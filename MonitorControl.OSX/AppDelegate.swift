@@ -69,7 +69,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             let brightnessItem = NSMenuItem();
             let contrastItem = NSMenuItem();
             let volumeItem = NSMenuItem();
-            
+            let defaultMonitorItem = NSMenuItem();
+
             let brightnessSlider = NSSlider(frame: NSRect(x: 20, y: 0, width: 200, height: 19));
             
             brightnessSlider.target = self;
@@ -100,6 +101,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             let brightnesSliderView = NSView(frame: NSRect(x: 0, y: 5, width: 250, height: 40));
             let contrastSliderView = NSView(frame: NSRect(x: 0, y: 5, width: 250, height: 40));
             let volumeSliderView = NSView(frame: NSRect(x: 0, y: 5, width: 250, height: 40));
+            let defaultMonitorView = NSView(frame: NSRect(x: 0, y: 5, width: 250, height: 25));
             
             let brightnessLabel = NSTextField(frame: NSRect(x: 20, y: 16, width: 130, height: 20))
             brightnessLabel.stringValue = "Brightness";
@@ -110,6 +112,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             brightnessLabelKeyCode.stringValue = "⇧⌘- / ⇧⌘+"
             brightnessLabelKeyCode.isBordered = false;
             brightnessLabelKeyCode.isBezeled = false;
+            brightnessLabelKeyCode.isHidden = i != 1;
             brightnessLabelKeyCode.alignment = NSTextAlignment.right
             
             let constrastLabel = NSTextField(frame: NSRect(x: 20, y: 16, width: 130, height: 20))
@@ -123,9 +126,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             volumeLabel.isBezeled = false;
             
             let volumeLabelKeyCode = NSTextField(frame: NSRect(x: 120, y: 19, width: 100, height: 20))
-            volumeLabelKeyCode.stringValue = "Ctrl⌘- / Ctrl⌘+"
+            volumeLabelKeyCode.stringValue = "⌥⌘- / ⌥⌘+"
             volumeLabelKeyCode.isBordered = false;
             volumeLabelKeyCode.isBezeled = false;
+            volumeLabelKeyCode.isHidden = i != 1;
             volumeLabelKeyCode.alignment = NSTextAlignment.right
             
             brightnesSliderView.addSubview(brightnessLabel)
@@ -143,12 +147,24 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             contrastItem.view = contrastSliderView;
             volumeItem.view = volumeSliderView;
             
+            let defaultMonitorSelectButtom = NSButton(frame: NSRect(x: 25, y: 0, width: 200, height: 25));
+            defaultMonitorSelectButtom.title = i == 1 ? "Default" : "Set as default";
+            defaultMonitorSelectButtom.bezelStyle = NSRoundRectBezelStyle;
+            defaultMonitorSelectButtom.isEnabled = i != 1;
+            defaultMonitorSelectButtom.tag = i;
+            
+            defaultMonitorView.addSubview(defaultMonitorSelectButtom);
+            
+            defaultMonitorItem.view = defaultMonitorView;
+            
             monitorSubMenu.addItem(brightnessItem);
             monitorSubMenu.addItem(NSMenuItem.separator());
             monitorSubMenu.addItem(contrastItem);
             monitorSubMenu.addItem(NSMenuItem.separator());
             monitorSubMenu.addItem(volumeItem);
-            
+            monitorSubMenu.addItem(NSMenuItem.separator());
+            monitorSubMenu.addItem(defaultMonitorItem);
+
             monitorMenuItem.title = "Monitor \(i)";
             monitorMenuItem.submenu = monitorSubMenu;
             
@@ -179,7 +195,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                     
                     self.ddcctl(monitor: String(monitor), command: "-v", value: String(value));
                 } else if (event.keyCode == 27 &&
-                    (event.modifierFlags.contains(NSEventModifierFlags.shift)) &&
+                    (event.modifierFlags.contains(NSEventModifierFlags.option)) &&
                     (event.modifierFlags.contains(NSEventModifierFlags.command))) {
                     let monitor = 1;
                     let value = abs(self.prefs.integer(forKey: "-b-\(monitor)") - 1);
@@ -188,7 +204,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                     
                     self.ddcctl(monitor: String(monitor), command: "-b", value: String(value));
                 } else if (event.keyCode == 24 &&
-                    (event.modifierFlags.contains(NSEventModifierFlags.shift)) &&
+                    (event.modifierFlags.contains(NSEventModifierFlags.option)) &&
                     (event.modifierFlags.contains(NSEventModifierFlags.command))) {
                     let monitor = 1;
                     let value = abs(self.prefs.integer(forKey: "-b-\(monitor)") + 1);
