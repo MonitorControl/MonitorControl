@@ -138,29 +138,39 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             brightnessLabel.stringValue = "Brightness";
             brightnessLabel.isBordered = false;
             brightnessLabel.isBezeled = false;
+            brightnessLabel.isEditable = false
+            brightnessLabel.drawsBackground = false
 
             let brightnessLabelKeyCode = NSTextField(frame: NSRect(x: 120, y: 16, width: 100, height: 20))
             brightnessLabelKeyCode.stringValue = "⇧⌘- / ⇧⌘+"
             brightnessLabelKeyCode.isBordered = false;
             brightnessLabelKeyCode.isBezeled = false;
-            brightnessLabelKeyCode.isHidden = firstDisplay == nil;
+            brightnessLabelKeyCode.isEditable = false
+            brightnessLabelKeyCode.drawsBackground = false
+            brightnessLabelKeyCode.isHidden = firstDisplay != nil;
             brightnessLabelKeyCode.alignment = NSTextAlignment.right
 
             let constrastLabel = NSTextField(frame: NSRect(x: 20, y: 16, width: 130, height: 20))
             constrastLabel.stringValue = "Contrast"
             constrastLabel.isBordered = false;
             constrastLabel.isBezeled = false;
+            constrastLabel.isEditable = false
+            constrastLabel.drawsBackground = false
 
             let volumeLabel = NSTextField(frame: NSRect(x: 20, y: 19, width: 130, height: 20))
             volumeLabel.stringValue = "Volume"
             volumeLabel.isBordered = false;
             volumeLabel.isBezeled = false;
+            volumeLabel.isEditable = false
+            volumeLabel.drawsBackground = false
 
             let volumeLabelKeyCode = NSTextField(frame: NSRect(x: 120, y: 19, width: 100, height: 20))
             volumeLabelKeyCode.stringValue = "⌥⌘- / ⌥⌘+"
             volumeLabelKeyCode.isBordered = false;
             volumeLabelKeyCode.isBezeled = false;
-            volumeLabelKeyCode.isHidden = firstDisplay == nil;
+            volumeLabelKeyCode.isEditable = false;
+            volumeLabelKeyCode.drawsBackground = false;
+            volumeLabelKeyCode.isHidden = firstDisplay != nil;
             volumeLabelKeyCode.alignment = NSTextAlignment.right
 
             brightnesSliderView.addSubview(brightnessLabel)
@@ -181,7 +191,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             let defaultMonitorSelectButtom = NSButton(frame: NSRect(x: 25, y: 0, width: 200, height: 25));
             defaultMonitorSelectButtom.title = firstDisplay == nil ? "Default" : "Set as default";
             defaultMonitorSelectButtom.bezelStyle = NSRoundRectBezelStyle;
-            defaultMonitorSelectButtom.isEnabled = firstDisplay == nil;
+            defaultMonitorSelectButtom.isEnabled = firstDisplay != nil;
             defaultMonitorSelectButtom.tag = i;
 
             defaultMonitorView.addSubview(defaultMonitorSelectButtom);
@@ -199,7 +209,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             monitorMenuItem.title = "\(name)";
             monitorMenuItem.submenu = monitorSubMenu;
 
-            statusMenu.insertItem(monitorMenuItem, at: 0)
+            statusMenu.insertItem(monitorMenuItem, at: i)
 
             if firstDisplay == nil {
                 firstDisplay = d
