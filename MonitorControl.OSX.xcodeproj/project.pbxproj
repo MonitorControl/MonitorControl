@@ -7,12 +7,23 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		55359E391E2737EC002671BC /* DDC.c in Sources */ = {isa = PBXBuildFile; fileRef = 55359E331E2737EC002671BC /* DDC.c */; };
+		55359E3B1E2737EC002671BC /* ddcctl.sh in Resources */ = {isa = PBXBuildFile; fileRef = 55359E361E2737EC002671BC /* ddcctl.sh */; };
+		55359E3C1E2737EC002671BC /* Makefile in Sources */ = {isa = PBXBuildFile; fileRef = 55359E371E2737EC002671BC /* Makefile */; };
+		55359E3D1E2737EC002671BC /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 55359E381E2737EC002671BC /* README.md */; };
 		56754EAF1D9A4016007BCDC5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56754EAE1D9A4016007BCDC5 /* AppDelegate.swift */; };
 		56754EB11D9A4016007BCDC5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 56754EB01D9A4016007BCDC5 /* Assets.xcassets */; };
 		56754EB41D9A4016007BCDC5 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 56754EB21D9A4016007BCDC5 /* MainMenu.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		55359E331E2737EC002671BC /* DDC.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = DDC.c; sourceTree = "<group>"; };
+		55359E341E2737EC002671BC /* DDC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDC.h; sourceTree = "<group>"; };
+		55359E351E2737EC002671BC /* ddcctl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ddcctl.m; sourceTree = "<group>"; };
+		55359E361E2737EC002671BC /* ddcctl.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = ddcctl.sh; sourceTree = "<group>"; };
+		55359E371E2737EC002671BC /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
+		55359E381E2737EC002671BC /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		55359E3E1E27380B002671BC /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
 		56754EAB1D9A4016007BCDC5 /* MonitorControl.OSX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MonitorControl.OSX.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		56754EAE1D9A4016007BCDC5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		56754EB01D9A4016007BCDC5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -31,10 +42,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		55359E321E2737EC002671BC /* ddcctl */ = {
+			isa = PBXGroup;
+			children = (
+				55359E331E2737EC002671BC /* DDC.c */,
+				55359E341E2737EC002671BC /* DDC.h */,
+				55359E351E2737EC002671BC /* ddcctl.m */,
+				55359E361E2737EC002671BC /* ddcctl.sh */,
+				55359E371E2737EC002671BC /* Makefile */,
+				55359E381E2737EC002671BC /* README.md */,
+			);
+			path = ddcctl;
+			sourceTree = "<group>";
+		};
 		56754EA21D9A4016007BCDC5 = {
 			isa = PBXGroup;
 			children = (
 				56754EAD1D9A4016007BCDC5 /* MonitorControl.OSX */,
+				55359E321E2737EC002671BC /* ddcctl */,
 				56754EAC1D9A4016007BCDC5 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -54,6 +79,7 @@
 				56754EB01D9A4016007BCDC5 /* Assets.xcassets */,
 				56754EB21D9A4016007BCDC5 /* MainMenu.xib */,
 				56754EB51D9A4016007BCDC5 /* Info.plist */,
+				55359E3E1E27380B002671BC /* Bridging-Header.h */,
 			);
 			path = MonitorControl.OSX;
 			sourceTree = "<group>";
@@ -118,6 +144,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				56754EB11D9A4016007BCDC5 /* Assets.xcassets in Resources */,
+				55359E3B1E2737EC002671BC /* ddcctl.sh in Resources */,
 				56754EB41D9A4016007BCDC5 /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -130,6 +157,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				56754EAF1D9A4016007BCDC5 /* AppDelegate.swift in Sources */,
+				55359E3D1E2737EC002671BC /* README.md in Sources */,
+				55359E3C1E2737EC002671BC /* Makefile in Sources */,
+				55359E391E2737EC002671BC /* DDC.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -246,6 +276,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "bluejamesbond.MonitorControl-OSX";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "MonitorControl.OSX/Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -259,6 +290,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "bluejamesbond.MonitorControl-OSX";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "MonitorControl.OSX/Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
@@ -282,6 +314,7 @@
 				56754EBA1D9A4016007BCDC5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
