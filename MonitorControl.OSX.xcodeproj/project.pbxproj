@@ -9,8 +9,6 @@
 /* Begin PBXBuildFile section */
 		55359E391E2737EC002671BC /* DDC.c in Sources */ = {isa = PBXBuildFile; fileRef = 55359E331E2737EC002671BC /* DDC.c */; };
 		55359E3B1E2737EC002671BC /* ddcctl.sh in Resources */ = {isa = PBXBuildFile; fileRef = 55359E361E2737EC002671BC /* ddcctl.sh */; };
-		55359E3C1E2737EC002671BC /* Makefile in Sources */ = {isa = PBXBuildFile; fileRef = 55359E371E2737EC002671BC /* Makefile */; };
-		55359E3D1E2737EC002671BC /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 55359E381E2737EC002671BC /* README.md */; };
 		56754EAF1D9A4016007BCDC5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56754EAE1D9A4016007BCDC5 /* AppDelegate.swift */; };
 		56754EB11D9A4016007BCDC5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 56754EB01D9A4016007BCDC5 /* Assets.xcassets */; };
 		56754EB41D9A4016007BCDC5 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 56754EB21D9A4016007BCDC5 /* MainMenu.xib */; };
@@ -157,8 +155,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				56754EAF1D9A4016007BCDC5 /* AppDelegate.swift in Sources */,
-				55359E3D1E2737EC002671BC /* README.md in Sources */,
-				55359E3C1E2737EC002671BC /* Makefile in Sources */,
 				55359E391E2737EC002671BC /* DDC.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
