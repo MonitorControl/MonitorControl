@@ -15,6 +15,8 @@ struct Display {
     var serial: String
 }
 
+var app : AppDelegate! = nil
+
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
     
@@ -27,6 +29,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     let keycode = UInt16(0x07)
 
+    var monitorItems : [NSMenuItem] = []
     var displays : [Display] = []
     
     @IBAction func quitClicked(_ sender: AnyObject) {
@@ -70,8 +73,25 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
+        app = self
+
         statusItem.title = "♨"
         statusItem.menu = statusMenu
+
+        acquirePrivileges();
+
+        CGDisplayRegisterReconfigurationCallback({_,_,_ in app.updateDisplays()}, nil)
+        updateDisplays()
+    }
+
+    func updateDisplays() {
+        for m in monitorItems {
+            statusMenu.removeItem(m)
+        }
+        monitorItems = []
+        displays = []
+
+        sleep(1)
 
         var firstDisplay : Display? = nil
 
@@ -209,14 +229,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             monitorMenuItem.title = "\(name)";
             monitorMenuItem.submenu = monitorSubMenu;
 
+            monitorItems.append(monitorMenuItem)
             statusMenu.insertItem(monitorMenuItem, at: i)
 
             if firstDisplay == nil {
                 firstDisplay = d
             }
         }
-
-        acquirePrivileges();
 
         if firstDisplay == nil {
             return
