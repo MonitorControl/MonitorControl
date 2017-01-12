@@ -23,7 +23,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     @IBOutlet weak var statusMenu: NSMenu!
     @IBOutlet weak var window: NSWindow!
     
-    let prefs = UserDefaults.standard;
+    let prefs = UserDefaults.standard
     
     let statusItem = NSStatusBar.system().statusItem(withLength: NSVariableStatusItemLength)
     
@@ -33,43 +33,43 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     var displays : [Display] = []
     
     @IBAction func quitClicked(_ sender: AnyObject) {
-        NSApplication.shared().terminate(self);
+        NSApplication.shared().terminate(self)
     }
     
     func setBrightness( slider: NSSlider ){
-        let command = "-b";
-        let value = slider.integerValue;
-        let i = slider.tag;
+        let command = "-b"
+        let value = slider.integerValue
+        let i = slider.tag
         let d = displays[i]
         
-        ddcctl(monitor: d.id, command: command, value: value);
+        ddcctl(monitor: d.id, command: command, value: value)
         
-        prefs.setValue(value, forKey: "\(command)-\(d.serial)");
-        prefs.synchronize();
+        prefs.setValue(value, forKey: "\(command)-\(d.serial)")
+        prefs.synchronize()
     }
     
     func setVolume(slider: NSSlider ){
-        let command = "-v";
-        let value = slider.integerValue;
-        let i = slider.tag;
+        let command = "-v"
+        let value = slider.integerValue
+        let i = slider.tag
         let d = displays[i]
 
-        ddcctl(monitor: d.id, command: command, value: value);
+        ddcctl(monitor: d.id, command: command, value: value)
 
-        prefs.setValue(value, forKey: "\(command)-\(d.serial)");
-        prefs.synchronize();
+        prefs.setValue(value, forKey: "\(command)-\(d.serial)")
+        prefs.synchronize()
     }
 
     func setContrast(slider: NSSlider ){
-        let command = "-c";
-        let value = slider.integerValue;
-        let i = slider.tag;
+        let command = "-c"
+        let value = slider.integerValue
+        let i = slider.tag
         let d = displays[i]
 
-        ddcctl(monitor: d.id, command: command, value: value);
+        ddcctl(monitor: d.id, command: command, value: value)
 
-        prefs.setValue(value, forKey: "\(command)-\(d.serial)");
-        prefs.synchronize();
+        prefs.setValue(value, forKey: "\(command)-\(d.serial)")
+        prefs.synchronize()
     }
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
@@ -78,7 +78,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         statusItem.title = "♨"
         statusItem.menu = statusMenu
 
-        acquirePrivileges();
+        acquirePrivileges()
 
         CGDisplayRegisterReconfigurationCallback({_,_,_ in app.updateDisplays()}, nil)
         updateDisplays()
@@ -114,83 +114,83 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
             let i = displays.count - 1
 
-            let monitorMenuItem = NSMenuItem();
-            let monitorSubMenu = NSMenu();
+            let monitorMenuItem = NSMenuItem()
+            let monitorSubMenu = NSMenu()
 
-            let brightnessItem = NSMenuItem();
-            let contrastItem = NSMenuItem();
-            let volumeItem = NSMenuItem();
-            let defaultMonitorItem = NSMenuItem();
+            let brightnessItem = NSMenuItem()
+            let contrastItem = NSMenuItem()
+            let volumeItem = NSMenuItem()
+            let defaultMonitorItem = NSMenuItem()
 
-            let brightnessSlider = NSSlider(frame: NSRect(x: 20, y: 0, width: 200, height: 19));
+            let brightnessSlider = NSSlider(frame: NSRect(x: 20, y: 0, width: 200, height: 19))
 
-            brightnessSlider.target = self;
-            brightnessSlider.minValue = 0;
-            brightnessSlider.maxValue = 100;
+            brightnessSlider.target = self
+            brightnessSlider.minValue = 0
+            brightnessSlider.maxValue = 100
             brightnessSlider.integerValue = prefs.integer(forKey: "-b-\(serial)")
-            brightnessSlider.action = #selector(AppDelegate.setBrightness);
-            brightnessSlider.tag = i;
+            brightnessSlider.action = #selector(AppDelegate.setBrightness)
+            brightnessSlider.tag = i
 
-            let contrastSlider = NSSlider(frame: NSRect(x: 20, y: 0, width: 200, height: 19));
+            let contrastSlider = NSSlider(frame: NSRect(x: 20, y: 0, width: 200, height: 19))
 
-            contrastSlider.target = self;
-            contrastSlider.minValue = 0;
-            contrastSlider.maxValue = 100;
+            contrastSlider.target = self
+            contrastSlider.minValue = 0
+            contrastSlider.maxValue = 100
             contrastSlider.integerValue = prefs.integer(forKey: "-c-\(serial)")
-            contrastSlider.action = #selector(AppDelegate.setContrast);
-            contrastSlider.tag = i;
+            contrastSlider.action = #selector(AppDelegate.setContrast)
+            contrastSlider.tag = i
 
-            let volumeSlider = NSSlider(frame: NSRect(x: 20, y: 3, width: 200, height: 19));
+            let volumeSlider = NSSlider(frame: NSRect(x: 20, y: 3, width: 200, height: 19))
 
-            volumeSlider.target = self;
-            volumeSlider.minValue = 0;
-            volumeSlider.maxValue = 100;
+            volumeSlider.target = self
+            volumeSlider.minValue = 0
+            volumeSlider.maxValue = 100
             volumeSlider.integerValue = prefs.integer(forKey: "-v-\(serial)")
-            volumeSlider.action = #selector(AppDelegate.setVolume);
-            volumeSlider.tag = i;
+            volumeSlider.action = #selector(AppDelegate.setVolume)
+            volumeSlider.tag = i
 
-            let brightnesSliderView = NSView(frame: NSRect(x: 0, y: 5, width: 250, height: 40));
-            let contrastSliderView = NSView(frame: NSRect(x: 0, y: 5, width: 250, height: 40));
-            let volumeSliderView = NSView(frame: NSRect(x: 0, y: 5, width: 250, height: 40));
-            let defaultMonitorView = NSView(frame: NSRect(x: 0, y: 5, width: 250, height: 25));
+            let brightnesSliderView = NSView(frame: NSRect(x: 0, y: 5, width: 250, height: 40))
+            let contrastSliderView = NSView(frame: NSRect(x: 0, y: 5, width: 250, height: 40))
+            let volumeSliderView = NSView(frame: NSRect(x: 0, y: 5, width: 250, height: 40))
+            let defaultMonitorView = NSView(frame: NSRect(x: 0, y: 5, width: 250, height: 25))
 
             let brightnessLabel = NSTextField(frame: NSRect(x: 20, y: 16, width: 130, height: 20))
-            brightnessLabel.stringValue = "Brightness";
-            brightnessLabel.isBordered = false;
-            brightnessLabel.isBezeled = false;
+            brightnessLabel.stringValue = "Brightness"
+            brightnessLabel.isBordered = false
+            brightnessLabel.isBezeled = false
             brightnessLabel.isEditable = false
             brightnessLabel.drawsBackground = false
 
             let brightnessLabelKeyCode = NSTextField(frame: NSRect(x: 120, y: 16, width: 100, height: 20))
             brightnessLabelKeyCode.stringValue = "⇧⌘- / ⇧⌘+"
-            brightnessLabelKeyCode.isBordered = false;
-            brightnessLabelKeyCode.isBezeled = false;
+            brightnessLabelKeyCode.isBordered = false
+            brightnessLabelKeyCode.isBezeled = false
             brightnessLabelKeyCode.isEditable = false
             brightnessLabelKeyCode.drawsBackground = false
-            brightnessLabelKeyCode.isHidden = firstDisplay != nil;
+            brightnessLabelKeyCode.isHidden = firstDisplay != nil
             brightnessLabelKeyCode.alignment = NSTextAlignment.right
 
             let constrastLabel = NSTextField(frame: NSRect(x: 20, y: 16, width: 130, height: 20))
             constrastLabel.stringValue = "Contrast"
-            constrastLabel.isBordered = false;
-            constrastLabel.isBezeled = false;
+            constrastLabel.isBordered = false
+            constrastLabel.isBezeled = false
             constrastLabel.isEditable = false
             constrastLabel.drawsBackground = false
 
             let volumeLabel = NSTextField(frame: NSRect(x: 20, y: 19, width: 130, height: 20))
             volumeLabel.stringValue = "Volume"
-            volumeLabel.isBordered = false;
-            volumeLabel.isBezeled = false;
+            volumeLabel.isBordered = false
+            volumeLabel.isBezeled = false
             volumeLabel.isEditable = false
             volumeLabel.drawsBackground = false
 
             let volumeLabelKeyCode = NSTextField(frame: NSRect(x: 120, y: 19, width: 100, height: 20))
             volumeLabelKeyCode.stringValue = "⌥⌘- / ⌥⌘+"
-            volumeLabelKeyCode.isBordered = false;
-            volumeLabelKeyCode.isBezeled = false;
-            volumeLabelKeyCode.isEditable = false;
-            volumeLabelKeyCode.drawsBackground = false;
-            volumeLabelKeyCode.isHidden = firstDisplay != nil;
+            volumeLabelKeyCode.isBordered = false
+            volumeLabelKeyCode.isBezeled = false
+            volumeLabelKeyCode.isEditable = false
+            volumeLabelKeyCode.drawsBackground = false
+            volumeLabelKeyCode.isHidden = firstDisplay != nil
             volumeLabelKeyCode.alignment = NSTextAlignment.right
 
             brightnesSliderView.addSubview(brightnessLabel)
@@ -204,30 +204,30 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             volumeSliderView.addSubview(volumeLabelKeyCode)
             volumeSliderView.addSubview(volumeSlider)
 
-            brightnessItem.view = brightnesSliderView;
-            contrastItem.view = contrastSliderView;
-            volumeItem.view = volumeSliderView;
+            brightnessItem.view = brightnesSliderView
+            contrastItem.view = contrastSliderView
+            volumeItem.view = volumeSliderView
 
-            let defaultMonitorSelectButtom = NSButton(frame: NSRect(x: 25, y: 0, width: 200, height: 25));
-            defaultMonitorSelectButtom.title = firstDisplay == nil ? "Default" : "Set as default";
-            defaultMonitorSelectButtom.bezelStyle = NSRoundRectBezelStyle;
-            defaultMonitorSelectButtom.isEnabled = firstDisplay != nil;
-            defaultMonitorSelectButtom.tag = i;
+            let defaultMonitorSelectButtom = NSButton(frame: NSRect(x: 25, y: 0, width: 200, height: 25))
+            defaultMonitorSelectButtom.title = firstDisplay == nil ? "Default" : "Set as default"
+            defaultMonitorSelectButtom.bezelStyle = NSRoundRectBezelStyle
+            defaultMonitorSelectButtom.isEnabled = firstDisplay != nil
+            defaultMonitorSelectButtom.tag = i
 
-            defaultMonitorView.addSubview(defaultMonitorSelectButtom);
+            defaultMonitorView.addSubview(defaultMonitorSelectButtom)
 
-            defaultMonitorItem.view = defaultMonitorView;
+            defaultMonitorItem.view = defaultMonitorView
 
-            monitorSubMenu.addItem(brightnessItem);
-            monitorSubMenu.addItem(NSMenuItem.separator());
-            monitorSubMenu.addItem(contrastItem);
-            monitorSubMenu.addItem(NSMenuItem.separator());
-            monitorSubMenu.addItem(volumeItem);
-            monitorSubMenu.addItem(NSMenuItem.separator());
-            monitorSubMenu.addItem(defaultMonitorItem);
+            monitorSubMenu.addItem(brightnessItem)
+            monitorSubMenu.addItem(NSMenuItem.separator())
+            monitorSubMenu.addItem(contrastItem)
+            monitorSubMenu.addItem(NSMenuItem.separator())
+            monitorSubMenu.addItem(volumeItem)
+            monitorSubMenu.addItem(NSMenuItem.separator())
+            monitorSubMenu.addItem(defaultMonitorItem)
 
-            monitorMenuItem.title = "\(name)";
-            monitorMenuItem.submenu = monitorSubMenu;
+            monitorMenuItem.title = "\(name)"
+            monitorMenuItem.submenu = monitorSubMenu
 
             monitorItems.append(monitorMenuItem)
             statusMenu.insertItem(monitorMenuItem, at: i)
@@ -248,49 +248,49 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                 if (event.keyCode == 27 &&
                     (event.modifierFlags.contains(NSEventModifierFlags.control)) &&
                     (event.modifierFlags.contains(NSEventModifierFlags.command))) {
-                    let value = abs(self.prefs.integer(forKey: "-v-\(d.serial)") - 1);
+                    let value = abs(self.prefs.integer(forKey: "-v-\(d.serial)") - 1)
 
-                    self.prefs.setValue(value, forKey: "-v-\(d.serial)");
+                    self.prefs.setValue(value, forKey: "-v-\(d.serial)")
 
-                    self.ddcctl(monitor: d.id, command: "-v", value: value);
+                    self.ddcctl(monitor: d.id, command: "-v", value: value)
                     
                 } else if (event.keyCode == 24 &&
                     (event.modifierFlags.contains(NSEventModifierFlags.control)) &&
                     (event.modifierFlags.contains(NSEventModifierFlags.command))) {
-                    let value = abs(self.prefs.integer(forKey: "-v-\(d.serial)") + 1);
+                    let value = abs(self.prefs.integer(forKey: "-v-\(d.serial)") + 1)
                     
-                    self.prefs.setValue(value, forKey: "-v-\(d.serial)");
+                    self.prefs.setValue(value, forKey: "-v-\(d.serial)")
                     
-                    self.ddcctl(monitor: d.id, command: "-v", value: value);
+                    self.ddcctl(monitor: d.id, command: "-v", value: value)
                 } else if (event.keyCode == 27 &&
                     (event.modifierFlags.contains(NSEventModifierFlags.option)) &&
                     (event.modifierFlags.contains(NSEventModifierFlags.command))) {
-                    let value = abs(self.prefs.integer(forKey: "-b-\(d.serial)") - 1);
+                    let value = abs(self.prefs.integer(forKey: "-b-\(d.serial)") - 1)
                     
-                    self.prefs.setValue(value, forKey: "-b-\(d.serial))");
+                    self.prefs.setValue(value, forKey: "-b-\(d.serial))")
                     
-                    self.ddcctl(monitor: d.id, command: "-b", value: value);
+                    self.ddcctl(monitor: d.id, command: "-b", value: value)
                 } else if (event.keyCode == 24 &&
                     (event.modifierFlags.contains(NSEventModifierFlags.option)) &&
                     (event.modifierFlags.contains(NSEventModifierFlags.command))) {
-                    let value = abs(self.prefs.integer(forKey: "-b-\(d.serial)") + 1);
+                    let value = abs(self.prefs.integer(forKey: "-b-\(d.serial)") + 1)
                     
-                    self.prefs.setValue(value, forKey: "-b-\(d.serial)");
+                    self.prefs.setValue(value, forKey: "-b-\(d.serial)")
                     
-                    self.ddcctl(monitor: d.id, command: "-b", value: value);
+                    self.ddcctl(monitor: d.id, command: "-b", value: value)
                 }
-        });
+        })
     }
     
     func acquirePrivileges() {
         let options : NSDictionary = [kAXTrustedCheckOptionPrompt.takeRetainedValue() as NSString: true]
-        let accessibilityEnabled = AXIsProcessTrustedWithOptions(options);
+        let accessibilityEnabled = AXIsProcessTrustedWithOptions(options)
         
         if !accessibilityEnabled {
             print("You need to enable the keylogger in the System Prefrences")
         }
         
-        return;
+        return
     }
     
     func ddcctl(monitor: CGDirectDisplayID, command: String, value: Int) {
