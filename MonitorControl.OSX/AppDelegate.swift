@@ -242,6 +242,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                 defaultVolumeSlider = volumeSlider
             }
         }
+
+        if defaultDisplay == nil {
+            // If no DDC capable display was detected
+            let item = NSMenuItem()
+            item.title = "No supported display found"
+            item.isEnabled = false
+            monitorItems.append(item)
+            statusMenu.insertItem(item, at: 0)
+        }
     }
     
     func acquirePrivileges() {
