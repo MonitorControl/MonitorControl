@@ -282,7 +282,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     func getDescriptorString(_ edid: EDID, _ type: UInt8) -> String? {
-        for d in [edid.descriptor1, edid.descriptor2, edid.descriptor3, edid.descriptor4] {
+        for (_, d) in Mirror(reflecting: edid.descriptors).children {
+            let d = d as! descriptor
             if d.text.type == UInt8(type) {
                 return edidString(d)
             }
