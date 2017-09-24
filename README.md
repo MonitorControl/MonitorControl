@@ -1,10 +1,40 @@
-# MonitorControl.OSX
-A menu let to control your monitor (brightness, contrast, volume)
+# MonitorControl
 
-![image](https://cloud.githubusercontent.com/assets/376453/18903896/5a8ad950-8510-11e6-85d0-c95170a76fb8.png)
+Control your external monitor brightness, contrast or volume directly from a menulet or with keyboard shortcuts :
 
-Compatible with most Dell monitors and LG including 27UD68
+- Brightness: `⇧` + `⌃` + `⌥` + `⌘` + `↑/↓` (Shift + Control + Alt + Command + Up/Down arrows)
+- Volume: `⇧` + `⌃` + `⌥` + `⌘` + `←/→` (Shift + Control + Alt + Command + Left/Right arrows)
+- Mute: `⇧` + `⌃` + `⌥` + `⌘` + `-` (Shift + Control + Alt + Command + Minus)
+
+(Ps. The keyboard shortcut only work for the default screen)
+
+![MonitorControl menulet](./.github/menulet.png)
+
+## Download
+
+Go to [Release](./) and download the latest `.dmg`
+
+## Brightness/Volume default key
+You can use [Karabiner Elements](https://github.com/tekezo/Karabiner-Elements/) to use the default mac key (`F1`, `F2` for brightness and `F10`, `F11`, `F12` for volume) with this set of custom rules : [Karabiner rules for MonitorControl](karabiner://karabiner/assets/complex_modifications/import?url=https%3A%2F%2Fraw.githubusercontent.com%2Fthe0neyouseek%2FMonitorControl%2Fmaster%2F.github%2Frules.json)
 
 ---
 
-Powered by [@kfix/ddcctl](https://github.com/kfix/ddcctl)
+Bonus: Using keyboard shortcuts display the native osd :
+
+![MonitorControl OSD](./.github/osd.png)
+
+## TODO
+
+- [ ] Hande multiple screen for keyboard shortcut (Possibly the choice to have all screen brightness/volume increase/decrease at the same time or separatly) 
+- [ ] Skip Karabiner use for keyboard shortcut
+- [ ] Option to start app at login
+- [ ] Add [SwiftLint](https://github.com/realm/SwiftLint)
+
+## Support
+- macOS Sierra (`10.12`) and up.
+- Works with monitors comptaible with [@kfix/ddcctl](https://github.com/kfix/ddcctl)
+
+## Thanks
+- @bluejamesbond (Original developer)
+- @Tyilo (Fork)
+- @Bensge - (Used some code from his project [NativeDisplayBrightness](https://github.com/Bensge/NativeDisplayBrightness))
