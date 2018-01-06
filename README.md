@@ -1,42 +1,47 @@
 # MonitorControl
 
-Control your external monitor brightness, contrast or volume directly from a menulet or with keyboard shortcuts :
-
-- Brightness: `⇧` + `⌃` + `⌥` + `⌘` + `↑/↓` (Shift + Control + Alt + Command + Up/Down arrows)
-- Volume: `⇧` + `⌃` + `⌥` + `⌘` + `←/→` (Shift + Control + Alt + Command + Left/Right arrows)
-- Mute: `⇧` + `⌃` + `⌥` + `⌘` + `-` (Shift + Control + Alt + Command + Minus)
-
-(Ps. The keyboard shortcut only work for the default screen)
+Control your external monitor brightness, contrast or volume directly from a menulet or with keyboard native keys
 
 ![MonitorControl menulet](./.github/menulet.png)
+
+*Bonus: Using keyboard keys display the native osd :*
+
+![MonitorControl OSD](./.github/osd.png)
+
 
 ## Download
 
 Go to [Release](https://github.com/the0neyouseek/MonitorControl/releases/latest) and download the latest `.dmg`
 
-## Brightness/Volume default key
-You can use [Karabiner Elements](https://github.com/tekezo/Karabiner-Elements/) to use the default mac key (`F1`, `F2` for brightness and `F10`, `F11`, `F12` for volume) with this set of custom rules :
-[Karabiner rules for MonitorControl](./.github/rules.json)
+## How to help
 
-Copy and paste this url in your browser to install them directly :
+Open [issues](./issues) if you have a question, an enhancement to suggest or a bug you've found. If you want you can fork the code yourself and submit a pull request to improve the app.
 
+## How to build
+
+### Required
+
+- XCode
+- [Cocoapods](https://cocoapods.org/)
+- [SwiftLint](https://github.com/realm/SwiftLint)
+
+Download the [zip](https://github.com/the0neyouseek/MonitorControl/archive/master.zip) directly or clone the project somewhere with git
+
+```sh
+$ git clone https://github.com/the0neyouseek/MonitorControl.git
 ```
-karabiner://karabiner/assets/complex_modifications/import?url=https%3A%2F%2Fraw.githubusercontent.com%2Fthe0neyouseek%2FMonitorControl%2Fmaster%2F.github%2Frules.json
+
+Then download the dependencies with Cocoapods
+
+```sh
+$ pod install
 ```
 
----
+You're all set ! Now open the `MonitorControl.xcworkspace` with Xcode
 
-Bonus: Using keyboard shortcuts display the native osd :
+### Third party dependencies
 
-![MonitorControl OSD](./.github/osd.png)
-
-## TODO
-
-- [ ] Hande multiple screen for keyboard shortcut (Possibly the choice to have all screen brightness/volume increase/decrease at the same time or separatly) 
-- [ ] Skip Karabiner use for keyboard shortcut
-- [ ] Option to start app at login
-- [ ] Add [SwiftLint](https://github.com/realm/SwiftLint)
-- [ ] Change App Icon
+- [MediaKeyTap](https://github.com/the0neyouseek/MediaKeyTap)
 
 ## Support
 - macOS Sierra (`10.12`) and up.
@@ -46,3 +51,4 @@ Bonus: Using keyboard shortcuts display the native osd :
 - [@bluejamesbond](https://github.com/bluejamesbond/) (Original developer)
 - [@Tyilo](https://github.com/Tyilo/) (Fork)
 - [@Bensge](https://github.com/Bensge/) - (Used some code from his project [NativeDisplayBrightness](https://github.com/Bensge/NativeDisplayBrightness))
+- [@nhurden](https://github.com/nhurden/) (For the original MediaKeyTap)

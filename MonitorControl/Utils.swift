@@ -9,7 +9,9 @@
 import Cocoa
 
 class Utils: NSObject {
-	
+
+	// MARK: - DDCCTL
+
 	/// Send command to ddcctl
 	///
 	/// - Parameters:
@@ -21,7 +23,9 @@ class Utils: NSObject {
 		DDCWrite(monitor, &wrcmd)
 		print(value)
 	}
-	
+
+	// MARK: - Menu
+
 	/// Create a label
 	///
 	/// - Parameters:
@@ -38,18 +42,109 @@ class Utils: NSObject {
 		return label
 	}
 
-
-	/// Enum for hardware independent keyCode
+	/// Create a slider and add it to the menu
 	///
-	/// - keyLeftArrow: keyCode for the left arrow
-	/// - keyRightArrow: keyCode for the right arrow
-	/// - keyDownArrow: keyCode for the down arrow
-	/// - keyUpArrow: keyCode for the up arrow
-	enum key : Int {
-		case keyLeftArrow = 123
-		case keyRightArrow = 124
-		case keyDownArrow = 125
-		case keyUpArrow = 126
-		case keyMute = 24
+	/// - Parameters:
+	///   - menu: Menu containing the slider
+	///   - display: Display to control
+	///   - command: Command (Brightness/Volume/...)
+	///   - title: Title of the slider
+	/// - Returns: An `NSSlider` slider
+	static func addSliderMenuItem(toMenu menu: NSMenu, forDisplay display: Display, command: Int32, title: String) -> SliderHandler {
+		let item = NSMenuItem()
+		let view = NSView(frame: NSRect(x: 0, y: 5, width: 250, height: 40))
+		let label = Utils.makeLabel(text: title, frame: NSRect(x: 20, y: 19, width: 130, height: 20))
+		let handler = SliderHandler(display: display, command: command)
+		let slider = NSSlider(frame: NSRect(x: 20, y: 0, width: 200, height: 19))
+		slider.target = handler
+		slider.minValue = 0
+		slider.maxValue = 100
+		slider.integerValue = prefs.integer(forKey: "\(command)-\(display.serial)")
+		slider.action = #selector(SliderHandler.valueChanged)
+		handler.slider = slider
+
+		view.addSubview(label)
+		view.addSubview(slider)
+
+		item.view = view
+
+		menu.addItem(item)
+		menu.addItem(NSMenuItem.separator())
+
+		return handler
 	}
+
+	// MARK: - Utilities
+
+	/// Acquire Privileges (Necessary to listen to keyboard event globally)
+	static func acquirePrivileges() {
+		let options: NSDictionary = [kAXTrustedCheckOptionPrompt.takeRetainedValue() as NSString: true]
+		let accessibilityEnabled = AXIsProcessTrustedWithOptions(options)
+
+		if !accessibilityEnabled {
+			let alert = NSAlert()
+			alert.addButton(withTitle: NSLocalizedString("Ok", comment: "Shown in the alert dialog"))
+			alert.messageText = NSLocalizedString("Shortcuts not available", comment: "Shown in the alert dialog")
+			alert.informativeText = NSLocalizedString("You need to enable MonitorControl in System Preferences > Security and Privacy > Accessibility for the keyboard shortcuts to work", comment: "Shown in the alert dialog")
+			alert.alertStyle = .warning
+			alert.runModal()
+		}
+
+		return
+	}
+
+	// MARK: - Display Infos
+
+	/// Get the descriptor text
+	///
+	/// - Parameter descriptor: the descriptor
+	/// - Returns: a string
+	static func getEdidString(_ descriptor: descriptor) -> String {
+		var result = ""
+		for (_, bitChar) in Mirror(reflecting: descriptor.text.data).children {
+			if let bitChar = bitChar as? Int8 {
+				let char = Character(UnicodeScalar(UInt8(bitPattern: bitChar)))
+				if char == "\0" || char == "\n" {
+					break
+				}
+				result.append(char)
+			}
+		}
+		return result
+	}
+
+	/// Get the descriptors of a display from the Edid
+	///
+	/// - Parameters:
+	///   - edid: the EDID of a display
+	///   - type: the type of descriptor
+	/// - Returns: a string if type of descriptor is found
+	static func getDescriptorString(_ edid: EDID, _ type: UInt8) -> String? {
+		for (_, descriptor) in Mirror(reflecting: edid.descriptors).children {
+			if let descriptor = descriptor as? descriptor {
+				if descriptor.text.type == UInt8(type) {
+					return getEdidString(descriptor)
+				}
+			}
+		}
+
+		return nil
+	}
+
+	/// Get the name of a display
+	///
+	/// - Parameter edid: the EDID of a display
+	/// - Returns: a string
+	static func getDisplayName(forEdid edid: EDID) -> String {
+		return getDescriptorString(edid, 0xFC) ?? NSLocalizedString("Display", comment: "")
+	}
+
+	/// Get the serial of a display
+	///
+	/// - Parameter edid: the EDID of a display
+	/// - Returns: a string
+	static func getDisplaySerial(forEdid edid: EDID) -> String {
+		return getDescriptorString(edid, 0xFF) ?? NSLocalizedString("Unknown", comment: "")
+	}
+
 }

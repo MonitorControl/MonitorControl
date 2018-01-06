@@ -12,6 +12,8 @@
 		56754EAF1D9A4016007BCDC5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56754EAE1D9A4016007BCDC5 /* AppDelegate.swift */; };
 		56754EB11D9A4016007BCDC5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 56754EB01D9A4016007BCDC5 /* Assets.xcassets */; };
 		56754EB41D9A4016007BCDC5 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 56754EB21D9A4016007BCDC5 /* MainMenu.xib */; };
+		9A19D3B73485870616B6D4E0 /* Pods_MonitorControl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 398F482D5C8816B29F16AAEB /* Pods_MonitorControl.framework */; };
+		F03A8DF21FFBAA6F0034DC27 /* Display.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03A8DF11FFBAA6F0034DC27 /* Display.swift */; };
 		F091C9B31F6EA6110096FD65 /* SliderHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F091C9B21F6EA6110096FD65 /* SliderHandler.swift */; };
 		F091C9B81F6EA79B0096FD65 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = F091C9B71F6EA79B0096FD65 /* Utils.swift */; };
 		F0A987E81F77B40E009B603D /* OSD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F0A987D61F77B290009B603D /* OSD.framework */; };
@@ -19,6 +21,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		31E16D90527EBD3F8A12BE0B /* Pods-MonitorControl.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MonitorControl.release.xcconfig"; path = "Pods/Target Support Files/Pods-MonitorControl/Pods-MonitorControl.release.xcconfig"; sourceTree = "<group>"; };
+		398F482D5C8816B29F16AAEB /* Pods_MonitorControl.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MonitorControl.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		42B61ABC1D7907131330228A /* Pods-MonitorControl.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MonitorControl.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MonitorControl/Pods-MonitorControl.debug.xcconfig"; sourceTree = "<group>"; };
 		55359E331E2737EC002671BC /* DDC.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = DDC.c; sourceTree = "<group>"; };
 		55359E341E2737EC002671BC /* DDC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDC.h; sourceTree = "<group>"; };
 		55359E351E2737EC002671BC /* ddcctl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ddcctl.m; sourceTree = "<group>"; };
@@ -30,6 +35,7 @@
 		56754EB01D9A4016007BCDC5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		56754EB31D9A4016007BCDC5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		56754EB51D9A4016007BCDC5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F03A8DF11FFBAA6F0034DC27 /* Display.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Display.swift; sourceTree = "<group>"; };
 		F091C9B21F6EA6110096FD65 /* SliderHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderHandler.swift; sourceTree = "<group>"; };
 		F091C9B71F6EA79B0096FD65 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		F091C9B91F6EB43B0096FD65 /* fr */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; lineEnding = 0; name = fr; path = fr.lproj/MainMenu.strings; sourceTree = "<group>"; };
@@ -57,6 +63,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F0A987E81F77B40E009B603D /* OSD.framework in Frameworks */,
+				9A19D3B73485870616B6D4E0 /* Pods_MonitorControl.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -84,6 +91,7 @@
 				55359E321E2737EC002671BC /* ddcctl */,
 				56754EAC1D9A4016007BCDC5 /* Products */,
 				F0A987D71F77B404009B603D /* Frameworks */,
+				EFFC2F3E35BEC9ACFA754137 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -110,10 +118,20 @@
 			path = MonitorControl;
 			sourceTree = "<group>";
 		};
+		EFFC2F3E35BEC9ACFA754137 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				42B61ABC1D7907131330228A /* Pods-MonitorControl.debug.xcconfig */,
+				31E16D90527EBD3F8A12BE0B /* Pods-MonitorControl.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		F091C9B41F6EA6180096FD65 /* Objects */ = {
 			isa = PBXGroup;
 			children = (
 				F091C9B21F6EA6110096FD65 /* SliderHandler.swift */,
+				F03A8DF11FFBAA6F0034DC27 /* Display.swift */,
 			);
 			path = Objects;
 			sourceTree = "<group>";
@@ -122,6 +140,7 @@
 			isa = PBXGroup;
 			children = (
 				F0A987D81F77B404009B603D /* MonitorControl */,
+				398F482D5C8816B29F16AAEB /* Pods_MonitorControl.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -157,9 +176,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 56754EB81D9A4016007BCDC5 /* Build configuration list for PBXNativeTarget "MonitorControl" */;
 			buildPhases = (
+				C0EF20D28FC7408CBE89A686 /* [CP] Check Pods Manifest.lock */,
+				F03A8DF01FFB9D4C0034DC27 /* [Lint] Run SwiftLint */,
 				56754EA71D9A4016007BCDC5 /* Sources */,
 				56754EA81D9A4016007BCDC5 /* Frameworks */,
 				56754EA91D9A4016007BCDC5 /* Resources */,
+				9DD5968596EFAF0E2EB56496 /* [CP] Embed Pods Frameworks */,
+				3ACE91333FC1E781FB2E44E5 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -182,6 +205,7 @@
 				TargetAttributes = {
 					56754EAA1D9A4016007BCDC5 = {
 						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = KGY56RWR9A;
 						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 					};
@@ -220,11 +244,80 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		3ACE91333FC1E781FB2E44E5 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MonitorControl/Pods-MonitorControl-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9DD5968596EFAF0E2EB56496 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-MonitorControl/Pods-MonitorControl-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/MediaKeyTap/MediaKeyTap.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MediaKeyTap.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MonitorControl/Pods-MonitorControl-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C0EF20D28FC7408CBE89A686 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MonitorControl-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F03A8DF01FFB9D4C0034DC27 /* [Lint] Run SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[Lint] Run SwiftLint";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\nelse\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		56754EA71D9A4016007BCDC5 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F03A8DF21FFBAA6F0034DC27 /* Display.swift in Sources */,
 				F091C9B31F6EA6110096FD65 /* SliderHandler.swift in Sources */,
 				56754EAF1D9A4016007BCDC5 /* AppDelegate.swift in Sources */,
 				55359E391E2737EC002671BC /* DDC.c in Sources */,
@@ -393,13 +486,13 @@
 		};
 		56754EB91D9A4016007BCDC5 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 42B61ABC1D7907131330228A /* Pods-MonitorControl.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = "";
-				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/**";
+				DEVELOPMENT_TEAM = KGY56RWR9A;
 				INFOPLIST_FILE = "$(SRCROOT)/MonitorControl/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = me.guillaumeb.MonitorControl;
@@ -412,13 +505,13 @@
 		};
 		56754EBA1D9A4016007BCDC5 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 31E16D90527EBD3F8A12BE0B /* Pods-MonitorControl.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = "";
-				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/**";
+				DEVELOPMENT_TEAM = KGY56RWR9A;
 				INFOPLIST_FILE = "$(SRCROOT)/MonitorControl/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = me.guillaumeb.MonitorControl;

@@ -9,227 +9,130 @@
 
 import Cocoa
 import Foundation
-
-struct Display {
-    var id: CGDirectDisplayID
-    var name: String
-    var serial: String
-}
+import MediaKeyTap
 
 var app: AppDelegate! = nil
 let prefs = UserDefaults.standard
 
 @NSApplicationMain
-class AppDelegate: NSObject, NSApplicationDelegate {
-    
+class AppDelegate: NSObject, NSApplicationDelegate, MediaKeyTapDelegate {
+
     @IBOutlet weak var statusMenu: NSMenu!
     @IBOutlet weak var window: NSWindow!
-    
+
     let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
 
     var monitorItems: [NSMenuItem] = []
     var displays: [Display] = []
-    var sliderHandlers: [SliderHandler] = []
+	var sliderHandlers: [SliderHandler] = []
 
     var defaultDisplay: Display! = nil
     var defaultBrightnessSlider: NSSlider! = nil
     var defaultVolumeSlider: NSSlider! = nil
 
-	let step = 100/16;
+	let step = 100/16
 
-    @IBAction func quitClicked(_ sender: AnyObject) {
-        NSApplication.shared.terminate(self)
-    }
+	var mediaKeyTap: MediaKeyTap?
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         app = self
+		mediaKeyTap = MediaKeyTap.init(delegate: self, forKeys: [.brightnessUp, .brightnessDown, .mute, .volumeUp, .volumeDown], observeBuiltIn: false)
 
 		statusItem.image = NSImage.init(named: NSImage.Name(rawValue: "status"))
         statusItem.menu = statusMenu
 
-        acquirePrivileges()
+        Utils.acquirePrivileges()
 
-        CGDisplayRegisterReconfigurationCallback({_,_,_ in app.updateDisplays()}, nil)
+        CGDisplayRegisterReconfigurationCallback({_, _, _ in app.updateDisplays()}, nil)
         updateDisplays()
 
-        NSEvent.addGlobalMonitorForEvents(
-            matching: NSEvent.EventTypeMask.keyDown, handler: {(event: NSEvent) in
-                if self.defaultDisplay == nil {
-                    return
-                }
-
-				// Keyboard shortcut only for main screen
-				let currentDisplayId = NSScreen.main?.deviceDescription[NSDeviceDescriptionKey.init("NSScreenNumber")] as! CGDirectDisplayID
-				if (self.defaultDisplay.id != currentDisplayId) {
-					return
-				}
-
-				// Brightness -> Shift + Control + Alt + Command + (Up/Down)
-				// Volume -> Shift + Control + Alt + Command + (Left/Right)
-				// Mute -> Minus
-
-				// Capture keys
-				let modifiers = NSEvent.ModifierFlags.init(rawValue: NSEvent.ModifierFlags.shift.rawValue | NSEvent.ModifierFlags.command.rawValue | NSEvent.ModifierFlags.control.rawValue | NSEvent.ModifierFlags.option.rawValue)
-				let flags = event.modifierFlags.intersection(modifiers)
-
-				// Only do something if all modifiers are active
-				if !flags.contains(NSEvent.ModifierFlags.shift) || !flags.contains(NSEvent.ModifierFlags.command) || !flags.contains(NSEvent.ModifierFlags.control) || !flags.contains(NSEvent.ModifierFlags.option) {
-					return
-				}
-
-                var brightnessRel = 0
-				var volumeRel = 0
-				var rel = 0
-
-				// Down key
-                if event.keyCode == Utils.key.keyDownArrow.rawValue {
-                    brightnessRel = -self.step
-				// Up key
-                } else if event.keyCode == Utils.key.keyUpArrow.rawValue {
-                    brightnessRel = +self.step
-				// Left key
-                } else if event.keyCode == Utils.key.keyLeftArrow.rawValue {
-					volumeRel = -self.step
-				// Right key
-				} else if event.keyCode == Utils.key.keyRightArrow.rawValue {
-					volumeRel = +self.step
-				// M key
-				} else if event.keyCode == Utils.key.keyMute.rawValue {
-					volumeRel = -100
-				} else {
-                    return
-                }
-
-                var command = Int32()
-                var slider: NSSlider! = nil
-                if brightnessRel == 0 {
-                    command = AUDIO_SPEAKER_VOLUME
-                    slider = self.defaultVolumeSlider
-					rel = volumeRel
-                } else if volumeRel == 0 {
-                    command = BRIGHTNESS
-                    slider = self.defaultBrightnessSlider
-					rel = brightnessRel
-                } else {
-                    return
-                }
-
-                let k = "\(command)-\(self.defaultDisplay.serial)"
-                let value = max(0, min(100, prefs.integer(forKey: k) + rel))
-
-                prefs.setValue(value, forKey: k)
-                prefs.synchronize()
-                slider.intValue = Int32(value)
-
-                Utils.ddcctl(monitor: self.defaultDisplay.id, command: command, value: value)
-
-				// OSD
-				let manager : OSDManager = OSDManager.sharedManager() as! OSDManager
-				var osdImage : Int = 1 // Brightness Image
-				if brightnessRel == 0 {
-					osdImage = 3 // Speaker image
-					if value == 0 {
-						osdImage = 4 // Mute speaker
-					}
-				}
-				manager.showImage(Int64(osdImage), onDisplayID: self.defaultDisplay.id, priority: 0x1f4, msecUntilFade: 2000, filledChiclets: UInt32(value/self.step), totalChiclets: UInt32(100/self.step), locked: false)
-        })
+		mediaKeyTap?.start()
     }
 
-    func addSliderItem(menu: NSMenu, isDefaultDisplay: Bool, display: Display, command: Int32, title: String) -> NSSlider {
-        let item = NSMenuItem()
+	func applicationWillTerminate(_ aNotification: Notification) {
+	}
 
-        let view = NSView(frame: NSRect(x: 0, y: 5, width: 250, height: 40))
+	@IBAction func quitClicked(_ sender: AnyObject) {
+		NSApplication.shared.terminate(self)
+	}
 
-        let label = Utils.makeLabel(text: title, frame: NSRect(x: 20, y: 19, width: 130, height: 20))
+	// MARK: - Menu
 
-        let handler = SliderHandler(display: display, command: command)
-        sliderHandlers.append(handler)
+	func clearDisplays() {
+		defaultDisplay = nil
+		defaultBrightnessSlider = nil
+		defaultVolumeSlider = nil
 
-        let slider = NSSlider(frame: NSRect(x: 20, y: 0, width: 200, height: 19))
-        slider.target = handler
-        slider.minValue = 0
-        slider.maxValue = 100
-        slider.integerValue = prefs.integer(forKey: "\(command)-\(display.serial)")
-		slider.action = #selector(SliderHandler.valueChanged)
+		for monitor in monitorItems {
+			statusMenu.removeItem(monitor)
+		}
 
-        view.addSubview(label)
-        view.addSubview(slider)
-
-        item.view = view
- 
-        menu.addItem(item)
-        menu.addItem(NSMenuItem.separator())
-
-        return slider
-    }
+		monitorItems = []
+		displays = []
+		sliderHandlers = []
+	}
 
     func updateDisplays() {
-        defaultDisplay = nil
-        defaultBrightnessSlider = nil
-        defaultVolumeSlider = nil
-
-        for m in monitorItems {
-            statusMenu.removeItem(m)
-        }
-
-        monitorItems = []
-        displays = []
-        sliderHandlers = []
-
+		clearDisplays()
         sleep(1)
 
-        for s in NSScreen.screens {
-            let id = s.deviceDescription[NSDeviceDescriptionKey.init("NSScreenNumber")] as! CGDirectDisplayID
-            if CGDisplayIsBuiltin(id) != 0 {
-                continue
-            }
+        for screen in NSScreen.screens {
+			if let id = screen.deviceDescription[NSDeviceDescriptionKey.init("NSScreenNumber")] as? CGDirectDisplayID {
+				// Is Built In Screen (e.g. MBP/iMac Screen)
+				if CGDisplayIsBuiltin(id) != 0 {
+					continue
+				}
 
-            var edid = EDID()
-            if !EDIDTest(id, &edid) {
-                continue
-            }
+				// Does screen support EDID ?
+				var edid = EDID()
+				if !EDIDTest(id, &edid) {
+					continue
+				}
 
-            let name = getDisplayName(edid)
-            let serial = getDisplaySerial(edid)
+				let name = Utils.getDisplayName(forEdid: edid)
+				let serial = Utils.getDisplaySerial(forEdid: edid)
 
-            let isDefaultDisplay = defaultDisplay == nil
+				let display = Display(identifier: id, name: name, serial: serial, isBuiltIn: false)
+				displays.append(display)
 
-            let d = Display(id: id, name: name, serial: serial)
-            displays.append(d)
+				let monitorSubMenu = NSMenu()
+				let brightnessSliderHandler = Utils.addSliderMenuItem(toMenu: monitorSubMenu,
+													   forDisplay: display,
+													   command: BRIGHTNESS,
+													   title: NSLocalizedString("Brightness", comment: "Shown in menu"))
+				let volumeSliderHandler = Utils.addSliderMenuItem(toMenu: monitorSubMenu,
+												   forDisplay: display,
+												   command: AUDIO_SPEAKER_VOLUME,
+												   title: NSLocalizedString("Volume", comment: "Shown in menu"))
+				sliderHandlers.append(brightnessSliderHandler)
+				sliderHandlers.append(volumeSliderHandler)
 
-            let monitorMenuItem = NSMenuItem()
-            let monitorSubMenu = NSMenu()
+				let isDefaultDisplay = defaultDisplay == nil
+				let defaultMonitorSelectButtom = NSButton(frame: NSRect(x: 25, y: 0, width: 200, height: 25))
+				defaultMonitorSelectButtom.title = isDefaultDisplay ? NSLocalizedString("Default", comment: "Shown in menu") : NSLocalizedString("Set as default", comment: "Shown in menu")
+				defaultMonitorSelectButtom.bezelStyle = NSButton.BezelStyle.rounded
+				defaultMonitorSelectButtom.isEnabled = !isDefaultDisplay
 
-            let brightnessSlider = addSliderItem(menu: monitorSubMenu, isDefaultDisplay: isDefaultDisplay, display: d, command: BRIGHTNESS, title: NSLocalizedString("Brightness", comment: "Sown in menu"))
-            let _ = addSliderItem(menu: monitorSubMenu, isDefaultDisplay: isDefaultDisplay, display: d, command: CONTRAST, title: NSLocalizedString("Contrast", comment: "Shown in menu"))
-            let volumeSlider = addSliderItem(menu: monitorSubMenu, isDefaultDisplay: isDefaultDisplay, display: d, command: AUDIO_SPEAKER_VOLUME, title: NSLocalizedString("Volume", comment: "Shown in menu"))
+				let defaultMonitorView = NSView(frame: NSRect(x: 0, y: 5, width: 250, height: 25))
+				defaultMonitorView.addSubview(defaultMonitorSelectButtom)
 
-            let defaultMonitorItem = NSMenuItem()
-            let defaultMonitorView = NSView(frame: NSRect(x: 0, y: 5, width: 250, height: 25))
+				let defaultMonitorItem = NSMenuItem()
+				defaultMonitorItem.view = defaultMonitorView
+				monitorSubMenu.addItem(defaultMonitorItem)
 
-            let defaultMonitorSelectButtom = NSButton(frame: NSRect(x: 25, y: 0, width: 200, height: 25))
-            defaultMonitorSelectButtom.title = isDefaultDisplay ? NSLocalizedString("Default", comment: "Shown in menu") : NSLocalizedString("Set as default", comment: "Shown in menu")
-            defaultMonitorSelectButtom.bezelStyle = NSButton.BezelStyle.rounded
-            defaultMonitorSelectButtom.isEnabled = !isDefaultDisplay
+				let monitorMenuItem = NSMenuItem()
+				monitorMenuItem.title = "\(name)"
+				monitorMenuItem.submenu = monitorSubMenu
 
-            defaultMonitorView.addSubview(defaultMonitorSelectButtom)
+				monitorItems.append(monitorMenuItem)
+				statusMenu.insertItem(monitorMenuItem, at: displays.count - 1)
 
-            defaultMonitorItem.view = defaultMonitorView
-
-            monitorSubMenu.addItem(defaultMonitorItem)
-
-            monitorMenuItem.title = "\(name)"
-            monitorMenuItem.submenu = monitorSubMenu
-
-            monitorItems.append(monitorMenuItem)
-            statusMenu.insertItem(monitorMenuItem, at: displays.count - 1)
-
-            if isDefaultDisplay {
-                defaultDisplay = d
-                defaultBrightnessSlider = brightnessSlider
-                defaultVolumeSlider = volumeSlider
-            }
+				if isDefaultDisplay {
+					defaultDisplay = display
+					defaultBrightnessSlider = brightnessSliderHandler.slider
+					defaultVolumeSlider = volumeSliderHandler.slider
+				}
+			}
         }
 
         if defaultDisplay == nil {
@@ -241,51 +144,64 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             statusMenu.insertItem(item, at: 0)
         }
     }
-	
-    func acquirePrivileges() {
-        let options: NSDictionary = [kAXTrustedCheckOptionPrompt.takeRetainedValue() as NSString: true]
-        let accessibilityEnabled = AXIsProcessTrustedWithOptions(options)
-        
-        if !accessibilityEnabled {
-            print(NSLocalizedString("You need to enable the keylogger in the System Prefrences for the keyboard shortcuts to work", comment: ""))
-        }
-        
-        return
-    }
-    
-    func applicationWillTerminate(_ aNotification: Notification) {
-        // Insert code here to tear down your application
-    }
 
-    func edidString(_ d: descriptor) -> String {
-        var s = ""
-        for (_, b) in Mirror(reflecting: d.text.data).children {
-            let b = b as! Int8
-            let c = Character(UnicodeScalar(UInt8(bitPattern: b)))
-            if c == "\0" || c == "\n" {
-                break
-            }
-            s.append(c)
-        }
-        return s
-    }
+	// MARK: - Media Key Tap delegate
 
-    func getDescriptorString(_ edid: EDID, _ type: UInt8) -> String? {
-        for (_, d) in Mirror(reflecting: edid.descriptors).children {
-            let d = d as! descriptor
-            if d.text.type == UInt8(type) {
-                return edidString(d)
-            }
-        }
+	func handle(mediaKey: MediaKey, event: KeyEvent) {
 
-        return nil
-    }
+		var command = BRIGHTNESS
+		var rel = 0
+		var slider = self.defaultBrightnessSlider
 
-    func getDisplayName(_ edid: EDID) -> String {
-        return getDescriptorString(edid, 0xFC) ?? NSLocalizedString("Display", comment: "")
-    }
+		switch mediaKey {
+		case .brightnessUp:
+			rel = +self.step
+		case .brightnessDown:
+			rel = -self.step
+		case .mute:
+			rel = -100
+			command = AUDIO_SPEAKER_VOLUME
+			slider = self.defaultVolumeSlider
+		case .volumeUp:
+			rel = +self.step
+			command = AUDIO_SPEAKER_VOLUME
+			slider = self.defaultVolumeSlider
+		case .volumeDown:
+			rel = -self.step
+			command = AUDIO_SPEAKER_VOLUME
+			slider = self.defaultVolumeSlider
+		default:
+			return
+		}
 
-    func getDisplaySerial(_ edid: EDID) -> String {
-        return getDescriptorString(edid, 0xFF) ?? NSLocalizedString("Unknown", comment: "")
-    }
+		let k = "\(command)-\(self.defaultDisplay.serial)"
+		let value = max(0, min(100, prefs.integer(forKey: k) + rel))
+		prefs.setValue(value, forKey: k)
+		prefs.synchronize()
+
+		if let slider = slider {
+			slider.intValue = Int32(value)
+		}
+
+		Utils.ddcctl(monitor: self.defaultDisplay.identifier, command: command, value: value)
+
+		// OSD
+		if let manager = OSDManager.sharedManager() as? OSDManager {
+			var osdImage: Int64 = 1 // Brightness Image
+			if command == AUDIO_SPEAKER_VOLUME {
+				osdImage = 3 // Speaker image
+				if value == 0 {
+					osdImage = 4 // Mute speaker
+				}
+			}
+			manager.showImage(osdImage,
+							  onDisplayID: self.defaultDisplay.identifier,
+							  priority: 0x1f4,
+							  msecUntilFade: 2000,
+							  filledChiclets: UInt32(value/self.step),
+							  totalChiclets: UInt32(100/self.step),
+							  locked: false)
+		}
+	}
+
 }

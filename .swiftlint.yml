@@ -1,0 +1,9 @@
+disabled_rules:
+- line_length
+- function_body_length
+excluded:
+- Pods
+type_body_length:
+- warning: 500
+file_length:
+- warning: 500
