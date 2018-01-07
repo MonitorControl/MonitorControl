@@ -32,8 +32,6 @@ class SliderHandler {
 		}
 
 		Utils.ddcctl(monitor: display.identifier, command: command, value: value)
-
-		prefs.setValue(value, forKey: "\(command)-\(display.serial)")
-		prefs.synchronize()
+		prefs.setValue(value, forKey: "\(command)-\(display.identifier)")
 	}
 }

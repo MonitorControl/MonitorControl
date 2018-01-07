@@ -53,7 +53,7 @@ class DisplayPrefsViewController: NSViewController, MASPreferencesViewController
 			if let id = screen.deviceDescription[NSDeviceDescriptionKey.init("NSScreenNumber")] as? CGDirectDisplayID {
 				// Is Built In Screen (e.g. MBP/iMac Screen)
 				if CGDisplayIsBuiltin(id) != 0 {
-					let display = Display(identifier: id, name: "Mac built-in Display", serial: "", isEnabled: false)
+					let display = Display(id, name: "Mac built-in Display", serial: "", isEnabled: false)
 					displays.append(display)
 					continue
 				}
@@ -71,7 +71,7 @@ class DisplayPrefsViewController: NSViewController, MASPreferencesViewController
 					isEnabled = enabled
 				}
 
-				let display = Display(identifier: id, name: name, serial: serial, isEnabled: isEnabled)
+				let display = Display(id, name: name, serial: serial, isEnabled: isEnabled)
 				displays.append(display)
 			}
 		}

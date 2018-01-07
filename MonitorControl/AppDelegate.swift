@@ -25,11 +25,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, MediaKeyTapDelegate {
 
     var monitorItems: [NSMenuItem] = []
     var displays: [Display] = []
-	var sliderHandlers: [SliderHandler] = []
-
-    var defaultDisplay: Display! = nil
-    var defaultBrightnessSlider: NSSlider! = nil
-    var defaultVolumeSlider: NSSlider! = nil
 
 	let step = 100/16
 
@@ -89,17 +84,12 @@ class AppDelegate: NSObject, NSApplicationDelegate, MediaKeyTapDelegate {
 	// MARK: - Menu
 
 	func clearDisplays() {
-		defaultDisplay = nil
-		defaultBrightnessSlider = nil
-		defaultVolumeSlider = nil
-
 		for monitor in monitorItems {
 			statusMenu.removeItem(monitor)
 		}
 
 		monitorItems = []
 		displays = []
-		sliderHandlers = []
 	}
 
     func updateDisplays() {
@@ -122,8 +112,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, MediaKeyTapDelegate {
 				let name = Utils.getDisplayName(forEdid: edid)
 				let serial = Utils.getDisplaySerial(forEdid: edid)
 
-				let display = Display(identifier: id, name: name, serial: serial, isEnabled: true)
-				displays.append(display)
+				let display = Display.init(id, name: name, serial: serial)
 
 				let monitorSubMenu = NSMenu()
 				let brightnessSliderHandler = Utils.addSliderMenuItem(toMenu: monitorSubMenu,
@@ -134,21 +123,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, MediaKeyTapDelegate {
 												   forDisplay: display,
 												   command: AUDIO_SPEAKER_VOLUME,
 												   title: NSLocalizedString("Volume", comment: "Shown in menu"))
-				sliderHandlers.append(brightnessSliderHandler)
-				sliderHandlers.append(volumeSliderHandler)
-
-				let isDefaultDisplay = defaultDisplay == nil
-				let defaultMonitorSelectButtom = NSButton(frame: NSRect(x: 25, y: 0, width: 200, height: 25))
-				defaultMonitorSelectButtom.title = isDefaultDisplay ? NSLocalizedString("Default", comment: "Shown in menu") : NSLocalizedString("Set as default", comment: "Shown in menu")
-				defaultMonitorSelectButtom.bezelStyle = NSButton.BezelStyle.rounded
-				defaultMonitorSelectButtom.isEnabled = !isDefaultDisplay
-
-				let defaultMonitorView = NSView(frame: NSRect(x: 0, y: 5, width: 250, height: 25))
-				defaultMonitorView.addSubview(defaultMonitorSelectButtom)
-
-				let defaultMonitorItem = NSMenuItem()
-				defaultMonitorItem.view = defaultMonitorView
-				monitorSubMenu.addItem(defaultMonitorItem)
+				display.brightnessSliderHandler = brightnessSliderHandler
+				display.volumeSliderHandler = volumeSliderHandler
+				displays.append(display)
 
 				let monitorMenuItem = NSMenuItem()
 				monitorMenuItem.title = "\(name)"
@@ -156,16 +133,10 @@ class AppDelegate: NSObject, NSApplicationDelegate, MediaKeyTapDelegate {
 
 				monitorItems.append(monitorMenuItem)
 				statusMenu.insertItem(monitorMenuItem, at: displays.count - 1)
-
-				if isDefaultDisplay {
-					defaultDisplay = display
-					defaultBrightnessSlider = brightnessSliderHandler.slider
-					defaultVolumeSlider = volumeSliderHandler.slider
-				}
 			}
         }
 
-        if defaultDisplay == nil {
+        if displays.count == 0 {
             // If no DDC capable display was detected
             let item = NSMenuItem()
             item.title = NSLocalizedString("No supported display found", comment: "Shown in menu")
@@ -178,60 +149,32 @@ class AppDelegate: NSObject, NSApplicationDelegate, MediaKeyTapDelegate {
 	// MARK: - Media Key Tap delegate
 
 	func handle(mediaKey: MediaKey, event: KeyEvent) {
-
-		var command = BRIGHTNESS
+		guard let currentDisplay = Utils.getCurrentDisplay(from: displays) else { return }
 		var rel = 0
-		var slider = self.defaultBrightnessSlider
 
 		switch mediaKey {
 		case .brightnessUp:
 			rel = +self.step
+			let value = currentDisplay.calcNewValue(for: BRIGHTNESS, withRel: rel)
+			currentDisplay.setBrightness(to: value)
 		case .brightnessDown:
 			rel = -self.step
+			let value = currentDisplay.calcNewValue(for: BRIGHTNESS, withRel: rel)
+			currentDisplay.setBrightness(to: value)
 		case .mute:
-			rel = -100
-			command = AUDIO_SPEAKER_VOLUME
-			slider = self.defaultVolumeSlider
+			currentDisplay.mute()
 		case .volumeUp:
 			rel = +self.step
-			command = AUDIO_SPEAKER_VOLUME
-			slider = self.defaultVolumeSlider
+			let value = currentDisplay.calcNewValue(for: AUDIO_SPEAKER_VOLUME, withRel: rel)
+			currentDisplay.setVolume(to: value)
 		case .volumeDown:
 			rel = -self.step
-			command = AUDIO_SPEAKER_VOLUME
-			slider = self.defaultVolumeSlider
+			let value = currentDisplay.calcNewValue(for: AUDIO_SPEAKER_VOLUME, withRel: rel)
+			currentDisplay.setVolume(to: value)
 		default:
 			return
 		}
 
-		let k = "\(command)-\(self.defaultDisplay.serial)"
-		let value = max(0, min(100, prefs.integer(forKey: k) + rel))
-		prefs.setValue(value, forKey: k)
-		prefs.synchronize()
-
-		if let slider = slider {
-			slider.intValue = Int32(value)
-		}
-
-		Utils.ddcctl(monitor: self.defaultDisplay.identifier, command: command, value: value)
-
-		// OSD
-		if let manager = OSDManager.sharedManager() as? OSDManager {
-			var osdImage: Int64 = 1 // Brightness Image
-			if command == AUDIO_SPEAKER_VOLUME {
-				osdImage = 3 // Speaker image
-				if value == 0 {
-					osdImage = 4 // Mute speaker
-				}
-			}
-			manager.showImage(osdImage,
-							  onDisplayID: self.defaultDisplay.identifier,
-							  priority: 0x1f4,
-							  msecUntilFade: 2000,
-							  filledChiclets: UInt32(value/self.step),
-							  totalChiclets: UInt32(100/self.step),
-							  locked: false)
-		}
 	}
 
 }

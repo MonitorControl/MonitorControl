@@ -147,6 +147,21 @@ class Utils: NSObject {
 		return getDescriptorString(edid, 0xFF) ?? NSLocalizedString("Unknown", comment: "")
 	}
 
+	/// Get the main display from a list of display
+	///
+	/// - Parameter displays: List of Display
+	/// - Returns: the main display or nil if not found
+	static func getCurrentDisplay(from displays: [Display]) -> Display? {
+		return displays.first { display -> Bool in
+			if let main = NSScreen.main {
+				if let id = main.deviceDescription[NSDeviceDescriptionKey.init("NSScreenNumber")] as? CGDirectDisplayID {
+					return display.identifier == id
+				}
+			}
+			return false
+		}
+	}
+
 	/// UserDefault Keys for the app prefs
 	enum PrefKeys: String {
 		/// Was the app launched once
