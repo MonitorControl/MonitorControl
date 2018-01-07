@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="13196" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="13771" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13196"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13771"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
@@ -22,6 +21,12 @@
         <menu id="lCi-vw-mwp">
             <items>
                 <menuItem isSeparatorItem="YES" id="F5R-GH-0ZO"/>
+                <menuItem title="Preferences..." id="SOS-eZ-uU5">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="prefsClicked:" target="Voe-Tx-rLC" id="sSU-RG-py2"/>
+                    </connections>
+                </menuItem>
                 <menuItem title="Quit" id="JTa-2I-AsI">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
@@ -29,7 +34,7 @@
                     </connections>
                 </menuItem>
             </items>
-            <point key="canvasLocation" x="-87.5" y="66.5"/>
+            <point key="canvasLocation" x="-348" y="-499"/>
         </menu>
     </objects>
 </document>

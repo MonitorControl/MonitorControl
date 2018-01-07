@@ -3,7 +3,5 @@ disabled_rules:
 - function_body_length
 excluded:
 - Pods
-type_body_length:
-- warning: 500
-file_length:
-- warning: 500
+type_body_length: 500
+file_length: 500

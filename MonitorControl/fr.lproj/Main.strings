@@ -1,0 +1,72 @@
+
+/* Class = "NSButtonCell"; title = "Change Brightness/Volume for all screens"; ObjectID = "0Z7-PQ-Bl8"; */
+"0Z7-PQ-Bl8.title" = "Modifier Luminosité/Volume pour tout les écrans";
+
+/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "2gr-xG-Byx"; */
+"2gr-xG-Byx.title" = "Text Cell";
+
+/* Class = "NSTableColumn"; headerCell.title = "Enabled"; ObjectID = "8U8-ec-Zbv"; */
+"8U8-ec-Zbv.headerCell.title" = "Activé";
+
+/* Class = "NSMenuItem"; title = "Native Mac Keys"; ObjectID = "AiH-h3-2w5"; */
+"AiH-h3-2w5.title" = "Touches macOS Native";
+
+/* Class = "NSTextFieldCell"; title = "Listen on"; ObjectID = "C3e-V0-Tn0"; */
+"C3e-V0-Tn0.title" = "Écouter sur";
+
+/* Class = "NSTableColumn"; headerCell.title = "Display Name"; ObjectID = "CHc-s5-4MN"; */
+"CHc-s5-4MN.headerCell.title" = "Nom de l'écran";
+
+/* Class = "NSTextFieldCell"; title = "Keys"; ObjectID = "Dcz-GG-1li"; */
+"Dcz-GG-1li.title" = "Touches";
+
+/* Class = "NSTextFieldCell"; title = "Display"; ObjectID = "ExD-7P-6XI"; */
+"ExD-7P-6XI.title" = "Écrans";
+
+/* Class = "NSTextFieldCell"; title = "Last check: "; ObjectID = "I3I-EP-Ev8"; */
+"I3I-EP-Ev8.title" = "Dernière vérification: ";
+
+/* Class = "NSMenuItem"; title = "Volume only"; ObjectID = "NLP-dU-Dam"; */
+"NLP-dU-Dam.title" = "Volume uniquement";
+
+/* Class = "NSButtonCell"; title = "Check for updates automatically"; ObjectID = "SCJ-AY-phi"; */
+"SCJ-AY-phi.title" = "Vérifier les màj automatiquement";
+
+/* Class = "NSButtonCell"; title = "Start MonitorControl at Login"; ObjectID = "UTh-SV-vAQ"; */
+"UTh-SV-vAQ.title" = "Lancer MonitorControl au démarrage";
+
+/* Class = "NSTextFieldCell"; title = "Listen for"; ObjectID = "Vh8-06-U3K"; */
+"Vh8-06-U3K.title" = "Écouter pour";
+
+/* Class = "NSButtonCell"; title = "Check for updates"; ObjectID = "Vi8-Ye-W28"; */
+"Vi8-Ye-W28.title" = "Vérifier les mis à jour";
+
+/* Class = "NSMenuItem"; title = "Both Brightness & Volume"; ObjectID = "Vr4-xb-B4o"; */
+"Vr4-xb-B4o.title" = "Luminosité & Volume";
+
+/* Class = "NSButtonCell"; title = "Start when plugged to an external monitor"; ObjectID = "WJp-aA-2Af"; */
+"WJp-aA-2Af.title" = "Lancer quand branché à un écran externe";
+
+/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "Xje-0J-NNJ"; */
+"Xje-0J-NNJ.title" = "Text Cell";
+
+/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "as0-t3-Aub"; */
+"as0-t3-Aub.title" = "Text Cell";
+
+/* Class = "NSTextFieldCell"; title = "Table View Cell"; ObjectID = "cUg-j2-8gt"; */
+"cUg-j2-8gt.title" = "Table View Cell";
+
+/* Class = "NSMenuItem"; title = "Function Keys (F1, F2...)"; ObjectID = "dQm-ww-uhA"; */
+"dQm-ww-uhA.title" = "Touches de fonctions (F1, F2...)";
+
+/* Class = "NSTableColumn"; headerCell.title = "Display Id"; ObjectID = "dgp-q7-cBK"; */
+"dgp-q7-cBK.headerCell.title" = "Identifiant";
+
+/* Class = "NSMenuItem"; title = "Brightness only"; ObjectID = "hjz-0c-rvK"; */
+"hjz-0c-rvK.title" = "Luminosité uniquement";
+
+/* Class = "NSTextFieldCell"; title = "Table View Cell"; ObjectID = "ldv-hu-9Hl"; */
+"ldv-hu-9Hl.title" = "Table View Cell";
+
+/* Class = "NSTextFieldCell"; title = "General"; ObjectID = "ocE-Cc-2bi"; */
+"ocE-Cc-2bi.title" = "Général";

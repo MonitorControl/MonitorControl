@@ -147,4 +147,25 @@ class Utils: NSObject {
 		return getDescriptorString(edid, 0xFF) ?? NSLocalizedString("Unknown", comment: "")
 	}
 
+	/// UserDefault Keys for the app prefs
+	enum PrefKeys: String {
+		/// Was the app launched once
+		case appAlreadyLaunched
+
+		/// Does the app start at Login
+		case startAtLogin
+
+		/// Does the app start when plugged to an external monitor
+		case startWhenExternal
+
+		/// Keys listened for (Brightness/Volume)
+		case listenFor
+
+		/// Keys listened on (mac or functions)
+		case listenOn
+
+		/// Change Brightness/Volume for all screens
+		case allScreens
+	}
+
 }

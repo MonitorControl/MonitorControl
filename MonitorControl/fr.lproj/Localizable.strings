@@ -22,6 +22,9 @@
 /* Shown in menu */
 "Volume" = "Volume";
 
+/* Shown in Preferences window */
+"Preferences" = "Préférences";
+
 /* Shown in the alert dialog */
 "Ok" = "Ok";
 
@@ -30,3 +33,9 @@
 
 /* Shown in the alert dialog */
 "You need to enable MonitorControl in System Preferences > Security and Privacy > Accessibility for the keyboard shortcuts to work" = "Vous devez activer MonitorControl dans Préférences Système > Sécurité et confidentialité  > Accessibilité pour que les raccourcis clavier fonctionnes";
+
+/* Shown in the main prefs window */
+"General" = "Général";
+
+/* Shown in the main prefs window */
+"Keys" = "Touches";

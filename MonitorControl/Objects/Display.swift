@@ -3,7 +3,7 @@
 //  MonitorControl
 //
 //  Created by Guillaume BRODER on 02/01/2018.
-//  Copyright © 2018 Mathew Kurian. All rights reserved.
+//  MIT Licensed.
 //
 
 import Cocoa
@@ -13,5 +13,5 @@ struct Display {
 	var identifier: CGDirectDisplayID
 	var name: String
 	var serial: String
-	var isBuiltIn: Bool = false
+	var isEnabled: Bool = true
 }

@@ -10,6 +10,7 @@
 import Cocoa
 import Foundation
 import MediaKeyTap
+import MASPreferences
 
 var app: AppDelegate! = nil
 let prefs = UserDefaults.standard
@@ -33,13 +34,24 @@ class AppDelegate: NSObject, NSApplicationDelegate, MediaKeyTapDelegate {
 	let step = 100/16
 
 	var mediaKeyTap: MediaKeyTap?
+	var prefsController: NSWindowController?
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         app = self
 		mediaKeyTap = MediaKeyTap.init(delegate: self, forKeys: [.brightnessUp, .brightnessDown, .mute, .volumeUp, .volumeDown], observeBuiltIn: false)
+		let storyboard: NSStoryboard = NSStoryboard.init(name: NSStoryboard.Name(rawValue: "Main"), bundle: Bundle.main)
+		prefsController = MASPreferencesWindowController(viewControllers:
+			[
+				storyboard.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "MainPrefsVC")),
+				storyboard.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "KeysPrefsVC")),
+				storyboard.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "DisplayPrefsVC"))
+			],
+														 title: NSLocalizedString("Preferences", comment: "Shown in Preferences window"))
 
 		statusItem.image = NSImage.init(named: NSImage.Name(rawValue: "status"))
         statusItem.menu = statusMenu
+
+		setDefaultPrefs()
 
         Utils.acquirePrivileges()
 
@@ -54,6 +66,24 @@ class AppDelegate: NSObject, NSApplicationDelegate, MediaKeyTapDelegate {
 
 	@IBAction func quitClicked(_ sender: AnyObject) {
 		NSApplication.shared.terminate(self)
+	}
+
+	@IBAction func prefsClicked(_ sender: AnyObject) {
+		if let prefsController = prefsController {
+			prefsController.showWindow(sender)
+			prefsController.window?.makeKeyAndOrderFront(sender)
+		}
+	}
+
+	/// Set the default prefs of the app
+	func setDefaultPrefs() {
+		let prefs = UserDefaults.standard
+		if !prefs.bool(forKey: Utils.PrefKeys.appAlreadyLaunched.rawValue) {
+			prefs.set(true, forKey: Utils.PrefKeys.appAlreadyLaunched.rawValue)
+
+			prefs.set(false, forKey: Utils.PrefKeys.startAtLogin.rawValue)
+			prefs.set(true, forKey: Utils.PrefKeys.startWhenExternal.rawValue)
+		}
 	}
 
 	// MARK: - Menu
@@ -92,7 +122,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, MediaKeyTapDelegate {
 				let name = Utils.getDisplayName(forEdid: edid)
 				let serial = Utils.getDisplaySerial(forEdid: edid)
 
-				let display = Display(identifier: id, name: name, serial: serial, isBuiltIn: false)
+				let display = Display(identifier: id, name: name, serial: serial, isEnabled: true)
 				displays.append(display)
 
 				let monitorSubMenu = NSMenu()
