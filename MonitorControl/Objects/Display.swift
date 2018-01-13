@@ -18,6 +18,8 @@ class Display {
 	var brightnessSliderHandler: SliderHandler?
 	var volumeSliderHandler: SliderHandler?
 
+	private let prefs = UserDefaults.standard
+
 	init(_ identifier: CGDirectDisplayID, name: String, serial: String, isEnabled: Bool = true) {
 		self.identifier = identifier
 		self.name = name
@@ -28,13 +30,13 @@ class Display {
 	func mute() {
 		var value = 0
 		if isMuted {
-			value = UserDefaults.standard.integer(forKey: "\(AUDIO_SPEAKER_VOLUME)-\(identifier)")
+			value = prefs.integer(forKey: "\(AUDIO_SPEAKER_VOLUME)-\(identifier)")
 			isMuted = false
 		} else {
 			isMuted = true
 		}
 
-		Utils.ddcctl(monitor: identifier, command: AUDIO_SPEAKER_VOLUME, value: value)
+		Utils.sendCommand(AUDIO_SPEAKER_VOLUME, toMonitor: identifier, withValue: value)
 		if let slider = volumeSliderHandler?.slider {
 			slider.intValue = Int32(value)
 		}
@@ -46,7 +48,7 @@ class Display {
 			isMuted = false
 		}
 
-		Utils.ddcctl(monitor: identifier, command: AUDIO_SPEAKER_VOLUME, value: value)
+		Utils.sendCommand(AUDIO_SPEAKER_VOLUME, toMonitor: identifier, withValue: value)
 		if let slider = volumeSliderHandler?.slider {
 			slider.intValue = Int32(value)
 		}
@@ -55,7 +57,7 @@ class Display {
 	}
 
 	func setBrightness(to value: Int) {
-		Utils.ddcctl(monitor: identifier, command: BRIGHTNESS, value: value)
+		Utils.sendCommand(BRIGHTNESS, toMonitor: identifier, withValue: value)
 		if let slider = brightnessSliderHandler?.slider {
 			slider.intValue = Int32(value)
 		}
@@ -64,12 +66,12 @@ class Display {
 	}
 
 	func calcNewValue(for command: Int32, withRel rel: Int) -> Int {
-		let currentValue = UserDefaults.standard.integer(forKey: "\(command)-\(identifier)")
+		let currentValue = prefs.integer(forKey: "\(command)-\(identifier)")
 		return max(0, min(100, currentValue + rel))
 	}
 
 	func saveValue(_ value: Int, for command: Int32) {
-		UserDefaults.standard.set(value, forKey: "\(command)-\(identifier)")
+		prefs.set(value, forKey: "\(command)-\(identifier)")
 	}
 
 	private func showOsd(command: Int32, value: Int) {

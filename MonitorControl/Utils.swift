@@ -15,13 +15,29 @@ class Utils: NSObject {
 	/// Send command to ddcctl
 	///
 	/// - Parameters:
-	///   - monitor: The id of the Monitor to send the command to
 	///   - command: The command to send
+	///   - monitor: The id of the Monitor to send the command to
 	///   - value: the value of the command
-	static func ddcctl(monitor: CGDirectDisplayID, command: Int32, value: Int) {
+	static func sendCommand(_ command: Int32, toMonitor monitor: CGDirectDisplayID, withValue value: Int) {
 		var wrcmd = DDCWriteCommand(control_id: UInt8(command), new_value: UInt8(value))
 		DDCWrite(monitor, &wrcmd)
-		print(value)
+		print("\(command == BRIGHTNESS ? "Brightness" : "Volume") value : \(value)")
+	}
+
+	/// Get current value of ddcctl command
+	///
+	/// - Parameters:
+	///   - command: The command to send
+	///   - monitor: The id of the monitor to send the command to
+	/// - Returns: the value of the command
+	static func getCommand(_ command: Int32, fromMonitor monitor: CGDirectDisplayID) -> Int {
+		var readCmd = DDCReadCommand()
+		readCmd.control_id = UInt8(command)
+		readCmd.max_value = 0
+		readCmd.current_value = 0
+		DDCRead(monitor, &readCmd)
+		print("\(command == BRIGHTNESS ? "Brightness" : "Volume") value : \(readCmd.current_value)")
+		return Int(readCmd.current_value)
 	}
 
 	// MARK: - Menu
@@ -59,17 +75,18 @@ class Utils: NSObject {
 		slider.target = handler
 		slider.minValue = 0
 		slider.maxValue = 100
-		slider.integerValue = prefs.integer(forKey: "\(command)-\(display.serial)")
+		slider.integerValue = getCommand(command, fromMonitor: display.identifier)
 		slider.action = #selector(SliderHandler.valueChanged)
 		handler.slider = slider
+		display.saveValue(slider.integerValue, for: command)
 
 		view.addSubview(label)
 		view.addSubview(slider)
 
 		item.view = view
 
-		menu.addItem(item)
-		menu.addItem(NSMenuItem.separator())
+		menu.insertItem(item, at: 0)
+		menu.insertItem(NSMenuItem.separator(), at: 1)
 
 		return handler
 	}

@@ -8,6 +8,7 @@
 
 import Cocoa
 import MASPreferences
+import ServiceManagement
 
 class MainPrefsViewController: NSViewController, MASPreferencesViewController {
 
@@ -27,15 +28,17 @@ class MainPrefsViewController: NSViewController, MASPreferencesViewController {
     }
 
 	@IBAction func startAtLoginClicked(_ sender: NSButton) {
+		let identifier = "me.guillaumeb.MonitorControlHelper" as CFString
 		switch sender.state {
 		case .on:
 			prefs.set(true, forKey: Utils.PrefKeys.startAtLogin.rawValue)
+			SMLoginItemSetEnabled(identifier, true)
 		case .off:
 			prefs.set(false, forKey: Utils.PrefKeys.startAtLogin.rawValue)
+			SMLoginItemSetEnabled(identifier, false)
 		default: break
 		}
-		// TODO: Toggle start at login state
-		print("Toggle start at login state -> \(sender.state)")
+		print("Toggle start at login state -> \(sender.state == .on ? "on" : "off")")
 	}
 
 	@IBAction func startWhenExternalClicked(_ sender: NSButton) {
@@ -47,6 +50,6 @@ class MainPrefsViewController: NSViewController, MASPreferencesViewController {
 		default: break
 		}
 		// TODO: Toggle start when external plugged in state
-		print("Toggle start when external plugged in state -> \(sender.state)")
+		print("Toggle start when external plugged in state -> \(sender.state == .on ? "on" : "off")")
 	}
 }

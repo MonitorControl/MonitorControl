@@ -11,11 +11,11 @@
             <objects>
                 <viewController storyboardIdentifier="MainPrefsVC" id="HNb-aq-vnV" customClass="MainPrefsViewController" customModule="MonitorControl" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="iuQ-z6-BGz">
-                        <rect key="frame" x="0.0" y="0.0" width="400" height="117"/>
+                        <rect key="frame" x="0.0" y="0.0" width="400" height="158"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="8KQ-j9-ddv">
-                                <rect key="frame" x="18" y="68" width="364" height="29"/>
+                                <rect key="frame" x="18" y="109" width="92" height="29"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="General" id="ocE-Cc-2bi">
                                     <font key="font" metaFont="systemBold" size="24"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -23,7 +23,7 @@
                                 </textFieldCell>
                             </textField>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dZG-M6-fsQ">
-                                <rect key="frame" x="18" y="42" width="364" height="18"/>
+                                <rect key="frame" x="18" y="83" width="199" height="18"/>
                                 <buttonCell key="cell" type="check" title="Start MonitorControl at Login" bezelStyle="regularSquare" imagePosition="left" inset="2" id="UTh-SV-vAQ">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -32,67 +32,55 @@
                                     <action selector="startAtLoginClicked:" target="HNb-aq-vnV" id="OrA-9Y-N8S"/>
                                 </connections>
                             </button>
-                            <button hidden="YES" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="nnZ-LS-lOW">
-                                <rect key="frame" x="18" y="-16" width="364" height="18"/>
-                                <buttonCell key="cell" type="check" title="Check for updates automatically" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="SCJ-AY-phi">
-                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                            </button>
                             <button hidden="YES" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="K3V-Ub-wAA">
-                                <rect key="frame" x="14" y="-52" width="152" height="32"/>
+                                <rect key="frame" x="14" y="13" width="152" height="32"/>
                                 <buttonCell key="cell" type="push" title="Check for updates" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Vi8-Ye-W28">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                             </button>
                             <textField hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fds-MD-5OJ">
-                                <rect key="frame" x="168" y="-43" width="78" height="17"/>
+                                <rect key="frame" x="168" y="22" width="78" height="17"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Last check: " id="I3I-EP-Ev8">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="71u-hm-uYt">
-                                <rect key="frame" x="18" y="18" width="364" height="18"/>
-                                <buttonCell key="cell" type="check" title="Start when plugged to an external monitor" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="WJp-aA-2Af">
+                            <button hidden="YES" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="nnZ-LS-lOW">
+                                <rect key="frame" x="18" y="49" width="218" height="18"/>
+                                <buttonCell key="cell" type="check" title="Check for updates automatically" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="SCJ-AY-phi">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
-                                <connections>
-                                    <action selector="startWhenExternalClicked:" target="HNb-aq-vnV" id="BT0-Ff-bx9"/>
-                                </connections>
                             </button>
                         </subviews>
                         <constraints>
                             <constraint firstItem="fds-MD-5OJ" firstAttribute="centerY" secondItem="K3V-Ub-wAA" secondAttribute="centerY" id="2RB-zz-fOU"/>
-                            <constraint firstItem="nnZ-LS-lOW" firstAttribute="top" secondItem="71u-hm-uYt" secondAttribute="bottom" constant="20" id="5IO-Jv-9ZU"/>
                             <constraint firstItem="dZG-M6-fsQ" firstAttribute="leading" secondItem="iuQ-z6-BGz" secondAttribute="leading" constant="20" id="8QT-EO-uBJ"/>
                             <constraint firstItem="K3V-Ub-wAA" firstAttribute="top" secondItem="nnZ-LS-lOW" secondAttribute="bottom" constant="10" id="9DT-6C-dQo"/>
                             <constraint firstItem="8KQ-j9-ddv" firstAttribute="top" secondItem="iuQ-z6-BGz" secondAttribute="top" constant="20" id="Fwh-JQ-1Cx"/>
                             <constraint firstItem="K3V-Ub-wAA" firstAttribute="leading" secondItem="iuQ-z6-BGz" secondAttribute="leading" constant="20" id="RWW-67-dGr"/>
-                            <constraint firstItem="71u-hm-uYt" firstAttribute="top" secondItem="dZG-M6-fsQ" secondAttribute="bottom" constant="10" id="Xmr-XF-7lE"/>
-                            <constraint firstAttribute="trailing" secondItem="dZG-M6-fsQ" secondAttribute="trailing" constant="20" id="c5h-vI-6Dg"/>
+                            <constraint firstItem="nnZ-LS-lOW" firstAttribute="top" secondItem="dZG-M6-fsQ" secondAttribute="bottom" constant="20" id="V4k-4m-OkH"/>
+                            <constraint firstAttribute="bottom" secondItem="K3V-Ub-wAA" secondAttribute="bottom" constant="20" id="bFh-Xa-GoP"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="dZG-M6-fsQ" secondAttribute="trailing" constant="20" id="c5h-vI-6Dg"/>
                             <constraint firstItem="dZG-M6-fsQ" firstAttribute="top" secondItem="8KQ-j9-ddv" secondAttribute="bottom" constant="10" id="dPJ-ev-Y3O"/>
+                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="dZG-M6-fsQ" secondAttribute="bottom" constant="20" id="gVa-4Q-fPP"/>
                             <constraint firstItem="8KQ-j9-ddv" firstAttribute="leading" secondItem="iuQ-z6-BGz" secondAttribute="leading" constant="20" id="ii0-uV-Ylg"/>
-                            <constraint firstItem="71u-hm-uYt" firstAttribute="leading" secondItem="iuQ-z6-BGz" secondAttribute="leading" constant="20" id="jsn-2a-Hse"/>
-                            <constraint firstAttribute="trailing" secondItem="nnZ-LS-lOW" secondAttribute="trailing" constant="20" id="kgN-1K-yxh"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="nnZ-LS-lOW" secondAttribute="trailing" constant="20" id="kgN-1K-yxh"/>
                             <constraint firstItem="nnZ-LS-lOW" firstAttribute="leading" secondItem="iuQ-z6-BGz" secondAttribute="leading" constant="20" id="kqS-g2-YV5"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="fds-MD-5OJ" secondAttribute="trailing" constant="20" id="mfJ-HC-8ie"/>
-                            <constraint firstAttribute="trailing" secondItem="8KQ-j9-ddv" secondAttribute="trailing" constant="20" id="qVn-hz-dRV"/>
-                            <constraint firstAttribute="trailing" secondItem="71u-hm-uYt" secondAttribute="trailing" constant="20" id="sIC-PJ-9gQ"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="8KQ-j9-ddv" secondAttribute="trailing" constant="20" id="qVn-hz-dRV"/>
                             <constraint firstItem="fds-MD-5OJ" firstAttribute="leading" secondItem="K3V-Ub-wAA" secondAttribute="trailing" constant="10" id="xuV-jB-am4"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="startAtLogin" destination="dZG-M6-fsQ" id="Rwg-dp-vIj"/>
-                        <outlet property="startWhenExternal" destination="71u-hm-uYt" id="l02-Xi-74S"/>
                     </connections>
                 </viewController>
                 <customObject id="ALN-AB-CU5" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="116" y="172.5"/>
+            <point key="canvasLocation" x="116" y="285"/>
         </scene>
         <!--Keys Prefs View Controller-->
         <scene sceneID="DmR-ia-4qL">
@@ -162,7 +150,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Uti-Vm-YwB">
-                                <rect key="frame" x="18" y="80" width="364" height="29"/>
+                                <rect key="frame" x="18" y="80" width="59" height="29"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Keys" id="Dcz-GG-1li">
                                     <font key="font" metaFont="systemBold" size="24"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -179,8 +167,9 @@
                             <constraint firstItem="Uti-Vm-YwB" firstAttribute="leading" secondItem="nfK-n0-xN4" secondAttribute="leading" constant="20" id="Mfl-NR-mVk"/>
                             <constraint firstItem="Uti-Vm-YwB" firstAttribute="top" secondItem="nfK-n0-xN4" secondAttribute="top" constant="20" id="ReX-zz-skV"/>
                             <constraint firstItem="fUf-UM-yW3" firstAttribute="leading" secondItem="jFY-ug-0KQ" secondAttribute="trailing" constant="10" id="Tic-nC-Oax"/>
+                            <constraint firstAttribute="bottom" secondItem="AeW-b4-XNc" secondAttribute="bottom" constant="20" id="ULA-RM-25S"/>
                             <constraint firstItem="AeW-b4-XNc" firstAttribute="top" secondItem="fUf-UM-yW3" secondAttribute="bottom" constant="10" id="Zd8-nU-IPw"/>
-                            <constraint firstAttribute="trailing" secondItem="Uti-Vm-YwB" secondAttribute="trailing" constant="20" id="ctI-eo-jEw"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Uti-Vm-YwB" secondAttribute="trailing" constant="20" id="ctI-eo-jEw"/>
                             <constraint firstItem="AeW-b4-XNc" firstAttribute="leading" secondItem="VNO-n0-6Y1" secondAttribute="trailing" constant="10" id="dkl-ho-D2N"/>
                             <constraint firstItem="jFY-ug-0KQ" firstAttribute="top" secondItem="Uti-Vm-YwB" secondAttribute="bottom" constant="10" id="t7Y-Pv-HlI"/>
                             <constraint firstItem="jFY-ug-0KQ" firstAttribute="leading" secondItem="nfK-n0-xN4" secondAttribute="leading" constant="20" id="xCB-fT-tMo"/>
@@ -193,7 +182,7 @@
                 </viewController>
                 <customObject id="hVj-0D-6XC" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="618" y="178.5"/>
+            <point key="canvasLocation" x="624" y="179"/>
         </scene>
         <!--Display Prefs View Controller-->
         <scene sceneID="kdt-oj-Qke">
@@ -204,7 +193,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="uXD-ZY-N3H">
-                                <rect key="frame" x="18" y="191" width="364" height="29"/>
+                                <rect key="frame" x="18" y="191" width="88" height="29"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Display" id="ExD-7P-6XI">
                                     <font key="font" metaFont="systemBold" size="24"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -214,7 +203,7 @@
                             <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B5k-we-kuP">
                                 <rect key="frame" x="20" y="20" width="360" height="137"/>
                                 <clipView key="contentView" id="4ot-Jo-X5O">
-                                    <rect key="frame" x="1" y="23" width="358" height="113"/>
+                                    <rect key="frame" x="1" y="0.0" width="358" height="136"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnResizing="NO" multipleSelection="NO" emptySelection="NO" autosaveColumns="NO" typeSelect="NO" rowSizeStyle="automatic" headerView="ckY-Px-mJn" viewBased="YES" id="dyo-uY-pMe">
@@ -343,7 +332,7 @@
                                 </tableHeaderView>
                             </scrollView>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Y48-gQ-uJi">
-                                <rect key="frame" x="18" y="165" width="364" height="18"/>
+                                <rect key="frame" x="18" y="165" width="275" height="18"/>
                                 <buttonCell key="cell" type="check" title="Change Brightness/Volume for all screens" bezelStyle="regularSquare" imagePosition="left" inset="2" id="0Z7-PQ-Bl8">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -354,9 +343,9 @@
                             </button>
                         </subviews>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="Y48-gQ-uJi" secondAttribute="trailing" constant="20" id="24u-jX-VqD"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Y48-gQ-uJi" secondAttribute="trailing" constant="20" id="24u-jX-VqD"/>
                             <constraint firstItem="Y48-gQ-uJi" firstAttribute="leading" secondItem="EBf-qN-KaN" secondAttribute="leading" constant="20" id="Ct2-ah-W0a"/>
-                            <constraint firstAttribute="trailing" secondItem="uXD-ZY-N3H" secondAttribute="trailing" constant="20" id="Qwk-xy-tL4"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="uXD-ZY-N3H" secondAttribute="trailing" constant="20" id="Qwk-xy-tL4"/>
                             <constraint firstAttribute="trailing" secondItem="B5k-we-kuP" secondAttribute="trailing" constant="20" id="SgW-60-zGH"/>
                             <constraint firstItem="Y48-gQ-uJi" firstAttribute="top" secondItem="uXD-ZY-N3H" secondAttribute="bottom" constant="10" id="WSd-oq-oD7"/>
                             <constraint firstItem="B5k-we-kuP" firstAttribute="top" secondItem="Y48-gQ-uJi" secondAttribute="bottom" constant="10" id="YIT-MK-KKw"/>

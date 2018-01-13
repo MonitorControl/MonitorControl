@@ -35,13 +35,12 @@ class AppDelegate: NSObject, NSApplicationDelegate, MediaKeyTapDelegate {
         app = self
 		mediaKeyTap = MediaKeyTap.init(delegate: self, forKeys: [.brightnessUp, .brightnessDown, .mute, .volumeUp, .volumeDown], observeBuiltIn: false)
 		let storyboard: NSStoryboard = NSStoryboard.init(name: NSStoryboard.Name(rawValue: "Main"), bundle: Bundle.main)
-		prefsController = MASPreferencesWindowController(viewControllers:
-			[
-				storyboard.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "MainPrefsVC")),
-				storyboard.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "KeysPrefsVC")),
-				storyboard.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "DisplayPrefsVC"))
-			],
-														 title: NSLocalizedString("Preferences", comment: "Shown in Preferences window"))
+		let views = [
+			storyboard.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "MainPrefsVC")),
+			storyboard.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "KeysPrefsVC")),
+			storyboard.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "DisplayPrefsVC"))
+		]
+		prefsController = MASPreferencesWindowController(viewControllers: views, title: NSLocalizedString("Preferences", comment: "Shown in Preferences window"))
 
 		statusItem.image = NSImage.init(named: NSImage.Name(rawValue: "status"))
         statusItem.menu = statusMenu
@@ -96,47 +95,33 @@ class AppDelegate: NSObject, NSApplicationDelegate, MediaKeyTapDelegate {
 		clearDisplays()
         sleep(1)
 
-        for screen in NSScreen.screens {
+		var filteredScreens = NSScreen.screens.filter { screen -> Bool in
 			if let id = screen.deviceDescription[NSDeviceDescriptionKey.init("NSScreenNumber")] as? CGDirectDisplayID {
 				// Is Built In Screen (e.g. MBP/iMac Screen)
 				if CGDisplayIsBuiltin(id) != 0 {
-					continue
+					return false
 				}
 
 				// Does screen support EDID ?
 				var edid = EDID()
 				if !EDIDTest(id, &edid) {
-					continue
+					return false
 				}
 
-				let name = Utils.getDisplayName(forEdid: edid)
-				let serial = Utils.getDisplaySerial(forEdid: edid)
-
-				let display = Display.init(id, name: name, serial: serial)
-
-				let monitorSubMenu = NSMenu()
-				let brightnessSliderHandler = Utils.addSliderMenuItem(toMenu: monitorSubMenu,
-													   forDisplay: display,
-													   command: BRIGHTNESS,
-													   title: NSLocalizedString("Brightness", comment: "Shown in menu"))
-				let volumeSliderHandler = Utils.addSliderMenuItem(toMenu: monitorSubMenu,
-												   forDisplay: display,
-												   command: AUDIO_SPEAKER_VOLUME,
-												   title: NSLocalizedString("Volume", comment: "Shown in menu"))
-				display.brightnessSliderHandler = brightnessSliderHandler
-				display.volumeSliderHandler = volumeSliderHandler
-				displays.append(display)
-
-				let monitorMenuItem = NSMenuItem()
-				monitorMenuItem.title = "\(name)"
-				monitorMenuItem.submenu = monitorSubMenu
-
-				monitorItems.append(monitorMenuItem)
-				statusMenu.insertItem(monitorMenuItem, at: displays.count - 1)
+				return true
 			}
-        }
+			return false
+		}
 
-        if displays.count == 0 {
+		if filteredScreens.count == 1 {
+			self.addScreenToMenu(screen: filteredScreens[0], asSubMenu: false)
+		} else {
+			for screen in filteredScreens {
+				self.addScreenToMenu(screen: screen, asSubMenu: true)
+			}
+		}
+
+        if filteredScreens.count == 0 {
             // If no DDC capable display was detected
             let item = NSMenuItem()
             item.title = NSLocalizedString("No supported display found", comment: "Shown in menu")
@@ -145,6 +130,46 @@ class AppDelegate: NSObject, NSApplicationDelegate, MediaKeyTapDelegate {
             statusMenu.insertItem(item, at: 0)
         }
     }
+
+	/// Add a screen to the menu
+	///
+	/// - Parameters:
+	///   - screen: The screen to add
+	///   - asSubMenu: Display in a sub menu or directly in menu
+	private func addScreenToMenu(screen: NSScreen, asSubMenu: Bool) {
+		if let id = screen.deviceDescription[NSDeviceDescriptionKey.init("NSScreenNumber")] as? CGDirectDisplayID {
+
+			var edid = EDID()
+			if EDIDTest(id, &edid) {
+				let name = Utils.getDisplayName(forEdid: edid)
+				let serial = Utils.getDisplaySerial(forEdid: edid)
+
+				let display = Display.init(id, name: name, serial: serial)
+
+				let monitorSubMenu: NSMenu = asSubMenu ? NSMenu() : statusMenu
+				let volumeSliderHandler = Utils.addSliderMenuItem(toMenu: monitorSubMenu,
+																  forDisplay: display,
+																  command: AUDIO_SPEAKER_VOLUME,
+																  title: NSLocalizedString("Volume", comment: "Shown in menu"))
+				let brightnessSliderHandler = Utils.addSliderMenuItem(toMenu: monitorSubMenu,
+																	  forDisplay: display,
+																	  command: BRIGHTNESS,
+																	  title: NSLocalizedString("Brightness", comment: "Shown in menu"))
+				display.volumeSliderHandler = volumeSliderHandler
+				display.brightnessSliderHandler = brightnessSliderHandler
+				displays.append(display)
+
+				let monitorMenuItem = NSMenuItem()
+				monitorMenuItem.title = "\(name)"
+				if asSubMenu {
+					monitorMenuItem.submenu = monitorSubMenu
+				}
+
+				monitorItems.append(monitorMenuItem)
+				statusMenu.insertItem(monitorMenuItem, at: 0)
+			}
+		}
+	}
 
 	// MARK: - Media Key Tap delegate
 

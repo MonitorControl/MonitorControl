@@ -29,7 +29,7 @@ class ButtonCellView: NSTableCellView {
 				break
 			}
 			// TODO: Toggle enabled display state
-			print("Toggle enabled display state -> \(sender.state)")
+			print("Toggle enabled display state -> \(sender.state == .on ? "on" : "off")")
 		}
 	}
 }

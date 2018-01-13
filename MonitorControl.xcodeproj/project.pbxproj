@@ -19,11 +19,27 @@
 		F0445D40200259C10025AE82 /* DisplayPrefsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0445D3F200259C10025AE82 /* DisplayPrefsViewController.swift */; };
 		F0445D41200282E60025AE82 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F0445D43200282E60025AE82 /* Main.storyboard */; };
 		F0445D4D200294AB0025AE82 /* ButtonCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0445D4C200294AB0025AE82 /* ButtonCellView.swift */; };
+		F06792EA200A73460066C438 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F06792E9200A73460066C438 /* AppDelegate.swift */; };
+		F06792F6200A745F0066C438 /* MonitorControlHelper.app in [Login] Copy Helper to start at Login */ = {isa = PBXBuildFile; fileRef = F06792E7200A73460066C438 /* MonitorControlHelper.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		F091C9B31F6EA6110096FD65 /* SliderHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F091C9B21F6EA6110096FD65 /* SliderHandler.swift */; };
 		F091C9B81F6EA79B0096FD65 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = F091C9B71F6EA79B0096FD65 /* Utils.swift */; };
 		F0A987E81F77B40E009B603D /* OSD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F0A987D61F77B290009B603D /* OSD.framework */; };
 		F0EB972F1F6ED7C800686D2A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F091C9C11F6EB8660096FD65 /* Localizable.strings */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		F06792F5200A73FA0066C438 /* [Login] Copy Helper to start at Login */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = Contents/Library/LoginItems;
+			dstSubfolderSpec = 1;
+			files = (
+				F06792F6200A745F0066C438 /* MonitorControlHelper.app in [Login] Copy Helper to start at Login */,
+			);
+			name = "[Login] Copy Helper to start at Login";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		31E16D90527EBD3F8A12BE0B /* Pods-MonitorControl.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MonitorControl.release.xcconfig"; path = "Pods/Target Support Files/Pods-MonitorControl/Pods-MonitorControl.release.xcconfig"; sourceTree = "<group>"; };
@@ -50,6 +66,10 @@
 		F0445D49200285690025AE82 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MainMenu.strings; sourceTree = "<group>"; };
 		F0445D4B2002856C0025AE82 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/MainMenu.strings; sourceTree = "<group>"; };
 		F0445D4C200294AB0025AE82 /* ButtonCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonCellView.swift; sourceTree = "<group>"; };
+		F06792E7200A73460066C438 /* MonitorControlHelper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MonitorControlHelper.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F06792E9200A73460066C438 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		F06792F0200A73470066C438 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F06792F1200A73470066C438 /* MonitorControlHelper.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MonitorControlHelper.entitlements; sourceTree = "<group>"; };
 		F091C9B21F6EA6110096FD65 /* SliderHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderHandler.swift; sourceTree = "<group>"; };
 		F091C9B71F6EA79B0096FD65 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		F091C9C21F6EB8660096FD65 /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; lineEnding = 0; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -79,6 +99,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		F06792E4200A73460066C438 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -101,6 +128,7 @@
 				56754EAD1D9A4016007BCDC5 /* MonitorControl */,
 				F0A987D61F77B290009B603D /* OSD.framework */,
 				55359E321E2737EC002671BC /* ddcctl */,
+				F06792E8200A73460066C438 /* MonitorControlHelper */,
 				56754EAC1D9A4016007BCDC5 /* Products */,
 				F0A987D71F77B404009B603D /* Frameworks */,
 				EFFC2F3E35BEC9ACFA754137 /* Pods */,
@@ -111,6 +139,7 @@
 			isa = PBXGroup;
 			children = (
 				56754EAB1D9A4016007BCDC5 /* MonitorControl.app */,
+				F06792E7200A73460066C438 /* MonitorControlHelper.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -149,6 +178,16 @@
 				F0445D3F200259C10025AE82 /* DisplayPrefsViewController.swift */,
 			);
 			path = Prefs;
+			sourceTree = "<group>";
+		};
+		F06792E8200A73460066C438 /* MonitorControlHelper */ = {
+			isa = PBXGroup;
+			children = (
+				F06792E9200A73460066C438 /* AppDelegate.swift */,
+				F06792F0200A73470066C438 /* Info.plist */,
+				F06792F1200A73470066C438 /* MonitorControlHelper.entitlements */,
+			);
+			path = MonitorControlHelper;
 			sourceTree = "<group>";
 		};
 		F091C9B41F6EA6180096FD65 /* Objects */ = {
@@ -208,6 +247,7 @@
 				56754EA91D9A4016007BCDC5 /* Resources */,
 				9DD5968596EFAF0E2EB56496 /* [CP] Embed Pods Frameworks */,
 				3ACE91333FC1E781FB2E44E5 /* [CP] Copy Pods Resources */,
+				F06792F5200A73FA0066C438 /* [Login] Copy Helper to start at Login */,
 			);
 			buildRules = (
 			);
@@ -218,13 +258,30 @@
 			productReference = 56754EAB1D9A4016007BCDC5 /* MonitorControl.app */;
 			productType = "com.apple.product-type.application";
 		};
+		F06792E6200A73460066C438 /* MonitorControlHelper */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F06792F4200A73470066C438 /* Build configuration list for PBXNativeTarget "MonitorControlHelper" */;
+			buildPhases = (
+				F06792E3200A73460066C438 /* Sources */,
+				F06792E4200A73460066C438 /* Frameworks */,
+				F06792E5200A73460066C438 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MonitorControlHelper;
+			productName = MonitorControlHelper;
+			productReference = F06792E7200A73460066C438 /* MonitorControlHelper.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		56754EA31D9A4016007BCDC5 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0800;
+				LastSwiftUpdateCheck = 0920;
 				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = "Mathew Kurian";
 				TargetAttributes = {
@@ -232,6 +289,11 @@
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = KGY56RWR9A;
 						LastSwiftMigration = 0900;
+						ProvisioningStyle = Automatic;
+					};
+					F06792E6200A73460066C438 = {
+						CreatedOnToolsVersion = 9.2;
+						DevelopmentTeam = KGY56RWR9A;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -251,6 +313,7 @@
 			projectRoot = "";
 			targets = (
 				56754EAA1D9A4016007BCDC5 /* MonitorControl */,
+				F06792E6200A73460066C438 /* MonitorControlHelper */,
 			);
 		};
 /* End PBXProject section */
@@ -265,6 +328,13 @@
 				F0EB972F1F6ED7C800686D2A /* Localizable.strings in Resources */,
 				55359E3B1E2737EC002671BC /* ddcctl.sh in Resources */,
 				56754EB41D9A4016007BCDC5 /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F06792E5200A73460066C438 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -293,11 +363,13 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-MonitorControl/Pods-MonitorControl-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/HotKey/HotKey.framework",
 				"${BUILT_PRODUCTS_DIR}/MASPreferences/MASPreferences.framework",
 				"${BUILT_PRODUCTS_DIR}/MediaKeyTap/MediaKeyTap.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HotKey.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MASPreferences.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MediaKeyTap.framework",
 			);
@@ -354,6 +426,14 @@
 				F0445D3D200254FA0025AE82 /* KeysPrefsViewController.swift in Sources */,
 				F091C9B81F6EA79B0096FD65 /* Utils.swift in Sources */,
 				F0445D4D200294AB0025AE82 /* ButtonCellView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F06792E3200A73460066C438 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F06792EA200A73460066C438 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -564,6 +644,52 @@
 			};
 			name = Release;
 		};
+		F06792F2200A73470066C438 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = MonitorControlHelper/MonitorControlHelper.entitlements;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = KGY56RWR9A;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = MonitorControlHelper/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				PRODUCT_BUNDLE_IDENTIFIER = me.guillaumeb.MonitorControlHelper;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+			};
+			name = Debug;
+		};
+		F06792F3200A73470066C438 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = MonitorControlHelper/MonitorControlHelper.entitlements;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = KGY56RWR9A;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = MonitorControlHelper/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				PRODUCT_BUNDLE_IDENTIFIER = me.guillaumeb.MonitorControlHelper;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -581,6 +707,15 @@
 			buildConfigurations = (
 				56754EB91D9A4016007BCDC5 /* Debug */,
 				56754EBA1D9A4016007BCDC5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F06792F4200A73470066C438 /* Build configuration list for PBXNativeTarget "MonitorControlHelper" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F06792F2200A73470066C438 /* Debug */,
+				F06792F3200A73470066C438 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

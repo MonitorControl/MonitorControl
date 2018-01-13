@@ -31,7 +31,7 @@ class SliderHandler {
 			slider.integerValue = value
 		}
 
-		Utils.ddcctl(monitor: display.identifier, command: command, value: value)
-		prefs.setValue(value, forKey: "\(command)-\(display.identifier)")
+		Utils.sendCommand(command, toMonitor: display.identifier, withValue: value)
+		display.saveValue(value, for: command)
 	}
 }

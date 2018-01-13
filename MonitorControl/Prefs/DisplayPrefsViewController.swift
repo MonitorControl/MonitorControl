@@ -43,7 +43,7 @@ class DisplayPrefsViewController: NSViewController, MASPreferencesViewController
 		default: break
 		}
 		// TODO: Toggle allScreens state
-		print("Toggle allScreens state -> \(sender.state)")
+		print("Toggle allScreens state -> \(sender.state == .on ? "on" : "off")")
 	}
 
 	// MARK: - Table datasource
