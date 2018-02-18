@@ -18,13 +18,15 @@ class MainPrefsViewController: NSViewController, MASPreferencesViewController {
 	let prefs = UserDefaults.standard
 
 	@IBOutlet var startAtLogin: NSButton!
-	@IBOutlet var startWhenExternal: NSButton!
+	@IBOutlet var showContrastSlider: NSButton!
+	@IBOutlet var lowerContrast: NSButton!
 
 	override func viewDidLoad() {
         super.viewDidLoad()
 
 		startAtLogin.state = prefs.bool(forKey: Utils.PrefKeys.startAtLogin.rawValue) ? .on : .off
-		startWhenExternal.state = prefs.bool(forKey: Utils.PrefKeys.startWhenExternal.rawValue) ? .on : .off
+		showContrastSlider.state = prefs.bool(forKey: Utils.PrefKeys.showContrast.rawValue) ? .on : .off
+		lowerContrast.state = prefs.bool(forKey: Utils.PrefKeys.lowerContrast.rawValue) ? .on : .off
     }
 
 	@IBAction func startAtLoginClicked(_ sender: NSButton) {
@@ -41,15 +43,26 @@ class MainPrefsViewController: NSViewController, MASPreferencesViewController {
 		print("Toggle start at login state -> \(sender.state == .on ? "on" : "off")")
 	}
 
-	@IBAction func startWhenExternalClicked(_ sender: NSButton) {
+	@IBAction func showContrastSliderClicked(_ sender: NSButton) {
 		switch sender.state {
 		case .on:
-			prefs.set(true, forKey: Utils.PrefKeys.startWhenExternal.rawValue)
+			prefs.set(true, forKey: Utils.PrefKeys.showContrast.rawValue)
 		case .off:
-			prefs.set(false, forKey: Utils.PrefKeys.startWhenExternal.rawValue)
+			prefs.set(false, forKey: Utils.PrefKeys.showContrast.rawValue)
 		default: break
 		}
-		// TODO: Toggle start when external plugged in state
-		print("Toggle start when external plugged in state -> \(sender.state == .on ? "on" : "off")")
+		print("Toggle show contrast slider state -> \(sender.state == .on ? "on" : "off")")
+		NotificationCenter.default.post(name: Notification.Name.init(Utils.PrefKeys.showContrast.rawValue), object: nil)
+	}
+
+	@IBAction func lowerContrastClicked(_ sender: NSButton) {
+		switch sender.state {
+		case .on:
+			prefs.set(true, forKey: Utils.PrefKeys.lowerContrast.rawValue)
+		case .off:
+			prefs.set(false, forKey: Utils.PrefKeys.lowerContrast.rawValue)
+		default: break
+		}
+		print("Toggle lower contrast after brightness state -> \(sender.state == .on ? "on" : "off")")
 	}
 }

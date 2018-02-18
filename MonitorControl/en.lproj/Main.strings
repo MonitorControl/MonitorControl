@@ -8,12 +8,6 @@
 /* Class = "NSTableColumn"; headerCell.title = "Enabled"; ObjectID = "8U8-ec-Zbv"; */
 "8U8-ec-Zbv.headerCell.title" = "Enabled";
 
-/* Class = "NSMenuItem"; title = "Native Mac Keys"; ObjectID = "AiH-h3-2w5"; */
-"AiH-h3-2w5.title" = "Native Mac Keys";
-
-/* Class = "NSTextFieldCell"; title = "Listen on"; ObjectID = "C3e-V0-Tn0"; */
-"C3e-V0-Tn0.title" = "Listen on";
-
 /* Class = "NSTableColumn"; headerCell.title = "Display Name"; ObjectID = "CHc-s5-4MN"; */
 "CHc-s5-4MN.headerCell.title" = "Display Name";
 
@@ -56,9 +50,6 @@
 /* Class = "NSTextFieldCell"; title = "Table View Cell"; ObjectID = "cUg-j2-8gt"; */
 "cUg-j2-8gt.title" = "Table View Cell";
 
-/* Class = "NSMenuItem"; title = "Function Keys (F1, F2...)"; ObjectID = "dQm-ww-uhA"; */
-"dQm-ww-uhA.title" = "Function Keys (F1, F2...)";
-
 /* Class = "NSTableColumn"; headerCell.title = "Display Id"; ObjectID = "dgp-q7-cBK"; */
 "dgp-q7-cBK.headerCell.title" = "Display Id";
 
@@ -70,3 +61,7 @@
 
 /* Class = "NSTextFieldCell"; title = "General"; ObjectID = "ocE-Cc-2bi"; */
 "ocE-Cc-2bi.title" = "General";
+
+"8cS-Fg-fKy.title" = "Show a slider for contrast";
+
+"JDl-l4-s8k.title" = "Lower Contrast after Brightness";

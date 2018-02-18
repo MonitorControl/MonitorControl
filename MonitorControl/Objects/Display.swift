@@ -17,6 +17,7 @@ class Display {
 	var isMuted: Bool = false
 	var brightnessSliderHandler: SliderHandler?
 	var volumeSliderHandler: SliderHandler?
+	var contrastSliderHandler: SliderHandler?
 
 	private let prefs = UserDefaults.standard
 
@@ -57,6 +58,18 @@ class Display {
 	}
 
 	func setBrightness(to value: Int) {
+		if prefs.bool(forKey: Utils.PrefKeys.lowerContrast.rawValue) {
+			if value == 0 {
+				Utils.sendCommand(CONTRAST, toMonitor: identifier, withValue: value)
+				if let slider = contrastSliderHandler?.slider {
+					slider.intValue = Int32(value)
+				}
+			} else if prefs.integer(forKey: "\(BRIGHTNESS)-\(identifier)") == 0 {
+				let contrastValue = prefs.integer(forKey: "\(CONTRAST)-\(identifier)")
+				Utils.sendCommand(CONTRAST, toMonitor: identifier, withValue: contrastValue)
+			}
+		}
+
 		Utils.sendCommand(BRIGHTNESS, toMonitor: identifier, withValue: value)
 		if let slider = brightnessSliderHandler?.slider {
 			slider.intValue = Int32(value)

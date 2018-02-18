@@ -8,12 +8,6 @@
 /* Class = "NSTableColumn"; headerCell.title = "Enabled"; ObjectID = "8U8-ec-Zbv"; */
 "8U8-ec-Zbv.headerCell.title" = "Activé";
 
-/* Class = "NSMenuItem"; title = "Native Mac Keys"; ObjectID = "AiH-h3-2w5"; */
-"AiH-h3-2w5.title" = "Touches macOS Native";
-
-/* Class = "NSTextFieldCell"; title = "Listen on"; ObjectID = "C3e-V0-Tn0"; */
-"C3e-V0-Tn0.title" = "Écouter sur";
-
 /* Class = "NSTableColumn"; headerCell.title = "Display Name"; ObjectID = "CHc-s5-4MN"; */
 "CHc-s5-4MN.headerCell.title" = "Nom de l'écran";
 
@@ -56,9 +50,6 @@
 /* Class = "NSTextFieldCell"; title = "Table View Cell"; ObjectID = "cUg-j2-8gt"; */
 "cUg-j2-8gt.title" = "Table View Cell";
 
-/* Class = "NSMenuItem"; title = "Function Keys (F1, F2...)"; ObjectID = "dQm-ww-uhA"; */
-"dQm-ww-uhA.title" = "Touches de fonctions (F1, F2...)";
-
 /* Class = "NSTableColumn"; headerCell.title = "Display Id"; ObjectID = "dgp-q7-cBK"; */
 "dgp-q7-cBK.headerCell.title" = "Identifiant";
 
@@ -70,3 +61,7 @@
 
 /* Class = "NSTextFieldCell"; title = "General"; ObjectID = "ocE-Cc-2bi"; */
 "ocE-Cc-2bi.title" = "Général";
+
+"8cS-Fg-fKy.title" = "Afficher un slider pour le contraste";
+
+"JDl-l4-s8k.title" = "Diminuer le contraste après la luminosité";

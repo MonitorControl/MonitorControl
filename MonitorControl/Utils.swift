@@ -179,6 +179,8 @@ class Utils: NSObject {
 		}
 	}
 
+	// MARK: - Enums
+
 	/// UserDefault Keys for the app prefs
 	enum PrefKeys: String {
 		/// Was the app launched once
@@ -193,11 +195,26 @@ class Utils: NSObject {
 		/// Keys listened for (Brightness/Volume)
 		case listenFor
 
-		/// Keys listened on (mac or functions)
-		case listenOn
+		/// Show contrast sliders
+		case showContrast
+
+		/// Lower contrast after brightness
+		case lowerContrast
 
 		/// Change Brightness/Volume for all screens
 		case allScreens
+	}
+
+	/// Keys for the value of listenFor option
+	enum ListenForKeys: Int {
+		/// Listen for Brightness and Volume keys
+		case brightnessAndVolumeKeys = 0
+
+		/// Listen for Brightness keys only
+		case brightnessOnlyKeys = 1
+
+		/// Listen for Volume keys only
+		case volumeOnlyKeys = 2
 	}
 
 }

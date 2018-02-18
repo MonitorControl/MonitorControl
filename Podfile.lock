@@ -12,7 +12,7 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   MediaKeyTap:
-    :commit: d02f865ea962d5811375ddd047525baf409fb2b0
+    :commit: f369a24f6c9931f2a1485a6cd1cef94a432bb36e
     :git: https://github.com/the0neyouseek/MediaKeyTap.git
 
 SPEC CHECKSUMS:

@@ -24,11 +24,10 @@ class ButtonCellView: NSTableCellView {
 			case .on:
 				prefs.set(true, forKey: "\(display.identifier)-state")
 			case .off:
-				prefs.set(true, forKey: "\(display.identifier)-state")
+				prefs.set(false, forKey: "\(display.identifier)-state")
 			default:
 				break
 			}
-			// TODO: Toggle enabled display state
 			print("Toggle enabled display state -> \(sender.state == .on ? "on" : "off")")
 		}
 	}

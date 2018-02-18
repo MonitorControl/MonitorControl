@@ -31,9 +31,19 @@ class AppDelegate: NSObject, NSApplicationDelegate, MediaKeyTapDelegate {
 	var mediaKeyTap: MediaKeyTap?
 	var prefsController: NSWindowController?
 
+	var keysListenedFor: [MediaKey] = [.brightnessUp, .brightnessDown, .mute, .volumeUp, .volumeDown]
+
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         app = self
-		mediaKeyTap = MediaKeyTap.init(delegate: self, forKeys: [.brightnessUp, .brightnessDown, .mute, .volumeUp, .volumeDown], observeBuiltIn: false)
+
+		let listenFor = prefs.integer(forKey: Utils.PrefKeys.listenFor.rawValue)
+		if listenFor == Utils.ListenForKeys.brightnessOnlyKeys.rawValue {
+			keysListenedFor.removeSubrange(2...4)
+		} else if listenFor == Utils.ListenForKeys.volumeOnlyKeys.rawValue {
+			keysListenedFor.removeSubrange(0...1)
+		}
+
+		mediaKeyTap = MediaKeyTap.init(delegate: self, forKeys: keysListenedFor, observeBuiltIn: false)
 		let storyboard: NSStoryboard = NSStoryboard.init(name: NSStoryboard.Name(rawValue: "Main"), bundle: Bundle.main)
 		let views = [
 			storyboard.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "MainPrefsVC")),
@@ -41,6 +51,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, MediaKeyTapDelegate {
 			storyboard.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "DisplayPrefsVC"))
 		]
 		prefsController = MASPreferencesWindowController(viewControllers: views, title: NSLocalizedString("Preferences", comment: "Shown in Preferences window"))
+
+		NotificationCenter.default.addObserver(self, selector: #selector(handleListenForChanged), name: NSNotification.Name.init(Utils.PrefKeys.listenFor.rawValue), object: nil)
+		NotificationCenter.default.addObserver(self, selector: #selector(handleShowContrastChanged), name: NSNotification.Name.init(Utils.PrefKeys.showContrast.rawValue), object: nil)
 
 		statusItem.image = NSImage.init(named: NSImage.Name(rawValue: "status"))
         statusItem.menu = statusMenu
@@ -65,6 +78,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, MediaKeyTapDelegate {
 	@IBAction func prefsClicked(_ sender: AnyObject) {
 		if let prefsController = prefsController {
 			prefsController.showWindow(sender)
+			NSApp.activate(ignoringOtherApps: true)
 			prefsController.window?.makeKeyAndOrderFront(sender)
 		}
 	}
@@ -76,15 +90,24 @@ class AppDelegate: NSObject, NSApplicationDelegate, MediaKeyTapDelegate {
 			prefs.set(true, forKey: Utils.PrefKeys.appAlreadyLaunched.rawValue)
 
 			prefs.set(false, forKey: Utils.PrefKeys.startAtLogin.rawValue)
-			prefs.set(true, forKey: Utils.PrefKeys.startWhenExternal.rawValue)
+
+			prefs.set(false, forKey: Utils.PrefKeys.showContrast.rawValue)
+			prefs.set(false, forKey: Utils.PrefKeys.lowerContrast.rawValue)
 		}
 	}
 
 	// MARK: - Menu
 
 	func clearDisplays() {
-		for monitor in monitorItems {
-			statusMenu.removeItem(monitor)
+		if statusMenu.items.count > 2 {
+			var items: [NSMenuItem] = []
+			for i in 0..<statusMenu.items.count - 2 {
+				items.append(statusMenu.items[i])
+			}
+
+			for item in items {
+				statusMenu.removeItem(item)
+			}
 		}
 
 		monitorItems = []
@@ -93,7 +116,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, MediaKeyTapDelegate {
 
     func updateDisplays() {
 		clearDisplays()
-        sleep(1)
 
 		var filteredScreens = NSScreen.screens.filter { screen -> Bool in
 			if let id = screen.deviceDescription[NSDeviceDescriptionKey.init("NSScreenNumber")] as? CGDirectDisplayID {
@@ -155,6 +177,14 @@ class AppDelegate: NSObject, NSApplicationDelegate, MediaKeyTapDelegate {
 																	  forDisplay: display,
 																	  command: BRIGHTNESS,
 																	  title: NSLocalizedString("Brightness", comment: "Shown in menu"))
+				if prefs.bool(forKey: Utils.PrefKeys.showContrast.rawValue) {
+					let contrastSliderHandler = Utils.addSliderMenuItem(toMenu: monitorSubMenu,
+																		forDisplay: display,
+																		command: CONTRAST,
+																		title: NSLocalizedString("Contrast", comment: "Shown in menu"))
+					display.contrastSliderHandler = contrastSliderHandler
+				}
+
 				display.volumeSliderHandler = volumeSliderHandler
 				display.brightnessSliderHandler = brightnessSliderHandler
 				displays.append(display)
@@ -173,33 +203,57 @@ class AppDelegate: NSObject, NSApplicationDelegate, MediaKeyTapDelegate {
 
 	// MARK: - Media Key Tap delegate
 
-	func handle(mediaKey: MediaKey, event: KeyEvent) {
+	func handle(mediaKey: MediaKey, event: KeyEvent?) {
 		guard let currentDisplay = Utils.getCurrentDisplay(from: displays) else { return }
-		var rel = 0
-
-		switch mediaKey {
-		case .brightnessUp:
-			rel = +self.step
-			let value = currentDisplay.calcNewValue(for: BRIGHTNESS, withRel: rel)
-			currentDisplay.setBrightness(to: value)
-		case .brightnessDown:
-			rel = -self.step
-			let value = currentDisplay.calcNewValue(for: BRIGHTNESS, withRel: rel)
-			currentDisplay.setBrightness(to: value)
-		case .mute:
-			currentDisplay.mute()
-		case .volumeUp:
-			rel = +self.step
-			let value = currentDisplay.calcNewValue(for: AUDIO_SPEAKER_VOLUME, withRel: rel)
-			currentDisplay.setVolume(to: value)
-		case .volumeDown:
-			rel = -self.step
-			let value = currentDisplay.calcNewValue(for: AUDIO_SPEAKER_VOLUME, withRel: rel)
-			currentDisplay.setVolume(to: value)
-		default:
-			return
+		let allDisplays = prefs.bool(forKey: Utils.PrefKeys.allScreens.rawValue) ? displays : [currentDisplay]
+		for display in allDisplays {
+			var rel = 0
+			if prefs.bool(forKey: "\(display.identifier)-state") {
+				switch mediaKey {
+				case .brightnessUp:
+					rel = +self.step
+					let value = display.calcNewValue(for: BRIGHTNESS, withRel: rel)
+					display.setBrightness(to: value)
+				case .brightnessDown:
+					rel = -self.step
+					let value = currentDisplay.calcNewValue(for: BRIGHTNESS, withRel: rel)
+					display.setBrightness(to: value)
+				case .mute:
+					display.mute()
+				case .volumeUp:
+					rel = +self.step
+					let value = display.calcNewValue(for: AUDIO_SPEAKER_VOLUME, withRel: rel)
+					display.setVolume(to: value)
+				case .volumeDown:
+					rel = -self.step
+					let value = display.calcNewValue(for: AUDIO_SPEAKER_VOLUME, withRel: rel)
+					display.setVolume(to: value)
+				default:
+					return
+				}
+			}
 		}
 
+	}
+
+	// MARK: - Prefs notification
+
+	@objc func handleListenForChanged() {
+		let listenFor = prefs.integer(forKey: Utils.PrefKeys.listenFor.rawValue)
+		keysListenedFor = [.brightnessUp, .brightnessDown, .mute, .volumeUp, .volumeDown]
+		if listenFor == Utils.ListenForKeys.brightnessOnlyKeys.rawValue {
+			keysListenedFor.removeSubrange(2...4)
+		} else if listenFor == Utils.ListenForKeys.volumeOnlyKeys.rawValue {
+			keysListenedFor.removeSubrange(0...1)
+		}
+
+		mediaKeyTap?.stop()
+		mediaKeyTap = MediaKeyTap.init(delegate: self, forKeys: keysListenedFor, observeBuiltIn: false)
+		mediaKeyTap?.start()
+	}
+
+	@objc func handleShowContrastChanged() {
+		self.updateDisplays()
 	}
 
 }
