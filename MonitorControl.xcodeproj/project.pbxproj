@@ -287,13 +287,13 @@
 				TargetAttributes = {
 					56754EAA1D9A4016007BCDC5 = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = AZJ6KXSZ74;
+						DevelopmentTeam = KGY56RWR9A;
 						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 					};
 					F06792E6200A73460066C438 = {
 						CreatedOnToolsVersion = 9.2;
-						DevelopmentTeam = AZJ6KXSZ74;
+						DevelopmentTeam = KGY56RWR9A;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -612,10 +612,10 @@
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = AZJ6KXSZ74;
+				DEVELOPMENT_TEAM = KGY56RWR9A;
 				INFOPLIST_FILE = "$(SRCROOT)/MonitorControl/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = me.guillaumeb.MonitorControlD;
+				PRODUCT_BUNDLE_IDENTIFIER = me.guillaumeb.MonitorControl;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "MonitorControl/Bridging-Header.h";
@@ -631,10 +631,10 @@
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = AZJ6KXSZ74;
+				DEVELOPMENT_TEAM = KGY56RWR9A;
 				INFOPLIST_FILE = "$(SRCROOT)/MonitorControl/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = me.guillaumeb.MonitorControlD;
+				PRODUCT_BUNDLE_IDENTIFIER = me.guillaumeb.MonitorControl;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "MonitorControl/Bridging-Header.h";
@@ -653,7 +653,7 @@
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = AZJ6KXSZ74;
+				DEVELOPMENT_TEAM = KGY56RWR9A;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = MonitorControlHelper/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
@@ -676,7 +676,7 @@
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = AZJ6KXSZ74;
+				DEVELOPMENT_TEAM = KGY56RWR9A;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = MonitorControlHelper/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
