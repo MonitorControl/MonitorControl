@@ -12,13 +12,13 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   MediaKeyTap:
-    :commit: f369a24f6c9931f2a1485a6cd1cef94a432bb36e
+    :commit: 61a64c17d598de7126f24befde6bdbd5dc7fa121
     :git: https://github.com/the0neyouseek/MediaKeyTap.git
 
 SPEC CHECKSUMS:
   MASPreferences: c08b8622dd17b47da87669e741efd7c92e970e8c
   MediaKeyTap: b652877e9ae2d52ca4f5310fa5152945ad3f0798
 
-PODFILE CHECKSUM: 3404918793c88a6c1f56a30e54cf0d9afb0cfffb
+PODFILE CHECKSUM: efa14c79ecdfeaf061bbc8ed950ee540d77f987a
 
-COCOAPODS: 1.3.1
+COCOAPODS: 1.4.0
