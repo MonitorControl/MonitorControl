@@ -9,6 +9,22 @@
 import Cocoa
 
 class Utils: NSObject {
+	private static func printCommandValue(_ command: Int32, _ value: Int) {
+		let cmdString: (Int32) -> String? = {
+			switch $0 {
+			case BRIGHTNESS:
+				return "Brightness"
+			case CONTRAST:
+				return "Contrast"
+			case AUDIO_SPEAKER_VOLUME:
+				return "Volume"
+			default:
+				return nil
+			}
+		}
+
+		print("\(cmdString(command) ?? "N/A") value: \(value)")
+	}
 
 	// MARK: - DDCCTL
 
@@ -21,7 +37,10 @@ class Utils: NSObject {
 	static func sendCommand(_ command: Int32, toMonitor monitor: CGDirectDisplayID, withValue value: Int) {
 		var wrcmd = DDCWriteCommand(control_id: UInt8(command), new_value: UInt8(value))
 		DDCWrite(monitor, &wrcmd)
-		print("\(command == BRIGHTNESS ? "Brightness" : "Volume") value : \(value)")
+
+		#if DEBUG
+		printCommandValue(command, value)
+		#endif
 	}
 
 	/// Get current value of ddcctl command
@@ -30,14 +49,18 @@ class Utils: NSObject {
 	///   - command: The command to send
 	///   - monitor: The id of the monitor to send the command to
 	/// - Returns: the value of the command
-	static func getCommand(_ command: Int32, fromMonitor monitor: CGDirectDisplayID) -> Int {
+	static func getCommand(_ command: Int32, fromMonitor monitor: CGDirectDisplayID) -> Int? {
 		var readCmd = DDCReadCommand()
 		readCmd.control_id = UInt8(command)
 		readCmd.max_value = 0
 		readCmd.current_value = 0
 		DDCRead(monitor, &readCmd)
-		print("\(command == BRIGHTNESS ? "Brightness" : "Volume") value : \(readCmd.current_value)")
-		return Int(readCmd.current_value)
+
+		#if DEBUG
+		printCommandValue(command, Int(readCmd.current_value))
+		#endif
+
+		return readCmd.success ? Int(readCmd.current_value) : nil
 	}
 
 	// MARK: - Menu
@@ -75,10 +98,8 @@ class Utils: NSObject {
 		slider.target = handler
 		slider.minValue = 0
 		slider.maxValue = 100
-		slider.integerValue = getCommand(command, fromMonitor: display.identifier)
 		slider.action = #selector(SliderHandler.valueChanged)
 		handler.slider = slider
-		display.saveValue(slider.integerValue, for: command)
 
 		view.addSubview(label)
 		view.addSubview(slider)
@@ -87,6 +108,26 @@ class Utils: NSObject {
 
 		menu.insertItem(item, at: 0)
 		menu.insertItem(NSMenuItem.separator(), at: 1)
+
+		DispatchQueue.global(qos: .background).async {
+			var val: Int?
+
+			for _ in 0...100 {
+				if let res = getCommand(command, fromMonitor: display.identifier) {
+					val = res
+					break
+				}
+				usleep(40000)
+			}
+
+			if let val = val {
+				display.saveValue(val, for: command)
+
+				DispatchQueue.main.async {
+				 slider.integerValue = val
+				}
+			}
+		}
 
 		return handler
 	}
