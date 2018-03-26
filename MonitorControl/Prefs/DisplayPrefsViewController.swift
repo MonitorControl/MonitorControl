@@ -42,7 +42,10 @@ class DisplayPrefsViewController: NSViewController, MASPreferencesViewController
 			prefs.set(false, forKey: Utils.PrefKeys.allScreens.rawValue)
 		default: break
 		}
+
+		#if DEBUG
 		print("Toggle allScreens state -> \(sender.state == .on ? "on" : "off")")
+		#endif
 	}
 
 	// MARK: - Table datasource

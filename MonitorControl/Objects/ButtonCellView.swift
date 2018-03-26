@@ -28,7 +28,10 @@ class ButtonCellView: NSTableCellView {
 			default:
 				break
 			}
+
+			#if DEBUG
 			print("Toggle enabled display state -> \(sender.state == .on ? "on" : "off")")
+			#endif
 		}
 	}
 }
