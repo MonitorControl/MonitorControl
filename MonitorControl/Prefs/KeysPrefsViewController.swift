@@ -26,7 +26,11 @@ class KeysPrefsViewController: NSViewController, MASPreferencesViewController {
 
 	@IBAction func listenForChanged(_ sender: NSPopUpButton) {
 		prefs.set(sender.selectedTag(), forKey: Utils.PrefKeys.listenFor.rawValue)
+
+		#if DEBUG
 		print("Toggle keys listened for state state -> \(sender.selectedItem?.title ?? "")")
+		#endif
+
 		NotificationCenter.default.post(name: Notification.Name.init(Utils.PrefKeys.listenFor.rawValue), object: nil)
 	}
 

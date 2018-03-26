@@ -7,5 +7,4 @@ target 'MonitorControl' do
 
 	pod 'MediaKeyTap', :git => 'https://github.com/the0neyouseek/MediaKeyTap.git'
 	pod 'MASPreferences'
-
 end

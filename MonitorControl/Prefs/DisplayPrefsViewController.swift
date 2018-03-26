@@ -42,7 +42,10 @@ class DisplayPrefsViewController: NSViewController, MASPreferencesViewController
 			prefs.set(false, forKey: Utils.PrefKeys.allScreens.rawValue)
 		default: break
 		}
+
+		#if DEBUG
 		print("Toggle allScreens state -> \(sender.state == .on ? "on" : "off")")
+		#endif
 	}
 
 	// MARK: - Table datasource
@@ -65,10 +68,7 @@ class DisplayPrefsViewController: NSViewController, MASPreferencesViewController
 
 				let name = Utils.getDisplayName(forEdid: edid)
 				let serial = Utils.getDisplaySerial(forEdid: edid)
-				var isEnabled = true
-				if let enabled = prefs.object(forKey: "\(id)-state") as? Bool {
-					isEnabled = enabled
-				}
+				let isEnabled = (prefs.object(forKey: "\(id)-state") as? Bool) ?? true
 
 				let display = Display(id, name: name, serial: serial, isEnabled: isEnabled)
 				displays.append(display)

@@ -40,7 +40,10 @@ class MainPrefsViewController: NSViewController, MASPreferencesViewController {
 			SMLoginItemSetEnabled(identifier, false)
 		default: break
 		}
+
+		#if DEBUG
 		print("Toggle start at login state -> \(sender.state == .on ? "on" : "off")")
+		#endif
 	}
 
 	@IBAction func showContrastSliderClicked(_ sender: NSButton) {
@@ -51,7 +54,11 @@ class MainPrefsViewController: NSViewController, MASPreferencesViewController {
 			prefs.set(false, forKey: Utils.PrefKeys.showContrast.rawValue)
 		default: break
 		}
+
+		#if DEBUG
 		print("Toggle show contrast slider state -> \(sender.state == .on ? "on" : "off")")
+		#endif
+
 		NotificationCenter.default.post(name: Notification.Name.init(Utils.PrefKeys.showContrast.rawValue), object: nil)
 	}
 
@@ -63,6 +70,9 @@ class MainPrefsViewController: NSViewController, MASPreferencesViewController {
 			prefs.set(false, forKey: Utils.PrefKeys.lowerContrast.rawValue)
 		default: break
 		}
+
+		#if DEBUG
 		print("Toggle lower contrast after brightness state -> \(sender.state == .on ? "on" : "off")")
+		#endif
 	}
 }
