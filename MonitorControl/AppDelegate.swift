@@ -207,26 +207,21 @@ class AppDelegate: NSObject, NSApplicationDelegate, MediaKeyTapDelegate {
 		guard let currentDisplay = Utils.getCurrentDisplay(from: displays) else { return }
 		let allDisplays = prefs.bool(forKey: Utils.PrefKeys.allScreens.rawValue) ? displays : [currentDisplay]
 		for display in allDisplays {
-			var rel = 0
-			if prefs.bool(forKey: "\(display.identifier)-state") {
+			if (prefs.object(forKey: "\(display.identifier)-state") as? Bool) ?? true {
 				switch mediaKey {
 				case .brightnessUp:
-					rel = +self.step
-					let value = display.calcNewValue(for: BRIGHTNESS, withRel: rel)
+					let value = display.calcNewValue(for: BRIGHTNESS, withRel: +step)
 					display.setBrightness(to: value)
 				case .brightnessDown:
-					rel = -self.step
-					let value = currentDisplay.calcNewValue(for: BRIGHTNESS, withRel: rel)
+					let value = currentDisplay.calcNewValue(for: BRIGHTNESS, withRel: -step)
 					display.setBrightness(to: value)
 				case .mute:
 					display.mute()
 				case .volumeUp:
-					rel = +self.step
-					let value = display.calcNewValue(for: AUDIO_SPEAKER_VOLUME, withRel: rel)
+					let value = display.calcNewValue(for: AUDIO_SPEAKER_VOLUME, withRel: +step)
 					display.setVolume(to: value)
 				case .volumeDown:
-					rel = -self.step
-					let value = display.calcNewValue(for: AUDIO_SPEAKER_VOLUME, withRel: rel)
+					let value = display.calcNewValue(for: AUDIO_SPEAKER_VOLUME, withRel: -step)
 					display.setVolume(to: value)
 				default:
 					return

@@ -65,10 +65,7 @@ class DisplayPrefsViewController: NSViewController, MASPreferencesViewController
 
 				let name = Utils.getDisplayName(forEdid: edid)
 				let serial = Utils.getDisplaySerial(forEdid: edid)
-				var isEnabled = true
-				if let enabled = prefs.object(forKey: "\(id)-state") as? Bool {
-					isEnabled = enabled
-				}
+				let isEnabled = (prefs.object(forKey: "\(id)-state") as? Bool) ?? true
 
 				let display = Display(id, name: name, serial: serial, isEnabled: isEnabled)
 				displays.append(display)
