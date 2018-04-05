@@ -1,7 +1,8 @@
 disabled_rules:
-- line_length
-- function_body_length
+  - line_length
+  - function_body_length
+  - identifier_name
 excluded:
-- Pods
+  - Pods
 type_body_length: 500
 file_length: 500
