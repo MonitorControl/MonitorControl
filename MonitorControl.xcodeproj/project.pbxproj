@@ -11,7 +11,6 @@
 		56754EB11D9A4016007BCDC5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 56754EB01D9A4016007BCDC5 /* Assets.xcassets */; };
 		56754EB41D9A4016007BCDC5 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 56754EB21D9A4016007BCDC5 /* MainMenu.xib */; };
 		6C33119021C58BF600971151 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 6C33118921C58BF500971151 /* README.md */; };
-		6C33119121C58BF600971151 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 6C33118A21C58BF500971151 /* .gitignore */; };
 		6C33119221C58BF600971151 /* ddcctl.sh in Resources */ = {isa = PBXBuildFile; fileRef = 6C33118C21C58BF500971151 /* ddcctl.sh */; };
 		6C33119521C58BF600971151 /* DDC.c in Sources */ = {isa = PBXBuildFile; fileRef = 6C33118F21C58BF600971151 /* DDC.c */; };
 		9A19D3B73485870616B6D4E0 /* Pods_MonitorControl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 398F482D5C8816B29F16AAEB /* Pods_MonitorControl.framework */; };
@@ -53,7 +52,6 @@
 		56754EB31D9A4016007BCDC5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		56754EB51D9A4016007BCDC5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6C33118921C58BF500971151 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		6C33118A21C58BF500971151 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		6C33118B21C58BF500971151 /* DDC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDC.h; sourceTree = "<group>"; };
 		6C33118C21C58BF500971151 /* ddcctl.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = ddcctl.sh; sourceTree = "<group>"; };
 		6C33118D21C58BF500971151 /* ddcctl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ddcctl.m; sourceTree = "<group>"; };
@@ -115,7 +113,6 @@
 		55359E321E2737EC002671BC /* ddcctl */ = {
 			isa = PBXGroup;
 			children = (
-				6C33118A21C58BF500971151 /* .gitignore */,
 				6C33118F21C58BF600971151 /* DDC.c */,
 				6C33118B21C58BF500971151 /* DDC.h */,
 				6C33118D21C58BF500971151 /* ddcctl.m */,
@@ -330,7 +327,6 @@
 				6C33119021C58BF600971151 /* README.md in Resources */,
 				F0EB972F1F6ED7C800686D2A /* Localizable.strings in Resources */,
 				6C33119221C58BF600971151 /* ddcctl.sh in Resources */,
-				6C33119121C58BF600971151 /* .gitignore in Resources */,
 				56754EB41D9A4016007BCDC5 /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
