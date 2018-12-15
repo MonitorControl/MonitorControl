@@ -11,7 +11,7 @@ Control your external monitor brightness, contrast or volume directly from a men
 
 ## Download
 
-Go to [Release](https://github.com/the0neyouseek/MonitorControl/releases/latest) and download the latest `.dmg`
+Go to [Release](https://github.com/JoniVR/MonitorControl/releases/latest) and download the latest `.dmg`
 
 ## How to help
 
@@ -23,12 +23,11 @@ Open [issues](./issues) if you have a question, an enhancement to suggest or a b
 
 - XCode
 - [Cocoapods](https://cocoapods.org/)
-- [SwiftLint](https://github.com/realm/SwiftLint)
 
-Download the [zip](https://github.com/the0neyouseek/MonitorControl/archive/master.zip) directly or clone the project somewhere with git
+Download the [zip](https://github.com/JoniVR/MonitorControl/archive/master.zip) directly or clone the project somewhere with git
 
 ```sh
-$ git clone https://github.com/the0neyouseek/MonitorControl.git
+$ git clone https://github.com/JoniVR/MonitorControl.git
 ```
 
 Then download the dependencies with Cocoapods
@@ -41,7 +40,7 @@ You're all set ! Now open the `MonitorControl.xcworkspace` with Xcode
 
 ### Third party dependencies
 
-- [MediaKeyTap](https://github.com/the0neyouseek/MediaKeyTap)
+- [MediaKeyTap](https://github.com/JoniVR/MediaKeyTap)
 
 ## Support
 - macOS Sierra (`10.12`) and up.
@@ -50,5 +49,6 @@ You're all set ! Now open the `MonitorControl.xcworkspace` with Xcode
 ## Thanks
 - [@bluejamesbond](https://github.com/bluejamesbond/) (Original developer)
 - [@Tyilo](https://github.com/Tyilo/) (Fork)
+- [@the0neyouseek](https://github.com/the0neyouseek) (Fork)
 - [@Bensge](https://github.com/Bensge/) - (Used some code from his project [NativeDisplayBrightness](https://github.com/Bensge/NativeDisplayBrightness))
 - [@nhurden](https://github.com/nhurden/) (For the original MediaKeyTap)
