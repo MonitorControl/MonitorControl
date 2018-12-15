@@ -44,18 +44,18 @@ class AppDelegate: NSObject, NSApplicationDelegate, MediaKeyTapDelegate {
 		}
 
 		mediaKeyTap = MediaKeyTap.init(delegate: self, for: keysListenedFor, observeBuiltIn: false)
-		let storyboard: NSStoryboard = NSStoryboard.init(name: NSStoryboard.Name(rawValue: "Main"), bundle: Bundle.main)
+		let storyboard: NSStoryboard = NSStoryboard.init(name: "Main", bundle: Bundle.main)
 		let views = [
-			storyboard.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "MainPrefsVC")),
-			storyboard.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "KeysPrefsVC")),
-			storyboard.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "DisplayPrefsVC"))
+			storyboard.instantiateController(withIdentifier: "MainPrefsVC"),
+			storyboard.instantiateController(withIdentifier: "KeysPrefsVC"),
+			storyboard.instantiateController(withIdentifier: "DisplayPrefsVC")
 		]
 		prefsController = MASPreferencesWindowController(viewControllers: views, title: NSLocalizedString("Preferences", comment: "Shown in Preferences window"))
 
 		NotificationCenter.default.addObserver(self, selector: #selector(handleListenForChanged), name: NSNotification.Name.init(Utils.PrefKeys.listenFor.rawValue), object: nil)
 		NotificationCenter.default.addObserver(self, selector: #selector(handleShowContrastChanged), name: NSNotification.Name.init(Utils.PrefKeys.showContrast.rawValue), object: nil)
 
-		statusItem.image = NSImage.init(named: NSImage.Name(rawValue: "status"))
+		statusItem.image = NSImage.init(named: "status")
         statusItem.menu = statusMenu
 
 		setDefaultPrefs()

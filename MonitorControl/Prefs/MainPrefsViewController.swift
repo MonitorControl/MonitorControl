@@ -14,7 +14,7 @@ class MainPrefsViewController: NSViewController, MASPreferencesViewController {
 
 	var viewIdentifier: String = "Main"
 	var toolbarItemLabel: String? = NSLocalizedString("General", comment: "Shown in the main prefs window")
-	var toolbarItemImage: NSImage? = NSImage.init(named: .preferencesGeneral)
+	var toolbarItemImage: NSImage? = NSImage.init(named: NSImage.preferencesGeneralName)
 	let prefs = UserDefaults.standard
 
 	@IBOutlet var startAtLogin: NSButton!

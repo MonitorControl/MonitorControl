@@ -13,7 +13,7 @@ class KeysPrefsViewController: NSViewController, MASPreferencesViewController {
 
 	var viewIdentifier: String = "Keys"
 	var toolbarItemLabel: String? = NSLocalizedString("Keys", comment: "Shown in the main prefs window")
-	var toolbarItemImage: NSImage? = NSImage.init(named: NSImage.Name.init("KeyboardPref"))
+	var toolbarItemImage: NSImage? = NSImage.init(named: "KeyboardPref")
 	let prefs = UserDefaults.standard
 
 	@IBOutlet var listenFor: NSPopUpButton!

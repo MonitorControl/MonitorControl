@@ -13,7 +13,7 @@ class DisplayPrefsViewController: NSViewController, MASPreferencesViewController
 
 	var viewIdentifier: String = "Display"
 	var toolbarItemLabel: String? = NSLocalizedString("Display", comment: "Shown in the main prefs window")
-	var toolbarItemImage: NSImage? = NSImage.init(named: .computer)
+	var toolbarItemImage: NSImage? = NSImage.init(named: NSImage.computerName)
 	let prefs = UserDefaults.standard
 
 	var displays: [Display] = []
