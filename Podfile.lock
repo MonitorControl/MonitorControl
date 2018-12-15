@@ -4,25 +4,25 @@ PODS:
 
 DEPENDENCIES:
   - MASPreferences
-  - MediaKeyTap (from `https://github.com/the0neyouseek/MediaKeyTap.git`)
+  - MediaKeyTap (from `https://github.com/JoniVR/MediaKeyTap.git`)
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
+  https://github.com/cocoapods/specs.git:
     - MASPreferences
 
 EXTERNAL SOURCES:
   MediaKeyTap:
-    :git: https://github.com/the0neyouseek/MediaKeyTap.git
+    :git: https://github.com/JoniVR/MediaKeyTap.git
 
 CHECKOUT OPTIONS:
   MediaKeyTap:
-    :commit: 2ff6e582c0c03b735d24d0800f4e43611d316e93
-    :git: https://github.com/the0neyouseek/MediaKeyTap.git
+    :commit: a7afe10951d2800d94c04091c2684ec9e978fb3e
+    :git: https://github.com/JoniVR/MediaKeyTap.git
 
 SPEC CHECKSUMS:
   MASPreferences: c08b8622dd17b47da87669e741efd7c92e970e8c
   MediaKeyTap: b652877e9ae2d52ca4f5310fa5152945ad3f0798
 
-PODFILE CHECKSUM: efa14c79ecdfeaf061bbc8ed950ee540d77f987a
+PODFILE CHECKSUM: 137eb2d2a81f325194fe440e7625ffdf797d0818
 
-COCOAPODS: 1.5.0
+COCOAPODS: 1.5.3
