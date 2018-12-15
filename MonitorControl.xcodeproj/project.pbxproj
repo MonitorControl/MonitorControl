@@ -13,8 +13,6 @@
 		6C33119021C58BF600971151 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 6C33118921C58BF500971151 /* README.md */; };
 		6C33119121C58BF600971151 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 6C33118A21C58BF500971151 /* .gitignore */; };
 		6C33119221C58BF600971151 /* ddcctl.sh in Resources */ = {isa = PBXBuildFile; fileRef = 6C33118C21C58BF500971151 /* ddcctl.sh */; };
-		6C33119321C58BF600971151 /* ddcctl.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C33118D21C58BF500971151 /* ddcctl.m */; };
-		6C33119421C58BF600971151 /* Makefile in Sources */ = {isa = PBXBuildFile; fileRef = 6C33118E21C58BF500971151 /* Makefile */; };
 		6C33119521C58BF600971151 /* DDC.c in Sources */ = {isa = PBXBuildFile; fileRef = 6C33118F21C58BF600971151 /* DDC.c */; };
 		9A19D3B73485870616B6D4E0 /* Pods_MonitorControl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 398F482D5C8816B29F16AAEB /* Pods_MonitorControl.framework */; };
 		F03A8DF21FFBAA6F0034DC27 /* Display.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03A8DF11FFBAA6F0034DC27 /* Display.swift */; };
@@ -393,11 +391,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				6C33119521C58BF600971151 /* DDC.c in Sources */,
-				6C33119421C58BF600971151 /* Makefile in Sources */,
 				F0445D40200259C10025AE82 /* DisplayPrefsViewController.swift in Sources */,
 				F03A8DF21FFBAA6F0034DC27 /* Display.swift in Sources */,
 				F091C9B31F6EA6110096FD65 /* SliderHandler.swift in Sources */,
-				6C33119321C58BF600971151 /* ddcctl.m in Sources */,
 				56754EAF1D9A4016007BCDC5 /* AppDelegate.swift in Sources */,
 				F0445D3820023E710025AE82 /* MainPrefsViewController.swift in Sources */,
 				F0445D3D200254FA0025AE82 /* KeysPrefsViewController.swift in Sources */,
