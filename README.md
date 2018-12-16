@@ -41,6 +41,8 @@ You're all set ! Now open the `MonitorControl.xcworkspace` with Xcode
 ### Third party dependencies
 
 - [MediaKeyTap](https://github.com/JoniVR/MediaKeyTap)
+- [MASPreferences](https://github.com/JoniVR/MASPreferences)
+- [ddcctl](https://github.com/kfix/ddcctl)
 
 ## Support
 - macOS Sierra (`10.12`) and up.
@@ -52,3 +54,4 @@ You're all set ! Now open the `MonitorControl.xcworkspace` with Xcode
 - [@the0neyouseek](https://github.com/the0neyouseek) (Fork)
 - [@Bensge](https://github.com/Bensge/) - (Used some code from his project [NativeDisplayBrightness](https://github.com/Bensge/NativeDisplayBrightness))
 - [@nhurden](https://github.com/nhurden/) (For the original MediaKeyTap)
+- [@kfix](https://github.com/kfix/ddcctl) (For ddcctl)
