@@ -37,34 +37,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         app = self
         
+        setupLayout()
+        subscribeEventListeners()
         setVolumeKeysMode()
-        
-        mediaKeyTap = MediaKeyTap.init(delegate: self, for: keysListenedFor, observeBuiltIn: false)
-        let storyboard: NSStoryboard = NSStoryboard.init(name: "Main", bundle: Bundle.main)
-        let views = [
-            storyboard.instantiateController(withIdentifier: "MainPrefsVC"),
-            storyboard.instantiateController(withIdentifier: "KeysPrefsVC"),
-            storyboard.instantiateController(withIdentifier: "DisplayPrefsVC")
-        ]
-        prefsController = MASPreferencesWindowController(viewControllers: views, title: NSLocalizedString("Preferences", comment: "Shown in Preferences window"))
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(handleListenForChanged), name: NSNotification.Name.init(Utils.PrefKeys.listenFor.rawValue), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(handleShowContrastChanged), name: NSNotification.Name.init(Utils.PrefKeys.showContrast.rawValue), object: nil)
-        
-        // subscribe Audio output detector (AMCoreAudio)
-        NotificationCenter.defaultCenter.subscribe(self, eventType: AudioHardwareEvent.self, dispatchQueue: DispatchQueue.main)
-        
         statusItem.image = NSImage.init(named: "status")
         statusItem.menu = statusMenu
-        
         setDefaultPrefs()
-        
         Utils.acquirePrivileges()
-        
         CGDisplayRegisterReconfigurationCallback({_, _, _ in app.updateDisplays()}, nil)
         updateDisplays()
-        
-        mediaKeyTap?.start()
     }
     
     @IBAction func quitClicked(_ sender: AnyObject) {
@@ -196,6 +177,24 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
     }
     
+    private func setupLayout() {
+        let storyboard: NSStoryboard = NSStoryboard.init(name: "Main", bundle: Bundle.main)
+        let views = [
+            storyboard.instantiateController(withIdentifier: "MainPrefsVC"),
+            storyboard.instantiateController(withIdentifier: "KeysPrefsVC"),
+            storyboard.instantiateController(withIdentifier: "DisplayPrefsVC")
+        ]
+        prefsController = MASPreferencesWindowController(viewControllers: views, title: NSLocalizedString("Preferences", comment: "Shown in Preferences window"))
+    }
+    
+    private func subscribeEventListeners() {
+        // subscribe KeyTap event listener
+        NotificationCenter.default.addObserver(self, selector: #selector(handleListenForChanged), name: NSNotification.Name.init(Utils.PrefKeys.listenFor.rawValue), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleShowContrastChanged), name: NSNotification.Name.init(Utils.PrefKeys.showContrast.rawValue), object: nil)
+        
+        // subscribe Audio output detector (AMCoreAudio)
+        NotificationCenter.defaultCenter.subscribe(self, eventType: AudioHardwareEvent.self, dispatchQueue: DispatchQueue.main)
+    }
 }
 
 // MARK: - Media Key Tap delegate
@@ -233,9 +232,7 @@ extension AppDelegate: MediaKeyTapDelegate {
     }
     
     // MARK: - Prefs notification
-    
     @objc func handleListenForChanged() {
-        
         readKeyListenPreferences()
         setKeysToListenFor()
     }
@@ -300,7 +297,7 @@ extension AppDelegate: EventSubscriber {
                 // load keys to listen to from prefs like normal
                 readKeyListenPreferences()
             }
-            setKeysToListenFor()
         }
+        setKeysToListenFor()
     }
 }
