@@ -592,7 +592,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/MonitorControl/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
-				PRODUCT_BUNDLE_IDENTIFIER = me.guillaumeb.MonitorControl;
+				PRODUCT_BUNDLE_IDENTIFIER = me.jonivr.MonitorControl;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "MonitorControl/Bridging-Header.h";
@@ -612,7 +612,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/MonitorControl/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
-				PRODUCT_BUNDLE_IDENTIFIER = me.guillaumeb.MonitorControl;
+				PRODUCT_BUNDLE_IDENTIFIER = me.jonivr.MonitorControl;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "MonitorControl/Bridging-Header.h";
@@ -636,7 +636,7 @@
 				INFOPLIST_FILE = MonitorControlHelper/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
-				PRODUCT_BUNDLE_IDENTIFIER = me.guillaumeb.MonitorControlHelper;
+				PRODUCT_BUNDLE_IDENTIFIER = me.jonivr.MonitorControlHelper;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.2;
@@ -659,7 +659,7 @@
 				INFOPLIST_FILE = MonitorControlHelper/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
-				PRODUCT_BUNDLE_IDENTIFIER = me.guillaumeb.MonitorControlHelper;
+				PRODUCT_BUNDLE_IDENTIFIER = me.jonivr.MonitorControlHelper;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.2;
