@@ -1,10 +1,16 @@
 PODS:
+  - AMCoreAudio (3.2.1)
   - MASPreferences (1.3)
   - MediaKeyTap (2.1.0)
 
 DEPENDENCIES:
+  - AMCoreAudio (~> 3.2)
   - MASPreferences (from `https://github.com/JoniVR/MASPreferences.git`)
   - MediaKeyTap (from `https://github.com/JoniVR/MediaKeyTap.git`)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - AMCoreAudio
 
 EXTERNAL SOURCES:
   MASPreferences:
@@ -21,9 +27,10 @@ CHECKOUT OPTIONS:
     :git: https://github.com/JoniVR/MediaKeyTap.git
 
 SPEC CHECKSUMS:
+  AMCoreAudio: 7fa6b718dc93acc29f849d60c3ad680ae1bf07b5
   MASPreferences: c08b8622dd17b47da87669e741efd7c92e970e8c
   MediaKeyTap: b652877e9ae2d52ca4f5310fa5152945ad3f0798
 
-PODFILE CHECKSUM: ef3a41f0dd719b389cc8241f6f5dd5fe52e55556
+PODFILE CHECKSUM: 947d8968124719d712379b2dbc0a24b1595515fe
 
 COCOAPODS: 1.5.3

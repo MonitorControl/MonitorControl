@@ -43,6 +43,7 @@ You're all set ! Now open the `MonitorControl.xcworkspace` with Xcode
 - [MediaKeyTap](https://github.com/JoniVR/MediaKeyTap)
 - [MASPreferences](https://github.com/JoniVR/MASPreferences)
 - [ddcctl](https://github.com/kfix/ddcctl)
+- [AMCoreAudio](https://github.com/rnine/AMCoreAudio)
 
 ## Support
 - macOS Sierra (`10.12`) and up.
