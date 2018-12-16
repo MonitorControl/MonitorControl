@@ -7,13 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2E3C2647A29DDCAA1F2D4E29 /* Pods_MonitorControl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65A9B356B917FAB6583F09A6 /* Pods_MonitorControl.framework */; };
 		56754EAF1D9A4016007BCDC5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56754EAE1D9A4016007BCDC5 /* AppDelegate.swift */; };
 		56754EB11D9A4016007BCDC5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 56754EB01D9A4016007BCDC5 /* Assets.xcassets */; };
 		56754EB41D9A4016007BCDC5 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 56754EB21D9A4016007BCDC5 /* MainMenu.xib */; };
 		6C33119021C58BF600971151 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 6C33118921C58BF500971151 /* README.md */; };
 		6C33119221C58BF600971151 /* ddcctl.sh in Resources */ = {isa = PBXBuildFile; fileRef = 6C33118C21C58BF500971151 /* ddcctl.sh */; };
 		6C33119521C58BF600971151 /* DDC.c in Sources */ = {isa = PBXBuildFile; fileRef = 6C33118F21C58BF600971151 /* DDC.c */; };
-		9A19D3B73485870616B6D4E0 /* Pods_MonitorControl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 398F482D5C8816B29F16AAEB /* Pods_MonitorControl.framework */; };
 		F03A8DF21FFBAA6F0034DC27 /* Display.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03A8DF11FFBAA6F0034DC27 /* Display.swift */; };
 		F0445D3820023E710025AE82 /* MainPrefsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0445D3720023E710025AE82 /* MainPrefsViewController.swift */; };
 		F0445D3D200254FA0025AE82 /* KeysPrefsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0445D3B200254FA0025AE82 /* KeysPrefsViewController.swift */; };
@@ -44,13 +44,13 @@
 
 /* Begin PBXFileReference section */
 		31E16D90527EBD3F8A12BE0B /* Pods-MonitorControl.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MonitorControl.release.xcconfig"; path = "Pods/Target Support Files/Pods-MonitorControl/Pods-MonitorControl.release.xcconfig"; sourceTree = "<group>"; };
-		398F482D5C8816B29F16AAEB /* Pods_MonitorControl.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MonitorControl.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		42B61ABC1D7907131330228A /* Pods-MonitorControl.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MonitorControl.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MonitorControl/Pods-MonitorControl.debug.xcconfig"; sourceTree = "<group>"; };
 		56754EAB1D9A4016007BCDC5 /* MonitorControl.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MonitorControl.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		56754EAE1D9A4016007BCDC5 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AppDelegate.swift; sourceTree = "<group>"; };
 		56754EB01D9A4016007BCDC5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		56754EB31D9A4016007BCDC5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		56754EB51D9A4016007BCDC5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		65A9B356B917FAB6583F09A6 /* Pods_MonitorControl.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MonitorControl.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C33118921C58BF500971151 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		6C33118B21C58BF500971151 /* DDC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDC.h; sourceTree = "<group>"; };
 		6C33118C21C58BF500971151 /* ddcctl.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = ddcctl.sh; sourceTree = "<group>"; };
@@ -77,17 +77,6 @@
 		F091C9C31F6EB8720096FD65 /* fr */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; lineEnding = 0; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F091C9C41F6EBA5A0096FD65 /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
 		F0A987D61F77B290009B603D /* OSD.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = OSD.framework; sourceTree = "<group>"; };
-		F0A987DA1F77B404009B603D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MainMenu.strings; sourceTree = "<group>"; };
-		F0A987DC1F77B404009B603D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		F0A987DD1F77B404009B603D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		F0A987DF1F77B404009B603D /* SliderHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderHandler.swift; sourceTree = "<group>"; };
-		F0A987E11F77B404009B603D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
-		F0A987E21F77B404009B603D /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
-		F0A987E31F77B404009B603D /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/MainMenu.strings; sourceTree = "<group>"; };
-		F0A987E41F77B404009B603D /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
-		F0A987E51F77B404009B603D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		F0A987E61F77B404009B603D /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
-		F0A987E71F77B404009B603D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,7 +85,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F0A987E81F77B40E009B603D /* OSD.framework in Frameworks */,
-				9A19D3B73485870616B6D4E0 /* Pods_MonitorControl.framework in Frameworks */,
+				2E3C2647A29DDCAA1F2D4E29 /* Pods_MonitorControl.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -131,8 +120,8 @@
 				55359E321E2737EC002671BC /* ddcctl */,
 				F06792E8200A73460066C438 /* MonitorControlHelper */,
 				56754EAC1D9A4016007BCDC5 /* Products */,
-				F0A987D71F77B404009B603D /* Frameworks */,
 				EFFC2F3E35BEC9ACFA754137 /* Pods */,
+				8ABFD04A9742F18299723076 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -160,6 +149,14 @@
 				56754EB51D9A4016007BCDC5 /* Info.plist */,
 			);
 			path = MonitorControl;
+			sourceTree = "<group>";
+		};
+		8ABFD04A9742F18299723076 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				65A9B356B917FAB6583F09A6 /* Pods_MonitorControl.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		EFFC2F3E35BEC9ACFA754137 /* Pods */ = {
@@ -197,39 +194,6 @@
 				F0445D4C200294AB0025AE82 /* ButtonCellView.swift */,
 				F091C9B21F6EA6110096FD65 /* SliderHandler.swift */,
 				F03A8DF11FFBAA6F0034DC27 /* Display.swift */,
-			);
-			path = Objects;
-			sourceTree = "<group>";
-		};
-		F0A987D71F77B404009B603D /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				F0A987D81F77B404009B603D /* MonitorControl */,
-				398F482D5C8816B29F16AAEB /* Pods_MonitorControl.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		F0A987D81F77B404009B603D /* MonitorControl */ = {
-			isa = PBXGroup;
-			children = (
-				F0A987D91F77B404009B603D /* MainMenu.strings */,
-				F0A987DB1F77B404009B603D /* Localizable.strings */,
-				F0A987DD1F77B404009B603D /* Assets.xcassets */,
-				F0A987DE1F77B404009B603D /* Objects */,
-				F0A987E01F77B404009B603D /* MainMenu.xib */,
-				F0A987E21F77B404009B603D /* Utils.swift */,
-				F0A987E51F77B404009B603D /* AppDelegate.swift */,
-				F0A987E61F77B404009B603D /* Bridging-Header.h */,
-				F0A987E71F77B404009B603D /* Info.plist */,
-			);
-			path = MonitorControl;
-			sourceTree = "<group>";
-		};
-		F0A987DE1F77B404009B603D /* Objects */ = {
-			isa = PBXGroup;
-			children = (
-				F0A987DF1F77B404009B603D /* SliderHandler.swift */,
 			);
 			path = Objects;
 			sourceTree = "<group>";
@@ -437,32 +401,6 @@
 				F091C9C31F6EB8720096FD65 /* fr */,
 			);
 			name = Localizable.strings;
-			sourceTree = "<group>";
-		};
-		F0A987D91F77B404009B603D /* MainMenu.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				F0A987DA1F77B404009B603D /* en */,
-				F0A987E31F77B404009B603D /* fr */,
-			);
-			name = MainMenu.strings;
-			sourceTree = "<group>";
-		};
-		F0A987DB1F77B404009B603D /* Localizable.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				F0A987DC1F77B404009B603D /* en */,
-				F0A987E41F77B404009B603D /* fr */,
-			);
-			name = Localizable.strings;
-			sourceTree = "<group>";
-		};
-		F0A987E01F77B404009B603D /* MainMenu.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				F0A987E11F77B404009B603D /* Base */,
-			);
-			name = MainMenu.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
