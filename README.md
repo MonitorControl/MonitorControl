@@ -77,7 +77,7 @@ You're all set ! Now open the `MonitorControl.xcworkspace` with Xcode
 
 ## Support
 - macOS Sierra (`10.12`) and up.
-- Works with monitors comptaible with [@kfix/ddcctl](https://github.com/kfix/ddcctl)
+- Works with monitors compatible with [@kfix/ddcctl](https://github.com/kfix/ddcctl)
 
 ## Thanks
 - [@bluejamesbond](https://github.com/bluejamesbond/) (Original developer)
