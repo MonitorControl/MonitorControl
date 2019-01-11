@@ -7,7 +7,7 @@ DEPENDENCIES:
   - MediaKeyTap (from `https://github.com/the0neyouseek/MediaKeyTap.git`)
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
+  https://github.com/cocoapods/specs.git:
     - MASPreferences
 
 EXTERNAL SOURCES:
@@ -16,7 +16,7 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   MediaKeyTap:
-    :commit: 2ff6e582c0c03b735d24d0800f4e43611d316e93
+    :commit: 3722ad54585d931977af8152a9555e832f4000f6
     :git: https://github.com/the0neyouseek/MediaKeyTap.git
 
 SPEC CHECKSUMS:
@@ -25,4 +25,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: efa14c79ecdfeaf061bbc8ed950ee540d77f987a
 
-COCOAPODS: 1.5.0
+COCOAPODS: 1.5.3
