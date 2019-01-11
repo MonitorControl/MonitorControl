@@ -12,12 +12,12 @@
 		56754EAF1D9A4016007BCDC5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56754EAE1D9A4016007BCDC5 /* AppDelegate.swift */; };
 		56754EB11D9A4016007BCDC5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 56754EB01D9A4016007BCDC5 /* Assets.xcassets */; };
 		56754EB41D9A4016007BCDC5 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 56754EB21D9A4016007BCDC5 /* MainMenu.xib */; };
+		6C778D5A21E91060000A4D5F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6C778D5821E91060000A4D5F /* Main.storyboard */; };
 		9A19D3B73485870616B6D4E0 /* Pods_MonitorControl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 398F482D5C8816B29F16AAEB /* Pods_MonitorControl.framework */; };
 		F03A8DF21FFBAA6F0034DC27 /* Display.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03A8DF11FFBAA6F0034DC27 /* Display.swift */; };
 		F0445D3820023E710025AE82 /* MainPrefsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0445D3720023E710025AE82 /* MainPrefsViewController.swift */; };
 		F0445D3D200254FA0025AE82 /* KeysPrefsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0445D3B200254FA0025AE82 /* KeysPrefsViewController.swift */; };
 		F0445D40200259C10025AE82 /* DisplayPrefsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0445D3F200259C10025AE82 /* DisplayPrefsViewController.swift */; };
-		F0445D41200282E60025AE82 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F0445D43200282E60025AE82 /* Main.storyboard */; };
 		F0445D4D200294AB0025AE82 /* ButtonCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0445D4C200294AB0025AE82 /* ButtonCellView.swift */; };
 		F06792EA200A73460066C438 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F06792E9200A73460066C438 /* AppDelegate.swift */; };
 		F06792F6200A745F0066C438 /* MonitorControlHelper.app in [Login] Copy Helper to start at Login */ = {isa = PBXBuildFile; fileRef = F06792E7200A73460066C438 /* MonitorControlHelper.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -56,13 +56,13 @@
 		56754EB01D9A4016007BCDC5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		56754EB31D9A4016007BCDC5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		56754EB51D9A4016007BCDC5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6C778D5921E91060000A4D5F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		6C778D5E21E910A2000A4D5F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
+		6C778D5F21E910A6000A4D5F /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Main.strings; sourceTree = "<group>"; };
 		F03A8DF11FFBAA6F0034DC27 /* Display.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Display.swift; sourceTree = "<group>"; };
 		F0445D3720023E710025AE82 /* MainPrefsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPrefsViewController.swift; sourceTree = "<group>"; };
 		F0445D3B200254FA0025AE82 /* KeysPrefsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeysPrefsViewController.swift; sourceTree = "<group>"; };
 		F0445D3F200259C10025AE82 /* DisplayPrefsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayPrefsViewController.swift; sourceTree = "<group>"; };
-		F0445D42200282E60025AE82 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		F0445D45200282EB0025AE82 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Main.strings; sourceTree = "<group>"; };
-		F0445D47200282F80025AE82 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		F0445D49200285690025AE82 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MainMenu.strings; sourceTree = "<group>"; };
 		F0445D4B2002856C0025AE82 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/MainMenu.strings; sourceTree = "<group>"; };
 		F0445D4C200294AB0025AE82 /* ButtonCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonCellView.swift; sourceTree = "<group>"; };
@@ -149,7 +149,7 @@
 			children = (
 				56754EAE1D9A4016007BCDC5 /* AppDelegate.swift */,
 				F091C9B71F6EA79B0096FD65 /* Utils.swift */,
-				F0445D43200282E60025AE82 /* Main.storyboard */,
+				6C778D5821E91060000A4D5F /* Main.storyboard */,
 				56754EB21D9A4016007BCDC5 /* MainMenu.xib */,
 				F0445D3620023D5B0025AE82 /* Prefs */,
 				F091C9B41F6EA6180096FD65 /* Objects */,
@@ -247,6 +247,7 @@
 				56754EA91D9A4016007BCDC5 /* Resources */,
 				9DD5968596EFAF0E2EB56496 /* [CP] Embed Pods Frameworks */,
 				F06792F5200A73FA0066C438 /* [Login] Copy Helper to start at Login */,
+				6C778D4D21E90DA1000A4D5F /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -324,8 +325,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				56754EB11D9A4016007BCDC5 /* Assets.xcassets in Resources */,
-				F0445D41200282E60025AE82 /* Main.storyboard in Resources */,
 				F0EB972F1F6ED7C800686D2A /* Localizable.strings in Resources */,
+				6C778D5A21E91060000A4D5F /* Main.storyboard in Resources */,
 				55359E3B1E2737EC002671BC /* ddcctl.sh in Resources */,
 				56754EB41D9A4016007BCDC5 /* MainMenu.xib in Resources */,
 			);
@@ -341,6 +342,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		6C778D4D21E90DA1000A4D5F /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nbuildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"${INFOPLIST_FILE}\")\nbuildNumber=$(($buildNumber + 1))\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"${INFOPLIST_FILE}\"\n\n";
+		};
 		9DD5968596EFAF0E2EB56496 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -348,11 +366,13 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-MonitorControl/Pods-MonitorControl-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/AMCoreAudio/AMCoreAudio.framework",
 				"${BUILT_PRODUCTS_DIR}/MASPreferences/MASPreferences.framework",
 				"${BUILT_PRODUCTS_DIR}/MediaKeyTap/MediaKeyTap.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AMCoreAudio.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MASPreferences.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MediaKeyTap.framework",
 			);
@@ -433,12 +453,12 @@
 			name = MainMenu.xib;
 			sourceTree = "<group>";
 		};
-		F0445D43200282E60025AE82 /* Main.storyboard */ = {
+		6C778D5821E91060000A4D5F /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				F0445D42200282E60025AE82 /* Base */,
-				F0445D45200282EB0025AE82 /* fr */,
-				F0445D47200282F80025AE82 /* en */,
+				6C778D5921E91060000A4D5F /* Base */,
+				6C778D5E21E910A2000A4D5F /* en */,
+				6C778D5F21E910A6000A4D5F /* fr */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
