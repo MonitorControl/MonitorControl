@@ -112,13 +112,9 @@ class Utils: NSObject {
 		DispatchQueue.global(qos: .background).async {
 			var val: Int?
 
-			for _ in 0...100 {
-				if let res = getCommand(command, fromMonitor: display.identifier) {
-					val = res
-					break
-				}
-				usleep(40000)
-			}
+            if let res = getCommand(command, fromMonitor: display.identifier) {
+                val = res
+            }
 
 			if let val = val {
 				display.saveValue(val, for: command)
@@ -128,7 +124,6 @@ class Utils: NSObject {
 				}
 			}
 		}
-
 		return handler
 	}
 
