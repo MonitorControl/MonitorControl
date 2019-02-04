@@ -1,13 +1,16 @@
 PODS:
+  - AMCoreAudio (3.2.1)
   - MASPreferences (1.3)
   - MediaKeyTap (2.1.0)
 
 DEPENDENCIES:
+  - AMCoreAudio (~> 3.2)
   - MASPreferences
   - MediaKeyTap (from `https://github.com/the0neyouseek/MediaKeyTap.git`)
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
+  https://github.com/cocoapods/specs.git:
+    - AMCoreAudio
     - MASPreferences
 
 EXTERNAL SOURCES:
@@ -16,13 +19,14 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   MediaKeyTap:
-    :commit: 2ff6e582c0c03b735d24d0800f4e43611d316e93
+    :commit: 3722ad54585d931977af8152a9555e832f4000f6
     :git: https://github.com/the0neyouseek/MediaKeyTap.git
 
 SPEC CHECKSUMS:
+  AMCoreAudio: 7fa6b718dc93acc29f849d60c3ad680ae1bf07b5
   MASPreferences: c08b8622dd17b47da87669e741efd7c92e970e8c
   MediaKeyTap: b652877e9ae2d52ca4f5310fa5152945ad3f0798
 
-PODFILE CHECKSUM: efa14c79ecdfeaf061bbc8ed950ee540d77f987a
+PODFILE CHECKSUM: 1b20d86a04731d82d4e8f346646d2b6b9d2db778
 
-COCOAPODS: 1.5.0
+COCOAPODS: 1.5.3
