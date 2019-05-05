@@ -2,6 +2,7 @@ disabled_rules:
   - line_length
   - function_body_length
   - identifier_name
+  - trailing_comma
 excluded:
   - Pods
 type_body_length: 500
