@@ -125,13 +125,13 @@
 		56754EA21D9A4016007BCDC5 = {
 			isa = PBXGroup;
 			children = (
-				56754EAD1D9A4016007BCDC5 /* MonitorControl */,
-				F0A987D61F77B290009B603D /* OSD.framework */,
 				55359E321E2737EC002671BC /* ddcctl */,
-				F06792E8200A73460066C438 /* MonitorControlHelper */,
-				56754EAC1D9A4016007BCDC5 /* Products */,
 				F0A987D71F77B404009B603D /* Frameworks */,
+				56754EAD1D9A4016007BCDC5 /* MonitorControl */,
+				F06792E8200A73460066C438 /* MonitorControlHelper */,
+				F0A987D61F77B290009B603D /* OSD.framework */,
 				EFFC2F3E35BEC9ACFA754137 /* Pods */,
+				56754EAC1D9A4016007BCDC5 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
@@ -148,15 +148,17 @@
 			isa = PBXGroup;
 			children = (
 				56754EAE1D9A4016007BCDC5 /* AppDelegate.swift */,
-				F091C9B71F6EA79B0096FD65 /* Utils.swift */,
+				56754EB01D9A4016007BCDC5 /* Assets.xcassets */,
+				F091C9C41F6EBA5A0096FD65 /* Bridging-Header.h */,
+				F0445D4C200294AB0025AE82 /* ButtonCellView.swift */,
+				F03A8DF11FFBAA6F0034DC27 /* Display.swift */,
+				56754EB51D9A4016007BCDC5 /* Info.plist */,
+				F091C9C11F6EB8660096FD65 /* Localizable.strings */,
 				6C778D5821E91060000A4D5F /* Main.storyboard */,
 				56754EB21D9A4016007BCDC5 /* MainMenu.xib */,
-				F0445D3620023D5B0025AE82 /* Prefs */,
-				F091C9B41F6EA6180096FD65 /* Objects */,
-				F091C9C41F6EBA5A0096FD65 /* Bridging-Header.h */,
-				56754EB01D9A4016007BCDC5 /* Assets.xcassets */,
-				F091C9C11F6EB8660096FD65 /* Localizable.strings */,
-				56754EB51D9A4016007BCDC5 /* Info.plist */,
+				F091C9B21F6EA6110096FD65 /* SliderHandler.swift */,
+				F091C9B71F6EA79B0096FD65 /* Utils.swift */,
+				F0445D3620023D5B0025AE82 /* View Controllers */,
 			);
 			path = MonitorControl;
 			sourceTree = "<group>";
@@ -170,14 +172,14 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		F0445D3620023D5B0025AE82 /* Prefs */ = {
+		F0445D3620023D5B0025AE82 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				F0445D3720023E710025AE82 /* MainPrefsViewController.swift */,
-				F0445D3B200254FA0025AE82 /* KeysPrefsViewController.swift */,
 				F0445D3F200259C10025AE82 /* DisplayPrefsViewController.swift */,
+				F0445D3B200254FA0025AE82 /* KeysPrefsViewController.swift */,
+				F0445D3720023E710025AE82 /* MainPrefsViewController.swift */,
 			);
-			path = Prefs;
+			path = "View Controllers";
 			sourceTree = "<group>";
 		};
 		F06792E8200A73460066C438 /* MonitorControlHelper */ = {
@@ -188,16 +190,6 @@
 				F06792F1200A73470066C438 /* MonitorControlHelper.entitlements */,
 			);
 			path = MonitorControlHelper;
-			sourceTree = "<group>";
-		};
-		F091C9B41F6EA6180096FD65 /* Objects */ = {
-			isa = PBXGroup;
-			children = (
-				F0445D4C200294AB0025AE82 /* ButtonCellView.swift */,
-				F091C9B21F6EA6110096FD65 /* SliderHandler.swift */,
-				F03A8DF11FFBAA6F0034DC27 /* Display.swift */,
-			);
-			path = Objects;
 			sourceTree = "<group>";
 		};
 		F0A987D71F77B404009B603D /* Frameworks */ = {
@@ -212,15 +204,15 @@
 		F0A987D81F77B404009B603D /* MonitorControl */ = {
 			isa = PBXGroup;
 			children = (
-				F0A987D91F77B404009B603D /* MainMenu.strings */,
-				F0A987DB1F77B404009B603D /* Localizable.strings */,
-				F0A987DD1F77B404009B603D /* Assets.xcassets */,
-				F0A987DE1F77B404009B603D /* Objects */,
-				F0A987E01F77B404009B603D /* MainMenu.xib */,
-				F0A987E21F77B404009B603D /* Utils.swift */,
 				F0A987E51F77B404009B603D /* AppDelegate.swift */,
+				F0A987DD1F77B404009B603D /* Assets.xcassets */,
 				F0A987E61F77B404009B603D /* Bridging-Header.h */,
 				F0A987E71F77B404009B603D /* Info.plist */,
+				F0A987DB1F77B404009B603D /* Localizable.strings */,
+				F0A987D91F77B404009B603D /* MainMenu.strings */,
+				F0A987E01F77B404009B603D /* MainMenu.xib */,
+				F0A987DE1F77B404009B603D /* Objects */,
+				F0A987E21F77B404009B603D /* Utils.swift */,
 			);
 			path = MonitorControl;
 			sourceTree = "<group>";
@@ -325,9 +317,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				56754EB11D9A4016007BCDC5 /* Assets.xcassets in Resources */,
+				55359E3B1E2737EC002671BC /* ddcctl.sh in Resources */,
 				F0EB972F1F6ED7C800686D2A /* Localizable.strings in Resources */,
 				6C778D5A21E91060000A4D5F /* Main.storyboard in Resources */,
-				55359E3B1E2737EC002671BC /* ddcctl.sh in Resources */,
 				56754EB41D9A4016007BCDC5 /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -420,15 +412,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F0445D40200259C10025AE82 /* DisplayPrefsViewController.swift in Sources */,
-				F03A8DF21FFBAA6F0034DC27 /* Display.swift in Sources */,
-				F091C9B31F6EA6110096FD65 /* SliderHandler.swift in Sources */,
 				56754EAF1D9A4016007BCDC5 /* AppDelegate.swift in Sources */,
-				55359E391E2737EC002671BC /* DDC.c in Sources */,
-				F0445D3820023E710025AE82 /* MainPrefsViewController.swift in Sources */,
-				F0445D3D200254FA0025AE82 /* KeysPrefsViewController.swift in Sources */,
-				F091C9B81F6EA79B0096FD65 /* Utils.swift in Sources */,
 				F0445D4D200294AB0025AE82 /* ButtonCellView.swift in Sources */,
+				55359E391E2737EC002671BC /* DDC.c in Sources */,
+				F03A8DF21FFBAA6F0034DC27 /* Display.swift in Sources */,
+				F0445D40200259C10025AE82 /* DisplayPrefsViewController.swift in Sources */,
+				F0445D3D200254FA0025AE82 /* KeysPrefsViewController.swift in Sources */,
+				F0445D3820023E710025AE82 /* MainPrefsViewController.swift in Sources */,
+				F091C9B31F6EA6110096FD65 /* SliderHandler.swift in Sources */,
+				F091C9B81F6EA79B0096FD65 /* Utils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
