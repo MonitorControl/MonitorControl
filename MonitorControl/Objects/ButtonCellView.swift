@@ -1,11 +1,3 @@
-//
-//  ButtonCellView.swift
-//  MonitorControl
-//
-//  Created by Guillaume BRODER on 07/01/2018.
-//  Copyright © 2018 Mathew Kurian. All rights reserved.
-//
-
 import Cocoa
 
 class ButtonCellView: NSTableCellView {

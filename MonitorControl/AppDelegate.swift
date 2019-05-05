@@ -1,12 +1,3 @@
-//
-//  AppDelegate.swift
-//  MonitorControl
-//
-//  Created by Mathew Kurian on 9/26/16.
-//  Last edited by Guillaume Broder on 9/17/2017
-//  MIT Licensed. 2017.
-//
-
 import AMCoreAudio
 import Cocoa
 import Foundation

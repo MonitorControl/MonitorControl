@@ -1,11 +1,3 @@
-//
-//  Utils.swift
-//  MonitorControl
-//
-//  Created by Guillaume BRODER on 9/17/2017.
-//  MIT Licensed.
-//
-
 import Cocoa
 
 class Utils: NSObject {

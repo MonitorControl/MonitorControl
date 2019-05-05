@@ -1,14 +1,5 @@
-//
-//  SliderHandler.swift
-//  MonitorControl
-//
-//  Created by Guillaume BRODER on 9/17/2017.
-//  MIT Licensed. 2017.
-//
-
 import Cocoa
 
-/// Handle the slider
 class SliderHandler {
   var slider: NSSlider?
   var display: Display

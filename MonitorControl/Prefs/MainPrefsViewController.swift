@@ -1,11 +1,3 @@
-//
-//  MainPrefsViewController.swift
-//  MonitorControl
-//
-//  Created by Guillaume BRODER on 07/01/2018.
-//  MIT Licensed.
-//
-
 import Cocoa
 import MASPreferences
 import ServiceManagement

@@ -1,14 +1,5 @@
-//
-//  Display.swift
-//  MonitorControl
-//
-//  Created by Guillaume BRODER on 02/01/2018.
-//  MIT Licensed.
-//
-
 import Cocoa
 
-/// A display
 class Display {
   let identifier: CGDirectDisplayID
   let name: String
