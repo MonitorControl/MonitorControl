@@ -42,6 +42,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		28D1DD78227FA927004CB494 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/MainMenu.strings; sourceTree = "<group>"; };
+		28D1DD79227FA927004CB494 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Main.strings; sourceTree = "<group>"; };
+		28D1DD7A227FA927004CB494 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/MainMenu.strings; sourceTree = "<group>"; };
+		28D1DD7B227FA927004CB494 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
+		28D1DD7C227FA939004CB494 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		31E16D90527EBD3F8A12BE0B /* Pods-MonitorControl.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MonitorControl.release.xcconfig"; path = "Pods/Target Support Files/Pods-MonitorControl/Pods-MonitorControl.release.xcconfig"; sourceTree = "<group>"; };
 		398F482D5C8816B29F16AAEB /* Pods_MonitorControl.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MonitorControl.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		42B61ABC1D7907131330228A /* Pods-MonitorControl.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MonitorControl.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MonitorControl/Pods-MonitorControl.debug.xcconfig"; sourceTree = "<group>"; };
@@ -299,6 +304,7 @@
 				en,
 				Base,
 				fr,
+				de,
 			);
 			mainGroup = 56754EA21D9A4016007BCDC5;
 			productRefGroup = 56754EAC1D9A4016007BCDC5 /* Products */;
@@ -439,6 +445,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				56754EB31D9A4016007BCDC5 /* Base */,
+				28D1DD7A227FA927004CB494 /* de */,
 				F0445D49200285690025AE82 /* en */,
 				F0445D4B2002856C0025AE82 /* fr */,
 			);
@@ -449,6 +456,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				6C778D5921E91060000A4D5F /* Base */,
+				28D1DD79227FA927004CB494 /* de */,
 				6C778D5E21E910A2000A4D5F /* en */,
 				6C778D5F21E910A6000A4D5F /* fr */,
 			);
@@ -458,6 +466,7 @@
 		F091C9C11F6EB8660096FD65 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
+				28D1DD7C227FA939004CB494 /* de */,
 				F091C9C21F6EB8660096FD65 /* en */,
 				F091C9C31F6EB8720096FD65 /* fr */,
 			);
@@ -476,6 +485,7 @@
 		F0A987DB1F77B404009B603D /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
+				28D1DD7B227FA927004CB494 /* de */,
 				F0A987DC1F77B404009B603D /* en */,
 				F0A987E41F77B404009B603D /* fr */,
 			);
@@ -486,6 +496,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				F0A987E11F77B404009B603D /* Base */,
+				28D1DD78227FA927004CB494 /* de */,
 			);
 			name = MainMenu.xib;
 			sourceTree = "<group>";

@@ -2,9 +2,6 @@
 /* Class = "NSButtonCell"; title = "Change Brightness/Volume for all screens"; ObjectID = "0Z7-PQ-Bl8"; */
 "0Z7-PQ-Bl8.title" = "Change Brightness/Volume for all screens";
 
-/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "2gr-xG-Byx"; */
-"2gr-xG-Byx.title" = "Text Cell";
-
 /* Class = "NSTableColumn"; headerCell.title = "Enabled"; ObjectID = "8U8-ec-Zbv"; */
 "8U8-ec-Zbv.headerCell.title" = "Enabled";
 
@@ -16,9 +13,6 @@
 
 /* Class = "NSTextFieldCell"; title = "Display"; ObjectID = "ExD-7P-6XI"; */
 "ExD-7P-6XI.title" = "Display";
-
-/* Class = "NSTextFieldCell"; title = "Last check: "; ObjectID = "I3I-EP-Ev8"; */
-"I3I-EP-Ev8.title" = "Last check: ";
 
 /* Class = "NSMenuItem"; title = "Volume only"; ObjectID = "NLP-dU-Dam"; */
 "NLP-dU-Dam.title" = "Volume only";
@@ -41,23 +35,11 @@
 /* Class = "NSButtonCell"; title = "Start when plugged to an external monitor"; ObjectID = "WJp-aA-2Af"; */
 "WJp-aA-2Af.title" = "Start when plugged to an external monitor";
 
-/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "Xje-0J-NNJ"; */
-"Xje-0J-NNJ.title" = "Text Cell";
-
-/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "as0-t3-Aub"; */
-"as0-t3-Aub.title" = "Text Cell";
-
-/* Class = "NSTextFieldCell"; title = "Table View Cell"; ObjectID = "cUg-j2-8gt"; */
-"cUg-j2-8gt.title" = "Table View Cell";
-
 /* Class = "NSTableColumn"; headerCell.title = "Display Id"; ObjectID = "dgp-q7-cBK"; */
 "dgp-q7-cBK.headerCell.title" = "Display Id";
 
 /* Class = "NSMenuItem"; title = "Brightness only"; ObjectID = "hjz-0c-rvK"; */
 "hjz-0c-rvK.title" = "Brightness only";
-
-/* Class = "NSTextFieldCell"; title = "Table View Cell"; ObjectID = "ldv-hu-9Hl"; */
-"ldv-hu-9Hl.title" = "Table View Cell";
 
 /* Class = "NSTextFieldCell"; title = "General"; ObjectID = "ocE-Cc-2bi"; */
 "ocE-Cc-2bi.title" = "General";

@@ -1,0 +1,41 @@
+/* Sown in menu */
+"Brightness" = "Helligkeit";
+
+/* Shown in menu */
+"Contrast" = "Kontrast";
+
+/* Shown in menu */
+"Default" = "Standard";
+
+/* No comment provided by engineer. */
+"Display" = "Monitor";
+
+/* Shown in menu */
+"No supported display found" = "Kein unterstützter Monitor angeschlossen";
+
+/* Shown in menu */
+"Set as default" = "Als Standard festlegen";
+
+/* No comment provided by engineer. */
+"Unknown" = "Unbekannt";
+
+/* Shown in menu */
+"Volume" = "Lautstärke";
+
+/* Shown in Preferences window */
+"Preferences" = "Einstellungen";
+
+/* Shown in the alert dialog */
+"Ok" = "OK";
+
+/* Shown in the alert dialog */
+"Shortcuts not available" = "Kurzbefehle nicht verfügbar";
+
+/* Shown in the alert dialog */
+"You need to enable MonitorControl in System Preferences > Security and Privacy > Accessibility for the keyboard shortcuts to work" = "Du musst MonitorControl in Systemeinstellungen > Sicherheit > Datenschutz > Bedienungshilfen aktivieren, damit die Kurzbefehle funktionieren.";
+
+/* Shown in the main prefs window */
+"General" = "Allgemein";
+
+/* Shown in the main prefs window */
+"Keys" = "Tasten";
