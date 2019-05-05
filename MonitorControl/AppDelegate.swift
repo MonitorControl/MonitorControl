@@ -31,20 +31,22 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   var mediaKeyTap: MediaKeyTap?
   var prefsController: NSWindowController?
 
-  var keysListenedFor: [MediaKey] = [.brightnessUp, .brightnessDown, .mute, .volumeUp, .volumeDown]
-
   func applicationDidFinishLaunching(_: Notification) {
     app = self
 
     self.setupLayout()
     self.subscribeEventListeners()
-    setVolumeKeysMode()
+    self.startOrRestartMediaKeyTap()
     self.statusItem.image = NSImage(named: "status")
     self.statusItem.menu = self.statusMenu
     self.setDefaultPrefs()
     Utils.acquirePrivileges()
     CGDisplayRegisterReconfigurationCallback({ _, _, _ in app.updateDisplays() }, nil)
     self.updateDisplays()
+  }
+
+  func applicationWillTerminate(_ notification: Notification) {
+    AMCoreAudio.NotificationCenter.defaultCenter.unsubscribe(self, eventType: AudioHardwareEvent.self)
   }
 
   @IBAction func quitClicked(_: AnyObject) {
@@ -192,7 +194,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     NotificationCenter.default.addObserver(self, selector: #selector(handleShowContrastChanged), name: NSNotification.Name(Utils.PrefKeys.showContrast.rawValue), object: nil)
 
     // subscribe Audio output detector (AMCoreAudio)
-    NotificationCenter.defaultCenter.subscribe(self, eventType: AudioHardwareEvent.self, dispatchQueue: DispatchQueue.main)
+    AMCoreAudio.NotificationCenter.defaultCenter.subscribe(self, eventType: AudioHardwareEvent.self, dispatchQueue: DispatchQueue.main)
   }
 }
 
@@ -232,70 +234,49 @@ extension AppDelegate: MediaKeyTapDelegate {
   // MARK: - Prefs notification
 
   @objc func handleListenForChanged() {
-    self.readKeyListenPreferences()
-    self.setKeysToListenFor()
+    self.startOrRestartMediaKeyTap()
   }
 
   @objc func handleShowContrastChanged() {
     self.updateDisplays()
   }
 
-  private func setKeysToListenFor() {
-    self.mediaKeyTap?.stop()
-    self.mediaKeyTap = MediaKeyTap(delegate: self, for: self.keysListenedFor, observeBuiltIn: false)
-    self.mediaKeyTap?.start()
-  }
+  private func startOrRestartMediaKeyTap() {
+    var keys: [MediaKey]
 
-  private func readKeyListenPreferences() {
-    let listenFor = prefs.integer(forKey: Utils.PrefKeys.listenFor.rawValue)
-
-    self.keysListenedFor = [.brightnessUp, .brightnessDown, .mute, .volumeUp, .volumeDown]
-
-    if listenFor == Utils.ListenForKeys.brightnessOnlyKeys.rawValue {
-      self.keysListenedFor.removeSubrange(2...4)
-    } else if listenFor == Utils.ListenForKeys.volumeOnlyKeys.rawValue {
-      self.keysListenedFor.removeSubrange(0...1)
+    switch prefs.integer(forKey: Utils.PrefKeys.listenFor.rawValue) {
+    case Utils.ListenForKeys.brightnessOnlyKeys.rawValue:
+      keys = [.brightnessUp, .brightnessDown]
+    case Utils.ListenForKeys.volumeOnlyKeys.rawValue:
+      keys = [.mute, .volumeUp, .volumeDown]
+    default:
+      keys = [.brightnessUp, .brightnessDown, .mute, .volumeUp, .volumeDown]
     }
+
+    if let audioDevice = AudioDevice.defaultOutputDevice(), audioDevice.canSetVirtualMasterVolume(direction: .playback) {
+      // Remove volume related keys.
+      let keysToDelete: [MediaKey] = [.volumeUp, .volumeDown, .mute]
+      keys.removeAll { keysToDelete.contains($0) }
+    }
+
+    self.mediaKeyTap?.stop()
+    self.mediaKeyTap = MediaKeyTap(delegate: self, for: keys, observeBuiltIn: false)
+    self.mediaKeyTap?.start()
   }
 }
 
 extension AppDelegate: EventSubscriber {
   /**
-   Fires off when a change in default audio device is detected.
+   Fires off when the default audio device changes.
    */
   func eventReceiver(_ event: Event) {
-    switch event {
-    case let event as AudioHardwareEvent:
-      switch event {
-      case let .defaultOutputDeviceChanged(audioDevice):
-        #if DEBUG
-          print("Default output device changed to \(audioDevice)")
-          print("Can device set its own volume? \(audioDevice.canSetVirtualMasterVolume(direction: .playback))")
-        #endif
-        self.setVolumeKeysMode()
-      default: break
-      }
-    default: break
-    }
-  }
+    if case let .defaultOutputDeviceChanged(audioDevice)? = event as? AudioHardwareEvent {
+      #if DEBUG
+        print("Default output device changed to “\(audioDevice.name)”.")
+        print("Can device set its own volume? \(audioDevice.canSetVirtualMasterVolume(direction: .playback))")
+      #endif
 
-  /**
-   We check if the current default audio output device can change the volume,
-   if not, we know for sure that we don't need to interact with it.
-   */
-  func setVolumeKeysMode() {
-    self.readKeyListenPreferences()
-
-    if let defaultOutputDevice = AudioDevice.defaultOutputDevice() {
-      if defaultOutputDevice.canSetVirtualMasterVolume(direction: .playback) {
-        // Remove volume related keys
-        let keysToDelete: [MediaKey] = [.volumeUp, .volumeDown, .mute]
-        keysListenedFor = self.keysListenedFor.filter { !keysToDelete.contains($0) }
-      } else {
-        // load keys to listen to from prefs like normal
-        self.readKeyListenPreferences()
-      }
+      self.startOrRestartMediaKeyTap()
     }
-    self.setKeysToListenFor()
   }
 }
