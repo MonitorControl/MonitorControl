@@ -1,5 +1,6 @@
 import Cocoa
 import MASPreferences
+import os.log
 
 class KeysPrefsViewController: NSViewController, MASPreferencesViewController {
   var viewIdentifier: String = "Keys"
@@ -19,7 +20,7 @@ class KeysPrefsViewController: NSViewController, MASPreferencesViewController {
     self.prefs.set(sender.selectedTag(), forKey: Utils.PrefKeys.listenFor.rawValue)
 
     #if DEBUG
-      print("Toggle keys listened for state state -> \(sender.selectedItem?.title ?? "")")
+      os_log("Toggle keys listened for state state: %@", type: .info, sender.selectedItem?.title ?? "")
     #endif
 
     NotificationCenter.default.post(name: Notification.Name(Utils.PrefKeys.listenFor.rawValue), object: nil)

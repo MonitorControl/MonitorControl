@@ -1,4 +1,5 @@
 import Cocoa
+import os.log
 
 class ButtonCellView: NSTableCellView {
   @IBOutlet var button: NSButton!
@@ -21,7 +22,7 @@ class ButtonCellView: NSTableCellView {
       }
 
       #if DEBUG
-        print("Toggle enabled display state -> \(sender.state == .on ? "on" : "off")")
+        os_log("Toggle enabled display state: %@", type: .info, sender.state == .on ? "on" : "off")
       #endif
     }
   }

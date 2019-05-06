@@ -1,6 +1,7 @@
 import Cocoa
 import DDC
 import MASPreferences
+import os.log
 
 class DisplayPrefsViewController: NSViewController, MASPreferencesViewController, NSTableViewDataSource, NSTableViewDelegate {
   var viewIdentifier: String = "Display"
@@ -36,7 +37,7 @@ class DisplayPrefsViewController: NSViewController, MASPreferencesViewController
     }
 
     #if DEBUG
-      print("Toggle allScreens state -> \(sender.state == .on ? "on" : "off")")
+      os_log("Toggle allScreens state: %@", type: .info, sender.state == .on ? "on" : "off")
     #endif
   }
 

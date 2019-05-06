@@ -4,6 +4,7 @@ import DDC
 import Foundation
 import MASPreferences
 import MediaKeyTap
+import os.log
 
 var app: AppDelegate!
 let prefs = UserDefaults.standard
@@ -256,8 +257,8 @@ extension AppDelegate: EventSubscriber {
   func eventReceiver(_ event: Event) {
     if case let .defaultOutputDeviceChanged(audioDevice)? = event as? AudioHardwareEvent {
       #if DEBUG
-        print("Default output device changed to “\(audioDevice.name)”.")
-        print("Can device set its own volume? \(audioDevice.canSetVirtualMasterVolume(direction: .playback))")
+        os_log("Default output device changed to “%@”.", type: .info, audioDevice.name)
+        os_log("Can device set its own volume? %@", type: .info, audioDevice.canSetVirtualMasterVolume(direction: .playback).description)
       #endif
 
       self.startOrRestartMediaKeyTap()

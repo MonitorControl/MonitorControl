@@ -1,5 +1,6 @@
 import Cocoa
 import MASPreferences
+import os.log
 import ServiceManagement
 
 class MainPrefsViewController: NSViewController, MASPreferencesViewController {
@@ -37,7 +38,7 @@ class MainPrefsViewController: NSViewController, MASPreferencesViewController {
     }
 
     #if DEBUG
-      print("Toggle start at login state -> \(sender.state == .on ? "on" : "off")")
+      os_log("Toggle start at login state: %@", type: .info, sender.state == .on ? "on" : "off")
     #endif
   }
 
@@ -51,7 +52,7 @@ class MainPrefsViewController: NSViewController, MASPreferencesViewController {
     }
 
     #if DEBUG
-      print("Toggle show contrast slider state -> \(sender.state == .on ? "on" : "off")")
+      os_log("Toggle show contrast slider state: %@", type: .info, sender.state == .on ? "on" : "off")
     #endif
 
     NotificationCenter.default.post(name: Notification.Name(Utils.PrefKeys.showContrast.rawValue), object: nil)
@@ -67,7 +68,7 @@ class MainPrefsViewController: NSViewController, MASPreferencesViewController {
     }
 
     #if DEBUG
-      print("Toggle lower contrast after brightness state -> \(sender.state == .on ? "on" : "off")")
+      os_log("Toggle lower contrast after brightness state: %@", type: .info, sender.state == .on ? "on" : "off")
     #endif
   }
 
