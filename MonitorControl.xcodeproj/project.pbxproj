@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2894D9B82280B30500DF58DA /* CGDirectDisplayID+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2894D9B72280B30500DF58DA /* CGDirectDisplayID+Extension.swift */; };
 		28D1DDD8227FB7A4004CB494 /* OSD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F0A987D61F77B290009B603D /* OSD.framework */; };
 		28D1DDE5227FB7D0004CB494 /* MediaKeyTap.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28D1DDE2227FB7D0004CB494 /* MediaKeyTap.framework */; };
 		28D1DDE6227FB7D0004CB494 /* MediaKeyTap.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 28D1DDE2227FB7D0004CB494 /* MediaKeyTap.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -73,6 +74,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2894D9B72280B30500DF58DA /* CGDirectDisplayID+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGDirectDisplayID+Extension.swift"; sourceTree = "<group>"; };
 		28D1DD79227FA927004CB494 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Main.strings; sourceTree = "<group>"; };
 		28D1DD7A227FA927004CB494 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/MainMenu.strings; sourceTree = "<group>"; };
 		28D1DD7C227FA939004CB494 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -149,6 +151,7 @@
 			children = (
 				28D1DDEC227FB8F2004CB494 /* EDID+Extension.swift */,
 				28D1DDF1227FBE71004CB494 /* NSScreen+Extension.swift */,
+				2894D9B72280B30500DF58DA /* CGDirectDisplayID+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -369,6 +372,7 @@
 				28D1DDF2227FBE71004CB494 /* NSScreen+Extension.swift in Sources */,
 				F091C9B31F6EA6110096FD65 /* SliderHandler.swift in Sources */,
 				F091C9B81F6EA79B0096FD65 /* Utils.swift in Sources */,
+				2894D9B82280B30500DF58DA /* CGDirectDisplayID+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

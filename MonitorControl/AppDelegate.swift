@@ -87,26 +87,17 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   func updateDisplays() {
     self.clearDisplays()
 
-    var filteredScreens = NSScreen.screens.filter { screen -> Bool in
-      let id = screen.displayID
-
-      // Is Built In Screen (e.g. MBP/iMac Screen)
-      if CGDisplayIsBuiltin(id) != 0 {
+    let filteredScreens = NSScreen.screens.filter { screen -> Bool in
+      // Skip built-in displays.
+      if screen.isBuiltin {
         return false
       }
 
-      return DDC(for: id)?.edid() != nil
+      return DDC(for: screen.displayID)?.edid() != nil
     }
 
-    if filteredScreens.count == 1 {
-      self.addScreenToMenu(screen: filteredScreens[0], asSubMenu: false)
-    } else {
-      for screen in filteredScreens {
-        self.addScreenToMenu(screen: screen, asSubMenu: true)
-      }
-    }
-
-    if filteredScreens.count == 0 {
+    switch filteredScreens.count {
+    case 0:
       // If no DDC capable display was detected
       let item = NSMenuItem()
       item.title = NSLocalizedString("No supported display found", comment: "Shown in menu")
@@ -114,6 +105,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       self.monitorItems.append(item)
       self.statusMenu.insertItem(item, at: 0)
       self.statusMenu.insertItem(NSMenuItem.separator(), at: 1)
+    default:
+      os_log("The following displays were found:", type: .info)
+
+      for screen in filteredScreens {
+        os_log(" - %@", type: .info, "\(screen.displayName ?? NSLocalizedString("Unknown", comment: "unknown display name")) (Vendor: \(screen.vendorNumber ?? 0), Model: \(screen.modelNumber ?? 0))")
+        self.addScreenToMenu(screen: screen, asSubMenu: filteredScreens.count > 1)
+      }
     }
   }
 

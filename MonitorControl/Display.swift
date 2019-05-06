@@ -20,6 +20,29 @@ class Display {
     self.ddc = DDC(for: identifier)
   }
 
+  // On some displays, the display's OSD overlaps the macOS OSD,
+  // calling the OSD command with 1 seems to hide it.
+  func hideDisplayOsd() {
+    // LG 38UC99-W
+    guard self.identifier.vendorNumber == 7789, self.identifier.modelNumber == 30460 else {
+      return
+    }
+
+    _ = self.ddc?.write(command: .onScreenDisplay, value: 1)
+
+    DispatchQueue.global(qos: .background).asyncAfter(deadline: DispatchTime.now() + 0.000001) {
+      _ = self.ddc?.write(command: .onScreenDisplay, value: 1)
+    }
+
+    DispatchQueue.global(qos: .background).asyncAfter(deadline: DispatchTime.now() + 0.00001) {
+      _ = self.ddc?.write(command: .onScreenDisplay, value: 1)
+    }
+
+    DispatchQueue.global(qos: .background).asyncAfter(deadline: DispatchTime.now() + 0.0001) {
+      _ = self.ddc?.write(command: .onScreenDisplay, value: 1)
+    }
+  }
+
   func mute() {
     var value = 0
     if self.isMuted {
@@ -30,6 +53,7 @@ class Display {
     }
 
     _ = self.ddc?.write(command: .audioSpeakerVolume, value: UInt8(value))
+    self.hideDisplayOsd()
 
     if let slider = volumeSliderHandler?.slider {
       slider.intValue = Int32(value)
@@ -44,6 +68,7 @@ class Display {
     }
 
     _ = self.ddc?.write(command: .audioSpeakerVolume, value: UInt8(value))
+    self.hideDisplayOsd()
 
     if let slider = volumeSliderHandler?.slider {
       slider.intValue = Int32(value)

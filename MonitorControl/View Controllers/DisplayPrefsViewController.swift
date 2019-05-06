@@ -46,9 +46,9 @@ class DisplayPrefsViewController: NSViewController, MASPreferencesViewController
     for screen in NSScreen.screens {
       let id = screen.displayID
 
-      // Is Built In Screen (e.g. MBP/iMac Screen)
-      if CGDisplayIsBuiltin(id) != 0 {
-        let display = Display(id, name: screen.displayName!, isEnabled: false)
+      // Disable built-in displays.
+      if screen.isBuiltin {
+        let display = Display(id, name: screen.displayName ?? NSLocalizedString("Unknown", comment: "unknown display name"), isEnabled: false)
         self.displays.append(display)
         continue
       }

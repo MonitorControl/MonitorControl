@@ -6,7 +6,7 @@ extension NSScreen {
   }
 
   public var vendorNumber: UInt32? {
-    switch CGDisplayVendorNumber(self.displayID) {
+    switch self.displayID.vendorNumber {
     case 0xFFFF_FFFF:
       return nil
     case let vendorNumber:
@@ -15,7 +15,7 @@ extension NSScreen {
   }
 
   public var modelNumber: UInt32? {
-    switch CGDisplayModelNumber(self.displayID) {
+    switch self.displayID.modelNumber {
     case 0xFFFF_FFFF:
       return nil
     case let modelNumber:
@@ -24,7 +24,7 @@ extension NSScreen {
   }
 
   public var serialNumber: UInt32? {
-    switch CGDisplaySerialNumber(self.displayID) {
+    switch self.displayID.serialNumber {
     case 0x0000_0000:
       return nil
     case let serialNumber:
@@ -58,6 +58,10 @@ extension NSScreen {
     }
 
     return nil
+  }
+
+  public var isBuiltin: Bool {
+    return CGDisplayIsBuiltin(self.displayID) != 0
   }
 
   public static func getByDisplayID(displayID: CGDirectDisplayID) -> NSScreen? {
