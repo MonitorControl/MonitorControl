@@ -10,16 +10,20 @@
 		2894D9B82280B30500DF58DA /* CGDirectDisplayID+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2894D9B72280B30500DF58DA /* CGDirectDisplayID+Extension.swift */; };
 		28D1DDD8227FB7A4004CB494 /* OSD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F0A987D61F77B290009B603D /* OSD.framework */; };
 		28D1DDE5227FB7D0004CB494 /* MediaKeyTap.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28D1DDE2227FB7D0004CB494 /* MediaKeyTap.framework */; };
-		28D1DDE6227FB7D0004CB494 /* MediaKeyTap.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 28D1DDE2227FB7D0004CB494 /* MediaKeyTap.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		28D1DDE6227FB7D0004CB494 /* MediaKeyTap.framework in [Carthage] Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 28D1DDE2227FB7D0004CB494 /* MediaKeyTap.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		28D1DDE7227FB7D0004CB494 /* AMCoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28D1DDE3227FB7D0004CB494 /* AMCoreAudio.framework */; };
-		28D1DDE8227FB7D0004CB494 /* AMCoreAudio.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 28D1DDE3227FB7D0004CB494 /* AMCoreAudio.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		28D1DDE8227FB7D0004CB494 /* AMCoreAudio.framework in [Carthage] Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 28D1DDE3227FB7D0004CB494 /* AMCoreAudio.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		28D1DDE9227FB7D0004CB494 /* MASPreferences.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28D1DDE4227FB7D0004CB494 /* MASPreferences.framework */; };
-		28D1DDEA227FB7D0004CB494 /* MASPreferences.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 28D1DDE4227FB7D0004CB494 /* MASPreferences.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		28D1DDEA227FB7D0004CB494 /* MASPreferences.framework in [Carthage] Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 28D1DDE4227FB7D0004CB494 /* MASPreferences.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		28D1DDEE227FB944004CB494 /* DDC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28D1DDED227FB944004CB494 /* DDC.framework */; };
-		28D1DDEF227FB944004CB494 /* DDC.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 28D1DDED227FB944004CB494 /* DDC.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		28D1DDEF227FB944004CB494 /* DDC.framework in [Carthage] Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 28D1DDED227FB944004CB494 /* DDC.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		28D1DDF0227FBD99004CB494 /* EDID+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D1DDEC227FB8F2004CB494 /* EDID+Extension.swift */; };
 		28D1DDF2227FBE71004CB494 /* NSScreen+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D1DDF1227FBE71004CB494 /* NSScreen+Extension.swift */; };
 		28D1DDF3227FC8C6004CB494 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 56754EB01D9A4016007BCDC5 /* Assets.xcassets */; };
+		28D1DE12227FD006004CB494 /* MASPreferences.framework.dSYM in [Carthage] Copy Framework Debug Symbols */ = {isa = PBXBuildFile; fileRef = 28D1DE0E227FD005004CB494 /* MASPreferences.framework.dSYM */; };
+		28D1DE13227FD006004CB494 /* MediaKeyTap.framework.dSYM in [Carthage] Copy Framework Debug Symbols */ = {isa = PBXBuildFile; fileRef = 28D1DE0F227FD006004CB494 /* MediaKeyTap.framework.dSYM */; };
+		28D1DE14227FD006004CB494 /* AMCoreAudio.framework.dSYM in [Carthage] Copy Framework Debug Symbols */ = {isa = PBXBuildFile; fileRef = 28D1DE10227FD006004CB494 /* AMCoreAudio.framework.dSYM */; };
+		28D1DE15227FD006004CB494 /* DDC.framework.dSYM in [Carthage] Copy Framework Debug Symbols */ = {isa = PBXBuildFile; fileRef = 28D1DE11227FD006004CB494 /* DDC.framework.dSYM */; };
 		56754EAF1D9A4016007BCDC5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56754EAE1D9A4016007BCDC5 /* AppDelegate.swift */; };
 		56754EB11D9A4016007BCDC5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 56754EB01D9A4016007BCDC5 /* Assets.xcassets */; };
 		56754EB41D9A4016007BCDC5 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 56754EB21D9A4016007BCDC5 /* MainMenu.xib */; };
@@ -37,28 +41,32 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		28D1DDAE227FB5C8004CB494 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = Carthage/Build/Mac;
-			dstSubfolderSpec = 10;
-			files = (
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		28D1DDBE227FB668004CB494 /* Embed Frameworks */ = {
+		28D1DDBE227FB668004CB494 /* [Carthage] Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				28D1DDE8227FB7D0004CB494 /* AMCoreAudio.framework in Embed Frameworks */,
-				28D1DDEF227FB944004CB494 /* DDC.framework in Embed Frameworks */,
-				28D1DDEA227FB7D0004CB494 /* MASPreferences.framework in Embed Frameworks */,
-				28D1DDE6227FB7D0004CB494 /* MediaKeyTap.framework in Embed Frameworks */,
+				28D1DDE8227FB7D0004CB494 /* AMCoreAudio.framework in [Carthage] Embed Frameworks */,
+				28D1DDEF227FB944004CB494 /* DDC.framework in [Carthage] Embed Frameworks */,
+				28D1DDEA227FB7D0004CB494 /* MASPreferences.framework in [Carthage] Embed Frameworks */,
+				28D1DDE6227FB7D0004CB494 /* MediaKeyTap.framework in [Carthage] Embed Frameworks */,
 			);
-			name = "Embed Frameworks";
+			name = "[Carthage] Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		28D1DE0B227FCF99004CB494 /* [Carthage] Copy Framework Debug Symbols */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 16;
+			files = (
+				28D1DE14227FD006004CB494 /* AMCoreAudio.framework.dSYM in [Carthage] Copy Framework Debug Symbols */,
+				28D1DE15227FD006004CB494 /* DDC.framework.dSYM in [Carthage] Copy Framework Debug Symbols */,
+				28D1DE12227FD006004CB494 /* MASPreferences.framework.dSYM in [Carthage] Copy Framework Debug Symbols */,
+				28D1DE13227FD006004CB494 /* MediaKeyTap.framework.dSYM in [Carthage] Copy Framework Debug Symbols */,
+			);
+			name = "[Carthage] Copy Framework Debug Symbols";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		F06792F5200A73FA0066C438 /* [Login] Copy Helper to start at Login */ = {
@@ -85,6 +93,10 @@
 		28D1DDEC227FB8F2004CB494 /* EDID+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EDID+Extension.swift"; sourceTree = "<group>"; };
 		28D1DDED227FB944004CB494 /* DDC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DDC.framework; path = Carthage/Build/Mac/DDC.framework; sourceTree = "<group>"; };
 		28D1DDF1227FBE71004CB494 /* NSScreen+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSScreen+Extension.swift"; sourceTree = "<group>"; };
+		28D1DE0E227FD005004CB494 /* MASPreferences.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = MASPreferences.framework.dSYM; path = Carthage/Build/Mac/MASPreferences.framework.dSYM; sourceTree = "<group>"; };
+		28D1DE0F227FD006004CB494 /* MediaKeyTap.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = MediaKeyTap.framework.dSYM; path = Carthage/Build/Mac/MediaKeyTap.framework.dSYM; sourceTree = "<group>"; };
+		28D1DE10227FD006004CB494 /* AMCoreAudio.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = AMCoreAudio.framework.dSYM; path = Carthage/Build/Mac/AMCoreAudio.framework.dSYM; sourceTree = "<group>"; };
+		28D1DE11227FD006004CB494 /* DDC.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = DDC.framework.dSYM; path = Carthage/Build/Mac/DDC.framework.dSYM; sourceTree = "<group>"; };
 		56754EAB1D9A4016007BCDC5 /* MonitorControl.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MonitorControl.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		56754EAE1D9A4016007BCDC5 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AppDelegate.swift; sourceTree = "<group>"; };
 		56754EB01D9A4016007BCDC5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -139,9 +151,13 @@
 			isa = PBXGroup;
 			children = (
 				28D1DDE3227FB7D0004CB494 /* AMCoreAudio.framework */,
+				28D1DE10227FD006004CB494 /* AMCoreAudio.framework.dSYM */,
 				28D1DDED227FB944004CB494 /* DDC.framework */,
+				28D1DE11227FD006004CB494 /* DDC.framework.dSYM */,
 				28D1DDE4227FB7D0004CB494 /* MASPreferences.framework */,
+				28D1DE0E227FD005004CB494 /* MASPreferences.framework.dSYM */,
 				28D1DDE2227FB7D0004CB494 /* MediaKeyTap.framework */,
+				28D1DE0F227FD006004CB494 /* MediaKeyTap.framework.dSYM */,
 				F0A987D61F77B290009B603D /* OSD.framework */,
 			);
 			name = Frameworks;
@@ -223,14 +239,16 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 56754EB81D9A4016007BCDC5 /* Build configuration list for PBXNativeTarget "MonitorControl" */;
 			buildPhases = (
+				28D1DE0C227FCFAF004CB494 /* [Format] Run SwiftFormat */,
 				F03A8DF01FFB9D4C0034DC27 /* [Lint] Run SwiftLint */,
 				56754EA71D9A4016007BCDC5 /* Sources */,
 				56754EA81D9A4016007BCDC5 /* Frameworks */,
 				56754EA91D9A4016007BCDC5 /* Resources */,
 				F06792F5200A73FA0066C438 /* [Login] Copy Helper to start at Login */,
-				6C778D4D21E90DA1000A4D5F /* ShellScript */,
-				28D1DDAE227FB5C8004CB494 /* Embed Frameworks */,
-				28D1DDBE227FB668004CB494 /* Embed Frameworks */,
+				28D1DDBE227FB668004CB494 /* [Carthage] Embed Frameworks */,
+				28D1DE0B227FCF99004CB494 /* [Carthage] Copy Framework Debug Symbols */,
+				28D1DE19227FD375004CB494 /* Increase Build Number */,
+				28D1DE1A227FD39F004CB494 /* Sync Version Numbers */,
 			);
 			buildRules = (
 			);
@@ -265,7 +283,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0920;
-				LastUpgradeCheck = 0930;
+				LastUpgradeCheck = 1020;
 				ORGANIZATIONNAME = "Mathew Kurian";
 				TargetAttributes = {
 					56754EAA1D9A4016007BCDC5 = {
@@ -326,7 +344,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		6C778D4D21E90DA1000A4D5F /* ShellScript */ = {
+		28D1DE0C227FCFAF004CB494 /* [Format] Run SwiftFormat */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -335,13 +353,50 @@
 			);
 			inputPaths = (
 			);
+			name = "[Format] Run SwiftFormat";
 			outputFileListPaths = (
 			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nbuildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"${INFOPLIST_FILE}\")\nbuildNumber=$(($buildNumber + 1))\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"${INFOPLIST_FILE}\"\n\n";
+			shellScript = "if which swiftformat >/dev/null; then\n  swiftformat .\nelse\n  echo \"warning: SwiftFormat not installed, download from https://github.com/nicklockwood/SwiftFormat\" >&2\nfi\n";
+		};
+		28D1DE19227FD375004CB494 /* Increase Build Number */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Increase Build Number";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e\nset -u\nset -o pipefail\n\nfiles_have_changed() {\n  test -n \"$(find \"${1}\" ! -path '*xcuserdata*' ! -path '*.git' ! -path '*.git/*' -newer \"${2}\")\"\n}\n\nif files_have_changed \"${PROJECT_DIR}\" \"${INFOPLIST_FILE}\"; then\n  agvtool next-version -all\nfi\n";
+		};
+		28D1DE1A227FD39F004CB494 /* Sync Version Numbers */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Sync Version Numbers";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e\nset -u\nset -o pipefail\n\nagvtool new-marketing-version \"$(agvtool what-marketing-version -terse1)\"\n";
 		};
 		F03A8DF01FFB9D4C0034DC27 /* [Lint] Run SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -543,6 +598,7 @@
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 157;
 				DEVELOPMENT_TEAM = KJ5F4KTDFH;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -550,13 +606,14 @@
 					"$(PROJECT_DIR)/Carthage/Build",
 					"$(PROJECT_DIR)",
 				);
-				INFOPLIST_FILE = "$(SRCROOT)/MonitorControl/Info.plist";
+				INFOPLIST_FILE = MonitorControl/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = me.guillaumeb.MonitorControl;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "MonitorControl/Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
+				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
 		};
@@ -567,6 +624,7 @@
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 157;
 				DEVELOPMENT_TEAM = KJ5F4KTDFH;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -574,13 +632,14 @@
 					"$(PROJECT_DIR)/Carthage/Build",
 					"$(PROJECT_DIR)",
 				);
-				INFOPLIST_FILE = "$(SRCROOT)/MonitorControl/Info.plist";
+				INFOPLIST_FILE = MonitorControl/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = me.guillaumeb.MonitorControl;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "MonitorControl/Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
+				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
 		};
@@ -595,6 +654,7 @@
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 157;
 				DEVELOPMENT_TEAM = KJ5F4KTDFH;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = MonitorControlHelper/Info.plist;
@@ -603,6 +663,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
+				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
 		};
@@ -617,6 +678,7 @@
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 157;
 				DEVELOPMENT_TEAM = KJ5F4KTDFH;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = MonitorControlHelper/Info.plist;
@@ -625,6 +687,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
+				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
 		};
