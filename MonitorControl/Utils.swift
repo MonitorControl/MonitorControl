@@ -36,7 +36,7 @@ class Utils: NSObject {
       var minReplyDelay = 10
 
       // Whitelist for displays which need a longer delay.
-      if display.name == "LG ULTRAWIDE" {
+      if display.identifier.vendorNumber == 7789, display.identifier.modelNumber == 30460 {
         minReplyDelay = 30 * kMillisecondScale
       }
 
