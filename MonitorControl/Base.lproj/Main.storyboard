@@ -302,8 +302,8 @@
                                 </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="tMg-qE-zTW">
-                                <rect key="frame" x="18" y="122" width="50" height="17"/>
-                                <textFieldCell key="cell" lineBreakMode="clipping" title="Version" id="mBs-6m-13Q">
+                                <rect key="frame" x="18" y="122" width="138" height="17"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="Version 0.0.0 (Build 0)" id="mBs-6m-13Q">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>

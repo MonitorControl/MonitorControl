@@ -109,9 +109,6 @@ class Utils: NSObject {
     /// Was the app launched once
     case appAlreadyLaunched
 
-    /// Does the app start at Login
-    case startAtLogin
-
     /// Does the app start when plugged to an external monitor
     case startWhenExternal
 

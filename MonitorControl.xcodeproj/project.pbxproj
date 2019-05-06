@@ -19,6 +19,7 @@
 		28D1DDEF227FB944004CB494 /* DDC.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 28D1DDED227FB944004CB494 /* DDC.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		28D1DDF0227FBD99004CB494 /* EDID+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D1DDEC227FB8F2004CB494 /* EDID+Extension.swift */; };
 		28D1DDF2227FBE71004CB494 /* NSScreen+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D1DDF1227FBE71004CB494 /* NSScreen+Extension.swift */; };
+		28D1DDF3227FC8C6004CB494 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 56754EB01D9A4016007BCDC5 /* Assets.xcassets */; };
 		56754EAF1D9A4016007BCDC5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56754EAE1D9A4016007BCDC5 /* AppDelegate.swift */; };
 		56754EB11D9A4016007BCDC5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 56754EB01D9A4016007BCDC5 /* Assets.xcassets */; };
 		56754EB41D9A4016007BCDC5 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 56754EB21D9A4016007BCDC5 /* MainMenu.xib */; };
@@ -28,7 +29,7 @@
 		F0445D3D200254FA0025AE82 /* KeysPrefsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0445D3B200254FA0025AE82 /* KeysPrefsViewController.swift */; };
 		F0445D40200259C10025AE82 /* DisplayPrefsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0445D3F200259C10025AE82 /* DisplayPrefsViewController.swift */; };
 		F0445D4D200294AB0025AE82 /* ButtonCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0445D4C200294AB0025AE82 /* ButtonCellView.swift */; };
-		F06792EA200A73460066C438 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F06792E9200A73460066C438 /* AppDelegate.swift */; };
+		F06792EA200A73460066C438 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = F06792E9200A73460066C438 /* main.swift */; };
 		F06792F6200A745F0066C438 /* MonitorControlHelper.app in [Login] Copy Helper to start at Login */ = {isa = PBXBuildFile; fileRef = F06792E7200A73460066C438 /* MonitorControlHelper.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		F091C9B31F6EA6110096FD65 /* SliderHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F091C9B21F6EA6110096FD65 /* SliderHandler.swift */; };
 		F091C9B81F6EA79B0096FD65 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = F091C9B71F6EA79B0096FD65 /* Utils.swift */; };
@@ -100,7 +101,7 @@
 		F0445D4B2002856C0025AE82 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/MainMenu.strings; sourceTree = "<group>"; };
 		F0445D4C200294AB0025AE82 /* ButtonCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonCellView.swift; sourceTree = "<group>"; };
 		F06792E7200A73460066C438 /* MonitorControlHelper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MonitorControlHelper.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		F06792E9200A73460066C438 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		F06792E9200A73460066C438 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		F06792F0200A73470066C438 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F06792F1200A73470066C438 /* MonitorControlHelper.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MonitorControlHelper.entitlements; sourceTree = "<group>"; };
 		F091C9B21F6EA6110096FD65 /* SliderHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderHandler.swift; sourceTree = "<group>"; };
@@ -208,8 +209,8 @@
 		F06792E8200A73460066C438 /* MonitorControlHelper */ = {
 			isa = PBXGroup;
 			children = (
-				F06792E9200A73460066C438 /* AppDelegate.swift */,
 				F06792F0200A73470066C438 /* Info.plist */,
+				F06792E9200A73460066C438 /* main.swift */,
 				F06792F1200A73470066C438 /* MonitorControlHelper.entitlements */,
 			);
 			path = MonitorControlHelper;
@@ -318,6 +319,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				28D1DDF3227FC8C6004CB494 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -380,7 +382,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F06792EA200A73460066C438 /* AppDelegate.swift in Sources */,
+				F06792EA200A73460066C438 /* main.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

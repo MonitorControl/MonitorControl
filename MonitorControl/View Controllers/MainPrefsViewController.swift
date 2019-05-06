@@ -13,23 +13,25 @@ class MainPrefsViewController: NSViewController, MASPreferencesViewController {
   @IBOutlet var showContrastSlider: NSButton!
   @IBOutlet var lowerContrast: NSButton!
 
+  @available(macOS, deprecated: 10.10)
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    self.startAtLogin.state = self.prefs.bool(forKey: Utils.PrefKeys.startAtLogin.rawValue) ? .on : .off
+    let startAtLogin = (SMCopyAllJobDictionaries(kSMDomainUserLaunchd).takeRetainedValue() as? [[String: AnyObject]])?.first { $0["Label"] as? String == "\(Bundle.main.bundleIdentifier!)Helper" }?["OnDemand"] as? Bool ?? false
+
+    self.startAtLogin.state = startAtLogin ? .on : .off
     self.showContrastSlider.state = self.prefs.bool(forKey: Utils.PrefKeys.showContrast.rawValue) ? .on : .off
     self.lowerContrast.state = self.prefs.bool(forKey: Utils.PrefKeys.lowerContrast.rawValue) ? .on : .off
     self.setVersionNumber()
   }
 
   @IBAction func startAtLoginClicked(_ sender: NSButton) {
-    let identifier = "me.guillaumeb.MonitorControlHelper" as CFString
+    let identifier = "\(Bundle.main.bundleIdentifier!)Helper" as CFString
+
     switch sender.state {
     case .on:
-      self.prefs.set(true, forKey: Utils.PrefKeys.startAtLogin.rawValue)
       SMLoginItemSetEnabled(identifier, true)
     case .off:
-      self.prefs.set(false, forKey: Utils.PrefKeys.startAtLogin.rawValue)
       SMLoginItemSetEnabled(identifier, false)
     default: break
     }
