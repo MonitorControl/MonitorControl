@@ -14,8 +14,9 @@
 		28D1DDE8227FB7D0004CB494 /* AMCoreAudio.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 28D1DDE3227FB7D0004CB494 /* AMCoreAudio.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		28D1DDE9227FB7D0004CB494 /* MASPreferences.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28D1DDE4227FB7D0004CB494 /* MASPreferences.framework */; };
 		28D1DDEA227FB7D0004CB494 /* MASPreferences.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 28D1DDE4227FB7D0004CB494 /* MASPreferences.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		55359E391E2737EC002671BC /* DDC.c in Sources */ = {isa = PBXBuildFile; fileRef = 55359E331E2737EC002671BC /* DDC.c */; };
-		55359E3B1E2737EC002671BC /* ddcctl.sh in Resources */ = {isa = PBXBuildFile; fileRef = 55359E361E2737EC002671BC /* ddcctl.sh */; };
+		28D1DDEE227FB944004CB494 /* DDC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28D1DDED227FB944004CB494 /* DDC.framework */; };
+		28D1DDEF227FB944004CB494 /* DDC.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 28D1DDED227FB944004CB494 /* DDC.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		28D1DDF0227FBD99004CB494 /* EDID+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D1DDEC227FB8F2004CB494 /* EDID+Extension.swift */; };
 		56754EAF1D9A4016007BCDC5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56754EAE1D9A4016007BCDC5 /* AppDelegate.swift */; };
 		56754EB11D9A4016007BCDC5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 56754EB01D9A4016007BCDC5 /* Assets.xcassets */; };
 		56754EB41D9A4016007BCDC5 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 56754EB21D9A4016007BCDC5 /* MainMenu.xib */; };
@@ -50,6 +51,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				28D1DDE8227FB7D0004CB494 /* AMCoreAudio.framework in Embed Frameworks */,
+				28D1DDEF227FB944004CB494 /* DDC.framework in Embed Frameworks */,
 				28D1DDEA227FB7D0004CB494 /* MASPreferences.framework in Embed Frameworks */,
 				28D1DDE6227FB7D0004CB494 /* MediaKeyTap.framework in Embed Frameworks */,
 			);
@@ -76,12 +78,8 @@
 		28D1DDE2227FB7D0004CB494 /* MediaKeyTap.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaKeyTap.framework; path = Carthage/Build/Mac/MediaKeyTap.framework; sourceTree = "<group>"; };
 		28D1DDE3227FB7D0004CB494 /* AMCoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMCoreAudio.framework; path = Carthage/Build/Mac/AMCoreAudio.framework; sourceTree = "<group>"; };
 		28D1DDE4227FB7D0004CB494 /* MASPreferences.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MASPreferences.framework; path = Carthage/Build/Mac/MASPreferences.framework; sourceTree = "<group>"; };
-		55359E331E2737EC002671BC /* DDC.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = DDC.c; sourceTree = "<group>"; };
-		55359E341E2737EC002671BC /* DDC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDC.h; sourceTree = "<group>"; };
-		55359E351E2737EC002671BC /* ddcctl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ddcctl.m; sourceTree = "<group>"; };
-		55359E361E2737EC002671BC /* ddcctl.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = ddcctl.sh; sourceTree = "<group>"; };
-		55359E371E2737EC002671BC /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
-		55359E381E2737EC002671BC /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		28D1DDEC227FB8F2004CB494 /* EDID+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EDID+Extension.swift"; sourceTree = "<group>"; };
+		28D1DDED227FB944004CB494 /* DDC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DDC.framework; path = Carthage/Build/Mac/DDC.framework; sourceTree = "<group>"; };
 		56754EAB1D9A4016007BCDC5 /* MonitorControl.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MonitorControl.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		56754EAE1D9A4016007BCDC5 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AppDelegate.swift; sourceTree = "<group>"; };
 		56754EB01D9A4016007BCDC5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -115,6 +113,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				28D1DDE7227FB7D0004CB494 /* AMCoreAudio.framework in Frameworks */,
+				28D1DDEE227FB944004CB494 /* DDC.framework in Frameworks */,
 				28D1DDE9227FB7D0004CB494 /* MASPreferences.framework in Frameworks */,
 				28D1DDE5227FB7D0004CB494 /* MediaKeyTap.framework in Frameworks */,
 				28D1DDD8227FB7A4004CB494 /* OSD.framework in Frameworks */,
@@ -135,6 +134,7 @@
 			isa = PBXGroup;
 			children = (
 				28D1DDE3227FB7D0004CB494 /* AMCoreAudio.framework */,
+				28D1DDED227FB944004CB494 /* DDC.framework */,
 				28D1DDE4227FB7D0004CB494 /* MASPreferences.framework */,
 				28D1DDE2227FB7D0004CB494 /* MediaKeyTap.framework */,
 				F0A987D61F77B290009B603D /* OSD.framework */,
@@ -142,23 +142,18 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		55359E321E2737EC002671BC /* ddcctl */ = {
+		28D1DDEB227FB8E9004CB494 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				55359E331E2737EC002671BC /* DDC.c */,
-				55359E341E2737EC002671BC /* DDC.h */,
-				55359E351E2737EC002671BC /* ddcctl.m */,
-				55359E361E2737EC002671BC /* ddcctl.sh */,
-				55359E371E2737EC002671BC /* Makefile */,
-				55359E381E2737EC002671BC /* README.md */,
+				28D1DDEC227FB8F2004CB494 /* EDID+Extension.swift */,
 			);
-			path = ddcctl;
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		56754EA21D9A4016007BCDC5 = {
 			isa = PBXGroup;
 			children = (
-				55359E321E2737EC002671BC /* ddcctl */,
+				28D1DDEB227FB8E9004CB494 /* Extensions */,
 				28D1DDD1227FB759004CB494 /* Frameworks */,
 				56754EAD1D9A4016007BCDC5 /* MonitorControl */,
 				F06792E8200A73460066C438 /* MonitorControlHelper */,
@@ -307,7 +302,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				56754EB11D9A4016007BCDC5 /* Assets.xcassets in Resources */,
-				55359E3B1E2737EC002671BC /* ddcctl.sh in Resources */,
 				F0EB972F1F6ED7C800686D2A /* Localizable.strings in Resources */,
 				6C778D5A21E91060000A4D5F /* Main.storyboard in Resources */,
 				56754EB41D9A4016007BCDC5 /* MainMenu.xib in Resources */,
@@ -364,9 +358,9 @@
 			files = (
 				56754EAF1D9A4016007BCDC5 /* AppDelegate.swift in Sources */,
 				F0445D4D200294AB0025AE82 /* ButtonCellView.swift in Sources */,
-				55359E391E2737EC002671BC /* DDC.c in Sources */,
 				F03A8DF21FFBAA6F0034DC27 /* Display.swift in Sources */,
 				F0445D40200259C10025AE82 /* DisplayPrefsViewController.swift in Sources */,
+				28D1DDF0227FBD99004CB494 /* EDID+Extension.swift in Sources */,
 				F0445D3D200254FA0025AE82 /* KeysPrefsViewController.swift in Sources */,
 				F0445D3820023E710025AE82 /* MainPrefsViewController.swift in Sources */,
 				F091C9B31F6EA6110096FD65 /* SliderHandler.swift in Sources */,
@@ -471,7 +465,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
@@ -525,7 +519,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";

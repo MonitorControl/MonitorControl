@@ -1,4 +1,5 @@
 import Cocoa
+import DDC
 import MASPreferences
 
 class DisplayPrefsViewController: NSViewController, MASPreferencesViewController, NSTableViewDataSource, NSTableViewDelegate {
@@ -46,22 +47,21 @@ class DisplayPrefsViewController: NSViewController, MASPreferencesViewController
       if let id = screen.deviceDescription[NSDeviceDescriptionKey("NSScreenNumber")] as? CGDirectDisplayID {
         // Is Built In Screen (e.g. MBP/iMac Screen)
         if CGDisplayIsBuiltin(id) != 0 {
-          let display = Display(id, name: "Mac built-in Display", serial: "", isEnabled: false)
+          let display = Display(id, name: "Mac built-in Display", isEnabled: false)
           displays.append(display)
           continue
         }
 
-        // Does screen support EDID ?
-        var edid = EDID()
-        if !EDIDTest(id, &edid) {
+        let ddc = DDC(for: id)
+
+        guard let edid = ddc?.edid() else {
           continue
         }
 
         let name = Utils.getDisplayName(forEdid: edid)
-        let serial = Utils.getDisplaySerial(forEdid: edid)
         let isEnabled = (prefs.object(forKey: "\(id)-state") as? Bool) ?? true
 
-        let display = Display(id, name: name, serial: serial, isEnabled: isEnabled)
+        let display = Display(id, name: name, isEnabled: isEnabled)
         displays.append(display)
       }
     }

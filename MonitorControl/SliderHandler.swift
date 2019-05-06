@@ -1,13 +1,14 @@
 import Cocoa
+import DDC
 
 class SliderHandler {
   var slider: NSSlider?
   var display: Display
-  var command: Int32 = 0
+  let cmd: DDC.Command
 
-  public init(display: Display, command: Int32) {
+  public init(display: Display, command: DDC.Command) {
     self.display = display
-    self.command = command
+    self.cmd = command
   }
 
   @objc func valueChanged(slider: NSSlider) {
@@ -22,7 +23,7 @@ class SliderHandler {
       slider.integerValue = value
     }
 
-    Utils.sendCommand(self.command, toMonitor: self.display.identifier, withValue: value)
-    self.display.saveValue(value, for: self.command)
+    _ = self.display.ddc?.write(command: self.cmd, value: UInt8(value))
+    self.display.saveValue(value, for: self.cmd)
   }
 }

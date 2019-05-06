@@ -1,77 +1,8 @@
 import Cocoa
+import DDC
 
 class Utils: NSObject {
-  private static func printCommandValue(_ command: Int32, _ value: Int) {
-    let cmdString: (Int32) -> String? = {
-      switch $0 {
-      case BRIGHTNESS:
-        return "Brightness"
-      case CONTRAST:
-        return "Contrast"
-      case AUDIO_SPEAKER_VOLUME:
-        return "Volume"
-      default:
-        return nil
-      }
-    }
-
-    print("\(cmdString(command) ?? "N/A") value: \(value)")
-  }
-
-  // MARK: - DDCCTL
-
-  /// Send command to ddcctl
-  ///
-  /// - Parameters:
-  ///   - command: The command to send
-  ///   - monitor: The id of the Monitor to send the command to
-  ///   - value: the value of the command
-  static func sendCommand(_ command: Int32, toMonitor monitor: CGDirectDisplayID, withValue value: Int) {
-    var wrcmd = DDCWriteCommand(control_id: UInt8(command), new_value: UInt8(value))
-    DDCWrite(monitor, &wrcmd)
-
-    #if DEBUG
-      self.printCommandValue(command, value)
-    #endif
-  }
-
-  /// Get current value of ddcctl command
-  ///
-  /// - Parameters:
-  ///   - command: The command to send
-  ///   - monitor: The id of the monitor to send the command to
-  /// - Returns: the value of the command
-  static func getCommand(_ command: Int32, fromMonitor monitor: CGDirectDisplayID) -> Int? {
-    var readCmd = DDCReadCommand()
-    readCmd.control_id = UInt8(command)
-    readCmd.max_value = 0
-    readCmd.current_value = 0
-    DDCRead(monitor, &readCmd)
-
-    #if DEBUG
-      self.printCommandValue(command, Int(readCmd.current_value))
-    #endif
-
-    return readCmd.success ? Int(readCmd.current_value) : nil
-  }
-
   // MARK: - Menu
-
-  /// Create a label
-  ///
-  /// - Parameters:
-  ///   - text: The text of the label
-  ///   - frame: The frame of the label
-  /// - Returns: An `NSTextField` label
-  static func makeLabel(text: String, frame: NSRect) -> NSTextField {
-    let label = NSTextField(frame: frame)
-    label.stringValue = text
-    label.isBordered = false
-    label.isBezeled = false
-    label.isEditable = false
-    label.drawsBackground = false
-    return label
-  }
 
   /// Create a slider and add it to the menu
   ///
@@ -81,10 +12,17 @@ class Utils: NSObject {
   ///   - command: Command (Brightness/Volume/...)
   ///   - title: Title of the slider
   /// - Returns: An `NSSlider` slider
-  static func addSliderMenuItem(toMenu menu: NSMenu, forDisplay display: Display, command: Int32, title: String) -> SliderHandler {
+  static func addSliderMenuItem(toMenu menu: NSMenu, forDisplay display: Display, command: DDC.Command, title: String) -> SliderHandler {
     let item = NSMenuItem()
     let view = NSView(frame: NSRect(x: 0, y: 5, width: 250, height: 40))
-    let label = Utils.makeLabel(text: title, frame: NSRect(x: 20, y: 19, width: 130, height: 20))
+
+    let label = NSTextField(frame: NSRect(x: 20, y: 19, width: 130, height: 20))
+    label.stringValue = title
+    label.isBordered = false
+    label.isBezeled = false
+    label.isEditable = false
+    label.drawsBackground = false
+
     let handler = SliderHandler(display: display, command: command)
     let slider = NSSlider(frame: NSRect(x: 20, y: 0, width: 200, height: 19))
     slider.target = handler
@@ -102,18 +40,23 @@ class Utils: NSObject {
     menu.insertItem(NSMenuItem.separator(), at: 1)
 
     DispatchQueue.global(qos: .background).async {
-      var val: Int?
+      var minReplyDelay = 10
 
-      if let res = getCommand(command, fromMonitor: display.identifier) {
-        val = res
+      // Whitelist for displays which need a longer delay.
+      if display.name == "LG ULTRAWIDE" {
+        minReplyDelay = 30 * kMillisecondScale
       }
 
-      if let val = val {
-        display.saveValue(val, for: command)
+      guard let (currentValue, maxValue) = display.ddc?.read(command: command, tries: 1000, minReplyDelay: UInt64(minReplyDelay)) else {
+        return
+      }
 
-        DispatchQueue.main.async {
-          slider.integerValue = val
-        }
+      let value = Int(currentValue > maxValue ? maxValue : currentValue)
+
+      display.saveValue(value, for: command)
+
+      DispatchQueue.main.async {
+        slider.integerValue = value
       }
     }
     return handler
@@ -140,56 +83,12 @@ class Utils: NSObject {
 
   // MARK: - Display Infos
 
-  /// Get the descriptor text
-  ///
-  /// - Parameter descriptor: the descriptor
-  /// - Returns: a string
-  static func getEdidString(_ descriptor: descriptor) -> String {
-    var result = ""
-    for (_, bitChar) in Mirror(reflecting: descriptor.text.data).children {
-      if let bitChar = bitChar as? Int8 {
-        let char = Character(UnicodeScalar(UInt8(bitPattern: bitChar)))
-        if char == "\0" || char == "\n" {
-          break
-        }
-        result.append(char)
-      }
-    }
-    return result
-  }
-
-  /// Get the descriptors of a display from the Edid
-  ///
-  /// - Parameters:
-  ///   - edid: the EDID of a display
-  ///   - type: the type of descriptor
-  /// - Returns: a string if type of descriptor is found
-  static func getDescriptorString(_ edid: EDID, _ type: UInt8) -> String? {
-    for (_, descriptor) in Mirror(reflecting: edid.descriptors).children {
-      if let descriptor = descriptor as? descriptor {
-        if descriptor.text.type == UInt8(type) {
-          return self.getEdidString(descriptor)
-        }
-      }
-    }
-
-    return nil
-  }
-
   /// Get the name of a display
   ///
   /// - Parameter edid: the EDID of a display
   /// - Returns: a string
   static func getDisplayName(forEdid edid: EDID) -> String {
-    return self.getDescriptorString(edid, 0xFC) ?? NSLocalizedString("Display", comment: "")
-  }
-
-  /// Get the serial of a display
-  ///
-  /// - Parameter edid: the EDID of a display
-  /// - Returns: a string
-  static func getDisplaySerial(forEdid edid: EDID) -> String {
-    return self.getDescriptorString(edid, 0xFF) ?? NSLocalizedString("Unknown", comment: "")
+    return edid.displayName() ?? NSLocalizedString("Unknown", comment: "")
   }
 
   /// Get the main display from a list of display
