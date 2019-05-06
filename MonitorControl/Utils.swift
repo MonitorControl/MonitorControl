@@ -14,30 +14,23 @@ class Utils: NSObject {
   /// - Returns: An `NSSlider` slider
   static func addSliderMenuItem(toMenu menu: NSMenu, forDisplay display: Display, command: DDC.Command, title: String) -> SliderHandler {
     let item = NSMenuItem()
-    let view = NSView(frame: NSRect(x: 0, y: 5, width: 250, height: 40))
-
-    let label = NSTextField(frame: NSRect(x: 20, y: 19, width: 130, height: 20))
-    label.stringValue = title
-    label.isBordered = false
-    label.isBezeled = false
-    label.isEditable = false
-    label.drawsBackground = false
 
     let handler = SliderHandler(display: display, command: command)
-    let slider = NSSlider(frame: NSRect(x: 20, y: 0, width: 200, height: 19))
-    slider.target = handler
-    slider.minValue = 0
-    slider.maxValue = 100
-    slider.action = #selector(SliderHandler.valueChanged)
+
+    let slider = NSSlider(value: 0, minValue: 0, maxValue: 100, target: handler, action: #selector(SliderHandler.valueChanged))
+    slider.isEnabled = false
+    slider.frame.size.width = 180
+    slider.frame.origin = NSPoint(x: 20, y: 5)
+
     handler.slider = slider
 
-    view.addSubview(label)
+    let view = NSView(frame: NSRect(x: 0, y: 0, width: slider.frame.width + 30, height: slider.frame.height + 10))
     view.addSubview(slider)
 
     item.view = view
 
     menu.insertItem(item, at: 0)
-    menu.insertItem(NSMenuItem.separator(), at: 1)
+    menu.insertItem(withTitle: title, action: nil, keyEquivalent: "", at: 0)
 
     DispatchQueue.global(qos: .background).async {
       var minReplyDelay = 10
@@ -45,6 +38,12 @@ class Utils: NSObject {
       // Whitelist for displays which need a longer delay.
       if display.name == "LG ULTRAWIDE" {
         minReplyDelay = 30 * kMillisecondScale
+      }
+
+      defer {
+        DispatchQueue.main.async {
+          slider.isEnabled = true
+        }
       }
 
       guard let (currentValue, maxValue) = display.ddc?.read(command: command, tries: 1000, minReplyDelay: UInt64(minReplyDelay)) else {
