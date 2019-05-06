@@ -2,4 +2,4 @@
 --ranges no-space
 --self insert
 --exponentcase lowercase
---exclude Pods
+--exclude Carthage

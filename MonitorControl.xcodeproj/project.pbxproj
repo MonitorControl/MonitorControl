@@ -7,13 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		28D1DDD8227FB7A4004CB494 /* OSD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F0A987D61F77B290009B603D /* OSD.framework */; };
+		28D1DDE5227FB7D0004CB494 /* MediaKeyTap.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28D1DDE2227FB7D0004CB494 /* MediaKeyTap.framework */; };
+		28D1DDE6227FB7D0004CB494 /* MediaKeyTap.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 28D1DDE2227FB7D0004CB494 /* MediaKeyTap.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		28D1DDE7227FB7D0004CB494 /* AMCoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28D1DDE3227FB7D0004CB494 /* AMCoreAudio.framework */; };
+		28D1DDE8227FB7D0004CB494 /* AMCoreAudio.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 28D1DDE3227FB7D0004CB494 /* AMCoreAudio.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		28D1DDE9227FB7D0004CB494 /* MASPreferences.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28D1DDE4227FB7D0004CB494 /* MASPreferences.framework */; };
+		28D1DDEA227FB7D0004CB494 /* MASPreferences.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 28D1DDE4227FB7D0004CB494 /* MASPreferences.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		55359E391E2737EC002671BC /* DDC.c in Sources */ = {isa = PBXBuildFile; fileRef = 55359E331E2737EC002671BC /* DDC.c */; };
 		55359E3B1E2737EC002671BC /* ddcctl.sh in Resources */ = {isa = PBXBuildFile; fileRef = 55359E361E2737EC002671BC /* ddcctl.sh */; };
 		56754EAF1D9A4016007BCDC5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56754EAE1D9A4016007BCDC5 /* AppDelegate.swift */; };
 		56754EB11D9A4016007BCDC5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 56754EB01D9A4016007BCDC5 /* Assets.xcassets */; };
 		56754EB41D9A4016007BCDC5 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 56754EB21D9A4016007BCDC5 /* MainMenu.xib */; };
 		6C778D5A21E91060000A4D5F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6C778D5821E91060000A4D5F /* Main.storyboard */; };
-		9A19D3B73485870616B6D4E0 /* Pods_MonitorControl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 398F482D5C8816B29F16AAEB /* Pods_MonitorControl.framework */; };
 		F03A8DF21FFBAA6F0034DC27 /* Display.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03A8DF11FFBAA6F0034DC27 /* Display.swift */; };
 		F0445D3820023E710025AE82 /* MainPrefsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0445D3720023E710025AE82 /* MainPrefsViewController.swift */; };
 		F0445D3D200254FA0025AE82 /* KeysPrefsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0445D3B200254FA0025AE82 /* KeysPrefsViewController.swift */; };
@@ -23,11 +29,33 @@
 		F06792F6200A745F0066C438 /* MonitorControlHelper.app in [Login] Copy Helper to start at Login */ = {isa = PBXBuildFile; fileRef = F06792E7200A73460066C438 /* MonitorControlHelper.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		F091C9B31F6EA6110096FD65 /* SliderHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F091C9B21F6EA6110096FD65 /* SliderHandler.swift */; };
 		F091C9B81F6EA79B0096FD65 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = F091C9B71F6EA79B0096FD65 /* Utils.swift */; };
-		F0A987E81F77B40E009B603D /* OSD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F0A987D61F77B290009B603D /* OSD.framework */; };
 		F0EB972F1F6ED7C800686D2A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F091C9C11F6EB8660096FD65 /* Localizable.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		28D1DDAE227FB5C8004CB494 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = Carthage/Build/Mac;
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		28D1DDBE227FB668004CB494 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				28D1DDE8227FB7D0004CB494 /* AMCoreAudio.framework in Embed Frameworks */,
+				28D1DDEA227FB7D0004CB494 /* MASPreferences.framework in Embed Frameworks */,
+				28D1DDE6227FB7D0004CB494 /* MediaKeyTap.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F06792F5200A73FA0066C438 /* [Login] Copy Helper to start at Login */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -42,14 +70,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		28D1DD78227FA927004CB494 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/MainMenu.strings; sourceTree = "<group>"; };
 		28D1DD79227FA927004CB494 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Main.strings; sourceTree = "<group>"; };
 		28D1DD7A227FA927004CB494 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/MainMenu.strings; sourceTree = "<group>"; };
-		28D1DD7B227FA927004CB494 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		28D1DD7C227FA939004CB494 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
-		31E16D90527EBD3F8A12BE0B /* Pods-MonitorControl.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MonitorControl.release.xcconfig"; path = "Pods/Target Support Files/Pods-MonitorControl/Pods-MonitorControl.release.xcconfig"; sourceTree = "<group>"; };
-		398F482D5C8816B29F16AAEB /* Pods_MonitorControl.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MonitorControl.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		42B61ABC1D7907131330228A /* Pods-MonitorControl.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MonitorControl.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MonitorControl/Pods-MonitorControl.debug.xcconfig"; sourceTree = "<group>"; };
+		28D1DDE2227FB7D0004CB494 /* MediaKeyTap.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaKeyTap.framework; path = Carthage/Build/Mac/MediaKeyTap.framework; sourceTree = "<group>"; };
+		28D1DDE3227FB7D0004CB494 /* AMCoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMCoreAudio.framework; path = Carthage/Build/Mac/AMCoreAudio.framework; sourceTree = "<group>"; };
+		28D1DDE4227FB7D0004CB494 /* MASPreferences.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MASPreferences.framework; path = Carthage/Build/Mac/MASPreferences.framework; sourceTree = "<group>"; };
 		55359E331E2737EC002671BC /* DDC.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = DDC.c; sourceTree = "<group>"; };
 		55359E341E2737EC002671BC /* DDC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDC.h; sourceTree = "<group>"; };
 		55359E351E2737EC002671BC /* ddcctl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ddcctl.m; sourceTree = "<group>"; };
@@ -81,17 +107,6 @@
 		F091C9C31F6EB8720096FD65 /* fr */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; lineEnding = 0; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F091C9C41F6EBA5A0096FD65 /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
 		F0A987D61F77B290009B603D /* OSD.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = OSD.framework; sourceTree = "<group>"; };
-		F0A987DA1F77B404009B603D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MainMenu.strings; sourceTree = "<group>"; };
-		F0A987DC1F77B404009B603D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		F0A987DD1F77B404009B603D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		F0A987DF1F77B404009B603D /* SliderHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderHandler.swift; sourceTree = "<group>"; };
-		F0A987E11F77B404009B603D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
-		F0A987E21F77B404009B603D /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
-		F0A987E31F77B404009B603D /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/MainMenu.strings; sourceTree = "<group>"; };
-		F0A987E41F77B404009B603D /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
-		F0A987E51F77B404009B603D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		F0A987E61F77B404009B603D /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
-		F0A987E71F77B404009B603D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,8 +114,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F0A987E81F77B40E009B603D /* OSD.framework in Frameworks */,
-				9A19D3B73485870616B6D4E0 /* Pods_MonitorControl.framework in Frameworks */,
+				28D1DDE7227FB7D0004CB494 /* AMCoreAudio.framework in Frameworks */,
+				28D1DDE9227FB7D0004CB494 /* MASPreferences.framework in Frameworks */,
+				28D1DDE5227FB7D0004CB494 /* MediaKeyTap.framework in Frameworks */,
+				28D1DDD8227FB7A4004CB494 /* OSD.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -114,6 +131,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		28D1DDD1227FB759004CB494 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				28D1DDE3227FB7D0004CB494 /* AMCoreAudio.framework */,
+				28D1DDE4227FB7D0004CB494 /* MASPreferences.framework */,
+				28D1DDE2227FB7D0004CB494 /* MediaKeyTap.framework */,
+				F0A987D61F77B290009B603D /* OSD.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		55359E321E2737EC002671BC /* ddcctl */ = {
 			isa = PBXGroup;
 			children = (
@@ -131,11 +159,9 @@
 			isa = PBXGroup;
 			children = (
 				55359E321E2737EC002671BC /* ddcctl */,
-				F0A987D71F77B404009B603D /* Frameworks */,
+				28D1DDD1227FB759004CB494 /* Frameworks */,
 				56754EAD1D9A4016007BCDC5 /* MonitorControl */,
 				F06792E8200A73460066C438 /* MonitorControlHelper */,
-				F0A987D61F77B290009B603D /* OSD.framework */,
-				EFFC2F3E35BEC9ACFA754137 /* Pods */,
 				56754EAC1D9A4016007BCDC5 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -168,15 +194,6 @@
 			path = MonitorControl;
 			sourceTree = "<group>";
 		};
-		EFFC2F3E35BEC9ACFA754137 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				42B61ABC1D7907131330228A /* Pods-MonitorControl.debug.xcconfig */,
-				31E16D90527EBD3F8A12BE0B /* Pods-MonitorControl.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 		F0445D3620023D5B0025AE82 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -197,39 +214,6 @@
 			path = MonitorControlHelper;
 			sourceTree = "<group>";
 		};
-		F0A987D71F77B404009B603D /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				F0A987D81F77B404009B603D /* MonitorControl */,
-				398F482D5C8816B29F16AAEB /* Pods_MonitorControl.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		F0A987D81F77B404009B603D /* MonitorControl */ = {
-			isa = PBXGroup;
-			children = (
-				F0A987E51F77B404009B603D /* AppDelegate.swift */,
-				F0A987DD1F77B404009B603D /* Assets.xcassets */,
-				F0A987E61F77B404009B603D /* Bridging-Header.h */,
-				F0A987E71F77B404009B603D /* Info.plist */,
-				F0A987DB1F77B404009B603D /* Localizable.strings */,
-				F0A987D91F77B404009B603D /* MainMenu.strings */,
-				F0A987E01F77B404009B603D /* MainMenu.xib */,
-				F0A987DE1F77B404009B603D /* Objects */,
-				F0A987E21F77B404009B603D /* Utils.swift */,
-			);
-			path = MonitorControl;
-			sourceTree = "<group>";
-		};
-		F0A987DE1F77B404009B603D /* Objects */ = {
-			isa = PBXGroup;
-			children = (
-				F0A987DF1F77B404009B603D /* SliderHandler.swift */,
-			);
-			path = Objects;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -237,14 +221,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 56754EB81D9A4016007BCDC5 /* Build configuration list for PBXNativeTarget "MonitorControl" */;
 			buildPhases = (
-				C0EF20D28FC7408CBE89A686 /* [CP] Check Pods Manifest.lock */,
 				F03A8DF01FFB9D4C0034DC27 /* [Lint] Run SwiftLint */,
 				56754EA71D9A4016007BCDC5 /* Sources */,
 				56754EA81D9A4016007BCDC5 /* Frameworks */,
 				56754EA91D9A4016007BCDC5 /* Resources */,
-				9DD5968596EFAF0E2EB56496 /* [CP] Embed Pods Frameworks */,
 				F06792F5200A73FA0066C438 /* [Login] Copy Helper to start at Login */,
 				6C778D4D21E90DA1000A4D5F /* ShellScript */,
+				28D1DDAE227FB5C8004CB494 /* Embed Frameworks */,
+				28D1DDBE227FB668004CB494 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -357,46 +341,6 @@
 			shellPath = /bin/sh;
 			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nbuildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"${INFOPLIST_FILE}\")\nbuildNumber=$(($buildNumber + 1))\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"${INFOPLIST_FILE}\"\n\n";
 		};
-		9DD5968596EFAF0E2EB56496 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-MonitorControl/Pods-MonitorControl-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/AMCoreAudio/AMCoreAudio.framework",
-				"${BUILT_PRODUCTS_DIR}/MASPreferences/MASPreferences.framework",
-				"${BUILT_PRODUCTS_DIR}/MediaKeyTap/MediaKeyTap.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AMCoreAudio.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MASPreferences.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MediaKeyTap.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MonitorControl/Pods-MonitorControl-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		C0EF20D28FC7408CBE89A686 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-MonitorControl-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
 		F03A8DF01FFB9D4C0034DC27 /* [Lint] Run SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -471,34 +415,6 @@
 				F091C9C31F6EB8720096FD65 /* fr */,
 			);
 			name = Localizable.strings;
-			sourceTree = "<group>";
-		};
-		F0A987D91F77B404009B603D /* MainMenu.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				F0A987DA1F77B404009B603D /* en */,
-				F0A987E31F77B404009B603D /* fr */,
-			);
-			name = MainMenu.strings;
-			sourceTree = "<group>";
-		};
-		F0A987DB1F77B404009B603D /* Localizable.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				28D1DD7B227FA927004CB494 /* de */,
-				F0A987DC1F77B404009B603D /* en */,
-				F0A987E41F77B404009B603D /* fr */,
-			);
-			name = Localizable.strings;
-			sourceTree = "<group>";
-		};
-		F0A987E01F77B404009B603D /* MainMenu.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				F0A987E11F77B404009B603D /* Base */,
-				28D1DD78227FA927004CB494 /* de */,
-			);
-			name = MainMenu.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -618,13 +534,18 @@
 		};
 		56754EB91D9A4016007BCDC5 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 42B61ABC1D7907131330228A /* Pods-MonitorControl.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = KJ5F4KTDFH;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
+					"$(PROJECT_DIR)/Carthage/Build",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = "$(SRCROOT)/MonitorControl/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = me.guillaumeb.MonitorControl;
@@ -637,13 +558,18 @@
 		};
 		56754EBA1D9A4016007BCDC5 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 31E16D90527EBD3F8A12BE0B /* Pods-MonitorControl.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = KJ5F4KTDFH;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
+					"$(PROJECT_DIR)/Carthage/Build",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = "$(SRCROOT)/MonitorControl/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = me.guillaumeb.MonitorControl;
