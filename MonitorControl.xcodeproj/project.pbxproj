@@ -17,6 +17,7 @@
 		28D1DDEE227FB944004CB494 /* DDC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28D1DDED227FB944004CB494 /* DDC.framework */; };
 		28D1DDEF227FB944004CB494 /* DDC.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 28D1DDED227FB944004CB494 /* DDC.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		28D1DDF0227FBD99004CB494 /* EDID+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D1DDEC227FB8F2004CB494 /* EDID+Extension.swift */; };
+		28D1DDF2227FBE71004CB494 /* NSScreen+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D1DDF1227FBE71004CB494 /* NSScreen+Extension.swift */; };
 		56754EAF1D9A4016007BCDC5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56754EAE1D9A4016007BCDC5 /* AppDelegate.swift */; };
 		56754EB11D9A4016007BCDC5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 56754EB01D9A4016007BCDC5 /* Assets.xcassets */; };
 		56754EB41D9A4016007BCDC5 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 56754EB21D9A4016007BCDC5 /* MainMenu.xib */; };
@@ -80,6 +81,7 @@
 		28D1DDE4227FB7D0004CB494 /* MASPreferences.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MASPreferences.framework; path = Carthage/Build/Mac/MASPreferences.framework; sourceTree = "<group>"; };
 		28D1DDEC227FB8F2004CB494 /* EDID+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EDID+Extension.swift"; sourceTree = "<group>"; };
 		28D1DDED227FB944004CB494 /* DDC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DDC.framework; path = Carthage/Build/Mac/DDC.framework; sourceTree = "<group>"; };
+		28D1DDF1227FBE71004CB494 /* NSScreen+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSScreen+Extension.swift"; sourceTree = "<group>"; };
 		56754EAB1D9A4016007BCDC5 /* MonitorControl.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MonitorControl.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		56754EAE1D9A4016007BCDC5 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AppDelegate.swift; sourceTree = "<group>"; };
 		56754EB01D9A4016007BCDC5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -146,6 +148,7 @@
 			isa = PBXGroup;
 			children = (
 				28D1DDEC227FB8F2004CB494 /* EDID+Extension.swift */,
+				28D1DDF1227FBE71004CB494 /* NSScreen+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -363,6 +366,7 @@
 				28D1DDF0227FBD99004CB494 /* EDID+Extension.swift in Sources */,
 				F0445D3D200254FA0025AE82 /* KeysPrefsViewController.swift in Sources */,
 				F0445D3820023E710025AE82 /* MainPrefsViewController.swift in Sources */,
+				28D1DDF2227FBE71004CB494 /* NSScreen+Extension.swift in Sources */,
 				F091C9B31F6EA6110096FD65 /* SliderHandler.swift in Sources */,
 				F091C9B81F6EA79B0096FD65 /* Utils.swift in Sources */,
 			);

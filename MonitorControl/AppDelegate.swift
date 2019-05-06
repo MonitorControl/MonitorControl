@@ -88,15 +88,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     self.clearDisplays()
 
     var filteredScreens = NSScreen.screens.filter { screen -> Bool in
-      if let id = screen.deviceDescription[NSDeviceDescriptionKey("NSScreenNumber")] as? CGDirectDisplayID {
-        // Is Built In Screen (e.g. MBP/iMac Screen)
-        if CGDisplayIsBuiltin(id) != 0 {
-          return false
-        }
+      let id = screen.displayID
 
-        return DDC(for: id)?.edid() != nil
+      // Is Built In Screen (e.g. MBP/iMac Screen)
+      if CGDisplayIsBuiltin(id) != 0 {
+        return false
       }
-      return false
+
+      return DDC(for: id)?.edid() != nil
     }
 
     if filteredScreens.count == 1 {
@@ -123,45 +122,44 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   ///   - screen: The screen to add
   ///   - asSubMenu: Display in a sub menu or directly in menu
   private func addScreenToMenu(screen: NSScreen, asSubMenu: Bool) {
-    if let id = screen.deviceDescription[NSDeviceDescriptionKey("NSScreenNumber")] as? CGDirectDisplayID {
-      let ddc = DDC(for: id)
+    let id = screen.displayID
+    let ddc = DDC(for: id)
 
-      if let edid = ddc?.edid() {
-        let name = Utils.getDisplayName(forEdid: edid)
+    if let edid = ddc?.edid() {
+      let name = Utils.getDisplayName(forEdid: edid)
 
-        let display = Display(id, name: name)
+      let display = Display(id, name: name)
 
-        let monitorSubMenu: NSMenu = asSubMenu ? NSMenu() : self.statusMenu
+      let monitorSubMenu: NSMenu = asSubMenu ? NSMenu() : self.statusMenu
 
-        let volumeSliderHandler = Utils.addSliderMenuItem(toMenu: monitorSubMenu,
-                                                          forDisplay: display,
-                                                          command: .audioSpeakerVolume,
-                                                          title: NSLocalizedString("Volume", comment: "Shown in menu"))
-        let brightnessSliderHandler = Utils.addSliderMenuItem(toMenu: monitorSubMenu,
-                                                              forDisplay: display,
-                                                              command: .brightness,
-                                                              title: NSLocalizedString("Brightness", comment: "Shown in menu"))
-        if prefs.bool(forKey: Utils.PrefKeys.showContrast.rawValue) {
-          let contrastSliderHandler = Utils.addSliderMenuItem(toMenu: monitorSubMenu,
-                                                              forDisplay: display,
-                                                              command: .contrast,
-                                                              title: NSLocalizedString("Contrast", comment: "Shown in menu"))
-          display.contrastSliderHandler = contrastSliderHandler
-        }
-
-        display.volumeSliderHandler = volumeSliderHandler
-        display.brightnessSliderHandler = brightnessSliderHandler
-        self.displays.append(display)
-
-        let monitorMenuItem = NSMenuItem()
-        monitorMenuItem.title = "\(name)"
-        if asSubMenu {
-          monitorMenuItem.submenu = monitorSubMenu
-        }
-
-        self.monitorItems.append(monitorMenuItem)
-        self.statusMenu.insertItem(monitorMenuItem, at: 0)
+      let volumeSliderHandler = Utils.addSliderMenuItem(toMenu: monitorSubMenu,
+                                                        forDisplay: display,
+                                                        command: .audioSpeakerVolume,
+                                                        title: NSLocalizedString("Volume", comment: "Shown in menu"))
+      let brightnessSliderHandler = Utils.addSliderMenuItem(toMenu: monitorSubMenu,
+                                                            forDisplay: display,
+                                                            command: .brightness,
+                                                            title: NSLocalizedString("Brightness", comment: "Shown in menu"))
+      if prefs.bool(forKey: Utils.PrefKeys.showContrast.rawValue) {
+        let contrastSliderHandler = Utils.addSliderMenuItem(toMenu: monitorSubMenu,
+                                                            forDisplay: display,
+                                                            command: .contrast,
+                                                            title: NSLocalizedString("Contrast", comment: "Shown in menu"))
+        display.contrastSliderHandler = contrastSliderHandler
       }
+
+      display.volumeSliderHandler = volumeSliderHandler
+      display.brightnessSliderHandler = brightnessSliderHandler
+      self.displays.append(display)
+
+      let monitorMenuItem = NSMenuItem()
+      monitorMenuItem.title = "\(name)"
+      if asSubMenu {
+        monitorMenuItem.submenu = monitorSubMenu
+      }
+
+      self.monitorItems.append(monitorMenuItem)
+      self.statusMenu.insertItem(monitorMenuItem, at: 0)
     }
   }
 

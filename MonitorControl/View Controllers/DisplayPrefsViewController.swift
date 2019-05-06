@@ -44,27 +44,28 @@ class DisplayPrefsViewController: NSViewController, MASPreferencesViewController
 
   func loadDisplayList() {
     for screen in NSScreen.screens {
-      if let id = screen.deviceDescription[NSDeviceDescriptionKey("NSScreenNumber")] as? CGDirectDisplayID {
-        // Is Built In Screen (e.g. MBP/iMac Screen)
-        if CGDisplayIsBuiltin(id) != 0 {
-          let display = Display(id, name: "Mac built-in Display", isEnabled: false)
-          displays.append(display)
-          continue
-        }
+      let id = screen.displayID
 
-        let ddc = DDC(for: id)
-
-        guard let edid = ddc?.edid() else {
-          continue
-        }
-
-        let name = Utils.getDisplayName(forEdid: edid)
-        let isEnabled = (prefs.object(forKey: "\(id)-state") as? Bool) ?? true
-
-        let display = Display(id, name: name, isEnabled: isEnabled)
-        displays.append(display)
+      // Is Built In Screen (e.g. MBP/iMac Screen)
+      if CGDisplayIsBuiltin(id) != 0 {
+        let display = Display(id, name: screen.displayName!, isEnabled: false)
+        self.displays.append(display)
+        continue
       }
+
+      let ddc = DDC(for: id)
+
+      guard let edid = ddc?.edid() else {
+        continue
+      }
+
+      let name = Utils.getDisplayName(forEdid: edid)
+      let isEnabled = (prefs.object(forKey: "\(id)-state") as? Bool) ?? true
+
+      let display = Display(id, name: name, isEnabled: isEnabled)
+      self.displays.append(display)
     }
+
     self.displayList.reloadData()
   }
 
