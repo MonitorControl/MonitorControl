@@ -85,7 +85,7 @@ You're all set ! Now open the `MonitorControl.xcodeproj` with Xcode
 
 ## Support
 - macOS Sierra (`10.12`) and up.
-- Works with monitors compatible with [@reitermarkus/DDC.swift](https://github.com/reitermarkus/DDC.swift)
+- Works with monitors controllable via [DDC](https://en.wikipedia.org/wiki/Display_Data_Channel).
 
 ## Contributors
 - [@the0neyouseek](https://github.com/the0neyouseek)
