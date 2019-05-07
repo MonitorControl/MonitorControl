@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="13771" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13771"/>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14490.70"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
@@ -13,7 +14,6 @@
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="MonitorControl" customModuleProvider="target">
             <connections>
-                <outlet property="quitClicked" destination="JTa-2I-AsI" id="pCf-S9-cfs"/>
                 <outlet property="statusMenu" destination="lCi-vw-mwp" id="iBf-iw-RcA"/>
             </connections>
         </customObject>
@@ -30,11 +30,11 @@
                 <menuItem title="Quit" id="JTa-2I-AsI">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
-                        <action selector="quitClicked:" target="Voe-Tx-rLC" id="quI-C7-yby"/>
+                        <action selector="quitClicked:" target="Voe-Tx-rLC" id="6Y0-el-CJx"/>
                     </connections>
                 </menuItem>
             </items>
-            <point key="canvasLocation" x="-348" y="-499"/>
+            <point key="canvasLocation" x="-1180" y="-1189"/>
         </menu>
     </objects>
 </document>

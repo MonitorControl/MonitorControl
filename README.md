@@ -54,16 +54,16 @@ Open [issues](https://github.com/the0neyouseek/MonitorControl/issues) if you hav
 ### Required
 
 - Xcode
-- [Cocoapods](https://cocoapods.org/)
+- [Carthage](https://github.com/Carthage/Carthage)
 - [Swiftlint](https://github.com/realm/SwiftLint)
 
 Clone the project
 ```sh
 git clone https://github.com/the0neyouseek/MonitorControl.git --recurse-submodules
 ```
-Then download the dependencies with Cocoapods
+Then download the dependencies with Carthage
 ```sh
-$ pod install
+$ carthage update --platform macOS
 ```
 
 You're all set ! Now open the `MonitorControl.xcworkspace` with Xcode
