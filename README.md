@@ -7,6 +7,13 @@ Control your external monitor brightness, contrast or volume directly from a men
 
 <br/>
 
+<!-- Language emoji -->
+<div align="center">
+    <p>Translations: :uk: :fr: :de:</p>
+</div>
+
+<br/>
+
 <!-- shields -->
 <div align="center">
     <!-- downloads -->
@@ -78,6 +85,11 @@ You're all set ! Now open the `MonitorControl.xcworkspace` with Xcode
 ## Support
 - macOS Sierra (`10.12`) and up.
 - Works with monitors compatible with [@kfix/ddcctl](https://github.com/kfix/ddcctl)
+
+## Contributors
+- [@the0neyouseek](https://github.com/the0neyouseek)
+- [@reitermarkus](https://github.com/reitermarkus)
+- [@JoniVR](https://github.com/JoniVR)
 
 ## Thanks
 - [@bluejamesbond](https://github.com/bluejamesbond/) (Original developer)

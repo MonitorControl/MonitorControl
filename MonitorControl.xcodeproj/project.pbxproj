@@ -24,21 +24,21 @@
 		28D1DE13227FD006004CB494 /* MediaKeyTap.framework.dSYM in [Carthage] Copy Framework Debug Symbols */ = {isa = PBXBuildFile; fileRef = 28D1DE0F227FD006004CB494 /* MediaKeyTap.framework.dSYM */; };
 		28D1DE14227FD006004CB494 /* AMCoreAudio.framework.dSYM in [Carthage] Copy Framework Debug Symbols */ = {isa = PBXBuildFile; fileRef = 28D1DE10227FD006004CB494 /* AMCoreAudio.framework.dSYM */; };
 		28D1DE15227FD006004CB494 /* DDC.framework.dSYM in [Carthage] Copy Framework Debug Symbols */ = {isa = PBXBuildFile; fileRef = 28D1DE11227FD006004CB494 /* DDC.framework.dSYM */; };
-		28D363812280EA6000CB8A99 /* Display+Whitelist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D363802280EA6000CB8A99 /* Display+Whitelist.swift */; };
 		56754EAF1D9A4016007BCDC5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56754EAE1D9A4016007BCDC5 /* AppDelegate.swift */; };
 		56754EB11D9A4016007BCDC5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 56754EB01D9A4016007BCDC5 /* Assets.xcassets */; };
-		56754EB41D9A4016007BCDC5 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 56754EB21D9A4016007BCDC5 /* MainMenu.xib */; };
-		6C778D5A21E91060000A4D5F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6C778D5821E91060000A4D5F /* Main.storyboard */; };
+		F01B067922822141008E64DB /* Display+Whitelist.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01B067822822141008E64DB /* Display+Whitelist.swift */; };
+		F01B0699228221B7008E64DB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F01B0680228221B6008E64DB /* Localizable.strings */; };
+		F01B069A228221B7008E64DB /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01B0683228221B6008E64DB /* Utils.swift */; };
+		F01B069E228221B7008E64DB /* ButtonCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01B068E228221B6008E64DB /* ButtonCellView.swift */; };
+		F01B069F228221B7008E64DB /* SliderHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01B068F228221B7008E64DB /* SliderHandler.swift */; };
+		F01B06A0228221B7008E64DB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F01B0690228221B7008E64DB /* Main.storyboard */; };
+		F01B06A1228221B7008E64DB /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = F01B0692228221B7008E64DB /* MainMenu.xib */; };
 		F03A8DF21FFBAA6F0034DC27 /* Display.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03A8DF11FFBAA6F0034DC27 /* Display.swift */; };
 		F0445D3820023E710025AE82 /* MainPrefsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0445D3720023E710025AE82 /* MainPrefsViewController.swift */; };
 		F0445D3D200254FA0025AE82 /* KeysPrefsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0445D3B200254FA0025AE82 /* KeysPrefsViewController.swift */; };
 		F0445D40200259C10025AE82 /* DisplayPrefsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0445D3F200259C10025AE82 /* DisplayPrefsViewController.swift */; };
-		F0445D4D200294AB0025AE82 /* ButtonCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0445D4C200294AB0025AE82 /* ButtonCellView.swift */; };
 		F06792EA200A73460066C438 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = F06792E9200A73460066C438 /* main.swift */; };
 		F06792F6200A745F0066C438 /* MonitorControlHelper.app in [Login] Copy Helper to start at Login */ = {isa = PBXBuildFile; fileRef = F06792E7200A73460066C438 /* MonitorControlHelper.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		F091C9B31F6EA6110096FD65 /* SliderHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F091C9B21F6EA6110096FD65 /* SliderHandler.swift */; };
-		F091C9B81F6EA79B0096FD65 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = F091C9B71F6EA79B0096FD65 /* Utils.swift */; };
-		F0EB972F1F6ED7C800686D2A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F091C9C11F6EB8660096FD65 /* Localizable.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -85,9 +85,6 @@
 
 /* Begin PBXFileReference section */
 		2894D9B72280B30500DF58DA /* CGDirectDisplayID+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGDirectDisplayID+Extension.swift"; sourceTree = "<group>"; };
-		28D1DD79227FA927004CB494 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Main.strings; sourceTree = "<group>"; };
-		28D1DD7A227FA927004CB494 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/MainMenu.strings; sourceTree = "<group>"; };
-		28D1DD7C227FA939004CB494 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		28D1DDE2227FB7D0004CB494 /* MediaKeyTap.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaKeyTap.framework; path = Carthage/Build/Mac/MediaKeyTap.framework; sourceTree = "<group>"; };
 		28D1DDE3227FB7D0004CB494 /* AMCoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMCoreAudio.framework; path = Carthage/Build/Mac/AMCoreAudio.framework; sourceTree = "<group>"; };
 		28D1DDE4227FB7D0004CB494 /* MASPreferences.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MASPreferences.framework; path = Carthage/Build/Mac/MASPreferences.framework; sourceTree = "<group>"; };
@@ -98,31 +95,34 @@
 		28D1DE0F227FD006004CB494 /* MediaKeyTap.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = MediaKeyTap.framework.dSYM; path = Carthage/Build/Mac/MediaKeyTap.framework.dSYM; sourceTree = "<group>"; };
 		28D1DE10227FD006004CB494 /* AMCoreAudio.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = AMCoreAudio.framework.dSYM; path = Carthage/Build/Mac/AMCoreAudio.framework.dSYM; sourceTree = "<group>"; };
 		28D1DE11227FD006004CB494 /* DDC.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = DDC.framework.dSYM; path = Carthage/Build/Mac/DDC.framework.dSYM; sourceTree = "<group>"; };
-		28D363802280EA6000CB8A99 /* Display+Whitelist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Display+Whitelist.swift"; sourceTree = "<group>"; };
 		56754EAB1D9A4016007BCDC5 /* MonitorControl.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MonitorControl.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		56754EAE1D9A4016007BCDC5 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AppDelegate.swift; sourceTree = "<group>"; };
 		56754EB01D9A4016007BCDC5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		56754EB31D9A4016007BCDC5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
-		56754EB51D9A4016007BCDC5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		6C778D5921E91060000A4D5F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		6C778D5E21E910A2000A4D5F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
-		6C778D5F21E910A6000A4D5F /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Main.strings; sourceTree = "<group>"; };
+		F01B067822822141008E64DB /* Display+Whitelist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Display+Whitelist.swift"; sourceTree = "<group>"; };
+		F01B0681228221B6008E64DB /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
+		F01B0682228221B6008E64DB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		F01B0683228221B6008E64DB /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		F01B0684228221B6008E64DB /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		F01B0685228221B6008E64DB /* Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
+		F01B0686228221B6008E64DB /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F01B068E228221B6008E64DB /* ButtonCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonCellView.swift; sourceTree = "<group>"; };
+		F01B068F228221B7008E64DB /* SliderHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SliderHandler.swift; sourceTree = "<group>"; };
+		F01B0691228221B7008E64DB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		F01B0693228221B7008E64DB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		F01B06A222822208008E64DB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MainMenu.strings; sourceTree = "<group>"; };
+		F01B06A32282220A008E64DB /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/MainMenu.strings; sourceTree = "<group>"; };
+		F01B06A42282220D008E64DB /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/MainMenu.strings; sourceTree = "<group>"; };
+		F01B06A522822215008E64DB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
+		F01B06A622822217008E64DB /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Main.strings; sourceTree = "<group>"; };
+		F01B06A72282221B008E64DB /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Main.strings; sourceTree = "<group>"; };
 		F03A8DF11FFBAA6F0034DC27 /* Display.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Display.swift; sourceTree = "<group>"; };
 		F0445D3720023E710025AE82 /* MainPrefsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPrefsViewController.swift; sourceTree = "<group>"; };
 		F0445D3B200254FA0025AE82 /* KeysPrefsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeysPrefsViewController.swift; sourceTree = "<group>"; };
 		F0445D3F200259C10025AE82 /* DisplayPrefsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayPrefsViewController.swift; sourceTree = "<group>"; };
-		F0445D49200285690025AE82 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MainMenu.strings; sourceTree = "<group>"; };
-		F0445D4B2002856C0025AE82 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/MainMenu.strings; sourceTree = "<group>"; };
-		F0445D4C200294AB0025AE82 /* ButtonCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonCellView.swift; sourceTree = "<group>"; };
 		F06792E7200A73460066C438 /* MonitorControlHelper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MonitorControlHelper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F06792E9200A73460066C438 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		F06792F0200A73470066C438 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F06792F1200A73470066C438 /* MonitorControlHelper.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MonitorControlHelper.entitlements; sourceTree = "<group>"; };
-		F091C9B21F6EA6110096FD65 /* SliderHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderHandler.swift; sourceTree = "<group>"; };
-		F091C9B71F6EA79B0096FD65 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
-		F091C9C21F6EB8660096FD65 /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; lineEnding = 0; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		F091C9C31F6EB8720096FD65 /* fr */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; lineEnding = 0; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
-		F091C9C41F6EBA5A0096FD65 /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
 		F0A987D61F77B290009B603D /* OSD.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = OSD.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -171,6 +171,7 @@
 				2894D9B72280B30500DF58DA /* CGDirectDisplayID+Extension.swift */,
 				28D1DDEC227FB8F2004CB494 /* EDID+Extension.swift */,
 				28D1DDF1227FBE71004CB494 /* NSScreen+Extension.swift */,
+				F01B067822822141008E64DB /* Display+Whitelist.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -178,10 +179,9 @@
 		56754EA21D9A4016007BCDC5 = {
 			isa = PBXGroup;
 			children = (
-				28D1DDEB227FB8E9004CB494 /* Extensions */,
-				28D1DDD1227FB759004CB494 /* Frameworks */,
 				56754EAD1D9A4016007BCDC5 /* MonitorControl */,
 				F06792E8200A73460066C438 /* MonitorControlHelper */,
+				28D1DDD1227FB759004CB494 /* Frameworks */,
 				56754EAC1D9A4016007BCDC5 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -199,20 +199,36 @@
 			isa = PBXGroup;
 			children = (
 				56754EAE1D9A4016007BCDC5 /* AppDelegate.swift */,
-				56754EB01D9A4016007BCDC5 /* Assets.xcassets */,
-				F091C9C41F6EBA5A0096FD65 /* Bridging-Header.h */,
-				F0445D4C200294AB0025AE82 /* ButtonCellView.swift */,
 				F03A8DF11FFBAA6F0034DC27 /* Display.swift */,
-				28D363802280EA6000CB8A99 /* Display+Whitelist.swift */,
-				56754EB51D9A4016007BCDC5 /* Info.plist */,
-				F091C9C11F6EB8660096FD65 /* Localizable.strings */,
-				6C778D5821E91060000A4D5F /* Main.storyboard */,
-				56754EB21D9A4016007BCDC5 /* MainMenu.xib */,
-				F091C9B21F6EA6110096FD65 /* SliderHandler.swift */,
-				F091C9B71F6EA79B0096FD65 /* Utils.swift */,
+				56754EB01D9A4016007BCDC5 /* Assets.xcassets */,
+				F01B0687228221B6008E64DB /* UI */,
 				F0445D3620023D5B0025AE82 /* View Controllers */,
+				F01B067F228221B6008E64DB /* Support */,
+				28D1DDEB227FB8E9004CB494 /* Extensions */,
 			);
 			path = MonitorControl;
+			sourceTree = "<group>";
+		};
+		F01B067F228221B6008E64DB /* Support */ = {
+			isa = PBXGroup;
+			children = (
+				F01B0680228221B6008E64DB /* Localizable.strings */,
+				F01B0683228221B6008E64DB /* Utils.swift */,
+				F01B0685228221B6008E64DB /* Bridging-Header.h */,
+				F01B0686228221B6008E64DB /* Info.plist */,
+			);
+			path = Support;
+			sourceTree = "<group>";
+		};
+		F01B0687228221B6008E64DB /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				F01B068E228221B6008E64DB /* ButtonCellView.swift */,
+				F01B068F228221B7008E64DB /* SliderHandler.swift */,
+				F01B0690228221B7008E64DB /* Main.storyboard */,
+				F01B0692228221B7008E64DB /* MainMenu.xib */,
+			);
+			path = UI;
 			sourceTree = "<group>";
 		};
 		F0445D3620023D5B0025AE82 /* View Controllers */ = {
@@ -287,17 +303,17 @@
 			attributes = {
 				LastSwiftUpdateCheck = 0920;
 				LastUpgradeCheck = 1020;
-				ORGANIZATIONNAME = "Mathew Kurian";
+				ORGANIZATIONNAME = "Guillaume Broder";
 				TargetAttributes = {
 					56754EAA1D9A4016007BCDC5 = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = KJ5F4KTDFH;
+						DevelopmentTeam = KGY56RWR9A;
 						LastSwiftMigration = 1020;
 						ProvisioningStyle = Automatic;
 					};
 					F06792E6200A73460066C438 = {
 						CreatedOnToolsVersion = 9.2;
-						DevelopmentTeam = KJ5F4KTDFH;
+						DevelopmentTeam = KGY56RWR9A;
 						LastSwiftMigration = 1020;
 						ProvisioningStyle = Automatic;
 					};
@@ -330,9 +346,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				56754EB11D9A4016007BCDC5 /* Assets.xcassets in Resources */,
-				F0EB972F1F6ED7C800686D2A /* Localizable.strings in Resources */,
-				6C778D5A21E91060000A4D5F /* Main.storyboard in Resources */,
-				56754EB41D9A4016007BCDC5 /* MainMenu.xib in Resources */,
+				F01B0699228221B7008E64DB /* Localizable.strings in Resources */,
+				F01B06A0228221B7008E64DB /* Main.storyboard in Resources */,
+				F01B06A1228221B7008E64DB /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -422,18 +438,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F01B069F228221B7008E64DB /* SliderHandler.swift in Sources */,
 				56754EAF1D9A4016007BCDC5 /* AppDelegate.swift in Sources */,
-				F0445D4D200294AB0025AE82 /* ButtonCellView.swift in Sources */,
 				2894D9B82280B30500DF58DA /* CGDirectDisplayID+Extension.swift in Sources */,
-				28D363812280EA6000CB8A99 /* Display+Whitelist.swift in Sources */,
 				F03A8DF21FFBAA6F0034DC27 /* Display.swift in Sources */,
+				F01B069A228221B7008E64DB /* Utils.swift in Sources */,
+				F01B067922822141008E64DB /* Display+Whitelist.swift in Sources */,
 				F0445D40200259C10025AE82 /* DisplayPrefsViewController.swift in Sources */,
+				F01B069E228221B7008E64DB /* ButtonCellView.swift in Sources */,
 				28D1DDF0227FBD99004CB494 /* EDID+Extension.swift in Sources */,
 				F0445D3D200254FA0025AE82 /* KeysPrefsViewController.swift in Sources */,
 				F0445D3820023E710025AE82 /* MainPrefsViewController.swift in Sources */,
 				28D1DDF2227FBE71004CB494 /* NSScreen+Extension.swift in Sources */,
-				F091C9B31F6EA6110096FD65 /* SliderHandler.swift in Sources */,
-				F091C9B81F6EA79B0096FD65 /* Utils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -448,36 +464,36 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		56754EB21D9A4016007BCDC5 /* MainMenu.xib */ = {
+		F01B0680228221B6008E64DB /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				56754EB31D9A4016007BCDC5 /* Base */,
-				28D1DD7A227FA927004CB494 /* de */,
-				F0445D49200285690025AE82 /* en */,
-				F0445D4B2002856C0025AE82 /* fr */,
+				F01B0681228221B6008E64DB /* de */,
+				F01B0682228221B6008E64DB /* en */,
+				F01B0684228221B6008E64DB /* fr */,
 			);
-			name = MainMenu.xib;
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
-		6C778D5821E91060000A4D5F /* Main.storyboard */ = {
+		F01B0690228221B7008E64DB /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				6C778D5921E91060000A4D5F /* Base */,
-				28D1DD79227FA927004CB494 /* de */,
-				6C778D5E21E910A2000A4D5F /* en */,
-				6C778D5F21E910A6000A4D5F /* fr */,
+				F01B0691228221B7008E64DB /* Base */,
+				F01B06A522822215008E64DB /* en */,
+				F01B06A622822217008E64DB /* fr */,
+				F01B06A72282221B008E64DB /* de */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
-		F091C9C11F6EB8660096FD65 /* Localizable.strings */ = {
+		F01B0692228221B7008E64DB /* MainMenu.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				28D1DD7C227FA939004CB494 /* de */,
-				F091C9C21F6EB8660096FD65 /* en */,
-				F091C9C31F6EB8720096FD65 /* fr */,
+				F01B0693228221B7008E64DB /* Base */,
+				F01B06A222822208008E64DB /* en */,
+				F01B06A32282220A008E64DB /* fr */,
+				F01B06A42282220D008E64DB /* de */,
 			);
-			name = Localizable.strings;
+			name = MainMenu.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -603,19 +619,19 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 179;
-				DEVELOPMENT_TEAM = KJ5F4KTDFH;
+				DEVELOPMENT_TEAM = KGY56RWR9A;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/Mac",
 					"$(PROJECT_DIR)/Carthage/Build",
 					"$(PROJECT_DIR)",
 				);
-				INFOPLIST_FILE = MonitorControl/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/MonitorControl/Support/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = me.guillaumeb.MonitorControl;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "MonitorControl/Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "MonitorControl/Support/Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -629,19 +645,19 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 179;
-				DEVELOPMENT_TEAM = KJ5F4KTDFH;
+				DEVELOPMENT_TEAM = KGY56RWR9A;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/Mac",
 					"$(PROJECT_DIR)/Carthage/Build",
 					"$(PROJECT_DIR)",
 				);
-				INFOPLIST_FILE = MonitorControl/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/MonitorControl/Support/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = me.guillaumeb.MonitorControl;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "MonitorControl/Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "MonitorControl/Support/Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -659,7 +675,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 179;
-				DEVELOPMENT_TEAM = KJ5F4KTDFH;
+				DEVELOPMENT_TEAM = KGY56RWR9A;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = MonitorControlHelper/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
@@ -683,7 +699,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 179;
-				DEVELOPMENT_TEAM = KJ5F4KTDFH;
+				DEVELOPMENT_TEAM = KGY56RWR9A;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = MonitorControlHelper/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
