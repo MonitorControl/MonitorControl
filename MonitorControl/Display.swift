@@ -23,8 +23,7 @@ class Display {
   // On some displays, the display's OSD overlaps the macOS OSD,
   // calling the OSD command with 1 seems to hide it.
   func hideDisplayOsd() {
-    // LG 38UC99-W
-    guard self.identifier.vendorNumber == 7789, self.identifier.modelNumber == 30460 else {
+    guard self.hideOsd else {
       return
     }
 

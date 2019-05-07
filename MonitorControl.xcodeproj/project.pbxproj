@@ -24,6 +24,7 @@
 		28D1DE13227FD006004CB494 /* MediaKeyTap.framework.dSYM in [Carthage] Copy Framework Debug Symbols */ = {isa = PBXBuildFile; fileRef = 28D1DE0F227FD006004CB494 /* MediaKeyTap.framework.dSYM */; };
 		28D1DE14227FD006004CB494 /* AMCoreAudio.framework.dSYM in [Carthage] Copy Framework Debug Symbols */ = {isa = PBXBuildFile; fileRef = 28D1DE10227FD006004CB494 /* AMCoreAudio.framework.dSYM */; };
 		28D1DE15227FD006004CB494 /* DDC.framework.dSYM in [Carthage] Copy Framework Debug Symbols */ = {isa = PBXBuildFile; fileRef = 28D1DE11227FD006004CB494 /* DDC.framework.dSYM */; };
+		28D363812280EA6000CB8A99 /* Display+Whitelist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D363802280EA6000CB8A99 /* Display+Whitelist.swift */; };
 		56754EAF1D9A4016007BCDC5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56754EAE1D9A4016007BCDC5 /* AppDelegate.swift */; };
 		56754EB11D9A4016007BCDC5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 56754EB01D9A4016007BCDC5 /* Assets.xcassets */; };
 		56754EB41D9A4016007BCDC5 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 56754EB21D9A4016007BCDC5 /* MainMenu.xib */; };
@@ -97,6 +98,7 @@
 		28D1DE0F227FD006004CB494 /* MediaKeyTap.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = MediaKeyTap.framework.dSYM; path = Carthage/Build/Mac/MediaKeyTap.framework.dSYM; sourceTree = "<group>"; };
 		28D1DE10227FD006004CB494 /* AMCoreAudio.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = AMCoreAudio.framework.dSYM; path = Carthage/Build/Mac/AMCoreAudio.framework.dSYM; sourceTree = "<group>"; };
 		28D1DE11227FD006004CB494 /* DDC.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = DDC.framework.dSYM; path = Carthage/Build/Mac/DDC.framework.dSYM; sourceTree = "<group>"; };
+		28D363802280EA6000CB8A99 /* Display+Whitelist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Display+Whitelist.swift"; sourceTree = "<group>"; };
 		56754EAB1D9A4016007BCDC5 /* MonitorControl.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MonitorControl.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		56754EAE1D9A4016007BCDC5 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AppDelegate.swift; sourceTree = "<group>"; };
 		56754EB01D9A4016007BCDC5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -166,9 +168,9 @@
 		28D1DDEB227FB8E9004CB494 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				2894D9B72280B30500DF58DA /* CGDirectDisplayID+Extension.swift */,
 				28D1DDEC227FB8F2004CB494 /* EDID+Extension.swift */,
 				28D1DDF1227FBE71004CB494 /* NSScreen+Extension.swift */,
-				2894D9B72280B30500DF58DA /* CGDirectDisplayID+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -201,6 +203,7 @@
 				F091C9C41F6EBA5A0096FD65 /* Bridging-Header.h */,
 				F0445D4C200294AB0025AE82 /* ButtonCellView.swift */,
 				F03A8DF11FFBAA6F0034DC27 /* Display.swift */,
+				28D363802280EA6000CB8A99 /* Display+Whitelist.swift */,
 				56754EB51D9A4016007BCDC5 /* Info.plist */,
 				F091C9C11F6EB8660096FD65 /* Localizable.strings */,
 				6C778D5821E91060000A4D5F /* Main.storyboard */,
@@ -421,6 +424,8 @@
 			files = (
 				56754EAF1D9A4016007BCDC5 /* AppDelegate.swift in Sources */,
 				F0445D4D200294AB0025AE82 /* ButtonCellView.swift in Sources */,
+				2894D9B82280B30500DF58DA /* CGDirectDisplayID+Extension.swift in Sources */,
+				28D363812280EA6000CB8A99 /* Display+Whitelist.swift in Sources */,
 				F03A8DF21FFBAA6F0034DC27 /* Display.swift in Sources */,
 				F0445D40200259C10025AE82 /* DisplayPrefsViewController.swift in Sources */,
 				28D1DDF0227FBD99004CB494 /* EDID+Extension.swift in Sources */,
@@ -429,7 +434,6 @@
 				28D1DDF2227FBE71004CB494 /* NSScreen+Extension.swift in Sources */,
 				F091C9B31F6EA6110096FD65 /* SliderHandler.swift in Sources */,
 				F091C9B81F6EA79B0096FD65 /* Utils.swift in Sources */,
-				2894D9B82280B30500DF58DA /* CGDirectDisplayID+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -598,7 +602,7 @@
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 170;
+				CURRENT_PROJECT_VERSION = 179;
 				DEVELOPMENT_TEAM = KJ5F4KTDFH;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -624,7 +628,7 @@
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 170;
+				CURRENT_PROJECT_VERSION = 179;
 				DEVELOPMENT_TEAM = KJ5F4KTDFH;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -654,7 +658,7 @@
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 170;
+				CURRENT_PROJECT_VERSION = 179;
 				DEVELOPMENT_TEAM = KJ5F4KTDFH;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = MonitorControlHelper/Info.plist;
@@ -678,7 +682,7 @@
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 170;
+				CURRENT_PROJECT_VERSION = 179;
 				DEVELOPMENT_TEAM = KJ5F4KTDFH;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = MonitorControlHelper/Info.plist;
