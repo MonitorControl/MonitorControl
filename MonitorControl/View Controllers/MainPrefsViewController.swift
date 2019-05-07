@@ -38,7 +38,7 @@ class MainPrefsViewController: NSViewController, MASPreferencesViewController {
     }
 
     #if DEBUG
-      os_log("Toggle start at login state: %@", type: .info, sender.state == .on ? "on" : "off")
+      os_log("Toggle start at login state: %{public}@", type: .info, sender.state == .on ? "on" : "off")
     #endif
   }
 
@@ -52,7 +52,7 @@ class MainPrefsViewController: NSViewController, MASPreferencesViewController {
     }
 
     #if DEBUG
-      os_log("Toggle show contrast slider state: %@", type: .info, sender.state == .on ? "on" : "off")
+      os_log("Toggle show contrast slider state: %{public}@", type: .info, sender.state == .on ? "on" : "off")
     #endif
 
     NotificationCenter.default.post(name: Notification.Name(Utils.PrefKeys.showContrast.rawValue), object: nil)
@@ -68,7 +68,7 @@ class MainPrefsViewController: NSViewController, MASPreferencesViewController {
     }
 
     #if DEBUG
-      os_log("Toggle lower contrast after brightness state: %@", type: .info, sender.state == .on ? "on" : "off")
+      os_log("Toggle lower contrast after brightness state: %{public}@", type: .info, sender.state == .on ? "on" : "off")
     #endif
   }
 

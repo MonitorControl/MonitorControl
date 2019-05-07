@@ -105,10 +105,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       self.statusMenu.insertItem(item, at: 0)
       self.statusMenu.insertItem(NSMenuItem.separator(), at: 1)
     default:
-      os_log("The following displays were found:", type: .info)
+      os_log("The following supported displays were found:", type: .info)
 
       for screen in filteredScreens {
-        os_log(" - %@", type: .info, "\(screen.displayName ?? NSLocalizedString("Unknown", comment: "unknown display name")) (Vendor: \(screen.vendorNumber ?? 0), Model: \(screen.modelNumber ?? 0))")
+        os_log(" - %{public}@", type: .info, "\(screen.displayName ?? NSLocalizedString("Unknown", comment: "unknown display name")) (Vendor: \(screen.vendorNumber ?? 0), Model: \(screen.modelNumber ?? 0))")
         self.addScreenToMenu(screen: screen, asSubMenu: filteredScreens.count > 1)
       }
     }
@@ -257,8 +257,8 @@ extension AppDelegate: EventSubscriber {
   func eventReceiver(_ event: Event) {
     if case let .defaultOutputDeviceChanged(audioDevice)? = event as? AudioHardwareEvent {
       #if DEBUG
-        os_log("Default output device changed to “%@”.", type: .info, audioDevice.name)
-        os_log("Can device set its own volume? %@", type: .info, audioDevice.canSetVirtualMasterVolume(direction: .playback).description)
+        os_log("Default output device changed to “%{public}@”.", type: .info, audioDevice.name)
+        os_log("Can device set its own volume? %{public}@", type: .info, audioDevice.canSetVirtualMasterVolume(direction: .playback).description)
       #endif
 
       self.startOrRestartMediaKeyTap()

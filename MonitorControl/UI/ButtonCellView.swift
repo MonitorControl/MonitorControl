@@ -22,7 +22,7 @@ class ButtonCellView: NSTableCellView {
       }
 
       #if DEBUG
-        os_log("Toggle enabled display state: %@", type: .info, sender.state == .on ? "on" : "off")
+        os_log("Toggle enabled display state: %{public}@", type: .info, sender.state == .on ? "on" : "off")
       #endif
     }
   }
