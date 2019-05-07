@@ -63,28 +63,29 @@ Open [issues](https://github.com/the0neyouseek/MonitorControl/issues) if you hav
 - Xcode
 - [Carthage](https://github.com/Carthage/Carthage)
 - [Swiftlint](https://github.com/realm/SwiftLint)
+- [SwiftFormat](https://github.com/nicklockwood/SwiftFormat)
 
 Clone the project
 ```sh
-git clone https://github.com/the0neyouseek/MonitorControl.git --recurse-submodules
+$ git clone https://github.com/the0neyouseek/MonitorControl.git
 ```
 Then download the dependencies with Carthage
 ```sh
 $ carthage update --platform macOS
 ```
 
-You're all set ! Now open the `MonitorControl.xcworkspace` with Xcode
+You're all set ! Now open the `MonitorControl.xcodeproj` with Xcode
 
 ### Third party dependencies
 
 - [MediaKeyTap](https://github.com/the0neyouseek/MediaKeyTap)
 - [MASPreferences](https://github.com/shpakovski/MASPreferences)
-- [ddcctl](https://github.com/kfix/ddcctl)
+- [DDC.swift](https://github.com/reitermarkus/DDC.swift)
 - [AMCoreAudio](https://github.com/rnine/AMCoreAudio)
 
 ## Support
 - macOS Sierra (`10.12`) and up.
-- Works with monitors compatible with [@kfix/ddcctl](https://github.com/kfix/ddcctl)
+- Works with monitors compatible with [@reitermarkus/DDC.swift](https://github.com/reitermarkus/DDC.swift)
 
 ## Contributors
 - [@the0neyouseek](https://github.com/the0neyouseek)
