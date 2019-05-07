@@ -39,7 +39,7 @@ class DisplayPrefsViewController: NSViewController, MASPreferencesViewController
     }
 
     #if DEBUG
-      os_log("Toggle allScreens state: %@", type: .info, sender.state == .on ? "on" : "off")
+      os_log("Toggle allScreens state: %{public}@", type: .info, sender.state == .on ? "on" : "off")
     #endif
   }
 
@@ -56,9 +56,13 @@ class DisplayPrefsViewController: NSViewController, MASPreferencesViewController
         continue
       }
 
-      let ddc = DDC(for: id)
+      guard let ddc = DDC(for: id) else {
+        os_log("Display “%{public}@” cannot be controlled via DDC.", screen.displayName ?? NSLocalizedString("Unknown", comment: "unknown display name"))
+        continue
+      }
 
-      guard let edid = ddc?.edid() else {
+      guard let edid = ddc.edid() else {
+        os_log("Cannot read EDID information for display “%{public}@”.", screen.displayName ?? NSLocalizedString("Unknown", comment: "unknown display name"))
         continue
       }
 

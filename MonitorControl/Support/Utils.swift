@@ -53,9 +53,9 @@ class Utils: NSObject {
       display.saveValue(Int(currentValue), for: command)
       display.saveMaxValue(Int(maxValue), for: command)
 
-      os_log("%@ (%@):", type: .info, display.name, String(reflecting: command))
-      os_log(" - current value: %@", type: .info, String(currentValue))
-      os_log(" - maximum value: %@", type: .info, String(maxValue))
+      os_log("%{public}@ (%{public}@):", type: .info, display.name, String(reflecting: command))
+      os_log(" - current value: %{public}@", type: .info, String(currentValue))
+      os_log(" - maximum value: %{public}@", type: .info, String(maxValue))
 
       DispatchQueue.main.async {
         slider.integerValue = Int(currentValue)
