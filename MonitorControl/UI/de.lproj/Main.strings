@@ -1,39 +1,29 @@
-
 /* Class = "NSButtonCell"; title = "Change Brightness/Volume for all screens"; ObjectID = "0Z7-PQ-Bl8"; */
 "0Z7-PQ-Bl8.title" = "Helligkeit/Lautstärke für alle Monitore ändern";
 
 /* Class = "NSTableColumn"; headerCell.title = "Enabled"; ObjectID = "8U8-ec-Zbv"; */
 "8U8-ec-Zbv.headerCell.title" = "Aktiv";
 
-/* Class = "NSTableColumn"; headerCell.title = "Display Name"; ObjectID = "CHc-s5-4MN"; */
+/* Class = "NSTextFieldCell"; title = "Table View Cell"; ObjectID = "aSw-3H-uNa"; */
+"aSw-3H-uNa.title" = "Table View Cell";
+
+/* Class = "NSTableColumn"; headerCell.title = "Name"; ObjectID = "CHc-s5-4MN"; */
 "CHc-s5-4MN.headerCell.title" = "Name";
+
+/* Class = "NSTextFieldCell"; title = "Table View Cell"; ObjectID = "cnb-Li-1lE"; */
+"cnb-Li-1lE.title" = "Table View Cell";
 
 /* Class = "NSTextFieldCell"; title = "Keys"; ObjectID = "Dcz-GG-1li"; */
 "Dcz-GG-1li.title" = "Tasten";
+
+/* Class = "NSTableColumn"; headerCell.title = "ID"; ObjectID = "dgp-q7-cBK"; */
+"dgp-q7-cBK.headerCell.title" = "ID";
 
 /* Class = "NSTextFieldCell"; title = "General"; ObjectID = "ENU-js-huy"; */
 "ENU-js-huy.title" = "Allgemein";
 
 /* Class = "NSTextFieldCell"; title = "Display"; ObjectID = "ExD-7P-6XI"; */
 "ExD-7P-6XI.title" = "Monitor";
-
-/* Class = "NSMenuItem"; title = "Volume only"; ObjectID = "NLP-dU-Dam"; */
-"NLP-dU-Dam.title" = "Lautstärke";
-
-/* Class = "NSTextFieldCell"; title = "Listen for"; ObjectID = "Vh8-06-U3K"; */
-"Vh8-06-U3K.title" = "Hören auf";
-
-/* Class = "NSMenuItem"; title = "Both Brightness & Volume"; ObjectID = "Vr4-xb-B4o"; */
-"Vr4-xb-B4o.title" = "Helligkeit & Lautstärke";
-
-/* Class = "NSTextFieldCell"; title = "Table View Cell"; ObjectID = "aSw-3H-uNa"; */
-"aSw-3H-uNa.title" = "Table View Cell";
-
-/* Class = "NSTextFieldCell"; title = "Table View Cell"; ObjectID = "cnb-Li-1lE"; */
-"cnb-Li-1lE.title" = "Table View Cell";
-
-/* Class = "NSTableColumn"; headerCell.title = "Display Id"; ObjectID = "dgp-q7-cBK"; */
-"dgp-q7-cBK.headerCell.title" = "ID";
 
 /* Class = "NSButtonCell"; title = "Lower Contrast after Brightness"; ObjectID = "fhy-Er-0aI"; */
 "fhy-Er-0aI.title" = "Lower Contrast after Brightness";
@@ -44,5 +34,21 @@
 /* Class = "NSButtonCell"; title = "Start MonitorControl at Login"; ObjectID = "j72-NF-zsW"; */
 "j72-NF-zsW.title" = "MonitorControl beim Login starten";
 
+/* Class = "NSTableColumn"; headerCell.title = "Vendor"; ObjectID = "LRJ-fb-Z9E"; */
+"LRJ-fb-Z9E.headerCell.title" = "Hersteller";
+
+/* Class = "NSMenuItem"; title = "Volume only"; ObjectID = "NLP-dU-Dam"; */
+"NLP-dU-Dam.title" = "Lautstärke";
+
+/* Class = "NSTableColumn"; headerCell.title = "Model"; ObjectID = "Nvp-hI-w4x"; */
+"Nvp-hI-w4x.headerCell.title" = "Modell";
+
+/* Class = "NSTextFieldCell"; title = "Listen for"; ObjectID = "Vh8-06-U3K"; */
+"Vh8-06-U3K.title" = "Hören auf";
+
+/* Class = "NSMenuItem"; title = "Both Brightness & Volume"; ObjectID = "Vr4-xb-B4o"; */
+"Vr4-xb-B4o.title" = "Helligkeit & Lautstärke";
+
 /* Class = "NSButtonCell"; title = "Show a slider for contrast"; ObjectID = "xSI-8W-Xd0"; */
 "xSI-8W-Xd0.title" = "Slider für Kontrast anzeigen";
+
