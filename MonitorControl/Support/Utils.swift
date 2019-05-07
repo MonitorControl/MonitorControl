@@ -1,5 +1,6 @@
 import Cocoa
 import DDC
+import os.log
 
 class Utils: NSObject {
   // MARK: - Menu
@@ -33,28 +34,32 @@ class Utils: NSObject {
     menu.insertItem(withTitle: title, action: nil, keyEquivalent: "", at: 0)
 
     DispatchQueue.global(qos: .background).async {
-      var minReplyDelay = 10
-
-      if display.needsLongerDelay {
-        minReplyDelay = 30 * kMillisecondScale
-      }
-
       defer {
         DispatchQueue.main.async {
           slider.isEnabled = true
         }
       }
 
-      guard let (currentValue, maxValue) = display.ddc?.read(command: command, tries: 1000, minReplyDelay: UInt64(minReplyDelay)) else {
-        return
+      var values: (UInt8, UInt8)?
+
+      if display.needsLongerDelay {
+        values = display.ddc?.read(command: command, tries: 100, minReplyDelay: UInt64(30 * kMillisecondScale))
+      } else {
+        values = display.ddc?.read(command: command, tries: 100)
       }
 
-      let value = Int(currentValue > maxValue ? maxValue : currentValue)
+      let (currentValue, maxValue) = values ?? (UInt8(display.getValue(for: command)), UInt8(display.getMaxValue(for: command)))
 
-      display.saveValue(value, for: command)
+      display.saveValue(Int(currentValue), for: command)
+      display.saveMaxValue(Int(maxValue), for: command)
+
+      os_log("%@ (%@):", type: .info, display.name, String(reflecting: command))
+      os_log(" - current value: %@", type: .info, String(currentValue))
+      os_log(" - maximum value: %@", type: .info, String(maxValue))
 
       DispatchQueue.main.async {
-        slider.integerValue = value
+        slider.integerValue = Int(currentValue)
+        slider.maxValue = Double(maxValue)
       }
     }
     return handler

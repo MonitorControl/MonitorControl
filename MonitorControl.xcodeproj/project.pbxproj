@@ -169,9 +169,9 @@
 			isa = PBXGroup;
 			children = (
 				2894D9B72280B30500DF58DA /* CGDirectDisplayID+Extension.swift */,
+				F01B067822822141008E64DB /* Display+Whitelist.swift */,
 				28D1DDEC227FB8F2004CB494 /* EDID+Extension.swift */,
 				28D1DDF1227FBE71004CB494 /* NSScreen+Extension.swift */,
-				F01B067822822141008E64DB /* Display+Whitelist.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -179,9 +179,9 @@
 		56754EA21D9A4016007BCDC5 = {
 			isa = PBXGroup;
 			children = (
+				28D1DDD1227FB759004CB494 /* Frameworks */,
 				56754EAD1D9A4016007BCDC5 /* MonitorControl */,
 				F06792E8200A73460066C438 /* MonitorControlHelper */,
-				28D1DDD1227FB759004CB494 /* Frameworks */,
 				56754EAC1D9A4016007BCDC5 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -199,12 +199,12 @@
 			isa = PBXGroup;
 			children = (
 				56754EAE1D9A4016007BCDC5 /* AppDelegate.swift */,
-				F03A8DF11FFBAA6F0034DC27 /* Display.swift */,
 				56754EB01D9A4016007BCDC5 /* Assets.xcassets */,
+				F03A8DF11FFBAA6F0034DC27 /* Display.swift */,
+				28D1DDEB227FB8E9004CB494 /* Extensions */,
+				F01B067F228221B6008E64DB /* Support */,
 				F01B0687228221B6008E64DB /* UI */,
 				F0445D3620023D5B0025AE82 /* View Controllers */,
-				F01B067F228221B6008E64DB /* Support */,
-				28D1DDEB227FB8E9004CB494 /* Extensions */,
 			);
 			path = MonitorControl;
 			sourceTree = "<group>";
@@ -212,10 +212,10 @@
 		F01B067F228221B6008E64DB /* Support */ = {
 			isa = PBXGroup;
 			children = (
-				F01B0680228221B6008E64DB /* Localizable.strings */,
-				F01B0683228221B6008E64DB /* Utils.swift */,
 				F01B0685228221B6008E64DB /* Bridging-Header.h */,
 				F01B0686228221B6008E64DB /* Info.plist */,
+				F01B0680228221B6008E64DB /* Localizable.strings */,
+				F01B0683228221B6008E64DB /* Utils.swift */,
 			);
 			path = Support;
 			sourceTree = "<group>";
@@ -224,9 +224,9 @@
 			isa = PBXGroup;
 			children = (
 				F01B068E228221B6008E64DB /* ButtonCellView.swift */,
-				F01B068F228221B7008E64DB /* SliderHandler.swift */,
 				F01B0690228221B7008E64DB /* Main.storyboard */,
 				F01B0692228221B7008E64DB /* MainMenu.xib */,
+				F01B068F228221B7008E64DB /* SliderHandler.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -307,13 +307,13 @@
 				TargetAttributes = {
 					56754EAA1D9A4016007BCDC5 = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = KGY56RWR9A;
+						DevelopmentTeam = KJ5F4KTDFH;
 						LastSwiftMigration = 1020;
 						ProvisioningStyle = Automatic;
 					};
 					F06792E6200A73460066C438 = {
 						CreatedOnToolsVersion = 9.2;
-						DevelopmentTeam = KGY56RWR9A;
+						DevelopmentTeam = KJ5F4KTDFH;
 						LastSwiftMigration = 1020;
 						ProvisioningStyle = Automatic;
 					};
@@ -438,18 +438,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F01B069F228221B7008E64DB /* SliderHandler.swift in Sources */,
 				56754EAF1D9A4016007BCDC5 /* AppDelegate.swift in Sources */,
-				2894D9B82280B30500DF58DA /* CGDirectDisplayID+Extension.swift in Sources */,
-				F03A8DF21FFBAA6F0034DC27 /* Display.swift in Sources */,
-				F01B069A228221B7008E64DB /* Utils.swift in Sources */,
-				F01B067922822141008E64DB /* Display+Whitelist.swift in Sources */,
-				F0445D40200259C10025AE82 /* DisplayPrefsViewController.swift in Sources */,
 				F01B069E228221B7008E64DB /* ButtonCellView.swift in Sources */,
+				2894D9B82280B30500DF58DA /* CGDirectDisplayID+Extension.swift in Sources */,
+				F01B067922822141008E64DB /* Display+Whitelist.swift in Sources */,
+				F03A8DF21FFBAA6F0034DC27 /* Display.swift in Sources */,
+				F0445D40200259C10025AE82 /* DisplayPrefsViewController.swift in Sources */,
 				28D1DDF0227FBD99004CB494 /* EDID+Extension.swift in Sources */,
 				F0445D3D200254FA0025AE82 /* KeysPrefsViewController.swift in Sources */,
 				F0445D3820023E710025AE82 /* MainPrefsViewController.swift in Sources */,
 				28D1DDF2227FBE71004CB494 /* NSScreen+Extension.swift in Sources */,
+				F01B069F228221B7008E64DB /* SliderHandler.swift in Sources */,
+				F01B069A228221B7008E64DB /* Utils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -478,9 +478,9 @@
 			isa = PBXVariantGroup;
 			children = (
 				F01B0691228221B7008E64DB /* Base */,
+				F01B06A72282221B008E64DB /* de */,
 				F01B06A522822215008E64DB /* en */,
 				F01B06A622822217008E64DB /* fr */,
-				F01B06A72282221B008E64DB /* de */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -489,9 +489,9 @@
 			isa = PBXVariantGroup;
 			children = (
 				F01B0693228221B7008E64DB /* Base */,
+				F01B06A42282220D008E64DB /* de */,
 				F01B06A222822208008E64DB /* en */,
 				F01B06A32282220A008E64DB /* fr */,
-				F01B06A42282220D008E64DB /* de */,
 			);
 			name = MainMenu.xib;
 			sourceTree = "<group>";
@@ -618,15 +618,15 @@
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 179;
-				DEVELOPMENT_TEAM = KGY56RWR9A;
+				CURRENT_PROJECT_VERSION = 229;
+				DEVELOPMENT_TEAM = KJ5F4KTDFH;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/Mac",
 					"$(PROJECT_DIR)/Carthage/Build",
 					"$(PROJECT_DIR)",
 				);
-				INFOPLIST_FILE = "$(SRCROOT)/MonitorControl/Support/Info.plist";
+				INFOPLIST_FILE = MonitorControl/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = me.guillaumeb.MonitorControl;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -644,15 +644,15 @@
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 179;
-				DEVELOPMENT_TEAM = KGY56RWR9A;
+				CURRENT_PROJECT_VERSION = 229;
+				DEVELOPMENT_TEAM = KJ5F4KTDFH;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/Mac",
 					"$(PROJECT_DIR)/Carthage/Build",
 					"$(PROJECT_DIR)",
 				);
-				INFOPLIST_FILE = "$(SRCROOT)/MonitorControl/Support/Info.plist";
+				INFOPLIST_FILE = MonitorControl/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = me.guillaumeb.MonitorControl;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -674,8 +674,8 @@
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 179;
-				DEVELOPMENT_TEAM = KGY56RWR9A;
+				CURRENT_PROJECT_VERSION = 229;
+				DEVELOPMENT_TEAM = KJ5F4KTDFH;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = MonitorControlHelper/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
@@ -698,8 +698,8 @@
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 179;
-				DEVELOPMENT_TEAM = KGY56RWR9A;
+				CURRENT_PROJECT_VERSION = 229;
+				DEVELOPMENT_TEAM = KJ5F4KTDFH;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = MonitorControlHelper/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";

@@ -102,31 +102,51 @@ class Display {
   }
 
   func calcNewValue(for command: DDC.Command, withRel rel: Int) -> Int {
-    let currentValue = self.prefs.integer(forKey: "\(command)-\(self.identifier)")
-    return max(0, min(100, currentValue + rel))
+    let currentValue = self.getValue(for: command)
+    return max(0, min(self.getMaxValue(for: command), currentValue + rel))
+  }
+
+  func getValue(for command: DDC.Command) -> Int {
+    return self.prefs.integer(forKey: "\(command)-\(self.identifier)")
   }
 
   func saveValue(_ value: Int, for command: DDC.Command) {
     self.prefs.set(value, forKey: "\(command)-\(self.identifier)")
   }
 
+  func saveMaxValue(_ maxValue: Int, for command: DDC.Command) {
+    self.prefs.set(maxValue, forKey: "max-\(command)-\(self.identifier)")
+  }
+
+  func getMaxValue(for command: DDC.Command) -> Int {
+    let max = self.prefs.integer(forKey: "max-\(command)-\(self.identifier)")
+
+    return max == 0 ? 100 : max
+  }
+
   private func showOsd(command: DDC.Command, value: Int) {
-    if let manager = OSDManager.sharedManager() as? OSDManager {
-      var osdImage: Int64 = 1 // Brightness Image
-      if command == .audioSpeakerVolume {
-        osdImage = 3 // Speaker image
-        if self.isMuted {
-          osdImage = 4 // Mute speaker
-        }
-      }
-      let step = 100 / 16
-      manager.showImage(osdImage,
-                        onDisplayID: self.identifier,
-                        priority: 0x1F4,
-                        msecUntilFade: 2000,
-                        filledChiclets: UInt32(value / step),
-                        totalChiclets: UInt32(100 / step),
-                        locked: false)
+    guard let manager = OSDManager.sharedManager() as? OSDManager else {
+      return
     }
+
+    let maxValue = self.getMaxValue(for: command)
+
+    var osdImage: Int64 = 1 // Brightness Image
+    if command == .audioSpeakerVolume {
+      osdImage = 3 // Speaker image
+      if self.isMuted {
+        osdImage = 4 // Mute speaker
+      }
+    }
+
+    let step = maxValue / 16
+
+    manager.showImage(osdImage,
+                      onDisplayID: self.identifier,
+                      priority: 0x1F4,
+                      msecUntilFade: 1000,
+                      filledChiclets: UInt32(value / step),
+                      totalChiclets: UInt32(maxValue / step),
+                      locked: false)
   }
 }
