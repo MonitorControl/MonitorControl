@@ -14,6 +14,8 @@ class DisplayPrefsViewController: NSViewController, MASPreferencesViewController
     case checkbox
     case name
     case identifier
+    case vendor
+    case model
   }
 
   @IBOutlet var allScreens: NSButton!
@@ -93,6 +95,14 @@ class DisplayPrefsViewController: NSViewController, MASPreferencesViewController
       // Identifier
       text = "\(display.identifier)"
       cellType = DisplayCell.identifier
+    } else if tableColumn == tableView.tableColumns[3] {
+      // Vendor
+      text = display.identifier.vendorNumber.map { String(format: "0x%02X", $0) } ?? NSLocalizedString("unknown", comment: "unknown vendor")
+      cellType = DisplayCell.vendor
+    } else if tableColumn == tableView.tableColumns[4] {
+      // Model
+      text = display.identifier.modelNumber.map { String(format: "0x%02X", $0) } ?? NSLocalizedString("unknown", comment: "unknown model")
+      cellType = DisplayCell.model
     }
     if cellType == DisplayCell.checkbox {
       if let cell = tableView.makeView(withIdentifier: (tableColumn?.identifier)!, owner: nil) as? ButtonCellView {
