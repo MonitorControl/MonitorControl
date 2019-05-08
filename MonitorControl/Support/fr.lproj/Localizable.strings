@@ -32,7 +32,7 @@
 "Shortcuts not available" = "Raccourcis non disponible";
 
 /* Shown in the alert dialog */
-"You need to enable MonitorControl in System Preferences > Security and Privacy > Accessibility for the keyboard shortcuts to work" = "Vous devez activer MonitorControl dans Préférences Système > Sécurité et confidentialité  > Accessibilité pour que les raccourcis clavier fonctionnes";
+"You need to enable MonitorControl in System Preferences > Security and Privacy > Accessibility for the keyboard shortcuts to work" = "Vous devez activer MonitorControl dans Préférences Système > Sécurité et confidentialité  > Accessibilité pour que les raccourcis clavier fonctionnes.\n\nMonitorControl se termine maintenant. Veuillez redémarrer manuellement après avoir accordé l'autorisation.";
 
 /* Shown in the main prefs window */
 "General" = "Général";

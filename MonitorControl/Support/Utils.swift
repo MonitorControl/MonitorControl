@@ -79,6 +79,8 @@ class Utils: NSObject {
       alert.informativeText = NSLocalizedString("You need to enable MonitorControl in System Preferences > Security and Privacy > Accessibility for the keyboard shortcuts to work", comment: "Shown in the alert dialog")
       alert.alertStyle = .warning
       alert.runModal()
+
+      NSApplication.shared.terminate(self)
     }
 
     return
