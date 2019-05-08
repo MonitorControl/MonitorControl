@@ -266,8 +266,6 @@
 				F06792F5200A73FA0066C438 /* [Login] Copy Helper to start at Login */,
 				28D1DDBE227FB668004CB494 /* [Carthage] Embed Frameworks */,
 				28D1DE0B227FCF99004CB494 /* [Carthage] Copy Framework Debug Symbols */,
-				28D1DE19227FD375004CB494 /* Increase Build Number */,
-				28D1DE1A227FD39F004CB494 /* Sync Version Numbers */,
 			);
 			buildRules = (
 			);
@@ -285,6 +283,8 @@
 				F06792E3200A73460066C438 /* Sources */,
 				F06792E4200A73460066C438 /* Frameworks */,
 				F06792E5200A73460066C438 /* Resources */,
+				28F6A5822283548F00A4ADCD /* Sync Version Numbers */,
+				28F6A5802283515F00A4ADCD /* Increase Build Number */,
 			);
 			buildRules = (
 			);
@@ -381,7 +381,7 @@
 			shellPath = /bin/sh;
 			shellScript = "if which swiftformat >/dev/null; then\n  swiftformat .\nelse\n  echo \"warning: SwiftFormat not installed, download from https://github.com/nicklockwood/SwiftFormat\" >&2\nfi\n";
 		};
-		28D1DE19227FD375004CB494 /* Increase Build Number */ = {
+		28F6A5802283515F00A4ADCD /* Increase Build Number */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -396,10 +396,10 @@
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "set -e\nset -u\nset -o pipefail\n\nfiles_have_changed() {\n  test -n \"$(find \"${1}\" ! -path '*xcuserdata*' ! -path '*.git' ! -path '*.git/*' -newer \"${2}\")\"\n}\n\nif files_have_changed \"${PROJECT_DIR}\" \"${INFOPLIST_FILE}\"; then\n  agvtool next-version -all\nfi\n";
+			shellPath = "/bin/bash -euo pipefail";
+			shellScript = "files_have_changed() {\n  test -n \"$(find \"${1}\" ! -path '*xcuserdata*' ! -path '*.git' ! -path '*.git/*' -newer \"${2}\")\"\n}\n\nif files_have_changed \"${PROJECT_DIR}\" \"${INFOPLIST_FILE}\"; then\n  build_number=\"$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"${INFOPLIST_FILE}\")\"\n  new_build_number=\"$((build_number + 1))\"\n\n  /usr/libexec/PlistBuddy -c \"Set :CFBundleVersion ${new_build_number}\" \"${INFOPLIST_FILE/Helper/}\"\n  /usr/libexec/PlistBuddy -c \"Set :CFBundleVersion ${new_build_number}\" \"${INFOPLIST_FILE}\"\nfi\n";
 		};
-		28D1DE1A227FD39F004CB494 /* Sync Version Numbers */ = {
+		28F6A5822283548F00A4ADCD /* Sync Version Numbers */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -414,8 +414,8 @@
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "set -e\nset -u\nset -o pipefail\n\nagvtool new-marketing-version \"$(agvtool what-marketing-version -terse1)\"\n";
+			shellPath = "/bin/bash -euo pipefail";
+			shellScript = "version_number=\"$(/usr/libexec/PlistBuddy -c \"Print CFBundleShortVersionString\" \"${INFOPLIST_FILE/Helper/}\")\"\n\n/usr/libexec/PlistBuddy -c \"Set :CFBundleShortVersionString ${version_number}\" \"${INFOPLIST_FILE/Helper/}\"\n/usr/libexec/PlistBuddy -c \"Set :CFBundleShortVersionString ${version_number}\" \"${INFOPLIST_FILE}\"\n";
 		};
 		F03A8DF01FFB9D4C0034DC27 /* [Lint] Run SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -618,7 +618,6 @@
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 261;
 				DEVELOPMENT_TEAM = KJ5F4KTDFH;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -633,7 +632,6 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "MonitorControl/Support/Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
-				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
 		};
@@ -644,7 +642,6 @@
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 261;
 				DEVELOPMENT_TEAM = KJ5F4KTDFH;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -659,7 +656,6 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "MonitorControl/Support/Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
-				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
 		};
@@ -674,7 +670,6 @@
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 261;
 				DEVELOPMENT_TEAM = KJ5F4KTDFH;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = MonitorControlHelper/Info.plist;
@@ -683,7 +678,6 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
-				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
 		};
@@ -698,7 +692,6 @@
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 261;
 				DEVELOPMENT_TEAM = KJ5F4KTDFH;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = MonitorControlHelper/Info.plist;
@@ -707,7 +700,6 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
-				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
 		};
