@@ -283,8 +283,8 @@
 				F06792E3200A73460066C438 /* Sources */,
 				F06792E4200A73460066C438 /* Frameworks */,
 				F06792E5200A73460066C438 /* Resources */,
-				28F6A5822283548F00A4ADCD /* Sync Version Numbers */,
 				28F6A5802283515F00A4ADCD /* Increase Build Number */,
+				28F6A5822283548F00A4ADCD /* Sync Version Numbers */,
 			);
 			buildRules = (
 			);
