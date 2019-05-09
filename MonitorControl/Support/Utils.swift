@@ -40,7 +40,7 @@ class Utils: NSObject {
         }
       }
 
-      var values: (UInt8, UInt8)?
+      var values: (UInt16, UInt16)?
 
       if display.needsLongerDelay {
         values = display.ddc?.read(command: command, tries: 10, minReplyDelay: UInt64(20 * kMillisecondScale))
@@ -48,7 +48,7 @@ class Utils: NSObject {
         values = display.ddc?.read(command: command, tries: 10)
       }
 
-      let (currentValue, maxValue) = values ?? (UInt8(display.getValue(for: command)), UInt8(display.getMaxValue(for: command)))
+      let (currentValue, maxValue) = values ?? (UInt16(display.getValue(for: command)), UInt16(display.getMaxValue(for: command)))
 
       display.saveValue(Int(currentValue), for: command)
       display.saveMaxValue(Int(maxValue), for: command)
