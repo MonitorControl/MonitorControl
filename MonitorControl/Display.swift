@@ -28,18 +28,7 @@ class Display {
     }
 
     _ = self.ddc?.write(command: .onScreenDisplay, value: 1)
-
-    DispatchQueue.global(qos: .background).asyncAfter(deadline: DispatchTime.now() + 0.000001) {
-      _ = self.ddc?.write(command: .onScreenDisplay, value: 1)
-    }
-
-    DispatchQueue.global(qos: .background).asyncAfter(deadline: DispatchTime.now() + 0.00001) {
-      _ = self.ddc?.write(command: .onScreenDisplay, value: 1)
-    }
-
-    DispatchQueue.global(qos: .background).asyncAfter(deadline: DispatchTime.now() + 0.0001) {
-      _ = self.ddc?.write(command: .onScreenDisplay, value: 1)
-    }
+    _ = self.ddc?.write(command: .onScreenDisplay, value: 1)
   }
 
   func mute() {
@@ -51,14 +40,18 @@ class Display {
       self.isMuted = true
     }
 
-    _ = self.ddc?.write(command: .audioSpeakerVolume, value: UInt8(value))
-    self.hideDisplayOsd()
+    DispatchQueue.global(qos: .userInitiated).async {
+      guard self.ddc?.write(command: .audioSpeakerVolume, value: UInt8(value)) == true else {
+        return
+      }
+
+      self.hideDisplayOsd()
+      self.showOsd(command: .audioSpeakerVolume, value: value)
+    }
 
     if let slider = volumeSliderHandler?.slider {
       slider.intValue = Int32(value)
     }
-
-    self.showOsd(command: .audioSpeakerVolume, value: value)
   }
 
   func setVolume(to value: Int) {
@@ -66,38 +59,53 @@ class Display {
       self.isMuted = false
     }
 
-    _ = self.ddc?.write(command: .audioSpeakerVolume, value: UInt8(value))
-    self.hideDisplayOsd()
+    DispatchQueue.global(qos: .userInitiated).async {
+      guard self.ddc?.write(command: .audioSpeakerVolume, value: UInt8(value)) == true else {
+        return
+      }
+
+      self.hideDisplayOsd()
+      self.showOsd(command: .audioSpeakerVolume, value: value)
+    }
 
     if let slider = volumeSliderHandler?.slider {
       slider.intValue = Int32(value)
     }
 
-    self.showOsd(command: .audioSpeakerVolume, value: value)
     self.saveValue(value, for: .audioSpeakerVolume)
   }
 
   func setBrightness(to value: Int) {
     if self.prefs.bool(forKey: Utils.PrefKeys.lowerContrast.rawValue) {
       if value == 0 {
-        _ = self.ddc?.write(command: .contrast, value: UInt8(value))
+        DispatchQueue.global(qos: .userInitiated).async {
+          _ = self.ddc?.write(command: .contrast, value: UInt8(value))
+        }
 
         if let slider = contrastSliderHandler?.slider {
           slider.intValue = Int32(value)
         }
       } else if self.prefs.integer(forKey: "\(DDC.Command.brightness.value)-\(self.identifier)") == 0 {
         let contrastValue = self.prefs.integer(forKey: "\(DDC.Command.contrast.value)-\(self.identifier)")
-        _ = self.ddc?.write(command: .contrast, value: UInt8(contrastValue))
+
+        DispatchQueue.global(qos: .userInitiated).async {
+          _ = self.ddc?.write(command: .contrast, value: UInt8(contrastValue))
+        }
       }
     }
 
-    _ = self.ddc?.write(command: .brightness, value: UInt8(value))
+    DispatchQueue.global(qos: .userInitiated).async {
+      guard self.ddc?.write(command: .brightness, value: UInt8(value)) == true else {
+        return
+      }
+
+      self.showOsd(command: .brightness, value: value)
+    }
 
     if let slider = brightnessSliderHandler?.slider {
       slider.intValue = Int32(value)
     }
 
-    self.showOsd(command: .brightness, value: value)
     self.saveValue(value, for: .brightness)
   }
 
