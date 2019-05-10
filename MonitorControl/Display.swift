@@ -27,21 +27,21 @@ class Display {
       return
     }
 
-    _ = self.ddc?.write(command: .onScreenDisplay, value: 1)
-    _ = self.ddc?.write(command: .onScreenDisplay, value: 1)
+    _ = self.ddc?.write(command: .osd, value: UInt16(1))
+    _ = self.ddc?.write(command: .osd, value: UInt16(1))
   }
 
   func mute() {
     var value = 0
     if self.isMuted {
-      value = self.prefs.integer(forKey: "\(DDC.Command.audioSpeakerVolume.value)-\(self.identifier)")
+      value = self.prefs.integer(forKey: "\(DDC.Command.audioSpeakerVolume.rawValue)-\(self.identifier)")
       self.isMuted = false
     } else {
       self.isMuted = true
     }
 
     DispatchQueue.global(qos: .userInitiated).async {
-      guard self.ddc?.write(command: .audioSpeakerVolume, value: UInt8(value)) == true else {
+      guard self.ddc?.write(command: .audioSpeakerVolume, value: UInt16(value)) == true else {
         return
       }
 
@@ -60,7 +60,7 @@ class Display {
     }
 
     DispatchQueue.global(qos: .userInitiated).async {
-      guard self.ddc?.write(command: .audioSpeakerVolume, value: UInt8(value)) == true else {
+      guard self.ddc?.write(command: .audioSpeakerVolume, value: UInt16(value)) == true else {
         return
       }
 
@@ -79,23 +79,23 @@ class Display {
     if self.prefs.bool(forKey: Utils.PrefKeys.lowerContrast.rawValue) {
       if value == 0 {
         DispatchQueue.global(qos: .userInitiated).async {
-          _ = self.ddc?.write(command: .contrast, value: UInt8(value))
+          _ = self.ddc?.write(command: .contrast, value: UInt16(value))
         }
 
         if let slider = contrastSliderHandler?.slider {
           slider.intValue = Int32(value)
         }
-      } else if self.prefs.integer(forKey: "\(DDC.Command.brightness.value)-\(self.identifier)") == 0 {
-        let contrastValue = self.prefs.integer(forKey: "\(DDC.Command.contrast.value)-\(self.identifier)")
+      } else if self.prefs.integer(forKey: "\(DDC.Command.brightness.rawValue)-\(self.identifier)") == 0 {
+        let contrastValue = self.prefs.integer(forKey: "\(DDC.Command.contrast.rawValue)-\(self.identifier)")
 
         DispatchQueue.global(qos: .userInitiated).async {
-          _ = self.ddc?.write(command: .contrast, value: UInt8(contrastValue))
+          _ = self.ddc?.write(command: .contrast, value: UInt16(contrastValue))
         }
       }
     }
 
     DispatchQueue.global(qos: .userInitiated).async {
-      guard self.ddc?.write(command: .brightness, value: UInt8(value)) == true else {
+      guard self.ddc?.write(command: .brightness, value: UInt16(value)) == true else {
         return
       }
 

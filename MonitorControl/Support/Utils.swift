@@ -42,6 +42,18 @@ class Utils: NSObject {
 
       var values: (UInt16, UInt16)?
 
+      if display.ddc?.supported() == true {
+        os_log("Display supports DDC.", type: .debug)
+      } else {
+        os_log("Display does not support DDC.", type: .debug)
+      }
+
+      if display.ddc?.enableAppReport() == true {
+        os_log("Display supports DDC (enableAppReport).", type: .debug)
+      } else {
+        os_log("Display does not support DDC (enableAppReport).", type: .debug)
+      }
+
       if display.needsLongerDelay {
         values = display.ddc?.read(command: command, tries: 10, minReplyDelay: UInt64(20 * kMillisecondScale))
       } else {
