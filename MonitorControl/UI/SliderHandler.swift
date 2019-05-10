@@ -23,7 +23,7 @@ class SliderHandler {
       slider.integerValue = value
     }
 
-    _ = self.display.ddc?.write(command: self.cmd, value: UInt8(value))
+    _ = self.display.ddc?.write(command: self.cmd, value: UInt16(value))
     self.display.saveValue(value, for: self.cmd)
   }
 }
