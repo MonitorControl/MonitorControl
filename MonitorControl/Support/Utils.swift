@@ -42,23 +42,21 @@ class Utils: NSObject {
 
       var values: (UInt16, UInt16)?
 
-      if display.ddc?.supported() == true {
+      let delay = display.needsLongerDelay ? UInt64(40 * kMillisecondScale) : nil
+
+      if display.ddc?.supported(minReplyDelay: delay) == true {
         os_log("Display supports DDC.", type: .debug)
       } else {
         os_log("Display does not support DDC.", type: .debug)
       }
 
       if display.ddc?.enableAppReport() == true {
-        os_log("Display supports DDC (enableAppReport).", type: .debug)
+        os_log("Display supports enabling DDC application report.", type: .debug)
       } else {
-        os_log("Display does not support DDC (enableAppReport).", type: .debug)
+        os_log("Display does not support enabling DDC application report.", type: .debug)
       }
 
-      if display.needsLongerDelay {
-        values = display.ddc?.read(command: command, tries: 10, minReplyDelay: UInt64(20 * kMillisecondScale))
-      } else {
-        values = display.ddc?.read(command: command, tries: 10)
-      }
+      values = display.ddc?.read(command: command, tries: 10, minReplyDelay: delay)
 
       let (currentValue, maxValue) = values ?? (UInt16(display.getValue(for: command)), UInt16(display.getMaxValue(for: command)))
 
