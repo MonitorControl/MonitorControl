@@ -27,8 +27,9 @@ class Display {
       return
     }
 
-    _ = self.ddc?.write(command: .osd, value: UInt16(1))
-    _ = self.ddc?.write(command: .osd, value: UInt16(1))
+    for _ in 0..<20 {
+      _ = self.ddc?.write(command: .osd, value: UInt16(1), errorRecoveryWaitTime: 2000)
+    }
   }
 
   func mute() {
@@ -41,7 +42,7 @@ class Display {
     }
 
     DispatchQueue.global(qos: .userInitiated).async {
-      guard self.ddc?.write(command: .audioSpeakerVolume, value: UInt16(value)) == true else {
+      guard self.ddc?.write(command: .audioSpeakerVolume, value: UInt16(value), errorRecoveryWaitTime: self.hideOsd ? 0 : nil) == true else {
         return
       }
 
@@ -60,7 +61,7 @@ class Display {
     }
 
     DispatchQueue.global(qos: .userInitiated).async {
-      guard self.ddc?.write(command: .audioSpeakerVolume, value: UInt16(value)) == true else {
+      guard self.ddc?.write(command: .audioSpeakerVolume, value: UInt16(value), errorRecoveryWaitTime: self.hideOsd ? 0 : nil) == true else {
         return
       }
 
