@@ -34,7 +34,7 @@ class Display {
   func mute() {
     var value = 0
     if self.isMuted {
-      value = self.prefs.integer(forKey: "\(DDC.Command.audioSpeakerVolume.rawValue)-\(self.identifier)")
+      value = self.getValue(for: DDC.Command.audioSpeakerVolume)
       self.isMuted = false
     } else {
       self.isMuted = true
@@ -85,8 +85,8 @@ class Display {
         if let slider = contrastSliderHandler?.slider {
           slider.intValue = Int32(value)
         }
-      } else if self.prefs.integer(forKey: "\(DDC.Command.brightness.rawValue)-\(self.identifier)") == 0 {
-        let contrastValue = self.prefs.integer(forKey: "\(DDC.Command.contrast.rawValue)-\(self.identifier)")
+      } else if self.getValue(for: DDC.Command.brightness) == 0 {
+        let contrastValue = self.getValue(for: DDC.Command.contrast)
 
         DispatchQueue.global(qos: .userInitiated).async {
           _ = self.ddc?.write(command: .contrast, value: UInt16(contrastValue))
@@ -115,19 +115,19 @@ class Display {
   }
 
   func getValue(for command: DDC.Command) -> Int {
-    return self.prefs.integer(forKey: "\(command)-\(self.identifier)")
+    return self.prefs.integer(forKey: "\(command.rawValue)-\(self.identifier)")
   }
 
   func saveValue(_ value: Int, for command: DDC.Command) {
-    self.prefs.set(value, forKey: "\(command)-\(self.identifier)")
+    self.prefs.set(value, forKey: "\(command.rawValue)-\(self.identifier)")
   }
 
   func saveMaxValue(_ maxValue: Int, for command: DDC.Command) {
-    self.prefs.set(maxValue, forKey: "max-\(command)-\(self.identifier)")
+    self.prefs.set(maxValue, forKey: "max-\(command.rawValue)-\(self.identifier)")
   }
 
   func getMaxValue(for command: DDC.Command) -> Int {
-    let max = self.prefs.integer(forKey: "max-\(command)-\(self.identifier)")
+    let max = self.prefs.integer(forKey: "max-\(command.rawValue)-\(self.identifier)")
 
     return max == 0 ? 100 : max
   }
