@@ -4,6 +4,7 @@ import DDC
 class Display {
   let identifier: CGDirectDisplayID
   let name: String
+  let friendlyName: String
   var isEnabled: Bool
   var isMuted: Bool = false
   var brightnessSliderHandler: SliderHandler?
@@ -13,9 +14,10 @@ class Display {
 
   private let prefs = UserDefaults.standard
 
-  init(_ identifier: CGDirectDisplayID, name: String, isEnabled: Bool = true) {
+  init(_ identifier: CGDirectDisplayID, name: String, friendlyName: String?, isEnabled: Bool = true) {
     self.identifier = identifier
     self.name = name
+    self.friendlyName = friendlyName ?? name
     self.isEnabled = isEnabled
     self.ddc = DDC(for: identifier)
   }

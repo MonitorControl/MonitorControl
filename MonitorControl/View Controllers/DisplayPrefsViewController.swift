@@ -13,6 +13,7 @@ class DisplayPrefsViewController: NSViewController, MASPreferencesViewController
   enum DisplayCell: String {
     case checkbox
     case name
+    case friendlyName
     case identifier
     case vendor
     case model
@@ -51,7 +52,7 @@ class DisplayPrefsViewController: NSViewController, MASPreferencesViewController
 
       // Disable built-in displays.
       if screen.isBuiltin {
-        let display = Display(id, name: screen.displayName ?? NSLocalizedString("Unknown", comment: "unknown display name"), isEnabled: false)
+        let display = Display(id, name: screen.displayName ?? NSLocalizedString("Unknown", comment: "unknown display name"), friendlyName: nil, isEnabled: false)
         self.displays.append(display)
         continue
       }
@@ -67,9 +68,10 @@ class DisplayPrefsViewController: NSViewController, MASPreferencesViewController
       }
 
       let name = Utils.getDisplayName(forEdid: edid)
+      let friendlyName = Utils.getFriendlyDisplayName(forDisplayId: id)
       let isEnabled = (prefs.object(forKey: "\(id)-state") as? Bool) ?? true
 
-      let display = Display(id, name: name, isEnabled: isEnabled)
+      let display = Display(id, name: name, friendlyName: friendlyName, isEnabled: isEnabled)
       self.displays.append(display)
     }
 
@@ -96,14 +98,18 @@ class DisplayPrefsViewController: NSViewController, MASPreferencesViewController
       text = display.name
       cellType = DisplayCell.name
     } else if tableColumn == tableView.tableColumns[2] {
+      // Friendly Name
+      text = display.friendlyName
+      cellType = DisplayCell.friendlyName
+    } else if tableColumn == tableView.tableColumns[3] {
       // Identifier
       text = "\(display.identifier)"
       cellType = DisplayCell.identifier
-    } else if tableColumn == tableView.tableColumns[3] {
+    } else if tableColumn == tableView.tableColumns[4] {
       // Vendor
       text = display.identifier.vendorNumber.map { String(format: "0x%02X", $0) } ?? NSLocalizedString("unknown", comment: "unknown vendor")
       cellType = DisplayCell.vendor
-    } else if tableColumn == tableView.tableColumns[4] {
+    } else if tableColumn == tableView.tableColumns[5] {
       // Model
       text = display.identifier.modelNumber.map { String(format: "0x%02X", $0) } ?? NSLocalizedString("unknown", comment: "unknown model")
       cellType = DisplayCell.model
