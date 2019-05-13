@@ -4,7 +4,6 @@ import DDC
 class Display {
   let identifier: CGDirectDisplayID
   let name: String
-  let friendlyName: String
   var isEnabled: Bool
   var isMuted: Bool = false
   var brightnessSliderHandler: SliderHandler?
@@ -14,10 +13,9 @@ class Display {
 
   private let prefs = UserDefaults.standard
 
-  init(_ identifier: CGDirectDisplayID, name: String, friendlyName: String?, isEnabled: Bool = true) {
+  init(_ identifier: CGDirectDisplayID, name: String, isEnabled: Bool = true) {
     self.identifier = identifier
     self.name = name
-    self.friendlyName = friendlyName ?? name
     self.isEnabled = isEnabled
     self.ddc = DDC(for: identifier)
   }
@@ -133,6 +131,14 @@ class Display {
     let max = self.prefs.integer(forKey: "max-\(command.rawValue)-\(self.identifier)")
 
     return max == 0 ? 100 : max
+  }
+
+  func setFriendlyName(_ value: String) {
+    self.prefs.set(value, forKey: "friendlyName-\(self.identifier)")
+  }
+
+  func getFriendlyName() -> String {
+    return self.prefs.string(forKey: "friendlyName-\(self.identifier)") ?? self.name
   }
 
   private func showOsd(command: DDC.Command, value: Int) {

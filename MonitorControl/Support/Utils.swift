@@ -104,17 +104,6 @@ class Utils: NSObject {
     return edid.displayName() ?? NSLocalizedString("Unknown", comment: "")
   }
 
-  /// Get a friendly name of a display
-  ///
-  /// - Parameter displayId: the Id of a display
-  /// - Returns: a string representing a user specified name or nil
-  static func getFriendlyDisplayName(forDisplayId displayId: UInt32) -> String? {
-    if displayId == 188_974_528 {
-      return "Right Monitor"
-    }
-    return nil
-  }
-
   /// Get the main display from a list of display
   ///
   /// - Parameter displays: List of Display

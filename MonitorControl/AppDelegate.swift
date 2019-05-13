@@ -125,9 +125,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     if let edid = ddc?.edid() {
       let name = Utils.getDisplayName(forEdid: edid)
-      let friendlyName = Utils.getFriendlyDisplayName(forDisplayId: id)
 
-      let display = Display(id, name: name, friendlyName: friendlyName)
+      let display = Display(id, name: name)
 
       let monitorSubMenu: NSMenu = asSubMenu ? NSMenu() : self.statusMenu
 
@@ -154,7 +153,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       self.displays.append(display)
 
       let monitorMenuItem = NSMenuItem()
-      monitorMenuItem.title = "\(display.friendlyName)"
+      monitorMenuItem.title = "\(display.getFriendlyName())"
       if asSubMenu {
         monitorMenuItem.submenu = monitorSubMenu
       }

@@ -52,7 +52,7 @@ class DisplayPrefsViewController: NSViewController, MASPreferencesViewController
 
       // Disable built-in displays.
       if screen.isBuiltin {
-        let display = Display(id, name: screen.displayName ?? NSLocalizedString("Unknown", comment: "unknown display name"), friendlyName: nil, isEnabled: false)
+        let display = Display(id, name: screen.displayName ?? NSLocalizedString("Unknown", comment: "unknown display name"), isEnabled: false)
         self.displays.append(display)
         continue
       }
@@ -68,10 +68,9 @@ class DisplayPrefsViewController: NSViewController, MASPreferencesViewController
       }
 
       let name = Utils.getDisplayName(forEdid: edid)
-      let friendlyName = Utils.getFriendlyDisplayName(forDisplayId: id)
       let isEnabled = (prefs.object(forKey: "\(id)-state") as? Bool) ?? true
 
-      let display = Display(id, name: name, friendlyName: friendlyName, isEnabled: isEnabled)
+      let display = Display(id, name: name, isEnabled: isEnabled)
       self.displays.append(display)
     }
 
@@ -99,7 +98,7 @@ class DisplayPrefsViewController: NSViewController, MASPreferencesViewController
       cellType = DisplayCell.name
     } else if tableColumn == tableView.tableColumns[2] {
       // Friendly Name
-      text = display.friendlyName
+      text = display.getFriendlyName()
       cellType = DisplayCell.friendlyName
     } else if tableColumn == tableView.tableColumns[3] {
       // Identifier
@@ -121,6 +120,13 @@ class DisplayPrefsViewController: NSViewController, MASPreferencesViewController
         if display.name == "Mac built-in Display" {
           cell.button.isEnabled = false
         }
+        return cell
+      }
+    } else if cellType == DisplayCell.friendlyName {
+      if let cell = tableView.makeView(withIdentifier: (tableColumn?.identifier)!, owner: nil) as? FriendlyNameCellView {
+        cell.display = display
+        cell.textField?.stringValue = text
+        cell.textField?.isEditable = true
         return cell
       }
     } else {
