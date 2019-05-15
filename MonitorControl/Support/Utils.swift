@@ -94,6 +94,20 @@ class Utils: NSObject {
     return
   }
 
+  static func getSystemPreferences() -> [String: AnyObject]? {
+    var propertyListFormat = PropertyListSerialization.PropertyListFormat.xml
+    let plistPath = NSString(string: "~/Library/Preferences/.GlobalPreferences.plist").expandingTildeInPath
+    guard let plistXML = FileManager.default.contents(atPath: plistPath) else {
+      return nil
+    }
+    do {
+      return try PropertyListSerialization.propertyList(from: plistXML, options: .mutableContainersAndLeaves, format: &propertyListFormat) as? [String: AnyObject]
+    } catch {
+      os_log("Error reading system prefs plist: %{public}@", type: .info, error.localizedDescription)
+      return nil
+    }
+  }
+
   // MARK: - Display Infos
 
   /// Get the name of a display
