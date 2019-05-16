@@ -1,5 +1,7 @@
+import AVFoundation
 import Cocoa
 import DDC
+import os.log
 
 class Display {
   let identifier: CGDirectDisplayID
@@ -12,6 +14,7 @@ class Display {
   var ddc: DDC?
 
   private let prefs = UserDefaults.standard
+  private var audioPlayer: AVAudioPlayer?
 
   init(_ identifier: CGDirectDisplayID, name: String, isEnabled: Bool = true) {
     self.identifier = identifier
@@ -67,6 +70,7 @@ class Display {
 
       self.hideDisplayOsd()
       self.showOsd(command: .audioSpeakerVolume, value: value)
+	  self.playVolumeChangedSound()
     }
 
     if let slider = volumeSliderHandler?.slider {
@@ -157,5 +161,27 @@ class Display {
                       filledChiclets: UInt32(value / step),
                       totalChiclets: UInt32(maxValue / step),
                       locked: false)
+  }
+
+  private func playVolumeChangedSound() {
+    let soundPath = "/System/Library/LoginPlugins/BezelServices.loginPlugin/Contents/Resources/volume.aiff"
+    let soundUrl = URL(fileURLWithPath: soundPath)
+
+    // Check if user has enabled "Play feedback when volume is changed" in Sound Preferences
+    guard let preferences = Utils.getSystemPreferences(),
+      let hasSoundEnabled = preferences["com.apple.sound.beep.feedback"] as? Int,
+      hasSoundEnabled == 1 else {
+      os_log("sound not enabled", type: .info)
+      return
+    }
+
+    do {
+      self.audioPlayer = try AVAudioPlayer(contentsOf: soundUrl)
+      self.audioPlayer?.volume = 1
+      self.audioPlayer?.prepareToPlay()
+      self.audioPlayer?.play()
+    } catch {
+      os_log("%{public}@", type: .error, error.localizedDescription)
+    }
   }
 }
