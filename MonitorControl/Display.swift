@@ -137,6 +137,14 @@ class Display {
     return max == 0 ? 100 : max
   }
 
+  func setFriendlyName(_ value: String) {
+    self.prefs.set(value, forKey: "friendlyName-\(self.identifier)")
+  }
+
+  func getFriendlyName() -> String {
+    return self.prefs.string(forKey: "friendlyName-\(self.identifier)") ?? self.name
+  }
+
   private func showOsd(command: DDC.Command, value: Int) {
     guard let manager = OSDManager.sharedManager() as? OSDManager else {
       return

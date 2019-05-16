@@ -151,6 +151,9 @@ class Utils: NSObject {
 
     /// Change Brightness/Volume for all screens
     case allScreens
+
+    /// Friendly name changed
+    case friendlyName
   }
 
   /// Keys for the value of listenFor option

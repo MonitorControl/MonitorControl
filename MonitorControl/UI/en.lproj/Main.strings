@@ -8,6 +8,9 @@
 /* Class = "NSTableColumn"; headerCell.title = "Display Name"; ObjectID = "CHc-s5-4MN"; */
 "CHc-s5-4MN.headerCell.title" = "Display Name";
 
+/* Class = "NSTableColumn"; headerCell.title = "Friendly Name"; ObjectID = "uoI-1J-RdD"; */
+"uoI-1J-RdD.headerCell.title" = "Friendly Name";
+
 /* Class = "NSTextFieldCell"; title = "Keys"; ObjectID = "Dcz-GG-1li"; */
 "Dcz-GG-1li.title" = "Keys";
 
