@@ -108,7 +108,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       os_log("The following supported displays were found:", type: .info)
 
       for screen in filteredScreens {
-        os_log(" - %{public}@", type: .info, "\(screen.displayName ?? NSLocalizedString("Unknown", comment: "unknown display name")) (Vendor: \(screen.vendorNumber ?? 0), Model: \(screen.modelNumber ?? 0))")
+        os_log(" - %{public}@", type: .info, "\(screen.displayName ?? NSLocalizedString("Unknown", comment: "Unknown display name")) (Vendor: \(screen.vendorNumber ?? 0), Model: \(screen.modelNumber ?? 0))")
         self.addScreenToMenu(screen: screen, asSubMenu: filteredScreens.count > 1)
       }
     }

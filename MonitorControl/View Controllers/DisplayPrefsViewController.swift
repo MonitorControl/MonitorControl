@@ -52,18 +52,18 @@ class DisplayPrefsViewController: NSViewController, MASPreferencesViewController
 
       // Disable built-in displays.
       if screen.isBuiltin {
-        let display = Display(id, name: screen.displayName ?? NSLocalizedString("Unknown", comment: "unknown display name"), isEnabled: false)
+        let display = Display(id, name: screen.displayName ?? NSLocalizedString("Unknown", comment: "Unknown display name"), isEnabled: false)
         self.displays.append(display)
         continue
       }
 
       guard let ddc = DDC(for: id) else {
-        os_log("Display “%{public}@” cannot be controlled via DDC.", screen.displayName ?? NSLocalizedString("Unknown", comment: "unknown display name"))
+        os_log("Display “%{public}@” cannot be controlled via DDC.", screen.displayName ?? NSLocalizedString("Unknown", comment: "Unknown display name"))
         continue
       }
 
       guard let edid = ddc.edid() else {
-        os_log("Cannot read EDID information for display “%{public}@”.", screen.displayName ?? NSLocalizedString("Unknown", comment: "unknown display name"))
+        os_log("Cannot read EDID information for display “%{public}@”.", screen.displayName ?? NSLocalizedString("Unknown", comment: "Unknown display name"))
         continue
       }
 
@@ -106,11 +106,11 @@ class DisplayPrefsViewController: NSViewController, MASPreferencesViewController
       cellType = DisplayCell.identifier
     } else if tableColumn == tableView.tableColumns[4] {
       // Vendor
-      text = display.identifier.vendorNumber.map { String(format: "0x%02X", $0) } ?? NSLocalizedString("unknown", comment: "unknown vendor")
+      text = display.identifier.vendorNumber.map { String(format: "0x%02X", $0) } ?? NSLocalizedString("Unknown", comment: "Unknown vendor")
       cellType = DisplayCell.vendor
     } else if tableColumn == tableView.tableColumns[5] {
       // Model
-      text = display.identifier.modelNumber.map { String(format: "0x%02X", $0) } ?? NSLocalizedString("unknown", comment: "unknown model")
+      text = display.identifier.modelNumber.map { String(format: "0x%02X", $0) } ?? NSLocalizedString("Unknown", comment: "Unknown model")
       cellType = DisplayCell.model
     }
     if cellType == DisplayCell.checkbox {

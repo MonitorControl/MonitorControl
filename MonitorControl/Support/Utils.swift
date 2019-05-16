@@ -115,7 +115,7 @@ class Utils: NSObject {
   /// - Parameter edid: the EDID of a display
   /// - Returns: a string
   static func getDisplayName(forEdid edid: EDID) -> String {
-    return edid.displayName() ?? NSLocalizedString("Unknown", comment: "")
+    return edid.displayName() ?? NSLocalizedString("Unknown", comment: "Unknown display name")
   }
 
   /// Get the main display from a list of display

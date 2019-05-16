@@ -70,7 +70,7 @@ class Display {
 
       self.hideDisplayOsd()
       self.showOsd(command: .audioSpeakerVolume, value: value)
-	  self.playVolumeChangedSound()
+      self.playVolumeChangedSound()
     }
 
     if let slider = volumeSliderHandler?.slider {
