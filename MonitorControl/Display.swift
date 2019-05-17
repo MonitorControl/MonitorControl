@@ -21,6 +21,7 @@ class Display {
     self.name = name
     self.isEnabled = isEnabled
     self.ddc = DDC(for: identifier)
+    self.isMuted = self.getValue(for: .audioMuteScreenBlank) == 1
   }
 
   // On some displays, the display's OSD overlaps the macOS OSD,
@@ -35,22 +36,32 @@ class Display {
     }
   }
 
-  func mute() {
+  func mute(forceVolume: Int? = nil) {
     var value = 0
-    if self.isMuted {
-      value = self.getValue(for: DDC.Command.audioSpeakerVolume)
+    
+    if self.isMuted && (forceVolume == nil || forceVolume! > 0) {
+      value = forceVolume ?? self.getValue(for: .audioSpeakerVolume)
+      self.saveValue(value, for: .audioSpeakerVolume)
+      
       self.isMuted = false
-    } else {
+    } else if !self.isMuted && (forceVolume == nil || forceVolume == 0) {
       self.isMuted = true
     }
 
     DispatchQueue.global(qos: .userInitiated).async {
-      guard self.ddc?.write(command: .audioSpeakerVolume, value: UInt16(value), errorRecoveryWaitTime: self.hideOsd ? 0 : nil) == true else {
+      let muteValue = self.isMuted ? 1 : 2
+      guard self.ddc?.write(command: .audioMuteScreenBlank, value: UInt16(muteValue), errorRecoveryWaitTime: self.hideOsd ? 0 : nil) == true else {
+        self.setVolume(to: value)
         return
       }
 
-      self.hideDisplayOsd()
-      self.showOsd(command: .audioSpeakerVolume, value: value)
+      if forceVolume == nil || forceVolume == 0 {
+        self.hideDisplayOsd()
+        self.showOsd(command: .audioSpeakerVolume, value: value)
+        self.playVolumeChangedSound()
+      }
+      
+      self.saveValue(muteValue, for: .audioMuteScreenBlank)
     }
 
     if let slider = volumeSliderHandler?.slider {
@@ -59,8 +70,11 @@ class Display {
   }
 
   func setVolume(to value: Int) {
-    if value > 0 {
-      self.isMuted = false
+    if value > 0 && self.isMuted {
+      self.mute(forceVolume: value)
+    } else if value == 0 {
+      self.mute(forceVolume: 0)
+      return
     }
 
     DispatchQueue.global(qos: .userInitiated).async {
