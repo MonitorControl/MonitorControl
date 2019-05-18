@@ -56,7 +56,12 @@ class Utils: NSObject {
         os_log("Display does not support enabling DDC application report.", type: .debug)
       }
 
-      values = display.ddc?.read(command: command, tries: 10, minReplyDelay: delay)
+      let tries = UInt(display.getPollingCount())
+      os_log("Polling %{public}@ times", type: .info, String(tries))
+
+      if tries != 0 {
+        values = display.ddc?.read(command: command, tries: tries, minReplyDelay: delay)
+      }
 
       let (currentValue, maxValue) = values ?? (UInt16(display.getValue(for: command)), UInt16(display.getMaxValue(for: command)))
 
@@ -154,6 +159,12 @@ class Utils: NSObject {
 
     /// Friendly name changed
     case friendlyName
+
+    /// Which polling mode should be used
+    case pollingMode
+
+    /// Custom polling count when pollingMode is set to custom
+    case customPollingCount
   }
 
   /// Keys for the value of listenFor option

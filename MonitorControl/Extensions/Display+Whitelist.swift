@@ -1,7 +1,23 @@
 extension Display {
-  enum WhitelistReason {
+  enum WhitelistReason: Equatable {
     case longerDelay
     case hideOsd
+    case specificPollingMode(mode: PollingMode)
+    //TODO: implement specificPollingMode into whitelist
+
+    // make enum with associated values equatable
+    static func == (lhs: Display.WhitelistReason, rhs: Display.WhitelistReason) -> Bool {
+      switch (lhs, rhs) {
+      case (.longerDelay, .longerDelay):
+        return true
+      case (.hideOsd, .hideOsd):
+        return true
+      case let (.specificPollingMode(p1), .specificPollingMode(p2)):
+        return p1.value == p2.value
+      default:
+        return false
+      }
+    }
   }
 
   static let whitelist: [UInt32: [UInt32: [WhitelistReason]]] = [

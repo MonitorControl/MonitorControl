@@ -145,6 +145,25 @@ class Display {
     return self.prefs.string(forKey: "friendlyName-\(self.identifier)") ?? self.name
   }
 
+  func getPollingCount() -> Int {
+    let selectedMode = self.prefs.integer(forKey: Utils.PrefKeys.pollingMode.rawValue)
+    switch selectedMode {
+    case 0:
+      return PollingMode.none.value
+    case 1:
+      return PollingMode.minimal.value
+    case 2:
+      return PollingMode.normal.value
+    case 3:
+      return PollingMode.heavy.value
+    case 4:
+      let val = self.prefs.integer(forKey: Utils.PrefKeys.customPollingCount.rawValue)
+      return PollingMode.custom(value: val).value
+    default:
+      return 0
+    }
+  }
+
   private func showOsd(command: DDC.Command, value: Int) {
     guard let manager = OSDManager.sharedManager() as? OSDManager else {
       return

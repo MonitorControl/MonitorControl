@@ -169,6 +169,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       storyboard.instantiateController(withIdentifier: "MainPrefsVC"),
       storyboard.instantiateController(withIdentifier: "KeysPrefsVC"),
       storyboard.instantiateController(withIdentifier: "DisplayPrefsVC"),
+      storyboard.instantiateController(withIdentifier: "AdvancedPrefsVC"),
     ]
     prefsController = MASPreferencesWindowController(viewControllers: views, title: NSLocalizedString("Preferences", comment: "Shown in Preferences window"))
   }
