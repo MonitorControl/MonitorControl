@@ -13,6 +13,7 @@ class DisplayPrefsViewController: NSViewController, MASPreferencesViewController
   enum DisplayCell: String {
     case checkbox
     case name
+    case friendlyName
     case identifier
     case vendor
     case model
@@ -51,18 +52,18 @@ class DisplayPrefsViewController: NSViewController, MASPreferencesViewController
 
       // Disable built-in displays.
       if screen.isBuiltin {
-        let display = Display(id, name: screen.displayName ?? NSLocalizedString("Unknown", comment: "unknown display name"), isEnabled: false)
+        let display = Display(id, name: screen.displayName ?? NSLocalizedString("Unknown", comment: "Unknown display name"), isEnabled: false)
         self.displays.append(display)
         continue
       }
 
       guard let ddc = DDC(for: id) else {
-        os_log("Display “%{public}@” cannot be controlled via DDC.", screen.displayName ?? NSLocalizedString("Unknown", comment: "unknown display name"))
+        os_log("Display “%{public}@” cannot be controlled via DDC.", screen.displayName ?? NSLocalizedString("Unknown", comment: "Unknown display name"))
         continue
       }
 
       guard let edid = ddc.edid() else {
-        os_log("Cannot read EDID information for display “%{public}@”.", screen.displayName ?? NSLocalizedString("Unknown", comment: "unknown display name"))
+        os_log("Cannot read EDID information for display “%{public}@”.", screen.displayName ?? NSLocalizedString("Unknown", comment: "Unknown display name"))
         continue
       }
 
@@ -96,16 +97,20 @@ class DisplayPrefsViewController: NSViewController, MASPreferencesViewController
       text = display.name
       cellType = DisplayCell.name
     } else if tableColumn == tableView.tableColumns[2] {
+      // Friendly Name
+      text = display.getFriendlyName()
+      cellType = DisplayCell.friendlyName
+    } else if tableColumn == tableView.tableColumns[3] {
       // Identifier
       text = "\(display.identifier)"
       cellType = DisplayCell.identifier
-    } else if tableColumn == tableView.tableColumns[3] {
-      // Vendor
-      text = display.identifier.vendorNumber.map { String(format: "0x%02X", $0) } ?? NSLocalizedString("unknown", comment: "unknown vendor")
-      cellType = DisplayCell.vendor
     } else if tableColumn == tableView.tableColumns[4] {
+      // Vendor
+      text = display.identifier.vendorNumber.map { String(format: "0x%02X", $0) } ?? NSLocalizedString("Unknown", comment: "Unknown vendor")
+      cellType = DisplayCell.vendor
+    } else if tableColumn == tableView.tableColumns[5] {
       // Model
-      text = display.identifier.modelNumber.map { String(format: "0x%02X", $0) } ?? NSLocalizedString("unknown", comment: "unknown model")
+      text = display.identifier.modelNumber.map { String(format: "0x%02X", $0) } ?? NSLocalizedString("Unknown", comment: "Unknown model")
       cellType = DisplayCell.model
     }
     if cellType == DisplayCell.checkbox {
@@ -115,6 +120,13 @@ class DisplayPrefsViewController: NSViewController, MASPreferencesViewController
         if display.name == "Mac built-in Display" {
           cell.button.isEnabled = false
         }
+        return cell
+      }
+    } else if cellType == DisplayCell.friendlyName {
+      if let cell = tableView.makeView(withIdentifier: (tableColumn?.identifier)!, owner: nil) as? FriendlyNameCellView {
+        cell.display = display
+        cell.textField?.stringValue = text
+        cell.textField?.isEditable = true
         return cell
       }
     } else {

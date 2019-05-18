@@ -1,5 +1,7 @@
+import AVFoundation
 import Cocoa
 import DDC
+import os.log
 
 class Display {
   let identifier: CGDirectDisplayID
@@ -12,12 +14,14 @@ class Display {
   var ddc: DDC?
 
   private let prefs = UserDefaults.standard
+  private var audioPlayer: AVAudioPlayer?
 
   init(_ identifier: CGDirectDisplayID, name: String, isEnabled: Bool = true) {
     self.identifier = identifier
     self.name = name
     self.isEnabled = isEnabled
     self.ddc = DDC(for: identifier)
+    self.isMuted = self.getValue(for: .audioMuteScreenBlank) == 1
   }
 
   // On some displays, the display's OSD overlaps the macOS OSD,
@@ -27,77 +31,100 @@ class Display {
       return
     }
 
-    _ = self.ddc?.write(command: .onScreenDisplay, value: 1)
-
-    DispatchQueue.global(qos: .background).asyncAfter(deadline: DispatchTime.now() + 0.000001) {
-      _ = self.ddc?.write(command: .onScreenDisplay, value: 1)
-    }
-
-    DispatchQueue.global(qos: .background).asyncAfter(deadline: DispatchTime.now() + 0.00001) {
-      _ = self.ddc?.write(command: .onScreenDisplay, value: 1)
-    }
-
-    DispatchQueue.global(qos: .background).asyncAfter(deadline: DispatchTime.now() + 0.0001) {
-      _ = self.ddc?.write(command: .onScreenDisplay, value: 1)
+    for _ in 0..<20 {
+      _ = self.ddc?.write(command: .osd, value: UInt16(1), errorRecoveryWaitTime: 2000)
     }
   }
 
-  func mute() {
+  func mute(forceVolume: Int? = nil) {
     var value = 0
-    if self.isMuted {
-      value = self.prefs.integer(forKey: "\(DDC.Command.audioSpeakerVolume.value)-\(self.identifier)")
+
+    if self.isMuted, forceVolume == nil || forceVolume! > 0 {
+      value = forceVolume ?? self.getValue(for: .audioSpeakerVolume)
+      self.saveValue(value, for: .audioSpeakerVolume)
+
       self.isMuted = false
-    } else {
+    } else if !self.isMuted, forceVolume == nil || forceVolume == 0 {
       self.isMuted = true
     }
 
-    _ = self.ddc?.write(command: .audioSpeakerVolume, value: UInt8(value))
-    self.hideDisplayOsd()
+    DispatchQueue.global(qos: .userInitiated).async {
+      let muteValue = self.isMuted ? 1 : 2
+      guard self.ddc?.write(command: .audioMuteScreenBlank, value: UInt16(muteValue), errorRecoveryWaitTime: self.hideOsd ? 0 : nil) == true else {
+        self.setVolume(to: value)
+        return
+      }
+
+      if forceVolume == nil || forceVolume == 0 {
+        self.hideDisplayOsd()
+        self.showOsd(command: .audioSpeakerVolume, value: value)
+        self.playVolumeChangedSound()
+      }
+
+      self.saveValue(muteValue, for: .audioMuteScreenBlank)
+    }
 
     if let slider = volumeSliderHandler?.slider {
       slider.intValue = Int32(value)
     }
-
-    self.showOsd(command: .audioSpeakerVolume, value: value)
   }
 
   func setVolume(to value: Int) {
-    if value > 0 {
-      self.isMuted = false
+    if value > 0, self.isMuted {
+      self.mute(forceVolume: value)
+    } else if value == 0 {
+      self.mute(forceVolume: 0)
+      return
     }
 
-    _ = self.ddc?.write(command: .audioSpeakerVolume, value: UInt8(value))
-    self.hideDisplayOsd()
+    DispatchQueue.global(qos: .userInitiated).async {
+      guard self.ddc?.write(command: .audioSpeakerVolume, value: UInt16(value), errorRecoveryWaitTime: self.hideOsd ? 0 : nil) == true else {
+        return
+      }
+
+      self.hideDisplayOsd()
+      self.showOsd(command: .audioSpeakerVolume, value: value)
+      self.playVolumeChangedSound()
+    }
 
     if let slider = volumeSliderHandler?.slider {
       slider.intValue = Int32(value)
     }
 
-    self.showOsd(command: .audioSpeakerVolume, value: value)
     self.saveValue(value, for: .audioSpeakerVolume)
   }
 
   func setBrightness(to value: Int) {
     if self.prefs.bool(forKey: Utils.PrefKeys.lowerContrast.rawValue) {
       if value == 0 {
-        _ = self.ddc?.write(command: .contrast, value: UInt8(value))
+        DispatchQueue.global(qos: .userInitiated).async {
+          _ = self.ddc?.write(command: .contrast, value: UInt16(value))
+        }
 
         if let slider = contrastSliderHandler?.slider {
           slider.intValue = Int32(value)
         }
-      } else if self.prefs.integer(forKey: "\(DDC.Command.brightness.value)-\(self.identifier)") == 0 {
-        let contrastValue = self.prefs.integer(forKey: "\(DDC.Command.contrast.value)-\(self.identifier)")
-        _ = self.ddc?.write(command: .contrast, value: UInt8(contrastValue))
+      } else if self.getValue(for: DDC.Command.brightness) == 0 {
+        let contrastValue = self.getValue(for: DDC.Command.contrast)
+
+        DispatchQueue.global(qos: .userInitiated).async {
+          _ = self.ddc?.write(command: .contrast, value: UInt16(contrastValue))
+        }
       }
     }
 
-    _ = self.ddc?.write(command: .brightness, value: UInt8(value))
+    DispatchQueue.global(qos: .userInitiated).async {
+      guard self.ddc?.write(command: .brightness, value: UInt16(value)) == true else {
+        return
+      }
+
+      self.showOsd(command: .brightness, value: value)
+    }
 
     if let slider = brightnessSliderHandler?.slider {
       slider.intValue = Int32(value)
     }
 
-    self.showOsd(command: .brightness, value: value)
     self.saveValue(value, for: .brightness)
   }
 
@@ -107,21 +134,29 @@ class Display {
   }
 
   func getValue(for command: DDC.Command) -> Int {
-    return self.prefs.integer(forKey: "\(command)-\(self.identifier)")
+    return self.prefs.integer(forKey: "\(command.rawValue)-\(self.identifier)")
   }
 
   func saveValue(_ value: Int, for command: DDC.Command) {
-    self.prefs.set(value, forKey: "\(command)-\(self.identifier)")
+    self.prefs.set(value, forKey: "\(command.rawValue)-\(self.identifier)")
   }
 
   func saveMaxValue(_ maxValue: Int, for command: DDC.Command) {
-    self.prefs.set(maxValue, forKey: "max-\(command)-\(self.identifier)")
+    self.prefs.set(maxValue, forKey: "max-\(command.rawValue)-\(self.identifier)")
   }
 
   func getMaxValue(for command: DDC.Command) -> Int {
-    let max = self.prefs.integer(forKey: "max-\(command)-\(self.identifier)")
+    let max = self.prefs.integer(forKey: "max-\(command.rawValue)-\(self.identifier)")
 
     return max == 0 ? 100 : max
+  }
+
+  func setFriendlyName(_ value: String) {
+    self.prefs.set(value, forKey: "friendlyName-\(self.identifier)")
+  }
+
+  func getFriendlyName() -> String {
+    return self.prefs.string(forKey: "friendlyName-\(self.identifier)") ?? self.name
   }
 
   private func showOsd(command: DDC.Command, value: Int) {
@@ -148,5 +183,27 @@ class Display {
                       filledChiclets: UInt32(value / step),
                       totalChiclets: UInt32(maxValue / step),
                       locked: false)
+  }
+
+  private func playVolumeChangedSound() {
+    let soundPath = "/System/Library/LoginPlugins/BezelServices.loginPlugin/Contents/Resources/volume.aiff"
+    let soundUrl = URL(fileURLWithPath: soundPath)
+
+    // Check if user has enabled "Play feedback when volume is changed" in Sound Preferences
+    guard let preferences = Utils.getSystemPreferences(),
+      let hasSoundEnabled = preferences["com.apple.sound.beep.feedback"] as? Int,
+      hasSoundEnabled == 1 else {
+      os_log("sound not enabled", type: .info)
+      return
+    }
+
+    do {
+      self.audioPlayer = try AVAudioPlayer(contentsOf: soundUrl)
+      self.audioPlayer?.volume = 1
+      self.audioPlayer?.prepareToPlay()
+      self.audioPlayer?.play()
+    } catch {
+      os_log("%{public}@", type: .error, error.localizedDescription)
+    }
   }
 }

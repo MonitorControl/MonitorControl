@@ -40,15 +40,25 @@ class Utils: NSObject {
         }
       }
 
-      var values: (UInt8, UInt8)?
+      var values: (UInt16, UInt16)?
 
-      if display.needsLongerDelay {
-        values = display.ddc?.read(command: command, tries: 100, minReplyDelay: UInt64(30 * kMillisecondScale))
+      let delay = display.needsLongerDelay ? UInt64(40 * kMillisecondScale) : nil
+
+      if display.ddc?.supported(minReplyDelay: delay) == true {
+        os_log("Display supports DDC.", type: .debug)
       } else {
-        values = display.ddc?.read(command: command, tries: 100)
+        os_log("Display does not support DDC.", type: .debug)
       }
 
-      let (currentValue, maxValue) = values ?? (UInt8(display.getValue(for: command)), UInt8(display.getMaxValue(for: command)))
+      if display.ddc?.enableAppReport() == true {
+        os_log("Display supports enabling DDC application report.", type: .debug)
+      } else {
+        os_log("Display does not support enabling DDC application report.", type: .debug)
+      }
+
+      values = display.ddc?.read(command: command, tries: 10, minReplyDelay: delay)
+
+      let (currentValue, maxValue) = values ?? (UInt16(display.getValue(for: command)), UInt16(display.getMaxValue(for: command)))
 
       display.saveValue(Int(currentValue), for: command)
       display.saveMaxValue(Int(maxValue), for: command)
@@ -86,6 +96,20 @@ class Utils: NSObject {
     return
   }
 
+  static func getSystemPreferences() -> [String: AnyObject]? {
+    var propertyListFormat = PropertyListSerialization.PropertyListFormat.xml
+    let plistPath = NSString(string: "~/Library/Preferences/.GlobalPreferences.plist").expandingTildeInPath
+    guard let plistXML = FileManager.default.contents(atPath: plistPath) else {
+      return nil
+    }
+    do {
+      return try PropertyListSerialization.propertyList(from: plistXML, options: .mutableContainersAndLeaves, format: &propertyListFormat) as? [String: AnyObject]
+    } catch {
+      os_log("Error reading system prefs plist: %{public}@", type: .info, error.localizedDescription)
+      return nil
+    }
+  }
+
   // MARK: - Display Infos
 
   /// Get the name of a display
@@ -93,7 +117,7 @@ class Utils: NSObject {
   /// - Parameter edid: the EDID of a display
   /// - Returns: a string
   static func getDisplayName(forEdid edid: EDID) -> String {
-    return edid.displayName() ?? NSLocalizedString("Unknown", comment: "")
+    return edid.displayName() ?? NSLocalizedString("Unknown", comment: "Unknown display name")
   }
 
   /// Get the main display from a list of display
@@ -129,6 +153,9 @@ class Utils: NSObject {
 
     /// Change Brightness/Volume for all screens
     case allScreens
+
+    /// Friendly name changed
+    case friendlyName
   }
 
   /// Keys for the value of listenFor option

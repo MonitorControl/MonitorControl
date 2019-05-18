@@ -1,5 +1,9 @@
+
 /* Shown in menu */
 "Brightness" = "Helligkeit";
+
+/* Build */
+"Build" = "Build";
 
 /* Shown in menu */
 "Contrast" = "Kontrast";
@@ -31,12 +35,16 @@
 /* Shown in the alert dialog */
 "Shortcuts not available" = "Kurzbefehle nicht verfügbar";
 
-/* unknown display name */
+/* unknown display name
+ unknown model
+ unknown vendor */
 "Unknown" = "Unbekannt";
+
+/* Version */
+"Version" = "Version";
 
 /* Shown in menu */
 "Volume" = "Lautstärke";
 
 /* Shown in the alert dialog */
-"You need to enable MonitorControl in System Preferences > Security and Privacy > Accessibility for the keyboard shortcuts to work" = "Du musst MonitorControl in Systemeinstellungen > Sicherheit > Datenschutz > Bedienungshilfen aktivieren, damit die Kurzbefehle funktionieren.\n\nMonitorControl wird nun beendet. Bitte starte MonitorControl nach Erteilung der Berechtigung manuell neu.";
-
+"You need to enable MonitorControl in System Preferences > Security and Privacy > Accessibility for the keyboard shortcuts to work" = "Du musst MonitorControl in Systemeinstellungen > Sicherheit > Datenschutz > Bedienungshilfen aktivieren, damit die Kurzbefehle funktionieren.";

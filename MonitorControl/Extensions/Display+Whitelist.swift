@@ -5,7 +5,10 @@ extension Display {
   }
 
   static let whitelist: [UInt32: [UInt32: [WhitelistReason]]] = [
-    7789: [30460: [.hideOsd, .longerDelay]], // LG 38UC99-W
+    7789: [
+      30460: [.hideOsd, .longerDelay], // LG 38UC99-W over DisplayPort
+      30459: [.hideOsd, .longerDelay], // LG 38UC99-W over HDMI
+    ],
   ]
 
   var hideOsd: Bool {

@@ -34,6 +34,7 @@
 		F01B06A0228221B7008E64DB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F01B0690228221B7008E64DB /* Main.storyboard */; };
 		F01B06A1228221B7008E64DB /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = F01B0692228221B7008E64DB /* MainMenu.xib */; };
 		F03A8DF21FFBAA6F0034DC27 /* Display.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03A8DF11FFBAA6F0034DC27 /* Display.swift */; };
+		F03FE4C0228DF62B001F59A4 /* FriendlyNameCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03FE4BF228DF62A001F59A4 /* FriendlyNameCellView.swift */; };
 		F0445D3820023E710025AE82 /* MainPrefsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0445D3720023E710025AE82 /* MainPrefsViewController.swift */; };
 		F0445D3D200254FA0025AE82 /* KeysPrefsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0445D3B200254FA0025AE82 /* KeysPrefsViewController.swift */; };
 		F0445D40200259C10025AE82 /* DisplayPrefsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0445D3F200259C10025AE82 /* DisplayPrefsViewController.swift */; };
@@ -116,6 +117,7 @@
 		F01B06A622822217008E64DB /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Main.strings; sourceTree = "<group>"; };
 		F01B06A72282221B008E64DB /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Main.strings; sourceTree = "<group>"; };
 		F03A8DF11FFBAA6F0034DC27 /* Display.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Display.swift; sourceTree = "<group>"; };
+		F03FE4BF228DF62A001F59A4 /* FriendlyNameCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendlyNameCellView.swift; sourceTree = "<group>"; };
 		F0445D3720023E710025AE82 /* MainPrefsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPrefsViewController.swift; sourceTree = "<group>"; };
 		F0445D3B200254FA0025AE82 /* KeysPrefsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeysPrefsViewController.swift; sourceTree = "<group>"; };
 		F0445D3F200259C10025AE82 /* DisplayPrefsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayPrefsViewController.swift; sourceTree = "<group>"; };
@@ -223,6 +225,7 @@
 		F01B0687228221B6008E64DB /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				F03FE4BF228DF62A001F59A4 /* FriendlyNameCellView.swift */,
 				F01B068E228221B6008E64DB /* ButtonCellView.swift */,
 				F01B0690228221B7008E64DB /* Main.storyboard */,
 				F01B0692228221B7008E64DB /* MainMenu.xib */,
@@ -283,8 +286,8 @@
 				F06792E3200A73460066C438 /* Sources */,
 				F06792E4200A73460066C438 /* Frameworks */,
 				F06792E5200A73460066C438 /* Resources */,
-				28F6A5822283548F00A4ADCD /* Sync Version Numbers */,
 				28F6A5802283515F00A4ADCD /* Increase Build Number */,
+				28F6A5822283548F00A4ADCD /* Sync Version Numbers */,
 			);
 			buildRules = (
 			);
@@ -307,13 +310,13 @@
 				TargetAttributes = {
 					56754EAA1D9A4016007BCDC5 = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = KJ5F4KTDFH;
+						DevelopmentTeam = KGY56RWR9A;
 						LastSwiftMigration = 1020;
 						ProvisioningStyle = Automatic;
 					};
 					F06792E6200A73460066C438 = {
 						CreatedOnToolsVersion = 9.2;
-						DevelopmentTeam = KJ5F4KTDFH;
+						DevelopmentTeam = KGY56RWR9A;
 						LastSwiftMigration = 1020;
 						ProvisioningStyle = Automatic;
 					};
@@ -429,7 +432,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\nelse\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
+			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\" >&2\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -441,6 +444,7 @@
 				56754EAF1D9A4016007BCDC5 /* AppDelegate.swift in Sources */,
 				F01B069E228221B7008E64DB /* ButtonCellView.swift in Sources */,
 				2894D9B82280B30500DF58DA /* CGDirectDisplayID+Extension.swift in Sources */,
+				F03FE4C0228DF62B001F59A4 /* FriendlyNameCellView.swift in Sources */,
 				F01B067922822141008E64DB /* Display+Whitelist.swift in Sources */,
 				F03A8DF21FFBAA6F0034DC27 /* Display.swift in Sources */,
 				F0445D40200259C10025AE82 /* DisplayPrefsViewController.swift in Sources */,
@@ -618,7 +622,7 @@
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = KJ5F4KTDFH;
+				DEVELOPMENT_TEAM = KGY56RWR9A;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/Mac",
@@ -642,7 +646,7 @@
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = KJ5F4KTDFH;
+				DEVELOPMENT_TEAM = KGY56RWR9A;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/Mac",
@@ -670,7 +674,7 @@
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = KJ5F4KTDFH;
+				DEVELOPMENT_TEAM = KGY56RWR9A;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = MonitorControlHelper/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
@@ -692,7 +696,7 @@
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = KJ5F4KTDFH;
+				DEVELOPMENT_TEAM = KGY56RWR9A;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = MonitorControlHelper/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";

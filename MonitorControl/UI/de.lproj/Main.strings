@@ -1,17 +1,12 @@
+
 /* Class = "NSButtonCell"; title = "Change Brightness/Volume for all screens"; ObjectID = "0Z7-PQ-Bl8"; */
 "0Z7-PQ-Bl8.title" = "Helligkeit/Lautstärke für alle Monitore ändern";
 
 /* Class = "NSTableColumn"; headerCell.title = "Enabled"; ObjectID = "8U8-ec-Zbv"; */
 "8U8-ec-Zbv.headerCell.title" = "Aktiv";
 
-/* Class = "NSTextFieldCell"; title = "Table View Cell"; ObjectID = "aSw-3H-uNa"; */
-"aSw-3H-uNa.title" = "Table View Cell";
-
 /* Class = "NSTableColumn"; headerCell.title = "Name"; ObjectID = "CHc-s5-4MN"; */
 "CHc-s5-4MN.headerCell.title" = "Name";
-
-/* Class = "NSTextFieldCell"; title = "Table View Cell"; ObjectID = "cnb-Li-1lE"; */
-"cnb-Li-1lE.title" = "Table View Cell";
 
 /* Class = "NSTextFieldCell"; title = "Keys"; ObjectID = "Dcz-GG-1li"; */
 "Dcz-GG-1li.title" = "Tasten";
@@ -43,6 +38,9 @@
 /* Class = "NSTableColumn"; headerCell.title = "Model"; ObjectID = "Nvp-hI-w4x"; */
 "Nvp-hI-w4x.headerCell.title" = "Modell";
 
+/* Class = "NSTableColumn"; headerCell.title = "Friendly Name"; ObjectID = "uoI-1J-RdD"; */
+"uoI-1J-RdD.headerCell.title" = "Anzeigename";
+
 /* Class = "NSTextFieldCell"; title = "Listen for"; ObjectID = "Vh8-06-U3K"; */
 "Vh8-06-U3K.title" = "Hören auf";
 
@@ -52,3 +50,35 @@
 /* Class = "NSButtonCell"; title = "Show a slider for contrast"; ObjectID = "xSI-8W-Xd0"; */
 "xSI-8W-Xd0.title" = "Slider für Kontrast anzeigen";
 
+/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "2gr-xG-Byx"; */
+"2gr-xG-Byx.title" = "";
+
+/* Class = "NSTextFieldCell"; title = "Table View Cell"; ObjectID = "4or-hS-WeW"; */
+"4or-hS-WeW.title" = "";
+
+/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "afl-95-ZJl"; */
+"afl-95-ZJl.title" = "";
+
+/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "as0-t3-Aub"; */
+"as0-t3-Aub.title" = "";
+
+/* Class = "NSTextFieldCell"; title = "Table View Cell"; ObjectID = "aSw-3H-uNa"; */
+"aSw-3H-uNa.title" = "";
+
+/* Class = "NSTextFieldCell"; title = "Table View Cell"; ObjectID = "cnb-Li-1lE"; */
+"cnb-Li-1lE.title" = "";
+
+/* Class = "NSTextFieldCell"; title = "Table View Cell"; ObjectID = "DGv-iu-Jg1"; */
+"DGv-iu-Jg1.title" = "";
+
+/* Class = "NSTextFieldCell"; title = "Version 0.0.0 (Build 0)"; ObjectID = "mBs-6m-13Q"; */
+"mBs-6m-13Q.title" = "";
+
+/* Class = "NSTextFieldCell"; title = "Table View Cell"; ObjectID = "Pkk-Ce-Y6Q"; */
+"Pkk-Ce-Y6Q.title" = "";
+
+/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "vkG-RF-Yne"; */
+"vkG-RF-Yne.title" = "";
+
+/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "VPD-MR-IXg"; */
+"VPD-MR-IXg.title" = "";
