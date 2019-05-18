@@ -38,13 +38,13 @@ class Display {
 
   func mute(forceVolume: Int? = nil) {
     var value = 0
-    
-    if self.isMuted && (forceVolume == nil || forceVolume! > 0) {
+
+    if self.isMuted, forceVolume == nil || forceVolume! > 0 {
       value = forceVolume ?? self.getValue(for: .audioSpeakerVolume)
       self.saveValue(value, for: .audioSpeakerVolume)
-      
+
       self.isMuted = false
-    } else if !self.isMuted && (forceVolume == nil || forceVolume == 0) {
+    } else if !self.isMuted, forceVolume == nil || forceVolume == 0 {
       self.isMuted = true
     }
 
@@ -60,7 +60,7 @@ class Display {
         self.showOsd(command: .audioSpeakerVolume, value: value)
         self.playVolumeChangedSound()
       }
-      
+
       self.saveValue(muteValue, for: .audioMuteScreenBlank)
     }
 
@@ -70,7 +70,7 @@ class Display {
   }
 
   func setVolume(to value: Int) {
-    if value > 0 && self.isMuted {
+    if value > 0, self.isMuted {
       self.mute(forceVolume: value)
     } else if value == 0 {
       self.mute(forceVolume: 0)
