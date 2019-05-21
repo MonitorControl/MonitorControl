@@ -1,10 +1,100 @@
-# MonitorControl.OSX
-A menu let to control your monitor (brightness, contrast, volume)
+<h1 align="center"> MonitorControl </h1>
 
-![image](https://cloud.githubusercontent.com/assets/376453/18903896/5a8ad950-8510-11e6-85d0-c95170a76fb8.png)
+<!-- subtext -->
+<div align="center">
+Control your external monitor brightness, contrast or volume directly from a menulet or with keyboard native keys.
+</div>
 
-Compatible with most Dell monitors and LG including 27UD68
+<br/>
 
----
+<!-- Language emoji -->
+<div align="center">
+    <p>Translations: :uk: :fr: :de:</p>
+</div>
 
-Powered by [@kfix/ddcctl](https://github.com/kfix/ddcctl)
+<br/>
+
+<!-- shields -->
+<div align="center">
+    <!-- downloads -->
+    <a href="https://github.com/the0neyouseek/MonitorControl/releases">
+        <img src="https://img.shields.io/github/downloads/the0neyouseek/MonitorControl/total.svg" alt="downloads"/>
+    </a>
+    <!-- version -->
+    <a href="https://github.com/the0neyouseek/MonitorControl/releases/latest">
+        <img src="https://img.shields.io/github/release/the0neyouseek/MonitorControl.svg" alt="latest version"/>
+    </a>
+    <!-- license -->
+    <a href="https://github.com/the0neyouseek/MonitorControl/blob/master/License.txt">
+        <img src="https://img.shields.io/github/license/the0neyouseek/MonitorControl.svg" alt="license"/>
+    </a>
+    <!-- platform -->
+    <a href="https://github.com/the0neyouseek/MonitorControl">
+        <img src="https://img.shields.io/badge/platform-macOS-lightgrey.svg" alt="platform"/>
+    </a>
+</div>
+
+<br/>
+
+<div align="center">
+    <img src="./.github/menulet.png"  alt="menulet screenshot"/>
+    <br/><br/>
+    <img src="./.github/menugeneral.png" width="299" alt="general screenshot"/><img src="./.github/menukeys.png" width="299" alt="keys screenshot"/><img src="./.github/menudisplay.png" width="299" alt="display screenshot"/>
+
+<br/>
+
+*Bonus: Using keyboard keys displays the native osd*
+
+<img src="./.github/osd.jpg" width="500" align="center" alt="osd screenshot"/>
+</div>
+
+## Download
+
+Go to [Release](https://github.com/the0neyouseek/MonitorControl/releases/latest) and download the latest `.dmg`
+
+## How to help
+
+Open [issues](https://github.com/the0neyouseek/MonitorControl/issues) if you have a question, an enhancement to suggest or a bug you've found. If you want you can fork the code yourself and submit a pull request to improve the app.
+
+## How to build
+
+### Required
+
+- Xcode
+- [Carthage](https://github.com/Carthage/Carthage)
+- [Swiftlint](https://github.com/realm/SwiftLint)
+- [SwiftFormat](https://github.com/nicklockwood/SwiftFormat)
+
+Clone the project
+```sh
+$ git clone https://github.com/the0neyouseek/MonitorControl.git
+```
+Then download the dependencies with Carthage
+```sh
+$ carthage update --platform macOS
+```
+
+You're all set ! Now open the `MonitorControl.xcodeproj` with Xcode
+
+### Third party dependencies
+
+- [MediaKeyTap](https://github.com/the0neyouseek/MediaKeyTap)
+- [MASPreferences](https://github.com/shpakovski/MASPreferences)
+- [DDC.swift](https://github.com/reitermarkus/DDC.swift)
+- [AMCoreAudio](https://github.com/rnine/AMCoreAudio)
+
+## Support
+- macOS Sierra (`10.12`) and up.
+- Works with monitors controllable via [DDC](https://en.wikipedia.org/wiki/Display_Data_Channel).
+
+## Contributors
+- [@the0neyouseek](https://github.com/the0neyouseek)
+- [@reitermarkus](https://github.com/reitermarkus)
+- [@JoniVR](https://github.com/JoniVR)
+
+## Thanks
+- [@bluejamesbond](https://github.com/bluejamesbond/) (Original developer)
+- [@Tyilo](https://github.com/Tyilo/) (Fork)
+- [@Bensge](https://github.com/Bensge/) - (Used some code from his project [NativeDisplayBrightness](https://github.com/Bensge/NativeDisplayBrightness))
+- [@nhurden](https://github.com/nhurden/) (For the original MediaKeyTap)
+- [@kfix](https://github.com/kfix/ddcctl) (For ddcctl)

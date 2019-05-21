@@ -1,0 +1,50 @@
+
+/* Sown in menu */
+"Brightness" = "Luminosità";
+
+/* Build */
+"Build" = "Build";
+
+/* Shown in menu */
+"Contrast" = "Contrasto";
+
+/* Shown in menu */
+"Default" = "Default";
+
+/* No comment provided by engineer. */
+"Display" = "Display";
+
+/* Shown in the main prefs window */
+"General" = "Generale";
+
+/* Shown in the main prefs window */
+"Keys" = "Tasti";
+
+/* Shown in menu */
+"No supported display found" = "Nessun display supportato trovato";
+
+/* Shown in the alert dialog */
+"Ok" = "Ok";
+
+/* Shown in Preferences window */
+"Preferences" = "Preferenze";
+
+/* Shown in menu */
+"Set as default" = "Salva come default";
+
+/* Shown in the alert dialog */
+"Shortcuts not available" = "Scorciatoie non disponibili";
+
+/* Unknown display name
+ Unknown model
+ Unknown vendor */
+"Unknown" = "Sconosciuto";
+
+/* Version */
+"Version" = "Versione";
+
+/* Shown in menu */
+"Volume" = "Volume";
+
+/* Shown in the alert dialog */
+"You need to enable MonitorControl in System Preferences > Security and Privacy > Accessibility for the keyboard shortcuts to work" = "Dovresti abilitare MonitorControl in Preferenze di Sistema > Sicurezza e Privacy > Accessibilità della tastiera per far funzionare le scorciatoie";
