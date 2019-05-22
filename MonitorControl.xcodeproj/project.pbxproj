@@ -186,6 +186,7 @@
 				F06792E8200A73460066C438 /* MonitorControlHelper */,
 				56754EAC1D9A4016007BCDC5 /* Products */,
 			);
+			indentWidth = 2;
 			sourceTree = "<group>";
 		};
 		56754EAC1D9A4016007BCDC5 /* Products */ = {
@@ -697,6 +698,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = KGY56RWR9A;
+				DEVELOPMENT_TEAM = CYC8C8R4K9;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = MonitorControlHelper/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
