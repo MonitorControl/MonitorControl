@@ -42,7 +42,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
   func applicationWillTerminate(_: Notification) {
     AMCoreAudio.NotificationCenter.defaultCenter.unsubscribe(self, eventType: AudioHardwareEvent.self)
-    DistributedNotificationCenter.default().removeObserver(self.accessibilityObserver as Any, name: NSNotification.Name("com.apple.accessibility.api"), object: nil)
+    DistributedNotificationCenter.default().removeObserver(self.accessibilityObserver as Any, name: .accessibilityApi, object: nil)
   }
 
   @IBAction func quitClicked(_: AnyObject) {
@@ -186,7 +186,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     AMCoreAudio.NotificationCenter.defaultCenter.subscribe(self, eventType: AudioHardwareEvent.self, dispatchQueue: DispatchQueue.main)
 
     // listen for accessibility status changes
-    accessibilityObserver = DistributedNotificationCenter.default().addObserver(forName: NSNotification.Name("com.apple.accessibility.api"), object: nil, queue: nil) { _ in
+    accessibilityObserver = DistributedNotificationCenter.default().addObserver(forName: .accessibilityApi, object: nil, queue: nil) { _ in
       DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
         self.startOrRestartMediaKeyTap()
       }

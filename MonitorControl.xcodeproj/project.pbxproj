@@ -26,6 +26,7 @@
 		28D1DE15227FD006004CB494 /* DDC.framework.dSYM in [Carthage] Copy Framework Debug Symbols */ = {isa = PBXBuildFile; fileRef = 28D1DE11227FD006004CB494 /* DDC.framework.dSYM */; };
 		56754EAF1D9A4016007BCDC5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56754EAE1D9A4016007BCDC5 /* AppDelegate.swift */; };
 		56754EB11D9A4016007BCDC5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 56754EB01D9A4016007BCDC5 /* Assets.xcassets */; };
+		8C0E20562296ABBA000CBF15 /* NSNotification+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0E20552296ABBA000CBF15 /* NSNotification+Extension.swift */; };
 		F01B067922822141008E64DB /* Display+Whitelist.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01B067822822141008E64DB /* Display+Whitelist.swift */; };
 		F01B0699228221B7008E64DB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F01B0680228221B6008E64DB /* Localizable.strings */; };
 		F01B069A228221B7008E64DB /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01B0683228221B6008E64DB /* Utils.swift */; };
@@ -99,6 +100,7 @@
 		56754EAB1D9A4016007BCDC5 /* MonitorControl.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MonitorControl.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		56754EAE1D9A4016007BCDC5 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AppDelegate.swift; sourceTree = "<group>"; };
 		56754EB01D9A4016007BCDC5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		8C0E20552296ABBA000CBF15 /* NSNotification+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSNotification+Extension.swift"; sourceTree = "<group>"; };
 		F01B067822822141008E64DB /* Display+Whitelist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Display+Whitelist.swift"; sourceTree = "<group>"; };
 		F01B0681228221B6008E64DB /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F01B0682228221B6008E64DB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -174,6 +176,7 @@
 				F01B067822822141008E64DB /* Display+Whitelist.swift */,
 				28D1DDEC227FB8F2004CB494 /* EDID+Extension.swift */,
 				28D1DDF1227FBE71004CB494 /* NSScreen+Extension.swift */,
+				8C0E20552296ABBA000CBF15 /* NSNotification+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -449,6 +452,7 @@
 				F01B067922822141008E64DB /* Display+Whitelist.swift in Sources */,
 				F03A8DF21FFBAA6F0034DC27 /* Display.swift in Sources */,
 				F0445D40200259C10025AE82 /* DisplayPrefsViewController.swift in Sources */,
+				8C0E20562296ABBA000CBF15 /* NSNotification+Extension.swift in Sources */,
 				28D1DDF0227FBD99004CB494 /* EDID+Extension.swift in Sources */,
 				F0445D3D200254FA0025AE82 /* KeysPrefsViewController.swift in Sources */,
 				F0445D3820023E710025AE82 /* MainPrefsViewController.swift in Sources */,
@@ -698,7 +702,6 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = KGY56RWR9A;
-				DEVELOPMENT_TEAM = CYC8C8R4K9;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = MonitorControlHelper/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
