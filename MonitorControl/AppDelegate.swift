@@ -24,6 +24,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   var mediaKeyTap: MediaKeyTap?
   var prefsController: NSWindowController?
 
+  var accessibilityObserver: NSObjectProtocol!
+
   func applicationDidFinishLaunching(_: Notification) {
     app = self
 
@@ -40,6 +42,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
   func applicationWillTerminate(_: Notification) {
     AMCoreAudio.NotificationCenter.defaultCenter.unsubscribe(self, eventType: AudioHardwareEvent.self)
+    DistributedNotificationCenter.default().removeObserver(self.accessibilityObserver as Any, name: .accessibilityApi, object: nil)
   }
 
   @IBAction func quitClicked(_: AnyObject) {
@@ -181,6 +184,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     // subscribe Audio output detector (AMCoreAudio)
     AMCoreAudio.NotificationCenter.defaultCenter.subscribe(self, eventType: AudioHardwareEvent.self, dispatchQueue: DispatchQueue.main)
+
+    // listen for accessibility status changes
+    accessibilityObserver = DistributedNotificationCenter.default().addObserver(forName: .accessibilityApi, object: nil, queue: nil) { _ in
+      DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+        self.startOrRestartMediaKeyTap()
+      }
+    }
   }
 }
 
