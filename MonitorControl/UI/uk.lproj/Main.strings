@@ -1,0 +1,84 @@
+
+/* Class = "NSButtonCell"; title = "Change Brightness/Volume for all screens"; ObjectID = "0Z7-PQ-Bl8"; */
+"0Z7-PQ-Bl8.title" = "Змінювати Яскравість та Гучність для усіх дісплеїв";
+
+/* Class = "NSTableColumn"; headerCell.title = "Enabled"; ObjectID = "8U8-ec-Zbv"; */
+"8U8-ec-Zbv.headerCell.title" = "Увімкнено";
+
+/* Class = "NSTableColumn"; headerCell.title = "Name"; ObjectID = "CHc-s5-4MN"; */
+"CHc-s5-4MN.headerCell.title" = "Назва";
+
+/* Class = "NSTextFieldCell"; title = "Keys"; ObjectID = "Dcz-GG-1li"; */
+"Dcz-GG-1li.title" = "Клавіші";
+
+/* Class = "NSTableColumn"; headerCell.title = "ID"; ObjectID = "dgp-q7-cBK"; */
+"dgp-q7-cBK.headerCell.title" = "ID";
+
+/* Class = "NSTextFieldCell"; title = "General"; ObjectID = "ENU-js-huy"; */
+"ENU-js-huy.title" = "Загальне";
+
+/* Class = "NSTextFieldCell"; title = "Display"; ObjectID = "ExD-7P-6XI"; */
+"ExD-7P-6XI.title" = "Дісплеї";
+
+/* Class = "NSButtonCell"; title = "Lower Contrast after Brightness"; ObjectID = "fhy-Er-0aI"; */
+"fhy-Er-0aI.title" = "Зменшувати Контраст після Яскравості";
+
+/* Class = "NSMenuItem"; title = "Brightness only"; ObjectID = "hjz-0c-rvK"; */
+"hjz-0c-rvK.title" = "лише Яскравість";
+
+/* Class = "NSButtonCell"; title = "Start MonitorControl at Login"; ObjectID = "j72-NF-zsW"; */
+"j72-NF-zsW.title" = "Запускати MonitorControl разом із системою";
+
+/* Class = "NSTableColumn"; headerCell.title = "Vendor"; ObjectID = "LRJ-fb-Z9E"; */
+"LRJ-fb-Z9E.headerCell.title" = "Виробник";
+
+/* Class = "NSMenuItem"; title = "Volume only"; ObjectID = "NLP-dU-Dam"; */
+"NLP-dU-Dam.title" = "лише Гучність";
+
+/* Class = "NSTableColumn"; headerCell.title = "Model"; ObjectID = "Nvp-hI-w4x"; */
+"Nvp-hI-w4x.headerCell.title" = "Модель";
+
+/* Class = "NSTableColumn"; headerCell.title = "Friendly Name"; ObjectID = "uoI-1J-RdD"; */
+"uoI-1J-RdD.headerCell.title" = "Назва дісплею";
+
+/* Class = "NSTextFieldCell"; title = "Listen for"; ObjectID = "Vh8-06-U3K"; */
+"Vh8-06-U3K.title" = "Реагувати на";
+
+/* Class = "NSMenuItem"; title = "Both Brightness & Volume"; ObjectID = "Vr4-xb-B4o"; */
+"Vr4-xb-B4o.title" = "Яскравість та Гучність";
+
+/* Class = "NSButtonCell"; title = "Show a slider for contrast"; ObjectID = "xSI-8W-Xd0"; */
+"xSI-8W-Xd0.title" = "Показувати слайдер для контрасту";
+
+/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "2gr-xG-Byx"; */
+"2gr-xG-Byx.title" = "";
+
+/* Class = "NSTextFieldCell"; title = "Table View Cell"; ObjectID = "4or-hS-WeW"; */
+"4or-hS-WeW.title" = "";
+
+/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "afl-95-ZJl"; */
+"afl-95-ZJl.title" = "";
+
+/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "as0-t3-Aub"; */
+"as0-t3-Aub.title" = "";
+
+/* Class = "NSTextFieldCell"; title = "Table View Cell"; ObjectID = "aSw-3H-uNa"; */
+"aSw-3H-uNa.title" = "";
+
+/* Class = "NSTextFieldCell"; title = "Table View Cell"; ObjectID = "cnb-Li-1lE"; */
+"cnb-Li-1lE.title" = "";
+
+/* Class = "NSTextFieldCell"; title = "Table View Cell"; ObjectID = "DGv-iu-Jg1"; */
+"DGv-iu-Jg1.title" = "";
+
+/* Class = "NSTextFieldCell"; title = "Version 0.0.0 (Build 0)"; ObjectID = "mBs-6m-13Q"; */
+"mBs-6m-13Q.title" = "";
+
+/* Class = "NSTextFieldCell"; title = "Table View Cell"; ObjectID = "Pkk-Ce-Y6Q"; */
+"Pkk-Ce-Y6Q.title" = "";
+
+/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "vkG-RF-Yne"; */
+"vkG-RF-Yne.title" = "";
+
+/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "VPD-MR-IXg"; */
+"VPD-MR-IXg.title" = "";
