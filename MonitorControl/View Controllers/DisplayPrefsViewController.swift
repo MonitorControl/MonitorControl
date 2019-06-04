@@ -10,8 +10,9 @@ class DisplayPrefsViewController: NSViewController, MASPreferencesViewController
   let prefs = UserDefaults.standard
 
   var displays: [Display] = []
-  enum DisplayCell: String {
+  enum DisplayColumn: Int {
     case checkbox
+    case ddc
     case name
     case friendlyName
     case identifier
@@ -50,27 +51,10 @@ class DisplayPrefsViewController: NSViewController, MASPreferencesViewController
     for screen in NSScreen.screens {
       let id = screen.displayID
 
-      // Disable built-in displays.
-      if screen.isBuiltin {
-        let display = Display(id, name: screen.displayName ?? NSLocalizedString("Unknown", comment: "Unknown display name"), isEnabled: false)
-        self.displays.append(display)
-        continue
-      }
-
-      guard let ddc = DDC(for: id) else {
-        os_log("Display “%{public}@” cannot be controlled via DDC.", screen.displayName ?? NSLocalizedString("Unknown", comment: "Unknown display name"))
-        continue
-      }
-
-      guard let edid = ddc.edid() else {
-        os_log("Cannot read EDID information for display “%{public}@”.", screen.displayName ?? NSLocalizedString("Unknown", comment: "Unknown display name"))
-        continue
-      }
-
-      let name = Utils.getDisplayName(forEdid: edid)
+      let name = screen.displayName ?? NSLocalizedString("Unknown", comment: "Unknown display name")
       let isEnabled = (prefs.object(forKey: "\(id)-state") as? Bool) ?? true
 
-      let display = Display(id, name: name, isEnabled: isEnabled)
+      let display = Display(id, name: name, isBuiltin: screen.isBuiltin, isEnabled: isEnabled)
       self.displays.append(display)
     }
 
@@ -84,58 +68,57 @@ class DisplayPrefsViewController: NSViewController, MASPreferencesViewController
   // MARK: - Table delegate
 
   func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
-    var cellType = DisplayCell.checkbox
-    var checked = false
-    var text = ""
+    guard let tableColumn = tableColumn,
+      let columnIndex = tableView.tableColumns.firstIndex(of: tableColumn),
+      let column = DisplayColumn(rawValue: columnIndex) else {
+      return nil
+    }
     let display = self.displays[row]
 
-    if tableColumn == tableView.tableColumns[0] {
-      // Checkbox
-      checked = display.isEnabled
-    } else if tableColumn == tableView.tableColumns[1] {
-      // Name
-      text = display.name
-      cellType = DisplayCell.name
-    } else if tableColumn == tableView.tableColumns[2] {
-      // Friendly Name
-      text = display.getFriendlyName()
-      cellType = DisplayCell.friendlyName
-    } else if tableColumn == tableView.tableColumns[3] {
-      // Identifier
-      text = "\(display.identifier)"
-      cellType = DisplayCell.identifier
-    } else if tableColumn == tableView.tableColumns[4] {
-      // Vendor
-      text = display.identifier.vendorNumber.map { String(format: "0x%02X", $0) } ?? NSLocalizedString("Unknown", comment: "Unknown vendor")
-      cellType = DisplayCell.vendor
-    } else if tableColumn == tableView.tableColumns[5] {
-      // Model
-      text = display.identifier.modelNumber.map { String(format: "0x%02X", $0) } ?? NSLocalizedString("Unknown", comment: "Unknown model")
-      cellType = DisplayCell.model
-    }
-    if cellType == DisplayCell.checkbox {
-      if let cell = tableView.makeView(withIdentifier: (tableColumn?.identifier)!, owner: nil) as? ButtonCellView {
-        cell.button.state = checked ? .on : .off
+    switch column {
+    case .checkbox:
+      if let cell = tableView.makeView(withIdentifier: tableColumn.identifier, owner: nil) as? ButtonCellView {
         cell.display = display
-        if display.name == "Mac built-in Display" {
-          cell.button.isEnabled = false
-        }
+        cell.button.state = display.isEnabled ? .on : .off
+        cell.button.isEnabled = !display.isBuiltin
         return cell
       }
-    } else if cellType == DisplayCell.friendlyName {
-      if let cell = tableView.makeView(withIdentifier: (tableColumn?.identifier)!, owner: nil) as? FriendlyNameCellView {
+    case .ddc:
+      if let cell = tableView.makeView(withIdentifier: tableColumn.identifier, owner: nil) as? ButtonCellView {
         cell.display = display
-        cell.textField?.stringValue = text
+        cell.button.state = DDC(for: display.identifier) != nil ? .on : .off
+        cell.button.isEnabled = false
+        return cell
+      }
+    case .friendlyName:
+      if let cell = tableView.makeView(withIdentifier: tableColumn.identifier, owner: nil) as? FriendlyNameCellView {
+        cell.display = display
+        cell.textField?.stringValue = display.getFriendlyName()
         cell.textField?.isEditable = true
         return cell
       }
-    } else {
-      if let cell = tableView.makeView(withIdentifier: (tableColumn?.identifier)!, owner: nil) as? NSTableCellView {
-        cell.textField?.stringValue = text
+    default:
+      if let cell = tableView.makeView(withIdentifier: tableColumn.identifier, owner: nil) as? NSTableCellView {
+        cell.textField?.stringValue = self.getText(for: column, with: display)
         return cell
       }
     }
 
     return nil
+  }
+
+  private func getText(for column: DisplayColumn, with display: Display) -> String {
+    switch column {
+    case .name:
+      return display.name
+    case .identifier:
+      return "\(display.identifier)"
+    case .vendor:
+      return display.identifier.vendorNumber.map { String(format: "0x%02X", $0) } ?? NSLocalizedString("Unknown", comment: "Unknown vendor")
+    case .model:
+      return display.identifier.modelNumber.map { String(format: "0x%02X", $0) } ?? NSLocalizedString("Unknown", comment: "Unknown model")
+    default:
+      return ""
+    }
   }
 }
