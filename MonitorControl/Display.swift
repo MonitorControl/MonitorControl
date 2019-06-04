@@ -71,7 +71,7 @@ class Display {
     }
   }
 
-  func setVolume(to value: Int) {
+  func setVolume(to value: Int, isSmallIncrement: Bool = false) {
     if value > 0, self.isMuted {
       self.mute(forceVolume: value)
     } else if value == 0 {
@@ -85,7 +85,7 @@ class Display {
       }
 
       self.hideDisplayOsd()
-      self.showOsd(command: .audioSpeakerVolume, value: value)
+      self.showOsd(command: .audioSpeakerVolume, value: value, isSmallIncrement: isSmallIncrement)
       self.playVolumeChangedSound()
     }
 
@@ -96,7 +96,7 @@ class Display {
     self.saveValue(value, for: .audioSpeakerVolume)
   }
 
-  func setBrightness(to value: Int) {
+  func setBrightness(to value: Int, isSmallIncrement: Bool = false) {
     if self.prefs.bool(forKey: Utils.PrefKeys.lowerContrast.rawValue) {
       if value == 0 {
         DispatchQueue.global(qos: .userInitiated).async {
@@ -120,7 +120,7 @@ class Display {
         return
       }
 
-      self.showOsd(command: .brightness, value: value)
+      self.showOsd(command: .brightness, value: value, isSmallIncrement: isSmallIncrement)
     }
 
     if let slider = brightnessSliderHandler?.slider {
@@ -161,7 +161,7 @@ class Display {
     return self.prefs.string(forKey: "friendlyName-\(self.identifier)") ?? self.name
   }
 
-  private func showOsd(command: DDC.Command, value: Int) {
+  private func showOsd(command: DDC.Command, value: Int, isSmallIncrement: Bool = false) {
     guard let manager = OSDManager.sharedManager() as? OSDManager else {
       return
     }
@@ -176,7 +176,7 @@ class Display {
       }
     }
 
-    let step = maxValue / 16
+    let step = isSmallIncrement ? maxValue / maxValue : maxValue / 16
 
     manager.showImage(osdImage,
                       onDisplayID: self.identifier,

@@ -197,29 +197,29 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 // MARK: - Media Key Tap delegate
 
 extension AppDelegate: MediaKeyTapDelegate {
-  func handle(mediaKey: MediaKey, event _: KeyEvent?) {
+  func handle(mediaKey: MediaKey, event _: KeyEvent?, modifiers: NSEvent.ModifierFlags?) {
     guard let currentDisplay = Utils.getCurrentDisplay(from: displays) else { return }
 
     let allDisplays = prefs.bool(forKey: Utils.PrefKeys.allScreens.rawValue) ? self.displays : [currentDisplay]
+    let isSmallIncrement = modifiers?.isSuperset(of: NSEvent.ModifierFlags([.shift, .option])) ?? false
 
     for display in allDisplays {
       if (prefs.object(forKey: "\(display.identifier)-state") as? Bool) ?? true {
         switch mediaKey {
         case .brightnessUp:
-          let value = display.calcNewValue(for: .brightness, withRel: +self.step)
-          display.setBrightness(to: value)
+          let value = display.calcNewValue(for: .brightness, withRel: +(isSmallIncrement ? self.step / 4 : self.step))
+          display.setBrightness(to: value, isSmallIncrement: isSmallIncrement)
         case .brightnessDown:
-          let value = currentDisplay.calcNewValue(for: .brightness, withRel: -self.step)
-          display.setBrightness(to: value)
+          let value = currentDisplay.calcNewValue(for: .brightness, withRel: -(isSmallIncrement ? self.step / 4 : self.step))
+          display.setBrightness(to: value, isSmallIncrement: isSmallIncrement)
         case .mute:
           display.mute()
         case .volumeUp:
-          let value = display.calcNewValue(for: .audioSpeakerVolume, withRel: +self.step)
-          display.setVolume(to: value)
+          let value = display.calcNewValue(for: .audioSpeakerVolume, withRel: +(isSmallIncrement ? self.step / 4 : self.step))
+          display.setVolume(to: value, isSmallIncrement: isSmallIncrement)
         case .volumeDown:
-          let value = display.calcNewValue(for: .audioSpeakerVolume, withRel: -self.step)
-          display.setVolume(to: value)
-
+          let value = display.calcNewValue(for: .audioSpeakerVolume, withRel: -(isSmallIncrement ? self.step / 4 : self.step))
+          display.setVolume(to: value, isSmallIncrement: isSmallIncrement)
         default:
           return
         }
