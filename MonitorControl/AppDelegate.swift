@@ -129,7 +129,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     if let edid = ddc?.edid() {
       let name = Utils.getDisplayName(forEdid: edid)
 
-      let display = Display(id, name: name)
+      let display = Display(id, name: name, isBuiltin: screen.isBuiltin)
 
       let monitorSubMenu: NSMenu = asSubMenu ? NSMenu() : self.statusMenu
 

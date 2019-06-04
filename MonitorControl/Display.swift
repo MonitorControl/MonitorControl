@@ -6,6 +6,7 @@ import os.log
 class Display {
   let identifier: CGDirectDisplayID
   let name: String
+  let isBuiltin: Bool
   var isEnabled: Bool
   var isMuted: Bool = false
   var brightnessSliderHandler: SliderHandler?
@@ -16,11 +17,12 @@ class Display {
   private let prefs = UserDefaults.standard
   private var audioPlayer: AVAudioPlayer?
 
-  init(_ identifier: CGDirectDisplayID, name: String, isEnabled: Bool = true) {
+  init(_ identifier: CGDirectDisplayID, name: String, isBuiltin: Bool, isEnabled: Bool = true) {
     self.identifier = identifier
     self.name = name
-    self.isEnabled = isEnabled
+    self.isEnabled = isBuiltin ? false : isEnabled
     self.ddc = DDC(for: identifier)
+    self.isBuiltin = isBuiltin
     self.isMuted = self.getValue(for: .audioMuteScreenBlank) == 1
   }
 
