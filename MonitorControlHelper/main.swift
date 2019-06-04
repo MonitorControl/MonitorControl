@@ -10,7 +10,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       return NSApp.terminate(self)
     }
 
-    var pathComponents = bundlePath.pathComponents
+    let pathComponents = bundlePath.pathComponents
     let path = NSString.path(withComponents: Array(pathComponents[0..<(pathComponents.count - 4)]))
 
     NSWorkspace.shared.launchApplication(path)

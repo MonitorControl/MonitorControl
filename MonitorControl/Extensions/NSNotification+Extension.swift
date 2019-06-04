@@ -1,5 +1,5 @@
 import Cocoa
 
 extension NSNotification.Name {
-	static let accessibilityApi = NSNotification.Name.init(rawValue: "com.apple.accessibility.api")
+  static let accessibilityApi = NSNotification.Name(rawValue: "com.apple.accessibility.api")
 }

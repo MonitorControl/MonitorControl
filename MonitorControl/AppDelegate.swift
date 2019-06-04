@@ -186,7 +186,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     AMCoreAudio.NotificationCenter.defaultCenter.subscribe(self, eventType: AudioHardwareEvent.self, dispatchQueue: DispatchQueue.main)
 
     // listen for accessibility status changes
-    accessibilityObserver = DistributedNotificationCenter.default().addObserver(forName: .accessibilityApi, object: nil, queue: nil) { _ in
+    self.accessibilityObserver = DistributedNotificationCenter.default().addObserver(forName: .accessibilityApi, object: nil, queue: nil) { _ in
       DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
         self.startOrRestartMediaKeyTap()
       }
