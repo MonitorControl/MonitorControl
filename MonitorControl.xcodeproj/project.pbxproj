@@ -100,6 +100,9 @@
 		28D1DE0F227FD006004CB494 /* MediaKeyTap.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = MediaKeyTap.framework.dSYM; path = Carthage/Build/Mac/MediaKeyTap.framework.dSYM; sourceTree = "<group>"; };
 		28D1DE10227FD006004CB494 /* AMCoreAudio.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = AMCoreAudio.framework.dSYM; path = Carthage/Build/Mac/AMCoreAudio.framework.dSYM; sourceTree = "<group>"; };
 		28D1DE11227FD006004CB494 /* DDC.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = DDC.framework.dSYM; path = Carthage/Build/Mac/DDC.framework.dSYM; sourceTree = "<group>"; };
+		47A9F59F22ACAFBE00F649BB /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
+		47A9F5A022ACAFBE00F649BB /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/MainMenu.strings"; sourceTree = "<group>"; };
+		47A9F5A122ACAFBE00F649BB /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		56754EAB1D9A4016007BCDC5 /* MonitorControl.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MonitorControl.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		56754EAE1D9A4016007BCDC5 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AppDelegate.swift; sourceTree = "<group>"; };
 		56754EB01D9A4016007BCDC5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -339,6 +342,7 @@
 				fr,
 				de,
 				uk,
+				"zh-Hans",
 			);
 			mainGroup = 56754EA21D9A4016007BCDC5;
 			productRefGroup = 56754EAC1D9A4016007BCDC5 /* Products */;
@@ -484,6 +488,7 @@
 				F01B0682228221B6008E64DB /* en */,
 				F01B0684228221B6008E64DB /* fr */,
 				1E7ECF3F22A4552400E4E701 /* uk */,
+				47A9F5A122ACAFBE00F649BB /* zh-Hans */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -496,6 +501,7 @@
 				F01B06A522822215008E64DB /* en */,
 				F01B06A622822217008E64DB /* fr */,
 				1E7ECF4022A4552B00E4E701 /* uk */,
+				47A9F59F22ACAFBE00F649BB /* zh-Hans */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -508,6 +514,7 @@
 				F01B06A222822208008E64DB /* en */,
 				F01B06A32282220A008E64DB /* fr */,
 				1E7ECF4122A4553000E4E701 /* uk */,
+				47A9F5A022ACAFBE00F649BB /* zh-Hans */,
 			);
 			name = MainMenu.xib;
 			sourceTree = "<group>";

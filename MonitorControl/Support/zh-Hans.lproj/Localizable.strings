@@ -1,0 +1,50 @@
+
+/* Sown in menu */
+"Brightness" = "Brightness";
+
+/* Build */
+"Build" = "Build";
+
+/* Shown in menu */
+"Contrast" = "Contrast";
+
+/* Shown in menu */
+"Default" = "Default";
+
+/* No comment provided by engineer. */
+"Display" = "Display";
+
+/* Shown in the main prefs window */
+"General" = "General";
+
+/* Shown in the main prefs window */
+"Keys" = "Keys";
+
+/* Shown in menu */
+"No supported display found" = "No supported display found";
+
+/* Shown in the alert dialog */
+"Ok" = "Ok";
+
+/* Shown in Preferences window */
+"Preferences" = "Preferences";
+
+/* Shown in menu */
+"Set as default" = "Set as default";
+
+/* Shown in the alert dialog */
+"Shortcuts not available" = "Shortcuts not available";
+
+/* Unknown display name
+ Unknown model
+ Unknown vendor */
+"Unknown" = "Unknown";
+
+/* Version */
+"Version" = "Version";
+
+/* Shown in menu */
+"Volume" = "Volume";
+
+/* Shown in the alert dialog */
+"You need to enable MonitorControl in System Preferences > Security and Privacy > Accessibility for the keyboard shortcuts to work" = "You need to enable MonitorControl in System Preferences > Security and Privacy > Accessibility for the keyboard shortcuts to work";
