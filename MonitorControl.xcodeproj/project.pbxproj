@@ -102,7 +102,7 @@
 		56754EAB1D9A4016007BCDC5 /* MonitorControl.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MonitorControl.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		56754EAE1D9A4016007BCDC5 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AppDelegate.swift; sourceTree = "<group>"; };
 		56754EB01D9A4016007BCDC5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		6C0CCB25228F4F720037D2C5 /* AdvancedPrefsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvancedPrefsViewController.swift; sourceTree = "<group>"; };
+		6C0CCB25228F4F720037D2C5 /* AdvancedPrefsViewController.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = AdvancedPrefsViewController.swift; sourceTree = "<group>"; };
 		6C2EA1CC228F644B00060E3F /* OnlyIntegerValueFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnlyIntegerValueFormatter.swift; sourceTree = "<group>"; };
 		6C2EA1CE228F7DFB00060E3F /* PollingMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollingMode.swift; sourceTree = "<group>"; };
 		F01B067822822141008E64DB /* Display+Whitelist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Display+Whitelist.swift"; sourceTree = "<group>"; };

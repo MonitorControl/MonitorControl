@@ -447,7 +447,7 @@
             <objects>
                 <viewController storyboardIdentifier="AdvancedPrefsVC" id="xjG-x0-7HO" customClass="AdvancedPrefsViewController" customModule="MonitorControl" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="MqL-7s-HoR">
-                        <rect key="frame" x="0.0" y="0.0" width="486" height="106"/>
+                        <rect key="frame" x="0.0" y="0.0" width="456" height="106"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="moz-ZW-I46">
@@ -466,8 +466,40 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="5O2-Rx-Ofg">
-                                <rect key="frame" x="107" y="15" width="85" height="25"/>
+                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="pmY-ct-aqj">
+                                <rect key="frame" x="298" y="18" width="50" height="22"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="OKE-Nj-KLk"/>
+                                </constraints>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="10" drawsBackground="YES" id="ISe-KR-9jL">
+                                    <numberFormatter key="formatter" formatterBehavior="default10_4" usesGroupingSeparator="NO" groupingSize="0" minimumIntegerDigits="0" maximumIntegerDigits="42" id="9y3-dd-cWl" customClass="OnlyIntegerValueFormatter" customModule="MonitorControl" customModuleProvider="target"/>
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                                <connections>
+                                    <action selector="pollingCountChanged:" target="xjG-x0-7HO" id="JDl-ee-cmq"/>
+                                </connections>
+                            </textField>
+                            <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="JJH-Qx-KJB" userLabel="Display Picker">
+                                <rect key="frame" x="107" y="15" width="94" height="25"/>
+                                <popUpButtonCell key="cell" type="push" title="Display 1" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="KOc-g4-cjy" id="Znr-n9-3L1">
+                                    <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="menu"/>
+                                    <menu key="menu" id="xTz-BF-vpC">
+                                        <items>
+                                            <menuItem title="Display 1" state="on" id="KOc-g4-cjy"/>
+                                            <menuItem title="Display 2" id="PJa-Cd-Sxh"/>
+                                            <menuItem title="Display 3" id="3bu-4f-tBo"/>
+                                        </items>
+                                    </menu>
+                                </popUpButtonCell>
+                                <connections>
+                                    <action selector="selectedDisplayChanged:" target="xjG-x0-7HO" id="FcL-OO-slV"/>
+                                </connections>
+                            </popUpButton>
+                            <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="5O2-Rx-Ofg" userLabel="Polling Mode Picker">
+                                <rect key="frame" x="206" y="15" width="85" height="25"/>
                                 <popUpButtonCell key="cell" type="push" title="Normal" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" tag="2" imageScaling="proportionallyDown" inset="2" selectedItem="niV-AQ-56t" id="9S4-xh-gkB">
                                     <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="menu"/>
@@ -486,24 +518,9 @@
                                     </menu>
                                 </popUpButtonCell>
                                 <connections>
-                                    <action selector="pollingModeChanged:" target="xjG-x0-7HO" id="Yyd-nE-H8p"/>
+                                    <action selector="selectedPollingModeChanged:" target="xjG-x0-7HO" id="Yyd-nE-H8p"/>
                                 </connections>
                             </popUpButton>
-                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="pmY-ct-aqj">
-                                <rect key="frame" x="199" y="18" width="50" height="22"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="50" id="OKE-Nj-KLk"/>
-                                </constraints>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="10" drawsBackground="YES" id="ISe-KR-9jL">
-                                    <numberFormatter key="formatter" formatterBehavior="default10_4" usesGroupingSeparator="NO" groupingSize="0" minimumIntegerDigits="0" maximumIntegerDigits="42" id="9y3-dd-cWl" customClass="OnlyIntegerValueFormatter" customModule="MonitorControl" customModuleProvider="target"/>
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                                <connections>
-                                    <action selector="pollingCountChanged:" target="xjG-x0-7HO" id="JDl-ee-cmq"/>
-                                </connections>
-                            </textField>
                         </subviews>
                         <constraints>
                             <constraint firstItem="mcM-AT-qYa" firstAttribute="top" secondItem="moz-ZW-I46" secondAttribute="bottom" constant="20" id="4bC-J1-iXD"/>
@@ -511,17 +528,20 @@
                             <constraint firstItem="pmY-ct-aqj" firstAttribute="leading" secondItem="5O2-Rx-Ofg" secondAttribute="trailing" constant="10" id="96O-QX-AcJ"/>
                             <constraint firstItem="5O2-Rx-Ofg" firstAttribute="centerY" secondItem="mcM-AT-qYa" secondAttribute="centerY" id="9Hl-NB-N8n"/>
                             <constraint firstAttribute="bottom" secondItem="mcM-AT-qYa" secondAttribute="bottom" constant="20" id="E17-5L-HsK"/>
+                            <constraint firstItem="JJH-Qx-KJB" firstAttribute="centerY" secondItem="mcM-AT-qYa" secondAttribute="centerY" id="Gdl-7d-Wuu"/>
                             <constraint firstItem="moz-ZW-I46" firstAttribute="leading" secondItem="MqL-7s-HoR" secondAttribute="leading" constant="20" id="Kh2-TM-Ugz"/>
                             <constraint firstItem="moz-ZW-I46" firstAttribute="top" secondItem="MqL-7s-HoR" secondAttribute="top" constant="20" id="MfN-q8-NmM"/>
                             <constraint firstItem="pmY-ct-aqj" firstAttribute="centerY" secondItem="mcM-AT-qYa" secondAttribute="centerY" id="PGX-3F-XZa"/>
-                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="pmY-ct-aqj" secondAttribute="trailing" constant="237" id="WuJ-gt-2he"/>
-                            <constraint firstItem="5O2-Rx-Ofg" firstAttribute="leading" secondItem="mcM-AT-qYa" secondAttribute="trailing" constant="10" id="caa-3U-X9N"/>
+                            <constraint firstItem="JJH-Qx-KJB" firstAttribute="leading" secondItem="mcM-AT-qYa" secondAttribute="trailing" constant="10" id="UtD-Dm-7SM"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="pmY-ct-aqj" secondAttribute="trailing" constant="108" id="fx2-eR-KFK"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="moz-ZW-I46" secondAttribute="trailing" constant="20" id="nUH-DD-Xsg"/>
+                            <constraint firstItem="5O2-Rx-Ofg" firstAttribute="leading" secondItem="JJH-Qx-KJB" secondAttribute="trailing" constant="10" id="qm2-Vc-GDg"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="pollingCustomCount" destination="pmY-ct-aqj" id="4SF-Sh-7as"/>
-                        <outlet property="pollingMode" destination="5O2-Rx-Ofg" id="89L-EC-HdN"/>
+                        <outlet property="displayPopupBtn" destination="JJH-Qx-KJB" id="aOp-Gy-YYj"/>
+                        <outlet property="pollingCountTxt" destination="pmY-ct-aqj" id="4SF-Sh-7as"/>
+                        <outlet property="pollingModePopupBtn" destination="5O2-Rx-Ofg" id="89L-EC-HdN"/>
                     </connections>
                 </viewController>
                 <customObject id="lVu-28-yuM" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>

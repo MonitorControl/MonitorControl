@@ -3,7 +3,7 @@ extension Display {
     case longerDelay
     case hideOsd
     case specificPollingMode(mode: PollingMode)
-    //TODO: implement specificPollingMode into whitelist
+    // TODO: implement specificPollingMode into whitelist
 
     // make enum with associated values equatable
     static func == (lhs: Display.WhitelistReason, rhs: Display.WhitelistReason) -> Bool {

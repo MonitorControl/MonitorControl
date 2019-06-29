@@ -145,8 +145,25 @@ class Display {
     return self.prefs.string(forKey: "friendlyName-\(self.identifier)") ?? self.name
   }
 
+  func setPollingMode(_ value: Int) {
+    self.prefs.set(String(value), forKey: "pollingMode-\(self.identifier)")
+  }
+
+  /*
+   Polling Modes:
+   0 -> .none     -> 0 tries
+   1 -> .minimal  -> 5 tries
+   2 -> .normal   -> 10 tries
+   3 -> .heavy    -> 100 tries
+   4 -> .custom   -> $pollingCount tries
+   */
+  func getPollingMode() -> Int {
+    // Reading as string so we don't get "0" as the default value
+    return Int(self.prefs.string(forKey: "pollingMode-\(self.identifier)") ?? "2") ?? 2
+  }
+
   func getPollingCount() -> Int {
-    let selectedMode = self.prefs.integer(forKey: Utils.PrefKeys.pollingMode.rawValue)
+    let selectedMode = Int(self.prefs.string(forKey: "pollingMode-\(self.identifier)") ?? "2") ?? 2
     switch selectedMode {
     case 0:
       return PollingMode.none.value
@@ -157,11 +174,15 @@ class Display {
     case 3:
       return PollingMode.heavy.value
     case 4:
-      let val = self.prefs.integer(forKey: Utils.PrefKeys.customPollingCount.rawValue)
+      let val = self.prefs.integer(forKey: "pollingCount-\(self.identifier)")
       return PollingMode.custom(value: val).value
     default:
       return 0
     }
+  }
+
+  func setPollingCount(_ value: Int) {
+    self.prefs.set(value, forKey: "pollingCount-\(self.identifier)")
   }
 
   private func showOsd(command: DDC.Command, value: Int) {
