@@ -447,11 +447,11 @@
             <objects>
                 <viewController storyboardIdentifier="AdvancedPrefsVC" id="xjG-x0-7HO" customClass="AdvancedPrefsViewController" customModule="MonitorControl" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="MqL-7s-HoR">
-                        <rect key="frame" x="0.0" y="0.0" width="531" height="200"/>
+                        <rect key="frame" x="0.0" y="0.0" width="531" height="244"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="moz-ZW-I46">
-                                <rect key="frame" x="18" y="151" width="118" height="29"/>
+                                <rect key="frame" x="18" y="195" width="118" height="29"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Advanced" id="5wk-Dy-0fG">
                                     <font key="font" metaFont="systemBold" size="24"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -459,13 +459,13 @@
                                 </textFieldCell>
                             </textField>
                             <scrollView autohidesScrollers="YES" horizontalLineScroll="22" horizontalPageScroll="10" verticalLineScroll="22" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VCP-xz-0jI">
-                                <rect key="frame" x="20" y="20" width="491" height="111"/>
+                                <rect key="frame" x="20" y="61" width="491" height="114"/>
                                 <clipView key="contentView" drawsBackground="NO" id="EAu-T4-lFV">
-                                    <rect key="frame" x="1" y="0.0" width="489" height="110"/>
+                                    <rect key="frame" x="1" y="0.0" width="489" height="113"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" multipleSelection="NO" emptySelection="NO" autosaveColumns="NO" typeSelect="NO" rowHeight="20" rowSizeStyle="automatic" headerView="qVc-cy-LaW" viewBased="YES" id="t7B-Q7-Ssj">
-                                            <rect key="frame" x="0.0" y="0.0" width="489" height="85"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="489" height="88"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -646,15 +646,28 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableHeaderView>
                             </scrollView>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bct-zW-zKf">
+                                <rect key="frame" x="14" y="13" width="151" height="32"/>
+                                <buttonCell key="cell" type="push" title="Reset Preferences" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="4Pj-3t-PJr">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="resetPrefsClicked:" target="xjG-x0-7HO" id="rET-YD-lIt"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <constraints>
                             <constraint firstItem="VCP-xz-0jI" firstAttribute="leading" secondItem="MqL-7s-HoR" secondAttribute="leading" constant="20" id="EXX-P9-jE2"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="bct-zW-zKf" secondAttribute="trailing" constant="20" id="FI6-Dj-LYL"/>
                             <constraint firstItem="moz-ZW-I46" firstAttribute="leading" secondItem="MqL-7s-HoR" secondAttribute="leading" constant="20" id="Kh2-TM-Ugz"/>
+                            <constraint firstAttribute="bottom" secondItem="bct-zW-zKf" secondAttribute="bottom" constant="20" id="Kr9-Xc-ADk"/>
                             <constraint firstItem="moz-ZW-I46" firstAttribute="top" secondItem="MqL-7s-HoR" secondAttribute="top" constant="20" id="MfN-q8-NmM"/>
                             <constraint firstAttribute="trailing" secondItem="VCP-xz-0jI" secondAttribute="trailing" constant="20" id="Vxd-7K-b1F"/>
+                            <constraint firstItem="bct-zW-zKf" firstAttribute="top" secondItem="VCP-xz-0jI" secondAttribute="bottom" constant="20" id="dgi-9A-uCh"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="moz-ZW-I46" secondAttribute="trailing" constant="20" id="nUH-DD-Xsg"/>
+                            <constraint firstItem="bct-zW-zKf" firstAttribute="leading" secondItem="MqL-7s-HoR" secondAttribute="leading" constant="20" id="qvo-d9-w65"/>
                             <constraint firstItem="VCP-xz-0jI" firstAttribute="top" secondItem="moz-ZW-I46" secondAttribute="bottom" constant="20" id="uXu-ul-N8n"/>
-                            <constraint firstAttribute="bottom" secondItem="VCP-xz-0jI" secondAttribute="bottom" constant="20" id="wl1-XN-dMs"/>
                         </constraints>
                     </view>
                     <connections>
@@ -663,7 +676,7 @@
                 </viewController>
                 <customObject id="lVu-28-yuM" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="621.5" y="511"/>
+            <point key="canvasLocation" x="621.5" y="533"/>
         </scene>
     </scenes>
 </document>

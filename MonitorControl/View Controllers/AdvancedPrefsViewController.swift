@@ -27,9 +27,24 @@ class AdvancedPrefsViewController: NSViewController, MASPreferencesViewControlle
     self.loadDisplayList()
   }
 
-  override func viewDidAppear() {
-    super.viewDidAppear()
-    self.displayList.reloadData()
+  @IBAction func resetPrefsClicked(_: NSButton) {
+    let alert: NSAlert = NSAlert()
+    alert.messageText = "Reset Preferences?"
+    alert.informativeText = "Are you sure you want to reset all preferences?"
+    alert.addButton(withTitle: "Yes")
+    alert.addButton(withTitle: "No")
+    alert.alertStyle = NSAlert.Style.warning
+
+    if let window = self.view.window {
+      alert.beginSheetModal(for: window, completionHandler: { modalResponse in
+        if modalResponse == NSApplication.ModalResponse.alertFirstButtonReturn {
+          if let bundleID = Bundle.main.bundleIdentifier {
+            UserDefaults.standard.removePersistentDomain(forName: bundleID)
+            os_log("Resetting all preferences.")
+          }
+        }
+      })
+    }
   }
 
   func didUpdateDisplays(displays: [Display]) {
