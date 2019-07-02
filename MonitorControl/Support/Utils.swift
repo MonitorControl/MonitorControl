@@ -159,12 +159,6 @@ class Utils: NSObject {
 
     /// Friendly name changed
     case friendlyName
-
-    /// Which polling mode should be used
-    case pollingMode
-
-    /// Custom polling count when pollingMode is set to custom
-    case customPollingCount
   }
 
   /// Keys for the value of listenFor option

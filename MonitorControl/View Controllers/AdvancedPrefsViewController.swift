@@ -107,8 +107,4 @@ class AdvancedPrefsViewController: NSViewController, MASPreferencesViewControlle
     }
     return nil
   }
-
-  func pollingModeDidChange(newMode: Int) {
-    if newMode == 4 {} else {}
-  }
 }
