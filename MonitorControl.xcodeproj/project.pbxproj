@@ -32,6 +32,7 @@
 		6C85EFDA22C941B000227EA1 /* DisplayManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C85EFD922C941B000227EA1 /* DisplayManager.swift */; };
 		6C85EFDD22CBAA8F00227EA1 /* PollingModeCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C85EFDC22CBAA8F00227EA1 /* PollingModeCellView.swift */; };
 		6C85EFDF22CBB54100227EA1 /* PollingCountCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C85EFDE22CBB54100227EA1 /* PollingCountCellView.swift */; };
+		6C85EFE122CC00AD00227EA1 /* NSNotification+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C85EFE022CC00AD00227EA1 /* NSNotification+Extension.swift */; };
 		F01B067922822141008E64DB /* Display+Whitelist.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01B067822822141008E64DB /* Display+Whitelist.swift */; };
 		F01B0699228221B7008E64DB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F01B0680228221B6008E64DB /* Localizable.strings */; };
 		F01B069A228221B7008E64DB /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01B0683228221B6008E64DB /* Utils.swift */; };
@@ -117,6 +118,7 @@
 		6C85EFD922C941B000227EA1 /* DisplayManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplayManager.swift; sourceTree = "<group>"; };
 		6C85EFDC22CBAA8F00227EA1 /* PollingModeCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollingModeCellView.swift; sourceTree = "<group>"; };
 		6C85EFDE22CBB54100227EA1 /* PollingCountCellView.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = PollingCountCellView.swift; sourceTree = "<group>"; tabWidth = 4; };
+		6C85EFE022CC00AD00227EA1 /* NSNotification+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSNotification+Extension.swift"; sourceTree = "<group>"; };
 		F01B067822822141008E64DB /* Display+Whitelist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Display+Whitelist.swift"; sourceTree = "<group>"; };
 		F01B0681228221B6008E64DB /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F01B0682228221B6008E64DB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -192,7 +194,7 @@
 				F01B067822822141008E64DB /* Display+Whitelist.swift */,
 				28D1DDEC227FB8F2004CB494 /* EDID+Extension.swift */,
 				28D1DDF1227FBE71004CB494 /* NSScreen+Extension.swift */,
-				8C0E20552296ABBA000CBF15 /* NSNotification+Extension.swift */,
+				6C85EFE022CC00AD00227EA1 /* NSNotification+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -486,6 +488,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				56754EAF1D9A4016007BCDC5 /* AppDelegate.swift in Sources */,
+				6C85EFE122CC00AD00227EA1 /* NSNotification+Extension.swift in Sources */,
 				6C85EFDF22CBB54100227EA1 /* PollingCountCellView.swift in Sources */,
 				6C0CCB26228F4F720037D2C5 /* AdvancedPrefsViewController.swift in Sources */,
 				F01B069E228221B7008E64DB /* ButtonCellView.swift in Sources */,
@@ -496,7 +499,6 @@
 				F01B067922822141008E64DB /* Display+Whitelist.swift in Sources */,
 				F03A8DF21FFBAA6F0034DC27 /* Display.swift in Sources */,
 				F0445D40200259C10025AE82 /* DisplayPrefsViewController.swift in Sources */,
-				8C0E20562296ABBA000CBF15 /* NSNotification+Extension.swift in Sources */,
 				28D1DDF0227FBD99004CB494 /* EDID+Extension.swift in Sources */,
 				6C85EFDD22CBAA8F00227EA1 /* PollingModeCellView.swift in Sources */,
 				F0445D3D200254FA0025AE82 /* KeysPrefsViewController.swift in Sources */,
@@ -680,7 +682,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 560;
-				DEVELOPMENT_TEAM = KGY56RWR9A;
+				DEVELOPMENT_TEAM = CYC8C8R4K9;
 				ENABLE_HARDENED_RUNTIME = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -707,7 +709,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 560;
-				DEVELOPMENT_TEAM = KGY56RWR9A;
+				DEVELOPMENT_TEAM = CYC8C8R4K9;
 				ENABLE_HARDENED_RUNTIME = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -738,7 +740,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 560;
-				DEVELOPMENT_TEAM = KGY56RWR9A;
+				DEVELOPMENT_TEAM = CYC8C8R4K9;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = MonitorControlHelper/Info.plist;
@@ -763,7 +765,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 560;
-				DEVELOPMENT_TEAM = KGY56RWR9A;
+				DEVELOPMENT_TEAM = CYC8C8R4K9;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = MonitorControlHelper/Info.plist;

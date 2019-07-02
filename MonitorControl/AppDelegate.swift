@@ -209,8 +209,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
 extension AppDelegate: MediaKeyTapDelegate {
   func handle(mediaKey: MediaKey, event _: KeyEvent?, modifiers: NSEvent.ModifierFlags?) {
-    guard let currentDisplay = Utils.getCurrentDisplay(from: displays) else { return }
     let displays = self.displayManager?.getDisplays() ?? [Display]()
+    guard let currentDisplay = Utils.getCurrentDisplay(from: displays) else { return }
 
     let allDisplays = prefs.bool(forKey: Utils.PrefKeys.allScreens.rawValue) ? displays : [currentDisplay]
     let isSmallIncrement = modifiers?.isSuperset(of: NSEvent.ModifierFlags([.shift, .option])) ?? false
