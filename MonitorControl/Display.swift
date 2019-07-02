@@ -71,7 +71,9 @@ class Display: Equatable {
     }
 
     if let slider = volumeSliderHandler?.slider {
-      slider.intValue = Int32(value)
+      DispatchQueue.main.async {
+        slider.intValue = Int32(value)
+      }
     }
   }
 
@@ -94,7 +96,9 @@ class Display: Equatable {
     }
 
     if let slider = volumeSliderHandler?.slider {
-      slider.intValue = Int32(value)
+      DispatchQueue.main.async {
+        slider.intValue = Int32(value)
+      }
     }
 
     self.saveValue(value, for: .audioSpeakerVolume)
