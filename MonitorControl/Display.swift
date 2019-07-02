@@ -10,6 +10,7 @@ class Display: Equatable {
 
   let identifier: CGDirectDisplayID
   let name: String
+  let isBuiltin: Bool
   var isEnabled: Bool
   var isMuted: Bool = false
   var brightnessSliderHandler: SliderHandler?
@@ -20,11 +21,13 @@ class Display: Equatable {
   private let prefs = UserDefaults.standard
   private var audioPlayer: AVAudioPlayer?
 
-  init(_ identifier: CGDirectDisplayID, name: String, isEnabled: Bool = true) {
+  init(_ identifier: CGDirectDisplayID, name: String, isBuiltin: Bool, isEnabled: Bool = true) {
     self.identifier = identifier
     self.name = name
-    self.isEnabled = isEnabled
+    self.isEnabled = isBuiltin ? false : isEnabled
     self.ddc = DDC(for: identifier)
+    self.isBuiltin = isBuiltin
+    self.isMuted = self.getValue(for: .audioMuteScreenBlank) == 1
   }
 
   // On some displays, the display's OSD overlaps the macOS OSD,
@@ -39,22 +42,32 @@ class Display: Equatable {
     }
   }
 
-  func mute() {
+  func mute(forceVolume: Int? = nil) {
     var value = 0
-    if self.isMuted {
-      value = self.getValue(for: DDC.Command.audioSpeakerVolume)
+
+    if self.isMuted, forceVolume == nil || forceVolume! > 0 {
+      value = forceVolume ?? self.getValue(for: .audioSpeakerVolume)
+      self.saveValue(value, for: .audioSpeakerVolume)
+
       self.isMuted = false
-    } else {
+    } else if !self.isMuted, forceVolume == nil || forceVolume == 0 {
       self.isMuted = true
     }
 
     DispatchQueue.global(qos: .userInitiated).async {
-      guard self.ddc?.write(command: .audioSpeakerVolume, value: UInt16(value), errorRecoveryWaitTime: self.hideOsd ? 0 : nil) == true else {
+      let muteValue = self.isMuted ? 1 : 2
+      guard self.ddc?.write(command: .audioMuteScreenBlank, value: UInt16(muteValue), errorRecoveryWaitTime: self.hideOsd ? 0 : nil) == true else {
+        self.setVolume(to: value)
         return
       }
 
-      self.hideDisplayOsd()
-      self.showOsd(command: .audioSpeakerVolume, value: value)
+      if forceVolume == nil || forceVolume == 0 {
+        self.hideDisplayOsd()
+        self.showOsd(command: .audioSpeakerVolume, value: value)
+        self.playVolumeChangedSound()
+      }
+
+      self.saveValue(muteValue, for: .audioMuteScreenBlank)
     }
 
     if let slider = volumeSliderHandler?.slider {
@@ -62,9 +75,12 @@ class Display: Equatable {
     }
   }
 
-  func setVolume(to value: Int) {
-    if value > 0 {
-      self.isMuted = false
+  func setVolume(to value: Int, isSmallIncrement: Bool = false) {
+    if value > 0, self.isMuted {
+      self.mute(forceVolume: value)
+    } else if value == 0 {
+      self.mute(forceVolume: 0)
+      return
     }
 
     DispatchQueue.global(qos: .userInitiated).async {
@@ -73,7 +89,7 @@ class Display: Equatable {
       }
 
       self.hideDisplayOsd()
-      self.showOsd(command: .audioSpeakerVolume, value: value)
+      self.showOsd(command: .audioSpeakerVolume, value: value, isSmallIncrement: isSmallIncrement)
       self.playVolumeChangedSound()
     }
 
@@ -84,7 +100,7 @@ class Display: Equatable {
     self.saveValue(value, for: .audioSpeakerVolume)
   }
 
-  func setBrightness(to value: Int) {
+  func setBrightness(to value: Int, isSmallIncrement: Bool = false) {
     if self.prefs.bool(forKey: Utils.PrefKeys.lowerContrast.rawValue) {
       if value == 0 {
         DispatchQueue.global(qos: .userInitiated).async {
@@ -108,7 +124,7 @@ class Display: Equatable {
         return
       }
 
-      self.showOsd(command: .brightness, value: value)
+      self.showOsd(command: .brightness, value: value, isSmallIncrement: isSmallIncrement)
     }
 
     if let slider = brightnessSliderHandler?.slider {
@@ -189,7 +205,7 @@ class Display: Equatable {
     self.prefs.set(value, forKey: "pollingCount-\(self.identifier)")
   }
 
-  private func showOsd(command: DDC.Command, value: Int) {
+  private func showOsd(command: DDC.Command, value: Int, isSmallIncrement: Bool = false) {
     guard let manager = OSDManager.sharedManager() as? OSDManager else {
       return
     }
@@ -204,7 +220,7 @@ class Display: Equatable {
       }
     }
 
-    let step = maxValue / 16
+    let step = isSmallIncrement ? maxValue / maxValue : maxValue / 16
 
     manager.showImage(osdImage,
                       onDisplayID: self.identifier,

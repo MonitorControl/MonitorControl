@@ -1,0 +1,50 @@
+
+/* Sown in menu */
+"Brightness" = "Яскравість";
+
+/* Build */
+"Build" = "Білд";
+
+/* Shown in menu */
+"Contrast" = "Контраст";
+
+/* Shown in menu */
+"Default" = "Стандартне";
+
+/* No comment provided by engineer. */
+"Display" = "Дісплей";
+
+/* Shown in the main prefs window */
+"General" = "Загальні";
+
+/* Shown in the main prefs window */
+"Keys" = "Клавіші";
+
+/* Shown in menu */
+"No supported display found" = "Не знайдено жодного дісплею";
+
+/* Shown in the alert dialog */
+"Ok" = "ОК";
+
+/* Shown in Preferences window */
+"Preferences" = "Налаштування";
+
+/* Shown in menu */
+"Set as default" = "Вибрати за-умовчанням";
+
+/* Shown in the alert dialog */
+"Shortcuts not available" = "Скорочення недоступні";
+
+/* Unknown display name
+ Unknown model
+ Unknown vendor */
+"Unknown" = "Невідомо";
+
+/* Version */
+"Version" = "Версія";
+
+/* Shown in menu */
+"Volume" = "Гучність";
+
+/* Shown in the alert dialog */
+"You need to enable MonitorControl in System Preferences > Security and Privacy > Accessibility for the keyboard shortcuts to work" = "Для роботи клавіатурних скороченнь, вам необхідно дозволити MonitorControl доступ до спеціальних можливостей вашого пристрою через Системні параметри > Захист і безпека > Безпека > Спеціальні можливості";

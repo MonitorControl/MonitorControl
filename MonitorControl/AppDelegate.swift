@@ -24,6 +24,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   var mediaKeyTap: MediaKeyTap?
   var prefsController: NSWindowController?
 
+  var accessibilityObserver: NSObjectProtocol!
+
   func applicationDidFinishLaunching(_: Notification) {
     app = self
 
@@ -41,6 +43,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
   func applicationWillTerminate(_: Notification) {
     AMCoreAudio.NotificationCenter.defaultCenter.unsubscribe(self, eventType: AudioHardwareEvent.self)
+    DistributedNotificationCenter.default().removeObserver(self.accessibilityObserver as Any, name: .accessibilityApi, object: nil)
   }
 
   @IBAction func quitClicked(_: AnyObject) {
@@ -126,7 +129,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     if let edid = ddc?.edid() {
       let name = Utils.getDisplayName(forEdid: edid)
 
-      let display = Display(id, name: name)
+      let display = Display(id, name: name, isBuiltin: screen.isBuiltin)
 
       let monitorSubMenu: NSMenu = asSubMenu ? NSMenu() : self.statusMenu
 
@@ -192,36 +195,43 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     // subscribe Audio output detector (AMCoreAudio)
     AMCoreAudio.NotificationCenter.defaultCenter.subscribe(self, eventType: AudioHardwareEvent.self, dispatchQueue: DispatchQueue.main)
+
+    // listen for accessibility status changes
+    self.accessibilityObserver = DistributedNotificationCenter.default().addObserver(forName: .accessibilityApi, object: nil, queue: nil) { _ in
+      DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+        self.startOrRestartMediaKeyTap()
+      }
+    }
   }
 }
 
 // MARK: - Media Key Tap delegate
 
 extension AppDelegate: MediaKeyTapDelegate {
-  func handle(mediaKey: MediaKey, event _: KeyEvent?) {
-    let displays = self.displayManager?.getDisplays() ?? [Display]()
+  func handle(mediaKey: MediaKey, event _: KeyEvent?, modifiers: NSEvent.ModifierFlags?) {
     guard let currentDisplay = Utils.getCurrentDisplay(from: displays) else { return }
+    let displays = self.displayManager?.getDisplays() ?? [Display]()
 
     let allDisplays = prefs.bool(forKey: Utils.PrefKeys.allScreens.rawValue) ? displays : [currentDisplay]
+    let isSmallIncrement = modifiers?.isSuperset(of: NSEvent.ModifierFlags([.shift, .option])) ?? false
 
     for display in allDisplays {
       if (prefs.object(forKey: "\(display.identifier)-state") as? Bool) ?? true {
         switch mediaKey {
         case .brightnessUp:
-          let value = display.calcNewValue(for: .brightness, withRel: +self.step)
-          display.setBrightness(to: value)
+          let value = display.calcNewValue(for: .brightness, withRel: +(isSmallIncrement ? self.step / 4 : self.step))
+          display.setBrightness(to: value, isSmallIncrement: isSmallIncrement)
         case .brightnessDown:
-          let value = currentDisplay.calcNewValue(for: .brightness, withRel: -self.step)
-          display.setBrightness(to: value)
+          let value = currentDisplay.calcNewValue(for: .brightness, withRel: -(isSmallIncrement ? self.step / 4 : self.step))
+          display.setBrightness(to: value, isSmallIncrement: isSmallIncrement)
         case .mute:
           display.mute()
         case .volumeUp:
-          let value = display.calcNewValue(for: .audioSpeakerVolume, withRel: +self.step)
-          display.setVolume(to: value)
+          let value = display.calcNewValue(for: .audioSpeakerVolume, withRel: +(isSmallIncrement ? self.step / 4 : self.step))
+          display.setVolume(to: value, isSmallIncrement: isSmallIncrement)
         case .volumeDown:
-          let value = display.calcNewValue(for: .audioSpeakerVolume, withRel: -self.step)
-          display.setVolume(to: value)
-
+          let value = display.calcNewValue(for: .audioSpeakerVolume, withRel: -(isSmallIncrement ? self.step / 4 : self.step))
+          display.setVolume(to: value, isSmallIncrement: isSmallIncrement)
         default:
           return
         }
