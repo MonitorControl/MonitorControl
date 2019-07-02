@@ -17,17 +17,18 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
 
   var monitorItems: [NSMenuItem] = []
-  var displays: [Display] = []
 
   let step = 100 / 16
 
+  var displayManager: DisplayManager?
   var mediaKeyTap: MediaKeyTap?
   var prefsController: NSWindowController?
 
   func applicationDidFinishLaunching(_: Notification) {
     app = self
 
-    self.setupLayout()
+    self.displayManager = DisplayManager()
+    self.setupViewControllers()
     self.subscribeEventListeners()
     self.startOrRestartMediaKeyTap()
     self.statusItem.image = NSImage(named: "status")
@@ -80,7 +81,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     self.monitorItems = []
-    self.displays = []
+    self.displayManager?.clearDisplays()
   }
 
   func updateDisplays() {
@@ -91,7 +92,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       if screen.isBuiltin {
         return false
       }
-
       return DDC(for: screen.displayID)?.edid() != nil
     }
 
@@ -150,7 +150,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
       display.volumeSliderHandler = volumeSliderHandler
       display.brightnessSliderHandler = brightnessSliderHandler
-      self.displays.append(display)
+      self.displayManager?.addDisplay(display: display)
 
       let monitorMenuItem = NSMenuItem()
       monitorMenuItem.title = "\(display.getFriendlyName())"
@@ -163,15 +163,25 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
   }
 
-  private func setupLayout() {
+  private func setupViewControllers() {
     let storyboard: NSStoryboard = NSStoryboard(name: "Main", bundle: Bundle.main)
+    let mainPrefsVc = storyboard.instantiateController(withIdentifier: "MainPrefsVC")
+    let keyPrefsVc = storyboard.instantiateController(withIdentifier: "KeysPrefsVC")
+    let displayPrefsVc = storyboard.instantiateController(withIdentifier: "DisplayPrefsVC")
+    let advancedPrefsVc = storyboard.instantiateController(withIdentifier: "AdvancedPrefsVC")
     let views = [
-      storyboard.instantiateController(withIdentifier: "MainPrefsVC"),
-      storyboard.instantiateController(withIdentifier: "KeysPrefsVC"),
-      storyboard.instantiateController(withIdentifier: "DisplayPrefsVC"),
-      storyboard.instantiateController(withIdentifier: "AdvancedPrefsVC"),
+      mainPrefsVc,
+      keyPrefsVc,
+      displayPrefsVc,
+      advancedPrefsVc,
     ]
     prefsController = MASPreferencesWindowController(viewControllers: views, title: NSLocalizedString("Preferences", comment: "Shown in Preferences window"))
+    if let displayPrefs = displayPrefsVc as? DisplayPrefsViewController {
+      displayPrefs.displayManager = self.displayManager
+    }
+    if let advancedPrefs = advancedPrefsVc as? AdvancedPrefsViewController {
+      advancedPrefs.displayManager = self.displayManager
+    }
   }
 
   private func subscribeEventListeners() {
@@ -189,9 +199,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
 extension AppDelegate: MediaKeyTapDelegate {
   func handle(mediaKey: MediaKey, event _: KeyEvent?) {
+    let displays = self.displayManager?.getDisplays() ?? [Display]()
     guard let currentDisplay = Utils.getCurrentDisplay(from: displays) else { return }
 
-    let allDisplays = prefs.bool(forKey: Utils.PrefKeys.allScreens.rawValue) ? self.displays : [currentDisplay]
+    let allDisplays = prefs.bool(forKey: Utils.PrefKeys.allScreens.rawValue) ? displays : [currentDisplay]
 
     for display in allDisplays {
       if (prefs.object(forKey: "\(display.identifier)-state") as? Bool) ?? true {

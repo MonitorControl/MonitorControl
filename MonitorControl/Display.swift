@@ -3,7 +3,11 @@ import Cocoa
 import DDC
 import os.log
 
-class Display {
+class Display: Equatable {
+  static func == (lhs: Display, rhs: Display) -> Bool {
+    return lhs.identifier == rhs.identifier
+  }
+
   let identifier: CGDirectDisplayID
   let name: String
   var isEnabled: Bool
@@ -163,7 +167,7 @@ class Display {
   }
 
   func getPollingCount() -> Int {
-    let selectedMode = Int(self.prefs.string(forKey: "pollingMode-\(self.identifier)") ?? "2") ?? 2
+    let selectedMode = self.getPollingMode()
     switch selectedMode {
     case 0:
       return PollingMode.none.value

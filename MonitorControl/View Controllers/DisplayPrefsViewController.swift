@@ -3,13 +3,15 @@ import DDC
 import MASPreferences
 import os.log
 
-class DisplayPrefsViewController: NSViewController, MASPreferencesViewController, NSTableViewDataSource, NSTableViewDelegate {
+class DisplayPrefsViewController: NSViewController, MASPreferencesViewController, NSTableViewDataSource, NSTableViewDelegate, DisplayDelegate {
   var viewIdentifier: String = "Display"
   var toolbarItemLabel: String? = NSLocalizedString("Display", comment: "Shown in the main prefs window")
   var toolbarItemImage: NSImage? = NSImage(named: NSImage.computerName)
   let prefs = UserDefaults.standard
 
   var displays: [Display] = []
+  var displayManager: DisplayManager?
+
   enum DisplayCell: String {
     case checkbox
     case name
@@ -26,8 +28,13 @@ class DisplayPrefsViewController: NSViewController, MASPreferencesViewController
     super.viewDidLoad()
 
     self.allScreens.state = self.prefs.bool(forKey: Utils.PrefKeys.allScreens.rawValue) ? .on : .off
-
+    self.displayManager?.displayDelegate = self
     self.loadDisplayList()
+  }
+
+  func didUpdateDisplays(displays: [Display]) {
+    self.displays = displays
+    self.displayList.reloadData()
   }
 
   @IBAction func allScreensTouched(_ sender: NSButton) {
@@ -47,33 +54,9 @@ class DisplayPrefsViewController: NSViewController, MASPreferencesViewController
   // MARK: - Table datasource
 
   func loadDisplayList() {
-    for screen in NSScreen.screens {
-      let id = screen.displayID
-
-      // Disable built-in displays.
-      if screen.isBuiltin {
-        let display = Display(id, name: screen.displayName ?? NSLocalizedString("Unknown", comment: "Unknown display name"), isEnabled: false)
-        self.displays.append(display)
-        continue
-      }
-
-      guard let ddc = DDC(for: id) else {
-        os_log("Display “%{public}@” cannot be controlled via DDC.", screen.displayName ?? NSLocalizedString("Unknown", comment: "Unknown display name"))
-        continue
-      }
-
-      guard let edid = ddc.edid() else {
-        os_log("Cannot read EDID information for display “%{public}@”.", screen.displayName ?? NSLocalizedString("Unknown", comment: "Unknown display name"))
-        continue
-      }
-
-      let name = Utils.getDisplayName(forEdid: edid)
-      let isEnabled = (prefs.object(forKey: "\(id)-state") as? Bool) ?? true
-
-      let display = Display(id, name: name, isEnabled: isEnabled)
-      self.displays.append(display)
+    if let displays = self.displayManager?.getDisplays() {
+      self.displays = displays
     }
-
     self.displayList.reloadData()
   }
 
