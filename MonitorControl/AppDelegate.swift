@@ -128,8 +128,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     if let edid = ddc?.edid() {
       let name = Utils.getDisplayName(forEdid: edid)
+      let isEnabled = (prefs.object(forKey: "\(id)-state") as? Bool) ?? true
 
-      let display = Display(id, name: name, isBuiltin: screen.isBuiltin)
+      let display = Display(id, name: name, isBuiltin: screen.isBuiltin, isEnabled: isEnabled)
 
       let monitorSubMenu: NSMenu = asSubMenu ? NSMenu() : self.statusMenu
 
