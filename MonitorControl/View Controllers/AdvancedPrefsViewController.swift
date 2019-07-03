@@ -40,6 +40,7 @@ class AdvancedPrefsViewController: NSViewController, MASPreferencesViewControlle
         if modalResponse == NSApplication.ModalResponse.alertFirstButtonReturn {
           if let bundleID = Bundle.main.bundleIdentifier {
             UserDefaults.standard.removePersistentDomain(forName: bundleID)
+            self.loadDisplayList()
             os_log("Resetting all preferences.")
           }
         }

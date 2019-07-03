@@ -41,11 +41,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     self.updateDisplays()
   }
 
-  func applicationWillTerminate(_: Notification) {
-    AMCoreAudio.NotificationCenter.defaultCenter.unsubscribe(self, eventType: AudioHardwareEvent.self)
-    DistributedNotificationCenter.default().removeObserver(self.accessibilityObserver as Any, name: .accessibilityApi, object: nil)
-  }
-
   @IBAction func quitClicked(_: AnyObject) {
     NSApplication.shared.terminate(self)
   }
@@ -193,12 +188,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     NotificationCenter.default.addObserver(self, selector: #selector(handleListenForChanged), name: NSNotification.Name(Utils.PrefKeys.listenFor.rawValue), object: nil)
     NotificationCenter.default.addObserver(self, selector: #selector(handleShowContrastChanged), name: NSNotification.Name(Utils.PrefKeys.showContrast.rawValue), object: nil)
     NotificationCenter.default.addObserver(self, selector: #selector(handleFriendlyNameChanged), name: NSNotification.Name(Utils.PrefKeys.friendlyName.rawValue), object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(self.handlePreferenceReset), name: NSNotification.Name(Utils.PrefKeys.preferenceReset.rawValue), object: nil)
 
     // subscribe Audio output detector (AMCoreAudio)
     AMCoreAudio.NotificationCenter.defaultCenter.subscribe(self, eventType: AudioHardwareEvent.self, dispatchQueue: DispatchQueue.main)
 
     // listen for accessibility status changes
-    self.accessibilityObserver = DistributedNotificationCenter.default().addObserver(forName: .accessibilityApi, object: nil, queue: nil) { _ in
+    DistributedNotificationCenter.default().addObserver(forName: .accessibilityApi, object: nil, queue: nil) { _ in
       DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
         self.startOrRestartMediaKeyTap()
       }

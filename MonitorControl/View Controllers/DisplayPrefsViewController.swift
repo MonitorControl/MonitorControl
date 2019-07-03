@@ -3,7 +3,7 @@ import DDC
 import MASPreferences
 import os.log
 
-class DisplayPrefsViewController: NSViewController, MASPreferencesViewController, NSTableViewDataSource, NSTableViewDelegate, DisplayDelegate {
+class DisplayPrefsViewController: NSViewController, MASPreferencesViewController, NSTableViewDataSource, NSTableViewDelegate {
   var viewIdentifier: String = "Display"
   var toolbarItemLabel: String? = NSLocalizedString("Display", comment: "Shown in the main prefs window")
   var toolbarItemImage: NSImage? = NSImage(named: NSImage.computerName)
@@ -120,5 +120,12 @@ class DisplayPrefsViewController: NSViewController, MASPreferencesViewController
     default:
       return ""
     }
+  }
+}
+
+extension DisplayPrefsViewController: DisplayDelegate {
+  func didUpdateDisplays(displays: [Display]) {
+    self.displays = displays
+    self.displayList.reloadData()
   }
 }
