@@ -159,6 +159,9 @@ class Utils: NSObject {
 
     /// Friendly name changed
     case friendlyName
+
+    /// Prefs Reset
+    case preferenceReset
   }
 
   /// Keys for the value of listenFor option

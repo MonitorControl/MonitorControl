@@ -55,7 +55,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
   /// Set the default prefs of the app
   func setDefaultPrefs() {
-    let prefs = UserDefaults.standard
     if !prefs.bool(forKey: Utils.PrefKeys.appAlreadyLaunched.rawValue) {
       prefs.set(true, forKey: Utils.PrefKeys.appAlreadyLaunched.rawValue)
 
@@ -194,7 +193,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     AMCoreAudio.NotificationCenter.defaultCenter.subscribe(self, eventType: AudioHardwareEvent.self, dispatchQueue: DispatchQueue.main)
 
     // listen for accessibility status changes
-    DistributedNotificationCenter.default().addObserver(forName: .accessibilityApi, object: nil, queue: nil) { _ in
+    _ = DistributedNotificationCenter.default().addObserver(forName: .accessibilityApi, object: nil, queue: nil) { _ in
       DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
         self.startOrRestartMediaKeyTap()
       }
@@ -248,6 +247,12 @@ extension AppDelegate: MediaKeyTapDelegate {
 
   @objc func handleFriendlyNameChanged() {
     self.updateDisplays()
+  }
+
+  @objc func handlePreferenceReset() {
+    self.setDefaultPrefs()
+    self.updateDisplays()
+    self.startOrRestartMediaKeyTap()
   }
 
   private func startOrRestartMediaKeyTap() {

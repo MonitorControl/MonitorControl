@@ -10,9 +10,8 @@ class KeysPrefsViewController: NSViewController, MASPreferencesViewController {
 
   @IBOutlet var listenFor: NSPopUpButton!
 
-  override func viewDidLoad() {
-    super.viewDidLoad()
-
+  override func viewWillAppear() {
+    super.viewWillAppear()
     self.listenFor.selectItem(at: self.prefs.integer(forKey: Utils.PrefKeys.listenFor.rawValue))
   }
 

@@ -17,13 +17,15 @@ class MainPrefsViewController: NSViewController, MASPreferencesViewController {
   @available(macOS, deprecated: 10.10)
   override func viewDidLoad() {
     super.viewDidLoad()
-
     let startAtLogin = (SMCopyAllJobDictionaries(kSMDomainUserLaunchd).takeRetainedValue() as? [[String: AnyObject]])?.first { $0["Label"] as? String == "\(Bundle.main.bundleIdentifier!)Helper" }?["OnDemand"] as? Bool ?? false
-
     self.startAtLogin.state = startAtLogin ? .on : .off
+    self.setVersionNumber()
+  }
+
+  override func viewWillAppear() {
+    super.viewWillAppear()
     self.showContrastSlider.state = self.prefs.bool(forKey: Utils.PrefKeys.showContrast.rawValue) ? .on : .off
     self.lowerContrast.state = self.prefs.bool(forKey: Utils.PrefKeys.lowerContrast.rawValue) ? .on : .off
-    self.setVersionNumber()
   }
 
   @IBAction func startAtLoginClicked(_ sender: NSButton) {

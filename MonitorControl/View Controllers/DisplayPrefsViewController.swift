@@ -27,15 +27,13 @@ class DisplayPrefsViewController: NSViewController, MASPreferencesViewController
 
   override func viewDidLoad() {
     super.viewDidLoad()
-
-    self.allScreens.state = self.prefs.bool(forKey: Utils.PrefKeys.allScreens.rawValue) ? .on : .off
     self.displayManager?.displayDelegate = self
     self.loadDisplayList()
   }
 
-  func didUpdateDisplays(displays: [Display]) {
-    self.displays = displays
-    self.displayList.reloadData()
+  override func viewWillAppear() {
+    super.viewWillAppear()
+    self.allScreens.state = self.prefs.bool(forKey: Utils.PrefKeys.allScreens.rawValue) ? .on : .off
   }
 
   @IBAction func allScreensTouched(_ sender: NSButton) {
