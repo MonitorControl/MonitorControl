@@ -3,7 +3,7 @@ import DDC
 import MASPreferences
 import os.log
 
-class AdvancedPrefsViewController: NSViewController, MASPreferencesViewController, NSTableViewDataSource, NSTableViewDelegate, DisplayDelegate {
+class AdvancedPrefsViewController: NSViewController, MASPreferencesViewController, NSTableViewDataSource, NSTableViewDelegate {
   var viewIdentifier: String = "Advanced"
   var toolbarItemLabel: String? = NSLocalizedString("Advanced", comment: "Shown in the main prefs window")
   var toolbarItemImage: NSImage? = NSImage(named: NSImage.advancedName)
@@ -46,11 +46,6 @@ class AdvancedPrefsViewController: NSViewController, MASPreferencesViewControlle
         }
       })
     }
-  }
-
-  func didUpdateDisplays(displays: [Display]) {
-    self.displays = displays
-    self.displayList.reloadData()
   }
 
   func loadDisplayList() {
@@ -107,5 +102,12 @@ class AdvancedPrefsViewController: NSViewController, MASPreferencesViewControlle
       }
     }
     return nil
+  }
+}
+
+extension AdvancedPrefsViewController: DisplayDelegate {
+  func didUpdateDisplays(displays: [Display]) {
+    self.displays = displays
+    self.displayList.reloadData()
   }
 }
