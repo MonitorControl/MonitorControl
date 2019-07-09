@@ -18,6 +18,31 @@ class Display: Equatable {
   var contrastSliderHandler: SliderHandler?
   var ddc: DDC?
 
+  var hideOsd: Bool {
+    get {
+      return self.prefs.bool(forKey: "hideOsd-\(self.identifier)")
+    }
+    set {
+      self.prefs.set(newValue, forKey: "hideOsd-\(self.identifier)")
+      os_log("Set `hideOsd` to: %{public}@", type: .info, String(newValue))
+    }
+  }
+
+  var needsLongerDelay: Bool {
+    get {
+      // TODO: remove or place safety check to prevent freezing during testing somewhere else
+      #if DEBUG
+        return false
+      #else
+        return self.prefs.object(forKey: "longerDelay-\(self.identifier)") as? Bool ?? false
+      #endif
+    }
+    set {
+      self.prefs.set(newValue, forKey: "longerDelay-\(self.identifier)")
+      os_log("Set `needsLongerDisplay` to: %{public}@", type: .info, String(newValue))
+    }
+  }
+
   private let prefs = UserDefaults.standard
   private var audioPlayer: AVAudioPlayer?
 

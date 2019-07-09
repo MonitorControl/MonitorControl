@@ -1,6 +1,7 @@
 import Cocoa
 import DDC
 import os.log
+import ServiceManagement
 
 class Utils: NSObject {
   // MARK: - Menu
@@ -97,6 +98,12 @@ class Utils: NSObject {
     }
 
     return
+  }
+
+  static func setStartAtLogin(enabled: Bool) {
+    let identifier = "\(Bundle.main.bundleIdentifier!)Helper" as CFString
+    SMLoginItemSetEnabled(identifier, enabled)
+    os_log("Toggle start at login state: %{public}@", type: .info, enabled ? "on" : "off")
   }
 
   static func getSystemPreferences() -> [String: AnyObject]? {

@@ -17,6 +17,7 @@ class AdvancedPrefsViewController: NSViewController, MASPreferencesViewControlle
     case identifier
     case pollingMode
     case pollingCount
+    case longerDelay
   }
 
   @IBOutlet var displayList: NSTableView!
@@ -98,6 +99,12 @@ class AdvancedPrefsViewController: NSViewController, MASPreferencesViewControlle
         } else {
           cell.textField?.isEnabled = false
         }
+        return cell
+      }
+    case .longerDelay:
+      if let cell = tableView.makeView(withIdentifier: tableColumn.identifier, owner: nil) as? LongerDelayCellView {
+        cell.button.state = display.needsLongerDelay ? .on : .off
+        cell.display = display
         return cell
       }
     }

@@ -29,19 +29,13 @@ class MainPrefsViewController: NSViewController, MASPreferencesViewController {
   }
 
   @IBAction func startAtLoginClicked(_ sender: NSButton) {
-    let identifier = "\(Bundle.main.bundleIdentifier!)Helper" as CFString
-
     switch sender.state {
     case .on:
-      SMLoginItemSetEnabled(identifier, true)
+      Utils.setStartAtLogin(enabled: true)
     case .off:
-      SMLoginItemSetEnabled(identifier, false)
+      Utils.setStartAtLogin(enabled: false)
     default: break
     }
-
-    #if DEBUG
-      os_log("Toggle start at login state: %{public}@", type: .info, sender.state == .on ? "on" : "off")
-    #endif
   }
 
   @IBAction func showContrastSliderClicked(_ sender: NSButton) {
