@@ -30,12 +30,7 @@ class Display: Equatable {
 
   var needsLongerDelay: Bool {
     get {
-      // TODO: remove or place safety check to prevent freezing during testing somewhere else
-      #if DEBUG
-        return false
-      #else
-        return self.prefs.object(forKey: "longerDelay-\(self.identifier)") as? Bool ?? false
-      #endif
+      return self.prefs.object(forKey: "longerDelay-\(self.identifier)") as? Bool ?? false
     }
     set {
       self.prefs.set(newValue, forKey: "longerDelay-\(self.identifier)")

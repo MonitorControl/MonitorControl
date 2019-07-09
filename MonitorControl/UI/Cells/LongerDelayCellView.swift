@@ -11,7 +11,7 @@ class LongerDelayCellView: NSTableCellView {
   }
 
   @IBAction func buttonToggled(_ sender: NSButton) {
-    if let display = display {
+    if let display = self.display {
       switch sender.state {
       case .on:
         let alert: NSAlert = NSAlert()
