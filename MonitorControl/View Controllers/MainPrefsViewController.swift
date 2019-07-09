@@ -14,16 +14,16 @@ class MainPrefsViewController: NSViewController, MASPreferencesViewController {
   @IBOutlet var showContrastSlider: NSButton!
   @IBOutlet var lowerContrast: NSButton!
 
-  @available(macOS, deprecated: 10.10)
   override func viewDidLoad() {
     super.viewDidLoad()
-    let startAtLogin = (SMCopyAllJobDictionaries(kSMDomainUserLaunchd).takeRetainedValue() as? [[String: AnyObject]])?.first { $0["Label"] as? String == "\(Bundle.main.bundleIdentifier!)Helper" }?["OnDemand"] as? Bool ?? false
-    self.startAtLogin.state = startAtLogin ? .on : .off
     self.setVersionNumber()
   }
 
+  @available(macOS, deprecated: 10.10)
   override func viewWillAppear() {
     super.viewWillAppear()
+    let startAtLogin = (SMCopyAllJobDictionaries(kSMDomainUserLaunchd).takeRetainedValue() as? [[String: AnyObject]])?.first { $0["Label"] as? String == "\(Bundle.main.bundleIdentifier!)Helper" }?["OnDemand"] as? Bool ?? false
+    self.startAtLogin.state = startAtLogin ? .on : .off
     self.showContrastSlider.state = self.prefs.bool(forKey: Utils.PrefKeys.showContrast.rawValue) ? .on : .off
     self.lowerContrast.state = self.prefs.bool(forKey: Utils.PrefKeys.lowerContrast.rawValue) ? .on : .off
   }
