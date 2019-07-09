@@ -18,6 +18,7 @@ class AdvancedPrefsViewController: NSViewController, MASPreferencesViewControlle
     case pollingMode
     case pollingCount
     case longerDelay
+    case hideOsd
   }
 
   @IBOutlet var displayList: NSTableView!
@@ -70,16 +71,6 @@ class AdvancedPrefsViewController: NSViewController, MASPreferencesViewControlle
     let pollingMode = display.getPollingMode()
 
     switch column {
-    case .friendlyName:
-      if let cell = tableView.makeView(withIdentifier: tableColumn.identifier, owner: nil) as? NSTableCellView {
-        cell.textField?.stringValue = "\(display.getFriendlyName())"
-        return cell
-      }
-    case .identifier:
-      if let cell = tableView.makeView(withIdentifier: tableColumn.identifier, owner: nil) as? NSTableCellView {
-        cell.textField?.stringValue = "\(display.identifier)"
-        return cell
-      }
     case .pollingMode:
       if let cell = tableView.makeView(withIdentifier: tableColumn.identifier, owner: nil) as? PollingModeCellView {
         cell.display = display
@@ -107,8 +98,30 @@ class AdvancedPrefsViewController: NSViewController, MASPreferencesViewControlle
         cell.display = display
         return cell
       }
+    case .hideOsd:
+      if let cell = tableView.makeView(withIdentifier: tableColumn.identifier, owner: nil) as? HideOsdCellView {
+        cell.button.state = display.hideOsd ? .on : .off
+        cell.display = display
+        return cell
+      }
+    default:
+      if let cell = tableView.makeView(withIdentifier: tableColumn.identifier, owner: nil) as? NSTableCellView {
+        cell.textField?.stringValue = self.getText(for: column, with: display)
+        return cell
+      }
     }
     return nil
+  }
+
+  private func getText(for column: DisplayColumn, with display: Display) -> String {
+    switch column {
+    case .friendlyName:
+      return display.getFriendlyName()
+    case .identifier:
+      return "\(display.identifier)"
+    default:
+      return ""
+    }
   }
 }
 

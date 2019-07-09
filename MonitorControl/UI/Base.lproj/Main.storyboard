@@ -478,7 +478,7 @@
             <objects>
                 <viewController storyboardIdentifier="AdvancedPrefsVC" id="xjG-x0-7HO" customClass="AdvancedPrefsViewController" customModule="MonitorControl" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="MqL-7s-HoR">
-                        <rect key="frame" x="0.0" y="0.0" width="567" height="267"/>
+                        <rect key="frame" x="0.0" y="0.0" width="628" height="267"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="moz-ZW-I46">
@@ -490,13 +490,13 @@
                                 </textFieldCell>
                             </textField>
                             <scrollView autohidesScrollers="YES" horizontalLineScroll="22" horizontalPageScroll="10" verticalLineScroll="22" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VCP-xz-0jI">
-                                <rect key="frame" x="20" y="61" width="527" height="83"/>
+                                <rect key="frame" x="20" y="61" width="588" height="83"/>
                                 <clipView key="contentView" drawsBackground="NO" id="EAu-T4-lFV">
-                                    <rect key="frame" x="1" y="0.0" width="525" height="82"/>
+                                    <rect key="frame" x="1" y="0.0" width="586" height="82"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" multipleSelection="NO" emptySelection="NO" autosaveColumns="NO" typeSelect="NO" rowHeight="20" rowSizeStyle="automatic" headerView="qVc-cy-LaW" viewBased="YES" id="t7B-Q7-Ssj">
-                                            <rect key="frame" x="0.0" y="0.0" width="525" height="57"/>
+                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnResizing="NO" multipleSelection="NO" emptySelection="NO" autosaveColumns="NO" typeSelect="NO" rowHeight="20" rowSizeStyle="automatic" headerView="qVc-cy-LaW" viewBased="YES" id="t7B-Q7-Ssj">
+                                            <rect key="frame" x="0.0" y="0.0" width="586" height="57"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -655,7 +655,7 @@
                                                         </tableCellView>
                                                     </prototypeCellViews>
                                                 </tableColumn>
-                                                <tableColumn width="86" minWidth="40" maxWidth="1000" id="grO-Kr-l4d">
+                                                <tableColumn width="79" minWidth="40" maxWidth="1000" id="grO-Kr-l4d">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Longer Delay">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -665,7 +665,7 @@
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
                                                         <tableCellView id="cOJ-Ph-muT" customClass="LongerDelayCellView" customModule="MonitorControl" customModuleProvider="target">
-                                                            <rect key="frame" x="437" y="1" width="86" height="17"/>
+                                                            <rect key="frame" x="437" y="1" width="79" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cmY-eY-p4P">
@@ -682,6 +682,37 @@
                                                             </subviews>
                                                             <connections>
                                                                 <outlet property="button" destination="cmY-eY-p4P" id="2qv-ZX-ifA"/>
+                                                            </connections>
+                                                        </tableCellView>
+                                                    </prototypeCellViews>
+                                                </tableColumn>
+                                                <tableColumn width="65" minWidth="40" maxWidth="1000" id="MPF-Mr-zVU">
+                                                    <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Hide OSD">
+                                                        <font key="font" metaFont="smallSystem"/>
+                                                        <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
+                                                    </tableHeaderCell>
+                                                    <customCell key="dataCell" alignment="left" id="LXT-s7-Hac"/>
+                                                    <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                                    <prototypeCellViews>
+                                                        <tableCellView id="iWx-Xs-DXV" customClass="HideOsdCellView" customModule="MonitorControl" customModuleProvider="target">
+                                                            <rect key="frame" x="519" y="1" width="65" height="17"/>
+                                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                            <subviews>
+                                                                <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rW9-Zy-n6z">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="49" height="18"/>
+                                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                                    <buttonCell key="cell" type="check" bezelStyle="regularSquare" imagePosition="overlaps" inset="2" id="5mh-qn-QcE">
+                                                                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                                        <font key="font" metaFont="system"/>
+                                                                    </buttonCell>
+                                                                    <connections>
+                                                                        <action selector="buttonToggled:" target="iWx-Xs-DXV" id="liH-GI-qNw"/>
+                                                                    </connections>
+                                                                </button>
+                                                            </subviews>
+                                                            <connections>
+                                                                <outlet property="button" destination="rW9-Zy-n6z" id="9JR-jX-ogx"/>
                                                             </connections>
                                                         </tableCellView>
                                                     </prototypeCellViews>
@@ -704,7 +735,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <tableHeaderView key="headerView" id="qVc-cy-LaW">
-                                    <rect key="frame" x="0.0" y="0.0" width="525" height="25"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="586" height="25"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableHeaderView>
                             </scrollView>
@@ -719,7 +750,7 @@
                                 </connections>
                             </button>
                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="Z6T-PG-PcF">
-                                <rect key="frame" x="18" y="164" width="531" height="34"/>
+                                <rect key="frame" x="18" y="164" width="592" height="34"/>
                                 <textFieldCell key="cell" selectable="YES" title="Warning ⚠️ - Changing some of these setting may cause system freezes or unexpected behaviour. " id="frw-j2-tE1">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -749,7 +780,7 @@
                 </viewController>
                 <customObject id="lVu-28-yuM" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="349.5" y="544.5"/>
+            <point key="canvasLocation" x="380" y="544.5"/>
         </scene>
     </scenes>
 </document>
