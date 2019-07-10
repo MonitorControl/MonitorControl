@@ -19,7 +19,7 @@ class LongerDelayCellView: NSTableCellView {
         alert.informativeText = "Are you sure you want to enable a longer delay? Doing so may freeze your system and require a restart. Start at login will be disabled as a safety measure."
         alert.addButton(withTitle: "Yes")
         alert.addButton(withTitle: "No")
-        alert.alertStyle = NSAlert.Style.warning
+        alert.alertStyle = NSAlert.Style.critical
 
         if let window = self.window {
           alert.beginSheetModal(for: window, completionHandler: { modalResponse in
