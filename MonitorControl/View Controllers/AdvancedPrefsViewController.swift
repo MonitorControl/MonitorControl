@@ -89,11 +89,7 @@ class AdvancedPrefsViewController: NSViewController, MASPreferencesViewControlle
       if let cell = tableView.makeView(withIdentifier: tableColumn.identifier, owner: nil) as? PollingCountCellView {
         cell.textField?.stringValue = "\(display.getPollingCount())"
         cell.display = display
-        if pollingMode == 4 {
-          cell.textField?.isEnabled = true
-        } else {
-          cell.textField?.isEnabled = false
-        }
+        cell.textField?.isEnabled = pollingMode == 4
         return cell
       }
     case .longerDelay:
