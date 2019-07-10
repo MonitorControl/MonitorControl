@@ -25,8 +25,12 @@ class AdvancedPrefsViewController: NSViewController, MASPreferencesViewControlle
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    self.displayManager?.displayDelegate = self
+    NotificationCenter.default.addObserver(self, selector: #selector(self.loadDisplayList), name: Notification.Name(Utils.PrefKeys.displayListUpdate.rawValue), object: nil)
     self.loadDisplayList()
+  }
+
+  deinit {
+    NotificationCenter.default.removeObserver(self)
   }
 
   @IBAction func resetPrefsClicked(_: NSButton) {
@@ -50,7 +54,7 @@ class AdvancedPrefsViewController: NSViewController, MASPreferencesViewControlle
     }
   }
 
-  func loadDisplayList() {
+  @objc func loadDisplayList() {
     if let displays = displayManager?.getDisplays() {
       self.displays = displays
       self.displayList.reloadData()
@@ -122,12 +126,5 @@ class AdvancedPrefsViewController: NSViewController, MASPreferencesViewControlle
     default:
       return ""
     }
-  }
-}
-
-extension AdvancedPrefsViewController: DisplayDelegate {
-  func didUpdateDisplays(displays: [Display]) {
-    self.displays = displays
-    self.displayList.reloadData()
   }
 }

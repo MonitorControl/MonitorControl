@@ -1,12 +1,11 @@
 import Foundation
 
-protocol DisplayDelegate: AnyObject {
-  func didUpdateDisplays(displays _: [Display])
-}
-
 class DisplayManager {
-  private var displays: [Display]
-  weak var displayDelegate: DisplayDelegate?
+  private var displays: [Display] {
+    didSet {
+      NotificationCenter.default.post(name: Notification.Name(Utils.PrefKeys.displayListUpdate.rawValue), object: nil)
+    }
+  }
 
   init() {
     self.displays = []
@@ -14,7 +13,6 @@ class DisplayManager {
 
   func updateDisplays(displays: [Display]) {
     self.displays = displays
-    self.displayDelegate?.didUpdateDisplays(displays: self.displays)
   }
 
   func getDisplays() -> [Display] {
@@ -23,18 +21,15 @@ class DisplayManager {
 
   func addDisplay(display: Display) {
     self.displays.append(display)
-    self.displayDelegate?.didUpdateDisplays(displays: self.displays)
   }
 
   func updateDisplay(display updatedDisplay: Display) {
     if let indexToUpdate = self.displays.firstIndex(of: updatedDisplay) {
       self.displays[indexToUpdate] = updatedDisplay
-      self.displayDelegate?.didUpdateDisplays(displays: self.displays)
     }
   }
 
   func clearDisplays() {
     self.displays = []
-    self.displayDelegate?.didUpdateDisplays(displays: self.displays)
   }
 }

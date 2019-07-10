@@ -27,13 +27,17 @@ class DisplayPrefsViewController: NSViewController, MASPreferencesViewController
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    self.displayManager?.displayDelegate = self
+    NotificationCenter.default.addObserver(self, selector: #selector(self.loadDisplayList), name: Notification.Name(Utils.PrefKeys.displayListUpdate.rawValue), object: nil)
     self.loadDisplayList()
   }
 
   override func viewWillAppear() {
     super.viewWillAppear()
     self.allScreens.state = self.prefs.bool(forKey: Utils.PrefKeys.allScreens.rawValue) ? .on : .off
+  }
+
+  deinit {
+    NotificationCenter.default.removeObserver(self)
   }
 
   @IBAction func allScreensTouched(_ sender: NSButton) {
@@ -52,7 +56,7 @@ class DisplayPrefsViewController: NSViewController, MASPreferencesViewController
 
   // MARK: - Table datasource
 
-  func loadDisplayList() {
+  @objc func loadDisplayList() {
     if let displays = self.displayManager?.getDisplays() {
       self.displays = displays
     }
@@ -118,12 +122,5 @@ class DisplayPrefsViewController: NSViewController, MASPreferencesViewController
     default:
       return ""
     }
-  }
-}
-
-extension DisplayPrefsViewController: DisplayDelegate {
-  func didUpdateDisplays(displays: [Display]) {
-    self.displays = displays
-    self.displayList.reloadData()
   }
 }

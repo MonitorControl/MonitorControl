@@ -169,6 +169,9 @@ class Utils: NSObject {
 
     /// Prefs Reset
     case preferenceReset
+
+    /// Used for notification when displays are updated in DisplayManager
+    case displayListUpdate
   }
 
   /// Keys for the value of listenFor option
