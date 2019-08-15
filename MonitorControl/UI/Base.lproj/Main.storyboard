@@ -749,29 +749,54 @@
                                     <action selector="resetPrefsClicked:" target="xjG-x0-7HO" id="rET-YD-lIt"/>
                                 </connections>
                             </button>
-                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="Z6T-PG-PcF">
-                                <rect key="frame" x="18" y="164" width="592" height="34"/>
-                                <textFieldCell key="cell" selectable="YES" title="Warning ⚠️ - Changing some of these setting may cause system freezes or unexpected behaviour. " id="frw-j2-tE1">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
+                            <stackView distribution="fillProportionally" orientation="horizontal" alignment="centerY" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VYW-sX-LN2">
+                                <rect key="frame" x="20" y="164" width="586" height="34"/>
+                                <subviews>
+                                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="Z6T-PG-PcF">
+                                        <rect key="frame" x="-2" y="0.0" width="567" height="34"/>
+                                        <textFieldCell key="cell" selectable="YES" id="frw-j2-tE1">
+                                            <font key="font" metaFont="system"/>
+                                            <string key="title">Warning ⚠️
+Changing some of these setting may cause system freezes or unexpected behaviour. </string>
+                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                    <button toolTip="More Info" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="kqn-gU-mZX">
+                                        <rect key="frame" x="561" y="3" width="27" height="25"/>
+                                        <buttonCell key="cell" type="help" bezelStyle="helpButton" imagePosition="overlaps" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="H6v-Sv-5MG">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="helpClicked:" target="xjG-x0-7HO" id="37V-Cf-oZ0"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <visibilityPriorities>
+                                    <integer value="1000"/>
+                                    <integer value="1000"/>
+                                </visibilityPriorities>
+                                <customSpacing>
+                                    <real value="3.4028234663852886e+38"/>
+                                    <real value="3.4028234663852886e+38"/>
+                                </customSpacing>
+                            </stackView>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="Z6T-PG-PcF" firstAttribute="leading" secondItem="MqL-7s-HoR" secondAttribute="leading" constant="20" id="0o0-CF-zz3"/>
-                            <constraint firstItem="VCP-xz-0jI" firstAttribute="top" secondItem="Z6T-PG-PcF" secondAttribute="bottom" constant="20" id="Dua-0E-O7Z"/>
+                            <constraint firstItem="VYW-sX-LN2" firstAttribute="leading" secondItem="MqL-7s-HoR" secondAttribute="leading" constant="20" id="CUY-YM-yrE"/>
                             <constraint firstItem="VCP-xz-0jI" firstAttribute="leading" secondItem="MqL-7s-HoR" secondAttribute="leading" constant="20" id="EXX-P9-jE2"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="bct-zW-zKf" secondAttribute="trailing" constant="20" id="FI6-Dj-LYL"/>
+                            <constraint firstItem="VYW-sX-LN2" firstAttribute="width" secondItem="t7B-Q7-Ssj" secondAttribute="width" id="HDw-Th-5gb"/>
                             <constraint firstItem="moz-ZW-I46" firstAttribute="leading" secondItem="MqL-7s-HoR" secondAttribute="leading" constant="20" id="Kh2-TM-Ugz"/>
                             <constraint firstAttribute="bottom" secondItem="bct-zW-zKf" secondAttribute="bottom" constant="20" id="Kr9-Xc-ADk"/>
                             <constraint firstItem="moz-ZW-I46" firstAttribute="top" secondItem="MqL-7s-HoR" secondAttribute="top" constant="20" id="MfN-q8-NmM"/>
+                            <constraint firstItem="VYW-sX-LN2" firstAttribute="top" secondItem="moz-ZW-I46" secondAttribute="bottom" constant="20" id="P9l-74-III"/>
                             <constraint firstAttribute="trailing" secondItem="VCP-xz-0jI" secondAttribute="trailing" constant="20" id="Vxd-7K-b1F"/>
-                            <constraint firstItem="Z6T-PG-PcF" firstAttribute="top" secondItem="moz-ZW-I46" secondAttribute="bottom" constant="20" id="Xew-UF-apu"/>
+                            <constraint firstItem="VCP-xz-0jI" firstAttribute="top" secondItem="VYW-sX-LN2" secondAttribute="bottom" constant="20" id="ccu-p4-dcq"/>
                             <constraint firstItem="bct-zW-zKf" firstAttribute="top" secondItem="VCP-xz-0jI" secondAttribute="bottom" constant="20" id="dgi-9A-uCh"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="moz-ZW-I46" secondAttribute="trailing" constant="20" id="nUH-DD-Xsg"/>
                             <constraint firstItem="bct-zW-zKf" firstAttribute="leading" secondItem="MqL-7s-HoR" secondAttribute="leading" constant="20" id="qvo-d9-w65"/>
-                            <constraint firstItem="Z6T-PG-PcF" firstAttribute="width" secondItem="VCP-xz-0jI" secondAttribute="width" id="sYE-Ws-R5l"/>
                         </constraints>
                     </view>
                     <connections>

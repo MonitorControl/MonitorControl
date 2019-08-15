@@ -54,6 +54,12 @@ class AdvancedPrefsViewController: NSViewController, MASPreferencesViewControlle
     }
   }
 
+  @IBAction func helpClicked(_: NSButton) {
+    if let url = URL(string: "https://github.com/the0neyouseek/MonitorControl/wiki/Advanced-Preferences") {
+      NSWorkspace.shared.open(url)
+    }
+  }
+
   @objc func loadDisplayList() {
     if let displays = displayManager?.getDisplays() {
       self.displays = displays
