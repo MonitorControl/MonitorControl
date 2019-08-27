@@ -25,7 +25,7 @@ class AdvancedPrefsViewController: NSViewController, MASPreferencesViewControlle
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    NotificationCenter.default.addObserver(self, selector: #selector(self.loadDisplayList), name: Notification.Name(Utils.PrefKeys.displayListUpdate.rawValue), object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(self.loadDisplayList), name: .displayListUpdate, object: nil)
     self.loadDisplayList()
   }
 
@@ -35,10 +35,10 @@ class AdvancedPrefsViewController: NSViewController, MASPreferencesViewControlle
 
   @IBAction func resetPrefsClicked(_: NSButton) {
     let alert: NSAlert = NSAlert()
-    alert.messageText = "Reset Preferences?"
-    alert.informativeText = "Are you sure you want to reset all preferences?"
-    alert.addButton(withTitle: "Yes")
-    alert.addButton(withTitle: "No")
+    alert.messageText = NSLocalizedString("Reset Preferences?", comment: "Shown in the alert dialog")
+    alert.informativeText = NSLocalizedString("Are you sure you want to reset all preferences?", comment: "Shown in the alert dialog")
+    alert.addButton(withTitle: NSLocalizedString("Yes", comment: "Shown in the alert dialog"))
+    alert.addButton(withTitle: NSLocalizedString("No", comment: "Shown in the alert dialog"))
     alert.alertStyle = NSAlert.Style.warning
 
     if let window = self.view.window {

@@ -184,10 +184,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
   private func subscribeEventListeners() {
     // subscribe KeyTap event listener
-    NotificationCenter.default.addObserver(self, selector: #selector(handleListenForChanged), name: NSNotification.Name(Utils.PrefKeys.listenFor.rawValue), object: nil)
-    NotificationCenter.default.addObserver(self, selector: #selector(handleShowContrastChanged), name: NSNotification.Name(Utils.PrefKeys.showContrast.rawValue), object: nil)
-    NotificationCenter.default.addObserver(self, selector: #selector(handleFriendlyNameChanged), name: NSNotification.Name(Utils.PrefKeys.friendlyName.rawValue), object: nil)
-    NotificationCenter.default.addObserver(self, selector: #selector(self.handlePreferenceReset), name: NSNotification.Name(Utils.PrefKeys.preferenceReset.rawValue), object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(handleListenForChanged), name: .listenFor, object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(handleShowContrastChanged), name: .showContrast, object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(handleFriendlyNameChanged), name: .friendlyName, object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(handlePreferenceReset), name: .preferenceReset, object: nil)
 
     // subscribe Audio output detector (AMCoreAudio)
     AMCoreAudio.NotificationCenter.defaultCenter.subscribe(self, eventType: AudioHardwareEvent.self, dispatchQueue: DispatchQueue.main)

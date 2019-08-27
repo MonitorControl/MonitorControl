@@ -27,7 +27,7 @@ class DisplayPrefsViewController: NSViewController, MASPreferencesViewController
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    NotificationCenter.default.addObserver(self, selector: #selector(self.loadDisplayList), name: Notification.Name(Utils.PrefKeys.displayListUpdate.rawValue), object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(self.loadDisplayList), name: .displayListUpdate, object: nil)
     self.loadDisplayList()
   }
 

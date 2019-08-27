@@ -27,6 +27,7 @@
 		56754EAF1D9A4016007BCDC5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56754EAE1D9A4016007BCDC5 /* AppDelegate.swift */; };
 		56754EB11D9A4016007BCDC5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 56754EB01D9A4016007BCDC5 /* Assets.xcassets */; };
 		6C0CCB26228F4F720037D2C5 /* AdvancedPrefsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C0CCB25228F4F720037D2C5 /* AdvancedPrefsViewController.swift */; };
+		6C20466C23153E4F00859767 /* Display+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C20466B23153E4F00859767 /* Display+Extension.swift */; };
 		6C2EA1CD228F644B00060E3F /* OnlyIntegerValueFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C2EA1CC228F644B00060E3F /* OnlyIntegerValueFormatter.swift */; };
 		6C2EA1CF228F7DFB00060E3F /* PollingMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C2EA1CE228F7DFB00060E3F /* PollingMode.swift */; };
 		6C85EFDA22C941B000227EA1 /* DisplayManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C85EFD922C941B000227EA1 /* DisplayManager.swift */; };
@@ -114,6 +115,7 @@
 		56754EAE1D9A4016007BCDC5 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AppDelegate.swift; sourceTree = "<group>"; };
 		56754EB01D9A4016007BCDC5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6C0CCB25228F4F720037D2C5 /* AdvancedPrefsViewController.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = AdvancedPrefsViewController.swift; sourceTree = "<group>"; tabWidth = 4; };
+		6C20466B23153E4F00859767 /* Display+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Display+Extension.swift"; sourceTree = "<group>"; };
 		6C2EA1CC228F644B00060E3F /* OnlyIntegerValueFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnlyIntegerValueFormatter.swift; sourceTree = "<group>"; };
 		6C2EA1CE228F7DFB00060E3F /* PollingMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollingMode.swift; sourceTree = "<group>"; };
 		6C85EFD922C941B000227EA1 /* DisplayManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplayManager.swift; sourceTree = "<group>"; };
@@ -196,6 +198,7 @@
 				28D1DDEC227FB8F2004CB494 /* EDID+Extension.swift */,
 				28D1DDF1227FBE71004CB494 /* NSScreen+Extension.swift */,
 				6C85EFE022CC00AD00227EA1 /* NSNotification+Extension.swift */,
+				6C20466B23153E4F00859767 /* Display+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -506,6 +509,7 @@
 				28D1DDF0227FBD99004CB494 /* EDID+Extension.swift in Sources */,
 				6C85EFDD22CBAA8F00227EA1 /* PollingModeCellView.swift in Sources */,
 				F0445D3D200254FA0025AE82 /* KeysPrefsViewController.swift in Sources */,
+				6C20466C23153E4F00859767 /* Display+Extension.swift in Sources */,
 				F0445D3820023E710025AE82 /* MainPrefsViewController.swift in Sources */,
 				28D1DDF2227FBE71004CB494 /* NSScreen+Extension.swift in Sources */,
 				F01B069F228221B7008E64DB /* SliderHandler.swift in Sources */,

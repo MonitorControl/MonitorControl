@@ -3,11 +3,7 @@ import Cocoa
 import DDC
 import os.log
 
-class Display: Equatable {
-  static func == (lhs: Display, rhs: Display) -> Bool {
-    return lhs.identifier == rhs.identifier
-  }
-
+class Display {
   let identifier: CGDirectDisplayID
   let name: String
   let isBuiltin: Bool
