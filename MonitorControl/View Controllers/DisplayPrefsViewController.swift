@@ -10,6 +10,8 @@ class DisplayPrefsViewController: NSViewController, MASPreferencesViewController
   let prefs = UserDefaults.standard
 
   var displays: [Display] = []
+  var displayManager: DisplayManager?
+
   enum DisplayColumn: Int {
     case checkbox
     case ddc
@@ -25,10 +27,17 @@ class DisplayPrefsViewController: NSViewController, MASPreferencesViewController
 
   override func viewDidLoad() {
     super.viewDidLoad()
-
-    self.allScreens.state = self.prefs.bool(forKey: Utils.PrefKeys.allScreens.rawValue) ? .on : .off
-
+    NotificationCenter.default.addObserver(self, selector: #selector(self.loadDisplayList), name: .displayListUpdate, object: nil)
     self.loadDisplayList()
+  }
+
+  override func viewWillAppear() {
+    super.viewWillAppear()
+    self.allScreens.state = self.prefs.bool(forKey: Utils.PrefKeys.allScreens.rawValue) ? .on : .off
+  }
+
+  deinit {
+    NotificationCenter.default.removeObserver(self)
   }
 
   @IBAction func allScreensTouched(_ sender: NSButton) {
@@ -47,17 +56,10 @@ class DisplayPrefsViewController: NSViewController, MASPreferencesViewController
 
   // MARK: - Table datasource
 
-  func loadDisplayList() {
-    for screen in NSScreen.screens {
-      let id = screen.displayID
-
-      let name = screen.displayName ?? NSLocalizedString("Unknown", comment: "Unknown display name")
-      let isEnabled = (prefs.object(forKey: "\(id)-state") as? Bool) ?? true
-
-      let display = Display(id, name: name, isBuiltin: screen.isBuiltin, isEnabled: isEnabled)
-      self.displays.append(display)
+  @objc func loadDisplayList() {
+    if let displays = self.displayManager?.getDisplays() {
+      self.displays = displays
     }
-
     self.displayList.reloadData()
   }
 

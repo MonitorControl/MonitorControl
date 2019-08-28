@@ -14,32 +14,28 @@ class MainPrefsViewController: NSViewController, MASPreferencesViewController {
   @IBOutlet var showContrastSlider: NSButton!
   @IBOutlet var lowerContrast: NSButton!
 
-  @available(macOS, deprecated: 10.10)
   override func viewDidLoad() {
     super.viewDidLoad()
-
-    let startAtLogin = (SMCopyAllJobDictionaries(kSMDomainUserLaunchd).takeRetainedValue() as? [[String: AnyObject]])?.first { $0["Label"] as? String == "\(Bundle.main.bundleIdentifier!)Helper" }?["OnDemand"] as? Bool ?? false
-
-    self.startAtLogin.state = startAtLogin ? .on : .off
-    self.showContrastSlider.state = self.prefs.bool(forKey: Utils.PrefKeys.showContrast.rawValue) ? .on : .off
-    self.lowerContrast.state = self.prefs.bool(forKey: Utils.PrefKeys.lowerContrast.rawValue) ? .on : .off
     self.setVersionNumber()
   }
 
-  @IBAction func startAtLoginClicked(_ sender: NSButton) {
-    let identifier = "\(Bundle.main.bundleIdentifier!)Helper" as CFString
+  @available(macOS, deprecated: 10.10)
+  override func viewWillAppear() {
+    super.viewWillAppear()
+    let startAtLogin = (SMCopyAllJobDictionaries(kSMDomainUserLaunchd).takeRetainedValue() as? [[String: AnyObject]])?.first { $0["Label"] as? String == "\(Bundle.main.bundleIdentifier!)Helper" }?["OnDemand"] as? Bool ?? false
+    self.startAtLogin.state = startAtLogin ? .on : .off
+    self.showContrastSlider.state = self.prefs.bool(forKey: Utils.PrefKeys.showContrast.rawValue) ? .on : .off
+    self.lowerContrast.state = self.prefs.bool(forKey: Utils.PrefKeys.lowerContrast.rawValue) ? .on : .off
+  }
 
+  @IBAction func startAtLoginClicked(_ sender: NSButton) {
     switch sender.state {
     case .on:
-      SMLoginItemSetEnabled(identifier, true)
+      Utils.setStartAtLogin(enabled: true)
     case .off:
-      SMLoginItemSetEnabled(identifier, false)
+      Utils.setStartAtLogin(enabled: false)
     default: break
     }
-
-    #if DEBUG
-      os_log("Toggle start at login state: %{public}@", type: .info, sender.state == .on ? "on" : "off")
-    #endif
   }
 
   @IBAction func showContrastSliderClicked(_ sender: NSButton) {

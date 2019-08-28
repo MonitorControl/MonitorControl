@@ -14,6 +14,26 @@ class Display {
   var contrastSliderHandler: SliderHandler?
   var ddc: DDC?
 
+  var hideOsd: Bool {
+    get {
+      return self.prefs.bool(forKey: "hideOsd-\(self.identifier)")
+    }
+    set {
+      self.prefs.set(newValue, forKey: "hideOsd-\(self.identifier)")
+      os_log("Set `hideOsd` to: %{public}@", type: .info, String(newValue))
+    }
+  }
+
+  var needsLongerDelay: Bool {
+    get {
+      return self.prefs.object(forKey: "longerDelay-\(self.identifier)") as? Bool ?? false
+    }
+    set {
+      self.prefs.set(newValue, forKey: "longerDelay-\(self.identifier)")
+      os_log("Set `needsLongerDisplay` to: %{public}@", type: .info, String(newValue))
+    }
+  }
+
   private let prefs = UserDefaults.standard
   private var audioPlayer: AVAudioPlayer?
 
@@ -67,7 +87,9 @@ class Display {
     }
 
     if let slider = volumeSliderHandler?.slider {
-      slider.intValue = Int32(value)
+      DispatchQueue.main.async {
+        slider.intValue = Int32(value)
+      }
     }
   }
 
@@ -90,7 +112,9 @@ class Display {
     }
 
     if let slider = volumeSliderHandler?.slider {
-      slider.intValue = Int32(value)
+      DispatchQueue.main.async {
+        slider.intValue = Int32(value)
+      }
     }
 
     self.saveValue(value, for: .audioSpeakerVolume)
@@ -159,6 +183,46 @@ class Display {
 
   func getFriendlyName() -> String {
     return self.prefs.string(forKey: "friendlyName-\(self.identifier)") ?? self.name
+  }
+
+  func setPollingMode(_ value: Int) {
+    self.prefs.set(String(value), forKey: "pollingMode-\(self.identifier)")
+  }
+
+  /*
+   Polling Modes:
+   0 -> .none     -> 0 tries
+   1 -> .minimal  -> 5 tries
+   2 -> .normal   -> 10 tries
+   3 -> .heavy    -> 100 tries
+   4 -> .custom   -> $pollingCount tries
+   */
+  func getPollingMode() -> Int {
+    // Reading as string so we don't get "0" as the default value
+    return Int(self.prefs.string(forKey: "pollingMode-\(self.identifier)") ?? "2") ?? 2
+  }
+
+  func getPollingCount() -> Int {
+    let selectedMode = self.getPollingMode()
+    switch selectedMode {
+    case 0:
+      return PollingMode.none.value
+    case 1:
+      return PollingMode.minimal.value
+    case 2:
+      return PollingMode.normal.value
+    case 3:
+      return PollingMode.heavy.value
+    case 4:
+      let val = self.prefs.integer(forKey: "pollingCount-\(self.identifier)")
+      return PollingMode.custom(value: val).value
+    default:
+      return 0
+    }
+  }
+
+  func setPollingCount(_ value: Int) {
+    self.prefs.set(value, forKey: "pollingCount-\(self.identifier)")
   }
 
   private func showOsd(command: DDC.Command, value: Int, isSmallIncrement: Bool = false) {

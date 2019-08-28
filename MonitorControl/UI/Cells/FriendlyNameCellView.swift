@@ -3,7 +3,6 @@ import os.log
 
 class FriendlyNameCellView: NSTableCellView {
   var display: Display?
-  let prefs = UserDefaults.standard
 
   override func draw(_ dirtyRect: NSRect) {
     super.draw(dirtyRect)
