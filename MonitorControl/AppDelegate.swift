@@ -18,8 +18,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
   var monitorItems: [NSMenuItem] = []
 
-  let step = 100 / 16
-
   var displayManager: DisplayManager?
   var mediaKeyTap: MediaKeyTap?
   var prefsController: NSWindowController?
@@ -214,20 +212,14 @@ extension AppDelegate: MediaKeyTapDelegate {
     for display in allDisplays {
       if (prefs.object(forKey: "\(display.identifier)-state") as? Bool) ?? true {
         switch mediaKey {
-        case .brightnessUp:
-          let value = display.calcNewValue(for: .brightness, withRel: +(isSmallIncrement ? self.step / 4 : self.step))
-          display.setBrightness(to: value, isSmallIncrement: isSmallIncrement)
-        case .brightnessDown:
-          let value = currentDisplay.calcNewValue(for: .brightness, withRel: -(isSmallIncrement ? self.step / 4 : self.step))
-          display.setBrightness(to: value, isSmallIncrement: isSmallIncrement)
+        case .brightnessUp, .brightnessDown:
+          let osdValue = display.calcNewValue(for: .brightness, isUp: mediaKey == .brightnessUp, isSmallIncrement: isSmallIncrement)
+          display.setBrightness(to: osdValue)
         case .mute:
-          display.mute()
-        case .volumeUp:
-          let value = display.calcNewValue(for: .audioSpeakerVolume, withRel: +(isSmallIncrement ? self.step / 4 : self.step))
-          display.setVolume(to: value, isSmallIncrement: isSmallIncrement)
-        case .volumeDown:
-          let value = display.calcNewValue(for: .audioSpeakerVolume, withRel: -(isSmallIncrement ? self.step / 4 : self.step))
-          display.setVolume(to: value, isSmallIncrement: isSmallIncrement)
+          display.toggleMute()
+        case .volumeUp, .volumeDown:
+          let osdValue = display.calcNewValue(for: .audioSpeakerVolume, isUp: mediaKey == .volumeUp, isSmallIncrement: isSmallIncrement)
+          display.setVolume(to: osdValue)
         default:
           return
         }

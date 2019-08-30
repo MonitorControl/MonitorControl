@@ -42,40 +42,58 @@ class Utils: NSObject {
       }
 
       var values: (UInt16, UInt16)?
-
       let delay = display.needsLongerDelay ? UInt64(40 * kMillisecondScale) : nil
-
-      if display.ddc?.supported(minReplyDelay: delay) == true {
-        os_log("Display supports DDC.", type: .debug)
-      } else {
-        os_log("Display does not support DDC.", type: .debug)
-      }
-
-      if display.ddc?.enableAppReport() == true {
-        os_log("Display supports enabling DDC application report.", type: .debug)
-      } else {
-        os_log("Display does not support enabling DDC application report.", type: .debug)
-      }
 
       let tries = UInt(display.getPollingCount())
       os_log("Polling %{public}@ times", type: .info, String(tries))
 
       if tries != 0 {
-        values = display.ddc?.read(command: command, tries: tries, minReplyDelay: delay)
+        values = display.readDDCValues(for: command, tries: tries, minReplyDelay: delay)
       }
 
-      let (currentValue, maxValue) = values ?? (UInt16(display.getValue(for: command)), UInt16(display.getMaxValue(for: command)))
+      let (currentDDCValue, maxValue) = values ?? (UInt16(display.getValue(for: command)), UInt16(display.getMaxValue(for: command)))
 
-      display.saveValue(Int(currentValue), for: command)
+      display.saveValue(Int(currentDDCValue), for: command)
       display.saveMaxValue(Int(maxValue), for: command)
 
       os_log("%{public}@ (%{public}@):", type: .info, display.name, String(reflecting: command))
-      os_log(" - current value: %{public}@", type: .info, String(currentValue))
-      os_log(" - maximum value: %{public}@", type: .info, String(maxValue))
+      os_log(" - current ddc value: %{public}@", type: .info, String(currentDDCValue))
+      os_log(" - maximum ddc value: %{public}@", type: .info, String(maxValue))
 
-      DispatchQueue.main.async {
-        slider.integerValue = Int(currentValue)
-        slider.maxValue = Double(maxValue)
+      if command != .audioSpeakerVolume {
+        DispatchQueue.main.async {
+          slider.integerValue = Int(currentDDCValue)
+          slider.maxValue = Double(maxValue)
+        }
+      } else {
+        // If we're looking at the audio speaker volume, also retrieve the values for the mute command
+        var muteValues: (current: UInt16, max: UInt16)?
+        os_log("Polling %{public}@ times", type: .info, String(tries))
+
+        if tries != 0 {
+          muteValues = display.readDDCValues(for: .audioMuteScreenBlank, tries: tries, minReplyDelay: delay)
+        }
+
+        os_log("%{public}@ (%{public}@):", type: .info, display.name, String(reflecting: DDC.Command.audioMuteScreenBlank))
+
+        if muteValues != nil {
+          os_log(" - current ddc value: %{public}@", type: .info, String(muteValues!.current))
+          os_log(" - maximum ddc value: %{public}@", type: .info, String(muteValues!.max))
+
+          display.saveValue(Int(muteValues!.current), for: command)
+          display.saveMaxValue(Int(muteValues!.max), for: command)
+        }
+
+        // If the system is not currently muted, or doesn't support the mute command, display the current volume as the slider value
+        DispatchQueue.main.async {
+          if muteValues == nil || muteValues!.current == 2 {
+            slider.integerValue = Int(currentDDCValue)
+          } else {
+            slider.integerValue = 0
+          }
+
+          slider.maxValue = Double(maxValue)
+        }
       }
     }
     return handler
