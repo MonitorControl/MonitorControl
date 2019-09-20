@@ -49,5 +49,5 @@
 /* Shown in the alert dialog */
 "You need to enable MonitorControl in System Preferences > Security and Privacy > Accessibility for the keyboard shortcuts to work" = "Вам нужно включить MonitorControl в Системных настройках > Защита и безопасность > Конфиденциальность > Универсальный доступ для работы сочетания клавиш";
 
-/* Show in menu */
+/* Shown in the main prefs window  */
 "Advanced" = "Дополнительные";
