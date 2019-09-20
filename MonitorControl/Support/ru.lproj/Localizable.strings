@@ -12,7 +12,7 @@
 "Default" = "По умолчанию";
 
 /* No comment provided by engineer. */
-"Display" = "Монитор";
+"Display" = "Мониторы";
 
 /* Shown in the main prefs window */
 "General" = "Основные";
@@ -48,3 +48,6 @@
 
 /* Shown in the alert dialog */
 "You need to enable MonitorControl in System Preferences > Security and Privacy > Accessibility for the keyboard shortcuts to work" = "Вам нужно включить MonitorControl в Системных настройках > Защита и безопасность > Конфиденциальность > Универсальный доступ для работы сочетания клавиш";
+
+/* Show in menu */
+"Advanced" = "Дополнительные";
