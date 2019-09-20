@@ -1,4 +1,3 @@
-
 /* Class = "NSButtonCell"; title = "Change Brightness/Volume for all screens"; ObjectID = "0Z7-PQ-Bl8"; */
 "0Z7-PQ-Bl8.title" = "Изменять Яркость/Громкость на всех мониторах";
 
@@ -50,6 +49,87 @@
 /* Class = "NSButtonCell"; title = "Show a slider for contrast"; ObjectID = "xSI-8W-Xd0"; */
 "xSI-8W-Xd0.title" = "Показать ползунок для контрастности";
 
+/* Class = "NSTextFieldCell"; title = "Version 0.0.0 (Build 0)"; ObjectID = "mBs-6m-13Q"; */
+"mBs-6m-13Q.title" = "Версия 0.0.0 (Сборка 0)";
+
+/* Class = "NSButtonCell"; title = "Reset Preferences"; ObjectID = "4Pj-3t-PJr"; */
+"4Pj-3t-PJr.title" = "Сброс настроек";
+
+/* Class = "NSTextFieldCell"; title = "Advanced"; ObjectID = "5wk-Dy-0fG"; */
+"5wk-Dy-0fG.title" = "Дополнительные";
+
+/* Class = "NSTableColumn"; headerCell.title = "Longer Delay"; ObjectID = "grO-Kr-l4d"; */
+"grO-Kr-l4d.headerCell.title" = "Длительный опрос";
+
+/* Class = "NSTableColumn"; headerCell.title = "Polling Mode"; ObjectID = "gxn-NH-Qhb"; */
+"gxn-NH-Qhb.headerCell.title" = "Режим опроса";
+
+/* Class = "NSMenuItem"; title = "None"; ObjectID = "FoA-yh-Yx3"; */
+"FoA-yh-Yx3.title" = "Нет";
+
+/* Class = "NSMenuItem"; title = "Minimal"; ObjectID = "Eq3-z9-yIo"; */
+"Eq3-z9-yIo.title" = "Редко";
+
+/* Class = "NSMenuItem"; title = "Normal"; ObjectID = "Riq-uM-bTs"; */
+"Riq-uM-bTs.title" = "Нормально";
+
+/* Class = "NSMenuItem"; title = "Heavy"; ObjectID = "vik-vN-bJe"; */
+"vik-vN-bJe.title" = "Часто";
+
+/* Class = "NSMenuItem"; title = "Custom"; ObjectID = "Cle-DD-vR7"; */
+"Cle-DD-vR7.title" = "Другое";
+
+/* Class = "NSTableColumn"; headerCell.title = "ID"; ObjectID = "JKW-oY-bSb"; */
+"JKW-oY-bSb.headerCell.title" = "ID";
+
+/* Class = "NSTableColumn"; headerCell.title = "Hide OSD"; ObjectID = "MPF-Mr-zVU"; */
+"MPF-Mr-zVU.headerCell.title" = "Скрыть OSD";
+
+/* Class = "NSTableColumn"; headerCell.title = "Display Name"; ObjectID = "dNl-I0-hcg"; */
+"dNl-I0-hcg.headerCell.title" = "Название монитора";
+
+/* Class = "NSTextFieldCell"; title = "Warning ⚠️\nChanging some of these setting may cause system freezes or unexpected behaviour. "; ObjectID = "frw-j2-tE1"; */
+"frw-j2-tE1.title" = "Внимание ⚠️\nИзменение некоторых из этих настроек может привести к зависанию системы или неожиданному поведению.";
+
+/* Class = "NSButton"; ibShadowedToolTip = "More Info"; ObjectID = "kqn-gU-mZX"; */
+"kqn-gU-mZX.ibShadowedToolTip" = "Больше информации";
+
+/* Class = "NSTextFieldCell"; title = "Version 0.0.0 (Build 0)"; ObjectID = "mBs-6m-13Q"; */
+"mBs-6m-13Q.title" = "Версия 0.0.0 (Сборка 0)";
+
+/* Class = "NSTableColumn"; headerCell.title = "DDC"; ObjectID = "xFw-if-3FU"; */
+"xFw-if-3FU.headerCell.title" = "DDC";
+
+/* Class = "NSTableColumn"; headerCell.title = "Polling Count"; ObjectID = "ytT-up-Dhs"; */
+"ytT-up-Dhs.headerCell.title" = "Количество опросов";
+
+/* Class = "NSTextFieldCell"; title = "Table View Cell"; ObjectID = "Pkk-Ce-Y6Q"; */
+"Pkk-Ce-Y6Q.title" = "";
+
+/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "vkG-RF-Yne"; */
+"vkG-RF-Yne.title" = "";
+
+/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "VPD-MR-IXg"; */
+"VPD-MR-IXg.title" = "";
+
+/* Class = "NSTextFieldCell"; title = "Table View Cell"; ObjectID = "5xu-ja-W21"; */
+"5xu-ja-W21.title" = "";
+
+/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "PZ9-0Z-K6J"; */
+"PZ9-0Z-K6J.title" = "";
+
+/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "UBV-gO-AZz"; */
+"UBV-gO-AZz.title" = "";
+
+/* Class = "NSTextFieldCell"; title = "Table View Cell"; ObjectID = "Euj-aT-PWW"; */
+"Euj-aT-PWW.title" = "";
+
+/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "H4a-c9-LcB"; */
+"H4a-c9-LcB.title" = "";
+
+/* Class = "NSTextFieldCell"; title = "Table View Cell"; ObjectID = "LZ8-Tj-mCs"; */
+"LZ8-Tj-mCs.title" = "";
+
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "2gr-xG-Byx"; */
 "2gr-xG-Byx.title" = "";
 
@@ -70,15 +150,3 @@
 
 /* Class = "NSTextFieldCell"; title = "Table View Cell"; ObjectID = "DGv-iu-Jg1"; */
 "DGv-iu-Jg1.title" = "";
-
-/* Class = "NSTextFieldCell"; title = "Version 0.0.0 (Build 0)"; ObjectID = "mBs-6m-13Q"; */
-"mBs-6m-13Q.title" = "";
-
-/* Class = "NSTextFieldCell"; title = "Table View Cell"; ObjectID = "Pkk-Ce-Y6Q"; */
-"Pkk-Ce-Y6Q.title" = "";
-
-/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "vkG-RF-Yne"; */
-"vkG-RF-Yne.title" = "";
-
-/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "VPD-MR-IXg"; */
-"VPD-MR-IXg.title" = "";
