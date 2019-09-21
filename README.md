@@ -54,7 +54,7 @@ Go to [Release](https://github.com/the0neyouseek/MonitorControl/releases/latest)
 
 ## Installing with Homebrew Cask
 
-You can also install MonitorControl with [Homebrew Cask](http://caskroom.io/).
+You can also install MonitorControl with [Homebrew Cask](https://github.com/Homebrew/homebrew-cask).
 
 ```bash
 $ brew cask install monitorcontrol
