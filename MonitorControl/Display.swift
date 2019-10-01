@@ -159,23 +159,8 @@ class Display {
   func setBrightness(to osdValue: Int) {
     let ddcValue = UInt16(osdValue)
 
-    if self.prefs.bool(forKey: Utils.PrefKeys.lowerContrast.rawValue) {
-      if ddcValue == 0 {
-        DispatchQueue.global(qos: .userInitiated).async {
-          _ = self.ddc?.write(command: .contrast, value: ddcValue)
-        }
-
-        if let slider = contrastSliderHandler?.slider {
-          slider.intValue = Int32(ddcValue)
-        }
-      } else if self.getValue(for: DDC.Command.brightness) == 0 {
-        let contrastValue = self.getValue(for: DDC.Command.contrast)
-
-        DispatchQueue.global(qos: .userInitiated).async {
-          _ = self.ddc?.write(command: .contrast, value: UInt16(contrastValue))
-        }
-      }
-    }
+    // Set the contrast value according to the brightness, if necessary
+    self.setContrastValueForBrightness(osdValue)
 
     DispatchQueue.global(qos: .userInitiated).async {
       guard self.ddc?.write(command: .brightness, value: ddcValue) == true else {
@@ -190,6 +175,33 @@ class Display {
     }
 
     self.saveValue(osdValue, for: .brightness)
+  }
+
+  func setContrastValueForBrightness(_ brightness: Int) {
+    var contrastValue: Int?
+
+    if brightness == 0 {
+      contrastValue = 0
+
+      // Save the current DDC value for contrast so it can be restored, even across app restarts
+      if self.getRestoreValue(for: .contrast) == 0 {
+        self.setRestoreValue(self.getValue(for: .contrast), for: .contrast)
+      }
+    } else if self.getValue(for: .brightness) == 0, brightness > 0 {
+      contrastValue = self.getRestoreValue(for: .contrast)
+    }
+
+    // Only write the new contrast value if lowering contrast after brightness is enabled
+    if contrastValue != nil, self.prefs.bool(forKey: Utils.PrefKeys.lowerContrast.rawValue) {
+      DispatchQueue.global(qos: .userInitiated).async {
+        _ = self.ddc?.write(command: .contrast, value: UInt16(contrastValue!))
+        self.saveValue(contrastValue!, for: .contrast)
+      }
+
+      if let slider = contrastSliderHandler?.slider {
+        slider.intValue = Int32(contrastValue!)
+      }
+    }
   }
 
   func readDDCValues(for command: DDC.Command, tries: UInt, minReplyDelay delay: UInt64?) -> (current: UInt16, max: UInt16)? {
@@ -257,6 +269,14 @@ class Display {
     let max = self.prefs.integer(forKey: "max-\(command.rawValue)-\(self.identifier)")
 
     return max == 0 ? 100 : max
+  }
+
+  func getRestoreValue(for command: DDC.Command) -> Int {
+    return self.prefs.integer(forKey: "restore-\(command.rawValue)-\(self.identifier)")
+  }
+
+  func setRestoreValue(_ value: Int?, for command: DDC.Command) {
+    self.prefs.set(value, forKey: "restore-\(command.rawValue)-\(self.identifier)")
   }
 
   func setFriendlyName(_ value: String) {
