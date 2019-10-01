@@ -124,8 +124,12 @@ class Display {
     }
 
     DispatchQueue.global(qos: .userInitiated).async {
-      guard self.ddc?.write(command: .audioSpeakerVolume, value: volumeDDCValue) == true else {
-        return
+      let isAlreadySet = volumeOSDValue == self.getValue(for: .audioSpeakerVolume)
+
+      if !isAlreadySet {
+        guard self.ddc?.write(command: .audioSpeakerVolume, value: volumeDDCValue) == true else {
+          return
+        }
       }
 
       if muteValue != nil {
@@ -143,38 +147,49 @@ class Display {
 
       self.hideDisplayOsd()
       self.showOsd(command: .audioSpeakerVolume, value: volumeOSDValue)
+    
+      if !isAlreadySet {
+        self.saveValue(volumeOSDValue, for: .audioSpeakerVolume)
 
-      if volumeOSDValue > 0 {
-        self.playVolumeChangedSound()
-      }
+        if volumeOSDValue > 0 {
+          self.playVolumeChangedSound()
+        }
 
-      if let slider = self.volumeSliderHandler?.slider {
-        DispatchQueue.main.async {
-          slider.intValue = Int32(volumeDDCValue)
+        if let slider = self.volumeSliderHandler?.slider {
+          DispatchQueue.main.async {
+            slider.intValue = Int32(volumeDDCValue)
+          }
         }
       }
     }
   }
 
   func setBrightness(to osdValue: Int) {
+    let isAlreadySet = osdValue == self.getValue(for: .brightness)
     let ddcValue = UInt16(osdValue)
 
     // Set the contrast value according to the brightness, if necessary
-    self.setContrastValueForBrightness(osdValue)
+    if !isAlreadySet {
+      self.setContrastValueForBrightness(osdValue)
+    }
 
     DispatchQueue.global(qos: .userInitiated).async {
-      guard self.ddc?.write(command: .brightness, value: ddcValue) == true else {
-        return
+      if !isAlreadySet {
+        guard self.ddc?.write(command: .brightness, value: ddcValue) == true else {
+          return
+        }
       }
 
       self.showOsd(command: .brightness, value: osdValue)
+      
+      if let slider = self.brightnessSliderHandler?.slider {
+        DispatchQueue.main.async {
+          slider.intValue = Int32(ddcValue)
+        }
+      }
+      
+      self.saveValue(osdValue, for: .brightness)
     }
-
-    if let slider = brightnessSliderHandler?.slider {
-      slider.intValue = Int32(ddcValue)
-    }
-
-    self.saveValue(osdValue, for: .brightness)
   }
 
   func setContrastValueForBrightness(_ brightness: Int) {
