@@ -80,8 +80,8 @@ class Utils: NSObject {
           os_log(" - current ddc value: %{public}@", type: .info, String(muteValues!.current))
           os_log(" - maximum ddc value: %{public}@", type: .info, String(muteValues!.max))
 
-          display.saveValue(Int(muteValues!.current), for: command)
-          display.saveMaxValue(Int(muteValues!.max), for: command)
+          display.saveValue(Int(muteValues!.current), for: .audioMuteScreenBlank)
+          display.saveMaxValue(Int(muteValues!.max), for: .audioMuteScreenBlank)
         }
 
         // If the system is not currently muted, or doesn't support the mute command, display the current volume as the slider value
