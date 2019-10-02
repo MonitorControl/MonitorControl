@@ -115,6 +115,9 @@
 		56754EAE1D9A4016007BCDC5 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AppDelegate.swift; sourceTree = "<group>"; };
 		56754EB01D9A4016007BCDC5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6C0CCB25228F4F720037D2C5 /* AdvancedPrefsViewController.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = AdvancedPrefsViewController.swift; sourceTree = "<group>"; tabWidth = 4; };
+		6C1CE9542344C6720026E0F7 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/Main.strings; sourceTree = "<group>"; };
+		6C1CE9552344C67C0026E0F7 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/MainMenu.strings; sourceTree = "<group>"; };
+		6C1CE9562344C6FE0026E0F7 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		6C20466B23153E4F00859767 /* Display+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Display+Extension.swift"; sourceTree = "<group>"; };
 		6C2EA1CC228F644B00060E3F /* OnlyIntegerValueFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnlyIntegerValueFormatter.swift; sourceTree = "<group>"; };
 		6C2EA1CE228F7DFB00060E3F /* PollingMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollingMode.swift; sourceTree = "<group>"; };
@@ -387,6 +390,7 @@
 				uk,
 				"zh-Hans",
 				ru,
+				tr,
 			);
 			mainGroup = 56754EA21D9A4016007BCDC5;
 			productRefGroup = 56754EAC1D9A4016007BCDC5 /* Products */;
@@ -542,6 +546,7 @@
 				1E7ECF3F22A4552400E4E701 /* uk */,
 				47A9F5A122ACAFBE00F649BB /* zh-Hans */,
 				B0C4810623357CE500053F91 /* ru */,
+				6C1CE9562344C6FE0026E0F7 /* tr */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -556,6 +561,7 @@
 				1E7ECF4022A4552B00E4E701 /* uk */,
 				47A9F59F22ACAFBE00F649BB /* zh-Hans */,
 				B0C4810723357CE500053F91 /* ru */,
+				6C1CE9542344C6720026E0F7 /* tr */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -570,6 +576,7 @@
 				1E7ECF4122A4553000E4E701 /* uk */,
 				47A9F5A022ACAFBE00F649BB /* zh-Hans */,
 				B0C4810823357CE500053F91 /* ru */,
+				6C1CE9552344C67C0026E0F7 /* tr */,
 			);
 			name = MainMenu.xib;
 			sourceTree = "<group>";
