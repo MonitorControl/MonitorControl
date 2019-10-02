@@ -23,6 +23,11 @@ class SliderHandler {
       slider.integerValue = value
     }
 
+    // For the speaker volume slider, also set/unset the mute command when the value is changed from/to 0
+    if self.cmd == .audioSpeakerVolume, (self.display.isMuted() && value > 0) || (!self.display.isMuted() && value == 0) {
+      self.display.toggleMute(fromVolumeSlider: true)
+    }
+
     _ = self.display.ddc?.write(command: self.cmd, value: UInt16(value))
     self.display.saveValue(value, for: self.cmd)
   }

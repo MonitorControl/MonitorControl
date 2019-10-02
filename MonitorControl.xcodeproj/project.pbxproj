@@ -124,6 +124,9 @@
 		6C85EFE022CC00AD00227EA1 /* NSNotification+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSNotification+Extension.swift"; sourceTree = "<group>"; };
 		6CCB278522D5315200619B05 /* HideOsdCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HideOsdCellView.swift; sourceTree = "<group>"; };
 		6CD444C222D4FBB8005BFD3D /* LongerDelayCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LongerDelayCellView.swift; sourceTree = "<group>"; };
+		B0C4810623357CE500053F91 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		B0C4810723357CE500053F91 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
+		B0C4810823357CE500053F91 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/MainMenu.strings; sourceTree = "<group>"; };
 		F01B0681228221B6008E64DB /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F01B0682228221B6008E64DB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F01B0683228221B6008E64DB /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
@@ -383,6 +386,7 @@
 				de,
 				uk,
 				"zh-Hans",
+				ru,
 			);
 			mainGroup = 56754EA21D9A4016007BCDC5;
 			productRefGroup = 56754EAC1D9A4016007BCDC5 /* Products */;
@@ -537,6 +541,7 @@
 				F01B0684228221B6008E64DB /* fr */,
 				1E7ECF3F22A4552400E4E701 /* uk */,
 				47A9F5A122ACAFBE00F649BB /* zh-Hans */,
+				B0C4810623357CE500053F91 /* ru */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -550,6 +555,7 @@
 				F01B06A622822217008E64DB /* fr */,
 				1E7ECF4022A4552B00E4E701 /* uk */,
 				47A9F59F22ACAFBE00F649BB /* zh-Hans */,
+				B0C4810723357CE500053F91 /* ru */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -563,6 +569,7 @@
 				F01B06A32282220A008E64DB /* fr */,
 				1E7ECF4122A4553000E4E701 /* uk */,
 				47A9F5A022ACAFBE00F649BB /* zh-Hans */,
+				B0C4810823357CE500053F91 /* ru */,
 			);
 			name = MainMenu.xib;
 			sourceTree = "<group>";
@@ -700,7 +707,7 @@
 				);
 				INFOPLIST_FILE = MonitorControl/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				MARKETING_VERSION = 1.6.0;
+				MARKETING_VERSION = 1.7.0;
 				PRODUCT_BUNDLE_IDENTIFIER = me.guillaumeb.MonitorControl;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -727,7 +734,7 @@
 				);
 				INFOPLIST_FILE = MonitorControl/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				MARKETING_VERSION = 1.6.0;
+				MARKETING_VERSION = 1.7.0;
 				PRODUCT_BUNDLE_IDENTIFIER = me.guillaumeb.MonitorControl;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -753,7 +760,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = MonitorControlHelper/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				MARKETING_VERSION = 1.6.0;
+				MARKETING_VERSION = 1.7.0;
 				PRODUCT_BUNDLE_IDENTIFIER = me.guillaumeb.MonitorControlHelper;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -778,7 +785,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = MonitorControlHelper/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				MARKETING_VERSION = 1.6.0;
+				MARKETING_VERSION = 1.7.0;
 				PRODUCT_BUNDLE_IDENTIFIER = me.guillaumeb.MonitorControlHelper;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;

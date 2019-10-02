@@ -9,7 +9,7 @@ Control your external monitor brightness, contrast or volume directly from a men
 
 <!-- Language emoji -->
 <div align="center">
-    <p>Translations: :uk: :fr: :de: :it: :tr:</p>
+    <p>Translations: :uk: :fr: :de: :it: :ru: :tr:</p>
 </div>
 
 <br/>
@@ -51,6 +51,14 @@ Control your external monitor brightness, contrast or volume directly from a men
 ## Download
 
 Go to [Release](https://github.com/the0neyouseek/MonitorControl/releases/latest) and download the latest `.dmg`
+
+## Installing with Homebrew Cask
+
+You can also install MonitorControl with [Homebrew Cask](https://github.com/Homebrew/homebrew-cask).
+
+```bash
+$ brew cask install monitorcontrol
+```
 
 ## How to help
 
