@@ -48,3 +48,6 @@
 
 /* Shown in the alert dialog */
 "You need to enable MonitorControl in System Preferences > Security and Privacy > Accessibility for the keyboard shortcuts to work" = "Для роботи клавіатурних скороченнь, вам необхідно дозволити MonitorControl доступ до спеціальних можливостей вашого пристрою через Системні параметри > Захист і безпека > Безпека > Спеціальні можливості";
+
+/* Shown in the main prefs window  */
+"Advanced" = "Розширені";
