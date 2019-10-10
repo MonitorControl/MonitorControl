@@ -363,13 +363,13 @@
 				TargetAttributes = {
 					56754EAA1D9A4016007BCDC5 = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = CYC8C8R4K9;
+						DevelopmentTeam = CUWL8LY6HS;
 						LastSwiftMigration = 1020;
 						ProvisioningStyle = Automatic;
 					};
 					F06792E6200A73460066C438 = {
 						CreatedOnToolsVersion = 9.2;
-						DevelopmentTeam = CYC8C8R4K9;
+						DevelopmentTeam = CUWL8LY6HS;
 						LastSwiftMigration = 1020;
 						ProvisioningStyle = Automatic;
 					};
@@ -697,7 +697,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 570;
-				DEVELOPMENT_TEAM = CYC8C8R4K9;
+				DEVELOPMENT_TEAM = CUWL8LY6HS;
 				ENABLE_HARDENED_RUNTIME = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -708,7 +708,7 @@
 				INFOPLIST_FILE = MonitorControl/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MARKETING_VERSION = 1.7.0;
-				PRODUCT_BUNDLE_IDENTIFIER = me.guillaumeb.MonitorControl;
+				PRODUCT_BUNDLE_IDENTIFIER = com.drshu.MonitorControl;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "MonitorControl/Support/Bridging-Header.h";
@@ -724,7 +724,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 570;
-				DEVELOPMENT_TEAM = CYC8C8R4K9;
+				DEVELOPMENT_TEAM = CUWL8LY6HS;
 				ENABLE_HARDENED_RUNTIME = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -735,7 +735,7 @@
 				INFOPLIST_FILE = MonitorControl/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MARKETING_VERSION = 1.7.0;
-				PRODUCT_BUNDLE_IDENTIFIER = me.guillaumeb.MonitorControl;
+				PRODUCT_BUNDLE_IDENTIFIER = com.drshu.MonitorControl;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "MonitorControl/Support/Bridging-Header.h";
@@ -755,13 +755,13 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 570;
-				DEVELOPMENT_TEAM = CYC8C8R4K9;
+				DEVELOPMENT_TEAM = CUWL8LY6HS;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = MonitorControlHelper/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MARKETING_VERSION = 1.7.0;
-				PRODUCT_BUNDLE_IDENTIFIER = me.guillaumeb.MonitorControlHelper;
+				PRODUCT_BUNDLE_IDENTIFIER = com.drshu.MonitorControlHelper;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
@@ -780,13 +780,13 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 570;
-				DEVELOPMENT_TEAM = CYC8C8R4K9;
+				DEVELOPMENT_TEAM = CUWL8LY6HS;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = MonitorControlHelper/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MARKETING_VERSION = 1.7.0;
-				PRODUCT_BUNDLE_IDENTIFIER = me.guillaumeb.MonitorControlHelper;
+				PRODUCT_BUNDLE_IDENTIFIER = com.drshu.MonitorControlHelper;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
