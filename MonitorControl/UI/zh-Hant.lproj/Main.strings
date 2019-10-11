@@ -1,0 +1,87 @@
+
+/* Class = "NSButtonCell"; title = "Change Brightness/Volume for all screens"; ObjectID = "0Z7-PQ-Bl8"; */
+"0Z7-PQ-Bl8.title" = "調整所有螢幕的亮度/音量";
+
+/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "2gr-xG-Byx"; */
+"2gr-xG-Byx.title" = "";
+
+/* Class = "NSTextFieldCell"; title = "Table View Cell"; ObjectID = "4or-hS-WeW"; */
+"4or-hS-WeW.title" = "";
+
+/* Class = "NSTableColumn"; headerCell.title = "Enabled"; ObjectID = "8U8-ec-Zbv"; */
+"8U8-ec-Zbv.headerCell.title" = "啟用";
+
+/* Class = "NSTableColumn"; headerCell.title = "Name"; ObjectID = "CHc-s5-4MN"; */
+"CHc-s5-4MN.headerCell.title" = "名稱";
+
+/* Class = "NSTextFieldCell"; title = "Table View Cell"; ObjectID = "DGv-iu-Jg1"; */
+"DGv-iu-Jg1.title" = "";
+
+/* Class = "NSTextFieldCell"; title = "Keys"; ObjectID = "Dcz-GG-1li"; */
+"Dcz-GG-1li.title" = "快速鍵";
+
+/* Class = "NSTextFieldCell"; title = "General"; ObjectID = "ENU-js-huy"; */
+"ENU-js-huy.title" = "一般";
+
+/* Class = "NSTextFieldCell"; title = "Display"; ObjectID = "ExD-7P-6XI"; */
+"ExD-7P-6XI.title" = "顯示器";
+
+/* Class = "NSTableColumn"; headerCell.title = "Vendor"; ObjectID = "LRJ-fb-Z9E"; */
+"LRJ-fb-Z9E.headerCell.title" = "製造商";
+
+/* Class = "NSMenuItem"; title = "Volume only"; ObjectID = "NLP-dU-Dam"; */
+"NLP-dU-Dam.title" = "僅限音量";
+
+/* Class = "NSTableColumn"; headerCell.title = "Model"; ObjectID = "Nvp-hI-w4x"; */
+"Nvp-hI-w4x.headerCell.title" = "型號";
+
+/* Class = "NSTextFieldCell"; title = "Table View Cell"; ObjectID = "Pkk-Ce-Y6Q"; */
+"Pkk-Ce-Y6Q.title" = "";
+
+/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "VPD-MR-IXg"; */
+"VPD-MR-IXg.title" = "";
+
+/* Class = "NSTextFieldCell"; title = "Listen for"; ObjectID = "Vh8-06-U3K"; */
+"Vh8-06-U3K.title" = "通過快速鍵調整螢幕";
+
+/* Class = "NSMenuItem"; title = "Both Brightness & Volume"; ObjectID = "Vr4-xb-B4o"; */
+"Vr4-xb-B4o.title" = "亮度與音量";
+
+/* Class = "NSTextFieldCell"; title = "Table View Cell"; ObjectID = "aSw-3H-uNa"; */
+"aSw-3H-uNa.title" = "";
+
+/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "afl-95-ZJl"; */
+"afl-95-ZJl.title" = "";
+
+/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "as0-t3-Aub"; */
+"as0-t3-Aub.title" = "";
+
+/* Class = "NSTextFieldCell"; title = "Table View Cell"; ObjectID = "cnb-Li-1lE"; */
+"cnb-Li-1lE.title" = "";
+
+/* Class = "NSTableColumn"; headerCell.title = "ID"; ObjectID = "dgp-q7-cBK"; */
+"dgp-q7-cBK.headerCell.title" = "ID";
+
+/* Class = "NSButtonCell"; title = "Lower Contrast after Brightness"; ObjectID = "fhy-Er-0aI"; */
+"fhy-Er-0aI.title" = "同時降低對比度與亮度";
+
+/* Class = "NSMenuItem"; title = "Brightness only"; ObjectID = "hjz-0c-rvK"; */
+"hjz-0c-rvK.title" = "僅限亮度";
+
+/* Class = "NSButtonCell"; title = "Start MonitorControl at Login"; ObjectID = "j72-NF-zsW"; */
+"j72-NF-zsW.title" = "登入時自動啟動 MonitorControl";
+
+/* Class = "NSTextFieldCell"; title = "Version 0.0.0 (Build 0)"; ObjectID = "mBs-6m-13Q"; */
+"mBs-6m-13Q.title" = "";
+
+/* Class = "NSTableColumn"; headerCell.title = "Friendly Name"; ObjectID = "uoI-1J-RdD"; */
+"uoI-1J-RdD.headerCell.title" = "自訂名稱";
+
+/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "vkG-RF-Yne"; */
+"vkG-RF-Yne.title" = "";
+
+/* Class = "NSTableColumn"; headerCell.title = "DDC"; ObjectID = "xFw-if-3FU"; */
+"xFw-if-3FU.headerCell.title" = "DDC";
+
+/* Class = "NSButtonCell"; title = "Show a slider for contrast"; ObjectID = "xSI-8W-Xd0"; */
+"xSI-8W-Xd0.title" = "顯示對比度滑條";
