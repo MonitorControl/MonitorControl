@@ -40,5 +40,9 @@ class SliderHandler {
 
     _ = self.display.ddc?.write(command: self.cmd, value: UInt16(value))
     self.display.saveValue(value, for: self.cmd)
+
+    if self.cmd == .audioSpeakerVolume {
+      self.display.hideDisplayOsd()
+    }
   }
 }
