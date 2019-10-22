@@ -219,18 +219,18 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 extension AppDelegate: MediaKeyTapDelegate {
   func handle(mediaKey: MediaKey, event: KeyEvent?, modifiers: NSEvent.ModifierFlags?) {
     let oppositeKey: MediaKey? = self.oppositeMediaKey(mediaKey: mediaKey)
-    let isRepeat = event != nil && event!.keyRepeat
+    let isRepeat = event?.keyRepeat ?? false
 
     // If the opposite key to the one being held has an active timer, cancel it - we'll be going in the opposite direction
-    if oppositeKey != nil, self.keyRepeatTimers[oppositeKey!] != nil, self.keyRepeatTimers[oppositeKey!]!.isValid {
-      self.keyRepeatTimers[oppositeKey!]!.invalidate()
-    } else if self.keyRepeatTimers[mediaKey] != nil, self.keyRepeatTimers[mediaKey]!.isValid {
+    if let oppositeKey = oppositeKey, let oppositeKeyTimer = self.keyRepeatTimers[oppositeKey], oppositeKeyTimer.isValid {
+      oppositeKeyTimer.invalidate()
+    } else if let mediaKeyTimer = self.keyRepeatTimers[mediaKey], mediaKeyTimer.isValid {
       // If there's already an active timer for the key being held down, let it run rather than executing it again
       if isRepeat {
         return
       }
 
-      self.keyRepeatTimers[mediaKey]!.invalidate()
+      mediaKeyTimer.invalidate()
     }
 
     let displays = self.displayManager?.getDisplays() ?? [Display]()

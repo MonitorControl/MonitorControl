@@ -127,15 +127,15 @@ class Display {
       }
     }
 
-    if muteValue != nil {
+    if let muteValue = muteValue {
       // If the mute command is supported, set its value accordingly
       if self.supportsMuteCommand() {
-        guard self.ddc?.write(command: .audioMuteScreenBlank, value: UInt16(muteValue!)) == true else {
+        guard self.ddc?.write(command: .audioMuteScreenBlank, value: UInt16(muteValue)) == true else {
           return
         }
       }
 
-      self.saveValue(muteValue!, for: .audioMuteScreenBlank)
+      self.saveValue(muteValue, for: .audioMuteScreenBlank)
     }
 
     self.hideDisplayOsd()
@@ -195,12 +195,12 @@ class Display {
     }
 
     // Only write the new contrast value if lowering contrast after brightness is enabled
-    if contrastValue != nil, self.prefs.bool(forKey: Utils.PrefKeys.lowerContrast.rawValue) {
-      _ = self.ddc?.write(command: .contrast, value: UInt16(contrastValue!))
-      self.saveValue(contrastValue!, for: .contrast)
+    if let contrastValue = contrastValue, self.prefs.bool(forKey: Utils.PrefKeys.lowerContrast.rawValue) {
+      _ = self.ddc?.write(command: .contrast, value: UInt16(contrastValue))
+      self.saveValue(contrastValue, for: .contrast)
 
       if let slider = contrastSliderHandler?.slider {
-        slider.intValue = Int32(contrastValue!)
+        slider.intValue = Int32(contrastValue)
       }
     }
   }
@@ -221,12 +221,7 @@ class Display {
     }
 
     values = self.ddc?.read(command: command, tries: tries, minReplyDelay: delay)
-
-    if values != nil {
-      return values!
-    }
-
-    return nil
+    return values
   }
 
   func calcNewValue(for command: DDC.Command, isUp: Bool, isSmallIncrement: Bool) -> Int {
