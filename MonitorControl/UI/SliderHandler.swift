@@ -42,7 +42,7 @@ class SliderHandler {
     self.display.saveValue(value, for: self.cmd)
 
     if self.cmd == .audioSpeakerVolume {
-      self.display.hideDisplayOsd()
+      self.display.hideDisplayOsd(repeatCommand: false)
     }
   }
 }
