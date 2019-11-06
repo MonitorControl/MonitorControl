@@ -48,13 +48,15 @@ class Display {
 
   // On some displays, the display's OSD overlaps the macOS OSD,
   // calling the OSD command with 1 seems to hide it.
-  func hideDisplayOsd(repeatCommand: Bool = true) {
+  func hideDisplayOsd() {
     guard self.hideOsd else {
       return
     }
 
-    for _ in 0..<(repeatCommand ? 20 : 1) {
-      _ = self.ddc?.write(command: .osd, value: UInt16(1), errorRecoveryWaitTime: 2000)
+    DispatchQueue.global(qos: .userInitiated).async {
+      for _ in 0..<20 {
+        _ = self.ddc?.write(command: .osd, value: UInt16(1), errorRecoveryWaitTime: 2000)
+      }
     }
   }
 
