@@ -81,34 +81,30 @@ class Display {
       }
     }
 
-    DispatchQueue.global(qos: .userInitiated).async {
-      let volumeDDCValue = UInt16(volumeOSDValue)
+    let volumeDDCValue = UInt16(volumeOSDValue)
 
-      guard self.ddc?.write(command: .audioSpeakerVolume, value: volumeDDCValue) == true else {
+    guard self.ddc?.write(command: .audioSpeakerVolume, value: volumeDDCValue) == true else {
+      return
+    }
+
+    if self.supportsMuteCommand() {
+      guard self.ddc?.write(command: .audioMuteScreenBlank, value: UInt16(muteValue)) == true else {
         return
       }
+    }
 
-      if self.supportsMuteCommand() {
-        guard self.ddc?.write(command: .audioMuteScreenBlank, value: UInt16(muteValue)) == true else {
-          return
-        }
+    self.saveValue(muteValue, for: .audioMuteScreenBlank)
+
+    if !fromVolumeSlider {
+      self.hideDisplayOsd()
+      self.showOsd(command: .audioSpeakerVolume, value: volumeOSDValue)
+
+      if volumeOSDValue > 0 {
+        self.playVolumeChangedSound()
       }
 
-      self.saveValue(muteValue, for: .audioMuteScreenBlank)
-
-      if !fromVolumeSlider {
-        self.hideDisplayOsd()
-        self.showOsd(command: .audioSpeakerVolume, value: volumeOSDValue)
-
-        if volumeOSDValue > 0 {
-          self.playVolumeChangedSound()
-        }
-
-        if let slider = self.volumeSliderHandler?.slider {
-          DispatchQueue.main.async {
-            slider.intValue = Int32(volumeDDCValue)
-          }
-        }
+      if let slider = self.volumeSliderHandler?.slider {
+        slider.intValue = Int32(volumeDDCValue)
       }
     }
   }
@@ -123,73 +119,90 @@ class Display {
       muteValue = 1
     }
 
-    DispatchQueue.global(qos: .userInitiated).async {
+    let isAlreadySet = volumeOSDValue == self.getValue(for: .audioSpeakerVolume)
+
+    if !isAlreadySet {
       guard self.ddc?.write(command: .audioSpeakerVolume, value: volumeDDCValue) == true else {
         return
       }
+    }
 
-      if muteValue != nil {
-        // If the mute command is supported, set its value accordingly
-        if self.supportsMuteCommand() {
-          guard self.ddc?.write(command: .audioMuteScreenBlank, value: UInt16(muteValue!)) == true else {
-            return
-          }
+    if let muteValue = muteValue {
+      // If the mute command is supported, set its value accordingly
+      if self.supportsMuteCommand() {
+        guard self.ddc?.write(command: .audioMuteScreenBlank, value: UInt16(muteValue)) == true else {
+          return
         }
-
-        self.saveValue(muteValue!, for: .audioMuteScreenBlank)
       }
 
-      self.saveValue(volumeOSDValue, for: .audioSpeakerVolume)
+      self.saveValue(muteValue, for: .audioMuteScreenBlank)
+    }
 
-      self.hideDisplayOsd()
-      self.showOsd(command: .audioSpeakerVolume, value: volumeOSDValue)
+    self.hideDisplayOsd()
+    self.showOsd(command: .audioSpeakerVolume, value: volumeOSDValue)
+
+    if !isAlreadySet {
+      self.saveValue(volumeOSDValue, for: .audioSpeakerVolume)
 
       if volumeOSDValue > 0 {
         self.playVolumeChangedSound()
       }
 
       if let slider = self.volumeSliderHandler?.slider {
-        DispatchQueue.main.async {
-          slider.intValue = Int32(volumeDDCValue)
-        }
+        slider.intValue = Int32(volumeDDCValue)
       }
     }
   }
 
   func setBrightness(to osdValue: Int) {
+    let isAlreadySet = osdValue == self.getValue(for: .brightness)
     let ddcValue = UInt16(osdValue)
 
-    if self.prefs.bool(forKey: Utils.PrefKeys.lowerContrast.rawValue) {
-      if ddcValue == 0 {
-        DispatchQueue.global(qos: .userInitiated).async {
-          _ = self.ddc?.write(command: .contrast, value: ddcValue)
-        }
-
-        if let slider = contrastSliderHandler?.slider {
-          slider.intValue = Int32(ddcValue)
-        }
-      } else if self.getValue(for: DDC.Command.brightness) == 0 {
-        let contrastValue = self.getValue(for: DDC.Command.contrast)
-
-        DispatchQueue.global(qos: .userInitiated).async {
-          _ = self.ddc?.write(command: .contrast, value: UInt16(contrastValue))
-        }
-      }
+    // Set the contrast value according to the brightness, if necessary
+    if !isAlreadySet {
+      self.setContrastValueForBrightness(osdValue)
     }
 
-    DispatchQueue.global(qos: .userInitiated).async {
+    if !isAlreadySet {
       guard self.ddc?.write(command: .brightness, value: ddcValue) == true else {
         return
       }
-
-      self.showOsd(command: .brightness, value: osdValue)
     }
 
-    if let slider = brightnessSliderHandler?.slider {
-      slider.intValue = Int32(ddcValue)
+    self.showOsd(command: .brightness, value: osdValue)
+
+    if !isAlreadySet {
+      if let slider = self.brightnessSliderHandler?.slider {
+        slider.intValue = Int32(ddcValue)
+      }
+
+      self.saveValue(osdValue, for: .brightness)
+    }
+  }
+
+  func setContrastValueForBrightness(_ brightness: Int) {
+    var contrastValue: Int?
+
+    if brightness == 0 {
+      contrastValue = 0
+
+      // Save the current DDC value for contrast so it can be restored, even across app restarts
+      if self.getRestoreValue(for: .contrast) == 0 {
+        self.setRestoreValue(self.getValue(for: .contrast), for: .contrast)
+      }
+    } else if self.getValue(for: .brightness) == 0, brightness > 0 {
+      contrastValue = self.getRestoreValue(for: .contrast)
     }
 
-    self.saveValue(osdValue, for: .brightness)
+    // Only write the new contrast value if lowering contrast after brightness is enabled
+    if let contrastValue = contrastValue, self.prefs.bool(forKey: Utils.PrefKeys.lowerContrast.rawValue) {
+      _ = self.ddc?.write(command: .contrast, value: UInt16(contrastValue))
+      self.saveValue(contrastValue, for: .contrast)
+
+      if let slider = contrastSliderHandler?.slider {
+        slider.intValue = Int32(contrastValue)
+      }
+    }
   }
 
   func readDDCValues(for command: DDC.Command, tries: UInt, minReplyDelay delay: UInt64?) -> (current: UInt16, max: UInt16)? {
@@ -208,12 +221,7 @@ class Display {
     }
 
     values = self.ddc?.read(command: command, tries: tries, minReplyDelay: delay)
-
-    if values != nil {
-      return values!
-    }
-
-    return nil
+    return values
   }
 
   func calcNewValue(for command: DDC.Command, isUp: Bool, isSmallIncrement: Bool) -> Int {
@@ -257,6 +265,14 @@ class Display {
     let max = self.prefs.integer(forKey: "max-\(command.rawValue)-\(self.identifier)")
 
     return max == 0 ? 100 : max
+  }
+
+  func getRestoreValue(for command: DDC.Command) -> Int {
+    return self.prefs.integer(forKey: "restore-\(command.rawValue)-\(self.identifier)")
+  }
+
+  func setRestoreValue(_ value: Int?, for command: DDC.Command) {
+    self.prefs.set(value, forKey: "restore-\(command.rawValue)-\(self.identifier)")
   }
 
   func setFriendlyName(_ value: String) {

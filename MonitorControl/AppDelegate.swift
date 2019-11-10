@@ -21,6 +21,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   var displayManager: DisplayManager?
   var mediaKeyTap: MediaKeyTap?
   var prefsController: NSWindowController?
+  var keyRepeatTimers: [MediaKey: Timer] = [:]
 
   var accessibilityObserver: NSObjectProtocol!
 
@@ -197,29 +198,68 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       }
     }
   }
+
+  private func oppositeMediaKey(mediaKey: MediaKey) -> MediaKey? {
+    if mediaKey == .brightnessUp {
+      return .brightnessDown
+    } else if mediaKey == .brightnessDown {
+      return .brightnessUp
+    } else if mediaKey == .volumeUp {
+      return .volumeDown
+    } else if mediaKey == .volumeDown {
+      return .volumeUp
+    }
+
+    return nil
+  }
 }
 
 // MARK: - Media Key Tap delegate
 
 extension AppDelegate: MediaKeyTapDelegate {
-  func handle(mediaKey: MediaKey, event _: KeyEvent?, modifiers: NSEvent.ModifierFlags?) {
+  func handle(mediaKey: MediaKey, event: KeyEvent?, modifiers: NSEvent.ModifierFlags?) {
+    let oppositeKey: MediaKey? = self.oppositeMediaKey(mediaKey: mediaKey)
+    let isRepeat = event?.keyRepeat ?? false
+
+    // If the opposite key to the one being held has an active timer, cancel it - we'll be going in the opposite direction
+    if let oppositeKey = oppositeKey, let oppositeKeyTimer = self.keyRepeatTimers[oppositeKey], oppositeKeyTimer.isValid {
+      oppositeKeyTimer.invalidate()
+    } else if let mediaKeyTimer = self.keyRepeatTimers[mediaKey], mediaKeyTimer.isValid {
+      // If there's already an active timer for the key being held down, let it run rather than executing it again
+      if isRepeat {
+        return
+      }
+
+      mediaKeyTimer.invalidate()
+    }
+
     let displays = self.displayManager?.getDisplays() ?? [Display]()
     guard let currentDisplay = Utils.getCurrentDisplay(from: displays) else { return }
 
     let allDisplays = prefs.bool(forKey: Utils.PrefKeys.allScreens.rawValue) ? displays : [currentDisplay]
     let isSmallIncrement = modifiers?.isSuperset(of: NSEvent.ModifierFlags([.shift, .option])) ?? false
 
+    // Introduce a small delay to handle the media key being held down
+    let delay = isRepeat ? 0.05 : 0
+
     for display in allDisplays {
       if (prefs.object(forKey: "\(display.identifier)-state") as? Bool) ?? true {
         switch mediaKey {
         case .brightnessUp, .brightnessDown:
-          let osdValue = display.calcNewValue(for: .brightness, isUp: mediaKey == .brightnessUp, isSmallIncrement: isSmallIncrement)
-          display.setBrightness(to: osdValue)
+          self.keyRepeatTimers[mediaKey] = Timer.scheduledTimer(withTimeInterval: delay, repeats: false, block: { _ in
+            let osdValue = display.calcNewValue(for: .brightness, isUp: mediaKey == .brightnessUp, isSmallIncrement: isSmallIncrement)
+            display.setBrightness(to: osdValue)
+          })
         case .mute:
-          display.toggleMute()
+          // The mute key should not respond to press + hold
+          if !isRepeat {
+            display.toggleMute()
+          }
         case .volumeUp, .volumeDown:
-          let osdValue = display.calcNewValue(for: .audioSpeakerVolume, isUp: mediaKey == .volumeUp, isSmallIncrement: isSmallIncrement)
-          display.setVolume(to: osdValue)
+          self.keyRepeatTimers[mediaKey] = Timer.scheduledTimer(withTimeInterval: delay, repeats: false, block: { _ in
+            let osdValue = display.calcNewValue(for: .audioSpeakerVolume, isUp: mediaKey == .volumeUp, isSmallIncrement: isSmallIncrement)
+            display.setVolume(to: osdValue)
+          })
         default:
           return
         }
