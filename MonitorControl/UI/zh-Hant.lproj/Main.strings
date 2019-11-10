@@ -5,14 +5,26 @@
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "2gr-xG-Byx"; */
 "2gr-xG-Byx.title" = "";
 
+/* Class = "NSButtonCell"; title = "Reset Preferences"; ObjectID = "4Pj-3t-PJr"; */
+"4Pj-3t-PJr.title" = "Reset Preferences";
+
 /* Class = "NSTextFieldCell"; title = "Table View Cell"; ObjectID = "4or-hS-WeW"; */
 "4or-hS-WeW.title" = "";
+
+/* Class = "NSTextFieldCell"; title = "Advanced"; ObjectID = "5wk-Dy-0fG"; */
+"5wk-Dy-0fG.title" = "Advanced";
+
+/* Class = "NSTextFieldCell"; title = "Table View Cell"; ObjectID = "5xu-ja-W21"; */
+"5xu-ja-W21.title" = "Table View Cell";
 
 /* Class = "NSTableColumn"; headerCell.title = "Enabled"; ObjectID = "8U8-ec-Zbv"; */
 "8U8-ec-Zbv.headerCell.title" = "啟用";
 
 /* Class = "NSTableColumn"; headerCell.title = "Name"; ObjectID = "CHc-s5-4MN"; */
 "CHc-s5-4MN.headerCell.title" = "名稱";
+
+/* Class = "NSMenuItem"; title = "Custom"; ObjectID = "Cle-DD-vR7"; */
+"Cle-DD-vR7.title" = "Custom";
 
 /* Class = "NSTextFieldCell"; title = "Table View Cell"; ObjectID = "DGv-iu-Jg1"; */
 "DGv-iu-Jg1.title" = "";
@@ -23,11 +35,32 @@
 /* Class = "NSTextFieldCell"; title = "General"; ObjectID = "ENU-js-huy"; */
 "ENU-js-huy.title" = "一般";
 
+/* Class = "NSMenuItem"; title = "Minimal"; ObjectID = "Eq3-z9-yIo"; */
+"Eq3-z9-yIo.title" = "Minimal";
+
+/* Class = "NSTextFieldCell"; title = "Table View Cell"; ObjectID = "Euj-aT-PWW"; */
+"Euj-aT-PWW.title" = "Table View Cell";
+
 /* Class = "NSTextFieldCell"; title = "Display"; ObjectID = "ExD-7P-6XI"; */
 "ExD-7P-6XI.title" = "顯示器";
 
+/* Class = "NSMenuItem"; title = "None"; ObjectID = "FoA-yh-Yx3"; */
+"FoA-yh-Yx3.title" = "None";
+
+/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "H4a-c9-LcB"; */
+"H4a-c9-LcB.title" = "Text Cell";
+
+/* Class = "NSTableColumn"; headerCell.title = "ID"; ObjectID = "JKW-oY-bSb"; */
+"JKW-oY-bSb.headerCell.title" = "ID";
+
 /* Class = "NSTableColumn"; headerCell.title = "Vendor"; ObjectID = "LRJ-fb-Z9E"; */
 "LRJ-fb-Z9E.headerCell.title" = "製造商";
+
+/* Class = "NSTextFieldCell"; title = "Table View Cell"; ObjectID = "LZ8-Tj-mCs"; */
+"LZ8-Tj-mCs.title" = "Table View Cell";
+
+/* Class = "NSTableColumn"; headerCell.title = "Hide OSD"; ObjectID = "MPF-Mr-zVU"; */
+"MPF-Mr-zVU.headerCell.title" = "Hide OSD";
 
 /* Class = "NSMenuItem"; title = "Volume only"; ObjectID = "NLP-dU-Dam"; */
 "NLP-dU-Dam.title" = "僅限音量";
@@ -35,8 +68,17 @@
 /* Class = "NSTableColumn"; headerCell.title = "Model"; ObjectID = "Nvp-hI-w4x"; */
 "Nvp-hI-w4x.headerCell.title" = "型號";
 
+/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "PZ9-0Z-K6J"; */
+"PZ9-0Z-K6J.title" = "Text Cell";
+
 /* Class = "NSTextFieldCell"; title = "Table View Cell"; ObjectID = "Pkk-Ce-Y6Q"; */
 "Pkk-Ce-Y6Q.title" = "";
+
+/* Class = "NSMenuItem"; title = "Normal"; ObjectID = "Riq-uM-bTs"; */
+"Riq-uM-bTs.title" = "Normal";
+
+/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "UBV-gO-AZz"; */
+"UBV-gO-AZz.title" = "Text Cell";
 
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "VPD-MR-IXg"; */
 "VPD-MR-IXg.title" = "";
@@ -59,11 +101,23 @@
 /* Class = "NSTextFieldCell"; title = "Table View Cell"; ObjectID = "cnb-Li-1lE"; */
 "cnb-Li-1lE.title" = "";
 
+/* Class = "NSTableColumn"; headerCell.title = "Display Name"; ObjectID = "dNl-I0-hcg"; */
+"dNl-I0-hcg.headerCell.title" = "Display Name";
+
 /* Class = "NSTableColumn"; headerCell.title = "ID"; ObjectID = "dgp-q7-cBK"; */
 "dgp-q7-cBK.headerCell.title" = "ID";
 
 /* Class = "NSButtonCell"; title = "Lower Contrast after Brightness"; ObjectID = "fhy-Er-0aI"; */
 "fhy-Er-0aI.title" = "同時降低對比度與亮度";
+
+/* Class = "NSTextFieldCell"; title = "Warning ⚠️\nChanging some of these setting may cause system freezes or unexpected behaviour. "; ObjectID = "frw-j2-tE1"; */
+"frw-j2-tE1.title" = "Warning ⚠️\nChanging some of these setting may cause system freezes or unexpected behaviour. ";
+
+/* Class = "NSTableColumn"; headerCell.title = "Longer Delay"; ObjectID = "grO-Kr-l4d"; */
+"grO-Kr-l4d.headerCell.title" = "Longer Delay";
+
+/* Class = "NSTableColumn"; headerCell.title = "Polling Mode"; ObjectID = "gxn-NH-Qhb"; */
+"gxn-NH-Qhb.headerCell.title" = "Polling Mode";
 
 /* Class = "NSMenuItem"; title = "Brightness only"; ObjectID = "hjz-0c-rvK"; */
 "hjz-0c-rvK.title" = "僅限亮度";
@@ -71,11 +125,17 @@
 /* Class = "NSButtonCell"; title = "Start MonitorControl at Login"; ObjectID = "j72-NF-zsW"; */
 "j72-NF-zsW.title" = "登入時自動啟動 MonitorControl";
 
+/* Class = "NSButton"; ibShadowedToolTip = "More Info"; ObjectID = "kqn-gU-mZX"; */
+"kqn-gU-mZX.ibShadowedToolTip" = "More Info";
+
 /* Class = "NSTextFieldCell"; title = "Version 0.0.0 (Build 0)"; ObjectID = "mBs-6m-13Q"; */
-"mBs-6m-13Q.title" = "";
+"mBs-6m-13Q.title" = "Version 0.0.0 (Build 0)";
 
 /* Class = "NSTableColumn"; headerCell.title = "Friendly Name"; ObjectID = "uoI-1J-RdD"; */
 "uoI-1J-RdD.headerCell.title" = "自訂名稱";
+
+/* Class = "NSMenuItem"; title = "Heavy"; ObjectID = "vik-vN-bJe"; */
+"vik-vN-bJe.title" = "Heavy";
 
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "vkG-RF-Yne"; */
 "vkG-RF-Yne.title" = "";
@@ -85,3 +145,6 @@
 
 /* Class = "NSButtonCell"; title = "Show a slider for contrast"; ObjectID = "xSI-8W-Xd0"; */
 "xSI-8W-Xd0.title" = "顯示對比度滑條";
+
+/* Class = "NSTableColumn"; headerCell.title = "Polling Count"; ObjectID = "ytT-up-Dhs"; */
+"ytT-up-Dhs.headerCell.title" = "Polling Count";
