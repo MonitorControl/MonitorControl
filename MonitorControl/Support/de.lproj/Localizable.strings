@@ -20,6 +20,9 @@
 /* Shown in the main prefs window */
 "Keys" = "Tasten";
 
+/* Shown in the main prefs window  */
+"Advanced" = "Erweitert";
+
 /* Shown in menu */
 "No supported display found" = "Kein unterstützter Monitor angeschlossen";
 

@@ -21,7 +21,7 @@
 "ExD-7P-6XI.title" = "Monitor";
 
 /* Class = "NSButtonCell"; title = "Lower Contrast after Brightness"; ObjectID = "fhy-Er-0aI"; */
-"fhy-Er-0aI.title" = "Lower Contrast after Brightness";
+"fhy-Er-0aI.title" = "Kontrast nach Helligkeit verringern";
 
 /* Class = "NSMenuItem"; title = "Brightness only"; ObjectID = "hjz-0c-rvK"; */
 "hjz-0c-rvK.title" = "Helligkeit";
@@ -82,3 +82,48 @@
 
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "VPD-MR-IXg"; */
 "VPD-MR-IXg.title" = "";
+
+/* Class = "NSButtonCell"; title = "Reset Preferences"; ObjectID = "4Pj-3t-PJr"; */
+"4Pj-3t-PJr.title" = "Einstellungen zurücksetzen";
+
+/* Class = "NSTextFieldCell"; title = "Advanced"; ObjectID = "5wk-Dy-0fG"; */
+"5wk-Dy-0fG.title" = "Erweitert";
+
+/* Class = "NSTableColumn"; headerCell.title = "Longer Delay"; ObjectID = "grO-Kr-l4d"; */
+"grO-Kr-l4d.headerCell.title" = "Verzögerung";
+
+/* Class = "NSTableColumn"; headerCell.title = "Polling Mode"; ObjectID = "gxn-NH-Qhb"; */
+"gxn-NH-Qhb.headerCell.title" = "Abfragemodus";
+
+/* Class = "NSMenuItem"; title = "None"; ObjectID = "FoA-yh-Yx3"; */
+"FoA-yh-Yx3.title" = "Aus";
+
+/* Class = "NSMenuItem"; title = "Minimal"; ObjectID = "Eq3-z9-yIo"; */
+"Eq3-z9-yIo.title" = "Minimal";
+
+/* Class = "NSMenuItem"; title = "Normal"; ObjectID = "Riq-uM-bTs"; */
+"Riq-uM-bTs.title" = "Normal";
+
+/* Class = "NSMenuItem"; title = "Heavy"; ObjectID = "vik-vN-bJe"; */
+"vik-vN-bJe.title" = "Stark";
+
+/* Class = "NSMenuItem"; title = "Custom"; ObjectID = "Cle-DD-vR7"; */
+"Cle-DD-vR7.title" = "Eigene";
+
+/* Class = "NSTableColumn"; headerCell.title = "ID"; ObjectID = "JKW-oY-bSb"; */
+"JKW-oY-bSb.headerCell.title" = "ID";
+
+/* Class = "NSTableColumn"; headerCell.title = "Hide OSD"; ObjectID = "MPF-Mr-zVU"; */
+"MPF-Mr-zVU.headerCell.title" = "ohne OSD";
+
+/* Class = "NSTableColumn"; headerCell.title = "Polling Count"; ObjectID = "ytT-up-Dhs"; */
+"ytT-up-Dhs.headerCell.title" = "Anzahl Abfragen";
+
+/* Class = "NSTableColumn"; headerCell.title = "Display Name"; ObjectID = "dNl-I0-hcg"; */
+"dNl-I0-hcg.headerCell.title" = "Anzeigename";
+
+/* Class = "NSTextFieldCell"; title = "Warning ⚠️\nChanging some of these setting may cause system freezes or unexpected behaviour. "; ObjectID = "frw-j2-tE1"; */
+"frw-j2-tE1.title" = "Warnung ⚠️\nDas Ändern dieser Einstellungen kann zum Einfrieren des Systems oder unerwartetem Verhalten führen.";
+
+/* Class = "NSButton"; ibShadowedToolTip = "More Info"; ObjectID = "kqn-gU-mZX"; */
+"kqn-gU-mZX.ibShadowedToolTip" = "Mehr Informationen";
