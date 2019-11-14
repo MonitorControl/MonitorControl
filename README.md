@@ -79,7 +79,7 @@ $ git clone https://github.com/the0neyouseek/MonitorControl.git
 ```
 Then download the dependencies with Carthage
 ```sh
-$ carthage update --platform macOS
+$ carthage bootstrap --platform macOS
 ```
 
 You're all set ! Now open the `MonitorControl.xcodeproj` with Xcode
