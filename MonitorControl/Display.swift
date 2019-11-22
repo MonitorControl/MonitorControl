@@ -62,7 +62,7 @@ class Display {
     return self.getValue(for: .audioMuteScreenBlank) == 1
   }
 
-  func toggleMute(fromVolumeSlider: Bool = false) {
+  func toggleMute() {
     var muteValue: Int
     var volumeOSDValue: Int
 
@@ -72,44 +72,39 @@ class Display {
     } else {
       muteValue = 2
       volumeOSDValue = self.getValue(for: .audioSpeakerVolume)
-
-      // The volume that will be set immediately after setting unmute while the old set volume was 0 is unpredictable
-      // Hence, just set it to a single filled chiclet
-      if volumeOSDValue == 0 {
-        volumeOSDValue = self.stepSize(for: .audioSpeakerVolume, isSmallIncrement: false)
-        self.saveValue(volumeOSDValue, for: .audioSpeakerVolume)
-      }
     }
 
     let volumeDDCValue = UInt16(volumeOSDValue)
 
-    guard self.ddc?.write(command: .audioSpeakerVolume, value: volumeDDCValue) == true else {
-      return
-    }
-
-    if self.supportsMuteCommand() {
-      guard self.ddc?.write(command: .audioMuteScreenBlank, value: UInt16(muteValue)) == true else {
-        return
+    DispatchQueue.global(qos: .userInitiated).async {
+      if self.ddc?.write(command: .audioSpeakerVolume, value: volumeDDCValue, errorRecoveryWaitTime: self.hideOsd ? 0 : nil) == true {
+        DispatchQueue.global(qos: .background).async {
+          self.saveValue(volumeOSDValue, for: .audioSpeakerVolume)
+        }
       }
-    }
 
-    self.saveValue(muteValue, for: .audioMuteScreenBlank)
-
-    if !fromVolumeSlider {
-      self.hideDisplayOsd()
-      self.showOsd(command: .audioSpeakerVolume, value: volumeOSDValue)
+      if self.supportsMuteCommand(), self.ddc?.write(command: .audioMuteScreenBlank, value: UInt16(muteValue), errorRecoveryWaitTime: self.hideOsd ? 0 : nil) == true {
+        DispatchQueue.global(qos: .background).async {
+          self.saveValue(muteValue, for: .audioMuteScreenBlank)
+        }
+      }
 
       if volumeOSDValue > 0 {
         self.playVolumeChangedSound()
       }
 
+      self.hideDisplayOsd()
+      self.showOsd(command: .audioSpeakerVolume, value: volumeOSDValue)
+
       if let slider = self.volumeSliderHandler?.slider {
-        slider.intValue = Int32(volumeDDCValue)
+        DispatchQueue.main.async {
+          slider.intValue = Int32(volumeDDCValue)
+        }
       }
     }
   }
 
-  func setVolume(to volumeOSDValue: Int) {
+  func setVolume(to volumeOSDValue: Int, fromVolumeSlider: Bool = false) {
     var muteValue: Int?
     let volumeDDCValue = UInt16(volumeOSDValue)
 
@@ -121,35 +116,38 @@ class Display {
 
     let isAlreadySet = volumeOSDValue == self.getValue(for: .audioSpeakerVolume)
 
-    if !isAlreadySet {
-      guard self.ddc?.write(command: .audioSpeakerVolume, value: volumeDDCValue) == true else {
-        return
-      }
-    }
-
-    if let muteValue = muteValue {
-      // If the mute command is supported, set its value accordingly
-      if self.supportsMuteCommand() {
-        guard self.ddc?.write(command: .audioMuteScreenBlank, value: UInt16(muteValue)) == true else {
-          return
+    DispatchQueue.global(qos: .userInitiated).async {
+      if !isAlreadySet {
+        if self.ddc?.write(command: .audioSpeakerVolume, value: volumeDDCValue, errorRecoveryWaitTime: self.hideOsd ? 0 : nil) == true {
+          DispatchQueue.global(qos: .background).async {
+            self.saveValue(volumeOSDValue, for: .audioSpeakerVolume)
+          }
         }
       }
 
-      self.saveValue(muteValue, for: .audioMuteScreenBlank)
-    }
-
-    self.hideDisplayOsd()
-    self.showOsd(command: .audioSpeakerVolume, value: volumeOSDValue)
-
-    if !isAlreadySet {
-      self.saveValue(volumeOSDValue, for: .audioSpeakerVolume)
+      if let muteValue = muteValue {
+        // If the mute command is supported, set its value accordingly.
+        if self.supportsMuteCommand(), self.ddc?.write(command: .audioMuteScreenBlank, value: UInt16(muteValue), errorRecoveryWaitTime: self.hideOsd ? 0 : nil) == true {
+          DispatchQueue.global(qos: .background).async {
+            self.saveValue(muteValue, for: .audioMuteScreenBlank)
+          }
+        }
+      }
 
       if volumeOSDValue > 0 {
         self.playVolumeChangedSound()
       }
 
-      if let slider = self.volumeSliderHandler?.slider {
-        slider.intValue = Int32(volumeDDCValue)
+      self.hideDisplayOsd()
+
+      if !fromVolumeSlider {
+        self.showOsd(command: .audioSpeakerVolume, value: volumeOSDValue)
+
+        if let slider = self.volumeSliderHandler?.slider {
+          DispatchQueue.main.async {
+            slider.intValue = Int32(volumeDDCValue)
+          }
+        }
       }
     }
   }
@@ -351,7 +349,8 @@ class Display {
 
   private func supportsMuteCommand() -> Bool {
     // Monitors which don't support the mute command - e.g. Dell U3419W - will have a maximum value of 100 for the DDC mute command
-    return self.getMaxValue(for: .audioMuteScreenBlank) == 2
+    let current = self.getValue(for: .audioMuteScreenBlank)
+    return current == 1 || current == 2
   }
 
   private func playVolumeChangedSound() {
@@ -366,13 +365,17 @@ class Display {
       return
     }
 
-    do {
-      self.audioPlayer = try AVAudioPlayer(contentsOf: soundUrl)
-      self.audioPlayer?.volume = 1
-      self.audioPlayer?.prepareToPlay()
-      self.audioPlayer?.play()
-    } catch {
-      os_log("%{public}@", type: .error, error.localizedDescription)
+    DispatchQueue.main.async {
+      do {
+        self.audioPlayer?.stop()
+        self.audioPlayer = try AVAudioPlayer(contentsOf: soundUrl)
+        self.audioPlayer!.volume = 1
+        self.audioPlayer!.prepareToPlay()
+        self.audioPlayer!.play()
+      } catch {
+        os_log("%{public}@", type: .error, error.localizedDescription)
+        return
+      }
     }
   }
 }

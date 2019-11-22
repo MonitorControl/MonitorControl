@@ -23,22 +23,28 @@ class SliderHandler {
       slider.integerValue = value
     }
 
-    // For the speaker volume slider, also set/unset the mute command when the value is changed from/to 0
-    if self.cmd == .audioSpeakerVolume, (self.display.isMuted() && value > 0) || (!self.display.isMuted() && value == 0) {
-      self.display.toggleMute(fromVolumeSlider: true)
-    }
+    switch self.cmd {
+    case .audioSpeakerVolume:
+      if self.cmd == .audioSpeakerVolume {
+        // Only change volume after the mouse is released, like the native volume slider.
+        if NSApplication.shared.currentEvent?.type == NSEvent.EventType.leftMouseUp {
+          self.display.setVolume(to: value, fromVolumeSlider: true)
+        }
 
-    // If the command is to adjust brightness, also instruct the display to set the contrast value, if necessary
-    if self.cmd == .brightness {
+        return
+      }
+    case .brightness:
+      // Also instruct the display to set the contrast value, if necessary.
       self.display.setContrastValueForBrightness(value)
-    }
-
-    // If the command is to adjust contrast, erase the previous value for the contrast to restore after brightness is increased
-    if self.cmd == .contrast {
+    case .contrast:
+      // Erase the previous value for the contrast to restore after brightness is increased.
       self.display.setRestoreValue(nil, for: .contrast)
+    default:
+      assertionFailure("unsupported command for slider: \(self.cmd)")
     }
 
-    _ = self.display.ddc?.write(command: self.cmd, value: UInt16(value))
-    self.display.saveValue(value, for: self.cmd)
+    if self.display.ddc?.write(command: self.cmd, value: UInt16(value)) == true {
+      self.display.saveValue(value, for: self.cmd)
+    }
   }
 }
