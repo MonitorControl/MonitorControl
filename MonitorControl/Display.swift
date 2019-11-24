@@ -77,11 +77,7 @@ class Display {
     let volumeDDCValue = UInt16(volumeOSDValue)
 
     DispatchQueue.global(qos: .userInitiated).async {
-      if self.ddc?.write(command: .audioSpeakerVolume, value: volumeDDCValue, errorRecoveryWaitTime: self.hideOsd ? 0 : nil) == true {
-        DispatchQueue.global(qos: .background).async {
-          self.saveValue(volumeOSDValue, for: .audioSpeakerVolume)
-        }
-      }
+      _ = self.ddc?.write(command: .audioSpeakerVolume, value: volumeDDCValue, errorRecoveryWaitTime: self.hideOsd ? 0 : nil)
 
       if self.supportsMuteCommand(), self.ddc?.write(command: .audioMuteScreenBlank, value: UInt16(muteValue), errorRecoveryWaitTime: self.hideOsd ? 0 : nil) == true {
         DispatchQueue.global(qos: .background).async {
