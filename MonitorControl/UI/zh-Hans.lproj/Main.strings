@@ -93,19 +93,19 @@
 "grO-Kr-l4d.headerCell.title" = "增加延时";
 
 /* Class = "NSTableColumn"; headerCell.title = "Polling Mode"; ObjectID = "gxn-NH-Qhb"; */
-"gxn-NH-Qhb.headerCell.title" = "查询模式";
+"gxn-NH-Qhb.headerCell.title" = "请求模式";
 
 /* Class = "NSMenuItem"; title = "None"; ObjectID = "FoA-yh-Yx3"; */
-"FoA-yh-Yx3.title" = "无";
+"FoA-yh-Yx3.title" = "不请求";
 
 /* Class = "NSMenuItem"; title = "Minimal"; ObjectID = "Eq3-z9-yIo"; */
-"Eq3-z9-yIo.title" = "少";
+"Eq3-z9-yIo.title" = "少量";
 
 /* Class = "NSMenuItem"; title = "Normal"; ObjectID = "Riq-uM-bTs"; */
 "Riq-uM-bTs.title" = "正常";
 
 /* Class = "NSMenuItem"; title = "Heavy"; ObjectID = "vik-vN-bJe"; */
-"vik-vN-bJe.title" = "多";
+"vik-vN-bJe.title" = "多次";
 
 /* Class = "NSMenuItem"; title = "Custom"; ObjectID = "Cle-DD-vR7"; */
 "Cle-DD-vR7.title" = "自定义";
