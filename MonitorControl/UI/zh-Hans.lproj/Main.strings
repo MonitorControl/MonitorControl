@@ -96,16 +96,16 @@
 "gxn-NH-Qhb.headerCell.title" = "查询模式";
 
 /* Class = "NSMenuItem"; title = "None"; ObjectID = "FoA-yh-Yx3"; */
-"FoA-yh-Yx3.title" = "None";
+"FoA-yh-Yx3.title" = "无";
 
 /* Class = "NSMenuItem"; title = "Minimal"; ObjectID = "Eq3-z9-yIo"; */
-"Eq3-z9-yIo.title" = "Minimal";
+"Eq3-z9-yIo.title" = "少";
 
 /* Class = "NSMenuItem"; title = "Normal"; ObjectID = "Riq-uM-bTs"; */
-"Riq-uM-bTs.title" = "Normal";
+"Riq-uM-bTs.title" = "正常";
 
 /* Class = "NSMenuItem"; title = "Heavy"; ObjectID = "vik-vN-bJe"; */
-"vik-vN-bJe.title" = "Heavy";
+"vik-vN-bJe.title" = "多";
 
 /* Class = "NSMenuItem"; title = "Custom"; ObjectID = "Cle-DD-vR7"; */
 "Cle-DD-vR7.title" = "自定义";
