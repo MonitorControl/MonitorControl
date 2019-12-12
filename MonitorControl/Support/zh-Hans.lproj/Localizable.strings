@@ -18,7 +18,7 @@
 "General" = "通用";
 
 /* Shown in the main prefs window  */
-"Advanced" = "";
+"Advanced" = "进阶设置";
 
 /* Shown in the main prefs window */
 "Keys" = "快捷键";
