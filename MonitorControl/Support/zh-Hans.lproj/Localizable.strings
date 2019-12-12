@@ -1,39 +1,42 @@
 
 /* Sown in menu */
-"Brightness" = "Brightness";
+"Brightness" = "亮度";
 
 /* Build */
 "Build" = "Build";
 
 /* Shown in menu */
-"Contrast" = "Contrast";
+"Contrast" = "对比度";
 
 /* Shown in menu */
-"Default" = "Default";
+"Default" = "默认";
 
 /* No comment provided by engineer. */
-"Display" = "Display";
+"Display" = "显示器";
 
 /* Shown in the main prefs window */
-"General" = "General";
+"General" = "通用";
+
+/* Shown in the main prefs window  */
+"Advanced" = "进阶设置";
 
 /* Shown in the main prefs window */
-"Keys" = "Keys";
+"Keys" = "快捷键";
 
 /* Shown in menu */
-"No supported display found" = "No supported display found";
+"No supported display found" = "未发现支持的显示器";
 
 /* Shown in the alert dialog */
 "Ok" = "Ok";
 
 /* Shown in Preferences window */
-"Preferences" = "Preferences";
+"Preferences" = "偏好设置";
 
 /* Shown in menu */
-"Set as default" = "Set as default";
+"Set as default" = "设为默认";
 
 /* Shown in the alert dialog */
-"Shortcuts not available" = "Shortcuts not available";
+"Shortcuts not available" = "快捷键不可用";
 
 /* Unknown display name
  Unknown model
@@ -44,7 +47,7 @@
 "Version" = "Version";
 
 /* Shown in menu */
-"Volume" = "Volume";
+"Volume" = "音量";
 
 /* Shown in the alert dialog */
-"You need to enable MonitorControl in System Preferences > Security and Privacy > Accessibility for the keyboard shortcuts to work" = "You need to enable MonitorControl in System Preferences > Security and Privacy > Accessibility for the keyboard shortcuts to work";
+"You need to enable MonitorControl in System Preferences > Security and Privacy > Accessibility for the keyboard shortcuts to work" = "您需要在「系统偏好设置」>「安全性与隐私」>「辅助功能」中开启 MonitorControl 以便使快捷键生效";
