@@ -212,12 +212,30 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     return nil
   }
+  
+  func handleOpenPrefPane(mediaKey: MediaKey, event: KeyEvent?, modifiers: NSEvent.ModifierFlags?) -> Bool {
+    if mediaKey != .mute && mediaKey != .volumeUp && mediaKey != .volumeDown {
+      return false
+    }
+    guard let modifiers = modifiers else { return false }
+    if !modifiers.contains(.option) || modifiers.contains(.shift) {
+      return false
+    }
+    if !(event?.keyRepeat ?? false) {
+      NSWorkspace.shared.open(URL(fileURLWithPath: "/System/Library/PreferencePanes/Sound.prefPane"))
+    }
+    return true
+  }
 }
 
 // MARK: - Media Key Tap delegate
 
 extension AppDelegate: MediaKeyTapDelegate {
   func handle(mediaKey: MediaKey, event: KeyEvent?, modifiers: NSEvent.ModifierFlags?) {
+    if self.handleOpenPrefPane(mediaKey: mediaKey, event: event, modifiers: modifiers) {
+      return
+    }
+    
     let oppositeKey: MediaKey? = self.oppositeMediaKey(mediaKey: mediaKey)
     let isRepeat = event?.keyRepeat ?? false
 
