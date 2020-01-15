@@ -90,7 +90,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     for screen in screens {
-      let name = screen.displayName ?? "unknown"
+      let name = screen.displayName ?? NSLocalizedString("Unknown", comment: "Unknown display name")
       let id = screen.displayID
       let isEnabled = (prefs.object(forKey: "\(id)-state") as? Bool) ?? true
       let display = Display(screen.displayID, name: name, isBuiltin: screen.isBuiltin, isEnabled: isEnabled)
