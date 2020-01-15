@@ -57,7 +57,7 @@ class DisplayPrefsViewController: NSViewController, MASPreferencesViewController
   // MARK: - Table datasource
 
   @objc func loadDisplayList() {
-    if let displays = self.displayManager?.getDisplays() {
+    if let displays = self.displayManager?.getAllDisplays() {
       self.displays = displays
     }
     self.displayList.reloadData()

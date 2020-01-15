@@ -15,8 +15,19 @@ class DisplayManager {
     self.displays = displays
   }
 
-  func getDisplays() -> [Display] {
+  func getAllDisplays() -> [Display] {
     return self.displays
+  }
+
+  func getDdcCapableDisplays() -> [Display] {
+    let filteredDisplays = self.displays.filter { (display) -> Bool in
+      !display.isBuiltin && display.ddc != nil
+    }
+    return filteredDisplays
+  }
+
+  func getBuiltInDisplay() -> Display? {
+    return self.displays.first { $0.isBuiltin }
   }
 
   func addDisplay(display: Display) {

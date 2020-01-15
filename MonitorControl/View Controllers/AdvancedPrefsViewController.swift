@@ -61,7 +61,7 @@ class AdvancedPrefsViewController: NSViewController, MASPreferencesViewControlle
   }
 
   @objc func loadDisplayList() {
-    if let displays = displayManager?.getDisplays() {
+    if let displays = displayManager?.getDdcCapableDisplays() {
       self.displays = displays
       self.displayList.reloadData()
     }
