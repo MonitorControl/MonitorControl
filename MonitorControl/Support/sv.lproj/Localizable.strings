@@ -1,0 +1,50 @@
+
+/* Sown in menu */
+"Brightness" = "Ljusstyrka";
+
+/* Build */
+"Build" = "Bygge";
+
+/* Shown in menu */
+"Contrast" = "Kontrast";
+
+/* Shown in menu */
+"Default" = "Standard";
+
+/* No comment provided by engineer. */
+"Display" = "Bildskärm";
+
+/* Shown in the main prefs window */
+"General" = "Allmänt";
+
+/* Shown in the main prefs window */
+"Keys" = "Tangenter";
+
+/* Shown in menu */
+"No supported display found" = "Hittade inte någon bildskärm som stöds";
+
+/* Shown in the alert dialog */
+"Ok" = "Ok";
+
+/* Shown in Preferences window */
+"Preferences" = "Inställningar";
+
+/* Shown in menu */
+"Set as default" = "Välj som standard";
+
+/* Shown in the alert dialog */
+"Shortcuts not available" = "Genväg ej tillänglig";
+
+/* Unknown display name
+ Unknown model
+ Unknown vendor */
+"Unknown" = "Okänd";
+
+/* Version */
+"Version" = "Version";
+
+/* Shown in menu */
+"Volume" = "Volym";
+
+/* Shown in the alert dialog */
+"You need to enable MonitorControl in System Preferences > Security and Privacy > Accessibility for the keyboard shortcuts to work" = "Du måste aktivera MonitorControl i Systeminställningar > Säkerhet och integritet > Hjälpmedel för att tangentbordsgenvägar ska fungera";
