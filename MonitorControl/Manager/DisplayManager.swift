@@ -1,4 +1,4 @@
-import Foundation
+import Cocoa
 
 class DisplayManager {
   private var displays: [Display] {
@@ -28,6 +28,13 @@ class DisplayManager {
 
   func getBuiltInDisplay() -> Display? {
     return self.displays.first { $0.isBuiltin }
+  }
+
+  func getCurrentDisplay() -> Display? {
+    guard let mainDisplayID = NSScreen.main?.displayID else {
+      return nil
+    }
+    return self.displays.first { $0.identifier == mainDisplayID }
   }
 
   func addDisplay(display: Display) {

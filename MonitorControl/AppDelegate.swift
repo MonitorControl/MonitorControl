@@ -216,20 +216,19 @@ extension AppDelegate: MediaKeyTapDelegate {
       if isRepeat {
         return
       }
-
       mediaKeyTimer.invalidate()
     }
 
-    let displays = self.displayManager?.getAllDisplays() ?? [Display]()
-    guard let currentDisplay = Utils.getCurrentDisplay(from: displays) else { return }
+    let displays = self.displayManager?.getDdcCapableDisplays() ?? [Display]()
+    guard let currentDisplay = self.displayManager?.getCurrentDisplay() else { return }
 
-    let allDisplays = prefs.bool(forKey: Utils.PrefKeys.allScreens.rawValue) ? displays : [currentDisplay]
+    let allDDCDisplays = prefs.bool(forKey: Utils.PrefKeys.allScreens.rawValue) ? displays : [currentDisplay]
     let isSmallIncrement = modifiers?.isSuperset(of: NSEvent.ModifierFlags([.shift, .option])) ?? false
 
     // Introduce a small delay to handle the media key being held down
     let delay = isRepeat ? 0.05 : 0
 
-    for display in allDisplays {
+    for display in allDDCDisplays {
       if (prefs.object(forKey: "\(display.identifier)-state") as? Bool) ?? true {
         switch mediaKey {
         case .brightnessUp, .brightnessDown:
@@ -291,7 +290,6 @@ extension AppDelegate: MediaKeyTapDelegate {
       let keysToDelete: [MediaKey] = [.volumeUp, .volumeDown, .mute]
       keys.removeAll { keysToDelete.contains($0) }
     }
-
     self.mediaKeyTap?.stop()
     self.mediaKeyTap = MediaKeyTap(delegate: self, for: keys, observeBuiltIn: false)
     self.mediaKeyTap?.start()
@@ -299,16 +297,11 @@ extension AppDelegate: MediaKeyTapDelegate {
 }
 
 extension AppDelegate: EventSubscriber {
-  /**
-   Fires off when the default audio device changes.
-   */
+  /// Fires off when the default audio device changes.
   func eventReceiver(_ event: Event) {
     if case let .defaultOutputDeviceChanged(audioDevice)? = event as? AudioHardwareEvent {
-      #if DEBUG
-        os_log("Default output device changed to “%{public}@”.", type: .info, audioDevice.name)
-        os_log("Can device set its own volume? %{public}@", type: .info, audioDevice.canSetVirtualMasterVolume(direction: .playback).description)
-      #endif
-
+      os_log("Default output device changed to “%{public}@”.", type: .info, audioDevice.name)
+      os_log("Can device set its own volume? %{public}@", type: .info, audioDevice.canSetVirtualMasterVolume(direction: .playback).description)
       self.startOrRestartMediaKeyTap()
     }
   }

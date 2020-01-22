@@ -131,28 +131,6 @@ class Utils: NSObject {
     }
   }
 
-  // MARK: - Display Infos
-
-  /// Get the name of a display
-  ///
-  /// - Parameter edid: the EDID of a display
-  /// - Returns: a string
-  static func getDisplayName(forEdid edid: EDID) -> String {
-    return edid.displayName() ?? NSLocalizedString("Unknown", comment: "Unknown display name")
-  }
-
-  /// Get the main display from a list of display
-  ///
-  /// - Parameter displays: List of Display
-  /// - Returns: the main display or nil if not found
-  static func getCurrentDisplay(from displays: [Display]) -> Display? {
-    guard let mainDisplayID = NSScreen.main?.displayID else {
-      return nil
-    }
-
-    return displays.first { $0.identifier == mainDisplayID }
-  }
-
   // MARK: - Enums
 
   /// UserDefault Keys for the app prefs
