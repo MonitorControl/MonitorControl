@@ -231,31 +231,29 @@ extension AppDelegate: MediaKeyTapDelegate {
     // Introduce a small delay to handle the media key being held down
     let delay = isRepeat ? 0.05 : 0
 
-    for display in allDisplays where display.isEnabled {
-      switch mediaKey {
-      case .brightnessUp, .brightnessDown:
-        self.keyRepeatTimers[mediaKey] = Timer.scheduledTimer(withTimeInterval: delay, repeats: false, block: { _ in
+    self.keyRepeatTimers[mediaKey] = Timer.scheduledTimer(withTimeInterval: delay, repeats: false, block: { _ in
+      for display in allDisplays where display.isEnabled {
+        switch mediaKey {
+        case .brightnessUp, .brightnessDown:
           display.stepBrightness(isUp: mediaKey == .brightnessUp, isSmallIncrement: isSmallIncrement)
-        })
-      case .mute:
-        // The mute key should not respond to press + hold
-        if !isRepeat {
-          // mute only matters for external displays
-          if let display = display as? ExternalDisplay {
-            display.toggleMute()
+        case .mute:
+          // The mute key should not respond to press + hold
+          if !isRepeat {
+            // mute only matters for external displays
+            if let display = display as? ExternalDisplay {
+              display.toggleMute()
+            }
           }
-        }
-      case .volumeUp, .volumeDown:
-        // volume only matters for external displays
-        if let display = display as? ExternalDisplay {
-          self.keyRepeatTimers[mediaKey] = Timer.scheduledTimer(withTimeInterval: delay, repeats: false, block: { _ in
+        case .volumeUp, .volumeDown:
+          // volume only matters for external displays
+          if let display = display as? ExternalDisplay {
             display.stepVolume(isUp: mediaKey == .volumeUp, isSmallIncrement: isSmallIncrement)
-          })
+          }
+        default:
+          return
         }
-      default:
-        return
       }
-    }
+    })
   }
 
   // MARK: - Prefs notification
