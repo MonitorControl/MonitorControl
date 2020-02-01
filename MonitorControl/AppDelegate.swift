@@ -198,6 +198,17 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
 extension AppDelegate: MediaKeyTapDelegate {
   func handle(mediaKey: MediaKey, event: KeyEvent?, modifiers: NSEvent.ModifierFlags?) {
+    let isSmallIncrement = modifiers?.isSuperset(of: NSEvent.ModifierFlags([.shift, .option])) ?? false
+
+    // control internal display when holding ctrl modifier
+    let isControlModifier = modifiers?.isSuperset(of: NSEvent.ModifierFlags([.control])) ?? false
+    if isControlModifier, mediaKey == .brightnessUp || mediaKey == .brightnessDown {
+      if let internalDisplay = DisplayManager.shared.getBuiltInDisplay() as? InternalDisplay {
+        internalDisplay.stepBrightness(isUp: mediaKey == .brightnessUp, isSmallIncrement: isSmallIncrement)
+        return
+      }
+    }
+
     let oppositeKey: MediaKey? = self.oppositeMediaKey(mediaKey: mediaKey)
     let isRepeat = event?.keyRepeat ?? false
 
@@ -216,19 +227,9 @@ extension AppDelegate: MediaKeyTapDelegate {
     guard let currentDisplay = DisplayManager.shared.getCurrentDisplay() else { return }
 
     let allDisplays = prefs.bool(forKey: Utils.PrefKeys.allScreens.rawValue) ? displays : [currentDisplay]
-    let isSmallIncrement = modifiers?.isSuperset(of: NSEvent.ModifierFlags([.shift, .option])) ?? false
 
     // Introduce a small delay to handle the media key being held down
     let delay = isRepeat ? 0.05 : 0
-
-    // PR open! https://github.com/the0neyouseek/MediaKeyTap/pull/5
-//    if (modifiers?.isSuperset(of: NSEvent.ModifierFlags([.control]))) ?? false &&
-//    if mediaKey == .brightnessUp || mediaKey == .brightnessDown {
-//      if let internalDisplay = DisplayManager.shared.getBuiltInDisplay() as? InternalDisplay {
-//        internalDisplay.stepBrightness(isUp: mediaKey == .brightnessUp, isSmallIncrement: isSmallIncrement)
-//        return
-//      }
-//    }
 
     for display in allDisplays where display.isEnabled {
       switch mediaKey {
@@ -239,13 +240,13 @@ extension AppDelegate: MediaKeyTapDelegate {
       case .mute:
         // The mute key should not respond to press + hold
         if !isRepeat {
-          // volume/mute only matters for external displays
+          // mute only matters for external displays
           if let display = display as? ExternalDisplay {
             display.toggleMute()
           }
         }
       case .volumeUp, .volumeDown:
-        // volume/mute only matters for external displays
+        // volume only matters for external displays
         if let display = display as? ExternalDisplay {
           self.keyRepeatTimers[mediaKey] = Timer.scheduledTimer(withTimeInterval: delay, repeats: false, block: { _ in
             display.stepVolume(isUp: mediaKey == .volumeUp, isSmallIncrement: isSmallIncrement)
