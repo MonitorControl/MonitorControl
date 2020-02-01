@@ -10,7 +10,6 @@ class DisplayPrefsViewController: NSViewController, MASPreferencesViewController
   let prefs = UserDefaults.standard
 
   var displays: [Display] = []
-  var displayManager: DisplayManager?
 
   enum DisplayColumn: Int {
     case checkbox
@@ -57,9 +56,7 @@ class DisplayPrefsViewController: NSViewController, MASPreferencesViewController
   // MARK: - Table datasource
 
   @objc func loadDisplayList() {
-    if let displays = self.displayManager?.getAllDisplays() {
-      self.displays = displays
-    }
+    self.displays = DisplayManager.shared.getAllDisplays()
     self.displayList.reloadData()
   }
 
@@ -82,7 +79,6 @@ class DisplayPrefsViewController: NSViewController, MASPreferencesViewController
       if let cell = tableView.makeView(withIdentifier: tableColumn.identifier, owner: nil) as? ButtonCellView {
         cell.display = display
         cell.button.state = display.isEnabled ? .on : .off
-        cell.button.isEnabled = !display.isBuiltin
         return cell
       }
     case .ddc:

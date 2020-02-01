@@ -14,7 +14,7 @@ class Utils: NSObject {
   ///   - command: Command (Brightness/Volume/...)
   ///   - title: Title of the slider
   /// - Returns: An `NSSlider` slider
-  static func addSliderMenuItem(toMenu menu: NSMenu, forDisplay display: Display, command: DDC.Command, title: String) -> SliderHandler {
+  static func addSliderMenuItem(toMenu menu: NSMenu, forDisplay display: ExternalDisplay, command: DDC.Command, title: String) -> SliderHandler {
     let item = NSMenuItem()
 
     let handler = SliderHandler(display: display, command: command)

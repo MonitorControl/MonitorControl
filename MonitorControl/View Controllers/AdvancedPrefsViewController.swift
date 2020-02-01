@@ -9,8 +9,7 @@ class AdvancedPrefsViewController: NSViewController, MASPreferencesViewControlle
   var toolbarItemImage: NSImage? = NSImage(named: NSImage.advancedName)
   let prefs = UserDefaults.standard
 
-  var displays: [Display] = []
-  var displayManager: DisplayManager?
+  var displays: [ExternalDisplay] = []
 
   enum DisplayColumn: Int {
     case friendlyName
@@ -61,10 +60,8 @@ class AdvancedPrefsViewController: NSViewController, MASPreferencesViewControlle
   }
 
   @objc func loadDisplayList() {
-    if let displays = displayManager?.getDdcCapableDisplays() {
-      self.displays = displays
-      self.displayList.reloadData()
-    }
+    self.displays = DisplayManager.shared.getDdcCapableDisplays()
+    self.displayList.reloadData()
   }
 
   func numberOfRows(in _: NSTableView) -> Int {
@@ -119,7 +116,7 @@ class AdvancedPrefsViewController: NSViewController, MASPreferencesViewControlle
     return nil
   }
 
-  private func getText(for column: DisplayColumn, with display: Display) -> String {
+  private func getText(for column: DisplayColumn, with display: ExternalDisplay) -> String {
     switch column {
     case .friendlyName:
       return display.getFriendlyName()

@@ -1,6 +1,8 @@
 import Cocoa
 
 class DisplayManager {
+  public static let shared = DisplayManager()
+
   private var displays: [Display] {
     didSet {
       NotificationCenter.default.post(name: Notification.Name(Utils.PrefKeys.displayListUpdate.rawValue), object: nil)
@@ -19,15 +21,16 @@ class DisplayManager {
     return self.displays
   }
 
-  func getDdcCapableDisplays() -> [Display] {
-    let filteredDisplays = self.displays.filter { (display) -> Bool in
-      !display.isBuiltin && display.ddc != nil
+  func getDdcCapableDisplays() -> [ExternalDisplay] {
+    return self.displays.compactMap { (display) -> ExternalDisplay? in
+      if let externalDisplay = display as? ExternalDisplay, externalDisplay.ddc != nil {
+        return externalDisplay
+      } else { return nil }
     }
-    return filteredDisplays
   }
 
   func getBuiltInDisplay() -> Display? {
-    return self.displays.first { $0.isBuiltin }
+    return self.displays.first { $0 is InternalDisplay }
   }
 
   func getCurrentDisplay() -> Display? {

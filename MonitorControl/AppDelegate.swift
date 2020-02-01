@@ -77,43 +77,43 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     self.monitorItems = []
-    self.displayManager?.clearDisplays()
+    DisplayManager.shared.clearDisplays()
   }
 
   func updateDisplays() {
     self.clearDisplays()
 
-    let screens = NSScreen.screens
-
-    let validScreens = screens.filter { (screen) -> Bool in
-      !screen.isBuiltin && DDC(for: screen.displayID) != nil
-    }
-
-    for screen in screens {
+    for screen in NSScreen.screens {
       let name = screen.displayName ?? NSLocalizedString("Unknown", comment: "Unknown display name")
       let id = screen.displayID
-      let isEnabled = (prefs.object(forKey: "\(id)-state") as? Bool) ?? true
-      let display = Display(screen.displayID, name: name, isBuiltin: screen.isBuiltin, isEnabled: isEnabled)
-      self.displayManager?.addDisplay(display: display)
-
-      if validScreens.count == 0 {
-        let item = NSMenuItem()
-        item.title = NSLocalizedString("No supported display found", comment: "Shown in menu")
-        item.isEnabled = false
-        self.monitorItems.append(item)
-        self.statusMenu.insertItem(item, at: 0)
-        self.statusMenu.insertItem(NSMenuItem.separator(), at: 1)
+      let vendorNumber = screen.vendorNumber
+      let modelNumber = screen.modelNumber
+      let display: Display
+      if screen.isBuiltin {
+        display = InternalDisplay(id, name: name, vendorNumber: vendorNumber, modelNumber: modelNumber)
       } else {
-        os_log("The following supported displays were found:", type: .info)
-        if validScreens.contains(screen) {
-          os_log(" - %{public}@", type: .info, "\(screen.displayName ?? NSLocalizedString("Unknown", comment: "Unknown display name")) (Vendor: \(screen.vendorNumber ?? 0), Model: \(screen.modelNumber ?? 0))")
-          self.addDisplayToMenu(display: display, asSubMenu: validScreens.count > 1)
-        }
+        display = ExternalDisplay(id, name: name, vendorNumber: vendorNumber, modelNumber: modelNumber)
+      }
+      DisplayManager.shared.addDisplay(display: display)
+    }
+
+    let ddcDisplays = DisplayManager.shared.getDdcCapableDisplays()
+    if ddcDisplays.count == 0 {
+      let item = NSMenuItem()
+      item.title = NSLocalizedString("No supported display found", comment: "Shown in menu")
+      item.isEnabled = false
+      self.monitorItems.append(item)
+      self.statusMenu.insertItem(item, at: 0)
+      self.statusMenu.insertItem(NSMenuItem.separator(), at: 1)
+    } else {
+      for display in ddcDisplays {
+        os_log("Supported display found: %{public}@", type: .info, "\(display.name) (Vendor: \(display.vendorNumber ?? 0), Model: \(display.modelNumber ?? 0))")
+        self.addDisplayToMenu(display: display, asSubMenu: ddcDisplays.count > 1)
       }
     }
   }
 
-  private func addDisplayToMenu(display: Display, asSubMenu: Bool) {
+  private func addDisplayToMenu(display: ExternalDisplay, asSubMenu: Bool) {
     let monitorSubMenu: NSMenu = asSubMenu ? NSMenu() : self.statusMenu
 
     self.statusMenu.insertItem(NSMenuItem.separator(), at: 0)
@@ -160,12 +160,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       advancedPrefsVc,
     ]
     prefsController = MASPreferencesWindowController(viewControllers: views, title: NSLocalizedString("Preferences", comment: "Shown in Preferences window"))
-    if let displayPrefs = displayPrefsVc as? DisplayPrefsViewController {
-      displayPrefs.displayManager = self.displayManager
-    }
-    if let advancedPrefs = advancedPrefsVc as? AdvancedPrefsViewController {
-      advancedPrefs.displayManager = self.displayManager
-    }
   }
 
   private func subscribeEventListeners() {
@@ -196,7 +190,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     } else if mediaKey == .volumeDown {
       return .volumeUp
     }
-
     return nil
   }
 }
@@ -219,36 +212,47 @@ extension AppDelegate: MediaKeyTapDelegate {
       mediaKeyTimer.invalidate()
     }
 
-    let displays = self.displayManager?.getDdcCapableDisplays() ?? [Display]()
-    guard let currentDisplay = self.displayManager?.getCurrentDisplay() else { return }
+    let displays = DisplayManager.shared.getAllDisplays()
+    guard let currentDisplay = DisplayManager.shared.getCurrentDisplay() else { return }
 
-    let allDDCDisplays = prefs.bool(forKey: Utils.PrefKeys.allScreens.rawValue) ? displays : [currentDisplay]
+    let allDisplays = prefs.bool(forKey: Utils.PrefKeys.allScreens.rawValue) ? displays : [currentDisplay]
     let isSmallIncrement = modifiers?.isSuperset(of: NSEvent.ModifierFlags([.shift, .option])) ?? false
 
     // Introduce a small delay to handle the media key being held down
     let delay = isRepeat ? 0.05 : 0
 
-    for display in allDDCDisplays {
-      if (prefs.object(forKey: "\(display.identifier)-state") as? Bool) ?? true {
-        switch mediaKey {
-        case .brightnessUp, .brightnessDown:
-          self.keyRepeatTimers[mediaKey] = Timer.scheduledTimer(withTimeInterval: delay, repeats: false, block: { _ in
-            let osdValue = display.calcNewValue(for: .brightness, isUp: mediaKey == .brightnessUp, isSmallIncrement: isSmallIncrement)
-            display.setBrightness(to: osdValue)
-          })
-        case .mute:
-          // The mute key should not respond to press + hold
-          if !isRepeat {
+    // PR open! https://github.com/the0neyouseek/MediaKeyTap/pull/5
+//    if (modifiers?.isSuperset(of: NSEvent.ModifierFlags([.control]))) ?? false &&
+//    if mediaKey == .brightnessUp || mediaKey == .brightnessDown {
+//      if let internalDisplay = DisplayManager.shared.getBuiltInDisplay() as? InternalDisplay {
+//        internalDisplay.stepBrightness(isUp: mediaKey == .brightnessUp, isSmallIncrement: isSmallIncrement)
+//        return
+//      }
+//    }
+
+    for display in allDisplays where display.isEnabled {
+      switch mediaKey {
+      case .brightnessUp, .brightnessDown:
+        self.keyRepeatTimers[mediaKey] = Timer.scheduledTimer(withTimeInterval: delay, repeats: false, block: { _ in
+          display.stepBrightness(isUp: mediaKey == .brightnessUp, isSmallIncrement: isSmallIncrement)
+        })
+      case .mute:
+        // The mute key should not respond to press + hold
+        if !isRepeat {
+          // volume/mute only matters for external displays
+          if let display = display as? ExternalDisplay {
             display.toggleMute()
           }
-        case .volumeUp, .volumeDown:
-          self.keyRepeatTimers[mediaKey] = Timer.scheduledTimer(withTimeInterval: delay, repeats: false, block: { _ in
-            let osdValue = display.calcNewValue(for: .audioSpeakerVolume, isUp: mediaKey == .volumeUp, isSmallIncrement: isSmallIncrement)
-            display.setVolume(to: osdValue)
-          })
-        default:
-          return
         }
+      case .volumeUp, .volumeDown:
+        // volume/mute only matters for external displays
+        if let display = display as? ExternalDisplay {
+          self.keyRepeatTimers[mediaKey] = Timer.scheduledTimer(withTimeInterval: delay, repeats: false, block: { _ in
+            display.stepVolume(isUp: mediaKey == .volumeUp, isSmallIncrement: isSmallIncrement)
+          })
+        }
+      default:
+        return
       }
     }
   }

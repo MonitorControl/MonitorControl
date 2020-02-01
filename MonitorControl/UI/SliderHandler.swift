@@ -3,10 +3,10 @@ import DDC
 
 class SliderHandler {
   var slider: NSSlider?
-  var display: Display
+  var display: ExternalDisplay
   let cmd: DDC.Command
 
-  public init(display: Display, command: DDC.Command) {
+  public init(display: ExternalDisplay, command: DDC.Command) {
     self.display = display
     self.cmd = command
   }
