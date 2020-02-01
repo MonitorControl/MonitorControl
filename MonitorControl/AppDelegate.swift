@@ -303,8 +303,10 @@ extension AppDelegate: EventSubscriber {
   /// Fires off when the default audio device changes.
   func eventReceiver(_ event: Event) {
     if case let .defaultOutputDeviceChanged(audioDevice)? = event as? AudioHardwareEvent {
-      os_log("Default output device changed to “%{public}@”.", type: .info, audioDevice.name)
-      os_log("Can device set its own volume? %{public}@", type: .info, audioDevice.canSetVirtualMasterVolume(direction: .playback).description)
+      #if DEBUG
+        os_log("Default output device changed to “%{public}@”.", type: .info, audioDevice.name)
+        os_log("Can device set its own volume? %{public}@", type: .info, audioDevice.canSetVirtualMasterVolume(direction: .playback).description)
+      #endif
       self.startOrRestartMediaKeyTap()
     }
   }

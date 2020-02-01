@@ -22,8 +22,9 @@ class FriendlyNameCellView: NSTableCellView {
         !newValue.isEmpty {
         display.setFriendlyName(newValue)
         NotificationCenter.default.post(name: Notification.Name(Utils.PrefKeys.friendlyName.rawValue), object: nil)
-
-        os_log("Value changed for friendly name: %{public}@", type: .info, "from `\(originalValue)` to `\(newValue)`")
+        #if DEBUG
+          os_log("Value changed for friendly name: %{public}@", type: .info, "from `\(originalValue)` to `\(newValue)`")
+        #endif
       }
     }
   }

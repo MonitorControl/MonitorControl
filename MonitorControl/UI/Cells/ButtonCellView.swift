@@ -13,7 +13,9 @@ class ButtonCellView: NSTableCellView {
     if let display = display {
       let isEnabled = sender.state == .on
       display.isEnabled = isEnabled
-      os_log("Toggle enabled display state: %{public}@", type: .info, isEnabled ? "on" : "off")
+      #if DEBUG
+        os_log("Toggle enabled display state: %{public}@", type: .info, isEnabled ? "on" : "off")
+      #endif
     }
   }
 }
