@@ -214,15 +214,20 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   }
   
   func handleOpenPrefPane(mediaKey: MediaKey, event: KeyEvent?, modifiers: NSEvent.ModifierFlags?) -> Bool {
-    if mediaKey != .mute && mediaKey != .volumeUp && mediaKey != .volumeDown {
-      return false
-    }
     guard let modifiers = modifiers else { return false }
-    if !modifiers.contains(.option) || modifiers.contains(.shift) {
+    if !(modifiers.contains(.option) && !modifiers.contains(.shift)) {
       return false
     }
-    if !(event?.keyRepeat ?? false) {
+    if event?.keyRepeat == true {
+      return false
+    }
+    switch mediaKey {
+    case .brightnessUp, .brightnessDown:
+      NSWorkspace.shared.open(URL(fileURLWithPath: "/System/Library/PreferencePanes/Displays.prefPane"))
+    case .mute, .volumeUp, .volumeDown:
       NSWorkspace.shared.open(URL(fileURLWithPath: "/System/Library/PreferencePanes/Sound.prefPane"))
+    default:
+      return false
     }
     return true
   }
