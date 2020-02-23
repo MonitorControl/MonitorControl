@@ -2,7 +2,7 @@ import Cocoa
 import os.log
 
 class PollingCountCellView: NSTableCellView {
-  var display: Display?
+  var display: ExternalDisplay?
 
   @IBAction func valueChanged(_ sender: NSTextField) {
     if let display = display {

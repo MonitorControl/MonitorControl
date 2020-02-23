@@ -11,7 +11,7 @@ import os.log
  We use these tags as a way to mark selection
  */
 class PollingModeCellView: NSTableCellView {
-  var display: Display?
+  var display: ExternalDisplay?
   @IBOutlet var pollingModeMenu: NSPopUpButtonCell!
 
   var didChangePollingMode: ((_ pollingModeInt: Int) -> Void)?

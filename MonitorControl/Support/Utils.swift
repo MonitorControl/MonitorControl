@@ -14,7 +14,7 @@ class Utils: NSObject {
   ///   - command: Command (Brightness/Volume/...)
   ///   - title: Title of the slider
   /// - Returns: An `NSSlider` slider
-  static func addSliderMenuItem(toMenu menu: NSMenu, forDisplay display: Display, command: DDC.Command, title: String) -> SliderHandler {
+  static func addSliderMenuItem(toMenu menu: NSMenu, forDisplay display: ExternalDisplay, command: DDC.Command, title: String) -> SliderHandler {
     let item = NSMenuItem()
 
     let handler = SliderHandler(display: display, command: command)
@@ -129,28 +129,6 @@ class Utils: NSObject {
       os_log("Error reading system prefs plist: %{public}@", type: .info, error.localizedDescription)
       return nil
     }
-  }
-
-  // MARK: - Display Infos
-
-  /// Get the name of a display
-  ///
-  /// - Parameter edid: the EDID of a display
-  /// - Returns: a string
-  static func getDisplayName(forEdid edid: EDID) -> String {
-    return edid.displayName() ?? NSLocalizedString("Unknown", comment: "Unknown display name")
-  }
-
-  /// Get the main display from a list of display
-  ///
-  /// - Parameter displays: List of Display
-  /// - Returns: the main display or nil if not found
-  static func getCurrentDisplay(from displays: [Display]) -> Display? {
-    guard let mainDisplayID = NSScreen.main?.displayID else {
-      return nil
-    }
-
-    return displays.first { $0.identifier == mainDisplayID }
   }
 
   // MARK: - Enums

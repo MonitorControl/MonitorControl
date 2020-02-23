@@ -1,6 +1,8 @@
-import Foundation
+import Cocoa
 
 class DisplayManager {
+  public static let shared = DisplayManager()
+
   private var displays: [Display] {
     didSet {
       NotificationCenter.default.post(name: Notification.Name(Utils.PrefKeys.displayListUpdate.rawValue), object: nil)
@@ -15,8 +17,27 @@ class DisplayManager {
     self.displays = displays
   }
 
-  func getDisplays() -> [Display] {
+  func getAllDisplays() -> [Display] {
     return self.displays
+  }
+
+  func getDdcCapableDisplays() -> [ExternalDisplay] {
+    return self.displays.compactMap { (display) -> ExternalDisplay? in
+      if let externalDisplay = display as? ExternalDisplay, externalDisplay.ddc != nil {
+        return externalDisplay
+      } else { return nil }
+    }
+  }
+
+  func getBuiltInDisplay() -> Display? {
+    return self.displays.first { $0 is InternalDisplay }
+  }
+
+  func getCurrentDisplay() -> Display? {
+    guard let mainDisplayID = NSScreen.main?.displayID else {
+      return nil
+    }
+    return self.displays.first { $0.identifier == mainDisplayID }
   }
 
   func addDisplay(display: Display) {

@@ -3,15 +3,13 @@ import Cocoa
 import DDC
 import os.log
 
-class Display {
-  let identifier: CGDirectDisplayID
-  let name: String
-  let isBuiltin: Bool
-  var isEnabled: Bool
+class ExternalDisplay: Display {
   var brightnessSliderHandler: SliderHandler?
   var volumeSliderHandler: SliderHandler?
   var contrastSliderHandler: SliderHandler?
   var ddc: DDC?
+
+  private let prefs = UserDefaults.standard
 
   var hideOsd: Bool {
     get {
@@ -33,17 +31,12 @@ class Display {
     }
   }
 
-  private let prefs = UserDefaults.standard
   private var audioPlayer: AVAudioPlayer?
-
   private let osdChicletBoxes: Float = 16
 
-  init(_ identifier: CGDirectDisplayID, name: String, isBuiltin: Bool, isEnabled: Bool = true) {
-    self.identifier = identifier
-    self.name = name
-    self.isEnabled = isBuiltin ? false : isEnabled
+  override init(_ identifier: CGDirectDisplayID, name: String, vendorNumber: UInt32?, modelNumber: UInt32?) {
+    super.init(identifier, name: name, vendorNumber: vendorNumber, modelNumber: modelNumber)
     self.ddc = DDC(for: identifier)
-    self.isBuiltin = isBuiltin
   }
 
   // On some displays, the display's OSD overlaps the macOS OSD,
@@ -97,7 +90,7 @@ class Display {
 
     if !fromVolumeSlider {
       self.hideDisplayOsd()
-      self.showOsd(command: .audioSpeakerVolume, value: volumeOSDValue)
+      self.showOsd(command: volumeOSDValue > 0 ? .audioSpeakerVolume : .audioMuteScreenBlank, value: volumeOSDValue)
 
       if volumeOSDValue > 0 {
         self.playVolumeChangedSound()
@@ -109,8 +102,9 @@ class Display {
     }
   }
 
-  func setVolume(to volumeOSDValue: Int) {
+  func stepVolume(isUp: Bool, isSmallIncrement: Bool) {
     var muteValue: Int?
+    let volumeOSDValue = self.calcNewValue(for: .audioSpeakerVolume, isUp: isUp, isSmallIncrement: isSmallIncrement)
     let volumeDDCValue = UInt16(volumeOSDValue)
 
     if self.isMuted(), volumeOSDValue > 0 {
@@ -134,7 +128,6 @@ class Display {
           return
         }
       }
-
       self.saveValue(muteValue, for: .audioMuteScreenBlank)
     }
 
@@ -154,7 +147,8 @@ class Display {
     }
   }
 
-  func setBrightness(to osdValue: Int) {
+  override func stepBrightness(isUp: Bool, isSmallIncrement: Bool) {
+    let osdValue = Int(self.calcNewValue(for: .brightness, isUp: isUp, isSmallIncrement: isSmallIncrement))
     let isAlreadySet = osdValue == self.getValue(for: .brightness)
     let ddcValue = UInt16(osdValue)
 
@@ -234,18 +228,17 @@ class Display {
       let filledChicletBoxes = self.osdChicletBoxes * (Float(currentValue) / Float(self.getMaxValue(for: command)))
 
       var nextFilledChicletBoxes: Float
-      var fillecChicletBoxesRel: Float = isUp ? 1 : -1
+      var filledChicletBoxesRel: Float = isUp ? 1 : -1
 
       // This is a workaround to ensure that if the user has set the value using a small step (that is, the current chiclet box isn't completely filled,
       // the next regular up or down step will only fill or empty that chiclet, and not the next one as well - it only really works because the max value is 100
       if (isUp && ceil(filledChicletBoxes) - filledChicletBoxes > 0.15) || (!isUp && filledChicletBoxes - floor(filledChicletBoxes) > 0.15) {
-        fillecChicletBoxesRel = 0
+        filledChicletBoxesRel = 0
       }
 
-      nextFilledChicletBoxes = isUp ? ceil(filledChicletBoxes + fillecChicletBoxesRel) : floor(filledChicletBoxes + fillecChicletBoxesRel)
+      nextFilledChicletBoxes = isUp ? ceil(filledChicletBoxes + filledChicletBoxesRel) : floor(filledChicletBoxes + filledChicletBoxesRel)
       nextValue = Int(Float(self.getMaxValue(for: command)) * (nextFilledChicletBoxes / self.osdChicletBoxes))
     }
-
     return max(0, min(self.getMaxValue(for: command), Int(nextValue)))
   }
 
@@ -263,7 +256,6 @@ class Display {
 
   func getMaxValue(for command: DDC.Command) -> Int {
     let max = self.prefs.integer(forKey: "max-\(command.rawValue)-\(self.identifier)")
-
     return max == 0 ? 100 : max
   }
 
@@ -273,14 +265,6 @@ class Display {
 
   func setRestoreValue(_ value: Int?, for command: DDC.Command) {
     self.prefs.set(value, forKey: "restore-\(command.rawValue)-\(self.identifier)")
-  }
-
-  func setFriendlyName(_ value: String) {
-    self.prefs.set(value, forKey: "friendlyName-\(self.identifier)")
-  }
-
-  func getFriendlyName() -> String {
-    return self.prefs.string(forKey: "friendlyName-\(self.identifier)") ?? self.name
   }
 
   func setPollingMode(_ value: Int) {
@@ -327,26 +311,8 @@ class Display {
     return isSmallIncrement ? 1 : Int(floor(Float(self.getMaxValue(for: command)) / self.osdChicletBoxes))
   }
 
-  private func showOsd(command: DDC.Command, value: Int) {
-    guard let manager = OSDManager.sharedManager() as? OSDManager else {
-      return
-    }
-
-    var osdImage: Int64 = 1 // Brightness Image
-    if command == .audioSpeakerVolume {
-      osdImage = 3 // Speaker image
-      if self.isMuted() {
-        osdImage = 4 // Mute speaker
-      }
-    }
-
-    manager.showImage(osdImage,
-                      onDisplayID: self.identifier,
-                      priority: 0x1F4,
-                      msecUntilFade: 1000,
-                      filledChiclets: UInt32(value),
-                      totalChiclets: UInt32(self.getMaxValue(for: command)),
-                      locked: false)
+  override func showOsd(command: DDC.Command, value: Int, maxValue _: Int = 100) {
+    super.showOsd(command: command, value: value, maxValue: self.getMaxValue(for: command))
   }
 
   private func supportsMuteCommand() -> Bool {
