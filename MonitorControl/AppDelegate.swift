@@ -77,87 +77,74 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     self.monitorItems = []
-    self.displayManager?.clearDisplays()
+    DisplayManager.shared.clearDisplays()
   }
 
   func updateDisplays() {
     self.clearDisplays()
 
-    let filteredScreens = NSScreen.screens.filter { screen -> Bool in
-      // Skip built-in displays.
+    for screen in NSScreen.screens {
+      let name = screen.displayName ?? NSLocalizedString("Unknown", comment: "Unknown display name")
+      let id = screen.displayID
+      let vendorNumber = screen.vendorNumber
+      let modelNumber = screen.modelNumber
+      let display: Display
       if screen.isBuiltin {
-        return false
+        display = InternalDisplay(id, name: name, vendorNumber: vendorNumber, modelNumber: modelNumber)
+      } else {
+        display = ExternalDisplay(id, name: name, vendorNumber: vendorNumber, modelNumber: modelNumber)
       }
-      return DDC(for: screen.displayID)?.edid() != nil
+      DisplayManager.shared.addDisplay(display: display)
     }
 
-    switch filteredScreens.count {
-    case 0:
-      // If no DDC capable display was detected
+    let ddcDisplays = DisplayManager.shared.getDdcCapableDisplays()
+    if ddcDisplays.count == 0 {
       let item = NSMenuItem()
       item.title = NSLocalizedString("No supported display found", comment: "Shown in menu")
       item.isEnabled = false
       self.monitorItems.append(item)
       self.statusMenu.insertItem(item, at: 0)
       self.statusMenu.insertItem(NSMenuItem.separator(), at: 1)
-    default:
-      os_log("The following supported displays were found:", type: .info)
-
-      for screen in filteredScreens {
-        os_log(" - %{public}@", type: .info, "\(screen.displayName ?? NSLocalizedString("Unknown", comment: "Unknown display name")) (Vendor: \(screen.vendorNumber ?? 0), Model: \(screen.modelNumber ?? 0))")
-        self.addScreenToMenu(screen: screen, asSubMenu: filteredScreens.count > 1)
+    } else {
+      for display in ddcDisplays {
+        os_log("Supported display found: %{public}@", type: .info, "\(display.name) (Vendor: \(display.vendorNumber ?? 0), Model: \(display.modelNumber ?? 0))")
+        self.addDisplayToMenu(display: display, asSubMenu: ddcDisplays.count > 1)
       }
     }
   }
 
-  /// Add a screen to the menu
-  ///
-  /// - Parameters:
-  ///   - screen: The screen to add
-  ///   - asSubMenu: Display in a sub menu or directly in menu
-  private func addScreenToMenu(screen: NSScreen, asSubMenu: Bool) {
-    let id = screen.displayID
-    let ddc = DDC(for: id)
+  private func addDisplayToMenu(display: ExternalDisplay, asSubMenu: Bool) {
+    let monitorSubMenu: NSMenu = asSubMenu ? NSMenu() : self.statusMenu
 
-    if let edid = ddc?.edid() {
-      let name = Utils.getDisplayName(forEdid: edid)
-      let isEnabled = (prefs.object(forKey: "\(id)-state") as? Bool) ?? true
+    self.statusMenu.insertItem(NSMenuItem.separator(), at: 0)
 
-      let display = Display(id, name: name, isBuiltin: screen.isBuiltin, isEnabled: isEnabled)
-
-      let monitorSubMenu: NSMenu = asSubMenu ? NSMenu() : self.statusMenu
-
-      self.statusMenu.insertItem(NSMenuItem.separator(), at: 0)
-
-      let volumeSliderHandler = Utils.addSliderMenuItem(toMenu: monitorSubMenu,
-                                                        forDisplay: display,
-                                                        command: .audioSpeakerVolume,
-                                                        title: NSLocalizedString("Volume", comment: "Shown in menu"))
-      let brightnessSliderHandler = Utils.addSliderMenuItem(toMenu: monitorSubMenu,
-                                                            forDisplay: display,
-                                                            command: .brightness,
-                                                            title: NSLocalizedString("Brightness", comment: "Shown in menu"))
-      if prefs.bool(forKey: Utils.PrefKeys.showContrast.rawValue) {
-        let contrastSliderHandler = Utils.addSliderMenuItem(toMenu: monitorSubMenu,
-                                                            forDisplay: display,
-                                                            command: .contrast,
-                                                            title: NSLocalizedString("Contrast", comment: "Shown in menu"))
-        display.contrastSliderHandler = contrastSliderHandler
-      }
-
-      display.volumeSliderHandler = volumeSliderHandler
-      display.brightnessSliderHandler = brightnessSliderHandler
-      self.displayManager?.addDisplay(display: display)
-
-      let monitorMenuItem = NSMenuItem()
-      monitorMenuItem.title = "\(display.getFriendlyName())"
-      if asSubMenu {
-        monitorMenuItem.submenu = monitorSubMenu
-      }
-
-      self.monitorItems.append(monitorMenuItem)
-      self.statusMenu.insertItem(monitorMenuItem, at: 0)
+    let volumeSliderHandler = Utils.addSliderMenuItem(toMenu: monitorSubMenu,
+                                                      forDisplay: display,
+                                                      command: .audioSpeakerVolume,
+                                                      title: NSLocalizedString("Volume", comment: "Shown in menu"))
+    let brightnessSliderHandler = Utils.addSliderMenuItem(toMenu: monitorSubMenu,
+                                                          forDisplay: display,
+                                                          command: .brightness,
+                                                          title: NSLocalizedString("Brightness", comment: "Shown in menu"))
+    if prefs.bool(forKey: Utils.PrefKeys.showContrast.rawValue) {
+      let contrastSliderHandler = Utils.addSliderMenuItem(toMenu: monitorSubMenu,
+                                                          forDisplay: display,
+                                                          command: .contrast,
+                                                          title: NSLocalizedString("Contrast", comment: "Shown in menu"))
+      display.contrastSliderHandler = contrastSliderHandler
     }
+
+    display.volumeSliderHandler = volumeSliderHandler
+    display.brightnessSliderHandler = brightnessSliderHandler
+
+    let monitorMenuItem = NSMenuItem()
+    monitorMenuItem.title = "\(display.getFriendlyName())"
+    if asSubMenu {
+      monitorMenuItem.submenu = monitorSubMenu
+    }
+
+    self.monitorItems.append(monitorMenuItem)
+    self.statusMenu.insertItem(monitorMenuItem, at: 0)
   }
 
   private func setupViewControllers() {
@@ -173,12 +160,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       advancedPrefsVc,
     ]
     prefsController = MASPreferencesWindowController(viewControllers: views, title: NSLocalizedString("Preferences", comment: "Shown in Preferences window"))
-    if let displayPrefs = displayPrefsVc as? DisplayPrefsViewController {
-      displayPrefs.displayManager = self.displayManager
-    }
-    if let advancedPrefs = advancedPrefsVc as? AdvancedPrefsViewController {
-      advancedPrefs.displayManager = self.displayManager
-    }
   }
 
   private func subscribeEventListeners() {
@@ -209,7 +190,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     } else if mediaKey == .volumeDown {
       return .volumeUp
     }
-
     return nil
   }
 }
@@ -218,6 +198,17 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
 extension AppDelegate: MediaKeyTapDelegate {
   func handle(mediaKey: MediaKey, event: KeyEvent?, modifiers: NSEvent.ModifierFlags?) {
+    let isSmallIncrement = modifiers?.isSuperset(of: NSEvent.ModifierFlags([.shift, .option])) ?? false
+
+    // control internal display when holding ctrl modifier
+    let isControlModifier = modifiers?.isSuperset(of: NSEvent.ModifierFlags([.control])) ?? false
+    if isControlModifier, mediaKey == .brightnessUp || mediaKey == .brightnessDown {
+      if let internalDisplay = DisplayManager.shared.getBuiltInDisplay() as? InternalDisplay {
+        internalDisplay.stepBrightness(isUp: mediaKey == .brightnessUp, isSmallIncrement: isSmallIncrement)
+        return
+      }
+    }
+
     let oppositeKey: MediaKey? = self.oppositeMediaKey(mediaKey: mediaKey)
     let isRepeat = event?.keyRepeat ?? false
 
@@ -229,42 +220,40 @@ extension AppDelegate: MediaKeyTapDelegate {
       if isRepeat {
         return
       }
-
       mediaKeyTimer.invalidate()
     }
 
-    let displays = self.displayManager?.getDisplays() ?? [Display]()
-    guard let currentDisplay = Utils.getCurrentDisplay(from: displays) else { return }
+    let displays = DisplayManager.shared.getAllDisplays()
+    guard let currentDisplay = DisplayManager.shared.getCurrentDisplay() else { return }
 
     let allDisplays = prefs.bool(forKey: Utils.PrefKeys.allScreens.rawValue) ? displays : [currentDisplay]
-    let isSmallIncrement = modifiers?.isSuperset(of: NSEvent.ModifierFlags([.shift, .option])) ?? false
 
     // Introduce a small delay to handle the media key being held down
     let delay = isRepeat ? 0.05 : 0
 
-    for display in allDisplays {
-      if (prefs.object(forKey: "\(display.identifier)-state") as? Bool) ?? true {
+    self.keyRepeatTimers[mediaKey] = Timer.scheduledTimer(withTimeInterval: delay, repeats: false, block: { _ in
+      for display in allDisplays where display.isEnabled {
         switch mediaKey {
         case .brightnessUp, .brightnessDown:
-          self.keyRepeatTimers[mediaKey] = Timer.scheduledTimer(withTimeInterval: delay, repeats: false, block: { _ in
-            let osdValue = display.calcNewValue(for: .brightness, isUp: mediaKey == .brightnessUp, isSmallIncrement: isSmallIncrement)
-            display.setBrightness(to: osdValue)
-          })
+          display.stepBrightness(isUp: mediaKey == .brightnessUp, isSmallIncrement: isSmallIncrement)
         case .mute:
           // The mute key should not respond to press + hold
           if !isRepeat {
-            display.toggleMute()
+            // mute only matters for external displays
+            if let display = display as? ExternalDisplay {
+              display.toggleMute()
+            }
           }
         case .volumeUp, .volumeDown:
-          self.keyRepeatTimers[mediaKey] = Timer.scheduledTimer(withTimeInterval: delay, repeats: false, block: { _ in
-            let osdValue = display.calcNewValue(for: .audioSpeakerVolume, isUp: mediaKey == .volumeUp, isSmallIncrement: isSmallIncrement)
-            display.setVolume(to: osdValue)
-          })
+          // volume only matters for external displays
+          if let display = display as? ExternalDisplay {
+            display.stepVolume(isUp: mediaKey == .volumeUp, isSmallIncrement: isSmallIncrement)
+          }
         default:
           return
         }
       }
-    }
+    })
   }
 
   // MARK: - Prefs notification
@@ -304,7 +293,6 @@ extension AppDelegate: MediaKeyTapDelegate {
       let keysToDelete: [MediaKey] = [.volumeUp, .volumeDown, .mute]
       keys.removeAll { keysToDelete.contains($0) }
     }
-
     self.mediaKeyTap?.stop()
     self.mediaKeyTap = MediaKeyTap(delegate: self, for: keys, observeBuiltIn: false)
     self.mediaKeyTap?.start()
@@ -312,16 +300,13 @@ extension AppDelegate: MediaKeyTapDelegate {
 }
 
 extension AppDelegate: EventSubscriber {
-  /**
-   Fires off when the default audio device changes.
-   */
+  /// Fires off when the default audio device changes.
   func eventReceiver(_ event: Event) {
     if case let .defaultOutputDeviceChanged(audioDevice)? = event as? AudioHardwareEvent {
       #if DEBUG
         os_log("Default output device changed to “%{public}@”.", type: .info, audioDevice.name)
         os_log("Can device set its own volume? %{public}@", type: .info, audioDevice.canSetVirtualMasterVolume(direction: .playback).description)
       #endif
-
       self.startOrRestartMediaKeyTap()
     }
   }

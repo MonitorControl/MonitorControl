@@ -3,7 +3,7 @@ import os.log
 
 class LongerDelayCellView: NSTableCellView {
   @IBOutlet var button: NSButton!
-  var display: Display?
+  var display: ExternalDisplay?
   let prefs = UserDefaults.standard
 
   override func draw(_ dirtyRect: NSRect) {
