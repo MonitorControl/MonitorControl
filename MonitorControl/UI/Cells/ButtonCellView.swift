@@ -16,6 +16,7 @@ class ButtonCellView: NSTableCellView {
       #if DEBUG
         os_log("Toggle enabled display state: %{public}@", type: .info, isEnabled ? "on" : "off")
       #endif
+      NotificationCenter.default.post(name: Notification.Name(Utils.PrefKeys.listenFor.rawValue), object: nil)
     }
   }
 }
