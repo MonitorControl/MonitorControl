@@ -297,7 +297,7 @@ extension AppDelegate: MediaKeyTapDelegate {
     let ddcDisplays = DisplayManager.shared.getDdcCapableDisplays()
     var atLeastOne = false
     for display in ddcDisplays where display.isEnabled {
-      atLeastOne = true;
+      atLeastOne = true
       break
     }
 
