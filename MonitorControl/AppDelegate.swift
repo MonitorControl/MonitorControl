@@ -31,7 +31,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     self.displayManager = DisplayManager()
     self.setupViewControllers()
     self.subscribeEventListeners()
-    self.startOrRestartMediaKeyTap()
     self.statusItem.image = NSImage(named: "status")
     self.statusItem.menu = self.statusMenu
     self.setDefaultPrefs()
@@ -111,6 +110,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         self.addDisplayToMenu(display: display, asSubMenu: ddcDisplays.count > 1)
       }
     }
+    self.startOrRestartMediaKeyTap()
   }
 
   private func addDisplayToMenu(display: ExternalDisplay, asSubMenu: Bool) {
@@ -273,7 +273,6 @@ extension AppDelegate: MediaKeyTapDelegate {
   @objc func handlePreferenceReset() {
     self.setDefaultPrefs()
     self.updateDisplays()
-    self.startOrRestartMediaKeyTap()
   }
 
   private func startOrRestartMediaKeyTap() {
