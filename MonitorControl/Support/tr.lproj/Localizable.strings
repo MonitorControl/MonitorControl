@@ -1,0 +1,50 @@
+
+/* Sown in menu */
+"Brightness" = "Parlaklık";
+
+/* Build */
+"Build" = "Derleme";
+
+/* Shown in menu */
+"Contrast" = "Kontrast";
+
+/* Shown in menu */
+"Default" = "Varsayılan";
+
+/* No comment provided by engineer. */
+"Display" = "Ekran";
+
+/* Shown in the main prefs window */
+"General" = "Genel";
+
+/* Shown in the main prefs window */
+"Keys" = "Kısayollar";
+
+/* Shown in menu */
+"No supported display found" = "Desteklenen bir ekran bulunamadı";
+
+/* Shown in the alert dialog */
+"Ok" = "Tamam";
+
+/* Shown in Preferences window */
+"Preferences" = "Tercihler";
+
+/* Shown in menu */
+"Set as default" = "Varsayılan olarak ayarla";
+
+/* Shown in the alert dialog */
+"Shortcuts not available" = "Kısayollar kullanılamıyor";
+
+/* Unknown display name
+ Unknown model
+ Unknown vendor */
+"Unknown" = "Bilinmeyen";
+
+/* Version */
+"Version" = "Sürüm";
+
+/* Shown in menu */
+"Volume" = "Ses Düzeyi";
+
+/* Shown in the alert dialog */
+"You need to enable MonitorControl in System Preferences > Security and Privacy > Accessibility for the keyboard shortcuts to work" = "Klavye kısayolların çalışması için Sistem Tercihleri > Güvenlik ve Gizlilik > Erişilebilirlik bölümünde MonitorControl'ü etkinleştirmeniz gerekir.";
