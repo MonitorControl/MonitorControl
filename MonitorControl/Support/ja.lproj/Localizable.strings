@@ -1,0 +1,53 @@
+
+/* Sown in menu */
+"Brightness" = "画面輝度";
+
+/* Build */
+"Build" = "ビルド";
+
+/* Shown in menu */
+"Contrast" = "コントラスト";
+
+/* Shown in menu */
+"Default" = "デフォルト";
+
+/* No comment provided by engineer. */
+"Display" = "ディスプレイ";
+
+/* Shown in the main prefs window */
+"General" = "一般";
+
+/* Shown in the main prefs window */
+"Keys" = "キー";
+
+/* Shown in the main prefs window  */
+"Advanced" = "詳細設定";
+
+/* Shown in menu */
+"No supported display found" = "サポートされていないディスプレイが検知されました";
+
+/* Shown in the alert dialog */
+"Ok" = "OK";
+
+/* Shown in Preferences window */
+"Preferences" = "環境設定";
+
+/* Shown in menu */
+"Set as default" = "デフォルトとして設定";
+
+/* Shown in the alert dialog */
+"Shortcuts not available" = "ショートカットキーを使用できません";
+
+/* Unknown display name
+ Unknown model
+ Unknown vendor */
+"Unknown" = "不明";
+
+/* Version */
+"Version" = "バージョン";
+
+/* Shown in menu */
+"Volume" = "音量";
+
+/* Shown in the alert dialog */
+"You need to enable MonitorControl in System Preferences > Security and Privacy > Accessibility for the keyboard shortcuts to work" = "ショートカットキーを使用するには、 環境設定 > セキュリティとプライバシー > アクセリビリティ からMonitorControlを有効にしてください。";
