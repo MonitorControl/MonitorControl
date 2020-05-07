@@ -58,6 +58,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       prefs.set(true, forKey: Utils.PrefKeys.appAlreadyLaunched.rawValue)
 
       prefs.set(false, forKey: Utils.PrefKeys.showContrast.rawValue)
+      prefs.set(false, forKey: Utils.PrefKeys.showVolume.rawValue)
       prefs.set(false, forKey: Utils.PrefKeys.lowerContrast.rawValue)
     }
   }
@@ -117,15 +118,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     let monitorSubMenu: NSMenu = asSubMenu ? NSMenu() : self.statusMenu
 
     self.statusMenu.insertItem(NSMenuItem.separator(), at: 0)
-
-    let volumeSliderHandler = Utils.addSliderMenuItem(toMenu: monitorSubMenu,
-                                                      forDisplay: display,
-                                                      command: .audioSpeakerVolume,
-                                                      title: NSLocalizedString("Volume", comment: "Shown in menu"))
-    let brightnessSliderHandler = Utils.addSliderMenuItem(toMenu: monitorSubMenu,
-                                                          forDisplay: display,
-                                                          command: .brightness,
-                                                          title: NSLocalizedString("Brightness", comment: "Shown in menu"))
+    
+    if prefs.bool(forKey: Utils.PrefKeys.showVolume.rawValue) {
+      let volumeSliderHandler = Utils.addSliderMenuItem(toMenu: monitorSubMenu,
+                                                        forDisplay: display,
+                                                        command: .audioSpeakerVolume,
+                                                        title: NSLocalizedString("Volume", comment: "Shown in menu"))
+      display.volumeSliderHandler = volumeSliderHandler
+    }
+    
     if prefs.bool(forKey: Utils.PrefKeys.showContrast.rawValue) {
       let contrastSliderHandler = Utils.addSliderMenuItem(toMenu: monitorSubMenu,
                                                           forDisplay: display,
@@ -133,8 +134,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                                                           title: NSLocalizedString("Contrast", comment: "Shown in menu"))
       display.contrastSliderHandler = contrastSliderHandler
     }
-
-    display.volumeSliderHandler = volumeSliderHandler
+    
+    let brightnessSliderHandler = Utils.addSliderMenuItem(toMenu: monitorSubMenu,
+                                                          forDisplay: display,
+                                                          command: .brightness,
+                                                          title: NSLocalizedString("Brightness", comment: "Shown in menu"))
+    
     display.brightnessSliderHandler = brightnessSliderHandler
 
     let monitorMenuItem = NSMenuItem()
@@ -165,6 +170,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   private func subscribeEventListeners() {
     // subscribe KeyTap event listener
     NotificationCenter.default.addObserver(self, selector: #selector(handleListenForChanged), name: .listenFor, object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(handleShowVolumeChanged), name: .showVolume, object: nil)
     NotificationCenter.default.addObserver(self, selector: #selector(handleShowContrastChanged), name: .showContrast, object: nil)
     NotificationCenter.default.addObserver(self, selector: #selector(handleFriendlyNameChanged), name: .friendlyName, object: nil)
     NotificationCenter.default.addObserver(self, selector: #selector(handlePreferenceReset), name: .preferenceReset, object: nil)
@@ -263,6 +269,10 @@ extension AppDelegate: MediaKeyTapDelegate {
   }
 
   @objc func handleShowContrastChanged() {
+    self.updateDisplays()
+  }
+  
+  @objc func handleShowVolumeChanged() {
     self.updateDisplays()
   }
 
