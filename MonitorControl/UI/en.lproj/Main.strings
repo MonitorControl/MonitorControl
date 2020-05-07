@@ -47,8 +47,11 @@
 /* Class = "NSMenuItem"; title = "Both Brightness & Volume"; ObjectID = "Vr4-xb-B4o"; */
 "Vr4-xb-B4o.title" = "Both Brightness & Volume";
 
-/* Class = "NSButtonCell"; title = "Show a slider for contrast"; ObjectID = "xSI-8W-Xd0"; */
-"xSI-8W-Xd0.title" = "Show a slider for contrast";
+/* Class = "NSButtonCell"; title = "Show Contrast Slider"; ObjectID = "xSI-8W-Xd0"; */
+"xSI-8W-Xd0.title" = "Show Contrast Slider";
+
+/* Class = "NSButtonCell"; title = "Show Volume Slider"; ObjectID = "vs6-in-GV0.title"; */
+"vs6-in-GV0.title" = "Show Volume Slider";
 
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "2gr-xG-Byx"; */
 "2gr-xG-Byx.title" = "";

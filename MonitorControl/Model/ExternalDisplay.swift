@@ -5,8 +5,8 @@ import os.log
 
 class ExternalDisplay: Display {
   var brightnessSliderHandler: SliderHandler?
-  var volumeSliderHandler: SliderHandler?
   var contrastSliderHandler: SliderHandler?
+  var volumeSliderHandler: SliderHandler?
   var ddc: DDC?
 
   private let prefs = UserDefaults.standard
