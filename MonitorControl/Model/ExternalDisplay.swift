@@ -46,7 +46,7 @@ class ExternalDisplay: Display {
       return
     }
 
-    for _ in 0..<20 {
+    for _ in 0 ..< 20 {
       _ = self.ddc?.write(command: .osd, value: UInt16(1), errorRecoveryWaitTime: 2000)
     }
   }
