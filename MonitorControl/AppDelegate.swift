@@ -67,7 +67,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   func clearDisplays() {
     if self.statusMenu.items.count > 2 {
       var items: [NSMenuItem] = []
-      for i in 0..<self.statusMenu.items.count - 2 {
+      for i in 0 ..< self.statusMenu.items.count - 2 {
         items.append(self.statusMenu.items[i])
       }
 
@@ -192,7 +192,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     return nil
   }
-  
+
   func handleOpenPrefPane(mediaKey: MediaKey, event: KeyEvent?, modifiers: NSEvent.ModifierFlags?) -> Bool {
     guard let modifiers = modifiers else { return false }
     if !(modifiers.contains(.option) && !modifiers.contains(.shift)) {
@@ -217,11 +217,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
 extension AppDelegate: MediaKeyTapDelegate {
   func handle(mediaKey: MediaKey, event: KeyEvent?, modifiers: NSEvent.ModifierFlags?) {
-    
     if self.handleOpenPrefPane(mediaKey: mediaKey, event: event, modifiers: modifiers) {
       return
     }
-    
+
     let isSmallIncrement = modifiers?.isSuperset(of: NSEvent.ModifierFlags([.shift, .option])) ?? false
 
     // control internal display when holding ctrl modifier
@@ -232,7 +231,7 @@ extension AppDelegate: MediaKeyTapDelegate {
         return
       }
     }
-    
+
     let oppositeKey: MediaKey? = self.oppositeMediaKey(mediaKey: mediaKey)
     let isRepeat = event?.keyRepeat ?? false
 
@@ -246,7 +245,10 @@ extension AppDelegate: MediaKeyTapDelegate {
       }
       mediaKeyTimer.invalidate()
     }
+    self.sendDisplayCommand(mediaKey: mediaKey, isRepeat: isRepeat, isSmallIncrement: isSmallIncrement)
+  }
 
+  private func sendDisplayCommand(mediaKey: MediaKey, isRepeat: Bool, isSmallIncrement: Bool) {
     let displays = DisplayManager.shared.getAllDisplays()
     guard let currentDisplay = DisplayManager.shared.getCurrentDisplay() else { return }
 
