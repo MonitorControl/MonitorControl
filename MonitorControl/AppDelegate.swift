@@ -322,7 +322,7 @@ extension AppDelegate: MediaKeyTapDelegate {
     self.mediaKeyTap?.stop()
     // returning an empty array listens for all mediakeys in MediaKeyTap
     if keys.count > 0 {
-      self.mediaKeyTap = MediaKeyTap(delegate: self, for: keys, observeBuiltIn: false)
+      self.mediaKeyTap = MediaKeyTap(delegate: self, for: keys, observeBuiltIn: true)
       self.mediaKeyTap?.start()
     }
   }
