@@ -96,10 +96,7 @@ class Utils: NSObject {
 
   /// Acquire Privileges (Necessary to listen to keyboard event globally)
   static func acquirePrivileges() {
-    let options: NSDictionary = [kAXTrustedCheckOptionPrompt.takeRetainedValue() as NSString: true]
-    let accessibilityEnabled = AXIsProcessTrustedWithOptions(options)
-
-    if !accessibilityEnabled {
+    if !self.readPrivileges(prompt: true) {
       let alert = NSAlert()
       alert.addButton(withTitle: NSLocalizedString("Ok", comment: "Shown in the alert dialog"))
       alert.messageText = NSLocalizedString("Shortcuts not available", comment: "Shown in the alert dialog")
@@ -107,8 +104,14 @@ class Utils: NSObject {
       alert.alertStyle = .warning
       alert.runModal()
     }
-
     return
+  }
+
+  static func readPrivileges(prompt: Bool) -> Bool {
+    let options: NSDictionary = [kAXTrustedCheckOptionPrompt.takeRetainedValue() as NSString: prompt]
+    let status = AXIsProcessTrustedWithOptions(options)
+    os_log("Reading Accessibility privileges - Current access status %{public}@", type: .info, String(status))
+    return status
   }
 
   static func setStartAtLogin(enabled: Bool) {

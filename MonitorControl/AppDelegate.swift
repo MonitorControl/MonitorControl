@@ -18,7 +18,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
   var monitorItems: [NSMenuItem] = []
 
-  var displayManager: DisplayManager?
   var mediaKeyTap: MediaKeyTap?
   var prefsController: NSWindowController?
   var keyRepeatTimers: [MediaKey: Timer] = [:]
@@ -27,15 +26,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
   func applicationDidFinishLaunching(_: Notification) {
     app = self
-
-    self.displayManager = DisplayManager()
     self.setupViewControllers()
     self.subscribeEventListeners()
+    self.setDefaultPrefs()
     self.updateMediaKeyTap()
     self.statusItem.image = NSImage(named: "status")
     self.statusItem.menu = self.statusMenu
-    self.setDefaultPrefs()
-    Utils.acquirePrivileges()
+    self.checkPermissions()
     CGDisplayRegisterReconfigurationCallback({ _, _, _ in app.updateDisplays() }, nil)
     self.updateDisplays()
   }
@@ -145,6 +142,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     self.monitorItems.append(monitorMenuItem)
     self.statusMenu.insertItem(monitorMenuItem, at: 0)
+  }
+
+  private func checkPermissions() {
+    let permissionsRequired: Bool = prefs.integer(forKey: Utils.PrefKeys.listenFor.rawValue) != Utils.ListenForKeys.none.rawValue
+    if !Utils.readPrivileges(prompt: false) && permissionsRequired {
+      Utils.acquirePrivileges()
+    }
   }
 
   private func setupViewControllers() {
@@ -285,6 +289,7 @@ extension AppDelegate: MediaKeyTapDelegate {
   // MARK: - Prefs notification
 
   @objc func handleListenForChanged() {
+    self.checkPermissions()
     self.updateMediaKeyTap()
   }
 
@@ -299,6 +304,7 @@ extension AppDelegate: MediaKeyTapDelegate {
   @objc func handlePreferenceReset() {
     self.setDefaultPrefs()
     self.updateDisplays()
+    self.checkPermissions()
     self.updateMediaKeyTap()
   }
 
