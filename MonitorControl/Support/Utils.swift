@@ -173,5 +173,8 @@ class Utils: NSObject {
 
     /// Listen for Volume keys only
     case volumeOnlyKeys = 2
+
+    /// Don't listen for any keys
+    case none = 3
   }
 }

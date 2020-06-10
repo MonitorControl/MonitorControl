@@ -310,6 +310,8 @@ extension AppDelegate: MediaKeyTapDelegate {
       keys = [.brightnessUp, .brightnessDown]
     case Utils.ListenForKeys.volumeOnlyKeys.rawValue:
       keys = [.mute, .volumeUp, .volumeDown]
+    case Utils.ListenForKeys.none.rawValue:
+      keys = []
     default:
       keys = [.brightnessUp, .brightnessDown, .mute, .volumeUp, .volumeDown]
     }
