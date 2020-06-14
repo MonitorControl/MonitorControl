@@ -80,8 +80,8 @@ if which git > /dev/null; then
     echo -e ""
     echo -e "${i}2. Commiting changes to master…"
     git add -A
-    git commit -S -m ":tada: Release v${VERSION}"
-    git tag -a "v${VERSION}"
+    git commit -S -m ":tada: Release v${APP_VERSION}"
+    git tag "v${APP_VERSION}"
     if [ "$DEV_MODE" == true ]; then
         echo -e "${i}Dev mode enabled: Skipping push"
     else
@@ -96,8 +96,8 @@ fi
 if which create-dmg > /dev/null; then
     echo -e ""
     echo -e "${i}3. Generating dmg…"
-    create-dmg "${TEMP_DIR}/${APP_NAME}.app"
-    mv "${TEMP_DIR}/${APP_NAME} ${VERSION}.app" "${TEMP_DIR}/${DMG_NAME}"
+    create-dmg "${TEMP_DIR}/${APP_NAME}.app" "${TEMP_DIR}"
+    mv "${TEMP_DIR}/${APP_NAME} ${APP_VERSION}.dmg" "${TEMP_DIR}/${DMG_NAME}"
     echo -e "${c}Dmg built successfully"
 else
     echo -e "${x}warning: create-dmg not installed"
@@ -127,7 +127,7 @@ if which git > /dev/null; then
     git checkout gh-pages
     cp -f "./updates.xml" "${TEMP_DIR}/updates.xml"
     git add -A
-    git commit -S -m ":tada: Release v${VERSION}"
+    git commit -S -m ":tada: Release v${APP_VERSION}"
     if [ "$DEV_MODE" == true ]; then
         echo -e "${i}Dev mode enabled: Skipping push"
     else
