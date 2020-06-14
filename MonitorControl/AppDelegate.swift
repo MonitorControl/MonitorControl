@@ -65,9 +65,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   // MARK: - Menu
 
   func clearDisplays() {
-    if self.statusMenu.items.count > 2 {
+    if self.statusMenu.items.count > 3 {
       var items: [NSMenuItem] = []
-      for i in 0 ..< self.statusMenu.items.count - 2 {
+      for i in 0 ..< self.statusMenu.items.count - 3 {
         items.append(self.statusMenu.items[i])
       }
 

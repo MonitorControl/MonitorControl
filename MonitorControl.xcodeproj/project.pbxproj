@@ -51,6 +51,9 @@
 		F0445D40200259C10025AE82 /* DisplayPrefsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0445D3F200259C10025AE82 /* DisplayPrefsViewController.swift */; };
 		F06792EA200A73460066C438 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = F06792E9200A73460066C438 /* main.swift */; };
 		F06792F6200A745F0066C438 /* MonitorControlHelper.app in [Login] Copy Helper to start at Login */ = {isa = PBXBuildFile; fileRef = F06792E7200A73460066C438 /* MonitorControlHelper.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		F0C4B26E24965B8700DF9967 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F0C4B26C24965B5400DF9967 /* Sparkle.framework */; };
+		F0C4B26F24965B8700DF9967 /* Sparkle.framework in [Carthage] Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F0C4B26C24965B5400DF9967 /* Sparkle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		F0FEFBBC2496669000B4B336 /* Sparkle.framework.dSYM in [Carthage] Copy Framework Debug Symbols */ = {isa = PBXBuildFile; fileRef = F0FEFBB92496661F00B4B336 /* Sparkle.framework.dSYM */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -62,6 +65,7 @@
 			files = (
 				28D1DDE8227FB7D0004CB494 /* AMCoreAudio.framework in [Carthage] Embed Frameworks */,
 				28D1DDEF227FB944004CB494 /* DDC.framework in [Carthage] Embed Frameworks */,
+				F0C4B26F24965B8700DF9967 /* Sparkle.framework in [Carthage] Embed Frameworks */,
 				28D1DDEA227FB7D0004CB494 /* MASPreferences.framework in [Carthage] Embed Frameworks */,
 				28D1DDE6227FB7D0004CB494 /* MediaKeyTap.framework in [Carthage] Embed Frameworks */,
 			);
@@ -74,6 +78,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 16;
 			files = (
+				F0FEFBBC2496669000B4B336 /* Sparkle.framework.dSYM in [Carthage] Copy Framework Debug Symbols */,
 				28D1DE14227FD006004CB494 /* AMCoreAudio.framework.dSYM in [Carthage] Copy Framework Debug Symbols */,
 				28D1DE15227FD006004CB494 /* DDC.framework.dSYM in [Carthage] Copy Framework Debug Symbols */,
 				28D1DE12227FD006004CB494 /* MASPreferences.framework.dSYM in [Carthage] Copy Framework Debug Symbols */,
@@ -160,6 +165,8 @@
 		F06792F0200A73470066C438 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F06792F1200A73470066C438 /* MonitorControlHelper.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MonitorControlHelper.entitlements; sourceTree = "<group>"; };
 		F0A987D61F77B290009B603D /* OSD.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = OSD.framework; sourceTree = "<group>"; };
+		F0C4B26C24965B5400DF9967 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = Carthage/Build/Mac/Sparkle.framework; sourceTree = "<group>"; };
+		F0FEFBB92496661F00B4B336 /* Sparkle.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = Sparkle.framework.dSYM; path = Carthage/Build/Mac/Sparkle.framework.dSYM; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -168,6 +175,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				28D1DDE7227FB7D0004CB494 /* AMCoreAudio.framework in Frameworks */,
+				F0C4B26E24965B8700DF9967 /* Sparkle.framework in Frameworks */,
 				28D1DDEE227FB944004CB494 /* DDC.framework in Frameworks */,
 				28D1DDE9227FB7D0004CB494 /* MASPreferences.framework in Frameworks */,
 				28D1DDE5227FB7D0004CB494 /* MediaKeyTap.framework in Frameworks */,
@@ -188,6 +196,7 @@
 		28D1DDD1227FB759004CB494 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F0FEFBB92496661F00B4B336 /* Sparkle.framework.dSYM */,
 				28D1DDE3227FB7D0004CB494 /* AMCoreAudio.framework */,
 				28D1DE10227FD006004CB494 /* AMCoreAudio.framework.dSYM */,
 				28D1DDED227FB944004CB494 /* DDC.framework */,
@@ -197,6 +206,7 @@
 				28D1DDE2227FB7D0004CB494 /* MediaKeyTap.framework */,
 				28D1DE0F227FD006004CB494 /* MediaKeyTap.framework.dSYM */,
 				F0A987D61F77B290009B603D /* OSD.framework */,
+				F0C4B26C24965B5400DF9967 /* Sparkle.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -729,7 +739,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = MonitorControl/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @loader_path/../Frameworks";
 				MARKETING_VERSION = 2.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = me.guillaumeb.MonitorControl;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -756,7 +766,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = MonitorControl/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @loader_path/../Frameworks";
 				MARKETING_VERSION = 2.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = me.guillaumeb.MonitorControl;
 				PRODUCT_NAME = "$(TARGET_NAME)";

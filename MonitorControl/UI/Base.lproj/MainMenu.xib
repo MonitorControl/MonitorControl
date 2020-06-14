@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="16097" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14490.70"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="16097"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
@@ -18,13 +18,20 @@
             </connections>
         </customObject>
         <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
+        <customObject id="QZB-eb-7ru" customClass="SPUStandardUpdaterController"/>
         <menu id="lCi-vw-mwp">
             <items>
                 <menuItem isSeparatorItem="YES" id="F5R-GH-0ZO"/>
-                <menuItem title="Preferences..." id="SOS-eZ-uU5">
+                <menuItem title="Preferences…" id="SOS-eZ-uU5">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
                         <action selector="prefsClicked:" target="Voe-Tx-rLC" id="sSU-RG-py2"/>
+                    </connections>
+                </menuItem>
+                <menuItem title="Check for Updates…" id="9Rk-je-G9P">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="checkForUpdates:" target="QZB-eb-7ru" id="873-HT-M4a"/>
                     </connections>
                 </menuItem>
                 <menuItem title="Quit" id="JTa-2I-AsI">

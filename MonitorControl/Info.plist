@@ -19,7 +19,7 @@
 	<key>CFBundleShortVersionString</key>
 	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleVersion</key>
-	<string>642</string>
+	<string>647</string>
 	<key>LSApplicationCategoryType</key>
 	<string>public.app-category.utilities</string>
 	<key>LSMinimumSystemVersion</key>
@@ -32,5 +32,9 @@
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
+	<key>SUFeedURL</key>
+	<string>https://monitorcontrol.github.io/monitorcontrol/updates.xml</string>
+	<key>SUPublicEDKey</key>
+	<string>MIIDOjCCAi0GByqGSM44BAEwggIgAoIBAQD7nkQiantJFaxwhj40Bj3KVRpudtNoEVkp2XKWQJoQjeKMpV1i27euDzOf76gsqmuUXeGIsIRErk5dsJebNtj2NSpQHzFlykcmOsrwWGfNssRbAwiwkmVVWeTCxbRBCNtKX1g/fxwayDpNfB92ZJik04YaZ2uotGoUO6td0VlSYByh9eBD8TiLXh7HEfZ7WZcB3LqqzcEbkeNUN41TYaQUt5JraT12hs/W96JQ9IT9g79GKL4kiWN6HZ9DI0j/L1IJ1OSIovZDw7cFWDgA0k17HLMA5UW8FIP0uVQ9JdLYCSEEGwKU5tv+m7BHgoAIxIZplcv0PAqKCcdzxt91vJJ/AhUAgVNhcNV/JjI5mrKGNTVxAmAI0UsCggEAZHl9ookx9OLzsydBBTDytfLmGppSj9U1CXcWwCtxrS03+brLXXjlWby2Z4VeSmWAWW6oW92j9JFdGeA9fNk0PH8pi6zL6sVJQw7Lh4+jOR5SZxn1zbOprVZQ7RbhODCa2r5EnogrlEvZd7ox7mSgVI4vxNvVZcsXU2cGbCWArhXfNCnRq8WEuojlvInJUeM1bn4cqa0h+v4UcCzhUJg6t+fdMh4yoAS2Kzw2zlh5Ors5Mvd+MRLD1DzdokRrVc+zG26Go+T2St2mIdi7rNsKUm74nLkvSgK+Y+aP1W+grgaGxFHs+eo8nCdQQCDJEQxS1xlIL+KJhK3TGz53YnUZbgOCAQUAAoIBAGisPPCniGn8yihpwnfMnCewVKtC7GrYVVNzKpywsrjGJ6bMgkPkj2Ep0a+4ccfJDhnUjpDDAvhWO3P2dNGCjUvplTPZQcPPPEM7vWNYDLYSWS5nMQjGSzwDruyWwbxYutiZh6q1d0gFzmc/grCQSG4KCAx3hqGTuVRy3gmZ1fKqikAt8fmxHJ4riEs+vzp8AQy7eSuEu+olCbsRGPngiT+OhjJq0wgnXrqyzQegyseGgVDi0NWC6eeeEM4j3EYsD5jp9lWkzHL5/nV+myFKcy1xZQXVD7rM0IlVcoOlKBKdf1+6hyc/WoMSdoGlpNwrsWPFdQ1Xm7i1tpq+5gvNKPw=</string>
 </dict>
 </plist>
