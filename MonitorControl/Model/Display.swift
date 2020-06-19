@@ -8,6 +8,7 @@
 
 import DDC
 import Foundation
+import os.log
 
 class Display {
   internal let identifier: CGDirectDisplayID
@@ -42,7 +43,7 @@ class Display {
     return self.prefs.string(forKey: "friendlyName-\(self.identifier)") ?? self.name
   }
 
-  func showOsd(command: DDC.Command, value: Int, maxValue: Int = 100) {
+  func showOsd(command: DDC.Command, value: Int, maxValue: Int = 100, roundChiclet: Bool = false) {
     guard let manager = OSDManager.sharedManager() as? OSDManager else {
       return
     }
@@ -59,12 +60,25 @@ class Display {
       osdImage = 1
     }
 
-    manager.showImage(osdImage,
-                      onDisplayID: self.identifier,
-                      priority: 0x1F4,
-                      msecUntilFade: 1000,
-                      filledChiclets: UInt32(value),
-                      totalChiclets: UInt32(maxValue),
-                      locked: false)
+    if roundChiclet {
+      let osdChiclet = OSDUtils.chiclet(fromValue: Float(value), maxValue: Float(maxValue))
+      let filledChiclets = round(osdChiclet)
+
+      manager.showImage(osdImage,
+                        onDisplayID: self.identifier,
+                        priority: 0x1F4,
+                        msecUntilFade: 1000,
+                        filledChiclets: UInt32(filledChiclets),
+                        totalChiclets: UInt32(16),
+                        locked: false)
+    } else {
+      manager.showImage(osdImage,
+                        onDisplayID: self.identifier,
+                        priority: 0x1F4,
+                        msecUntilFade: 1000,
+                        filledChiclets: UInt32(value),
+                        totalChiclets: UInt32(maxValue),
+                        locked: false)
+    }
   }
 }
