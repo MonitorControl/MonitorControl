@@ -408,6 +408,7 @@
 				"zh-Hans",
 				ru,
 				it,
+				ja,
 			);
 			mainGroup = 56754EA21D9A4016007BCDC5;
 			productRefGroup = 56754EAC1D9A4016007BCDC5 /* Products */;
