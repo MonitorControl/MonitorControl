@@ -1,0 +1,70 @@
+/* Shown in the main prefs window */
+"Advanced" = "Avançado";
+
+/* Shown in the alert dialog */
+"Are you sure you want to enable a longer delay? Doing so may freeze your system and require a restart. Start at login will be disabled as a safety measure." = "Tem certeza de que deseja ativar um atraso mais demorado? Isso pode congelar o sistema e exigir uma reinicialização. Iniciar no login será desabilitado como medida de segurança.";
+
+/* Shown in the alert dialog */
+"Are you sure you want to reset all preferences?" = "Tem certeza que deseja redefinir todas as preferências?";
+
+/* Show in menu */
+"Brightness" = "Brilho";
+
+/* Build */
+"Build" = "Build";
+
+/* Shown in menu */
+"Contrast" = "Contraste";
+
+/* Shown in menu */
+"Default" = "Padrão";
+
+/* No comment provided by engineer. */
+"Display" = "Monitor";
+
+/* Shown in the alert dialog */
+"Enable Longer Delay?" = "Ativar Modo Demorado?";
+
+/* Shown in the main prefs window */
+"General" = "Geral";
+
+/* Shown in the main prefs window */
+"Keys" = "Teclas";
+
+/* Shown in the alert dialog */
+"No" = "Não";
+
+/* Shown in menu */
+"No supported display found" = "Nenhum monitor suportado encontrado";
+
+/* Shown in the alert dialog */
+"Ok" = "Ok";
+
+/* Shown in Preferences window */
+"Preferences" = "Preferências";
+
+/* Shown in the alert dialog */
+"Reset Preferences?" = "Reiniciar preferências?";
+
+/* Shown in menu */
+"Set as default" = "Definir como padrão";
+
+/* Shown in the alert dialog */
+"Shortcuts not available" = "Atalhos não disponíveis";
+
+/* Unknown display name
+ Unknown model
+ Unknown vendor */
+"Unknown" = "Desconhecido";
+
+/* Version */
+"Version" = "Versão";
+
+/* Shown in menu */
+"Volume" = "Volume";
+
+/* Shown in the alert dialog */
+"Yes" = "Sim";
+
+/* Shown in the alert dialog */
+"You need to enable MonitorControl in System Preferences > Security and Privacy > Accessibility for the keyboard shortcuts to work" = "Você precisa ativar MonitorControl em 'Preferências do Sistema > Segurança e Privacidade > Acessibilidade' para os atalhos de teclado funcionarem";

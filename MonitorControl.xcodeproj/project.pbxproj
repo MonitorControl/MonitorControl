@@ -123,6 +123,9 @@
 		56754EAB1D9A4016007BCDC5 /* MonitorControl.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MonitorControl.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		56754EAE1D9A4016007BCDC5 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AppDelegate.swift; sourceTree = "<group>"; };
 		56754EB01D9A4016007BCDC5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		6444A0FC24B8083F0063AB2C /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Main.strings"; sourceTree = "<group>"; };
+		6444A0FD24B8083F0063AB2C /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/MainMenu.strings"; sourceTree = "<group>"; };
+		6444A0FE24B8083F0063AB2C /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		6C0CCB25228F4F720037D2C5 /* AdvancedPrefsViewController.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = AdvancedPrefsViewController.swift; sourceTree = "<group>"; tabWidth = 4; };
 		6C20466B23153E4F00859767 /* Display+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Display+Extension.swift"; sourceTree = "<group>"; };
 		6C2EA1CC228F644B00060E3F /* OnlyIntegerValueFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnlyIntegerValueFormatter.swift; sourceTree = "<group>"; };
@@ -417,6 +420,7 @@
 				it,
 				ja,
 				pl,
+				"pt-BR",
 			);
 			mainGroup = 56754EA21D9A4016007BCDC5;
 			productRefGroup = 56754EAC1D9A4016007BCDC5 /* Products */;
@@ -596,6 +600,7 @@
 				6CAD135023624CC1009BD53F /* it */,
 				3CCA5F972442EFF800B4DB84 /* ja */,
 				2EAA5B7F24BF9E9A00937821 /* pl */,
+				6444A0FE24B8083F0063AB2C /* pt-BR */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -613,6 +618,7 @@
 				6CAD134E23624CC1009BD53F /* it */,
 				3CCA5F952442EFF800B4DB84 /* ja */,
 				2EAA5B7D24BF9E9A00937821 /* pl */,
+				6444A0FC24B8083F0063AB2C /* pt-BR */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -630,6 +636,7 @@
 				6CAD134F23624CC1009BD53F /* it */,
 				3CCA5F962442EFF800B4DB84 /* ja */,
 				2EAA5B7E24BF9E9A00937821 /* pl */,
+				6444A0FD24B8083F0063AB2C /* pt-BR */,
 			);
 			name = MainMenu.xib;
 			sourceTree = "<group>";

@@ -1,0 +1,128 @@
+/* Class = "NSButtonCell"; title = "Change Brightness/Volume for all screens"; ObjectID = "0Z7-PQ-Bl8"; */
+"0Z7-PQ-Bl8.title" = "Alterar Brilho/Volume para todas as telas";
+
+/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "2gr-xG-Byx"; */
+"2gr-xG-Byx.title" = "Text Cell";
+
+/* Class = "NSButtonCell"; title = "Reset Preferences"; ObjectID = "4Pj-3t-PJr"; */
+"4Pj-3t-PJr.title" = "Configuração Padrão";
+
+/* Class = "NSTextFieldCell"; title = "Advanced"; ObjectID = "5wk-Dy-0fG"; */
+"5wk-Dy-0fG.title" = "Avançado";
+
+/* Class = "NSTableColumn"; headerCell.title = "Enabled"; ObjectID = "8U8-ec-Zbv"; */
+"8U8-ec-Zbv.headerCell.title" = "Ativado";
+
+/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "afl-95-ZJl"; */
+"afl-95-ZJl.title" = "Text Cell";
+
+/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "as0-t3-Aub"; */
+"as0-t3-Aub.title" = "Text Cell";
+
+/* Class = "NSTableColumn"; headerCell.title = "Name"; ObjectID = "CHc-s5-4MN"; */
+"CHc-s5-4MN.headerCell.title" = "Nome";
+
+/* Class = "NSMenuItem"; title = "Custom"; ObjectID = "Cle-DD-vR7"; */
+"Cle-DD-vR7.title" = "Personalizado";
+
+/* Class = "NSTextFieldCell"; title = "Keys"; ObjectID = "Dcz-GG-1li"; */
+"Dcz-GG-1li.title" = "Teclas";
+
+/* Class = "NSTableColumn"; headerCell.title = "ID"; ObjectID = "dgp-q7-cBK"; */
+"dgp-q7-cBK.headerCell.title" = "ID";
+
+/* Class = "NSTableColumn"; headerCell.title = "Display Name"; ObjectID = "dNl-I0-hcg"; */
+"dNl-I0-hcg.headerCell.title" = "Nome do Monitor";
+
+/* Class = "NSTextFieldCell"; title = "General"; ObjectID = "ENU-js-huy"; */
+"ENU-js-huy.title" = "Geral";
+
+/* Class = "NSMenuItem"; title = "Minimal"; ObjectID = "Eq3-z9-yIo"; */
+"Eq3-z9-yIo.title" = "Mínimo";
+
+/* Class = "NSTextFieldCell"; title = "Display"; ObjectID = "ExD-7P-6XI"; */
+"ExD-7P-6XI.title" = "Monitor";
+
+/* Class = "NSButtonCell"; title = "Lower Contrast after Brightness"; ObjectID = "fhy-Er-0aI"; */
+"fhy-Er-0aI.title" = "Diminuir contraste após brilho";
+
+/* Class = "NSMenuItem"; title = "None"; ObjectID = "FoA-yh-Yx3"; */
+"FoA-yh-Yx3.title" = "Nenhum";
+
+/* Class = "NSTextFieldCell"; title = "Warning ⚠️\nChanging some of these setting may cause system freezes or unexpected behaviour. "; ObjectID = "frw-j2-tE1"; */
+"frw-j2-tE1.title" = "AVISO ⚠️\nAlterar algumas dessas configurações pode causar congelamentos do sistema ou comportamento inesperado. ";
+
+/* Class = "NSTableColumn"; headerCell.title = "Longer Delay"; ObjectID = "grO-Kr-l4d"; */
+"grO-Kr-l4d.headerCell.title" = "Mais Demorado";
+
+/* Class = "NSTableColumn"; headerCell.title = "Polling Mode"; ObjectID = "gxn-NH-Qhb"; */
+"gxn-NH-Qhb.headerCell.title" = "Modo Verificação";
+
+/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "H4a-c9-LcB"; */
+"H4a-c9-LcB.title" = "Text Cell";
+
+/* Class = "NSMenuItem"; title = "Brightness only"; ObjectID = "hjz-0c-rvK"; */
+"hjz-0c-rvK.title" = "Apenas Brilho";
+
+/* Class = "NSButtonCell"; title = "Start MonitorControl at Login"; ObjectID = "j72-NF-zsW"; */
+"j72-NF-zsW.title" = "Iniciar MonitorControl durante login";
+
+/* Class = "NSTableColumn"; headerCell.title = "ID"; ObjectID = "JKW-oY-bSb"; */
+"JKW-oY-bSb.headerCell.title" = "ID";
+
+/* Class = "NSButton"; ibShadowedToolTip = "More Info"; ObjectID = "kqn-gU-mZX"; */
+"kqn-gU-mZX.ibShadowedToolTip" = "Mais Informações";
+
+/* Class = "NSTableColumn"; headerCell.title = "Vendor"; ObjectID = "LRJ-fb-Z9E"; */
+"LRJ-fb-Z9E.headerCell.title" = "Fabricante";
+
+/* Class = "NSTextFieldCell"; title = "Version 0.0.0 (Build 0)"; ObjectID = "mBs-6m-13Q"; */
+"mBs-6m-13Q.title" = "Versão 0.0.0 (Build 0)";
+
+/* Class = "NSTableColumn"; headerCell.title = "Hide OSD"; ObjectID = "MPF-Mr-zVU"; */
+"MPF-Mr-zVU.headerCell.title" = "Ocultar OSD";
+
+/* Class = "NSMenuItem"; title = "Volume only"; ObjectID = "NLP-dU-Dam"; */
+"NLP-dU-Dam.title" = "Apenas Volume";
+
+/* Class = "NSTableColumn"; headerCell.title = "Model"; ObjectID = "Nvp-hI-w4x"; */
+"Nvp-hI-w4x.headerCell.title" = "Modelo";
+
+/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "PZ9-0Z-K6J"; */
+"PZ9-0Z-K6J.title" = "Text Cell";
+
+/* Class = "NSMenuItem"; title = "Normal"; ObjectID = "Riq-uM-bTs"; */
+"Riq-uM-bTs.title" = "Normal";
+
+/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "UBV-gO-AZz"; */
+"UBV-gO-AZz.title" = "Text Cell";
+
+/* Class = "NSTableColumn"; headerCell.title = "Friendly Name"; ObjectID = "uoI-1J-RdD"; */
+"uoI-1J-RdD.headerCell.title" = "Nome Amigável";
+
+/* Class = "NSTextFieldCell"; title = "Listen for"; ObjectID = "Vh8-06-U3K"; */
+"Vh8-06-U3K.title" = "Alterar";
+
+/* Class = "NSMenuItem"; title = "Heavy"; ObjectID = "vik-vN-bJe"; */
+"vik-vN-bJe.title" = "Agressivo";
+
+/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "vkG-RF-Yne"; */
+"vkG-RF-Yne.title" = "Text Cell";
+
+/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "VPD-MR-IXg"; */
+"VPD-MR-IXg.title" = "Text Cell";
+
+/* Class = "NSMenuItem"; title = "Both Brightness & Volume"; ObjectID = "Vr4-xb-B4o"; */
+"Vr4-xb-B4o.title" = "Ambos Brilho & Volume";
+
+/* Class = "NSMenuItem"; title = "None"; ObjectID = "X96-ny-lAP"; */
+"X96-ny-lAP.title" = "Nenhum";
+
+/* Class = "NSTableColumn"; headerCell.title = "DDC"; ObjectID = "xFw-if-3FU"; */
+"xFw-if-3FU.headerCell.title" = "DDC";
+
+/* Class = "NSButtonCell"; title = "Show a slider for contrast"; ObjectID = "xSI-8W-Xd0"; */
+"xSI-8W-Xd0.title" = "Mostrar uma barra deslizante para contraste";
+
+/* Class = "NSTableColumn"; headerCell.title = "Polling Count"; ObjectID = "ytT-up-Dhs"; */
+"ytT-up-Dhs.headerCell.title" = "Contagem de Verificação";
