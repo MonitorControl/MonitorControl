@@ -1,4 +1,4 @@
-<h1 align="center"> MonitorControl </h1>
+  <h1 align="center"> MonitorControl </h1>
 
 <!-- subtext -->
 <div align="center">
@@ -9,7 +9,7 @@ Control your external monitor brightness, contrast or volume directly from a men
 
 <!-- Language emoji -->
 <div align="center">
-    <p>Translations: :uk: :fr: :de: :it: :ru: :ukraine: :jp:</p>
+    <p>Translations: :uk: :fr: :de: :it: :ru: :ukraine: :jp: :poland: </p>
 </div>
 
 <br/>
