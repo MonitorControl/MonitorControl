@@ -27,7 +27,7 @@
 "hjz-0c-rvK.title" = "Helligkeit";
 
 /* Class = "NSButtonCell"; title = "Start MonitorControl at Login"; ObjectID = "j72-NF-zsW"; */
-"j72-NF-zsW.title" = "MonitorControl beim Login starten";
+"j72-NF-zsW.title" = "MonitorControl beim login starten";
 
 /* Class = "NSTableColumn"; headerCell.title = "Vendor"; ObjectID = "LRJ-fb-Z9E"; */
 "LRJ-fb-Z9E.headerCell.title" = "Hersteller";
