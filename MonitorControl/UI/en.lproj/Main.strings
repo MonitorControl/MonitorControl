@@ -21,13 +21,13 @@
 "ExD-7P-6XI.title" = "Display";
 
 /* Class = "NSButtonCell"; title = "Lower Contrast after Brightness"; ObjectID = "fhy-Er-0aI"; */
-"fhy-Er-0aI.title" = "Lower Contrast after Brightness";
+"fhy-Er-0aI.title" = "Lower contrast after brightness";
 
 /* Class = "NSMenuItem"; title = "Brightness only"; ObjectID = "hjz-0c-rvK"; */
 "hjz-0c-rvK.title" = "Brightness only";
 
 /* Class = "NSButtonCell"; title = "Start MonitorControl at Login"; ObjectID = "j72-NF-zsW"; */
-"j72-NF-zsW.title" = "Start MonitorControl at Login";
+"j72-NF-zsW.title" = "Start MonitorControl at login";
 
 /* Class = "NSTableColumn"; headerCell.title = "Vendor"; ObjectID = "LRJ-fb-Z9E"; */
 "LRJ-fb-Z9E.headerCell.title" = "Vendor";
