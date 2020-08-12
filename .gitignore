@@ -1,3 +1,13 @@
+### Carthage ###
 Carthage
 
-*.xcuserdatad
+### macOS ###
+.DS_Store
+
+### Xcode ###
+xcuserdata/
+*.xcodeproj/*
+!*.xcodeproj/project.pbxproj
+!*.xcodeproj/xcshareddata/
+!*.xcworkspace/contents.xcworkspacedata
+**/xcshareddata/WorkspaceSettings.xcsettings
