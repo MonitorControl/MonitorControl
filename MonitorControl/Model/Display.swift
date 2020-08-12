@@ -10,6 +10,12 @@ import DDC
 import Foundation
 import os.log
 
+private enum OSDImage: Int64 {
+  case brightness = 1
+  case audioSpeaker = 3
+  case audioSpeakerMuted = 4
+}
+
 class Display {
   internal let identifier: CGDirectDisplayID
   internal let name: String
@@ -48,23 +54,21 @@ class Display {
       return
     }
 
-    var osdImage: Int64!
+    var osdImage: OSDImage
     switch command {
-    case .brightness:
-      osdImage = 1 // Brightness Image
     case .audioSpeakerVolume:
-      osdImage = 3 // Speaker image
+      osdImage = value > 0 ? .audioSpeaker : .audioSpeakerMuted
     case .audioMuteScreenBlank:
-      osdImage = 4 // Mute image
+      osdImage = .audioSpeakerMuted
     default:
-      osdImage = 1
+      osdImage = .brightness
     }
 
     if roundChiclet {
       let osdChiclet = OSDUtils.chiclet(fromValue: Float(value), maxValue: Float(maxValue))
       let filledChiclets = round(osdChiclet)
 
-      manager.showImage(osdImage,
+      manager.showImage(osdImage.rawValue,
                         onDisplayID: self.identifier,
                         priority: 0x1F4,
                         msecUntilFade: 1000,
@@ -72,7 +76,7 @@ class Display {
                         totalChiclets: UInt32(16),
                         locked: false)
     } else {
-      manager.showImage(osdImage,
+      manager.showImage(osdImage.rawValue,
                         onDisplayID: self.identifier,
                         priority: 0x1F4,
                         msecUntilFade: 1000,
