@@ -64,25 +64,25 @@ class Display {
       osdImage = .brightness
     }
 
+    let filledChiclets: Int
+    let totalChiclets: Int
+
     if roundChiclet {
       let osdChiclet = OSDUtils.chiclet(fromValue: Float(value), maxValue: Float(maxValue))
-      let filledChiclets = round(osdChiclet)
-
-      manager.showImage(osdImage.rawValue,
-                        onDisplayID: self.identifier,
-                        priority: 0x1F4,
-                        msecUntilFade: 1000,
-                        filledChiclets: UInt32(filledChiclets),
-                        totalChiclets: UInt32(16),
-                        locked: false)
+      
+      filledChiclets = Int(round(osdChiclet))
+      totalChiclets = 16
     } else {
-      manager.showImage(osdImage.rawValue,
-                        onDisplayID: self.identifier,
-                        priority: 0x1F4,
-                        msecUntilFade: 1000,
-                        filledChiclets: UInt32(value),
-                        totalChiclets: UInt32(maxValue),
-                        locked: false)
+      filledChiclets = value
+      totalChiclets = maxValue
     }
+
+    manager.showImage(osdImage.rawValue,
+                      onDisplayID: self.identifier,
+                      priority: 0x1F4,
+                      msecUntilFade: 1000,
+                      filledChiclets: UInt32(filledChiclets),
+                      totalChiclets: UInt32(totalChiclets),
+                      locked: false)
   }
 }
