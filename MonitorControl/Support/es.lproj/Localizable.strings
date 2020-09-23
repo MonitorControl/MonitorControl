@@ -1,0 +1,50 @@
+
+/* Sown in menu */
+"Brightness" = "Brillo";
+
+/* Build */
+"Build" = "Build";
+
+/* Shown in menu */
+"Contrast" = "Contraste";
+
+/* Shown in menu */
+"Default" = "Predefinido";
+
+/* No comment provided by engineer. */
+"Display" = "Monitor";
+
+/* Shown in the main prefs window */
+"General" = "General";
+
+/* Shown in the main prefs window */
+"Keys" = "Botones";
+
+/* Shown in menu */
+"No supported display found" = "No se ha encontrado un monitor soportado";
+
+/* Shown in the alert dialog */
+"Ok" = "Ok";
+
+/* Shown in Preferences window */
+"Preferences" = "Preferencias";
+
+/* Shown in menu */
+"Set as default" = "Definir como predeterminado";
+
+/* Shown in the alert dialog */
+"Shortcuts not available" = "Atajo no disponible";
+
+/* Unknown display name
+ Unknown model
+ Unknown vendor */
+"Unknown" = "Desconocido";
+
+/* Version */
+"Version" = "Version";
+
+/* Shown in menu */
+"Volume" = "Volumen";
+
+/* Shown in the alert dialog */
+"You need to enable MonitorControl in System Preferences > Security and Privacy > Accessibility for the keyboard shortcuts to work" = "Necesita habilitar MonitorControl en Preferencias de Sistema > Seguridad y Privacidad > Accesibilidad para que funcionen los atajos del teclado";
