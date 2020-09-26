@@ -1,0 +1,26 @@
+name: CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: macos-latest
+
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+
+      - name: carthage bootstrap
+        run: carthage bootstrap --platform macOS
+
+      - name: xcodebuild
+        uses: sersoft-gmbh/xcodebuild-action@v1
+        with:
+          project: MonitorControl.xcodeproj
+          scheme: MonitorControl
+          destination: platform=macOS
+          action: build
