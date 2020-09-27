@@ -17,6 +17,9 @@ jobs:
       - name: carthage bootstrap
         run: carthage bootstrap --platform macOS
 
+      - name: brew bundle
+        run: brew bundle
+
       - name: xcodebuild
         uses: sersoft-gmbh/xcodebuild-action@v1
         with:
