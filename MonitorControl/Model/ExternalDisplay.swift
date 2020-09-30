@@ -7,6 +7,9 @@ class ExternalDisplay: Display {
   var brightnessSliderHandler: SliderHandler?
   var volumeSliderHandler: SliderHandler?
   var contrastSliderHandler: SliderHandler?
+  var redGainSliderHandler: SliderHandler?
+  var greenGainSliderHandler: SliderHandler?
+  var blueGainSliderHandler: SliderHandler?
   var ddc: DDC?
 
   private let prefs = UserDefaults.standard

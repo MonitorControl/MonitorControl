@@ -149,6 +149,9 @@ class Utils: NSObject {
 
     /// Show contrast sliders
     case showContrast
+    
+    /// Show color adjustment sliders
+    case showColorSliders
 
     /// Lower contrast after brightness
     case lowerContrast

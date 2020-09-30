@@ -55,6 +55,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       prefs.set(true, forKey: Utils.PrefKeys.appAlreadyLaunched.rawValue)
 
       prefs.set(false, forKey: Utils.PrefKeys.showContrast.rawValue)
+      prefs.set(false, forKey: Utils.PrefKeys.showColorSliders.rawValue)
       prefs.set(false, forKey: Utils.PrefKeys.lowerContrast.rawValue)
     }
   }
@@ -114,6 +115,21 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     let monitorSubMenu: NSMenu = asSubMenu ? NSMenu() : self.statusMenu
 
     self.statusMenu.insertItem(NSMenuItem.separator(), at: 0)
+    
+    if prefs.bool(forKey: Utils.PrefKeys.showColorSliders.rawValue) {
+      display.blueGainSliderHandler = Utils.addSliderMenuItem(toMenu: monitorSubMenu,
+                                                         forDisplay: display,
+                                                         command: .videoGainBlue,
+                                                         title: NSLocalizedString("Blue Gain", comment: "Shown in menu"))
+      display.greenGainSliderHandler = Utils.addSliderMenuItem(toMenu: monitorSubMenu,
+                                                         forDisplay: display,
+                                                         command: .videoGainGreen,
+                                                         title: NSLocalizedString("Green Gain", comment: "Shown in menu"))
+      display.redGainSliderHandler = Utils.addSliderMenuItem(toMenu: monitorSubMenu,
+                                                         forDisplay: display,
+                                                         command: .videoGainRed,
+                                                         title: NSLocalizedString("Red Gain", comment: "Shown in menu"))
+    }
 
     let volumeSliderHandler = Utils.addSliderMenuItem(toMenu: monitorSubMenu,
                                                       forDisplay: display,
@@ -170,6 +186,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     // subscribe KeyTap event listener
     NotificationCenter.default.addObserver(self, selector: #selector(handleListenForChanged), name: .listenFor, object: nil)
     NotificationCenter.default.addObserver(self, selector: #selector(handleShowContrastChanged), name: .showContrast, object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(handleShowContrastChanged), name: .showColorSliders, object: nil)
     NotificationCenter.default.addObserver(self, selector: #selector(handleFriendlyNameChanged), name: .friendlyName, object: nil)
     NotificationCenter.default.addObserver(self, selector: #selector(handlePreferenceReset), name: .preferenceReset, object: nil)
 

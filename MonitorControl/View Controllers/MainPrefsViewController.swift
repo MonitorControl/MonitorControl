@@ -12,6 +12,7 @@ class MainPrefsViewController: NSViewController, MASPreferencesViewController {
   @IBOutlet var versionLabel: NSTextField!
   @IBOutlet var startAtLogin: NSButton!
   @IBOutlet var showContrastSlider: NSButton!
+  @IBOutlet var showColorSliders: NSButton!
   @IBOutlet var lowerContrast: NSButton!
 
   override func viewDidLoad() {
@@ -25,6 +26,7 @@ class MainPrefsViewController: NSViewController, MASPreferencesViewController {
     let startAtLogin = (SMCopyAllJobDictionaries(kSMDomainUserLaunchd).takeRetainedValue() as? [[String: AnyObject]])?.first { $0["Label"] as? String == "\(Bundle.main.bundleIdentifier!)Helper" }?["OnDemand"] as? Bool ?? false
     self.startAtLogin.state = startAtLogin ? .on : .off
     self.showContrastSlider.state = self.prefs.bool(forKey: Utils.PrefKeys.showContrast.rawValue) ? .on : .off
+    self.showColorSliders.state = self.prefs.bool(forKey: Utils.PrefKeys.showColorSliders.rawValue) ? .on : .off
     self.lowerContrast.state = self.prefs.bool(forKey: Utils.PrefKeys.lowerContrast.rawValue) ? .on : .off
   }
 
@@ -53,7 +55,26 @@ class MainPrefsViewController: NSViewController, MASPreferencesViewController {
 
     NotificationCenter.default.post(name: Notification.Name(Utils.PrefKeys.showContrast.rawValue), object: nil)
   }
-
+  
+  @IBAction func showColorSlidersClicked(_ sender: NSButton) {
+    switch sender.state {
+    case .on:
+      self.prefs.set(true, forKey:
+          Utils.PrefKeys.showColorSliders.rawValue)
+    case .off:
+      self.prefs.set(false, forKey:
+          Utils.PrefKeys.showColorSliders.rawValue)
+    default: break
+    }
+    
+    #if DEBUG
+    os_log("Toggle show color sliders state: %{public}@", type: .info, sender.state == .on ? "on" : "off")
+    #endif
+    
+    NotificationCenter.default.post(name: Notification.Name(Utils.PrefKeys.showColorSliders.rawValue),
+        object:nil)
+  }
+  
   @IBAction func lowerContrastClicked(_ sender: NSButton) {
     switch sender.state {
     case .on:
