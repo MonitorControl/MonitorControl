@@ -9,7 +9,7 @@ Control your external monitor brightness, contrast or volume directly from a men
 
 <!-- Language emoji -->
 <div align="center">
-    <p>Translations: :uk: :fr: :de: :it: :ru: :ukraine: :jp:</p>
+    <p>Translations: :uk: :fr: :de: :it: :ru: :ukraine: :jp: <img src="https://raw.githubusercontent.com/rogerxaic/MonitorControl/ca-flag/images/ca-flag/21px.png" alt="Catalan flag"></p>
 </div>
 
 <br/>

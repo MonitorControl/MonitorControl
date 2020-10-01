@@ -1,5 +1,5 @@
 
-/* Sown in menu */
+/* Shown in menu */
 "Brightness" = "Яскравість";
 
 /* Build */
@@ -11,7 +11,7 @@
 /* Shown in menu */
 "Default" = "Стандартне";
 
-/* No comment provided by engineer. */
+/* Shown in the main prefs window */
 "Display" = "Дісплей";
 
 /* Shown in the main prefs window */

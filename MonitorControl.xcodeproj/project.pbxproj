@@ -138,6 +138,9 @@
 		B0C4810623357CE500053F91 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		B0C4810723357CE500053F91 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
 		B0C4810823357CE500053F91 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/MainMenu.strings; sourceTree = "<group>"; };
+		DBB2978525263C24003A7FC8 /* ca-AD */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "ca-AD"; path = "ca-AD.lproj/Main.strings"; sourceTree = "<group>"; };
+		DBB2978625263C24003A7FC8 /* ca-AD */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "ca-AD"; path = "ca-AD.lproj/MainMenu.strings"; sourceTree = "<group>"; };
+		DBB2978725263C24003A7FC8 /* ca-AD */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "ca-AD"; path = "ca-AD.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		F01B0681228221B6008E64DB /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F01B0682228221B6008E64DB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F01B0683228221B6008E64DB /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
@@ -412,6 +415,7 @@
 				ru,
 				it,
 				ja,
+				"ca-AD",
 			);
 			mainGroup = 56754EA21D9A4016007BCDC5;
 			productRefGroup = 56754EAC1D9A4016007BCDC5 /* Products */;
@@ -572,6 +576,7 @@
 				B0C4810623357CE500053F91 /* ru */,
 				6CAD135023624CC1009BD53F /* it */,
 				3CCA5F972442EFF800B4DB84 /* ja */,
+				DBB2978725263C24003A7FC8 /* ca-AD */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -588,6 +593,7 @@
 				B0C4810723357CE500053F91 /* ru */,
 				6CAD134E23624CC1009BD53F /* it */,
 				3CCA5F952442EFF800B4DB84 /* ja */,
+				DBB2978525263C24003A7FC8 /* ca-AD */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -604,6 +610,7 @@
 				B0C4810823357CE500053F91 /* ru */,
 				6CAD134F23624CC1009BD53F /* it */,
 				3CCA5F962442EFF800B4DB84 /* ja */,
+				DBB2978625263C24003A7FC8 /* ca-AD */,
 			);
 			name = MainMenu.xib;
 			sourceTree = "<group>";

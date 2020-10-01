@@ -1,0 +1,53 @@
+
+/* Shown in menu */
+"Brightness" = "Brillantor";
+
+/* Build */
+"Build" = "Build";
+
+/* Shown in menu */
+"Contrast" = "Contrast";
+
+/* Shown in menu */
+"Default" = "Per defecte";
+
+/* Shown in the main prefs window */
+"Display" = "Pantalla";
+
+/* Shown in the main prefs window */
+"General" = "General";
+
+/* Shown in the main prefs window */
+"Keys" = "Tecles";
+
+/* Shown in the main prefs window  */
+"Advanced" = "Avançat";
+
+/* Shown in menu */
+"No supported display found" = "No s'ha trobat cap pantalla compatible";
+
+/* Shown in the alert dialog */
+"Ok" = "D'acord";
+
+/* Shown in Preferences window */
+"Preferences" = "Preferències";
+
+/* Shown in menu */
+"Set as default" = "Establir com a pantalla per defecte";
+
+/* Shown in the alert dialog */
+"Shortcuts not available" = "Dreceres no disponibles";
+
+/* Unknown display name
+ Unknown model
+ Unknown vendor */
+"Unknown" = "Desconegut/da";
+
+/* Version */
+"Version" = "Versió";
+
+/* Shown in menu */
+"Volume" = "Volum";
+
+/* Shown in the alert dialog */
+"You need to enable MonitorControl in System Preferences > Security and Privacy > Accessibility for the keyboard shortcuts to work" = "Cal activar MonitorControl a Preferències del sistema > Seguretat i Privacitat > Accessibilitat perquè les dreceres amb el teclat funcionin";
