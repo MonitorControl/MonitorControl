@@ -96,7 +96,7 @@ class Utils: NSObject {
 
   /// Acquire Privileges (Necessary to listen to keyboard event globally)
   static func acquirePrivileges() {
-    if !self.readPrivileges(prompt: true) {
+    if ProcessInfo.processInfo.environment["skip_read_priviledges"] == nil && !self.readPrivileges(prompt: true) {
       let alert = NSAlert()
       alert.addButton(withTitle: NSLocalizedString("Ok", comment: "Shown in the alert dialog"))
       alert.messageText = NSLocalizedString("Shortcuts not available", comment: "Shown in the alert dialog")
