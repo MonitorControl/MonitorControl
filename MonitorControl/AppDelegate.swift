@@ -26,6 +26,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
   func applicationDidFinishLaunching(_: Notification) {
     app = self
+    test()
     self.setupViewControllers()
     self.subscribeEventListeners()
     self.setDefaultPrefs()
@@ -35,6 +36,16 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     self.checkPermissions()
     CGDisplayRegisterReconfigurationCallback({ _, _, _ in app.updateDisplays() }, nil)
     self.updateDisplays()
+  }
+  
+  func test() {
+    var activeDisplays = [CGDirectDisplayID](repeating: 0, count: Int(8))
+    var displayCount: UInt32 = 0
+
+    CGGetActiveDisplayList(8, &activeDisplays, &displayCount)
+    
+    let brightness = CoreDisplay_Display_GetLinearBrightness(activeDisplays.first!)
+    print("----\(brightness)")
   }
 
   @IBAction func quitClicked(_: AnyObject) {

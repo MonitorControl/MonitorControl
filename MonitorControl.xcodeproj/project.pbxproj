@@ -24,6 +24,8 @@
 		28D1DE13227FD006004CB494 /* MediaKeyTap.framework.dSYM in [Carthage] Copy Framework Debug Symbols */ = {isa = PBXBuildFile; fileRef = 28D1DE0F227FD006004CB494 /* MediaKeyTap.framework.dSYM */; };
 		28D1DE14227FD006004CB494 /* AMCoreAudio.framework.dSYM in [Carthage] Copy Framework Debug Symbols */ = {isa = PBXBuildFile; fileRef = 28D1DE10227FD006004CB494 /* AMCoreAudio.framework.dSYM */; };
 		28D1DE15227FD006004CB494 /* DDC.framework.dSYM in [Carthage] Copy Framework Debug Symbols */ = {isa = PBXBuildFile; fileRef = 28D1DE11227FD006004CB494 /* DDC.framework.dSYM */; };
+		424E828C2527F3F900945FAB /* CoreDisplay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 424E828B2527F3F900945FAB /* CoreDisplay.framework */; };
+		424E828D2527F3F900945FAB /* CoreDisplay.framework in [Carthage] Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 424E828B2527F3F900945FAB /* CoreDisplay.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		56754EAF1D9A4016007BCDC5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56754EAE1D9A4016007BCDC5 /* AppDelegate.swift */; };
 		56754EB11D9A4016007BCDC5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 56754EB01D9A4016007BCDC5 /* Assets.xcassets */; };
 		6C0CCB26228F4F720037D2C5 /* AdvancedPrefsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C0CCB25228F4F720037D2C5 /* AdvancedPrefsViewController.swift */; };
@@ -61,6 +63,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				424E828D2527F3F900945FAB /* CoreDisplay.framework in [Carthage] Embed Frameworks */,
 				28D1DDE8227FB7D0004CB494 /* AMCoreAudio.framework in [Carthage] Embed Frameworks */,
 				28D1DDEF227FB944004CB494 /* DDC.framework in [Carthage] Embed Frameworks */,
 				28D1DDEA227FB7D0004CB494 /* MASPreferences.framework in [Carthage] Embed Frameworks */,
@@ -114,6 +117,7 @@
 		3CCA5F952442EFF800B4DB84 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Main.strings; sourceTree = "<group>"; };
 		3CCA5F962442EFF800B4DB84 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/MainMenu.strings; sourceTree = "<group>"; };
 		3CCA5F972442EFF800B4DB84 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
+		424E828B2527F3F900945FAB /* CoreDisplay.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreDisplay.framework; path = ../../../../System/Library/Frameworks/CoreDisplay.framework; sourceTree = "<group>"; };
 		47A9F59F22ACAFBE00F649BB /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		47A9F5A022ACAFBE00F649BB /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/MainMenu.strings"; sourceTree = "<group>"; };
 		47A9F5A122ACAFBE00F649BB /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
@@ -172,6 +176,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				424E828C2527F3F900945FAB /* CoreDisplay.framework in Frameworks */,
 				28D1DDE7227FB7D0004CB494 /* AMCoreAudio.framework in Frameworks */,
 				28D1DDEE227FB944004CB494 /* DDC.framework in Frameworks */,
 				28D1DDE9227FB7D0004CB494 /* MASPreferences.framework in Frameworks */,
@@ -193,6 +198,7 @@
 		28D1DDD1227FB759004CB494 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				424E828B2527F3F900945FAB /* CoreDisplay.framework */,
 				28D1DDE3227FB7D0004CB494 /* AMCoreAudio.framework */,
 				28D1DE10227FD006004CB494 /* AMCoreAudio.framework.dSYM */,
 				28D1DDED227FB944004CB494 /* DDC.framework */,

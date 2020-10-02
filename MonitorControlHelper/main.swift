@@ -5,8 +5,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     let mainBundleID = Bundle.main.bundleIdentifier!.replacingOccurrences(of: "Helper", with: "")
 
     let bundlePath = Bundle.main.bundlePath as NSString
-
-    guard NSRunningApplication.runningApplications(withBundleIdentifier: mainBundleID).isEmpty else {
+    
+   guard NSRunningApplication.runningApplications(withBundleIdentifier: mainBundleID).isEmpty else {
       return NSApp.terminate(self)
     }
 
