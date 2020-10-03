@@ -56,7 +56,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
             prefs.set(false, forKey: Utils.PrefKeys.showContrast.rawValue)
             prefs.set(false, forKey: Utils.PrefKeys.lowerContrast.rawValue)
-			prefs.set(true, forKey: Utils.PrefKeys.syncBrightness.rawValue)
+            prefs.set(true, forKey: Utils.PrefKeys.syncBrightness.rawValue)
         }
     }
 
@@ -110,7 +110,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             }
         }
 
-        DisplayManager.shared.startSync()
+        if UserDefaults.standard.bool(forKey: Utils.PrefKeys.syncBrightness.rawValue) {
+            DisplayManager.shared.startSync()
+		} else {
+			DisplayManager.shared.stopSync()
+		}
     }
 
     private func addDisplayToMenu(display: ExternalDisplay, asSubMenu: Bool) {
@@ -174,6 +178,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         NotificationCenter.default.addObserver(self, selector: #selector(handleListenForChanged), name: .listenFor, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(handleShowContrastChanged), name: .showContrast, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(handleFriendlyNameChanged), name: .friendlyName, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleSyncBrightnessChanged), name: .syncBrightness, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(handlePreferenceReset), name: .preferenceReset, object: nil)
 
         // subscribe Audio output detector (AMCoreAudio)
@@ -301,6 +306,10 @@ extension AppDelegate: MediaKeyTapDelegate {
     }
 
     @objc func handleFriendlyNameChanged() {
+        updateDisplays()
+    }
+
+    @objc func handleSyncBrightnessChanged() {
         updateDisplays()
     }
 

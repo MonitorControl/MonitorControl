@@ -53,7 +53,7 @@ class MainPrefsViewController: NSViewController, MASPreferencesViewController {
             os_log("Toggle show contrast slider state: %{public}@", type: .info, sender.state == .on ? "on" : "off")
         #endif
 
-        NotificationCenter.default.post(name: Notification.Name(Utils.PrefKeys.showContrast.rawValue), object: nil)
+        NotificationCenter.default.post(name: Notification.Name(Utils.PrefKeys.showContrast.rawValue), object: nil)		
     }
 
     @IBAction func syncBrightnessClicked(_ sender: NSButton) {

@@ -7,4 +7,5 @@ extension NSNotification.Name {
   static let friendlyName = NSNotification.Name(rawValue: Utils.PrefKeys.friendlyName.rawValue)
   static let preferenceReset = NSNotification.Name(rawValue: Utils.PrefKeys.preferenceReset.rawValue)
   static let displayListUpdate = NSNotification.Name(rawValue: Utils.PrefKeys.displayListUpdate.rawValue)
+	static let syncBrightness = NSNotification.Name(rawValue: Utils.PrefKeys.syncBrightness.rawValue)
 }

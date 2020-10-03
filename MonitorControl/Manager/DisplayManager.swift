@@ -65,6 +65,10 @@ extension DisplayManager {
         }
     }
 
+    func stopSync() {
+        timer.invalidate()
+    }
+
     @objc func sync() {
         let brightness = (DisplayManager.shared.getBuiltInDisplay() as! InternalDisplay).getBrightness()
         var value = Int(brightness * 100)
@@ -75,7 +79,7 @@ extension DisplayManager {
                 _ = ddcDisplay.ddc!.write(command: DDC.Command.brightness, value: UInt16(value), errorRecoveryWaitTime: UInt32(3))
                 ddcDisplay.saveValue(value, for: .brightness)
             }
-			ddcDisplay.brightnessSliderHandler?.slider?.intValue = Int32(value)
+            ddcDisplay.brightnessSliderHandler?.slider?.intValue = Int32(value)
         }
     }
 }
