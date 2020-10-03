@@ -24,6 +24,8 @@
 		28D1DE13227FD006004CB494 /* MediaKeyTap.framework.dSYM in [Carthage] Copy Framework Debug Symbols */ = {isa = PBXBuildFile; fileRef = 28D1DE0F227FD006004CB494 /* MediaKeyTap.framework.dSYM */; };
 		28D1DE14227FD006004CB494 /* AMCoreAudio.framework.dSYM in [Carthage] Copy Framework Debug Symbols */ = {isa = PBXBuildFile; fileRef = 28D1DE10227FD006004CB494 /* AMCoreAudio.framework.dSYM */; };
 		28D1DE15227FD006004CB494 /* DDC.framework.dSYM in [Carthage] Copy Framework Debug Symbols */ = {isa = PBXBuildFile; fileRef = 28D1DE11227FD006004CB494 /* DDC.framework.dSYM */; };
+		420FAFDB2528764600204D38 /* DDC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 420FAFD92528764600204D38 /* DDC.swift */; };
+		420FAFDC2528764600204D38 /* EDID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 420FAFDA2528764600204D38 /* EDID.swift */; };
 		424E828C2527F3F900945FAB /* CoreDisplay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 424E828B2527F3F900945FAB /* CoreDisplay.framework */; };
 		424E828D2527F3F900945FAB /* CoreDisplay.framework in [Carthage] Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 424E828B2527F3F900945FAB /* CoreDisplay.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		56754EAF1D9A4016007BCDC5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56754EAE1D9A4016007BCDC5 /* AppDelegate.swift */; };
@@ -117,6 +119,8 @@
 		3CCA5F952442EFF800B4DB84 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Main.strings; sourceTree = "<group>"; };
 		3CCA5F962442EFF800B4DB84 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/MainMenu.strings; sourceTree = "<group>"; };
 		3CCA5F972442EFF800B4DB84 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
+		420FAFD92528764600204D38 /* DDC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DDC.swift; sourceTree = "<group>"; };
+		420FAFDA2528764600204D38 /* EDID.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EDID.swift; sourceTree = "<group>"; };
 		424E828B2527F3F900945FAB /* CoreDisplay.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreDisplay.framework; path = ../../../../System/Library/Frameworks/CoreDisplay.framework; sourceTree = "<group>"; };
 		47A9F59F22ACAFBE00F649BB /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		47A9F5A022ACAFBE00F649BB /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/MainMenu.strings"; sourceTree = "<group>"; };
@@ -247,6 +251,8 @@
 		56754EAD1D9A4016007BCDC5 /* MonitorControl */ = {
 			isa = PBXGroup;
 			children = (
+				420FAFD92528764600204D38 /* DDC.swift */,
+				420FAFDA2528764600204D38 /* EDID.swift */,
 				6C6C34F423DB25BF00C0E9CB /* Model */,
 				F01B0686228221B6008E64DB /* Info.plist */,
 				6C85EFD622C74B0E00227EA1 /* Manager */,
@@ -343,8 +349,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 56754EB81D9A4016007BCDC5 /* Build configuration list for PBXNativeTarget "MonitorControl" */;
 			buildPhases = (
-				28D1DE0C227FCFAF004CB494 /* [Format] Run SwiftFormat */,
-				F03A8DF01FFB9D4C0034DC27 /* [Lint] Run SwiftLint */,
 				56754EA71D9A4016007BCDC5 /* Sources */,
 				56754EA81D9A4016007BCDC5 /* Frameworks */,
 				56754EA91D9A4016007BCDC5 /* Resources */,
@@ -453,24 +457,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		28D1DE0C227FCFAF004CB494 /* [Format] Run SwiftFormat */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "[Format] Run SwiftFormat";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if which swiftformat >/dev/null; then\n  swiftformat .\nelse\n  echo \"warning: SwiftFormat not installed, download from https://github.com/nicklockwood/SwiftFormat\" >&2\nfi\n";
-		};
 		28F6A5802283515F00A4ADCD /* Increase Build Number */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -507,20 +493,6 @@
 			shellPath = "/bin/bash -euo pipefail";
 			shellScript = "version_number=\"$(/usr/libexec/PlistBuddy -c \"Print CFBundleShortVersionString\" \"${INFOPLIST_FILE/Helper/}\")\"\n\n/usr/libexec/PlistBuddy -c \"Set :CFBundleShortVersionString ${version_number}\" \"${INFOPLIST_FILE/Helper/}\"\n/usr/libexec/PlistBuddy -c \"Set :CFBundleShortVersionString ${version_number}\" \"${INFOPLIST_FILE}\"\n";
 		};
-		F03A8DF01FFB9D4C0034DC27 /* [Lint] Run SwiftLint */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[Lint] Run SwiftLint";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\" >&2\nfi\n";
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -530,7 +502,9 @@
 			files = (
 				56754EAF1D9A4016007BCDC5 /* AppDelegate.swift in Sources */,
 				6C85EFE122CC00AD00227EA1 /* NSNotification+Extension.swift in Sources */,
+				420FAFDC2528764600204D38 /* EDID.swift in Sources */,
 				6C85EFDF22CBB54100227EA1 /* PollingCountCellView.swift in Sources */,
+				420FAFDB2528764600204D38 /* DDC.swift in Sources */,
 				6C0CCB26228F4F720037D2C5 /* AdvancedPrefsViewController.swift in Sources */,
 				F01B069E228221B7008E64DB /* ButtonCellView.swift in Sources */,
 				6C2EA1CD228F644B00060E3F /* OnlyIntegerValueFormatter.swift in Sources */,

@@ -1,56 +1,79 @@
 import Cocoa
+import DDC
 
 class DisplayManager {
-  public static let shared = DisplayManager()
+    public static let shared = DisplayManager()
+    var timer = Timer()
 
-  private var displays: [Display] {
-    didSet {
-      NotificationCenter.default.post(name: Notification.Name(Utils.PrefKeys.displayListUpdate.rawValue), object: nil)
+    private var displays: [Display] {
+        didSet {
+            NotificationCenter.default.post(name: Notification.Name(Utils.PrefKeys.displayListUpdate.rawValue), object: nil)
+        }
     }
-  }
 
-  init() {
-    self.displays = []
-  }
-
-  func updateDisplays(displays: [Display]) {
-    self.displays = displays
-  }
-
-  func getAllDisplays() -> [Display] {
-    return self.displays
-  }
-
-  func getDdcCapableDisplays() -> [ExternalDisplay] {
-    return self.displays.compactMap { (display) -> ExternalDisplay? in
-      if let externalDisplay = display as? ExternalDisplay, externalDisplay.ddc != nil {
-        return externalDisplay
-      } else { return nil }
+    init() {
+        displays = []
     }
-  }
 
-  func getBuiltInDisplay() -> Display? {
-    return self.displays.first { $0 is InternalDisplay }
-  }
-
-  func getCurrentDisplay() -> Display? {
-    guard let mainDisplayID = NSScreen.main?.displayID else {
-      return nil
+    func updateDisplays(displays: [Display]) {
+        self.displays = displays
     }
-    return self.displays.first { $0.identifier == mainDisplayID }
-  }
 
-  func addDisplay(display: Display) {
-    self.displays.append(display)
-  }
-
-  func updateDisplay(display updatedDisplay: Display) {
-    if let indexToUpdate = self.displays.firstIndex(of: updatedDisplay) {
-      self.displays[indexToUpdate] = updatedDisplay
+    func getAllDisplays() -> [Display] {
+        return displays
     }
-  }
 
-  func clearDisplays() {
-    self.displays = []
-  }
+    func getDdcCapableDisplays() -> [ExternalDisplay] {
+        return displays.compactMap { (display) -> ExternalDisplay? in
+            if let externalDisplay = display as? ExternalDisplay, externalDisplay.ddc != nil {
+                return externalDisplay
+            } else { return nil }
+        }
+    }
+
+    func getBuiltInDisplay() -> Display? {
+        return displays.first { $0 is InternalDisplay }
+    }
+
+    func getCurrentDisplay() -> Display? {
+        guard let mainDisplayID = NSScreen.main?.displayID else {
+            return nil
+        }
+        return displays.first { $0.identifier == mainDisplayID }
+    }
+
+    func addDisplay(display: Display) {
+        displays.append(display)
+    }
+
+    func updateDisplay(display updatedDisplay: Display) {
+        if let indexToUpdate = displays.firstIndex(of: updatedDisplay) {
+            displays[indexToUpdate] = updatedDisplay
+        }
+    }
+
+    func clearDisplays() {
+        displays = []
+    }
+}
+
+extension DisplayManager {
+    func startSync() {
+        timer.invalidate()
+        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] _ in
+            self?.sync()
+        }
+    }
+
+    @objc func sync() {
+        // TODO: If value doesn't varies much from external to internal display, don't change brightness.
+        let brightness = (DisplayManager.shared.getBuiltInDisplay() as! InternalDisplay).getBrightness()
+        for ddcDisplay in DisplayManager.shared.getDdcCapableDisplays() {
+            var value = Int(brightness * 100)
+            value = max(20, value)
+            print("sync", value, ddcDisplay.modelNumber)
+            _ = ddcDisplay.ddc!.write(command: DDC.Command.brightness, value: UInt16(value), errorRecoveryWaitTime: UInt32(3))
+            print("sync end")
+        }
+    }
 }
