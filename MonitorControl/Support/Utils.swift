@@ -164,6 +164,8 @@ class Utils: NSObject {
 
     /// Used for notification when displays are updated in DisplayManager
     case displayListUpdate
+	
+	case syncBrightness
   }
 
   /// Keys for the value of listenFor option
