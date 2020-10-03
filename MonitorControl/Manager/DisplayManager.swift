@@ -66,16 +66,16 @@ extension DisplayManager {
     }
 
     @objc func sync() {
-        // TODO: If value doesn't varies much from external to internal display, don't change brightness.
         let brightness = (DisplayManager.shared.getBuiltInDisplay() as! InternalDisplay).getBrightness()
+        var value = Int(brightness * 100)
         for ddcDisplay in DisplayManager.shared.getDdcCapableDisplays() {
-            var value = Int(brightness * 100)
             value = max(20, value)
             if abs(ddcDisplay.getValue(for: .brightness) - value) > 5 {
                 print("write", value)
                 _ = ddcDisplay.ddc!.write(command: DDC.Command.brightness, value: UInt16(value), errorRecoveryWaitTime: UInt32(3))
                 ddcDisplay.saveValue(value, for: .brightness)
             }
+			ddcDisplay.brightnessSliderHandler?.slider?.intValue = Int32(value)
         }
     }
 }
