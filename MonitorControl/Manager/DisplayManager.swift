@@ -71,9 +71,11 @@ extension DisplayManager {
         for ddcDisplay in DisplayManager.shared.getDdcCapableDisplays() {
             var value = Int(brightness * 100)
             value = max(20, value)
-            print("sync", value, ddcDisplay.modelNumber)
-            _ = ddcDisplay.ddc!.write(command: DDC.Command.brightness, value: UInt16(value), errorRecoveryWaitTime: UInt32(3))
-            print("sync end")
+            if abs(ddcDisplay.getValue(for: .brightness) - value) > 5 {
+                print("write")
+                _ = ddcDisplay.ddc!.write(command: DDC.Command.brightness, value: UInt16(value), errorRecoveryWaitTime: UInt32(3))
+                ddcDisplay.saveValue(value, for: .brightness)
+            }
         }
     }
 }
