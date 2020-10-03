@@ -74,7 +74,7 @@ extension DisplayManager {
             if abs(ddcDisplay.getValue(for: .brightness) - value) > 5 {
                 print("write")
                 _ = ddcDisplay.ddc!.write(command: DDC.Command.brightness, value: UInt16(value), errorRecoveryWaitTime: UInt32(3))
-                ddcDisplay.saveValue(value, for: .brightness)
+                ddcDisplay.saveValue(value, for: .brightness)
             }
         }
     }
