@@ -389,11 +389,11 @@
             <objects>
                 <viewController storyboardIdentifier="MainPrefsVC" id="BGD-tY-Myx" customClass="MainPrefsViewController" customModule="MonitorControl" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="COE-Oc-gZs">
-                        <rect key="frame" x="0.0" y="0.0" width="486" height="246"/>
+                        <rect key="frame" x="0.0" y="0.0" width="777" height="366"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="siR-fL-v2a">
-                                <rect key="frame" x="18" y="198" width="92" height="28"/>
+                                <rect key="frame" x="18" y="318" width="92" height="28"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="General" id="ENU-js-huy">
                                     <font key="font" metaFont="systemBold" size="24"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -401,7 +401,7 @@
                                 </textFieldCell>
                             </textField>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="9Gu-aU-Td2">
-                                <rect key="frame" x="18" y="126" width="199" height="18"/>
+                                <rect key="frame" x="18" y="246" width="199" height="18"/>
                                 <buttonCell key="cell" type="check" title="Start MonitorControl at Login" bezelStyle="regularSquare" imagePosition="left" inset="2" id="j72-NF-zsW">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -411,7 +411,7 @@
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="xGa-qG-9ut">
-                                <rect key="frame" x="18" y="92" width="177" height="18"/>
+                                <rect key="frame" x="18" y="212" width="177" height="18"/>
                                 <buttonCell key="cell" type="check" title="Show a slider for contrast" bezelStyle="regularSquare" imagePosition="left" inset="2" id="xSI-8W-Xd0">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -421,7 +421,7 @@
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="i5K-Cd-wxm">
-                                <rect key="frame" x="18" y="58" width="215" height="18"/>
+                                <rect key="frame" x="18" y="178" width="215" height="18"/>
                                 <buttonCell key="cell" type="check" title="Lower Contrast after Brightness" bezelStyle="regularSquare" imagePosition="left" inset="2" id="fhy-Er-0aI">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -431,13 +431,56 @@
                                 </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="tMg-qE-zTW">
-                                <rect key="frame" x="18" y="162" width="138" height="16"/>
+                                <rect key="frame" x="18" y="282" width="138" height="16"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="Version 0.0.0 (Build 0)" id="mBs-6m-13Q">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="a4V-x2-NKI">
+                                <rect key="frame" x="18" y="131" width="149" height="26"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="Sync brightness range" id="XF9-G5-5A6">
+                                    <font key="font" size="14" name="HelveticaNeue-Medium"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <slider verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="J31-9Q-fhL">
+                                <rect key="frame" x="177" y="80" width="247" height="19"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <sliderCell key="cell" state="on" alignment="left" maxValue="100" doubleValue="50" tickMarkPosition="above" sliderType="linear" id="yIY-CP-egP"/>
+                                <connections>
+                                    <action selector="maxBrightnessChanged:" target="BGD-tY-Myx" id="wYI-oT-2dD"/>
+                                </connections>
+                            </slider>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zqr-1L-Jbw">
+                                <rect key="frame" x="18" y="107" width="94" height="16"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="Min brightness" id="Zy2-oR-1gc">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lIl-BQ-grF">
+                                <rect key="frame" x="18" y="82" width="97" height="16"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="Max brightness" id="38K-d6-FEQ">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <slider verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Jrz-DL-3PM">
+                                <rect key="frame" x="177" y="105" width="247" height="19"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <sliderCell key="cell" state="on" alignment="left" maxValue="100" doubleValue="50" tickMarkPosition="above" sliderType="linear" id="4DD-cN-NWh"/>
+                                <connections>
+                                    <action selector="minBrightnessChanged:" target="BGD-tY-Myx" id="lQk-cf-EuQ"/>
+                                </connections>
+                            </slider>
                         </subviews>
                         <constraints>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="i5K-Cd-wxm" secondAttribute="trailing" constant="20" id="7p3-HQ-gLl"/>
@@ -459,6 +502,8 @@
                     </view>
                     <connections>
                         <outlet property="lowerContrast" destination="i5K-Cd-wxm" id="sE8-Ra-JSn"/>
+                        <outlet property="maxSyncBrightness" destination="J31-9Q-fhL" id="cZ6-VA-eEN"/>
+                        <outlet property="minSyncBrightness" destination="Jrz-DL-3PM" id="S9F-zw-NbU"/>
                         <outlet property="showContrastSlider" destination="xGa-qG-9ut" id="AzL-sx-Z8Q"/>
                         <outlet property="startAtLogin" destination="9Gu-aU-Td2" id="Tyx-Ub-Cyf"/>
                         <outlet property="versionLabel" destination="tMg-qE-zTW" id="31N-s8-URL"/>
@@ -466,7 +511,7 @@
                 </viewController>
                 <customObject id="JDw-du-OST" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="162" y="238"/>
+            <point key="canvasLocation" x="-92.5" y="272"/>
         </scene>
         <!--Advanced Prefs View Controller-->
         <scene sceneID="tdo-vT-sVy">

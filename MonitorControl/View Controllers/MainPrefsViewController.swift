@@ -14,6 +14,9 @@ class MainPrefsViewController: NSViewController, MASPreferencesViewController {
     @IBOutlet var showContrastSlider: NSButton!
     @IBOutlet var lowerContrast: NSButton!
 
+    @IBOutlet var maxSyncBrightness: NSSlider!
+    @IBOutlet var minSyncBrightness: NSSlider!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setVersionNumber()
@@ -26,6 +29,8 @@ class MainPrefsViewController: NSViewController, MASPreferencesViewController {
         self.startAtLogin.state = startAtLogin ? .on : .off
         showContrastSlider.state = prefs.bool(forKey: Utils.PrefKeys.showContrast.rawValue) ? .on : .off
         lowerContrast.state = prefs.bool(forKey: Utils.PrefKeys.lowerContrast.rawValue) ? .on : .off
+		minSyncBrightness.intValue = Int32(prefs.integer(forKey: Utils.PrefKeys.minSyncBrightness.rawValue))
+		maxSyncBrightness.intValue = Int32(prefs.integer(forKey: Utils.PrefKeys.maxSyncBrightness.rawValue))
     }
 
     @IBAction func startAtLoginClicked(_ sender: NSButton) {
@@ -51,7 +56,15 @@ class MainPrefsViewController: NSViewController, MASPreferencesViewController {
             os_log("Toggle show contrast slider state: %{public}@", type: .info, sender.state == .on ? "on" : "off")
         #endif
 
-        NotificationCenter.default.post(name: Notification.Name(Utils.PrefKeys.showContrast.rawValue), object: nil)		
+        NotificationCenter.default.post(name: Notification.Name(Utils.PrefKeys.showContrast.rawValue), object: nil)
+    }
+
+    @IBAction func maxBrightnessChanged(_ sender: NSSlider) {
+        prefs.set(sender.intValue, forKey: Utils.PrefKeys.maxSyncBrightness.rawValue)
+    }
+
+    @IBAction func minBrightnessChanged(_ sender: NSSlider) {
+        prefs.set(sender.intValue, forKey: Utils.PrefKeys.minSyncBrightness.rawValue)
     }
 
     @IBAction func lowerContrastClicked(_ sender: NSButton) {

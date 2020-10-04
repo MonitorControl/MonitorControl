@@ -167,6 +167,9 @@ class Utils: NSObject {
         case displayListUpdate
 
         case syncBrightness
+		
+		case minSyncBrightness
+		case maxSyncBrightness
     }
 
     /// Keys for the value of listenFor option

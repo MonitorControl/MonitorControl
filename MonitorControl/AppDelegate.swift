@@ -57,6 +57,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             prefs.set(false, forKey: Utils.PrefKeys.showContrast.rawValue)
             prefs.set(false, forKey: Utils.PrefKeys.lowerContrast.rawValue)
             prefs.set(true, forKey: Utils.PrefKeys.syncBrightness.rawValue)
+			prefs.set(20, forKey: Utils.PrefKeys.minSyncBrightness.rawValue)
+			prefs.set(100, forKey: Utils.PrefKeys.maxSyncBrightness.rawValue)
         }
     }
 
