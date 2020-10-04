@@ -13,7 +13,6 @@ class MainPrefsViewController: NSViewController, MASPreferencesViewController {
     @IBOutlet var startAtLogin: NSButton!
     @IBOutlet var showContrastSlider: NSButton!
     @IBOutlet var lowerContrast: NSButton!
-    @IBOutlet var syncBrightness: NSButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,7 +26,6 @@ class MainPrefsViewController: NSViewController, MASPreferencesViewController {
         self.startAtLogin.state = startAtLogin ? .on : .off
         showContrastSlider.state = prefs.bool(forKey: Utils.PrefKeys.showContrast.rawValue) ? .on : .off
         lowerContrast.state = prefs.bool(forKey: Utils.PrefKeys.lowerContrast.rawValue) ? .on : .off
-        syncBrightness.state = prefs.bool(forKey: Utils.PrefKeys.syncBrightness.rawValue) ? .on : .off
     }
 
     @IBAction func startAtLoginClicked(_ sender: NSButton) {
@@ -54,17 +52,6 @@ class MainPrefsViewController: NSViewController, MASPreferencesViewController {
         #endif
 
         NotificationCenter.default.post(name: Notification.Name(Utils.PrefKeys.showContrast.rawValue), object: nil)		
-    }
-
-    @IBAction func syncBrightnessClicked(_ sender: NSButton) {
-        switch sender.state {
-        case .on:
-            prefs.set(true, forKey: Utils.PrefKeys.syncBrightness.rawValue)
-        case .off:
-            prefs.set(false, forKey: Utils.PrefKeys.syncBrightness.rawValue)
-        default: break
-        }
-        NotificationCenter.default.post(name: Notification.Name(Utils.PrefKeys.syncBrightness.rawValue), object: nil)
     }
 
     @IBAction func lowerContrastClicked(_ sender: NSButton) {

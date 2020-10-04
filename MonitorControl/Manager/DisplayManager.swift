@@ -70,7 +70,7 @@ extension DisplayManager {
     }
 
     @objc func sync() {
-        let brightness = (DisplayManager.shared.getBuiltInDisplay() as! InternalDisplay).getBrightness()
+		let brightness = (DisplayManager.shared.getBuiltInDisplay() as! InternalDisplay).getBrightness()
         var value = Int(brightness * 100)
         for ddcDisplay in DisplayManager.shared.getDdcCapableDisplays() {
             value = max(20, value)

@@ -438,23 +438,11 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="JAC-iO-dkB" userLabel="Sync brightness to external display">
-                                <rect key="frame" x="18" y="24" width="234" height="18"/>
-                                <buttonCell key="cell" type="check" title="Sync brightness to external display" bezelStyle="regularSquare" imagePosition="left" inset="2" id="wi4-uc-YE6">
-                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="syncBrightnessClicked:" target="BGD-tY-Myx" id="HQD-BU-PAd"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <constraints>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="i5K-Cd-wxm" secondAttribute="trailing" constant="20" id="7p3-HQ-gLl"/>
                             <constraint firstItem="xGa-qG-9ut" firstAttribute="top" secondItem="9Gu-aU-Td2" secondAttribute="bottom" constant="20" id="DOL-i0-bCI"/>
-                            <constraint firstItem="JAC-iO-dkB" firstAttribute="top" secondItem="i5K-Cd-wxm" secondAttribute="bottom" constant="20" id="FNZ-gv-gYW"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="9Gu-aU-Td2" secondAttribute="trailing" constant="20" id="Gft-KX-rdy"/>
-                            <constraint firstItem="JAC-iO-dkB" firstAttribute="leading" secondItem="i5K-Cd-wxm" secondAttribute="leading" id="Gra-aB-190"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="xGa-qG-9ut" secondAttribute="trailing" constant="20" id="HDL-zX-2dq"/>
                             <constraint firstItem="9Gu-aU-Td2" firstAttribute="leading" secondItem="COE-Oc-gZs" secondAttribute="leading" constant="20" id="MwQ-M8-u18"/>
                             <constraint firstItem="xGa-qG-9ut" firstAttribute="leading" secondItem="COE-Oc-gZs" secondAttribute="leading" constant="20" id="NgS-ga-iNo"/>
@@ -473,7 +461,6 @@
                         <outlet property="lowerContrast" destination="i5K-Cd-wxm" id="sE8-Ra-JSn"/>
                         <outlet property="showContrastSlider" destination="xGa-qG-9ut" id="AzL-sx-Z8Q"/>
                         <outlet property="startAtLogin" destination="9Gu-aU-Td2" id="Tyx-Ub-Cyf"/>
-                        <outlet property="syncBrightness" destination="JAC-iO-dkB" id="YIg-zt-KWQ"/>
                         <outlet property="versionLabel" destination="tMg-qE-zTW" id="31N-s8-URL"/>
                     </connections>
                 </viewController>

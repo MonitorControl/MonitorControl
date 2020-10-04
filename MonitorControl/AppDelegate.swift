@@ -112,15 +112,20 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
         if UserDefaults.standard.bool(forKey: Utils.PrefKeys.syncBrightness.rawValue) {
             DisplayManager.shared.startSync()
-		} else {
-			DisplayManager.shared.stopSync()
-		}
+        } else {
+            DisplayManager.shared.stopSync()
+        }
     }
 
     private func addDisplayToMenu(display: ExternalDisplay, asSubMenu: Bool) {
         let monitorSubMenu: NSMenu = asSubMenu ? NSMenu() : statusMenu
 
         statusMenu.insertItem(NSMenuItem.separator(), at: 0)
+
+        let syncBrightnessItem = NSMenuItem(title: "Sync brightness to external display", action: #selector(syncBrightnessClicked(_:)), keyEquivalent: "asdf")
+        syncBrightnessItem.target = self
+        syncBrightnessItem.state = prefs.bool(forKey: Utils.PrefKeys.syncBrightness.rawValue) ? .on : .off
+        monitorSubMenu.insertItem(syncBrightnessItem, at: 0)
 
         let volumeSliderHandler = Utils.addSliderMenuItem(toMenu: monitorSubMenu,
                                                           forDisplay: display,
@@ -149,6 +154,17 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
         monitorItems.append(monitorMenuItem)
         statusMenu.insertItem(monitorMenuItem, at: 0)
+    }
+
+    @IBAction func syncBrightnessClicked(_ sender: NSMenuItem) {
+        switch sender.state {
+        case .on:
+            prefs.set(false, forKey: Utils.PrefKeys.syncBrightness.rawValue)
+        case .off:
+            prefs.set(true, forKey: Utils.PrefKeys.syncBrightness.rawValue)
+        default: break
+        }
+        NotificationCenter.default.post(name: Notification.Name(Utils.PrefKeys.syncBrightness.rawValue), object: nil)
     }
 
     private func checkPermissions() {
