@@ -69,11 +69,26 @@ extension DisplayManager {
         timer.invalidate()
     }
 
+    private func clampBrightness(_ value: Int) -> Int {
+        var minBrightness = prefs.integer(forKey: Utils.PrefKeys.minSyncBrightness.rawValue)
+        var maxBrightness = prefs.integer(forKey: Utils.PrefKeys.maxSyncBrightness.rawValue)
+        if maxBrightness == 0 && minBrightness == 0 {
+            minBrightness = 0
+            maxBrightness = 100
+        }
+
+        if maxBrightness <= minBrightness {
+            maxBrightness = 100
+        }
+
+        return min(max(value, minBrightness), maxBrightness)
+    }
+
     @objc func sync() {
-		let brightness = (DisplayManager.shared.getBuiltInDisplay() as! InternalDisplay).getBrightness()
+        let brightness = (DisplayManager.shared.getBuiltInDisplay() as! InternalDisplay).getBrightness()
         var value = Int(brightness * 100)
         for ddcDisplay in DisplayManager.shared.getDdcCapableDisplays() {
-            value = max(20, value)
+            value = clampBrightness(value)
             if abs(ddcDisplay.getValue(for: .brightness) - value) > 2 {
                 print("write", value)
                 _ = ddcDisplay.ddc!.write(command: DDC.Command.brightness, value: UInt16(value), errorRecoveryWaitTime: UInt32(3))
