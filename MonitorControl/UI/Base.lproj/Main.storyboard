@@ -447,6 +447,14 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
+                            <slider verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Jrz-DL-3PM">
+                                <rect key="frame" x="177" y="105" width="247" height="19"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <sliderCell key="cell" state="on" alignment="left" maxValue="100" doubleValue="50" tickMarkPosition="above" sliderType="linear" id="4DD-cN-NWh"/>
+                                <connections>
+                                    <action selector="minBrightnessChanged:" target="BGD-tY-Myx" id="lQk-cf-EuQ"/>
+                                </connections>
+                            </slider>
                             <slider verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="J31-9Q-fhL">
                                 <rect key="frame" x="177" y="80" width="247" height="19"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -473,14 +481,15 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <slider verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Jrz-DL-3PM">
-                                <rect key="frame" x="177" y="105" width="247" height="19"/>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ih5-tJ-UKB">
+                                <rect key="frame" x="18" y="28" width="488" height="36"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <sliderCell key="cell" state="on" alignment="left" maxValue="100" doubleValue="50" tickMarkPosition="above" sliderType="linear" id="4DD-cN-NWh"/>
-                                <connections>
-                                    <action selector="minBrightnessChanged:" target="BGD-tY-Myx" id="lQk-cf-EuQ"/>
-                                </connections>
-                            </slider>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="The externaly display brightness will be clamped according to above settings" id="a4d-0O-MWq">
+                                    <font key="font" metaFont="toolTip"/>
+                                    <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
                         </subviews>
                         <constraints>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="i5K-Cd-wxm" secondAttribute="trailing" constant="20" id="7p3-HQ-gLl"/>
