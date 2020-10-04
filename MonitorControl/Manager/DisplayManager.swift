@@ -85,12 +85,14 @@ extension DisplayManager {
     }
 
     func sync() {
-        let brightness = (DisplayManager.shared.getBuiltInDisplay() as! InternalDisplay).getBrightness()
+        guard let buildInDisplay = DisplayManager.shared.getBuiltInDisplay() as? InternalDisplay else { return }
+		
+        let brightness = buildInDisplay.getBrightness()
         var value = Int(brightness * 100)
         for ddcDisplay in DisplayManager.shared.getDdcCapableDisplays() {
-//			print(value)
+            //			print(value)
             value = clampBrightness(value)
-//			print("after clamp", value)
+            //			print("after clamp", value)
             if abs(ddcDisplay.getValue(for: .brightness) - value) > 2 {
                 print("write", value)
                 _ = ddcDisplay.ddc!.write(command: DDC.Command.brightness, value: UInt16(value), errorRecoveryWaitTime: UInt32(3))
