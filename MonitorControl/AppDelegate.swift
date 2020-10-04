@@ -127,19 +127,23 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         syncBrightnessItem.state = prefs.bool(forKey: Utils.PrefKeys.syncBrightness.rawValue) ? .on : .off
         monitorSubMenu.insertItem(syncBrightnessItem, at: 0)
 
+        let enableSlider = !prefs.bool(forKey: Utils.PrefKeys.syncBrightness.rawValue)
         let volumeSliderHandler = Utils.addSliderMenuItem(toMenu: monitorSubMenu,
                                                           forDisplay: display,
                                                           command: .audioSpeakerVolume,
-                                                          title: NSLocalizedString("Volume", comment: "Shown in menu"))
+                                                          title: NSLocalizedString("Volume", comment: "Shown in menu"),
+                                                          enabled: enableSlider)
         let brightnessSliderHandler = Utils.addSliderMenuItem(toMenu: monitorSubMenu,
                                                               forDisplay: display,
                                                               command: .brightness,
-                                                              title: NSLocalizedString("Brightness", comment: "Shown in menu"))
+                                                              title: NSLocalizedString("Brightness", comment: "Shown in menu"),
+                                                              enabled: enableSlider)
         if prefs.bool(forKey: Utils.PrefKeys.showContrast.rawValue) {
             let contrastSliderHandler = Utils.addSliderMenuItem(toMenu: monitorSubMenu,
                                                                 forDisplay: display,
                                                                 command: .contrast,
-                                                                title: NSLocalizedString("Contrast", comment: "Shown in menu"))
+                                                                title: NSLocalizedString("Contrast", comment: "Shown in menu"),
+                                                                enabled: enableSlider)
             display.contrastSliderHandler = contrastSliderHandler
         }
 
