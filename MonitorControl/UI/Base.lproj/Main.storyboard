@@ -438,52 +438,53 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="a4V-x2-NKI">
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="a4V-x2-NKI">
                                 <rect key="frame" x="18" y="131" width="149" height="26"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="Sync brightness range" id="XF9-G5-5A6">
                                     <font key="font" size="14" name="HelveticaNeue-Medium"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <slider verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Jrz-DL-3PM">
+                            <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Jrz-DL-3PM">
                                 <rect key="frame" x="177" y="105" width="247" height="19"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="243" id="fDx-7w-gNs"/>
+                                </constraints>
                                 <sliderCell key="cell" state="on" alignment="left" maxValue="100" doubleValue="50" tickMarkPosition="above" sliderType="linear" id="4DD-cN-NWh"/>
                                 <connections>
                                     <action selector="minBrightnessChanged:" target="BGD-tY-Myx" id="lQk-cf-EuQ"/>
                                 </connections>
                             </slider>
-                            <slider verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="J31-9Q-fhL">
+                            <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="J31-9Q-fhL">
                                 <rect key="frame" x="177" y="80" width="247" height="19"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <sliderCell key="cell" state="on" alignment="left" maxValue="100" doubleValue="50" tickMarkPosition="above" sliderType="linear" id="yIY-CP-egP"/>
                                 <connections>
                                     <action selector="maxBrightnessChanged:" target="BGD-tY-Myx" id="wYI-oT-2dD"/>
                                 </connections>
                             </slider>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zqr-1L-Jbw">
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="zqr-1L-Jbw">
                                 <rect key="frame" x="18" y="107" width="94" height="16"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="Min brightness" id="Zy2-oR-1gc">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lIl-BQ-grF">
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="lIl-BQ-grF">
                                 <rect key="frame" x="18" y="82" width="97" height="16"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="Max brightness" id="38K-d6-FEQ">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ih5-tJ-UKB">
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Ih5-tJ-UKB">
                                 <rect key="frame" x="18" y="28" width="488" height="36"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="484" id="UHg-sQ-ht4"/>
+                                    <constraint firstAttribute="height" constant="36" id="kFJ-IN-h0m"/>
+                                </constraints>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="The externaly display brightness will be clamped according to above settings" id="a4d-0O-MWq">
                                     <font key="font" metaFont="toolTip"/>
                                     <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
@@ -492,20 +493,35 @@
                             </textField>
                         </subviews>
                         <constraints>
+                            <constraint firstItem="Ih5-tJ-UKB" firstAttribute="top" secondItem="lIl-BQ-grF" secondAttribute="bottom" constant="18" id="3DI-tc-teo"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="i5K-Cd-wxm" secondAttribute="trailing" constant="20" id="7p3-HQ-gLl"/>
+                            <constraint firstItem="a4V-x2-NKI" firstAttribute="leading" secondItem="i5K-Cd-wxm" secondAttribute="leading" id="9bL-85-0Ci"/>
+                            <constraint firstItem="zqr-1L-Jbw" firstAttribute="top" secondItem="a4V-x2-NKI" secondAttribute="bottom" constant="8" symbolic="YES" id="BJr-rB-gs2"/>
                             <constraint firstItem="xGa-qG-9ut" firstAttribute="top" secondItem="9Gu-aU-Td2" secondAttribute="bottom" constant="20" id="DOL-i0-bCI"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="9Gu-aU-Td2" secondAttribute="trailing" constant="20" id="Gft-KX-rdy"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="xGa-qG-9ut" secondAttribute="trailing" constant="20" id="HDL-zX-2dq"/>
+                            <constraint firstItem="J31-9Q-fhL" firstAttribute="leading" secondItem="lIl-BQ-grF" secondAttribute="trailing" constant="66" id="JbP-yV-ub1"/>
                             <constraint firstItem="9Gu-aU-Td2" firstAttribute="leading" secondItem="COE-Oc-gZs" secondAttribute="leading" constant="20" id="MwQ-M8-u18"/>
                             <constraint firstItem="xGa-qG-9ut" firstAttribute="leading" secondItem="COE-Oc-gZs" secondAttribute="leading" constant="20" id="NgS-ga-iNo"/>
+                            <constraint firstItem="zqr-1L-Jbw" firstAttribute="leading" secondItem="lIl-BQ-grF" secondAttribute="leading" id="Q27-bl-lNM"/>
                             <constraint firstItem="i5K-Cd-wxm" firstAttribute="top" secondItem="xGa-qG-9ut" secondAttribute="bottom" constant="20" id="R2I-Ko-ZJ9"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="siR-fL-v2a" secondAttribute="trailing" constant="20" id="Srs-vY-IQB"/>
+                            <constraint firstItem="lIl-BQ-grF" firstAttribute="top" secondItem="zqr-1L-Jbw" secondAttribute="bottom" constant="9" id="VQO-Ds-PXo"/>
+                            <constraint firstItem="lIl-BQ-grF" firstAttribute="baseline" secondItem="J31-9Q-fhL" secondAttribute="baseline" id="Xtf-Fo-kaV"/>
+                            <constraint firstItem="zqr-1L-Jbw" firstAttribute="baseline" secondItem="Jrz-DL-3PM" secondAttribute="firstBaseline" id="Ys0-rk-YDi"/>
+                            <constraint firstItem="lIl-BQ-grF" firstAttribute="leading" secondItem="Ih5-tJ-UKB" secondAttribute="leading" id="ZlO-4X-vpv"/>
                             <constraint firstItem="9Gu-aU-Td2" firstAttribute="top" secondItem="tMg-qE-zTW" secondAttribute="bottom" constant="20" id="caN-Et-n47"/>
+                            <constraint firstItem="a4V-x2-NKI" firstAttribute="leading" secondItem="zqr-1L-Jbw" secondAttribute="leading" id="d7A-TF-I6b"/>
+                            <constraint firstItem="Jrz-DL-3PM" firstAttribute="baseline" secondItem="zqr-1L-Jbw" secondAttribute="firstBaseline" id="dUA-Uw-McP"/>
                             <constraint firstItem="siR-fL-v2a" firstAttribute="leading" secondItem="COE-Oc-gZs" secondAttribute="leading" constant="20" id="eXs-op-WJj"/>
+                            <constraint firstItem="Jrz-DL-3PM" firstAttribute="top" secondItem="i5K-Cd-wxm" secondAttribute="bottom" constant="58" id="fDt-Sy-s3h"/>
                             <constraint firstItem="siR-fL-v2a" firstAttribute="top" secondItem="COE-Oc-gZs" secondAttribute="top" constant="20" id="iTz-r7-NFb"/>
+                            <constraint firstItem="Jrz-DL-3PM" firstAttribute="trailing" secondItem="J31-9Q-fhL" secondAttribute="trailing" id="iri-IH-PFa"/>
                             <constraint firstItem="i5K-Cd-wxm" firstAttribute="leading" secondItem="COE-Oc-gZs" secondAttribute="leading" constant="20" id="jWI-DQ-WdT"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="tMg-qE-zTW" secondAttribute="trailing" constant="20" id="jzw-7W-4cW"/>
                             <constraint firstItem="tMg-qE-zTW" firstAttribute="leading" secondItem="COE-Oc-gZs" secondAttribute="leading" constant="20" id="qhb-hw-Gwg"/>
+                            <constraint firstItem="Jrz-DL-3PM" firstAttribute="leading" secondItem="J31-9Q-fhL" secondAttribute="leading" id="rCA-R5-ann"/>
+                            <constraint firstItem="a4V-x2-NKI" firstAttribute="top" secondItem="i5K-Cd-wxm" secondAttribute="bottom" constant="23" id="y4R-uj-Iyw"/>
                             <constraint firstItem="tMg-qE-zTW" firstAttribute="top" secondItem="siR-fL-v2a" secondAttribute="bottom" constant="20" id="zis-v1-6aZ"/>
                         </constraints>
                     </view>

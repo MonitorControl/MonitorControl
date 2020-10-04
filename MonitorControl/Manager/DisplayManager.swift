@@ -88,7 +88,9 @@ extension DisplayManager {
         let brightness = (DisplayManager.shared.getBuiltInDisplay() as! InternalDisplay).getBrightness()
         var value = Int(brightness * 100)
         for ddcDisplay in DisplayManager.shared.getDdcCapableDisplays() {
+//			print(value)
             value = clampBrightness(value)
+//			print("after clamp", value)
             if abs(ddcDisplay.getValue(for: .brightness) - value) > 2 {
                 print("write", value)
                 _ = ddcDisplay.ddc!.write(command: DDC.Command.brightness, value: UInt16(value), errorRecoveryWaitTime: UInt32(3))

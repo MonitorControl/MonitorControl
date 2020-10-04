@@ -22,6 +22,14 @@ class MainPrefsViewController: NSViewController, MASPreferencesViewController {
         setVersionNumber()
     }
 
+    var minSyncBrightnessValue: Int {
+        prefs.integer(forKey: Utils.PrefKeys.minSyncBrightness.rawValue)
+    }
+
+    var maxSyncBrightnessValue: Int {
+        prefs.integer(forKey: Utils.PrefKeys.minSyncBrightness.rawValue)
+    }
+
     @available(macOS, deprecated: 10.10)
     override func viewWillAppear() {
         super.viewWillAppear()
@@ -29,8 +37,12 @@ class MainPrefsViewController: NSViewController, MASPreferencesViewController {
         self.startAtLogin.state = startAtLogin ? .on : .off
         showContrastSlider.state = prefs.bool(forKey: Utils.PrefKeys.showContrast.rawValue) ? .on : .off
         lowerContrast.state = prefs.bool(forKey: Utils.PrefKeys.lowerContrast.rawValue) ? .on : .off
-		minSyncBrightness.intValue = Int32(prefs.integer(forKey: Utils.PrefKeys.minSyncBrightness.rawValue))
-		maxSyncBrightness.intValue = Int32(prefs.integer(forKey: Utils.PrefKeys.maxSyncBrightness.rawValue))
+        minSyncBrightness.intValue = Int32(prefs.integer(forKey: Utils.PrefKeys.minSyncBrightness.rawValue))
+        maxSyncBrightness.intValue = Int32(prefs.integer(forKey: Utils.PrefKeys.maxSyncBrightness.rawValue))
+        updateBrightnessSliders()
+    }
+
+    func updateBrightnessSliders() {
     }
 
     @IBAction func startAtLoginClicked(_ sender: NSButton) {
@@ -61,10 +73,12 @@ class MainPrefsViewController: NSViewController, MASPreferencesViewController {
 
     @IBAction func maxBrightnessChanged(_ sender: NSSlider) {
         prefs.set(sender.intValue, forKey: Utils.PrefKeys.maxSyncBrightness.rawValue)
+        updateBrightnessSliders()
     }
 
     @IBAction func minBrightnessChanged(_ sender: NSSlider) {
         prefs.set(sender.intValue, forKey: Utils.PrefKeys.minSyncBrightness.rawValue)
+        updateBrightnessSliders()
     }
 
     @IBAction func lowerContrastClicked(_ sender: NSButton) {
