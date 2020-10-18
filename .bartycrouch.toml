@@ -32,4 +32,4 @@ sortByKeys = true
 [lint]
 paths = ["."]
 duplicateKeys = true
-emptyValues = true
+emptyValues = false

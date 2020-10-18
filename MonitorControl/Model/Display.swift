@@ -69,7 +69,7 @@ class Display {
 
     if roundChiclet {
       let osdChiclet = OSDUtils.chiclet(fromValue: Float(value), maxValue: Float(maxValue))
-      
+
       filledChiclets = Int(round(osdChiclet))
       totalChiclets = 16
     } else {
