@@ -1,4 +1,4 @@
-  <h1 align="center"> MonitorControl </h1>
+<h1 align="center"> MonitorControl </h1>
 
 <!-- subtext -->
 <div align="center">
