@@ -111,6 +111,9 @@
 		28D1DE0F227FD006004CB494 /* MediaKeyTap.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = MediaKeyTap.framework.dSYM; path = Carthage/Build/Mac/MediaKeyTap.framework.dSYM; sourceTree = "<group>"; };
 		28D1DE10227FD006004CB494 /* AMCoreAudio.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = AMCoreAudio.framework.dSYM; path = Carthage/Build/Mac/AMCoreAudio.framework.dSYM; sourceTree = "<group>"; };
 		28D1DE11227FD006004CB494 /* DDC.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = DDC.framework.dSYM; path = Carthage/Build/Mac/DDC.framework.dSYM; sourceTree = "<group>"; };
+		2EAA5B7D24BF9E9A00937821 /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/Main.strings; sourceTree = "<group>"; };
+		2EAA5B7E24BF9E9A00937821 /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/MainMenu.strings; sourceTree = "<group>"; };
+		2EAA5B7F24BF9E9A00937821 /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3CCA5F952442EFF800B4DB84 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Main.strings; sourceTree = "<group>"; };
 		3CCA5F962442EFF800B4DB84 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/MainMenu.strings; sourceTree = "<group>"; };
 		3CCA5F972442EFF800B4DB84 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -412,6 +415,7 @@
 				ru,
 				it,
 				ja,
+				pl,
 			);
 			mainGroup = 56754EA21D9A4016007BCDC5;
 			productRefGroup = 56754EAC1D9A4016007BCDC5 /* Products */;
@@ -572,6 +576,7 @@
 				B0C4810623357CE500053F91 /* ru */,
 				6CAD135023624CC1009BD53F /* it */,
 				3CCA5F972442EFF800B4DB84 /* ja */,
+				2EAA5B7F24BF9E9A00937821 /* pl */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -588,6 +593,7 @@
 				B0C4810723357CE500053F91 /* ru */,
 				6CAD134E23624CC1009BD53F /* it */,
 				3CCA5F952442EFF800B4DB84 /* ja */,
+				2EAA5B7D24BF9E9A00937821 /* pl */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -604,6 +610,7 @@
 				B0C4810823357CE500053F91 /* ru */,
 				6CAD134F23624CC1009BD53F /* it */,
 				3CCA5F962442EFF800B4DB84 /* ja */,
+				2EAA5B7E24BF9E9A00937821 /* pl */,
 			);
 			name = MainMenu.xib;
 			sourceTree = "<group>";
