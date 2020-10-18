@@ -20,6 +20,9 @@
 /* Shown in the main prefs window */
 "Keys" = "Klawisze";
 
+/* Shown in the main prefs window */
+"Advanced" = "Zaawansowane";
+
 /* Shown in menu */
 "No supported display found" = "Nie znaleziono obsługiwanego wyświetlacza";
 
@@ -47,5 +50,4 @@
 "Volume" = "Głośność";
 
 /* Shown in the alert dialog */
-"You need to enable MonitorControl in System Preferences > Security and Privacy > Accessibility for the keyboard shortcuts to work" = "
-Musisz włączyć MonitorControl w Preferencjach systemowych> Bezpieczeństwo i prywatność> Ułatwienie dostępu dla skrótów klawiszowych";
+"You need to enable MonitorControl in System Preferences > Security and Privacy > Accessibility for the keyboard shortcuts to work" = "Musisz włączyć MonitorControl w Preferencjach systemowych> Bezpieczeństwo i prywatność> Ułatwienie dostępu dla skrótów klawiszowych";
