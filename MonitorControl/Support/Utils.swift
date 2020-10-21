@@ -147,6 +147,9 @@ class Utils: NSObject {
     /// Keys listened for (Brightness/Volume)
     case listenFor
 
+    /// Show volume sliders
+    case showVolume
+
     /// Show contrast sliders
     case showContrast
 

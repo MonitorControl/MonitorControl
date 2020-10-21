@@ -417,6 +417,16 @@
                                     <action selector="startAtLoginClicked:" target="BGD-tY-Myx" id="QvH-5O-Lck"/>
                                 </connections>
                             </button>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Fey-NE-wyx">
+                                <rect key="frame" x="18" y="86" width="171" height="18"/>
+                                <buttonCell key="cell" type="check" title="Show a slider for volume" bezelStyle="regularSquare" imagePosition="left" inset="2" id="lGa-Bb-oVu">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="showVolumeSliderClicked:" target="BGD-tY-Myx" id="jpx-09-3tn"/>
+                                </connections>
+                            </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="xGa-qG-9ut">
                                 <rect key="frame" x="18" y="55" width="181" height="18"/>
                                 <buttonCell key="cell" type="check" title="Show a slider for contrast" bezelStyle="regularSquare" imagePosition="left" inset="2" id="xSI-8W-Xd0">
@@ -448,14 +458,17 @@
                         </subviews>
                         <constraints>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="i5K-Cd-wxm" secondAttribute="trailing" constant="20" id="7p3-HQ-gLl"/>
-                            <constraint firstItem="xGa-qG-9ut" firstAttribute="top" secondItem="9Gu-aU-Td2" secondAttribute="bottom" constant="20" id="DOL-i0-bCI"/>
+                            <constraint firstItem="xGa-qG-9ut" firstAttribute="top" secondItem="Fey-NE-wyx" secondAttribute="bottom" constant="20" id="DOL-i0-bCI"/>
+                            <constraint firstItem="Fey-NE-wyx" firstAttribute="top" secondItem="9Gu-aU-Td2" secondAttribute="bottom" constant="20" id="DZ0-lX-muY"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="9Gu-aU-Td2" secondAttribute="trailing" constant="20" id="Gft-KX-rdy"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="xGa-qG-9ut" secondAttribute="trailing" constant="20" id="HDL-zX-2dq"/>
                             <constraint firstItem="9Gu-aU-Td2" firstAttribute="leading" secondItem="COE-Oc-gZs" secondAttribute="leading" constant="20" id="MwQ-M8-u18"/>
                             <constraint firstItem="xGa-qG-9ut" firstAttribute="leading" secondItem="COE-Oc-gZs" secondAttribute="leading" constant="20" id="NgS-ga-iNo"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Fey-NE-wyx" secondAttribute="trailing" constant="20" id="Pxf-gn-wul"/>
                             <constraint firstItem="i5K-Cd-wxm" firstAttribute="top" secondItem="xGa-qG-9ut" secondAttribute="bottom" constant="20" id="R2I-Ko-ZJ9"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="siR-fL-v2a" secondAttribute="trailing" constant="20" id="Srs-vY-IQB"/>
                             <constraint firstItem="9Gu-aU-Td2" firstAttribute="top" secondItem="tMg-qE-zTW" secondAttribute="bottom" constant="20" id="caN-Et-n47"/>
+                            <constraint firstItem="Fey-NE-wyx" firstAttribute="leading" secondItem="COE-Oc-gZs" secondAttribute="leading" constant="20" id="eU9-NM-CyY"/>
                             <constraint firstItem="siR-fL-v2a" firstAttribute="leading" secondItem="COE-Oc-gZs" secondAttribute="leading" constant="20" id="eXs-op-WJj"/>
                             <constraint firstItem="siR-fL-v2a" firstAttribute="top" secondItem="COE-Oc-gZs" secondAttribute="top" constant="20" id="iTz-r7-NFb"/>
                             <constraint firstItem="i5K-Cd-wxm" firstAttribute="leading" secondItem="COE-Oc-gZs" secondAttribute="leading" constant="20" id="jWI-DQ-WdT"/>
@@ -468,6 +481,7 @@
                     <connections>
                         <outlet property="lowerContrast" destination="i5K-Cd-wxm" id="sE8-Ra-JSn"/>
                         <outlet property="showContrastSlider" destination="xGa-qG-9ut" id="AzL-sx-Z8Q"/>
+                        <outlet property="showVolumeSlider" destination="Fey-NE-wyx" id="ClC-m3-iEy"/>
                         <outlet property="startAtLogin" destination="9Gu-aU-Td2" id="Tyx-Ub-Cyf"/>
                         <outlet property="versionLabel" destination="tMg-qE-zTW" id="31N-s8-URL"/>
                     </connections>

@@ -54,6 +54,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     if !prefs.bool(forKey: Utils.PrefKeys.appAlreadyLaunched.rawValue) {
       prefs.set(true, forKey: Utils.PrefKeys.appAlreadyLaunched.rawValue)
 
+      prefs.set(true, forKey: Utils.PrefKeys.showVolume.rawValue)
       prefs.set(false, forKey: Utils.PrefKeys.showContrast.rawValue)
       prefs.set(false, forKey: Utils.PrefKeys.lowerContrast.rawValue)
     }
@@ -115,10 +116,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     self.statusMenu.insertItem(NSMenuItem.separator(), at: 0)
 
-    let volumeSliderHandler = Utils.addSliderMenuItem(toMenu: monitorSubMenu,
-                                                      forDisplay: display,
-                                                      command: .audioSpeakerVolume,
-                                                      title: NSLocalizedString("Volume", comment: "Shown in menu"))
+    if prefs.bool(forKey: Utils.PrefKeys.showVolume.rawValue) {
+      let volumeSliderHandler = Utils.addSliderMenuItem(toMenu: monitorSubMenu,
+                                                        forDisplay: display,
+                                                        command: .audioSpeakerVolume,
+                                                        title: NSLocalizedString("Volume", comment: "Shown in menu"))
+      display.volumeSliderHandler = volumeSliderHandler
+    }
     let brightnessSliderHandler = Utils.addSliderMenuItem(toMenu: monitorSubMenu,
                                                           forDisplay: display,
                                                           command: .brightness,
@@ -131,7 +135,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       display.contrastSliderHandler = contrastSliderHandler
     }
 
-    display.volumeSliderHandler = volumeSliderHandler
     display.brightnessSliderHandler = brightnessSliderHandler
 
     let monitorMenuItem = NSMenuItem()
@@ -169,6 +172,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   private func subscribeEventListeners() {
     // subscribe KeyTap event listener
     NotificationCenter.default.addObserver(self, selector: #selector(handleListenForChanged), name: .listenFor, object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(handleShowVolumeChanged), name: .showVolume, object: nil)
     NotificationCenter.default.addObserver(self, selector: #selector(handleShowContrastChanged), name: .showContrast, object: nil)
     NotificationCenter.default.addObserver(self, selector: #selector(handleFriendlyNameChanged), name: .friendlyName, object: nil)
     NotificationCenter.default.addObserver(self, selector: #selector(handlePreferenceReset), name: .preferenceReset, object: nil)
@@ -291,6 +295,10 @@ extension AppDelegate: MediaKeyTapDelegate {
   @objc func handleListenForChanged() {
     self.checkPermissions()
     self.updateMediaKeyTap()
+  }
+
+  @objc func handleShowVolumeChanged() {
+    self.updateDisplays()
   }
 
   @objc func handleShowContrastChanged() {

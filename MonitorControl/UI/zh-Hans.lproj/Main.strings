@@ -103,6 +103,9 @@
 /* Class = "NSTableColumn"; headerCell.title = "DDC"; ObjectID = "xFw-if-3FU"; */
 "xFw-if-3FU.headerCell.title" = "DDC";
 
+/* Class = "NSButtonCell"; title = "Show a slider for volume"; ObjectID = "lGa-Bb-oVu"; */
+"lGa-Bb-oVu.title" = "显示音量滑动条";
+
 /* Class = "NSButtonCell"; title = "Show a slider for contrast"; ObjectID = "xSI-8W-Xd0"; */
 "xSI-8W-Xd0.title" = "显示对比度滑动条";
 
