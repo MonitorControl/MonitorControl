@@ -1,5 +1,5 @@
 /* Shown in the main prefs window */
-"Advanced" = "Advanced";
+"Advanced" = "Avancé";
 
 /* Shown in the alert dialog */
 "Are you sure you want to enable a longer delay? Doing so may freeze your system and require a restart. Start at login will be disabled as a safety measure." = "Are you sure you want to enable a longer delay? Doing so may freeze your system and require a restart. Start at login will be disabled as a safety measure.";
@@ -30,9 +30,6 @@
 
 /* Shown in the main prefs window */
 "Keys" = "Touches";
-
-/* Shown in the main prefs window  */
-"Advanced" = "Avancé";
 
 /* Shown in the alert dialog */
 "No" = "No";

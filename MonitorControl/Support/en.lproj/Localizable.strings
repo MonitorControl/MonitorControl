@@ -31,9 +31,6 @@
 /* Shown in the main prefs window */
 "Keys" = "Keys";
 
-/* Shown in the main prefs window  */
-"Advanced" = "Advanced";
-
 /* Shown in the alert dialog */
 "No" = "No";
 
