@@ -9,7 +9,7 @@ Control your external monitor brightness, contrast or volume directly from a men
 
 <!-- Language emoji -->
 <div align="center">
-    <p>Translations: :uk: :fr: :de: :it: :ru: :ukraine: :jp: <img src="https://raw.githubusercontent.com/rogerxaic/MonitorControl/ca-flag/images/ca-flag/21px.png" alt="Catalan flag"></p>
+    <p>Translations: :uk: :fr: :de: :it: :ru: :ukraine: :jp: :poland: <img src="https://raw.githubusercontent.com/rogerxaic/MonitorControl/ca-flag/images/ca-flag/21px.png" alt="Catalan flag"></p>
 </div>
 
 <br/>
@@ -43,7 +43,7 @@ Control your external monitor brightness, contrast or volume directly from a men
 
 <br/>
 
-*Bonus: Using keyboard keys displays the native osd*
+_Bonus: Using keyboard keys displays the native osd_
 
 <img src="./.github/osd.jpg" width="500" align="center" alt="osd screenshot"/>
 </div>
@@ -72,12 +72,16 @@ Open [issues](https://github.com/the0neyouseek/MonitorControl/issues) if you hav
 - [Carthage](https://github.com/Carthage/Carthage)
 - [Swiftlint](https://github.com/realm/SwiftLint)
 - [SwiftFormat](https://github.com/nicklockwood/SwiftFormat)
+- [BartyCrouch](https://github.com/Flinesoft/BartyCrouch) (for updating localizations)
 
 Clone the project
+
 ```sh
 $ git clone https://github.com/the0neyouseek/MonitorControl.git
 ```
+
 Then download the dependencies with Carthage
+
 ```sh
 $ carthage bootstrap --platform macOS
 ```
@@ -92,15 +96,18 @@ You're all set ! Now open the `MonitorControl.xcodeproj` with Xcode
 - [AMCoreAudio](https://github.com/rnine/AMCoreAudio)
 
 ## Support
+
 - macOS Sierra (`10.12`) and up.
 - Works with monitors controllable via [DDC](https://en.wikipedia.org/wiki/Display_Data_Channel).
 
 ## Contributors
+
 - [@the0neyouseek](https://github.com/the0neyouseek)
 - [@reitermarkus](https://github.com/reitermarkus)
 - [@JoniVR](https://github.com/JoniVR)
 
 ## Thanks
+
 - [@bluejamesbond](https://github.com/bluejamesbond/) (Original developer)
 - [@Tyilo](https://github.com/Tyilo/) (Fork)
 - [@Bensge](https://github.com/Bensge/) - (Used some code from his project [NativeDisplayBrightness](https://github.com/Bensge/NativeDisplayBrightness))

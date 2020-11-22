@@ -1,3 +1,11 @@
+/* Shown in the main prefs window */
+"Advanced" = "Advanced";
+
+/* Shown in the alert dialog */
+"Are you sure you want to enable a longer delay? Doing so may freeze your system and require a restart. Start at login will be disabled as a safety measure." = "Are you sure you want to enable a longer delay? Doing so may freeze your system and require a restart. Start at login will be disabled as a safety measure.";
+
+/* Shown in the alert dialog */
+"Are you sure you want to reset all preferences?" = "Are you sure you want to reset all preferences?";
 
 /* Shown in menu */
 "Brightness" = "Luminosité";
@@ -14,6 +22,9 @@
 /* Shown in the main prefs window */
 "Display" = "Écrans";
 
+/* Shown in the alert dialog */
+"Enable Longer Delay?" = "Enable Longer Delay?";
+
 /* Shown in the main prefs window */
 "General" = "Général";
 
@@ -23,6 +34,9 @@
 /* Shown in the main prefs window  */
 "Advanced" = "Avancé";
 
+/* Shown in the alert dialog */
+"No" = "No";
+
 /* Shown in menu */
 "No supported display found" = "Aucun écran supporté trouvé";
 
@@ -31,6 +45,9 @@
 
 /* Shown in Preferences window */
 "Preferences" = "Préférences";
+
+/* Shown in the alert dialog */
+"Reset Preferences?" = "Reset Preferences?";
 
 /* Shown in menu */
 "Set as default" = "Enregistrer comme écran par défaut";
@@ -48,6 +65,9 @@
 
 /* Shown in menu */
 "Volume" = "Volume";
+
+/* Shown in the alert dialog */
+"Yes" = "Yes";
 
 /* Shown in the alert dialog */
 "You need to enable MonitorControl in System Preferences > Security and Privacy > Accessibility for the keyboard shortcuts to work" = "Vous devez activer MonitorControl dans Préférences Système > Sécurité et confidentialité  > Accessibilité pour que les raccourcis clavier fonctionnes";
