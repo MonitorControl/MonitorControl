@@ -2,10 +2,10 @@
 "Advanced" = "Дополнительные";
 
 /* Shown in the alert dialog */
-"Are you sure you want to enable a longer delay? Doing so may freeze your system and require a restart. Start at login will be disabled as a safety measure." = "Are you sure you want to enable a longer delay? Doing so may freeze your system and require a restart. Start at login will be disabled as a safety measure.";
+"Are you sure you want to enable a longer delay? Doing so may freeze your system and require a restart. Start at login will be disabled as a safety measure." = "Вы уверены что хотите включить увеличенную задержку? Это может привести к зависанию системы и потребуется перезагрузка. Запуск при старте системы будет выключен в мерах безопасности.";
 
 /* Shown in the alert dialog */
-"Are you sure you want to reset all preferences?" = "Are you sure you want to reset all preferences?";
+"Are you sure you want to reset all preferences?" = "Вы уверены что хотите сбросить все настройки?";
 
 /* Sown in menu */
 "Brightness" = "Яркость";
@@ -23,7 +23,7 @@
 "Display" = "Мониторы";
 
 /* Shown in the alert dialog */
-"Enable Longer Delay?" = "Enable Longer Delay?";
+"Enable Longer Delay?" = "Включить увеличенную задержку?";
 
 /* Shown in the main prefs window */
 "General" = "Основные";
@@ -32,7 +32,7 @@
 "Keys" = "Сочетания клавиш";
 
 /* Shown in the alert dialog */
-"No" = "No";
+"No" = "Нет";
 
 /* Shown in menu */
 "No supported display found" = "Поддерживаемых мониторов не найдено";
@@ -44,7 +44,7 @@
 "Preferences" = "Настройки";
 
 /* Shown in the alert dialog */
-"Reset Preferences?" = "Reset Preferences?";
+"Reset Preferences?" = "Сбросить настройки?";
 
 /* Shown in menu */
 "Set as default" = "Сделать основным";
