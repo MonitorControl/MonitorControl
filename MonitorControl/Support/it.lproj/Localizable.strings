@@ -2,10 +2,10 @@
 "Advanced" = "Avanzato";
 
 /* Shown in the alert dialog */
-"Are you sure you want to enable a longer delay? Doing so may freeze your system and require a restart. Start at login will be disabled as a safety measure." = "Are you sure you want to enable a longer delay? Doing so may freeze your system and require a restart. Start at login will be disabled as a safety measure.";
+"Are you sure you want to enable a longer delay? Doing so may freeze your system and require a restart. Start at login will be disabled as a safety measure." = "Sei sicuro di voler abilitare un ritardo più lungo? Ciò potrebbe bloccare il sistema e richiedere un riavvio. L'avvio all'accesso sarà disabilitato come misura di sicurezza.";
 
 /* Shown in the alert dialog */
-"Are you sure you want to reset all preferences?" = "Are you sure you want to reset all preferences?";
+"Are you sure you want to reset all preferences?" = "Sei sicuro di voler ripristinare tutte le preferenze?";
 
 /* Shown in menu */
 "Brightness" = "Luminosità";
@@ -23,7 +23,7 @@
 "Display" = "Monitor";
 
 /* Shown in the alert dialog */
-"Enable Longer Delay?" = "Enable Longer Delay?";
+"Enable Longer Delay?" = "Abilita ritardo più lungo?";
 
 /* Shown in the main prefs window */
 "General" = "Generale";
@@ -44,7 +44,7 @@
 "Preferences" = "Preferenze";
 
 /* Shown in the alert dialog */
-"Reset Preferences?" = "Reset Preferences?";
+"Reset Preferences?" = "Resetta le preferenze?";
 
 /* Shown in menu */
 "Set as default" = "Imposta come default";
@@ -64,7 +64,7 @@
 "Volume" = "Volume";
 
 /* Shown in the alert dialog */
-"Yes" = "Yes";
+"Yes" = "Sì";
 
 /* Shown in the alert dialog */
 "You need to enable MonitorControl in System Preferences > Security and Privacy > Accessibility for the keyboard shortcuts to work" = "E' necessario abilitare MonitorControl nelle Preferenze di Sistema > Sicurezza e Privacy > Accessibilità affinchè le abbreviazioni da tastiera funzionino";
