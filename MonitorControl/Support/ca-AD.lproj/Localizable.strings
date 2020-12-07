@@ -2,10 +2,10 @@
 "Advanced" = "Avançat";
 
 /* Shown in the alert dialog */
-"Are you sure you want to enable a longer delay? Doing so may freeze your system and require a restart. Start at login will be disabled as a safety measure." = "Are you sure you want to enable a longer delay? Doing so may freeze your system and require a restart. Start at login will be disabled as a safety measure.";
+"Are you sure you want to enable a longer delay? Doing so may freeze your system and require a restart. Start at login will be disabled as a safety measure." = "Esteu segur que voleu habilitar un retard més llarg? Si ho feu, això pot congelar el vostre sistema i requerir un reinici. Com a mesura de seguretat, es desactivarà l'obertura de l'aplicació a l'inici de sessió.";
 
 /* Shown in the alert dialog */
-"Are you sure you want to reset all preferences?" = "Are you sure you want to reset all preferences?";
+"Are you sure you want to reset all preferences?" = "Esteu segur que voleu restablir totes les preferències?";
 
 /* Shown in menu */
 "Brightness" = "Brillantor";
@@ -23,7 +23,7 @@
 "Display" = "Pantalla";
 
 /* Shown in the alert dialog */
-"Enable Longer Delay?" = "Enable Longer Delay?";
+"Enable Longer Delay?" = "Voleu activar un retard més llarg?";
 
 /* Shown in the main prefs window */
 "General" = "General";
@@ -44,7 +44,7 @@
 "Preferences" = "Preferències";
 
 /* Shown in the alert dialog */
-"Reset Preferences?" = "Reset Preferences?";
+"Reset Preferences?" = "Restablir Preferències?";
 
 /* Shown in menu */
 "Set as default" = "Establir com a pantalla per defecte";
@@ -64,7 +64,7 @@
 "Volume" = "Volum";
 
 /* Shown in the alert dialog */
-"Yes" = "Yes";
+"Yes" = "Sí";
 
 /* Shown in the alert dialog */
 "You need to enable MonitorControl in System Preferences > Security and Privacy > Accessibility for the keyboard shortcuts to work" = "Cal activar MonitorControl a Preferències del sistema > Seguretat i Privacitat > Accessibilitat perquè les dreceres amb el teclat funcionin";
