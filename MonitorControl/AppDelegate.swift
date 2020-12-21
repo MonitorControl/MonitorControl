@@ -18,7 +18,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
   var monitorItems: [NSMenuItem] = []
 
-  var displayManager: DisplayManager?
   var mediaKeyTap: MediaKeyTap?
   var prefsController: NSWindowController?
   var keyRepeatTimers: [MediaKey: Timer] = [:]
@@ -27,15 +26,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
   func applicationDidFinishLaunching(_: Notification) {
     app = self
-
-    self.displayManager = DisplayManager()
     self.setupViewControllers()
     self.subscribeEventListeners()
+    self.setDefaultPrefs()
     self.updateMediaKeyTap()
     self.statusItem.image = NSImage(named: "status")
     self.statusItem.menu = self.statusMenu
-    self.setDefaultPrefs()
-    Utils.acquirePrivileges()
+    self.checkPermissions()
     CGDisplayRegisterReconfigurationCallback({ _, _, _ in app.updateDisplays() }, nil)
     self.updateDisplays()
   }
@@ -68,7 +65,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   func clearDisplays() {
     if self.statusMenu.items.count > 2 {
       var items: [NSMenuItem] = []
-      for i in 0..<self.statusMenu.items.count - 2 {
+      for i in 0 ..< self.statusMenu.items.count - 2 {
         items.append(self.statusMenu.items[i])
       }
 
@@ -152,6 +149,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     self.statusMenu.insertItem(monitorMenuItem, at: 0)
   }
 
+  private func checkPermissions() {
+    let permissionsRequired: Bool = prefs.integer(forKey: Utils.PrefKeys.listenFor.rawValue) != Utils.ListenForKeys.none.rawValue
+    if !Utils.readPrivileges(prompt: false) && permissionsRequired {
+      Utils.acquirePrivileges()
+    }
+  }
+
   private func setupViewControllers() {
     let storyboard: NSStoryboard = NSStoryboard(name: "Main", bundle: Bundle.main)
     let mainPrefsVc = storyboard.instantiateController(withIdentifier: "MainPrefsVC")
@@ -198,12 +202,35 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     return nil
   }
+
+  func handleOpenPrefPane(mediaKey: MediaKey, event: KeyEvent?, modifiers: NSEvent.ModifierFlags?) -> Bool {
+    guard let modifiers = modifiers else { return false }
+    if !(modifiers.contains(.option) && !modifiers.contains(.shift)) {
+      return false
+    }
+    if event?.keyRepeat == true {
+      return false
+    }
+    switch mediaKey {
+    case .brightnessUp, .brightnessDown:
+      NSWorkspace.shared.open(URL(fileURLWithPath: "/System/Library/PreferencePanes/Displays.prefPane"))
+    case .mute, .volumeUp, .volumeDown:
+      NSWorkspace.shared.open(URL(fileURLWithPath: "/System/Library/PreferencePanes/Sound.prefPane"))
+    default:
+      return false
+    }
+    return true
+  }
 }
 
 // MARK: - Media Key Tap delegate
 
 extension AppDelegate: MediaKeyTapDelegate {
   func handle(mediaKey: MediaKey, event: KeyEvent?, modifiers: NSEvent.ModifierFlags?) {
+    if self.handleOpenPrefPane(mediaKey: mediaKey, event: event, modifiers: modifiers) {
+      return
+    }
+
     let isSmallIncrement = modifiers?.isSuperset(of: NSEvent.ModifierFlags([.shift, .option])) ?? false
 
     // control internal display when holding ctrl modifier
@@ -228,7 +255,10 @@ extension AppDelegate: MediaKeyTapDelegate {
       }
       mediaKeyTimer.invalidate()
     }
+    self.sendDisplayCommand(mediaKey: mediaKey, isRepeat: isRepeat, isSmallIncrement: isSmallIncrement)
+  }
 
+  private func sendDisplayCommand(mediaKey: MediaKey, isRepeat: Bool, isSmallIncrement: Bool) {
     let displays = DisplayManager.shared.getAllDisplays()
     guard let currentDisplay = DisplayManager.shared.getCurrentDisplay() else { return }
 
@@ -265,6 +295,7 @@ extension AppDelegate: MediaKeyTapDelegate {
   // MARK: - Prefs notification
 
   @objc func handleListenForChanged() {
+    self.checkPermissions()
     self.updateMediaKeyTap()
   }
 
@@ -283,6 +314,7 @@ extension AppDelegate: MediaKeyTapDelegate {
   @objc func handlePreferenceReset() {
     self.setDefaultPrefs()
     self.updateDisplays()
+    self.checkPermissions()
     self.updateMediaKeyTap()
   }
 
@@ -294,6 +326,8 @@ extension AppDelegate: MediaKeyTapDelegate {
       keys = [.brightnessUp, .brightnessDown]
     case Utils.ListenForKeys.volumeOnlyKeys.rawValue:
       keys = [.mute, .volumeUp, .volumeDown]
+    case Utils.ListenForKeys.none.rawValue:
+      keys = []
     default:
       keys = [.brightnessUp, .brightnessDown, .mute, .volumeUp, .volumeDown]
     }
@@ -306,7 +340,7 @@ extension AppDelegate: MediaKeyTapDelegate {
     self.mediaKeyTap?.stop()
     // returning an empty array listens for all mediakeys in MediaKeyTap
     if keys.count > 0 {
-      self.mediaKeyTap = MediaKeyTap(delegate: self, for: keys, observeBuiltIn: false)
+      self.mediaKeyTap = MediaKeyTap(delegate: self, for: keys, observeBuiltIn: true)
       self.mediaKeyTap?.start()
     }
   }

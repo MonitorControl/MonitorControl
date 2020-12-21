@@ -32,7 +32,6 @@ class ExternalDisplay: Display {
   }
 
   private var audioPlayer: AVAudioPlayer?
-  private let osdChicletBoxes: Float = 16
 
   override init(_ identifier: CGDirectDisplayID, name: String, vendorNumber: UInt32?, modelNumber: UInt32?) {
     super.init(identifier, name: name, vendorNumber: vendorNumber, modelNumber: modelNumber)
@@ -46,7 +45,7 @@ class ExternalDisplay: Display {
       return
     }
 
-    for _ in 0..<20 {
+    for _ in 0 ..< 20 {
       _ = self.ddc?.write(command: .osd, value: UInt16(1), errorRecoveryWaitTime: 2000)
     }
   }
@@ -90,7 +89,7 @@ class ExternalDisplay: Display {
 
     if !fromVolumeSlider {
       self.hideDisplayOsd()
-      self.showOsd(command: volumeOSDValue > 0 ? .audioSpeakerVolume : .audioMuteScreenBlank, value: volumeOSDValue)
+      self.showOsd(command: volumeOSDValue > 0 ? .audioSpeakerVolume : .audioMuteScreenBlank, value: volumeOSDValue, roundChiclet: true)
 
       if volumeOSDValue > 0 {
         self.playVolumeChangedSound()
@@ -106,7 +105,6 @@ class ExternalDisplay: Display {
     var muteValue: Int?
     let volumeOSDValue = self.calcNewValue(for: .audioSpeakerVolume, isUp: isUp, isSmallIncrement: isSmallIncrement)
     let volumeDDCValue = UInt16(volumeOSDValue)
-
     if self.isMuted(), volumeOSDValue > 0 {
       muteValue = 2
     } else if !self.isMuted(), volumeOSDValue == 0 {
@@ -132,7 +130,7 @@ class ExternalDisplay: Display {
     }
 
     self.hideDisplayOsd()
-    self.showOsd(command: .audioSpeakerVolume, value: volumeOSDValue)
+    self.showOsd(command: .audioSpeakerVolume, value: volumeOSDValue, roundChiclet: !isSmallIncrement)
 
     if !isAlreadySet {
       self.saveValue(volumeOSDValue, for: .audioSpeakerVolume)
@@ -163,7 +161,7 @@ class ExternalDisplay: Display {
       }
     }
 
-    self.showOsd(command: .brightness, value: osdValue)
+    self.showOsd(command: .brightness, value: osdValue, roundChiclet: !isSmallIncrement)
 
     if !isAlreadySet {
       if let slider = self.brightnessSliderHandler?.slider {
@@ -221,25 +219,32 @@ class ExternalDisplay: Display {
   func calcNewValue(for command: DDC.Command, isUp: Bool, isSmallIncrement: Bool) -> Int {
     let currentValue = self.getValue(for: command)
     let nextValue: Int
+    let maxValue = Float(self.getMaxValue(for: command))
 
     if isSmallIncrement {
       nextValue = currentValue + (isUp ? 1 : -1)
     } else {
-      let filledChicletBoxes = self.osdChicletBoxes * (Float(currentValue) / Float(self.getMaxValue(for: command)))
+      let osdChicletFromValue = OSDUtils.chiclet(fromValue: Float(currentValue), maxValue: maxValue)
 
-      var nextFilledChicletBoxes: Float
-      var filledChicletBoxesRel: Float = isUp ? 1 : -1
+      let distance = OSDUtils.getDistance(fromNearestChiclet: osdChicletFromValue)
+      // get the next rounded chiclet
+      var nextFilledChiclet = isUp ? ceil(osdChicletFromValue) : floor(osdChicletFromValue)
 
-      // This is a workaround to ensure that if the user has set the value using a small step (that is, the current chiclet box isn't completely filled,
-      // the next regular up or down step will only fill or empty that chiclet, and not the next one as well - it only really works because the max value is 100
-      if (isUp && ceil(filledChicletBoxes) - filledChicletBoxes > 0.15) || (!isUp && filledChicletBoxes - floor(filledChicletBoxes) > 0.15) {
-        filledChicletBoxesRel = 0
+      // Depending on the direction, if the chiclet is above or below a certain threshold, we go to the next whole chiclet
+      let distanceThreshold = Float(0.25) // 25% of the distance between the edges of an osd box
+      if distance == 0 {
+        nextFilledChiclet += isUp ? 1 : -1
+      } else if !isUp, distance < distanceThreshold {
+        nextFilledChiclet -= 1
+      } else if isUp, distance > (1 - distanceThreshold) {
+        nextFilledChiclet += 1
       }
 
-      nextFilledChicletBoxes = isUp ? ceil(filledChicletBoxes + filledChicletBoxesRel) : floor(filledChicletBoxes + filledChicletBoxesRel)
-      nextValue = Int(Float(self.getMaxValue(for: command)) * (nextFilledChicletBoxes / self.osdChicletBoxes))
+      nextValue = Int(round(OSDUtils.value(fromChiclet: nextFilledChiclet, maxValue: maxValue)))
+
+      os_log("next: .value %{public}@/%{public}@, .osd %{public}@/%{public}@", type: .debug, String(nextValue), String(maxValue), String(nextFilledChiclet), String(OSDUtils.chicletCount))
     }
-    return max(0, min(self.getMaxValue(for: command), Int(nextValue)))
+    return max(0, min(self.getMaxValue(for: command), nextValue))
   }
 
   func getValue(for command: DDC.Command) -> Int {
@@ -308,11 +313,11 @@ class ExternalDisplay: Display {
   }
 
   private func stepSize(for command: DDC.Command, isSmallIncrement: Bool) -> Int {
-    return isSmallIncrement ? 1 : Int(floor(Float(self.getMaxValue(for: command)) / self.osdChicletBoxes))
+    return isSmallIncrement ? 1 : Int(floor(Float(self.getMaxValue(for: command)) / OSDUtils.chicletCount))
   }
 
-  override func showOsd(command: DDC.Command, value: Int, maxValue _: Int = 100) {
-    super.showOsd(command: command, value: value, maxValue: self.getMaxValue(for: command))
+  override func showOsd(command: DDC.Command, value: Int, maxValue _: Int = 100, roundChiclet: Bool = false) {
+    super.showOsd(command: command, value: value, maxValue: self.getMaxValue(for: command), roundChiclet: roundChiclet)
   }
 
   private func supportsMuteCommand() -> Bool {

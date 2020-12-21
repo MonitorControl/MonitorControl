@@ -1,5 +1,5 @@
 --indent 2
---ranges no-space
+--nospaceoperators
 --self insert
 --exponentcase lowercase
 --exclude Carthage

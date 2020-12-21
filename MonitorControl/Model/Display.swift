@@ -8,6 +8,13 @@
 
 import DDC
 import Foundation
+import os.log
+
+private enum OSDImage: Int64 {
+  case brightness = 1
+  case audioSpeaker = 3
+  case audioSpeakerMuted = 4
+}
 
 class Display {
   internal let identifier: CGDirectDisplayID
@@ -42,29 +49,40 @@ class Display {
     return self.prefs.string(forKey: "friendlyName-\(self.identifier)") ?? self.name
   }
 
-  func showOsd(command: DDC.Command, value: Int, maxValue: Int = 100) {
+  func showOsd(command: DDC.Command, value: Int, maxValue: Int = 100, roundChiclet: Bool = false) {
     guard let manager = OSDManager.sharedManager() as? OSDManager else {
       return
     }
 
-    var osdImage: Int64!
+    var osdImage: OSDImage
     switch command {
-    case .brightness:
-      osdImage = 1 // Brightness Image
     case .audioSpeakerVolume:
-      osdImage = 3 // Speaker image
+      osdImage = value > 0 ? .audioSpeaker : .audioSpeakerMuted
     case .audioMuteScreenBlank:
-      osdImage = 4 // Mute image
+      osdImage = .audioSpeakerMuted
     default:
-      osdImage = 1
+      osdImage = .brightness
     }
 
-    manager.showImage(osdImage,
+    let filledChiclets: Int
+    let totalChiclets: Int
+
+    if roundChiclet {
+      let osdChiclet = OSDUtils.chiclet(fromValue: Float(value), maxValue: Float(maxValue))
+
+      filledChiclets = Int(round(osdChiclet))
+      totalChiclets = 16
+    } else {
+      filledChiclets = value
+      totalChiclets = maxValue
+    }
+
+    manager.showImage(osdImage.rawValue,
                       onDisplayID: self.identifier,
                       priority: 0x1F4,
                       msecUntilFade: 1000,
-                      filledChiclets: UInt32(value),
-                      totalChiclets: UInt32(maxValue),
+                      filledChiclets: UInt32(filledChiclets),
+                      totalChiclets: UInt32(totalChiclets),
                       locked: false)
   }
 }

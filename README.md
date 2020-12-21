@@ -9,7 +9,7 @@ Control your external monitor brightness, contrast or volume directly from a men
 
 <!-- Language emoji -->
 <div align="center">
-    <p>Translations: :uk: :fr: :de: :it: :ru: 🇺🇦 </p>
+    <p>Translations: :uk: :fr: :de: :it: :ru: :ukraine: :jp: :poland: </p>
 </div>
 
 <br/>
@@ -72,6 +72,7 @@ Open [issues](https://github.com/the0neyouseek/MonitorControl/issues) if you hav
 - [Carthage](https://github.com/Carthage/Carthage)
 - [Swiftlint](https://github.com/realm/SwiftLint)
 - [SwiftFormat](https://github.com/nicklockwood/SwiftFormat)
+- [BartyCrouch](https://github.com/Flinesoft/BartyCrouch) (for updating localizations)
 
 Clone the project
 ```sh

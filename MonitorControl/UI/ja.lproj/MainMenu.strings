@@ -1,5 +1,5 @@
 /* Class = "NSMenuItem"; title = "Quit"; ObjectID = "JTa-2I-AsI"; */
-"JTa-2I-AsI.title" = "Quit";
+"JTa-2I-AsI.title" = "MonitorControl を終了";
 
 /* Class = "NSMenuItem"; title = "Preferences..."; ObjectID = "SOS-eZ-uU5"; */
-"SOS-eZ-uU5.title" = "Preferences...";
+"SOS-eZ-uU5.title" = "環境設定...";
