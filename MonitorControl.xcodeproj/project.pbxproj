@@ -38,6 +38,7 @@
 		6CBFE27C23DB27A200D1BC41 /* InternalDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CBFE27B23DB27A200D1BC41 /* InternalDisplay.swift */; };
 		6CCB278622D5315200619B05 /* HideOsdCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CCB278522D5315200619B05 /* HideOsdCellView.swift */; };
 		6CD444C322D4FBB8005BFD3D /* LongerDelayCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CD444C222D4FBB8005BFD3D /* LongerDelayCellView.swift */; };
+		70D5BAB0258E9D8A00355938 /* EnableMuteCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D5BAAF258E9D8A00355938 /* EnableMuteCellView.swift */; };
 		F01B0699228221B7008E64DB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F01B0680228221B6008E64DB /* Localizable.strings */; };
 		F01B069A228221B7008E64DB /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01B0683228221B6008E64DB /* Utils.swift */; };
 		F01B069E228221B7008E64DB /* ButtonCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01B068E228221B6008E64DB /* ButtonCellView.swift */; };
@@ -138,6 +139,7 @@
 		6CBFE27B23DB27A200D1BC41 /* InternalDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternalDisplay.swift; sourceTree = "<group>"; };
 		6CCB278522D5315200619B05 /* HideOsdCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HideOsdCellView.swift; sourceTree = "<group>"; };
 		6CD444C222D4FBB8005BFD3D /* LongerDelayCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LongerDelayCellView.swift; sourceTree = "<group>"; };
+		70D5BAAF258E9D8A00355938 /* EnableMuteCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnableMuteCellView.swift; sourceTree = "<group>"; };
 		B0C4810623357CE500053F91 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		B0C4810723357CE500053F91 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
 		B0C4810823357CE500053F91 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/MainMenu.strings; sourceTree = "<group>"; };
@@ -284,6 +286,7 @@
 				6C85EFDE22CBB54100227EA1 /* PollingCountCellView.swift */,
 				6CD444C222D4FBB8005BFD3D /* LongerDelayCellView.swift */,
 				6CCB278522D5315200619B05 /* HideOsdCellView.swift */,
+				70D5BAAF258E9D8A00355938 /* EnableMuteCellView.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -559,6 +562,7 @@
 				6CBFE27C23DB27A200D1BC41 /* InternalDisplay.swift in Sources */,
 				FE4E0896249D584C003A50BB /* OSDUtils.swift in Sources */,
 				6CBFE27A23DB266000D1BC41 /* Display.swift in Sources */,
+				70D5BAB0258E9D8A00355938 /* EnableMuteCellView.swift in Sources */,
 				F03A8DF21FFBAA6F0034DC27 /* ExternalDisplay.swift in Sources */,
 				F0445D40200259C10025AE82 /* DisplayPrefsViewController.swift in Sources */,
 				28D1DDF0227FBD99004CB494 /* EDID+Extension.swift in Sources */,

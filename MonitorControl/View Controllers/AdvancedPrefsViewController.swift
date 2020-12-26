@@ -18,6 +18,7 @@ class AdvancedPrefsViewController: NSViewController, MASPreferencesViewControlle
     case pollingCount
     case longerDelay
     case hideOsd
+    case enableMute
   }
 
   @IBOutlet var displayList: NSTableView!
@@ -104,6 +105,12 @@ class AdvancedPrefsViewController: NSViewController, MASPreferencesViewControlle
     case .hideOsd:
       if let cell = tableView.makeView(withIdentifier: tableColumn.identifier, owner: nil) as? HideOsdCellView {
         cell.button.state = display.hideOsd ? .on : .off
+        cell.display = display
+        return cell
+      }
+    case .enableMute:
+      if let cell = tableView.makeView(withIdentifier: tableColumn.identifier, owner: nil) as? EnableMuteCellView {
+        cell.button.state = display.enableMuteUnmute ? .on : .off
         cell.display = display
         return cell
       }

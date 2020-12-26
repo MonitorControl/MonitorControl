@@ -76,6 +76,9 @@
 /* Class = "NSTableColumn"; headerCell.title = "Model"; ObjectID = "Nvp-hI-w4x"; */
 "Nvp-hI-w4x.headerCell.title" = "Modello";
 
+/* Class = "NSTableColumn"; headerCell.title = "Enable Mute"; ObjectID = "PaR-Kn-lMO"; */
+"PaR-Kn-lMO.headerCell.title" = "Enable Mute";
+
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "PZ9-0Z-K6J"; */
 "PZ9-0Z-K6J.title" = "Text Cell";
 

@@ -11,6 +11,16 @@ class ExternalDisplay: Display {
 
   private let prefs = UserDefaults.standard
 
+  var enableMuteUnmute: Bool {
+    get {
+      return self.prefs.bool(forKey: "enableMuteUnmute-\(self.identifier)")
+    }
+    set {
+      self.prefs.set(newValue, forKey: "enableMuteUnmute-\(self.identifier)")
+      os_log("Set `enableMuteUnmute` for %{private}@ to: %{public}@", type: .info, String(self.identifier), String(newValue))
+    }
+  }
+
   var hideOsd: Bool {
     get {
       return self.prefs.bool(forKey: "hideOsd-\(self.identifier)")
@@ -79,7 +89,7 @@ class ExternalDisplay: Display {
       return
     }
 
-    if self.supportsMuteCommand() {
+    if self.enableMuteUnmute {
       guard self.ddc?.write(command: .audioMuteScreenBlank, value: UInt16(muteValue)) == true else {
         return
       }
@@ -120,8 +130,7 @@ class ExternalDisplay: Display {
     }
 
     if let muteValue = muteValue {
-      // If the mute command is supported, set its value accordingly
-      if self.supportsMuteCommand() {
+      if self.enableMuteUnmute {
         guard self.ddc?.write(command: .audioMuteScreenBlank, value: UInt16(muteValue)) == true else {
           return
         }
@@ -318,11 +327,6 @@ class ExternalDisplay: Display {
 
   override func showOsd(command: DDC.Command, value: Int, maxValue _: Int = 100, roundChiclet: Bool = false) {
     super.showOsd(command: command, value: value, maxValue: self.getMaxValue(for: command), roundChiclet: roundChiclet)
-  }
-
-  private func supportsMuteCommand() -> Bool {
-    // Monitors which don't support the mute command - e.g. Dell U3419W - will have a maximum value of 100 for the DDC mute command
-    return self.getMaxValue(for: .audioMuteScreenBlank) == 2
   }
 
   private func playVolumeChangedSound() {
