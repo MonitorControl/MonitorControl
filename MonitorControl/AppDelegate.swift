@@ -81,7 +81,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     self.clearDisplays()
 
     for screen in NSScreen.screens {
-      let name = screen.displayName ?? NSLocalizedString("Unknown", comment: "Unknown display name")
+      let name: String
+      if #available(OSX 10.15, *) {
+        name = screen.localizedName
+      } else {
+        name = screen.displayName ?? NSLocalizedString("Unknown", comment: "Unknown display name")
+      }
       let id = screen.displayID
       let vendorNumber = screen.vendorNumber
       let modelNumber = screen.modelNumber
