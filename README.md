@@ -17,19 +17,19 @@ Control your external monitor brightness, contrast or volume directly from a men
 <!-- shields -->
 <div align="center">
     <!-- downloads -->
-    <a href="https://github.com/the0neyouseek/MonitorControl/releases">
-        <img src="https://img.shields.io/github/downloads/the0neyouseek/MonitorControl/total.svg" alt="downloads"/>
+    <a href="https://github.com/MonitorControl/MonitorControl/releases">
+        <img src="https://img.shields.io/github/downloads/MonitorControl/MonitorControl/total.svg" alt="downloads"/>
     </a>
     <!-- version -->
-    <a href="https://github.com/the0neyouseek/MonitorControl/releases/latest">
-        <img src="https://img.shields.io/github/release/the0neyouseek/MonitorControl.svg" alt="latest version"/>
+    <a href="https://github.com/MonitorControl/MonitorControl/releases/latest">
+        <img src="https://img.shields.io/github/release/MonitorControl/MonitorControl.svg" alt="latest version"/>
     </a>
     <!-- license -->
-    <a href="https://github.com/the0neyouseek/MonitorControl/blob/master/License.txt">
-        <img src="https://img.shields.io/github/license/the0neyouseek/MonitorControl.svg" alt="license"/>
+    <a href="https://github.com/MonitorControl/MonitorControl/blob/master/License.txt">
+        <img src="https://img.shields.io/github/license/MonitorControl/MonitorControl.svg" alt="license"/>
     </a>
     <!-- platform -->
-    <a href="https://github.com/the0neyouseek/MonitorControl">
+    <a href="https://github.com/MonitorControl/MonitorControl">
         <img src="https://img.shields.io/badge/platform-macOS-lightgrey.svg" alt="platform"/>
     </a>
 </div>
@@ -50,7 +50,7 @@ Control your external monitor brightness, contrast or volume directly from a men
 
 ## Download
 
-Go to [Release](https://github.com/the0neyouseek/MonitorControl/releases/latest) and download the latest `.dmg`
+Go to [Release](https://github.com/MonitorControl/MonitorControl/releases/latest) and download the latest `.dmg`
 
 ## Installing with Homebrew Cask
 
@@ -62,7 +62,7 @@ $ brew install --cask monitorcontrol
 
 ## How to help
 
-Open [issues](https://github.com/the0neyouseek/MonitorControl/issues) if you have a question, an enhancement to suggest or a bug you've found. If you want you can fork the code yourself and submit a pull request to improve the app.
+Open [issues](https://github.com/MonitorControl/MonitorControl/issues) if you have a question, an enhancement to suggest or a bug you've found. If you want you can fork the code yourself and submit a pull request to improve the app.
 
 ## How to build
 
@@ -76,7 +76,7 @@ Open [issues](https://github.com/the0neyouseek/MonitorControl/issues) if you hav
 
 Clone the project
 ```sh
-$ git clone https://github.com/the0neyouseek/MonitorControl.git
+$ git clone https://github.com/MonitorControl/MonitorControl.git
 ```
 Then download the dependencies with Carthage
 ```sh
