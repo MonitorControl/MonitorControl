@@ -4,9 +4,6 @@
 /* Class = "NSButtonCell"; title = "Reset Preferences"; ObjectID = "4Pj-3t-PJr"; */
 "4Pj-3t-PJr.title" = "Reset Preferences";
 
-/* Class = "NSTextFieldCell"; title = "Advanced"; ObjectID = "5wk-Dy-0fG"; */
-"5wk-Dy-0fG.title" = "Advanced";
-
 /* Class = "NSTableColumn"; headerCell.title = "Enabled"; ObjectID = "8U8-ec-Zbv"; */
 "8U8-ec-Zbv.headerCell.title" = "Activé";
 
@@ -16,23 +13,14 @@
 /* Class = "NSMenuItem"; title = "Custom"; ObjectID = "Cle-DD-vR7"; */
 "Cle-DD-vR7.title" = "Custom";
 
-/* Class = "NSTextFieldCell"; title = "Keys"; ObjectID = "Dcz-GG-1li"; */
-"Dcz-GG-1li.title" = "Touches";
-
 /* Class = "NSTableColumn"; headerCell.title = "ID"; ObjectID = "dgp-q7-cBK"; */
 "dgp-q7-cBK.headerCell.title" = "Identifiant";
 
 /* Class = "NSTableColumn"; headerCell.title = "Display Name"; ObjectID = "dNl-I0-hcg"; */
 "dNl-I0-hcg.headerCell.title" = "Display Name";
 
-/* Class = "NSTextFieldCell"; title = "General"; ObjectID = "ENU-js-huy"; */
-"ENU-js-huy.title" = "Général";
-
 /* Class = "NSMenuItem"; title = "Minimal"; ObjectID = "Eq3-z9-yIo"; */
 "Eq3-z9-yIo.title" = "Minimal";
-
-/* Class = "NSTextFieldCell"; title = "Display"; ObjectID = "ExD-7P-6XI"; */
-"ExD-7P-6XI.title" = "Écrans";
 
 /* Class = "NSButtonCell"; title = "Lower Contrast after Brightness"; ObjectID = "fhy-Er-0aI"; */
 "fhy-Er-0aI.title" = "Diminuer le contraste après la luminosité";

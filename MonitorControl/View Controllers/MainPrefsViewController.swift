@@ -5,8 +5,16 @@ import ServiceManagement
 
 class MainPrefsViewController: NSViewController, PreferencePane {
   let preferencePaneIdentifier = Preferences.PaneIdentifier.main
-  let preferencePaneTitle: String = "General"
-  let toolbarItemIcon = NSImage(named: NSImage.preferencesGeneralName)!
+  let preferencePaneTitle: String = NSLocalizedString("General", comment: "Shown in the main prefs window")
+
+  var toolbarItemIcon: NSImage {
+    if #available(macOS 11.0, *) {
+      return NSImage(systemSymbolName: "switch.2", accessibilityDescription: "Display")!
+    } else {
+      // Fallback on earlier versions
+      return NSImage(named: NSImage.preferencesGeneralName)!
+    }
+  }
 
   let prefs = UserDefaults.standard
 

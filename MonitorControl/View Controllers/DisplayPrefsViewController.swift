@@ -6,7 +6,15 @@ import Preferences
 class DisplayPrefsViewController: NSViewController, PreferencePane, NSTableViewDataSource, NSTableViewDelegate {
   var preferencePaneIdentifier = Preferences.PaneIdentifier.display
   var preferencePaneTitle: String = NSLocalizedString("Display", comment: "Shown in the main prefs window")
-  var toolbarItemIcon = NSImage(named: NSImage.computerName)!
+
+  var toolbarItemIcon: NSImage {
+    if #available(macOS 11.0, *) {
+      return NSImage(systemSymbolName: "display", accessibilityDescription: "Display")!
+    } else {
+      // Fallback on earlier versions
+      return NSImage(named: NSImage.computerName)!
+    }
+  }
 
   let prefs = UserDefaults.standard
 

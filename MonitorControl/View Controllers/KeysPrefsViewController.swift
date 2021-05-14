@@ -5,7 +5,15 @@ import Preferences
 class KeysPrefsViewController: NSViewController, PreferencePane {
   var preferencePaneIdentifier = Preferences.PaneIdentifier.keys
   var preferencePaneTitle: String = NSLocalizedString("Keys", comment: "Shown in the main prefs window")
-  var toolbarItemIcon = NSImage(named: "KeyboardPref")!
+
+  var toolbarItemIcon: NSImage {
+    if #available(macOS 11.0, *) {
+      return NSImage(systemSymbolName: "keyboard", accessibilityDescription: "Keys")!
+    } else {
+      // Fallback on earlier versions
+      return NSImage(named: "KeyboardPref")!
+    }
+  }
 
   let prefs = UserDefaults.standard
 

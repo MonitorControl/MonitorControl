@@ -11,13 +11,13 @@
             <objects>
                 <viewController storyboardIdentifier="KeysPrefsVC" id="MHy-Dv-i5A" customClass="KeysPrefsViewController" customModule="MonitorControl" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="nfK-n0-xN4">
-                        <rect key="frame" x="0.0" y="0.0" width="340" height="60"/>
+                        <rect key="frame" x="0.0" y="0.0" width="410" height="60"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <gridView xPlacement="leading" yPlacement="bottom" rowAlignment="none" rowSpacing="20" columnSpacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="APt-8Z-pdA">
-                                <rect key="frame" x="30" y="20" width="280" height="20"/>
+                                <rect key="frame" x="30" y="20" width="350" height="20"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="280" id="Che-0s-OHN"/>
+                                    <constraint firstAttribute="width" constant="350" id="Che-0s-OHN"/>
                                 </constraints>
                                 <rows>
                                     <gridRow yPlacement="fill" id="qed-B5-CbA"/>
@@ -39,7 +39,7 @@
                                     </gridCell>
                                     <gridCell row="qed-B5-CbA" column="gkC-F3-La2" id="Kb0-SV-OQ6">
                                         <popUpButton key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fUf-UM-yW3">
-                                            <rect key="frame" x="66" y="-4" width="218" height="25"/>
+                                            <rect key="frame" x="66" y="-4" width="288" height="25"/>
                                             <popUpButtonCell key="cell" type="push" title="Both Brightness &amp; Volume" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="Vr4-xb-B4o" id="DkZ-as-YDS">
                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" metaFont="menu"/>
@@ -95,7 +95,7 @@
                             <gridView xPlacement="leading" yPlacement="bottom" rowAlignment="none" rowSpacing="20" columnSpacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="1Op-Sf-8Vf">
                                 <rect key="frame" x="30" y="20" width="680" height="136"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="680" id="2fJ-Mo-iry"/>
+                                    <constraint firstAttribute="width" constant="680" id="gFN-2H-VBo"/>
                                 </constraints>
                                 <rows>
                                     <gridRow id="CtE-vz-HwJ"/>
@@ -416,13 +416,13 @@
             <objects>
                 <viewController storyboardIdentifier="MainPrefsVC" id="BGD-tY-Myx" customClass="MainPrefsViewController" customModule="MonitorControl" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="COE-Oc-gZs">
-                        <rect key="frame" x="0.0" y="0.0" width="380" height="164"/>
+                        <rect key="frame" x="0.0" y="0.0" width="410" height="164"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <gridView xPlacement="leading" yPlacement="fill" rowAlignment="none" rowSpacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="noT-gJ-0yS">
-                                <rect key="frame" x="30" y="20" width="320" height="124"/>
+                                <rect key="frame" x="30" y="20" width="350" height="124"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="320" id="QHC-Rw-h2u"/>
+                                    <constraint firstAttribute="width" constant="350" id="QHC-Rw-h2u"/>
                                 </constraints>
                                 <rows>
                                     <gridRow id="nyM-ec-RCX"/>
@@ -514,7 +514,7 @@
                             <gridView xPlacement="leading" yPlacement="fill" rowAlignment="none" rowSpacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="LNp-d4-dRY">
                                 <rect key="frame" x="30" y="20" width="680" height="212"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="680" id="uzA-PV-9z6"/>
+                                    <constraint firstAttribute="width" constant="680" id="2wP-QE-Oyr"/>
                                 </constraints>
                                 <rows>
                                     <gridRow id="bZa-uq-5i7"/>

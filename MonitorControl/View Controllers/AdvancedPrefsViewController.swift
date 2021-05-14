@@ -6,7 +6,15 @@ import Preferences
 class AdvancedPrefsViewController: NSViewController, PreferencePane, NSTableViewDataSource, NSTableViewDelegate {
   var preferencePaneIdentifier = Preferences.PaneIdentifier.advanced
   var preferencePaneTitle: String = NSLocalizedString("Advanced", comment: "Shown in the main prefs window")
-  var toolbarItemIcon = NSImage(named: NSImage.advancedName)!
+
+  var toolbarItemIcon: NSImage {
+    if #available(macOS 11.0, *) {
+      return NSImage(systemSymbolName: "gearshape", accessibilityDescription: "Advanced")!
+    } else {
+      // Fallback on earlier versions
+      return NSImage(named: NSImage.advancedName)!
+    }
+  }
 
   let prefs = UserDefaults.standard
 

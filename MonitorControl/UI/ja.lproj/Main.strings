@@ -7,9 +7,6 @@
 /* Class = "NSButtonCell"; title = "Reset Preferences"; ObjectID = "4Pj-3t-PJr"; */
 "4Pj-3t-PJr.title" = "初期設定に戻す";
 
-/* Class = "NSTextFieldCell"; title = "Advanced"; ObjectID = "5wk-Dy-0fG"; */
-"5wk-Dy-0fG.title" = "詳細設定";
-
 /* Class = "NSTableColumn"; headerCell.title = "Enabled"; ObjectID = "8U8-ec-Zbv"; */
 "8U8-ec-Zbv.headerCell.title" = "有効";
 
@@ -25,23 +22,14 @@
 /* Class = "NSMenuItem"; title = "Custom"; ObjectID = "Cle-DD-vR7"; */
 "Cle-DD-vR7.title" = "カスタム";
 
-/* Class = "NSTextFieldCell"; title = "Keys"; ObjectID = "Dcz-GG-1li"; */
-"Dcz-GG-1li.title" = "キー";
-
 /* Class = "NSTableColumn"; headerCell.title = "ID"; ObjectID = "dgp-q7-cBK"; */
 "dgp-q7-cBK.headerCell.title" = "ID";
 
 /* Class = "NSTableColumn"; headerCell.title = "Display Name"; ObjectID = "dNl-I0-hcg"; */
 "dNl-I0-hcg.headerCell.title" = "ディスプレイの名称";
 
-/* Class = "NSTextFieldCell"; title = "General"; ObjectID = "ENU-js-huy"; */
-"ENU-js-huy.title" = "一般";
-
 /* Class = "NSMenuItem"; title = "Minimal"; ObjectID = "Eq3-z9-yIo"; */
 "Eq3-z9-yIo.title" = "低頻度";
-
-/* Class = "NSTextFieldCell"; title = "Display"; ObjectID = "ExD-7P-6XI"; */
-"ExD-7P-6XI.title" = "ディスプレイ";
 
 /* Class = "NSButtonCell"; title = "Lower Contrast after Brightness"; ObjectID = "fhy-Er-0aI"; */
 "fhy-Er-0aI.title" = "画面輝度変更後、コントラストを下げる";
