@@ -331,8 +331,9 @@ class ExternalDisplay: Display {
 
     // Check if user has enabled "Play feedback when volume is changed" in Sound Preferences
     guard let preferences = Utils.getSystemPreferences(),
-      let hasSoundEnabled = preferences["com.apple.sound.beep.feedback"] as? Int,
-      hasSoundEnabled == 1 else {
+          let hasSoundEnabled = preferences["com.apple.sound.beep.feedback"] as? Int,
+          hasSoundEnabled == 1
+    else {
       os_log("sound not enabled", type: .info)
       return
     }

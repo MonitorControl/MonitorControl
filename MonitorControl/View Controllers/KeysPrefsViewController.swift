@@ -1,11 +1,12 @@
 import Cocoa
-import MASPreferences
 import os.log
+import Preferences
 
-class KeysPrefsViewController: NSViewController, MASPreferencesViewController {
-  var viewIdentifier: String = "Keys"
-  var toolbarItemLabel: String? = NSLocalizedString("Keys", comment: "Shown in the main prefs window")
-  var toolbarItemImage: NSImage? = NSImage(named: "KeyboardPref")
+class KeysPrefsViewController: NSViewController, PreferencePane {
+  var preferencePaneIdentifier = Preferences.PaneIdentifier.keys
+  var preferencePaneTitle: String = NSLocalizedString("Keys", comment: "Shown in the main prefs window")
+  var toolbarItemIcon = NSImage(named: "KeyboardPref")!
+
   let prefs = UserDefaults.standard
 
   @IBOutlet var listenFor: NSPopUpButton!

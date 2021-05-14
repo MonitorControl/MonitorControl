@@ -1,4 +1,4 @@
 github "the0neyouseek/MediaKeyTap" "master"
 github "reitermarkus/DDC.swift" "master"
 github "rnine/AMCoreAudio"
-github "shpakovski/MASPreferences"
+github "sindresorhus/Preferences"

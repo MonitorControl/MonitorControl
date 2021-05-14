@@ -1,12 +1,13 @@
 import Cocoa
 import DDC
-import MASPreferences
 import os.log
+import Preferences
 
-class DisplayPrefsViewController: NSViewController, MASPreferencesViewController, NSTableViewDataSource, NSTableViewDelegate {
-  var viewIdentifier: String = "Display"
-  var toolbarItemLabel: String? = NSLocalizedString("Display", comment: "Shown in the main prefs window")
-  var toolbarItemImage: NSImage? = NSImage(named: NSImage.computerName)
+class DisplayPrefsViewController: NSViewController, PreferencePane, NSTableViewDataSource, NSTableViewDelegate {
+  var preferencePaneIdentifier = Preferences.PaneIdentifier.display
+  var preferencePaneTitle: String = NSLocalizedString("Display", comment: "Shown in the main prefs window")
+  var toolbarItemIcon = NSImage(named: NSImage.computerName)!
+
   let prefs = UserDefaults.standard
 
   var displays: [Display] = []
@@ -68,8 +69,9 @@ class DisplayPrefsViewController: NSViewController, MASPreferencesViewController
 
   func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
     guard let tableColumn = tableColumn,
-      let columnIndex = tableView.tableColumns.firstIndex(of: tableColumn),
-      let column = DisplayColumn(rawValue: columnIndex) else {
+          let columnIndex = tableView.tableColumns.firstIndex(of: tableColumn),
+          let column = DisplayColumn(rawValue: columnIndex)
+    else {
       return nil
     }
     let display = self.displays[row]

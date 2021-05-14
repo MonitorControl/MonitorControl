@@ -1,7 +1,7 @@
 import DDC
 
-extension EDID {
-  public func displayName() -> String? {
+public extension EDID {
+  func displayName() -> String? {
     let descriptors = [self.descriptors.0, self.descriptors.1, self.descriptors.2, self.descriptors.3]
 
     for descriptor in descriptors {
@@ -16,7 +16,7 @@ extension EDID {
     return nil
   }
 
-  public func serialNumber() -> String? {
+  func serialNumber() -> String? {
     let descriptors = [self.descriptors.0, self.descriptors.1, self.descriptors.2, self.descriptors.3]
 
     for descriptor in descriptors {
