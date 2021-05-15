@@ -3,17 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		2894D9B82280B30500DF58DA /* CGDirectDisplayID+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2894D9B72280B30500DF58DA /* CGDirectDisplayID+Extension.swift */; };
-		28D1DDE5227FB7D0004CB494 /* MediaKeyTap.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28D1DDE2227FB7D0004CB494 /* MediaKeyTap.framework */; };
-		28D1DDE6227FB7D0004CB494 /* MediaKeyTap.framework in [Carthage] Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 28D1DDE2227FB7D0004CB494 /* MediaKeyTap.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		28D1DDE7227FB7D0004CB494 /* AMCoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28D1DDE3227FB7D0004CB494 /* AMCoreAudio.framework */; };
-		28D1DDE8227FB7D0004CB494 /* AMCoreAudio.framework in [Carthage] Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 28D1DDE3227FB7D0004CB494 /* AMCoreAudio.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		28D1DDEE227FB944004CB494 /* DDC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28D1DDED227FB944004CB494 /* DDC.framework */; };
-		28D1DDEF227FB944004CB494 /* DDC.framework in [Carthage] Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 28D1DDED227FB944004CB494 /* DDC.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		28D1DDF0227FBD99004CB494 /* EDID+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D1DDEC227FB8F2004CB494 /* EDID+Extension.swift */; };
 		28D1DDF2227FBE71004CB494 /* NSScreen+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D1DDF1227FBE71004CB494 /* NSScreen+Extension.swift */; };
 		28D1DDF3227FC8C6004CB494 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 56754EB01D9A4016007BCDC5 /* Assets.xcassets */; };
@@ -28,13 +22,14 @@
 		6C85EFDF22CBB54100227EA1 /* PollingCountCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C85EFDE22CBB54100227EA1 /* PollingCountCellView.swift */; };
 		6C85EFE122CC00AD00227EA1 /* NSNotification+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C85EFE022CC00AD00227EA1 /* NSNotification+Extension.swift */; };
 		6CB2B64B263EDA6600F0E0EF /* OSD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F0A987D61F77B290009B603D /* OSD.framework */; };
-		6CB2B64C263EDA6600F0E0EF /* OSD.framework in [Carthage] Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F0A987D61F77B290009B603D /* OSD.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6CBFE27A23DB266000D1BC41 /* Display.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CBFE27923DB266000D1BC41 /* Display.swift */; };
 		6CBFE27C23DB27A200D1BC41 /* InternalDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CBFE27B23DB27A200D1BC41 /* InternalDisplay.swift */; };
 		6CC260F6256AD8F900613714 /* Preferences+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CC260F5256AD8F900613714 /* Preferences+Extension.swift */; };
-		6CC260FE256ADAD300613714 /* Preferences.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CC260F9256ADA7400613714 /* Preferences.framework */; };
-		6CC260FF256ADAD300613714 /* Preferences.framework in [Carthage] Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6CC260F9256ADA7400613714 /* Preferences.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6CCB278622D5315200619B05 /* HideOsdCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CCB278522D5315200619B05 /* HideOsdCellView.swift */; };
+		6CD35F53264FFFC6001F1344 /* SimplyCoreAudio in Frameworks */ = {isa = PBXBuildFile; productRef = 6CD35F52264FFFC6001F1344 /* SimplyCoreAudio */; };
+		6CD35F5626500008001F1344 /* MediaKeyTap in Frameworks */ = {isa = PBXBuildFile; productRef = 6CD35F5526500008001F1344 /* MediaKeyTap */; };
+		6CD35F592650002E001F1344 /* DDC in Frameworks */ = {isa = PBXBuildFile; productRef = 6CD35F582650002E001F1344 /* DDC */; };
+		6CD35F5C2650003F001F1344 /* Preferences in Frameworks */ = {isa = PBXBuildFile; productRef = 6CD35F5B2650003F001F1344 /* Preferences */; };
 		6CD444C322D4FBB8005BFD3D /* LongerDelayCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CD444C222D4FBB8005BFD3D /* LongerDelayCellView.swift */; };
 		6CDA0FCC26485A7600F52125 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6CDA0FCA26485A7600F52125 /* Main.storyboard */; };
 		6CDA0FCF26485A8300F52125 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6CDA0FCD26485A8300F52125 /* Main.storyboard */; };
@@ -54,21 +49,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		28D1DDBE227FB668004CB494 /* [Carthage] Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				28D1DDE8227FB7D0004CB494 /* AMCoreAudio.framework in [Carthage] Embed Frameworks */,
-				28D1DDEF227FB944004CB494 /* DDC.framework in [Carthage] Embed Frameworks */,
-				28D1DDE6227FB7D0004CB494 /* MediaKeyTap.framework in [Carthage] Embed Frameworks */,
-				6CB2B64C263EDA6600F0E0EF /* OSD.framework in [Carthage] Embed Frameworks */,
-				6CC260FF256ADAD300613714 /* Preferences.framework in [Carthage] Embed Frameworks */,
-			);
-			name = "[Carthage] Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		F06792F5200A73FA0066C438 /* [Login] Copy Helper to start at Login */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -164,11 +144,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				28D1DDE7227FB7D0004CB494 /* AMCoreAudio.framework in Frameworks */,
-				28D1DDEE227FB944004CB494 /* DDC.framework in Frameworks */,
-				28D1DDE5227FB7D0004CB494 /* MediaKeyTap.framework in Frameworks */,
+				6CD35F53264FFFC6001F1344 /* SimplyCoreAudio in Frameworks */,
+				6CD35F5626500008001F1344 /* MediaKeyTap in Frameworks */,
 				6CB2B64B263EDA6600F0E0EF /* OSD.framework in Frameworks */,
-				6CC260FE256ADAD300613714 /* Preferences.framework in Frameworks */,
+				6CD35F592650002E001F1344 /* DDC in Frameworks */,
+				6CD35F5C2650003F001F1344 /* Preferences in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -339,13 +319,18 @@
 				56754EA81D9A4016007BCDC5 /* Frameworks */,
 				56754EA91D9A4016007BCDC5 /* Resources */,
 				F06792F5200A73FA0066C438 /* [Login] Copy Helper to start at Login */,
-				28D1DDBE227FB668004CB494 /* [Carthage] Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = MonitorControl;
+			packageProductDependencies = (
+				6CD35F52264FFFC6001F1344 /* SimplyCoreAudio */,
+				6CD35F5526500008001F1344 /* MediaKeyTap */,
+				6CD35F582650002E001F1344 /* DDC */,
+				6CD35F5B2650003F001F1344 /* Preferences */,
+			);
 			productName = MonitorControl.OSX;
 			productReference = 56754EAB1D9A4016007BCDC5 /* MonitorControl.app */;
 			productType = "com.apple.product-type.application";
@@ -410,6 +395,12 @@
 				pl,
 			);
 			mainGroup = 56754EA21D9A4016007BCDC5;
+			packageReferences = (
+				6CD35F51264FFFC6001F1344 /* XCRemoteSwiftPackageReference "SimplyCoreAudio" */,
+				6CD35F5426500008001F1344 /* XCRemoteSwiftPackageReference "MediaKeyTap" */,
+				6CD35F572650002E001F1344 /* XCRemoteSwiftPackageReference "DDC" */,
+				6CD35F5A2650003F001F1344 /* XCRemoteSwiftPackageReference "Preferences" */,
+			);
 			productRefGroup = 56754EAC1D9A4016007BCDC5 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -746,7 +737,8 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 			};
 			name = Release;
 		};
@@ -767,7 +759,10 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = MonitorControl/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
 				MARKETING_VERSION = 2.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = me.guillaumeb.MonitorControl;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -794,7 +789,10 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = MonitorControl/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
 				MARKETING_VERSION = 2.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = me.guillaumeb.MonitorControl;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -820,7 +818,10 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = MonitorControlHelper/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
 				MARKETING_VERSION = 2.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = me.guillaumeb.MonitorControlHelper;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -845,7 +846,10 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = MonitorControlHelper/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
 				MARKETING_VERSION = 2.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = me.guillaumeb.MonitorControlHelper;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -885,6 +889,64 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		6CD35F51264FFFC6001F1344 /* XCRemoteSwiftPackageReference "SimplyCoreAudio" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/rnine/SimplyCoreAudio";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.1;
+			};
+		};
+		6CD35F5426500008001F1344 /* XCRemoteSwiftPackageReference "MediaKeyTap" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/MonitorControl/MediaKeyTap";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+		6CD35F572650002E001F1344 /* XCRemoteSwiftPackageReference "DDC" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/reitermarkus/DDC.swift";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+		6CD35F5A2650003F001F1344 /* XCRemoteSwiftPackageReference "Preferences" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/sindresorhus/Preferences";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.3.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		6CD35F52264FFFC6001F1344 /* SimplyCoreAudio */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6CD35F51264FFFC6001F1344 /* XCRemoteSwiftPackageReference "SimplyCoreAudio" */;
+			productName = SimplyCoreAudio;
+		};
+		6CD35F5526500008001F1344 /* MediaKeyTap */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6CD35F5426500008001F1344 /* XCRemoteSwiftPackageReference "MediaKeyTap" */;
+			productName = MediaKeyTap;
+		};
+		6CD35F582650002E001F1344 /* DDC */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6CD35F572650002E001F1344 /* XCRemoteSwiftPackageReference "DDC" */;
+			productName = DDC;
+		};
+		6CD35F5B2650003F001F1344 /* Preferences */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6CD35F5A2650003F001F1344 /* XCRemoteSwiftPackageReference "Preferences" */;
+			productName = Preferences;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 56754EA31D9A4016007BCDC5 /* Project object */;
 }

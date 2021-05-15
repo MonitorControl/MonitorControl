@@ -71,7 +71,6 @@ Open [issues](https://github.com/MonitorControl/MonitorControl/issues) if you ha
 ### Required
 
 - Xcode
-- [Carthage](https://github.com/Carthage/Carthage)
 - [Swiftlint](https://github.com/realm/SwiftLint)
 - [SwiftFormat](https://github.com/nicklockwood/SwiftFormat)
 - [BartyCrouch](https://github.com/Flinesoft/BartyCrouch) (for updating localizations)
@@ -82,20 +81,18 @@ Clone the project
 git clone https://github.com/MonitorControl/MonitorControl.git
 ```
 
-Then download the dependencies with Carthage
+Then dependencies will automatically get downloaded when opening the project, if they don't:
 
-```sh
-carthage bootstrap --platform macOS
-```
+`File > Swift Packages > Resolve Package Versions`
 
 You're all set ! Now open the `MonitorControl.xcodeproj` with Xcode
 
 ### Third party dependencies
 
-- [MediaKeyTap](https://github.com/the0neyouseek/MediaKeyTap)
+- [MediaKeyTap](https://github.com/MonitorControl/MediaKeyTap)
 - [Preferences](https://github.com/sindresorhus/Preferences)
 - [DDC.swift](https://github.com/reitermarkus/DDC.swift)
-- [AMCoreAudio](https://github.com/rnine/AMCoreAudio)
+- [SimplyCoreAudio](https://github.com/rnine/SimplyCoreAudio)
 
 ## Support
 

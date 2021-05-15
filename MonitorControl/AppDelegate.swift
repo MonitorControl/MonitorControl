@@ -1,10 +1,10 @@
-import AMCoreAudio
 import Cocoa
 import DDC
 import Foundation
 import MediaKeyTap
 import os.log
 import Preferences
+import SimplyCoreAudio
 
 var app: AppDelegate!
 let prefs = UserDefaults.standard
@@ -16,10 +16,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
 
   var monitorItems: [NSMenuItem] = []
-
   var mediaKeyTap: MediaKeyTap?
   var keyRepeatTimers: [MediaKey: Timer] = [:]
 
+  let coreAudio = SimplyCoreAudio()
   var accessibilityObserver: NSObjectProtocol!
 
   lazy var preferencesWindowController: PreferencesWindowController = {
@@ -169,8 +169,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     NotificationCenter.default.addObserver(self, selector: #selector(handleFriendlyNameChanged), name: .friendlyName, object: nil)
     NotificationCenter.default.addObserver(self, selector: #selector(handlePreferenceReset), name: .preferenceReset, object: nil)
 
-    // subscribe Audio output detector (AMCoreAudio)
-    AMCoreAudio.NotificationCenter.defaultCenter.subscribe(self, eventType: AudioHardwareEvent.self, dispatchQueue: DispatchQueue.main)
+    // subscribe Audio output detector (SimplyCoreAudio)
+    NotificationCenter.default.addObserver(self, selector: #selector(audioDeviceChanged), name: Notification.Name.defaultOutputDeviceChanged, object: nil)
 
     // listen for accessibility status changes
     _ = DistributedNotificationCenter.default().addObserver(forName: .accessibilityApi, object: nil, queue: nil) { _ in
@@ -318,11 +318,12 @@ extension AppDelegate: MediaKeyTapDelegate {
       keys = [.brightnessUp, .brightnessDown, .mute, .volumeUp, .volumeDown]
     }
 
-    if let audioDevice = AudioDevice.defaultOutputDevice(), audioDevice.canSetVirtualMasterVolume(direction: .playback) {
+    if self.coreAudio.defaultOutputDevice?.canSetVirtualMasterVolume(scope: .output) == true {
       // Remove volume related keys.
       let keysToDelete: [MediaKey] = [.volumeUp, .volumeDown, .mute]
       keys.removeAll { keysToDelete.contains($0) }
     }
+
     self.mediaKeyTap?.stop()
     // returning an empty array listens for all mediakeys in MediaKeyTap
     if keys.count > 0 {
@@ -330,17 +331,14 @@ extension AppDelegate: MediaKeyTapDelegate {
       self.mediaKeyTap?.start()
     }
   }
-}
 
-extension AppDelegate: EventSubscriber {
-  /// Fires off when the default audio device changes.
-  func eventReceiver(_ event: Event) {
-    if case let .defaultOutputDeviceChanged(audioDevice)? = event as? AudioHardwareEvent {
-      #if DEBUG
-        os_log("Default output device changed to “%{public}@”.", type: .info, audioDevice.name)
-        os_log("Can device set its own volume? %{public}@", type: .info, audioDevice.canSetVirtualMasterVolume(direction: .playback).description)
-      #endif
-      self.updateMediaKeyTap()
-    }
+  @objc private func audioDeviceChanged() {
+    #if DEBUG
+      if let defaultDevice = self.coreAudio.defaultOutputDevice {
+        os_log("Default output device changed to “%{public}@”.", type: .info, defaultDevice.name ?? "")
+        os_log("Can device set its own volume? %{public}@", type: .info, defaultDevice.canSetVirtualMasterVolume(scope: .output).description)
+      }
+    #endif
+    self.updateMediaKeyTap()
   }
 }
