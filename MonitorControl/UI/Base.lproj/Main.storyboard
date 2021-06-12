@@ -205,7 +205,7 @@
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
                                                                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" id="qsc-jC-vJQ">
-                                                                                <rect key="frame" x="0.0" y="0.0" width="144" height="17"/>
+                                                                                <rect key="frame" x="0.0" y="0.0" width="143" height="16"/>
                                                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                                 <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="#bc-ignore!" id="aSw-3H-uNa">
                                                                                     <font key="font" metaFont="system"/>
@@ -237,7 +237,7 @@
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
                                                                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" id="CB1-x8-d9G">
-                                                                                <rect key="frame" x="0.0" y="0.0" width="140" height="17"/>
+                                                                                <rect key="frame" x="0.0" y="0.0" width="139" height="16"/>
                                                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                                 <textFieldCell key="cell" title="#bc-ignore!" id="DGv-iu-Jg1">
                                                                                     <font key="font" metaFont="system"/>
@@ -272,7 +272,7 @@
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
                                                                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" id="z5b-Gr-EmC">
-                                                                                <rect key="frame" x="0.0" y="0.0" width="80" height="17"/>
+                                                                                <rect key="frame" x="0.0" y="0.0" width="78" height="16"/>
                                                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                                 <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="#bc-ignore!" id="cnb-Li-1lE">
                                                                                     <font key="font" metaFont="system"/>
@@ -790,7 +790,7 @@ Changing some of these setting may cause system freezes or unexpected behaviour.
                                     </gridCell>
                                     <gridCell row="1RH-qe-bKm" column="Z74-3T-hch" xPlacement="leading" id="pqU-Xd-aGF">
                                         <button key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bct-zW-zKf">
-                                            <rect key="frame" x="-7" y="-7" width="145" height="32"/>
+                                            <rect key="frame" x="-7" y="-7" width="694" height="32"/>
                                             <buttonCell key="cell" type="push" title="Reset Preferences" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="4Pj-3t-PJr">
                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" metaFont="system"/>
