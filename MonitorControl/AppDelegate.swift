@@ -56,7 +56,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   }
 
   @IBAction func prefsClicked(_: AnyObject) {
-//    NSApp.activate(ignoringOtherApps: true)
     self.preferencesWindowController.show()
   }
 
@@ -335,7 +334,7 @@ extension AppDelegate: MediaKeyTapDelegate {
   @objc private func audioDeviceChanged() {
     #if DEBUG
       if let defaultDevice = self.coreAudio.defaultOutputDevice {
-        os_log("Default output device changed to “%{public}@”.", type: .info, defaultDevice.name ?? "")
+        os_log("Default output device changed to “%{public}@”.", type: .info, defaultDevice.name)
         os_log("Can device set its own volume? %{public}@", type: .info, defaultDevice.canSetVirtualMasterVolume(scope: .output).description)
       }
     #endif

@@ -752,12 +752,6 @@
 				CURRENT_PROJECT_VERSION = 631;
 				DEVELOPMENT_TEAM = CYC8C8R4K9;
 				ENABLE_HARDENED_RUNTIME = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/Mac",
-					"$(PROJECT_DIR)/Carthage/Build",
-					"$(PROJECT_DIR)",
-				);
 				INFOPLIST_FILE = MonitorControl/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -782,12 +776,6 @@
 				CURRENT_PROJECT_VERSION = 631;
 				DEVELOPMENT_TEAM = CYC8C8R4K9;
 				ENABLE_HARDENED_RUNTIME = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/Mac",
-					"$(PROJECT_DIR)/Carthage/Build",
-					"$(PROJECT_DIR)",
-				);
 				INFOPLIST_FILE = MonitorControl/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

@@ -10,9 +10,8 @@
         <scene sceneID="DmR-ia-4qL">
             <objects>
                 <viewController storyboardIdentifier="KeysPrefsVC" id="MHy-Dv-i5A" customClass="KeysPrefsViewController" customModule="MonitorControl" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" id="nfK-n0-xN4">
+                    <view key="view" translatesAutoresizingMaskIntoConstraints="NO" id="nfK-n0-xN4">
                         <rect key="frame" x="0.0" y="0.0" width="460" height="60"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <gridView xPlacement="leading" yPlacement="bottom" rowAlignment="none" rowSpacing="20" columnSpacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="APt-8Z-pdA">
                                 <rect key="frame" x="30" y="20" width="400" height="20"/>
@@ -88,14 +87,13 @@
         <scene sceneID="kdt-oj-Qke">
             <objects>
                 <viewController storyboardIdentifier="DisplayPrefsVC" id="NAx-6T-ZPc" customClass="DisplayPrefsViewController" customModule="MonitorControl" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" id="EBf-qN-KaN">
+                    <view key="view" translatesAutoresizingMaskIntoConstraints="NO" id="EBf-qN-KaN">
                         <rect key="frame" x="0.0" y="0.0" width="740" height="176"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <gridView xPlacement="leading" yPlacement="bottom" rowAlignment="none" rowSpacing="20" columnSpacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="1Op-Sf-8Vf">
                                 <rect key="frame" x="30" y="20" width="680" height="136"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="680" id="gFN-2H-VBo"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="680" id="w4U-zd-DBI"/>
                                 </constraints>
                                 <rows>
                                     <gridRow id="CtE-vz-HwJ"/>
@@ -139,12 +137,13 @@
                                                                 <customCell key="dataCell" alignment="left" id="Dzg-gO-DMd"/>
                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                 <prototypeCellViews>
-                                                                    <tableCellView misplaced="YES" id="Fzp-05-e2y" customClass="ButtonCellView" customModule="MonitorControl" customModuleProvider="target">
-                                                                        <rect key="frame" x="11" y="1" width="65" height="17"/>
+                                                                    <tableCellView id="Fzp-05-e2y" customClass="ButtonCellView" customModule="MonitorControl" customModuleProvider="target">
+                                                                        <rect key="frame" x="1" y="1" width="65" height="17"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
-                                                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="OJu-lv-bAA">
+                                                                            <button verticalHuggingPriority="750" id="OJu-lv-bAA">
                                                                                 <rect key="frame" x="-2" y="-2" width="69" height="18"/>
+                                                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                                 <buttonCell key="cell" type="check" bezelStyle="regularSquare" imagePosition="overlaps" state="on" inset="2" id="EjF-JQ-tUb">
                                                                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                                                     <font key="font" metaFont="system"/>
@@ -154,12 +153,6 @@
                                                                                 </connections>
                                                                             </button>
                                                                         </subviews>
-                                                                        <constraints>
-                                                                            <constraint firstAttribute="trailing" secondItem="OJu-lv-bAA" secondAttribute="trailing" id="4Vy-mB-mzk"/>
-                                                                            <constraint firstAttribute="bottom" secondItem="OJu-lv-bAA" secondAttribute="bottom" id="Q7N-43-lrK"/>
-                                                                            <constraint firstItem="OJu-lv-bAA" firstAttribute="top" secondItem="Fzp-05-e2y" secondAttribute="top" id="VCw-Pj-rJy"/>
-                                                                            <constraint firstItem="OJu-lv-bAA" firstAttribute="leading" secondItem="Fzp-05-e2y" secondAttribute="leading" id="gWy-n6-Cj0"/>
-                                                                        </constraints>
                                                                         <connections>
                                                                             <outlet property="button" destination="OJu-lv-bAA" id="Mlq-Sp-j03"/>
                                                                         </connections>
@@ -174,12 +167,13 @@
                                                                 <customCell key="dataCell" alignment="left" id="Zxr-PK-6Na"/>
                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                 <prototypeCellViews>
-                                                                    <tableCellView misplaced="YES" id="1tR-yk-dKV" customClass="ButtonCellView" customModule="MonitorControl" customModuleProvider="target">
-                                                                        <rect key="frame" x="79" y="1" width="49" height="17"/>
+                                                                    <tableCellView id="1tR-yk-dKV" customClass="ButtonCellView" customModule="MonitorControl" customModuleProvider="target">
+                                                                        <rect key="frame" x="69" y="1" width="49" height="17"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
-                                                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="4a9-J0-ruf">
+                                                                            <button verticalHuggingPriority="750" id="4a9-J0-ruf">
                                                                                 <rect key="frame" x="-2" y="-2" width="53" height="18"/>
+                                                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                                 <buttonCell key="cell" type="check" bezelStyle="regularSquare" imagePosition="overlaps" state="on" inset="2" id="NBx-SJ-4YC">
                                                                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                                                     <font key="font" metaFont="system"/>
@@ -189,12 +183,6 @@
                                                                                 </connections>
                                                                             </button>
                                                                         </subviews>
-                                                                        <constraints>
-                                                                            <constraint firstItem="4a9-J0-ruf" firstAttribute="top" secondItem="1tR-yk-dKV" secondAttribute="top" id="BNk-DE-G3m"/>
-                                                                            <constraint firstAttribute="bottom" secondItem="4a9-J0-ruf" secondAttribute="bottom" id="VUk-8T-TMR"/>
-                                                                            <constraint firstItem="4a9-J0-ruf" firstAttribute="leading" secondItem="1tR-yk-dKV" secondAttribute="leading" id="ox0-jz-la8"/>
-                                                                            <constraint firstAttribute="trailing" secondItem="4a9-J0-ruf" secondAttribute="trailing" id="pdB-Tu-C4c"/>
-                                                                        </constraints>
                                                                         <connections>
                                                                             <outlet property="button" destination="4a9-J0-ruf" id="UGd-xq-uRA"/>
                                                                         </connections>
@@ -214,12 +202,12 @@
                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                 <prototypeCellViews>
                                                                     <tableCellView id="iYj-Ud-yGU">
-                                                                        <rect key="frame" x="131" y="1" width="140" height="17"/>
+                                                                        <rect key="frame" x="121" y="1" width="140" height="17"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
-                                                                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qsc-jC-vJQ">
+                                                                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" id="qsc-jC-vJQ">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="144" height="17"/>
-                                                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                                 <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="#bc-ignore!" id="aSw-3H-uNa">
                                                                                     <font key="font" metaFont="system"/>
                                                                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -246,13 +234,13 @@
                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                 <prototypeCellViews>
                                                                     <tableCellView id="aGt-d9-Qcx" customClass="FriendlyNameCellView" customModule="MonitorControl" customModuleProvider="target">
-                                                                        <rect key="frame" x="274" y="1" width="140" height="17"/>
+                                                                        <rect key="frame" x="264" y="1" width="140" height="17"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
-                                                                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CB1-x8-d9G">
+                                                                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" id="CB1-x8-d9G">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="140" height="17"/>
-                                                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                                                                <textFieldCell key="cell" lineBreakMode="truncatingTail" title="#bc-ignore!" id="DGv-iu-Jg1">
+                                                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                                                <textFieldCell key="cell" title="#bc-ignore!" id="DGv-iu-Jg1">
                                                                                     <font key="font" metaFont="system"/>
                                                                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -281,12 +269,12 @@
                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                 <prototypeCellViews>
                                                                     <tableCellView id="vw4-Us-VHk">
-                                                                        <rect key="frame" x="417" y="1" width="80" height="17"/>
+                                                                        <rect key="frame" x="407" y="1" width="80" height="17"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
-                                                                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="z5b-Gr-EmC">
+                                                                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" id="z5b-Gr-EmC">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="80" height="17"/>
-                                                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                                 <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="#bc-ignore!" id="cnb-Li-1lE">
                                                                                     <font key="font" metaFont="system"/>
                                                                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -313,12 +301,12 @@
                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                 <prototypeCellViews>
                                                                     <tableCellView id="eVa-Md-Avh">
-                                                                        <rect key="frame" x="500" y="1" width="80" height="17"/>
+                                                                        <rect key="frame" x="490" y="1" width="80" height="17"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
-                                                                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NK1-rO-I0Z">
-                                                                                <rect key="frame" x="0.0" y="0.0" width="80" height="17"/>
-                                                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                                                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" id="NK1-rO-I0Z">
+                                                                                <rect key="frame" x="2" y="1" width="76" height="16"/>
+                                                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                                 <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="#bc-ignore!" id="Pkk-Ce-Y6Q">
                                                                                     <font key="font" metaFont="system"/>
                                                                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -345,12 +333,12 @@
                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                 <prototypeCellViews>
                                                                     <tableCellView id="C4F-JT-GfP">
-                                                                        <rect key="frame" x="583" y="1" width="74" height="17"/>
+                                                                        <rect key="frame" x="573" y="1" width="74" height="17"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
-                                                                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4Vl-7d-eft">
-                                                                                <rect key="frame" x="0.0" y="0.0" width="74" height="17"/>
-                                                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                                                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" id="4Vl-7d-eft">
+                                                                                <rect key="frame" x="-1" y="1" width="76" height="16"/>
+                                                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                                 <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="#bc-ignore!" id="4or-hS-WeW">
                                                                                     <font key="font" metaFont="system"/>
                                                                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -374,7 +362,7 @@
                                                 <nil key="backgroundColor"/>
                                             </clipView>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="100" id="CAs-iE-Kk1"/>
+                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="80" id="CAs-iE-Kk1"/>
                                             </constraints>
                                             <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="UHx-W7-xSv">
                                                 <rect key="frame" x="-100" y="-100" width="358" height="16"/>
@@ -409,15 +397,14 @@
                 </viewController>
                 <customObject id="34q-0u-YTQ" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="316" y="415"/>
+            <point key="canvasLocation" x="316" y="394.5"/>
         </scene>
         <!--Main Prefs View Controller-->
         <scene sceneID="zAg-r8-WQ5">
             <objects>
                 <viewController storyboardIdentifier="MainPrefsVC" id="BGD-tY-Myx" customClass="MainPrefsViewController" customModule="MonitorControl" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" misplaced="YES" id="COE-Oc-gZs">
+                    <view key="view" translatesAutoresizingMaskIntoConstraints="NO" id="COE-Oc-gZs">
                         <rect key="frame" x="0.0" y="0.0" width="460" height="164"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <gridView xPlacement="leading" yPlacement="fill" rowAlignment="none" rowSpacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="noT-gJ-0yS">
                                 <rect key="frame" x="30" y="20" width="400" height="124"/>
@@ -507,14 +494,13 @@
             <objects>
                 <customObject id="lVu-28-yuM" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="AdvancedPrefsVC" id="xjG-x0-7HO" customClass="AdvancedPrefsViewController" customModule="MonitorControl" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" id="MqL-7s-HoR">
+                    <view key="view" translatesAutoresizingMaskIntoConstraints="NO" id="MqL-7s-HoR">
                         <rect key="frame" x="0.0" y="0.0" width="740" height="252"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <gridView xPlacement="leading" yPlacement="fill" rowAlignment="none" rowSpacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="LNp-d4-dRY">
                                 <rect key="frame" x="30" y="20" width="680" height="212"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="680" id="2wP-QE-Oyr"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="680" id="3An-WA-IDq"/>
                                 </constraints>
                                 <rows>
                                     <gridRow id="bZa-uq-5i7"/>
@@ -586,12 +572,13 @@ Changing some of these setting may cause system freezes or unexpected behaviour.
                                                                 </textFieldCell>
                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                 <prototypeCellViews>
-                                                                    <tableCellView misplaced="YES" id="OH7-e2-Xoh" customClass="FriendlyNameCellView" customModule="MonitorControl" customModuleProvider="target">
-                                                                        <rect key="frame" x="11" y="1" width="127" height="20"/>
+                                                                    <tableCellView id="OH7-e2-Xoh" customClass="FriendlyNameCellView" customModule="MonitorControl" customModuleProvider="target">
+                                                                        <rect key="frame" x="1" y="1" width="127" height="20"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
-                                                                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="aqx-sQ-YMe">
+                                                                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" id="aqx-sQ-YMe">
                                                                                 <rect key="frame" x="-2" y="0.0" width="131" height="16"/>
+                                                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                                 <textFieldCell key="cell" lineBreakMode="truncatingTail" title="#bc-ignore!" id="Euj-aT-PWW">
                                                                                     <font key="font" metaFont="system"/>
                                                                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -599,12 +586,6 @@ Changing some of these setting may cause system freezes or unexpected behaviour.
                                                                                 </textFieldCell>
                                                                             </textField>
                                                                         </subviews>
-                                                                        <constraints>
-                                                                            <constraint firstItem="aqx-sQ-YMe" firstAttribute="top" secondItem="OH7-e2-Xoh" secondAttribute="top" id="0Wa-2K-LQ0"/>
-                                                                            <constraint firstItem="aqx-sQ-YMe" firstAttribute="leading" secondItem="OH7-e2-Xoh" secondAttribute="leading" id="CuE-Dt-kye"/>
-                                                                            <constraint firstAttribute="bottom" secondItem="aqx-sQ-YMe" secondAttribute="bottom" id="GMM-OB-wQ9"/>
-                                                                            <constraint firstAttribute="trailing" secondItem="aqx-sQ-YMe" secondAttribute="trailing" id="fRZ-MF-Agr"/>
-                                                                        </constraints>
                                                                         <connections>
                                                                             <outlet property="textField" destination="aqx-sQ-YMe" id="3eJ-Tg-zKo"/>
                                                                         </connections>
@@ -623,12 +604,13 @@ Changing some of these setting may cause system freezes or unexpected behaviour.
                                                                 </textFieldCell>
                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                 <prototypeCellViews>
-                                                                    <tableCellView misplaced="YES" id="YSF-wp-a89">
-                                                                        <rect key="frame" x="141" y="1" width="108" height="20"/>
+                                                                    <tableCellView id="YSF-wp-a89">
+                                                                        <rect key="frame" x="131" y="1" width="108" height="20"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
-                                                                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="4mP-DS-UcD">
+                                                                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" id="4mP-DS-UcD">
                                                                                 <rect key="frame" x="-2" y="0.0" width="112" height="16"/>
+                                                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                                 <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="#bc-ignore!" id="5xu-ja-W21">
                                                                                     <font key="font" metaFont="system"/>
                                                                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -636,12 +618,6 @@ Changing some of these setting may cause system freezes or unexpected behaviour.
                                                                                 </textFieldCell>
                                                                             </textField>
                                                                         </subviews>
-                                                                        <constraints>
-                                                                            <constraint firstAttribute="trailing" secondItem="4mP-DS-UcD" secondAttribute="trailing" id="9zg-Nc-Ufz"/>
-                                                                            <constraint firstAttribute="bottom" secondItem="4mP-DS-UcD" secondAttribute="bottom" id="F7d-ho-xJQ"/>
-                                                                            <constraint firstItem="4mP-DS-UcD" firstAttribute="leading" secondItem="YSF-wp-a89" secondAttribute="leading" id="xuv-EJ-ecd"/>
-                                                                            <constraint firstItem="4mP-DS-UcD" firstAttribute="top" secondItem="YSF-wp-a89" secondAttribute="top" id="yzS-hL-TUF"/>
-                                                                        </constraints>
                                                                         <connections>
                                                                             <outlet property="textField" destination="4mP-DS-UcD" id="Du8-3S-RN7"/>
                                                                         </connections>
@@ -661,11 +637,12 @@ Changing some of these setting may cause system freezes or unexpected behaviour.
                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                 <prototypeCellViews>
                                                                     <tableCellView id="ZCd-vc-3fw" customClass="PollingModeCellView" customModule="MonitorControl" customModuleProvider="target">
-                                                                        <rect key="frame" x="252" y="1" width="110" height="20"/>
+                                                                        <rect key="frame" x="242" y="1" width="110" height="20"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
-                                                                            <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7FH-uw-jcn">
+                                                                            <popUpButton verticalHuggingPriority="750" id="7FH-uw-jcn">
                                                                                 <rect key="frame" x="-3" y="-4" width="117" height="25"/>
+                                                                                <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                                                                 <popUpButtonCell key="cell" type="push" title="Normal" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" tag="2" imageScaling="proportionallyDown" inset="2" selectedItem="Riq-uM-bTs" id="M5p-a2-UEs">
                                                                                     <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                                                     <font key="font" metaFont="menu"/>
@@ -684,12 +661,6 @@ Changing some of these setting may cause system freezes or unexpected behaviour.
                                                                                 </connections>
                                                                             </popUpButton>
                                                                         </subviews>
-                                                                        <constraints>
-                                                                            <constraint firstItem="7FH-uw-jcn" firstAttribute="top" secondItem="ZCd-vc-3fw" secondAttribute="top" id="Uxh-XI-3le"/>
-                                                                            <constraint firstAttribute="trailing" secondItem="7FH-uw-jcn" secondAttribute="trailing" id="V8a-3p-Nzx"/>
-                                                                            <constraint firstAttribute="bottom" secondItem="7FH-uw-jcn" secondAttribute="bottom" id="oQN-HG-yeg"/>
-                                                                            <constraint firstItem="7FH-uw-jcn" firstAttribute="leading" secondItem="ZCd-vc-3fw" secondAttribute="leading" id="wfZ-68-LLZ"/>
-                                                                        </constraints>
                                                                         <connections>
                                                                             <outlet property="pollingModeMenu" destination="M5p-a2-UEs" id="qXA-qI-8fN"/>
                                                                         </connections>
@@ -708,12 +679,13 @@ Changing some of these setting may cause system freezes or unexpected behaviour.
                                                                 </textFieldCell>
                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                 <prototypeCellViews>
-                                                                    <tableCellView misplaced="YES" id="dEe-qK-55M" customClass="PollingCountCellView" customModule="MonitorControl" customModuleProvider="target">
-                                                                        <rect key="frame" x="365" y="1" width="90" height="20"/>
+                                                                    <tableCellView id="dEe-qK-55M" customClass="PollingCountCellView" customModule="MonitorControl" customModuleProvider="target">
+                                                                        <rect key="frame" x="355" y="1" width="90" height="20"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
-                                                                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="2ys-EO-duG">
+                                                                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" id="2ys-EO-duG">
                                                                                 <rect key="frame" x="-2" y="0.0" width="94" height="16"/>
+                                                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                                 <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" enabled="NO" title="#bc-ignore!" id="LZ8-Tj-mCs">
                                                                                     <numberFormatter key="formatter" formatterBehavior="default10_4" usesGroupingSeparator="NO" groupingSize="0" minimumIntegerDigits="0" maximumIntegerDigits="42" id="Sfn-Gs-w6w" customClass="OnlyIntegerValueFormatter" customModule="MonitorControl" customModuleProvider="target"/>
                                                                                     <font key="font" metaFont="system"/>
@@ -725,12 +697,6 @@ Changing some of these setting may cause system freezes or unexpected behaviour.
                                                                                 </connections>
                                                                             </textField>
                                                                         </subviews>
-                                                                        <constraints>
-                                                                            <constraint firstItem="2ys-EO-duG" firstAttribute="top" secondItem="dEe-qK-55M" secondAttribute="top" id="7NH-Eo-6fY"/>
-                                                                            <constraint firstAttribute="trailing" secondItem="2ys-EO-duG" secondAttribute="trailing" id="9cV-BP-u26"/>
-                                                                            <constraint firstItem="2ys-EO-duG" firstAttribute="leading" secondItem="dEe-qK-55M" secondAttribute="leading" id="DGl-I0-UCB"/>
-                                                                            <constraint firstAttribute="bottom" secondItem="2ys-EO-duG" secondAttribute="bottom" id="e7f-vY-6Nl"/>
-                                                                        </constraints>
                                                                         <connections>
                                                                             <outlet property="textField" destination="2ys-EO-duG" id="elf-GU-vnP"/>
                                                                         </connections>
@@ -745,12 +711,13 @@ Changing some of these setting may cause system freezes or unexpected behaviour.
                                                                 <customCell key="dataCell" alignment="left" id="fNO-9H-lO8"/>
                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                 <prototypeCellViews>
-                                                                    <tableCellView misplaced="YES" id="cOJ-Ph-muT" customClass="LongerDelayCellView" customModule="MonitorControl" customModuleProvider="target">
-                                                                        <rect key="frame" x="458" y="1" width="80" height="17"/>
+                                                                    <tableCellView id="cOJ-Ph-muT" customClass="LongerDelayCellView" customModule="MonitorControl" customModuleProvider="target">
+                                                                        <rect key="frame" x="448" y="1" width="80" height="17"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
-                                                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cmY-eY-p4P">
+                                                                            <button verticalHuggingPriority="750" id="cmY-eY-p4P">
                                                                                 <rect key="frame" x="-2" y="-2" width="84" height="18"/>
+                                                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                                 <buttonCell key="cell" type="check" bezelStyle="regularSquare" imagePosition="overlaps" inset="2" id="XFk-DD-r8N">
                                                                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                                                     <font key="font" metaFont="system"/>
@@ -760,12 +727,6 @@ Changing some of these setting may cause system freezes or unexpected behaviour.
                                                                                 </connections>
                                                                             </button>
                                                                         </subviews>
-                                                                        <constraints>
-                                                                            <constraint firstAttribute="bottom" secondItem="cmY-eY-p4P" secondAttribute="bottom" id="4cG-Ii-X01"/>
-                                                                            <constraint firstItem="cmY-eY-p4P" firstAttribute="top" secondItem="cOJ-Ph-muT" secondAttribute="top" id="TPf-nF-a5S"/>
-                                                                            <constraint firstAttribute="trailing" secondItem="cmY-eY-p4P" secondAttribute="trailing" id="X4k-Ob-e0m"/>
-                                                                            <constraint firstItem="cmY-eY-p4P" firstAttribute="leading" secondItem="cOJ-Ph-muT" secondAttribute="leading" id="q19-B5-4Ma"/>
-                                                                        </constraints>
                                                                         <connections>
                                                                             <outlet property="button" destination="cmY-eY-p4P" id="2qv-ZX-ifA"/>
                                                                         </connections>
@@ -780,12 +741,13 @@ Changing some of these setting may cause system freezes or unexpected behaviour.
                                                                 <customCell key="dataCell" alignment="left" id="LXT-s7-Hac"/>
                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                 <prototypeCellViews>
-                                                                    <tableCellView misplaced="YES" id="iWx-Xs-DXV" customClass="HideOsdCellView" customModule="MonitorControl" customModuleProvider="target">
-                                                                        <rect key="frame" x="541" y="1" width="84" height="17"/>
+                                                                    <tableCellView id="iWx-Xs-DXV" customClass="HideOsdCellView" customModule="MonitorControl" customModuleProvider="target">
+                                                                        <rect key="frame" x="531" y="1" width="84" height="17"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
-                                                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="rW9-Zy-n6z">
+                                                                            <button verticalHuggingPriority="750" id="rW9-Zy-n6z">
                                                                                 <rect key="frame" x="-2" y="-2" width="88" height="18"/>
+                                                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                                 <buttonCell key="cell" type="check" bezelStyle="regularSquare" imagePosition="overlaps" inset="2" id="5mh-qn-QcE">
                                                                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                                                     <font key="font" metaFont="system"/>
@@ -795,12 +757,6 @@ Changing some of these setting may cause system freezes or unexpected behaviour.
                                                                                 </connections>
                                                                             </button>
                                                                         </subviews>
-                                                                        <constraints>
-                                                                            <constraint firstItem="rW9-Zy-n6z" firstAttribute="top" secondItem="iWx-Xs-DXV" secondAttribute="top" id="FTx-Ps-2rL"/>
-                                                                            <constraint firstAttribute="trailing" secondItem="rW9-Zy-n6z" secondAttribute="trailing" id="Nwq-0S-jWq"/>
-                                                                            <constraint firstAttribute="bottom" secondItem="rW9-Zy-n6z" secondAttribute="bottom" id="Q0E-Pd-waE"/>
-                                                                            <constraint firstItem="rW9-Zy-n6z" firstAttribute="leading" secondItem="iWx-Xs-DXV" secondAttribute="leading" id="oCS-dh-3zB"/>
-                                                                        </constraints>
                                                                         <connections>
                                                                             <outlet property="button" destination="rW9-Zy-n6z" id="9JR-jX-ogx"/>
                                                                         </connections>
@@ -817,7 +773,7 @@ Changing some of these setting may cause system freezes or unexpected behaviour.
                                                 <nil key="backgroundColor"/>
                                             </clipView>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="100" id="jhg-Ac-V8b"/>
+                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="100" id="jhg-Ac-V8b"/>
                                             </constraints>
                                             <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="7ew-dx-qzM">
                                                 <rect key="frame" x="-100" y="-100" width="518" height="16"/>
