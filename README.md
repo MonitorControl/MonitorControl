@@ -37,13 +37,15 @@ Control your external monitor brightness, contrast or volume directly from a men
 <br/>
 
 <div align="center">
-    <img src="./.github/menulet.png"  alt="menulet screenshot"/>
+    <img src="./.github/menulet.png" width="200" alt="menulet screenshot"/>
     <br/><br/>
-    <img src="./.github/menugeneral.png" width="299" alt="general screenshot"/><img src="./.github/menukeys.png" width="299" alt="keys screenshot"/><img src="./.github/menudisplay.png" width="299" alt="display screenshot"/>
+    <img src="./.github/menugeneral.png" width="299" alt="general screenshot"/><img src="./.github/menukeys.png" width="299" alt="keys screenshot"/>
+    <img src="./.github/menudisplay.png" width="299" alt="display screenshot"/>
+    <img src="./.github/menuadvanced.png" width="299" alt="advanced screenshot"/>
 
 <br/>
 
-*Bonus: Using keyboard keys displays the native osd*
+_Bonus: Using keyboard keys displays the native osd_
 
 <img src="./.github/osd.jpg" width="500" align="center" alt="osd screenshot"/>
 </div>
@@ -69,39 +71,42 @@ Open [issues](https://github.com/MonitorControl/MonitorControl/issues) if you ha
 ### Required
 
 - Xcode
-- [Carthage](https://github.com/Carthage/Carthage)
 - [Swiftlint](https://github.com/realm/SwiftLint)
 - [SwiftFormat](https://github.com/nicklockwood/SwiftFormat)
 - [BartyCrouch](https://github.com/Flinesoft/BartyCrouch) (for updating localizations)
 
 Clone the project
+
 ```sh
-$ git clone https://github.com/MonitorControl/MonitorControl.git
+git clone https://github.com/MonitorControl/MonitorControl.git
 ```
-Then download the dependencies with Carthage
-```sh
-$ carthage bootstrap --platform macOS
-```
+
+Then dependencies will automatically get downloaded when opening the project, if they don't:
+
+`File > Swift Packages > Resolve Package Versions`
 
 You're all set ! Now open the `MonitorControl.xcodeproj` with Xcode
 
 ### Third party dependencies
 
-- [MediaKeyTap](https://github.com/the0neyouseek/MediaKeyTap)
-- [MASPreferences](https://github.com/shpakovski/MASPreferences)
+- [MediaKeyTap](https://github.com/MonitorControl/MediaKeyTap)
+- [Preferences](https://github.com/sindresorhus/Preferences)
 - [DDC.swift](https://github.com/reitermarkus/DDC.swift)
-- [AMCoreAudio](https://github.com/rnine/AMCoreAudio)
+- [SimplyCoreAudio](https://github.com/rnine/SimplyCoreAudio)
 
 ## Support
+
 - macOS Sierra (`10.12`) and up.
 - Works with monitors controllable via [DDC](https://en.wikipedia.org/wiki/Display_Data_Channel).
 
 ## Contributors
+
 - [@the0neyouseek](https://github.com/the0neyouseek)
 - [@reitermarkus](https://github.com/reitermarkus)
 - [@JoniVR](https://github.com/JoniVR)
 
 ## Thanks
+
 - [@bluejamesbond](https://github.com/bluejamesbond/) (Original developer)
 - [@Tyilo](https://github.com/Tyilo/) (Fork)
 - [@Bensge](https://github.com/Bensge/) - (Used some code from his project [NativeDisplayBrightness](https://github.com/Bensge/NativeDisplayBrightness))

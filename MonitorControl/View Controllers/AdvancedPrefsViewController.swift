@@ -1,12 +1,21 @@
 import Cocoa
 import DDC
-import MASPreferences
 import os.log
+import Preferences
 
-class AdvancedPrefsViewController: NSViewController, MASPreferencesViewController, NSTableViewDataSource, NSTableViewDelegate {
-  var viewIdentifier: String = "Advanced"
-  var toolbarItemLabel: String? = NSLocalizedString("Advanced", comment: "Shown in the main prefs window")
-  var toolbarItemImage: NSImage? = NSImage(named: NSImage.advancedName)
+class AdvancedPrefsViewController: NSViewController, PreferencePane, NSTableViewDataSource, NSTableViewDelegate {
+  var preferencePaneIdentifier = Preferences.PaneIdentifier.advanced
+  var preferencePaneTitle: String = NSLocalizedString("Advanced", comment: "Shown in the main prefs window")
+
+  var toolbarItemIcon: NSImage {
+    if #available(macOS 11.0, *) {
+      return NSImage(systemSymbolName: "gearshape", accessibilityDescription: "Advanced")!
+    } else {
+      // Fallback on earlier versions
+      return NSImage(named: NSImage.advancedName)!
+    }
+  }
+
   let prefs = UserDefaults.standard
 
   var displays: [ExternalDisplay] = []
@@ -33,7 +42,7 @@ class AdvancedPrefsViewController: NSViewController, MASPreferencesViewControlle
   }
 
   @IBAction func resetPrefsClicked(_: NSButton) {
-    let alert: NSAlert = NSAlert()
+    let alert = NSAlert()
     alert.messageText = NSLocalizedString("Reset Preferences?", comment: "Shown in the alert dialog")
     alert.informativeText = NSLocalizedString("Are you sure you want to reset all preferences?", comment: "Shown in the alert dialog")
     alert.addButton(withTitle: NSLocalizedString("Yes", comment: "Shown in the alert dialog"))
@@ -70,8 +79,9 @@ class AdvancedPrefsViewController: NSViewController, MASPreferencesViewControlle
 
   func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
     guard let tableColumn = tableColumn,
-      let columnIndex = tableView.tableColumns.firstIndex(of: tableColumn),
-      let column = DisplayColumn(rawValue: columnIndex) else {
+          let columnIndex = tableView.tableColumns.firstIndex(of: tableColumn),
+          let column = DisplayColumn(rawValue: columnIndex)
+    else {
       return nil
     }
     let display = self.displays[row]

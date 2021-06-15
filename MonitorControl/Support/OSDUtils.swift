@@ -3,7 +3,7 @@
 //  MonitorControl
 //
 //  Created by Victor Chabbert on 19/06/2020.
-//  Copyright © 2020 Guillaume Broder. All rights reserved.
+//  Copyright © 2020 MonitorControl. All rights reserved.
 //
 
 import Cocoa

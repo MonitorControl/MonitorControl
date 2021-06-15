@@ -1,10 +1,10 @@
-import AMCoreAudio
 import Cocoa
 import DDC
 import Foundation
-import MASPreferences
 import MediaKeyTap
 import os.log
+import Preferences
+import SimplyCoreAudio
 
 var app: AppDelegate!
 let prefs = UserDefaults.standard
@@ -12,21 +12,35 @@ let prefs = UserDefaults.standard
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
   @IBOutlet var statusMenu: NSMenu!
-  @IBOutlet var window: NSWindow!
 
   let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
 
   var monitorItems: [NSMenuItem] = []
-
   var mediaKeyTap: MediaKeyTap?
-  var prefsController: NSWindowController?
   var keyRepeatTimers: [MediaKey: Timer] = [:]
 
+  let coreAudio = SimplyCoreAudio()
   var accessibilityObserver: NSObjectProtocol!
+
+  lazy var preferencesWindowController: PreferencesWindowController = {
+    let storyboard = NSStoryboard(name: "Main", bundle: Bundle.main)
+    let mainPrefsVc = storyboard.instantiateController(withIdentifier: "MainPrefsVC") as? MainPrefsViewController
+    let keyPrefsVc = storyboard.instantiateController(withIdentifier: "KeysPrefsVC") as? KeysPrefsViewController
+    let displayPrefsVc = storyboard.instantiateController(withIdentifier: "DisplayPrefsVC") as? DisplayPrefsViewController
+    let advancedPrefsVc = storyboard.instantiateController(withIdentifier: "AdvancedPrefsVC") as? AdvancedPrefsViewController
+    return PreferencesWindowController(
+      preferencePanes: [
+        mainPrefsVc!,
+        keyPrefsVc!,
+        displayPrefsVc!,
+        advancedPrefsVc!,
+      ],
+      animated: false // causes glitchy animations
+    )
+  }()
 
   func applicationDidFinishLaunching(_: Notification) {
     app = self
-    self.setupViewControllers()
     self.subscribeEventListeners()
     self.setDefaultPrefs()
     self.updateMediaKeyTap()
@@ -41,12 +55,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     NSApplication.shared.terminate(self)
   }
 
-  @IBAction func prefsClicked(_ sender: AnyObject) {
-    if let prefsController = prefsController {
-      prefsController.showWindow(sender)
-      NSApp.activate(ignoringOtherApps: true)
-      prefsController.window?.makeKeyAndOrderFront(sender)
-    }
+  @IBAction func prefsClicked(_: AnyObject) {
+    self.preferencesWindowController.show()
   }
 
   /// Set the default prefs of the app
@@ -151,21 +161,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
   }
 
-  private func setupViewControllers() {
-    let storyboard: NSStoryboard = NSStoryboard(name: "Main", bundle: Bundle.main)
-    let mainPrefsVc = storyboard.instantiateController(withIdentifier: "MainPrefsVC")
-    let keyPrefsVc = storyboard.instantiateController(withIdentifier: "KeysPrefsVC")
-    let displayPrefsVc = storyboard.instantiateController(withIdentifier: "DisplayPrefsVC")
-    let advancedPrefsVc = storyboard.instantiateController(withIdentifier: "AdvancedPrefsVC")
-    let views = [
-      mainPrefsVc,
-      keyPrefsVc,
-      displayPrefsVc,
-      advancedPrefsVc,
-    ]
-    prefsController = MASPreferencesWindowController(viewControllers: views, title: NSLocalizedString("Preferences", comment: "Shown in Preferences window"))
-  }
-
   private func subscribeEventListeners() {
     // subscribe KeyTap event listener
     NotificationCenter.default.addObserver(self, selector: #selector(handleListenForChanged), name: .listenFor, object: nil)
@@ -173,8 +168,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     NotificationCenter.default.addObserver(self, selector: #selector(handleFriendlyNameChanged), name: .friendlyName, object: nil)
     NotificationCenter.default.addObserver(self, selector: #selector(handlePreferenceReset), name: .preferenceReset, object: nil)
 
-    // subscribe Audio output detector (AMCoreAudio)
-    AMCoreAudio.NotificationCenter.defaultCenter.subscribe(self, eventType: AudioHardwareEvent.self, dispatchQueue: DispatchQueue.main)
+    // subscribe Audio output detector (SimplyCoreAudio)
+    NotificationCenter.default.addObserver(self, selector: #selector(audioDeviceChanged), name: Notification.Name.defaultOutputDeviceChanged, object: nil)
 
     // listen for accessibility status changes
     _ = DistributedNotificationCenter.default().addObserver(forName: .accessibilityApi, object: nil, queue: nil) { _ in
@@ -322,11 +317,12 @@ extension AppDelegate: MediaKeyTapDelegate {
       keys = [.brightnessUp, .brightnessDown, .mute, .volumeUp, .volumeDown]
     }
 
-    if let audioDevice = AudioDevice.defaultOutputDevice(), audioDevice.canSetVirtualMasterVolume(direction: .playback) {
+    if self.coreAudio.defaultOutputDevice?.canSetVirtualMasterVolume(scope: .output) == true {
       // Remove volume related keys.
       let keysToDelete: [MediaKey] = [.volumeUp, .volumeDown, .mute]
       keys.removeAll { keysToDelete.contains($0) }
     }
+
     self.mediaKeyTap?.stop()
     // returning an empty array listens for all mediakeys in MediaKeyTap
     if keys.count > 0 {
@@ -334,17 +330,14 @@ extension AppDelegate: MediaKeyTapDelegate {
       self.mediaKeyTap?.start()
     }
   }
-}
 
-extension AppDelegate: EventSubscriber {
-  /// Fires off when the default audio device changes.
-  func eventReceiver(_ event: Event) {
-    if case let .defaultOutputDeviceChanged(audioDevice)? = event as? AudioHardwareEvent {
-      #if DEBUG
-        os_log("Default output device changed to “%{public}@”.", type: .info, audioDevice.name)
-        os_log("Can device set its own volume? %{public}@", type: .info, audioDevice.canSetVirtualMasterVolume(direction: .playback).description)
-      #endif
-      self.updateMediaKeyTap()
-    }
+  @objc private func audioDeviceChanged() {
+    #if DEBUG
+      if let defaultDevice = self.coreAudio.defaultOutputDevice {
+        os_log("Default output device changed to “%{public}@”.", type: .info, defaultDevice.name)
+        os_log("Can device set its own volume? %{public}@", type: .info, defaultDevice.canSetVirtualMasterVolume(scope: .output).description)
+      }
+    #endif
+    self.updateMediaKeyTap()
   }
 }
