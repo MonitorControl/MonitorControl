@@ -8,13 +8,13 @@ on:
 
 jobs:
   build:
-    runs-on: macos-latest
+    runs-on: macos-11
 
     steps:
       - uses: actions/checkout@v2
 
       - name: brew bundle
-        run: brew bundle && swift --version
+        run: brew bundle
 
       - name: xcodebuild
         uses: sersoft-gmbh/xcodebuild-action@v1.4
