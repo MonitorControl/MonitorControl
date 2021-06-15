@@ -1,11 +1,11 @@
 import Cocoa
 
-extension NSScreen {
-  public var displayID: CGDirectDisplayID {
+public extension NSScreen {
+  var displayID: CGDirectDisplayID {
     return (self.deviceDescription[NSDeviceDescriptionKey("NSScreenNumber")] as? CGDirectDisplayID)!
   }
 
-  public var vendorNumber: UInt32? {
+  var vendorNumber: UInt32? {
     switch self.displayID.vendorNumber {
     case 0xFFFF_FFFF:
       return nil
@@ -14,7 +14,7 @@ extension NSScreen {
     }
   }
 
-  public var modelNumber: UInt32? {
+  var modelNumber: UInt32? {
     switch self.displayID.modelNumber {
     case 0xFFFF_FFFF:
       return nil
@@ -23,7 +23,7 @@ extension NSScreen {
     }
   }
 
-  public var serialNumber: UInt32? {
+  var serialNumber: UInt32? {
     switch self.displayID.serialNumber {
     case 0x0000_0000:
       return nil
@@ -32,7 +32,7 @@ extension NSScreen {
     }
   }
 
-  public var displayName: String? {
+  var displayName: String? {
     var servicePortIterator = io_iterator_t()
 
     let status = IOServiceGetMatchingServices(kIOMasterPortDefault, IOServiceMatching("IODisplayConnect"), &servicePortIterator)
@@ -48,10 +48,12 @@ extension NSScreen {
       let dict = (IODisplayCreateInfoDictionary(object, UInt32(kIODisplayOnlyPreferredName)).takeRetainedValue() as NSDictionary as? [String: AnyObject])!
 
       if dict[kDisplayVendorID] as? UInt32 == self.vendorNumber,
-        dict[kDisplayProductID] as? UInt32 == self.modelNumber,
-        dict[kDisplaySerialNumber] as? UInt32 == self.serialNumber {
+         dict[kDisplayProductID] as? UInt32 == self.modelNumber,
+         dict[kDisplaySerialNumber] as? UInt32 == self.serialNumber
+      {
         if let productName = dict["DisplayProductName"] as? [String: String],
-          let firstKey = Array(productName.keys).first {
+           let firstKey = Array(productName.keys).first
+        {
           return productName[firstKey]!
         }
       }
@@ -60,11 +62,11 @@ extension NSScreen {
     return nil
   }
 
-  public var isBuiltin: Bool {
+  var isBuiltin: Bool {
     return CGDisplayIsBuiltin(self.displayID) != 0
   }
 
-  public static func getByDisplayID(displayID: CGDirectDisplayID) -> NSScreen? {
+  static func getByDisplayID(displayID: CGDirectDisplayID) -> NSScreen? {
     return NSScreen.screens.first { $0.displayID == displayID }
   }
 }

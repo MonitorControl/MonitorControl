@@ -3,27 +3,14 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		2894D9B82280B30500DF58DA /* CGDirectDisplayID+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2894D9B72280B30500DF58DA /* CGDirectDisplayID+Extension.swift */; };
-		28D1DDD8227FB7A4004CB494 /* OSD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F0A987D61F77B290009B603D /* OSD.framework */; };
-		28D1DDE5227FB7D0004CB494 /* MediaKeyTap.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28D1DDE2227FB7D0004CB494 /* MediaKeyTap.framework */; };
-		28D1DDE6227FB7D0004CB494 /* MediaKeyTap.framework in [Carthage] Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 28D1DDE2227FB7D0004CB494 /* MediaKeyTap.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		28D1DDE7227FB7D0004CB494 /* AMCoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28D1DDE3227FB7D0004CB494 /* AMCoreAudio.framework */; };
-		28D1DDE8227FB7D0004CB494 /* AMCoreAudio.framework in [Carthage] Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 28D1DDE3227FB7D0004CB494 /* AMCoreAudio.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		28D1DDE9227FB7D0004CB494 /* MASPreferences.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28D1DDE4227FB7D0004CB494 /* MASPreferences.framework */; };
-		28D1DDEA227FB7D0004CB494 /* MASPreferences.framework in [Carthage] Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 28D1DDE4227FB7D0004CB494 /* MASPreferences.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		28D1DDEE227FB944004CB494 /* DDC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28D1DDED227FB944004CB494 /* DDC.framework */; };
-		28D1DDEF227FB944004CB494 /* DDC.framework in [Carthage] Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 28D1DDED227FB944004CB494 /* DDC.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		28D1DDF0227FBD99004CB494 /* EDID+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D1DDEC227FB8F2004CB494 /* EDID+Extension.swift */; };
 		28D1DDF2227FBE71004CB494 /* NSScreen+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D1DDF1227FBE71004CB494 /* NSScreen+Extension.swift */; };
 		28D1DDF3227FC8C6004CB494 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 56754EB01D9A4016007BCDC5 /* Assets.xcassets */; };
-		28D1DE12227FD006004CB494 /* MASPreferences.framework.dSYM in [Carthage] Copy Framework Debug Symbols */ = {isa = PBXBuildFile; fileRef = 28D1DE0E227FD005004CB494 /* MASPreferences.framework.dSYM */; };
-		28D1DE13227FD006004CB494 /* MediaKeyTap.framework.dSYM in [Carthage] Copy Framework Debug Symbols */ = {isa = PBXBuildFile; fileRef = 28D1DE0F227FD006004CB494 /* MediaKeyTap.framework.dSYM */; };
-		28D1DE14227FD006004CB494 /* AMCoreAudio.framework.dSYM in [Carthage] Copy Framework Debug Symbols */ = {isa = PBXBuildFile; fileRef = 28D1DE10227FD006004CB494 /* AMCoreAudio.framework.dSYM */; };
-		28D1DE15227FD006004CB494 /* DDC.framework.dSYM in [Carthage] Copy Framework Debug Symbols */ = {isa = PBXBuildFile; fileRef = 28D1DE11227FD006004CB494 /* DDC.framework.dSYM */; };
 		56754EAF1D9A4016007BCDC5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56754EAE1D9A4016007BCDC5 /* AppDelegate.swift */; };
 		56754EB11D9A4016007BCDC5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 56754EB01D9A4016007BCDC5 /* Assets.xcassets */; };
 		6C0CCB26228F4F720037D2C5 /* AdvancedPrefsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C0CCB25228F4F720037D2C5 /* AdvancedPrefsViewController.swift */; };
@@ -34,15 +21,21 @@
 		6C85EFDD22CBAA8F00227EA1 /* PollingModeCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C85EFDC22CBAA8F00227EA1 /* PollingModeCellView.swift */; };
 		6C85EFDF22CBB54100227EA1 /* PollingCountCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C85EFDE22CBB54100227EA1 /* PollingCountCellView.swift */; };
 		6C85EFE122CC00AD00227EA1 /* NSNotification+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C85EFE022CC00AD00227EA1 /* NSNotification+Extension.swift */; };
+		6CB2B64B263EDA6600F0E0EF /* OSD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F0A987D61F77B290009B603D /* OSD.framework */; };
 		6CBFE27A23DB266000D1BC41 /* Display.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CBFE27923DB266000D1BC41 /* Display.swift */; };
 		6CBFE27C23DB27A200D1BC41 /* InternalDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CBFE27B23DB27A200D1BC41 /* InternalDisplay.swift */; };
+		6CC260F6256AD8F900613714 /* Preferences+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CC260F5256AD8F900613714 /* Preferences+Extension.swift */; };
 		6CCB278622D5315200619B05 /* HideOsdCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CCB278522D5315200619B05 /* HideOsdCellView.swift */; };
+		6CD35F53264FFFC6001F1344 /* SimplyCoreAudio in Frameworks */ = {isa = PBXBuildFile; productRef = 6CD35F52264FFFC6001F1344 /* SimplyCoreAudio */; };
+		6CD35F5626500008001F1344 /* MediaKeyTap in Frameworks */ = {isa = PBXBuildFile; productRef = 6CD35F5526500008001F1344 /* MediaKeyTap */; };
+		6CD35F592650002E001F1344 /* DDC in Frameworks */ = {isa = PBXBuildFile; productRef = 6CD35F582650002E001F1344 /* DDC */; };
+		6CD35F5C2650003F001F1344 /* Preferences in Frameworks */ = {isa = PBXBuildFile; productRef = 6CD35F5B2650003F001F1344 /* Preferences */; };
 		6CD444C322D4FBB8005BFD3D /* LongerDelayCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CD444C222D4FBB8005BFD3D /* LongerDelayCellView.swift */; };
+		6CDA0FCF26485A8300F52125 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6CDA0FCD26485A8300F52125 /* Main.storyboard */; };
 		F01B0699228221B7008E64DB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F01B0680228221B6008E64DB /* Localizable.strings */; };
 		F01B069A228221B7008E64DB /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01B0683228221B6008E64DB /* Utils.swift */; };
 		F01B069E228221B7008E64DB /* ButtonCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01B068E228221B6008E64DB /* ButtonCellView.swift */; };
 		F01B069F228221B7008E64DB /* SliderHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01B068F228221B7008E64DB /* SliderHandler.swift */; };
-		F01B06A0228221B7008E64DB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F01B0690228221B7008E64DB /* Main.storyboard */; };
 		F01B06A1228221B7008E64DB /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = F01B0692228221B7008E64DB /* MainMenu.xib */; };
 		F03A8DF21FFBAA6F0034DC27 /* ExternalDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03A8DF11FFBAA6F0034DC27 /* ExternalDisplay.swift */; };
 		F03FE4C0228DF62B001F59A4 /* FriendlyNameCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03FE4BF228DF62A001F59A4 /* FriendlyNameCellView.swift */; };
@@ -55,34 +48,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		28D1DDBE227FB668004CB494 /* [Carthage] Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				28D1DDE8227FB7D0004CB494 /* AMCoreAudio.framework in [Carthage] Embed Frameworks */,
-				28D1DDEF227FB944004CB494 /* DDC.framework in [Carthage] Embed Frameworks */,
-				28D1DDEA227FB7D0004CB494 /* MASPreferences.framework in [Carthage] Embed Frameworks */,
-				28D1DDE6227FB7D0004CB494 /* MediaKeyTap.framework in [Carthage] Embed Frameworks */,
-			);
-			name = "[Carthage] Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		28D1DE0B227FCF99004CB494 /* [Carthage] Copy Framework Debug Symbols */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 16;
-			files = (
-				28D1DE14227FD006004CB494 /* AMCoreAudio.framework.dSYM in [Carthage] Copy Framework Debug Symbols */,
-				28D1DE15227FD006004CB494 /* DDC.framework.dSYM in [Carthage] Copy Framework Debug Symbols */,
-				28D1DE12227FD006004CB494 /* MASPreferences.framework.dSYM in [Carthage] Copy Framework Debug Symbols */,
-				28D1DE13227FD006004CB494 /* MediaKeyTap.framework.dSYM in [Carthage] Copy Framework Debug Symbols */,
-			);
-			name = "[Carthage] Copy Framework Debug Symbols";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		F06792F5200A73FA0066C438 /* [Login] Copy Helper to start at Login */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -98,7 +63,6 @@
 
 /* Begin PBXFileReference section */
 		1E7ECF3F22A4552400E4E701 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/Localizable.strings; sourceTree = "<group>"; };
-		1E7ECF4022A4552B00E4E701 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/Main.strings; sourceTree = "<group>"; };
 		1E7ECF4122A4553000E4E701 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/MainMenu.strings; sourceTree = "<group>"; };
 		2894D9B72280B30500DF58DA /* CGDirectDisplayID+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGDirectDisplayID+Extension.swift"; sourceTree = "<group>"; };
 		28D1DDE2227FB7D0004CB494 /* MediaKeyTap.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaKeyTap.framework; path = Carthage/Build/Mac/MediaKeyTap.framework; sourceTree = "<group>"; };
@@ -111,10 +75,10 @@
 		28D1DE0F227FD006004CB494 /* MediaKeyTap.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = MediaKeyTap.framework.dSYM; path = Carthage/Build/Mac/MediaKeyTap.framework.dSYM; sourceTree = "<group>"; };
 		28D1DE10227FD006004CB494 /* AMCoreAudio.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = AMCoreAudio.framework.dSYM; path = Carthage/Build/Mac/AMCoreAudio.framework.dSYM; sourceTree = "<group>"; };
 		28D1DE11227FD006004CB494 /* DDC.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = DDC.framework.dSYM; path = Carthage/Build/Mac/DDC.framework.dSYM; sourceTree = "<group>"; };
-		3CCA5F952442EFF800B4DB84 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Main.strings; sourceTree = "<group>"; };
+		2EAA5B7E24BF9E9A00937821 /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/MainMenu.strings; sourceTree = "<group>"; };
+		2EAA5B7F24BF9E9A00937821 /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3CCA5F962442EFF800B4DB84 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/MainMenu.strings; sourceTree = "<group>"; };
 		3CCA5F972442EFF800B4DB84 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
-		47A9F59F22ACAFBE00F649BB /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		47A9F5A022ACAFBE00F649BB /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/MainMenu.strings"; sourceTree = "<group>"; };
 		47A9F5A122ACAFBE00F649BB /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		56754EAB1D9A4016007BCDC5 /* MonitorControl.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MonitorControl.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -128,15 +92,26 @@
 		6C85EFDC22CBAA8F00227EA1 /* PollingModeCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollingModeCellView.swift; sourceTree = "<group>"; };
 		6C85EFDE22CBB54100227EA1 /* PollingCountCellView.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = PollingCountCellView.swift; sourceTree = "<group>"; tabWidth = 4; };
 		6C85EFE022CC00AD00227EA1 /* NSNotification+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSNotification+Extension.swift"; sourceTree = "<group>"; };
-		6CAD134E23624CC1009BD53F /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Main.strings; sourceTree = "<group>"; };
 		6CAD134F23624CC1009BD53F /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/MainMenu.strings; sourceTree = "<group>"; };
 		6CAD135023624CC1009BD53F /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Localizable.strings; sourceTree = "<group>"; };
 		6CBFE27923DB266000D1BC41 /* Display.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Display.swift; sourceTree = "<group>"; };
 		6CBFE27B23DB27A200D1BC41 /* InternalDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternalDisplay.swift; sourceTree = "<group>"; };
+		6CC260F5256AD8F900613714 /* Preferences+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Preferences+Extension.swift"; sourceTree = "<group>"; };
+		6CC260F9256ADA7400613714 /* Preferences.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Preferences.framework; path = Carthage/Build/Mac/Preferences.framework; sourceTree = "<group>"; };
 		6CCB278522D5315200619B05 /* HideOsdCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HideOsdCellView.swift; sourceTree = "<group>"; };
 		6CD444C222D4FBB8005BFD3D /* LongerDelayCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LongerDelayCellView.swift; sourceTree = "<group>"; };
+		6CDA0FCB26485A7600F52125 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = MonitorControl/UI/Base.lproj/Main.storyboard; sourceTree = SOURCE_ROOT; };
+		6CDA0FCE26485A8300F52125 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		6CDA0FD026485AA100F52125 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
+		6CDA0FD126485AA300F52125 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
+		6CDA0FD226485AA700F52125 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Main.strings; sourceTree = "<group>"; };
+		6CDA0FD326485AA900F52125 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Main.strings; sourceTree = "<group>"; };
+		6CDA0FD426485AAA00F52125 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Main.strings; sourceTree = "<group>"; };
+		6CDA0FD526485AAB00F52125 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Main.strings; sourceTree = "<group>"; };
+		6CDA0FD626485AAC00F52125 /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/Main.strings; sourceTree = "<group>"; };
+		6CDA0FD726485AAC00F52125 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
+		6CDA0FD826485AAE00F52125 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/Main.strings; sourceTree = "<group>"; };
 		B0C4810623357CE500053F91 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
-		B0C4810723357CE500053F91 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
 		B0C4810823357CE500053F91 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/MainMenu.strings; sourceTree = "<group>"; };
 		F01B0681228221B6008E64DB /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F01B0682228221B6008E64DB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -146,14 +121,10 @@
 		F01B0686228221B6008E64DB /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F01B068E228221B6008E64DB /* ButtonCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonCellView.swift; sourceTree = "<group>"; };
 		F01B068F228221B7008E64DB /* SliderHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SliderHandler.swift; sourceTree = "<group>"; };
-		F01B0691228221B7008E64DB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F01B0693228221B7008E64DB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		F01B06A222822208008E64DB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MainMenu.strings; sourceTree = "<group>"; };
 		F01B06A32282220A008E64DB /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/MainMenu.strings; sourceTree = "<group>"; };
 		F01B06A42282220D008E64DB /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/MainMenu.strings; sourceTree = "<group>"; };
-		F01B06A522822215008E64DB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
-		F01B06A622822217008E64DB /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Main.strings; sourceTree = "<group>"; };
-		F01B06A72282221B008E64DB /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Main.strings; sourceTree = "<group>"; };
 		F03A8DF11FFBAA6F0034DC27 /* ExternalDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExternalDisplay.swift; sourceTree = "<group>"; };
 		F03FE4BF228DF62A001F59A4 /* FriendlyNameCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendlyNameCellView.swift; sourceTree = "<group>"; };
 		F0445D3720023E710025AE82 /* MainPrefsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPrefsViewController.swift; sourceTree = "<group>"; };
@@ -172,11 +143,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				28D1DDE7227FB7D0004CB494 /* AMCoreAudio.framework in Frameworks */,
-				28D1DDEE227FB944004CB494 /* DDC.framework in Frameworks */,
-				28D1DDE9227FB7D0004CB494 /* MASPreferences.framework in Frameworks */,
-				28D1DDE5227FB7D0004CB494 /* MediaKeyTap.framework in Frameworks */,
-				28D1DDD8227FB7A4004CB494 /* OSD.framework in Frameworks */,
+				6CD35F53264FFFC6001F1344 /* SimplyCoreAudio in Frameworks */,
+				6CD35F5626500008001F1344 /* MediaKeyTap in Frameworks */,
+				6CB2B64B263EDA6600F0E0EF /* OSD.framework in Frameworks */,
+				6CD35F592650002E001F1344 /* DDC in Frameworks */,
+				6CD35F5C2650003F001F1344 /* Preferences in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -193,6 +164,7 @@
 		28D1DDD1227FB759004CB494 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6CC260F9256ADA7400613714 /* Preferences.framework */,
 				28D1DDE3227FB7D0004CB494 /* AMCoreAudio.framework */,
 				28D1DE10227FD006004CB494 /* AMCoreAudio.framework.dSYM */,
 				28D1DDED227FB944004CB494 /* DDC.framework */,
@@ -214,6 +186,7 @@
 				28D1DDF1227FBE71004CB494 /* NSScreen+Extension.swift */,
 				6C85EFE022CC00AD00227EA1 /* NSNotification+Extension.swift */,
 				6C20466B23153E4F00859767 /* Display+Extension.swift */,
+				6CC260F5256AD8F900613714 /* Preferences+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -275,6 +248,7 @@
 		6C85EFDB22CBA77600227EA1 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				6CDA0FCA26485A7600F52125 /* Main.storyboard */,
 				F03FE4BF228DF62A001F59A4 /* FriendlyNameCellView.swift */,
 				F01B068E228221B6008E64DB /* ButtonCellView.swift */,
 				6C85EFDC22CBAA8F00227EA1 /* PollingModeCellView.swift */,
@@ -302,7 +276,7 @@
 			isa = PBXGroup;
 			children = (
 				6C85EFDB22CBA77600227EA1 /* Cells */,
-				F01B0690228221B7008E64DB /* Main.storyboard */,
+				6CDA0FCD26485A8300F52125 /* Main.storyboard */,
 				F01B0692228221B7008E64DB /* MainMenu.xib */,
 				F01B068F228221B7008E64DB /* SliderHandler.swift */,
 			);
@@ -339,18 +313,23 @@
 			buildPhases = (
 				28D1DE0C227FCFAF004CB494 /* [Format] Run SwiftFormat */,
 				F03A8DF01FFB9D4C0034DC27 /* [Lint] Run SwiftLint */,
+				6CB1BDB2253C7EBE00B52124 /* [Localization] Run BartyCrouch */,
 				56754EA71D9A4016007BCDC5 /* Sources */,
 				56754EA81D9A4016007BCDC5 /* Frameworks */,
 				56754EA91D9A4016007BCDC5 /* Resources */,
 				F06792F5200A73FA0066C438 /* [Login] Copy Helper to start at Login */,
-				28D1DDBE227FB668004CB494 /* [Carthage] Embed Frameworks */,
-				28D1DE0B227FCF99004CB494 /* [Carthage] Copy Framework Debug Symbols */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = MonitorControl;
+			packageProductDependencies = (
+				6CD35F52264FFFC6001F1344 /* SimplyCoreAudio */,
+				6CD35F5526500008001F1344 /* MediaKeyTap */,
+				6CD35F582650002E001F1344 /* DDC */,
+				6CD35F5B2650003F001F1344 /* Preferences */,
+			);
 			productName = MonitorControl.OSX;
 			productReference = 56754EAB1D9A4016007BCDC5 /* MonitorControl.app */;
 			productType = "com.apple.product-type.application";
@@ -381,8 +360,8 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0920;
-				LastUpgradeCheck = 1100;
-				ORGANIZATIONNAME = "Guillaume Broder";
+				LastUpgradeCheck = 1250;
+				ORGANIZATIONNAME = MonitorControl;
 				TargetAttributes = {
 					56754EAA1D9A4016007BCDC5 = {
 						CreatedOnToolsVersion = 8.0;
@@ -410,8 +389,15 @@
 				ru,
 				it,
 				ja,
+				pl,
 			);
 			mainGroup = 56754EA21D9A4016007BCDC5;
+			packageReferences = (
+				6CD35F51264FFFC6001F1344 /* XCRemoteSwiftPackageReference "SimplyCoreAudio" */,
+				6CD35F5426500008001F1344 /* XCRemoteSwiftPackageReference "MediaKeyTap" */,
+				6CD35F572650002E001F1344 /* XCRemoteSwiftPackageReference "DDC" */,
+				6CD35F5A2650003F001F1344 /* XCRemoteSwiftPackageReference "Preferences" */,
+			);
 			productRefGroup = 56754EAC1D9A4016007BCDC5 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -428,8 +414,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				56754EB11D9A4016007BCDC5 /* Assets.xcassets in Resources */,
+				6CDA0FCF26485A8300F52125 /* Main.storyboard in Resources */,
 				F01B0699228221B7008E64DB /* Localizable.strings in Resources */,
-				F01B06A0228221B7008E64DB /* Main.storyboard in Resources */,
 				F01B06A1228221B7008E64DB /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -499,6 +485,24 @@
 			shellPath = "/bin/bash -euo pipefail";
 			shellScript = "version_number=\"$(/usr/libexec/PlistBuddy -c \"Print CFBundleShortVersionString\" \"${INFOPLIST_FILE/Helper/}\")\"\n\n/usr/libexec/PlistBuddy -c \"Set :CFBundleShortVersionString ${version_number}\" \"${INFOPLIST_FILE/Helper/}\"\n/usr/libexec/PlistBuddy -c \"Set :CFBundleShortVersionString ${version_number}\" \"${INFOPLIST_FILE}\"\n";
 		};
+		6CB1BDB2253C7EBE00B52124 /* [Localization] Run BartyCrouch */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "[Localization] Run BartyCrouch";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which bartycrouch > /dev/null; then\n    bartycrouch update -x\n    bartycrouch lint -x\nelse\n    echo \"warning: BartyCrouch not installed, download it from https://github.com/Flinesoft/BartyCrouch\"\nfi\n";
+		};
 		F03A8DF01FFB9D4C0034DC27 /* [Lint] Run SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -528,6 +532,7 @@
 				6C2EA1CD228F644B00060E3F /* OnlyIntegerValueFormatter.swift in Sources */,
 				2894D9B82280B30500DF58DA /* CGDirectDisplayID+Extension.swift in Sources */,
 				6CCB278622D5315200619B05 /* HideOsdCellView.swift in Sources */,
+				6CC260F6256AD8F900613714 /* Preferences+Extension.swift in Sources */,
 				6CD444C322D4FBB8005BFD3D /* LongerDelayCellView.swift in Sources */,
 				F03FE4C0228DF62B001F59A4 /* FriendlyNameCellView.swift in Sources */,
 				6C2EA1CF228F7DFB00060E3F /* PollingMode.swift in Sources */,
@@ -559,6 +564,31 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		6CDA0FCA26485A7600F52125 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6CDA0FCB26485A7600F52125 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		6CDA0FCD26485A8300F52125 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6CDA0FCE26485A8300F52125 /* Base */,
+				6CDA0FD026485AA100F52125 /* en */,
+				6CDA0FD126485AA300F52125 /* zh-Hans */,
+				6CDA0FD226485AA700F52125 /* fr */,
+				6CDA0FD326485AA900F52125 /* de */,
+				6CDA0FD426485AAA00F52125 /* it */,
+				6CDA0FD526485AAB00F52125 /* ja */,
+				6CDA0FD626485AAC00F52125 /* pl */,
+				6CDA0FD726485AAC00F52125 /* ru */,
+				6CDA0FD826485AAE00F52125 /* uk */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
 		F01B0680228221B6008E64DB /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -570,24 +600,9 @@
 				B0C4810623357CE500053F91 /* ru */,
 				6CAD135023624CC1009BD53F /* it */,
 				3CCA5F972442EFF800B4DB84 /* ja */,
+				2EAA5B7F24BF9E9A00937821 /* pl */,
 			);
 			name = Localizable.strings;
-			sourceTree = "<group>";
-		};
-		F01B0690228221B7008E64DB /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				F01B0691228221B7008E64DB /* Base */,
-				F01B06A72282221B008E64DB /* de */,
-				F01B06A522822215008E64DB /* en */,
-				F01B06A622822217008E64DB /* fr */,
-				1E7ECF4022A4552B00E4E701 /* uk */,
-				47A9F59F22ACAFBE00F649BB /* zh-Hans */,
-				B0C4810723357CE500053F91 /* ru */,
-				6CAD134E23624CC1009BD53F /* it */,
-				3CCA5F952442EFF800B4DB84 /* ja */,
-			);
-			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 		F01B0692228221B7008E64DB /* MainMenu.xib */ = {
@@ -602,6 +617,7 @@
 				B0C4810823357CE500053F91 /* ru */,
 				6CAD134F23624CC1009BD53F /* it */,
 				3CCA5F962442EFF800B4DB84 /* ja */,
+				2EAA5B7E24BF9E9A00937821 /* pl */,
 			);
 			name = MainMenu.xib;
 			sourceTree = "<group>";
@@ -634,6 +650,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -694,6 +711,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -717,7 +735,8 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 			};
 			name = Release;
 		};
@@ -731,14 +750,11 @@
 				CURRENT_PROJECT_VERSION = 631;
 				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/Mac",
-					"$(PROJECT_DIR)/Carthage/Build",
-					"$(PROJECT_DIR)",
-				);
 				INFOPLIST_FILE = MonitorControl/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
 				MARKETING_VERSION = 2.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = me.guillaumeb.MonitorControl;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -758,14 +774,11 @@
 				CURRENT_PROJECT_VERSION = 631;
 				DEVELOPMENT_TEAM = CYC8C8R4K9;
 				ENABLE_HARDENED_RUNTIME = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/Mac",
-					"$(PROJECT_DIR)/Carthage/Build",
-					"$(PROJECT_DIR)",
-				);
 				INFOPLIST_FILE = MonitorControl/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
 				MARKETING_VERSION = 2.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = me.guillaumeb.MonitorControl;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -791,7 +804,10 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = MonitorControlHelper/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
 				MARKETING_VERSION = 2.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = me.guillaumeb.MonitorControlHelper;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -816,7 +832,10 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = MonitorControlHelper/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
 				MARKETING_VERSION = 2.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = me.guillaumeb.MonitorControlHelper;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -856,6 +875,64 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		6CD35F51264FFFC6001F1344 /* XCRemoteSwiftPackageReference "SimplyCoreAudio" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/rnine/SimplyCoreAudio";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.1;
+			};
+		};
+		6CD35F5426500008001F1344 /* XCRemoteSwiftPackageReference "MediaKeyTap" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/MonitorControl/MediaKeyTap";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+		6CD35F572650002E001F1344 /* XCRemoteSwiftPackageReference "DDC" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/reitermarkus/DDC.swift";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+		6CD35F5A2650003F001F1344 /* XCRemoteSwiftPackageReference "Preferences" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/sindresorhus/Preferences";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.3.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		6CD35F52264FFFC6001F1344 /* SimplyCoreAudio */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6CD35F51264FFFC6001F1344 /* XCRemoteSwiftPackageReference "SimplyCoreAudio" */;
+			productName = SimplyCoreAudio;
+		};
+		6CD35F5526500008001F1344 /* MediaKeyTap */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6CD35F5426500008001F1344 /* XCRemoteSwiftPackageReference "MediaKeyTap" */;
+			productName = MediaKeyTap;
+		};
+		6CD35F582650002E001F1344 /* DDC */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6CD35F572650002E001F1344 /* XCRemoteSwiftPackageReference "DDC" */;
+			productName = DDC;
+		};
+		6CD35F5B2650003F001F1344 /* Preferences */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6CD35F5A2650003F001F1344 /* XCRemoteSwiftPackageReference "Preferences" */;
+			productName = Preferences;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 56754EA31D9A4016007BCDC5 /* Project object */;
 }

@@ -1,12 +1,21 @@
 import Cocoa
-import MASPreferences
 import os.log
+import Preferences
 import ServiceManagement
 
-class MainPrefsViewController: NSViewController, MASPreferencesViewController {
-  var viewIdentifier: String = "Main"
-  var toolbarItemLabel: String? = NSLocalizedString("General", comment: "Shown in the main prefs window")
-  var toolbarItemImage: NSImage? = NSImage(named: NSImage.preferencesGeneralName)
+class MainPrefsViewController: NSViewController, PreferencePane {
+  let preferencePaneIdentifier = Preferences.PaneIdentifier.main
+  let preferencePaneTitle: String = NSLocalizedString("General", comment: "Shown in the main prefs window")
+
+  var toolbarItemIcon: NSImage {
+    if #available(macOS 11.0, *) {
+      return NSImage(systemSymbolName: "switch.2", accessibilityDescription: "Display")!
+    } else {
+      // Fallback on earlier versions
+      return NSImage(named: NSImage.preferencesGeneralName)!
+    }
+  }
+
   let prefs = UserDefaults.standard
 
   @IBOutlet var versionLabel: NSTextField!
