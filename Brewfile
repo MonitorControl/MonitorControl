@@ -1,2 +1,1 @@
 brew 'swiftformat'
-brew 'carthage'
