@@ -361,7 +361,7 @@
 			attributes = {
 				LastSwiftUpdateCheck = 0920;
 				LastUpgradeCheck = 1250;
-				ORGANIZATIONNAME = "Guillaume Broder";
+				ORGANIZATIONNAME = MonitorControl;
 				TargetAttributes = {
 					56754EAA1D9A4016007BCDC5 = {
 						CreatedOnToolsVersion = 8.0;

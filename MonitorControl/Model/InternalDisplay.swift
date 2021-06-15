@@ -3,7 +3,7 @@
 //  MonitorControl
 //
 //  Created by Joni Van Roost on 24/01/2020.
-//  Copyright © 2020 Guillaume Broder. All rights reserved.
+//  Copyright © 2020 MonitorControl. All rights reserved.
 //
 //  Most of the code in this file was sourced from:
 //  https://github.com/fnesveda/ExternalDisplayBrightness
