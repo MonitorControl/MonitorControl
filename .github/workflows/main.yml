@@ -16,5 +16,13 @@ jobs:
       - name: brew bundle
         run: brew bundle
 
+      - name: print xcodebuild version
+        run: xcodebuild -version
+
       - name: xcodebuild
-        run: xcodebuild build -project MonitorControl.xcodeproj -arch "x86_64"  CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO -scheme "MonitorControl"
+        uses: sersoft-gmbh/xcodebuild-action@v1.4
+        with:
+          project: MonitorControl.xcodeproj
+          scheme: MonitorControl
+          destination: platform=macOS
+          action: build
