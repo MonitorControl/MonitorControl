@@ -25,4 +25,4 @@ jobs:
           project: MonitorControl.xcodeproj
           scheme: MonitorControl
           destination: platform=macOS
-          action: build
+          action: build 
