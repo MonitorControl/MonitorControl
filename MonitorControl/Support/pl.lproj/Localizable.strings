@@ -2,10 +2,10 @@
 "Advanced" = "Zaawansowane";
 
 /* Shown in the alert dialog */
-"Are you sure you want to enable a longer delay? Doing so may freeze your system and require a restart. Start at login will be disabled as a safety measure." = "Are you sure you want to enable a longer delay? Doing so may freeze your system and require a restart. Start at login will be disabled as a safety measure.";
+"Are you sure you want to enable a longer delay? Doing so may freeze your system and require a restart. Start at login will be disabled as a safety measure." = "Czy na pewno chcesz ustawić większe opóźnienie? Może to skutkować zawieszeniem systemu i koniecznością restartu. Uruchamianie programu podczas logowania zostanie wyłączone.";
 
 /* Shown in the alert dialog */
-"Are you sure you want to reset all preferences?" = "Are you sure you want to reset all preferences?";
+"Are you sure you want to reset all preferences?" = "Czy na pewno chcesz przywrócić wszystkie ustawienia do stanu początkowego?";
 
 /* Sown in menu */
 "Brightness" = "Jasność";
@@ -32,7 +32,7 @@
 "Keys" = "Klawisze";
 
 /* Shown in the alert dialog */
-"No" = "No";
+"No" = "Nie";
 
 /* Shown in menu */
 "No supported display found" = "Nie znaleziono obsługiwanego wyświetlacza";
@@ -64,7 +64,7 @@
 "Volume" = "Głośność";
 
 /* Shown in the alert dialog */
-"Yes" = "Yes";
+"Yes" = "Tak";
 
 /* Shown in the alert dialog */
-"You need to enable MonitorControl in System Preferences > Security and Privacy > Accessibility for the keyboard shortcuts to work" = "Musisz włączyć MonitorControl w Preferencjach systemowych> Bezpieczeństwo i prywatność> Ułatwienie dostępu dla skrótów klawiszowych";
+"You need to enable MonitorControl in System Preferences > Security and Privacy > Accessibility for the keyboard shortcuts to work" = "Musisz włączyć MonitorControl w Preferencjach systemowych > Ochrona i prywatność > Dostępność, aby skróty klawiszowe mogły działać";
