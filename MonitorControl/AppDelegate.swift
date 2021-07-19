@@ -1,5 +1,4 @@
 import Cocoa
-import DDC
 import Foundation
 import MediaKeyTap
 import os.log

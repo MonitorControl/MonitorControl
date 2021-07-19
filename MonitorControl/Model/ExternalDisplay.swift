@@ -8,6 +8,7 @@ class ExternalDisplay: Display {
   var volumeSliderHandler: SliderHandler?
   var contrastSliderHandler: SliderHandler?
   var ddc: DDC?
+  var m1ddc: Bool = false
 
   private let prefs = UserDefaults.standard
 
@@ -35,8 +36,25 @@ class ExternalDisplay: Display {
 
   override init(_ identifier: CGDirectDisplayID, name: String, vendorNumber: UInt32?, modelNumber: UInt32?) {
     super.init(identifier, name: name, vendorNumber: vendorNumber, modelNumber: modelNumber)
-    self.ddc = DDC(for: identifier)
+
+    #if arch(arm64)
+      // MARK: Check if M1 connected display is DDC capable
+      self.m1ddc = true // DDC compatibility is assumed for now...
+    #else
+      self.ddc = DDC(for: identifier)
+    #endif
+    
   }
+
+  public func ddcWrite(command: DDC.Command, value: UInt16, errorRecoveryWaitTime: UInt32? = nil) -> Bool? {
+    #if arch(arm64)
+      // MARK: Put M1 DDC write here
+      return true
+    #else
+      return ddcWrite(command: .osd, value: UInt16(1), errorRecoveryWaitTime: 2000)
+    #endif
+  }
+
 
   // On some displays, the display's OSD overlaps the macOS OSD,
   // calling the OSD command with 1 seems to hide it.
@@ -46,7 +64,7 @@ class ExternalDisplay: Display {
     }
 
     for _ in 0 ..< 20 {
-      _ = self.ddc?.write(command: .osd, value: UInt16(1), errorRecoveryWaitTime: 2000)
+      _ = ddcWrite(command: .osd, value: UInt16(1), errorRecoveryWaitTime: 2000)
     }
   }
 
@@ -75,12 +93,12 @@ class ExternalDisplay: Display {
 
     let volumeDDCValue = UInt16(volumeOSDValue)
 
-    guard self.ddc?.write(command: .audioSpeakerVolume, value: volumeDDCValue) == true else {
+    guard ddcWrite(command: .audioSpeakerVolume, value: volumeDDCValue) == true else {
       return
     }
 
     if self.supportsMuteCommand() {
-      guard self.ddc?.write(command: .audioMuteScreenBlank, value: UInt16(muteValue)) == true else {
+      guard ddcWrite(command: .audioMuteScreenBlank, value: UInt16(muteValue)) == true else {
         return
       }
     }
@@ -114,7 +132,7 @@ class ExternalDisplay: Display {
     let isAlreadySet = volumeOSDValue == self.getValue(for: .audioSpeakerVolume)
 
     if !isAlreadySet {
-      guard self.ddc?.write(command: .audioSpeakerVolume, value: volumeDDCValue) == true else {
+      guard ddcWrite(command: .audioSpeakerVolume, value: volumeDDCValue) == true else {
         return
       }
     }
@@ -122,7 +140,7 @@ class ExternalDisplay: Display {
     if let muteValue = muteValue {
       // If the mute command is supported, set its value accordingly
       if self.supportsMuteCommand() {
-        guard self.ddc?.write(command: .audioMuteScreenBlank, value: UInt16(muteValue)) == true else {
+        guard ddcWrite(command: .audioMuteScreenBlank, value: UInt16(muteValue)) == true else {
           return
         }
       }
@@ -156,7 +174,7 @@ class ExternalDisplay: Display {
     }
 
     if !isAlreadySet {
-      guard self.ddc?.write(command: .brightness, value: ddcValue) == true else {
+      guard ddcWrite(command: .brightness, value: ddcValue) == true else {
         return
       }
     }
@@ -188,7 +206,7 @@ class ExternalDisplay: Display {
 
     // Only write the new contrast value if lowering contrast after brightness is enabled
     if let contrastValue = contrastValue, self.prefs.bool(forKey: Utils.PrefKeys.lowerContrast.rawValue) {
-      _ = self.ddc?.write(command: .contrast, value: UInt16(contrastValue))
+      _ = ddcWrite(command: .contrast, value: UInt16(contrastValue))
       self.saveValue(contrastValue, for: .contrast)
 
       if let slider = contrastSliderHandler?.slider {
@@ -212,7 +230,13 @@ class ExternalDisplay: Display {
       os_log("Display does not support enabling DDC application report.", type: .debug)
     }
 
-    values = self.ddc?.read(command: command, tries: tries, minReplyDelay: delay)
+    #if arch(arm64)
+      // MARK: Put M1 DDC read here
+      values = (current: 0, max: 100) // Return a current value of 50 and max value of 100 for now
+    #else
+      values = self.ddc?.read(command: command, tries: tries, minReplyDelay: delay)
+    #endif
+    
     return values
   }
 
