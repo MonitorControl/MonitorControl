@@ -1,5 +1,23 @@
-<div align="center">
-<b>This is an <u>experimental</u> fork to have some kind of M1 support until it is done professionally.<b>
+## Experimental
+
+This is an **experimental** fork to have some kind of **M1 support** until DDC.Swift is updated.
+
+Currently brightness and volume control works if you have a *single*, *compatible* external display connected to your *M1 Mac* via *USB-C/DisplayPort* (HDMI does not work).
+
+Sorry, no Release, you have to build it in XCode if you are interested.
+
+Notes: I am not sure about Intel compatibility, but I tried not to break it. I tested only on Monterey but should work on Big Sur as well.
+
+Current state:
+
+- [x] Make the app compile without complaints on ARM, fix the OSD.Framework problem.
+- [x] Figure out how to do M1 DDC control in 100% Swift (MonitorControl seems to avoid. C :))
+- [x] Make it work with a single external display config on M1.
+- [x] Make DDC writes work on M1 - results in a fundamentally working app on M1. **MILESTONE ACHIEVED**
+- [ ] Make DDC read work on M1 (to set up initial brightness and volume on app start).
+- [ ] Proper multi monitor detection (this applies only for the M1 Mac Mini as of now, but its HDMI port does not pass through I2C commands).
+- [ ] Add proper guards everywhere and do all the required cleanup to make things tidy.
+
 </div>
 
 <hr>
@@ -77,9 +95,6 @@ Open [issues](https://github.com/MonitorControl/MonitorControl/issues) if you ha
 ### Required
 
 - Xcode
-- [Swiftlint](https://github.com/realm/SwiftLint)
-- [SwiftFormat](https://github.com/nicklockwood/SwiftFormat)
-- [BartyCrouch](https://github.com/Flinesoft/BartyCrouch) (for updating localizations)
 
 Clone the project
 
@@ -102,7 +117,7 @@ You're all set ! Now open the `MonitorControl.xcodeproj` with Xcode
 
 ## Support
 
-- macOS Sierra (`10.12`) and up.
+- macOS Big Sur (`11.0`) and up.
 - Works with monitors controllable via [DDC](https://en.wikipedia.org/wiki/Display_Data_Channel).
 
 ## Contributors
