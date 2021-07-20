@@ -76,15 +76,7 @@ _Bonus: Using keyboard keys displays the native osd_
 
 ## Download
 
-Go to [Release](https://github.com/MonitorControl/MonitorControl/releases/latest) and download the latest `.dmg`
-
-## Installing with Homebrew Cask
-
-You can also install MonitorControl with [Homebrew Cask](https://github.com/Homebrew/homebrew-cask).
-
-```bash
-$ brew install --cask monitorcontrol
-```
+Sorry, no releases download for this experimental fork.
 
 ## How to help
 
