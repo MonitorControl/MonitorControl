@@ -219,7 +219,7 @@ class ExternalDisplay: Display {
 
     // MARK: This must be a litle bit more sophisticated, now we just assume everything went fine...
     
-    var data = [UInt8](repeating: 0, count: 256)
+    var data = [UInt8](repeating: 0, count: 6)
   
     data[0] = 0x84
     data[1] = 0x03
@@ -250,8 +250,9 @@ class ExternalDisplay: Display {
 
     // MARK: This is rather rudimentary and assumes everything goes well...
     
-    var data = [UInt8](repeating: 0, count: 256)
-  
+    var data = [UInt8](repeating: 0, count: 6)
+    var read = [UInt8](repeating: 0, count: 12)
+
     data[0] = 0x82
     data[1] = 0x01
     data[2] = command.rawValue
@@ -261,9 +262,7 @@ class ExternalDisplay: Display {
       usleep(2000)
       IOAVServiceWriteI2C(self.m1avService, 0x37, 0x51, &data,  6)
     }
-    
-    var read = [UInt8](repeating: 0, count: 12)
-    
+        
     usleep(2000)
     IOAVServiceReadI2C(self.m1avService, 0x37, 0x51, &read, 12);
     
