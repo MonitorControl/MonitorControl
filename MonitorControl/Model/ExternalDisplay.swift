@@ -2,6 +2,7 @@ import AVFoundation
 import Cocoa
 import DDC
 import os.log
+import IOKit
 
 class ExternalDisplay: Display {
   var brightnessSliderHandler: SliderHandler?
@@ -9,9 +10,10 @@ class ExternalDisplay: Display {
   var contrastSliderHandler: SliderHandler?
   var ddc: DDC?
   var m1ddc: Bool = false
+  var m1avService: IOAVService?
 
   private let prefs = UserDefaults.standard
-
+  
   var hideOsd: Bool {
     get {
       return self.prefs.bool(forKey: "hideOsd-\(self.identifier)")
@@ -38,23 +40,75 @@ class ExternalDisplay: Display {
     super.init(identifier, name: name, vendorNumber: vendorNumber, modelNumber: modelNumber)
 
     #if arch(arm64)
-      // MARK: Check if M1 connected display is DDC capable
-      self.m1ddc = true // DDC compatibility is assumed for now...
+    
+    // MARK: Implement proper IOAVService matching and DDC detection
+  
+    self.m1avService = IOAVServiceCreate(kCFAllocatorDefault) as IOAVService
+    self.m1ddc = true
+
     #else
-      self.ddc = DDC(for: identifier)
+    
+    self.ddc = DDC(for: identifier)
+
     #endif
     
   }
 
   public func ddcWrite(command: DDC.Command, value: UInt16, errorRecoveryWaitTime: UInt32? = nil) -> Bool? {
+    
     #if arch(arm64)
-      // MARK: Put M1 DDC write here
-      return true
-    #else
-      return ddcWrite(command: .osd, value: UInt16(1), errorRecoveryWaitTime: 2000)
-    #endif
-  }
+    
+    // MARK: All right, this is not working... Don't know why though. The same works in Obj-C just fine. It must be something obvious...
+         
+    let pointer = UnsafeMutableRawPointer.allocate(byteCount: 6, alignment: MemoryLayout<UInt8>.alignment)
+    
+    defer {
+      pointer.deallocate()
+    }
+    
+    pointer.advanced(by: 0).storeBytes(of: 0x84, as: UInt8.self)
+    pointer.advanced(by: 1).storeBytes(of: 0x03, as: UInt8.self)
+    pointer.advanced(by: 2).storeBytes(of: command.rawValue, as: UInt8.self)
+    pointer.advanced(by: 3).storeBytes(of: UInt8(value >> 8), as: UInt8.self)
+    pointer.advanced(by: 4).storeBytes(of: UInt8(value & 255), as: UInt8.self)
+    pointer.advanced(by: 5).storeBytes(of: (0x6E ^ 0x51 ^ 0x84 ^ 0x03 ^ command.rawValue ^ UInt8(value >> 8) ^ UInt8(value & 255)), as: UInt8.self)
 
+    for _ in 1...2 {
+    
+      usleep(2000)
+      IOAVServiceWriteI2C(self.m1avService, 0x37, 0x51, pointer,  6)
+
+    }
+    
+    /** This should be fine as well, but does not work either...
+    
+    var data = [UInt8](repeating: 0, count: 256)
+  
+    data[0] = 0x84
+    data[1] = 0x03
+    data[2] = command.rawValue
+    data[3] = UInt8(value >> 8)
+    data[4] = UInt8(value & 255)
+    data[5] = 0x6E ^ 0x51 ^ data[0] ^ data[1] ^ data[2] ^ data[3] ^ data[4]
+
+    for _ in 1...2 {
+     
+      usleep(2000)
+      IOAVServiceWriteI2C(self.m1avService, 0x37, 0x51, &data,  6)
+
+     }
+     
+    */
+  
+    return true
+    
+    #else
+    
+    return self.ddc?.write(command: .osd, value: UInt16(1), errorRecoveryWaitTime: 2000)
+    
+    #endif
+    
+  }
 
   // On some displays, the display's OSD overlaps the macOS OSD,
   // calling the OSD command with 1 seems to hide it.
@@ -231,10 +285,14 @@ class ExternalDisplay: Display {
     }
 
     #if arch(arm64)
-      // MARK: Put M1 DDC read here
-      values = (current: 0, max: 100) // Return a current value of 50 and max value of 100 for now
+    
+    // MARK: Put M1 DDC read here
+    values = (current: 50, max: 100) // Return a current value of 50 and max value of 100 for now
+    
     #else
-      values = self.ddc?.read(command: command, tries: tries, minReplyDelay: delay)
+    
+    values = self.ddc?.read(command: command, tries: tries, minReplyDelay: delay)
+    
     #endif
     
     return values

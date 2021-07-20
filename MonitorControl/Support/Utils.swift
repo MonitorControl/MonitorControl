@@ -132,6 +132,16 @@ class Utils: NSObject {
       return nil
     }
   }
+  
+  static func alert(text: String) {
+
+    let alert: NSAlert = NSAlert()
+    alert.messageText = text
+    alert.alertStyle = NSAlert.Style.informational
+    alert.addButton(withTitle: "OK")
+    alert.runModal()
+    
+  }
 
   // MARK: - Enums
 
@@ -179,4 +189,5 @@ class Utils: NSObject {
     /// Don't listen for any keys
     case none = 3
   }
+
 }
