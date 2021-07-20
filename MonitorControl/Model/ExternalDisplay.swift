@@ -216,6 +216,8 @@ class ExternalDisplay: Display {
   public func writeDDCValues(command: DDC.Command, value: UInt16, errorRecoveryWaitTime: UInt32? = nil) -> Bool? {
     
     #if arch(arm64)
+
+    // MARK: This must be a litle bit more sophisticated, now we just assume everything went fine...
     
     var data = [UInt8](repeating: 0, count: 256)
   
@@ -229,10 +231,8 @@ class ExternalDisplay: Display {
     for _ in 1...2 {
       usleep(2000)
       IOAVServiceWriteI2C(self.m1avService, 0x37, 0x51, &data,  6)
-     }
-    
-    // MARK: This must be a litle bit more sophisticated, now we just assume everything went fine...
-    
+    }
+        
     return true
     
     #else
@@ -248,10 +248,27 @@ class ExternalDisplay: Display {
     
     #if arch(arm64)
 
-    // MARK: Reading will be done right, we now just return some generic current and max values...
+    // MARK: This is rather rudimentary and assumes everything goes well...
     
-    return (50,100)
+    var data = [UInt8](repeating: 0, count: 256)
+  
+    data[0] = 0x82
+    data[1] = 0x01
+    data[2] = command.rawValue
+    data[3] = 0x6e ^ data[0] ^ data[1] ^ data[2] ^ data[3]
+
+    for _ in 1...2 {
+      usleep(2000)
+      IOAVServiceWriteI2C(self.m1avService, 0x37, 0x51, &data,  6)
+    }
     
+    var read = [UInt8](repeating: 0, count: 12)
+    
+    usleep(2000)
+    IOAVServiceReadI2C(self.m1avService, 0x37, 0x51, &read, 12);
+    
+    values = (UInt16(read[9]), UInt16(read[7]))
+
     #else
     
     if self.ddc?.supported(minReplyDelay: delay) == true {
@@ -267,11 +284,11 @@ class ExternalDisplay: Display {
     }
 
     values = self.ddc?.read(command: command, tries: tries, minReplyDelay: delay)
-        
+
+    #endif
+    
     return values
     
-    #endif
-
   }
 
   func calcNewValue(for command: DDC.Command, isUp: Bool, isSmallIncrement: Bool) -> Int {
