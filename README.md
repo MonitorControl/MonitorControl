@@ -14,7 +14,7 @@ Current state:
 - [x] Figure out how to do M1 DDC control in 100% Swift (MonitorControl seems to avoid C :))
 - [x] Make it work with a single external display config on M1.
 - [x] Make DDC writes work on M1 - results in a fundamentally working app on M1. **MILESTONE ACHIEVED**
-- [ ] Make DDC read work on M1 (to set up initial brightness and volume on app start).
+- [x] Make DDC read work on M1 (to set up initial brightness and volume on app start).
 - [ ] Proper multi monitor detection (this applies only for the M1 Mac Mini as of now, but its HDMI port does not pass through I2C commands).
 - [ ] Fix issue with internal display brightness display control on M1.
 - [ ] Add proper guards everywhere and do all the required cleanup to make things tidy.
