@@ -228,8 +228,8 @@ class ExternalDisplay: Display {
     data[4] = UInt8(value & 255)
     data[5] = 0x6E ^ 0x51 ^ data[0] ^ data[1] ^ data[2] ^ data[3] ^ data[4]
 
-    for _ in 1...2 {
-      usleep(2000)
+    for _ in 1...3 {
+      usleep(10000)
       IOAVServiceWriteI2C(self.m1avService, 0x37, 0x51, &data,  6)
     }
         
@@ -258,15 +258,18 @@ class ExternalDisplay: Display {
     data[2] = command.rawValue
     data[3] = 0x6e ^ data[0] ^ data[1] ^ data[2] ^ data[3]
 
-    for _ in 1...2 {
-      usleep(2000)
+    for _ in 1...3 {
+      usleep(30000)
       IOAVServiceWriteI2C(self.m1avService, 0x37, 0x51, &data,  6)
     }
         
-    usleep(2000)
+    usleep(30000)
     IOAVServiceReadI2C(self.m1avService, 0x37, 0x51, &read, 12);
     
-    values = (UInt16(read[9]), UInt16(read[7]))
+    let current = min(UInt16(read[9]),100)
+    let max = min(UInt16(read[7]),100)
+    
+    values = (current, max)
 
     #else
     
