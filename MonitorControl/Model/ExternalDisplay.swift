@@ -41,11 +41,9 @@ class ExternalDisplay: Display {
 
     #if arch(arm64)
     
-    // MARK: Implement proper IOAVService matching based on EDID
+    // MARK: Should implement proper display matching (this is currently needed for the M1 Mini's HDMI port only as all other M1 Macs support a single external display)
   
     self.m1avService = IOAVServiceCreate(kCFAllocatorDefault)?.takeRetainedValue() as IOAVService
-    
-    // self.m1ddc = true
     
     var send: [UInt8] = [0xF1]
     var reply = [UInt8](repeating: 0, count: 11)
