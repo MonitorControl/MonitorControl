@@ -4,18 +4,17 @@ This is an **experimental** fork of [MonitorControl](https://github.com/MonitorC
 
 **Test it at your own risk!**
 
-You need to have a *single*, *compatible* external display connected to your *M1 Mac* via *USB-C/DisplayPort*. The HDMI port of the M1 Mac Mini does not work - unfortunatelly there is no known way to circumvent this limitation.
+You need to have a *single*, *compatible* external display (aside from the internal display if present) connected to your *M1 Mac* via *USB-C/DisplayPort*. The HDMI port of the M1 Mac Mini does not work - unfortunatelly there is no known way to circumvent this limitation.
 
 Current state:
 
 - [x] Make the app compile without complaints on ARM, fix the OSD.Framework problem.
 - [x] Figure out how to do M1 DDC control in 100% Swift (MonitorControl seems to avoid C :))
-- [x] Make it work with a single external display config on M1.
-- [x] Make DDC writes work on M1 - results in a fundamentally working app on M1.
+- [x] Make DDC writes work on M1
 - [x] Make DDC read work on M1 (to set up initial brightness and volume on app start).
 - [x] Add proper checks to safeguard things.
 - [x] Fix issue with internal display brightness display control on M1 (relevant services moved to a different private framework)
-- [ ] Proper multi monitor detection (this applies only for the M1 Mac Mini as of now, but its HDMI port does not pass through I2C commands anyway).
+- [ ] Proper multi monitor (not including internal displays) detection (this applies only for the M1 Mac Mini as of now, but its HDMI port does not pass through I2C commands anyway).
 - [ ] Cleanup and make things tidy.
 
 </div>
