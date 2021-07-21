@@ -2,6 +2,8 @@
 
 This is an **experimental** fork to have some kind of **M1 support** until DDC.Swift is updated.
 
+**WARNING! Test it at your own risk! Safeguards and checks are not implemented yet, DDC commands may exceed your Display's specs!** [This can cause issues with some displays!](https://github.com/MonitorControl/MonitorControl/discussions/379#discussioncomment-1029518)
+
 Currently brightness and volume control works if you have a *single*, *compatible* external display connected to your *M1 Mac* via *USB-C/DisplayPort* (HDMI does not work).
 
 Sorry, no Release, you have to build it in XCode if you are interested.
