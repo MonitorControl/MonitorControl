@@ -3,6 +3,8 @@
 #import <Foundation/Foundation.h>
 #import <OSD/OSDManager.h>
 #import <IOKit/i2c/IOI2CInterface.h>
+#import <IOKit/graphics/IOGraphicsLib.h>
+#import <ApplicationServices/ApplicationServices.h>
 
 typedef CFTypeRef IOAVService;
 extern IOAVService IOAVServiceCreate(CFAllocatorRef allocator);
