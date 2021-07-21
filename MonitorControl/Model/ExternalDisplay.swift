@@ -41,11 +41,19 @@ class ExternalDisplay: Display {
 
     #if arch(arm64)
     
-    // MARK: Implement proper IOAVService matching and DDC detection
+    // MARK: Implement proper IOAVService matching based on EDID
   
     self.m1avService = IOAVServiceCreate(kCFAllocatorDefault)?.takeRetainedValue() as IOAVService
-    self.m1ddc = true
-
+    
+    // self.m1ddc = true
+    
+    var send: [UInt8] = [0xF1]
+    var reply = [UInt8](repeating: 0, count: 11)
+        
+    if m1ddcComm(send: &send, reply: &reply) {
+      self.m1ddc = true
+    }
+ 
     #else
     
     self.ddc = DDC(for: identifier)
@@ -212,28 +220,67 @@ class ExternalDisplay: Display {
       }
     }
   }
+  
+  #if arch(arm64)
+  
+  public func m1ddcComm(send: inout [UInt8], reply: inout [UInt8], writeSleepTime: UInt32 = 5000, numofWriteCycles: UInt8 = 3, readSleepTime: UInt32 = 10000, numOfRetryAttemps: UInt8 = 3, retrySleepTime: UInt32 = 20000) -> Bool {
+    
+    var success: Bool = false;
+    
+    guard self.m1avService != nil else {
+      return success
+    }
+    
+    var checkedsend: [UInt8] = [UInt8(0x80 + send.count+1), UInt8(send.count)] + send + [0]
+    checkedsend[checkedsend.count-1] = Utils.checksum(data: &checkedsend, start:0, end: checkedsend.count-2)
+    
+    for _ in 1...numOfRetryAttemps {
+    
+      for _ in 1...numofWriteCycles {
+        usleep(writeSleepTime)
+        if IOAVServiceWriteI2C(self.m1avService, 0x37, 0x51, &checkedsend, UInt32(checkedsend.count)) == 0 {
+          success = true;
+        }
+      }
 
+      if ( reply.count > 0 ) {
+      
+        usleep(readSleepTime)
+        if IOAVServiceReadI2C(self.m1avService, 0x37, 0x51, &reply, UInt32(reply.count)) == 0 {
+          if Utils.checksum(data: &reply, start:0, end: reply.count-2) == reply[reply.count-1]  {
+            success = true
+          } else {
+            success = false
+          }
+        }
+      }
+      
+      if success {
+        return success
+      }
+
+      usleep(retrySleepTime);
+      
+    }
+          
+    return success;
+    
+  }
+
+  #endif
+  
   public func writeDDCValues(command: DDC.Command, value: UInt16, errorRecoveryWaitTime: UInt32? = nil) -> Bool? {
     
     #if arch(arm64)
 
-    // MARK: This must be a litle bit more sophisticated, now we just assume everything went fine...
-    
-    var data = [UInt8](repeating: 0, count: 6)
-  
-    data[0] = 0x84
-    data[1] = 0x03
-    data[2] = command.rawValue
-    data[3] = UInt8(value >> 8)
-    data[4] = UInt8(value & 255)
-    data[5] = 0x6E ^ 0x51 ^ data[0] ^ data[1] ^ data[2] ^ data[3] ^ data[4]
-
-    for _ in 1...3 {
-      usleep(10000)
-      IOAVServiceWriteI2C(self.m1avService, 0x37, 0x51, &data,  6)
+    guard m1ddc else {
+      return false
     }
-        
-    return true
+    
+    var send: [UInt8] = [command.rawValue, UInt8(value >> 8), UInt8(value & 255)]
+    var reply: [UInt8] = []
+    
+    return m1ddcComm(send: &send, reply: &reply)
     
     #else
     
@@ -247,30 +294,22 @@ class ExternalDisplay: Display {
     var values: (UInt16, UInt16)?
     
     #if arch(arm64)
-
-    // MARK: This is rather rudimentary and assumes everything goes well...
     
-    var data = [UInt8](repeating: 0, count: 6)
-    var read = [UInt8](repeating: 0, count: 12)
-
-    data[0] = 0x82
-    data[1] = 0x01
-    data[2] = command.rawValue
-    data[3] = 0x6e ^ data[0] ^ data[1] ^ data[2] ^ data[3]
-
-    for _ in 1...3 {
-      usleep(30000)
-      IOAVServiceWriteI2C(self.m1avService, 0x37, 0x51, &data,  6)
+    guard m1ddc else {
+      return nil
     }
-        
-    usleep(30000)
-    IOAVServiceReadI2C(self.m1avService, 0x37, 0x51, &read, 12);
-    
-    let current = min(UInt16(read[9]),100)
-    let max = min(UInt16(read[7]),100)
-    
-    values = (current, max)
 
+    var send: [UInt8] = [command.rawValue]
+    var reply = [UInt8](repeating: 0, count: 11)
+    
+    if m1ddcComm(send: &send, reply: &reply) {
+      let max = min(UInt16(reply[7]),100) // For safety we won't allow values over 100 even if everything looks fine
+      let current = min(UInt16(reply[9]),100) // For safety we won't allow values over 100 (should be max?) even if everything looks fine
+      values = (current, max)
+    } else {
+      values = nil
+    }
+      
     #else
     
     if self.ddc?.supported(minReplyDelay: delay) == true {

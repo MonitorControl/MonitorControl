@@ -1,25 +1,24 @@
 ## Experimental
 
-This is an **experimental** fork to have some kind of **M1 support** until DDC.Swift is updated.
+This is an **experimental** fork to have some **M1 support** until DDC.Swift is updated.
 
-**WARNING! Test it at your own risk! Safeguards and checks are not implemented yet, DDC commands may exceed your Display's specs!** [This can cause issues with some displays!](https://github.com/MonitorControl/MonitorControl/discussions/379#discussioncomment-1029518)
+**Test it at your own risk!**
 
 Currently brightness and volume control works if you have a *single*, *compatible* external display connected to your *M1 Mac* via *USB-C/DisplayPort* (HDMI does not work).
 
-Sorry, no Release, you have to build it in XCode if you are interested.
-
-Notes: I am not sure about Intel compatibility, but I tried not to break it. I tested only on Monterey but should work on Big Sur as well.
+Notes: I am not sure about Intel compatibility,  I tried not to break it. I tested only on Monterey but should work on Big Sur as well.
 
 Current state:
 
 - [x] Make the app compile without complaints on ARM, fix the OSD.Framework problem.
 - [x] Figure out how to do M1 DDC control in 100% Swift (MonitorControl seems to avoid C :))
 - [x] Make it work with a single external display config on M1.
-- [x] Make DDC writes work on M1 - results in a fundamentally working app on M1. **MILESTONE ACHIEVED**
+- [x] Make DDC writes work on M1 - results in a fundamentally working app on M1.
 - [x] Make DDC read work on M1 (to set up initial brightness and volume on app start).
+- [x] Add proper checks to safeguard things.
 - [ ] Proper multi monitor detection (this applies only for the M1 Mac Mini as of now, but its HDMI port does not pass through I2C commands).
 - [ ] Fix issue with internal display brightness display control on M1.
-- [ ] Add proper guards everywhere and do all the required cleanup to make things tidy.
+- [ ] Cleanup and make things tidy.
 
 </div>
 

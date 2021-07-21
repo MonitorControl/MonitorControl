@@ -142,6 +142,16 @@ class Utils: NSObject {
     alert.runModal()
     
   }
+  
+  static func checksum(data: inout [UInt8],start: Int,end: Int) -> UInt8 {
+
+    var chk = UInt8(0x50)
+    for i in start...end {
+      chk ^= data[i]
+    }
+    return chk
+    
+  }
 
   // MARK: - Enums
 
