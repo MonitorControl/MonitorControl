@@ -31,12 +31,12 @@ Sorry, no releases download for this experimental fork but you can easily build 
 
 ### Steps
 
-* Clone the project (in Terminal): `git clone https://github.com/waydabber/MonitorControl.git`
-* Open the `MonitorControl.xcodeproj` with Xcode
-* Dependencies will automatically get downloaded by XCode, if they don't: `File > Swift Packages > Resolve Package Versions`
-* Build the app: `Product > Build`
-* See the product: `Product > Reveal Build Products Folder`
-* Test the app
-* Send a feedback. :)
+1. Clone the project (in Terminal): `git clone https://github.com/waydabber/MonitorControl.git`
+1. Open the `MonitorControl.xcodeproj` with Xcode
+1. Dependencies will automatically get downloaded by XCode, if they don't: `File > Swift Packages > Resolve Package Versions`
+1. Build the app: `Product > Build`
+1. See the product: `Product > Reveal Build Products Folder`
+1. Test the app
+1. Send a feedback. :)
 
 
