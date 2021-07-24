@@ -422,8 +422,8 @@
                                 <gridCells>
                                     <gridCell row="nyM-ec-RCX" column="64O-72-10l" xPlacement="leading" id="zfN-CU-miQ">
                                         <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="tMg-qE-zTW">
-                                            <rect key="frame" x="-2" y="108" width="138" height="16"/>
-                                            <textFieldCell key="cell" lineBreakMode="clipping" title="Version 0.0.0 (Build 0)" id="mBs-6m-13Q">
+                                            <rect key="frame" x="-2" y="108" width="233" height="16"/>
+                                            <textFieldCell key="cell" lineBreakMode="clipping" title="MonitorControl Version 0.0.0 (Build 0)" id="mBs-6m-13Q">
                                                 <font key="font" metaFont="system"/>
                                                 <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -548,11 +548,11 @@ Changing some of these setting may cause system freezes or unexpected behaviour.
                                     <gridCell row="5cy-5l-MhF" column="Z74-3T-hch" id="xEY-wY-Qu7">
                                         <scrollView key="contentView" autohidesScrollers="YES" horizontalLineScroll="26" horizontalPageScroll="10" verticalLineScroll="26" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VCP-xz-0jI">
                                             <rect key="frame" x="0.0" y="40" width="680" height="120"/>
-                                            <clipView key="contentView" drawsBackground="NO" id="EAu-T4-lFV">
+                                            <clipView key="contentView" ambiguous="YES" drawsBackground="NO" id="EAu-T4-lFV">
                                                 <rect key="frame" x="1" y="1" width="678" height="118"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
-                                                    <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnResizing="NO" multipleSelection="NO" emptySelection="NO" autosaveColumns="NO" typeSelect="NO" rowHeight="24" rowSizeStyle="medium" headerView="qVc-cy-LaW" viewBased="YES" id="t7B-Q7-Ssj">
+                                                    <tableView verticalHuggingPriority="750" ambiguous="YES" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnResizing="NO" multipleSelection="NO" emptySelection="NO" autosaveColumns="NO" typeSelect="NO" rowHeight="24" rowSizeStyle="medium" headerView="qVc-cy-LaW" viewBased="YES" id="t7B-Q7-Ssj">
                                                         <rect key="frame" x="0.0" y="0.0" width="678" height="93"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         <size key="intercellSpacing" width="3" height="2"/>
@@ -641,9 +641,9 @@ Changing some of these setting may cause system freezes or unexpected behaviour.
                                                                         <subviews>
                                                                             <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7FH-uw-jcn">
                                                                                 <rect key="frame" x="-3" y="-4" width="117" height="25"/>
-                                                                                <popUpButtonCell key="cell" type="push" title="None" bezelStyle="rounded" alignment="center" lineBreakMode="truncatingTail" borderStyle="border" inset="2" selectedItem="Riq-uM-bTs" id="M5p-a2-UEs">
+                                                                                <popUpButtonCell key="cell" type="push" title="Normal" bezelStyle="rounded" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" tag="2" inset="2" selectedItem="Riq-uM-bTs" id="M5p-a2-UEs">
                                                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                                                    <font key="font" metaFont="system"/>
+                                                                                    <font key="font" metaFont="menu"/>
                                                                                     <menu key="menu" id="Nil-kM-Hvj">
                                                                                         <items>
                                                                                             <menuItem title="None" id="FoA-yh-Yx3"/>
@@ -795,7 +795,7 @@ Changing some of these setting may cause system freezes or unexpected behaviour.
                                     </gridCell>
                                     <gridCell row="1RH-qe-bKm" column="Z74-3T-hch" xPlacement="leading" id="pqU-Xd-aGF">
                                         <button key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bct-zW-zKf">
-                                            <rect key="frame" x="-7" y="-7" width="694" height="32"/>
+                                            <rect key="frame" x="-7" y="-7" width="145" height="32"/>
                                             <buttonCell key="cell" type="push" title="Reset Preferences" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="4Pj-3t-PJr">
                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" metaFont="system"/>

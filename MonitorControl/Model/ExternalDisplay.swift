@@ -45,12 +45,18 @@ class ExternalDisplay: Display {
   
     self.m1avService = IOAVServiceCreate(kCFAllocatorDefault)?.takeRetainedValue() as IOAVService
     
+    /* We don't need this check as some displays are incompatible with this. We always assume DDC capability.
+    
     var send: [UInt8] = [0xF1]
     var reply = [UInt8](repeating: 0, count: 11)
         
     if m1ddcComm(send: &send, reply: &reply) {
       self.m1ddc = true
     }
+ 
+    */
+    
+    self.m1ddc = true
  
     #else
     
@@ -301,10 +307,11 @@ class ExternalDisplay: Display {
     var reply = [UInt8](repeating: 0, count: 11)
     
     if m1ddcComm(send: &send, reply: &reply) {
-      let max = min(UInt16(reply[7]),100) // For safety we won't allow values over 100 even if everything looks fine
-      let current = min(UInt16(reply[9]),100) // For safety we won't allow values over 100 (should be max?) even if everything looks fine
+      let max = UInt16(reply[6])*256+UInt16(reply[7])
+      let current = UInt16(reply[8])*256+UInt16(reply[9])
       values = (current, max)
     } else {
+      os_log("DDC read was unsuccessful.", type: .debug)
       values = nil
     }
       

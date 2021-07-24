@@ -78,7 +78,7 @@ class MainPrefsViewController: NSViewController, PreferencePane {
   }
 
   fileprivate func setVersionNumber() {
-    let versionName = NSLocalizedString("Version", comment: "Version")
+    let versionName = "MonitorControl " + NSLocalizedString("Version", comment: "Version")
     let buildName = NSLocalizedString("Build", comment: "Build")
     let versionNumber = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") ?? "error"
     let buildNumber = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") ?? "error"

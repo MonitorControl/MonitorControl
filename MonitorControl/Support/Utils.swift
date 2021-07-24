@@ -44,11 +44,11 @@ class Utils: NSObject {
       values = display.readDDCValues(for: command, tries: tries, minReplyDelay: delay)
     }
 
-    let (currentDDCValue, maxValue) = values ?? (UInt16(display.getValue(for: command)), UInt16(display.getMaxValue(for: command)))
+    let (currentDDCValue, maxValue) = values ?? (UInt16(display.getValue(for: command)), 0) // We set 0 for max. value to indicate that there is no real DDC reported max. value - ExternalDisplay.getMaxValue() will return 100 in case of 0 max. values.
 
-    display.saveValue(Int(currentDDCValue), for: command)
     display.saveMaxValue(Int(maxValue), for: command)
-
+    display.saveValue(min(Int(currentDDCValue), display.getMaxValue(for: command)), for: command) // We won't allow currrent value to be higher than the max. value
+ 
     os_log("%{public}@ (%{public}@):", type: .info, display.name, String(reflecting: command))
     os_log(" - current ddc value: %{public}@ - from display? %{public}@", type: .info, String(currentDDCValue), String(values != nil))
     os_log(" - maximum ddc value: %{public}@ - from display? %{public}@", type: .info, String(maxValue), String(values != nil))
