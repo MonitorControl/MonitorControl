@@ -11,6 +11,8 @@ class ExternalDisplay: Display {
   var ddc: DDC?
   var m1ddc: Bool = false
   var m1avService: IOAVService?
+  
+  let DDC_HARD_MAX_LIMIT: Int = 100
 
   private let prefs = UserDefaults.standard
   
@@ -382,7 +384,7 @@ class ExternalDisplay: Display {
 
   func getMaxValue(for command: DDC.Command) -> Int {
     let max = self.prefs.integer(forKey: "max-\(command.rawValue)-\(self.identifier)")
-    return max == 0 ? 100 : max
+    return min(DDC_HARD_MAX_LIMIT, max == 0 ? DDC_HARD_MAX_LIMIT : max)
   }
 
   func getRestoreValue(for command: DDC.Command) -> Int {
