@@ -24,7 +24,7 @@ This does not affect MonitorControl's ability to handle the internal display alo
 
 ## Download
 
-No releases download for this experimental fork but you can easily build it. See the steps below.
+You should build the app (see below). You can however [download](https://github.com/waydabber/MonitorControl/releases) the latest unsigned pre-release version if you don't want to build the app.
 
 ## How to build and use this experimental version
 
