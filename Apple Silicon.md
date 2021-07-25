@@ -21,19 +21,3 @@ You need to have a *single*, *compatible* external display (aside from the inter
 Unfortunatelly proper external multi monitor support is rather difficult to achieve for several reasons (needs a complicated display matching logic based on various properties). It is doable but needs lots of work and testing to work really well. Also other changes are needed (like fixing how MonitorControl handles mirrored displays). For the M1 class devices this only affects the Mac mini when both HDMI and DP is connected. Even then the HDMI port will not work (which is a hard limitation as of now) so such users probably won't want use MonitorControl anyway. This issue will have to be resolved though for future Apple Silicon devices
 
 This does not affect MonitorControl's ability to handle the internal display alongside a single external display connected via USB-C.
-
-## How to build and use this experimental version
-
-### Required
-
-* Install [Xcode](https://developer.apple.com/xcode/)
-
-### Steps
-
-1. Clone the project (in Terminal): `git clone https://github.com/waydabber/MonitorControl.git`
-1. Open the `MonitorControl.xcodeproj` with Xcode
-1. Dependencies will automatically get downloaded by XCode, if they don't: `File > Swift Packages > Resolve Package Versions`
-1. Build the app: `Product > Build`
-1. See the product: `Product > Reveal Build Products Folder`
-1. Test the app
-1. Send a feedback. :)
