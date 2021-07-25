@@ -38,7 +38,7 @@ class SliderHandler {
       self.display.setRestoreValue(nil, for: .contrast)
     }
 
-    _ = self.display.ddc?.write(command: self.cmd, value: UInt16(value))
+    _ = self.display.writeDDCValues(command: self.cmd, value: UInt16(value))
     self.display.saveValue(value, for: self.cmd)
   }
 }

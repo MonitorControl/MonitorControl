@@ -1,5 +1,4 @@
 import Cocoa
-import DDC
 import Foundation
 import MediaKeyTap
 import os.log
@@ -44,7 +43,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     self.subscribeEventListeners()
     self.setDefaultPrefs()
     self.updateMediaKeyTap()
-    self.statusItem.image = NSImage(named: "status")
+    self.statusItem.button?.image = NSImage(named: "status")
     self.statusItem.menu = self.statusMenu
     self.checkPermissions()
     CGDisplayRegisterReconfigurationCallback({ _, _, _ in app.updateDisplays() }, nil)
