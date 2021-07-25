@@ -50,23 +50,11 @@ _Bonus: Using keyboard keys displays the native osd_
 <img src="./.github/osd.jpg" width="500" align="center" alt="osd screenshot"/>
 </div>
 
-## Download
+## State of the experimental Apple Silicon version
 
-Go to [Release](https://github.com/MonitorControl/MonitorControl/releases/latest) and download the latest `.dmg`
+Check out the state of the experimental version [here](https://github.com/MonitorControl/MonitorControl/blob/experimental/apple-silicon/Apple%20Silicon.md).
 
-## Installing with Homebrew Cask
-
-You can also install MonitorControl with [Homebrew Cask](https://github.com/Homebrew/homebrew-cask).
-
-```bash
-$ brew install --cask monitorcontrol
-```
-
-## How to help
-
-Open [issues](https://github.com/MonitorControl/MonitorControl/issues) if you have a question, an enhancement to suggest or a bug you've found. If you want you can fork the code yourself and submit a pull request to improve the app.
-
-## How to build
+## How to build this *experimental branch*
 
 ### Required
 
@@ -78,7 +66,7 @@ Open [issues](https://github.com/MonitorControl/MonitorControl/issues) if you ha
 Clone the project
 
 ```sh
-git clone https://github.com/MonitorControl/MonitorControl.git
+git clone --single-branch --branch experimental/apple-silicon https://github.com/MonitorControl/MonitorControl.git
 ```
 
 Then dependencies will automatically get downloaded when opening the project, if they don't:
@@ -94,9 +82,30 @@ You're all set ! Now open the `MonitorControl.xcodeproj` with Xcode
 - [DDC.swift](https://github.com/reitermarkus/DDC.swift)
 - [SimplyCoreAudio](https://github.com/rnine/SimplyCoreAudio)
 
+## How to help
+
+Open [issues](https://github.com/MonitorControl/MonitorControl/issues) if you have a question, an enhancement to suggest or a bug you've found. If you want you can fork the code yourself and submit a pull request to improve the app.
+
+## Download
+
+Go to [Release](https://github.com/MonitorControl/MonitorControl/releases/latest) and download the latest `.dmg`
+
+**Please note that releases are not available for the experimental Apple Silicon version yet!**
+
+## Installing with Homebrew Cask
+
+You can also install MonitorControl with [Homebrew Cask](https://github.com/Homebrew/homebrew-cask). 
+
+**Be aware that this comment will not install the experimental Apple Silicon compatible version of the app!**
+
+```bash
+$ brew install --cask monitorcontrol
+```
+
 ## Support
 
 - macOS Sierra (`10.12`) and up.
+- For the Apple Silicon version macOS Big Sur and up 
 - Works with monitors controllable via [DDC](https://en.wikipedia.org/wiki/Display_Data_Channel).
 
 ## Contributors
