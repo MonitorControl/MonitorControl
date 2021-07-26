@@ -101,7 +101,7 @@ You can also install MonitorControl with [Homebrew Cask](https://github.com/Home
 **Be aware that this comment will not install the experimental Apple Silicon compatible version of the app!**
 
 ```bash
-$ brew install --cask monitorcontrol
+brew install --cask monitorcontrol
 ```
 
 ## Support
@@ -115,6 +115,7 @@ $ brew install --cask monitorcontrol
 - [@the0neyouseek](https://github.com/the0neyouseek)
 - [@reitermarkus](https://github.com/reitermarkus)
 - [@JoniVR](https://github.com/JoniVR)
+- [@waydabber](https://github.com/waydabber)
 
 ## Thanks
 
