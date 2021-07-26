@@ -22,7 +22,7 @@ class Utils: NSObject {
     let slider = NSSlider(value: 0, minValue: 0, maxValue: 100, target: handler, action: #selector(SliderHandler.valueChanged))
     slider.isEnabled = false
     slider.frame.size.width = 180
-    slider.frame.origin = NSPoint(x: 20, y: 5)
+    slider.frame.origin = NSPoint(x: 15, y: 5)
 
     handler.slider = slider
 
@@ -31,8 +31,12 @@ class Utils: NSObject {
 
     item.view = view
 
+    let sliderHeaderItem = NSMenuItem()
+    let attrs: [NSAttributedString.Key: Any] = [.foregroundColor: NSColor.systemGray, .font: NSFont.systemFont(ofSize: 12) ]
+    sliderHeaderItem.attributedTitle = NSAttributedString(string: title, attributes: attrs)
+    
     menu.insertItem(item, at: 0)
-    menu.insertItem(withTitle: title, action: nil, keyEquivalent: "", at: 0)
+    menu.insertItem(sliderHeaderItem, at: 0)
 
     var values: (UInt16, UInt16)?
     let delay = display.needsLongerDelay ? UInt64(40 * kMillisecondScale) : nil

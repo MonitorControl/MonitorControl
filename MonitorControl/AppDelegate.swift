@@ -149,7 +149,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     display.brightnessSliderHandler = brightnessSliderHandler
 
     let monitorMenuItem = NSMenuItem()
-    monitorMenuItem.title = "\(display.getFriendlyName())"
+    let attrs: [NSAttributedString.Key: Any] = [.foregroundColor: NSColor.systemGray, .font: NSFont.boldSystemFont(ofSize: 12)]
+    monitorMenuItem.attributedTitle = NSAttributedString(string: "\(display.getFriendlyName())", attributes: attrs)
     if asSubMenu {
       monitorMenuItem.submenu = monitorSubMenu
     }
