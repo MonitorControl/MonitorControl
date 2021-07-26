@@ -54,6 +54,8 @@ _Bonus: Using keyboard keys displays the native osd_
 
 Check out the state of the experimental version [here](https://github.com/MonitorControl/MonitorControl/blob/experimental/apple-silicon/Apple%20Silicon.md).
 
+**Test it at your own risk!**
+
 ## How to build this *experimental branch*
 
 ### Required

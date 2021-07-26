@@ -82,6 +82,17 @@ class MainPrefsViewController: NSViewController, PreferencePane {
     let buildName = NSLocalizedString("Build", comment: "Build")
     let versionNumber = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") ?? "error"
     let buildNumber = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") ?? "error"
-    self.versionLabel.stringValue = "\(versionName) \(versionNumber) (\(buildName) \(buildNumber))"
+    
+    #if arch(arm64)
+    
+    let arch :String = "Apple Silicon"
+
+    #else
+    
+    let arch :String = "Intel"
+
+    #endif
+    
+    self.versionLabel.stringValue = "\(versionName) \(versionNumber) (\(buildName) \(buildNumber)) \(arch)"
   }
 }

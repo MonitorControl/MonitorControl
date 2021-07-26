@@ -248,9 +248,9 @@ class ExternalDisplay: Display {
           success = true;
         }
       }
-
-      if ( reply.count > 0 ) {
       
+      if ( reply.count > 0 ) {
+        
         usleep(readSleepTime)
         if IOAVServiceReadI2C(self.arm64avService, 0x37, 0x51, &reply, UInt32(reply.count)) == 0 {
           if Utils.checksum(data: &reply, start:0, end: reply.count-2) == reply[reply.count-1]  {

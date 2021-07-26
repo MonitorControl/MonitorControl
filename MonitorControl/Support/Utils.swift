@@ -51,11 +51,11 @@ class Utils: NSObject {
  
     os_log("%{public}@ (%{public}@):", type: .info, display.name, String(reflecting: command))
     os_log(" - current ddc value: %{public}@ - from display? %{public}@", type: .info, String(currentDDCValue), String(values != nil))
-    os_log(" - maximum ddc value: %{public}@ - from display? %{public}@", type: .info, String(maxValue), String(values != nil))
+    os_log(" - maximum ddc value: %{public}@ - from display? %{public}@", type: .info, String(display.getMaxValue(for: command)), String(values != nil))
 
     if command != .audioSpeakerVolume {
       slider.integerValue = Int(currentDDCValue)
-      slider.maxValue = Double(maxValue)
+      slider.maxValue = Double(display.getMaxValue(for: command))
     } else {
       // If we're looking at the audio speaker volume, also retrieve the values for the mute command
       var muteValues: (current: UInt16, max: UInt16)?
@@ -85,7 +85,7 @@ class Utils: NSObject {
         slider.integerValue = 0
       }
 
-      slider.maxValue = Double(maxValue)
+      slider.maxValue = Double(display.getMaxValue(for: command))
     }
 
     slider.isEnabled = true

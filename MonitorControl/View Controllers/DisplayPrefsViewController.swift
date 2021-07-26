@@ -92,12 +92,27 @@ class DisplayPrefsViewController: NSViewController, PreferencePane, NSTableViewD
         return cell
       }
     case .ddc:
+      
+      #if arch(arm64)
+      
+      if let cell = tableView.makeView(withIdentifier: tableColumn.identifier, owner: nil) as? ButtonCellView {
+        cell.display = display
+        cell.button.state = display is ExternalDisplay ? ( (display as! ExternalDisplay).arm64ddc ? .on : .off) : .off
+        cell.button.isEnabled = false
+        return cell
+      }
+      
+      #else
+      
       if let cell = tableView.makeView(withIdentifier: tableColumn.identifier, owner: nil) as? ButtonCellView {
         cell.display = display
         cell.button.state = DDC(for: display.identifier) != nil ? .on : .off
         cell.button.isEnabled = false
         return cell
       }
+      
+      #endif
+      
     case .friendlyName:
       if let cell = tableView.makeView(withIdentifier: tableColumn.identifier, owner: nil) as? FriendlyNameCellView {
         cell.display = display
