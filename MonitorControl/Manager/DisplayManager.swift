@@ -23,7 +23,7 @@ class DisplayManager {
 
   func getDdcCapableDisplays() -> [ExternalDisplay] {
     return self.displays.compactMap { display -> ExternalDisplay? in
-      if let externalDisplay = display as? ExternalDisplay, ( externalDisplay.ddc != nil || externalDisplay.arm64ddc )  {
+      if let externalDisplay = display as? ExternalDisplay, externalDisplay.ddc != nil || externalDisplay.arm64ddc {
         return externalDisplay
       } else { return nil }
     }

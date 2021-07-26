@@ -1,8 +1,8 @@
 import AVFoundation
 import Cocoa
 import DDC
-import os.log
 import IOKit
+import os.log
 
 class ExternalDisplay: Display {
   var brightnessSliderHandler: SliderHandler?
@@ -11,11 +11,11 @@ class ExternalDisplay: Display {
   var ddc: DDC?
   var arm64ddc: Bool = false
   var arm64avService: IOAVService?
-  
+
   let DDC_HARD_MAX_LIMIT: Int = 100
 
   private let prefs = UserDefaults.standard
-  
+
   var hideOsd: Bool {
     get {
       return self.prefs.bool(forKey: "hideOsd-\(self.identifier)")
@@ -42,32 +42,31 @@ class ExternalDisplay: Display {
     super.init(identifier, name: name, vendorNumber: vendorNumber, modelNumber: modelNumber)
 
     #if arch(arm64)
-    
-    // MARK: Should implement proper display matching (this is currently needed for the M1 Mini's HDMI port only as all other M1 Macs support a single external display)
-  
-    self.arm64avService = IOAVServiceCreate(kCFAllocatorDefault)?.takeRetainedValue() as IOAVService
-    
-    /* We don't need this check as some displays are incompatible with this. We always assume DDC capability.
-    
-    var send: [UInt8] = [0xF1]
-    var reply = [UInt8](repeating: 0, count: 11)
-        
-    if arm64ddcComm(send: &send, reply: &reply) {
+
+      // MARK: Should implement proper display matching (this is currently needed for the M1 Mini's HDMI port only as all other M1 Macs support a single external display)
+
+      self.arm64avService = IOAVServiceCreate(kCFAllocatorDefault)?.takeRetainedValue() as IOAVService
+
+      /* We don't need this check as some displays are incompatible with this. We always assume DDC capability.
+
+       var send: [UInt8] = [0xF1]
+       var reply = [UInt8](repeating: 0, count: 11)
+
+       if arm64ddcComm(send: &send, reply: &reply) {
+         self.arm64ddc = true
+       }
+
+       */
+
       self.arm64ddc = true
-    }
- 
-    */
-    
-    self.arm64ddc = true
- 
+
     #else
-    
-    self.ddc = DDC(for: identifier)
+
+      self.ddc = DDC(for: identifier)
 
     #endif
-    
   }
-  
+
   // On some displays, the display's OSD overlaps the macOS OSD,
   // calling the OSD command with 1 seems to hide it.
   func hideDisplayOsd() {
@@ -76,7 +75,7 @@ class ExternalDisplay: Display {
     }
 
     for _ in 0 ..< 20 {
-      _ = writeDDCValues(command: .osd, value: UInt16(1), errorRecoveryWaitTime: 2000)
+      _ = self.writeDDCValues(command: .osd, value: UInt16(1), errorRecoveryWaitTime: 2000)
     }
   }
 
@@ -105,12 +104,12 @@ class ExternalDisplay: Display {
 
     let volumeDDCValue = UInt16(volumeOSDValue)
 
-    guard writeDDCValues(command: .audioSpeakerVolume, value: volumeDDCValue) == true else {
+    guard self.writeDDCValues(command: .audioSpeakerVolume, value: volumeDDCValue) == true else {
       return
     }
 
     if self.supportsMuteCommand() {
-      guard writeDDCValues(command: .audioMuteScreenBlank, value: UInt16(muteValue)) == true else {
+      guard self.writeDDCValues(command: .audioMuteScreenBlank, value: UInt16(muteValue)) == true else {
         return
       }
     }
@@ -144,7 +143,7 @@ class ExternalDisplay: Display {
     let isAlreadySet = volumeOSDValue == self.getValue(for: .audioSpeakerVolume)
 
     if !isAlreadySet {
-      guard writeDDCValues(command: .audioSpeakerVolume, value: volumeDDCValue) == true else {
+      guard self.writeDDCValues(command: .audioSpeakerVolume, value: volumeDDCValue) == true else {
         return
       }
     }
@@ -152,7 +151,7 @@ class ExternalDisplay: Display {
     if let muteValue = muteValue {
       // If the mute command is supported, set its value accordingly
       if self.supportsMuteCommand() {
-        guard writeDDCValues(command: .audioMuteScreenBlank, value: UInt16(muteValue)) == true else {
+        guard self.writeDDCValues(command: .audioMuteScreenBlank, value: UInt16(muteValue)) == true else {
           return
         }
       }
@@ -186,7 +185,7 @@ class ExternalDisplay: Display {
     }
 
     if !isAlreadySet {
-      guard writeDDCValues(command: .brightness, value: ddcValue) == true else {
+      guard self.writeDDCValues(command: .brightness, value: ddcValue) == true else {
         return
       }
     }
@@ -218,7 +217,7 @@ class ExternalDisplay: Display {
 
     // Only write the new contrast value if lowering contrast after brightness is enabled
     if let contrastValue = contrastValue, self.prefs.bool(forKey: Utils.PrefKeys.lowerContrast.rawValue) {
-      _ = writeDDCValues(command: .contrast, value: UInt16(contrastValue))
+      _ = self.writeDDCValues(command: .contrast, value: UInt16(contrastValue))
       self.saveValue(contrastValue, for: .contrast)
 
       if let slider = contrastSliderHandler?.slider {
@@ -226,117 +225,109 @@ class ExternalDisplay: Display {
       }
     }
   }
-  
+
   #if arch(arm64)
-  
-  public func arm64ddcComm(send: inout [UInt8], reply: inout [UInt8], writeSleepTime: UInt32 = 5000, numofWriteCycles: UInt8 = 3, readSleepTime: UInt32 = 10000, numOfRetryAttemps: UInt8 = 3, retrySleepTime: UInt32 = 20000) -> Bool {
-    
-    var success: Bool = false;
-    
-    guard self.arm64avService != nil else {
-      return success
-    }
-    
-    var checkedsend: [UInt8] = [UInt8(0x80 + send.count+1), UInt8(send.count)] + send + [0]
-    checkedsend[checkedsend.count-1] = Utils.checksum(data: &checkedsend, start:0, end: checkedsend.count-2)
-    
-    for _ in 1...numOfRetryAttemps {
-    
-      for _ in 1...numofWriteCycles {
-        usleep(writeSleepTime)
-        if IOAVServiceWriteI2C(self.arm64avService, 0x37, 0x51, &checkedsend, UInt32(checkedsend.count)) == 0 {
-          success = true;
-        }
-      }
-      
-      if ( reply.count > 0 ) {
-        
-        usleep(readSleepTime)
-        if IOAVServiceReadI2C(self.arm64avService, 0x37, 0x51, &reply, UInt32(reply.count)) == 0 {
-          if Utils.checksum(data: &reply, start:0, end: reply.count-2) == reply[reply.count-1]  {
-            success = true
-          } else {
-            success = false
-          }
-        }
-      }
-      
-      if success {
+
+    public func arm64ddcComm(send: inout [UInt8], reply: inout [UInt8], writeSleepTime: UInt32 = 5000, numofWriteCycles: UInt8 = 3, readSleepTime: UInt32 = 10000, numOfRetryAttemps: UInt8 = 3, retrySleepTime: UInt32 = 20000) -> Bool {
+      var success: Bool = false
+
+      guard self.arm64avService != nil else {
         return success
       }
 
-      usleep(retrySleepTime);
-      
+      var checkedsend: [UInt8] = [UInt8(0x80 + send.count + 1), UInt8(send.count)] + send + [0]
+      checkedsend[checkedsend.count - 1] = Utils.checksum(data: &checkedsend, start: 0, end: checkedsend.count - 2)
+
+      for _ in 1 ... numOfRetryAttemps {
+        for _ in 1 ... numofWriteCycles {
+          usleep(writeSleepTime)
+          if IOAVServiceWriteI2C(self.arm64avService, 0x37, 0x51, &checkedsend, UInt32(checkedsend.count)) == 0 {
+            success = true
+          }
+        }
+
+        if reply.count > 0 {
+          usleep(readSleepTime)
+          if IOAVServiceReadI2C(self.arm64avService, 0x37, 0x51, &reply, UInt32(reply.count)) == 0 {
+            if Utils.checksum(data: &reply, start: 0, end: reply.count - 2) == reply[reply.count - 1] {
+              success = true
+            } else {
+              success = false
+            }
+          }
+        }
+
+        if success {
+          return success
+        }
+
+        usleep(retrySleepTime)
+      }
+
+      return success
     }
-          
-    return success;
-    
-  }
 
   #endif
-  
-  public func writeDDCValues(command: DDC.Command, value: UInt16, errorRecoveryWaitTime: UInt32? = nil) -> Bool? {
-    
+
+  public func writeDDCValues(command: DDC.Command, value: UInt16, errorRecoveryWaitTime _: UInt32? = nil) -> Bool? {
     #if arch(arm64)
 
-    guard arm64ddc else {
-      return false
-    }
-    
-    var send: [UInt8] = [command.rawValue, UInt8(value >> 8), UInt8(value & 255)]
-    var reply: [UInt8] = []
-    
-    return arm64ddcComm(send: &send, reply: &reply)
-    
+      guard self.arm64ddc else {
+        return false
+      }
+
+      var send: [UInt8] = [command.rawValue, UInt8(value >> 8), UInt8(value & 255)]
+      var reply: [UInt8] = []
+
+      return self.arm64ddcComm(send: &send, reply: &reply)
+
     #else
-    
-    return self.ddc?.write(command: command, value: UInt16(1), errorRecoveryWaitTime: 2000)
-    
+
+      return self.ddc?.write(command: command, value: UInt16(1), errorRecoveryWaitTime: 2000)
+
     #endif
-    
   }
 
   func readDDCValues(for command: DDC.Command, tries: UInt, minReplyDelay delay: UInt64?) -> (current: UInt16, max: UInt16)? {
     var values: (UInt16, UInt16)?
-    
+
     #if arch(arm64)
-    
-    guard arm64ddc else {
-      return nil
-    }
 
-    var send: [UInt8] = [command.rawValue]
-    var reply = [UInt8](repeating: 0, count: 11)
-    
-    if arm64ddcComm(send: &send, reply: &reply) {
-      let max = UInt16(reply[6])*256+UInt16(reply[7])
-      let current = UInt16(reply[8])*256+UInt16(reply[9])
-      values = (current, max)
-    } else {
-      os_log("DDC read was unsuccessful.", type: .debug)
-      values = nil
-    }
-      
+      guard self.arm64ddc else {
+        return nil
+      }
+
+      var send: [UInt8] = [command.rawValue]
+      var reply = [UInt8](repeating: 0, count: 11)
+
+      if self.arm64ddcComm(send: &send, reply: &reply) {
+        let max = UInt16(reply[6]) * 256 + UInt16(reply[7])
+        let current = UInt16(reply[8]) * 256 + UInt16(reply[9])
+        values = (current, max)
+      } else {
+        os_log("DDC read was unsuccessful.", type: .debug)
+        values = nil
+      }
+
     #else
-    
-    if self.ddc?.supported(minReplyDelay: delay) == true {
-      os_log("Display supports DDC.", type: .debug)
-    } else {
-      os_log("Display does not support DDC.", type: .debug)
-    }
 
-    if self.ddc?.enableAppReport() == true {
-      os_log("Display supports enabling DDC application report.", type: .debug)
-    } else {
-      os_log("Display does not support enabling DDC application report.", type: .debug)
-    }
+      if self.ddc?.supported(minReplyDelay: delay) == true {
+        os_log("Display supports DDC.", type: .debug)
+      } else {
+        os_log("Display does not support DDC.", type: .debug)
+      }
 
-    values = self.ddc?.read(command: command, tries: tries, minReplyDelay: delay)
+      if self.ddc?.enableAppReport() == true {
+        os_log("Display supports enabling DDC application report.", type: .debug)
+      } else {
+        os_log("Display does not support enabling DDC application report.", type: .debug)
+      }
+
+      values = self.ddc?.read(command: command, tries: tries, minReplyDelay: delay)
 
     #endif
-    
+
     return values
-    
   }
 
   func calcNewValue(for command: DDC.Command, isUp: Bool, isSmallIncrement: Bool) -> Int {
@@ -384,7 +375,7 @@ class ExternalDisplay: Display {
 
   func getMaxValue(for command: DDC.Command) -> Int {
     let max = self.prefs.integer(forKey: "max-\(command.rawValue)-\(self.identifier)")
-    return min(DDC_HARD_MAX_LIMIT, max == 0 ? DDC_HARD_MAX_LIMIT : max)
+    return min(self.DDC_HARD_MAX_LIMIT, max == 0 ? self.DDC_HARD_MAX_LIMIT : max)
   }
 
   func getRestoreValue(for command: DDC.Command) -> Int {

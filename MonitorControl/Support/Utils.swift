@@ -32,9 +32,9 @@ class Utils: NSObject {
     item.view = view
 
     let sliderHeaderItem = NSMenuItem()
-    let attrs: [NSAttributedString.Key: Any] = [.foregroundColor: NSColor.systemGray, .font: NSFont.systemFont(ofSize: 12) ]
+    let attrs: [NSAttributedString.Key: Any] = [.foregroundColor: NSColor.systemGray, .font: NSFont.systemFont(ofSize: 12)]
     sliderHeaderItem.attributedTitle = NSAttributedString(string: title, attributes: attrs)
-    
+
     menu.insertItem(item, at: 0)
     menu.insertItem(sliderHeaderItem, at: 0)
 
@@ -52,7 +52,7 @@ class Utils: NSObject {
 
     display.saveMaxValue(Int(maxValue), for: command)
     display.saveValue(min(Int(currentDDCValue), display.getMaxValue(for: command)), for: command) // We won't allow currrent value to be higher than the max. value
- 
+
     os_log("%{public}@ (%{public}@):", type: .info, display.name, String(reflecting: command))
     os_log(" - current ddc value: %{public}@ - from display? %{public}@", type: .info, String(currentDDCValue), String(values != nil))
     os_log(" - maximum ddc value: %{public}@ - from display? %{public}@", type: .info, String(display.getMaxValue(for: command)), String(values != nil))
@@ -136,15 +136,13 @@ class Utils: NSObject {
       return nil
     }
   }
-  
-  static func checksum(data: inout [UInt8],start: Int,end: Int) -> UInt8 {
 
+  static func checksum(data: inout [UInt8], start: Int, end: Int) -> UInt8 {
     var chk = UInt8(0x50)
-    for i in start...end {
+    for i in start ... end {
       chk ^= data[i]
     }
     return chk
-    
   }
 
   // MARK: - Enums
@@ -193,5 +191,4 @@ class Utils: NSObject {
     /// Don't listen for any keys
     case none = 3
   }
-
 }

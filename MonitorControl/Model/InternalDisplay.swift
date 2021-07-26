@@ -30,39 +30,39 @@ class InternalDisplay: Display {
   }
 
   #if arch(arm64)
-  
-  public func getBrightness() -> Float {
-    var brightness: Float = 0
-    let _ = type(of: self).DisplayServicesGetBrightness?(self.identifier, &brightness)
-    return brightness
-  }
 
-  override func stepBrightness(isUp: Bool, isSmallIncrement: Bool) {
-    let value = self.calcNewBrightness(isUp: isUp, isSmallIncrement: isSmallIncrement)
-    self.displayQueue.sync {
-      let _ = type(of: self).DisplayServicesSetBrightness?(self.identifier, Float(value))
-      type(of: self).DisplayServicesBrightnessChanged?(self.identifier, Double(value))
-      self.showOsd(command: .brightness, value: Int(value * 64), maxValue: 64)
+    public func getBrightness() -> Float {
+      var brightness: Float = 0
+      _ = type(of: self).DisplayServicesGetBrightness?(self.identifier, &brightness)
+      return brightness
     }
-  }
-  
+
+    override func stepBrightness(isUp: Bool, isSmallIncrement: Bool) {
+      let value = self.calcNewBrightness(isUp: isUp, isSmallIncrement: isSmallIncrement)
+      self.displayQueue.sync {
+        _ = type(of: self).DisplayServicesSetBrightness?(self.identifier, Float(value))
+        type(of: self).DisplayServicesBrightnessChanged?(self.identifier, Double(value))
+        self.showOsd(command: .brightness, value: Int(value * 64), maxValue: 64)
+      }
+    }
+
   #else
 
-  public func getBrightness() -> Float {
-    self.displayQueue.sync {
-      Float(type(of: self).CoreDisplayGetUserBrightness?(self.identifier) ?? 0.5)
+    public func getBrightness() -> Float {
+      self.displayQueue.sync {
+        Float(type(of: self).CoreDisplayGetUserBrightness?(self.identifier) ?? 0.5)
+      }
     }
-  }
 
-  override func stepBrightness(isUp: Bool, isSmallIncrement: Bool) {
-    let value = self.calcNewBrightness(isUp: isUp, isSmallIncrement: isSmallIncrement)
-    self.displayQueue.sync {
-      type(of: self).CoreDisplaySetUserBrightness?(self.identifier, Double(value))
-      type(of: self).DisplayServicesBrightnessChanged?(self.identifier, Double(value))
-      self.showOsd(command: .brightness, value: Int(value * 64), maxValue: 64)
+    override func stepBrightness(isUp: Bool, isSmallIncrement: Bool) {
+      let value = self.calcNewBrightness(isUp: isUp, isSmallIncrement: isSmallIncrement)
+      self.displayQueue.sync {
+        type(of: self).CoreDisplaySetUserBrightness?(self.identifier, Double(value))
+        type(of: self).DisplayServicesBrightnessChanged?(self.identifier, Double(value))
+        self.showOsd(command: .brightness, value: Int(value * 64), maxValue: 64)
+      }
     }
-  }
-  
+
   #endif
 
   // notifies the system that the brightness of a specified display has changed (to update System Preferences etc.)
@@ -79,59 +79,58 @@ class InternalDisplay: Display {
   }
 
   #if arch(arm64)
-  
-  // For Apple Silicon
-  private static var DisplayServicesGetBrightness: ((CGDirectDisplayID, UnsafePointer<Float>) -> Int)? {
-    let displayServicesPath = CFURLCreateWithString(kCFAllocatorDefault, "/System/Library/PrivateFrameworks/DisplayServices.framework" as CFString, nil)
-    if let displayServicesBundle = CFBundleCreate(kCFAllocatorDefault, displayServicesPath) {
-      if let funcPointer = CFBundleGetFunctionPointerForName(displayServicesBundle, "DisplayServicesGetBrightness" as CFString) {
-        typealias DSBCFunctionType = @convention(c) (UInt32, UnsafePointer<Float>) -> Int
-        return unsafeBitCast(funcPointer, to: DSBCFunctionType.self)
-      }
-    }
-    return nil
-  }
 
-  // For Apple Silicon
-  private static var DisplayServicesSetBrightness: ((CGDirectDisplayID, Float) -> Int)? {
-    let displayServicesPath = CFURLCreateWithString(kCFAllocatorDefault, "/System/Library/PrivateFrameworks/DisplayServices.framework" as CFString, nil)
-    if let displayServicesBundle = CFBundleCreate(kCFAllocatorDefault, displayServicesPath) {
-      if let funcPointer = CFBundleGetFunctionPointerForName(displayServicesBundle, "DisplayServicesSetBrightness" as CFString) {
-        typealias DSBCFunctionType = @convention(c) (UInt32, Float) -> Int
-        return unsafeBitCast(funcPointer, to: DSBCFunctionType.self)
+    // For Apple Silicon
+    private static var DisplayServicesGetBrightness: ((CGDirectDisplayID, UnsafePointer<Float>) -> Int)? {
+      let displayServicesPath = CFURLCreateWithString(kCFAllocatorDefault, "/System/Library/PrivateFrameworks/DisplayServices.framework" as CFString, nil)
+      if let displayServicesBundle = CFBundleCreate(kCFAllocatorDefault, displayServicesPath) {
+        if let funcPointer = CFBundleGetFunctionPointerForName(displayServicesBundle, "DisplayServicesGetBrightness" as CFString) {
+          typealias DSBCFunctionType = @convention(c) (UInt32, UnsafePointer<Float>) -> Int
+          return unsafeBitCast(funcPointer, to: DSBCFunctionType.self)
+        }
       }
+      return nil
     }
-    return nil
-  }
-  
+
+    // For Apple Silicon
+    private static var DisplayServicesSetBrightness: ((CGDirectDisplayID, Float) -> Int)? {
+      let displayServicesPath = CFURLCreateWithString(kCFAllocatorDefault, "/System/Library/PrivateFrameworks/DisplayServices.framework" as CFString, nil)
+      if let displayServicesBundle = CFBundleCreate(kCFAllocatorDefault, displayServicesPath) {
+        if let funcPointer = CFBundleGetFunctionPointerForName(displayServicesBundle, "DisplayServicesSetBrightness" as CFString) {
+          typealias DSBCFunctionType = @convention(c) (UInt32, Float) -> Int
+          return unsafeBitCast(funcPointer, to: DSBCFunctionType.self)
+        }
+      }
+      return nil
+    }
+
   #else
 
-  // reads the brightness of a display through the CoreDisplay framework
-  // unfortunately Apple doesn't provide a public API for this, so we have to manually extract the function from the CoreDisplay framework
-  private static var CoreDisplayGetUserBrightness: ((CGDirectDisplayID) -> Double)? {
-    let coreDisplayPath = CFURLCreateWithString(kCFAllocatorDefault, "/System/Library/Frameworks/CoreDisplay.framework" as CFString, nil)
-    if let coreDisplayBundle = CFBundleCreate(kCFAllocatorDefault, coreDisplayPath) {
-      if let funcPointer = CFBundleGetFunctionPointerForName(coreDisplayBundle, "CoreDisplay_Display_GetUserBrightness" as CFString) {
-        typealias CDGUBFunctionType = @convention(c) (UInt32) -> Double
-        return unsafeBitCast(funcPointer, to: CDGUBFunctionType.self)
+    // reads the brightness of a display through the CoreDisplay framework
+    // unfortunately Apple doesn't provide a public API for this, so we have to manually extract the function from the CoreDisplay framework
+    private static var CoreDisplayGetUserBrightness: ((CGDirectDisplayID) -> Double)? {
+      let coreDisplayPath = CFURLCreateWithString(kCFAllocatorDefault, "/System/Library/Frameworks/CoreDisplay.framework" as CFString, nil)
+      if let coreDisplayBundle = CFBundleCreate(kCFAllocatorDefault, coreDisplayPath) {
+        if let funcPointer = CFBundleGetFunctionPointerForName(coreDisplayBundle, "CoreDisplay_Display_GetUserBrightness" as CFString) {
+          typealias CDGUBFunctionType = @convention(c) (UInt32) -> Double
+          return unsafeBitCast(funcPointer, to: CDGUBFunctionType.self)
+        }
       }
+      return nil
     }
-    return nil
-  }
 
-  // sets the brightness of a display through the CoreDisplay framework
-  // unfortunately Apple doesn't provide a public API for this, so we have to manually extract the function from the CoreDisplay framework
-  private static var CoreDisplaySetUserBrightness: ((CGDirectDisplayID, Double) -> Void)? {
-    let coreDisplayPath = CFURLCreateWithString(kCFAllocatorDefault, "/System/Library/Frameworks/CoreDisplay.framework" as CFString, nil)
-    if let coreDisplayBundle = CFBundleCreate(kCFAllocatorDefault, coreDisplayPath) {
-      if let funcPointer = CFBundleGetFunctionPointerForName(coreDisplayBundle, "CoreDisplay_Display_SetUserBrightness" as CFString) {
-        typealias CDSUBFunctionType = @convention(c) (UInt32, Double) -> Void
-        return unsafeBitCast(funcPointer, to: CDSUBFunctionType.self)
+    // sets the brightness of a display through the CoreDisplay framework
+    // unfortunately Apple doesn't provide a public API for this, so we have to manually extract the function from the CoreDisplay framework
+    private static var CoreDisplaySetUserBrightness: ((CGDirectDisplayID, Double) -> Void)? {
+      let coreDisplayPath = CFURLCreateWithString(kCFAllocatorDefault, "/System/Library/Frameworks/CoreDisplay.framework" as CFString, nil)
+      if let coreDisplayBundle = CFBundleCreate(kCFAllocatorDefault, coreDisplayPath) {
+        if let funcPointer = CFBundleGetFunctionPointerForName(coreDisplayBundle, "CoreDisplay_Display_SetUserBrightness" as CFString) {
+          typealias CDSUBFunctionType = @convention(c) (UInt32, Double) -> Void
+          return unsafeBitCast(funcPointer, to: CDSUBFunctionType.self)
+        }
       }
+      return nil
     }
-    return nil
-  }
-  
+
   #endif
-  
 }
