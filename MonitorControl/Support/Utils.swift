@@ -137,12 +137,12 @@ class Utils: NSObject {
     }
   }
 
-  static func checksum(data: inout [UInt8], start: Int, end: Int) -> UInt8 {
-    var chk = UInt8(0x50)
+  static func checksum(chk: UInt8, data: inout [UInt8], start: Int, end: Int) -> UInt8 {
+    var chkd: UInt8 = chk
     for i in start ... end {
-      chk ^= data[i]
+      chkd ^= data[i]
     }
-    return chk
+    return chkd
   }
 
   // MARK: - Enums

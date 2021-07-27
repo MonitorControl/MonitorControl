@@ -228,7 +228,7 @@ class ExternalDisplay: Display {
 
   #if arch(arm64)
 
-    public func arm64ddcComm(send: inout [UInt8], reply: inout [UInt8], writeSleepTime: UInt32 = 5000, numofWriteCycles: UInt8 = 3, readSleepTime: UInt32 = 10000, numOfRetryAttemps: UInt8 = 3, retrySleepTime: UInt32 = 20000) -> Bool {
+    public func arm64ddcComm(send: inout [UInt8], reply: inout [UInt8], writeSleepTime: UInt32 = 10000, numofWriteCycles: UInt8 = 2, readSleepTime: UInt32 = 10000, numOfRetryAttemps: UInt8 = 3, retrySleepTime: UInt32 = 20000) -> Bool {
       var success: Bool = false
 
       guard self.arm64avService != nil else {
@@ -236,7 +236,7 @@ class ExternalDisplay: Display {
       }
 
       var checkedsend: [UInt8] = [UInt8(0x80 + send.count + 1), UInt8(send.count)] + send + [0]
-      checkedsend[checkedsend.count - 1] = Utils.checksum(data: &checkedsend, start: 0, end: checkedsend.count - 2)
+      checkedsend[checkedsend.count - 1] = Utils.checksum(chk: send.count == 1 ? 0x6E : 0x6E ^ 0x51, data: &checkedsend, start: 0, end: checkedsend.count - 2)
 
       for _ in 1 ... numOfRetryAttemps {
         for _ in 1 ... numofWriteCycles {
@@ -249,7 +249,7 @@ class ExternalDisplay: Display {
         if reply.count > 0 {
           usleep(readSleepTime)
           if IOAVServiceReadI2C(self.arm64avService, 0x37, 0x51, &reply, UInt32(reply.count)) == 0 {
-            if Utils.checksum(data: &reply, start: 0, end: reply.count - 2) == reply[reply.count - 1] {
+            if Utils.checksum(chk: 0x50, data: &reply, start: 0, end: reply.count - 2) == reply[reply.count - 1] {
               success = true
             } else {
               success = false
