@@ -31,6 +31,12 @@
 /* Shown in the main prefs window */
 "Keys" = "Klawisze";
 
+/* Shown in case a display mirrors an other display - like 'Mirror of DisplayName */
+"Mirror of" = "Mirror of";
+
+/* Mirrors */
+"Mirrors" = "Mirrors";
+
 /* Shown in the alert dialog */
 "No" = "Nie";
 

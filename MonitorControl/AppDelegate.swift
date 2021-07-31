@@ -89,18 +89,37 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   func updateDisplays() {
     self.clearDisplays()
 
-    for screen in NSScreen.screens {
-      let name: String
-      if #available(OSX 10.15, *) {
-        name = screen.localizedName
-      } else {
-        name = screen.displayName ?? NSLocalizedString("Unknown", comment: "Unknown display name")
+    var onlineDisplayIDs = [CGDirectDisplayID](repeating: 0, count: 10)
+    var displayCount: UInt32 = 0
+
+    guard CGGetOnlineDisplayList(10, &onlineDisplayIDs, &displayCount) == .success else {
+      os_log("Unable to get display list.", type: .info)
+      return
+    }
+
+    for onlineDisplayID in onlineDisplayIDs where onlineDisplayID != 0 {
+      var name: String = NSLocalizedString("Unknown", comment: "Unknown display name") + String(CGDisplaySerialNumber(onlineDisplayID))
+      if let screen = NSScreen.getByDisplayID(displayID: onlineDisplayID) {
+        if #available(OSX 10.15, *) {
+          name = screen.localizedName
+        } else {
+          name = screen.displayName ?? name
+        }
+      } else if CGDisplayIsInHWMirrorSet(onlineDisplayID) != 0 || CGDisplayIsInMirrorSet(onlineDisplayID) != 0 {
+        if let mirroredScreen = NSScreen.getByDisplayID(displayID: CGDisplayMirrorsDisplay(onlineDisplayID)) {
+          name = NSLocalizedString("Mirror of", comment: "Shown in case a display mirrors an other display - like 'Mirror of DisplayName")
+          if #available(OSX 10.15, *) {
+            name = "" + name + " " + String(mirroredScreen.localizedName)
+          } else {
+            name = "" + name + " " + String(mirroredScreen.displayName ?? NSLocalizedString("Unknown", comment: "Unknown display name"))
+          }
+        }
       }
-      let id = screen.displayID
-      let vendorNumber = screen.vendorNumber
-      let modelNumber = screen.modelNumber
+      let id = onlineDisplayID
+      let vendorNumber = CGDisplayVendorNumber(onlineDisplayID)
+      let modelNumber = CGDisplayVendorNumber(onlineDisplayID)
       let display: Display
-      if screen.isBuiltin {
+      if CGDisplayIsBuiltin(onlineDisplayID) != 0 {
         display = InternalDisplay(id, name: name, vendorNumber: vendorNumber, modelNumber: modelNumber)
       } else {
         display = ExternalDisplay(id, name: name, vendorNumber: vendorNumber, modelNumber: modelNumber)
