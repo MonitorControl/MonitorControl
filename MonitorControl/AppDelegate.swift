@@ -86,6 +86,31 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     DisplayManager.shared.clearDisplays()
   }
 
+  func getDisplayName(displayID: CGDirectDisplayID) -> String {
+    let defaultName: String = NSLocalizedString("Unknown", comment: "Unknown display name") // + String(CGDisplaySerialNumber(displayID))
+    if let dictionary = ((CoreDisplay_DisplayCreateInfoDictionary(displayID))?.takeRetainedValue() as NSDictionary?), let nameList = dictionary["DisplayProductName"] as? [String: String], let name = nameList[Locale.current.identifier] ?? nameList["en_US"] ?? nameList.first?.value {
+      return name
+    }
+    if let screen = NSScreen.getByDisplayID(displayID: displayID) {
+      if #available(OSX 10.15, *) {
+        return screen.localizedName
+      } else {
+        return screen.displayName ?? defaultName
+      }
+    }
+    if CGDisplayIsInHWMirrorSet(displayID) != 0 || CGDisplayIsInMirrorSet(displayID) != 0 {
+      if let mirroredScreen = NSScreen.getByDisplayID(displayID: CGDisplayMirrorsDisplay(displayID)) {
+        let name = NSLocalizedString("Mirror of", comment: "Shown in case a display mirrors an other display - like 'Mirror of DisplayName")
+        if #available(OSX 10.15, *) {
+          return "" + name + " " + String(mirroredScreen.localizedName)
+        } else {
+          return "" + name + " " + String(mirroredScreen.displayName ?? defaultName)
+        }
+      }
+    }
+    return defaultName
+  }
+
   func updateDisplays() {
     self.clearDisplays()
 
@@ -98,23 +123,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     for onlineDisplayID in onlineDisplayIDs where onlineDisplayID != 0 {
-      var name: String = NSLocalizedString("Unknown", comment: "Unknown display name") + String(CGDisplaySerialNumber(onlineDisplayID))
-      if let screen = NSScreen.getByDisplayID(displayID: onlineDisplayID) {
-        if #available(OSX 10.15, *) {
-          name = screen.localizedName
-        } else {
-          name = screen.displayName ?? name
-        }
-      } else if CGDisplayIsInHWMirrorSet(onlineDisplayID) != 0 || CGDisplayIsInMirrorSet(onlineDisplayID) != 0 {
-        if let mirroredScreen = NSScreen.getByDisplayID(displayID: CGDisplayMirrorsDisplay(onlineDisplayID)) {
-          name = NSLocalizedString("Mirror of", comment: "Shown in case a display mirrors an other display - like 'Mirror of DisplayName")
-          if #available(OSX 10.15, *) {
-            name = "" + name + " " + String(mirroredScreen.localizedName)
-          } else {
-            name = "" + name + " " + String(mirroredScreen.displayName ?? NSLocalizedString("Unknown", comment: "Unknown display name"))
-          }
-        }
-      }
+      let name = getDisplayName(displayID: onlineDisplayID)
       let id = onlineDisplayID
       let vendorNumber = CGDisplayVendorNumber(onlineDisplayID)
       let modelNumber = CGDisplayVendorNumber(onlineDisplayID)
