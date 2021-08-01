@@ -1,6 +1,9 @@
 /* Shown in the main prefs window */
 "Advanced" = "Advanced";
 
+/* Apple Silicon designation (shown after the version number in Preferences) */
+"Apple Silicon" = "Apple Silicon";
+
 /* Shown in the alert dialog */
 "Are you sure you want to enable a longer delay? Doing so may freeze your system and require a restart. Start at login will be disabled as a safety measure." = "Are you sure you want to enable a longer delay? Doing so may freeze your system and require a restart. Start at login will be disabled as a safety measure.";
 
@@ -27,6 +30,9 @@
 
 /* Shown in the main prefs window */
 "General" = "General";
+
+/* Intel designation (shown after the version number in Preferences) */
+"Intel" = "Intel";
 
 /* Shown in the main prefs window */
 "Keys" = "Keys";

@@ -30,9 +30,11 @@ class Display {
     }
   }
 
+  var isVirtual: Bool = false
+
   private let prefs = UserDefaults.standard
 
-  internal init(_ identifier: CGDirectDisplayID, name: String, vendorNumber: UInt32?, modelNumber: UInt32?) {
+  internal init(_ identifier: CGDirectDisplayID, name: String, vendorNumber: UInt32?, modelNumber: UInt32?, isVirtual _: Bool = false) {
     self.identifier = identifier
     self.name = name
     self.vendorNumber = vendorNumber

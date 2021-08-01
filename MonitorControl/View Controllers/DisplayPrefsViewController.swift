@@ -88,7 +88,8 @@ class DisplayPrefsViewController: NSViewController, PreferencePane, NSTableViewD
     case .checkbox:
       if let cell = tableView.makeView(withIdentifier: tableColumn.identifier, owner: nil) as? ButtonCellView {
         cell.display = display
-        cell.button.state = display.isEnabled ? .on : .off
+        cell.button.state = display.isEnabled && !display.isVirtual ? .on : .off
+        cell.button.isEnabled = !display.isVirtual
         return cell
       }
     case .ddc:

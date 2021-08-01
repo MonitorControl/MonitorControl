@@ -85,11 +85,11 @@ class MainPrefsViewController: NSViewController, PreferencePane {
 
     #if arch(arm64)
 
-      let arch: String = "Apple Silicon"
+      let arch: String = NSLocalizedString("Apple Silicon", comment: "Apple Silicon designation (shown after the version number in Preferences)")
 
     #else
 
-      let arch: String = "Intel"
+      let arch: String = NSLocalizedString("Intel", comment: "Intel designation (shown after the version number in Preferences)")
 
     #endif
 

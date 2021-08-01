@@ -128,11 +128,23 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       let vendorNumber = CGDisplayVendorNumber(onlineDisplayID)
       let modelNumber = CGDisplayVendorNumber(onlineDisplayID)
       let display: Display
-      if CGDisplayIsBuiltin(onlineDisplayID) != 0 {
-        display = InternalDisplay(id, name: name, vendorNumber: vendorNumber, modelNumber: modelNumber)
-      } else {
-        display = ExternalDisplay(id, name: name, vendorNumber: vendorNumber, modelNumber: modelNumber)
+
+      var isVirtual: Bool = false
+
+      if let dictionary = ((CoreDisplay_DisplayCreateInfoDictionary(onlineDisplayID))?.takeRetainedValue() as NSDictionary?) {
+        let isVirtualDevice = dictionary["kCGDisplayIsVirtualDevice"] as? Bool
+        let displayIsAirplay = dictionary["kCGDisplayIsAirPlay"] as? Bool
+        if isVirtualDevice ?? displayIsAirplay ?? false {
+          isVirtual = true
+        }
       }
+
+      if CGDisplayIsBuiltin(onlineDisplayID) != 0 {
+        display = InternalDisplay(id, name: name, vendorNumber: vendorNumber, modelNumber: modelNumber, isVirtual: isVirtual)
+      } else {
+        display = ExternalDisplay(id, name: name, vendorNumber: vendorNumber, modelNumber: modelNumber, isVirtual: isVirtual)
+      }
+
       DisplayManager.shared.addDisplay(display: display)
     }
 
@@ -290,7 +302,7 @@ extension AppDelegate: MediaKeyTapDelegate {
     let delay = isRepeat ? 0.05 : 0
 
     self.keyRepeatTimers[mediaKey] = Timer.scheduledTimer(withTimeInterval: delay, repeats: false, block: { _ in
-      for display in allDisplays where display.isEnabled {
+      for display in allDisplays where display.isEnabled && !display.isVirtual {
         switch mediaKey {
         case .brightnessUp, .brightnessDown:
           display.stepBrightness(isUp: mediaKey == .brightnessUp, isSmallIncrement: isSmallIncrement)

@@ -38,33 +38,37 @@ class ExternalDisplay: Display {
 
   private var audioPlayer: AVAudioPlayer?
 
-  override init(_ identifier: CGDirectDisplayID, name: String, vendorNumber: UInt32?, modelNumber: UInt32?) {
+  override init(_ identifier: CGDirectDisplayID, name: String, vendorNumber: UInt32?, modelNumber: UInt32?, isVirtual: Bool = false) {
     super.init(identifier, name: name, vendorNumber: vendorNumber, modelNumber: modelNumber)
 
-    #if arch(arm64)
+    if !isVirtual {
+      #if arch(arm64)
 
-      // MARK: Should implement proper display matching (this is currently needed for the M1 Mini's HDMI port only as all other M1 Macs support a single external display)
+        // MARK: Should implement proper display matching (this is currently needed for the M1 Mini's HDMI port only as all other M1 Macs support a single external display)
 
-      self.arm64avService = IOAVServiceCreate(kCFAllocatorDefault)?.takeRetainedValue() as IOAVService
+        self.arm64avService = IOAVServiceCreate(kCFAllocatorDefault)?.takeRetainedValue() as IOAVService
 
-      /* We don't need this check as some displays are incompatible with this. We always assume DDC capability.
+        /* We don't need this check as some displays are incompatible with this. We always assume DDC capability.
 
-       var send: [UInt8] = [0xF1]
-       var reply = [UInt8](repeating: 0, count: 11)
+         var send: [UInt8] = [0xF1]
+         var reply = [UInt8](repeating: 0, count: 11)
 
-       if arm64ddcComm(send: &send, reply: &reply) {
-         self.arm64ddc = true
-       }
+         if arm64ddcComm(send: &send, reply: &reply) {
+           self.arm64ddc = true
+         }
 
-       */
+         */
 
-      self.arm64ddc = true
+        self.arm64ddc = true
 
-    #else
+      #else
 
-      self.ddc = DDC(for: identifier)
+        self.ddc = DDC(for: identifier)
 
-    #endif
+      #endif
+    } else {
+      self.isVirtual = true
+    }
   }
 
   // On some displays, the display's OSD overlaps the macOS OSD,
