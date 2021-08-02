@@ -28,21 +28,18 @@ class Utils: NSObject {
       slider.frame.origin = NSPoint(x: 35, y: 5)
       let view = NSView(frame: NSRect(x: 0, y: 0, width: slider.frame.width + 47, height: slider.frame.height + 14))
       view.frame.origin = NSPoint(x: 12, y: 0)
-      let icon = NSImageView(image: NSImage(systemSymbolName: "circle.dashed", accessibilityDescription: title)!)
+      var iconName: String = "circle.dashed"
+      switch command {
+      case .audioSpeakerVolume: iconName = "speaker.wave.2"
+      case .brightness: iconName = "sun.max"
+      case .contrast: iconName = "circle.lefthalf.filled"
+      default: break
+      }
+      let icon = NSImageView(image: NSImage(systemSymbolName: iconName, accessibilityDescription: title)!)
       icon.frame = view.frame
       icon.wantsLayer = true
       icon.alphaValue = 0.7
       icon.imageAlignment = NSImageAlignment.alignLeft
-      switch command {
-      case .audioSpeakerVolume:
-        icon.image = NSImage(systemSymbolName: "speaker.wave.2", accessibilityDescription: title)!
-      case .brightness:
-        icon.image = NSImage(systemSymbolName: "sun.max", accessibilityDescription: title)!
-      case .contrast:
-        icon.image = NSImage(systemSymbolName: "circle.lefthalf.filled", accessibilityDescription: title)!
-      default:
-        break
-      }
       view.addSubview(icon)
       view.addSubview(slider)
       item.view = view
