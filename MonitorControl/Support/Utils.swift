@@ -21,22 +21,44 @@ class Utils: NSObject {
 
     let slider = NSSlider(value: 0, minValue: 0, maxValue: 100, target: handler, action: #selector(SliderHandler.valueChanged))
     slider.isEnabled = false
-    slider.frame.size.width = 180
-    slider.frame.origin = NSPoint(x: 15, y: 5)
-
     handler.slider = slider
 
-    let view = NSView(frame: NSRect(x: 0, y: 0, width: slider.frame.width + 30, height: slider.frame.height + 10))
-    view.addSubview(slider)
-
-    item.view = view
-
-    let sliderHeaderItem = NSMenuItem()
-    let attrs: [NSAttributedString.Key: Any] = [.foregroundColor: NSColor.systemGray, .font: NSFont.systemFont(ofSize: 12)]
-    sliderHeaderItem.attributedTitle = NSAttributedString(string: title, attributes: attrs)
-
-    menu.insertItem(item, at: 0)
-    menu.insertItem(sliderHeaderItem, at: 0)
+    if #available(macOS 11.0, *) {
+      slider.frame.size.width = 160
+      slider.frame.origin = NSPoint(x: 35, y: 5)
+      let view = NSView(frame: NSRect(x: 0, y: 0, width: slider.frame.width + 47, height: slider.frame.height + 14))
+      view.frame.origin = NSPoint(x: 12, y: 0)
+      let icon = NSImageView(image: NSImage(systemSymbolName: "circle.dotted", accessibilityDescription: title)!)
+      icon.frame = view.frame
+      icon.wantsLayer = true
+      icon.alphaValue = 0.7
+      icon.imageAlignment = NSImageAlignment.alignLeft
+      switch command {
+      case .audioSpeakerVolume:
+        icon.image = NSImage(systemSymbolName: "speaker.wave.2", accessibilityDescription: title)!
+      case .brightness:
+        icon.image = NSImage(systemSymbolName: "sun.max", accessibilityDescription: title)!
+      case .contrast:
+        icon.image = NSImage(systemSymbolName: "circle.lefthalf.filled", accessibilityDescription: title)!
+      default:
+        break
+      }
+      view.addSubview(icon)
+      view.addSubview(slider)
+      item.view = view
+      menu.insertItem(item, at: 0)
+    } else {
+      slider.frame.size.width = 180
+      slider.frame.origin = NSPoint(x: 15, y: 5)
+      let view = NSView(frame: NSRect(x: 0, y: 0, width: slider.frame.width + 30, height: slider.frame.height + 10))
+      let sliderHeaderItem = NSMenuItem()
+      let attrs: [NSAttributedString.Key: Any] = [.foregroundColor: NSColor.systemGray, .font: NSFont.systemFont(ofSize: 12)]
+      sliderHeaderItem.attributedTitle = NSAttributedString(string: title, attributes: attrs)
+      view.addSubview(slider)
+      item.view = view
+      menu.insertItem(item, at: 0)
+      menu.insertItem(sliderHeaderItem, at: 0)
+    }
 
     var values: (UInt16, UInt16)?
     let delay = display.needsLongerDelay ? UInt64(40 * kMillisecondScale) : nil
