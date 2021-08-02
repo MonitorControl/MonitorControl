@@ -28,7 +28,7 @@ class Utils: NSObject {
       slider.frame.origin = NSPoint(x: 35, y: 5)
       let view = NSView(frame: NSRect(x: 0, y: 0, width: slider.frame.width + 47, height: slider.frame.height + 14))
       view.frame.origin = NSPoint(x: 12, y: 0)
-      let icon = NSImageView(image: NSImage(systemSymbolName: "circle.dotted", accessibilityDescription: title)!)
+      let icon = NSImageView(image: NSImage(systemSymbolName: "circle.dashed", accessibilityDescription: title)!)
       icon.frame = view.frame
       icon.wantsLayer = true
       icon.alphaValue = 0.7
