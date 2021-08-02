@@ -116,6 +116,10 @@
 		6CDA0FD826485AAE00F52125 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/Main.strings; sourceTree = "<group>"; };
 		AA3B4A2726AE103C00B74CD2 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		AA3B4A2926AE108E00B74CD2 /* Apple Silicon.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "Apple Silicon.md"; sourceTree = "<group>"; };
+		AA6686EF26B8172E00AF74A2 /* hu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hu; path = ../hu.lproj/Main.strings; sourceTree = "<group>"; };
+		AA6686F026B8172E00AF74A2 /* hu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hu; path = hu.lproj/Main.strings; sourceTree = "<group>"; };
+		AA6686F126B8172E00AF74A2 /* hu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hu; path = hu.lproj/MainMenu.strings; sourceTree = "<group>"; };
+		AA6686F226B8172E00AF74A2 /* hu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hu; path = hu.lproj/Localizable.strings; sourceTree = "<group>"; };
 		AA9AE86E26B5BF3D00B6CA65 /* OSD.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OSD.framework; path = ../../../../../System/Library/PrivateFrameworks/OSD.framework; sourceTree = "<group>"; };
 		AA9AE87026B5BFB700B6CA65 /* CoreDisplay.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreDisplay.framework; path = ../../../../../System/Library/Frameworks/CoreDisplay.framework; sourceTree = "<group>"; };
 		B0C4810623357CE500053F91 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -400,6 +404,7 @@
 				it,
 				ja,
 				pl,
+				hu,
 			);
 			mainGroup = 56754EA21D9A4016007BCDC5;
 			packageReferences = (
@@ -580,6 +585,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				6CDA0FCB26485A7600F52125 /* Base */,
+				AA6686EF26B8172E00AF74A2 /* hu */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -597,6 +603,7 @@
 				6CDA0FD626485AAC00F52125 /* pl */,
 				6CDA0FD726485AAC00F52125 /* ru */,
 				6CDA0FD826485AAE00F52125 /* uk */,
+				AA6686F026B8172E00AF74A2 /* hu */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -613,6 +620,7 @@
 				6CAD135023624CC1009BD53F /* it */,
 				3CCA5F972442EFF800B4DB84 /* ja */,
 				2EAA5B7F24BF9E9A00937821 /* pl */,
+				AA6686F226B8172E00AF74A2 /* hu */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -630,6 +638,7 @@
 				6CAD134F23624CC1009BD53F /* it */,
 				3CCA5F962442EFF800B4DB84 /* ja */,
 				2EAA5B7E24BF9E9A00937821 /* pl */,
+				AA6686F126B8172E00AF74A2 /* hu */,
 			);
 			name = MainMenu.xib;
 			sourceTree = "<group>";

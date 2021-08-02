@@ -1,0 +1,79 @@
+/* Shown in the main prefs window */
+"Advanced" = "Fejlett";
+
+/* Apple Silicon designation (shown after the version number in Preferences) */
+"Apple Silicon" = "Apple Silicon";
+
+/* Shown in the alert dialog */
+"Are you sure you want to enable a longer delay? Doing so may freeze your system and require a restart. Start at login will be disabled as a safety measure." = "Biztos benne, hogy engedélyezni kívánja a hosszabb várakozást? Ez bizonyos esetekben a rendszer lefagyását eredményezheti, akár újraindítás is szükségessé válhat. A bejelentkezéskori automatikus indítást letiltjuk a biztonság kedvéért.";
+
+/* Shown in the alert dialog */
+"Are you sure you want to reset all preferences?" = "Biztos benne, hogy vissza kívánja állítani az alapértelmezett beállításokat?";
+
+/* Sown in menu */
+"Brightness" = "Fényerő";
+
+/* Build */
+"Build" = "Build";
+
+/* Shown in menu */
+"Contrast" = "Kontraszt";
+
+/* Shown in menu */
+"Default" = "Alapértelmezett";
+
+/* No comment provided by engineer. */
+"Display" = "Kijelző";
+
+/* Shown in the alert dialog */
+"Enable Longer Delay?" = "Hosszabb várakozás engedélyezése?";
+
+/* Shown in the main prefs window */
+"General" = "Általános";
+
+/* Intel designation (shown after the version number in Preferences) */
+"Intel" = "Intel";
+
+/* Shown in the main prefs window */
+"Keys" = "Billentyűk";
+
+/* Shown in case a display mirrors an other display - like 'Mirror of DisplayName */
+"Mirror of" = "Tükrözött";
+
+/* Shown in the alert dialog */
+"No" = "Nem";
+
+/* Shown in menu */
+"No supported display found" = "Nincs támogatott kijelző";
+
+/* Shown in the alert dialog */
+"Ok" = "Ok";
+
+/* Shown in Preferences window */
+"Preferences" = "Beállítások";
+
+/* Shown in the alert dialog */
+"Reset Preferences?" = "Alapértelmezett beállítások";
+
+/* Shown in menu */
+"Set as default" = "Beállítás alapértelmezettként";
+
+/* Shown in the alert dialog */
+"Shortcuts not available" = "Gyorsbillentyűk nem elérhetők";
+
+/* Unknown display name
+ Unknown model
+ Unknown vendor */
+"Unknown" = "Ismeretlen";
+
+/* Version */
+"Version" = "Verzió";
+
+/* Shown in menu */
+"Volume" = "Hangerő";
+
+/* Shown in the alert dialog */
+"Yes" = "Igen";
+
+/* Shown in the alert dialog */
+"You need to enable MonitorControl in System Preferences > Security and Privacy > Accessibility for the keyboard shortcuts to work" = "Engedélyeznie kell a MonitorControlt a Rendszerbeállítások > Biztonság és adatvédelem > Kisegítő lehetőségek alatt a gyorsbillentyűk használatához!";
