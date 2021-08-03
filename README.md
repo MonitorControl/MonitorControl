@@ -1,4 +1,5 @@
-<h1 align="center"> MonitorControl </h1>
+<h1 align="center">MonitorControl</h1>
+<h3 align="center">Now with M1 support!</h2>
 
 <!-- subtext -->
 <div align="center">
