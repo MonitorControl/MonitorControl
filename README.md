@@ -37,17 +37,20 @@ Control your external monitor brightness, contrast or volume directly from a men
 <br/>
 
 <div align="center">
-    <img src="./.github/menulet.png" width="200" alt="menulet screenshot"/>
-    <br/><br/>
-    <img src="./.github/menugeneral.png" width="299" alt="general screenshot"/><img src="./.github/menukeys.png" width="299" alt="keys screenshot"/>
-    <img src="./.github/menudisplay.png" width="299" alt="display screenshot"/>
-    <img src="./.github/menuadvanced.png" width="299" alt="advanced screenshot"/>
+    <br/>
+    <img src="./.github/menulet.png" width="253" alt="menulet screenshot"/>
+    <img src="./.github/menugeneral.png" width="261" alt="general screenshot"/>
+    <img src="./.github/menukeys.png" width="261" alt="keys screenshot"/>
+    <br/>
+    <img src="./.github/menuadvanced.png" width="426" alt="advanced screenshot"/>
+    <img src="./.github/menudisplay.png" width="426" alt="display screenshot"/>
 
 <br/>
 
 _Bonus: Using keyboard keys displays the native osd_
 
-<img src="./.github/osd.jpg" width="500" align="center" alt="osd screenshot"/>
+<img src="./.github/osd1.png" width="200" align="center" alt="osd screenshot"/>&nbsp;&nbsp;&nbsp;
+<img src="./.github/osd2.png" width="200" align="center" alt="osd screenshot"/>
 </div>
 
 ## State of the experimental Apple Silicon version
@@ -122,4 +125,5 @@ brew install --cask monitorcontrol
 - [@Bensge](https://github.com/Bensge/) - (Used some code from his project [NativeDisplayBrightness](https://github.com/Bensge/NativeDisplayBrightness))
 - [@nhurden](https://github.com/nhurden/) (For the original MediaKeyTap)
 - [@kfix](https://github.com/kfix/ddcctl) (For ddcctl)
-- [@tao-j](https://github.com/tao-j) (For figuring out M1 DDC)
+- [@tao-j](https://github.com/tao-j) (For originally figuring out M1 DDC)
+- [@alin23](https://github.com/alin23) (For contribution in further figuring out M1 DDC)
