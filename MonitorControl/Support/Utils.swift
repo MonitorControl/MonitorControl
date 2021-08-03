@@ -32,7 +32,7 @@ class Utils: NSObject {
       switch command {
       case .audioSpeakerVolume: iconName = "speaker.wave.2"
       case .brightness: iconName = "sun.max"
-      case .contrast: iconName = "circle.lefthalf.filled"
+      case .contrast: iconName = "circle.lefthalf.fill"
       default: break
       }
       let icon = NSImageView(image: NSImage(systemSymbolName: iconName, accessibilityDescription: title)!)
