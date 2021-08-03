@@ -22,7 +22,7 @@ Control your external monitor brightness, contrast or volume directly from a men
     </a>
     <!-- version -->
     <a href="https://github.com/MonitorControl/MonitorControl/releases/latest">
-        <img src="https://img.shields.io/github/release/MonitorControl/MonitorControl.svg?style=for-the-badge" alt="latest version"/>
+        <img src="https://img.shields.io/github/release-pre/MonitorControl/MonitorControl.svg?style=for-the-badge" alt="latest version"/>
     </a>
     <!-- license -->
     <a href="https://github.com/MonitorControl/MonitorControl/blob/master/License.txt">
