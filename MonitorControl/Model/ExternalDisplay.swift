@@ -287,7 +287,7 @@ class ExternalDisplay: Display {
 
     #else
 
-      return self.ddc?.write(command: command, value: UInt16(1), errorRecoveryWaitTime: 2000)
+      return self.ddc?.write(command: command, value: value, errorRecoveryWaitTime: 2000)
 
     #endif
   }
