@@ -18,19 +18,19 @@ Control your external monitor brightness, contrast or volume directly from a men
 <div align="center">
     <!-- downloads -->
     <a href="https://github.com/MonitorControl/MonitorControl/releases">
-        <img src="https://img.shields.io/github/downloads/MonitorControl/MonitorControl/total.svg" alt="downloads"/>
+        <img src="https://img.shields.io/github/downloads/MonitorControl/MonitorControl/total.svg?style=for-the-badge" alt="downloads"/>
     </a>
     <!-- version -->
     <a href="https://github.com/MonitorControl/MonitorControl/releases/latest">
-        <img src="https://img.shields.io/github/release/MonitorControl/MonitorControl.svg" alt="latest version"/>
+        <img src="https://img.shields.io/github/release/MonitorControl/MonitorControl.svg?style=for-the-badge" alt="latest version"/>
     </a>
     <!-- license -->
     <a href="https://github.com/MonitorControl/MonitorControl/blob/master/License.txt">
-        <img src="https://img.shields.io/github/license/MonitorControl/MonitorControl.svg" alt="license"/>
+        <img src="https://img.shields.io/github/license/MonitorControl/MonitorControl.svg?style=for-the-badge" alt="license"/>
     </a>
     <!-- platform -->
     <a href="https://github.com/MonitorControl/MonitorControl">
-        <img src="https://img.shields.io/badge/platform-macOS-lightgrey.svg" alt="platform"/>
+        <img src="https://img.shields.io/badge/platform-macOS-lightgrey.svg?style=for-the-badge" alt="platform"/>
     </a>
 </div>
 
@@ -88,17 +88,15 @@ You're all set ! Now open the `MonitorControl.xcodeproj` with Xcode
 
 Open [issues](https://github.com/MonitorControl/MonitorControl/issues) if you have a question, an enhancement to suggest or a bug you've found. If you want you can fork the code yourself and submit a pull request to improve the app.
 
-## Download
+## Download the pre-release version
 
-Go to [Release](https://github.com/MonitorControl/MonitorControl/releases/latest) and download the latest `.dmg`
-
-**Please note that releases are not available for the experimental Apple Silicon version yet!**
+Go to [Releases](https://github.com/MonitorControl/MonitorControl/releases) and download the latest pre-release `.dmg`
 
 ## Installing with Homebrew Cask
 
 You can also install MonitorControl with [Homebrew Cask](https://github.com/Homebrew/homebrew-cask). 
 
-**Be aware that this comment will not install the experimental Apple Silicon compatible version of the app!**
+**Be aware that this command will not install the experimental Apple Silicon compatible version of the app!**
 
 ```bash
 brew install --cask monitorcontrol
@@ -124,3 +122,4 @@ brew install --cask monitorcontrol
 - [@Bensge](https://github.com/Bensge/) - (Used some code from his project [NativeDisplayBrightness](https://github.com/Bensge/NativeDisplayBrightness))
 - [@nhurden](https://github.com/nhurden/) (For the original MediaKeyTap)
 - [@kfix](https://github.com/kfix/ddcctl) (For ddcctl)
+- [@tao-j](https://github.com/tao-j) (For figuring out M1 DDC)
