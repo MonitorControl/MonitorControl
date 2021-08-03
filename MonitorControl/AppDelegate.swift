@@ -173,10 +173,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                                                       forDisplay: display,
                                                       command: .audioSpeakerVolume,
                                                       title: NSLocalizedString("Volume", comment: "Shown in menu"))
-    let brightnessSliderHandler = Utils.addSliderMenuItem(toMenu: monitorSubMenu,
-                                                          forDisplay: display,
-                                                          command: .brightness,
-                                                          title: NSLocalizedString("Brightness", comment: "Shown in menu"))
     if prefs.bool(forKey: Utils.PrefKeys.showContrast.rawValue) {
       let contrastSliderHandler = Utils.addSliderMenuItem(toMenu: monitorSubMenu,
                                                           forDisplay: display,
@@ -184,6 +180,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                                                           title: NSLocalizedString("Contrast", comment: "Shown in menu"))
       display.contrastSliderHandler = contrastSliderHandler
     }
+    let brightnessSliderHandler = Utils.addSliderMenuItem(toMenu: monitorSubMenu,
+                                                          forDisplay: display,
+                                                          command: .brightness,
+                                                          title: NSLocalizedString("Brightness", comment: "Shown in menu"))
 
     display.volumeSliderHandler = volumeSliderHandler
     display.brightnessSliderHandler = brightnessSliderHandler
