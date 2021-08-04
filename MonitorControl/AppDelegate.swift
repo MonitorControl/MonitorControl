@@ -159,15 +159,22 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     } else {
       for display in ddcDisplays {
         os_log("Supported display found: %{public}@", type: .info, "\(display.name) (Vendor: \(display.vendorNumber ?? 0), Model: \(display.modelNumber ?? 0))")
-        self.addDisplayToMenu(display: display, asSubMenu: ddcDisplays.count > 1)
+
+        let asSubmenu: Bool = ddcDisplays.count > 2 ? true : false // MARK: >2
+
+        if asSubmenu {
+          self.statusMenu.insertItem(NSMenuItem.separator(), at: 0)
+        }
+        self.addDisplayToMenu(display: display, asSubMenu: asSubmenu)
       }
     }
   }
 
   private func addDisplayToMenu(display: ExternalDisplay, asSubMenu: Bool) {
+    if !asSubMenu {
+      self.statusMenu.insertItem(NSMenuItem.separator(), at: 0)
+    }
     let monitorSubMenu: NSMenu = asSubMenu ? NSMenu() : self.statusMenu
-
-    self.statusMenu.insertItem(NSMenuItem.separator(), at: 0)
 
     let volumeSliderHandler = Utils.addSliderMenuItem(toMenu: monitorSubMenu,
                                                       forDisplay: display,
@@ -189,10 +196,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     display.brightnessSliderHandler = brightnessSliderHandler
 
     let monitorMenuItem = NSMenuItem()
-    let attrs: [NSAttributedString.Key: Any] = [.foregroundColor: NSColor.systemGray, .font: NSFont.boldSystemFont(ofSize: 12)]
-    monitorMenuItem.attributedTitle = NSAttributedString(string: "\(display.getFriendlyName())", attributes: attrs)
     if asSubMenu {
+      monitorMenuItem.title = "\(display.getFriendlyName())"
       monitorMenuItem.submenu = monitorSubMenu
+    } else {
+      let attrs: [NSAttributedString.Key: Any] = [.foregroundColor: NSColor.systemGray, .font: NSFont.boldSystemFont(ofSize: 12)]
+      monitorMenuItem.attributedTitle = NSAttributedString(string: "\(display.getFriendlyName())", attributes: attrs)
     }
 
     self.monitorItems.append(monitorMenuItem)
