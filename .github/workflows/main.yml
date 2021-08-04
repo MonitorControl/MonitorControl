@@ -27,5 +27,8 @@ jobs:
 
       - name: SwiftLint
         uses: norio-nomura/action-swiftlint@3.2.1
+        env:
+          DIFF_BASE: ${{ github.base_ref }}
         with:
           args: --strict
+
