@@ -21,6 +21,7 @@ class MainPrefsViewController: NSViewController, PreferencePane {
   @IBOutlet var versionLabel: NSTextField!
   @IBOutlet var startAtLogin: NSButton!
   @IBOutlet var showContrastSlider: NSButton!
+  @IBOutlet var showVolumeSlider: NSButton!
   @IBOutlet var lowerContrast: NSButton!
 
   override func viewDidLoad() {
@@ -34,6 +35,7 @@ class MainPrefsViewController: NSViewController, PreferencePane {
     let startAtLogin = (SMCopyAllJobDictionaries(kSMDomainUserLaunchd).takeRetainedValue() as? [[String: AnyObject]])?.first { $0["Label"] as? String == "\(Bundle.main.bundleIdentifier!)Helper" }?["OnDemand"] as? Bool ?? false
     self.startAtLogin.state = startAtLogin ? .on : .off
     self.showContrastSlider.state = self.prefs.bool(forKey: Utils.PrefKeys.showContrast.rawValue) ? .on : .off
+    self.showVolumeSlider.state = self.prefs.bool(forKey: Utils.PrefKeys.showVolume.rawValue) ? .on : .off
     self.lowerContrast.state = self.prefs.bool(forKey: Utils.PrefKeys.lowerContrast.rawValue) ? .on : .off
   }
 
@@ -61,6 +63,22 @@ class MainPrefsViewController: NSViewController, PreferencePane {
     #endif
 
     NotificationCenter.default.post(name: Notification.Name(Utils.PrefKeys.showContrast.rawValue), object: nil)
+  }
+
+  @IBAction func showVolumeSliderClicked(_ sender: NSButton) {
+    switch sender.state {
+    case .on:
+      self.prefs.set(true, forKey: Utils.PrefKeys.showVolume.rawValue)
+    case .off:
+      self.prefs.set(false, forKey: Utils.PrefKeys.showVolume.rawValue)
+    default: break
+    }
+
+    #if DEBUG
+      os_log("Toggle show volume slider state: %{public}@", type: .info, sender.state == .on ? "on" : "off")
+    #endif
+
+    NotificationCenter.default.post(name: Notification.Name(Utils.PrefKeys.showVolume.rawValue), object: nil)
   }
 
   @IBAction func lowerContrastClicked(_ sender: NSButton) {

@@ -12,6 +12,8 @@ class ExternalDisplay: Display {
   var arm64ddc: Bool = false
   var arm64avService: IOAVService?
 
+  var isContrastAfterBrightnessMode: Bool = false
+
   let DDC_HARD_MAX_LIMIT: Int = 100
 
   private let prefs = UserDefaults.standard
@@ -181,52 +183,41 @@ class ExternalDisplay: Display {
   override func stepBrightness(isUp: Bool, isSmallIncrement: Bool) {
     let osdValue = Int(self.calcNewValue(for: .brightness, isUp: isUp, isSmallIncrement: isSmallIncrement))
     let isAlreadySet = osdValue == self.getValue(for: .brightness)
-    let ddcValue = UInt16(osdValue)
 
     // Set the contrast value according to the brightness, if necessary
-    if !isAlreadySet {
-      self.setContrastValueForBrightness(osdValue)
+    if isAlreadySet, !isUp, !self.isContrastAfterBrightnessMode, self.prefs.bool(forKey: Utils.PrefKeys.lowerContrast.rawValue) {
+      self.setRestoreValue(self.getValue(for: .contrast), for: .contrast)
+      self.isContrastAfterBrightnessMode = true
     }
 
-    if !isAlreadySet {
-      guard self.writeDDCValues(command: .brightness, value: ddcValue) == true else {
+    if self.isContrastAfterBrightnessMode {
+      var contrastValue = Int(self.calcNewValue(for: .contrast, isUp: isUp, isSmallIncrement: isSmallIncrement))
+      if contrastValue >= self.getRestoreValue(for: .contrast) {
+        contrastValue = self.getRestoreValue(for: .contrast)
+        self.isContrastAfterBrightnessMode = false
+      }
+      let ddcValue = UInt16(contrastValue)
+      guard self.writeDDCValues(command: .contrast, value: ddcValue) == true else {
         return
       }
-    }
-
-    self.showOsd(command: .brightness, value: osdValue, roundChiclet: !isSmallIncrement)
-
-    if !isAlreadySet {
-      if let slider = self.brightnessSliderHandler?.slider {
-        slider.intValue = Int32(ddcValue)
-      }
-
-      self.saveValue(osdValue, for: .brightness)
-    }
-  }
-
-  func setContrastValueForBrightness(_ brightness: Int) {
-    var contrastValue: Int?
-
-    if brightness == 0 {
-      contrastValue = 0
-
-      // Save the current DDC value for contrast so it can be restored, even across app restarts
-      if self.getRestoreValue(for: .contrast) == 0 {
-        self.setRestoreValue(self.getValue(for: .contrast), for: .contrast)
-      }
-    } else if self.getValue(for: .brightness) == 0, brightness > 0 {
-      contrastValue = self.getRestoreValue(for: .contrast)
-    }
-
-    // Only write the new contrast value if lowering contrast after brightness is enabled
-    if let contrastValue = contrastValue, self.prefs.bool(forKey: Utils.PrefKeys.lowerContrast.rawValue) {
-      _ = self.writeDDCValues(command: .contrast, value: UInt16(contrastValue))
       self.saveValue(contrastValue, for: .contrast)
-
       if let slider = contrastSliderHandler?.slider {
         slider.intValue = Int32(contrastValue)
       }
+      self.showOsd(command: .brightness, value: self.getValue(for: .brightness), roundChiclet: !isSmallIncrement)
+    }
+    if !self.isContrastAfterBrightnessMode {
+      let ddcValue = UInt16(osdValue)
+      if !isAlreadySet {
+        guard self.writeDDCValues(command: .brightness, value: ddcValue) == true else {
+          return
+        }
+        if let slider = brightnessSliderHandler?.slider {
+          slider.intValue = Int32(ddcValue)
+        }
+      }
+      self.showOsd(command: .brightness, value: osdValue, roundChiclet: !isSmallIncrement)
+      self.saveValue(osdValue, for: .brightness)
     }
   }
 

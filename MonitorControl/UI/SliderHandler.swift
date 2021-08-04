@@ -28,11 +28,6 @@ class SliderHandler {
       self.display.toggleMute(fromVolumeSlider: true)
     }
 
-    // If the command is to adjust brightness, also instruct the display to set the contrast value, if necessary
-    if self.cmd == .brightness {
-      self.display.setContrastValueForBrightness(value)
-    }
-
     // If the command is to adjust contrast, erase the previous value for the contrast to restore after brightness is increased
     if self.cmd == .contrast {
       self.display.setRestoreValue(nil, for: .contrast)

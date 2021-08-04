@@ -180,6 +180,9 @@ class Utils: NSObject {
     /// Show contrast sliders
     case showContrast
 
+    /// Show volume sliders
+    case showVolume
+
     /// Lower contrast after brightness
     case lowerContrast
 

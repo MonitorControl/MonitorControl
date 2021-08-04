@@ -16,13 +16,16 @@
 /* Class = "NSTableColumn"; headerCell.title = "ID"; ObjectID = "dgp-q7-cBK"; */
 "dgp-q7-cBK.headerCell.title" = "ID";
 
+/* Class = "NSButtonCell"; title = "Show volume slider in menu"; ObjectID = "dhP-eB-1L6"; */
+"dhP-eB-1L6.title" = "Hangerő csúszka megjelenítése a menüben";
+
 /* Class = "NSTableColumn"; headerCell.title = "Display Name"; ObjectID = "dNl-I0-hcg"; */
 "dNl-I0-hcg.headerCell.title" = "Kijelző neve";
 
 /* Class = "NSMenuItem"; title = "Minimal"; ObjectID = "Eq3-z9-yIo"; */
 "Eq3-z9-yIo.title" = "Minimális";
 
-/* Class = "NSButtonCell"; title = "Lower Contrast after Brightness"; ObjectID = "fhy-Er-0aI"; */
+/* Class = "NSButtonCell"; title = "Lower contrast after brightness"; ObjectID = "fhy-Er-0aI"; */
 "fhy-Er-0aI.title" = "Kontraszt csökkentése a fényerő csökkentése után";
 
 /* Class = "NSMenuItem"; title = "None"; ObjectID = "FoA-yh-Yx3"; */
@@ -85,8 +88,8 @@
 /* Class = "NSTableColumn"; headerCell.title = "DDC"; ObjectID = "xFw-if-3FU"; */
 "xFw-if-3FU.headerCell.title" = "DDC";
 
-/* Class = "NSButtonCell"; title = "Show a slider for contrast"; ObjectID = "xSI-8W-Xd0"; */
-"xSI-8W-Xd0.title" = "Kontraszt csúszka megjelenítése";
+/* Class = "NSButtonCell"; title = "Show contrast slider in menu"; ObjectID = "xSI-8W-Xd0"; */
+"xSI-8W-Xd0.title" = "Kontraszt csúszka megjelenítése a menüben";
 
 /* Class = "NSTableColumn"; headerCell.title = "Polling Count"; ObjectID = "ytT-up-Dhs"; */
 "ytT-up-Dhs.headerCell.title" = "Mintavételezés";
