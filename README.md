@@ -1,41 +1,36 @@
-<h1 align="center">MonitorControl</h1>
-<h3 align="center">Now with M1 support!</h2>
+<div align="center">
+    
+<img src="./.github/Icon-1024.png" width="300" alt="App icon"/>
+    
+<h3 align="center">MonitorControl - Now with Apple Silicon support!</h2>
 
 <!-- subtext -->
-<div align="center">
-Control your external monitor brightness, contrast or volume directly from a menulet or with keyboard native keys.
-</div>
-
-<br/>
+Control your external monitor brightness, contrast or volume directly from a menulet or with keyboard native keys!
 
 <!-- Language emoji -->
-<div align="center">
-    <p>Translations: :uk: :fr: :de: :it: :ru: :ukraine: :jp: :poland: :hungary:</p>
+<p>Translations: :uk: :fr: :de: :it: :ru: :ukraine: :jp: :poland: :hungary:</p>
+    
 </div>
-
-<br/>
 
 <!-- shields -->
 <div align="center">
     <!-- downloads -->
     <a href="https://github.com/MonitorControl/MonitorControl/releases">
-        <img src="https://img.shields.io/github/downloads/MonitorControl/MonitorControl/total.svg?style=for-the-badge" alt="downloads"/>
+        <img src="https://img.shields.io/github/downloads/MonitorControl/MonitorControl/total.svg?style=flat" alt="downloads"/>
     </a>
     <!-- version -->
     <a href="https://github.com/MonitorControl/MonitorControl/releases">
-        <img src="https://img.shields.io/github/release-pre/MonitorControl/MonitorControl.svg?style=for-the-badge" alt="latest version"/>
+        <img src="https://img.shields.io/github/release-pre/MonitorControl/MonitorControl.svg?style=flat" alt="latest version"/>
     </a>
     <!-- license -->
     <a href="https://github.com/MonitorControl/MonitorControl/blob/master/License.txt">
-        <img src="https://img.shields.io/github/license/MonitorControl/MonitorControl.svg?style=for-the-badge" alt="license"/>
+        <img src="https://img.shields.io/github/license/MonitorControl/MonitorControl.svg?style=flat" alt="license"/>
     </a>
     <!-- platform -->
     <a href="https://github.com/MonitorControl/MonitorControl">
-        <img src="https://img.shields.io/badge/platform-macOS-lightgrey.svg?style=for-the-badge" alt="platform"/>
+        <img src="https://img.shields.io/badge/platform-macOS-lightgrey.svg?style=flat" alt="platform"/>
     </a>
 </div>
-
-<br/>
 
 <div align="center">
     <br/>
@@ -48,7 +43,7 @@ Control your external monitor brightness, contrast or volume directly from a men
 
 <br/>
 
-_Bonus: Using keyboard keys displays the native osd_
+<b>Bonus: using keyboard keys displays the native OSD</b>
 
 <img src="./.github/osd1.png" width="200" align="center" alt="osd screenshot"/>&nbsp;&nbsp;&nbsp;
 <img src="./.github/osd2.png" width="200" align="center" alt="osd screenshot"/>
