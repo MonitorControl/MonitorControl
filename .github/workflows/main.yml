@@ -27,4 +27,5 @@ jobs:
 
       - name: SwiftLint
         uses: norio-nomura/action-swiftlint@3.2.1
-        args: --strict
+        with:
+          args: --strict
