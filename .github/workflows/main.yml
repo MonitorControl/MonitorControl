@@ -16,9 +16,6 @@ jobs:
       - name: brew bundle
         run: brew bundle
 
-      - name: print xcodebuild version
-        run: xcodebuild -version
-
       - name: xcodebuild
         uses: sersoft-gmbh/xcodebuild-action@v1.4
         with:

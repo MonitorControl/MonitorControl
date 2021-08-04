@@ -1,7 +1,0 @@
-name: test
-on: [push]
-jobs:
-  check-bats-version:
-    runs-on: ubuntu-latest
-    steps:
-      - run: echo hello
