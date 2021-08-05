@@ -5,7 +5,7 @@
 //  Created by Joni Van Roost on 24/01/2020.
 //  Copyright © 2020 MonitorControl. All rights reserved.
 //
-//  Most of the code in this file was sourced from:
+//  Some of the code in this file was sourced from:
 //  https://github.com/fnesveda/ExternalDisplayBrightness
 //  all credit goes to @fnesveda
 
@@ -31,51 +31,16 @@ class InternalDisplay: Display {
 
   public func getBrightness() -> Float {
     var brightness: Float = 0
-    _ = type(of: self).DisplayServicesGetBrightness?(self.identifier, &brightness)
+    DisplayServicesGetBrightness(self.identifier, &brightness)
     return brightness
   }
 
   override func stepBrightness(isUp: Bool, isSmallIncrement: Bool) {
     let value = self.calcNewBrightness(isUp: isUp, isSmallIncrement: isSmallIncrement)
     self.displayQueue.sync {
-      _ = type(of: self).DisplayServicesSetBrightness?(self.identifier, Float(value))
-      type(of: self).DisplayServicesBrightnessChanged?(self.identifier, Double(value))
+      DisplayServicesSetBrightness(self.identifier, Float(value))
+      DisplayServicesBrightnessChanged(self.identifier, Double(value))
       self.showOsd(command: .brightness, value: Int(value * 64), maxValue: 64)
     }
-  }
-
-  // notifies the system that the brightness of a specified display has changed (to update System Preferences etc.)
-  // unfortunately Apple doesn't provide a public API for this, so we have to manually extract the function from the DisplayServices framework
-  private static var DisplayServicesBrightnessChanged: ((CGDirectDisplayID, Double) -> Void)? {
-    let displayServicesPath = CFURLCreateWithString(kCFAllocatorDefault, "/System/Library/PrivateFrameworks/DisplayServices.framework" as CFString, nil)
-    if let displayServicesBundle = CFBundleCreate(kCFAllocatorDefault, displayServicesPath) {
-      if let funcPointer = CFBundleGetFunctionPointerForName(displayServicesBundle, "DisplayServicesBrightnessChanged" as CFString) {
-        typealias DSBCFunctionType = @convention(c) (UInt32, Double) -> Void
-        return unsafeBitCast(funcPointer, to: DSBCFunctionType.self)
-      }
-    }
-    return nil
-  }
-
-  private static var DisplayServicesGetBrightness: ((CGDirectDisplayID, UnsafePointer<Float>) -> Int)? {
-    let displayServicesPath = CFURLCreateWithString(kCFAllocatorDefault, "/System/Library/PrivateFrameworks/DisplayServices.framework" as CFString, nil)
-    if let displayServicesBundle = CFBundleCreate(kCFAllocatorDefault, displayServicesPath) {
-      if let funcPointer = CFBundleGetFunctionPointerForName(displayServicesBundle, "DisplayServicesGetBrightness" as CFString) {
-        typealias DSBCFunctionType = @convention(c) (UInt32, UnsafePointer<Float>) -> Int
-        return unsafeBitCast(funcPointer, to: DSBCFunctionType.self)
-      }
-    }
-    return nil
-  }
-
-  private static var DisplayServicesSetBrightness: ((CGDirectDisplayID, Float) -> Int)? {
-    let displayServicesPath = CFURLCreateWithString(kCFAllocatorDefault, "/System/Library/PrivateFrameworks/DisplayServices.framework" as CFString, nil)
-    if let displayServicesBundle = CFBundleCreate(kCFAllocatorDefault, displayServicesPath) {
-      if let funcPointer = CFBundleGetFunctionPointerForName(displayServicesBundle, "DisplayServicesSetBrightness" as CFString) {
-        typealias DSBCFunctionType = @convention(c) (UInt32, Float) -> Int
-        return unsafeBitCast(funcPointer, to: DSBCFunctionType.self)
-      }
-    }
-    return nil
   }
 }
