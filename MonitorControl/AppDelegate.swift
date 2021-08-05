@@ -314,10 +314,19 @@ extension AppDelegate: MediaKeyTapDelegate {
     // Introduce a small delay to handle the media key being held down
     let delay = isRepeat ? 0.05 : 0
 
+    var isAnyDisplayInContrastAfterBrightnessMode: Bool = false
+    for display in allDisplays where (display as? ExternalDisplay)?.isContrastAfterBrightnessMode ?? false {
+      isAnyDisplayInContrastAfterBrightnessMode = true
+    }
+
     self.keyRepeatTimers[mediaKey] = Timer.scheduledTimer(withTimeInterval: delay, repeats: false, block: { _ in
       for display in allDisplays where display.isEnabled && !display.isVirtual {
         switch mediaKey {
-        case .brightnessUp, .brightnessDown:
+        case .brightnessUp:
+          if !(isAnyDisplayInContrastAfterBrightnessMode && !((display as? ExternalDisplay)?.isContrastAfterBrightnessMode ?? false)) {
+            display.stepBrightness(isUp: mediaKey == .brightnessUp, isSmallIncrement: isSmallIncrement)
+          }
+        case .brightnessDown:
           display.stepBrightness(isUp: mediaKey == .brightnessUp, isSmallIncrement: isSmallIncrement)
         case .mute:
           // The mute key should not respond to press + hold
