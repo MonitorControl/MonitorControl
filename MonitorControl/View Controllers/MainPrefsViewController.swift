@@ -85,6 +85,12 @@ class MainPrefsViewController: NSViewController, PreferencePane {
     switch sender.state {
     case .on:
       self.prefs.set(true, forKey: Utils.PrefKeys.lowerContrast.rawValue)
+      let alert = NSAlert()
+      alert.addButton(withTitle: NSLocalizedString("Ok", comment: "Shown in the alert dialog"))
+      alert.messageText = NSLocalizedString("Setting up Lower contrast after brightness", comment: "Shown in the alert dialog")
+      alert.informativeText = NSLocalizedString("Enabling this option will let you dim the screen even more via the brightness keys by lowering contrast after brightness has reached zero.\n\nTo make this work, please make sure that current contrast levels are properly set via the contrast slider!", comment: "Shown in the alert dialog")
+      alert.alertStyle = .warning
+      alert.runModal()
     case .off:
       self.prefs.set(false, forKey: Utils.PrefKeys.lowerContrast.rawValue)
     default: break

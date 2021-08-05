@@ -28,9 +28,13 @@ class SliderHandler {
       self.display.toggleMute(fromVolumeSlider: true)
     }
 
-    // If the command is to adjust contrast, erase the previous value for the contrast to restore after brightness is increased
+    // If the command is to adjust contrast, exit ContrastAfterBirghtness mode if contrast is higher than the restore value
     if self.cmd == .contrast {
-      self.display.setRestoreValue(nil, for: .contrast)
+      if self.display.isContrastAfterBrightnessMode {
+        if value >= self.display.getRestoreValue(for: .contrast) {
+          self.display.isContrastAfterBrightnessMode = false
+        }
+      }
     }
 
     _ = self.display.writeDDCValues(command: self.cmd, value: UInt16(value))

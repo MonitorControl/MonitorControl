@@ -19,14 +19,14 @@
 /* Shown in menu */
 "Contrast" = "Kontraszt";
 
-/* Shown in menu */
-"Default" = "Alapértelmezett";
-
 /* No comment provided by engineer. */
 "Display" = "Kijelző";
 
 /* Shown in the alert dialog */
 "Enable Longer Delay?" = "Hosszabb várakozás engedélyezése?";
+
+/* Shown in the alert dialog */
+"Enabling this option will let you dim the screen even more via the brightness keys by lowering contrast after brightness has reached zero.\n\nTo make this work, please make sure that current contrast levels are properly set via the contrast slider!" = "Ez a beállítás lehetővé teszi a képernyő további sötétítését a kontraszt további csökkentésével, miután a fényerő szintje elérte a nullát.\n\nAnnak érdekében, hogy a funkció megfelelően működjön, ellenőrizze, hogy a kontraszt szint megfelelően be van állítva a kontraszt csúszka segítségével!";
 
 /* Shown in the main prefs window */
 "General" = "Általános";
@@ -49,14 +49,11 @@
 /* Shown in the alert dialog */
 "Ok" = "Ok";
 
-/* Shown in Preferences window */
-"Preferences" = "Beállítások";
-
 /* Shown in the alert dialog */
 "Reset Preferences?" = "Alapértelmezett beállítások";
 
-/* Shown in menu */
-"Set as default" = "Beállítás alapértelmezettként";
+/* Shown in the alert dialog */
+"Setting up Lower contrast after brightness" = "Kontraszt csökkentése a fényerő után beállítása";
 
 /* Shown in the alert dialog */
 "Shortcuts not available" = "Gyorsbillentyűk nem elérhetők";

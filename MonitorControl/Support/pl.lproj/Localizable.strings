@@ -19,14 +19,14 @@
 /* Shown in menu */
 "Contrast" = "Kontrast";
 
-/* Shown in menu */
-"Default" = "Domyślnie";
-
 /* No comment provided by engineer. */
 "Display" = "Wyświetlacz";
 
 /* Shown in the alert dialog */
 "Enable Longer Delay?" = "Enable Longer Delay?";
+
+/* Shown in the alert dialog */
+"Enabling this option will let you dim the screen even more via the brightness keys by lowering contrast after brightness has reached zero.\n\nTo make this work, please make sure that current contrast levels are properly set via the contrast slider!" = "Enabling this option will let you dim the screen even more via the brightness keys by lowering contrast after brightness has reached zero.\n\nTo make this work, please make sure that current contrast levels are properly set via the contrast slider!";
 
 /* Shown in the main prefs window */
 "General" = "Ogólne";
@@ -49,14 +49,11 @@
 /* Shown in the alert dialog */
 "Ok" = "Ok";
 
-/* Shown in Preferences window */
-"Preferences" = "Preferencje";
-
 /* Shown in the alert dialog */
 "Reset Preferences?" = "Reset Preferences?";
 
-/* Shown in menu */
-"Set as default" = "Ustaw jako domyślne";
+/* Shown in the alert dialog */
+"Setting up Lower contrast after brightness" = "Setting up Lower contrast after brightness";
 
 /* Shown in the alert dialog */
 "Shortcuts not available" = "Skróty klawiszowe niedostępne";

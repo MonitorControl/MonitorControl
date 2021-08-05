@@ -10,7 +10,7 @@
 /* Shown in the alert dialog */
 "Are you sure you want to reset all preferences?" = "Are you sure you want to reset all preferences?";
 
-/* Sown in menu */
+/* Shown in menu */
 "Brightness" = "Brightness";
 
 /* Build */
@@ -19,14 +19,14 @@
 /* Shown in menu */
 "Contrast" = "Contrast";
 
-/* Shown in menu */
-"Default" = "Default";
-
-/* No comment provided by engineer. */
+/* Shown in the main prefs window */
 "Display" = "Display";
 
 /* Shown in the alert dialog */
 "Enable Longer Delay?" = "Enable Longer Delay?";
+
+/* Shown in the alert dialog */
+"Enabling this option will let you dim the screen even more via the brightness keys by lowering contrast after brightness has reached zero.\n\nTo make this work, please make sure that current contrast levels are properly set via the contrast slider!" = "Enabling this option will let you dim the screen even more via the brightness keys by lowering contrast after brightness has reached zero.\n\nTo make this work, please make sure that current contrast levels are properly set via the contrast slider!";
 
 /* Shown in the main prefs window */
 "General" = "General";
@@ -49,21 +49,18 @@
 /* Shown in the alert dialog */
 "Ok" = "Ok";
 
-/* Shown in Preferences window */
-"Preferences" = "Preferences";
-
 /* Shown in the alert dialog */
 "Reset Preferences?" = "Reset Preferences?";
 
-/* Shown in menu */
-"Set as default" = "Set as default";
+/* Shown in the alert dialog */
+"Setting up Lower contrast after brightness" = "Setting up Lower contrast after brightness";
 
 /* Shown in the alert dialog */
 "Shortcuts not available" = "Shortcuts not available";
 
 /* Unknown display name
- Unknown model
- Unknown vendor */
+   Unknown model
+   Unknown vendor */
 "Unknown" = "Unknown";
 
 /* Version */
