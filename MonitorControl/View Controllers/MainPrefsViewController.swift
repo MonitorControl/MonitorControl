@@ -26,7 +26,7 @@ class MainPrefsViewController: NSViewController, PreferencePane {
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    self.setVersionNumber()
+    self.setAppInfo()
   }
 
   @available(macOS, deprecated: 10.10)
@@ -101,7 +101,7 @@ class MainPrefsViewController: NSViewController, PreferencePane {
     #endif
   }
 
-  fileprivate func setVersionNumber() {
+  fileprivate func setAppInfo() {
     let versionName = NSLocalizedString("Version", comment: "Version")
     let buildName = NSLocalizedString("Build", comment: "Build")
     let versionNumber = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") ?? "error"
@@ -117,6 +117,6 @@ class MainPrefsViewController: NSViewController, PreferencePane {
 
     #endif
 
-    self.versionLabel.stringValue = "\(versionName) \(versionNumber) (\(buildName) \(buildNumber)) \(arch)"
+    self.versionLabel.stringValue = "MonitorControl \(versionName) \(versionNumber) (\(buildName) \(buildNumber)) \(arch)"
   }
 }
