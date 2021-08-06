@@ -54,45 +54,41 @@ class ExternalDisplay: Display {
     }
   }
 
-  #if !arch(arm64)
-
-    // Scores the likelihood of a display match based on EDID UUID, ProductName and SerialNumber from in ioreg, compared to DisplayCreateInfoDictionary.
-    func ioregMatchScore(ioregEdidUUID: String, ioregProductName: String = "", ioregSerialNumber: Int64 = 0) -> Int {
-      var matchScore: Int = 0
-      if let dictionary = (CoreDisplay_DisplayCreateInfoDictionary(self.identifier))?.takeRetainedValue() as NSDictionary? {
-        if let kDisplayYearOfManufacture = dictionary[kDisplayYearOfManufacture] as? Int64, let kDisplayWeekOfManufacture = dictionary[kDisplayWeekOfManufacture] as? Int64, let kDisplayVendorID = dictionary[kDisplayVendorID] as? Int64, let kDisplayProductID = dictionary[kDisplayProductID] as? Int64, let kDisplayVerticalImageSize = dictionary[kDisplayVerticalImageSize] as? Int64, let kDisplayHorizontalImageSize = dictionary[kDisplayHorizontalImageSize] as? Int64 {
-          struct KeyLoc {
-            var key: String
-            var loc: Int
-          }
-          let edidUUIDSearchKeys: [KeyLoc] = [
-            // Vendor ID
-            KeyLoc(key: String(format: "%04x", UInt16(kDisplayVendorID)).uppercased(), loc: 0),
-            // Product ID
-            KeyLoc(key: String(format: "%02x", UInt8((UInt16(kDisplayProductID) >> (1 * 8)) & 0xFF)).uppercased()
-              + String(format: "%02x", UInt8((UInt16(kDisplayProductID) >> (0 * 8)) & 0xFF)).uppercased(), loc: 4),
-            // Manufacture date
-            KeyLoc(key: String(format: "%02x", UInt8(kDisplayYearOfManufacture - 1990)).uppercased()
-              + String(format: "%02x", UInt8(kDisplayWeekOfManufacture)).uppercased(), loc: 19),
-            // Image size
-            KeyLoc(key: String(format: "%02x", UInt8(kDisplayHorizontalImageSize / 10)).uppercased()
-              + String(format: "%02x", UInt8(kDisplayVerticalImageSize / 10)).uppercased(), loc: 30),
-          ]
-          for searchKey in edidUUIDSearchKeys where searchKey.key != "0000" && searchKey.key == ioregEdidUUID.prefix(searchKey.loc + 4).suffix(4) {
-            matchScore += 1
-          }
+  // Scores the likelihood of a display match based on EDID UUID, ProductName and SerialNumber from in ioreg, compared to DisplayCreateInfoDictionary.
+  public func ioregMatchScore(ioregEdidUUID: String, ioregProductName: String = "", ioregSerialNumber: Int64 = 0) -> Int {
+    var matchScore: Int = 0
+    if let dictionary = (CoreDisplay_DisplayCreateInfoDictionary(self.identifier))?.takeRetainedValue() as NSDictionary? {
+      if let kDisplayYearOfManufacture = dictionary[kDisplayYearOfManufacture] as? Int64, let kDisplayWeekOfManufacture = dictionary[kDisplayWeekOfManufacture] as? Int64, let kDisplayVendorID = dictionary[kDisplayVendorID] as? Int64, let kDisplayProductID = dictionary[kDisplayProductID] as? Int64, let kDisplayVerticalImageSize = dictionary[kDisplayVerticalImageSize] as? Int64, let kDisplayHorizontalImageSize = dictionary[kDisplayHorizontalImageSize] as? Int64 {
+        struct KeyLoc {
+          var key: String
+          var loc: Int
         }
-        if ioregProductName != "", let nameList = dictionary["DisplayProductName"] as? [String: String], let name = nameList["en_US"] ?? nameList.first?.value, name.lowercased() == ioregProductName.lowercased() {
-          matchScore += 1
-        }
-        if ioregSerialNumber != 0, let serial = dictionary[kDisplaySerialNumber] as? Int64, serial == ioregSerialNumber {
+        let edidUUIDSearchKeys: [KeyLoc] = [
+          // Vendor ID
+          KeyLoc(key: String(format: "%04x", UInt16(kDisplayVendorID)).uppercased(), loc: 0),
+          // Product ID
+          KeyLoc(key: String(format: "%02x", UInt8((UInt16(kDisplayProductID) >> (0 * 8)) & 0xFF)).uppercased()
+            + String(format: "%02x", UInt8((UInt16(kDisplayProductID) >> (1 * 8)) & 0xFF)).uppercased(), loc: 4),
+          // Manufacture date
+          KeyLoc(key: String(format: "%02x", UInt8(kDisplayWeekOfManufacture)).uppercased()
+            + String(format: "%02x", UInt8(kDisplayYearOfManufacture - 1990)).uppercased(), loc: 19),
+          // Image size
+          KeyLoc(key: String(format: "%02x", UInt8(kDisplayHorizontalImageSize / 10)).uppercased()
+            + String(format: "%02x", UInt8(kDisplayVerticalImageSize / 10)).uppercased(), loc: 30),
+        ]
+        for searchKey in edidUUIDSearchKeys where searchKey.key != "0000" && searchKey.key == ioregEdidUUID.prefix(searchKey.loc + 4).suffix(4) {
           matchScore += 1
         }
       }
-      return matchScore
+      if ioregProductName != "", let nameList = dictionary["DisplayProductName"] as? [String: String], let name = nameList["en_US"] ?? nameList.first?.value, name.lowercased() == ioregProductName.lowercased() {
+        matchScore += 1
+      }
+      if ioregSerialNumber != 0, let serial = dictionary[kDisplaySerialNumber] as? Int64, serial == ioregSerialNumber {
+        matchScore += 1
+      }
     }
-
-  #endif
+    return matchScore
+  }
 
   // On some displays, the display's OSD overlaps the macOS OSD,
   // calling the OSD command with 1 seems to hide it.

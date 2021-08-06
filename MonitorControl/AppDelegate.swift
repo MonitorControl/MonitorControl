@@ -115,8 +115,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func updateAVServices() {
       // MARK: TODO tasks
 
-      // Implement - Find out the match score of each service (via its destcriptor strings) to each ExternalDisplay using the new ExternalDisplay.ioregMatchScore()
-      // Implement - Based on the scores, attach the proper service in order from the service array to each ExternalDisplay
+      // Finalize matching logic
       // Cleanup - Reduce cyclomatic complexity, break up into parts
       // Cleanup - Move all this stuff out to a separate source file
 
@@ -189,19 +188,23 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
       }
 
-      // MARK: Temporary solution (returns whichever service we found first for every display)
+      // MARK: This is just a temporary solution not the final matching logic
 
-      for display in DisplayManager.shared.getExternalDisplays() {
-        display.arm64avService = IOAVServiceCreate(kCFAllocatorDefault)?.takeRetainedValue() as IOAVService
-        display.arm64ddc = true
-
-        /*
-         var send: [UInt8] = [0xF1]
-         var reply = [UInt8](repeating: 0, count: 11)
-         if display.arm64ddcComm(send: &send, reply: &reply) {
-           display.arm64ddc = true
-         }
-          */
+      for externalDisplay in DisplayManager.shared.getExternalDisplays() {
+        for ioregService in ioregServicesForMatching {
+          let matchScore = externalDisplay.ioregMatchScore(ioregEdidUUID: ioregService.edidUUID, ioregProductName: ioregService.productName, ioregSerialNumber: ioregService.serialNumber)
+          if matchScore >= 4 {
+            externalDisplay.arm64avService = ioregService.service
+            externalDisplay.arm64ddc = true
+            /*
+              var send: [UInt8] = [0xF1]
+              var reply = [UInt8](repeating: 0, count: 11)
+              if display.arm64ddcComm(send: &send, reply: &reply) {
+                display.arm64ddc = true
+              }
+             */
+          }
+        }
       }
     }
 

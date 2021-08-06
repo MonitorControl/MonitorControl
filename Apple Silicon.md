@@ -15,4 +15,4 @@ You need to have a *single*, *compatible* external display (aside from the inter
 - [x] Add proper checks to safeguard things.
 - [x] Fix issue with internal display brightness display control on Apple Slicon (relevant services moved to a different private framework)
 - [x] Better handling of mirrored displays to prepare for proper external multi monitor support
-- [ ] Proper external multi monitor support - 80%
+- [ ] Proper external multi monitor support - 85%
