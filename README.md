@@ -121,7 +121,11 @@ brew install --cask monitorcontrol
 - [@Bensge](https://github.com/Bensge/) - (used some code from his project [NativeDisplayBrightness](https://github.com/Bensge/NativeDisplayBrightness))
 - [@nhurden](https://github.com/nhurden/) (for the original MediaKeyTap)
 - [@kfix](https://github.com/kfix/ddcctl) (for ddcctl)
-- [@zhuowei](https://github.com/zhuowei) (for figuring out M1 I²C communication)
-- [@tao-j](https://github.com/tao-j) (for figuring out M1 I²C write)
-- [@alin23](https://github.com/alin23) (for figuring out M1 service matching)
+
+### For the 3.x.x versions:
+
+- [@zhuowei](https://github.com/zhuowei) (figured out M1 I²C communication)
+- [@tao-j](https://github.com/tao-j) (figured out M1 I²C write)
+- [@dguerri](https://github.com/dguerri) (basic finding behind EDID UUID based matching)
+- [@alin23](https://github.com/alin23) (generally spearheaded M1 DDC support and figured out a many of the caveats)
 - [javierocasio](https://www.deviantart.com/javierocasio) (app icon background)

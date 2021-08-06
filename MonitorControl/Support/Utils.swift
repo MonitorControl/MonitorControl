@@ -164,6 +164,14 @@ class Utils: NSObject {
     return chkd
   }
 
+  static func alert(text: String) {
+    let alert = NSAlert()
+    alert.messageText = text
+    alert.alertStyle = NSAlert.Style.informational
+    alert.addButton(withTitle: "OK")
+    alert.runModal()
+  }
+
   // MARK: - Enums
 
   /// UserDefault Keys for the app prefs

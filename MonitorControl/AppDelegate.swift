@@ -112,6 +112,46 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     return defaultName
   }
 
+  #if arch(arm64)
+
+    func updateAVServices() {
+      // MARK: TODO - proper display matching
+
+      /*
+
+       Outline of what will happen:
+
+       1) Create a service array (array of IOAVService and the corresponding "AppleCLCD2" descriptor strings)
+       2) Iterate through the ioreg service tree and find all instances of "AppleCLCD2" service
+            For the instance of the "AppleCLCD2" service extract the following relevant strings:
+              "EDID UUID"
+              "DisplayAttributes" -> "ProductAttributes"/"ProductName", "ProductAttributes"/"SerialNumber"
+            For the instance of "AppleCLCD2" find the belonging "DCPAVServiceProxy" service (which should follow "AppleCLCD2" somewhat closely)
+              Create an instance of IOAVService with this service and add it to the service array with the "AppleCLCD2" strings
+       3) Find out the match score of each service (via its destcriptor strings) to each ExternalDisplay using the new ExternalDisplay.ioregMatchScore()
+       4) Based on the scores, attach the proper service in order from the service array to each ExternalDisplay
+       5) Further check DDC support for each ExternalDisplay
+
+       */
+
+      // MARK: Temporary solution (returns default service)
+
+      for display in DisplayManager.shared.getExternalDisplays() {
+        display.arm64avService = IOAVServiceCreate(kCFAllocatorDefault)?.takeRetainedValue() as IOAVService
+        display.arm64ddc = true
+
+        /*
+         var send: [UInt8] = [0xF1]
+         var reply = [UInt8](repeating: 0, count: 11)
+         if display.arm64ddcComm(send: &send, reply: &reply) {
+           display.arm64ddc = true
+         }
+          */
+      }
+    }
+
+  #endif
+
   func updateDisplays() {
     self.clearDisplays()
 
@@ -148,6 +188,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
       DisplayManager.shared.addDisplay(display: display)
     }
+
+    #if arch(arm64)
+
+      self.updateAVServices()
+
+    #endif
 
     let ddcDisplays = DisplayManager.shared.getDdcCapableDisplays()
     if ddcDisplays.count == 0 {
