@@ -58,7 +58,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     self.preferencesWindowController.show()
   }
 
-  /// Set the default prefs of the app
+  // Set the default prefs of the app
   func setDefaultPrefs() {
     if !prefs.bool(forKey: Utils.PrefKeys.appAlreadyLaunched.rawValue) {
       prefs.set(true, forKey: Utils.PrefKeys.appAlreadyLaunched.rawValue)
@@ -68,8 +68,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       prefs.set(false, forKey: Utils.PrefKeys.lowerContrast.rawValue)
     }
   }
-
-  // MARK: - Menu
 
   func clearDisplays() {
     if self.statusMenu.items.count > 2 {
@@ -115,26 +113,83 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   #if arch(arm64)
 
     func updateAVServices() {
-      // MARK: TODO - proper display matching
+      // MARK: TODO tasks
 
-      /*
+      // Implement - Find out the match score of each service (via its destcriptor strings) to each ExternalDisplay using the new ExternalDisplay.ioregMatchScore()
+      // Implement - Based on the scores, attach the proper service in order from the service array to each ExternalDisplay
+      // Cleanup - Reduce cyclomatic complexity, break up into parts
+      // Cleanup - Move all this stuff out to a separate source file
 
-       Outline of what will happen:
+      // This will store the IOAVService with associated display properties
+      struct IOregService {
+        var service: IOAVService?
+        var edidUUID: String = ""
+        var productName: String = ""
+        var serialNumber: Int64 = 0
+      }
+      var ioregServicesForMatching: [IOregService] = []
+      // We will iterate through the entire ioreg tree
+      let root: io_registry_entry_t = IORegistryGetRootEntry(kIOMasterPortDefault)
+      var iter = io_iterator_t()
+      guard IORegistryEntryCreateIterator(root, "IOService", IOOptionBits(kIORegistryIterateRecursively), &iter) == KERN_SUCCESS else {
+        os_log("IORegistryEntryCreateIterator error", type: .debug)
+        return
+      }
+      var service: io_service_t
+      while true {
+        service = IOIteratorNext(iter)
+        guard service != MACH_PORT_NULL else {
+          break
+        }
+        let name = UnsafeMutablePointer<CChar>.allocate(capacity: MemoryLayout<io_name_t>.size)
+        guard IORegistryEntryGetName(service, name) == KERN_SUCCESS else {
+          os_log("IORegistryEntryGetName error", type: .debug)
+          return
+        }
+        // We are looking for an AppleCLCD2 service
+        if String(cString: name) == "AppleCLCD2" {
+          // We will check if it has an EDID UUID. If so, then we take it as an external display
+          if let unmanagedEdidUUID = IORegistryEntryCreateCFProperty(service, CFStringCreateWithCString(kCFAllocatorDefault, "EDID UUID", kCFStringEncodingASCII), kCFAllocatorDefault, IOOptionBits(kIORegistryIterateRecursively)), let edidUUID = unmanagedEdidUUID.takeRetainedValue() as? String {
+            // Now we will store the display's properties
+            var ioregService = IOregService()
+            ioregService.edidUUID = edidUUID
+            if let unmanagedDisplayAttrs = IORegistryEntryCreateCFProperty(service, CFStringCreateWithCString(kCFAllocatorDefault, "DisplayAttributes", kCFStringEncodingASCII), kCFAllocatorDefault, IOOptionBits(kIORegistryIterateRecursively)), let displayAttrs = unmanagedDisplayAttrs.takeRetainedValue() as? NSDictionary, let productAttrs = displayAttrs.value(forKey: "ProductAttributes") as? NSDictionary {
+              if let productName = productAttrs.value(forKey: "ProductName") as? String {
+                ioregService.productName = productName
+              }
+              if let serialNumber = productAttrs.value(forKey: "SerialNumber") as? Int64 {
+                ioregService.serialNumber = serialNumber
+              }
+            }
+            //  We will now iterate further, looking for the belonging "DCPAVServiceProxy" service (which should follow "AppleCLCD2" somewhat closely)
+            while true {
+              service = IOIteratorNext(iter)
+              guard service != MACH_PORT_NULL else {
+                break
+              }
+              let name = UnsafeMutablePointer<CChar>.allocate(capacity: MemoryLayout<io_name_t>.size)
+              guard IORegistryEntryGetName(service, name) == KERN_SUCCESS else {
+                os_log("IORegistryEntryGetName error", type: .debug)
+                return
+              }
+              if String(cString: name) == "DCPAVServiceProxy" {
+                // Let's now create an instance of IOAVService with this service and add it to the service store with the "AppleCLCD2" strings
+                if let unmanagedLocation = IORegistryEntryCreateCFProperty(service, CFStringCreateWithCString(kCFAllocatorDefault, "Location", kCFStringEncodingASCII), kCFAllocatorDefault, IOOptionBits(kIORegistryIterateRecursively)), let location = unmanagedLocation.takeRetainedValue() as? String {
+                  if location == "External" {
+                    ioregService.service = IOAVServiceCreateWithService(kCFAllocatorDefault, service)?.takeRetainedValue() as IOAVService
+                    if ioregService.service != nil {
+                      // Finally, we are there!
+                      ioregServicesForMatching.append(ioregService)
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
 
-       1) Create a service array (array of IOAVService and the corresponding "AppleCLCD2" descriptor strings)
-       2) Iterate through the ioreg service tree and find all instances of "AppleCLCD2" service
-            For the instance of the "AppleCLCD2" service extract the following relevant strings:
-              "EDID UUID"
-              "DisplayAttributes" -> "ProductAttributes"/"ProductName", "ProductAttributes"/"SerialNumber"
-            For the instance of "AppleCLCD2" find the belonging "DCPAVServiceProxy" service (which should follow "AppleCLCD2" somewhat closely)
-              Create an instance of IOAVService with this service and add it to the service array with the "AppleCLCD2" strings
-       3) Find out the match score of each service (via its destcriptor strings) to each ExternalDisplay using the new ExternalDisplay.ioregMatchScore()
-       4) Based on the scores, attach the proper service in order from the service array to each ExternalDisplay
-       5) Further check DDC support for each ExternalDisplay
-
-       */
-
-      // MARK: Temporary solution (returns default service)
+      // MARK: Temporary solution (returns whichever service we found first for every display)
 
       for display in DisplayManager.shared.getExternalDisplays() {
         display.arm64avService = IOAVServiceCreate(kCFAllocatorDefault)?.takeRetainedValue() as IOAVService
