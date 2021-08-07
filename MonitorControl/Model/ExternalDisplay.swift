@@ -44,50 +44,12 @@ class ExternalDisplay: Display {
     super.init(identifier, name: name, vendorNumber: vendorNumber, modelNumber: modelNumber)
 
     if !isVirtual {
-      #if !arch(arm64)
-
+      if !Arm64DDCUtils.isArm64 {
         self.ddc = DDC(for: identifier)
-
-      #endif
+      }
     } else {
       self.isVirtual = true
     }
-  }
-
-  // Scores the likelihood of a display match based on EDID UUID, ProductName and SerialNumber from in ioreg, compared to DisplayCreateInfoDictionary.
-  public func ioregMatchScore(ioregEdidUUID: String, ioregProductName: String = "", ioregSerialNumber: Int64 = 0) -> Int {
-    var matchScore: Int = 0
-    if let dictionary = (CoreDisplay_DisplayCreateInfoDictionary(self.identifier))?.takeRetainedValue() as NSDictionary? {
-      if let kDisplayYearOfManufacture = dictionary[kDisplayYearOfManufacture] as? Int64, let kDisplayWeekOfManufacture = dictionary[kDisplayWeekOfManufacture] as? Int64, let kDisplayVendorID = dictionary[kDisplayVendorID] as? Int64, let kDisplayProductID = dictionary[kDisplayProductID] as? Int64, let kDisplayVerticalImageSize = dictionary[kDisplayVerticalImageSize] as? Int64, let kDisplayHorizontalImageSize = dictionary[kDisplayHorizontalImageSize] as? Int64 {
-        struct KeyLoc {
-          var key: String
-          var loc: Int
-        }
-        let edidUUIDSearchKeys: [KeyLoc] = [
-          // Vendor ID
-          KeyLoc(key: String(format: "%04x", UInt16(kDisplayVendorID)).uppercased(), loc: 0),
-          // Product ID
-          KeyLoc(key: String(format: "%02x", UInt8((UInt16(kDisplayProductID) >> (0 * 8)) & 0xFF)).uppercased()
-            + String(format: "%02x", UInt8((UInt16(kDisplayProductID) >> (1 * 8)) & 0xFF)).uppercased(), loc: 4),
-          // Manufacture date
-          KeyLoc(key: String(format: "%02x", UInt8(kDisplayWeekOfManufacture)).uppercased()
-            + String(format: "%02x", UInt8(kDisplayYearOfManufacture - 1990)).uppercased(), loc: 19),
-          // Image size
-          KeyLoc(key: String(format: "%02x", UInt8(kDisplayHorizontalImageSize / 10)).uppercased()
-            + String(format: "%02x", UInt8(kDisplayVerticalImageSize / 10)).uppercased(), loc: 30),
-        ]
-        for searchKey in edidUUIDSearchKeys where searchKey.key != "0000" && searchKey.key == ioregEdidUUID.prefix(searchKey.loc + 4).suffix(4) {
-          matchScore += 1
-        }
-      }
-      if ioregProductName != "", let nameList = dictionary["DisplayProductName"] as? [String: String], let name = nameList["en_US"] ?? nameList.first?.value, name.lowercased() == ioregProductName.lowercased() {
-        matchScore += 1
-      }
-      if ioregSerialNumber != 0, let serial = dictionary[kDisplaySerialNumber] as? Int64, serial == ioregSerialNumber {
-        matchScore += 1
-      }
-    }
-    return matchScore
   }
 
   // On some displays, the display's OSD overlaps the macOS OSD,
@@ -238,52 +200,8 @@ class ExternalDisplay: Display {
     }
   }
 
-  #if arch(arm64)
-
-    public func arm64ddcComm(send: inout [UInt8], reply: inout [UInt8], writeSleepTime: UInt32 = 10000, numofWriteCycles: UInt8 = 2, readSleepTime: UInt32 = 10000, numOfRetryAttemps: UInt8 = 3, retrySleepTime: UInt32 = 20000) -> Bool {
-      var success: Bool = false
-
-      guard self.arm64avService != nil else {
-        return success
-      }
-
-      var checkedsend: [UInt8] = [UInt8(0x80 | (send.count + 1)), UInt8(send.count)] + send + [0]
-      checkedsend[checkedsend.count - 1] = Utils.checksum(chk: send.count == 1 ? 0x6E : 0x6E ^ 0x51, data: &checkedsend, start: 0, end: checkedsend.count - 2)
-
-      for _ in 1 ... numOfRetryAttemps {
-        for _ in 1 ... numofWriteCycles {
-          usleep(writeSleepTime)
-          if IOAVServiceWriteI2C(self.arm64avService, 0x37, 0x51, &checkedsend, UInt32(checkedsend.count)) == 0 {
-            success = true
-          }
-        }
-
-        if reply.count > 0 {
-          usleep(readSleepTime)
-          if IOAVServiceReadI2C(self.arm64avService, 0x37, 0x51, &reply, UInt32(reply.count)) == 0 {
-            if Utils.checksum(chk: 0x50, data: &reply, start: 0, end: reply.count - 2) == reply[reply.count - 1] {
-              success = true
-            } else {
-              success = false
-            }
-          }
-        }
-
-        if success {
-          return success
-        }
-
-        usleep(retrySleepTime)
-      }
-
-      return success
-    }
-
-  #endif
-
   public func writeDDCValues(command: DDC.Command, value: UInt16, errorRecoveryWaitTime _: UInt32? = nil) -> Bool? {
-    #if arch(arm64)
-
+    if Arm64DDCUtils.isArm64 {
       guard self.arm64ddc else {
         return false
       }
@@ -291,9 +209,8 @@ class ExternalDisplay: Display {
       var send: [UInt8] = [command.rawValue, UInt8(value >> 8), UInt8(value & 255)]
       var reply: [UInt8] = []
 
-      return self.arm64ddcComm(send: &send, reply: &reply)
-
-    #else
+      return Arm64DDCUtils.performDDCCommunication(service: self.arm64avService, send: &send, reply: &reply)
+    } else {
       // NOTE: Loop is a hacky workaround that should probably be removed as it wasn't necessary before and makes things choppy.
       // SEE: https://github.com/MonitorControl/MonitorControl/issues/478
       var success = false
@@ -301,15 +218,12 @@ class ExternalDisplay: Display {
         success = self.ddc?.write(command: command, value: value, errorRecoveryWaitTime: 2000) ?? false
       }
       return success
-
-    #endif
+    }
   }
 
   func readDDCValues(for command: DDC.Command, tries: UInt, minReplyDelay delay: UInt64?) -> (current: UInt16, max: UInt16)? {
     var values: (UInt16, UInt16)?
-
-    #if arch(arm64)
-
+    if Arm64DDCUtils.isArm64 {
       guard self.arm64ddc else {
         return nil
       }
@@ -317,7 +231,7 @@ class ExternalDisplay: Display {
       var send: [UInt8] = [command.rawValue]
       var reply = [UInt8](repeating: 0, count: 11)
 
-      if self.arm64ddcComm(send: &send, reply: &reply) {
+      if Arm64DDCUtils.performDDCCommunication(service: self.arm64avService, send: &send, reply: &reply) {
         let max = UInt16(reply[6]) * 256 + UInt16(reply[7])
         let current = UInt16(reply[8]) * 256 + UInt16(reply[9])
         values = (current, max)
@@ -325,9 +239,7 @@ class ExternalDisplay: Display {
         os_log("DDC read was unsuccessful.", type: .debug)
         values = nil
       }
-
-    #else
-
+    } else {
       if self.ddc?.supported(minReplyDelay: delay) == true {
         os_log("Display supports DDC.", type: .debug)
       } else {
@@ -341,9 +253,7 @@ class ExternalDisplay: Display {
       }
 
       values = self.ddc?.read(command: command, tries: tries, minReplyDelay: delay)
-
-    #endif
-
+    }
     return values
   }
 

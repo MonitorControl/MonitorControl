@@ -110,105 +110,25 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     return defaultName
   }
 
-  #if arch(arm64)
-
-    func updateAVServices() {
-      // MARK: TODO tasks
-
-      // Finalize matching logic
-      // Cleanup - Reduce cyclomatic complexity, break up into parts
-      // Cleanup - Move all this stuff out to a separate source file
-
-      // This will store the IOAVService with associated display properties
-      struct IOregService {
-        var service: IOAVService?
-        var edidUUID: String = ""
-        var productName: String = ""
-        var serialNumber: Int64 = 0
-      }
-      var ioregServicesForMatching: [IOregService] = []
-      // We will iterate through the entire ioreg tree
-      let root: io_registry_entry_t = IORegistryGetRootEntry(kIOMasterPortDefault)
-      var iter = io_iterator_t()
-      guard IORegistryEntryCreateIterator(root, "IOService", IOOptionBits(kIORegistryIterateRecursively), &iter) == KERN_SUCCESS else {
-        os_log("IORegistryEntryCreateIterator error", type: .debug)
-        return
-      }
-      var service: io_service_t
-      while true {
-        service = IOIteratorNext(iter)
-        guard service != MACH_PORT_NULL else {
-          break
-        }
-        let name = UnsafeMutablePointer<CChar>.allocate(capacity: MemoryLayout<io_name_t>.size)
-        guard IORegistryEntryGetName(service, name) == KERN_SUCCESS else {
-          os_log("IORegistryEntryGetName error", type: .debug)
-          return
-        }
-        // We are looking for an AppleCLCD2 service
-        if String(cString: name) == "AppleCLCD2" {
-          // We will check if it has an EDID UUID. If so, then we take it as an external display
-          if let unmanagedEdidUUID = IORegistryEntryCreateCFProperty(service, CFStringCreateWithCString(kCFAllocatorDefault, "EDID UUID", kCFStringEncodingASCII), kCFAllocatorDefault, IOOptionBits(kIORegistryIterateRecursively)), let edidUUID = unmanagedEdidUUID.takeRetainedValue() as? String {
-            // Now we will store the display's properties
-            var ioregService = IOregService()
-            ioregService.edidUUID = edidUUID
-            if let unmanagedDisplayAttrs = IORegistryEntryCreateCFProperty(service, CFStringCreateWithCString(kCFAllocatorDefault, "DisplayAttributes", kCFStringEncodingASCII), kCFAllocatorDefault, IOOptionBits(kIORegistryIterateRecursively)), let displayAttrs = unmanagedDisplayAttrs.takeRetainedValue() as? NSDictionary, let productAttrs = displayAttrs.value(forKey: "ProductAttributes") as? NSDictionary {
-              if let productName = productAttrs.value(forKey: "ProductName") as? String {
-                ioregService.productName = productName
-              }
-              if let serialNumber = productAttrs.value(forKey: "SerialNumber") as? Int64 {
-                ioregService.serialNumber = serialNumber
-              }
-            }
-            //  We will now iterate further, looking for the belonging "DCPAVServiceProxy" service (which should follow "AppleCLCD2" somewhat closely)
-            while true {
-              service = IOIteratorNext(iter)
-              guard service != MACH_PORT_NULL else {
-                break
-              }
-              let name = UnsafeMutablePointer<CChar>.allocate(capacity: MemoryLayout<io_name_t>.size)
-              guard IORegistryEntryGetName(service, name) == KERN_SUCCESS else {
-                os_log("IORegistryEntryGetName error", type: .debug)
-                return
-              }
-              if String(cString: name) == "DCPAVServiceProxy" {
-                // Let's now create an instance of IOAVService with this service and add it to the service store with the "AppleCLCD2" strings
-                if let unmanagedLocation = IORegistryEntryCreateCFProperty(service, CFStringCreateWithCString(kCFAllocatorDefault, "Location", kCFStringEncodingASCII), kCFAllocatorDefault, IOOptionBits(kIORegistryIterateRecursively)), let location = unmanagedLocation.takeRetainedValue() as? String {
-                  if location == "External" {
-                    ioregService.service = IOAVServiceCreateWithService(kCFAllocatorDefault, service)?.takeRetainedValue() as IOAVService
-                    if ioregService.service != nil {
-                      // Finally, we are there!
-                      ioregServicesForMatching.append(ioregService)
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-
-      // MARK: This is just a temporary solution not the final matching logic
-
+  func updateAVServices() {
+    if Arm64DDCUtils.isArm64 {
+      var displayIDs: [CGDirectDisplayID] = []
       for externalDisplay in DisplayManager.shared.getExternalDisplays() {
-        for ioregService in ioregServicesForMatching {
-          let matchScore = externalDisplay.ioregMatchScore(ioregEdidUUID: ioregService.edidUUID, ioregProductName: ioregService.productName, ioregSerialNumber: ioregService.serialNumber)
-          if matchScore >= 4 {
-            externalDisplay.arm64avService = ioregService.service
+        displayIDs.append(externalDisplay.identifier)
+      }
+      let serviceMatches = Arm64DDCUtils.getServiceMatches(displayIDs: displayIDs, ioregServicesForMatching: Arm64DDCUtils.getIoregServicesForMatching())
+      for serviceMatch in serviceMatches {
+        for externalDisplay in DisplayManager.shared.getExternalDisplays() where externalDisplay.identifier == serviceMatch.displayID {
+          externalDisplay.arm64avService = serviceMatch.service
+          var send: [UInt8] = [0xF1]
+          var reply = [UInt8](repeating: 0, count: 11)
+          if Arm64DDCUtils.performDDCCommunication(service: externalDisplay.arm64avService, send: &send, reply: &reply) {
             externalDisplay.arm64ddc = true
-            /*
-              var send: [UInt8] = [0xF1]
-              var reply = [UInt8](repeating: 0, count: 11)
-              if display.arm64ddcComm(send: &send, reply: &reply) {
-                display.arm64ddc = true
-              }
-             */
           }
         }
       }
     }
-
-  #endif
+  }
 
   func updateDisplays() {
     self.clearDisplays()
@@ -247,11 +167,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       DisplayManager.shared.addDisplay(display: display)
     }
 
-    #if arch(arm64)
-
-      self.updateAVServices()
-
-    #endif
+    self.updateAVServices()
 
     let ddcDisplays = DisplayManager.shared.getDdcCapableDisplays()
     if ddcDisplays.count == 0 {
