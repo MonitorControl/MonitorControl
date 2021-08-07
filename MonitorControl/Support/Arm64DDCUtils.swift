@@ -16,11 +16,14 @@ class Arm64DDCUtils: NSObject {
     var productName: String = ""
     var serialNumber: Int64 = 0
     var service: IOAVService?
+    var displayAttributesIoregPosition: Int64 = 0
+    var serviceIoregPosition: Int64 = 0
   }
 
   public struct DisplayService {
     var displayID: CGDirectDisplayID = 0
     var service: IOAVService?
+    var serviceIoregPosition: Int64 = 0
   }
 
   #if arch(arm64)
@@ -29,21 +32,36 @@ class Arm64DDCUtils: NSObject {
     public static let isArm64: Bool = false
   #endif
 
-  // This matches Displays to the right IOAVServices
+  static let MAX_MATCH_SCORE: Int = 6
+
+  // This matches Displays to the right IOAVService
   public static func getServiceMatches(displayIDs: [CGDirectDisplayID], ioregServicesForMatching: [IOregService]) -> [DisplayService] {
-    var matchedServices: [DisplayService] = []
-
-    // MARK: TODO - this is not the final logic
-
+    var matchedDisplayServices: [DisplayService] = []
+    var scoredCandidateDisplayServices: [Int: [DisplayService]] = [:]
     for displayID in displayIDs {
       for ioregServiceForMatching in ioregServicesForMatching {
-        if self.ioregMatchScore(displayID: displayID, ioregEdidUUID: ioregServiceForMatching.edidUUID, ioregProductName: ioregServiceForMatching.productName, ioregSerialNumber: ioregServiceForMatching.serialNumber) >= 4 {
-          let matchedService = DisplayService(displayID: displayID, service: ioregServiceForMatching.service)
-          matchedServices.append(matchedService)
+        let score = self.ioregMatchScore(displayID: displayID, ioregEdidUUID: ioregServiceForMatching.edidUUID, ioregProductName: ioregServiceForMatching.productName, ioregSerialNumber: ioregServiceForMatching.serialNumber)
+        let displayService = DisplayService(displayID: displayID, service: ioregServiceForMatching.service, serviceIoregPosition: ioregServiceForMatching.serviceIoregPosition)
+        if scoredCandidateDisplayServices[score] == nil {
+          scoredCandidateDisplayServices[score] = []
+        }
+        scoredCandidateDisplayServices[score]?.append(displayService)
+      }
+    }
+    var takenServiceIoregPositions: [Int64] = []
+    var takenDisplayIDs: [CGDirectDisplayID] = []
+    for score in stride(from: self.MAX_MATCH_SCORE, to: 0, by: -1) {
+      if let scoredCandidateDisplayService = scoredCandidateDisplayServices[score] {
+        for candidateDisplayService in scoredCandidateDisplayService {
+          if !(takenDisplayIDs.contains(candidateDisplayService.displayID) || takenServiceIoregPositions.contains(candidateDisplayService.serviceIoregPosition)) {
+            takenDisplayIDs.append(candidateDisplayService.displayID)
+            takenServiceIoregPositions.append(candidateDisplayService.serviceIoregPosition)
+            matchedDisplayServices.append(candidateDisplayService)
+          }
         }
       }
     }
-    return matchedServices
+    return matchedDisplayServices
   }
 
   // Scores the likelihood of a display match based on EDID UUID, ProductName and SerialNumber from in ioreg, compared to DisplayCreateInfoDictionary.
@@ -83,7 +101,7 @@ class Arm64DDCUtils: NSObject {
   }
 
   // Iterate to the next requested item in the ioreg tree
-  static func ioregIterateToNext(ioregObjectName: String, iterator: inout io_iterator_t) -> io_service_t {
+  static func ioregIterateToNext(ioregObjectName: String, iterator: inout io_iterator_t, position: inout Int64) -> io_service_t {
     var service: io_service_t = IO_OBJECT_NULL
     let name = UnsafeMutablePointer<CChar>.allocate(capacity: MemoryLayout<io_name_t>.size)
     defer {
@@ -91,6 +109,7 @@ class Arm64DDCUtils: NSObject {
     }
     while true {
       service = IOIteratorNext(iterator)
+      position += 1
       guard service != MACH_PORT_NULL else {
         service = IO_OBJECT_NULL
         break
@@ -108,9 +127,10 @@ class Arm64DDCUtils: NSObject {
   }
 
   // Returns EDID UUDI, Product Name and Serial Number in an IOregService if it is found using the provided io_service_t pointing to a AppleCDC2 item in the ioreg tree
-  static func getIORegServiceAppleCDC2Properties(service: io_service_t) -> IOregService? {
+  static func getIORegServiceAppleCDC2Properties(service: io_service_t, position: Int64 = 0) -> IOregService? {
     if let unmanagedEdidUUID = IORegistryEntryCreateCFProperty(service, CFStringCreateWithCString(kCFAllocatorDefault, "EDID UUID", kCFStringEncodingASCII), kCFAllocatorDefault, IOOptionBits(kIORegistryIterateRecursively)), let edidUUID = unmanagedEdidUUID.takeRetainedValue() as? String {
       var ioregService = IOregService()
+      ioregService.displayAttributesIoregPosition = position
       ioregService.edidUUID = edidUUID
       if let unmanagedDisplayAttrs = IORegistryEntryCreateCFProperty(service, CFStringCreateWithCString(kCFAllocatorDefault, "DisplayAttributes", kCFStringEncodingASCII), kCFAllocatorDefault, IOOptionBits(kIORegistryIterateRecursively)), let displayAttrs = unmanagedDisplayAttrs.takeRetainedValue() as? NSDictionary, let productAttrs = displayAttrs.value(forKey: "ProductAttributes") as? NSDictionary {
         if let productName = productAttrs.value(forKey: "ProductName") as? String {
@@ -126,9 +146,10 @@ class Arm64DDCUtils: NSObject {
   }
 
   // Sets up the service in an IOregService if it is found using the provided io_service_t pointing to a DCPAVServiceProxy item in the ioreg tree
-  static func setIORegServiceDCPAVServiceProxy(service: io_service_t, ioregService: inout IOregService) -> Bool {
+  static func setIORegServiceDCPAVServiceProxy(service: io_service_t, ioregService: inout IOregService, position: Int64 = 0) -> Bool {
     if let unmanagedLocation = IORegistryEntryCreateCFProperty(service, CFStringCreateWithCString(kCFAllocatorDefault, "Location", kCFStringEncodingASCII), kCFAllocatorDefault, IOOptionBits(kIORegistryIterateRecursively)), let location = unmanagedLocation.takeRetainedValue() as? String {
       if location == "External" {
+        ioregService.serviceIoregPosition = position
         ioregService.service = IOAVServiceCreateWithService(kCFAllocatorDefault, service)?.takeRetainedValue() as IOAVService
         return true
       }
@@ -138,6 +159,7 @@ class Arm64DDCUtils: NSObject {
 
   // Returns IOAVSerivces with associated display properties for matching logic
   public static func getIoregServicesForMatching() -> [IOregService] {
+    var position: Int64 = 0
     var ioregServicesForMatching: [IOregService] = []
     let ioregRoot: io_registry_entry_t = IORegistryGetRootEntry(kIOMasterPortDefault)
     var iterator = io_iterator_t()
@@ -146,19 +168,19 @@ class Arm64DDCUtils: NSObject {
       return ioregServicesForMatching
     }
     while true {
-      let serviceAppleCLCD2 = self.ioregIterateToNext(ioregObjectName: "AppleCLCD2", iterator: &iterator)
+      let serviceAppleCLCD2 = self.ioregIterateToNext(ioregObjectName: "AppleCLCD2", iterator: &iterator, position: &position)
       guard serviceAppleCLCD2 != IO_OBJECT_NULL else {
         break
       }
       // We will check if it has an EDID UUID. If so, then we take it as an external display
-      if var ioregService = getIORegServiceAppleCDC2Properties(service: serviceAppleCLCD2) {
+      if var ioregService = getIORegServiceAppleCDC2Properties(service: serviceAppleCLCD2, position: position) {
         //  We will now iterate further, looking for the belonging "DCPAVServiceProxy" service (which should follow "AppleCLCD2" somewhat closely)
-        let serviceDCPAVServiceProxy = self.ioregIterateToNext(ioregObjectName: "DCPAVServiceProxy", iterator: &iterator)
+        let serviceDCPAVServiceProxy = self.ioregIterateToNext(ioregObjectName: "DCPAVServiceProxy", iterator: &iterator, position: &position)
         guard serviceDCPAVServiceProxy != IO_OBJECT_NULL else {
           break
         }
         // Let's now create an instance of IOAVService with this service and add it to the service store with the "AppleCLCD2" strings
-        if self.setIORegServiceDCPAVServiceProxy(service: serviceDCPAVServiceProxy, ioregService: &ioregService) {
+        if self.setIORegServiceDCPAVServiceProxy(service: serviceDCPAVServiceProxy, ioregService: &ioregService, position: position) {
           ioregServicesForMatching.append(ioregService)
         }
       }
