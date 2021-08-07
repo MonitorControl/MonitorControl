@@ -4,7 +4,7 @@ This is an **experimental** version of MonitorControl with full **Apple Silicon 
 
 **Test it at your own risk!**
 
-You need to have *compatible* external display (aside from the internal display if present) connected to your *Apple Silicon Mac* via *USB-C/DisplayPort*. The HDMI port of the M1 Mac mini does not work - unfortunatelly there is no known way to circumvent this limitation at the moment.
+You need to have *compatible* external display (aside from the internal display if present) connected to your *Apple Silicon Mac* via the *USB-C port*. The HDMI port of the M1 Mac mini does not work - unfortunatelly there is no known way to circumvent this limitation at the moment.
 
 ### Current state
 
@@ -16,4 +16,5 @@ You need to have *compatible* external display (aside from the internal display 
 - [x] Fix issue with internal display brightness display control on Apple Slicon (relevant services moved to a different private framework) - 100%
 - [x] Better handling of mirrored displays to prepare for proper external multi monitor support - 100%
 - [x] Proper external multi monitor support - 100%
-- [ ] Testing and fixing all problems. :) - ???
+
+_Note: current pre-release version might not relfect this state._

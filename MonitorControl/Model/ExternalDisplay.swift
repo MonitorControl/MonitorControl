@@ -205,11 +205,7 @@ class ExternalDisplay: Display {
       guard self.arm64ddc else {
         return false
       }
-
-      var send: [UInt8] = [command.rawValue, UInt8(value >> 8), UInt8(value & 255)]
-      var reply: [UInt8] = []
-
-      return Arm64DDCUtils.performDDCCommunication(service: self.arm64avService, send: &send, reply: &reply)
+      return Arm64DDCUtils.write(service: self.arm64avService, command: command.rawValue, value: value)
     } else {
       // NOTE: Loop is a hacky workaround that should probably be removed as it wasn't necessary before and makes things choppy.
       // SEE: https://github.com/MonitorControl/MonitorControl/issues/478
@@ -227,18 +223,7 @@ class ExternalDisplay: Display {
       guard self.arm64ddc else {
         return nil
       }
-
-      var send: [UInt8] = [command.rawValue]
-      var reply = [UInt8](repeating: 0, count: 11)
-
-      if Arm64DDCUtils.performDDCCommunication(service: self.arm64avService, send: &send, reply: &reply) {
-        let max = UInt16(reply[6]) * 256 + UInt16(reply[7])
-        let current = UInt16(reply[8]) * 256 + UInt16(reply[9])
-        values = (current, max)
-      } else {
-        os_log("DDC read was unsuccessful.", type: .debug)
-        values = nil
-      }
+      values = Arm64DDCUtils.read(service: self.arm64avService, command: command.rawValue)
     } else {
       if self.ddc?.supported(minReplyDelay: delay) == true {
         os_log("Display supports DDC.", type: .debug)

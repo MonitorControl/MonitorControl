@@ -110,19 +110,17 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     return defaultName
   }
 
+  // Update AVServices for External Displays
   func updateAVServices() {
     if Arm64DDCUtils.isArm64 {
       var displayIDs: [CGDirectDisplayID] = []
       for externalDisplay in DisplayManager.shared.getExternalDisplays() {
         displayIDs.append(externalDisplay.identifier)
       }
-      let serviceMatches = Arm64DDCUtils.getServiceMatches(displayIDs: displayIDs, ioregServicesForMatching: Arm64DDCUtils.getIoregServicesForMatching())
-      for serviceMatch in serviceMatches {
+      for serviceMatch in Arm64DDCUtils.getServiceMatches(displayIDs: displayIDs) {
         for externalDisplay in DisplayManager.shared.getExternalDisplays() where externalDisplay.identifier == serviceMatch.displayID {
           externalDisplay.arm64avService = serviceMatch.service
-          var send: [UInt8] = [0xF1]
-          var reply = [UInt8](repeating: 0, count: 11)
-          if Arm64DDCUtils.performDDCCommunication(service: externalDisplay.arm64avService, send: &send, reply: &reply) {
+          if Arm64DDCUtils.read(service: externalDisplay.arm64avService, command: UInt8(0xF1)) != nil {
             externalDisplay.arm64ddc = true
           }
         }

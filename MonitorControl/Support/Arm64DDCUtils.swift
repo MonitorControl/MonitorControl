@@ -2,7 +2,7 @@
 //  Arm64DDCUitls.swift
 //  MonitorControl
 //
-//  Created by @waydabber on 2021. 08. 07..
+//  Created by @waydabber, 2021
 //  Copyright © 2021. MonitorControl. All rights reserved.
 //
 
@@ -11,15 +11,6 @@ import IOKit
 import os.log
 
 class Arm64DDCUtils: NSObject {
-  public struct IOregService {
-    var edidUUID: String = ""
-    var productName: String = ""
-    var serialNumber: Int64 = 0
-    var service: IOAVService?
-    var displayAttributesIoregPosition: Int64 = 0
-    var serviceIoregPosition: Int64 = 0
-  }
-
   public struct DisplayService {
     var displayID: CGDirectDisplayID = 0
     var service: IOAVService?
@@ -32,10 +23,20 @@ class Arm64DDCUtils: NSObject {
     public static let isArm64: Bool = false
   #endif
 
+  struct IOregService {
+    var edidUUID: String = ""
+    var productName: String = ""
+    var serialNumber: Int64 = 0
+    var service: IOAVService?
+    var displayAttributesIoregPosition: Int64 = 0
+    var serviceIoregPosition: Int64 = 0
+  }
+
   static let MAX_MATCH_SCORE: Int = 6
 
   // This matches Displays to the right IOAVService
-  public static func getServiceMatches(displayIDs: [CGDirectDisplayID], ioregServicesForMatching: [IOregService]) -> [DisplayService] {
+  public static func getServiceMatches(displayIDs: [CGDirectDisplayID]) -> [DisplayService] {
+    let ioregServicesForMatching = self.getIoregServicesForMatching()
     var matchedDisplayServices: [DisplayService] = []
     var scoredCandidateDisplayServices: [Int: [DisplayService]] = [:]
     for displayID in displayIDs {
@@ -65,7 +66,7 @@ class Arm64DDCUtils: NSObject {
   }
 
   // Scores the likelihood of a display match based on EDID UUID, ProductName and SerialNumber from in ioreg, compared to DisplayCreateInfoDictionary.
-  public static func ioregMatchScore(displayID: CGDirectDisplayID, ioregEdidUUID: String, ioregProductName: String = "", ioregSerialNumber: Int64 = 0) -> Int {
+  static func ioregMatchScore(displayID: CGDirectDisplayID, ioregEdidUUID: String, ioregProductName: String = "", ioregSerialNumber: Int64 = 0) -> Int {
     var matchScore: Int = 0
     if let dictionary = (CoreDisplay_DisplayCreateInfoDictionary(displayID))?.takeRetainedValue() as NSDictionary? {
       if let kDisplayYearOfManufacture = dictionary[kDisplayYearOfManufacture] as? Int64, let kDisplayWeekOfManufacture = dictionary[kDisplayWeekOfManufacture] as? Int64, let kDisplayVendorID = dictionary[kDisplayVendorID] as? Int64, let kDisplayProductID = dictionary[kDisplayProductID] as? Int64, let kDisplayVerticalImageSize = dictionary[kDisplayVerticalImageSize] as? Int64, let kDisplayHorizontalImageSize = dictionary[kDisplayHorizontalImageSize] as? Int64 {
@@ -220,5 +221,28 @@ class Arm64DDCUtils: NSObject {
       usleep(retrySleepTime)
     }
     return success
+  }
+
+  // Perform DDC read
+  public static func read(service: IOAVService?, command: UInt8) -> (current: UInt16, max: UInt16)? {
+    var values: (UInt16, UInt16)?
+    var send: [UInt8] = [command]
+    var reply = [UInt8](repeating: 0, count: 11)
+    if Arm64DDCUtils.performDDCCommunication(service: service, send: &send, reply: &reply) {
+      let max = UInt16(reply[6]) * 256 + UInt16(reply[7])
+      let current = UInt16(reply[8]) * 256 + UInt16(reply[9])
+      values = (current, max)
+    } else {
+      os_log("DDC read was unsuccessful.", type: .debug)
+      values = nil
+    }
+    return values
+  }
+
+  // Perform DDC write
+  public static func write(service: IOAVService?, command: UInt8, value: UInt16) -> Bool {
+    var send: [UInt8] = [command, UInt8(value >> 8), UInt8(value & 255)]
+    var reply: [UInt8] = []
+    return Arm64DDCUtils.performDDCCommunication(service: service, send: &send, reply: &reply)
   }
 }
