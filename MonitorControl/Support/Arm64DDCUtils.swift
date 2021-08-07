@@ -82,77 +82,87 @@ class Arm64DDCUtils: NSObject {
     return matchScore
   }
 
+  // Iterate to the next requested item in the ioreg tree
+  static func ioregIterateToNext(ioregObjectName: String, iterator: inout io_iterator_t) -> io_service_t {
+    var service: io_service_t = IO_OBJECT_NULL
+    let name = UnsafeMutablePointer<CChar>.allocate(capacity: MemoryLayout<io_name_t>.size)
+    defer {
+      name.deallocate()
+    }
+    while true {
+      service = IOIteratorNext(iterator)
+      guard service != MACH_PORT_NULL else {
+        service = IO_OBJECT_NULL
+        break
+      }
+      guard IORegistryEntryGetName(service, name) == KERN_SUCCESS else {
+        os_log("IORegistryEntryGetName error", type: .debug)
+        service = IO_OBJECT_NULL
+        break
+      }
+      if String(cString: name) == ioregObjectName {
+        break
+      }
+    }
+    return service
+  }
+
+  // Returns EDID UUDI, Product Name and Serial Number in an IOregService if it is found using the provided io_service_t pointing to a AppleCDC2 item in the ioreg tree
+  static func getIORegServiceAppleCDC2Properties(service: io_service_t) -> IOregService? {
+    if let unmanagedEdidUUID = IORegistryEntryCreateCFProperty(service, CFStringCreateWithCString(kCFAllocatorDefault, "EDID UUID", kCFStringEncodingASCII), kCFAllocatorDefault, IOOptionBits(kIORegistryIterateRecursively)), let edidUUID = unmanagedEdidUUID.takeRetainedValue() as? String {
+      var ioregService = IOregService()
+      ioregService.edidUUID = edidUUID
+      if let unmanagedDisplayAttrs = IORegistryEntryCreateCFProperty(service, CFStringCreateWithCString(kCFAllocatorDefault, "DisplayAttributes", kCFStringEncodingASCII), kCFAllocatorDefault, IOOptionBits(kIORegistryIterateRecursively)), let displayAttrs = unmanagedDisplayAttrs.takeRetainedValue() as? NSDictionary, let productAttrs = displayAttrs.value(forKey: "ProductAttributes") as? NSDictionary {
+        if let productName = productAttrs.value(forKey: "ProductName") as? String {
+          ioregService.productName = productName
+        }
+        if let serialNumber = productAttrs.value(forKey: "SerialNumber") as? Int64 {
+          ioregService.serialNumber = serialNumber
+        }
+      }
+      return ioregService
+    }
+    return nil
+  }
+
+  // Sets up the service in an IOregService if it is found using the provided io_service_t pointing to a DCPAVServiceProxy item in the ioreg tree
+  static func setIORegServiceDCPAVServiceProxy(service: io_service_t, ioregService: inout IOregService) -> Bool {
+    if let unmanagedLocation = IORegistryEntryCreateCFProperty(service, CFStringCreateWithCString(kCFAllocatorDefault, "Location", kCFStringEncodingASCII), kCFAllocatorDefault, IOOptionBits(kIORegistryIterateRecursively)), let location = unmanagedLocation.takeRetainedValue() as? String {
+      if location == "External" {
+        ioregService.service = IOAVServiceCreateWithService(kCFAllocatorDefault, service)?.takeRetainedValue() as IOAVService
+        return true
+      }
+    }
+    return false
+  }
+
   // Returns IOAVSerivces with associated display properties for matching logic
   public static func getIoregServicesForMatching() -> [IOregService] {
-    // Finalize matching logic
-    // Cleanup - Reduce cyclomatic complexity, break up into parts
-    // Cleanup - Move all this stuff out to a separate source file
-
-    // This will store the IOAVService with associated display properties
-
     var ioregServicesForMatching: [IOregService] = []
-
-    // We will iterate through the entire ioreg tree
-    let root: io_registry_entry_t = IORegistryGetRootEntry(kIOMasterPortDefault)
-    var iter = io_iterator_t()
-    guard IORegistryEntryCreateIterator(root, "IOService", IOOptionBits(kIORegistryIterateRecursively), &iter) == KERN_SUCCESS else {
+    let ioregRoot: io_registry_entry_t = IORegistryGetRootEntry(kIOMasterPortDefault)
+    var iterator = io_iterator_t()
+    guard IORegistryEntryCreateIterator(ioregRoot, "IOService", IOOptionBits(kIORegistryIterateRecursively), &iterator) == KERN_SUCCESS else {
       os_log("IORegistryEntryCreateIterator error", type: .debug)
       return ioregServicesForMatching
     }
-    var service: io_service_t
     while true {
-      service = IOIteratorNext(iter)
-      guard service != MACH_PORT_NULL else {
+      let serviceAppleCLCD2 = self.ioregIterateToNext(ioregObjectName: "AppleCLCD2", iterator: &iterator)
+      guard serviceAppleCLCD2 != IO_OBJECT_NULL else {
         break
       }
-      let name = UnsafeMutablePointer<CChar>.allocate(capacity: MemoryLayout<io_name_t>.size)
-      guard IORegistryEntryGetName(service, name) == KERN_SUCCESS else {
-        os_log("IORegistryEntryGetName error", type: .debug)
-        return ioregServicesForMatching
-      }
-      // We are looking for an AppleCLCD2 service
-      if String(cString: name) == "AppleCLCD2" {
-        // We will check if it has an EDID UUID. If so, then we take it as an external display
-        if let unmanagedEdidUUID = IORegistryEntryCreateCFProperty(service, CFStringCreateWithCString(kCFAllocatorDefault, "EDID UUID", kCFStringEncodingASCII), kCFAllocatorDefault, IOOptionBits(kIORegistryIterateRecursively)), let edidUUID = unmanagedEdidUUID.takeRetainedValue() as? String {
-          // Now we will store the display's properties
-          var ioregService = IOregService()
-          ioregService.edidUUID = edidUUID
-          if let unmanagedDisplayAttrs = IORegistryEntryCreateCFProperty(service, CFStringCreateWithCString(kCFAllocatorDefault, "DisplayAttributes", kCFStringEncodingASCII), kCFAllocatorDefault, IOOptionBits(kIORegistryIterateRecursively)), let displayAttrs = unmanagedDisplayAttrs.takeRetainedValue() as? NSDictionary, let productAttrs = displayAttrs.value(forKey: "ProductAttributes") as? NSDictionary {
-            if let productName = productAttrs.value(forKey: "ProductName") as? String {
-              ioregService.productName = productName
-            }
-            if let serialNumber = productAttrs.value(forKey: "SerialNumber") as? Int64 {
-              ioregService.serialNumber = serialNumber
-            }
-          }
-          //  We will now iterate further, looking for the belonging "DCPAVServiceProxy" service (which should follow "AppleCLCD2" somewhat closely)
-          while true {
-            service = IOIteratorNext(iter)
-            guard service != MACH_PORT_NULL else {
-              break
-            }
-            let name = UnsafeMutablePointer<CChar>.allocate(capacity: MemoryLayout<io_name_t>.size)
-            guard IORegistryEntryGetName(service, name) == KERN_SUCCESS else {
-              os_log("IORegistryEntryGetName error", type: .debug)
-              return ioregServicesForMatching
-            }
-            if String(cString: name) == "DCPAVServiceProxy" {
-              // Let's now create an instance of IOAVService with this service and add it to the service store with the "AppleCLCD2" strings
-              if let unmanagedLocation = IORegistryEntryCreateCFProperty(service, CFStringCreateWithCString(kCFAllocatorDefault, "Location", kCFStringEncodingASCII), kCFAllocatorDefault, IOOptionBits(kIORegistryIterateRecursively)), let location = unmanagedLocation.takeRetainedValue() as? String {
-                if location == "External" {
-                  ioregService.service = IOAVServiceCreateWithService(kCFAllocatorDefault, service)?.takeRetainedValue() as IOAVService
-                  if ioregService.service != nil {
-                    // Finally, we are there!
-                    ioregServicesForMatching.append(ioregService)
-                  }
-                }
-              }
-            }
-          }
+      // We will check if it has an EDID UUID. If so, then we take it as an external display
+      if var ioregService = getIORegServiceAppleCDC2Properties(service: serviceAppleCLCD2) {
+        //  We will now iterate further, looking for the belonging "DCPAVServiceProxy" service (which should follow "AppleCLCD2" somewhat closely)
+        let serviceDCPAVServiceProxy = self.ioregIterateToNext(ioregObjectName: "DCPAVServiceProxy", iterator: &iterator)
+        guard serviceDCPAVServiceProxy != IO_OBJECT_NULL else {
+          break
+        }
+        // Let's now create an instance of IOAVService with this service and add it to the service store with the "AppleCLCD2" strings
+        if self.setIORegServiceDCPAVServiceProxy(service: serviceDCPAVServiceProxy, ioregService: &ioregService) {
+          ioregServicesForMatching.append(ioregService)
         }
       }
     }
-
     return ioregServicesForMatching
   }
 
