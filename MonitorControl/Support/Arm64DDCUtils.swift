@@ -30,7 +30,7 @@ class Arm64DDCUtils: NSObject {
     var scoredCandidateDisplayServices: [Int: [DisplayService]] = [:]
     for displayID in displayIDs {
       for ioregServiceForMatching in ioregServicesForMatching {
-        let score = self.ioregMatchScore(displayID: displayID, ioregEdidUUID: ioregServiceForMatching.edidUUID, ioregProductName: ioregServiceForMatching.productName, ioregSerialNumber: ioregServiceForMatching.serialNumber)
+        let score = self.ioregMatchScore(displayID: displayID, ioregEdidUUID: ioregServiceForMatching.edidUUID, ioregProductName: ioregServiceForMatching.productName, ioregSerialNumber: ioregServiceForMatching.serialNumber, serviceLocation: ioregServiceForMatching.serviceLocation)
         let isDiscouraged = self.checkIfDiscouraged(ioregService: ioregServiceForMatching)
         let displayService = DisplayService(displayID: displayID, service: ioregServiceForMatching.service, serviceLocation: ioregServiceForMatching.serviceLocation, isDiscouraged: isDiscouraged)
         if scoredCandidateDisplayServices[score] == nil {
@@ -124,10 +124,10 @@ class Arm64DDCUtils: NSObject {
     var serviceLocation: Int = 0
   }
 
-  private static let MAX_MATCH_SCORE: Int = 6
+  private static let MAX_MATCH_SCORE: Int = 13
 
   // Scores the likelihood of a display match based on EDID UUID, ProductName and SerialNumber from in ioreg, compared to DisplayCreateInfoDictionary.
-  private static func ioregMatchScore(displayID: CGDirectDisplayID, ioregEdidUUID: String, ioregProductName: String = "", ioregSerialNumber: Int64 = 0) -> Int {
+  private static func ioregMatchScore(displayID: CGDirectDisplayID, ioregEdidUUID: String, ioregProductName: String = "", ioregSerialNumber: Int64 = 0, serviceLocation: Int = 0) -> Int {
     var matchScore: Int = 0
     if let dictionary = (CoreDisplay_DisplayCreateInfoDictionary(displayID))?.takeRetainedValue() as NSDictionary? {
       if let kDisplayYearOfManufacture = dictionary[kDisplayYearOfManufacture] as? Int64, let kDisplayWeekOfManufacture = dictionary[kDisplayWeekOfManufacture] as? Int64, let kDisplayVendorID = dictionary[kDisplayVendorID] as? Int64, let kDisplayProductID = dictionary[kDisplayProductID] as? Int64, let kDisplayVerticalImageSize = dictionary[kDisplayVerticalImageSize] as? Int64, let kDisplayHorizontalImageSize = dictionary[kDisplayHorizontalImageSize] as? Int64 {
@@ -137,10 +137,10 @@ class Arm64DDCUtils: NSObject {
         }
         let edidUUIDSearchKeys: [KeyLoc] = [
           // Vendor ID
-          KeyLoc(key: String(format: "%04x", UInt16(max(0, min(kDisplayVendorID, 256 ^ 2 - 1)))).uppercased(), loc: 0),
+          KeyLoc(key: String(format: "%04x", UInt16(max(0, min(kDisplayVendorID, 256 * 256 - 1)))).uppercased(), loc: 0),
           // Product ID
-          KeyLoc(key: String(format: "%02x", UInt8((UInt16(max(0, min(kDisplayProductID, 256 ^ 2 - 1))) >> (0 * 8)) & 0xFF)).uppercased()
-            + String(format: "%02x", UInt8((UInt16(max(0, min(kDisplayProductID, 256 ^ 2 - 1))) >> (1 * 8)) & 0xFF)).uppercased(), loc: 4),
+          KeyLoc(key: String(format: "%02x", UInt8((UInt16(max(0, min(kDisplayProductID, 256 * 256 - 1))) >> (0 * 8)) & 0xFF)).uppercased()
+            + String(format: "%02x", UInt8((UInt16(max(0, min(kDisplayProductID, 256 * 256 - 1))) >> (1 * 8)) & 0xFF)).uppercased(), loc: 4),
           // Manufacture date
           KeyLoc(key: String(format: "%02x", UInt8(max(0, min(kDisplayWeekOfManufacture, 256 - 1)))).uppercased()
             + String(format: "%02x", UInt8(max(0, min(kDisplayYearOfManufacture - 1990, 256 - 1)))).uppercased(), loc: 19),
@@ -149,13 +149,16 @@ class Arm64DDCUtils: NSObject {
             + String(format: "%02x", UInt8(max(0, min(kDisplayVerticalImageSize / 10, 256 - 1)))).uppercased(), loc: 30),
         ]
         for searchKey in edidUUIDSearchKeys where searchKey.key != "0000" && searchKey.key == ioregEdidUUID.prefix(searchKey.loc + 4).suffix(4) {
-          matchScore += 1
+          matchScore += 2
         }
       }
       if ioregProductName != "", let nameList = dictionary["DisplayProductName"] as? [String: String], let name = nameList["en_US"] ?? nameList.first?.value, name.lowercased() == ioregProductName.lowercased() {
-        matchScore += 1
+        matchScore += 2
       }
       if ioregSerialNumber != 0, let serial = dictionary[kDisplaySerialNumber] as? Int64, serial == ioregSerialNumber {
+        matchScore += 2
+      }
+      if serviceLocation == displayID {
         matchScore += 1
       }
     }
