@@ -12,11 +12,11 @@ enum PollingMode {
     case .none:
       return 0
     case .minimal:
-      return 5
+      return 3
     case .normal:
-      return 10
+      return 6
     case .heavy:
-      return 100
+      return 30
     case let .custom(val):
       return val
     }

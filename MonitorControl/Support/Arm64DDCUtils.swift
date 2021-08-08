@@ -13,7 +13,8 @@ class Arm64DDCUtils: NSObject {
   public struct DisplayService {
     var displayID: CGDirectDisplayID = 0
     var service: IOAVService?
-    var serviceIoregPosition: Int64 = 0
+    var serviceLocation: Int = 0
+    var isDiscouraged: Bool = false
   }
 
   #if arch(arm64)
@@ -30,21 +31,22 @@ class Arm64DDCUtils: NSObject {
     for displayID in displayIDs {
       for ioregServiceForMatching in ioregServicesForMatching {
         let score = self.ioregMatchScore(displayID: displayID, ioregEdidUUID: ioregServiceForMatching.edidUUID, ioregProductName: ioregServiceForMatching.productName, ioregSerialNumber: ioregServiceForMatching.serialNumber)
-        let displayService = DisplayService(displayID: displayID, service: ioregServiceForMatching.service, serviceIoregPosition: ioregServiceForMatching.serviceIoregPosition)
+        let isDiscouraged = self.checkIfDiscouraged(ioregService: ioregServiceForMatching)
+        let displayService = DisplayService(displayID: displayID, service: ioregServiceForMatching.service, serviceLocation: ioregServiceForMatching.serviceLocation, isDiscouraged: isDiscouraged)
         if scoredCandidateDisplayServices[score] == nil {
           scoredCandidateDisplayServices[score] = []
         }
         scoredCandidateDisplayServices[score]?.append(displayService)
       }
     }
-    var takenServiceIoregPositions: [Int64] = []
+    var takenServiceLocations: [Int] = []
     var takenDisplayIDs: [CGDirectDisplayID] = []
     for score in stride(from: self.MAX_MATCH_SCORE, to: 0, by: -1) {
       if let scoredCandidateDisplayService = scoredCandidateDisplayServices[score] {
         for candidateDisplayService in scoredCandidateDisplayService {
-          if !(takenDisplayIDs.contains(candidateDisplayService.displayID) || takenServiceIoregPositions.contains(candidateDisplayService.serviceIoregPosition)) {
+          if !(takenDisplayIDs.contains(candidateDisplayService.displayID) || takenServiceLocations.contains(candidateDisplayService.serviceLocation)) {
             takenDisplayIDs.append(candidateDisplayService.displayID)
-            takenServiceIoregPositions.append(candidateDisplayService.serviceIoregPosition)
+            takenServiceLocations.append(candidateDisplayService.serviceLocation)
             matchedDisplayServices.append(candidateDisplayService)
           }
         }
@@ -112,11 +114,14 @@ class Arm64DDCUtils: NSObject {
 
   private struct IOregService {
     var edidUUID: String = ""
+    var manufacturerID: String = ""
     var productName: String = ""
     var serialNumber: Int64 = 0
+    var location: String = ""
+    var transportUpstream: String = ""
+    var transportDownstream: String = ""
     var service: IOAVService?
-    var displayAttributesIoregPosition: Int64 = 0
-    var serviceIoregPosition: Int64 = 0
+    var serviceLocation: Int = 0
   }
 
   private static let MAX_MATCH_SCORE: Int = 6
@@ -132,16 +137,16 @@ class Arm64DDCUtils: NSObject {
         }
         let edidUUIDSearchKeys: [KeyLoc] = [
           // Vendor ID
-          KeyLoc(key: String(format: "%04x", UInt16(kDisplayVendorID)).uppercased(), loc: 0),
+          KeyLoc(key: String(format: "%04x", UInt16(max(0, min(kDisplayVendorID, 256 ^ 2 - 1)))).uppercased(), loc: 0),
           // Product ID
-          KeyLoc(key: String(format: "%02x", UInt8((UInt16(kDisplayProductID) >> (0 * 8)) & 0xFF)).uppercased()
-            + String(format: "%02x", UInt8((UInt16(kDisplayProductID) >> (1 * 8)) & 0xFF)).uppercased(), loc: 4),
+          KeyLoc(key: String(format: "%02x", UInt8((UInt16(max(0, min(kDisplayProductID, 256 ^ 2 - 1))) >> (0 * 8)) & 0xFF)).uppercased()
+            + String(format: "%02x", UInt8((UInt16(max(0, min(kDisplayProductID, 256 ^ 2 - 1))) >> (1 * 8)) & 0xFF)).uppercased(), loc: 4),
           // Manufacture date
-          KeyLoc(key: String(format: "%02x", UInt8(kDisplayWeekOfManufacture)).uppercased()
-            + String(format: "%02x", UInt8(kDisplayYearOfManufacture - 1990)).uppercased(), loc: 19),
+          KeyLoc(key: String(format: "%02x", UInt8(max(0, min(kDisplayWeekOfManufacture, 256 - 1)))).uppercased()
+            + String(format: "%02x", UInt8(max(0, min(kDisplayYearOfManufacture - 1990, 256 - 1)))).uppercased(), loc: 19),
           // Image size
-          KeyLoc(key: String(format: "%02x", UInt8(kDisplayHorizontalImageSize / 10)).uppercased()
-            + String(format: "%02x", UInt8(kDisplayVerticalImageSize / 10)).uppercased(), loc: 30),
+          KeyLoc(key: String(format: "%02x", UInt8(max(0, min(kDisplayHorizontalImageSize / 10, 256 - 1)))).uppercased()
+            + String(format: "%02x", UInt8(max(0, min(kDisplayVerticalImageSize / 10, 256 - 1)))).uppercased(), loc: 30),
         ]
         for searchKey in edidUUIDSearchKeys where searchKey.key != "0000" && searchKey.key == ioregEdidUUID.prefix(searchKey.loc + 4).suffix(4) {
           matchScore += 1
@@ -157,8 +162,9 @@ class Arm64DDCUtils: NSObject {
     return matchScore
   }
 
-  // Iterate to the next requested item in the ioreg tree
-  private static func ioregIterateToNext(ioregObjectName: String, iterator: inout io_iterator_t, position: inout Int64) -> io_service_t {
+  // Iterate to the next AppleCLCD2 or DCPAVServiceProxy item in the ioreg tree and return the name and corresponding service
+  private static func ioregIterateToNextObjectOfInterest(interests _: [String], iterator: inout io_iterator_t) -> (name: String, service: io_service_t)? {
+    var objectName: String = ""
     var service: io_service_t = IO_OBJECT_NULL
     let name = UnsafeMutablePointer<CChar>.allocate(capacity: MemoryLayout<io_name_t>.size)
     defer {
@@ -166,7 +172,6 @@ class Arm64DDCUtils: NSObject {
     }
     while true {
       service = IOIteratorNext(iterator)
-      position += 1
       guard service != MACH_PORT_NULL else {
         service = IO_OBJECT_NULL
         break
@@ -175,71 +180,95 @@ class Arm64DDCUtils: NSObject {
         service = IO_OBJECT_NULL
         break
       }
-      if String(cString: name) == ioregObjectName {
-        break
+      if String(cString: name) == "AppleCLCD2" || String(cString: name) == "DCPAVServiceProxy" {
+        objectName = String(cString: name)
+        return (objectName, service)
       }
-    }
-    return service
-  }
-
-  // Returns EDID UUDI, Product Name and Serial Number in an IOregService if it is found using the provided io_service_t pointing to a AppleCDC2 item in the ioreg tree
-  private static func getIORegServiceAppleCDC2Properties(service: io_service_t, position: Int64 = 0) -> IOregService? {
-    if let unmanagedEdidUUID = IORegistryEntryCreateCFProperty(service, CFStringCreateWithCString(kCFAllocatorDefault, "EDID UUID", kCFStringEncodingASCII), kCFAllocatorDefault, IOOptionBits(kIORegistryIterateRecursively)), let edidUUID = unmanagedEdidUUID.takeRetainedValue() as? String {
-      var ioregService = IOregService()
-      ioregService.displayAttributesIoregPosition = position
-      ioregService.edidUUID = edidUUID
-      if let unmanagedDisplayAttrs = IORegistryEntryCreateCFProperty(service, CFStringCreateWithCString(kCFAllocatorDefault, "DisplayAttributes", kCFStringEncodingASCII), kCFAllocatorDefault, IOOptionBits(kIORegistryIterateRecursively)), let displayAttrs = unmanagedDisplayAttrs.takeRetainedValue() as? NSDictionary, let productAttrs = displayAttrs.value(forKey: "ProductAttributes") as? NSDictionary {
-        if let productName = productAttrs.value(forKey: "ProductName") as? String {
-          ioregService.productName = productName
-        }
-        if let serialNumber = productAttrs.value(forKey: "SerialNumber") as? Int64 {
-          ioregService.serialNumber = serialNumber
-        }
-      }
-      return ioregService
     }
     return nil
   }
 
-  // Sets up the service in an IOregService if it is found using the provided io_service_t pointing to a DCPAVServiceProxy item in the ioreg tree
-  private static func setIORegServiceDCPAVServiceProxy(service: io_service_t, ioregService: inout IOregService, position: Int64 = 0) -> Bool {
-    if let unmanagedLocation = IORegistryEntryCreateCFProperty(service, CFStringCreateWithCString(kCFAllocatorDefault, "Location", kCFStringEncodingASCII), kCFAllocatorDefault, IOOptionBits(kIORegistryIterateRecursively)), let location = unmanagedLocation.takeRetainedValue() as? String {
-      if location == "External" {
-        ioregService.serviceIoregPosition = position
-        ioregService.service = IOAVServiceCreateWithService(kCFAllocatorDefault, service)?.takeRetainedValue() as IOAVService
-        return true
+  // Returns EDID UUDI, Product Name and Serial Number in an IOregService if it is found using the provided io_service_t pointing to a AppleCDC2 item in the ioreg tree
+  private static func getIORegServiceAppleCDC2Properties(service: io_service_t) -> IOregService {
+    var ioregService = IOregService()
+    if let unmanagedEdidUUID = IORegistryEntryCreateCFProperty(service, CFStringCreateWithCString(kCFAllocatorDefault, "EDID UUID", kCFStringEncodingASCII), kCFAllocatorDefault, IOOptionBits(kIORegistryIterateRecursively)), let edidUUID = unmanagedEdidUUID.takeRetainedValue() as? String {
+      ioregService.edidUUID = edidUUID
+    }
+    if let unmanagedDisplayAttrs = IORegistryEntryCreateCFProperty(service, CFStringCreateWithCString(kCFAllocatorDefault, "DisplayAttributes", kCFStringEncodingASCII), kCFAllocatorDefault, IOOptionBits(kIORegistryIterateRecursively)), let displayAttrs = unmanagedDisplayAttrs.takeRetainedValue() as? NSDictionary, let productAttrs = displayAttrs.value(forKey: "ProductAttributes") as? NSDictionary {
+      if let manufacturerID = productAttrs.value(forKey: "ManufacturerID") as? String {
+        ioregService.manufacturerID = manufacturerID
+      }
+      if let productName = productAttrs.value(forKey: "ProductName") as? String {
+        ioregService.productName = productName
+      }
+      if let serialNumber = productAttrs.value(forKey: "SerialNumber") as? Int64 {
+        ioregService.serialNumber = serialNumber
       }
     }
-    return false
+    if let unmanagedTransport = IORegistryEntryCreateCFProperty(service, CFStringCreateWithCString(kCFAllocatorDefault, "Transport", kCFStringEncodingASCII), kCFAllocatorDefault, IOOptionBits(kIORegistryIterateRecursively)), let transport = unmanagedTransport.takeRetainedValue() as? NSDictionary {
+      if let upstream = transport.value(forKey: "Upstream") as? String {
+        ioregService.transportUpstream = upstream
+      }
+      if let downstream = transport.value(forKey: "Downstream") as? String {
+        ioregService.transportDownstream = downstream
+      }
+    }
+    return ioregService
+  }
+
+  // Sets up the service in an IOregService if it is found using the provided io_service_t pointing to a DCPAVServiceProxy item in the ioreg tree
+  private static func setIORegServiceDCPAVServiceProxy(service: io_service_t, ioregService: inout IOregService) {
+    if let unmanagedLocation = IORegistryEntryCreateCFProperty(service, CFStringCreateWithCString(kCFAllocatorDefault, "Location", kCFStringEncodingASCII), kCFAllocatorDefault, IOOptionBits(kIORegistryIterateRecursively)), let location = unmanagedLocation.takeRetainedValue() as? String {
+      ioregService.location = location
+      if location == "External" {
+        ioregService.service = IOAVServiceCreateWithService(kCFAllocatorDefault, service)?.takeRetainedValue() as IOAVService
+      }
+    }
   }
 
   // Returns IOAVSerivces with associated display properties for matching logic
   private static func getIoregServicesForMatching() -> [IOregService] {
-    var position: Int64 = 0
+    var serviceLocation: Int = 0
     var ioregServicesForMatching: [IOregService] = []
     let ioregRoot: io_registry_entry_t = IORegistryGetRootEntry(kIOMasterPortDefault)
     var iterator = io_iterator_t()
+    var ioregService = IOregService()
     guard IORegistryEntryCreateIterator(ioregRoot, "IOService", IOOptionBits(kIORegistryIterateRecursively), &iterator) == KERN_SUCCESS else {
       return ioregServicesForMatching
     }
     while true {
-      let serviceAppleCLCD2 = self.ioregIterateToNext(ioregObjectName: "AppleCLCD2", iterator: &iterator, position: &position)
-      guard serviceAppleCLCD2 != IO_OBJECT_NULL else {
-        break
-      }
-      // We will check if it has an EDID UUID. If so, then we take it as an external display
-      if var ioregService = getIORegServiceAppleCDC2Properties(service: serviceAppleCLCD2, position: position) {
-        //  We will now iterate further, looking for the belonging "DCPAVServiceProxy" service (which should follow "AppleCLCD2" somewhat closely)
-        let serviceDCPAVServiceProxy = self.ioregIterateToNext(ioregObjectName: "DCPAVServiceProxy", iterator: &iterator, position: &position)
-        guard serviceDCPAVServiceProxy != IO_OBJECT_NULL else {
-          break
+      if let objectOfInterest = ioregIterateToNextObjectOfInterest(interests: ["AppleCLCD2", "DCPAVServiceProxy"], iterator: &iterator) {
+        if objectOfInterest.name == "AppleCLCD2", objectOfInterest.service != IO_OBJECT_NULL {
+          ioregService = self.getIORegServiceAppleCDC2Properties(service: objectOfInterest.service)
+          serviceLocation += 1
+          ioregService.serviceLocation = serviceLocation
         }
-        // Let's now create an instance of IOAVService with this service and add it to the service store with the "AppleCLCD2" strings
-        if self.setIORegServiceDCPAVServiceProxy(service: serviceDCPAVServiceProxy, ioregService: &ioregService, position: position) {
+        if objectOfInterest.name == "DCPAVServiceProxy", objectOfInterest.service != IO_OBJECT_NULL {
+          self.setIORegServiceDCPAVServiceProxy(service: objectOfInterest.service, ioregService: &ioregService)
           ioregServicesForMatching.append(ioregService)
         }
+      } else {
+        break
       }
     }
     return ioregServicesForMatching
+  }
+
+  // Check if it is problematic to enable DDC on the display
+  private static func checkIfDiscouraged(ioregService: IOregService) -> Bool {
+    var modelIdentifier: String = ""
+    let platformExpertDevice = IOServiceGetMatchingService(kIOMasterPortDefault, IOServiceMatching("IOPlatformExpertDevice"))
+    if let modelData = IORegistryEntryCreateCFProperty(platformExpertDevice, "model" as CFString, kCFAllocatorDefault, 0).takeRetainedValue() as? Data, let modelIdentifierCString = String(data: modelData, encoding: .utf8)?.cString(using: .utf8) {
+      modelIdentifier = String(cString: modelIdentifierCString)
+    }
+    // This is a well known dummy plug (not a real display) but it breaks DDC communication on M1
+    if ioregService.manufacturerID == "AOC", ioregService.productName == "28E850" {
+      return true
+    }
+    // First service location of Mac Mini HDMI is broken for DDC communication
+    if ioregService.transportDownstream == "HDMI", ioregService.serviceLocation == 1, modelIdentifier == "Macmini9,1" {
+      return true
+    }
+    return false
   }
 }

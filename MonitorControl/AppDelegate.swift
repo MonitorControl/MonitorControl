@@ -21,6 +21,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   let coreAudio = SimplyCoreAudio()
   var accessibilityObserver: NSObjectProtocol!
 
+  var willReconfigureDisplay: Bool = false
+
   lazy var preferencesWindowController: PreferencesWindowController = {
     let storyboard = NSStoryboard(name: "Main", bundle: Bundle.main)
     let mainPrefsVc = storyboard.instantiateController(withIdentifier: "MainPrefsVC") as? MainPrefsViewController
@@ -46,7 +48,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     self.statusItem.button?.image = NSImage(named: "status")
     self.statusItem.menu = self.statusMenu
     self.checkPermissions()
-    CGDisplayRegisterReconfigurationCallback({ _, _, _ in app.updateDisplays() }, nil)
+    CGDisplayRegisterReconfigurationCallback({ _, _, _ in app.displayReconfigured() }, nil)
     self.updateDisplays()
   }
 
@@ -113,22 +115,42 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   // Update AVServices for External Displays
   func updateAVServices() {
     if Arm64DDCUtils.isArm64 {
+      os_log("arm64 AVService update requested", type: .info)
       var displayIDs: [CGDirectDisplayID] = []
       for externalDisplay in DisplayManager.shared.getExternalDisplays() {
         displayIDs.append(externalDisplay.identifier)
       }
       for serviceMatch in Arm64DDCUtils.getServiceMatches(displayIDs: displayIDs) {
-        for externalDisplay in DisplayManager.shared.getExternalDisplays() where externalDisplay.identifier == serviceMatch.displayID {
+        for externalDisplay in DisplayManager.shared.getExternalDisplays() where externalDisplay.identifier == serviceMatch.displayID && serviceMatch.service != nil {
           externalDisplay.arm64avService = serviceMatch.service
-          if Arm64DDCUtils.read(service: externalDisplay.arm64avService, command: UInt8(0xF1)) != nil {
+          os_log("Display service match successful for display %{public}@", type: .info, String(serviceMatch.displayID))
+          // This upsets devices with no read support
+          // if Arm64DDCUtils.read(service: externalDisplay.arm64avService, command: UInt8(0xF1)) != nil {
+          //   externalDisplay.arm64ddc = true
+          // }
+          if !serviceMatch.isDiscouraged {
             externalDisplay.arm64ddc = true
           }
         }
+      }
+      os_log("AVService update done", type: .info)
+    }
+  }
+
+  // Handle display reconfiguration in a lazy way
+  func displayReconfigured() {
+    if !self.willReconfigureDisplay {
+      self.willReconfigureDisplay = true
+      os_log("Display to be reconfigured via updateDisplay in 2 seconds", type: .info)
+      DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+        self.updateDisplays()
       }
     }
   }
 
   func updateDisplays() {
+    os_log("Request for updateDisplay", type: .info)
+    self.willReconfigureDisplay = false
     self.clearDisplays()
 
     var onlineDisplayIDs = [CGDirectDisplayID](repeating: 0, count: 10)
