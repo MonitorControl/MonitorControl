@@ -24,6 +24,7 @@ class MainPrefsViewController: NSViewController, PreferencePane {
   @IBOutlet var showContrastSlider: NSButton!
   @IBOutlet var showVolumeSlider: NSButton!
   @IBOutlet var lowerContrast: NSButton!
+  @IBOutlet var listenFor: NSPopUpButton!
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -39,6 +40,7 @@ class MainPrefsViewController: NSViewController, PreferencePane {
     self.showContrastSlider.state = self.prefs.bool(forKey: Utils.PrefKeys.showContrast.rawValue) ? .on : .off
     self.showVolumeSlider.state = self.prefs.bool(forKey: Utils.PrefKeys.showVolume.rawValue) ? .on : .off
     self.lowerContrast.state = self.prefs.bool(forKey: Utils.PrefKeys.lowerContrast.rawValue) ? .on : .off
+    self.listenFor.selectItem(at: self.prefs.integer(forKey: Utils.PrefKeys.listenFor.rawValue))
   }
 
   @IBAction func startAtLoginClicked(_ sender: NSButton) {
@@ -115,28 +117,35 @@ class MainPrefsViewController: NSViewController, PreferencePane {
       self.prefs.set(false, forKey: Utils.PrefKeys.lowerContrast.rawValue)
     default: break
     }
-
     #if DEBUG
       os_log("Toggle lower contrast after brightness state: %{public}@", type: .info, sender.state == .on ? "on" : "off")
     #endif
   }
 
+  @IBAction func listenForChanged(_ sender: NSPopUpButton) {
+    self.prefs.set(sender.selectedTag(), forKey: Utils.PrefKeys.listenFor.rawValue)
+    #if DEBUG
+      os_log("Toggle keys listened for state state: %{public}@", type: .info, sender.selectedItem?.title ?? "")
+    #endif
+    NotificationCenter.default.post(name: Notification.Name(Utils.PrefKeys.listenFor.rawValue), object: nil)
+  }
+
   fileprivate func setAppInfo() {
-    let versionName = NSLocalizedString("Version", comment: "Version")
-    let buildName = NSLocalizedString("Build", comment: "Build")
+    let versionName = NSLocalizedString("v", comment: "v")
+    let buildName = NSLocalizedString("b", comment: "b")
     let versionNumber = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") ?? "error"
     let buildNumber = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") ?? "error"
 
     #if arch(arm64)
 
-      let arch: String = NSLocalizedString("Apple Silicon", comment: "Apple Silicon designation (shown after the version number in Preferences)")
+      let arch: String = NSLocalizedString("arm64", comment: "Apple Silicon designation (shown after the version number in Preferences)")
 
     #else
 
-      let arch: String = NSLocalizedString("Intel", comment: "Intel designation (shown after the version number in Preferences)")
+      let arch: String = NSLocalizedString("x64", comment: "Intel designation (shown after the version number in Preferences)")
 
     #endif
 
-    self.versionLabel.stringValue = "MonitorControl \(versionName) \(versionNumber) (\(buildName) \(buildNumber)) \(arch)"
+    self.versionLabel.stringValue = "\(versionName)\(versionNumber) \(buildName)\(buildNumber) \(arch)"
   }
 }

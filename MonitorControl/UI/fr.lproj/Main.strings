@@ -10,6 +10,9 @@
 /* Class = "NSButtonCell"; title = "Hide Menu Icon"; ObjectID = "aXL-i8-S6R"; */
 "aXL-i8-S6R.title" = "Hide Menu Icon";
 
+/* Class = "NSTextFieldCell"; title = "Keyboard:"; ObjectID = "c7N-cO-759"; */
+"c7N-cO-759.title" = "Keyboard:";
+
 /* Class = "NSTableColumn"; headerCell.title = "Name"; ObjectID = "CHc-s5-4MN"; */
 "CHc-s5-4MN.headerCell.title" = "Nom de l'écran";
 
@@ -34,7 +37,7 @@
 /* Class = "NSMenuItem"; title = "None"; ObjectID = "FoA-yh-Yx3"; */
 "FoA-yh-Yx3.title" = "None";
 
-/* Class = "NSTextFieldCell"; title = "Warning ⚠️\nChanging some of these setting may cause system freezes or unexpected behaviour. "; ObjectID = "frw-j2-tE1"; */
+/* Class = "NSTextFieldCell"; title = "⚠️ Warning! Changing some of these setting may cause system freezes or unexpected behaviour. "; ObjectID = "frw-j2-tE1"; */
 "frw-j2-tE1.title" = "Warning ⚠️\nChanging some of these setting may cause system freezes or unexpected behaviour. ";
 
 /* Class = "NSTableColumn"; headerCell.title = "Longer Delay"; ObjectID = "grO-Kr-l4d"; */
@@ -46,20 +49,29 @@
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "H4a-c9-LcB"; */
 "H4a-c9-LcB.title" = "Text Cell";
 
+/* Class = "NSTextFieldCell"; title = "Brightness keys:"; ObjectID = "hdd-Zz-buN"; */
+"hdd-Zz-buN.title" = "Brightness keys:";
+
 /* Class = "NSMenuItem"; title = "Brightness only"; ObjectID = "hjz-0c-rvK"; */
 "hjz-0c-rvK.title" = "Luminosité uniquement";
 
-/* Class = "NSButtonCell"; title = "Start MonitorControl at Login"; ObjectID = "j72-NF-zsW"; */
+/* Class = "NSButtonCell"; title = "Start at Login"; ObjectID = "j72-NF-zsW"; */
 "j72-NF-zsW.title" = "Lancer MonitorControl au démarrage";
 
 /* Class = "NSTableColumn"; headerCell.title = "ID"; ObjectID = "JKW-oY-bSb"; */
 "JKW-oY-bSb.headerCell.title" = "ID";
+
+/* Class = "NSTextFieldCell"; title = "You can control the Brighness and Volume of your display using the Brightness and Volume keys off Apple Keyboards."; ObjectID = "K2r-aD-eec"; */
+"K2r-aD-eec.title" = "You can control the Brighness and Volume of your display using the Brightness and Volume keys off Apple Keyboards.";
 
 /* Class = "NSButton"; ibShadowedToolTip = "More Info"; ObjectID = "kqn-gU-mZX"; */
 "kqn-gU-mZX.ibShadowedToolTip" = "More Info";
 
 /* Class = "NSTableColumn"; headerCell.title = "Vendor"; ObjectID = "LRJ-fb-Z9E"; */
 "LRJ-fb-Z9E.headerCell.title" = "Vendeur";
+
+/* Class = "NSTextFieldCell"; title = "Menu contents:"; ObjectID = "MJx-MK-e7D"; */
+"MJx-MK-e7D.title" = "Menu contents:";
 
 /* Class = "NSTableColumn"; headerCell.title = "Hide OSD"; ObjectID = "MPF-Mr-zVU"; */
 "MPF-Mr-zVU.headerCell.title" = "Hide OSD";
@@ -70,7 +82,10 @@
 /* Class = "NSTableColumn"; headerCell.title = "Model"; ObjectID = "Nvp-hI-w4x"; */
 "Nvp-hI-w4x.headerCell.title" = "Model";
 
-/* Class = "NSTextFieldCell"; title = "If hidden, relaunch the app to reveal Preferences!"; ObjectID = "PVE-y7-zIk"; */
+/* Class = "NSTextFieldCell"; title = "Application:"; ObjectID = "okD-DG-pYa"; */
+"okD-DG-pYa.title" = "Application:";
+
+/* Class = "NSTextFieldCell"; title = "If Menu is hidden, just relaunch the app to reveal Preferences!"; ObjectID = "PVE-y7-zIk"; */
 "PVE-y7-zIk.title" = "If hidden, relaunch the app to show Preferences!";
 
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "PZ9-0Z-K6J"; */
@@ -84,9 +99,6 @@
 
 /* Class = "NSTableColumn"; headerCell.title = "Friendly Name"; ObjectID = "uoI-1J-RdD"; */
 "uoI-1J-RdD.headerCell.title" = "Nom d'affichage";
-
-/* Class = "NSTextFieldCell"; title = "Listen for"; ObjectID = "Vh8-06-U3K"; */
-"Vh8-06-U3K.title" = "Écouter pour";
 
 /* Class = "NSMenuItem"; title = "Heavy"; ObjectID = "vik-vN-bJe"; */
 "vik-vN-bJe.title" = "Heavy";
@@ -118,7 +130,7 @@
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "as0-t3-Aub"; */
 "as0-t3-Aub.title" = "";
 
-/* Class = "NSTextFieldCell"; title = "Version 0.0.0 (Build 0)"; ObjectID = "mBs-6m-13Q"; */
+/* Class = "NSTextFieldCell"; title = "v0.0.0 build 0 (Apple)"; ObjectID = "mBs-6m-13Q"; */
 "mBs-6m-13Q.title" = "";
 
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "vkG-RF-Yne"; */

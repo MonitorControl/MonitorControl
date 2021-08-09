@@ -45,7 +45,6 @@
 		F03A8DF21FFBAA6F0034DC27 /* ExternalDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03A8DF11FFBAA6F0034DC27 /* ExternalDisplay.swift */; };
 		F03FE4C0228DF62B001F59A4 /* FriendlyNameCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03FE4BF228DF62A001F59A4 /* FriendlyNameCellView.swift */; };
 		F0445D3820023E710025AE82 /* MainPrefsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0445D3720023E710025AE82 /* MainPrefsViewController.swift */; };
-		F0445D3D200254FA0025AE82 /* KeysPrefsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0445D3B200254FA0025AE82 /* KeysPrefsViewController.swift */; };
 		F0445D40200259C10025AE82 /* DisplayPrefsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0445D3F200259C10025AE82 /* DisplayPrefsViewController.swift */; };
 		F06792EA200A73460066C438 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = F06792E9200A73460066C438 /* main.swift */; };
 		F06792F6200A745F0066C438 /* MonitorControlHelper.app in [Login] Copy Helper to start at Login */ = {isa = PBXBuildFile; fileRef = F06792E7200A73460066C438 /* MonitorControlHelper.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -134,7 +133,6 @@
 		F03A8DF11FFBAA6F0034DC27 /* ExternalDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExternalDisplay.swift; sourceTree = "<group>"; };
 		F03FE4BF228DF62A001F59A4 /* FriendlyNameCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendlyNameCellView.swift; sourceTree = "<group>"; };
 		F0445D3720023E710025AE82 /* MainPrefsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPrefsViewController.swift; sourceTree = "<group>"; };
-		F0445D3B200254FA0025AE82 /* KeysPrefsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeysPrefsViewController.swift; sourceTree = "<group>"; };
 		F0445D3F200259C10025AE82 /* DisplayPrefsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayPrefsViewController.swift; sourceTree = "<group>"; };
 		F06792E7200A73460066C438 /* MonitorControlHelper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MonitorControlHelper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F06792E9200A73460066C438 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
@@ -290,7 +288,6 @@
 			isa = PBXGroup;
 			children = (
 				F0445D3F200259C10025AE82 /* DisplayPrefsViewController.swift */,
-				F0445D3B200254FA0025AE82 /* KeysPrefsViewController.swift */,
 				F0445D3720023E710025AE82 /* MainPrefsViewController.swift */,
 				6C0CCB25228F4F720037D2C5 /* AdvancedPrefsViewController.swift */,
 			);
@@ -549,7 +546,6 @@
 				F0445D40200259C10025AE82 /* DisplayPrefsViewController.swift in Sources */,
 				28D1DDF0227FBD99004CB494 /* EDID+Extension.swift in Sources */,
 				6C85EFDD22CBAA8F00227EA1 /* PollingModeCellView.swift in Sources */,
-				F0445D3D200254FA0025AE82 /* KeysPrefsViewController.swift in Sources */,
 				6C20466C23153E4F00859767 /* Display+Extension.swift in Sources */,
 				AA16139B26BE772E00DCF027 /* Arm64DDCUtils.swift in Sources */,
 				F0445D3820023E710025AE82 /* MainPrefsViewController.swift in Sources */,
@@ -770,6 +766,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 11.4;
 				MARKETING_VERSION = 3.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = me.guillaumeb.MonitorControl;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -802,6 +799,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 11.4;
 				MARKETING_VERSION = 3.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = me.guillaumeb.MonitorControl;
 				PRODUCT_NAME = "$(TARGET_NAME)";

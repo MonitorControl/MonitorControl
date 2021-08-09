@@ -10,6 +10,9 @@
 /* Class = "NSButtonCell"; title = "Hide Menu Icon"; ObjectID = "aXL-i8-S6R"; */
 "aXL-i8-S6R.title" = "Menü ikon elrejtése";
 
+/* Class = "NSTextFieldCell"; title = "Keyboard:"; ObjectID = "c7N-cO-759"; */
+"c7N-cO-759.title" = "Keyboard:";
+
 /* Class = "NSTableColumn"; headerCell.title = "Name"; ObjectID = "CHc-s5-4MN"; */
 "CHc-s5-4MN.headerCell.title" = "Név";
 
@@ -34,7 +37,7 @@
 /* Class = "NSMenuItem"; title = "None"; ObjectID = "FoA-yh-Yx3"; */
 "FoA-yh-Yx3.title" = "Nincs";
 
-/* Class = "NSTextFieldCell"; title = "Warning ⚠️\nChanging some of these setting may cause system freezes or unexpected behaviour. "; ObjectID = "frw-j2-tE1"; */
+/* Class = "NSTextFieldCell"; title = "⚠️ Warning! Changing some of these setting may cause system freezes or unexpected behaviour. "; ObjectID = "frw-j2-tE1"; */
 "frw-j2-tE1.title" = "Figyelem ⚠️\nAz alábbi beállítások megváltoztatása lefagyást vagy váratlan működést eredményezhet!";
 
 /* Class = "NSTableColumn"; headerCell.title = "Longer Delay"; ObjectID = "grO-Kr-l4d"; */
@@ -43,14 +46,20 @@
 /* Class = "NSTableColumn"; headerCell.title = "Polling Mode"; ObjectID = "gxn-NH-Qhb"; */
 "gxn-NH-Qhb.headerCell.title" = "Mintavételezési mód";
 
+/* Class = "NSTextFieldCell"; title = "Brightness keys:"; ObjectID = "hdd-Zz-buN"; */
+"hdd-Zz-buN.title" = "Brightness keys:";
+
 /* Class = "NSMenuItem"; title = "Brightness only"; ObjectID = "hjz-0c-rvK"; */
 "hjz-0c-rvK.title" = "Csak a fényerő billentyűk";
 
-/* Class = "NSButtonCell"; title = "Start MonitorControl at Login"; ObjectID = "j72-NF-zsW"; */
+/* Class = "NSButtonCell"; title = "Start at Login"; ObjectID = "j72-NF-zsW"; */
 "j72-NF-zsW.title" = "Automatikus indítás bejelentkezéskor";
 
 /* Class = "NSTableColumn"; headerCell.title = "ID"; ObjectID = "JKW-oY-bSb"; */
 "JKW-oY-bSb.headerCell.title" = "Azonosító";
+
+/* Class = "NSTextFieldCell"; title = "You can control the Brighness and Volume of your display using the Brightness and Volume keys off Apple Keyboards."; ObjectID = "K2r-aD-eec"; */
+"K2r-aD-eec.title" = "You can control the Brighness and Volume of your display using the Brightness and Volume keys off Apple Keyboards.";
 
 /* Class = "NSButton"; ibShadowedToolTip = "More Info"; ObjectID = "kqn-gU-mZX"; */
 "kqn-gU-mZX.ibShadowedToolTip" = "További információ";
@@ -58,8 +67,11 @@
 /* Class = "NSTableColumn"; headerCell.title = "Vendor"; ObjectID = "LRJ-fb-Z9E"; */
 "LRJ-fb-Z9E.headerCell.title" = "Szállító";
 
-/* Class = "NSTextFieldCell"; title = "Version 0.0.0 (Build 0)"; ObjectID = "mBs-6m-13Q"; */
+/* Class = "NSTextFieldCell"; title = "v0.0.0 build 0 (Apple)"; ObjectID = "mBs-6m-13Q"; */
 "mBs-6m-13Q.title" = "Verzió 0.0.0 (Build 0)";
+
+/* Class = "NSTextFieldCell"; title = "Menu contents:"; ObjectID = "MJx-MK-e7D"; */
+"MJx-MK-e7D.title" = "Menu contents:";
 
 /* Class = "NSTableColumn"; headerCell.title = "Hide OSD"; ObjectID = "MPF-Mr-zVU"; */
 "MPF-Mr-zVU.headerCell.title" = "OSD elrejtése";
@@ -70,7 +82,10 @@
 /* Class = "NSTableColumn"; headerCell.title = "Model"; ObjectID = "Nvp-hI-w4x"; */
 "Nvp-hI-w4x.headerCell.title" = "Modell";
 
-/* Class = "NSTextFieldCell"; title = "If hidden, relaunch the app to reveal Preferences!"; ObjectID = "PVE-y7-zIk"; */
+/* Class = "NSTextFieldCell"; title = "Application:"; ObjectID = "okD-DG-pYa"; */
+"okD-DG-pYa.title" = "Application:";
+
+/* Class = "NSTextFieldCell"; title = "If Menu is hidden, just relaunch the app to reveal Preferences!"; ObjectID = "PVE-y7-zIk"; */
 "PVE-y7-zIk.title" = "Ha rejtett, indítsa el újra az alkalmazást a beállítások megnyitásához!";
 
 /* Class = "NSMenuItem"; title = "Normal"; ObjectID = "Riq-uM-bTs"; */
@@ -78,9 +93,6 @@
 
 /* Class = "NSTableColumn"; headerCell.title = "Friendly Name"; ObjectID = "uoI-1J-RdD"; */
 "uoI-1J-RdD.headerCell.title" = "Egyéni név";
-
-/* Class = "NSTextFieldCell"; title = "Listen for"; ObjectID = "Vh8-06-U3K"; */
-"Vh8-06-U3K.title" = "Figyelt billentyűk";
 
 /* Class = "NSMenuItem"; title = "Heavy"; ObjectID = "vik-vN-bJe"; */
 "vik-vN-bJe.title" = "Magas";

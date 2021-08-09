@@ -26,17 +26,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   lazy var preferencesWindowController: PreferencesWindowController = {
     let storyboard = NSStoryboard(name: "Main", bundle: Bundle.main)
     let mainPrefsVc = storyboard.instantiateController(withIdentifier: "MainPrefsVC") as? MainPrefsViewController
-    let keyPrefsVc = storyboard.instantiateController(withIdentifier: "KeysPrefsVC") as? KeysPrefsViewController
     let displayPrefsVc = storyboard.instantiateController(withIdentifier: "DisplayPrefsVC") as? DisplayPrefsViewController
     let advancedPrefsVc = storyboard.instantiateController(withIdentifier: "AdvancedPrefsVC") as? AdvancedPrefsViewController
     return PreferencesWindowController(
       preferencePanes: [
         mainPrefsVc!,
-        keyPrefsVc!,
         displayPrefsVc!,
         advancedPrefsVc!,
       ],
-      animated: false // causes glitchy animations
+      animated: true // causes glitchy animations
     )
   }()
 
@@ -47,6 +45,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     self.updateMediaKeyTap()
     if prefs.bool(forKey: Utils.PrefKeys.hideMenuIcon.rawValue) {
       self.statusItem.isVisible = false
+    } else {
+      self.statusItem.isVisible = true
+    }
+    defer {
+      self.statusItem.isVisible = true
     }
     if #available(macOS 11.0, *) {
       self.statusItem.button?.image = NSImage(systemSymbolName: "sun.max", accessibilityDescription: "MonitorControl")
@@ -66,6 +69,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   }
 
   @IBAction func quitClicked(_: AnyObject) {
+    self.statusItem.isVisible = true
     NSApplication.shared.terminate(self)
   }
 

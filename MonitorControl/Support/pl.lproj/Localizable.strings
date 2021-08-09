@@ -1,20 +1,20 @@
 /* Shown in the main prefs window */
 "Advanced" = "Zaawansowane";
 
-/* Apple Silicon designation (shown after the version number in Preferences) */
-"Apple Silicon" = "Apple Silicon";
-
 /* Shown in the alert dialog */
 "Are you sure you want to enable a longer delay? Doing so may freeze your system and require a restart. Start at login will be disabled as a safety measure." = "Czy na pewno chcesz ustawić większe opóźnienie? Może to skutkować zawieszeniem systemu i koniecznością restartu. Uruchamianie programu podczas logowania zostanie wyłączone.";
 
 /* Shown in the alert dialog */
 "Are you sure you want to reset all preferences?" = "Czy na pewno chcesz przywrócić wszystkie ustawienia do stanu początkowego?";
 
+/* Apple Silicon designation (shown after the version number in Preferences) */
+"arm64" = "arm64";
+
+/* b */
+"b" = "b";
+
 /* Sown in menu */
 "Brightness" = "Jasność";
-
-/* Build */
-"Build" = "Kompilacja";
 
 /* Shown in menu */
 "Contrast" = "Kontrast";
@@ -30,12 +30,6 @@
 
 /* Shown in the main prefs window */
 "General" = "Ogólne";
-
-/* Intel designation (shown after the version number in Preferences) */
-"Intel" = "Intel";
-
-/* Shown in the main prefs window */
-"Keys" = "Klawisze";
 
 /* Shown in case a display mirrors an other display - like 'Mirror of DisplayName */
 "Mirror of" = "Mirror of";
@@ -63,11 +57,14 @@
  Unknown vendor */
 "Unknown" = "Nieznany";
 
-/* Version */
-"Version" = "Wersja";
+/* v */
+"v" = "v";
 
 /* Shown in menu */
 "Volume" = "Głośność";
+
+/* Intel designation (shown after the version number in Preferences) */
+"x64" = "x64";
 
 /* Shown in the alert dialog */
 "Yes" = "Tak";

@@ -1,20 +1,20 @@
 /* Shown in the main prefs window */
 "Advanced" = "Fejlett";
 
-/* Apple Silicon designation (shown after the version number in Preferences) */
-"Apple Silicon" = "Apple Silicon";
-
 /* Shown in the alert dialog */
 "Are you sure you want to enable a longer delay? Doing so may freeze your system and require a restart. Start at login will be disabled as a safety measure." = "Biztos benne, hogy engedélyezni kívánja a hosszabb várakozást? Ez bizonyos esetekben a rendszer lefagyását eredményezheti, akár újraindítás is szükségessé válhat. A bejelentkezéskori automatikus indítást letiltjuk a biztonság kedvéért.";
 
 /* Shown in the alert dialog */
 "Are you sure you want to reset all preferences?" = "Biztos benne, hogy vissza kívánja állítani az alapértelmezett beállításokat?";
 
+/* Apple Silicon designation (shown after the version number in Preferences) */
+"arm64" = "arm64";
+
+/* b */
+"b" = "b";
+
 /* Sown in menu */
 "Brightness" = "Fényerő";
-
-/* Build */
-"Build" = "Build";
 
 /* Shown in menu */
 "Contrast" = "Kontraszt";
@@ -30,12 +30,6 @@
 
 /* Shown in the main prefs window */
 "General" = "Általános";
-
-/* Intel designation (shown after the version number in Preferences) */
-"Intel" = "Intel";
-
-/* Shown in the main prefs window */
-"Keys" = "Billentyűk";
 
 /* Shown in case a display mirrors an other display - like 'Mirror of DisplayName */
 "Mirror of" = "Tükrözött";
@@ -63,11 +57,14 @@
  Unknown vendor */
 "Unknown" = "Ismeretlen";
 
-/* Version */
-"Version" = "Verzió";
+/* v */
+"v" = "v";
 
 /* Shown in menu */
 "Volume" = "Hangerő";
+
+/* Intel designation (shown after the version number in Preferences) */
+"x64" = "x64";
 
 /* Shown in the alert dialog */
 "Yes" = "Igen";
