@@ -34,12 +34,12 @@ Control your external monitor brightness, contrast or volume directly from a men
 
 <div align="center">
     <br/>
-    <img src="./.github/menulet.png" width="200" alt="menulet screenshot"/>
+    <img src="./.github/menulet.png" width="240" alt="menulet screenshot"/>
     <img src="./.github/menugeneral.png" width="261" alt="general screenshot"/>
-    <img src="./.github/menukeys.png" width="261" alt="keys screenshot"/>
+    <!--img src="./.github/menukeys.png" width="261" alt="keys screenshot"/-->
     <br/>
-    <img src="./.github/menuadvanced.png" width="400" alt="advanced screenshot"/>
     <img src="./.github/menudisplay.png" width="400" alt="display screenshot"/>
+    <img src="./.github/menuadvanced.png" width="400" alt="advanced screenshot"/>
 
 <br/>
 
@@ -126,6 +126,5 @@ brew install --cask monitorcontrol
 
 - [@zhuowei](https://github.com/zhuowei) (figured out M1 I²C communication)
 - [@tao-j](https://github.com/tao-j) (figured out M1 I²C write)
-- [@dguerri](https://github.com/dguerri) (basic finding behind EDID UUID based matching)
 - [@alin23](https://github.com/alin23) (generally spearheaded M1 DDC support and figured out a many of the caveats)
 - [javierocasio](https://www.deviantart.com/javierocasio) (app icon background)
