@@ -37,6 +37,10 @@ class SliderHandler {
       }
     }
 
+    guard !app.displaySleep, !app.willReconfigureDisplay else {
+      return
+    }
+
     _ = self.display.writeDDCValues(command: self.cmd, value: UInt16(value))
     self.display.saveValue(value, for: self.cmd)
   }

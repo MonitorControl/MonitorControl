@@ -11,18 +11,14 @@ let prefs = UserDefaults.standard
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
   @IBOutlet var statusMenu: NSMenu!
-
   let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
-
   var monitorItems: [NSMenuItem] = []
   var mediaKeyTap: MediaKeyTap?
   var keyRepeatTimers: [MediaKey: Timer] = [:]
-
   let coreAudio = SimplyCoreAudio()
   var accessibilityObserver: NSObjectProtocol!
-
-  var willReconfigureDisplay: Bool = false
-
+  var willReconfigureDisplay: Bool = false // A reconfigure display command is already dispatched
+  var displaySleep: Bool = false // Don't reconfigure display as the system or display is sleeping or wake just recently.
   lazy var preferencesWindowController: PreferencesWindowController = {
     let storyboard = NSStoryboard(name: "Main", bundle: Bundle.main)
     let mainPrefsVc = storyboard.instantiateController(withIdentifier: "MainPrefsVC") as? MainPrefsViewController
@@ -68,8 +64,19 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     return true
   }
 
-  @IBAction func quitClicked(_: AnyObject) {
+  func applicationWillTerminate(_: Notification) {
+    os_log("Goodbye!", type: .info)
+    for externalDisplay in DisplayManager.shared.getExternalDisplays() where externalDisplay.isContrastAfterBrightnessMode {
+      let contrastRestoreValue = externalDisplay.getRestoreValue(for: .contrast)
+      guard externalDisplay.writeDDCValues(command: .contrast, value: UInt16(contrastRestoreValue)) == true else {
+        continue
+      }
+      externalDisplay.saveValue(contrastRestoreValue, for: .contrast)
+    }
     self.statusItem.isVisible = true
+  }
+
+  @IBAction func quitClicked(_: AnyObject) {
     NSApplication.shared.terminate(self)
   }
 
@@ -77,7 +84,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     self.preferencesWindowController.show()
   }
 
-  // Set the default prefs of the app
   func setDefaultPrefs() {
     if !prefs.bool(forKey: Utils.PrefKeys.appAlreadyLaunched.rawValue) {
       prefs.set(true, forKey: Utils.PrefKeys.appAlreadyLaunched.rawValue)
@@ -129,7 +135,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     return defaultName
   }
 
-  // Update AVServices for External Displays
   func updateAVServices() {
     if Arm64DDCUtils.isArm64 {
       os_log("arm64 AVService update requested", type: .info)
@@ -141,7 +146,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         for externalDisplay in DisplayManager.shared.getExternalDisplays() where externalDisplay.identifier == serviceMatch.displayID && serviceMatch.service != nil {
           externalDisplay.arm64avService = serviceMatch.service
           os_log("Display service match successful for display %{public}@", type: .info, String(serviceMatch.displayID))
-          // This upsets devices with no read support
           // if Arm64DDCUtils.read(service: externalDisplay.arm64avService, command: UInt8(0xF1)) != nil {
           //   externalDisplay.arm64ddc = true
           // }
@@ -154,9 +158,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
   }
 
-  // Handle display reconfiguration in a lazy way
   func displayReconfigured() {
-    if !self.willReconfigureDisplay {
+    if !self.willReconfigureDisplay, !self.displaySleep {
       self.willReconfigureDisplay = true
       os_log("Display to be reconfigured via updateDisplay in 2 seconds", type: .info)
       DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
@@ -166,27 +169,25 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   }
 
   func updateDisplays() {
+    guard !self.displaySleep else {
+      return
+    }
     os_log("Request for updateDisplay", type: .info)
     self.willReconfigureDisplay = false
     self.clearDisplays()
-
     var onlineDisplayIDs = [CGDirectDisplayID](repeating: 0, count: 10)
     var displayCount: UInt32 = 0
-
     guard CGGetOnlineDisplayList(10, &onlineDisplayIDs, &displayCount) == .success else {
       os_log("Unable to get display list.", type: .info)
       return
     }
-
     for onlineDisplayID in onlineDisplayIDs where onlineDisplayID != 0 {
       let name = getDisplayName(displayID: onlineDisplayID)
       let id = onlineDisplayID
       let vendorNumber = CGDisplayVendorNumber(onlineDisplayID)
       let modelNumber = CGDisplayVendorNumber(onlineDisplayID)
       let display: Display
-
       var isVirtual: Bool = false
-
       if let dictionary = ((CoreDisplay_DisplayCreateInfoDictionary(onlineDisplayID))?.takeRetainedValue() as NSDictionary?) {
         let isVirtualDevice = dictionary["kCGDisplayIsVirtualDevice"] as? Bool
         let displayIsAirplay = dictionary["kCGDisplayIsAirPlay"] as? Bool
@@ -194,18 +195,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
           isVirtual = true
         }
       }
-
       if CGDisplayIsBuiltin(onlineDisplayID) != 0 {
         display = InternalDisplay(id, name: name, vendorNumber: vendorNumber, modelNumber: modelNumber, isVirtual: isVirtual)
       } else {
         display = ExternalDisplay(id, name: name, vendorNumber: vendorNumber, modelNumber: modelNumber, isVirtual: isVirtual)
       }
-
       DisplayManager.shared.addDisplay(display: display)
     }
-
     self.updateAVServices()
-
     let ddcDisplays = DisplayManager.shared.getDdcCapableDisplays()
     if ddcDisplays.count == 0 {
       let item = NSMenuItem()
@@ -276,21 +273,41 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   }
 
   private func subscribeEventListeners() {
-    // subscribe KeyTap event listener
-    NotificationCenter.default.addObserver(self, selector: #selector(handleListenForChanged), name: .listenFor, object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(handleListenForChanged), name: .listenFor, object: nil) // subscribe KeyTap event listeners
     NotificationCenter.default.addObserver(self, selector: #selector(handleShowContrastChanged), name: .showContrast, object: nil)
     NotificationCenter.default.addObserver(self, selector: #selector(handleShowVolumeChanged), name: .showVolume, object: nil)
     NotificationCenter.default.addObserver(self, selector: #selector(handleFriendlyNameChanged), name: .friendlyName, object: nil)
     NotificationCenter.default.addObserver(self, selector: #selector(handlePreferenceReset), name: .preferenceReset, object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(audioDeviceChanged), name: Notification.Name.defaultOutputDeviceChanged, object: nil) // subscribe Audio output detector (SimplyCoreAudio)
+    NSWorkspace.shared.notificationCenter.addObserver(self, selector: #selector(self.sleepNotification), name: NSWorkspace.screensDidSleepNotification, object: nil) // sleep and wake listeners
+    NSWorkspace.shared.notificationCenter.addObserver(self, selector: #selector(self.wakeNotofication), name: NSWorkspace.screensDidWakeNotification, object: nil)
+    NSWorkspace.shared.notificationCenter.addObserver(self, selector: #selector(self.sleepNotification), name: NSWorkspace.willSleepNotification, object: nil)
+    NSWorkspace.shared.notificationCenter.addObserver(self, selector: #selector(self.wakeNotofication), name: NSWorkspace.didWakeNotification, object: nil)
+    _ = DistributedNotificationCenter.default().addObserver(forName: .accessibilityApi, object: nil, queue: nil) { _ in DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+      self.updateMediaKeyTap() // listen for accessibility status changes
+    }
+    }
+  }
 
-    // subscribe Audio output detector (SimplyCoreAudio)
-    NotificationCenter.default.addObserver(self, selector: #selector(audioDeviceChanged), name: Notification.Name.defaultOutputDeviceChanged, object: nil)
+  @objc private func sleepNotification() {
+    if !self.displaySleep {
+      os_log("Sleeping...zZz.", type: .info)
+      self.displaySleep = true
+    }
+  }
 
-    // listen for accessibility status changes
-    _ = DistributedNotificationCenter.default().addObserver(forName: .accessibilityApi, object: nil, queue: nil) { _ in
-      DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-        self.updateMediaKeyTap()
-      }
+  @objc private func wakeNotofication() {
+    os_log("Wake up!", type: .info)
+    DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) { // Some displays take time to recover...
+      self.soberNow()
+    }
+  }
+
+  private func soberNow() {
+    if self.displaySleep {
+      os_log("Sober now!", type: .info)
+      self.displaySleep = false
+      self.displayReconfigured()
     }
   }
 
@@ -331,12 +348,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
 extension AppDelegate: MediaKeyTapDelegate {
   func handle(mediaKey: MediaKey, event: KeyEvent?, modifiers: NSEvent.ModifierFlags?) {
+    guard !self.displaySleep && !self.willReconfigureDisplay else {
+      return
+    }
     if self.handleOpenPrefPane(mediaKey: mediaKey, event: event, modifiers: modifiers) {
       return
     }
-
     let isSmallIncrement = modifiers?.isSuperset(of: NSEvent.ModifierFlags([.shift, .option])) ?? false
-
     // control internal display when holding ctrl modifier
     let isControlModifier = modifiers?.isSuperset(of: NSEvent.ModifierFlags([.control])) ?? false
     if isControlModifier, mediaKey == .brightnessUp || mediaKey == .brightnessDown {
@@ -345,10 +363,8 @@ extension AppDelegate: MediaKeyTapDelegate {
         return
       }
     }
-
     let oppositeKey: MediaKey? = self.oppositeMediaKey(mediaKey: mediaKey)
     let isRepeat = event?.keyRepeat ?? false
-
     // If the opposite key to the one being held has an active timer, cancel it - we'll be going in the opposite direction
     if let oppositeKey = oppositeKey, let oppositeKeyTimer = self.keyRepeatTimers[oppositeKey], oppositeKeyTimer.isValid {
       oppositeKeyTimer.invalidate()
@@ -363,19 +379,17 @@ extension AppDelegate: MediaKeyTapDelegate {
   }
 
   private func sendDisplayCommand(mediaKey: MediaKey, isRepeat: Bool, isSmallIncrement: Bool) {
+    guard !self.displaySleep, !self.willReconfigureDisplay else {
+      return
+    }
     let displays = DisplayManager.shared.getAllDisplays()
     guard let currentDisplay = DisplayManager.shared.getCurrentDisplay() else { return }
-
     let allDisplays = prefs.bool(forKey: Utils.PrefKeys.allScreens.rawValue) ? displays : [currentDisplay]
-
-    // Introduce a small delay to handle the media key being held down
-    let delay = isRepeat ? 0.05 : 0
-
+    let delay = isRepeat ? 0.05 : 0 // Introduce a small delay to handle the media key being held down
     var isAnyDisplayInContrastAfterBrightnessMode: Bool = false
     for display in allDisplays where (display as? ExternalDisplay)?.isContrastAfterBrightnessMode ?? false {
       isAnyDisplayInContrastAfterBrightnessMode = true
     }
-
     self.keyRepeatTimers[mediaKey] = Timer.scheduledTimer(withTimeInterval: delay, repeats: false, block: { _ in
       for display in allDisplays where display.isEnabled && !display.isVirtual {
         switch mediaKey {
@@ -444,13 +458,10 @@ extension AppDelegate: MediaKeyTapDelegate {
     default:
       keys = [.brightnessUp, .brightnessDown, .mute, .volumeUp, .volumeDown]
     }
-
-    if self.coreAudio.defaultOutputDevice?.canSetVirtualMasterVolume(scope: .output) == true {
-      // Remove volume related keys.
+    if self.coreAudio.defaultOutputDevice?.canSetVirtualMasterVolume(scope: .output) == true { // Remove volume related keys.
       let keysToDelete: [MediaKey] = [.volumeUp, .volumeDown, .mute]
       keys.removeAll { keysToDelete.contains($0) }
     }
-
     self.mediaKeyTap?.stop()
     // returning an empty array listens for all mediakeys in MediaKeyTap
     if keys.count > 0 {
