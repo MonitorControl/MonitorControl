@@ -36,7 +36,7 @@ Control your external monitor brightness, contrast or volume directly from a men
     <br/>
     <img src="./.github/menulet.png" width="200" alt="menulet screenshot"/>
     <img src="./.github/menugeneral.png" width="261" alt="general screenshot"/>
-    <img src="./.github/menukeys.png" width="261" alt="keys screenshot"/>
+    <!--img src="./.github/menukeys.png" width="261" alt="keys screenshot"/-->
     <br/>
     <img src="./.github/menuadvanced.png" width="400" alt="advanced screenshot"/>
     <img src="./.github/menudisplay.png" width="400" alt="display screenshot"/>
