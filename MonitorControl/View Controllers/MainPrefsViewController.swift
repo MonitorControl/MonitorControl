@@ -20,6 +20,7 @@ class MainPrefsViewController: NSViewController, PreferencePane {
 
   @IBOutlet var versionLabel: NSTextField!
   @IBOutlet var startAtLogin: NSButton!
+  @IBOutlet var hideMenuIcon: NSButton!
   @IBOutlet var showContrastSlider: NSButton!
   @IBOutlet var showVolumeSlider: NSButton!
   @IBOutlet var lowerContrast: NSButton!
@@ -34,6 +35,7 @@ class MainPrefsViewController: NSViewController, PreferencePane {
     super.viewWillAppear()
     let startAtLogin = (SMCopyAllJobDictionaries(kSMDomainUserLaunchd).takeRetainedValue() as? [[String: AnyObject]])?.first { $0["Label"] as? String == "\(Bundle.main.bundleIdentifier!)Helper" }?["OnDemand"] as? Bool ?? false
     self.startAtLogin.state = startAtLogin ? .on : .off
+    self.hideMenuIcon.state = self.prefs.bool(forKey: Utils.PrefKeys.hideMenuIcon.rawValue) ? .on : .off
     self.showContrastSlider.state = self.prefs.bool(forKey: Utils.PrefKeys.showContrast.rawValue) ? .on : .off
     self.showVolumeSlider.state = self.prefs.bool(forKey: Utils.PrefKeys.showVolume.rawValue) ? .on : .off
     self.lowerContrast.state = self.prefs.bool(forKey: Utils.PrefKeys.lowerContrast.rawValue) ? .on : .off
@@ -46,6 +48,20 @@ class MainPrefsViewController: NSViewController, PreferencePane {
     case .off:
       Utils.setStartAtLogin(enabled: false)
     default: break
+    }
+  }
+
+  @IBAction func hideMenuIconClicked(_ sender: NSButton) {
+    if let delegate = (NSApplication.shared.delegate) as? AppDelegate {
+      switch sender.state {
+      case .on:
+        self.prefs.set(true, forKey: Utils.PrefKeys.hideMenuIcon.rawValue)
+        delegate.statusItem.isVisible = false
+      case .off:
+        self.prefs.set(false, forKey: Utils.PrefKeys.hideMenuIcon.rawValue)
+        delegate.statusItem.isVisible = true
+      default: break
+      }
     }
   }
 
@@ -88,9 +104,13 @@ class MainPrefsViewController: NSViewController, PreferencePane {
       let alert = NSAlert()
       alert.addButton(withTitle: NSLocalizedString("Ok", comment: "Shown in the alert dialog"))
       alert.messageText = NSLocalizedString("Setting up Lower contrast after brightness", comment: "Shown in the alert dialog")
-      alert.informativeText = NSLocalizedString("Enabling this option will let you dim the screen even more via the brightness keys by lowering contrast after brightness has reached zero.\n\nTo make this work, please make sure that current contrast levels are properly set via the contrast slider!", comment: "Shown in the alert dialog")
+      alert.informativeText = NSLocalizedString("Enabling this option will let you dim the screen even more via the brightness keys by lowering contrast after brightness has reached zero.\n\nTo make this work, please make sure that current contrast levels are properly set via the contrast slider! The contrast slider was enabled you to do that (you can disable it afterward)!", comment: "Shown in the alert dialog")
       alert.alertStyle = .warning
       alert.runModal()
+      // We enable contrast slider
+      self.prefs.set(true, forKey: Utils.PrefKeys.showContrast.rawValue)
+      self.showContrastSlider.state = self.prefs.bool(forKey: Utils.PrefKeys.showContrast.rawValue) ? .on : .off
+      NotificationCenter.default.post(name: Notification.Name(Utils.PrefKeys.showContrast.rawValue), object: nil)
     case .off:
       self.prefs.set(false, forKey: Utils.PrefKeys.lowerContrast.rawValue)
     default: break

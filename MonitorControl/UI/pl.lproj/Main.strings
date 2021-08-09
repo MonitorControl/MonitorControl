@@ -10,6 +10,9 @@
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "as0-t3-Aub"; */
 "as0-t3-Aub.title" = "Text Cell";
 
+/* Class = "NSButtonCell"; title = "Hide Menu Icon"; ObjectID = "aXL-i8-S6R"; */
+"aXL-i8-S6R.title" = "Hide Menu Icon";
+
 /* Class = "NSTableColumn"; headerCell.title = "Name"; ObjectID = "CHc-s5-4MN"; */
 "CHc-s5-4MN.headerCell.title" = "Nazwa";
 
@@ -70,6 +73,9 @@
 /* Class = "NSTableColumn"; headerCell.title = "Model"; ObjectID = "Nvp-hI-w4x"; */
 "Nvp-hI-w4x.headerCell.title" = "Model";
 
+/* Class = "NSTextFieldCell"; title = "If hidden, relaunch the app to reveal Preferences!"; ObjectID = "PVE-y7-zIk"; */
+"PVE-y7-zIk.title" = "If hidden, relaunch the app to show Preferences!";
+
 /* Class = "NSMenuItem"; title = "Normal"; ObjectID = "Riq-uM-bTs"; */
 "Riq-uM-bTs.title" = "Normalny";
 
@@ -93,6 +99,9 @@
 
 /* Class = "NSButtonCell"; title = "Show contrast slider in menu"; ObjectID = "xSI-8W-Xd0"; */
 "xSI-8W-Xd0.title" = "Pokaż suwak dla kontrastu";
+
+/* Class = "NSTextFieldCell"; title = "To ensure this works, please make sure the app properly detected current contrast! Adjust it manually using via the contrast slider if necessary!"; ObjectID = "yeg-GN-SuO"; */
+"yeg-GN-SuO.title" = "To ensure this works, please make sure the app properly detected current contrast! Adjust it manually using via the contrast slider if necessary!";
 
 /* Class = "NSTableColumn"; headerCell.title = "Polling Count"; ObjectID = "ytT-up-Dhs"; */
 "ytT-up-Dhs.headerCell.title" = "Licznik odpytań";

@@ -182,6 +182,9 @@ class Utils: NSObject {
     /// Does the app start when plugged to an external monitor
     case startWhenExternal
 
+    /// Hide menu icon
+    case hideMenuIcon
+
     /// Keys listened for (Brightness/Volume)
     case listenFor
 

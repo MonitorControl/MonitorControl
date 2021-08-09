@@ -7,6 +7,9 @@
 /* Class = "NSTableColumn"; headerCell.title = "Enabled"; ObjectID = "8U8-ec-Zbv"; */
 "8U8-ec-Zbv.headerCell.title" = "Включено";
 
+/* Class = "NSButtonCell"; title = "Hide Menu Icon"; ObjectID = "aXL-i8-S6R"; */
+"aXL-i8-S6R.title" = "Hide Menu Icon";
+
 /* Class = "NSTableColumn"; headerCell.title = "Name"; ObjectID = "CHc-s5-4MN"; */
 "CHc-s5-4MN.headerCell.title" = "Имя";
 
@@ -67,6 +70,9 @@
 /* Class = "NSTableColumn"; headerCell.title = "Model"; ObjectID = "Nvp-hI-w4x"; */
 "Nvp-hI-w4x.headerCell.title" = "Модель";
 
+/* Class = "NSTextFieldCell"; title = "If hidden, relaunch the app to reveal Preferences!"; ObjectID = "PVE-y7-zIk"; */
+"PVE-y7-zIk.title" = "If hidden, relaunch the app to show Preferences!";
+
 /* Class = "NSMenuItem"; title = "Normal"; ObjectID = "Riq-uM-bTs"; */
 "Riq-uM-bTs.title" = "Нормально";
 
@@ -90,6 +96,9 @@
 
 /* Class = "NSButtonCell"; title = "Show contrast slider in menu"; ObjectID = "xSI-8W-Xd0"; */
 "xSI-8W-Xd0.title" = "Показать ползунок для контрастности";
+
+/* Class = "NSTextFieldCell"; title = "To ensure this works, please make sure the app properly detected current contrast! Adjust it manually using via the contrast slider if necessary!"; ObjectID = "yeg-GN-SuO"; */
+"yeg-GN-SuO.title" = "To ensure this works, please make sure the app properly detected current contrast! Adjust it manually using via the contrast slider if necessary!";
 
 /* Class = "NSTableColumn"; headerCell.title = "Polling Count"; ObjectID = "ytT-up-Dhs"; */
 "ytT-up-Dhs.headerCell.title" = "Количество опросов";

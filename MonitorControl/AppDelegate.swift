@@ -45,11 +45,24 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     self.subscribeEventListeners()
     self.setDefaultPrefs()
     self.updateMediaKeyTap()
-    self.statusItem.button?.image = NSImage(named: "status")
+    if prefs.bool(forKey: Utils.PrefKeys.hideMenuIcon.rawValue) {
+      self.statusItem.isVisible = false
+    }
+    if #available(macOS 11.0, *) {
+      self.statusItem.button?.image = NSImage(systemSymbolName: "sun.max", accessibilityDescription: "MonitorControl")
+    } else {
+      self.statusItem.button?.image = NSImage(named: "status")
+      self.statusItem.isVisible = false
+    }
     self.statusItem.menu = self.statusMenu
     self.checkPermissions()
     CGDisplayRegisterReconfigurationCallback({ _, _, _ in app.displayReconfigured() }, nil)
     self.updateDisplays()
+  }
+
+  func applicationShouldHandleReopen(_: NSApplication, hasVisibleWindows _: Bool) -> Bool {
+    self.prefsClicked(self)
+    return true
   }
 
   @IBAction func quitClicked(_: AnyObject) {
@@ -64,10 +77,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   func setDefaultPrefs() {
     if !prefs.bool(forKey: Utils.PrefKeys.appAlreadyLaunched.rawValue) {
       prefs.set(true, forKey: Utils.PrefKeys.appAlreadyLaunched.rawValue)
-
       prefs.set(false, forKey: Utils.PrefKeys.showContrast.rawValue)
       prefs.set(true, forKey: Utils.PrefKeys.showVolume.rawValue)
       prefs.set(false, forKey: Utils.PrefKeys.lowerContrast.rawValue)
+      prefs.set(false, forKey: Utils.PrefKeys.hideMenuIcon.rawValue)
     }
   }
 
