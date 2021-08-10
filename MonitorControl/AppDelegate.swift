@@ -17,8 +17,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   var keyRepeatTimers: [MediaKey: Timer] = [:]
   let coreAudio = SimplyCoreAudio()
   var accessibilityObserver: NSObjectProtocol!
-  var willReconfigureDisplay: Bool = false // A reconfigure display command is already dispatched
-  var displaySleep: Int = 0 // Don't reconfigure display as the system or display is sleeping or wake just recently.
+  var reconfigureID: Int = 0 // dispatched reconfigure command ID
+  var sleepID: Int = 0 // Don't reconfigure display as the system or display is sleeping or wake just recently.
   lazy var preferencesWindowController: PreferencesWindowController = {
     let storyboard = NSStoryboard(name: "Main", bundle: Bundle.main)
     let mainPrefsVc = storyboard.instantiateController(withIdentifier: "MainPrefsVC") as? MainPrefsViewController
@@ -108,7 +108,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
   func getDisplayName(displayID: CGDirectDisplayID) -> String {
     let defaultName: String = NSLocalizedString("Unknown", comment: "Unknown display name") // + String(CGDisplaySerialNumber(displayID))
-    if let dictionary = ((CoreDisplay_DisplayCreateInfoDictionary(displayID))?.takeRetainedValue() as NSDictionary?), let nameList = dictionary["DisplayProductName"] as? [String: String], let name = nameList[Locale.current.identifier] ?? nameList["en_US"] ?? nameList.first?.value {
+    if let dictionary = ((CoreDisplay_DisplayCreateInfoDictionary(displayID))?.takeRetainedValue() as NSDictionary?), let nameList = dictionary["DisplayProductName"] as? [String: String], var name = nameList[Locale.current.identifier] ?? nameList["en_US"] ?? nameList.first?.value {
+      if CGDisplayIsInHWMirrorSet(displayID) != 0 || CGDisplayIsInMirrorSet(displayID) != 0 {
+        let mirroredDisplayID = CGDisplayMirrorsDisplay(displayID)
+        if mirroredDisplayID != 0, let dictionary = ((CoreDisplay_DisplayCreateInfoDictionary(mirroredDisplayID))?.takeRetainedValue() as NSDictionary?), let nameList = dictionary["DisplayProductName"] as? [String: String], let mirroredName = nameList[Locale.current.identifier] ?? nameList["en_US"] ?? nameList.first?.value {
+          name.append("~" + mirroredName)
+        }
+      }
       return name
     }
     if let screen = NSScreen.getByDisplayID(displayID: displayID) {
@@ -116,16 +122,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         return screen.localizedName
       } else {
         return screen.displayName ?? defaultName
-      }
-    }
-    if CGDisplayIsInHWMirrorSet(displayID) != 0 || CGDisplayIsInMirrorSet(displayID) != 0 {
-      if let mirroredScreen = NSScreen.getByDisplayID(displayID: CGDisplayMirrorsDisplay(displayID)) {
-        let name = NSLocalizedString("Mirror of", comment: "Shown in case a display mirrors an other display - like 'Mirror of DisplayName")
-        if #available(OSX 10.15, *) {
-          return "" + name + " " + String(mirroredScreen.localizedName)
-        } else {
-          return "" + name + " " + String(mirroredScreen.displayName ?? defaultName)
-        }
       }
     }
     return defaultName
@@ -155,21 +151,22 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   }
 
   func displayReconfigured() {
-    if !self.willReconfigureDisplay, self.displaySleep == 0 {
-      self.willReconfigureDisplay = true
-      os_log("Display to be reconfigured via updateDisplay in 2 seconds", type: .info)
+    if self.sleepID == 0 {
+      self.reconfigureID += 1
+      let dispatchedReconfigureID = self.reconfigureID
+      os_log("Display to be reconfigured with reconfigureID %{public}@", type: .info, String(dispatchedReconfigureID))
       DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-        self.updateDisplays()
+        self.updateDisplays(dispatchedReconfigureID: dispatchedReconfigureID)
       }
     }
   }
 
-  func updateDisplays() {
-    guard self.displaySleep == 0 else {
+  func updateDisplays(dispatchedReconfigureID: Int = 0) {
+    guard self.sleepID == 0, dispatchedReconfigureID == self.reconfigureID else {
       return
     }
-    os_log("Request for updateDisplay", type: .info)
-    self.willReconfigureDisplay = false
+    os_log("Request for updateDisplay with reconfigreID %{public}@", type: .info, String(dispatchedReconfigureID))
+    self.reconfigureID = 0
     self.clearDisplays()
     var onlineDisplayIDs = [CGDirectDisplayID](repeating: 0, count: 10)
     var displayCount: UInt32 = 0
@@ -286,24 +283,24 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   }
 
   @objc private func sleepNotification() {
-    self.displaySleep += 1
-    os_log("Sleeping with sleep %{public}@", type: .info, String(self.displaySleep))
+    self.sleepID += 1
+    os_log("Sleeping with sleep %{public}@", type: .info, String(self.sleepID))
   }
 
   @objc private func wakeNotofication() {
-    if self.displaySleep != 0 {
-      os_log("Waking up from sleep %{public}@", type: .info, String(self.displaySleep))
-      let sleepID = self.displaySleep
+    if self.sleepID != 0 {
+      os_log("Waking up from sleep %{public}@", type: .info, String(self.sleepID))
+      let dispatchedSleepID = self.sleepID
       DispatchQueue.main.asyncAfter(deadline: .now() + 6.0) { // Some displays take time to recover...
-        self.soberNow(sleepID: sleepID)
+        self.soberNow(dispatchedSleepID: dispatchedSleepID)
       }
     }
   }
 
-  private func soberNow(sleepID: Int) {
-    if self.displaySleep == sleepID {
-      os_log("Sober from sleep %{public}@", type: .info, String(self.displaySleep))
-      self.displaySleep = 0
+  private func soberNow(dispatchedSleepID: Int) {
+    if self.sleepID == dispatchedSleepID {
+      os_log("Sober from sleep %{public}@", type: .info, String(self.sleepID))
+      self.sleepID = 0
       self.updateDisplays()
     }
   }
@@ -345,7 +342,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
 extension AppDelegate: MediaKeyTapDelegate {
   func handle(mediaKey: MediaKey, event: KeyEvent?, modifiers: NSEvent.ModifierFlags?) {
-    guard self.displaySleep == 0 && !self.willReconfigureDisplay else {
+    guard self.sleepID == 0, self.reconfigureID == 0 else {
       return
     }
     if self.handleOpenPrefPane(mediaKey: mediaKey, event: event, modifiers: modifiers) {
@@ -375,20 +372,37 @@ extension AppDelegate: MediaKeyTapDelegate {
     self.sendDisplayCommand(mediaKey: mediaKey, isRepeat: isRepeat, isSmallIncrement: isSmallIncrement)
   }
 
+  private func getAffectedDisplays() -> [Display]? {
+    var affectedDisplays: [Display]
+    let allDisplays = DisplayManager.shared.getAllDisplays()
+    guard let currentDisplay = DisplayManager.shared.getCurrentDisplay() else {
+      return nil
+    }
+    // let allDisplays = prefs.bool(forKey: Utils.PrefKeys.allScreens.rawValue) ? displays : [currentDisplay]
+    if prefs.bool(forKey: Utils.PrefKeys.allScreens.rawValue) {
+      affectedDisplays = allDisplays
+    } else {
+      affectedDisplays = [currentDisplay]
+      if CGDisplayIsInHWMirrorSet(currentDisplay.identifier) != 0 || CGDisplayIsInMirrorSet(currentDisplay.identifier) != 0, CGDisplayMirrorsDisplay(currentDisplay.identifier) == 0 {
+        for display in allDisplays where CGDisplayMirrorsDisplay(display.identifier) == currentDisplay.identifier {
+          affectedDisplays.append(display)
+        }
+      }
+    }
+    return affectedDisplays
+  }
+
   private func sendDisplayCommand(mediaKey: MediaKey, isRepeat: Bool, isSmallIncrement: Bool) {
-    guard self.displaySleep == 0, !self.willReconfigureDisplay else {
+    guard self.sleepID == 0, self.reconfigureID == 0, let affectedDisplays = self.getAffectedDisplays() else {
       return
     }
-    let displays = DisplayManager.shared.getAllDisplays()
-    guard let currentDisplay = DisplayManager.shared.getCurrentDisplay() else { return }
-    let allDisplays = prefs.bool(forKey: Utils.PrefKeys.allScreens.rawValue) ? displays : [currentDisplay]
     let delay = isRepeat ? 0.05 : 0 // Introduce a small delay to handle the media key being held down
     var isAnyDisplayInContrastAfterBrightnessMode: Bool = false
-    for display in allDisplays where (display as? ExternalDisplay)?.isContrastAfterBrightnessMode ?? false {
+    for display in affectedDisplays where (display as? ExternalDisplay)?.isContrastAfterBrightnessMode ?? false {
       isAnyDisplayInContrastAfterBrightnessMode = true
     }
     self.keyRepeatTimers[mediaKey] = Timer.scheduledTimer(withTimeInterval: delay, repeats: false, block: { _ in
-      for display in allDisplays where display.isEnabled && !display.isVirtual {
+      for display in affectedDisplays where display.isEnabled && !display.isVirtual {
         switch mediaKey {
         case .brightnessUp:
           if !(isAnyDisplayInContrastAfterBrightnessMode && !((display as? ExternalDisplay)?.isContrastAfterBrightnessMode ?? false)) {

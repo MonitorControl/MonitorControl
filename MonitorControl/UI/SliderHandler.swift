@@ -12,6 +12,9 @@ class SliderHandler {
   }
 
   @objc func valueChanged(slider: NSSlider) {
+    guard app.sleepID == 0, app.reconfigureID == 0 else {
+      return
+    }
     let snapInterval = 25
     let snapThreshold = 3
 
@@ -35,10 +38,6 @@ class SliderHandler {
           self.display.isContrastAfterBrightnessMode = false
         }
       }
-    }
-
-    guard app.displaySleep == 0, !app.willReconfigureDisplay else {
-      return
     }
 
     _ = self.display.writeDDCValues(command: self.cmd, value: UInt16(value))

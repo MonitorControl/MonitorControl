@@ -51,6 +51,23 @@ class Display {
     return self.prefs.string(forKey: "friendlyName-\(self.identifier)") ?? self.name
   }
 
+  func getShowOsdDisplayId() -> CGDirectDisplayID {
+    if CGDisplayIsInHWMirrorSet(self.identifier) != 0 || CGDisplayIsInMirrorSet(self.identifier) != 0, CGDisplayMirrorsDisplay(self.identifier) != 0 {
+      for mirrorMaestro in DisplayManager.shared.getAllDisplays() where CGDisplayMirrorsDisplay(self.identifier) == mirrorMaestro.identifier {
+        if let externalMirrorMaestro = mirrorMaestro as? ExternalDisplay, !externalMirrorMaestro.arm64ddc, externalMirrorMaestro.ddc == nil {
+          var thereAreOthers = false
+          for mirrorMember in DisplayManager.shared.getAllDisplays() where CGDisplayMirrorsDisplay(mirrorMember.identifier) == CGDisplayMirrorsDisplay(self.identifier) && mirrorMember.identifier != self.identifier {
+            thereAreOthers = true
+          }
+          if !thereAreOthers {
+            return externalMirrorMaestro.identifier
+          }
+        }
+      }
+    }
+    return self.identifier
+  }
+
   func showOsd(command: DDC.Command, value: Int, maxValue: Int = 100, roundChiclet: Bool = false) {
     guard let manager = OSDManager.sharedManager() as? OSDManager else {
       return
@@ -80,7 +97,7 @@ class Display {
     }
 
     manager.showImage(osdImage.rawValue,
-                      onDisplayID: self.identifier,
+                      onDisplayID: self.getShowOsdDisplayId(),
                       priority: 0x1F4,
                       msecUntilFade: 1000,
                       filledChiclets: UInt32(filledChiclets),

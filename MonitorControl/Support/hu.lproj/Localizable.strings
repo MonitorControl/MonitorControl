@@ -31,9 +31,6 @@
 /* Shown in the main prefs window */
 "General" = "Általános";
 
-/* Shown in case a display mirrors an other display - like 'Mirror of DisplayName */
-"Mirror of" = "Tükrözött";
-
 /* Shown in the alert dialog */
 "No" = "Nem";
 

@@ -187,13 +187,11 @@ class ExternalDisplay: Display {
     }
     if !self.isContrastAfterBrightnessMode {
       let ddcValue = UInt16(osdValue)
-      if !isAlreadySet {
-        guard self.writeDDCValues(command: .brightness, value: ddcValue) == true else {
-          return
-        }
-        if let slider = brightnessSliderHandler?.slider {
-          slider.intValue = Int32(ddcValue)
-        }
+      guard self.writeDDCValues(command: .brightness, value: ddcValue) == true else {
+        return
+      }
+      if let slider = brightnessSliderHandler?.slider {
+        slider.intValue = Int32(ddcValue)
       }
       self.showOsd(command: .brightness, value: osdValue, roundChiclet: !isSmallIncrement)
       self.saveValue(osdValue, for: .brightness)
@@ -201,6 +199,9 @@ class ExternalDisplay: Display {
   }
 
   public func writeDDCValues(command: DDC.Command, value: UInt16, errorRecoveryWaitTime _: UInt32? = nil) -> Bool? {
+    guard app.sleepID == 0, app.reconfigureID == 0 else {
+      return false
+    }
     if Arm64DDCUtils.isArm64 {
       guard self.arm64ddc else {
         return false
@@ -219,6 +220,9 @@ class ExternalDisplay: Display {
 
   func readDDCValues(for command: DDC.Command, tries: UInt, minReplyDelay delay: UInt64?) -> (current: UInt16, max: UInt16)? {
     var values: (UInt16, UInt16)?
+    guard app.sleepID == 0, app.reconfigureID == 0 else {
+      return values
+    }
     if Arm64DDCUtils.isArm64 {
       guard self.arm64ddc else {
         return nil

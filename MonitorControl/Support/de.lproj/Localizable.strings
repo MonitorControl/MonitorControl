@@ -31,9 +31,6 @@
 /* Shown in the main prefs window */
 "General" = "Allgemein";
 
-/* Shown in case a display mirrors an other display - like 'Mirror of DisplayName */
-"Mirror of" = "Mirror of";
-
 /* Shown in the alert dialog */
 "No" = "No";
 

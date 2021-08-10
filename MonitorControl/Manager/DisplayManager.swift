@@ -17,8 +17,6 @@ class DisplayManager {
     self.displays = displays
   }
 
-  //                   cell.button.state = ((display as? ExternalDisplay)?.arm64ddc ?? false) ? .on : .off
-
   func getExternalDisplays() -> [ExternalDisplay] {
     return self.displays.compactMap { $0 as? ExternalDisplay }
   }
