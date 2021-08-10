@@ -4,7 +4,7 @@
 
 <img src="./.github/Icon-1024.png" width="400" alt="App icon"/>
     
-<p><b>Control your external monitor brightness, contrast or volume directly from a menulet or with keyboard native keys!</b></p>
+<p><b>Control your external display brightness, volume or contrast from a menulet or with keyboard native keys!</b></p>
 
 <!-- shields -->
 <!-- downloads -->
