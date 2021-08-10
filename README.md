@@ -1,56 +1,52 @@
 <div align="center">
-    
-<img src="./.github/Icon-1024.png" width="300" alt="App icon"/>
-    
-<h3 align="center">MonitorControl - Now with Apple Silicon support!</h2>
+        
+<h2 align="center">MonitorControl - Now with Apple Silicon support!</h2>
 
-<!-- subtext -->
-Control your external monitor brightness, contrast or volume directly from a menulet or with keyboard native keys!
-
-<!-- Language emoji -->
-<p>Translations: :uk: :fr: :de: :it: :ru: :ukraine: :jp: :poland: :hungary:</p>
+<img src="./.github/Icon-1024.png" width="400" alt="App icon"/>
     
-</div>
+<p><b>Control your external monitor brightness, contrast or volume directly from a menulet or with keyboard native keys!</b></p>
 
 <!-- shields -->
-<div align="center">
-    <!-- downloads -->
-    <a href="https://github.com/MonitorControl/MonitorControl/releases">
-        <img src="https://img.shields.io/github/downloads/MonitorControl/MonitorControl/total.svg?style=flat" alt="downloads"/>
-    </a>
-    <!-- version -->
-    <a href="https://github.com/MonitorControl/MonitorControl/releases">
-        <img src="https://img.shields.io/github/release-pre/MonitorControl/MonitorControl.svg?style=flat" alt="latest version"/>
-    </a>
-    <!-- license -->
-    <a href="https://github.com/MonitorControl/MonitorControl/blob/master/License.txt">
-        <img src="https://img.shields.io/github/license/MonitorControl/MonitorControl.svg?style=flat" alt="license"/>
-    </a>
-    <!-- platform -->
-    <a href="https://github.com/MonitorControl/MonitorControl">
-        <img src="https://img.shields.io/badge/platform-macOS-lightgrey.svg?style=flat" alt="platform"/>
-    </a>
+<!-- downloads -->
+<a href="https://github.com/MonitorControl/MonitorControl/releases">
+<img src="https://img.shields.io/github/downloads/MonitorControl/MonitorControl/total.svg?style=flat" alt="downloads"/>
+</a>
+<!-- version -->
+<a href="https://github.com/MonitorControl/MonitorControl/releases">
+<img src="https://img.shields.io/github/release-pre/MonitorControl/MonitorControl.svg?style=flat" alt="latest version"/>
+</a>
+<!-- license -->
+<a href="https://github.com/MonitorControl/MonitorControl/blob/master/License.txt">
+<img src="https://img.shields.io/github/license/MonitorControl/MonitorControl.svg?style=flat" alt="license"/>
+</a>
+<!-- platform -->
+<a href="https://github.com/MonitorControl/MonitorControl">
+<img src="https://img.shields.io/badge/platform-macOS-lightgrey.svg?style=flat" alt="platform"/>
+</a>
+    
+<br/>
+    
+<p>Translations: :uk: :fr: :de: :it: :ru: :ukraine: :jp: :poland: :hungary:</p>
+    
+<hr>
+    
 </div>
 
 <div align="center">
-    <br/>
-    <img src="./.github/menulet.png" width="750" alt="menulet screenshot"/>
-    <br/>
-    <img src="./.github/menugeneral.png" width="400" alt="general screenshot"/>
-    <img src="./.github/menudisplay.png" width="400" alt="display screenshot"/>
+<img src="./.github/menulet.png" width="600" alt="menulet screenshot"/><br/>
 <br/>
+<img src="./.github/menugeneral.png" width="700" alt="general screenshot"/><br/>
 
-<b>Bonus: using keyboard keys displays the native OSD</b>
+<img src="./.github/osd1.png" width="290" align="center" alt="osd screenshot"/>&nbsp;&nbsp;&nbsp;
+<img src="./.github/osd2.png" width="290" align="center" alt="osd screenshot"/><br>
 
-<img src="./.github/osd1.png" width="200" align="center" alt="osd screenshot"/>&nbsp;&nbsp;&nbsp;
-<img src="./.github/osd2.png" width="200" align="center" alt="osd screenshot"/>
+<hr>
+    
 </div>
 
 ## State of the experimental Apple Silicon version
 
-Check out the state of the experimental version [here](https://github.com/MonitorControl/MonitorControl/blob/experimental/apple-silicon/Apple%20Silicon.md).
-
-**Test it at your own risk!**
+The Apple Silicon version is now complete.
 
 ## How to build this *experimental branch*
 
