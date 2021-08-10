@@ -291,7 +291,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     if self.sleepID != 0 {
       os_log("Waking up from sleep %{public}@", type: .info, String(self.sleepID))
       let dispatchedSleepID = self.sleepID
-      DispatchQueue.main.asyncAfter(deadline: .now() + 6.0) { // Some displays take time to recover...
+      DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) { // Some displays take time to recover...
         self.soberNow(dispatchedSleepID: dispatchedSleepID)
       }
     }
