@@ -41,7 +41,7 @@
 "FoA-yh-Yx3.title" = "Nikt";
 
 /* Class = "NSTextFieldCell"; title = "⚠️ Warning! Changing some of these setting may cause system freezes or unexpected behaviour. "; ObjectID = "frw-j2-tE1"; */
-"frw-j2-tE1.title" = "Uwaga ⚠️\nZmiana niektórych z tych ustawień może spowodować zawieszenia systemu lub nieoczekiwane zachowanie.";
+"frw-j2-tE1.title" = "⚠️ Uwaga! Zmiana niektórych z tych ustawień może spowodować zawieszenia systemu lub nieoczekiwane zachowanie.";
 
 /* Class = "NSTableColumn"; headerCell.title = "Longer Delay"; ObjectID = "grO-Kr-l4d"; */
 "grO-Kr-l4d.headerCell.title" = "Dłuższe opóźnienie";

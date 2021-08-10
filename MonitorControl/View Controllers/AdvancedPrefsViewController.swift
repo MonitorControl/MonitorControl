@@ -48,10 +48,11 @@ class AdvancedPrefsViewController: NSViewController, PreferencePane, NSTableView
     alert.addButton(withTitle: NSLocalizedString("Yes", comment: "Shown in the alert dialog"))
     alert.addButton(withTitle: NSLocalizedString("No", comment: "Shown in the alert dialog"))
     alert.alertStyle = NSAlert.Style.warning
-
     if let window = self.view.window {
       alert.beginSheetModal(for: window, completionHandler: { modalResponse in
         if modalResponse == NSApplication.ModalResponse.alertFirstButtonReturn {
+          app.resetContrastAfterBrightness()
+          app.statusItem.isVisible = true
           if let bundleID = Bundle.main.bundleIdentifier {
             UserDefaults.standard.removePersistentDomain(forName: bundleID)
             NotificationCenter.default.post(name: Notification.Name(Utils.PrefKeys.preferenceReset.rawValue), object: nil)

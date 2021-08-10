@@ -10,7 +10,6 @@ import Preferences
 
 extension Preferences.PaneIdentifier {
   static let main = Self("Main")
-  static let keys = Self("Keys")
   static let advanced = Self("Advanced")
   static let display = Self("Display")
 }

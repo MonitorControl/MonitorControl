@@ -47,7 +47,7 @@
 "FoA-yh-Yx3.title" = "設定しない";
 
 /* Class = "NSTextFieldCell"; title = "⚠️ Warning! Changing some of these setting may cause system freezes or unexpected behaviour. "; ObjectID = "frw-j2-tE1"; */
-"frw-j2-tE1.title" = "⚠️ 注意 ⚠️\n下の設定を変更するとMacがフリーズしたり予期せぬ挙動になる場合があります。";
+"frw-j2-tE1.title" = "⚠️ 注意 下の設定を変更するとMacがフリーズしたり予期せぬ挙動になる場合があります。";
 
 /* Class = "NSTableColumn"; headerCell.title = "Longer Delay"; ObjectID = "grO-Kr-l4d"; */
 "grO-Kr-l4d.headerCell.title" = "遅延を長くする";

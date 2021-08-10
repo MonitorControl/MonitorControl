@@ -37,7 +37,7 @@ class SliderHandler {
       }
     }
 
-    guard !app.displaySleep, !app.willReconfigureDisplay else {
+    guard app.displaySleep == 0, !app.willReconfigureDisplay else {
       return
     }
 

@@ -38,7 +38,7 @@
 "FoA-yh-Yx3.title" = "Nincs";
 
 /* Class = "NSTextFieldCell"; title = "⚠️ Warning! Changing some of these setting may cause system freezes or unexpected behaviour. "; ObjectID = "frw-j2-tE1"; */
-"frw-j2-tE1.title" = "Figyelem ⚠️\nAz alábbi beállítások megváltoztatása lefagyást vagy váratlan működést eredményezhet!";
+"frw-j2-tE1.title" = "⚠️ Figyelem! Az alábbi beállítások megváltoztatása lefagyást vagy váratlan működést eredményezhet!";
 
 /* Class = "NSTableColumn"; headerCell.title = "Longer Delay"; ObjectID = "grO-Kr-l4d"; */
 "grO-Kr-l4d.headerCell.title" = "Hosszabb várakozás";
@@ -47,7 +47,7 @@
 "gxn-NH-Qhb.headerCell.title" = "Mintavételezési mód";
 
 /* Class = "NSTextFieldCell"; title = "Brightness keys:"; ObjectID = "hdd-Zz-buN"; */
-"hdd-Zz-buN.title" = "Brightness keys:";
+"hdd-Zz-buN.title" = "Fényerő billentyűk:";
 
 /* Class = "NSMenuItem"; title = "Brightness only"; ObjectID = "hjz-0c-rvK"; */
 "hjz-0c-rvK.title" = "Csak a fényerő billentyűk";
@@ -59,7 +59,7 @@
 "JKW-oY-bSb.headerCell.title" = "Azonosító";
 
 /* Class = "NSTextFieldCell"; title = "You can control the Brighness and Volume of your display using the Brightness and Volume keys off Apple Keyboards."; ObjectID = "K2r-aD-eec"; */
-"K2r-aD-eec.title" = "You can control the Brighness and Volume of your display using the Brightness and Volume keys off Apple Keyboards.";
+"K2r-aD-eec.title" = "A képernyő fényerejét és hangerejét az Apple Billentyűzet fényerő és hangerő gombjaival lehet szabályozni.";
 
 /* Class = "NSButton"; ibShadowedToolTip = "More Info"; ObjectID = "kqn-gU-mZX"; */
 "kqn-gU-mZX.ibShadowedToolTip" = "További információ";
@@ -83,7 +83,7 @@
 "Nvp-hI-w4x.headerCell.title" = "Modell";
 
 /* Class = "NSTextFieldCell"; title = "Application:"; ObjectID = "okD-DG-pYa"; */
-"okD-DG-pYa.title" = "Application:";
+"okD-DG-pYa.title" = "Alkalmazás:";
 
 /* Class = "NSTextFieldCell"; title = "If Menu is hidden, just relaunch the app to reveal Preferences!"; ObjectID = "PVE-y7-zIk"; */
 "PVE-y7-zIk.title" = "Ha rejtett, indítsa el újra az alkalmazást a beállítások megnyitásához!";

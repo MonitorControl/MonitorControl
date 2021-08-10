@@ -18,7 +18,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   let coreAudio = SimplyCoreAudio()
   var accessibilityObserver: NSObjectProtocol!
   var willReconfigureDisplay: Bool = false // A reconfigure display command is already dispatched
-  var displaySleep: Bool = false // Don't reconfigure display as the system or display is sleeping or wake just recently.
+  var displaySleep: Int = 0 // Don't reconfigure display as the system or display is sleeping or wake just recently.
   lazy var preferencesWindowController: PreferencesWindowController = {
     let storyboard = NSStoryboard(name: "Main", bundle: Bundle.main)
     let mainPrefsVc = storyboard.instantiateController(withIdentifier: "MainPrefsVC") as? MainPrefsViewController
@@ -39,20 +39,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     self.subscribeEventListeners()
     self.setDefaultPrefs()
     self.updateMediaKeyTap()
-    if prefs.bool(forKey: Utils.PrefKeys.hideMenuIcon.rawValue) {
-      self.statusItem.isVisible = false
-    } else {
-      self.statusItem.isVisible = true
-    }
-    defer {
-      self.statusItem.isVisible = true
-    }
     if #available(macOS 11.0, *) {
       self.statusItem.button?.image = NSImage(systemSymbolName: "sun.max", accessibilityDescription: "MonitorControl")
     } else {
       self.statusItem.button?.image = NSImage(named: "status")
-      self.statusItem.isVisible = false
     }
+    self.statusItem.isVisible = prefs.bool(forKey: Utils.PrefKeys.hideMenuIcon.rawValue) ? false : true
     self.statusItem.menu = self.statusMenu
     self.checkPermissions()
     CGDisplayRegisterReconfigurationCallback({ _, _, _ in app.displayReconfigured() }, nil)
@@ -64,8 +56,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     return true
   }
 
-  func applicationWillTerminate(_: Notification) {
-    os_log("Goodbye!", type: .info)
+  func resetContrastAfterBrightness() {
     for externalDisplay in DisplayManager.shared.getExternalDisplays() where externalDisplay.isContrastAfterBrightnessMode {
       let contrastRestoreValue = externalDisplay.getRestoreValue(for: .contrast)
       guard externalDisplay.writeDDCValues(command: .contrast, value: UInt16(contrastRestoreValue)) == true else {
@@ -73,6 +64,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       }
       externalDisplay.saveValue(contrastRestoreValue, for: .contrast)
     }
+  }
+
+  func applicationWillTerminate(_: Notification) {
+    os_log("Goodbye!", type: .info)
+    self.resetContrastAfterBrightness()
     self.statusItem.isVisible = true
   }
 
@@ -159,7 +155,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   }
 
   func displayReconfigured() {
-    if !self.willReconfigureDisplay, !self.displaySleep {
+    if !self.willReconfigureDisplay, self.displaySleep == 0 {
       self.willReconfigureDisplay = true
       os_log("Display to be reconfigured via updateDisplay in 2 seconds", type: .info)
       DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
@@ -169,7 +165,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   }
 
   func updateDisplays() {
-    guard !self.displaySleep else {
+    guard self.displaySleep == 0 else {
       return
     }
     os_log("Request for updateDisplay", type: .info)
@@ -290,24 +286,25 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   }
 
   @objc private func sleepNotification() {
-    if !self.displaySleep {
-      os_log("Sleeping...zZz.", type: .info)
-      self.displaySleep = true
-    }
+    self.displaySleep += 1
+    os_log("Sleeping with sleep %{public}@", type: .info, String(self.displaySleep))
   }
 
   @objc private func wakeNotofication() {
-    os_log("Wake up!", type: .info)
-    DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) { // Some displays take time to recover...
-      self.soberNow()
+    if self.displaySleep != 0 {
+      os_log("Waking up from sleep %{public}@", type: .info, String(self.displaySleep))
+      let sleepID = self.displaySleep
+      DispatchQueue.main.asyncAfter(deadline: .now() + 6.0) { // Some displays take time to recover...
+        self.soberNow(sleepID: sleepID)
+      }
     }
   }
 
-  private func soberNow() {
-    if self.displaySleep {
-      os_log("Sober now!", type: .info)
-      self.displaySleep = false
-      self.displayReconfigured()
+  private func soberNow(sleepID: Int) {
+    if self.displaySleep == sleepID {
+      os_log("Sober from sleep %{public}@", type: .info, String(self.displaySleep))
+      self.displaySleep = 0
+      self.updateDisplays()
     }
   }
 
@@ -348,7 +345,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
 extension AppDelegate: MediaKeyTapDelegate {
   func handle(mediaKey: MediaKey, event: KeyEvent?, modifiers: NSEvent.ModifierFlags?) {
-    guard !self.displaySleep && !self.willReconfigureDisplay else {
+    guard self.displaySleep == 0 && !self.willReconfigureDisplay else {
       return
     }
     if self.handleOpenPrefPane(mediaKey: mediaKey, event: event, modifiers: modifiers) {
@@ -379,7 +376,7 @@ extension AppDelegate: MediaKeyTapDelegate {
   }
 
   private func sendDisplayCommand(mediaKey: MediaKey, isRepeat: Bool, isSmallIncrement: Bool) {
-    guard !self.displaySleep, !self.willReconfigureDisplay else {
+    guard self.displaySleep == 0, !self.willReconfigureDisplay else {
       return
     }
     let displays = DisplayManager.shared.getAllDisplays()
@@ -443,6 +440,7 @@ extension AppDelegate: MediaKeyTapDelegate {
     self.updateDisplays()
     self.checkPermissions()
     self.updateMediaKeyTap()
+    self.resetContrastAfterBrightness()
   }
 
   private func updateMediaKeyTap() {

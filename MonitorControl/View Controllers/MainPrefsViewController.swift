@@ -54,16 +54,14 @@ class MainPrefsViewController: NSViewController, PreferencePane {
   }
 
   @IBAction func hideMenuIconClicked(_ sender: NSButton) {
-    if let delegate = (NSApplication.shared.delegate) as? AppDelegate {
-      switch sender.state {
-      case .on:
-        self.prefs.set(true, forKey: Utils.PrefKeys.hideMenuIcon.rawValue)
-        delegate.statusItem.isVisible = false
-      case .off:
-        self.prefs.set(false, forKey: Utils.PrefKeys.hideMenuIcon.rawValue)
-        delegate.statusItem.isVisible = true
-      default: break
-      }
+    switch sender.state {
+    case .on:
+      self.prefs.set(true, forKey: Utils.PrefKeys.hideMenuIcon.rawValue)
+      app.statusItem.isVisible = false
+    case .off:
+      self.prefs.set(false, forKey: Utils.PrefKeys.hideMenuIcon.rawValue)
+      app.statusItem.isVisible = true
+    default: break
     }
   }
 
@@ -115,6 +113,7 @@ class MainPrefsViewController: NSViewController, PreferencePane {
       NotificationCenter.default.post(name: Notification.Name(Utils.PrefKeys.showContrast.rawValue), object: nil)
     case .off:
       self.prefs.set(false, forKey: Utils.PrefKeys.lowerContrast.rawValue)
+      app.resetContrastAfterBrightness()
     default: break
     }
     #if DEBUG
