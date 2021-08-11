@@ -396,14 +396,14 @@ extension AppDelegate: MediaKeyTapDelegate {
     }
     let delay = isRepeat ? 0.05 : 0 // Introduce a small delay to handle the media key being held down
     var isAnyDisplayInSwAfterBrightnessMode: Bool = false
-    for display in affectedDisplays where (display as? ExternalDisplay)?.isSwBrightnessNotDefault() ?? false {
+    for display in affectedDisplays where ((display as? ExternalDisplay)?.isSwBrightnessNotDefault() ?? false) && !((display as? ExternalDisplay)?.isSw() ?? false) {
       isAnyDisplayInSwAfterBrightnessMode = true
     }
     self.keyRepeatTimers[mediaKey] = Timer.scheduledTimer(withTimeInterval: delay, repeats: false, block: { _ in
       for display in affectedDisplays where display.isEnabled && !display.isVirtual {
         switch mediaKey {
         case .brightnessUp:
-          if !(isAnyDisplayInSwAfterBrightnessMode && !((display as? ExternalDisplay)?.isSwBrightnessNotDefault() ?? false)) {
+          if !(isAnyDisplayInSwAfterBrightnessMode && !(((display as? ExternalDisplay)?.isSwBrightnessNotDefault() ?? false) && !((display as? ExternalDisplay)?.isSw() ?? false))) {
             display.stepBrightness(isUp: mediaKey == .brightnessUp, isSmallIncrement: isSmallIncrement)
           }
         case .brightnessDown:
