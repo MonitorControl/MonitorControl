@@ -48,7 +48,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     self.statusItem.menu = self.statusMenu
     self.checkPermissions()
     CGDisplayRegisterReconfigurationCallback({ _, _, _ in app.displayReconfigured() }, nil)
-    self.updateDisplays()
+    self.updateDisplays(firstrun: true)
   }
 
   func applicationShouldHandleReopen(_: NSApplication, hasVisibleWindows _: Bool) -> Bool {
@@ -99,14 +99,16 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
   func getDisplayName(displayID: CGDirectDisplayID) -> String {
     let defaultName: String = NSLocalizedString("Unknown", comment: "Unknown display name") // + String(CGDisplaySerialNumber(displayID))
-    if let dictionary = ((CoreDisplay_DisplayCreateInfoDictionary(displayID))?.takeRetainedValue() as NSDictionary?), let nameList = dictionary["DisplayProductName"] as? [String: String], var name = nameList[Locale.current.identifier] ?? nameList["en_US"] ?? nameList.first?.value {
-      if CGDisplayIsInHWMirrorSet(displayID) != 0 || CGDisplayIsInMirrorSet(displayID) != 0 {
-        let mirroredDisplayID = CGDisplayMirrorsDisplay(displayID)
-        if mirroredDisplayID != 0, let dictionary = ((CoreDisplay_DisplayCreateInfoDictionary(mirroredDisplayID))?.takeRetainedValue() as NSDictionary?), let nameList = dictionary["DisplayProductName"] as? [String: String], let mirroredName = nameList[Locale.current.identifier] ?? nameList["en_US"] ?? nameList.first?.value {
-          name.append("~" + mirroredName)
+    if #available(macOS 11.0, *) {
+      if let dictionary = ((CoreDisplay_DisplayCreateInfoDictionary(displayID))?.takeRetainedValue() as NSDictionary?), let nameList = dictionary["DisplayProductName"] as? [String: String], var name = nameList[Locale.current.identifier] ?? nameList["en_US"] ?? nameList.first?.value {
+        if CGDisplayIsInHWMirrorSet(displayID) != 0 || CGDisplayIsInMirrorSet(displayID) != 0 {
+          let mirroredDisplayID = CGDisplayMirrorsDisplay(displayID)
+          if mirroredDisplayID != 0, let dictionary = ((CoreDisplay_DisplayCreateInfoDictionary(mirroredDisplayID))?.takeRetainedValue() as NSDictionary?), let nameList = dictionary["DisplayProductName"] as? [String: String], let mirroredName = nameList[Locale.current.identifier] ?? nameList["en_US"] ?? nameList.first?.value {
+            name.append("~" + mirroredName)
+          }
         }
+        return name
       }
-      return name
     }
     if let screen = NSScreen.getByDisplayID(displayID: displayID) {
       if #available(OSX 10.15, *) {
@@ -152,48 +154,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
   }
 
-  func updateDisplays(dispatchedReconfigureID: Int = 0) {
-    guard self.sleepID == 0, dispatchedReconfigureID == self.reconfigureID else {
-      return
-    }
-    os_log("Request for updateDisplay with reconfigreID %{public}@", type: .info, String(dispatchedReconfigureID))
-    self.reconfigureID = 0
-    self.clearDisplays()
-    var onlineDisplayIDs = [CGDirectDisplayID](repeating: 0, count: 10)
-    var displayCount: UInt32 = 0
-    guard CGGetOnlineDisplayList(10, &onlineDisplayIDs, &displayCount) == .success else {
-      os_log("Unable to get display list.", type: .info)
-      return
-    }
-    for onlineDisplayID in onlineDisplayIDs where onlineDisplayID != 0 {
-      let name = getDisplayName(displayID: onlineDisplayID)
-      let id = onlineDisplayID
-      let vendorNumber = CGDisplayVendorNumber(onlineDisplayID)
-      let modelNumber = CGDisplayVendorNumber(onlineDisplayID)
-      let display: Display
-      var isVirtual: Bool = false
-      if let dictionary = ((CoreDisplay_DisplayCreateInfoDictionary(onlineDisplayID))?.takeRetainedValue() as NSDictionary?) {
-        let isVirtualDevice = dictionary["kCGDisplayIsVirtualDevice"] as? Bool
-        let displayIsAirplay = dictionary["kCGDisplayIsAirPlay"] as? Bool
-        if isVirtualDevice ?? displayIsAirplay ?? false {
-          isVirtual = true
-        }
-      }
-      if CGDisplayIsBuiltin(onlineDisplayID) != 0 {
-        display = InternalDisplay(id, name: name, vendorNumber: vendorNumber, modelNumber: modelNumber, isVirtual: isVirtual)
-      } else {
-        display = ExternalDisplay(id, name: name, vendorNumber: vendorNumber, modelNumber: modelNumber, isVirtual: isVirtual)
-      }
-      DisplayManager.shared.addDisplay(display: display)
-    }
-    DisplayManager.shared.restoreSwBrightness()
-    self.updateAVServices()
-    var controllableExternalDisplays: [ExternalDisplay] = []
-    if prefs.bool(forKey: Utils.PrefKeys.fallbackSw.rawValue) {
-      controllableExternalDisplays = DisplayManager.shared.getExternalDisplays()
-    } else {
-      controllableExternalDisplays = DisplayManager.shared.getDdcCapableDisplays()
-    }
+  func updateMenus(controllableExternalDisplays: [ExternalDisplay]) {
     if controllableExternalDisplays.count == 0 {
       let item = NSMenuItem()
       item.title = NSLocalizedString("No supported display found", comment: "Shown in menu")
@@ -213,6 +174,55 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
   }
 
+  func updateDisplays(dispatchedReconfigureID: Int = 0, firstrun: Bool = false) {
+    guard self.sleepID == 0, dispatchedReconfigureID == self.reconfigureID else {
+      return
+    }
+    os_log("Request for updateDisplay with reconfigreID %{public}@", type: .info, String(dispatchedReconfigureID))
+    self.reconfigureID = 0
+    self.clearDisplays()
+    var onlineDisplayIDs = [CGDirectDisplayID](repeating: 0, count: 10)
+    var displayCount: UInt32 = 0
+    guard CGGetOnlineDisplayList(10, &onlineDisplayIDs, &displayCount) == .success else {
+      os_log("Unable to get display list.", type: .info)
+      return
+    }
+    for onlineDisplayID in onlineDisplayIDs where onlineDisplayID != 0 {
+      let name = getDisplayName(displayID: onlineDisplayID)
+      let id = onlineDisplayID
+      let vendorNumber = CGDisplayVendorNumber(onlineDisplayID)
+      let modelNumber = CGDisplayVendorNumber(onlineDisplayID)
+      let display: Display
+      var isVirtual: Bool = false
+      if #available(macOS 11.0, *) {
+        if let dictionary = ((CoreDisplay_DisplayCreateInfoDictionary(onlineDisplayID))?.takeRetainedValue() as NSDictionary?) {
+          let isVirtualDevice = dictionary["kCGDisplayIsVirtualDevice"] as? Bool
+          let displayIsAirplay = dictionary["kCGDisplayIsAirPlay"] as? Bool
+          if isVirtualDevice ?? displayIsAirplay ?? false {
+            isVirtual = true
+          }
+        }
+      }
+      if CGDisplayIsBuiltin(onlineDisplayID) != 0 {
+        display = InternalDisplay(id, name: name, vendorNumber: vendorNumber, modelNumber: modelNumber, isVirtual: isVirtual)
+      } else {
+        display = ExternalDisplay(id, name: name, vendorNumber: vendorNumber, modelNumber: modelNumber, isVirtual: isVirtual)
+      }
+      DisplayManager.shared.addDisplay(display: display)
+    }
+    if !firstrun {
+      DisplayManager.shared.restoreSwBrightness()
+    }
+    self.updateAVServices()
+    var controllableExternalDisplays: [ExternalDisplay] = []
+    if prefs.bool(forKey: Utils.PrefKeys.fallbackSw.rawValue) {
+      controllableExternalDisplays = DisplayManager.shared.getExternalDisplays()
+    } else {
+      controllableExternalDisplays = DisplayManager.shared.getDdcCapableDisplays()
+    }
+    self.updateMenus(controllableExternalDisplays: controllableExternalDisplays)
+  }
+
   private func addDisplayToMenu(display: ExternalDisplay, asSubMenu: Bool) {
     if !asSubMenu {
       self.statusMenu.insertItem(NSMenuItem.separator(), at: 0)
@@ -221,24 +231,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     if !display.isSw() {
       if prefs.bool(forKey: Utils.PrefKeys.showVolume.rawValue) {
-        let volumeSliderHandler = Utils.addSliderMenuItem(toMenu: monitorSubMenu,
-                                                          forDisplay: display,
-                                                          command: .audioSpeakerVolume,
-                                                          title: NSLocalizedString("Volume", comment: "Shown in menu"))
+        let volumeSliderHandler = Utils.addSliderMenuItem(toMenu: monitorSubMenu, forDisplay: display, command: .audioSpeakerVolume, title: NSLocalizedString("Volume", comment: "Shown in menu"))
         display.volumeSliderHandler = volumeSliderHandler
       }
       if prefs.bool(forKey: Utils.PrefKeys.showContrast.rawValue) {
-        let contrastSliderHandler = Utils.addSliderMenuItem(toMenu: monitorSubMenu,
-                                                            forDisplay: display,
-                                                            command: .contrast,
-                                                            title: NSLocalizedString("Contrast", comment: "Shown in menu"))
+        let contrastSliderHandler = Utils.addSliderMenuItem(toMenu: monitorSubMenu, forDisplay: display, command: .contrast, title: NSLocalizedString("Contrast", comment: "Shown in menu"))
         display.contrastSliderHandler = contrastSliderHandler
       }
     }
-    let brightnessSliderHandler = Utils.addSliderMenuItem(toMenu: monitorSubMenu,
-                                                          forDisplay: display,
-                                                          command: .brightness,
-                                                          title: NSLocalizedString("Brightness", comment: "Shown in menu"))
+    let brightnessSliderHandler = Utils.addSliderMenuItem(toMenu: monitorSubMenu, forDisplay: display, command: .brightness, title: NSLocalizedString("Brightness", comment: "Shown in menu"))
     display.brightnessSliderHandler = brightnessSliderHandler
 
     let monitorMenuItem = NSMenuItem()
@@ -458,7 +459,6 @@ extension AppDelegate: MediaKeyTapDelegate {
 
   private func updateMediaKeyTap() {
     var keys: [MediaKey]
-
     switch prefs.integer(forKey: Utils.PrefKeys.listenFor.rawValue) {
     case Utils.ListenForKeys.brightnessOnlyKeys.rawValue:
       keys = [.brightnessUp, .brightnessDown]
