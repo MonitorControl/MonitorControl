@@ -61,7 +61,7 @@
 /* Class = "NSTableColumn"; headerCell.title = "ID"; ObjectID = "JKW-oY-bSb"; */
 "JKW-oY-bSb.headerCell.title" = "ID";
 
-/* Class = "NSTextFieldCell"; title = "You can control the Brighness and Volume of your display using the Brightness and Volume keys off Apple Keyboards."; ObjectID = "K2r-aD-eec"; */
+/* Class = "NSTextFieldCell"; title = "Use the media keys of your keyboard to control Brightness & Volume."; ObjectID = "K2r-aD-eec"; */
 "K2r-aD-eec.title" = "You can control the Brighness and Volume of your display using the Brightness and Volume keys off Apple Keyboards.";
 
 /* Class = "NSButtonCell"; title = "Fallback to software control if required"; ObjectID = "kMa-3q-udl"; */
@@ -79,7 +79,7 @@
 /* Class = "NSTableColumn"; headerCell.title = "Hide OSD"; ObjectID = "MPF-Mr-zVU"; */
 "MPF-Mr-zVU.headerCell.title" = "隐藏 OSD";
 
-/* Class = "NSTextFieldCell"; title = "If an external display can't be controlled, software shading will be used. Only brightness control is available in this mode."; ObjectID = "n4V-jQ-1Ri"; */
+/* Class = "NSTextFieldCell"; title = "If an external display can't be controlled, software shading will be used instead."; ObjectID = "n4V-jQ-1Ri"; */
 "n4V-jQ-1Ri.title" = "If an external display can't be controlled, software shading will be used. Only brightness control is available in this mode.";
 
 /* Class = "NSMenuItem"; title = "Volume only"; ObjectID = "NLP-dU-Dam"; */
@@ -91,7 +91,7 @@
 /* Class = "NSTextFieldCell"; title = "Application:"; ObjectID = "okD-DG-pYa"; */
 "okD-DG-pYa.title" = "Application:";
 
-/* Class = "NSTextFieldCell"; title = "If Menu is hidden, just relaunch the app to reveal Preferences!"; ObjectID = "PVE-y7-zIk"; */
+/* Class = "NSTextFieldCell"; title = "If the menu item is hidden, just relaunch the app to reveal Preferences!"; ObjectID = "PVE-y7-zIk"; */
 "PVE-y7-zIk.title" = "If hidden, relaunch the app to show Preferences!";
 
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "PZ9-0Z-K6J"; */
