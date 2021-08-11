@@ -210,7 +210,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       }
       DisplayManager.shared.addDisplay(display: display)
     }
-    if !firstrun {
+    if firstrun {
       DisplayManager.shared.resetSwBrightness()
     } else {
       DisplayManager.shared.restoreSwBrightness()
