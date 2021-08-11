@@ -12,8 +12,6 @@ class ExternalDisplay: Display {
   var arm64ddc: Bool = false
   var arm64avService: IOAVService?
 
-  var isContrastAfterBrightnessMode: Bool = false
-
   let DDC_HARD_MAX_LIMIT: Int = 100
 
   private let prefs = UserDefaults.standard
@@ -117,7 +115,9 @@ class ExternalDisplay: Display {
 
   func stepVolume(isUp: Bool, isSmallIncrement: Bool) {
     var muteValue: Int?
-    let volumeOSDValue = self.calcNewValue(for: .audioSpeakerVolume, isUp: isUp, isSmallIncrement: isSmallIncrement)
+    let currentValue = self.getValue(for: .audioSpeakerVolume)
+    let maxValue = self.getMaxValue(for: .audioSpeakerVolume)
+    let volumeOSDValue = self.calcNewValue(currentValue: currentValue, maxValue: maxValue, isUp: isUp, isSmallIncrement: isSmallIncrement)
     let volumeDDCValue = UInt16(volumeOSDValue)
     if self.isMuted(), volumeOSDValue > 0 {
       muteValue = 2
@@ -159,33 +159,46 @@ class ExternalDisplay: Display {
     }
   }
 
+  func isSw() -> Bool {
+    return (!self.arm64ddc && self.ddc == nil)
+  }
+
   override func stepBrightness(isUp: Bool, isSmallIncrement: Bool) {
-    let osdValue = Int(self.calcNewValue(for: .brightness, isUp: isUp, isSmallIncrement: isSmallIncrement))
+    let currentValue = self.getValue(for: .brightness)
+    let maxValue = self.isSw() ? Int(self.getSwMaxBrightness()) : self.getMaxValue(for: .brightness)
+    let osdValue = self.calcNewValue(currentValue: currentValue, maxValue: maxValue, isUp: isUp, isSmallIncrement: isSmallIncrement)
     let isAlreadySet = osdValue == self.getValue(for: .brightness)
 
-    // Set the contrast value according to the brightness, if necessary
-    if isAlreadySet, !isUp, !self.isContrastAfterBrightnessMode, self.prefs.bool(forKey: Utils.PrefKeys.lowerContrast.rawValue) {
-      self.setRestoreValue(self.getValue(for: .contrast), for: .contrast)
-      self.isContrastAfterBrightnessMode = true
+    if self.isSw(), self.prefs.bool(forKey: Utils.PrefKeys.fallbackSw.rawValue) {
+      if self.setSwBrightness(value: UInt8(osdValue)) {
+        self.showOsd(command: .brightness, value: osdValue, roundChiclet: !isSmallIncrement)
+        self.saveValue(osdValue, for: .brightness)
+        if let slider = brightnessSliderHandler?.slider {
+          slider.intValue = Int32(osdValue)
+        }
+      }
+      return
     }
 
-    if self.isContrastAfterBrightnessMode {
-      var contrastValue = Int(self.calcNewValue(for: .contrast, isUp: isUp, isSmallIncrement: isSmallIncrement))
-      if contrastValue >= self.getRestoreValue(for: .contrast) {
-        contrastValue = self.getRestoreValue(for: .contrast)
-        self.isContrastAfterBrightnessMode = false
-      }
-      let ddcValue = UInt16(contrastValue)
-      guard self.writeDDCValues(command: .contrast, value: ddcValue) == true else {
-        return
-      }
-      self.saveValue(contrastValue, for: .contrast)
-      if let slider = contrastSliderHandler?.slider {
-        slider.intValue = Int32(contrastValue)
-      }
-      self.showOsd(command: .brightness, value: self.getValue(for: .brightness), roundChiclet: !isSmallIncrement)
+    var swAfterBirghtnessMode: Bool = isSwBrightnessNotDefault()
+
+    // Set software brightness value according to the brightness, if necessary
+    if isAlreadySet, !isUp, !swAfterBirghtnessMode, self.prefs.bool(forKey: Utils.PrefKeys.lowerSwAfterBrightness.rawValue) {
+      swAfterBirghtnessMode = true
     }
-    if !self.isContrastAfterBrightnessMode {
+
+    if swAfterBirghtnessMode {
+      let currentSwBrightness: UInt8 = self.getSwBrightness()
+      var swBirghtnessValue = self.calcNewValue(currentValue: Int(currentSwBrightness), maxValue: Int(getSwMaxBrightness()), isUp: isUp, isSmallIncrement: isSmallIncrement)
+      if swBirghtnessValue >= Int(getSwMaxBrightness()) {
+        swBirghtnessValue = Int(getSwMaxBrightness())
+        swAfterBirghtnessMode = false
+      }
+      if self.setSwBrightness(value: UInt8(swBirghtnessValue)) {
+        self.showOsd(command: .brightness, value: self.getValue(for: .brightness), roundChiclet: !isSmallIncrement)
+      }
+    }
+    if !swAfterBirghtnessMode {
       let ddcValue = UInt16(osdValue)
       guard self.writeDDCValues(command: .brightness, value: ddcValue) == true else {
         return
@@ -246,15 +259,13 @@ class ExternalDisplay: Display {
     return values
   }
 
-  func calcNewValue(for command: DDC.Command, isUp: Bool, isSmallIncrement: Bool) -> Int {
-    let currentValue = self.getValue(for: command)
+  func calcNewValue(currentValue: Int, maxValue: Int, isUp: Bool, isSmallIncrement: Bool) -> Int {
     let nextValue: Int
-    let maxValue = Float(self.getMaxValue(for: command))
 
     if isSmallIncrement {
       nextValue = currentValue + (isUp ? 1 : -1)
     } else {
-      let osdChicletFromValue = OSDUtils.chiclet(fromValue: Float(currentValue), maxValue: maxValue)
+      let osdChicletFromValue = OSDUtils.chiclet(fromValue: Float(currentValue), maxValue: Float(maxValue))
 
       let distance = OSDUtils.getDistance(fromNearestChiclet: osdChicletFromValue)
       // get the next rounded chiclet
@@ -270,11 +281,11 @@ class ExternalDisplay: Display {
         nextFilledChiclet += 1
       }
 
-      nextValue = Int(round(OSDUtils.value(fromChiclet: nextFilledChiclet, maxValue: maxValue)))
+      nextValue = Int(round(OSDUtils.value(fromChiclet: nextFilledChiclet, maxValue: Float(maxValue))))
 
       os_log("next: .value %{public}@/%{public}@, .osd %{public}@/%{public}@", type: .debug, String(nextValue), String(maxValue), String(nextFilledChiclet), String(OSDUtils.chicletCount))
     }
-    return max(0, min(self.getMaxValue(for: command), nextValue))
+    return max(0, min(maxValue, nextValue))
   }
 
   func getValue(for command: DDC.Command) -> Int {

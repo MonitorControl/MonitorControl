@@ -31,8 +31,8 @@
 /* Class = "NSMenuItem"; title = "Minimal"; ObjectID = "Eq3-z9-yIo"; */
 "Eq3-z9-yIo.title" = "Minimal";
 
-/* Class = "NSButtonCell"; title = "Lower contrast after brightness"; ObjectID = "fhy-Er-0aI"; */
-"fhy-Er-0aI.title" = "Kontrast nach Helligkeit verringern";
+/* Class = "NSButtonCell"; title = "Further lower brightness via software shading"; ObjectID = "fhy-Er-0aI"; */
+"fhy-Er-0aI.title" = "Further lower brightness via software shading";
 
 /* Class = "NSMenuItem"; title = "None"; ObjectID = "FoA-yh-Yx3"; */
 "FoA-yh-Yx3.title" = "Aus";
@@ -49,7 +49,7 @@
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "H4a-c9-LcB"; */
 "H4a-c9-LcB.title" = "Text Cell";
 
-/* Class = "NSTextFieldCell"; title = "Brightness keys:"; ObjectID = "hdd-Zz-buN"; */
+/* Class = "NSTextFieldCell"; title = "Brightness control:"; ObjectID = "hdd-Zz-buN"; */
 "hdd-Zz-buN.title" = "Brightness keys:";
 
 /* Class = "NSMenuItem"; title = "Brightness only"; ObjectID = "hjz-0c-rvK"; */
@@ -64,6 +64,9 @@
 /* Class = "NSTextFieldCell"; title = "You can control the Brighness and Volume of your display using the Brightness and Volume keys off Apple Keyboards."; ObjectID = "K2r-aD-eec"; */
 "K2r-aD-eec.title" = "You can control the Brighness and Volume of your display using the Brightness and Volume keys off Apple Keyboards.";
 
+/* Class = "NSButtonCell"; title = "Fallback to software control if required"; ObjectID = "kMa-3q-udl"; */
+"kMa-3q-udl.title" = "Fallback to software control if required";
+
 /* Class = "NSButton"; ibShadowedToolTip = "More Info"; ObjectID = "kqn-gU-mZX"; */
 "kqn-gU-mZX.ibShadowedToolTip" = "Mehr Informationen";
 
@@ -75,6 +78,9 @@
 
 /* Class = "NSTableColumn"; headerCell.title = "Hide OSD"; ObjectID = "MPF-Mr-zVU"; */
 "MPF-Mr-zVU.headerCell.title" = "ohne OSD";
+
+/* Class = "NSTextFieldCell"; title = "If an external display can't be controlled, software shading will be used. Only brightness control is available in this mode."; ObjectID = "n4V-jQ-1Ri"; */
+"n4V-jQ-1Ri.title" = "If an external display can't be controlled, software shading will be used. Only brightness control is available in this mode.";
 
 /* Class = "NSMenuItem"; title = "Volume only"; ObjectID = "NLP-dU-Dam"; */
 "NLP-dU-Dam.title" = "Lautstärke";
@@ -115,8 +121,8 @@
 /* Class = "NSButtonCell"; title = "Show contrast slider in menu"; ObjectID = "xSI-8W-Xd0"; */
 "xSI-8W-Xd0.title" = "Slider für Kontrast anzeigen";
 
-/* Class = "NSTextFieldCell"; title = "To ensure this works, please make sure the app properly detected current contrast! Adjust it manually using via the contrast slider if necessary!"; ObjectID = "yeg-GN-SuO"; */
-"yeg-GN-SuO.title" = "To ensure this works, please make sure the app properly detected current contrast! Adjust it manually using via the contrast slider if necessary!";
+/* Class = "NSTextFieldCell"; title = "This lets you further lower brightness via software shading even after display has reached zero brightness."; ObjectID = "yeg-GN-SuO"; */
+"yeg-GN-SuO.title" = "This lets you further lower brightness via software shading even after display has reached zero brightness.";
 
 /* Class = "NSTableColumn"; headerCell.title = "Polling Count"; ObjectID = "ytT-up-Dhs"; */
 "ytT-up-Dhs.headerCell.title" = "Anzahl Abfragen";

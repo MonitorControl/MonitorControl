@@ -11,7 +11,7 @@
 "aXL-i8-S6R.title" = "Menü ikon elrejtése";
 
 /* Class = "NSTextFieldCell"; title = "Keyboard:"; ObjectID = "c7N-cO-759"; */
-"c7N-cO-759.title" = "Keyboard:";
+"c7N-cO-759.title" = "Billentyűzet:";
 
 /* Class = "NSTableColumn"; headerCell.title = "Name"; ObjectID = "CHc-s5-4MN"; */
 "CHc-s5-4MN.headerCell.title" = "Név";
@@ -31,8 +31,8 @@
 /* Class = "NSMenuItem"; title = "Minimal"; ObjectID = "Eq3-z9-yIo"; */
 "Eq3-z9-yIo.title" = "Minimális";
 
-/* Class = "NSButtonCell"; title = "Lower contrast after brightness"; ObjectID = "fhy-Er-0aI"; */
-"fhy-Er-0aI.title" = "Kontraszt csökkentése a fényerő csökkentése után";
+/* Class = "NSButtonCell"; title = "Further lower brightness via software shading"; ObjectID = "fhy-Er-0aI"; */
+"fhy-Er-0aI.title" = "Fényerő tovább csökkentése szoftveres sötétítéssel";
 
 /* Class = "NSMenuItem"; title = "None"; ObjectID = "FoA-yh-Yx3"; */
 "FoA-yh-Yx3.title" = "Nincs";
@@ -46,7 +46,7 @@
 /* Class = "NSTableColumn"; headerCell.title = "Polling Mode"; ObjectID = "gxn-NH-Qhb"; */
 "gxn-NH-Qhb.headerCell.title" = "Mintavételezési mód";
 
-/* Class = "NSTextFieldCell"; title = "Brightness keys:"; ObjectID = "hdd-Zz-buN"; */
+/* Class = "NSTextFieldCell"; title = "Brightness control:"; ObjectID = "hdd-Zz-buN"; */
 "hdd-Zz-buN.title" = "Fényerő billentyűk:";
 
 /* Class = "NSMenuItem"; title = "Brightness only"; ObjectID = "hjz-0c-rvK"; */
@@ -61,6 +61,9 @@
 /* Class = "NSTextFieldCell"; title = "You can control the Brighness and Volume of your display using the Brightness and Volume keys off Apple Keyboards."; ObjectID = "K2r-aD-eec"; */
 "K2r-aD-eec.title" = "A képernyő fényerejét és hangerejét az Apple Billentyűzet fényerő és hangerő gombjaival lehet szabályozni.";
 
+/* Class = "NSButtonCell"; title = "Fallback to software control if required"; ObjectID = "kMa-3q-udl"; */
+"kMa-3q-udl.title" = "Átállás szoftveres sötétítésre, ha szükséges";
+
 /* Class = "NSButton"; ibShadowedToolTip = "More Info"; ObjectID = "kqn-gU-mZX"; */
 "kqn-gU-mZX.ibShadowedToolTip" = "További információ";
 
@@ -71,10 +74,13 @@
 "mBs-6m-13Q.title" = "Verzió 0.0.0 (Build 0)";
 
 /* Class = "NSTextFieldCell"; title = "Menu contents:"; ObjectID = "MJx-MK-e7D"; */
-"MJx-MK-e7D.title" = "Menu contents:";
+"MJx-MK-e7D.title" = "Menü tartalom:";
 
 /* Class = "NSTableColumn"; headerCell.title = "Hide OSD"; ObjectID = "MPF-Mr-zVU"; */
 "MPF-Mr-zVU.headerCell.title" = "OSD elrejtése";
+
+/* Class = "NSTextFieldCell"; title = "If an external display can't be controlled, software shading will be used. Only brightness control is available in this mode."; ObjectID = "n4V-jQ-1Ri"; */
+"n4V-jQ-1Ri.title" = "Szoftveres sötétítés használata, ha egy külső kijelzőt nem lehet vezérelni. Csak a fényerő szabályozás elérhető ilyen kijelzőknél.";
 
 /* Class = "NSMenuItem"; title = "Volume only"; ObjectID = "NLP-dU-Dam"; */
 "NLP-dU-Dam.title" = "Csak a hangerő billentyűk";
@@ -109,8 +115,8 @@
 /* Class = "NSButtonCell"; title = "Show contrast slider in menu"; ObjectID = "xSI-8W-Xd0"; */
 "xSI-8W-Xd0.title" = "Kontraszt csúszka megjelenítése a menüben";
 
-/* Class = "NSTextFieldCell"; title = "To ensure this works, please make sure the app properly detected current contrast! Adjust it manually using via the contrast slider if necessary!"; ObjectID = "yeg-GN-SuO"; */
-"yeg-GN-SuO.title" = "Ahhoz, hogy ez a funkció jól működjön, ellenőrizze, hogy a kontrasztot a program megfelelően állította be!";
+/* Class = "NSTextFieldCell"; title = "This lets you further lower brightness via software shading even after display has reached zero brightness."; ObjectID = "yeg-GN-SuO"; */
+"yeg-GN-SuO.title" = "A fényerő továbi csökkentése szoftveres sötétítéssel miután a kijelző elérte a nulla fényerőt.";
 
 /* Class = "NSTableColumn"; headerCell.title = "Polling Count"; ObjectID = "ytT-up-Dhs"; */
 "ytT-up-Dhs.headerCell.title" = "Mintavételezés";

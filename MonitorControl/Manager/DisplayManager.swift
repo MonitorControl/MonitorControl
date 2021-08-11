@@ -1,4 +1,5 @@
 import Cocoa
+import CoreMedia
 
 class DisplayManager {
   public static let shared = DisplayManager()
@@ -27,7 +28,7 @@ class DisplayManager {
 
   func getDdcCapableDisplays() -> [ExternalDisplay] {
     return self.displays.compactMap { display -> ExternalDisplay? in
-      if let externalDisplay = display as? ExternalDisplay, externalDisplay.ddc != nil || externalDisplay.arm64ddc {
+      if let externalDisplay = display as? ExternalDisplay, !externalDisplay.isSw() {
         return externalDisplay
       } else { return nil }
     }
@@ -56,5 +57,27 @@ class DisplayManager {
 
   func clearDisplays() {
     self.displays = []
+  }
+
+  func resetSwBrightness() {
+    for externalDisplay in self.getExternalDisplays() where externalDisplay.isSwBrightnessNotDefault() {
+      guard externalDisplay.setSwBrightness(value: externalDisplay.getSwMaxBrightness()) else {
+        continue
+      }
+      if externalDisplay.isSw() {
+        externalDisplay.saveValue(Int(externalDisplay.getSwMaxBrightness()), for: .brightness)
+      }
+    }
+  }
+
+  func restoreSwBrightness() {
+    for externalDisplay in self.getExternalDisplays() {
+      if externalDisplay.getValue(for: .brightness) == 0 || externalDisplay.isSw() {
+        // Out of caution we won't let it restore to complete darkness, not to interfere with login, etc. This is how Apple devices work as well.
+        _ = externalDisplay.setSwBrightness(value: UInt8(max(externalDisplay.getSwBrightnessPrefValue(), 20)))
+      } else {
+        _ = externalDisplay.setSwBrightness(value: externalDisplay.getSwMaxBrightness())
+      }
+    }
   }
 }

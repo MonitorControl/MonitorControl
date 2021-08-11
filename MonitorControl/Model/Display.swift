@@ -54,7 +54,7 @@ class Display {
   func getShowOsdDisplayId() -> CGDirectDisplayID {
     if CGDisplayIsInHWMirrorSet(self.identifier) != 0 || CGDisplayIsInMirrorSet(self.identifier) != 0, CGDisplayMirrorsDisplay(self.identifier) != 0 {
       for mirrorMaestro in DisplayManager.shared.getAllDisplays() where CGDisplayMirrorsDisplay(self.identifier) == mirrorMaestro.identifier {
-        if let externalMirrorMaestro = mirrorMaestro as? ExternalDisplay, !externalMirrorMaestro.arm64ddc, externalMirrorMaestro.ddc == nil {
+        if let externalMirrorMaestro = mirrorMaestro as? ExternalDisplay, externalMirrorMaestro.isSw() {
           var thereAreOthers = false
           for mirrorMember in DisplayManager.shared.getAllDisplays() where CGDisplayMirrorsDisplay(mirrorMember.identifier) == CGDisplayMirrorsDisplay(self.identifier) && mirrorMember.identifier != self.identifier {
             thereAreOthers = true
@@ -66,6 +66,52 @@ class Display {
       }
     }
     return self.identifier
+  }
+
+  func setSwBrightness(value: UInt8) -> Bool {
+    let brightnessValue: UInt8 = min(getSwMaxBrightness(), value)
+    let floatValue = Float(Float(brightnessValue) / Float(self.getSwMaxBrightness()))
+    if CGSetDisplayTransferByFormula(self.identifier, 0, floatValue, 1, 0, floatValue, 1, 0, floatValue, 1) == CGError.success {
+      self.saveSwBirghtnessPrefValue(Int(brightnessValue))
+      return true
+    }
+    return false
+  }
+
+  func getSwBrightness() -> UInt8 {
+    var redMin: CGGammaValue = 0
+    var redMax: CGGammaValue = 0
+    var redGamma: CGGammaValue = 0
+    var greenMin: CGGammaValue = 0
+    var greenMax: CGGammaValue = 0
+    var greenGamma: CGGammaValue = 0
+    var blueMin: CGGammaValue = 0
+    var blueMax: CGGammaValue = 0
+    var blueGamma: CGGammaValue = 0
+    if CGGetDisplayTransferByFormula(self.identifier, &redMin, &redMax, &redGamma, &greenMin, &greenMax, &greenGamma, &blueMin, &blueMax, &blueGamma) == CGError.success {
+      let brightnessValue = UInt8(min(max(redMax, greenMax, blueMax), 1) * Float(self.getSwMaxBrightness()))
+      return brightnessValue
+    }
+    return self.getSwMaxBrightness()
+  }
+
+  func saveSwBirghtnessPrefValue(_ value: Int) {
+    self.prefs.set(value, forKey: "SwBrightness-\(self.identifier)")
+  }
+
+  func getSwBrightnessPrefValue() -> Int {
+    return self.prefs.integer(forKey: "SwBrightness-\(self.identifier)")
+  }
+
+  func getSwMaxBrightness() -> UInt8 {
+    return 100
+  }
+
+  func isSwBrightnessNotDefault() -> Bool {
+    if self.getSwBrightness() < self.getSwMaxBrightness() {
+      return true
+    }
+    return false
   }
 
   func showOsd(command: DDC.Command, value: Int, maxValue: Int = 100, roundChiclet: Bool = false) {

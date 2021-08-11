@@ -23,7 +23,8 @@ class MainPrefsViewController: NSViewController, PreferencePane {
   @IBOutlet var hideMenuIcon: NSButton!
   @IBOutlet var showContrastSlider: NSButton!
   @IBOutlet var showVolumeSlider: NSButton!
-  @IBOutlet var lowerContrast: NSButton!
+  @IBOutlet var lowerSwAfterBrightness: NSButton!
+  @IBOutlet var fallbackSw: NSButton!
   @IBOutlet var listenFor: NSPopUpButton!
 
   override func viewDidLoad() {
@@ -39,7 +40,8 @@ class MainPrefsViewController: NSViewController, PreferencePane {
     self.hideMenuIcon.state = self.prefs.bool(forKey: Utils.PrefKeys.hideMenuIcon.rawValue) ? .on : .off
     self.showContrastSlider.state = self.prefs.bool(forKey: Utils.PrefKeys.showContrast.rawValue) ? .on : .off
     self.showVolumeSlider.state = self.prefs.bool(forKey: Utils.PrefKeys.showVolume.rawValue) ? .on : .off
-    self.lowerContrast.state = self.prefs.bool(forKey: Utils.PrefKeys.lowerContrast.rawValue) ? .on : .off
+    self.lowerSwAfterBrightness.state = self.prefs.bool(forKey: Utils.PrefKeys.lowerSwAfterBrightness.rawValue) ? .on : .off
+    self.fallbackSw.state = self.prefs.bool(forKey: Utils.PrefKeys.fallbackSw.rawValue) ? .on : .off
     self.listenFor.selectItem(at: self.prefs.integer(forKey: Utils.PrefKeys.listenFor.rawValue))
   }
 
@@ -97,28 +99,33 @@ class MainPrefsViewController: NSViewController, PreferencePane {
     NotificationCenter.default.post(name: Notification.Name(Utils.PrefKeys.showVolume.rawValue), object: nil)
   }
 
-  @IBAction func lowerContrastClicked(_ sender: NSButton) {
+  @IBAction func lowerSwAfterBrightnessClicked(_ sender: NSButton) {
     switch sender.state {
     case .on:
-      self.prefs.set(true, forKey: Utils.PrefKeys.lowerContrast.rawValue)
-      let alert = NSAlert()
-      alert.addButton(withTitle: NSLocalizedString("Ok", comment: "Shown in the alert dialog"))
-      alert.messageText = NSLocalizedString("Setting up Lower contrast after brightness", comment: "Shown in the alert dialog")
-      alert.informativeText = NSLocalizedString("Enabling this option will let you dim the screen even more via the brightness keys by lowering contrast after brightness has reached zero.\n\nTo make this work, please make sure that current contrast levels are properly set via the contrast slider! The contrast slider was enabled you to do that (you can disable it afterward)!", comment: "Shown in the alert dialog")
-      alert.alertStyle = .warning
-      alert.runModal()
-      // We enable contrast slider
-      self.prefs.set(true, forKey: Utils.PrefKeys.showContrast.rawValue)
-      self.showContrastSlider.state = self.prefs.bool(forKey: Utils.PrefKeys.showContrast.rawValue) ? .on : .off
-      NotificationCenter.default.post(name: Notification.Name(Utils.PrefKeys.showContrast.rawValue), object: nil)
+      self.prefs.set(true, forKey: Utils.PrefKeys.lowerSwAfterBrightness.rawValue)
     case .off:
-      self.prefs.set(false, forKey: Utils.PrefKeys.lowerContrast.rawValue)
-      app.resetContrastAfterBrightness()
+      self.prefs.set(false, forKey: Utils.PrefKeys.lowerSwAfterBrightness.rawValue)
+      DisplayManager.shared.resetSwBrightness()
     default: break
     }
     #if DEBUG
-      os_log("Toggle lower contrast after brightness state: %{public}@", type: .info, sender.state == .on ? "on" : "off")
+      os_log("Toggle software control after brightness state: %{public}@", type: .info, sender.state == .on ? "on" : "off")
     #endif
+  }
+
+  @IBAction func fallbackSwClicked(_ sender: NSButton) {
+    switch sender.state {
+    case .on:
+      self.prefs.set(true, forKey: Utils.PrefKeys.fallbackSw.rawValue)
+    case .off:
+      self.prefs.set(false, forKey: Utils.PrefKeys.fallbackSw.rawValue)
+    default: break
+    }
+    #if DEBUG
+      os_log("Toggle fallback to software if no DDC: %{public}@", type: .info, sender.state == .on ? "on" : "off")
+    #endif
+
+    NotificationCenter.default.post(name: Notification.Name(Utils.PrefKeys.fallbackSw.rawValue), object: nil)
   }
 
   @IBAction func listenForChanged(_ sender: NSPopUpButton) {

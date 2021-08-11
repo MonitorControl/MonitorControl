@@ -63,22 +63,29 @@ class Utils: NSObject {
     let tries = UInt(display.getPollingCount())
     os_log("Polling %{public}@ times", type: .info, String(tries))
 
-    if tries != 0 {
-      values = display.readDDCValues(for: command, tries: tries, minReplyDelay: delay)
+    var (currentValue, maxValue) = (UInt16(0), UInt16(0))
+
+    if display.isSw(), command == DDC.Command.brightness {
+      (currentValue, maxValue) = (UInt16(display.getSwBrightness()), UInt16(display.getSwMaxBrightness()))
+    } else {
+      if tries != 0 {
+        values = display.readDDCValues(for: command, tries: tries, minReplyDelay: delay)
+      }
+
+      (currentValue, maxValue) = values ?? (UInt16(display.getValue(for: command)), 0) // We set 0 for max. value to indicate that there is no real DDC reported max. value - ExternalDisplay.getMaxValue() will return 100 in case of 0 max. values.
     }
-
-    let (currentDDCValue, maxValue) = values ?? (UInt16(display.getValue(for: command)), 0) // We set 0 for max. value to indicate that there is no real DDC reported max. value - ExternalDisplay.getMaxValue() will return 100 in case of 0 max. values.
-
     display.saveMaxValue(Int(maxValue), for: command)
-    display.saveValue(min(Int(currentDDCValue), display.getMaxValue(for: command)), for: command) // We won't allow currrent value to be higher than the max. value
-
+    display.saveValue(min(Int(currentValue), display.getMaxValue(for: command)), for: command) // We won't allow currrent value to be higher than the max. value
     os_log("%{public}@ (%{public}@):", type: .info, display.name, String(reflecting: command))
-    os_log(" - current ddc value: %{public}@ - from display? %{public}@", type: .info, String(currentDDCValue), String(values != nil))
-    os_log(" - maximum ddc value: %{public}@ - from display? %{public}@", type: .info, String(display.getMaxValue(for: command)), String(values != nil))
+    os_log(" - current value: %{public}@ - from display? %{public}@", type: .info, String(currentValue), String(values != nil))
+    os_log(" - maximum value: %{public}@ - from display? %{public}@", type: .info, String(display.getMaxValue(for: command)), String(values != nil))
 
     if command != .audioSpeakerVolume {
-      slider.integerValue = Int(currentDDCValue)
+      slider.integerValue = Int(currentValue)
       slider.maxValue = Double(display.getMaxValue(for: command))
+      if display.isSw() {
+        slider.minValue = Double(display.getSwMaxBrightness()) * 0.2 // Don't let brightness to down for software brightness control as the user won't see the slider anymore
+      }
     } else {
       // If we're looking at the audio speaker volume, also retrieve the values for the mute command
       var muteValues: (current: UInt16, max: UInt16)?
@@ -103,7 +110,7 @@ class Utils: NSObject {
 
       // If the system is not currently muted, or doesn't support the mute command, display the current volume as the slider value
       if muteValues == nil || muteValues!.current == 2 {
-        slider.integerValue = Int(currentDDCValue)
+        slider.integerValue = Int(currentValue)
       } else {
         slider.integerValue = 0
       }
@@ -194,8 +201,11 @@ class Utils: NSObject {
     /// Show volume sliders
     case showVolume
 
-    /// Lower contrast after brightness
-    case lowerContrast
+    /// Lower via software after brightness
+    case lowerSwAfterBrightness
+
+    /// Fallback to software control for external displays with no DDC
+    case fallbackSw
 
     /// Change Brightness/Volume for all screens
     case allScreens

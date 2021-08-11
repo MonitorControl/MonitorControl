@@ -31,16 +31,11 @@ class SliderHandler {
       self.display.toggleMute(fromVolumeSlider: true)
     }
 
-    // If the command is to adjust contrast, exit ContrastAfterBirghtness mode if contrast is higher than the restore value
-    if self.cmd == .contrast {
-      if self.display.isContrastAfterBrightnessMode {
-        if value >= self.display.getRestoreValue(for: .contrast) {
-          self.display.isContrastAfterBrightnessMode = false
-        }
-      }
+    if self.display.isSw() {
+      _ = self.display.setSwBrightness(value: UInt8(value))
+    } else if self.cmd == DDC.Command.brightness {
+      _ = self.display.writeDDCValues(command: self.cmd, value: UInt16(value))
     }
-
-    _ = self.display.writeDDCValues(command: self.cmd, value: UInt16(value))
     self.display.saveValue(value, for: self.cmd)
   }
 }
