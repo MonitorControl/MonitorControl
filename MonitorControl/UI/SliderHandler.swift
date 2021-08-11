@@ -31,10 +31,10 @@ class SliderHandler {
       self.display.toggleMute(fromVolumeSlider: true)
     }
 
-    if self.display.isSw() {
-      _ = self.display.setSwBrightness(value: UInt8(value))
-    } else if self.cmd == DDC.Command.brightness {
+    if !(self.display.isSw()) {
       _ = self.display.writeDDCValues(command: self.cmd, value: UInt16(value))
+    } else if self.cmd == DDC.Command.brightness {
+      _ = self.display.setSwBrightness(value: UInt8(value))
     }
     self.display.saveValue(value, for: self.cmd)
   }
