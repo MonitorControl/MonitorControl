@@ -30,7 +30,6 @@ class DisplayPrefsViewController: NSViewController, PreferencePane, NSTableViewD
     case model
   }
 
-  @IBOutlet var allScreens: NSButton!
   @IBOutlet var displayList: NSTableView!
 
   override func viewDidLoad() {
@@ -41,25 +40,10 @@ class DisplayPrefsViewController: NSViewController, PreferencePane, NSTableViewD
 
   override func viewWillAppear() {
     super.viewWillAppear()
-    self.allScreens.state = self.prefs.bool(forKey: Utils.PrefKeys.allScreens.rawValue) ? .on : .off
   }
 
   deinit {
     NotificationCenter.default.removeObserver(self)
-  }
-
-  @IBAction func allScreensTouched(_ sender: NSButton) {
-    switch sender.state {
-    case .on:
-      self.prefs.set(true, forKey: Utils.PrefKeys.allScreens.rawValue)
-    case .off:
-      self.prefs.set(false, forKey: Utils.PrefKeys.allScreens.rawValue)
-    default: break
-    }
-
-    #if DEBUG
-      os_log("Toggle allScreens state: %{public}@", type: .info, sender.state == .on ? "on" : "off")
-    #endif
   }
 
   // MARK: - Table datasource

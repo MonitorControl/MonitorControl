@@ -1,6 +1,3 @@
-/* Class = "NSButtonCell"; title = "Change Brightness/Volume for all screens"; ObjectID = "0Z7-PQ-Bl8"; */
-"0Z7-PQ-Bl8.title" = "Изменять Яркость/Громкость на всех мониторах";
-
 /* Class = "NSTextFieldCell"; title = "MonitorControl"; ObjectID = "1PJ-14-Bvn"; */
 "1PJ-14-Bvn.title" = "MonitorControl";
 
@@ -36,6 +33,9 @@
 
 /* Class = "NSTextFieldCell"; title = "Copyright Ⓒ MonitorControl, 0000"; ObjectID = "e0q-fb-k7R"; */
 "e0q-fb-k7R.title" = "Copyright Ⓒ MonitorControl, 0000";
+
+/* Class = "NSButtonCell"; title = "Change Brightness and Volume for all screens"; ObjectID = "E6M-ih-S8Y"; */
+"E6M-ih-S8Y.title" = "Изменять Яркость/Громкость на всех мониторах";
 
 /* Class = "NSMenuItem"; title = "Minimal"; ObjectID = "Eq3-z9-yIo"; */
 "Eq3-z9-yIo.title" = "Редко";

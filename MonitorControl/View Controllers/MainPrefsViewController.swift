@@ -25,6 +25,7 @@ class MainPrefsViewController: NSViewController, PreferencePane {
   @IBOutlet var lowerSwAfterBrightness: NSButton!
   @IBOutlet var fallbackSw: NSButton!
   @IBOutlet var listenFor: NSPopUpButton!
+  @IBOutlet var allScreens: NSButton!
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -41,6 +42,21 @@ class MainPrefsViewController: NSViewController, PreferencePane {
     self.lowerSwAfterBrightness.state = self.prefs.bool(forKey: Utils.PrefKeys.lowerSwAfterBrightness.rawValue) ? .on : .off
     self.fallbackSw.state = self.prefs.bool(forKey: Utils.PrefKeys.fallbackSw.rawValue) ? .on : .off
     self.listenFor.selectItem(at: self.prefs.integer(forKey: Utils.PrefKeys.listenFor.rawValue))
+    self.allScreens.state = self.prefs.bool(forKey: Utils.PrefKeys.allScreens.rawValue) ? .on : .off
+  }
+
+  @IBAction func allScreensTouched(_ sender: NSButton) {
+    switch sender.state {
+    case .on:
+      self.prefs.set(true, forKey: Utils.PrefKeys.allScreens.rawValue)
+    case .off:
+      self.prefs.set(false, forKey: Utils.PrefKeys.allScreens.rawValue)
+    default: break
+    }
+
+    #if DEBUG
+      os_log("Toggle allScreens state: %{public}@", type: .info, sender.state == .on ? "on" : "off")
+    #endif
   }
 
   @IBAction func startAtLoginClicked(_ sender: NSButton) {
