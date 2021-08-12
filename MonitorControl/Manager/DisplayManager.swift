@@ -26,9 +26,25 @@ class DisplayManager {
     return self.displays
   }
 
+  func getAllNonVirtualDisplays() -> [Display] {
+    return self.displays.compactMap { display -> Display? in
+      if !display.isVirtual {
+        return display
+      } else { return nil }
+    }
+  }
+
   func getDdcCapableDisplays() -> [ExternalDisplay] {
     return self.displays.compactMap { display -> ExternalDisplay? in
-      if let externalDisplay = display as? ExternalDisplay, !externalDisplay.isSw() {
+      if let externalDisplay = display as? ExternalDisplay, !externalDisplay.isSw(), !externalDisplay.isVirtual {
+        return externalDisplay
+      } else { return nil }
+    }
+  }
+
+  func getNonVirtualExternalDisplays() -> [ExternalDisplay] {
+    return self.displays.compactMap { display -> ExternalDisplay? in
+      if let externalDisplay = display as? ExternalDisplay, !externalDisplay.isVirtual {
         return externalDisplay
       } else { return nil }
     }
@@ -79,5 +95,28 @@ class DisplayManager {
         _ = externalDisplay.setSwBrightness(value: externalDisplay.getSwMaxBrightness())
       }
     }
+  }
+
+  func getDisplayNameByID(displayID: CGDirectDisplayID) -> String {
+    let defaultName: String = NSLocalizedString("Unknown", comment: "Unknown display name") // + String(CGDisplaySerialNumber(displayID))
+    if #available(macOS 11.0, *) {
+      if let dictionary = ((CoreDisplay_DisplayCreateInfoDictionary(displayID))?.takeRetainedValue() as NSDictionary?), let nameList = dictionary["DisplayProductName"] as? [String: String], var name = nameList[Locale.current.identifier] ?? nameList["en_US"] ?? nameList.first?.value {
+        if CGDisplayIsInHWMirrorSet(displayID) != 0 || CGDisplayIsInMirrorSet(displayID) != 0 {
+          let mirroredDisplayID = CGDisplayMirrorsDisplay(displayID)
+          if mirroredDisplayID != 0, let dictionary = ((CoreDisplay_DisplayCreateInfoDictionary(mirroredDisplayID))?.takeRetainedValue() as NSDictionary?), let nameList = dictionary["DisplayProductName"] as? [String: String], let mirroredName = nameList[Locale.current.identifier] ?? nameList["en_US"] ?? nameList.first?.value {
+            name.append("~" + mirroredName)
+          }
+        }
+        return name
+      }
+    }
+    if let screen = NSScreen.getByDisplayID(displayID: displayID) {
+      if #available(OSX 10.15, *) {
+        return screen.localizedName
+      } else {
+        return screen.displayName ?? defaultName
+      }
+    }
+    return defaultName
   }
 }

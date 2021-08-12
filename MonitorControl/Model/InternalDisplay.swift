@@ -15,9 +15,9 @@ class InternalDisplay: Display {
   // the queue for dispatching display operations, so they're not performed directly and concurrently
   private var displayQueue: DispatchQueue
 
-  override init(_ identifier: CGDirectDisplayID, name: String, vendorNumber: UInt32?, modelNumber: UInt32?, isVirtual _: Bool = false) {
+  override init(_ identifier: CGDirectDisplayID, name: String, vendorNumber: UInt32?, modelNumber: UInt32?, isVirtual: Bool = false) {
     self.displayQueue = DispatchQueue(label: String("displayQueue-\(identifier)"))
-    super.init(identifier, name: name, vendorNumber: vendorNumber, modelNumber: modelNumber)
+    super.init(identifier, name: name, vendorNumber: vendorNumber, modelNumber: modelNumber, isVirtual: isVirtual)
   }
 
   func calcNewBrightness(isUp: Bool, isSmallIncrement: Bool) -> Float {

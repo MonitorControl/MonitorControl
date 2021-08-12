@@ -34,11 +34,12 @@ class Display {
 
   private let prefs = UserDefaults.standard
 
-  internal init(_ identifier: CGDirectDisplayID, name: String, vendorNumber: UInt32?, modelNumber: UInt32?, isVirtual _: Bool = false) {
+  internal init(_ identifier: CGDirectDisplayID, name: String, vendorNumber: UInt32?, modelNumber: UInt32?, isVirtual: Bool = false) {
     self.identifier = identifier
     self.name = name
     self.vendorNumber = vendorNumber
     self.modelNumber = modelNumber
+    self.isVirtual = isVirtual
   }
 
   func stepBrightness(isUp _: Bool, isSmallIncrement _: Bool) {}
@@ -53,10 +54,10 @@ class Display {
 
   func getShowOsdDisplayId() -> CGDirectDisplayID {
     if CGDisplayIsInHWMirrorSet(self.identifier) != 0 || CGDisplayIsInMirrorSet(self.identifier) != 0, CGDisplayMirrorsDisplay(self.identifier) != 0 {
-      for mirrorMaestro in DisplayManager.shared.getAllDisplays() where CGDisplayMirrorsDisplay(self.identifier) == mirrorMaestro.identifier {
+      for mirrorMaestro in DisplayManager.shared.getAllNonVirtualDisplays() where CGDisplayMirrorsDisplay(self.identifier) == mirrorMaestro.identifier {
         if let externalMirrorMaestro = mirrorMaestro as? ExternalDisplay, externalMirrorMaestro.isSw() {
           var thereAreOthers = false
-          for mirrorMember in DisplayManager.shared.getAllDisplays() where CGDisplayMirrorsDisplay(mirrorMember.identifier) == CGDisplayMirrorsDisplay(self.identifier) && mirrorMember.identifier != self.identifier {
+          for mirrorMember in DisplayManager.shared.getAllNonVirtualDisplays() where CGDisplayMirrorsDisplay(mirrorMember.identifier) == CGDisplayMirrorsDisplay(self.identifier) && mirrorMember.identifier != self.identifier {
             thereAreOthers = true
           }
           if !thereAreOthers {
@@ -108,6 +109,9 @@ class Display {
   }
 
   func isSwBrightnessNotDefault() -> Bool {
+    guard !self.isVirtual else {
+      return false
+    }
     if self.getSwBrightness() < self.getSwMaxBrightness() {
       return true
     }

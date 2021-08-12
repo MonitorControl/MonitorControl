@@ -76,7 +76,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       prefs.set(false, forKey: Utils.PrefKeys.showContrast.rawValue)
       prefs.set(true, forKey: Utils.PrefKeys.showVolume.rawValue)
       prefs.set(false, forKey: Utils.PrefKeys.lowerSwAfterBrightness.rawValue)
-      prefs.set(true, forKey: Utils.PrefKeys.fallbackSw.rawValue)
+      prefs.set(false, forKey: Utils.PrefKeys.fallbackSw.rawValue)
       prefs.set(false, forKey: Utils.PrefKeys.hideMenuIcon.rawValue)
     }
   }
@@ -97,30 +97,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     DisplayManager.shared.clearDisplays()
   }
 
-  func getDisplayName(displayID: CGDirectDisplayID) -> String {
-    let defaultName: String = NSLocalizedString("Unknown", comment: "Unknown display name") // + String(CGDisplaySerialNumber(displayID))
-    if #available(macOS 11.0, *) {
-      if let dictionary = ((CoreDisplay_DisplayCreateInfoDictionary(displayID))?.takeRetainedValue() as NSDictionary?), let nameList = dictionary["DisplayProductName"] as? [String: String], var name = nameList[Locale.current.identifier] ?? nameList["en_US"] ?? nameList.first?.value {
-        if CGDisplayIsInHWMirrorSet(displayID) != 0 || CGDisplayIsInMirrorSet(displayID) != 0 {
-          let mirroredDisplayID = CGDisplayMirrorsDisplay(displayID)
-          if mirroredDisplayID != 0, let dictionary = ((CoreDisplay_DisplayCreateInfoDictionary(mirroredDisplayID))?.takeRetainedValue() as NSDictionary?), let nameList = dictionary["DisplayProductName"] as? [String: String], let mirroredName = nameList[Locale.current.identifier] ?? nameList["en_US"] ?? nameList.first?.value {
-            name.append("~" + mirroredName)
-          }
-        }
-        return name
-      }
-    }
-    if let screen = NSScreen.getByDisplayID(displayID: displayID) {
-      if #available(OSX 10.15, *) {
-        return screen.localizedName
-      } else {
-        return screen.displayName ?? defaultName
-      }
-    }
-    return defaultName
-  }
-
-  func updateAVServices() {
+  func updateArm64AVServices() {
     if Arm64DDCUtils.isArm64 {
       os_log("arm64 AVService update requested", type: .info)
       var displayIDs: [CGDirectDisplayID] = []
@@ -135,7 +112,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
           //   externalDisplay.arm64ddc = true
           // }
           if !serviceMatch.isDiscouraged {
-            externalDisplay.arm64ddc = true
+            externalDisplay.arm64ddc = true // MARK: (point of interest when testing)
           }
         }
       }
@@ -188,7 +165,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       return
     }
     for onlineDisplayID in onlineDisplayIDs where onlineDisplayID != 0 {
-      let name = getDisplayName(displayID: onlineDisplayID)
+      let name = DisplayManager.shared.getDisplayNameByID(displayID: onlineDisplayID)
       let id = onlineDisplayID
       let vendorNumber = CGDisplayVendorNumber(onlineDisplayID)
       let modelNumber = CGDisplayVendorNumber(onlineDisplayID)
@@ -203,7 +180,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
           }
         }
       }
-      if CGDisplayIsBuiltin(onlineDisplayID) != 0 {
+      if CGDisplayIsBuiltin(onlineDisplayID) != 0 { // MARK: (point of interest for testing)
         display = InternalDisplay(id, name: name, vendorNumber: vendorNumber, modelNumber: modelNumber, isVirtual: isVirtual)
       } else {
         display = ExternalDisplay(id, name: name, vendorNumber: vendorNumber, modelNumber: modelNumber, isVirtual: isVirtual)
@@ -215,10 +192,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     } else {
       DisplayManager.shared.restoreSwBrightness()
     }
-    self.updateAVServices()
+    self.updateArm64AVServices()
     var controllableExternalDisplays: [ExternalDisplay] = []
     if prefs.bool(forKey: Utils.PrefKeys.fallbackSw.rawValue) {
-      controllableExternalDisplays = DisplayManager.shared.getExternalDisplays()
+      controllableExternalDisplays = DisplayManager.shared.getNonVirtualExternalDisplays()
     } else {
       controllableExternalDisplays = DisplayManager.shared.getDdcCapableDisplays()
     }
@@ -372,7 +349,7 @@ extension AppDelegate: MediaKeyTapDelegate {
 
   private func getAffectedDisplays() -> [Display]? {
     var affectedDisplays: [Display]
-    let allDisplays = DisplayManager.shared.getAllDisplays()
+    let allDisplays = DisplayManager.shared.getAllNonVirtualDisplays()
     guard let currentDisplay = DisplayManager.shared.getCurrentDisplay() else {
       return nil
     }

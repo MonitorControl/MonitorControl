@@ -39,14 +39,12 @@ class ExternalDisplay: Display {
   private var audioPlayer: AVAudioPlayer?
 
   override init(_ identifier: CGDirectDisplayID, name: String, vendorNumber: UInt32?, modelNumber: UInt32?, isVirtual: Bool = false) {
-    super.init(identifier, name: name, vendorNumber: vendorNumber, modelNumber: modelNumber)
+    super.init(identifier, name: name, vendorNumber: vendorNumber, modelNumber: modelNumber, isVirtual: isVirtual)
 
     if !isVirtual {
       if !Arm64DDCUtils.isArm64 {
         self.ddc = DDC(for: identifier)
       }
-    } else {
-      self.isVirtual = true
     }
   }
 
@@ -160,7 +158,7 @@ class ExternalDisplay: Display {
   }
 
   func isSw() -> Bool {
-    return (!self.arm64ddc && self.ddc == nil)
+    return (!self.arm64ddc && self.ddc == nil && !self.isVirtual)
   }
 
   override func stepBrightness(isUp: Bool, isSmallIncrement: Bool) {
