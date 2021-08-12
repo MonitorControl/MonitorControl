@@ -109,7 +109,7 @@ class Display {
   }
 
   func isSwBrightnessNotDefault() -> Bool {
-    guard self.isVirtual else {
+    guard !self.isVirtual else {
       return false
     }
     if self.getSwBrightness() < self.getSwMaxBrightness() {
