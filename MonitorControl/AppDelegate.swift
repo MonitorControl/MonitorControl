@@ -32,7 +32,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         advancedPrefsVc!,
         aboutPrefsVc!,
       ],
-      animated: true // causes nice (some say glitch) animations
+      animated: true // causes nice (some say glitchy) animations
     )
   }()
 

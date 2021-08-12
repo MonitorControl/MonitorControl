@@ -923,7 +923,7 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField identifier="copyrightLabel" horizontalHuggingPriority="251" verticalHuggingPriority="750" id="Dqc-RQ-Lbc">
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="Dqc-RQ-Lbc">
                                 <rect key="frame" x="276" y="103" width="333" height="16"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" alignment="left" title="Copyright Ⓒ MonitorControl, 0000" id="e0q-fb-k7R">
