@@ -428,12 +428,15 @@ extension AppDelegate: MediaKeyTapDelegate {
   }
 
   @objc func handlePreferenceReset() {
+    os_log("Resetting all preferences.")
+    if let bundleID = Bundle.main.bundleIdentifier {
+      UserDefaults.standard.removePersistentDomain(forName: bundleID)
+    }
+    DisplayManager.shared.resetSwBrightness()
     self.setDefaultPrefs()
-    self.updateDisplays()
     self.checkPermissions()
     self.updateMediaKeyTap()
-    DisplayManager.shared.resetSwBrightness()
-    self.updateDisplays()
+    self.updateDisplays(firstrun: true)
   }
 
   private func updateMediaKeyTap() {

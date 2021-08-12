@@ -76,7 +76,7 @@ class DisplayManager {
   }
 
   func resetSwBrightness() {
-    for externalDisplay in self.getExternalDisplays() where externalDisplay.isSwBrightnessNotDefault() {
+    for externalDisplay in self.getNonVirtualExternalDisplays() {
       guard externalDisplay.setSwBrightness(value: externalDisplay.getSwMaxBrightness()) else {
         continue
       }

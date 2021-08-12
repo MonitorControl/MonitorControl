@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="19150" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="18122"/>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="19150"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -10,17 +11,17 @@
             <objects>
                 <viewController storyboardIdentifier="DisplayPrefsVC" id="NAx-6T-ZPc" customClass="DisplayPrefsViewController" customModule="MonitorControl" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" translatesAutoresizingMaskIntoConstraints="NO" id="EBf-qN-KaN">
-                        <rect key="frame" x="0.0" y="0.0" width="691" height="276"/>
+                        <rect key="frame" x="0.0" y="0.0" width="691" height="280"/>
                         <subviews>
                             <gridView placeholderIntrinsicWidth="657" placeholderIntrinsicHeight="236" xPlacement="leading" yPlacement="bottom" rowAlignment="none" rowSpacing="20" columnSpacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="1Op-Sf-8Vf">
-                                <rect key="frame" x="20" y="20" width="651" height="236"/>
+                                <rect key="frame" x="20" y="20" width="651" height="240"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="651" id="XOI-Lm-w45"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="236" id="maY-JY-pdl"/>
                                 </constraints>
                                 <rows>
                                     <gridRow height="16" id="CtE-vz-HwJ"/>
-                                    <gridRow height="200" id="siG-OL-3W3"/>
+                                    <gridRow id="siG-OL-3W3"/>
                                 </rows>
                                 <columns>
                                     <gridColumn width="651" id="Y4h-Do-mte"/>
@@ -28,7 +29,7 @@
                                 <gridCells>
                                     <gridCell row="CtE-vz-HwJ" column="Y4h-Do-mte" yPlacement="fill" id="EAB-48-4hA">
                                         <button key="contentView" horizontalHuggingPriority="1" verticalHuggingPriority="1" horizontalCompressionResistancePriority="1" verticalCompressionResistancePriority="1" translatesAutoresizingMaskIntoConstraints="NO" id="Y48-gQ-uJi">
-                                            <rect key="frame" x="-2" y="219" width="279" height="18"/>
+                                            <rect key="frame" x="-2" y="223" width="279" height="18"/>
                                             <buttonCell key="cell" type="check" title="Change Brightness/Volume for all screens" bezelStyle="regularSquare" imagePosition="left" inset="2" id="0Z7-PQ-Bl8">
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                 <font key="font" metaFont="system"/>
@@ -40,13 +41,13 @@
                                     </gridCell>
                                     <gridCell row="siG-OL-3W3" column="Y4h-Do-mte" xPlacement="fill" yPlacement="fill" id="TtN-GM-o9Z">
                                         <scrollView key="contentView" horizontalHuggingPriority="1" verticalHuggingPriority="1" horizontalCompressionResistancePriority="1" verticalCompressionResistancePriority="1" autohidesScrollers="YES" horizontalLineScroll="26" horizontalPageScroll="10" verticalLineScroll="26" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B5k-we-kuP">
-                                            <rect key="frame" x="0.0" y="0.0" width="651" height="200"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="651" height="204"/>
                                             <clipView key="contentView" drawsBackground="NO" id="4ot-Jo-X5O">
-                                                <rect key="frame" x="1" y="1" width="649" height="198"/>
+                                                <rect key="frame" x="1" y="1" width="649" height="202"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnResizing="NO" multipleSelection="NO" emptySelection="NO" autosaveColumns="NO" typeSelect="NO" rowHeight="24" rowSizeStyle="medium" headerView="ckY-Px-mJn" viewBased="YES" id="dyo-uY-pMe">
-                                                        <rect key="frame" x="0.0" y="0.0" width="649" height="175"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="649" height="179"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         <size key="intercellSpacing" width="3" height="2"/>
                                                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -61,7 +62,7 @@
                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                 <prototypeCellViews>
                                                                     <tableCellView id="Fzp-05-e2y" customClass="ButtonCellView" customModule="MonitorControl" customModuleProvider="target">
-                                                                        <rect key="frame" x="11" y="1" width="65" height="17"/>
+                                                                        <rect key="frame" x="1" y="1" width="65" height="17"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
                                                                             <button verticalHuggingPriority="750" id="OJu-lv-bAA">
@@ -91,7 +92,7 @@
                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                 <prototypeCellViews>
                                                                     <tableCellView id="1tR-yk-dKV" customClass="ButtonCellView" customModule="MonitorControl" customModuleProvider="target">
-                                                                        <rect key="frame" x="79" y="1" width="49" height="17"/>
+                                                                        <rect key="frame" x="69" y="1" width="49" height="17"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
                                                                             <button verticalHuggingPriority="750" id="4a9-J0-ruf">
@@ -125,7 +126,7 @@
                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                 <prototypeCellViews>
                                                                     <tableCellView id="iYj-Ud-yGU">
-                                                                        <rect key="frame" x="131" y="1" width="141" height="17"/>
+                                                                        <rect key="frame" x="121" y="1" width="141" height="17"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
                                                                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" id="qsc-jC-vJQ">
@@ -157,7 +158,7 @@
                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                 <prototypeCellViews>
                                                                     <tableCellView id="aGt-d9-Qcx" customClass="FriendlyNameCellView" customModule="MonitorControl" customModuleProvider="target">
-                                                                        <rect key="frame" x="275" y="1" width="141" height="17"/>
+                                                                        <rect key="frame" x="265" y="1" width="141" height="17"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
                                                                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" id="CB1-x8-d9G">
@@ -192,7 +193,7 @@
                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                 <prototypeCellViews>
                                                                     <tableCellView id="vw4-Us-VHk">
-                                                                        <rect key="frame" x="419" y="1" width="76" height="17"/>
+                                                                        <rect key="frame" x="409" y="1" width="76" height="17"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
                                                                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" id="z5b-Gr-EmC">
@@ -224,7 +225,7 @@
                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                 <prototypeCellViews>
                                                                     <tableCellView id="eVa-Md-Avh">
-                                                                        <rect key="frame" x="498" y="1" width="76" height="17"/>
+                                                                        <rect key="frame" x="488" y="1" width="76" height="17"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
                                                                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" id="NK1-rO-I0Z">
@@ -256,7 +257,7 @@
                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                 <prototypeCellViews>
                                                                     <tableCellView id="C4F-JT-GfP">
-                                                                        <rect key="frame" x="577" y="1" width="80" height="17"/>
+                                                                        <rect key="frame" x="567" y="1" width="80" height="17"/>
                                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                                         <subviews>
                                                                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" id="4Vl-7d-eft">
@@ -326,9 +327,6 @@
                         <subviews>
                             <gridView xPlacement="leading" yPlacement="fill" rowAlignment="none" rowSpacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="noT-gJ-0yS">
                                 <rect key="frame" x="20" y="20" width="651" height="411"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="400" id="QHC-Rw-h2u"/>
-                                </constraints>
                                 <rows>
                                     <gridRow bottomPadding="-5" id="d70-FX-dma"/>
                                     <gridRow bottomPadding="-10" id="QQ6-z4-SQj"/>
@@ -605,12 +603,12 @@
                                 <rect key="frame" x="20" y="20" width="651" height="236"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="651" id="Fi1-mP-sEi"/>
-                                    <constraint firstAttribute="height" constant="236" id="Ggf-ge-6gP"/>
+                                    <constraint firstAttribute="height" constant="236" id="Ggf-ge-6gP" userLabel="height &gt;= 236"/>
                                 </constraints>
                                 <rows>
                                     <gridRow height="16" id="bZa-uq-5i7"/>
-                                    <gridRow height="160" id="5cy-5l-MhF"/>
-                                    <gridRow height="20" id="1RH-qe-bKm"/>
+                                    <gridRow id="5cy-5l-MhF"/>
+                                    <gridRow id="1RH-qe-bKm"/>
                                 </rows>
                                 <columns>
                                     <gridColumn xPlacement="fill" width="651" id="Z74-3T-hch"/>
@@ -676,7 +674,7 @@
                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                 <prototypeCellViews>
                                                                     <tableCellView id="OH7-e2-Xoh" customClass="FriendlyNameCellView" customModule="MonitorControl" customModuleProvider="target">
-                                                                        <rect key="frame" x="11" y="1" width="151" height="20"/>
+                                                                        <rect key="frame" x="1" y="1" width="151" height="20"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
                                                                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" id="aqx-sQ-YMe">
@@ -708,7 +706,7 @@
                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                 <prototypeCellViews>
                                                                     <tableCellView id="YSF-wp-a89">
-                                                                        <rect key="frame" x="165" y="1" width="98" height="20"/>
+                                                                        <rect key="frame" x="155" y="1" width="98" height="20"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
                                                                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" id="4mP-DS-UcD">
@@ -740,14 +738,14 @@
                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                 <prototypeCellViews>
                                                                     <tableCellView id="ZCd-vc-3fw" customClass="PollingModeCellView" customModule="MonitorControl" customModuleProvider="target">
-                                                                        <rect key="frame" x="265" y="1" width="120" height="23"/>
+                                                                        <rect key="frame" x="256" y="1" width="120" height="23"/>
                                                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                                         <subviews>
                                                                             <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7FH-uw-jcn">
                                                                                 <rect key="frame" x="-3" y="-2" width="127" height="25"/>
-                                                                                <popUpButtonCell key="cell" type="push" title="None" bezelStyle="rounded" alignment="center" lineBreakMode="truncatingTail" borderStyle="border" inset="2" selectedItem="Riq-uM-bTs" id="M5p-a2-UEs">
+                                                                                <popUpButtonCell key="cell" type="push" title="Normal" bezelStyle="rounded" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" tag="2" inset="2" selectedItem="Riq-uM-bTs" id="M5p-a2-UEs">
                                                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                                                    <font key="font" metaFont="system"/>
+                                                                                    <font key="font" metaFont="menu"/>
                                                                                     <menu key="menu" id="Nil-kM-Hvj">
                                                                                         <items>
                                                                                             <menuItem title="None" id="FoA-yh-Yx3"/>
@@ -787,7 +785,7 @@
                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                 <prototypeCellViews>
                                                                     <tableCellView id="dEe-qK-55M" customClass="PollingCountCellView" customModule="MonitorControl" customModuleProvider="target">
-                                                                        <rect key="frame" x="389" y="1" width="90" height="20"/>
+                                                                        <rect key="frame" x="379" y="1" width="90" height="20"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
                                                                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" id="2ys-EO-duG">
@@ -819,7 +817,7 @@
                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                 <prototypeCellViews>
                                                                     <tableCellView id="cOJ-Ph-muT" customClass="LongerDelayCellView" customModule="MonitorControl" customModuleProvider="target">
-                                                                        <rect key="frame" x="482" y="1" width="84" height="17"/>
+                                                                        <rect key="frame" x="472" y="1" width="84" height="17"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
                                                                             <button verticalHuggingPriority="750" id="cmY-eY-p4P">
@@ -849,7 +847,7 @@
                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                 <prototypeCellViews>
                                                                     <tableCellView id="iWx-Xs-DXV" customClass="HideOsdCellView" customModule="MonitorControl" customModuleProvider="target">
-                                                                        <rect key="frame" x="569" y="1" width="88" height="17"/>
+                                                                        <rect key="frame" x="559" y="1" width="88" height="17"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
                                                                             <button verticalHuggingPriority="750" id="rW9-Zy-n6z">

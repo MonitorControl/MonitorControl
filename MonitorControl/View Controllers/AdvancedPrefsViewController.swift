@@ -53,11 +53,7 @@ class AdvancedPrefsViewController: NSViewController, PreferencePane, NSTableView
         if modalResponse == NSApplication.ModalResponse.alertFirstButtonReturn {
           DisplayManager.shared.resetSwBrightness()
           app.statusItem.isVisible = true
-          if let bundleID = Bundle.main.bundleIdentifier {
-            UserDefaults.standard.removePersistentDomain(forName: bundleID)
-            NotificationCenter.default.post(name: Notification.Name(Utils.PrefKeys.preferenceReset.rawValue), object: nil)
-            os_log("Resetting all preferences.")
-          }
+          NotificationCenter.default.post(name: Notification.Name(Utils.PrefKeys.preferenceReset.rawValue), object: nil)
         }
       })
     }
