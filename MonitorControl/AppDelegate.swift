@@ -193,6 +193,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       DisplayManager.shared.restoreSwBrightness()
     }
     self.updateArm64AVServices()
+    NotificationCenter.default.post(name: Notification.Name(Utils.PrefKeys.displayListUpdate.rawValue), object: nil)
     var controllableExternalDisplays: [ExternalDisplay] = []
     if prefs.bool(forKey: Utils.PrefKeys.fallbackSw.rawValue) {
       controllableExternalDisplays = DisplayManager.shared.getNonVirtualExternalDisplays()

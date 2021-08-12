@@ -4,11 +4,7 @@ import CoreMedia
 class DisplayManager {
   public static let shared = DisplayManager()
 
-  private var displays: [Display] {
-    didSet {
-      NotificationCenter.default.post(name: Notification.Name(Utils.PrefKeys.displayListUpdate.rawValue), object: nil)
-    }
-  }
+  private var displays: [Display]
 
   init() {
     self.displays = []

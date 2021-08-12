@@ -65,6 +65,7 @@ class DisplayPrefsViewController: NSViewController, PreferencePane, NSTableViewD
   // MARK: - Table datasource
 
   @objc func loadDisplayList() {
+    os_log("Reloading display preferences display list", type: .info)
     self.displays = DisplayManager.shared.getAllDisplays()
     self.displayList.reloadData()
   }

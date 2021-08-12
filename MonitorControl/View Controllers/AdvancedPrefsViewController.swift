@@ -66,6 +66,7 @@ class AdvancedPrefsViewController: NSViewController, PreferencePane, NSTableView
   }
 
   @objc func loadDisplayList() {
+    os_log("Reloading advanced preferences display list", type: .info)
     self.displays = DisplayManager.shared.getDdcCapableDisplays()
     self.displayList.reloadData()
   }
