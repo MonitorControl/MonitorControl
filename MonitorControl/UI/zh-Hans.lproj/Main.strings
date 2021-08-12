@@ -1,6 +1,9 @@
 /* Class = "NSButtonCell"; title = "Change Brightness/Volume for all screens"; ObjectID = "0Z7-PQ-Bl8"; */
 "0Z7-PQ-Bl8.title" = "将亮度/音量调节应用于所有显示器";
 
+/* Class = "NSTextFieldCell"; title = "MonitorControl"; ObjectID = "1PJ-14-Bvn"; */
+"1PJ-14-Bvn.title" = "MonitorControl";
+
 /* Class = "NSButtonCell"; title = "Reset Preferences"; ObjectID = "4Pj-3t-PJr"; */
 "4Pj-3t-PJr.title" = "重置偏好设置";
 
@@ -19,6 +22,9 @@
 /* Class = "NSMenuItem"; title = "Custom"; ObjectID = "Cle-DD-vR7"; */
 "Cle-DD-vR7.title" = "自定义";
 
+/* Class = "NSButtonCell"; title = "Visit GitHub site"; ObjectID = "Cln-uW-2dd"; */
+"Cln-uW-2dd.title" = "Visit GitHub site";
+
 /* Class = "NSTableColumn"; headerCell.title = "ID"; ObjectID = "dgp-q7-cBK"; */
 "dgp-q7-cBK.headerCell.title" = "ID";
 
@@ -28,10 +34,16 @@
 /* Class = "NSTableColumn"; headerCell.title = "Display Name"; ObjectID = "dNl-I0-hcg"; */
 "dNl-I0-hcg.headerCell.title" = "显示器名字";
 
+/* Class = "NSTextFieldCell"; title = "Copyright Ⓒ MonitorControl, 0000"; ObjectID = "e0q-fb-k7R"; */
+"e0q-fb-k7R.title" = "Copyright Ⓒ MonitorControl, 0000";
+
 /* Class = "NSMenuItem"; title = "Minimal"; ObjectID = "Eq3-z9-yIo"; */
 "Eq3-z9-yIo.title" = "少量";
 
-/* Class = "NSButtonCell"; title = "Further lower brightness via software shading"; ObjectID = "fhy-Er-0aI"; */
+/* Class = "NSButtonCell"; title = "Issues and feature requests"; ObjectID = "eUG-vD-C3W"; */
+"eUG-vD-C3W.title" = "Issues and feature requests";
+
+/* Class = "NSButtonCell"; title = "Further lower brightness via software dimming"; ObjectID = "fhy-Er-0aI"; */
 "fhy-Er-0aI.title" = "Further lower brightness via software shading";
 
 /* Class = "NSMenuItem"; title = "None"; ObjectID = "FoA-yh-Yx3"; */
@@ -64,7 +76,7 @@
 /* Class = "NSTextFieldCell"; title = "Use the media keys of your keyboard to control Brightness & Volume."; ObjectID = "K2r-aD-eec"; */
 "K2r-aD-eec.title" = "You can control the Brighness and Volume of your display using the Brightness and Volume keys off Apple Keyboards.";
 
-/* Class = "NSButtonCell"; title = "Fallback to software control if required"; ObjectID = "kMa-3q-udl"; */
+/* Class = "NSButtonCell"; title = "Fallback to software dimming if required"; ObjectID = "kMa-3q-udl"; */
 "kMa-3q-udl.title" = "Fallback to software control if required";
 
 /* Class = "NSButton"; ibShadowedToolTip = "More Info"; ObjectID = "kqn-gU-mZX"; */
@@ -79,7 +91,7 @@
 /* Class = "NSTableColumn"; headerCell.title = "Hide OSD"; ObjectID = "MPF-Mr-zVU"; */
 "MPF-Mr-zVU.headerCell.title" = "隐藏 OSD";
 
-/* Class = "NSTextFieldCell"; title = "If an external display can't be controlled, software shading will be used instead."; ObjectID = "n4V-jQ-1Ri"; */
+/* Class = "NSTextFieldCell"; title = "If an external display can't be controlled, software dimming will be used instead."; ObjectID = "n4V-jQ-1Ri"; */
 "n4V-jQ-1Ri.title" = "If an external display can't be controlled, software shading will be used. Only brightness control is available in this mode.";
 
 /* Class = "NSMenuItem"; title = "Volume only"; ObjectID = "NLP-dU-Dam"; */
@@ -99,6 +111,9 @@
 
 /* Class = "NSMenuItem"; title = "Normal"; ObjectID = "Riq-uM-bTs"; */
 "Riq-uM-bTs.title" = "正常";
+
+/* Class = "NSTextFieldCell"; title = "@the0neyouseek\n@reitermarkus\n@JoniVR\n@waydabber"; ObjectID = "TKd-J8-Iyk"; */
+"TKd-J8-Iyk.title" = "@the0neyouseek\n@reitermarkus\n@JoniVR\n@waydabber";
 
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "UBV-gO-AZz"; */
 "UBV-gO-AZz.title" = "Text Cell";
@@ -121,7 +136,7 @@
 /* Class = "NSButtonCell"; title = "Show contrast slider in menu"; ObjectID = "xSI-8W-Xd0"; */
 "xSI-8W-Xd0.title" = "显示对比度滑动条";
 
-/* Class = "NSTextFieldCell"; title = "This lets you further lower brightness via software shading even after display has reached zero brightness."; ObjectID = "yeg-GN-SuO"; */
+/* Class = "NSTextFieldCell"; title = "This lets you further lower brightness via software dimming even after display has reached zero brightness."; ObjectID = "yeg-GN-SuO"; */
 "yeg-GN-SuO.title" = "This lets you further lower brightness via software shading even after display has reached zero brightness.";
 
 /* Class = "NSTableColumn"; headerCell.title = "Polling Count"; ObjectID = "ytT-up-Dhs"; */
@@ -136,7 +151,7 @@
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "as0-t3-Aub"; */
 "as0-t3-Aub.title" = "";
 
-/* Class = "NSTextFieldCell"; title = "v0.0.0 build 0 (Apple)"; ObjectID = "mBs-6m-13Q"; */
+/* Class = "NSTextFieldCell"; title = "Version 0.0.0 Build 0000 - Platform"; ObjectID = "mBs-6m-13Q"; */
 "mBs-6m-13Q.title" = "";
 
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "vkG-RF-Yne"; */

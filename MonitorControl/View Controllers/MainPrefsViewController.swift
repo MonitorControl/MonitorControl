@@ -18,7 +18,6 @@ class MainPrefsViewController: NSViewController, PreferencePane {
 
   let prefs = UserDefaults.standard
 
-  @IBOutlet var versionLabel: NSTextField!
   @IBOutlet var startAtLogin: NSButton!
   @IBOutlet var hideMenuIcon: NSButton!
   @IBOutlet var showContrastSlider: NSButton!
@@ -29,7 +28,6 @@ class MainPrefsViewController: NSViewController, PreferencePane {
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    self.setAppInfo()
   }
 
   @available(macOS, deprecated: 10.10)
@@ -134,24 +132,5 @@ class MainPrefsViewController: NSViewController, PreferencePane {
       os_log("Toggle keys listened for state state: %{public}@", type: .info, sender.selectedItem?.title ?? "")
     #endif
     NotificationCenter.default.post(name: Notification.Name(Utils.PrefKeys.listenFor.rawValue), object: nil)
-  }
-
-  fileprivate func setAppInfo() {
-    let versionName = NSLocalizedString("v", comment: "v")
-    let buildName = NSLocalizedString("b", comment: "b")
-    let versionNumber = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") ?? "error"
-    let buildNumber = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") ?? "error"
-
-    #if arch(arm64)
-
-      let arch: String = NSLocalizedString("arm64", comment: "Apple Silicon designation (shown after the version number in Preferences)")
-
-    #else
-
-      let arch: String = NSLocalizedString("x64", comment: "Intel designation (shown after the version number in Preferences)")
-
-    #endif
-
-    self.versionLabel.stringValue = "\(versionName)\(versionNumber) \(buildName)\(buildNumber) \(arch)"
   }
 }

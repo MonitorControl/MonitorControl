@@ -34,6 +34,7 @@
 		AA16139B26BE772E00DCF027 /* Arm64DDCUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA16139A26BE772E00DCF027 /* Arm64DDCUtils.swift */; };
 		AA3B4A2826AE103C00B74CD2 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = AA3B4A2726AE103C00B74CD2 /* README.md */; };
 		AA3B4A2A26AE108E00B74CD2 /* Apple Silicon.md in Resources */ = {isa = PBXBuildFile; fileRef = AA3B4A2926AE108E00B74CD2 /* Apple Silicon.md */; };
+		AA665A5D26C5892800FEF2C1 /* AboutPrefsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA665A5C26C5892800FEF2C1 /* AboutPrefsViewController.swift */; };
 		AA9AE86F26B5BF3D00B6CA65 /* OSD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA9AE86E26B5BF3D00B6CA65 /* OSD.framework */; };
 		AA9AE87126B5BFB700B6CA65 /* CoreDisplay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA9AE87026B5BFB700B6CA65 /* CoreDisplay.framework */; };
 		AADB625A26BC196900DFFAA5 /* DisplayServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AADB625926BC196900DFFAA5 /* DisplayServices.framework */; };
@@ -109,6 +110,7 @@
 		AA16139A26BE772E00DCF027 /* Arm64DDCUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Arm64DDCUtils.swift; sourceTree = "<group>"; };
 		AA3B4A2726AE103C00B74CD2 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		AA3B4A2926AE108E00B74CD2 /* Apple Silicon.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "Apple Silicon.md"; sourceTree = "<group>"; };
+		AA665A5C26C5892800FEF2C1 /* AboutPrefsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutPrefsViewController.swift; sourceTree = "<group>"; };
 		AA6686EF26B8172E00AF74A2 /* hu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hu; path = ../hu.lproj/Main.strings; sourceTree = "<group>"; };
 		AA6686F026B8172E00AF74A2 /* hu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hu; path = hu.lproj/Main.strings; sourceTree = "<group>"; };
 		AA6686F126B8172E00AF74A2 /* hu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hu; path = hu.lproj/MainMenu.strings; sourceTree = "<group>"; };
@@ -290,6 +292,7 @@
 				F0445D3F200259C10025AE82 /* DisplayPrefsViewController.swift */,
 				F0445D3720023E710025AE82 /* MainPrefsViewController.swift */,
 				6C0CCB25228F4F720037D2C5 /* AdvancedPrefsViewController.swift */,
+				AA665A5C26C5892800FEF2C1 /* AboutPrefsViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -537,6 +540,7 @@
 				6CCB278622D5315200619B05 /* HideOsdCellView.swift in Sources */,
 				6CC260F6256AD8F900613714 /* Preferences+Extension.swift in Sources */,
 				6CD444C322D4FBB8005BFD3D /* LongerDelayCellView.swift in Sources */,
+				AA665A5D26C5892800FEF2C1 /* AboutPrefsViewController.swift in Sources */,
 				F03FE4C0228DF62B001F59A4 /* FriendlyNameCellView.swift in Sources */,
 				6C2EA1CF228F7DFB00060E3F /* PollingMode.swift in Sources */,
 				6CBFE27C23DB27A200D1BC41 /* InternalDisplay.swift in Sources */,

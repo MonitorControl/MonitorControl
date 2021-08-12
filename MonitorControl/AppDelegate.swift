@@ -24,13 +24,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     let mainPrefsVc = storyboard.instantiateController(withIdentifier: "MainPrefsVC") as? MainPrefsViewController
     let displayPrefsVc = storyboard.instantiateController(withIdentifier: "DisplayPrefsVC") as? DisplayPrefsViewController
     let advancedPrefsVc = storyboard.instantiateController(withIdentifier: "AdvancedPrefsVC") as? AdvancedPrefsViewController
+    let aboutPrefsVc = storyboard.instantiateController(withIdentifier: "AboutPrefsVC") as? AboutPrefsViewController
     return PreferencesWindowController(
       preferencePanes: [
         mainPrefsVc!,
         displayPrefsVc!,
         advancedPrefsVc!,
+        aboutPrefsVc!,
       ],
-      animated: true // causes glitchy animations
+      animated: true // causes nice (some say glitch) animations
     )
   }()
 

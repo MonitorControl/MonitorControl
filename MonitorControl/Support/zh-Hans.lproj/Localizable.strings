@@ -1,5 +1,11 @@
+/* Shown in the main prefs window */
+"About" = "About";
+
 /* Shown in the main prefs window  */
 "Advanced" = "进阶设置";
+
+/* Apple Silicon designation (shown after the version number in Preferences) */
+"Apple Silicon" = "Apple Silicon";
 
 /* Shown in the alert dialog */
 "Are you sure you want to enable a longer delay? Doing so may freeze your system and require a restart. Start at login will be disabled as a safety measure." = "Are you sure you want to enable a longer delay? Doing so may freeze your system and require a restart. Start at login will be disabled as a safety measure.";
@@ -16,8 +22,14 @@
 /* Sown in menu */
 "Brightness" = "亮度";
 
+/* Build */
+"Build" = "Build";
+
 /* Shown in menu */
 "Contrast" = "对比度";
+
+/* Version */
+"Copyright Ⓒ MonitorControl, " = "Copyright Ⓒ MonitorControl, ";
 
 /* No comment provided by engineer. */
 "Display" = "显示器";
@@ -27,6 +39,9 @@
 
 /* Shown in the main prefs window */
 "General" = "通用";
+
+/* Intel designation (shown after the version number in Preferences) */
+"Intel" = "Intel";
 
 /* Shown in the alert dialog */
 "No" = "No";
@@ -50,6 +65,9 @@
 
 /* v */
 "v" = "v";
+
+/* Version */
+"Version" = "Version";
 
 /* Shown in menu */
 "Volume" = "音量";
