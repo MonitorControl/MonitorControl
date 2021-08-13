@@ -186,13 +186,13 @@ class ExternalDisplay: Display {
     }
 
     if swAfterBirghtnessMode {
-      let currentSwBrightness: UInt8 = self.getSwBrightness()
+      let currentSwBrightness = UInt8(self.getSwBrightnessPrefValue())
       var swBirghtnessValue = self.calcNewValue(currentValue: Int(currentSwBrightness), maxValue: Int(getSwMaxBrightness()), isUp: isUp, isSmallIncrement: isSmallIncrement)
       if swBirghtnessValue >= Int(getSwMaxBrightness()) {
         swBirghtnessValue = Int(getSwMaxBrightness())
         swAfterBirghtnessMode = false
       }
-      if self.setSwBrightness(value: UInt8(swBirghtnessValue)) {
+      if self.setSwBrightness(value: UInt8(swBirghtnessValue), fast: true) {
         self.showOsd(command: .brightness, value: self.getValue(for: .brightness), roundChiclet: !isSmallIncrement)
       }
     }

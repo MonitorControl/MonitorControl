@@ -23,7 +23,7 @@ class Display {
   internal var modelNumber: UInt32?
   internal var isEnabled: Bool {
     get {
-      return self.prefs.object(forKey: "\(self.identifier)-state") as? Bool ?? true
+      self.prefs.object(forKey: "\(self.identifier)-state") as? Bool ?? true
     }
     set {
       self.prefs.set(newValue, forKey: "\(self.identifier)-state")
@@ -69,11 +69,40 @@ class Display {
     return self.identifier
   }
 
-  func setSwBrightness(value: UInt8) -> Bool {
+  func swBrightnessTransform(value: Float, reverse: Bool = false) -> Float {
+    let lowTreshold: Float = 0.05 // We don't allow decrease lower than 5% for safety reasons and because some displays blank off after a while on full screen black
+    if !reverse {
+      return value * (1 - lowTreshold) + lowTreshold
+    } else {
+      return (value - lowTreshold) / (1 - lowTreshold)
+    }
+  }
+
+  func setSwBrightness(value: UInt8, fast: Bool = false) -> Bool {
+    var redMin: CGGammaValue = 0
+    var redMax: CGGammaValue = 0
+    var redGamma: CGGammaValue = 0
+    var greenMin: CGGammaValue = 0
+    var greenMax: CGGammaValue = 0
+    var greenGamma: CGGammaValue = 0
+    var blueMin: CGGammaValue = 0
+    var blueMax: CGGammaValue = 0
+    var blueGamma: CGGammaValue = 0
     let brightnessValue: UInt8 = min(getSwMaxBrightness(), value)
     var floatValue = Float(Float(brightnessValue) / Float(self.getSwMaxBrightness()))
-    floatValue = floatValue * 0.95 + 0.05 // We don't allow decrease lower than 5% for safety reasons and because some displays blank off after a while on full screen black
-    if CGSetDisplayTransferByFormula(self.identifier, 0, floatValue, 1, 0, floatValue, 1, 0, floatValue, 1) == CGError.success {
+    floatValue = self.swBrightnessTransform(value: floatValue)
+    os_log("setting software brightness to: %{public}@", type: .debug, String(floatValue))
+    if CGGetDisplayTransferByFormula(self.identifier, &redMin, &redMax, &redGamma, &greenMin, &greenMax, &greenGamma, &blueMin, &blueMax, &blueGamma) == CGError.success {
+      if !fast {
+        DispatchQueue.global(qos: .userInitiated).async {
+          for value in stride(from: redMax, to: floatValue, by: 0.0025 * (redMax > floatValue ? -1 : 1)) {
+            CGSetDisplayTransferByFormula(self.identifier, 0, value, redGamma, 0, value, greenGamma, 0, value, blueGamma)
+            Thread.sleep(forTimeInterval: 0.001)
+          }
+        }
+      } else {
+        CGSetDisplayTransferByFormula(self.identifier, 0, floatValue, redGamma, 0, floatValue, greenGamma, 0, floatValue, blueGamma)
+      }
       self.saveSwBirghtnessPrefValue(Int(brightnessValue))
       return true
     }
@@ -91,7 +120,8 @@ class Display {
     var blueMax: CGGammaValue = 0
     var blueGamma: CGGammaValue = 0
     if CGGetDisplayTransferByFormula(self.identifier, &redMin, &redMax, &redGamma, &greenMin, &greenMax, &greenGamma, &blueMin, &blueMax, &blueGamma) == CGError.success {
-      let brightnessValue = UInt8(min(max(redMax, greenMax, blueMax), 1) * Float(self.getSwMaxBrightness()))
+      let brightnessValue = UInt8(round(swBrightnessTransform(value: max(redMax, greenMax, blueMax), reverse: true) * Float(self.getSwMaxBrightness())))
+      os_log("Current read software brightness is: %{public}@", type: .debug, String(brightnessValue))
       return brightnessValue
     }
     return self.getSwMaxBrightness()

@@ -19,6 +19,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   var accessibilityObserver: NSObjectProtocol!
   var reconfigureID: Int = 0 // dispatched reconfigure command ID
   var sleepID: Int = 0 // Don't reconfigure display as the system or display is sleeping or wake just recently.
+  let debugSw: Bool = false
   lazy var preferencesWindowController: PreferencesWindowController = {
     let storyboard = NSStoryboard(name: "Main", bundle: Bundle.main)
     let mainPrefsVc = storyboard.instantiateController(withIdentifier: "MainPrefsVC") as? MainPrefsViewController
@@ -114,7 +115,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
           //   externalDisplay.arm64ddc = true
           // }
           if !serviceMatch.isDiscouraged {
-            externalDisplay.arm64ddc = true // MARK: (point of interest when testing)
+            externalDisplay.arm64ddc = !debugSw ? true : false // MARK: (point of interest when testing)
           }
         }
       }
@@ -182,7 +183,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
           }
         }
       }
-      if CGDisplayIsBuiltin(onlineDisplayID) != 0 { // MARK: (point of interest for testing)
+      if !debugSw, CGDisplayIsBuiltin(onlineDisplayID) != 0 { // MARK: (point of interest for testing)
         display = InternalDisplay(id, name: name, vendorNumber: vendorNumber, modelNumber: modelNumber, isVirtual: isVirtual)
       } else {
         display = ExternalDisplay(id, name: name, vendorNumber: vendorNumber, modelNumber: modelNumber, isVirtual: isVirtual)
