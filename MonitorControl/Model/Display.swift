@@ -32,6 +32,12 @@ class Display {
 
   var isVirtual: Bool = false
 
+  var defaultGammaTableRed = [CGGammaValue](repeating: 0, count: 256)
+  var defaultGammaTableGreen = [CGGammaValue](repeating: 0, count: 256)
+  var defaultGammaTableBlue = [CGGammaValue](repeating: 0, count: 256)
+  var defaultGammaTableSampleCount: UInt32 = 0
+  var defaultGammaTablePeak: Float = 1
+
   private let prefs = UserDefaults.standard
 
   internal init(_ identifier: CGDirectDisplayID, name: String, vendorNumber: UInt32?, modelNumber: UInt32?, isVirtual: Bool = false) {
@@ -40,6 +46,7 @@ class Display {
     self.vendorNumber = vendorNumber
     self.modelNumber = modelNumber
     self.isVirtual = isVirtual
+    self.swUpdateDefaultGammaTable()
   }
 
   func stepBrightness(isUp _: Bool, isSmallIncrement _: Bool) {}
@@ -69,8 +76,16 @@ class Display {
     return self.identifier
   }
 
+  func swUpdateDefaultGammaTable() {
+    CGGetDisplayTransferByTable(self.identifier, 256, &self.defaultGammaTableRed, &self.defaultGammaTableGreen, &self.defaultGammaTableBlue, &self.defaultGammaTableSampleCount)
+    let redPeak = self.defaultGammaTableRed.max() ?? 0
+    let greenPeak = self.defaultGammaTableGreen.max() ?? 0
+    let bluePeak = self.defaultGammaTableBlue.max() ?? 0
+    self.defaultGammaTablePeak = max(redPeak, greenPeak, bluePeak)
+  }
+
   func swBrightnessTransform(value: Float, reverse: Bool = false) -> Float {
-    let lowTreshold: Float = 0.05 // We don't allow decrease lower than 5% for safety reasons and because some displays blank off after a while on full screen black
+    let lowTreshold: Float = 0.05 // We don't allow decrease lower than 5% for safety reasons and because some displays blank off after a while on full black screen due to energy saving settings
     if !reverse {
       return value * (1 - lowTreshold) + lowTreshold
     } else {
@@ -78,50 +93,44 @@ class Display {
     }
   }
 
-  func setSwBrightness(value: UInt8, fast: Bool = false) -> Bool {
-    var redMin: CGGammaValue = 0
-    var redMax: CGGammaValue = 0
-    var redGamma: CGGammaValue = 0
-    var greenMin: CGGammaValue = 0
-    var greenMax: CGGammaValue = 0
-    var greenGamma: CGGammaValue = 0
-    var blueMin: CGGammaValue = 0
-    var blueMax: CGGammaValue = 0
-    var blueGamma: CGGammaValue = 0
+  func setSwBrightness(value: UInt8, fast _: Bool = false) -> Bool {
     let brightnessValue: UInt8 = min(getSwMaxBrightness(), value)
-    var floatValue = Float(Float(brightnessValue) / Float(self.getSwMaxBrightness()))
-    floatValue = self.swBrightnessTransform(value: floatValue)
-    os_log("setting software brightness to: %{public}@", type: .debug, String(floatValue))
-    if CGGetDisplayTransferByFormula(self.identifier, &redMin, &redMax, &redGamma, &greenMin, &greenMax, &greenGamma, &blueMin, &blueMax, &blueGamma) == CGError.success {
-      if !fast {
-        DispatchQueue.global(qos: .userInitiated).async {
-          for value in stride(from: redMax, to: floatValue, by: 0.0025 * (redMax > floatValue ? -1 : 1)) {
-            CGSetDisplayTransferByFormula(self.identifier, 0, value, redGamma, 0, value, greenGamma, 0, value, blueGamma)
-            Thread.sleep(forTimeInterval: 0.001)
-          }
-        }
-      } else {
-        CGSetDisplayTransferByFormula(self.identifier, 0, floatValue, redGamma, 0, floatValue, greenGamma, 0, floatValue, blueGamma)
-      }
-      self.saveSwBirghtnessPrefValue(Int(brightnessValue))
-      return true
-    }
-    return false
+    var currentValue = Float(self.getSwBrightness()) / Float(self.getSwMaxBrightness())
+//  var currentValue = Float(self.getSwBrightnessPrefValue()) / Float(self.getSwMaxBrightness()) // Better for async version but is not right after display reconfiguration
+    self.saveSwBirghtnessPrefValue(Int(brightnessValue))
+    var newValue = Float(Float(brightnessValue)) / Float(self.getSwMaxBrightness())
+    currentValue = self.swBrightnessTransform(value: currentValue)
+    newValue = self.swBrightnessTransform(value: newValue)
+    os_log("setting software brightness to: %{public}@", type: .debug, String(newValue))
+    let gammaTableRed = self.defaultGammaTableRed.map { $0 * /* transientValue */ newValue }
+    let gammaTableGreen = self.defaultGammaTableGreen.map { $0 * /* transientValue */ newValue }
+    let gammaTableBlue = self.defaultGammaTableBlue.map { $0 * /* transientValue */ newValue }
+    CGSetDisplayTransferByTable(self.identifier, self.defaultGammaTableSampleCount, gammaTableRed, gammaTableGreen, gammaTableBlue)
+//  DispatchQueue.global(qos: .userInitiated).async {
+//    for transientValue in stride(from: currentValue, to: newValue, by: 0.0025 * (currentValue > newValue ? -1 : 1)) {
+//      let gammaTableRed = self.defaultGammaTableRed.map { $0 * transientValue }
+//      let gammaTableGreen = self.defaultGammaTableGreen.map { $0 * transientValue }
+//      let gammaTableBlue = self.defaultGammaTableBlue.map { $0 * transientValue }
+//      CGSetDisplayTransferByTable(self.identifier, self.defaultGammaTableSampleCount, gammaTableRed, gammaTableGreen, gammaTableBlue)
+//        Thread.sleep(forTimeInterval: 0.0005) // This will make things a bit nicer and mimic delay of DDC communication for consistency
+//    }
+//  }
+    return true
   }
 
   func getSwBrightness() -> UInt8 {
-    var redMin: CGGammaValue = 0
-    var redMax: CGGammaValue = 0
-    var redGamma: CGGammaValue = 0
-    var greenMin: CGGammaValue = 0
-    var greenMax: CGGammaValue = 0
-    var greenGamma: CGGammaValue = 0
-    var blueMin: CGGammaValue = 0
-    var blueMax: CGGammaValue = 0
-    var blueGamma: CGGammaValue = 0
-    if CGGetDisplayTransferByFormula(self.identifier, &redMin, &redMax, &redGamma, &greenMin, &greenMax, &greenGamma, &blueMin, &blueMax, &blueGamma) == CGError.success {
-      let brightnessValue = UInt8(round(swBrightnessTransform(value: max(redMax, greenMax, blueMax), reverse: true) * Float(self.getSwMaxBrightness())))
-      os_log("Current read software brightness is: %{public}@", type: .debug, String(brightnessValue))
+    var gammaTableRed = [CGGammaValue](repeating: 0, count: 256)
+    var gammaTableGreen = [CGGammaValue](repeating: 0, count: 256)
+    var gammaTableBlue = [CGGammaValue](repeating: 0, count: 256)
+    var gammaTableSampleCount: UInt32 = 0
+    if CGGetDisplayTransferByTable(self.identifier, 256, &gammaTableRed, &gammaTableGreen, &gammaTableBlue, &gammaTableSampleCount) == CGError.success {
+      let redPeak = gammaTableRed.max() ?? 0
+      let greenPeak = gammaTableGreen.max() ?? 0
+      let bluePeak = gammaTableBlue.max() ?? 0
+      let gammaTablePeak = max(redPeak, greenPeak, bluePeak)
+      let peakRatio = gammaTablePeak / self.defaultGammaTablePeak
+      let brightnessValue = UInt8(round(self.swBrightnessTransform(value: peakRatio, reverse: true) * Float(self.getSwMaxBrightness())))
+      os_log("Current software gammatable brightness is: %{public}@", type: .debug, String(brightnessValue))
       return brightnessValue
     }
     return self.getSwMaxBrightness()

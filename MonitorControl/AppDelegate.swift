@@ -124,8 +124,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   }
 
   func displayReconfigured() {
+    self.reconfigureID += 1
+    os_log("Bumping reconfigureID to %{public}@", type: .info, String(self.reconfigureID))
     if self.sleepID == 0 {
-      self.reconfigureID += 1
       let dispatchedReconfigureID = self.reconfigureID
       os_log("Display to be reconfigured with reconfigureID %{public}@", type: .info, String(dispatchedReconfigureID))
       DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
@@ -255,6 +256,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     NotificationCenter.default.addObserver(self, selector: #selector(handleFriendlyNameChanged), name: .friendlyName, object: nil)
     NotificationCenter.default.addObserver(self, selector: #selector(handlePreferenceReset), name: .preferenceReset, object: nil)
     NotificationCenter.default.addObserver(self, selector: #selector(audioDeviceChanged), name: Notification.Name.defaultOutputDeviceChanged, object: nil) // subscribe Audio output detector (SimplyCoreAudio)
+    NotificationCenter.default.addObserver(self, selector: #selector(colorSyncSettingsChanged), name: NSNotification.Name(rawValue: kColorSyncDisplayDeviceProfilesNotification.takeRetainedValue() as String), object: nil) // ColorSync change
+
     NSWorkspace.shared.notificationCenter.addObserver(self, selector: #selector(self.sleepNotification), name: NSWorkspace.screensDidSleepNotification, object: nil) // sleep and wake listeners
     NSWorkspace.shared.notificationCenter.addObserver(self, selector: #selector(self.wakeNotofication), name: NSWorkspace.screensDidWakeNotification, object: nil)
     NSWorkspace.shared.notificationCenter.addObserver(self, selector: #selector(self.sleepNotification), name: NSWorkspace.willSleepNotification, object: nil)
@@ -284,7 +287,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     if self.sleepID == dispatchedSleepID {
       os_log("Sober from sleep %{public}@", type: .info, String(self.sleepID))
       self.sleepID = 0
-      self.updateDisplays()
+      if self.reconfigureID != 0 {
+        let dispatchedReconfigureID = self.reconfigureID
+        os_log("Display needs reconfig after sober with reconfigureID %{public}@", type: .info, String(dispatchedReconfigureID))
+        self.updateDisplays(dispatchedReconfigureID: dispatchedReconfigureID)
+      }
     }
   }
 
@@ -479,5 +486,10 @@ extension AppDelegate: MediaKeyTapDelegate {
       }
     #endif
     self.updateMediaKeyTap()
+  }
+
+  @objc private func colorSyncSettingsChanged() {
+    // We should perform a protected colorsync reset here using CGDisplayRestoreColorSyncSettings(), black bug check and recovery if needed
+    // Afterwards we should perform a swUpdateDefaultGammaTable() for every display
   }
 }

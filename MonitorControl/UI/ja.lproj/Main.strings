@@ -4,9 +4,6 @@
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "2gr-xG-Byx"; */
 "2gr-xG-Byx.title" = "Text Cell";
 
-/* Class = "NSTextFieldCell"; title = "Please be aware that both of these features are currently incompatible with custom ColorSync Display Calibration Profiles!"; ObjectID = "3BD-NN-46v"; */
-"3BD-NN-46v.title" = "Please be aware that both of these features are currently incompatible with custom ColorSync Display Calibration Profiles!";
-
 /* Class = "NSButtonCell"; title = "Reset Preferences"; ObjectID = "4Pj-3t-PJr"; */
 "4Pj-3t-PJr.title" = "初期設定に戻す";
 

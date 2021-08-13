@@ -87,8 +87,7 @@ class DisplayManager {
   func restoreSwBrightnessForAllDisplays() {
     for externalDisplay in self.getExternalDisplays() {
       if externalDisplay.getValue(for: .brightness) == 0 || externalDisplay.isSw() {
-        // Out of caution we won't let it restore to complete darkness, not to interfere with login, etc. This is how Apple devices work as well.
-        _ = externalDisplay.setSwBrightness(value: UInt8(max(externalDisplay.getSwBrightnessPrefValue(), 20)))
+        _ = externalDisplay.setSwBrightness(value: UInt8(externalDisplay.getSwBrightnessPrefValue()))
       } else {
         _ = externalDisplay.setSwBrightness(value: externalDisplay.getSwMaxBrightness())
       }
