@@ -71,7 +71,8 @@ class Display {
 
   func setSwBrightness(value: UInt8) -> Bool {
     let brightnessValue: UInt8 = min(getSwMaxBrightness(), value)
-    let floatValue = Float(Float(brightnessValue) / Float(self.getSwMaxBrightness()))
+    var floatValue = Float(Float(brightnessValue) / Float(self.getSwMaxBrightness()))
+    floatValue = floatValue * 0.95 + 0.05 // We don't allow decrease lower than 5% for safety reasons and because some displays blank off after a while on full screen black
     if CGSetDisplayTransferByFormula(self.identifier, 0, floatValue, 1, 0, floatValue, 1, 0, floatValue, 1) == CGError.success {
       self.saveSwBirghtnessPrefValue(Int(brightnessValue))
       return true
@@ -94,6 +95,10 @@ class Display {
       return brightnessValue
     }
     return self.getSwMaxBrightness()
+  }
+
+  func resetSwBrightness() -> Bool {
+    return self.setSwBrightness(value: self.getSwMaxBrightness())
   }
 
   func saveSwBirghtnessPrefValue(_ value: Int) {

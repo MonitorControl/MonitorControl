@@ -71,10 +71,12 @@ class DisplayManager {
     self.displays = []
   }
 
-  func resetSwBrightness() {
+  func resetSwBrightnessForAllDisplays(settingsOnly: Bool = false) {
     for externalDisplay in self.getNonVirtualExternalDisplays() {
-      guard externalDisplay.setSwBrightness(value: externalDisplay.getSwMaxBrightness()) else {
-        continue
+      if !settingsOnly {
+        _ = externalDisplay.setSwBrightness(value: externalDisplay.getSwMaxBrightness())
+      } else {
+        externalDisplay.saveSwBirghtnessPrefValue(Int(externalDisplay.getSwMaxBrightness()))
       }
       if externalDisplay.isSw() {
         externalDisplay.saveValue(Int(externalDisplay.getSwMaxBrightness()), for: .brightness)
@@ -82,7 +84,7 @@ class DisplayManager {
     }
   }
 
-  func restoreSwBrightness() {
+  func restoreSwBrightnessForAllDisplays() {
     for externalDisplay in self.getExternalDisplays() {
       if externalDisplay.getValue(for: .brightness) == 0 || externalDisplay.isSw() {
         // Out of caution we won't let it restore to complete darkness, not to interfere with login, etc. This is how Apple devices work as well.

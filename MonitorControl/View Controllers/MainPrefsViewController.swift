@@ -119,7 +119,7 @@ class MainPrefsViewController: NSViewController, PreferencePane {
       self.prefs.set(true, forKey: Utils.PrefKeys.lowerSwAfterBrightness.rawValue)
     case .off:
       self.prefs.set(false, forKey: Utils.PrefKeys.lowerSwAfterBrightness.rawValue)
-      DisplayManager.shared.resetSwBrightness()
+      DisplayManager.shared.resetSwBrightnessForAllDisplays()
     default: break
     }
     #if DEBUG
@@ -133,6 +133,7 @@ class MainPrefsViewController: NSViewController, PreferencePane {
       self.prefs.set(true, forKey: Utils.PrefKeys.fallbackSw.rawValue)
     case .off:
       self.prefs.set(false, forKey: Utils.PrefKeys.fallbackSw.rawValue)
+      DisplayManager.shared.resetSwBrightnessForAllDisplays()
     default: break
     }
     #if DEBUG

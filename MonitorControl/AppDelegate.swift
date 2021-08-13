@@ -60,7 +60,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
   func applicationWillTerminate(_: Notification) {
     os_log("Goodbye!", type: .info)
-    DisplayManager.shared.resetSwBrightness()
+    DisplayManager.shared.resetSwBrightnessForAllDisplays()
     self.statusItem.isVisible = true
   }
 
@@ -114,7 +114,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
           //   externalDisplay.arm64ddc = true
           // }
           if !serviceMatch.isDiscouraged {
-            externalDisplay.arm64ddc = true // MARK: (point of interest when testing)
+            externalDisplay.arm64ddc = false // MARK: (point of interest when testing)
           }
         }
       }
@@ -182,7 +182,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
           }
         }
       }
-      if CGDisplayIsBuiltin(onlineDisplayID) != 0 { // MARK: (point of interest for testing)
+      if false, CGDisplayIsBuiltin(onlineDisplayID) != 0 { // MARK: (point of interest for testing)
         display = InternalDisplay(id, name: name, vendorNumber: vendorNumber, modelNumber: modelNumber, isVirtual: isVirtual)
       } else {
         display = ExternalDisplay(id, name: name, vendorNumber: vendorNumber, modelNumber: modelNumber, isVirtual: isVirtual)
@@ -190,9 +190,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       DisplayManager.shared.addDisplay(display: display)
     }
     if firstrun {
-      DisplayManager.shared.resetSwBrightness()
+      DisplayManager.shared.resetSwBrightnessForAllDisplays(settingsOnly: true)
     } else {
-      DisplayManager.shared.restoreSwBrightness()
+      if prefs.bool(forKey: Utils.PrefKeys.fallbackSw.rawValue) || prefs.bool(forKey: Utils.PrefKeys.lowerSwAfterBrightness.rawValue) {
+        DisplayManager.shared.restoreSwBrightnessForAllDisplays()
+      }
     }
     self.updateArm64AVServices()
     NotificationCenter.default.post(name: Notification.Name(Utils.PrefKeys.displayListUpdate.rawValue), object: nil)
@@ -422,7 +424,6 @@ extension AppDelegate: MediaKeyTapDelegate {
   }
 
   @objc func handleFallbackSwChanged() {
-    DisplayManager.shared.resetSwBrightness()
     self.updateDisplays()
   }
 
@@ -432,10 +433,13 @@ extension AppDelegate: MediaKeyTapDelegate {
 
   @objc func handlePreferenceReset() {
     os_log("Resetting all preferences.")
+    if prefs.bool(forKey: Utils.PrefKeys.fallbackSw.rawValue) || prefs.bool(forKey: Utils.PrefKeys.lowerSwAfterBrightness.rawValue) {
+      DisplayManager.shared.resetSwBrightnessForAllDisplays()
+    }
     if let bundleID = Bundle.main.bundleIdentifier {
       UserDefaults.standard.removePersistentDomain(forName: bundleID)
     }
-    DisplayManager.shared.resetSwBrightness()
+    app.statusItem.isVisible = true
     self.setDefaultPrefs()
     self.checkPermissions()
     self.updateMediaKeyTap()

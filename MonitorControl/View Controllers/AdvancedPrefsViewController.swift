@@ -51,8 +51,6 @@ class AdvancedPrefsViewController: NSViewController, PreferencePane, NSTableView
     if let window = self.view.window {
       alert.beginSheetModal(for: window, completionHandler: { modalResponse in
         if modalResponse == NSApplication.ModalResponse.alertFirstButtonReturn {
-          DisplayManager.shared.resetSwBrightness()
-          app.statusItem.isVisible = true
           NotificationCenter.default.post(name: Notification.Name(Utils.PrefKeys.preferenceReset.rawValue), object: nil)
         }
       })
