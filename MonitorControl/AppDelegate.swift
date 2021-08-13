@@ -114,7 +114,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
           //   externalDisplay.arm64ddc = true
           // }
           if !serviceMatch.isDiscouraged {
-            externalDisplay.arm64ddc = false // MARK: (point of interest when testing)
+            externalDisplay.arm64ddc = true // MARK: (point of interest when testing)
           }
         }
       }
@@ -182,7 +182,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
           }
         }
       }
-      if false, CGDisplayIsBuiltin(onlineDisplayID) != 0 { // MARK: (point of interest for testing)
+      if CGDisplayIsBuiltin(onlineDisplayID) != 0 { // MARK: (point of interest for testing)
         display = InternalDisplay(id, name: name, vendorNumber: vendorNumber, modelNumber: modelNumber, isVirtual: isVirtual)
       } else {
         display = ExternalDisplay(id, name: name, vendorNumber: vendorNumber, modelNumber: modelNumber, isVirtual: isVirtual)

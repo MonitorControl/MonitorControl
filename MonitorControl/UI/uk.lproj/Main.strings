@@ -1,6 +1,9 @@
 /* Class = "NSTextFieldCell"; title = "MonitorControl"; ObjectID = "1PJ-14-Bvn"; */
 "1PJ-14-Bvn.title" = "MonitorControl";
 
+/* Class = "NSTextFieldCell"; title = "Please be aware that both of these features are currently incompatible with custom ColorSync Display Calibration Profiles!"; ObjectID = "3BD-NN-46v"; */
+"3BD-NN-46v.title" = "Please be aware that both of these features are currently incompatible with custom ColorSync Display Calibration Profiles!";
+
 /* Class = "NSButtonCell"; title = "Reset Preferences"; ObjectID = "4Pj-3t-PJr"; */
 "4Pj-3t-PJr.title" = "Відновлення налаштувань";
 
