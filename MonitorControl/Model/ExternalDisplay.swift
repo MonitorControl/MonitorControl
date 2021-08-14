@@ -157,8 +157,16 @@ class ExternalDisplay: Display {
     }
   }
 
-  func isSw() -> Bool {
+  func isSwOnly() -> Bool {
     return (!self.arm64ddc && self.ddc == nil && !self.isVirtual)
+  }
+
+  func isSw() -> Bool {
+    if self.prefs.bool(forKey: "forceSw-\(self.identifier)") || self.isSwOnly() {
+      return true
+    } else {
+      return false
+    }
   }
 
   override func stepBrightness(isUp: Bool, isSmallIncrement: Bool) {

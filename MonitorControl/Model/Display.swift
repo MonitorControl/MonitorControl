@@ -30,6 +30,16 @@ class Display {
     }
   }
 
+  var forceSw: Bool {
+    get {
+      return self.prefs.bool(forKey: "forceSw-\(self.identifier)")
+    }
+    set {
+      self.prefs.set(newValue, forKey: "forceSw-\(self.identifier)")
+      os_log("Set `forceSw` to: %{public}@", type: .info, String(newValue))
+    }
+  }
+
   var isVirtual: Bool = false
 
   var defaultGammaTableRed = [CGGammaValue](repeating: 0, count: 256)

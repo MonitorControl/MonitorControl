@@ -78,7 +78,7 @@
                                                                 <customCell key="dataCell" alignment="left" id="Zxr-PK-6Na"/>
                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                 <prototypeCellViews>
-                                                                    <tableCellView id="1tR-yk-dKV" customClass="ButtonCellView" customModule="MonitorControl" customModuleProvider="target">
+                                                                    <tableCellView id="1tR-yk-dKV" customClass="ForceSwCellView" customModule="MonitorControl" customModuleProvider="target">
                                                                         <rect key="frame" x="69" y="1" width="49" height="17"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
@@ -90,12 +90,12 @@
                                                                                     <font key="font" metaFont="system"/>
                                                                                 </buttonCell>
                                                                                 <connections>
-                                                                                    <action selector="buttonToggled:" target="1tR-yk-dKV" id="i9X-im-3gv"/>
+                                                                                    <action selector="buttonToggled:" target="1tR-yk-dKV" id="V54-Rb-yBx"/>
                                                                                 </connections>
                                                                             </button>
                                                                         </subviews>
                                                                         <connections>
-                                                                            <outlet property="button" destination="4a9-J0-ruf" id="UGd-xq-uRA"/>
+                                                                            <outlet property="button" destination="4a9-J0-ruf" id="bd6-TW-2Py"/>
                                                                         </connections>
                                                                     </tableCellView>
                                                                 </prototypeCellViews>
