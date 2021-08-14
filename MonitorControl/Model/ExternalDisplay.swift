@@ -125,10 +125,8 @@ class ExternalDisplay: Display {
 
     let isAlreadySet = volumeOSDValue == self.getValue(for: .audioSpeakerVolume)
 
-    if !isAlreadySet {
-      guard self.writeDDCValues(command: .audioSpeakerVolume, value: volumeDDCValue) == true else {
-        return
-      }
+    guard self.writeDDCValues(command: .audioSpeakerVolume, value: volumeDDCValue) == true else {
+      return
     }
 
     if let muteValue = muteValue {
@@ -218,7 +216,7 @@ class ExternalDisplay: Display {
   }
 
   public func writeDDCValues(command: DDC.Command, value: UInt16, errorRecoveryWaitTime _: UInt32? = nil) -> Bool? {
-    guard app.sleepID == 0, app.reconfigureID == 0 else {
+    guard app.sleepID == 0, app.reconfigureID == 0, !self.forceSw else {
       return false
     }
     if Arm64DDCUtils.isArm64 {
@@ -239,7 +237,7 @@ class ExternalDisplay: Display {
 
   func readDDCValues(for command: DDC.Command, tries: UInt, minReplyDelay delay: UInt64?) -> (current: UInt16, max: UInt16)? {
     var values: (UInt16, UInt16)?
-    guard app.sleepID == 0, app.reconfigureID == 0 else {
+    guard app.sleepID == 0, app.reconfigureID == 0, !self.forceSw else {
       return values
     }
     if Arm64DDCUtils.isArm64 {
