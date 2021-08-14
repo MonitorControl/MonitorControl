@@ -1,0 +1,73 @@
+name: Bug report
+description: Create a report to help us improve
+labels: ["Type: Bug"]
+assignees: []
+body:
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Before opening the issue, have you...?
+      description: This is to help us minimize the amount of duplicate issues, which allows us more time for actual development.
+      options:
+        - label: Searched for existing issues
+          required: true
+        - label: Looked through [the wiki](https://github.com/MonitorControl/MonitorControl/wiki)
+          required: true
+        - label: Updated MonitorControl to the latest version (if applicable)
+          required: true
+  - type: textarea
+    id: description
+    validations:
+      required: true
+    attributes:
+      label: Describe the bug
+      description: A clear and concise description of what the bug is.
+      placeholder: "Example: When enabling the Show contrast slider in menu option, the application crashes when clicking on the menu icon."
+  - type: textarea
+    id: reproduction
+    validations:
+      required: true
+    attributes:
+      label: Steps to reproduce
+      description: Please provide some steps on how we can reproduce the problem. This helps us resolve it faster.
+      placeholder: |
+        1. Go to '...'
+        2. Click on '....'
+        3. Scroll down to '....'
+        4. See error
+  - type: textarea
+    id: expected
+    validations:
+      required: true
+    attributes:
+      label: Expected behavior
+      description: A clear and concise description of what you expected to happen.
+      placeholder: "Example: The app shows a contrast slider when clicking the icon in the menu bar and does not crash."
+  - type: textarea
+    validations:
+      required: false
+    attributes:
+      label: Anything else?
+      description: |
+        Screenshots? Links? References? Anything that will give us more context about the issue you are encountering!
+
+        Tip: You can attach images or log files by clicking this area to highlight it and then dragging files in.
+  - type: textarea
+    validations:
+      required: true
+    attributes:
+      label: Environment Information (please complete the following information)
+      description: |
+        examples:
+            - **macOS version**: 11.4 Big Sur
+            - **Mac model**: MacBook Pro (16-inch, 2019)
+            - **MonitorControl version**: v2.1.0
+            - **Monitor(s)**: LG 38GN950, LG 27UN83A
+            - **Apple Silicon/M1 (yes or no)**: no
+      value: |
+        - macOS version:
+        - Mac model:
+        - MonitorControl version:
+        - Monitor(s):
+        - Apple Silicon/M1 (yes or no): no
+      render: markdown
