@@ -20,6 +20,7 @@ class ForceSwCellView: NSTableCellView {
       default:
         break
       }
+      _ = display.resetSwBrightness()
       app.updateMenus()
     }
   }
