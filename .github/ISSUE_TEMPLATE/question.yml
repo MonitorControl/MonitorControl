@@ -11,8 +11,8 @@ body:
         - label: Searched for existing issues
           required: true
   - type: textarea
-  validations:
-    required: true
-  attributes:
-    label: Question
-    description: Ask your question, be specific. The more info you provide, the easier it will be for someone to answer!
+    validations:
+      required: true
+    attributes:
+      label: Question
+      description: Ask your question, be specific. The more info you provide, the easier it will be for someone to answer!
