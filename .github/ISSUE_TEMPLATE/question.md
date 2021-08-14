@@ -1,14 +1,18 @@
----
 name: Question
-about: I have a question related to this project
-title: ''
-labels: 'Type: Question'
-assignees: ''
-
----
-
-**Checklist**
-<!-- Before you submit your issue, please make sure to check the following boxes by putting an x in the [ ] (don't: [x ], [ x], do: [x]) -->
-- [ ] I have searched for existing issues
-
-**Question**
+description: I have a question related to this project
+labels: ["Type: Question"]
+assignees: []
+body:
+  - type: checkboxes
+    attributes:
+      label: Before opening the issue, have you...?
+      description: This is to help us minimize the amount of duplicate issues, which allows us more time for actual development.
+      options:
+        - label: Searched for existing issues
+          required: true
+  - type: textarea
+  validations:
+    required: true
+  attributes:
+    label: Question
+    description: Ask your question, be specific. The more info you provide, the easier it will be for someone to answer!
