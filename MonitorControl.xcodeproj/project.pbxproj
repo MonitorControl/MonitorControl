@@ -32,6 +32,7 @@
 		6CD444C322D4FBB8005BFD3D /* LongerDelayCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CD444C222D4FBB8005BFD3D /* LongerDelayCellView.swift */; };
 		6CDA0FCF26485A8300F52125 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6CDA0FCD26485A8300F52125 /* Main.storyboard */; };
 		AA16139B26BE772E00DCF027 /* Arm64DDCUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA16139A26BE772E00DCF027 /* Arm64DDCUtils.swift */; };
+		AA2DFAD726C80F2500E439AA /* ForceSwCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2DFAD626C80F2500E439AA /* ForceSwCellView.swift */; };
 		AA3B4A2826AE103C00B74CD2 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = AA3B4A2726AE103C00B74CD2 /* README.md */; };
 		AA3B4A2A26AE108E00B74CD2 /* Apple Silicon.md in Resources */ = {isa = PBXBuildFile; fileRef = AA3B4A2926AE108E00B74CD2 /* Apple Silicon.md */; };
 		AA665A5D26C5892800FEF2C1 /* AboutPrefsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA665A5C26C5892800FEF2C1 /* AboutPrefsViewController.swift */; };
@@ -108,6 +109,7 @@
 		6CDA0FD726485AAC00F52125 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
 		6CDA0FD826485AAE00F52125 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/Main.strings; sourceTree = "<group>"; };
 		AA16139A26BE772E00DCF027 /* Arm64DDCUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Arm64DDCUtils.swift; sourceTree = "<group>"; };
+		AA2DFAD626C80F2500E439AA /* ForceSwCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForceSwCellView.swift; sourceTree = "<group>"; };
 		AA3B4A2726AE103C00B74CD2 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		AA3B4A2926AE108E00B74CD2 /* Apple Silicon.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "Apple Silicon.md"; sourceTree = "<group>"; };
 		AA665A5C26C5892800FEF2C1 /* AboutPrefsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutPrefsViewController.swift; sourceTree = "<group>"; };
@@ -257,6 +259,7 @@
 				6C85EFDE22CBB54100227EA1 /* PollingCountCellView.swift */,
 				6CD444C222D4FBB8005BFD3D /* LongerDelayCellView.swift */,
 				6CCB278522D5315200619B05 /* HideOsdCellView.swift */,
+				AA2DFAD626C80F2500E439AA /* ForceSwCellView.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -530,6 +533,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA2DFAD726C80F2500E439AA /* ForceSwCellView.swift in Sources */,
 				56754EAF1D9A4016007BCDC5 /* AppDelegate.swift in Sources */,
 				6C85EFE122CC00AD00227EA1 /* NSNotification+Extension.swift in Sources */,
 				6C85EFDF22CBB54100227EA1 /* PollingCountCellView.swift in Sources */,
