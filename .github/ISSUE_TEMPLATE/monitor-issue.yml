@@ -20,6 +20,7 @@ body:
     attributes:
       label: Describe the issue
       description: A clear and concise description of the problem.
+      placeholder: Volume & Brightness controls are not working on my LG 38GN950.
   - type: textarea
     validations:
       required: true
