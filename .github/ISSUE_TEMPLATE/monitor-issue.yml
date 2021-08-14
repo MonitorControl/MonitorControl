@@ -1,5 +1,5 @@
 name: Monitor Issue
-description: MonitorControl is not working as expected on my Monitor
+description: MonitorControl is not working as expected on my monitor.
 labels: ["Type: Monitor Issue"]
 assignees: []
 body:
