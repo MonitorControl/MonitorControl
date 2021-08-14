@@ -22,7 +22,7 @@ body:
       description: A clear and concise description of what the bug is.
       validations:
         required: true
-      placeholder: Example: When enabling the Show contrast slider in menu option, the application crashes when clicking on the menu icon.
+      placeholder: "Example: When enabling the Show contrast slider in menu option, the application crashes when clicking on the menu icon."
   - type: textarea
     id: reproduction
     attributes:
@@ -42,7 +42,7 @@ body:
       description: A clear and concise description of what you expected to happen.
       validations:
         required: true
-      placeholder: Example: The app shows a contrast slider when clicking the icon in the menu bar and does not crash.
+      placeholder: "Example: The app shows a contrast slider when clicking the icon in the menu bar and does not crash."
   - type: textarea
     attributes:
       label: Anything else?
