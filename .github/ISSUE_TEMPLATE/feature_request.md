@@ -1,24 +1,39 @@
----
 name: Feature request
-about: Suggest an idea for this project
-title: ''
-labels: 'Type: Feature Request'
-assignees: ''
+description: Suggest an idea for this project
+labels: ["Type: Feature Request"]
+assignees: []
+body:
+  - type: checkboxes
+    attributes:
+      label: Before opening the issue, have you...?
+      description: This is to help us minimize the amount of duplicate issues, which allows us more time for actual development.
+      options:
+        - label: Searched for existing issues
+          required: true
+  - type: textarea
+    validations:
+      required: true
+    attributes:
+      label: Is your feature request related to a problem? Please describe
+      description: A clear and concise description of what the problem is. Ex. I'm always frustrated when [...]
+  - type: textarea
+    validations:
+      required: true
+    attributes:
+      label: Describe the solution you'd like
+      description: A clear and concise description of what you want to happen.
+  - type: textarea
+    validations:
+      required: true
+    attributes:
+      label: Describe alternatives you've considered
+      description: A clear and concise description of any alternative solutions or features you've considered.
+  - type: textarea
+    validations:
+      required: false
+    attributes:
+      label: Anything else?
+      description: |
+        Links? References? Anything that will give us more context about the issue you are encountering!
 
----
-
-**Checklist**
-<!-- Before you submit your issue, please make sure to check the following boxes by putting an x in the [ ] (don't: [x ], [ x], do: [x]) -->
-- [ ] I have searched for existing issues
-
-**Is your feature request related to a problem? Please describe.**
-A clear and concise description of what the problem is. Ex. I'm always frustrated when [...]
-
-**Describe the solution you'd like**
-A clear and concise description of what you want to happen.
-
-**Describe alternatives you've considered**
-A clear and concise description of any alternative solutions or features you've considered.
-
-**Additional context**
-Add any other context or screenshots about the feature request here.
+        Tip: You can attach images or log files by clicking this area to highlight it and then dragging files in.
