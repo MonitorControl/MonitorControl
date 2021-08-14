@@ -71,10 +71,10 @@ class DisplayManager {
     self.displays = []
   }
 
-  func resetSwBrightnessForAllDisplays(settingsOnly: Bool = false) {
+  func resetSwBrightnessForAllDisplays(settingsOnly: Bool = false, async: Bool = false) {
     for externalDisplay in self.getNonVirtualExternalDisplays() {
       if !settingsOnly {
-        _ = externalDisplay.setSwBrightness(value: externalDisplay.getSwMaxBrightness())
+        _ = externalDisplay.setSwBrightness(value: externalDisplay.getSwMaxBrightness(), smooth: async)
       } else {
         externalDisplay.saveSwBirghtnessPrefValue(Int(externalDisplay.getSwMaxBrightness()))
       }
@@ -84,12 +84,14 @@ class DisplayManager {
     }
   }
 
-  func restoreSwBrightnessForAllDisplays() {
+  func restoreSwBrightnessForAllDisplays(async: Bool = false) {
     for externalDisplay in self.getExternalDisplays() {
       if externalDisplay.getValue(for: .brightness) == 0 || externalDisplay.isSw() {
-        _ = externalDisplay.setSwBrightness(value: UInt8(externalDisplay.getSwBrightnessPrefValue()))
+        let savedPrefValue = externalDisplay.getSwBrightnessPrefValue()
+        externalDisplay.saveSwBirghtnessPrefValue(Int(externalDisplay.getSwBrightness()))
+        _ = externalDisplay.setSwBrightness(value: UInt8(savedPrefValue), smooth: async)
       } else {
-        _ = externalDisplay.setSwBrightness(value: externalDisplay.getSwMaxBrightness())
+        _ = externalDisplay.setSwBrightness(value: externalDisplay.getSwMaxBrightness(), smooth: async)
       }
     }
   }

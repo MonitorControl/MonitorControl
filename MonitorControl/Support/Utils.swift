@@ -66,7 +66,7 @@ class Utils: NSObject {
     var (currentValue, maxValue) = (UInt16(0), UInt16(0))
 
     if display.isSw(), command == DDC.Command.brightness {
-      (currentValue, maxValue) = (UInt16(display.getSwBrightness()), UInt16(display.getSwMaxBrightness()))
+      (currentValue, maxValue) = (UInt16(display.getSwBrightnessPrefValue()), UInt16(display.getSwMaxBrightness()))
     } else {
       if tries != 0 {
         values = display.readDDCValues(for: command, tries: tries, minReplyDelay: delay)

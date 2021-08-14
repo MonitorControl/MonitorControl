@@ -168,7 +168,7 @@ class ExternalDisplay: Display {
     let isAlreadySet = osdValue == self.getValue(for: .brightness)
 
     if self.isSw(), self.prefs.bool(forKey: Utils.PrefKeys.fallbackSw.rawValue) {
-      if self.setSwBrightness(value: UInt8(osdValue)) {
+      if self.setSwBrightness(value: UInt8(osdValue), smooth: true) {
         self.showOsd(command: .brightness, value: osdValue, roundChiclet: !isSmallIncrement)
         self.saveValue(osdValue, for: .brightness)
         if let slider = brightnessSliderHandler?.slider {
@@ -192,7 +192,7 @@ class ExternalDisplay: Display {
         swBirghtnessValue = Int(getSwMaxBrightness())
         swAfterBirghtnessMode = false
       }
-      if self.setSwBrightness(value: UInt8(swBirghtnessValue), fast: true) {
+      if self.setSwBrightness(value: UInt8(swBirghtnessValue), smooth: true) {
         self.showOsd(command: .brightness, value: self.getValue(for: .brightness), roundChiclet: !isSmallIncrement)
       }
     }

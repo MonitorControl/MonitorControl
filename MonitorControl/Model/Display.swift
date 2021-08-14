@@ -93,28 +93,36 @@ class Display {
     }
   }
 
-  func setSwBrightness(value: UInt8, fast _: Bool = false) -> Bool {
+  let swBrightnessSemaphore = DispatchSemaphore(value: 1)
+  func setSwBrightness(value: UInt8, smooth: Bool = false) -> Bool {
     let brightnessValue: UInt8 = min(getSwMaxBrightness(), value)
-    var currentValue = Float(self.getSwBrightness()) / Float(self.getSwMaxBrightness())
-//  var currentValue = Float(self.getSwBrightnessPrefValue()) / Float(self.getSwMaxBrightness()) // Better for async version but is not right after display reconfiguration
+    var currentValue = Float(self.getSwBrightnessPrefValue()) / Float(self.getSwMaxBrightness())
     self.saveSwBirghtnessPrefValue(Int(brightnessValue))
     var newValue = Float(Float(brightnessValue)) / Float(self.getSwMaxBrightness())
     currentValue = self.swBrightnessTransform(value: currentValue)
     newValue = self.swBrightnessTransform(value: newValue)
     os_log("setting software brightness to: %{public}@", type: .debug, String(newValue))
-    let gammaTableRed = self.defaultGammaTableRed.map { $0 * /* transientValue */ newValue }
-    let gammaTableGreen = self.defaultGammaTableGreen.map { $0 * /* transientValue */ newValue }
-    let gammaTableBlue = self.defaultGammaTableBlue.map { $0 * /* transientValue */ newValue }
-    CGSetDisplayTransferByTable(self.identifier, self.defaultGammaTableSampleCount, gammaTableRed, gammaTableGreen, gammaTableBlue)
-//  DispatchQueue.global(qos: .userInitiated).async {
-//    for transientValue in stride(from: currentValue, to: newValue, by: 0.0025 * (currentValue > newValue ? -1 : 1)) {
-//      let gammaTableRed = self.defaultGammaTableRed.map { $0 * transientValue }
-//      let gammaTableGreen = self.defaultGammaTableGreen.map { $0 * transientValue }
-//      let gammaTableBlue = self.defaultGammaTableBlue.map { $0 * transientValue }
-//      CGSetDisplayTransferByTable(self.identifier, self.defaultGammaTableSampleCount, gammaTableRed, gammaTableGreen, gammaTableBlue)
-//        Thread.sleep(forTimeInterval: 0.0005) // This will make things a bit nicer and mimic delay of DDC communication for consistency
-//    }
-//  }
+    if smooth {
+      DispatchQueue.global(qos: .userInteractive).async {
+        self.swBrightnessSemaphore.wait()
+        for transientValue in stride(from: currentValue, to: newValue, by: 0.0025 * (currentValue > newValue ? -1 : 1)) {
+          let gammaTableRed = self.defaultGammaTableRed.map { $0 * transientValue }
+          let gammaTableGreen = self.defaultGammaTableGreen.map { $0 * transientValue }
+          let gammaTableBlue = self.defaultGammaTableBlue.map { $0 * transientValue }
+          guard app.reconfigureID == 0 else {
+            return
+          }
+          CGSetDisplayTransferByTable(self.identifier, self.defaultGammaTableSampleCount, gammaTableRed, gammaTableGreen, gammaTableBlue)
+          Thread.sleep(forTimeInterval: 0.001) // Let's make things quick if not performed in the background
+        }
+        self.swBrightnessSemaphore.signal()
+      }
+    } else {
+      let gammaTableRed = self.defaultGammaTableRed.map { $0 * /* transientValue */ newValue }
+      let gammaTableGreen = self.defaultGammaTableGreen.map { $0 * /* transientValue */ newValue }
+      let gammaTableBlue = self.defaultGammaTableBlue.map { $0 * /* transientValue */ newValue }
+      CGSetDisplayTransferByTable(self.identifier, self.defaultGammaTableSampleCount, gammaTableRed, gammaTableGreen, gammaTableBlue)
+    }
     return true
   }
 

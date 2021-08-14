@@ -84,7 +84,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
   }
 
-  func clearDisplays() {
+  func clearMenu() {
     if self.statusMenu.items.count > 2 {
       var items: [NSMenuItem] = []
       for i in 0 ..< self.statusMenu.items.count - 2 {
@@ -95,9 +95,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         self.statusMenu.removeItem(item)
       }
     }
-
     self.monitorItems = []
-    DisplayManager.shared.clearDisplays()
   }
 
   func updateArm64AVServices() {
@@ -135,7 +133,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
   }
 
-  func updateMenus(controllableExternalDisplays: [ExternalDisplay]) {
+  func updateMenus() {
+    self.clearMenu()
+    var controllableExternalDisplays: [ExternalDisplay] = []
+    if prefs.bool(forKey: Utils.PrefKeys.fallbackSw.rawValue) {
+      controllableExternalDisplays = DisplayManager.shared.getNonVirtualExternalDisplays()
+    } else {
+      controllableExternalDisplays = DisplayManager.shared.getDdcCapableDisplays()
+    }
     if controllableExternalDisplays.count == 0 {
       let item = NSMenuItem()
       item.title = NSLocalizedString("No supported display found", comment: "Shown in menu")
@@ -161,7 +166,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     os_log("Request for updateDisplay with reconfigreID %{public}@", type: .info, String(dispatchedReconfigureID))
     self.reconfigureID = 0
-    self.clearDisplays()
+    DisplayManager.shared.clearDisplays()
     var onlineDisplayIDs = [CGDirectDisplayID](repeating: 0, count: 10)
     var displayCount: UInt32 = 0
     guard CGGetOnlineDisplayList(10, &onlineDisplayIDs, &displayCount) == .success else {
@@ -195,18 +200,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       DisplayManager.shared.resetSwBrightnessForAllDisplays(settingsOnly: true)
     } else {
       if prefs.bool(forKey: Utils.PrefKeys.fallbackSw.rawValue) || prefs.bool(forKey: Utils.PrefKeys.lowerSwAfterBrightness.rawValue) {
-        DisplayManager.shared.restoreSwBrightnessForAllDisplays()
+        DisplayManager.shared.restoreSwBrightnessForAllDisplays(async: true)
       }
     }
     self.updateArm64AVServices()
     NotificationCenter.default.post(name: Notification.Name(Utils.PrefKeys.displayListUpdate.rawValue), object: nil)
-    var controllableExternalDisplays: [ExternalDisplay] = []
-    if prefs.bool(forKey: Utils.PrefKeys.fallbackSw.rawValue) {
-      controllableExternalDisplays = DisplayManager.shared.getNonVirtualExternalDisplays()
-    } else {
-      controllableExternalDisplays = DisplayManager.shared.getDdcCapableDisplays()
-    }
-    self.updateMenus(controllableExternalDisplays: controllableExternalDisplays)
+    self.updateMenus()
   }
 
   private func addDisplayToMenu(display: ExternalDisplay, asSubMenu: Bool) {
@@ -250,9 +249,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
   private func subscribeEventListeners() {
     NotificationCenter.default.addObserver(self, selector: #selector(handleListenForChanged), name: .listenFor, object: nil) // subscribe KeyTap event listeners
-    NotificationCenter.default.addObserver(self, selector: #selector(handleShowContrastChanged), name: .showContrast, object: nil)
-    NotificationCenter.default.addObserver(self, selector: #selector(handleShowVolumeChanged), name: .showVolume, object: nil)
-    NotificationCenter.default.addObserver(self, selector: #selector(handleFallbackSwChanged), name: .fallbackSw, object: nil)
     NotificationCenter.default.addObserver(self, selector: #selector(handleFriendlyNameChanged), name: .friendlyName, object: nil)
     NotificationCenter.default.addObserver(self, selector: #selector(handlePreferenceReset), name: .preferenceReset, object: nil)
     NotificationCenter.default.addObserver(self, selector: #selector(audioDeviceChanged), name: Notification.Name.defaultOutputDeviceChanged, object: nil) // subscribe Audio output detector (SimplyCoreAudio)
@@ -423,20 +419,8 @@ extension AppDelegate: MediaKeyTapDelegate {
     self.updateMediaKeyTap()
   }
 
-  @objc func handleShowContrastChanged() {
-    self.updateDisplays()
-  }
-
-  @objc func handleShowVolumeChanged() {
-    self.updateDisplays()
-  }
-
-  @objc func handleFallbackSwChanged() {
-    self.updateDisplays()
-  }
-
   @objc func handleFriendlyNameChanged() {
-    self.updateDisplays()
+    self.updateMenus()
   }
 
   @objc func handlePreferenceReset() {

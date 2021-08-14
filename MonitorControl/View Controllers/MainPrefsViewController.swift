@@ -89,12 +89,10 @@ class MainPrefsViewController: NSViewController, PreferencePane {
       self.prefs.set(false, forKey: Utils.PrefKeys.showContrast.rawValue)
     default: break
     }
-
+    app.updateMenus()
     #if DEBUG
       os_log("Toggle show contrast slider state: %{public}@", type: .info, sender.state == .on ? "on" : "off")
     #endif
-
-    NotificationCenter.default.post(name: Notification.Name(Utils.PrefKeys.showContrast.rawValue), object: nil)
   }
 
   @IBAction func showVolumeSliderClicked(_ sender: NSButton) {
@@ -105,12 +103,10 @@ class MainPrefsViewController: NSViewController, PreferencePane {
       self.prefs.set(false, forKey: Utils.PrefKeys.showVolume.rawValue)
     default: break
     }
-
+    app.updateMenus()
     #if DEBUG
       os_log("Toggle show volume slider state: %{public}@", type: .info, sender.state == .on ? "on" : "off")
     #endif
-
-    NotificationCenter.default.post(name: Notification.Name(Utils.PrefKeys.showVolume.rawValue), object: nil)
   }
 
   @IBAction func lowerSwAfterBrightnessClicked(_ sender: NSButton) {
@@ -133,14 +129,13 @@ class MainPrefsViewController: NSViewController, PreferencePane {
       self.prefs.set(true, forKey: Utils.PrefKeys.fallbackSw.rawValue)
     case .off:
       self.prefs.set(false, forKey: Utils.PrefKeys.fallbackSw.rawValue)
-      DisplayManager.shared.resetSwBrightnessForAllDisplays()
     default: break
     }
+    DisplayManager.shared.resetSwBrightnessForAllDisplays()
+    app.updateMenus()
     #if DEBUG
       os_log("Toggle fallback to software if no DDC: %{public}@", type: .info, sender.state == .on ? "on" : "off")
     #endif
-
-    NotificationCenter.default.post(name: Notification.Name(Utils.PrefKeys.fallbackSw.rawValue), object: nil)
   }
 
   @IBAction func listenForChanged(_ sender: NSPopUpButton) {
