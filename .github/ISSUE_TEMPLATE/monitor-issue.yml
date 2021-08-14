@@ -47,8 +47,8 @@ body:
             - **MonitorControl version**: v2.1.0
             - **Monitor(s)**: LG 38GN950, LG 27UN83A
             - **Monitor Cable(s)/Connection(s)**: 
-              - Mac Mini -> DisplayPort 2.1 -> LG 38GN950
-              - Mac Mini -> Belkin Thunderbolt 3 Dock Core -> LG 27UN83A
+                * Mac Mini -> DisplayPort 2.1 -> LG 38GN950
+                * Mac Mini -> Belkin Thunderbolt 3 Dock Core -> LG 27UN83A
             - **Apple Silicon/M1 (yes or no)**: no
       value: |
         - macOS version:
