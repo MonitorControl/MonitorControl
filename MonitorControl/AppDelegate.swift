@@ -252,8 +252,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     NotificationCenter.default.addObserver(self, selector: #selector(handleFriendlyNameChanged), name: .friendlyName, object: nil)
     NotificationCenter.default.addObserver(self, selector: #selector(handlePreferenceReset), name: .preferenceReset, object: nil)
     NotificationCenter.default.addObserver(self, selector: #selector(audioDeviceChanged), name: Notification.Name.defaultOutputDeviceChanged, object: nil) // subscribe Audio output detector (SimplyCoreAudio)
-    NotificationCenter.default.addObserver(self, selector: #selector(colorSyncSettingsChanged), name: NSNotification.Name(rawValue: kColorSyncDisplayDeviceProfilesNotification.takeRetainedValue() as String), object: nil) // ColorSync change
-
+    DistributedNotificationCenter.default.addObserver(self, selector: #selector(colorSyncSettingsChanged), name: NSNotification.Name(rawValue: kColorSyncDisplayDeviceProfilesNotification.takeRetainedValue() as String), object: nil) // ColorSync change
     NSWorkspace.shared.notificationCenter.addObserver(self, selector: #selector(self.sleepNotification), name: NSWorkspace.screensDidSleepNotification, object: nil) // sleep and wake listeners
     NSWorkspace.shared.notificationCenter.addObserver(self, selector: #selector(self.wakeNotofication), name: NSWorkspace.screensDidWakeNotification, object: nil)
     NSWorkspace.shared.notificationCenter.addObserver(self, selector: #selector(self.sleepNotification), name: NSWorkspace.willSleepNotification, object: nil)
@@ -473,7 +472,7 @@ extension AppDelegate: MediaKeyTapDelegate {
   }
 
   @objc private func colorSyncSettingsChanged() {
-    // We should perform a protected colorsync reset here using CGDisplayRestoreColorSyncSettings(), black bug check and recovery if needed
-    // Afterwards we should perform a swUpdateDefaultGammaTable() for every display
+    CGDisplayRestoreColorSyncSettings()
+    self.displayReconfigured()
   }
 }
