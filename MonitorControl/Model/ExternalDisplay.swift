@@ -167,6 +167,37 @@ class ExternalDisplay: Display {
     }
   }
 
+  let swAfterOsdAnimationSemaphore = DispatchSemaphore(value: 1)
+  var lastAnimationStartedTime: CFTimeInterval = CACurrentMediaTime()
+  func doSwAfterOsdAnimation() {
+    self.lastAnimationStartedTime = CACurrentMediaTime()
+    DispatchQueue.global(qos: .userInteractive).async {
+      self.swAfterOsdAnimationSemaphore.wait()
+      guard CACurrentMediaTime() < self.lastAnimationStartedTime + 0.05 else {
+        self.swAfterOsdAnimationSemaphore.signal()
+        return
+      }
+      for value: Int in stride(from: 1, to: 6, by: 1) {
+        guard self.getValue(for: .brightness) == 0 else {
+          self.swAfterOsdAnimationSemaphore.signal()
+          return
+        }
+        self.showOsd(command: .brightness, value: value, roundChiclet: false)
+        Thread.sleep(forTimeInterval: Double(value * 2) / 300)
+      }
+      for value: Int in stride(from: 5, to: 0, by: -1) {
+        guard self.getValue(for: .brightness) == 0 else {
+          self.swAfterOsdAnimationSemaphore.signal()
+          return
+        }
+        self.showOsd(command: .brightness, value: value, roundChiclet: false)
+        Thread.sleep(forTimeInterval: Double(value * 2) / 300)
+      }
+      self.showOsd(command: .brightness, value: 0, roundChiclet: true)
+      self.swAfterOsdAnimationSemaphore.signal()
+    }
+  }
+
   override func stepBrightness(isUp: Bool, isSmallIncrement: Bool) {
     let currentValue = self.getValue(for: .brightness)
     let maxValue = self.isSw() ? Int(self.getSwMaxBrightness()) : self.getMaxValue(for: .brightness)
@@ -198,8 +229,8 @@ class ExternalDisplay: Display {
         swBirghtnessValue = Int(getSwMaxBrightness())
         swAfterBirghtnessMode = false
       }
-      if self.setSwBrightness(value: UInt8(swBirghtnessValue), smooth: true) {
-        self.showOsd(command: .brightness, value: self.getValue(for: .brightness), roundChiclet: !isSmallIncrement)
+      if self.setSwBrightness(value: UInt8(swBirghtnessValue)) {
+        self.doSwAfterOsdAnimation()
       }
     }
     if !swAfterBirghtnessMode {

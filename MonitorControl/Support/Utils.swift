@@ -83,9 +83,9 @@ class Utils: NSObject {
     if command != .audioSpeakerVolume {
       slider.integerValue = Int(currentValue)
       slider.maxValue = Double(display.getMaxValue(for: command))
-      if display.isSw() {
-        slider.minValue = Double(display.getSwMaxBrightness()) * 0.2 // Don't let brightness to down for software brightness control as the user won't see the slider anymore
-      }
+//      if display.isSw() {
+//        slider.minValue = Double(display.getSwMaxBrightness()) * 0.2 // Don't let brightness to down for software brightness control as the user won't see the slider anymore
+//      }
     } else {
       // If we're looking at the audio speaker volume, also retrieve the values for the mute command
       var muteValues: (current: UInt16, max: UInt16)?

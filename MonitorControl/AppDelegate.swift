@@ -196,6 +196,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       }
       DisplayManager.shared.addDisplay(display: display)
     }
+    self.updateArm64AVServices()
     if firstrun {
       DisplayManager.shared.resetSwBrightnessForAllDisplays(settingsOnly: true)
     } else {
@@ -203,7 +204,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         DisplayManager.shared.restoreSwBrightnessForAllDisplays(async: true)
       }
     }
-    self.updateArm64AVServices()
     NotificationCenter.default.post(name: Notification.Name(Utils.PrefKeys.displayListUpdate.rawValue), object: nil)
     self.updateMenus()
   }

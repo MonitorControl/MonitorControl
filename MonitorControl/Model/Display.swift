@@ -10,7 +10,7 @@ import DDC
 import Foundation
 import os.log
 
-private enum OSDImage: Int64 {
+enum OSDImage: Int64 {
   case brightness = 1
   case audioSpeaker = 3
   case audioSpeakerMuted = 4
@@ -95,7 +95,7 @@ class Display {
   }
 
   func swBrightnessTransform(value: Float, reverse: Bool = false) -> Float {
-    let lowTreshold: Float = 0.05 // We don't allow decrease lower than 5% for safety reasons and because some displays blank off after a while on full black screen due to energy saving settings
+    let lowTreshold: Float = 0.1 // We don't allow decrease lower than 5% for safety reasons and because some displays blank off after a while on full black screen due to energy saving settings
     if !reverse {
       return value * (1 - lowTreshold) + lowTreshold
     } else {
@@ -115,7 +115,7 @@ class Display {
     if smooth {
       DispatchQueue.global(qos: .userInteractive).async {
         self.swBrightnessSemaphore.wait()
-        for transientValue in stride(from: currentValue, to: newValue, by: 0.0025 * (currentValue > newValue ? -1 : 1)) {
+        for transientValue in stride(from: currentValue, to: newValue, by: 0.005 * (currentValue > newValue ? -1 : 1)) {
           let gammaTableRed = self.defaultGammaTableRed.map { $0 * transientValue }
           let gammaTableGreen = self.defaultGammaTableGreen.map { $0 * transientValue }
           let gammaTableBlue = self.defaultGammaTableBlue.map { $0 * transientValue }
