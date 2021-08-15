@@ -30,7 +30,7 @@ class AboutPrefsViewController: NSViewController, PreferencePane {
   }
 
   @IBAction func openGitHubPage(_: NSButton) {
-    if let url = URL(string: "https://github.com/MonitorControl/MonitorControl/tree/experimental/apple-silicon") {
+    if let url = URL(string: "https://github.com/MonitorControl/MonitorControl/tree/experimental/apple-silicon") { // DO NOT FORGET to change url on release!
       NSWorkspace.shared.open(url)
     }
   }
@@ -53,7 +53,7 @@ class AboutPrefsViewController: NSViewController, PreferencePane {
       let arch: String = NSLocalizedString("Intel", comment: "Intel designation (shown after the version number in Preferences)")
     #endif
 
-    self.versionLabel.stringValue = "\(versionName) \(versionNumber) \(buildName) \(buildNumber) - \(arch)"
+    self.versionLabel.stringValue = "BETA \(versionName) \(versionNumber) \(buildName) \(buildNumber) - \(arch)" // DO NOT FORGET to change beta designation on release!
   }
 
   func setCopyrightInfo() {
