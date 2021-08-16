@@ -145,7 +145,7 @@
                                     <gridCell row="DnA-aR-kcy" column="64O-72-10l" id="Srb-mF-ZHj">
                                         <button key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="IDx-gH-haW">
                                             <rect key="frame" x="235" y="263" width="416" height="18"/>
-                                            <buttonCell key="cell" type="check" title="Fallback to software dimming if required" bezelStyle="regularSquare" imagePosition="left" inset="2" id="kMa-3q-udl">
+                                            <buttonCell key="cell" type="check" title="Enable software dimming if required" bezelStyle="regularSquare" imagePosition="left" inset="2" id="kMa-3q-udl">
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                 <font key="font" metaFont="system"/>
                                             </buttonCell>

@@ -76,7 +76,7 @@
 /* Class = "NSTextFieldCell"; title = "Use the media keys of your keyboard to control Brightness & Volume."; ObjectID = "K2r-aD-eec"; */
 "K2r-aD-eec.title" = "A képernyő fényerejét és hangerejét az Apple Billentyűzet fényerő és hangerő gombjaival lehet szabályozni.";
 
-/* Class = "NSButtonCell"; title = "Fallback to software dimming if required"; ObjectID = "kMa-3q-udl"; */
+/* Class = "NSButtonCell"; title = "Enable software dimming if required"; ObjectID = "kMa-3q-udl"; */
 "kMa-3q-udl.title" = "Átállás szoftveres sötétítésre, ha szükséges";
 
 /* Class = "NSButton"; ibShadowedToolTip = "More Info"; ObjectID = "kqn-gU-mZX"; */

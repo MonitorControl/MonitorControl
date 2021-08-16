@@ -78,8 +78,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       prefs.set(true, forKey: Utils.PrefKeys.appAlreadyLaunched.rawValue)
       prefs.set(false, forKey: Utils.PrefKeys.showContrast.rawValue)
       prefs.set(true, forKey: Utils.PrefKeys.showVolume.rawValue)
-      prefs.set(false, forKey: Utils.PrefKeys.lowerSwAfterBrightness.rawValue)
-      prefs.set(false, forKey: Utils.PrefKeys.fallbackSw.rawValue)
+      prefs.set(true, forKey: Utils.PrefKeys.lowerSwAfterBrightness.rawValue)
+      prefs.set(true, forKey: Utils.PrefKeys.fallbackSw.rawValue)
       prefs.set(false, forKey: Utils.PrefKeys.hideMenuIcon.rawValue)
     }
   }
