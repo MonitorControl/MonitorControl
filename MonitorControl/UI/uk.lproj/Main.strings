@@ -4,11 +4,20 @@
 /* Class = "NSButtonCell"; title = "Reset Preferences"; ObjectID = "4Pj-3t-PJr"; */
 "4Pj-3t-PJr.title" = "Відновлення налаштувань";
 
+/* Class = "NSTextFieldCell"; title = "#ID"; ObjectID = "6GJ-6Q-gqz"; */
+"6GJ-6Q-gqz.title" = "#ID";
+
 /* Class = "NSTableColumn"; headerCell.title = "Enabled"; ObjectID = "8U8-ec-Zbv"; */
 "8U8-ec-Zbv.headerCell.title" = "Актив.";
 
 /* Class = "NSButtonCell"; title = "Hide Menu Icon"; ObjectID = "aXL-i8-S6R"; */
 "aXL-i8-S6R.title" = "Hide Menu Icon";
+
+/* Class = "NSButtonCell"; title = "Disable macOS Volume OSD"; ObjectID = "bkM-Px-U3b"; */
+"bkM-Px-U3b.title" = "Disable macOS Volume OSD";
+
+/* Class = "NSButtonCell"; title = "Reset settings"; ObjectID = "BYS-7Y-bRz"; */
+"BYS-7Y-bRz.title" = "Reset settings";
 
 /* Class = "NSTextFieldCell"; title = "Keyboard:"; ObjectID = "c7N-cO-759"; */
 "c7N-cO-759.title" = "Keyboard:";
@@ -43,6 +52,9 @@
 /* Class = "NSButtonCell"; title = "Issues and feature requests"; ObjectID = "eUG-vD-C3W"; */
 "eUG-vD-C3W.title" = "Issues and feature requests";
 
+/* Class = "NSButtonCell"; title = "Reset Name"; ObjectID = "f9g-8s-gdd"; */
+"f9g-8s-gdd.title" = "Reset Name";
+
 /* Class = "NSButtonCell"; title = "Further lower brightness via software dimming"; ObjectID = "fhy-Er-0aI"; */
 "fhy-Er-0aI.title" = "Further lower brightness via software shading";
 
@@ -64,6 +76,9 @@
 /* Class = "NSMenuItem"; title = "Brightness only"; ObjectID = "hjz-0c-rvK"; */
 "hjz-0c-rvK.title" = "лише Яскравість";
 
+/* Class = "NSTextFieldCell"; title = "#FriendlyName"; ObjectID = "ibQ-4u-ClE"; */
+"ibQ-4u-ClE.title" = "#FriendlyName";
+
 /* Class = "NSButtonCell"; title = "Start at Login"; ObjectID = "j72-NF-zsW"; */
 "j72-NF-zsW.title" = "Запускати MonitorControl разом із системою";
 
@@ -81,6 +96,12 @@
 
 /* Class = "NSTableColumn"; headerCell.title = "Vendor"; ObjectID = "LRJ-fb-Z9E"; */
 "LRJ-fb-Z9E.headerCell.title" = "Виробник";
+
+/* Class = "NSTextFieldCell"; title = "Display type:"; ObjectID = "lSJ-6w-KJ2"; */
+"lSJ-6w-KJ2.title" = "Display type:";
+
+/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "Lu0-Dq-lqu"; */
+"Lu0-Dq-lqu.title" = "Text Cell";
 
 /* Class = "NSTextFieldCell"; title = "Version 0.0.0 Build 0000 - Platform"; ObjectID = "mBs-6m-13Q"; */
 "mBs-6m-13Q.title" = "Версія 0.0.0 (Білд 0)";
@@ -103,6 +124,15 @@
 /* Class = "NSTextFieldCell"; title = "Application:"; ObjectID = "okD-DG-pYa"; */
 "okD-DG-pYa.title" = "Application:";
 
+/* Class = "NSTextFieldCell"; title = "Control method:"; ObjectID = "PaK-1f-DsW"; */
+"PaK-1f-DsW.title" = "Control method:";
+
+/* Class = "NSTextFieldCell"; title = "#ControlMethod"; ObjectID = "pIy-Lk-kkm"; */
+"pIy-Lk-kkm.title" = "#ControlMethod";
+
+/* Class = "NSTextFieldCell"; title = "#DisplayType"; ObjectID = "Pqk-VW-JGY"; */
+"Pqk-VW-JGY.title" = "#DisplayType";
+
 /* Class = "NSTextFieldCell"; title = "If the menu item is hidden, just relaunch the app to reveal Preferences!"; ObjectID = "PVE-y7-zIk"; */
 "PVE-y7-zIk.title" = "If hidden, relaunch the app to show Preferences!";
 
@@ -114,6 +144,9 @@
 
 /* Class = "NSTableColumn"; headerCell.title = "Friendly Name"; ObjectID = "uoI-1J-RdD"; */
 "uoI-1J-RdD.headerCell.title" = "Назва дісплею";
+
+/* Class = "NSButtonCell"; title = "Enable keyboard control for display"; ObjectID = "UqR-WE-jHl"; */
+"UqR-WE-jHl.title" = "Enable keyboard control for display";
 
 /* Class = "NSMenuItem"; title = "Heavy"; ObjectID = "vik-vN-bJe"; */
 "vik-vN-bJe.title" = "Част.";
@@ -133,8 +166,14 @@
 /* Class = "NSTextFieldCell"; title = "This lets you further lower brightness via software dimming even after display has reached zero brightness."; ObjectID = "yeg-GN-SuO"; */
 "yeg-GN-SuO.title" = "This lets you further lower brightness via software shading even after display has reached zero brightness.";
 
+/* Class = "NSTextFieldCell"; title = "Identifier:"; ObjectID = "YqZ-LS-YvR"; */
+"YqZ-LS-YvR.title" = "Identifier:";
+
 /* Class = "NSTableColumn"; headerCell.title = "Polling Count"; ObjectID = "ytT-up-Dhs"; */
 "ytT-up-Dhs.headerCell.title" = "Опитувань/с";
+
+/* Class = "NSButtonCell"; title = "Prefer hardware DDC control"; ObjectID = "ZdU-gV-V05"; */
+"ZdU-gV-V05.title" = "Prefer hardware DDC control";
 
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "2gr-xG-Byx"; */
 "2gr-xG-Byx.title" = "";

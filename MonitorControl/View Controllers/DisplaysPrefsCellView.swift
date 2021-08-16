@@ -8,15 +8,19 @@ class DisplaysPrefsCellView: NSTableCellView {
     super.draw(dirtyRect)
   }
 
-  @IBOutlet var displayName: NSTextFieldCell!
+  @IBOutlet var displayImage: NSImageCell!
   @IBOutlet var friendlyName: NSTextFieldCell!
+  @IBOutlet var displayId: NSTextFieldCell!
   @IBOutlet var enabledButton: NSButton!
   @IBOutlet var ddcButton: NSButton!
+  @IBOutlet var controlMethod: NSTextFieldCell!
+  @IBOutlet var displayType: NSTextFieldCell!
+  @IBOutlet var disableVolumeOSDButton: NSButton!
 
   @IBAction func enabledButtonToggled(_ sender: NSButton) {
-    if let display = display {
+    if let disp = display {
       let isEnabled = sender.state == .on
-      display.isEnabled = isEnabled
+      disp.isEnabled = isEnabled
       #if DEBUG
         os_log("Toggle enabled display state: %{public}@", type: .info, isEnabled ? "on" : "off")
       #endif
@@ -24,37 +28,56 @@ class DisplaysPrefsCellView: NSTableCellView {
   }
 
   @IBAction func ddcButtonToggled(_ sender: NSButton) {
-    if let display = display {
+    if let disp = display {
       switch sender.state {
       case .off:
-        display.forceSw = true
+        disp.forceSw = true
       case .on:
-        display.forceSw = false
+        disp.forceSw = false
       default:
         break
       }
-      _ = display.resetSwBrightness()
+      _ = disp.resetSwBrightness()
       app.updateMenus()
     }
   }
 
   @IBAction func friendlyNameValueChanged(_ sender: NSTextFieldCell) {
-    if let display = display {
+    if let disp = display {
       let newValue = sender.stringValue
-      let originalValue = display.getFriendlyName()
+      let originalValue = disp.getFriendlyName()
 
       if newValue.isEmpty {
-        self.textField?.stringValue = originalValue
+        self.friendlyName.stringValue = originalValue
         return
       }
 
       if newValue != originalValue, !newValue.isEmpty {
-        display.setFriendlyName(newValue)
+        disp.setFriendlyName(newValue)
         NotificationCenter.default.post(name: Notification.Name(Utils.PrefKeys.friendlyName.rawValue), object: nil)
         #if DEBUG
           os_log("Value changed for friendly name: %{public}@", type: .info, "from `\(originalValue)` to `\(newValue)`")
         #endif
       }
+    }
+  }
+
+  @IBAction func disableVolumeOSDButton(_: NSButton) {
+    if let display = display {
+      // TODO: Unfinished
+    }
+  }
+
+  @IBAction func resetSettings(_: NSButton) {
+    if let disp = display {
+      self.ddcButton.state = .on
+      self.ddcButtonToggled(self.ddcButton)
+      self.enabledButton.state = .on
+      self.enabledButtonToggled(self.enabledButton)
+      self.disableVolumeOSDButton.state = .off
+      self.disableVolumeOSDButton(self.disableVolumeOSDButton)
+      self.friendlyName.stringValue = disp.name
+      self.friendlyNameValueChanged(self.friendlyName)
     }
   }
 }

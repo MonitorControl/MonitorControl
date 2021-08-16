@@ -11,7 +11,7 @@ class DisplaysPrefsViewController: NSViewController, PreferencePane, NSTableView
       return NSImage(systemSymbolName: "display.2", accessibilityDescription: "Displays")!
     } else {
       // Fallback on earlier versions
-      return NSImage(named: NSImage.infoName)!
+      return NSImage(named: NSImage.computerName)!
     }
   }
 
@@ -50,30 +50,75 @@ class DisplaysPrefsViewController: NSViewController, PreferencePane, NSTableView
     if let cell = tableView.makeView(withIdentifier: tableColumn.identifier, owner: nil) as? DisplaysPrefsCellView {
       cell.display = display
 
+      // ID
+      cell.displayId.stringValue = String(display.identifier)
+      // Firendly name
+      cell.friendlyName.stringValue = display.getFriendlyName()
+      cell.friendlyName.isEditable = true
       // Enabled
-
       cell.enabledButton.state = display.isEnabled && !display.isVirtual ? .on : .off
       cell.enabledButton.isEnabled = !display.isVirtual
-
       // DDC
-
       cell.ddcButton.state = ((display as? ExternalDisplay)?.isSw() ?? true) || ((display as? ExternalDisplay)?.isVirtual ?? true) ? .off : .on
       if ((display as? ExternalDisplay)?.isSwOnly() ?? true) || ((display as? ExternalDisplay)?.isVirtual ?? true) {
         cell.ddcButton.isEnabled = false
       } else {
         cell.ddcButton.isEnabled = true
       }
-
-      // Firendly name
-
-      cell.friendlyName.stringValue = display.getFriendlyName()
-      cell.friendlyName.isEditable = true
-
-      // Name
-
-      cell.displayName.stringValue = display.name
-      cell.friendlyName.isEditable = false
-
+      // Display type
+      var displayImage = ""
+      if display.isVirtual {
+        cell.displayType.stringValue = "Virtual Display"
+        if #available(macOS 11.0, *) {
+          displayImage = "tv.and.mediabox"
+        }
+        cell.controlMethod.stringValue = "No Control Available"
+      } else if display is ExternalDisplay {
+        cell.displayType.stringValue = "External Display"
+        if #available(macOS 11.0, *) {
+          displayImage = "display"
+        }
+        if let externalDisplay: ExternalDisplay = display as? ExternalDisplay {
+          if externalDisplay.isSwOnly() {
+            cell.controlMethod.stringValue = "Software Only"
+          } else {
+            if externalDisplay.isSw() {
+              cell.controlMethod.stringValue = "Software (Forced)"
+            } else {
+              cell.controlMethod.stringValue = "Hardware (DDC)"
+            }
+          }
+        } else {
+          cell.controlMethod.stringValue = "Unspecified"
+        }
+      } else if display is InternalDisplay {
+        cell.displayType.stringValue = "Built-in Display"
+        var isImac: Bool = false
+        let platformExpertDevice = IOServiceGetMatchingService(kIOMasterPortDefault, IOServiceMatching("IOPlatformExpertDevice"))
+        if let modelData = IORegistryEntryCreateCFProperty(platformExpertDevice, "model" as CFString, kCFAllocatorDefault, 0).takeRetainedValue() as? Data, let modelIdentifierCString = String(data: modelData, encoding: .utf8)?.cString(using: .utf8) {
+          let modelIdentifier = String(cString: modelIdentifierCString)
+          isImac = modelIdentifier.contains("iMac")
+        }
+        if #available(macOS 11.0, *) {
+          if isImac {
+            displayImage = "desktopcomputer"
+          } else {
+            displayImage = "laptopcomputer"
+          }
+        }
+        cell.controlMethod.stringValue = "Hardware (CoreDisplay)" // TODO: Unfinished
+      } else {
+        cell.displayType.stringValue = "Other Display"
+        displayImage = "display.trianglebadge.exclamationmark"
+        cell.controlMethod.stringValue = "No Control Available" // TODO: Unfinished
+      }
+      if #available(macOS 11.0, *) {
+        cell.displayImage.image = NSImage(systemSymbolName: displayImage, accessibilityDescription: display.name)!
+      } else {
+        cell.displayImage.image = NSImage(named: NSImage.computerName)!
+      }
+      // Disable Volume OSD
+      cell.disableVolumeOSDButton.state = .off // TODO: Unfinished
       return cell
     }
     return nil
