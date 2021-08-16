@@ -34,6 +34,9 @@
 /* No comment provided by engineer. */
 "Display" = "显示器";
 
+/* Shown in the main prefs window */
+"Displays" = "显示器";
+
 /* Shown in the alert dialog */
 "Enable Longer Delay?" = "Enable Longer Delay?";
 

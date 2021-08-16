@@ -71,7 +71,7 @@
 "H4a-c9-LcB.title" = "Text Cell";
 
 /* Class = "NSTextFieldCell"; title = "Brightness control:"; ObjectID = "hdd-Zz-buN"; */
-"hdd-Zz-buN.title" = "Brightness keys:";
+"hdd-Zz-buN.title" = "Brightness control:";
 
 /* Class = "NSMenuItem"; title = "Brightness only"; ObjectID = "hjz-0c-rvK"; */
 "hjz-0c-rvK.title" = "Brightness only";
@@ -86,7 +86,7 @@
 "K2r-aD-eec.title" = "You can control the Brighness and Volume of your display using the Brightness and Volume keys off Apple Keyboards.";
 
 /* Class = "NSButtonCell"; title = "Fallback to software dimming if required"; ObjectID = "kMa-3q-udl"; */
-"kMa-3q-udl.title" = "Fallback to software control if required";
+"kMa-3q-udl.title" = "Fallback to software dimming if required";
 
 /* Class = "NSButton"; ibShadowedToolTip = "More Info"; ObjectID = "kqn-gU-mZX"; */
 "kqn-gU-mZX.ibShadowedToolTip" = "More Info";
@@ -104,7 +104,7 @@
 "MPF-Mr-zVU.headerCell.title" = "Hide OSD";
 
 /* Class = "NSTextFieldCell"; title = "If an external display can't be controlled, software dimming will be used instead."; ObjectID = "n4V-jQ-1Ri"; */
-"n4V-jQ-1Ri.title" = "If an external display can't be controlled, software shading will be used. Only brightness control is available in this mode.";
+"n4V-jQ-1Ri.title" = "If an external display can't be controlled, software dimming will be used instead.";
 
 /* Class = "NSMenuItem"; title = "Volume only"; ObjectID = "NLP-dU-Dam"; */
 "NLP-dU-Dam.title" = "Volume only";
@@ -155,7 +155,7 @@
 "xSI-8W-Xd0.title" = "Show contrast slider in menu";
 
 /* Class = "NSTextFieldCell"; title = "This lets you further lower brightness via software dimming even after display has reached zero brightness."; ObjectID = "yeg-GN-SuO"; */
-"yeg-GN-SuO.title" = "This lets you further lower brightness via software shading even after display has reached zero brightness.";
+"yeg-GN-SuO.title" = "This lets you further lower brightness via software dimming even after display has reached zero brightness.";
 
 /* Class = "NSTableColumn"; headerCell.title = "Polling Count"; ObjectID = "ytT-up-Dhs"; */
 "ytT-up-Dhs.headerCell.title" = "Polling Count";

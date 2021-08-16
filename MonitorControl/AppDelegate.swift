@@ -26,9 +26,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     let displayPrefsVc = storyboard.instantiateController(withIdentifier: "DisplayPrefsVC") as? DisplayPrefsViewController
     let advancedPrefsVc = storyboard.instantiateController(withIdentifier: "AdvancedPrefsVC") as? AdvancedPrefsViewController
     let aboutPrefsVc = storyboard.instantiateController(withIdentifier: "AboutPrefsVC") as? AboutPrefsViewController
+//    let displaysPrefsVc = storyboard.instantiateController(withIdentifier: "DisplaysPrefsVC") as? DisplaysPrefsViewController
     return PreferencesWindowController(
       preferencePanes: [
         mainPrefsVc!,
+//        displaysPrefsVc!,
         displayPrefsVc!,
         advancedPrefsVc!,
         aboutPrefsVc!,
@@ -326,6 +328,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 extension AppDelegate: MediaKeyTapDelegate {
   func handle(mediaKey: MediaKey, event: KeyEvent?, modifiers: NSEvent.ModifierFlags?) {
     guard self.sleepID == 0, self.reconfigureID == 0 else {
+      if [.brightnessUp, .brightnessDown].contains(mediaKey) {
+        OSDUtils.showOSDLockOnAllDisplays(osdImage: 1)
+      }
+      if [.volumeUp, .volumeDown, .mute].contains(mediaKey) {
+        OSDUtils.showOSDLockOnAllDisplays(osdImage: 3)
+      }
       return
     }
     if self.handleOpenPrefPane(mediaKey: mediaKey, event: event, modifiers: modifiers) {

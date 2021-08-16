@@ -34,6 +34,9 @@
 /* Shown in the main prefs window */
 "Display" = "Display";
 
+/* Shown in the main prefs window */
+"Displays" = "Displays";
+
 /* Shown in the alert dialog */
 "Enable Longer Delay?" = "Enable Longer Delay?";
 

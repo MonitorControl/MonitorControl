@@ -34,6 +34,9 @@
 /* No comment provided by engineer. */
 "Display" = "Kijelző";
 
+/* Shown in the main prefs window */
+"Displays" = "Kijelzők";
+
 /* Shown in the alert dialog */
 "Enable Longer Delay?" = "Hosszabb várakozás engedélyezése?";
 

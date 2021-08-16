@@ -31,6 +31,8 @@
 		6CD35F5C2650003F001F1344 /* Preferences in Frameworks */ = {isa = PBXBuildFile; productRef = 6CD35F5B2650003F001F1344 /* Preferences */; };
 		6CD444C322D4FBB8005BFD3D /* LongerDelayCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CD444C222D4FBB8005BFD3D /* LongerDelayCellView.swift */; };
 		6CDA0FCF26485A8300F52125 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6CDA0FCD26485A8300F52125 /* Main.storyboard */; };
+		AA062E8A26C9A039007E628C /* DisplaysPrefsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA062E8926C9A039007E628C /* DisplaysPrefsViewController.swift */; };
+		AA062E8E26CA7BE5007E628C /* DisplaysPrefsCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA062E8D26CA7BE5007E628C /* DisplaysPrefsCellView.swift */; };
 		AA16139B26BE772E00DCF027 /* Arm64DDCUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA16139A26BE772E00DCF027 /* Arm64DDCUtils.swift */; };
 		AA2DFAD726C80F2500E439AA /* ForceSwCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2DFAD626C80F2500E439AA /* ForceSwCellView.swift */; };
 		AA3B4A2826AE103C00B74CD2 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = AA3B4A2726AE103C00B74CD2 /* README.md */; };
@@ -97,7 +99,6 @@
 		6CC260F5256AD8F900613714 /* Preferences+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Preferences+Extension.swift"; sourceTree = "<group>"; };
 		6CCB278522D5315200619B05 /* HideOsdCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HideOsdCellView.swift; sourceTree = "<group>"; };
 		6CD444C222D4FBB8005BFD3D /* LongerDelayCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LongerDelayCellView.swift; sourceTree = "<group>"; };
-		6CDA0FCB26485A7600F52125 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = MonitorControl/UI/Base.lproj/Main.storyboard; sourceTree = SOURCE_ROOT; };
 		6CDA0FCE26485A8300F52125 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		6CDA0FD026485AA100F52125 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		6CDA0FD126485AA300F52125 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
@@ -108,12 +109,13 @@
 		6CDA0FD626485AAC00F52125 /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/Main.strings; sourceTree = "<group>"; };
 		6CDA0FD726485AAC00F52125 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
 		6CDA0FD826485AAE00F52125 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/Main.strings; sourceTree = "<group>"; };
+		AA062E8926C9A039007E628C /* DisplaysPrefsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplaysPrefsViewController.swift; sourceTree = "<group>"; };
+		AA062E8D26CA7BE5007E628C /* DisplaysPrefsCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplaysPrefsCellView.swift; sourceTree = "<group>"; };
 		AA16139A26BE772E00DCF027 /* Arm64DDCUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Arm64DDCUtils.swift; sourceTree = "<group>"; };
 		AA2DFAD626C80F2500E439AA /* ForceSwCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForceSwCellView.swift; sourceTree = "<group>"; };
 		AA3B4A2726AE103C00B74CD2 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		AA3B4A2926AE108E00B74CD2 /* Apple Silicon.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "Apple Silicon.md"; sourceTree = "<group>"; };
 		AA665A5C26C5892800FEF2C1 /* AboutPrefsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutPrefsViewController.swift; sourceTree = "<group>"; };
-		AA6686EF26B8172E00AF74A2 /* hu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hu; path = ../hu.lproj/Main.strings; sourceTree = "<group>"; };
 		AA6686F026B8172E00AF74A2 /* hu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hu; path = hu.lproj/Main.strings; sourceTree = "<group>"; };
 		AA6686F126B8172E00AF74A2 /* hu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hu; path = hu.lproj/MainMenu.strings; sourceTree = "<group>"; };
 		AA6686F226B8172E00AF74A2 /* hu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hu; path = hu.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -252,7 +254,6 @@
 		6C85EFDB22CBA77600227EA1 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				6CDA0FCA26485A7600F52125 /* Main.storyboard */,
 				F03FE4BF228DF62A001F59A4 /* FriendlyNameCellView.swift */,
 				F01B068E228221B6008E64DB /* ButtonCellView.swift */,
 				6C85EFDC22CBAA8F00227EA1 /* PollingModeCellView.swift */,
@@ -296,6 +297,8 @@
 				F0445D3720023E710025AE82 /* MainPrefsViewController.swift */,
 				6C0CCB25228F4F720037D2C5 /* AdvancedPrefsViewController.swift */,
 				AA665A5C26C5892800FEF2C1 /* AboutPrefsViewController.swift */,
+				AA062E8926C9A039007E628C /* DisplaysPrefsViewController.swift */,
+				AA062E8D26CA7BE5007E628C /* DisplaysPrefsCellView.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -536,6 +539,7 @@
 				AA2DFAD726C80F2500E439AA /* ForceSwCellView.swift in Sources */,
 				56754EAF1D9A4016007BCDC5 /* AppDelegate.swift in Sources */,
 				6C85EFE122CC00AD00227EA1 /* NSNotification+Extension.swift in Sources */,
+				AA062E8A26C9A039007E628C /* DisplaysPrefsViewController.swift in Sources */,
 				6C85EFDF22CBB54100227EA1 /* PollingCountCellView.swift in Sources */,
 				6C0CCB26228F4F720037D2C5 /* AdvancedPrefsViewController.swift in Sources */,
 				F01B069E228221B7008E64DB /* ButtonCellView.swift in Sources */,
@@ -548,6 +552,7 @@
 				F03FE4C0228DF62B001F59A4 /* FriendlyNameCellView.swift in Sources */,
 				6C2EA1CF228F7DFB00060E3F /* PollingMode.swift in Sources */,
 				6CBFE27C23DB27A200D1BC41 /* InternalDisplay.swift in Sources */,
+				AA062E8E26CA7BE5007E628C /* DisplaysPrefsCellView.swift in Sources */,
 				FE4E0896249D584C003A50BB /* OSDUtils.swift in Sources */,
 				6CBFE27A23DB266000D1BC41 /* Display.swift in Sources */,
 				F03A8DF21FFBAA6F0034DC27 /* ExternalDisplay.swift in Sources */,
@@ -575,15 +580,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		6CDA0FCA26485A7600F52125 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				6CDA0FCB26485A7600F52125 /* Base */,
-				AA6686EF26B8172E00AF74A2 /* hu */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		6CDA0FCD26485A8300F52125 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

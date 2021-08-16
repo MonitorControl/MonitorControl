@@ -34,6 +34,9 @@
 /* No comment provided by engineer. */
 "Display" = "Monitor";
 
+/* Shown in the main prefs window */
+"Displays" = "Monitor";
+
 /* Shown in the alert dialog */
 "Enable Longer Delay?" = "Enable Longer Delay?";
 

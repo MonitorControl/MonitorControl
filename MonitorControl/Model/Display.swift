@@ -180,7 +180,7 @@ class Display {
     return false
   }
 
-  func showOsd(command: DDC.Command, value: Int, maxValue: Int = 100, roundChiclet: Bool = false) {
+  func showOsd(command: DDC.Command, value: Int, maxValue: Int = 100, roundChiclet: Bool = false, lock: Bool = false) {
     guard let manager = OSDManager.sharedManager() as? OSDManager else {
       return
     }
@@ -214,6 +214,6 @@ class Display {
                       msecUntilFade: 1000,
                       filledChiclets: UInt32(filledChiclets),
                       totalChiclets: UInt32(totalChiclets),
-                      locked: false)
+                      locked: lock)
   }
 }
