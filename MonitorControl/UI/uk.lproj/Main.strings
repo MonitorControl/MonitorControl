@@ -1,14 +1,8 @@
 /* Class = "NSTextFieldCell"; title = "MonitorControl"; ObjectID = "1PJ-14-Bvn"; */
 "1PJ-14-Bvn.title" = "MonitorControl";
 
-/* Class = "NSButtonCell"; title = "Reset Preferences"; ObjectID = "4Pj-3t-PJr"; */
-"4Pj-3t-PJr.title" = "Відновлення налаштувань";
-
 /* Class = "NSTextFieldCell"; title = "#ID"; ObjectID = "6GJ-6Q-gqz"; */
 "6GJ-6Q-gqz.title" = "#ID";
-
-/* Class = "NSTableColumn"; headerCell.title = "Enabled"; ObjectID = "8U8-ec-Zbv"; */
-"8U8-ec-Zbv.headerCell.title" = "Актив.";
 
 /* Class = "NSButtonCell"; title = "Hide Menu Icon"; ObjectID = "aXL-i8-S6R"; */
 "aXL-i8-S6R.title" = "Hide Menu Icon";
@@ -22,17 +16,11 @@
 /* Class = "NSTextFieldCell"; title = "Keyboard:"; ObjectID = "c7N-cO-759"; */
 "c7N-cO-759.title" = "Keyboard:";
 
-/* Class = "NSTableColumn"; headerCell.title = "Name"; ObjectID = "CHc-s5-4MN"; */
-"CHc-s5-4MN.headerCell.title" = "Назва";
-
 /* Class = "NSMenuItem"; title = "Custom"; ObjectID = "Cle-DD-vR7"; */
 "Cle-DD-vR7.title" = "Власне";
 
 /* Class = "NSButtonCell"; title = "Visit GitHub site"; ObjectID = "Cln-uW-2dd"; */
 "Cln-uW-2dd.title" = "Visit GitHub site";
-
-/* Class = "NSTableColumn"; headerCell.title = "ID"; ObjectID = "dgp-q7-cBK"; */
-"dgp-q7-cBK.headerCell.title" = "ID";
 
 /* Class = "NSButtonCell"; title = "Show volume slider in menu"; ObjectID = "dhP-eB-1L6"; */
 "dhP-eB-1L6.title" = "Show a slider for volume";
@@ -94,9 +82,6 @@
 /* Class = "NSButton"; ibShadowedToolTip = "More Info"; ObjectID = "kqn-gU-mZX"; */
 "kqn-gU-mZX.ibShadowedToolTip" = "Детальніше";
 
-/* Class = "NSTableColumn"; headerCell.title = "Vendor"; ObjectID = "LRJ-fb-Z9E"; */
-"LRJ-fb-Z9E.headerCell.title" = "Виробник";
-
 /* Class = "NSTextFieldCell"; title = "Display type:"; ObjectID = "lSJ-6w-KJ2"; */
 "lSJ-6w-KJ2.title" = "Display type:";
 
@@ -109,17 +94,11 @@
 /* Class = "NSTextFieldCell"; title = "Menu contents:"; ObjectID = "MJx-MK-e7D"; */
 "MJx-MK-e7D.title" = "Menu contents:";
 
-/* Class = "NSTableColumn"; headerCell.title = "Hide OSD"; ObjectID = "MPF-Mr-zVU"; */
-"MPF-Mr-zVU.headerCell.title" = "Без OSD";
-
 /* Class = "NSTextFieldCell"; title = "If an external display can't be controlled, software dimming will be used instead."; ObjectID = "n4V-jQ-1Ri"; */
 "n4V-jQ-1Ri.title" = "If an external display can't be controlled, software shading will be used. Only brightness control is available in this mode.";
 
 /* Class = "NSMenuItem"; title = "Volume only"; ObjectID = "NLP-dU-Dam"; */
 "NLP-dU-Dam.title" = "лише Гучність";
-
-/* Class = "NSTableColumn"; headerCell.title = "Model"; ObjectID = "Nvp-hI-w4x"; */
-"Nvp-hI-w4x.headerCell.title" = "Модель";
 
 /* Class = "NSTextFieldCell"; title = "Application:"; ObjectID = "okD-DG-pYa"; */
 "okD-DG-pYa.title" = "Application:";
@@ -136,14 +115,14 @@
 /* Class = "NSTextFieldCell"; title = "If the menu item is hidden, just relaunch the app to reveal Preferences!"; ObjectID = "PVE-y7-zIk"; */
 "PVE-y7-zIk.title" = "If hidden, relaunch the app to show Preferences!";
 
+/* Class = "NSTextFieldCell"; title = "Advanced:"; ObjectID = "r7i-oG-Ab6"; */
+"r7i-oG-Ab6.title" = "Advanced:";
+
 /* Class = "NSMenuItem"; title = "Normal"; ObjectID = "Riq-uM-bTs"; */
 "Riq-uM-bTs.title" = "Звич.";
 
 /* Class = "NSTextFieldCell"; title = "@the0neyouseek\n@reitermarkus\n@JoniVR\n@waydabber"; ObjectID = "TKd-J8-Iyk"; */
 "TKd-J8-Iyk.title" = "@the0neyouseek\n@reitermarkus\n@JoniVR\n@waydabber";
-
-/* Class = "NSTableColumn"; headerCell.title = "Friendly Name"; ObjectID = "uoI-1J-RdD"; */
-"uoI-1J-RdD.headerCell.title" = "Назва дісплею";
 
 /* Class = "NSButtonCell"; title = "Enable keyboard control for display"; ObjectID = "UqR-WE-jHl"; */
 "UqR-WE-jHl.title" = "Enable keyboard control for display";
@@ -157,11 +136,11 @@
 /* Class = "NSMenuItem"; title = "None"; ObjectID = "X96-ny-lAP"; */
 "X96-ny-lAP.title" = "None";
 
-/* Class = "NSTableColumn"; headerCell.title = "DDC"; ObjectID = "xFw-if-3FU"; */
-"xFw-if-3FU.headerCell.title" = "DDC";
-
 /* Class = "NSButtonCell"; title = "Show contrast slider in menu"; ObjectID = "xSI-8W-Xd0"; */
 "xSI-8W-Xd0.title" = "Показувати слайдер для контрасту";
+
+/* Class = "NSButtonCell"; title = "Reset Preferences"; ObjectID = "xY6-aw-o9u"; */
+"xY6-aw-o9u.title" = "Reset Preferences";
 
 /* Class = "NSTextFieldCell"; title = "This lets you further lower brightness via software dimming even after display has reached zero brightness."; ObjectID = "yeg-GN-SuO"; */
 "yeg-GN-SuO.title" = "This lets you further lower brightness via software shading even after display has reached zero brightness.";
@@ -172,17 +151,8 @@
 /* Class = "NSTableColumn"; headerCell.title = "Polling Count"; ObjectID = "ytT-up-Dhs"; */
 "ytT-up-Dhs.headerCell.title" = "Опитувань/с";
 
-/* Class = "NSButtonCell"; title = "Prefer hardware DDC control"; ObjectID = "ZdU-gV-V05"; */
-"ZdU-gV-V05.title" = "Prefer hardware DDC control";
-
-/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "2gr-xG-Byx"; */
-"2gr-xG-Byx.title" = "";
-
-/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "afl-95-ZJl"; */
-"afl-95-ZJl.title" = "";
-
-/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "as0-t3-Aub"; */
-"as0-t3-Aub.title" = "";
+/* Class = "NSButtonCell"; title = "Use hardware DDC control"; ObjectID = "ZdU-gV-V05"; */
+"ZdU-gV-V05.title" = "Use DDC control";
 
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "H4a-c9-LcB"; */
 "H4a-c9-LcB.title" = "";
@@ -192,9 +162,3 @@
 
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "UBV-gO-AZz"; */
 "UBV-gO-AZz.title" = "";
-
-/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "vkG-RF-Yne"; */
-"vkG-RF-Yne.title" = "";
-
-/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "VPD-MR-IXg"; */
-"VPD-MR-IXg.title" = "";

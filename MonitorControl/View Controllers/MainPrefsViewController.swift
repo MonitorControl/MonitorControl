@@ -31,9 +31,7 @@ class MainPrefsViewController: NSViewController, PreferencePane {
     super.viewDidLoad()
   }
 
-  @available(macOS, deprecated: 10.10)
-  override func viewWillAppear() {
-    super.viewWillAppear()
+  func populateSettings() {
     let startAtLogin = (SMCopyAllJobDictionaries(kSMDomainUserLaunchd).takeRetainedValue() as? [[String: AnyObject]])?.first { $0["Label"] as? String == "\(Bundle.main.bundleIdentifier!)Helper" }?["OnDemand"] as? Bool ?? false
     self.startAtLogin.state = startAtLogin ? .on : .off
     self.hideMenuIcon.state = self.prefs.bool(forKey: Utils.PrefKeys.hideMenuIcon.rawValue) ? .on : .off
@@ -43,6 +41,12 @@ class MainPrefsViewController: NSViewController, PreferencePane {
     self.fallbackSw.state = self.prefs.bool(forKey: Utils.PrefKeys.fallbackSw.rawValue) ? .on : .off
     self.listenFor.selectItem(at: self.prefs.integer(forKey: Utils.PrefKeys.listenFor.rawValue))
     self.allScreens.state = self.prefs.bool(forKey: Utils.PrefKeys.allScreens.rawValue) ? .on : .off
+  }
+
+  @available(macOS, deprecated: 10.10)
+  override func viewWillAppear() {
+    super.viewWillAppear()
+    self.populateSettings()
   }
 
   @IBAction func allScreensTouched(_ sender: NSButton) {
@@ -144,5 +148,22 @@ class MainPrefsViewController: NSViewController, PreferencePane {
       os_log("Toggle keys listened for state state: %{public}@", type: .info, sender.selectedItem?.title ?? "")
     #endif
     NotificationCenter.default.post(name: Notification.Name(Utils.PrefKeys.listenFor.rawValue), object: nil)
+  }
+
+  @IBAction func resetPrefsClicked(_: NSButton) {
+    let alert = NSAlert()
+    alert.messageText = NSLocalizedString("Reset Preferences?", comment: "Shown in the alert dialog")
+    alert.informativeText = NSLocalizedString("Are you sure you want to reset all preferences?", comment: "Shown in the alert dialog")
+    alert.addButton(withTitle: NSLocalizedString("Yes", comment: "Shown in the alert dialog"))
+    alert.addButton(withTitle: NSLocalizedString("No", comment: "Shown in the alert dialog"))
+    alert.alertStyle = NSAlert.Style.warning
+    if let window = self.view.window {
+      alert.beginSheetModal(for: window, completionHandler: { modalResponse in
+        if modalResponse == NSApplication.ModalResponse.alertFirstButtonReturn {
+          NotificationCenter.default.post(name: Notification.Name(Utils.PrefKeys.preferenceReset.rawValue), object: nil)
+          self.populateSettings()
+        }
+      })
+    }
   }
 }

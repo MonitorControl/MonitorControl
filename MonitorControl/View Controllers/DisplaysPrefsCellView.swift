@@ -39,6 +39,8 @@ class DisplaysPrefsCellView: NSTableCellView {
       }
       _ = disp.resetSwBrightness()
       app.updateMenus()
+      let displayInfo = DisplaysPrefsViewController.getDisplayInfo(display: disp)
+      self.controlMethod.stringValue = displayInfo.controlMethod
     }
   }
 
@@ -77,12 +79,18 @@ class DisplaysPrefsCellView: NSTableCellView {
 
   @IBAction func resetSettings(_: NSButton) {
     if let disp = display {
-      self.ddcButton.state = .on
-      self.ddcButtonToggled(self.ddcButton)
-      self.enabledButton.state = .on
-      self.enabledButtonToggled(self.enabledButton)
-      self.disableVolumeOSDButton.state = .off
-      self.disableVolumeOSDButton(self.disableVolumeOSDButton)
+      if self.ddcButton.isEnabled {
+        self.ddcButton.state = .on
+        self.ddcButtonToggled(self.ddcButton)
+      }
+      if self.enabledButton.isEnabled {
+        self.enabledButton.state = .on
+        self.enabledButtonToggled(self.enabledButton)
+      }
+      if self.disableVolumeOSDButton.isEnabled {
+        self.disableVolumeOSDButton.state = .off
+        self.disableVolumeOSDButton(self.disableVolumeOSDButton)
+      }
       self.friendlyName.stringValue = disp.name
       self.friendlyNameValueChanged(self.friendlyName)
     }

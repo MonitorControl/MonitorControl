@@ -24,14 +24,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     let storyboard = NSStoryboard(name: "Main", bundle: Bundle.main)
     let mainPrefsVc = storyboard.instantiateController(withIdentifier: "MainPrefsVC") as? MainPrefsViewController
     let displaysPrefsVc = storyboard.instantiateController(withIdentifier: "DisplaysPrefsVC") as? DisplaysPrefsViewController
-//    let displayPrefsVc = storyboard.instantiateController(withIdentifier: "DisplayPrefsVC") as? DisplayPrefsViewController
 //    let advancedPrefsVc = storyboard.instantiateController(withIdentifier: "AdvancedPrefsVC") as? AdvancedPrefsViewController
     let aboutPrefsVc = storyboard.instantiateController(withIdentifier: "AboutPrefsVC") as? AboutPrefsViewController
     return PreferencesWindowController(
       preferencePanes: [
         mainPrefsVc!,
         displaysPrefsVc!,
-//        displayPrefsVc!,
 //        advancedPrefsVc!,
         aboutPrefsVc!,
       ],

@@ -25,6 +25,9 @@
 /* Build */
 "Build" = "Build";
 
+/* Shown in the Display Preferences */
+"Built-in Display" = "Built-in Display";
+
 /* Shown in menu */
 "Contrast" = "对比度";
 
@@ -40,8 +43,17 @@
 /* Shown in the alert dialog */
 "Enable Longer Delay?" = "Enable Longer Delay?";
 
+/* Shown in the Display Preferences */
+"External Display" = "External Display";
+
 /* Shown in the main prefs window */
 "General" = "通用";
+
+/* Shown in the Display Preferences */
+"Hardware (CoreDisplay)" = "Hardware (CoreDisplay)";
+
+/* Shown in the Display Preferences */
+"Hardware (DDC)" = "Hardware (DDC)";
 
 /* Intel designation (shown after the version number in Preferences) */
 "Intel" = "Intel";
@@ -49,11 +61,17 @@
 /* Shown in the alert dialog */
 "No" = "No";
 
+/* Shown in the Display Preferences */
+"No Control Available" = "No Control Available";
+
 /* Shown in menu */
 "No supported display found" = "未发现支持的显示器";
 
 /* Shown in the alert dialog */
 "Ok" = "Ok";
+
+/* Shown in the Display Preferences */
+"Other Display" = "Other Display";
 
 /* Shown in the alert dialog */
 "Reset Preferences?" = "Reset Preferences?";
@@ -61,16 +79,28 @@
 /* Shown in the alert dialog */
 "Shortcuts not available" = "快捷键不可用";
 
+/* Shown in the Display Preferences */
+"Software (Forced)" = "Software (Forced)";
+
+/* Shown in the Display Preferences */
+"Software Only" = "Software Only";
+
 /* Unknown display name
  Unknown model
  Unknown vendor */
 "Unknown" = "Unknown";
+
+/* Shown in the Display Preferences */
+"Unspecified" = "Unspecified";
 
 /* v */
 "v" = "v";
 
 /* Version */
 "Version" = "Version";
+
+/* Shown in the Display Preferences */
+"Virtual Display" = "Virtual Display";
 
 /* Shown in menu */
 "Volume" = "音量";

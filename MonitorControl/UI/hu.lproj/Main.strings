@@ -1,38 +1,26 @@
 /* Class = "NSTextFieldCell"; title = "MonitorControl"; ObjectID = "1PJ-14-Bvn"; */
 "1PJ-14-Bvn.title" = "MonitorControl";
 
-/* Class = "NSButtonCell"; title = "Reset Preferences"; ObjectID = "4Pj-3t-PJr"; */
-"4Pj-3t-PJr.title" = "Alapértelmezett beállítások";
-
 /* Class = "NSTextFieldCell"; title = "#ID"; ObjectID = "6GJ-6Q-gqz"; */
 "6GJ-6Q-gqz.title" = "#ID";
-
-/* Class = "NSTableColumn"; headerCell.title = "Enabled"; ObjectID = "8U8-ec-Zbv"; */
-"8U8-ec-Zbv.headerCell.title" = "Aktív";
 
 /* Class = "NSButtonCell"; title = "Hide Menu Icon"; ObjectID = "aXL-i8-S6R"; */
 "aXL-i8-S6R.title" = "Menü ikon elrejtése";
 
 /* Class = "NSButtonCell"; title = "Disable macOS volume OSD"; ObjectID = "bkM-Px-U3b"; */
-"bkM-Px-U3b.title" = "Disable macOS Volume OSD";
+"bkM-Px-U3b.title" = "MacOS hangerő OSD tiltása";
 
 /* Class = "NSButtonCell"; title = "Reset settings"; ObjectID = "BYS-7Y-bRz"; */
-"BYS-7Y-bRz.title" = "Reset settings";
+"BYS-7Y-bRz.title" = "Visszaállítás";
 
 /* Class = "NSTextFieldCell"; title = "Keyboard:"; ObjectID = "c7N-cO-759"; */
 "c7N-cO-759.title" = "Billentyűzet:";
-
-/* Class = "NSTableColumn"; headerCell.title = "Name"; ObjectID = "CHc-s5-4MN"; */
-"CHc-s5-4MN.headerCell.title" = "Név";
 
 /* Class = "NSMenuItem"; title = "Custom"; ObjectID = "Cle-DD-vR7"; */
 "Cle-DD-vR7.title" = "Egyedi";
 
 /* Class = "NSButtonCell"; title = "Visit GitHub site"; ObjectID = "Cln-uW-2dd"; */
 "Cln-uW-2dd.title" = "GitHub oldal";
-
-/* Class = "NSTableColumn"; headerCell.title = "ID"; ObjectID = "dgp-q7-cBK"; */
-"dgp-q7-cBK.headerCell.title" = "ID";
 
 /* Class = "NSButtonCell"; title = "Show volume slider in menu"; ObjectID = "dhP-eB-1L6"; */
 "dhP-eB-1L6.title" = "Hangerő csúszka megjelenítése a menüben";
@@ -94,9 +82,6 @@
 /* Class = "NSButton"; ibShadowedToolTip = "More Info"; ObjectID = "kqn-gU-mZX"; */
 "kqn-gU-mZX.ibShadowedToolTip" = "További információ";
 
-/* Class = "NSTableColumn"; headerCell.title = "Vendor"; ObjectID = "LRJ-fb-Z9E"; */
-"LRJ-fb-Z9E.headerCell.title" = "Szállító";
-
 /* Class = "NSTextFieldCell"; title = "Display type:"; ObjectID = "lSJ-6w-KJ2"; */
 "lSJ-6w-KJ2.title" = "Display type:";
 
@@ -109,23 +94,17 @@
 /* Class = "NSTextFieldCell"; title = "Menu contents:"; ObjectID = "MJx-MK-e7D"; */
 "MJx-MK-e7D.title" = "Menü tartalom:";
 
-/* Class = "NSTableColumn"; headerCell.title = "Hide OSD"; ObjectID = "MPF-Mr-zVU"; */
-"MPF-Mr-zVU.headerCell.title" = "OSD elrejtése";
-
 /* Class = "NSTextFieldCell"; title = "If an external display can't be controlled, software dimming will be used instead."; ObjectID = "n4V-jQ-1Ri"; */
 "n4V-jQ-1Ri.title" = "Szoftveres sötétítés használata, ha egy külső kijelzőt nem lehet vezérelni. Csak a fényerő szabályozás elérhető ilyen kijelzőknél.";
 
 /* Class = "NSMenuItem"; title = "Volume only"; ObjectID = "NLP-dU-Dam"; */
 "NLP-dU-Dam.title" = "Csak a hangerő billentyűk";
 
-/* Class = "NSTableColumn"; headerCell.title = "Model"; ObjectID = "Nvp-hI-w4x"; */
-"Nvp-hI-w4x.headerCell.title" = "Modell";
-
 /* Class = "NSTextFieldCell"; title = "Application:"; ObjectID = "okD-DG-pYa"; */
 "okD-DG-pYa.title" = "Alkalmazás:";
 
 /* Class = "NSTextFieldCell"; title = "Control method:"; ObjectID = "PaK-1f-DsW"; */
-"PaK-1f-DsW.title" = "Control method:";
+"PaK-1f-DsW.title" = "Vezérlés:";
 
 /* Class = "NSTextFieldCell"; title = "#ControlMethod"; ObjectID = "pIy-Lk-kkm"; */
 "pIy-Lk-kkm.title" = "#ControlMethod";
@@ -136,17 +115,17 @@
 /* Class = "NSTextFieldCell"; title = "If the menu item is hidden, just relaunch the app to reveal Preferences!"; ObjectID = "PVE-y7-zIk"; */
 "PVE-y7-zIk.title" = "Ha rejtett, indítsa el újra az alkalmazást a beállítások megnyitásához!";
 
+/* Class = "NSTextFieldCell"; title = "Advanced:"; ObjectID = "r7i-oG-Ab6"; */
+"r7i-oG-Ab6.title" = "Advanced:";
+
 /* Class = "NSMenuItem"; title = "Normal"; ObjectID = "Riq-uM-bTs"; */
 "Riq-uM-bTs.title" = "Normál";
 
 /* Class = "NSTextFieldCell"; title = "@the0neyouseek\n@reitermarkus\n@JoniVR\n@waydabber"; ObjectID = "TKd-J8-Iyk"; */
 "TKd-J8-Iyk.title" = "@the0neyouseek\n@reitermarkus\n@JoniVR\n@waydabber";
 
-/* Class = "NSTableColumn"; headerCell.title = "Friendly Name"; ObjectID = "uoI-1J-RdD"; */
-"uoI-1J-RdD.headerCell.title" = "Egyéni név";
-
 /* Class = "NSButtonCell"; title = "Enable keyboard control for display"; ObjectID = "UqR-WE-jHl"; */
-"UqR-WE-jHl.title" = "Enable keyboard control for display";
+"UqR-WE-jHl.title" = "Vezérlés billentyűzetről";
 
 /* Class = "NSMenuItem"; title = "Heavy"; ObjectID = "vik-vN-bJe"; */
 "vik-vN-bJe.title" = "Magas";
@@ -157,32 +136,23 @@
 /* Class = "NSMenuItem"; title = "None"; ObjectID = "X96-ny-lAP"; */
 "X96-ny-lAP.title" = "Nincs";
 
-/* Class = "NSTableColumn"; headerCell.title = "DDC"; ObjectID = "xFw-if-3FU"; */
-"xFw-if-3FU.headerCell.title" = "DDC";
-
 /* Class = "NSButtonCell"; title = "Show contrast slider in menu"; ObjectID = "xSI-8W-Xd0"; */
 "xSI-8W-Xd0.title" = "Kontraszt csúszka megjelenítése a menüben";
+
+/* Class = "NSButtonCell"; title = "Reset Preferences"; ObjectID = "xY6-aw-o9u"; */
+"xY6-aw-o9u.title" = "Reset Preferences";
 
 /* Class = "NSTextFieldCell"; title = "This lets you further lower brightness via software dimming even after display has reached zero brightness."; ObjectID = "yeg-GN-SuO"; */
 "yeg-GN-SuO.title" = "A fényerő további csökkentése szoftveres sötétítéssel miután a kijelző elérte a nulla fényerőt.";
 
 /* Class = "NSTextFieldCell"; title = "Identifier:"; ObjectID = "YqZ-LS-YvR"; */
-"YqZ-LS-YvR.title" = "Identifier:";
+"YqZ-LS-YvR.title" = "Azonosító:";
 
 /* Class = "NSTableColumn"; headerCell.title = "Polling Count"; ObjectID = "ytT-up-Dhs"; */
 "ytT-up-Dhs.headerCell.title" = "Mintavételezés";
 
-/* Class = "NSButtonCell"; title = "Prefer hardware DDC control"; ObjectID = "ZdU-gV-V05"; */
-"ZdU-gV-V05.title" = "Prefer hardware DDC control";
-
-/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "2gr-xG-Byx"; */
-"2gr-xG-Byx.title" = "";
-
-/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "afl-95-ZJl"; */
-"afl-95-ZJl.title" = "";
-
-/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "as0-t3-Aub"; */
-"as0-t3-Aub.title" = "";
+/* Class = "NSButtonCell"; title = "Use hardware DDC control"; ObjectID = "ZdU-gV-V05"; */
+"ZdU-gV-V05.title" = "Hardveres DDC vezérlés";
 
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "H4a-c9-LcB"; */
 "H4a-c9-LcB.title" = "";
@@ -192,9 +162,3 @@
 
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "UBV-gO-AZz"; */
 "UBV-gO-AZz.title" = "";
-
-/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "vkG-RF-Yne"; */
-"vkG-RF-Yne.title" = "";
-
-/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "VPD-MR-IXg"; */
-"VPD-MR-IXg.title" = "";

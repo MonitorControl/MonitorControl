@@ -1,14 +1,8 @@
 /* Class = "NSTextFieldCell"; title = "MonitorControl"; ObjectID = "1PJ-14-Bvn"; */
 "1PJ-14-Bvn.title" = "MonitorControl";
 
-/* Class = "NSButtonCell"; title = "Reset Preferences"; ObjectID = "4Pj-3t-PJr"; */
-"4Pj-3t-PJr.title" = "重置偏好设置";
-
 /* Class = "NSTextFieldCell"; title = "#ID"; ObjectID = "6GJ-6Q-gqz"; */
 "6GJ-6Q-gqz.title" = "#ID";
-
-/* Class = "NSTableColumn"; headerCell.title = "Enabled"; ObjectID = "8U8-ec-Zbv"; */
-"8U8-ec-Zbv.headerCell.title" = "启用";
 
 /* Class = "NSButtonCell"; title = "Hide Menu Icon"; ObjectID = "aXL-i8-S6R"; */
 "aXL-i8-S6R.title" = "Hide Menu Icon";
@@ -22,17 +16,11 @@
 /* Class = "NSTextFieldCell"; title = "Keyboard:"; ObjectID = "c7N-cO-759"; */
 "c7N-cO-759.title" = "Keyboard:";
 
-/* Class = "NSTableColumn"; headerCell.title = "Name"; ObjectID = "CHc-s5-4MN"; */
-"CHc-s5-4MN.headerCell.title" = "名字";
-
 /* Class = "NSMenuItem"; title = "Custom"; ObjectID = "Cle-DD-vR7"; */
 "Cle-DD-vR7.title" = "自定义";
 
 /* Class = "NSButtonCell"; title = "Visit GitHub site"; ObjectID = "Cln-uW-2dd"; */
 "Cln-uW-2dd.title" = "Visit GitHub site";
-
-/* Class = "NSTableColumn"; headerCell.title = "ID"; ObjectID = "dgp-q7-cBK"; */
-"dgp-q7-cBK.headerCell.title" = "ID";
 
 /* Class = "NSButtonCell"; title = "Show volume slider in menu"; ObjectID = "dhP-eB-1L6"; */
 "dhP-eB-1L6.title" = "Show a slider for volume";
@@ -97,9 +85,6 @@
 /* Class = "NSButton"; ibShadowedToolTip = "More Info"; ObjectID = "kqn-gU-mZX"; */
 "kqn-gU-mZX.ibShadowedToolTip" = "了解更多";
 
-/* Class = "NSTableColumn"; headerCell.title = "Vendor"; ObjectID = "LRJ-fb-Z9E"; */
-"LRJ-fb-Z9E.headerCell.title" = "制造商";
-
 /* Class = "NSTextFieldCell"; title = "Display type:"; ObjectID = "lSJ-6w-KJ2"; */
 "lSJ-6w-KJ2.title" = "Display type:";
 
@@ -109,17 +94,11 @@
 /* Class = "NSTextFieldCell"; title = "Menu contents:"; ObjectID = "MJx-MK-e7D"; */
 "MJx-MK-e7D.title" = "Menu contents:";
 
-/* Class = "NSTableColumn"; headerCell.title = "Hide OSD"; ObjectID = "MPF-Mr-zVU"; */
-"MPF-Mr-zVU.headerCell.title" = "隐藏 OSD";
-
 /* Class = "NSTextFieldCell"; title = "If an external display can't be controlled, software dimming will be used instead."; ObjectID = "n4V-jQ-1Ri"; */
 "n4V-jQ-1Ri.title" = "If an external display can't be controlled, software shading will be used. Only brightness control is available in this mode.";
 
 /* Class = "NSMenuItem"; title = "Volume only"; ObjectID = "NLP-dU-Dam"; */
 "NLP-dU-Dam.title" = "仅音量";
-
-/* Class = "NSTableColumn"; headerCell.title = "Model"; ObjectID = "Nvp-hI-w4x"; */
-"Nvp-hI-w4x.headerCell.title" = "型号";
 
 /* Class = "NSTextFieldCell"; title = "Application:"; ObjectID = "okD-DG-pYa"; */
 "okD-DG-pYa.title" = "Application:";
@@ -139,6 +118,9 @@
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "PZ9-0Z-K6J"; */
 "PZ9-0Z-K6J.title" = "Text Cell";
 
+/* Class = "NSTextFieldCell"; title = "Advanced:"; ObjectID = "r7i-oG-Ab6"; */
+"r7i-oG-Ab6.title" = "Advanced:";
+
 /* Class = "NSMenuItem"; title = "Normal"; ObjectID = "Riq-uM-bTs"; */
 "Riq-uM-bTs.title" = "正常";
 
@@ -147,9 +129,6 @@
 
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "UBV-gO-AZz"; */
 "UBV-gO-AZz.title" = "Text Cell";
-
-/* Class = "NSTableColumn"; headerCell.title = "Friendly Name"; ObjectID = "uoI-1J-RdD"; */
-"uoI-1J-RdD.headerCell.title" = "自定义名";
 
 /* Class = "NSButtonCell"; title = "Enable keyboard control for display"; ObjectID = "UqR-WE-jHl"; */
 "UqR-WE-jHl.title" = "Enable keyboard control for display";
@@ -163,11 +142,11 @@
 /* Class = "NSMenuItem"; title = "None"; ObjectID = "X96-ny-lAP"; */
 "X96-ny-lAP.title" = "None";
 
-/* Class = "NSTableColumn"; headerCell.title = "DDC"; ObjectID = "xFw-if-3FU"; */
-"xFw-if-3FU.headerCell.title" = "DDC";
-
 /* Class = "NSButtonCell"; title = "Show contrast slider in menu"; ObjectID = "xSI-8W-Xd0"; */
 "xSI-8W-Xd0.title" = "显示对比度滑动条";
+
+/* Class = "NSButtonCell"; title = "Reset Preferences"; ObjectID = "xY6-aw-o9u"; */
+"xY6-aw-o9u.title" = "Reset Preferences";
 
 /* Class = "NSTextFieldCell"; title = "This lets you further lower brightness via software dimming even after display has reached zero brightness."; ObjectID = "yeg-GN-SuO"; */
 "yeg-GN-SuO.title" = "This lets you further lower brightness via software shading even after display has reached zero brightness.";
@@ -178,23 +157,8 @@
 /* Class = "NSTableColumn"; headerCell.title = "Polling Count"; ObjectID = "ytT-up-Dhs"; */
 "ytT-up-Dhs.headerCell.title" = "查询次数";
 
-/* Class = "NSButtonCell"; title = "Prefer hardware DDC control"; ObjectID = "ZdU-gV-V05"; */
-"ZdU-gV-V05.title" = "Prefer hardware DDC control";
-
-/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "2gr-xG-Byx"; */
-"2gr-xG-Byx.title" = "";
-
-/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "afl-95-ZJl"; */
-"afl-95-ZJl.title" = "";
-
-/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "as0-t3-Aub"; */
-"as0-t3-Aub.title" = "";
+/* Class = "NSButtonCell"; title = "Use hardware DDC control"; ObjectID = "ZdU-gV-V05"; */
+"ZdU-gV-V05.title" = "Use DDC control";
 
 /* Class = "NSTextFieldCell"; title = "Version 0.0.0 Build 0000 - Platform"; ObjectID = "mBs-6m-13Q"; */
 "mBs-6m-13Q.title" = "";
-
-/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "vkG-RF-Yne"; */
-"vkG-RF-Yne.title" = "";
-
-/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "VPD-MR-IXg"; */
-"VPD-MR-IXg.title" = "";

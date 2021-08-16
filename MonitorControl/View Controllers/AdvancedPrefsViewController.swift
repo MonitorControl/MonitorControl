@@ -26,7 +26,6 @@ class AdvancedPrefsViewController: NSViewController, PreferencePane, NSTableView
     case pollingMode
     case pollingCount
     case longerDelay
-    case hideOsd
   }
 
   @IBOutlet var displayList: NSTableView!
@@ -39,22 +38,6 @@ class AdvancedPrefsViewController: NSViewController, PreferencePane, NSTableView
 
   deinit {
     NotificationCenter.default.removeObserver(self)
-  }
-
-  @IBAction func resetPrefsClicked(_: NSButton) {
-    let alert = NSAlert()
-    alert.messageText = NSLocalizedString("Reset Preferences?", comment: "Shown in the alert dialog")
-    alert.informativeText = NSLocalizedString("Are you sure you want to reset all preferences?", comment: "Shown in the alert dialog")
-    alert.addButton(withTitle: NSLocalizedString("Yes", comment: "Shown in the alert dialog"))
-    alert.addButton(withTitle: NSLocalizedString("No", comment: "Shown in the alert dialog"))
-    alert.alertStyle = NSAlert.Style.warning
-    if let window = self.view.window {
-      alert.beginSheetModal(for: window, completionHandler: { modalResponse in
-        if modalResponse == NSApplication.ModalResponse.alertFirstButtonReturn {
-          NotificationCenter.default.post(name: Notification.Name(Utils.PrefKeys.preferenceReset.rawValue), object: nil)
-        }
-      })
-    }
   }
 
   @IBAction func helpClicked(_: NSButton) {
@@ -104,12 +87,6 @@ class AdvancedPrefsViewController: NSViewController, PreferencePane, NSTableView
     case .longerDelay:
       if let cell = tableView.makeView(withIdentifier: tableColumn.identifier, owner: nil) as? LongerDelayCellView {
         cell.button.state = display.needsLongerDelay ? .on : .off
-        cell.display = display
-        return cell
-      }
-    case .hideOsd:
-      if let cell = tableView.makeView(withIdentifier: tableColumn.identifier, owner: nil) as? HideOsdCellView {
-        cell.button.state = display.hideOsd ? .on : .off
         cell.display = display
         return cell
       }
