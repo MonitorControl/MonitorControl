@@ -62,9 +62,16 @@ class DisplaysPrefsCellView: NSTableCellView {
     }
   }
 
-  @IBAction func disableVolumeOSDButton(_: NSButton) {
-    if let display = display {
-      // TODO: Unfinished
+  @IBAction func disableVolumeOSDButton(_ sender: NSButton) {
+    if let disp = display as? ExternalDisplay {
+      switch sender.state {
+      case .on:
+        disp.hideOsd = true
+      case .off:
+        disp.hideOsd = false
+      default:
+        break
+      }
     }
   }
 

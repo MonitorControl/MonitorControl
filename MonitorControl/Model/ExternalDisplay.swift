@@ -48,18 +48,6 @@ class ExternalDisplay: Display {
     }
   }
 
-  // On some displays, the display's OSD overlaps the macOS OSD,
-  // calling the OSD command with 1 seems to hide it.
-  func hideDisplayOsd() {
-    guard self.hideOsd else {
-      return
-    }
-
-    for _ in 0 ..< 20 {
-      _ = self.writeDDCValues(command: .osd, value: UInt16(1), errorRecoveryWaitTime: 2000)
-    }
-  }
-
   func isMuted() -> Bool {
     return self.getValue(for: .audioMuteScreenBlank) == 1
   }
@@ -98,8 +86,9 @@ class ExternalDisplay: Display {
     self.saveValue(muteValue, for: .audioMuteScreenBlank)
 
     if !fromVolumeSlider {
-      self.hideDisplayOsd()
-      self.showOsd(command: volumeOSDValue > 0 ? .audioSpeakerVolume : .audioMuteScreenBlank, value: volumeOSDValue, roundChiclet: true)
+      if !self.hideOsd {
+        self.showOsd(command: volumeOSDValue > 0 ? .audioSpeakerVolume : .audioMuteScreenBlank, value: volumeOSDValue, roundChiclet: true)
+      }
 
       if volumeOSDValue > 0 {
         self.playVolumeChangedSound()
@@ -139,8 +128,9 @@ class ExternalDisplay: Display {
       self.saveValue(muteValue, for: .audioMuteScreenBlank)
     }
 
-    self.hideDisplayOsd()
-    self.showOsd(command: .audioSpeakerVolume, value: volumeOSDValue, roundChiclet: !isSmallIncrement)
+    if !self.hideOsd {
+      self.showOsd(command: .audioSpeakerVolume, value: volumeOSDValue, roundChiclet: !isSmallIncrement)
+    }
 
     if !isAlreadySet {
       self.saveValue(volumeOSDValue, for: .audioSpeakerVolume)

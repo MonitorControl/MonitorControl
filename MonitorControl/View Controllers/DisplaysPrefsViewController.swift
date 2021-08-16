@@ -41,6 +41,58 @@ class DisplaysPrefsViewController: NSViewController, PreferencePane, NSTableView
     return self.displays.count
   }
 
+  func getDisplayInfo(display: Display) -> (displayType: String, displayImage: String, controlMethod: String) {
+    var displayType = ""
+    var displayImage = ""
+    var controlMethod = ""
+    if display.isVirtual {
+      displayType = "Virtual Display"
+      if #available(macOS 11.0, *) {
+        displayImage = "tv.and.mediabox"
+      }
+      controlMethod = "No Control Available"
+    } else if display is ExternalDisplay {
+      displayType = "External Display"
+      if #available(macOS 11.0, *) {
+        displayImage = "display"
+      }
+      if let externalDisplay: ExternalDisplay = display as? ExternalDisplay {
+        if externalDisplay.isSwOnly() {
+          controlMethod = "Software Only"
+        } else {
+          if externalDisplay.isSw() {
+            controlMethod = "Software (Forced)"
+          } else {
+            controlMethod = "Hardware (DDC)"
+          }
+        }
+      } else {
+        controlMethod = "Unspecified"
+      }
+    } else if display is InternalDisplay {
+      displayType = "Built-in Display"
+      var isImac: Bool = false
+      let platformExpertDevice = IOServiceGetMatchingService(kIOMasterPortDefault, IOServiceMatching("IOPlatformExpertDevice"))
+      if let modelData = IORegistryEntryCreateCFProperty(platformExpertDevice, "model" as CFString, kCFAllocatorDefault, 0).takeRetainedValue() as? Data, let modelIdentifierCString = String(data: modelData, encoding: .utf8)?.cString(using: .utf8) {
+        let modelIdentifier = String(cString: modelIdentifierCString)
+        isImac = modelIdentifier.contains("iMac")
+      }
+      if #available(macOS 11.0, *) {
+        if isImac {
+          displayImage = "desktopcomputer"
+        } else {
+          displayImage = "laptopcomputer"
+        }
+      }
+      controlMethod = "Hardware (CoreDisplay)"
+    } else {
+      displayType = "Other Display"
+      displayImage = "display.trianglebadge.exclamationmark"
+      controlMethod = "No Control Available" //
+    }
+    return (displayType, displayImage, controlMethod)
+  }
+
   func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
     guard let tableColumn = tableColumn else {
       return nil
@@ -65,60 +117,24 @@ class DisplaysPrefsViewController: NSViewController, PreferencePane, NSTableView
       } else {
         cell.ddcButton.isEnabled = true
       }
-      // Display type
-      var displayImage = ""
-      if display.isVirtual {
-        cell.displayType.stringValue = "Virtual Display"
-        if #available(macOS 11.0, *) {
-          displayImage = "tv.and.mediabox"
-        }
-        cell.controlMethod.stringValue = "No Control Available"
-      } else if display is ExternalDisplay {
-        cell.displayType.stringValue = "External Display"
-        if #available(macOS 11.0, *) {
-          displayImage = "display"
-        }
-        if let externalDisplay: ExternalDisplay = display as? ExternalDisplay {
-          if externalDisplay.isSwOnly() {
-            cell.controlMethod.stringValue = "Software Only"
-          } else {
-            if externalDisplay.isSw() {
-              cell.controlMethod.stringValue = "Software (Forced)"
-            } else {
-              cell.controlMethod.stringValue = "Hardware (DDC)"
-            }
-          }
-        } else {
-          cell.controlMethod.stringValue = "Unspecified"
-        }
-      } else if display is InternalDisplay {
-        cell.displayType.stringValue = "Built-in Display"
-        var isImac: Bool = false
-        let platformExpertDevice = IOServiceGetMatchingService(kIOMasterPortDefault, IOServiceMatching("IOPlatformExpertDevice"))
-        if let modelData = IORegistryEntryCreateCFProperty(platformExpertDevice, "model" as CFString, kCFAllocatorDefault, 0).takeRetainedValue() as? Data, let modelIdentifierCString = String(data: modelData, encoding: .utf8)?.cString(using: .utf8) {
-          let modelIdentifier = String(cString: modelIdentifierCString)
-          isImac = modelIdentifier.contains("iMac")
-        }
-        if #available(macOS 11.0, *) {
-          if isImac {
-            displayImage = "desktopcomputer"
-          } else {
-            displayImage = "laptopcomputer"
-          }
-        }
-        cell.controlMethod.stringValue = "Hardware (CoreDisplay)" // TODO: Unfinished
-      } else {
-        cell.displayType.stringValue = "Other Display"
-        displayImage = "display.trianglebadge.exclamationmark"
-        cell.controlMethod.stringValue = "No Control Available" // TODO: Unfinished
-      }
+      // Display type, image, control method
+      var displayType, displayImage, controlMethod: String
+      (displayType, displayImage, controlMethod) = self.getDisplayInfo(display: display)
+      cell.displayType.stringValue = displayType
+      cell.controlMethod.stringValue = controlMethod
       if #available(macOS 11.0, *) {
         cell.displayImage.image = NSImage(systemSymbolName: displayImage, accessibilityDescription: display.name)!
       } else {
         cell.displayImage.image = NSImage(named: NSImage.computerName)!
       }
       // Disable Volume OSD
-      cell.disableVolumeOSDButton.state = .off // TODO: Unfinished
+      if let externalDisplay = display as? ExternalDisplay {
+        cell.disableVolumeOSDButton.state = externalDisplay.hideOsd ? .on : .off
+        cell.disableVolumeOSDButton.isEnabled = true
+      } else {
+        cell.disableVolumeOSDButton.state = .off
+        cell.disableVolumeOSDButton.isEnabled = false
+      }
       return cell
     }
     return nil

@@ -1112,7 +1112,7 @@
                                                                     </textFieldCell>
                                                                 </textField>
                                                                 <textField verticalHuggingPriority="750" id="mIA-Wh-7aB">
-                                                                    <rect key="frame" x="86" y="132" width="152" height="21"/>
+                                                                    <rect key="frame" x="86" y="132" width="285" height="21"/>
                                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" title="#FriendlyName" id="ibQ-4u-ClE">
                                                                         <font key="font" textStyle="title2" name=".SFNS-Regular"/>
@@ -1143,7 +1143,7 @@
                                                                 <button verticalHuggingPriority="750" id="ARW-va-sn0">
                                                                     <rect key="frame" x="365" y="24" width="250" height="18"/>
                                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                                    <buttonCell key="cell" type="check" title="Disable macOS Volume OSD" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="bkM-Px-U3b">
+                                                                    <buttonCell key="cell" type="check" title="Disable macOS volume OSD" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="bkM-Px-U3b">
                                                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                                         <font key="font" metaFont="system"/>
                                                                     </buttonCell>
