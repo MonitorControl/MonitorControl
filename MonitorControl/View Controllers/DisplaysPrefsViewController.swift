@@ -158,6 +158,13 @@ class DisplaysPrefsViewController: NSViewController, PreferencePane, NSTableView
         // DDC read delay
         cell.longerDelayButton.isEnabled = true
         cell.longerDelayButton.state = externalDisplay.needsLongerDelay ? .on : .off
+      } else {
+        cell.pollingModeMenu.selectItem(withTag: 0)
+        cell.pollingModeMenu.isEnabled = false
+        cell.pollingCount.stringValue = ""
+        cell.pollingCount.isEnabled = false
+        cell.longerDelayButton.state = .off
+        cell.longerDelayButton.isEnabled = false
       }
       if self.prefs.bool(forKey: Utils.PrefKeys.showAdvancedDisplays.rawValue) {
         cell.advancedSettings.isHidden = false
