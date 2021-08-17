@@ -23,7 +23,7 @@
 "Cle-DD-vR7.title" = "Custom";
 
 /* Class = "NSButtonCell"; title = "GitHub site"; ObjectID = "Cln-uW-2dd"; */
-"Cln-uW-2dd.title" = "Visit GitHub site";
+"Cln-uW-2dd.title" = "GitHub site";
 
 /* Class = "NSTextFieldCell"; title = "⚠️ Warning! Changing some of these setting may cause system freezes or unexpected behaviour. "; ObjectID = "Cz1-Mh-llk"; */
 "Cz1-Mh-llk.title" = "⚠️ Warning! Changing some of these setting may cause system freezes or unexpected behaviour. ";
@@ -41,7 +41,7 @@
 "Eq3-z9-yIo.title" = "Minimal";
 
 /* Class = "NSButtonCell"; title = "Issues"; ObjectID = "eUG-vD-C3W"; */
-"eUG-vD-C3W.title" = "Issues and feature requests";
+"eUG-vD-C3W.title" = "Issues";
 
 /* Class = "NSButtonCell"; title = "Reset Name"; ObjectID = "f9g-8s-gdd"; */
 "f9g-8s-gdd.title" = "Reset Name";

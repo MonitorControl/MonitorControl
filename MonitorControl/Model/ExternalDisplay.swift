@@ -266,9 +266,9 @@ class ExternalDisplay: Display {
         return nil
       }
       if let unwrappedDelay = delay {
-        values = Arm64DDCUtils.read(service: self.arm64avService, command: command.rawValue, tries: UInt8(tries), minReplyDelay: UInt32(unwrappedDelay))
+        values = Arm64DDCUtils.read(service: self.arm64avService, command: command.rawValue, tries: UInt8(min(tries, 255)), minReplyDelay: UInt32(unwrappedDelay / 1000))
       } else {
-        values = Arm64DDCUtils.read(service: self.arm64avService, command: command.rawValue, tries: UInt8(tries))
+        values = Arm64DDCUtils.read(service: self.arm64avService, command: command.rawValue, tries: UInt8(min(tries, 255)))
       }
     } else {
       if self.ddc?.supported(minReplyDelay: delay) == true {

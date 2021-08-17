@@ -19,9 +19,15 @@ class DisplaysPrefsCellView: NSTableCellView {
 
   @IBOutlet var advancedSettings: NSBox!
 
-  @IBOutlet var pollingModeMenu: NSPopUpButtonCell!
+  @IBOutlet var pollingModeMenu: NSPopUpButton!
   @IBOutlet var longerDelayButton: NSButton!
   @IBOutlet var pollingCount: NSTextFieldCell!
+
+  @IBAction func openAdvancedHelp(_: NSButton) {
+    if let url = URL(string: "https://github.com/the0neyouseek/MonitorControl/wiki/Advanced-Preferences") {
+      NSWorkspace.shared.open(url)
+    }
+  }
 
   @IBAction func pollingModeValueChanged(_ sender: NSPopUpButton) {
     if let display = display as? ExternalDisplay {
@@ -163,6 +169,14 @@ class DisplaysPrefsCellView: NSTableCellView {
       if self.disableVolumeOSDButton.isEnabled {
         self.disableVolumeOSDButton.state = .off
         self.disableVolumeOSDButton(self.disableVolumeOSDButton)
+      }
+      if self.pollingModeMenu.isEnabled {
+        self.pollingModeMenu.selectItem(withTag: 2)
+        self.pollingModeValueChanged(self.pollingModeMenu)
+      }
+      if self.longerDelayButton.isEnabled {
+        self.longerDelayButton.state = .off
+        self.longerDelayButtonToggled(self.longerDelayButton)
       }
       self.friendlyName.stringValue = disp.name
       self.friendlyNameValueChanged(self.friendlyName)

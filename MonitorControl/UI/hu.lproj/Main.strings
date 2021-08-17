@@ -41,7 +41,7 @@
 "Eq3-z9-yIo.title" = "Minimális";
 
 /* Class = "NSButtonCell"; title = "Issues"; ObjectID = "eUG-vD-C3W"; */
-"eUG-vD-C3W.title" = "Problémák és kérések";
+"eUG-vD-C3W.title" = "Problémák";
 
 /* Class = "NSButtonCell"; title = "Reset Name"; ObjectID = "f9g-8s-gdd"; */
 "f9g-8s-gdd.title" = "Reset Name";
@@ -158,4 +158,4 @@
 "ZdU-gV-V05.title" = "Hardveres DDC vezérlés";
 
 /* Class = "NSButtonCell"; title = "Donate!"; ObjectID = "ZKk-ve-rS4"; */
-"ZKk-ve-rS4.title" = "Donate!";
+"ZKk-ve-rS4.title" = "Adakozás";

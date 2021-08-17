@@ -607,9 +607,9 @@
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
                                                                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" id="2ys-EO-duG">
-                                                                                <rect key="frame" x="191" y="35" width="100" height="18"/>
+                                                                                <rect key="frame" x="191" y="35" width="100" height="23"/>
                                                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                                                <textFieldCell key="cell" controlSize="small" selectable="YES" editable="YES" enabled="NO" borderStyle="bezel" alignment="center" bezelStyle="round" id="LZ8-Tj-mCs">
+                                                                                <textFieldCell key="cell" controlSize="small" selectable="YES" editable="YES" enabled="NO" sendsActionOnEndEditing="YES" borderStyle="bezel" alignment="center" bezelStyle="round" id="LZ8-Tj-mCs">
                                                                                     <font key="font" metaFont="smallSystem"/>
                                                                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -635,7 +635,7 @@
                                                                                     </menu>
                                                                                 </popUpButtonCell>
                                                                                 <connections>
-                                                                                    <action selector="pollingModeValueChanged:" target="hCY-wr-B84" id="29i-IC-yDl"/>
+                                                                                    <action selector="pollingModeValueChanged:" target="hCY-wr-B84" id="GLr-dz-MuB"/>
                                                                                 </connections>
                                                                             </popUpButton>
                                                                             <button toolTip="More Info" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kqn-gU-mZX">
@@ -645,6 +645,9 @@
                                                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                                     <font key="font" metaFont="system"/>
                                                                                 </buttonCell>
+                                                                                <connections>
+                                                                                    <action selector="openAdvancedHelp:" target="hCY-wr-B84" id="GEM-ta-xhl"/>
+                                                                                </connections>
                                                                             </button>
                                                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yU6-4R-6Ji">
                                                                                 <rect key="frame" x="-2" y="90" width="553" height="16"/>
@@ -714,8 +717,7 @@
                                                                 <outlet property="friendlyName" destination="ibQ-4u-ClE" id="Lvu-68-2n9"/>
                                                                 <outlet property="longerDelayButton" destination="PJz-Jc-hZ4" id="3Gr-7L-zsi"/>
                                                                 <outlet property="pollingCount" destination="LZ8-Tj-mCs" id="JNg-eE-s2y"/>
-                                                                <outlet property="pollingModeMenu" destination="M5p-a2-UEs" id="qsf-EY-9rU"/>
-                                                                <outlet property="pollingModeMnue2" destination="7FH-uw-jcn" id="6Lo-06-Iq6"/>
+                                                                <outlet property="pollingModeMenu" destination="7FH-uw-jcn" id="RkL-VO-WJ2"/>
                                                             </connections>
                                                         </tableCellView>
                                                     </prototypeCellViews>

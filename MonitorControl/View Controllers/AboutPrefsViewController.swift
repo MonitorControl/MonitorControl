@@ -15,10 +15,10 @@ class AboutPrefsViewController: NSViewController, PreferencePane {
     }
   }
 
-  // MARK: TODO: Change these to "" for release!
+  // MARK: TODO: Change these for release!
 
-  let gitHubSubURL = "/tree/experimental/apple-silicon" // "/tree/experimental/apple-silicon"
-  let betaDesignation = "BETA " // "BETA "
+  let gitHubSubURL = "/experimental/apple-silicon" // release: "/master"
+  let betaDesignation = "BETA " // release: ""
 
   @IBOutlet var versionLabel: NSTextField!
   @IBOutlet var copyrightLabel: NSTextField!
@@ -35,13 +35,13 @@ class AboutPrefsViewController: NSViewController, PreferencePane {
   }
 
   @IBAction func openDonate(_: NSButton) {
-    if let url = URL(string: "https://raw.githubusercontent.com/MonitorControl/MonitorControl" + gitHubSubURL + "/DONATE.html") { // DO NOT FORGET to change url on release!
+    if let url = URL(string: "https://github.com/MonitorControl/MonitorControl/blob" + gitHubSubURL + "/DONATE.md") { // DO NOT FORGET to change url on release!
       NSWorkspace.shared.open(url)
     }
   }
 
   @IBAction func openGitHubPage(_: NSButton) {
-    if let url = URL(string: "https://github.com/MonitorControl/MonitorControl" + gitHubSubURL) { // DO NOT FORGET to change url on release!
+    if let url = URL(string: "https://github.com/MonitorControl/MonitorControl/tree" + gitHubSubURL) { // DO NOT FORGET to change url on release!
       NSWorkspace.shared.open(url)
     }
   }

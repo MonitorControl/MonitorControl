@@ -28,7 +28,6 @@
 		6CDA0FCF26485A8300F52125 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6CDA0FCD26485A8300F52125 /* Main.storyboard */; };
 		AA062E8A26C9A039007E628C /* DisplaysPrefsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA062E8926C9A039007E628C /* DisplaysPrefsViewController.swift */; };
 		AA062E8E26CA7BE5007E628C /* DisplaysPrefsCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA062E8D26CA7BE5007E628C /* DisplaysPrefsCellView.swift */; };
-		AA08127126CBF18300247B0A /* DONATE.html in Resources */ = {isa = PBXBuildFile; fileRef = AA08127026CBF18300247B0A /* DONATE.html */; };
 		AA16139B26BE772E00DCF027 /* Arm64DDCUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA16139A26BE772E00DCF027 /* Arm64DDCUtils.swift */; };
 		AA3B4A2826AE103C00B74CD2 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = AA3B4A2726AE103C00B74CD2 /* README.md */; };
 		AA665A5D26C5892800FEF2C1 /* AboutPrefsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA665A5C26C5892800FEF2C1 /* AboutPrefsViewController.swift */; };
@@ -97,7 +96,7 @@
 		6CDA0FD826485AAE00F52125 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/Main.strings; sourceTree = "<group>"; };
 		AA062E8926C9A039007E628C /* DisplaysPrefsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplaysPrefsViewController.swift; sourceTree = "<group>"; };
 		AA062E8D26CA7BE5007E628C /* DisplaysPrefsCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplaysPrefsCellView.swift; sourceTree = "<group>"; };
-		AA08127026CBF18300247B0A /* DONATE.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = DONATE.html; sourceTree = "<group>"; };
+		AA08127226CC165600247B0A /* DONATE.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = DONATE.md; sourceTree = "<group>"; };
 		AA16139A26BE772E00DCF027 /* Arm64DDCUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Arm64DDCUtils.swift; sourceTree = "<group>"; };
 		AA3B4A2726AE103C00B74CD2 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		AA665A5C26C5892800FEF2C1 /* AboutPrefsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutPrefsViewController.swift; sourceTree = "<group>"; };
@@ -180,7 +179,7 @@
 		56754EA21D9A4016007BCDC5 = {
 			isa = PBXGroup;
 			children = (
-				AA08127026CBF18300247B0A /* DONATE.html */,
+				AA08127226CC165600247B0A /* DONATE.md */,
 				AA3B4A2726AE103C00B74CD2 /* README.md */,
 				28D1DDD1227FB759004CB494 /* Frameworks */,
 				56754EAD1D9A4016007BCDC5 /* MonitorControl */,
@@ -391,7 +390,6 @@
 				56754EB11D9A4016007BCDC5 /* Assets.xcassets in Resources */,
 				6CDA0FCF26485A8300F52125 /* Main.storyboard in Resources */,
 				AA3B4A2826AE103C00B74CD2 /* README.md in Resources */,
-				AA08127126CBF18300247B0A /* DONATE.html in Resources */,
 				F01B0699228221B7008E64DB /* Localizable.strings in Resources */,
 				F01B06A1228221B7008E64DB /* MainMenu.xib in Resources */,
 			);
