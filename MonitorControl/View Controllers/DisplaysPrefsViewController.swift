@@ -62,18 +62,15 @@ class DisplaysPrefsViewController: NSViewController, PreferencePane, NSTableView
     var controlMethod = ""
     if display.isVirtual {
       displayType = NSLocalizedString("Virtual Display", comment: "Shown in the Display Preferences")
-      if #available(macOS 11.0, *) {
-        displayImage = "tv.and.mediabox"
-      }
+      displayImage = "tv.and.mediabox"
       controlMethod = NSLocalizedString("No Control Available", comment: "Shown in the Display Preferences")
     } else if display is ExternalDisplay {
       displayType = NSLocalizedString("External Display", comment: "Shown in the Display Preferences")
-      if #available(macOS 11.0, *) {
-        displayImage = "display"
-      }
+      displayImage = "display"
       if let externalDisplay: ExternalDisplay = display as? ExternalDisplay {
         if externalDisplay.isSwOnly() {
           controlMethod = NSLocalizedString("Software Only", comment: "Shown in the Display Preferences")
+          displayImage = "display.trianglebadge.exclamationmark"
         } else {
           if externalDisplay.isSw() {
             controlMethod = NSLocalizedString("Software (Forced)", comment: "Shown in the Display Preferences")
@@ -86,12 +83,10 @@ class DisplaysPrefsViewController: NSViewController, PreferencePane, NSTableView
       }
     } else if display is InternalDisplay {
       displayType = NSLocalizedString("Built-in Display", comment: "Shown in the Display Preferences")
-      if #available(macOS 11.0, *) {
-        if self.isImac() {
-          displayImage = "desktopcomputer"
-        } else {
-          displayImage = "laptopcomputer"
-        }
+      if self.isImac() {
+        displayImage = "desktopcomputer"
+      } else {
+        displayImage = "laptopcomputer"
       }
       controlMethod = NSLocalizedString("Hardware (CoreDisplay)", comment: "Shown in the Display Preferences")
     } else {
