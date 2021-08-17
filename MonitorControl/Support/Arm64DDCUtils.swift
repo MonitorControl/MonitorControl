@@ -56,11 +56,11 @@ class Arm64DDCUtils: NSObject {
   }
 
   // Perform DDC read
-  public static func read(service: IOAVService?, command: UInt8) -> (current: UInt16, max: UInt16)? {
+  public static func read(service: IOAVService?, command: UInt8, tries: UInt8 = 3, minReplyDelay: UInt32 = 10000) -> (current: UInt16, max: UInt16)? {
     var values: (UInt16, UInt16)?
     var send: [UInt8] = [command]
     var reply = [UInt8](repeating: 0, count: 11)
-    if Arm64DDCUtils.performDDCCommunication(service: service, send: &send, reply: &reply) {
+    if Arm64DDCUtils.performDDCCommunication(service: service, send: &send, reply: &reply, readSleepTime: minReplyDelay, numOfRetryAttemps: tries) {
       let max = UInt16(reply[6]) * 256 + UInt16(reply[7])
       let current = UInt16(reply[8]) * 256 + UInt16(reply[9])
       values = (current, max)

@@ -11,7 +11,5 @@ import Preferences
 extension Preferences.PaneIdentifier {
   static let main = Self("Main")
   static let displays = Self("Displays")
-  static let advanced = Self("Advanced")
-  static let display = Self("Display")
   static let about = Self("About")
 }

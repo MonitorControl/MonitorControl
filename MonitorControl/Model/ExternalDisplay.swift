@@ -265,7 +265,11 @@ class ExternalDisplay: Display {
       guard self.arm64ddc else {
         return nil
       }
-      values = Arm64DDCUtils.read(service: self.arm64avService, command: command.rawValue)
+      if let unwrappedDelay = delay {
+        values = Arm64DDCUtils.read(service: self.arm64avService, command: command.rawValue, tries: UInt8(tries), minReplyDelay: UInt32(unwrappedDelay))
+      } else {
+        values = Arm64DDCUtils.read(service: self.arm64avService, command: command.rawValue, tries: UInt8(tries))
+      }
     } else {
       if self.ddc?.supported(minReplyDelay: delay) == true {
         os_log("Display supports DDC.", type: .debug)

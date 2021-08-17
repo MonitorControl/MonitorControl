@@ -26,6 +26,7 @@ class MainPrefsViewController: NSViewController, PreferencePane {
   @IBOutlet var fallbackSw: NSButton!
   @IBOutlet var listenFor: NSPopUpButton!
   @IBOutlet var allScreens: NSButton!
+  @IBOutlet var showAdvancedDisplays: NSButton!
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -50,6 +51,7 @@ class MainPrefsViewController: NSViewController, PreferencePane {
     self.fallbackSw.state = self.prefs.bool(forKey: Utils.PrefKeys.fallbackSw.rawValue) ? .on : .off
     self.listenFor.selectItem(at: self.prefs.integer(forKey: Utils.PrefKeys.listenFor.rawValue))
     self.allScreens.state = self.prefs.bool(forKey: Utils.PrefKeys.allScreens.rawValue) ? .on : .off
+    self.showAdvancedDisplays.state = self.prefs.bool(forKey: Utils.PrefKeys.showAdvancedDisplays.rawValue) ? .on : .off
   }
 
   @IBAction func allScreensTouched(_ sender: NSButton) {
@@ -142,6 +144,20 @@ class MainPrefsViewController: NSViewController, PreferencePane {
     app.updateMenus()
     #if DEBUG
       os_log("Toggle fallback to software if no DDC: %{public}@", type: .info, sender.state == .on ? "on" : "off")
+    #endif
+  }
+
+  @IBAction func showAdvancedClicked(_ sender: NSButton) {
+    switch sender.state {
+    case .on:
+      self.prefs.set(true, forKey: Utils.PrefKeys.showAdvancedDisplays.rawValue)
+    case .off:
+      self.prefs.set(false, forKey: Utils.PrefKeys.showAdvancedDisplays.rawValue)
+    default: break
+    }
+    NotificationCenter.default.post(name: Notification.Name(Utils.PrefKeys.displayListUpdate.rawValue), object: nil)
+    #if DEBUG
+      os_log("Show advanced settings in Display clicked: %{public}@", type: .info, sender.state == .on ? "on" : "off")
     #endif
   }
 

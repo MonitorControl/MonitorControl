@@ -17,6 +17,79 @@ class DisplaysPrefsCellView: NSTableCellView {
   @IBOutlet var displayType: NSTextFieldCell!
   @IBOutlet var disableVolumeOSDButton: NSButton!
 
+  @IBOutlet var advancedSettings: NSBox!
+
+  @IBOutlet var pollingModeMenu: NSPopUpButtonCell!
+  @IBOutlet var longerDelayButton: NSButton!
+  @IBOutlet var pollingCount: NSTextFieldCell!
+
+  @IBAction func pollingModeValueChanged(_ sender: NSPopUpButton) {
+    if let display = display as? ExternalDisplay {
+      let newValue = sender.selectedTag()
+      let originalValue = display.getPollingMode()
+
+      if newValue != originalValue {
+        display.setPollingMode(newValue)
+        if display.getPollingMode() == 4 {
+          self.pollingCount.isEnabled = true
+        } else {
+          self.pollingCount.isEnabled = false
+        }
+        self.pollingCount.stringValue = String(display.getPollingCount())
+        os_log("Value changed for polling count: %{public}@", type: .info, "from `\(originalValue)` to `\(newValue)`")
+      }
+    }
+  }
+
+  @IBAction func pollingCountValueChanged(_ sender: NSTextFieldCell) {
+    if let display = display as? ExternalDisplay {
+      let newValue = sender.stringValue
+      let originalValue = "\(display.getPollingCount())"
+
+      if newValue.isEmpty {
+        self.pollingCount.stringValue = originalValue
+      } else if let intValue = Int(newValue) {
+        self.pollingCount.stringValue = String(intValue)
+      } else {
+        self.pollingCount.stringValue = ""
+      }
+
+      if newValue != originalValue, !newValue.isEmpty, let newValue = Int(newValue) {
+        display.setPollingCount(newValue)
+        os_log("Value changed for polling count: %{public}@", type: .info, "from `\(originalValue)` to `\(newValue)`")
+      }
+    }
+  }
+
+  @IBAction func longerDelayButtonToggled(_ sender: NSButton) {
+    if let display = self.display as? ExternalDisplay {
+      switch sender.state {
+      case .on:
+        let alert = NSAlert()
+        alert.messageText = NSLocalizedString("Enable Longer Delay?", comment: "Shown in the alert dialog")
+        alert.informativeText = NSLocalizedString("Are you sure you want to enable a longer delay? Doing so may freeze your system and require a restart. Start at login will be disabled as a safety measure.", comment: "Shown in the alert dialog")
+        alert.addButton(withTitle: NSLocalizedString("Yes", comment: "Shown in the alert dialog"))
+        alert.addButton(withTitle: NSLocalizedString("No", comment: "Shown in the alert dialog"))
+        alert.alertStyle = NSAlert.Style.critical
+
+        if let window = self.window {
+          alert.beginSheetModal(for: window, completionHandler: { modalResponse in
+            if modalResponse == NSApplication.ModalResponse.alertFirstButtonReturn {
+              Utils.setStartAtLogin(enabled: false)
+              display.needsLongerDelay = true
+            } else {
+              sender.state = .off
+            }
+          })
+        }
+      case .off:
+        display.needsLongerDelay = false
+      default:
+        break
+      }
+    }
+  }
+
   @IBAction func enabledButtonToggled(_ sender: NSButton) {
     if let disp = display {
       let isEnabled = sender.state == .on

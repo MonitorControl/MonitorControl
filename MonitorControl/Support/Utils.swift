@@ -218,6 +218,9 @@ class Utils: NSObject {
 
     /// Used for notification when displays are updated in DisplayManager
     case displayListUpdate
+
+    /// Show advanced options under Displays tab in Preferences
+    case showAdvancedDisplays
   }
 
   /// Keys for the value of listenFor option

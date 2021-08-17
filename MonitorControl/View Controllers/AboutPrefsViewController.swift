@@ -15,6 +15,11 @@ class AboutPrefsViewController: NSViewController, PreferencePane {
     }
   }
 
+  // MARK: TODO: Change these to "" for release!
+
+  let gitHubSubURL = "/tree/experimental/apple-silicon" // "/tree/experimental/apple-silicon"
+  let betaDesignation = "BETA " // "BETA "
+
   @IBOutlet var versionLabel: NSTextField!
   @IBOutlet var copyrightLabel: NSTextField!
 
@@ -29,8 +34,14 @@ class AboutPrefsViewController: NSViewController, PreferencePane {
     super.viewWillAppear()
   }
 
+  @IBAction func openDonate(_: NSButton) {
+    if let url = URL(string: "https://raw.githubusercontent.com/MonitorControl/MonitorControl" + gitHubSubURL + "/DONATE.html") { // DO NOT FORGET to change url on release!
+      NSWorkspace.shared.open(url)
+    }
+  }
+
   @IBAction func openGitHubPage(_: NSButton) {
-    if let url = URL(string: "https://github.com/MonitorControl/MonitorControl/tree/experimental/apple-silicon") { // DO NOT FORGET to change url on release!
+    if let url = URL(string: "https://github.com/MonitorControl/MonitorControl" + gitHubSubURL) { // DO NOT FORGET to change url on release!
       NSWorkspace.shared.open(url)
     }
   }
@@ -53,7 +64,7 @@ class AboutPrefsViewController: NSViewController, PreferencePane {
       let arch: String = NSLocalizedString("Intel", comment: "Intel designation (shown after the version number in Preferences)")
     #endif
 
-    self.versionLabel.stringValue = "BETA \(versionName) \(versionNumber) \(buildName) \(buildNumber) - \(arch)" // DO NOT FORGET to change beta designation on release!
+    self.versionLabel.stringValue = "" + self.betaDesignation + "\(versionName) \(versionNumber) \(buildName) \(buildNumber) - \(arch)" // DO NOT FORGET to change beta designation on release!
   }
 
   func setCopyrightInfo() {

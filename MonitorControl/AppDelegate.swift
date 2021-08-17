@@ -24,13 +24,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     let storyboard = NSStoryboard(name: "Main", bundle: Bundle.main)
     let mainPrefsVc = storyboard.instantiateController(withIdentifier: "MainPrefsVC") as? MainPrefsViewController
     let displaysPrefsVc = storyboard.instantiateController(withIdentifier: "DisplaysPrefsVC") as? DisplaysPrefsViewController
-//    let advancedPrefsVc = storyboard.instantiateController(withIdentifier: "AdvancedPrefsVC") as? AdvancedPrefsViewController
     let aboutPrefsVc = storyboard.instantiateController(withIdentifier: "AboutPrefsVC") as? AboutPrefsViewController
     return PreferencesWindowController(
       preferencePanes: [
         mainPrefsVc!,
         displaysPrefsVc!,
-//        advancedPrefsVc!,
         aboutPrefsVc!,
       ],
       animated: true // causes nice (some say glitchy) animations
@@ -81,6 +79,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       prefs.set(true, forKey: Utils.PrefKeys.lowerSwAfterBrightness.rawValue)
       prefs.set(true, forKey: Utils.PrefKeys.fallbackSw.rawValue)
       prefs.set(false, forKey: Utils.PrefKeys.hideMenuIcon.rawValue)
+      prefs.set(false, forKey: Utils.PrefKeys.showAdvancedDisplays.rawValue)
     }
   }
 

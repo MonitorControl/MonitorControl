@@ -22,18 +22,19 @@ class DisplaysPrefsViewController: NSViewController, PreferencePane, NSTableView
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    NotificationCenter.default.addObserver(self, selector: #selector(self.loadDisplayList), name: .displayListUpdate, object: nil)
-    self.loadDisplayList()
   }
 
   override func viewWillAppear() {
     super.viewWillAppear()
+    self.loadDisplayList()
+    NotificationCenter.default.addObserver(self, selector: #selector(self.loadDisplayList), name: .displayListUpdate, object: nil)
   }
 
   @objc func loadDisplayList() {
     os_log("Reloading Displays preferences display list", type: .info)
     self.displays = DisplayManager.shared.getAllDisplays()
     self.displayList.reloadData()
+    self.updateDisplayListRowHeight()
   }
 
   func numberOfRows(in _: NSTableView) -> Int {
@@ -142,8 +143,39 @@ class DisplaysPrefsViewController: NSViewController, PreferencePane, NSTableView
         cell.disableVolumeOSDButton.state = .off
         cell.disableVolumeOSDButton.isEnabled = false
       }
+      // Advanced settings
+      if let externalDisplay = display as? ExternalDisplay, !externalDisplay.isSwOnly(), !externalDisplay.isVirtual {
+        // DDC read polling mode
+        cell.pollingModeMenu.isEnabled = true
+        cell.pollingModeMenu.selectItem(withTag: externalDisplay.getPollingMode())
+        // Custom read polling count
+        if externalDisplay.getPollingMode() == 4 {
+          cell.pollingCount.isEnabled = true
+        } else {
+          cell.pollingCount.isEnabled = false
+        }
+        cell.pollingCount.stringValue = String(externalDisplay.getPollingCount())
+        // DDC read delay
+        cell.longerDelayButton.isEnabled = true
+        cell.longerDelayButton.state = externalDisplay.needsLongerDelay ? .on : .off
+      }
+      if self.prefs.bool(forKey: Utils.PrefKeys.showAdvancedDisplays.rawValue) {
+        cell.advancedSettings.isHidden = false
+//        tableView.rowHeight = 290
+      } else {
+        cell.advancedSettings.isHidden = true
+//        tableView.rowHeight = 150
+      }
       return cell
     }
     return nil
+  }
+
+  func updateDisplayListRowHeight() {
+    if self.prefs.bool(forKey: Utils.PrefKeys.showAdvancedDisplays.rawValue) {
+      self.displayList.rowHeight = 290
+    } else {
+      self.displayList.rowHeight = 150
+    }
   }
 }
