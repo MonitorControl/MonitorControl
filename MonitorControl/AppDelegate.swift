@@ -76,7 +76,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       prefs.set(true, forKey: Utils.PrefKeys.appAlreadyLaunched.rawValue)
       prefs.set(false, forKey: Utils.PrefKeys.showContrast.rawValue)
       prefs.set(true, forKey: Utils.PrefKeys.showVolume.rawValue)
-      prefs.set(true, forKey: Utils.PrefKeys.lowerSwAfterBrightness.rawValue)
+      prefs.set(false, forKey: Utils.PrefKeys.lowerSwAfterBrightness.rawValue)
       prefs.set(true, forKey: Utils.PrefKeys.fallbackSw.rawValue)
       prefs.set(false, forKey: Utils.PrefKeys.hideMenuIcon.rawValue)
       prefs.set(false, forKey: Utils.PrefKeys.showAdvancedDisplays.rawValue)
@@ -198,13 +198,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     self.updateArm64AVServices()
     if firstrun {
       DisplayManager.shared.resetSwBrightnessForAllDisplays(settingsOnly: true)
-    } else {
+    }
+    NotificationCenter.default.post(name: Notification.Name(Utils.PrefKeys.displayListUpdate.rawValue), object: nil)
+    self.updateMenus()
+    if !firstrun {
       if prefs.bool(forKey: Utils.PrefKeys.fallbackSw.rawValue) || prefs.bool(forKey: Utils.PrefKeys.lowerSwAfterBrightness.rawValue) {
         DisplayManager.shared.restoreSwBrightnessForAllDisplays(async: true)
       }
     }
-    NotificationCenter.default.post(name: Notification.Name(Utils.PrefKeys.displayListUpdate.rawValue), object: nil)
-    self.updateMenus()
   }
 
   private func addDisplayToMenu(display: ExternalDisplay, asSubMenu: Bool) {

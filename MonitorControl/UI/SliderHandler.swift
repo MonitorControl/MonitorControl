@@ -32,10 +32,26 @@ class SliderHandler {
     }
 
     if !self.display.isSw() {
-      _ = self.display.writeDDCValues(command: self.cmd, value: UInt16(value))
+      if self.cmd == DDC.Command.brightness, prefs.bool(forKey: Utils.PrefKeys.lowerSwAfterBrightness.rawValue) {
+        var brightnessDDCValue: Int = 0
+        var brightnessSwValue: Int = 100
+        if value >= Int(slider.maxValue / 2) {
+          brightnessDDCValue = slider.integerValue - Int(slider.maxValue / 2)
+          brightnessSwValue = Int(self.display.getSwMaxBrightness())
+        } else {
+          brightnessDDCValue = 0
+          brightnessSwValue = Int((Float(value) / Float(slider.maxValue / 2)) * Float(self.display.getSwMaxBrightness()))
+        }
+        _ = self.display.writeDDCValues(command: self.cmd, value: UInt16(brightnessDDCValue))
+        _ = self.display.setSwBrightness(value: UInt8(brightnessSwValue))
+        self.display.saveValue(brightnessDDCValue, for: self.cmd)
+      } else {
+        _ = self.display.writeDDCValues(command: self.cmd, value: UInt16(value))
+        self.display.saveValue(value, for: self.cmd)
+      }
     } else if self.cmd == DDC.Command.brightness {
       _ = self.display.setSwBrightness(value: UInt8(value))
+      self.display.saveValue(value, for: self.cmd)
     }
-    self.display.saveValue(value, for: self.cmd)
   }
 }

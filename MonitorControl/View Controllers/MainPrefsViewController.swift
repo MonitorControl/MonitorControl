@@ -127,6 +127,7 @@ class MainPrefsViewController: NSViewController, PreferencePane {
       DisplayManager.shared.resetSwBrightnessForAllDisplays()
     default: break
     }
+    app.updateMenus()
     #if DEBUG
       os_log("Toggle software control after brightness state: %{public}@", type: .info, sender.state == .on ? "on" : "off")
     #endif

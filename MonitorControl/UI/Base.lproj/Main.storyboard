@@ -617,7 +617,7 @@
                                                                                     </connections>
                                                                                 </textFieldCell>
                                                                             </textField>
-                                                                            <popUpButton verticalHuggingPriority="750" fixedFrame="YES" id="7FH-uw-jcn">
+                                                                            <popUpButton verticalHuggingPriority="750" id="7FH-uw-jcn">
                                                                                 <rect key="frame" x="187" y="57" width="108" height="26"/>
                                                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                                                 <popUpButtonCell key="cell" type="push" title="None" bezelStyle="rounded" alignment="center" controlSize="small" lineBreakMode="truncatingTail" enabled="NO" state="on" borderStyle="border" inset="2" selectedItem="FoA-yh-Yx3" id="M5p-a2-UEs">
@@ -637,7 +637,7 @@
                                                                                     <action selector="pollingModeValueChanged:" target="hCY-wr-B84" id="GLr-dz-MuB"/>
                                                                                 </connections>
                                                                             </popUpButton>
-                                                                            <button toolTip="More Info" verticalHuggingPriority="750" fixedFrame="YES" id="kqn-gU-mZX">
+                                                                            <button toolTip="More Info" verticalHuggingPriority="750" id="kqn-gU-mZX">
                                                                                 <rect key="frame" x="512" y="10" width="26" height="25"/>
                                                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                                                 <buttonCell key="cell" type="help" bezelStyle="helpButton" imagePosition="overlaps" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="H6v-Sv-5MG">
@@ -648,7 +648,7 @@
                                                                                     <action selector="openAdvancedHelp:" target="hCY-wr-B84" id="GEM-ta-xhl"/>
                                                                                 </connections>
                                                                             </button>
-                                                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" id="yU6-4R-6Ji">
+                                                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="yU6-4R-6Ji">
                                                                                 <rect key="frame" x="-2" y="90" width="553" height="14"/>
                                                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                                                 <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="⚠️ Warning! Changing some of these setting may cause system freezes or unexpected behaviour. " id="Cz1-Mh-llk">
@@ -668,7 +668,7 @@
                                                                                     <action selector="longerDelayButtonToggled:" target="hCY-wr-B84" id="jUC-Ye-cHW"/>
                                                                                 </connections>
                                                                             </button>
-                                                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" id="krX-bC-QxX">
+                                                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="krX-bC-QxX">
                                                                                 <rect key="frame" x="18" y="64" width="167" height="14"/>
                                                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                                                 <textFieldCell key="cell" controlSize="small" lineBreakMode="clipping" title="DDC read polling mode:" id="vwm-hY-on5">

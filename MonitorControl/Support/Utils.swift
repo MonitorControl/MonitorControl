@@ -14,7 +14,7 @@ class Utils: NSObject {
   ///   - command: Command (Brightness/Volume/...)
   ///   - title: Title of the slider
   /// - Returns: An `NSSlider` slider
-  static func addSliderMenuItem(toMenu menu: NSMenu, forDisplay display: ExternalDisplay, command: DDC.Command, title: String) -> SliderHandler {
+  static func addSliderMenuItem(toMenu menu: NSMenu, forDisplay display: ExternalDisplay, command: DDC.Command, title: String, numOfTickMarks: Int = 0) -> SliderHandler {
     let item = NSMenuItem()
 
     let handler = SliderHandler(display: display, command: command)
@@ -71,7 +71,6 @@ class Utils: NSObject {
       if tries != 0 {
         values = display.readDDCValues(for: command, tries: tries, minReplyDelay: delay)
       }
-
       (currentValue, maxValue) = values ?? (UInt16(display.getValue(for: command)), 0) // We set 0 for max. value to indicate that there is no real DDC reported max. value - ExternalDisplay.getMaxValue() will return 100 in case of 0 max. values.
     }
     display.saveMaxValue(Int(maxValue), for: command)
@@ -80,13 +79,15 @@ class Utils: NSObject {
     os_log(" - current value: %{public}@ - from display? %{public}@", type: .info, String(currentValue), String(values != nil))
     os_log(" - maximum value: %{public}@ - from display? %{public}@", type: .info, String(display.getMaxValue(for: command)), String(values != nil))
 
-    if command != .audioSpeakerVolume {
-      slider.integerValue = Int(currentValue)
-      slider.maxValue = Double(display.getMaxValue(for: command))
-//      if display.isSw() {
-//        slider.minValue = Double(display.getSwMaxBrightness()) * 0.2 // Don't let brightness to down for software brightness control as the user won't see the slider anymore
-//      }
-    } else {
+    if command == .brightness {
+      if !display.isSw(), prefs.bool(forKey: Utils.PrefKeys.lowerSwAfterBrightness.rawValue) {
+        slider.maxValue = Double(display.getMaxValue(for: command) * 2)
+        slider.integerValue = Int(slider.maxValue) / 2 + Int(currentValue)
+      } else {
+        slider.integerValue = Int(currentValue)
+        slider.maxValue = Double(display.getMaxValue(for: command))
+      }
+    } else if command == .audioSpeakerVolume {
       // If we're looking at the audio speaker volume, also retrieve the values for the mute command
       var muteValues: (current: UInt16, max: UInt16)?
 
@@ -116,8 +117,12 @@ class Utils: NSObject {
       }
 
       slider.maxValue = Double(display.getMaxValue(for: command))
+    } else {
+      slider.integerValue = Int(currentValue)
+      slider.maxValue = Double(display.getMaxValue(for: command))
     }
 
+    slider.numberOfTickMarks = numOfTickMarks
     slider.isEnabled = true
     return handler
   }

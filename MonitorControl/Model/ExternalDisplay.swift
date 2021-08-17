@@ -188,12 +188,7 @@ class ExternalDisplay: Display {
     }
   }
 
-  override func stepBrightness(isUp: Bool, isSmallIncrement: Bool) {
-    let currentValue = self.getValue(for: .brightness)
-    let maxValue = self.isSw() ? Int(self.getSwMaxBrightness()) : self.getMaxValue(for: .brightness)
-    let osdValue = self.calcNewValue(currentValue: currentValue, maxValue: maxValue, isUp: isUp, isSmallIncrement: isSmallIncrement)
-    let isAlreadySet = osdValue == self.getValue(for: .brightness)
-
+  func stepBrightnessPart(osdValue: Int, isSmallIncrement: Bool) -> Bool {
     if self.isSw(), self.prefs.bool(forKey: Utils.PrefKeys.fallbackSw.rawValue) {
       if self.setSwBrightness(value: UInt8(osdValue), smooth: true) {
         self.showOsd(command: .brightness, value: osdValue, roundChiclet: !isSmallIncrement)
@@ -202,12 +197,14 @@ class ExternalDisplay: Display {
           slider.intValue = Int32(osdValue)
         }
       }
-      return
+      return true
     }
+    return false
+  }
 
+  func stepBrightnessswAfterBirghtnessMode(osdValue: Int, isUp: Bool, isSmallIncrement: Bool) -> Bool {
+    let isAlreadySet = osdValue == self.getValue(for: .brightness)
     var swAfterBirghtnessMode: Bool = isSwBrightnessNotDefault()
-
-    // Set software brightness value according to the brightness, if necessary
     if isAlreadySet, !isUp, !swAfterBirghtnessMode, self.prefs.bool(forKey: Utils.PrefKeys.lowerSwAfterBrightness.rawValue) {
       swAfterBirghtnessMode = true
     }
@@ -220,20 +217,41 @@ class ExternalDisplay: Display {
         swAfterBirghtnessMode = false
       }
       if self.setSwBrightness(value: UInt8(swBirghtnessValue)) {
+        if let slider = brightnessSliderHandler?.slider {
+          slider.intValue = Int32(Float(slider.maxValue / 2) * (Float(swBirghtnessValue) / Float(getSwMaxBrightness())))
+        }
         self.doSwAfterOsdAnimation()
       }
     }
-    if !swAfterBirghtnessMode {
-      let ddcValue = UInt16(osdValue)
-      guard self.writeDDCValues(command: .brightness, value: ddcValue) == true else {
-        return
-      }
-      if let slider = brightnessSliderHandler?.slider {
+    return swAfterBirghtnessMode
+  }
+
+  override func stepBrightness(isUp: Bool, isSmallIncrement: Bool) {
+    let currentValue = self.getValue(for: .brightness)
+    let maxValue = self.isSw() ? Int(self.getSwMaxBrightness()) : self.getMaxValue(for: .brightness)
+    let osdValue = self.calcNewValue(currentValue: currentValue, maxValue: maxValue, isUp: isUp, isSmallIncrement: isSmallIncrement)
+
+    if self.stepBrightnessPart(osdValue: osdValue, isSmallIncrement: isSmallIncrement) {
+      return
+    }
+
+    if self.stepBrightnessswAfterBirghtnessMode(osdValue: osdValue, isUp: isUp, isSmallIncrement: isSmallIncrement) {
+      return
+    }
+
+    let ddcValue = UInt16(osdValue)
+    guard self.writeDDCValues(command: .brightness, value: ddcValue) == true else {
+      return
+    }
+    if let slider = brightnessSliderHandler?.slider {
+      if !self.isSw(), self.prefs.bool(forKey: Utils.PrefKeys.lowerSwAfterBrightness.rawValue) {
+        slider.intValue = Int32(slider.maxValue / 2) + Int32(ddcValue)
+      } else {
         slider.intValue = Int32(ddcValue)
       }
-      self.showOsd(command: .brightness, value: osdValue, roundChiclet: !isSmallIncrement)
-      self.saveValue(osdValue, for: .brightness)
     }
+    self.showOsd(command: .brightness, value: osdValue, roundChiclet: !isSmallIncrement)
+    self.saveValue(osdValue, for: .brightness)
   }
 
   public func writeDDCValues(command: DDC.Command, value: UInt16, errorRecoveryWaitTime _: UInt32? = nil) -> Bool? {

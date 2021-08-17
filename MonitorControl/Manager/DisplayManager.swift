@@ -1,5 +1,6 @@
 import Cocoa
 import CoreMedia
+import DDC
 
 class DisplayManager {
   public static let shared = DisplayManager()
@@ -84,8 +85,22 @@ class DisplayManager {
     }
   }
 
+  func setBrightnessSliderValue(externalDisplay: ExternalDisplay, value: Int32) {
+    if let slider = externalDisplay.brightnessSliderHandler?.slider {
+      slider.intValue = value
+    }
+  }
+
+  func getBrightnessSliderMaxValue(externalDisplay: ExternalDisplay) -> Double {
+    if let slider = externalDisplay.brightnessSliderHandler?.slider {
+      return slider.maxValue
+    }
+    return 0
+  }
+
   func restoreSwBrightnessForAllDisplays(async: Bool = false) {
     for externalDisplay in self.getExternalDisplays() {
+      let sliderMax = self.getBrightnessSliderMaxValue(externalDisplay: externalDisplay)
       if externalDisplay.getValue(for: .brightness) == 0 || externalDisplay.isSw() {
         let savedPrefValue = externalDisplay.getSwBrightnessPrefValue()
         if externalDisplay.getSwBrightness() != savedPrefValue {
@@ -95,8 +110,20 @@ class DisplayManager {
         }
         externalDisplay.saveSwBirghtnessPrefValue(Int(externalDisplay.getSwBrightness()))
         _ = externalDisplay.setSwBrightness(value: UInt8(savedPrefValue), smooth: async)
+        if !externalDisplay.isSw(), prefs.bool(forKey: Utils.PrefKeys.lowerSwAfterBrightness.rawValue) {
+          if savedPrefValue < externalDisplay.getSwMaxBrightness() {
+            self.setBrightnessSliderValue(externalDisplay: externalDisplay, value: Int32(Float(sliderMax / 2) * (Float(savedPrefValue) / Float(externalDisplay.getSwMaxBrightness()))))
+          } else {
+            self.setBrightnessSliderValue(externalDisplay: externalDisplay, value: Int32(sliderMax / 2) + Int32(externalDisplay.getValue(for: DDC.Command.brightness)))
+          }
+        } else if externalDisplay.isSw() {
+          self.setBrightnessSliderValue(externalDisplay: externalDisplay, value: Int32(Float(sliderMax) * (Float(savedPrefValue) / Float(externalDisplay.getSwMaxBrightness()))))
+        }
       } else {
         _ = externalDisplay.setSwBrightness(value: externalDisplay.getSwMaxBrightness())
+        if externalDisplay.isSw() {
+          self.setBrightnessSliderValue(externalDisplay: externalDisplay, value: Int32(sliderMax))
+        }
       }
     }
   }

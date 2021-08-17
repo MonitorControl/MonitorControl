@@ -16,6 +16,7 @@ class AboutPrefsViewController: NSViewController, PreferencePane {
   }
 
   // MARK: TODO: Change these for release!
+
   let gitHubSubURL = "/experimental/apple-silicon" // release: "/master"
   let betaDesignation = "BETA " // release: ""
 
