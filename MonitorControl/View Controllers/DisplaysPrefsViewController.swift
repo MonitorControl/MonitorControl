@@ -26,7 +26,6 @@ class DisplaysPrefsViewController: NSViewController, PreferencePane, NSTableView
     self.loadDisplayList()
   }
 
-  @available(macOS, deprecated: 10.10)
   override func viewWillAppear() {
     super.viewWillAppear()
   }

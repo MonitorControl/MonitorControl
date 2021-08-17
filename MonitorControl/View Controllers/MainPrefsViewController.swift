@@ -31,9 +31,18 @@ class MainPrefsViewController: NSViewController, PreferencePane {
     super.viewDidLoad()
   }
 
+  @available(macOS, deprecated: 10.10)
+  override func viewWillAppear() {
+    super.viewWillAppear()
+    self.populateSettings()
+  }
+
+  @available(macOS, deprecated: 10.10)
   func populateSettings() {
+    // This is marked as deprectated but according to the function header it still does not have a replacement as of macOS 12 Monterey and is valid to use.
     let startAtLogin = (SMCopyAllJobDictionaries(kSMDomainUserLaunchd).takeRetainedValue() as? [[String: AnyObject]])?.first { $0["Label"] as? String == "\(Bundle.main.bundleIdentifier!)Helper" }?["OnDemand"] as? Bool ?? false
     self.startAtLogin.state = startAtLogin ? .on : .off
+
     self.hideMenuIcon.state = self.prefs.bool(forKey: Utils.PrefKeys.hideMenuIcon.rawValue) ? .on : .off
     self.showContrastSlider.state = self.prefs.bool(forKey: Utils.PrefKeys.showContrast.rawValue) ? .on : .off
     self.showVolumeSlider.state = self.prefs.bool(forKey: Utils.PrefKeys.showVolume.rawValue) ? .on : .off
@@ -41,12 +50,6 @@ class MainPrefsViewController: NSViewController, PreferencePane {
     self.fallbackSw.state = self.prefs.bool(forKey: Utils.PrefKeys.fallbackSw.rawValue) ? .on : .off
     self.listenFor.selectItem(at: self.prefs.integer(forKey: Utils.PrefKeys.listenFor.rawValue))
     self.allScreens.state = self.prefs.bool(forKey: Utils.PrefKeys.allScreens.rawValue) ? .on : .off
-  }
-
-  @available(macOS, deprecated: 10.10)
-  override func viewWillAppear() {
-    super.viewWillAppear()
-    self.populateSettings()
   }
 
   @IBAction func allScreensTouched(_ sender: NSButton) {
@@ -150,6 +153,15 @@ class MainPrefsViewController: NSViewController, PreferencePane {
     NotificationCenter.default.post(name: Notification.Name(Utils.PrefKeys.listenFor.rawValue), object: nil)
   }
 
+  @available(macOS, deprecated: 10.10)
+  func resetSheetModalHander(modalResponse: NSApplication.ModalResponse) {
+    if modalResponse == NSApplication.ModalResponse.alertFirstButtonReturn {
+      NotificationCenter.default.post(name: Notification.Name(Utils.PrefKeys.preferenceReset.rawValue), object: nil)
+      self.populateSettings()
+    }
+  }
+
+  @available(macOS, deprecated: 10.10)
   @IBAction func resetPrefsClicked(_: NSButton) {
     let alert = NSAlert()
     alert.messageText = NSLocalizedString("Reset Preferences?", comment: "Shown in the alert dialog")
@@ -158,12 +170,7 @@ class MainPrefsViewController: NSViewController, PreferencePane {
     alert.addButton(withTitle: NSLocalizedString("No", comment: "Shown in the alert dialog"))
     alert.alertStyle = NSAlert.Style.warning
     if let window = self.view.window {
-      alert.beginSheetModal(for: window, completionHandler: { modalResponse in
-        if modalResponse == NSApplication.ModalResponse.alertFirstButtonReturn {
-          NotificationCenter.default.post(name: Notification.Name(Utils.PrefKeys.preferenceReset.rawValue), object: nil)
-          self.populateSettings()
-        }
-      })
+      alert.beginSheetModal(for: window, completionHandler: { modalResponse in self.resetSheetModalHander(modalResponse: modalResponse) })
     }
   }
 }
