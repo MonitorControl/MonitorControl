@@ -2,10 +2,7 @@
 "1PJ-14-Bvn.title" = "MonitorControl";
 
 /* Class = "NSTextFieldCell"; title = "DDC read delay:"; ObjectID = "1rn-ep-ZvO"; */
-"1rn-ep-ZvO.title" = "DDC read delay:";
-
-/* Class = "NSTextFieldCell"; title = "#ID"; ObjectID = "6GJ-6Q-gqz"; */
-"6GJ-6Q-gqz.title" = "#ID";
+"1rn-ep-ZvO.title" = "DDC várakozás:";
 
 /* Class = "NSButtonCell"; title = "Hide Menu Icon"; ObjectID = "aXL-i8-S6R"; */
 "aXL-i8-S6R.title" = "Menü ikon elrejtése";
@@ -25,14 +22,11 @@
 /* Class = "NSButtonCell"; title = "GitHub site"; ObjectID = "Cln-uW-2dd"; */
 "Cln-uW-2dd.title" = "GitHub oldal";
 
-/* Class = "NSTextFieldCell"; title = "⚠️ Warning! Changing some of these setting may cause system freezes or unexpected behaviour. "; ObjectID = "Cz1-Mh-llk"; */
-"Cz1-Mh-llk.title" = "⚠️ Warning! Changing some of these setting may cause system freezes or unexpected behaviour. ";
+/* Class = "NSTextFieldCell"; title = "⚠️ Warning! Changing some of these setting may cause system freezes or unexpected behavior!"; ObjectID = "Cz1-Mh-llk"; */
+"Cz1-Mh-llk.title" = "⚠️ Figyelem! Ezen beállítások némelyikének változtatása veszélyeztetheti a rendszer stabilitását!";
 
 /* Class = "NSButtonCell"; title = "Show volume slider in menu"; ObjectID = "dhP-eB-1L6"; */
 "dhP-eB-1L6.title" = "Hangerő csúszka megjelenítése a menüben";
-
-/* Class = "NSTextFieldCell"; title = "Copyright Ⓒ MonitorControl, 0000"; ObjectID = "e0q-fb-k7R"; */
-"e0q-fb-k7R.title" = "Copyright Ⓒ MonitorControl, 0000";
 
 /* Class = "NSButtonCell"; title = "Change Brightness and Volume for all screens"; ObjectID = "E6M-ih-S8Y"; */
 "E6M-ih-S8Y.title" = "Fényerő/hangerő módosítása az összes képernyőn";
@@ -44,7 +38,7 @@
 "eUG-vD-C3W.title" = "Problémák";
 
 /* Class = "NSButtonCell"; title = "Reset Name"; ObjectID = "f9g-8s-gdd"; */
-"f9g-8s-gdd.title" = "Reset Name";
+"f9g-8s-gdd.title" = "Alaphelyzet";
 
 /* Class = "NSButtonCell"; title = "Further lower brightness via software dimming"; ObjectID = "fhy-Er-0aI"; */
 "fhy-Er-0aI.title" = "Fényerő tovább csökkentése szoftveres sötétítéssel";
@@ -58,17 +52,11 @@
 /* Class = "NSMenuItem"; title = "Brightness only"; ObjectID = "hjz-0c-rvK"; */
 "hjz-0c-rvK.title" = "Csak a fényerő billentyűk";
 
-/* Class = "NSTextFieldCell"; title = "#FriendlyName"; ObjectID = "ibQ-4u-ClE"; */
-"ibQ-4u-ClE.title" = "#FriendlyName";
-
-/* Class = "NSBox"; title = "Box"; ObjectID = "ihQ-SK-x7Y"; */
-"ihQ-SK-x7Y.title" = "Box";
-
 /* Class = "NSButtonCell"; title = "Start at Login"; ObjectID = "j72-NF-zsW"; */
 "j72-NF-zsW.title" = "Automatikus indítás bejelentkezéskor";
 
 /* Class = "NSTextFieldCell"; title = "Custom read polling count:"; ObjectID = "J77-r0-djA"; */
-"J77-r0-djA.title" = "Custom read polling count:";
+"J77-r0-djA.title" = "Olvasási próbálkozások:";
 
 /* Class = "NSTextFieldCell"; title = "Use the media keys of your keyboard to control Brightness & Volume."; ObjectID = "K2r-aD-eec"; */
 "K2r-aD-eec.title" = "A képernyő fényerejét és hangerejét az Apple Billentyűzet fényerő és hangerő gombjaival lehet szabályozni.";
@@ -80,13 +68,7 @@
 "kqn-gU-mZX.ibShadowedToolTip" = "További információ";
 
 /* Class = "NSTextFieldCell"; title = "Display type:"; ObjectID = "lSJ-6w-KJ2"; */
-"lSJ-6w-KJ2.title" = "Display type:";
-
-/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "Lu0-Dq-lqu"; */
-"Lu0-Dq-lqu.title" = "Text Cell";
-
-/* Class = "NSTextFieldCell"; title = "Version 0.0.0 Build 0000 - Platform"; ObjectID = "mBs-6m-13Q"; */
-"mBs-6m-13Q.title" = "Verzió 0.0.0 (Build 0)";
+"lSJ-6w-KJ2.title" = "Kijelző típusa:";
 
 /* Class = "NSTextFieldCell"; title = "Menu contents:"; ObjectID = "MJx-MK-e7D"; */
 "MJx-MK-e7D.title" = "Menü tartalom:";
@@ -104,19 +86,13 @@
 "PaK-1f-DsW.title" = "Vezérlés:";
 
 /* Class = "NSButtonCell"; title = "Longer delay during DDC read operations"; ObjectID = "pF5-Sw-7BR"; */
-"pF5-Sw-7BR.title" = "Longer delay during DDC read operations";
-
-/* Class = "NSTextFieldCell"; title = "#ControlMethod"; ObjectID = "pIy-Lk-kkm"; */
-"pIy-Lk-kkm.title" = "#ControlMethod";
-
-/* Class = "NSTextFieldCell"; title = "#DisplayType"; ObjectID = "Pqk-VW-JGY"; */
-"Pqk-VW-JGY.title" = "#DisplayType";
+"pF5-Sw-7BR.title" = "Hosszabb várakozás DDC olvasáskor";
 
 /* Class = "NSTextFieldCell"; title = "If the menu item is hidden, just relaunch the app to reveal Preferences!"; ObjectID = "PVE-y7-zIk"; */
 "PVE-y7-zIk.title" = "Ha rejtett, indítsa el újra az alkalmazást a beállítások megnyitásához!";
 
 /* Class = "NSTextFieldCell"; title = "Advanced:"; ObjectID = "r7i-oG-Ab6"; */
-"r7i-oG-Ab6.title" = "Advanced:";
+"r7i-oG-Ab6.title" = "Haladó:";
 
 /* Class = "NSMenuItem"; title = "Normal"; ObjectID = "Riq-uM-bTs"; */
 "Riq-uM-bTs.title" = "Normál";
@@ -134,10 +110,10 @@
 "Vr4-xb-B4o.title" = "Fényerő és hangerő billentyűk";
 
 /* Class = "NSTextFieldCell"; title = "DDC read polling mode:"; ObjectID = "vwm-hY-on5"; */
-"vwm-hY-on5.title" = "DDC read polling mode:";
+"vwm-hY-on5.title" = "DDC olvasás mód:";
 
 /* Class = "NSButtonCell"; title = "Show advanced settings under Displays"; ObjectID = "Wnd-hx-Meb"; */
-"Wnd-hx-Meb.title" = "Show advanced settings under Displays";
+"Wnd-hx-Meb.title" = "Haladó beállítások a Kijelzők alatt";
 
 /* Class = "NSMenuItem"; title = "None"; ObjectID = "X96-ny-lAP"; */
 "X96-ny-lAP.title" = "Nincs";
@@ -146,7 +122,7 @@
 "xSI-8W-Xd0.title" = "Kontraszt csúszka megjelenítése a menüben";
 
 /* Class = "NSButtonCell"; title = "Reset Preferences"; ObjectID = "xY6-aw-o9u"; */
-"xY6-aw-o9u.title" = "Reset Preferences";
+"xY6-aw-o9u.title" = "Alaphelyzetbe állítás";
 
 /* Class = "NSTextFieldCell"; title = "This lets you further lower brightness via software dimming even after display has reached zero brightness."; ObjectID = "yeg-GN-SuO"; */
 "yeg-GN-SuO.title" = "A fényerő további csökkentése szoftveres sötétítéssel miután a kijelző elérte a nulla fényerőt.";

@@ -4,9 +4,6 @@
 /* Class = "NSTextFieldCell"; title = "DDC read delay:"; ObjectID = "1rn-ep-ZvO"; */
 "1rn-ep-ZvO.title" = "DDC read delay:";
 
-/* Class = "NSTextFieldCell"; title = "#ID"; ObjectID = "6GJ-6Q-gqz"; */
-"6GJ-6Q-gqz.title" = "#ID";
-
 /* Class = "NSButtonCell"; title = "Hide Menu Icon"; ObjectID = "aXL-i8-S6R"; */
 "aXL-i8-S6R.title" = "Hide Menu Icon";
 
@@ -25,14 +22,11 @@
 /* Class = "NSButtonCell"; title = "GitHub site"; ObjectID = "Cln-uW-2dd"; */
 "Cln-uW-2dd.title" = "GitHub site";
 
-/* Class = "NSTextFieldCell"; title = "⚠️ Warning! Changing some of these setting may cause system freezes or unexpected behaviour. "; ObjectID = "Cz1-Mh-llk"; */
-"Cz1-Mh-llk.title" = "⚠️ Warning! Changing some of these setting may cause system freezes or unexpected behaviour. ";
+/* Class = "NSTextFieldCell"; title = "⚠️ Warning! Changing some of these setting may cause system freezes or unexpected behavior!"; ObjectID = "Cz1-Mh-llk"; */
+"Cz1-Mh-llk.title" = "⚠️ Warning! Changing some of these setting may cause system freezes or unexpected behavior!";
 
 /* Class = "NSButtonCell"; title = "Show volume slider in menu"; ObjectID = "dhP-eB-1L6"; */
 "dhP-eB-1L6.title" = "Show volume slider in menu";
-
-/* Class = "NSTextFieldCell"; title = "Copyright Ⓒ MonitorControl, 0000"; ObjectID = "e0q-fb-k7R"; */
-"e0q-fb-k7R.title" = "Copyright Ⓒ MonitorControl, 0000";
 
 /* Class = "NSButtonCell"; title = "Change Brightness and Volume for all screens"; ObjectID = "E6M-ih-S8Y"; */
 "E6M-ih-S8Y.title" = "Change Brightness and Volume for all screens";
@@ -58,12 +52,6 @@
 /* Class = "NSMenuItem"; title = "Brightness only"; ObjectID = "hjz-0c-rvK"; */
 "hjz-0c-rvK.title" = "Brightness only";
 
-/* Class = "NSTextFieldCell"; title = "#FriendlyName"; ObjectID = "ibQ-4u-ClE"; */
-"ibQ-4u-ClE.title" = "#FriendlyName";
-
-/* Class = "NSBox"; title = "Box"; ObjectID = "ihQ-SK-x7Y"; */
-"ihQ-SK-x7Y.title" = "Box";
-
 /* Class = "NSButtonCell"; title = "Start at Login"; ObjectID = "j72-NF-zsW"; */
 "j72-NF-zsW.title" = "Start at Login";
 
@@ -82,12 +70,6 @@
 /* Class = "NSTextFieldCell"; title = "Display type:"; ObjectID = "lSJ-6w-KJ2"; */
 "lSJ-6w-KJ2.title" = "Display type:";
 
-/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "Lu0-Dq-lqu"; */
-"Lu0-Dq-lqu.title" = "Text Cell";
-
-/* Class = "NSTextFieldCell"; title = "Version 0.0.0 Build 0000 - Platform"; ObjectID = "mBs-6m-13Q"; */
-"mBs-6m-13Q.title" = "Version 0.0.0 Build 0000 - Platform";
-
 /* Class = "NSTextFieldCell"; title = "Menu contents:"; ObjectID = "MJx-MK-e7D"; */
 "MJx-MK-e7D.title" = "Menu contents:";
 
@@ -105,12 +87,6 @@
 
 /* Class = "NSButtonCell"; title = "Longer delay during DDC read operations"; ObjectID = "pF5-Sw-7BR"; */
 "pF5-Sw-7BR.title" = "Longer delay during DDC read operations";
-
-/* Class = "NSTextFieldCell"; title = "#ControlMethod"; ObjectID = "pIy-Lk-kkm"; */
-"pIy-Lk-kkm.title" = "#ControlMethod";
-
-/* Class = "NSTextFieldCell"; title = "#DisplayType"; ObjectID = "Pqk-VW-JGY"; */
-"Pqk-VW-JGY.title" = "#DisplayType";
 
 /* Class = "NSTextFieldCell"; title = "If the menu item is hidden, just relaunch the app to reveal Preferences!"; ObjectID = "PVE-y7-zIk"; */
 "PVE-y7-zIk.title" = "If the menu item is hidden, just relaunch the app to reveal Preferences!";

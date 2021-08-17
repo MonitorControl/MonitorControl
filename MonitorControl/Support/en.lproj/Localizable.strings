@@ -1,9 +1,6 @@
 /* Shown in the main prefs window */
 "About" = "About";
 
-/* Shown in the main prefs window */
-"Advanced" = "Advanced";
-
 /* Apple Silicon designation (shown after the version number in Preferences) */
 "Apple Silicon" = "Apple Silicon";
 
@@ -12,12 +9,6 @@
 
 /* Shown in the alert dialog */
 "Are you sure you want to reset all preferences?" = "Are you sure you want to reset all preferences?";
-
-/* Apple Silicon designation (shown after the version number in Preferences) */
-"arm64" = "arm64";
-
-/* b */
-"b" = "b";
 
 /* Shown in menu */
 "Brightness" = "Brightness";
@@ -33,9 +24,6 @@
 
 /* Version */
 "Copyright Ⓒ MonitorControl, " = "Copyright Ⓒ MonitorControl, ";
-
-/* Shown in the main prefs window */
-"Display" = "Display";
 
 /* Shown in the main prefs window */
 "Displays" = "Displays";
@@ -85,16 +73,11 @@
 /* Shown in the Display Preferences */
 "Software Only" = "Software Only";
 
-/* Unknown display name
-   Unknown model
-   Unknown vendor */
+/* Unknown display name */
 "Unknown" = "Unknown";
 
 /* Shown in the Display Preferences */
 "Unspecified" = "Unspecified";
-
-/* v */
-"v" = "v";
 
 /* Version */
 "Version" = "Version";
@@ -104,9 +87,6 @@
 
 /* Shown in menu */
 "Volume" = "Volume";
-
-/* Intel designation (shown after the version number in Preferences) */
-"x64" = "x64";
 
 /* Shown in the alert dialog */
 "Yes" = "Yes";

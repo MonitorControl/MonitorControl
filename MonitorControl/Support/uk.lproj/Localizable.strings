@@ -1,9 +1,6 @@
 /* Shown in the main prefs window */
 "About" = "About";
 
-/* Shown in the main prefs window  */
-"Advanced" = "Розширені";
-
 /* Apple Silicon designation (shown after the version number in Preferences) */
 "Apple Silicon" = "Apple Silicon";
 
@@ -13,17 +10,11 @@
 /* Shown in the alert dialog */
 "Are you sure you want to reset all preferences?" = "Are you sure you want to reset all preferences?";
 
-/* Apple Silicon designation (shown after the version number in Preferences) */
-"arm64" = "arm64";
-
-/* b */
-"b" = "b";
-
 /* Sown in menu */
 "Brightness" = "Яскравість";
 
 /* Build */
-"Build" = "Build";
+"Build" = "Білд";
 
 /* Shown in the Display Preferences */
 "Built-in Display" = "Built-in Display";
@@ -34,11 +25,8 @@
 /* Version */
 "Copyright Ⓒ MonitorControl, " = "Copyright Ⓒ MonitorControl, ";
 
-/* No comment provided by engineer. */
-"Display" = "Дісплей";
-
 /* Shown in the main prefs window */
-"Displays" = "Дісплей";
+"Displays" = "Displays";
 
 /* Shown in the alert dialog */
 "Enable Longer Delay?" = "Enable Longer Delay?";
@@ -93,20 +81,14 @@
 /* Shown in the Display Preferences */
 "Unspecified" = "Unspecified";
 
-/* v */
-"v" = "v";
-
 /* Version */
-"Version" = "Version";
+"Version" = "Версія";
 
 /* Shown in the Display Preferences */
 "Virtual Display" = "Virtual Display";
 
 /* Shown in menu */
 "Volume" = "Гучність";
-
-/* Intel designation (shown after the version number in Preferences) */
-"x64" = "x64";
 
 /* Shown in the alert dialog */
 "Yes" = "Yes";

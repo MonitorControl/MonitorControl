@@ -336,7 +336,7 @@
                             <textField identifier="versionLabel" horizontalHuggingPriority="251" verticalHuggingPriority="750" id="tMg-qE-zTW">
                                 <rect key="frame" x="272" y="203" width="333" height="16"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <textFieldCell key="cell" lineBreakMode="clipping" alignment="left" title="Version 0.0.0 Build 0000 - Platform" id="mBs-6m-13Q">
+                                <textFieldCell key="cell" lineBreakMode="clipping" alignment="left" title="#bc-ignore!" id="mBs-6m-13Q">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -345,7 +345,7 @@
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="Dqc-RQ-Lbc">
                                 <rect key="frame" x="272" y="81" width="333" height="16"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <textFieldCell key="cell" lineBreakMode="clipping" alignment="left" title="Copyright Ⓒ MonitorControl, 0000" id="e0q-fb-k7R">
+                                <textFieldCell key="cell" lineBreakMode="clipping" alignment="left" title="#bc-ignore!" id="e0q-fb-k7R">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -461,7 +461,7 @@
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
-                                                    <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" title="Text Cell" id="Lu0-Dq-lqu">
+                                                    <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" id="Lu0-Dq-lqu">
                                                         <font key="font" metaFont="system"/>
                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -480,7 +480,7 @@
                                                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="jz0-4Z-xVm">
                                                                     <rect key="frame" x="205" y="219" width="150" height="16"/>
                                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                                    <textFieldCell key="cell" lineBreakMode="clipping" title="#ID" id="6GJ-6Q-gqz">
+                                                                    <textFieldCell key="cell" lineBreakMode="clipping" title="#bc-ignore!" id="6GJ-6Q-gqz">
                                                                         <font key="font" metaFont="system"/>
                                                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -533,7 +533,7 @@
                                                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="DmC-gj-anZ">
                                                                     <rect key="frame" x="205" y="186" width="150" height="16"/>
                                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                                    <textFieldCell key="cell" lineBreakMode="clipping" title="#DisplayType" id="Pqk-VW-JGY">
+                                                                    <textFieldCell key="cell" lineBreakMode="clipping" title="#bc-ignore!" id="Pqk-VW-JGY">
                                                                         <font key="font" metaFont="system"/>
                                                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -542,7 +542,7 @@
                                                                 <textField verticalHuggingPriority="750" id="mIA-Wh-7aB">
                                                                     <rect key="frame" x="86" y="262" width="285" height="21"/>
                                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" title="#FriendlyName" id="ibQ-4u-ClE">
+                                                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" title="#bc-ignore!" id="ibQ-4u-ClE">
                                                                         <font key="font" textStyle="title2" name=".SFNS-Regular"/>
                                                                         <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -554,7 +554,7 @@
                                                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="2Yf-2b-6A8">
                                                                     <rect key="frame" x="205" y="155" width="150" height="16"/>
                                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                                    <textFieldCell key="cell" lineBreakMode="clipping" title="#ControlMethod" id="pIy-Lk-kkm">
+                                                                    <textFieldCell key="cell" lineBreakMode="clipping" title="#bc-ignore!" id="pIy-Lk-kkm">
                                                                         <font key="font" metaFont="system"/>
                                                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -599,7 +599,7 @@
                                                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                     </textFieldCell>
                                                                 </textField>
-                                                                <box boxType="custom" borderType="line" borderWidth="0.0" cornerRadius="6" title="Box" translatesAutoresizingMaskIntoConstraints="NO" id="ihQ-SK-x7Y">
+                                                                <box boxType="custom" borderType="line" borderWidth="0.0" cornerRadius="6" translatesAutoresizingMaskIntoConstraints="NO" id="ihQ-SK-x7Y">
                                                                     <rect key="frame" x="88" y="19" width="549" height="116"/>
                                                                     <view key="contentView" id="sNT-7f-pNP">
                                                                         <rect key="frame" x="0.0" y="0.0" width="549" height="116"/>
@@ -651,7 +651,7 @@
                                                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="yU6-4R-6Ji">
                                                                                 <rect key="frame" x="-2" y="90" width="553" height="14"/>
                                                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                                                <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="⚠️ Warning! Changing some of these setting may cause system freezes or unexpected behaviour. " id="Cz1-Mh-llk">
+                                                                                <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="⚠️ Warning! Changing some of these setting may cause system freezes or unexpected behavior!" id="Cz1-Mh-llk">
                                                                                     <font key="font" textStyle="subheadline" name=".SFNS-Regular"/>
                                                                                     <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>

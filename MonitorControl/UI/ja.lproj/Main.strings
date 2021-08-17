@@ -4,14 +4,11 @@
 /* Class = "NSTextFieldCell"; title = "DDC read delay:"; ObjectID = "1rn-ep-ZvO"; */
 "1rn-ep-ZvO.title" = "DDC read delay:";
 
-/* Class = "NSTextFieldCell"; title = "#ID"; ObjectID = "6GJ-6Q-gqz"; */
-"6GJ-6Q-gqz.title" = "#ID";
-
 /* Class = "NSButtonCell"; title = "Hide Menu Icon"; ObjectID = "aXL-i8-S6R"; */
 "aXL-i8-S6R.title" = "Hide Menu Icon";
 
 /* Class = "NSButtonCell"; title = "Disable macOS volume OSD"; ObjectID = "bkM-Px-U3b"; */
-"bkM-Px-U3b.title" = "Disable macOS Volume OSD";
+"bkM-Px-U3b.title" = "Disable macOS volume OSD";
 
 /* Class = "NSButtonCell"; title = "Reset settings"; ObjectID = "BYS-7Y-bRz"; */
 "BYS-7Y-bRz.title" = "Reset settings";
@@ -23,25 +20,22 @@
 "Cle-DD-vR7.title" = "カスタム";
 
 /* Class = "NSButtonCell"; title = "GitHub site"; ObjectID = "Cln-uW-2dd"; */
-"Cln-uW-2dd.title" = "Visit GitHub site";
+"Cln-uW-2dd.title" = "GitHub site";
 
-/* Class = "NSTextFieldCell"; title = "⚠️ Warning! Changing some of these setting may cause system freezes or unexpected behaviour. "; ObjectID = "Cz1-Mh-llk"; */
-"Cz1-Mh-llk.title" = "⚠️ Warning! Changing some of these setting may cause system freezes or unexpected behaviour. ";
+/* Class = "NSTextFieldCell"; title = "⚠️ Warning! Changing some of these setting may cause system freezes or unexpected behavior!"; ObjectID = "Cz1-Mh-llk"; */
+"Cz1-Mh-llk.title" = "⚠️ Warning! Changing some of these setting may cause system freezes or unexpected behavior!";
 
 /* Class = "NSButtonCell"; title = "Show volume slider in menu"; ObjectID = "dhP-eB-1L6"; */
-"dhP-eB-1L6.title" = "Show a slider for volume";
-
-/* Class = "NSTextFieldCell"; title = "Copyright Ⓒ MonitorControl, 0000"; ObjectID = "e0q-fb-k7R"; */
-"e0q-fb-k7R.title" = "Copyright Ⓒ MonitorControl, 0000";
+"dhP-eB-1L6.title" = "Show volume slider in menu";
 
 /* Class = "NSButtonCell"; title = "Change Brightness and Volume for all screens"; ObjectID = "E6M-ih-S8Y"; */
-"E6M-ih-S8Y.title" = "すべての画面の画面輝度と音量を変更する";
+"E6M-ih-S8Y.title" = "Change Brightness and Volume for all screens";
 
 /* Class = "NSMenuItem"; title = "Minimal"; ObjectID = "Eq3-z9-yIo"; */
 "Eq3-z9-yIo.title" = "低頻度";
 
 /* Class = "NSButtonCell"; title = "Issues"; ObjectID = "eUG-vD-C3W"; */
-"eUG-vD-C3W.title" = "Issues and feature requests";
+"eUG-vD-C3W.title" = "Issues";
 
 /* Class = "NSButtonCell"; title = "Reset Name"; ObjectID = "f9g-8s-gdd"; */
 "f9g-8s-gdd.title" = "Reset Name";
@@ -53,16 +47,10 @@
 "FoA-yh-Yx3.title" = "設定しない";
 
 /* Class = "NSTextFieldCell"; title = "Brightness control:"; ObjectID = "hdd-Zz-buN"; */
-"hdd-Zz-buN.title" = "Brightness keys:";
+"hdd-Zz-buN.title" = "Brightness control:";
 
 /* Class = "NSMenuItem"; title = "Brightness only"; ObjectID = "hjz-0c-rvK"; */
 "hjz-0c-rvK.title" = "画面輝度のみ";
-
-/* Class = "NSTextFieldCell"; title = "#FriendlyName"; ObjectID = "ibQ-4u-ClE"; */
-"ibQ-4u-ClE.title" = "#FriendlyName";
-
-/* Class = "NSBox"; title = "Box"; ObjectID = "ihQ-SK-x7Y"; */
-"ihQ-SK-x7Y.title" = "Box";
 
 /* Class = "NSButtonCell"; title = "Start at Login"; ObjectID = "j72-NF-zsW"; */
 "j72-NF-zsW.title" = "ログイン時にMonitorCoontrolを起動する";
@@ -71,10 +59,10 @@
 "J77-r0-djA.title" = "Custom read polling count:";
 
 /* Class = "NSTextFieldCell"; title = "Use the media keys of your keyboard to control Brightness & Volume."; ObjectID = "K2r-aD-eec"; */
-"K2r-aD-eec.title" = "You can control the Brighness and Volume of your display using the Brightness and Volume keys off Apple Keyboards.";
+"K2r-aD-eec.title" = "Use the media keys of your keyboard to control Brightness & Volume.";
 
 /* Class = "NSButtonCell"; title = "Enable software dimming if required"; ObjectID = "kMa-3q-udl"; */
-"kMa-3q-udl.title" = "Fallback to software control if required";
+"kMa-3q-udl.title" = "Enable software dimming if required";
 
 /* Class = "NSButton"; ibShadowedToolTip = "More Info"; ObjectID = "kqn-gU-mZX"; */
 "kqn-gU-mZX.ibShadowedToolTip" = "More Info";
@@ -82,17 +70,11 @@
 /* Class = "NSTextFieldCell"; title = "Display type:"; ObjectID = "lSJ-6w-KJ2"; */
 "lSJ-6w-KJ2.title" = "Display type:";
 
-/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "Lu0-Dq-lqu"; */
-"Lu0-Dq-lqu.title" = "Text Cell";
-
-/* Class = "NSTextFieldCell"; title = "Version 0.0.0 Build 0000 - Platform"; ObjectID = "mBs-6m-13Q"; */
-"mBs-6m-13Q.title" = "バージョン 0.0.0 (ビルド 0)";
-
 /* Class = "NSTextFieldCell"; title = "Menu contents:"; ObjectID = "MJx-MK-e7D"; */
 "MJx-MK-e7D.title" = "Menu contents:";
 
 /* Class = "NSTextFieldCell"; title = "If an external display can't be controlled, software dimming will be used instead."; ObjectID = "n4V-jQ-1Ri"; */
-"n4V-jQ-1Ri.title" = "If an external display can't be controlled, software shading will be used. Only brightness control is available in this mode.";
+"n4V-jQ-1Ri.title" = "If an external display can't be controlled, software dimming will be used instead.";
 
 /* Class = "NSMenuItem"; title = "Volume only"; ObjectID = "NLP-dU-Dam"; */
 "NLP-dU-Dam.title" = "音量のみ";
@@ -106,14 +88,8 @@
 /* Class = "NSButtonCell"; title = "Longer delay during DDC read operations"; ObjectID = "pF5-Sw-7BR"; */
 "pF5-Sw-7BR.title" = "Longer delay during DDC read operations";
 
-/* Class = "NSTextFieldCell"; title = "#ControlMethod"; ObjectID = "pIy-Lk-kkm"; */
-"pIy-Lk-kkm.title" = "#ControlMethod";
-
-/* Class = "NSTextFieldCell"; title = "#DisplayType"; ObjectID = "Pqk-VW-JGY"; */
-"Pqk-VW-JGY.title" = "#DisplayType";
-
 /* Class = "NSTextFieldCell"; title = "If the menu item is hidden, just relaunch the app to reveal Preferences!"; ObjectID = "PVE-y7-zIk"; */
-"PVE-y7-zIk.title" = "If hidden, relaunch the app to show Preferences!";
+"PVE-y7-zIk.title" = "If the menu item is hidden, just relaunch the app to reveal Preferences!";
 
 /* Class = "NSTextFieldCell"; title = "Advanced:"; ObjectID = "r7i-oG-Ab6"; */
 "r7i-oG-Ab6.title" = "Advanced:";
@@ -149,13 +125,13 @@
 "xY6-aw-o9u.title" = "Reset Preferences";
 
 /* Class = "NSTextFieldCell"; title = "This lets you further lower brightness via software dimming even after display has reached zero brightness."; ObjectID = "yeg-GN-SuO"; */
-"yeg-GN-SuO.title" = "This lets you further lower brightness via software shading even after display has reached zero brightness.";
+"yeg-GN-SuO.title" = "This lets you further lower brightness via software dimming even after display has reached zero brightness.";
 
 /* Class = "NSTextFieldCell"; title = "Identifier:"; ObjectID = "YqZ-LS-YvR"; */
 "YqZ-LS-YvR.title" = "Identifier:";
 
 /* Class = "NSButtonCell"; title = "Use hardware DDC control"; ObjectID = "ZdU-gV-V05"; */
-"ZdU-gV-V05.title" = "Use DDC control";
+"ZdU-gV-V05.title" = "Use hardware DDC control";
 
 /* Class = "NSButtonCell"; title = "Donate!"; ObjectID = "ZKk-ve-rS4"; */
 "ZKk-ve-rS4.title" = "Donate!";

@@ -1,9 +1,6 @@
 /* Shown in the main prefs window */
 "About" = "Névjegy";
 
-/* Shown in the main prefs window */
-"Advanced" = "Fejlett";
-
 /* Apple Silicon designation (shown after the version number in Preferences) */
 "Apple Silicon" = "Apple Silicon";
 
@@ -12,12 +9,6 @@
 
 /* Shown in the alert dialog */
 "Are you sure you want to reset all preferences?" = "Biztos benne, hogy vissza kívánja állítani az alapértelmezett beállításokat?";
-
-/* Apple Silicon designation (shown after the version number in Preferences) */
-"arm64" = "arm64";
-
-/* b */
-"b" = "b";
 
 /* Sown in menu */
 "Brightness" = "Fényerő";
@@ -34,9 +25,6 @@
 /* Version */
 "Copyright Ⓒ MonitorControl, " = "Copyright Ⓒ MonitorControl, ";
 
-/* No comment provided by engineer. */
-"Display" = "Kijelző";
-
 /* Shown in the main prefs window */
 "Displays" = "Kijelzők";
 
@@ -50,10 +38,10 @@
 "General" = "Általános";
 
 /* Shown in the Display Preferences */
-"Hardware (CoreDisplay)" = "Hardware (CoreDisplay)";
+"Hardware (CoreDisplay)" = "Hardver (CoreDisplay)";
 
 /* Shown in the Display Preferences */
-"Hardware (DDC)" = "Hardware (DDC)";
+"Hardware (DDC)" = "Hardver (DDC)";
 
 /* Intel designation (shown after the version number in Preferences) */
 "Intel" = "Intel";
@@ -62,7 +50,7 @@
 "No" = "Nem";
 
 /* Shown in the Display Preferences */
-"No Control Available" = "No Control Available";
+"No Control Available" = "Nincs vezérlés";
 
 /* Shown in menu */
 "No supported display found" = "Nincs támogatott kijelző";
@@ -71,7 +59,7 @@
 "Ok" = "Ok";
 
 /* Shown in the Display Preferences */
-"Other Display" = "Other Display";
+"Other Display" = "Egyéb kijelző";
 
 /* Shown in the alert dialog */
 "Reset Preferences?" = "Alapértelmezett beállítások";
@@ -80,10 +68,10 @@
 "Shortcuts not available" = "Gyorsbillentyűk nem elérhetők";
 
 /* Shown in the Display Preferences */
-"Software (Forced)" = "Software (Forced)";
+"Software (Forced)" = "Szoftveres";
 
 /* Shown in the Display Preferences */
-"Software Only" = "Software Only";
+"Software Only" = "Csak szoftveres";
 
 /* Unknown display name
  Unknown model
@@ -91,22 +79,16 @@
 "Unknown" = "Ismeretlen";
 
 /* Shown in the Display Preferences */
-"Unspecified" = "Unspecified";
-
-/* v */
-"v" = "v";
+"Unspecified" = "Meghatározatlan";
 
 /* Version */
 "Version" = "Verzió";
 
 /* Shown in the Display Preferences */
-"Virtual Display" = "Virtual Display";
+"Virtual Display" = "Virtuális kijelző";
 
 /* Shown in menu */
 "Volume" = "Hangerő";
-
-/* Intel designation (shown after the version number in Preferences) */
-"x64" = "x64";
 
 /* Shown in the alert dialog */
 "Yes" = "Igen";
