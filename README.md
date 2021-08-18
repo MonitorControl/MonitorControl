@@ -65,7 +65,7 @@ git clone --single-branch --branch experimental/apple-silicon https://github.com
 
 Then dependencies will automatically get downloaded when opening the project, if they don't:
 
-`File > Swift Packages > Resolve Package Versions`
+`File > Packages > Resolve Package Versions`
 
 You're all set ! Now open the `MonitorControl.xcodeproj` with Xcode
 
