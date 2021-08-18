@@ -49,6 +49,9 @@
 /* Class = "NSMenuItem"; title = "Brightness only"; ObjectID = "hjz-0c-rvK"; */
 "hjz-0c-rvK.title" = "Csak a fényerő billentyűk";
 
+/* Class = "NSTextFieldCell"; title = "These options work for hardware (DDC) controlled displays only."; ObjectID = "iBZ-8c-JDY"; */
+"iBZ-8c-JDY.title" = "Ezek a lehetőségek hardveresen (DDC) vezérelhető kijelzőkkel működnek.";
+
 /* Class = "NSButtonCell"; title = "Start at Login"; ObjectID = "j72-NF-zsW"; */
 "j72-NF-zsW.title" = "Automatikus indítás bejelentkezéskor";
 
@@ -121,8 +124,8 @@
 /* Class = "NSButtonCell"; title = "Reset Preferences"; ObjectID = "xY6-aw-o9u"; */
 "xY6-aw-o9u.title" = "Alaphelyzetbe állítás";
 
-/* Class = "NSTextFieldCell"; title = "This lets you further lower brightness via software dimming even after display has reached zero brightness."; ObjectID = "yeg-GN-SuO"; */
-"yeg-GN-SuO.title" = "A fényerő további csökkentése szoftveres sötétítéssel miután a kijelző elérte a nulla fényerőt.";
+/* Class = "NSTextFieldCell"; title = "This lets you lower brightness even after display reached zero brightness. Menu slider will have a tick mark showing the transition point. Works for hardware (DDC) controlled displays only."; ObjectID = "yeg-GN-SuO"; */
+"yeg-GN-SuO.title" = "A fényerő szoftveres csökkentése, ha a kijelző elérte a nulla fényerőt. A menü csúszkán megjelenő jel mutatja a váltás helyét. Hardveresen (DDC) vezérelhető kijelzőkkel működik";
 
 /* Class = "NSTextFieldCell"; title = "Identifier:"; ObjectID = "YqZ-LS-YvR"; */
 "YqZ-LS-YvR.title" = "Azonosító:";

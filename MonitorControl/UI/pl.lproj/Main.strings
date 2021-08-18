@@ -49,6 +49,9 @@
 /* Class = "NSMenuItem"; title = "Brightness only"; ObjectID = "hjz-0c-rvK"; */
 "hjz-0c-rvK.title" = "Tylko jasność";
 
+/* Class = "NSTextFieldCell"; title = "These options work for hardware (DDC) controlled displays only."; ObjectID = "iBZ-8c-JDY"; */
+"iBZ-8c-JDY.title" = "These options work for hardware (DDC) controlled displays only.";
+
 /* Class = "NSButtonCell"; title = "Start at Login"; ObjectID = "j72-NF-zsW"; */
 "j72-NF-zsW.title" = "Uruchamiaj MonitorContol podczas logowania";
 
@@ -121,7 +124,7 @@
 /* Class = "NSButtonCell"; title = "Reset Preferences"; ObjectID = "xY6-aw-o9u"; */
 "xY6-aw-o9u.title" = "Reset Preferences";
 
-/* Class = "NSTextFieldCell"; title = "This lets you further lower brightness via software dimming even after display has reached zero brightness."; ObjectID = "yeg-GN-SuO"; */
+/* Class = "NSTextFieldCell"; title = "This lets you lower brightness even after display reached zero brightness. Menu slider will have a tick mark showing the transition point. Works for hardware (DDC) controlled displays only."; ObjectID = "yeg-GN-SuO"; */
 "yeg-GN-SuO.title" = "This lets you further lower brightness via software dimming even after display has reached zero brightness.";
 
 /* Class = "NSTextFieldCell"; title = "Identifier:"; ObjectID = "YqZ-LS-YvR"; */
