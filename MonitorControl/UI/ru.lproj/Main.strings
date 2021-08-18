@@ -121,8 +121,8 @@
 /* Class = "NSButtonCell"; title = "Reset Preferences"; ObjectID = "xY6-aw-o9u"; */
 "xY6-aw-o9u.title" = "Reset Preferences";
 
-/* Class = "NSTextFieldCell"; title = "This lets you lower brightness even after display reached zero brightness. Menu slider will have a tick mark showing the transition point. Works for hardware (DDC) controlled displays only."; ObjectID = "yeg-GN-SuO"; */
-"yeg-GN-SuO.title" = "This lets you lower brightness even after display reached zero brightness. Menu slider will have a tick mark showing the transition point. Works for hardware (DDC) controlled displays only.";
+/* Class = "NSTextFieldCell"; title = "This activates additional software dimming after the display reached zero hardware brightness. Menu slider is also affected with 50% being the transition point. Works for DDC controlled displays only."; ObjectID = "yeg-GN-SuO"; */
+"yeg-GN-SuO.title" = "This activates additional software dimming after the display reached zero hardware brightness. Menu slider is also affected with 50% being the transition point. Works for DDC controlled displays only.";
 
 /* Class = "NSTextFieldCell"; title = "Identifier:"; ObjectID = "YqZ-LS-YvR"; */
 "YqZ-LS-YvR.title" = "Identifier:";

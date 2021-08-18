@@ -226,7 +226,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     var numOfTickMarks = 0
     if !display.isSw(), prefs.bool(forKey: Utils.PrefKeys.lowerSwAfterBrightness.rawValue) {
-      numOfTickMarks = 1
+      numOfTickMarks = 0 // 1 - I  disabled this because tickmarks are buggy in dark mode on Monterey (probably Big Sur as well).
     }
     let brightnessSliderHandler = Utils.addSliderMenuItem(toMenu: monitorSubMenu, forDisplay: display, command: .brightness, title: NSLocalizedString("Brightness", comment: "Shown in menu"), numOfTickMarks: numOfTickMarks)
     display.brightnessSliderHandler = brightnessSliderHandler
@@ -389,38 +389,38 @@ extension AppDelegate: MediaKeyTapDelegate {
     guard self.sleepID == 0, self.reconfigureID == 0, let affectedDisplays = self.getAffectedDisplays() else {
       return
     }
-    let delay = isRepeat ? 0.05 : 0 // Introduce a small delay to handle the media key being held down
     var isAnyDisplayInSwAfterBrightnessMode: Bool = false
     for display in affectedDisplays where ((display as? ExternalDisplay)?.isSwBrightnessNotDefault() ?? false) && !((display as? ExternalDisplay)?.isSw() ?? false) {
       isAnyDisplayInSwAfterBrightnessMode = true
     }
-    self.keyRepeatTimers[mediaKey] = Timer.scheduledTimer(withTimeInterval: delay, repeats: false, block: { _ in
-      for display in affectedDisplays where display.isEnabled && !display.isVirtual {
-        switch mediaKey {
-        case .brightnessUp:
-          if !(isAnyDisplayInSwAfterBrightnessMode && !(((display as? ExternalDisplay)?.isSwBrightnessNotDefault() ?? false) && !((display as? ExternalDisplay)?.isSw() ?? false))) {
-            display.stepBrightness(isUp: mediaKey == .brightnessUp, isSmallIncrement: isSmallIncrement)
-          }
-        case .brightnessDown:
+    // let delay = isRepeat ? 0.05 : 0 // Introduce a small delay to handle the media key being held down - Update: it is not clear why this is needed but it blocks the media keys working when the menu is open and also it doesn't seem to affect external bluetooth keyboards but slows down internal keyboards for some reason. Things seem to work better this being disabled.
+    // self.keyRepeatTimers[mediaKey] = Timer.scheduledTimer(withTimeInterval: delay, repeats: false, block: { _ in
+    for display in affectedDisplays where display.isEnabled && !display.isVirtual {
+      switch mediaKey {
+      case .brightnessUp:
+        if !(isAnyDisplayInSwAfterBrightnessMode && !(((display as? ExternalDisplay)?.isSwBrightnessNotDefault() ?? false) && !((display as? ExternalDisplay)?.isSw() ?? false))) {
           display.stepBrightness(isUp: mediaKey == .brightnessUp, isSmallIncrement: isSmallIncrement)
-        case .mute:
-          // The mute key should not respond to press + hold
-          if !isRepeat {
-            // mute only matters for external displays
-            if let display = display as? ExternalDisplay {
-              display.toggleMute()
-            }
-          }
-        case .volumeUp, .volumeDown:
-          // volume only matters for external displays
-          if let display = display as? ExternalDisplay {
-            display.stepVolume(isUp: mediaKey == .volumeUp, isSmallIncrement: isSmallIncrement)
-          }
-        default:
-          return
         }
+      case .brightnessDown:
+        display.stepBrightness(isUp: mediaKey == .brightnessUp, isSmallIncrement: isSmallIncrement)
+      case .mute:
+        // The mute key should not respond to press + hold
+        if !isRepeat {
+          // mute only matters for external displays
+          if let display = display as? ExternalDisplay {
+            display.toggleMute()
+          }
+        }
+      case .volumeUp, .volumeDown:
+        // volume only matters for external displays
+        if let display = display as? ExternalDisplay {
+          display.stepVolume(isUp: mediaKey == .volumeUp, isSmallIncrement: isSmallIncrement)
+        }
+      default:
+        return
       }
-    })
+    }
+    // })
   }
 
   @objc func handleListenForChanged() {
