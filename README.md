@@ -4,8 +4,8 @@
         
 <p>
 <b>Control your external display brightness and volume!<br>
-<b>Use menulet sliders or the native Apple keyboard keys!<br>
-<b>Shows native brightness and volume OSDs as well!</b>
+Use menulet sliders or the native Apple keyboard keys!<br>
+Shows native brightness and volume OSDs as well!</b>
 </p>            
 
 <br/>
