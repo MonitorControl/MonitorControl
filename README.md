@@ -1,11 +1,21 @@
-<div align="center">
+<img src="./.github/Icon-1024.png" width="175" alt="App icon" align="left"/>
+
+<h2>MonitorControl - Now with Apple Silicon support!</h2>
         
-<h2 align="center">MonitorControl - Now with Apple Silicon support!</h2>
+<p>
+<b>Control your external display brightness and volume!<br>
+<b>Use menulet sliders or the native Apple keyboard keys!<br>
+<b>Shows native brightness and volume OSDs as well!</b>
+</p>            
 
-<img src="./.github/Icon-1024.png" width="400" alt="App icon"/>
+<br/>    
+        
+<hr>
     
-<p><b>Control your external display brightness, volume or contrast from a menulet or with keyboard native keys!</b></p>
-
+<div align="center">
+<img src="./.github/screenshot.png" width="840" alt="Screenshot"/><br/>
+<hr>
+    
 <!-- shields -->
 <!-- downloads -->
 <a href="https://github.com/MonitorControl/MonitorControl/releases">
@@ -25,24 +35,11 @@
 </a>
     
 <br/>
-    
+
 <p>Translations: :uk: :fr: :de: :it: :ru: :ukraine: :jp: :poland: :hungary:</p>
-    
-<hr>
-    
 </div>
 
-<div align="center">
-<img src="./.github/menulet.png" width="600" alt="menulet screenshot"/><br/>
-<br/>
-<img src="./.github/menugeneral.png" width="700" alt="general screenshot"/><br/>
-
-<img src="./.github/osd1.png" width="290" align="center" alt="osd screenshot"/>&nbsp;&nbsp;&nbsp;
-<img src="./.github/osd2.png" width="290" align="center" alt="osd screenshot"/><br>
-
-<hr>
-    
-</div>
+</hr>
 
 ## Download the pre-release version
 
