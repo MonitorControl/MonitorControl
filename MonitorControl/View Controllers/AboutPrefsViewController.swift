@@ -35,7 +35,7 @@ class AboutPrefsViewController: NSViewController, PreferencePane {
   }
 
   @IBAction func openDonate(_: NSButton) {
-    if let url = URL(string: "https://github.com/MonitorControl/MonitorControl/blob" + gitHubSubURL + "/DONATE.md") {
+    if let url = URL(string: "https://opencollective.com/monitorcontrol/donate") {
       NSWorkspace.shared.open(url)
     }
   }

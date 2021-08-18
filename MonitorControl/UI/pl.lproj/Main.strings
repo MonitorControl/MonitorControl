@@ -133,5 +133,5 @@
 /* Class = "NSButtonCell"; title = "Use hardware DDC control"; ObjectID = "ZdU-gV-V05"; */
 "ZdU-gV-V05.title" = "Use hardware DDC control";
 
-/* Class = "NSButtonCell"; title = "Donate!"; ObjectID = "ZKk-ve-rS4"; */
+/* Class = "NSButtonCell"; title = "Donate"; ObjectID = "ZKk-ve-rS4"; */
 "ZKk-ve-rS4.title" = "Donate!";
