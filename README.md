@@ -1,4 +1,4 @@
-<img src="./.github/Icon-1024.png" width="175" alt="App icon" align="left"/>
+<img src=".github/Icon-1024.png" width="175" alt="App icon" align="left"/>
 
 <h2>MonitorControl - Now with Apple Silicon support!</h2>
         
@@ -11,7 +11,7 @@ Shows native brightness and volume OSDs as well!</b>
 <br/>
         
 <div align="center">
-<img src="./.github/screenshot.png" width="840" alt="Screenshot"/><br/>
+<img src=".github/screenshot.png" width="840" alt="Screenshot"/><br/>
 <br/>
 
 <!-- shields -->
@@ -37,7 +37,7 @@ Shows native brightness and volume OSDs as well!</b>
 <p>:uk: :fr: :de: :it: :ru: :ukraine: :jp: :poland: :hungary:</p>
 </div>
 
-</hr>
+<hr>
 
 ## Download
 
