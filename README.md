@@ -8,14 +8,12 @@
 <b>Shows native brightness and volume OSDs as well!</b>
 </p>            
 
-<br/>    
+<br/>
         
-<hr>
-    
 <div align="center">
 <img src="./.github/screenshot.png" width="840" alt="Screenshot"/><br/>
-<hr>
-    
+<br/>
+
 <!-- shields -->
 <!-- downloads -->
 <a href="https://github.com/MonitorControl/MonitorControl/releases">
@@ -36,14 +34,14 @@
     
 <br/>
 
-<p>Translations: :uk: :fr: :de: :it: :ru: :ukraine: :jp: :poland: :hungary:</p>
+<p>:uk: :fr: :de: :it: :ru: :ukraine: :jp: :poland: :hungary:</p>
 </div>
 
 </hr>
 
-## Download the pre-release version
+## Download
 
-Go to [Releases](https://github.com/MonitorControl/MonitorControl/releases) and download the latest pre-release `.dmg`
+Go to [Releases](https://github.com/MonitorControl/MonitorControl/releases) and download the latest `.dmg`
 
 ## Compatibility
 
@@ -58,7 +56,7 @@ Open [issues](https://github.com/MonitorControl/MonitorControl/issues) if you ha
 
 Check out our [Open Collecitve page, you can contribute](https://opencollective.com/monitorcontrol/donate) to the development of MonitorControl financially and follow the spendings in a transparent manner!
 
-## How to build this *experimental branch*
+## How to build
 
 ### Required
 
