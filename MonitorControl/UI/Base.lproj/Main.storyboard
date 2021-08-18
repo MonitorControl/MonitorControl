@@ -344,10 +344,10 @@
             <objects>
                 <viewController storyboardIdentifier="AboutPrefsVC" id="7uI-eE-yxm" customClass="AboutPrefsViewController" customModule="MonitorControl" sceneMemberID="viewController">
                     <view key="view" wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kXT-i4-NNT">
-                        <rect key="frame" x="0.0" y="0.0" width="691" height="301"/>
+                        <rect key="frame" x="0.0" y="0.0" width="691" height="280"/>
                         <subviews>
                             <textField identifier="versionLabel" horizontalHuggingPriority="251" verticalHuggingPriority="750" id="tMg-qE-zTW">
-                                <rect key="frame" x="272" y="203" width="333" height="16"/>
+                                <rect key="frame" x="272" y="182" width="333" height="16"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" alignment="left" title="#bc-ignore!" id="mBs-6m-13Q">
                                     <font key="font" metaFont="system"/>
@@ -356,7 +356,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="Dqc-RQ-Lbc">
-                                <rect key="frame" x="272" y="81" width="333" height="16"/>
+                                <rect key="frame" x="272" y="78" width="333" height="16"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" alignment="left" title="#bc-ignore!" id="e0q-fb-k7R">
                                     <font key="font" metaFont="system"/>
@@ -365,7 +365,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField identifier="softwareNameLabel" horizontalHuggingPriority="251" verticalHuggingPriority="750" id="dtg-g7-hZb">
-                                <rect key="frame" x="272" y="251" width="147" height="26"/>
+                                <rect key="frame" x="272" y="230" width="147" height="26"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" alignment="left" title="MonitorControl" id="1PJ-14-Bvn">
                                     <font key="font" textStyle="title1" name=".SFNS-Regular"/>
@@ -374,20 +374,19 @@
                                 </textFieldCell>
                             </textField>
                             <box verticalHuggingPriority="750" fixedFrame="YES" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="9Mt-M9-Xqc">
-                                <rect key="frame" x="274" y="233" width="329" height="4"/>
+                                <rect key="frame" x="274" y="212" width="329" height="4"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             </box>
                             <box verticalHuggingPriority="750" fixedFrame="YES" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="JqO-vB-ykl">
-                                <rect key="frame" x="275" y="59" width="329" height="4"/>
+                                <rect key="frame" x="275" y="56" width="329" height="4"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             </box>
                             <textField identifier="copyrightLabel" horizontalHuggingPriority="251" verticalHuggingPriority="750" id="mjR-ls-0mP">
-                                <rect key="frame" x="272" y="117" width="147" height="64"/>
+                                <rect key="frame" x="272" y="96" width="147" height="64"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" alignment="left" id="TKd-J8-Iyk">
                                     <font key="font" metaFont="systemMedium" size="13"/>
                                     <string key="title">@the0neyouseek
-@reitermarkus
 @JoniVR
 @waydabber</string>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -395,7 +394,7 @@
                                 </textFieldCell>
                             </textField>
                             <button verticalHuggingPriority="750" id="XNb-58-SKU">
-                                <rect key="frame" x="497" y="20" width="113" height="32"/>
+                                <rect key="frame" x="497" y="17" width="113" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="push" title="Issues" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="eUG-vD-C3W">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -406,7 +405,7 @@
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" id="vS5-oh-3k6">
-                                <rect key="frame" x="267" y="20" width="112" height="32"/>
+                                <rect key="frame" x="267" y="17" width="112" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="push" title="Donate" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ZKk-ve-rS4">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -417,12 +416,12 @@
                                 </connections>
                             </button>
                             <imageView identifier="appIcon" wantsLayer="YES" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="qQ1-AF-le8">
-                                <rect key="frame" x="68" y="124" width="169" height="169"/>
+                                <rect key="frame" x="68" y="104" width="169" height="169"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="axesIndependently" image="NSApplicationIcon" id="2rQ-WJ-rCY"/>
                             </imageView>
                             <button verticalHuggingPriority="750" id="D9i-nX-VSm">
-                                <rect key="frame" x="382" y="20" width="113" height="32"/>
+                                <rect key="frame" x="382" y="17" width="113" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="push" title="GitHub site" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Cln-uW-2dd">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -434,7 +433,7 @@
                             </button>
                         </subviews>
                         <constraints>
-                            <constraint firstAttribute="height" constant="301" id="hXB-ku-c1r"/>
+                            <constraint firstAttribute="height" constant="280" id="hXB-ku-c1r"/>
                             <constraint firstAttribute="width" constant="691" id="kEY-xf-vB5"/>
                         </constraints>
                     </view>

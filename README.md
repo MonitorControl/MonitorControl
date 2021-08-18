@@ -44,9 +44,22 @@
     
 </div>
 
-## State of the experimental Apple Silicon version
+## Download the pre-release version
 
-The Apple Silicon version is now complete.
+Go to [Releases](https://github.com/MonitorControl/MonitorControl/releases) and download the latest pre-release `.dmg`
+
+## Compatibility
+
+- macOS Mojave (`10.14`) and up.
+- Works with monitors controllable via [DDC](https://en.wikipedia.org/wiki/Display_Data_Channel) (or any other display via software dimming)
+
+## How to help
+
+Open [issues](https://github.com/MonitorControl/MonitorControl/issues) if you have a question, an enhancement to suggest or a bug you've found. If you want you can fork the code yourself and submit a pull request to improve the app.
+
+## How to donate or contribute
+
+Check out our [Open Collecitve page, you can contribute](https://opencollective.com/monitorcontrol/donate) to the development of MonitorControl financially and follow the spendings in a transparent manner!
 
 ## How to build this *experimental branch*
 
@@ -57,17 +70,17 @@ The Apple Silicon version is now complete.
 - [SwiftFormat](https://github.com/nicklockwood/SwiftFormat)
 - [BartyCrouch](https://github.com/Flinesoft/BartyCrouch) (for updating localizations)
 
-Clone the project
+Clone the project via this Terminal command:
 
-```sh
+```
 git clone --single-branch --branch experimental/apple-silicon https://github.com/MonitorControl/MonitorControl.git
 ```
 
-Then dependencies will automatically get downloaded when opening the project, if they don't:
+The dependencies will automatically get downloaded when opening the project, if they don't:
 
 `File > Packages > Resolve Package Versions`
 
-You're all set ! Now open the `MonitorControl.xcodeproj` with Xcode
+You're all set ! Now open the `MonitorControl.xcodeproj` with Xcode!
 
 ### Third party dependencies
 
@@ -76,34 +89,9 @@ You're all set ! Now open the `MonitorControl.xcodeproj` with Xcode
 - [DDC.swift](https://github.com/reitermarkus/DDC.swift)
 - [SimplyCoreAudio](https://github.com/rnine/SimplyCoreAudio)
 
-## How to help
-
-Open [issues](https://github.com/MonitorControl/MonitorControl/issues) if you have a question, an enhancement to suggest or a bug you've found. If you want you can fork the code yourself and submit a pull request to improve the app.
-
-## Download the pre-release version
-
-Go to [Releases](https://github.com/MonitorControl/MonitorControl/releases) and download the latest pre-release `.dmg`
-
-## Installing with Homebrew Cask
-
-You can also install MonitorControl with [Homebrew Cask](https://github.com/Homebrew/homebrew-cask). 
-
-**Be aware that this command will not install the experimental Apple Silicon compatible version of the app!**
-
-```bash
-brew install --cask monitorcontrol
-```
-
-## Support
-
-- macOS Sierra (`10.12`) and up.
-- For the Apple Silicon version macOS Big Sur and up 
-- Works with monitors controllable via [DDC](https://en.wikipedia.org/wiki/Display_Data_Channel).
-
 ## Contributors
 
 - [@the0neyouseek](https://github.com/the0neyouseek)
-- [@reitermarkus](https://github.com/reitermarkus)
 - [@JoniVR](https://github.com/JoniVR)
 - [@waydabber](https://github.com/waydabber)
 
@@ -114,9 +102,7 @@ brew install --cask monitorcontrol
 - [@Bensge](https://github.com/Bensge/) - (used some code from his project [NativeDisplayBrightness](https://github.com/Bensge/NativeDisplayBrightness))
 - [@nhurden](https://github.com/nhurden/) (for the original MediaKeyTap)
 - [@kfix](https://github.com/kfix/ddcctl) (for ddcctl)
-
-### For the 3.x.x versions:
-
+- [@reitermarkus](https://github.com/reitermarkus) (for DDC.Swift)
 - [@zhuowei](https://github.com/zhuowei) (figured out M1 I²C communication)
 - [@tao-j](https://github.com/tao-j) (figured out M1 I²C write)
 - [@alin23](https://github.com/alin23) (generally spearheaded M1 DDC support and figured out a many of the caveats)
