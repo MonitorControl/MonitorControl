@@ -16,8 +16,8 @@
 /* Class = "NSMenuItem"; title = "Custom"; ObjectID = "Cle-DD-vR7"; */
 "Cle-DD-vR7.title" = "Власне";
 
-/* Class = "NSButtonCell"; title = "GitHub site"; ObjectID = "Cln-uW-2dd"; */
-"Cln-uW-2dd.title" = "GitHub site";
+/* Class = "NSButtonCell"; title = "Website"; ObjectID = "Cln-uW-2dd"; */
+"Cln-uW-2dd.title" = "Website";
 
 /* Class = "NSTextFieldCell"; title = "⚠️ Warning! Changing some of these setting may cause system freezes or unexpected behavior!"; ObjectID = "Cz1-Mh-llk"; */
 "Cz1-Mh-llk.title" = "⚠️ Warning! Changing some of these setting may cause system freezes or unexpected behavior!";
@@ -30,9 +30,6 @@
 
 /* Class = "NSMenuItem"; title = "Minimal"; ObjectID = "Eq3-z9-yIo"; */
 "Eq3-z9-yIo.title" = "Мінім.";
-
-/* Class = "NSButtonCell"; title = "Issues"; ObjectID = "eUG-vD-C3W"; */
-"eUG-vD-C3W.title" = "Issues";
 
 /* Class = "NSButtonCell"; title = "Reset Name"; ObjectID = "f9g-8s-gdd"; */
 "f9g-8s-gdd.title" = "Reset Name";
@@ -133,5 +130,5 @@
 /* Class = "NSButtonCell"; title = "Use hardware DDC control"; ObjectID = "ZdU-gV-V05"; */
 "ZdU-gV-V05.title" = "Use hardware DDC control";
 
-/* Class = "NSButtonCell"; title = "Donate"; ObjectID = "ZKk-ve-rS4"; */
-"ZKk-ve-rS4.title" = "Donate!";
+/* Class = "NSButtonCell"; title = "Contribute"; ObjectID = "ZKk-ve-rS4"; */
+"ZKk-ve-rS4.title" = "Contribute";

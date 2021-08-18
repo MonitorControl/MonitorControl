@@ -15,11 +15,6 @@ class AboutPrefsViewController: NSViewController, PreferencePane {
     }
   }
 
-  // MARK: TODO: Change these for release!
-
-  let gitHubSubURL = "/experimental/apple-silicon" // release: "/master"
-  let betaDesignation = "BETA " // release: ""
-
   @IBOutlet var versionLabel: NSTextField!
   @IBOutlet var copyrightLabel: NSTextField!
 
@@ -41,13 +36,7 @@ class AboutPrefsViewController: NSViewController, PreferencePane {
   }
 
   @IBAction func openGitHubPage(_: NSButton) {
-    if let url = URL(string: "https://github.com/MonitorControl/MonitorControl/tree" + gitHubSubURL) {
-      NSWorkspace.shared.open(url)
-    }
-  }
-
-  @IBAction func openIssuesPage(_: NSButton) {
-    if let url = URL(string: "https://github.com/MonitorControl/MonitorControl/issues") {
+    if let url = URL(string: "https://monitorcontrol.app") {
       NSWorkspace.shared.open(url)
     }
   }
@@ -64,7 +53,7 @@ class AboutPrefsViewController: NSViewController, PreferencePane {
       let arch: String = NSLocalizedString("Intel", comment: "Intel designation (shown after the version number in Preferences)")
     #endif
 
-    self.versionLabel.stringValue = "" + self.betaDesignation + "\(versionName) \(versionNumber) \(buildName) \(buildNumber) - \(arch)" // DO NOT FORGET to change beta designation on release!
+    self.versionLabel.stringValue = "\(versionName) \(versionNumber) \(buildName) \(buildNumber) - \(arch)" // DO NOT FORGET to change beta designation on release!
   }
 
   func setCopyrightInfo() {
