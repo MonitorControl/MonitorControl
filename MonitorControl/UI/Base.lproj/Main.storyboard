@@ -441,20 +441,20 @@
                 <customObject id="rw7-Po-Lxm" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="DisplaysPrefsVC" id="2Ei-9P-f0u" customClass="DisplaysPrefsViewController" customModule="MonitorControl" sceneMemberID="viewController">
                     <view key="view" id="aj0-6l-QE2">
-                        <rect key="frame" x="0.0" y="0.0" width="691" height="390"/>
+                        <rect key="frame" x="0.0" y="0.0" width="691" height="391"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <subviews>
-                            <scrollView autohidesScrollers="YES" horizontalLineScroll="290" horizontalPageScroll="10" verticalLineScroll="290" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O0W-8R-9c8">
+                            <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="290" horizontalPageScroll="10" verticalLineScroll="290" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="none" translatesAutoresizingMaskIntoConstraints="NO" id="O0W-8R-9c8">
                                 <rect key="frame" x="0.0" y="0.0" width="691" height="390"/>
                                 <clipView key="contentView" drawsBackground="NO" id="yDV-Al-LQT">
-                                    <rect key="frame" x="1" y="1" width="689" height="388"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="691" height="390"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="none" tableStyle="sourceList" selectionHighlightStyle="none" columnReordering="NO" columnResizing="NO" multipleSelection="NO" emptySelection="NO" autosaveColumns="NO" typeSelect="NO" rowHeight="290" rowSizeStyle="automatic" viewBased="YES" id="zC9-dS-Tr3">
-                                            <rect key="frame" x="0.0" y="0.0" width="689" height="388"/>
+                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="none" tableStyle="inset" selectionHighlightStyle="none" columnReordering="NO" columnResizing="NO" multipleSelection="NO" emptySelection="NO" autosaveColumns="NO" typeSelect="NO" rowHeight="290" rowSizeStyle="automatic" viewBased="YES" id="zC9-dS-Tr3">
+                                            <rect key="frame" x="0.0" y="0.0" width="691" height="390"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <size key="intercellSpacing" width="17" height="0.0"/>
-                                            <color key="backgroundColor" name="_sourceListBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="windowBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                             <tableColumns>
                                                 <tableColumn width="645" minWidth="40" maxWidth="660" id="3eK-hg-Tqu">
@@ -731,7 +731,7 @@
                                     <nil key="backgroundColor"/>
                                 </clipView>
                                 <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="24Y-Ol-HHE">
-                                    <rect key="frame" x="1" y="407" width="689" height="16"/>
+                                    <rect key="frame" x="-100" y="-100" width="689" height="16"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="zbU-d8-F8n">
@@ -744,8 +744,8 @@
                             <constraint firstAttribute="bottom" secondItem="O0W-8R-9c8" secondAttribute="bottom" id="5tj-nE-mrI"/>
                             <constraint firstItem="O0W-8R-9c8" firstAttribute="leading" secondItem="aj0-6l-QE2" secondAttribute="leading" id="MNc-WK-uDZ"/>
                             <constraint firstAttribute="width" constant="691" id="PBE-8S-BOY"/>
-                            <constraint firstItem="O0W-8R-9c8" firstAttribute="top" secondItem="aj0-6l-QE2" secondAttribute="top" id="Rg2-d3-Mrg"/>
-                            <constraint firstAttribute="height" constant="390" id="vYp-Nq-MkZ"/>
+                            <constraint firstItem="O0W-8R-9c8" firstAttribute="top" secondItem="aj0-6l-QE2" secondAttribute="top" constant="1" id="Rg2-d3-Mrg"/>
+                            <constraint firstAttribute="height" constant="391" id="vYp-Nq-MkZ"/>
                             <constraint firstAttribute="trailing" secondItem="O0W-8R-9c8" secondAttribute="trailing" id="xUm-oc-lj8"/>
                         </constraints>
                     </view>
