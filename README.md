@@ -9,11 +9,8 @@ Shows native brightness and volume OSDs as well!</b>
 </p>            
 
 <br/>
-        
+ 
 <div align="center">
-<img src=".github/screenshot.png" width="840" alt="Screenshot"/><br/>
-<br/>
-
 <!-- shields -->
 <!-- downloads -->
 <a href="https://github.com/MonitorControl/MonitorControl/releases">
@@ -31,11 +28,17 @@ Shows native brightness and volume OSDs as well!</b>
 <a href="https://github.com/MonitorControl/MonitorControl">
 <img src="https://img.shields.io/badge/platform-macOS-lightgrey.svg?style=flat" alt="platform"/>
 </a>
+<!-- backers -->
+<a href="https://opencollective.com/monitorcontrol">
+<img src="https://opencollective.com/monitorcontrol/tiers/badge.svg" alt="backers"/>
+</a>
     
 <br/>
+<br/>
 
-<p>:uk: :fr: :de: :it: :ru: :ukraine: :jp: :poland: :hungary:</p>
 </div>
+
+<img src=".github/screenshot.png" width="840" alt="Screenshot"/><br/>
 
 <hr>
 
@@ -52,9 +55,8 @@ Go to [Releases](https://github.com/MonitorControl/MonitorControl/releases) and 
 
 Open [issues](https://github.com/MonitorControl/MonitorControl/issues) if you have a question, an enhancement to suggest or a bug you've found. If you want you can fork the code yourself and submit a pull request to improve the app.
 
-## How to donate or contribute
-
-Check out our [Open Collecitve page, you can contribute](https://opencollective.com/monitorcontrol/donate) to the development of MonitorControl financially and follow the spendings in a transparent manner!
+## Backers
+<object type="image/svg+xml" data="https://opencollective.com/monitorcontrol/tiers/backer.svg?avatarHeight=36&width=600"></object>
 
 ## How to build
 
