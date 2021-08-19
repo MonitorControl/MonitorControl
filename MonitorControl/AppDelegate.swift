@@ -4,6 +4,7 @@ import MediaKeyTap
 import os.log
 import Preferences
 import SimplyCoreAudio
+import SwiftUI
 
 var app: AppDelegate!
 let prefs = UserDefaults.standard
@@ -39,7 +40,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     app = self
     self.subscribeEventListeners()
     self.setDefaultPrefs()
-    self.updateMediaKeyTap()
     if #available(macOS 11.0, *) {
       self.statusItem.button?.image = NSImage(systemSymbolName: "sun.max", accessibilityDescription: "MonitorControl")
     } else {
@@ -206,6 +206,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         DisplayManager.shared.restoreSwBrightnessForAllDisplays(async: true)
       }
     }
+    updateMediaKeyTap()
   }
 
   private func addDisplayToMenu(display: ExternalDisplay, asSubMenu: Bool) {
@@ -459,7 +460,17 @@ extension AppDelegate: MediaKeyTapDelegate {
     default:
       keys = [.brightnessUp, .brightnessDown, .mute, .volumeUp, .volumeDown]
     }
-    if self.coreAudio.defaultOutputDevice?.canSetVirtualMasterVolume(scope: .output) == true { // Remove volume related keys.
+    // Remove keys if no external displays are connected
+    var isInternalDisplayOnly = true
+    for display in DisplayManager.shared.getAllDisplays() where display is ExternalDisplay {
+      isInternalDisplayOnly = false
+    }
+    if isInternalDisplayOnly {
+      let keysToDelete: [MediaKey] = [.volumeUp, .volumeDown, .mute, .brightnessUp, .brightnessDown]
+      keys.removeAll { keysToDelete.contains($0) }
+    }
+    // Remove volume related keys if audio device is controllable
+    if self.coreAudio.defaultOutputDevice?.canSetVirtualMasterVolume(scope: .output) == true {
       let keysToDelete: [MediaKey] = [.volumeUp, .volumeDown, .mute]
       keys.removeAll { keysToDelete.contains($0) }
     }
