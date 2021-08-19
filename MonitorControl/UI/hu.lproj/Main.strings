@@ -19,8 +19,8 @@
 /* Class = "NSButtonCell"; title = "Website"; ObjectID = "Cln-uW-2dd"; */
 "Cln-uW-2dd.title" = "Weboldal";
 
-/* Class = "NSTextFieldCell"; title = "⚠️ Warning! Changing some of these setting may cause system freezes or unexpected behavior!"; ObjectID = "Cz1-Mh-llk"; */
-"Cz1-Mh-llk.title" = "⚠️ Figyelem! Ezen beállítások némelyikének változtatása veszélyeztetheti a rendszer stabilitását!";
+/* Class = "NSTextFieldCell"; title = "⚠️ Warning! Changing some of these settings may cause system freezes or unexpected behavior!"; ObjectID = "Cz1-Mh-llk"; */
+"Cz1-Mh-llk.title" = "⚠️ Figyelem! Ezen beállítások változtatása veszélyeztetheti a rendszer stabilitását!";
 
 /* Class = "NSButtonCell"; title = "Show volume slider in menu"; ObjectID = "dhP-eB-1L6"; */
 "dhP-eB-1L6.title" = "Hangerő csúszka megjelenítése a menüben";
