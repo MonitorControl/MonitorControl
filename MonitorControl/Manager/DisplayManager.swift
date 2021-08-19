@@ -52,10 +52,12 @@ class DisplayManager {
   }
 
   func getCurrentDisplay() -> Display? {
-    guard let mainDisplayID = NSScreen.main?.displayID else {
-      return nil
+    let mouseLocation = NSEvent.mouseLocation
+    let screens = NSScreen.screens
+    if let screenWithMouse = (screens.first { NSMouseInRect(mouseLocation, $0.frame, false) }) {
+      return self.displays.first { $0.identifier == screenWithMouse.displayID }
     }
-    return self.displays.first { $0.identifier == mainDisplayID }
+    return nil
   }
 
   func addDisplay(display: Display) {
