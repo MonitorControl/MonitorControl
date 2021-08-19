@@ -68,14 +68,16 @@ Check out our [Open Collecitve page, you can contribute](https://opencollective.
 Clone the project via this Terminal command:
 
 ```
-git clone --single-branch --branch experimental/apple-silicon https://github.com/MonitorControl/MonitorControl.git
+git clone https://github.com/MonitorControl/MonitorControl.git
 ```
 
-The dependencies will automatically get downloaded when opening the project, if they don't:
+If you want to clone one of the branches, add `--single-branch --branch [branchname]` after the `clone` option.
+
+You're all set ! Now open the `MonitorControl.xcodeproj` with Xcode! The dependencies will automatically get downloaded once you open the project. If they don't:
 
 `File > Packages > Resolve Package Versions`
 
-You're all set ! Now open the `MonitorControl.xcodeproj` with Xcode!
+(In earlier XCode versions `Packages` menu is titled `Swift Packages`)
 
 ### Third party dependencies
 
