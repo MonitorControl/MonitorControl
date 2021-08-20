@@ -131,7 +131,7 @@ class DisplayManager {
   }
 
   func getDisplayNameByID(displayID: CGDirectDisplayID) -> String {
-    let defaultName: String = NSLocalizedString("Unknown", comment: "Unknown display name") // + String(CGDisplaySerialNumber(displayID))
+    let defaultName: String = NSLocalizedString("Unknown", comment: "Unknown display name")
     if #available(macOS 11.0, *) {
       if let dictionary = ((CoreDisplay_DisplayCreateInfoDictionary(displayID))?.takeRetainedValue() as NSDictionary?), let nameList = dictionary["DisplayProductName"] as? [String: String], var name = nameList[Locale.current.identifier] ?? nameList["en_US"] ?? nameList.first?.value {
         if CGDisplayIsInHWMirrorSet(displayID) != 0 || CGDisplayIsInMirrorSet(displayID) != 0 {
