@@ -22,6 +22,7 @@ class DisplaysPrefsCellView: NSTableCellView {
   @IBOutlet var pollingModeMenu: NSPopUpButton!
   @IBOutlet var longerDelayButton: NSButton!
   @IBOutlet var pollingCount: NSTextFieldCell!
+  @IBOutlet var enableMuteButton: NSButton!
 
   @IBAction func openAdvancedHelp(_: NSButton) {
     if let url = URL(string: "https://github.com/the0neyouseek/MonitorControl/wiki/Advanced-Preferences") {
@@ -63,6 +64,24 @@ class DisplaysPrefsCellView: NSTableCellView {
       if newValue != originalValue, !newValue.isEmpty, let newValue = Int(newValue) {
         display.setPollingCount(newValue)
         os_log("Value changed for polling count: %{public}@", type: .info, "from `\(originalValue)` to `\(newValue)`")
+      }
+    }
+  }
+
+  @IBAction func enableMuteButtonToggled(_ sender: NSButton) {
+    if let display = display as? ExternalDisplay {
+      switch sender.state {
+      case .on:
+        display.enableMuteUnmute = true
+      case .off:
+        // If the display is currently muted, toggle back to unmute
+        // to prevent the display becoming stuck in the muted state
+        if display.isMuted() {
+          display.toggleMute()
+        }
+        display.enableMuteUnmute = false
+      default:
+        break
       }
     }
   }
@@ -177,6 +196,10 @@ class DisplaysPrefsCellView: NSTableCellView {
       if self.longerDelayButton.isEnabled {
         self.longerDelayButton.state = .off
         self.longerDelayButtonToggled(self.longerDelayButton)
+      }
+      if self.enableMuteButton.isEnabled {
+        self.enableMuteButton.state = .off
+        self.enableMuteButtonToggled(self.enableMuteButton)
       }
       self.friendlyName.stringValue = disp.name
       self.friendlyNameValueChanged(self.friendlyName)

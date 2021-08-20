@@ -153,6 +153,8 @@ class DisplaysPrefsViewController: NSViewController, PreferencePane, NSTableView
         // DDC read delay
         cell.longerDelayButton.isEnabled = true
         cell.longerDelayButton.state = externalDisplay.needsLongerDelay ? .on : .off
+        cell.enableMuteButton.isEnabled = true
+        cell.enableMuteButton.state = externalDisplay.enableMuteUnmute ? .on : .off
       } else {
         cell.pollingModeMenu.selectItem(withTag: 0)
         cell.pollingModeMenu.isEnabled = false
@@ -160,6 +162,8 @@ class DisplaysPrefsViewController: NSViewController, PreferencePane, NSTableView
         cell.pollingCount.isEnabled = false
         cell.longerDelayButton.state = .off
         cell.longerDelayButton.isEnabled = false
+        cell.enableMuteButton.state = .off
+        cell.enableMuteButton.isEnabled = false
       }
       if self.prefs.bool(forKey: Utils.PrefKeys.showAdvancedDisplays.rawValue) {
         cell.advancedSettings.isHidden = false

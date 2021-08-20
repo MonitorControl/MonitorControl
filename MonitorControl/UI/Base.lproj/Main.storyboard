@@ -382,7 +382,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             </box>
                             <textField identifier="copyrightLabel" horizontalHuggingPriority="251" verticalHuggingPriority="750" id="mjR-ls-0mP">
-                                <rect key="frame" x="272" y="96" width="147" height="64"/>
+                                <rect key="frame" x="272" y="112" width="147" height="48"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" alignment="left" id="TKd-J8-Iyk">
                                     <font key="font" metaFont="systemMedium" size="13"/>
@@ -600,14 +600,14 @@
                                                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                     </textFieldCell>
                                                                 </textField>
-                                                                <box boxType="custom" borderType="line" borderWidth="0.0" cornerRadius="6" translatesAutoresizingMaskIntoConstraints="NO" id="ihQ-SK-x7Y">
-                                                                    <rect key="frame" x="88" y="19" width="549" height="116"/>
-                                                                    <view key="contentView" id="sNT-7f-pNP">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="549" height="116"/>
+                                                                <box autoresizesSubviews="NO" boxType="custom" borderType="line" borderWidth="0.0" cornerRadius="6" translatesAutoresizingMaskIntoConstraints="NO" id="ihQ-SK-x7Y">
+                                                                    <rect key="frame" x="88" y="3" width="549" height="132"/>
+                                                                    <view key="contentView" autoresizesSubviews="NO" id="sNT-7f-pNP">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="549" height="132"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
-                                                                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" id="2ys-EO-duG">
-                                                                                <rect key="frame" x="190" y="37" width="102" height="19"/>
+                                                                            <textField autoresizesSubviews="NO" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" preferredMaxLayoutWidth="102" translatesAutoresizingMaskIntoConstraints="NO" id="2ys-EO-duG">
+                                                                                <rect key="frame" x="190" y="55" width="102" height="19"/>
                                                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES"/>
                                                                                 <textFieldCell key="cell" controlSize="small" selectable="YES" editable="YES" enabled="NO" sendsActionOnEndEditing="YES" borderStyle="bezel" alignment="center" bezelStyle="round" id="LZ8-Tj-mCs">
                                                                                     <font key="font" metaFont="smallSystem"/>
@@ -619,7 +619,7 @@
                                                                                 </textFieldCell>
                                                                             </textField>
                                                                             <popUpButton verticalHuggingPriority="750" id="7FH-uw-jcn">
-                                                                                <rect key="frame" x="187" y="57" width="108" height="26"/>
+                                                                                <rect key="frame" x="187" y="75" width="108" height="26"/>
                                                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                                                 <popUpButtonCell key="cell" type="push" title="None" bezelStyle="rounded" alignment="center" controlSize="small" lineBreakMode="truncatingTail" enabled="NO" state="on" borderStyle="border" inset="2" selectedItem="FoA-yh-Yx3" id="M5p-a2-UEs">
                                                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -650,7 +650,7 @@
                                                                                 </connections>
                                                                             </button>
                                                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="yU6-4R-6Ji">
-                                                                                <rect key="frame" x="-2" y="90" width="553" height="14"/>
+                                                                                <rect key="frame" x="-2" y="108" width="553" height="14"/>
                                                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                                                 <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="⚠️ Warning! Changing some of these settings may cause system freezes or unexpected behavior!" id="Cz1-Mh-llk">
                                                                                     <font key="font" metaFont="smallSystem"/>
@@ -658,8 +658,46 @@
                                                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                                 </textFieldCell>
                                                                             </textField>
+                                                                            <button verticalHuggingPriority="750" id="42E-Sk-KYk">
+                                                                                <rect key="frame" x="190" y="8" width="302" height="16"/>
+                                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                                                <buttonCell key="cell" type="check" title="Enable Mute DDC command" bezelStyle="regularSquare" imagePosition="left" controlSize="small" enabled="NO" inset="2" id="bZq-0d-lJa">
+                                                                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                                                    <font key="font" metaFont="smallSystem"/>
+                                                                                </buttonCell>
+                                                                                <connections>
+                                                                                    <action selector="enableMuteButtonToggled:" target="hCY-wr-B84" id="BvE-Bn-gUg"/>
+                                                                                </connections>
+                                                                            </button>
+                                                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="krX-bC-QxX">
+                                                                                <rect key="frame" x="19" y="82" width="158" height="14"/>
+                                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                                                <textFieldCell key="cell" controlSize="small" lineBreakMode="clipping" alignment="right" title="DDC read polling mode:" id="vwm-hY-on5">
+                                                                                    <font key="font" metaFont="smallSystem"/>
+                                                                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                                                </textFieldCell>
+                                                                            </textField>
+                                                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="7VO-Pi-qRd">
+                                                                                <rect key="frame" x="19" y="56" width="158" height="14"/>
+                                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                                                <textFieldCell key="cell" controlSize="small" lineBreakMode="clipping" alignment="right" title="Custom read polling count:" id="J77-r0-djA">
+                                                                                    <font key="font" metaFont="smallSystem"/>
+                                                                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                                                </textFieldCell>
+                                                                            </textField>
+                                                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="g9r-Og-rnY">
+                                                                                <rect key="frame" x="19" y="31" width="158" height="14"/>
+                                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                                                <textFieldCell key="cell" controlSize="small" lineBreakMode="clipping" alignment="right" title="Additional settings:" id="Xz0-X0-rB4">
+                                                                                    <font key="font" metaFont="smallSystem"/>
+                                                                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                                                </textFieldCell>
+                                                                            </textField>
                                                                             <button verticalHuggingPriority="750" id="PJz-Jc-hZ4">
-                                                                                <rect key="frame" x="190" y="14" width="302" height="16"/>
+                                                                                <rect key="frame" x="190" y="30" width="302" height="16"/>
                                                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                                                 <buttonCell key="cell" type="check" title="Longer delay during DDC read operations" bezelStyle="regularSquare" imagePosition="left" controlSize="small" enabled="NO" inset="2" id="pF5-Sw-7BR">
                                                                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -669,29 +707,11 @@
                                                                                     <action selector="longerDelayButtonToggled:" target="hCY-wr-B84" id="jUC-Ye-cHW"/>
                                                                                 </connections>
                                                                             </button>
-                                                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="krX-bC-QxX">
-                                                                                <rect key="frame" x="18" y="64" width="167" height="14"/>
-                                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                                                <textFieldCell key="cell" controlSize="small" lineBreakMode="clipping" title="DDC read polling mode:" id="vwm-hY-on5">
-                                                                                    <font key="font" metaFont="smallSystem"/>
-                                                                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                                                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                                                </textFieldCell>
-                                                                            </textField>
-                                                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="7VO-Pi-qRd">
-                                                                                <rect key="frame" x="18" y="38" width="167" height="14"/>
-                                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                                                <textFieldCell key="cell" controlSize="small" lineBreakMode="clipping" title="Custom read polling count:" id="J77-r0-djA">
-                                                                                    <font key="font" metaFont="smallSystem"/>
-                                                                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                                                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                                                </textFieldCell>
-                                                                            </textField>
                                                                         </subviews>
                                                                     </view>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="549" id="VEg-M2-Y3v"/>
-                                                                        <constraint firstAttribute="height" constant="116" id="qRf-Ll-HYh"/>
+                                                                        <constraint firstAttribute="height" constant="132" id="qRf-Ll-HYh"/>
                                                                     </constraints>
                                                                     <shadow key="shadow" blurRadius="2">
                                                                         <color key="color" name="systemGrayColor" catalog="System" colorSpace="catalog"/>
@@ -712,6 +732,7 @@
                                                                 <outlet property="displayId" destination="6GJ-6Q-gqz" id="f0v-9s-rvs"/>
                                                                 <outlet property="displayImage" destination="DLq-uQ-NPf" id="iel-Eq-Ttc"/>
                                                                 <outlet property="displayType" destination="Pqk-VW-JGY" id="bnb-t3-FSu"/>
+                                                                <outlet property="enableMuteButton" destination="42E-Sk-KYk" id="DVs-cz-chU"/>
                                                                 <outlet property="enabledButton" destination="Y93-eX-6aR" id="ySF-ms-Byg"/>
                                                                 <outlet property="friendlyName" destination="ibQ-4u-ClE" id="Lvu-68-2n9"/>
                                                                 <outlet property="longerDelayButton" destination="PJz-Jc-hZ4" id="3Gr-7L-zsi"/>
@@ -754,7 +775,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="300.5" y="370"/>
+            <point key="canvasLocation" x="300.5" y="369.5"/>
         </scene>
     </scenes>
     <resources>
