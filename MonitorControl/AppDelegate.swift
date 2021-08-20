@@ -4,7 +4,6 @@ import MediaKeyTap
 import os.log
 import Preferences
 import SimplyCoreAudio
-import SwiftUI
 
 var app: AppDelegate!
 let prefs = UserDefaults.standard
