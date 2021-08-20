@@ -162,7 +162,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     os_log("Request for updateDisplay with reconfigreID %{public}@", type: .info, String(dispatchedReconfigureID))
     self.reconfigureID = 0
     DisplayManager.shared.clearDisplays()
-    var onlineDisplayIDs = [CGDirectDisplayID](repeating: 0, count: 10)
+    var onlineDisplayIDs = [CGDirectDisplayID](repeating: 0, count: 16)
     var displayCount: UInt32 = 0
     guard CGGetOnlineDisplayList(10, &onlineDisplayIDs, &displayCount) == .success else {
       os_log("Unable to get display list.", type: .info)

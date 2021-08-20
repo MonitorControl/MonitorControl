@@ -1,5 +1,4 @@
 import Cocoa
-import CoreMedia
 import DDC
 
 class DisplayManager {

@@ -51,7 +51,7 @@ class ExternalDisplay: Display {
   override init(_ identifier: CGDirectDisplayID, name: String, vendorNumber: UInt32?, modelNumber: UInt32?, isVirtual: Bool = false) {
     super.init(identifier, name: name, vendorNumber: vendorNumber, modelNumber: modelNumber, isVirtual: isVirtual)
 
-    if !isVirtual && !Arm64DDCUtils.isArm64 {
+    if !isVirtual, !Arm64DDCUtils.isArm64 {
       self.ddc = DDC(for: identifier)
     }
   }
