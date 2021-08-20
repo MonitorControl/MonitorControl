@@ -107,9 +107,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         for externalDisplay in DisplayManager.shared.getExternalDisplays() where externalDisplay.identifier == serviceMatch.displayID && serviceMatch.service != nil {
           externalDisplay.arm64avService = serviceMatch.service
           os_log("Display service match successful for display %{public}@", type: .info, String(serviceMatch.displayID))
-          // if Arm64DDCUtils.read(service: externalDisplay.arm64avService, command: UInt8(0xF1)) != nil {
-          //   externalDisplay.arm64ddc = true
-          // }
           if !serviceMatch.isDiscouraged {
             externalDisplay.arm64ddc = !debugSw ? true : false // MARK: (point of interest when testing)
           }
