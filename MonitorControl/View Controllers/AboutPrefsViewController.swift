@@ -53,7 +53,7 @@ class AboutPrefsViewController: NSViewController, PreferencePane {
       let arch: String = NSLocalizedString("Intel", comment: "Intel designation (shown after the version number in Preferences)")
     #endif
 
-    self.versionLabel.stringValue = "\(versionName) \(versionNumber) \(buildName) \(buildNumber) - \(arch)" // DO NOT FORGET to change beta designation on release!
+    self.versionLabel.stringValue = "\(versionName) \(versionNumber) \(buildName) \(buildNumber) - \(arch)"
   }
 
   func setCopyrightInfo() {
