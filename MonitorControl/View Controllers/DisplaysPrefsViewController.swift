@@ -167,10 +167,8 @@ class DisplaysPrefsViewController: NSViewController, PreferencePane, NSTableView
       }
       if self.prefs.bool(forKey: Utils.PrefKeys.showAdvancedDisplays.rawValue) {
         cell.advancedSettings.isHidden = false
-//        tableView.rowHeight = 290
       } else {
         cell.advancedSettings.isHidden = true
-//        tableView.rowHeight = 150
       }
       return cell
     }
@@ -179,7 +177,7 @@ class DisplaysPrefsViewController: NSViewController, PreferencePane, NSTableView
 
   func updateDisplayListRowHeight() {
     if self.prefs.bool(forKey: Utils.PrefKeys.showAdvancedDisplays.rawValue) {
-      self.displayList.rowHeight = 290
+      self.displayList.rowHeight = 300
     } else {
       self.displayList.rowHeight = 150
     }
