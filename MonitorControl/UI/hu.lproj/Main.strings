@@ -1,6 +1,9 @@
 /* Class = "NSTextFieldCell"; title = "MonitorControl"; ObjectID = "1PJ-14-Bvn"; */
 "1PJ-14-Bvn.title" = "MonitorControl";
 
+/* Class = "NSButtonCell"; title = "Special thanks to our contributors!"; ObjectID = "95V-M4-2l5"; */
+"95V-M4-2l5.title" = "Köszönjük mindenkinek, aki hozzájárult!";
+
 /* Class = "NSButtonCell"; title = "Hide Menu Icon"; ObjectID = "aXL-i8-S6R"; */
 "aXL-i8-S6R.title" = "Menü ikon elrejtése";
 
@@ -136,5 +139,5 @@
 /* Class = "NSButtonCell"; title = "Use hardware DDC control"; ObjectID = "ZdU-gV-V05"; */
 "ZdU-gV-V05.title" = "Hardveres DDC vezérlés";
 
-/* Class = "NSButtonCell"; title = "Contribute"; ObjectID = "ZKk-ve-rS4"; */
+/* Class = "NSButtonCell"; title = "Donate"; ObjectID = "ZKk-ve-rS4"; */
 "ZKk-ve-rS4.title" = "Adakozás";

@@ -17,6 +17,7 @@ class AboutPrefsViewController: NSViewController, PreferencePane {
 
   @IBOutlet var versionLabel: NSTextField!
   @IBOutlet var copyrightLabel: NSTextField!
+  @IBOutlet var openContributorsButton: NSButton!
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -35,8 +36,14 @@ class AboutPrefsViewController: NSViewController, PreferencePane {
     }
   }
 
-  @IBAction func openGitHubPage(_: NSButton) {
+  @IBAction func openWebPage(_: NSButton) {
     if let url = URL(string: "https://monitorcontrol.app") {
+      NSWorkspace.shared.open(url)
+    }
+  }
+
+  @IBAction func openContributorsPage(_: NSButton) {
+    if let url = URL(string: "https://github.com/MonitorControl/MonitorControl/graphs/contributors") {
       NSWorkspace.shared.open(url)
     }
   }

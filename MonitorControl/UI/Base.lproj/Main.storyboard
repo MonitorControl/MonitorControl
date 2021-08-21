@@ -344,10 +344,10 @@
             <objects>
                 <viewController storyboardIdentifier="AboutPrefsVC" id="7uI-eE-yxm" customClass="AboutPrefsViewController" customModule="MonitorControl" sceneMemberID="viewController">
                     <view key="view" wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kXT-i4-NNT">
-                        <rect key="frame" x="0.0" y="0.0" width="691" height="280"/>
+                        <rect key="frame" x="0.0" y="0.0" width="691" height="307"/>
                         <subviews>
                             <textField identifier="versionLabel" horizontalHuggingPriority="251" verticalHuggingPriority="750" id="tMg-qE-zTW">
-                                <rect key="frame" x="272" y="182" width="333" height="16"/>
+                                <rect key="frame" x="272" y="211" width="333" height="16"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" alignment="left" title="#bc-ignore!" id="mBs-6m-13Q">
                                     <font key="font" metaFont="system"/>
@@ -356,7 +356,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="Dqc-RQ-Lbc">
-                                <rect key="frame" x="272" y="78" width="333" height="16"/>
+                                <rect key="frame" x="272" y="76" width="333" height="16"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" alignment="left" title="#bc-ignore!" id="e0q-fb-k7R">
                                     <font key="font" metaFont="system"/>
@@ -365,7 +365,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField identifier="softwareNameLabel" horizontalHuggingPriority="251" verticalHuggingPriority="750" id="dtg-g7-hZb">
-                                <rect key="frame" x="272" y="230" width="147" height="26"/>
+                                <rect key="frame" x="272" y="257" width="147" height="26"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" alignment="left" title="MonitorControl" id="1PJ-14-Bvn">
                                     <font key="font" textStyle="title1" name=".SFNS-Regular"/>
@@ -374,15 +374,15 @@
                                 </textFieldCell>
                             </textField>
                             <box verticalHuggingPriority="750" fixedFrame="YES" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="9Mt-M9-Xqc">
-                                <rect key="frame" x="274" y="212" width="329" height="4"/>
+                                <rect key="frame" x="274" y="240" width="329" height="4"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             </box>
                             <box verticalHuggingPriority="750" fixedFrame="YES" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="JqO-vB-ykl">
-                                <rect key="frame" x="275" y="56" width="329" height="4"/>
+                                <rect key="frame" x="275" y="54" width="329" height="4"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             </box>
                             <textField identifier="copyrightLabel" horizontalHuggingPriority="251" verticalHuggingPriority="750" id="mjR-ls-0mP">
-                                <rect key="frame" x="272" y="112" width="147" height="48"/>
+                                <rect key="frame" x="272" y="143" width="147" height="48"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" alignment="left" id="TKd-J8-Iyk">
                                     <font key="font" metaFont="systemMedium" size="13"/>
@@ -394,25 +394,25 @@
                                 </textFieldCell>
                             </textField>
                             <imageView identifier="appIcon" wantsLayer="YES" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="qQ1-AF-le8">
-                                <rect key="frame" x="68" y="104" width="169" height="169"/>
+                                <rect key="frame" x="67" y="114" width="185" height="185"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="axesIndependently" image="NSApplicationIcon" id="2rQ-WJ-rCY"/>
                             </imageView>
                             <button verticalHuggingPriority="750" id="D9i-nX-VSm">
-                                <rect key="frame" x="444" y="17" width="167" height="32"/>
+                                <rect key="frame" x="444" y="13" width="167" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="push" title="Website" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Cln-uW-2dd">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
-                                    <connections>
-                                        <action selector="openGitHubPage" target="7uI-eE-yxm" id="exd-pA-myo"/>
-                                    </connections>
                                 </buttonCell>
+                                <connections>
+                                    <action selector="openWebPage:" target="7uI-eE-yxm" id="iqt-JK-xaO"/>
+                                </connections>
                             </button>
                             <button verticalHuggingPriority="750" id="vS5-oh-3k6">
-                                <rect key="frame" x="268" y="17" width="166" height="32"/>
+                                <rect key="frame" x="268" y="13" width="166" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="push" title="Contribute" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ZKk-ve-rS4">
+                                <buttonCell key="cell" type="push" title="Donate" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ZKk-ve-rS4">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
@@ -420,20 +420,33 @@
                                     <action selector="openDonate:" target="7uI-eE-yxm" id="vXV-ri-tCT"/>
                                 </connections>
                             </button>
+                            <button verticalHuggingPriority="750" id="rqH-BW-IT6" customClass="AboutPrefsViewController.HandButton">
+                                <rect key="frame" x="274" y="107" width="329" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="bevel" title="Special thanks to our contributors!" bezelStyle="rounded" alignment="left" imageScaling="proportionallyDown" inset="2" id="95V-M4-2l5">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <color key="contentTintColor" name="linkColor" catalog="System" colorSpace="catalog"/>
+                                <connections>
+                                    <action selector="openContributorsPage:" target="7uI-eE-yxm" id="YbP-4y-EPf"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <constraints>
-                            <constraint firstAttribute="height" constant="280" id="hXB-ku-c1r"/>
+                            <constraint firstAttribute="height" constant="307" id="hXB-ku-c1r"/>
                             <constraint firstAttribute="width" constant="691" id="kEY-xf-vB5"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="copyrightLabel" destination="Dqc-RQ-Lbc" id="4o3-kc-Fed"/>
+                        <outlet property="copyrightLabel" destination="Dqc-RQ-Lbc" id="lGL-A6-Lto"/>
+                        <outlet property="openContributorsButton" destination="rqH-BW-IT6" id="4Rv-0h-u6J"/>
                         <outlet property="versionLabel" destination="tMg-qE-zTW" id="G1o-YJ-X4n"/>
                     </connections>
                 </viewController>
                 <customObject id="5Vf-Rd-nyE" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="300.5" y="801"/>
+            <point key="canvasLocation" x="300.5" y="814.5"/>
         </scene>
         <!--Displays Prefs View Controller-->
         <scene sceneID="lLH-hh-1EK">
