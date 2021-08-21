@@ -1,5 +1,8 @@
-/* Shown in the main prefs window  */
-"Advanced" = "Erweitert";
+/* Shown in the main prefs window */
+"About" = "About";
+
+/* Apple Silicon designation (shown after the version number in Preferences) */
+"Apple Silicon" = "Apple Silicon";
 
 /* Shown in the alert dialog */
 "Are you sure you want to enable a longer delay? Doing so may freeze your system and require a restart. Start at login will be disabled as a safety measure." = "Are you sure you want to enable a longer delay? Doing so may freeze your system and require a restart. Start at login will be disabled as a safety measure.";
@@ -13,26 +16,41 @@
 /* Build */
 "Build" = "Build";
 
+/* Shown in the Display Preferences */
+"Built-in Display" = "Built-in Display";
+
 /* Shown in menu */
 "Contrast" = "Kontrast";
 
-/* Shown in menu */
-"Default" = "Standard";
+/* Version */
+"Copyright Ⓒ MonitorControl, " = "Copyright Ⓒ MonitorControl, ";
 
 /* Shown in the main prefs window */
-"Display" = "Monitor";
+"Displays" = "Displays";
 
 /* Shown in the alert dialog */
 "Enable Longer Delay?" = "Enable Longer Delay?";
 
+/* Shown in the Display Preferences */
+"External Display" = "External Display";
+
 /* Shown in the main prefs window */
 "General" = "Allgemein";
 
-/* Shown in the main prefs window */
-"Keys" = "Tasten";
+/* Shown in the Display Preferences */
+"Hardware (CoreDisplay)" = "Hardware (CoreDisplay)";
+
+/* Shown in the Display Preferences */
+"Hardware (DDC)" = "Hardware (DDC)";
+
+/* Intel designation (shown after the version number in Preferences) */
+"Intel" = "Intel";
 
 /* Shown in the alert dialog */
 "No" = "No";
+
+/* Shown in the Display Preferences */
+"No Control Available" = "No Control Available";
 
 /* Shown in menu */
 "No supported display found" = "Kein unterstützter Monitor angeschlossen";
@@ -40,25 +58,34 @@
 /* Shown in the alert dialog */
 "Ok" = "OK";
 
-/* Shown in Preferences window */
-"Preferences" = "Einstellungen";
+/* Shown in the Display Preferences */
+"Other Display" = "Other Display";
 
 /* Shown in the alert dialog */
 "Reset Preferences?" = "Reset Preferences?";
 
-/* Shown in menu */
-"Set as default" = "Als Standard festlegen";
-
 /* Shown in the alert dialog */
 "Shortcuts not available" = "Kurzbefehle nicht verfügbar";
+
+/* Shown in the Display Preferences */
+"Software (Forced)" = "Software (Forced)";
+
+/* Shown in the Display Preferences */
+"Software Only" = "Software Only";
 
 /* unknown display name
  unknown model
  unknown vendor */
 "Unknown" = "Unbekannt";
 
+/* Shown in the Display Preferences */
+"Unspecified" = "Unspecified";
+
 /* Version */
 "Version" = "Version";
+
+/* Shown in the Display Preferences */
+"Virtual Display" = "Virtual Display";
 
 /* Shown in menu */
 "Volume" = "Lautstärke";

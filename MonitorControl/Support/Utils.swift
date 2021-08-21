@@ -14,25 +14,48 @@ class Utils: NSObject {
   ///   - command: Command (Brightness/Volume/...)
   ///   - title: Title of the slider
   /// - Returns: An `NSSlider` slider
-  static func addSliderMenuItem(toMenu menu: NSMenu, forDisplay display: ExternalDisplay, command: DDC.Command, title: String) -> SliderHandler {
+  static func addSliderMenuItem(toMenu menu: NSMenu, forDisplay display: ExternalDisplay, command: DDC.Command, title: String, numOfTickMarks: Int = 0) -> SliderHandler {
     let item = NSMenuItem()
 
     let handler = SliderHandler(display: display, command: command)
 
     let slider = NSSlider(value: 0, minValue: 0, maxValue: 100, target: handler, action: #selector(SliderHandler.valueChanged))
     slider.isEnabled = false
-    slider.frame.size.width = 180
-    slider.frame.origin = NSPoint(x: 20, y: 5)
-
     handler.slider = slider
 
-    let view = NSView(frame: NSRect(x: 0, y: 0, width: slider.frame.width + 30, height: slider.frame.height + 10))
-    view.addSubview(slider)
-
-    item.view = view
-
-    menu.insertItem(item, at: 0)
-    menu.insertItem(withTitle: title, action: nil, keyEquivalent: "", at: 0)
+    if #available(macOS 11.0, *) {
+      slider.frame.size.width = 160
+      slider.frame.origin = NSPoint(x: 35, y: 5)
+      let view = NSView(frame: NSRect(x: 0, y: 0, width: slider.frame.width + 47, height: slider.frame.height + 14))
+      view.frame.origin = NSPoint(x: 12, y: 0)
+      var iconName: String = "circle.dashed"
+      switch command {
+      case .audioSpeakerVolume: iconName = "speaker.wave.2"
+      case .brightness: iconName = "sun.max"
+      case .contrast: iconName = "circle.lefthalf.fill"
+      default: break
+      }
+      let icon = NSImageView(image: NSImage(systemSymbolName: iconName, accessibilityDescription: title)!)
+      icon.frame = view.frame
+      icon.wantsLayer = true
+      icon.alphaValue = 0.7
+      icon.imageAlignment = NSImageAlignment.alignLeft
+      view.addSubview(icon)
+      view.addSubview(slider)
+      item.view = view
+      menu.insertItem(item, at: 0)
+    } else {
+      slider.frame.size.width = 180
+      slider.frame.origin = NSPoint(x: 15, y: 5)
+      let view = NSView(frame: NSRect(x: 0, y: 0, width: slider.frame.width + 30, height: slider.frame.height + 10))
+      let sliderHeaderItem = NSMenuItem()
+      let attrs: [NSAttributedString.Key: Any] = [.foregroundColor: NSColor.systemGray, .font: NSFont.systemFont(ofSize: 12)]
+      sliderHeaderItem.attributedTitle = NSAttributedString(string: title, attributes: attrs)
+      view.addSubview(slider)
+      item.view = view
+      menu.insertItem(item, at: 0)
+      menu.insertItem(sliderHeaderItem, at: 0)
+    }
 
     var values: (UInt16, UInt16)?
     let delay = display.needsLongerDelay ? UInt64(40 * kMillisecondScale) : nil
@@ -40,23 +63,31 @@ class Utils: NSObject {
     let tries = UInt(display.getPollingCount())
     os_log("Polling %{public}@ times", type: .info, String(tries))
 
-    if tries != 0 {
-      values = display.readDDCValues(for: command, tries: tries, minReplyDelay: delay)
-    }
+    var (currentValue, maxValue) = (UInt16(0), UInt16(0))
 
-    let (currentDDCValue, maxValue) = values ?? (UInt16(display.getValue(for: command)), UInt16(display.getMaxValue(for: command)))
-
-    display.saveValue(Int(currentDDCValue), for: command)
-    display.saveMaxValue(Int(maxValue), for: command)
-
-    os_log("%{public}@ (%{public}@):", type: .info, display.name, String(reflecting: command))
-    os_log(" - current ddc value: %{public}@ - from display? %{public}@", type: .info, String(currentDDCValue), String(values != nil))
-    os_log(" - maximum ddc value: %{public}@ - from display? %{public}@", type: .info, String(maxValue), String(values != nil))
-
-    if command != .audioSpeakerVolume {
-      slider.integerValue = Int(currentDDCValue)
-      slider.maxValue = Double(maxValue)
+    if display.isSw(), command == DDC.Command.brightness {
+      (currentValue, maxValue) = (UInt16(display.getSwBrightnessPrefValue()), UInt16(display.getSwMaxBrightness()))
     } else {
+      if tries != 0 {
+        values = display.readDDCValues(for: command, tries: tries, minReplyDelay: delay)
+      }
+      (currentValue, maxValue) = values ?? (UInt16(display.getValue(for: command)), 0) // We set 0 for max. value to indicate that there is no real DDC reported max. value - ExternalDisplay.getMaxValue() will return 100 in case of 0 max. values.
+    }
+    display.saveMaxValue(Int(maxValue), for: command)
+    display.saveValue(min(Int(currentValue), display.getMaxValue(for: command)), for: command) // We won't allow currrent value to be higher than the max. value
+    os_log("%{public}@ (%{public}@):", type: .info, display.name, String(reflecting: command))
+    os_log(" - current value: %{public}@ - from display? %{public}@", type: .info, String(currentValue), String(values != nil))
+    os_log(" - maximum value: %{public}@ - from display? %{public}@", type: .info, String(display.getMaxValue(for: command)), String(values != nil))
+
+    if command == .brightness {
+      if !display.isSw(), prefs.bool(forKey: Utils.PrefKeys.lowerSwAfterBrightness.rawValue) {
+        slider.maxValue = Double(display.getMaxValue(for: command) * 2)
+        slider.integerValue = Int(slider.maxValue) / 2 + Int(currentValue)
+      } else {
+        slider.integerValue = Int(currentValue)
+        slider.maxValue = Double(display.getMaxValue(for: command))
+      }
+    } else if command == .audioSpeakerVolume {
       // If we're looking at the audio speaker volume, also retrieve the values for the mute command
       var muteValues: (current: UInt16, max: UInt16)?
 
@@ -80,14 +111,18 @@ class Utils: NSObject {
 
       // If the system is not currently muted, or doesn't support the mute command, display the current volume as the slider value
       if muteValues == nil || muteValues!.current == 2 {
-        slider.integerValue = Int(currentDDCValue)
+        slider.integerValue = Int(currentValue)
       } else {
         slider.integerValue = 0
       }
 
-      slider.maxValue = Double(maxValue)
+      slider.maxValue = Double(display.getMaxValue(for: command))
+    } else {
+      slider.integerValue = Int(currentValue)
+      slider.maxValue = Double(display.getMaxValue(for: command))
     }
 
+    slider.numberOfTickMarks = numOfTickMarks
     slider.isEnabled = true
     return handler
   }
@@ -133,6 +168,22 @@ class Utils: NSObject {
     }
   }
 
+  static func checksum(chk: UInt8, data: inout [UInt8], start: Int, end: Int) -> UInt8 {
+    var chkd: UInt8 = chk
+    for i in start ... end {
+      chkd ^= data[i]
+    }
+    return chkd
+  }
+
+  static func alert(text: String) {
+    let alert = NSAlert()
+    alert.messageText = text
+    alert.alertStyle = NSAlert.Style.informational
+    alert.addButton(withTitle: "OK")
+    alert.runModal()
+  }
+
   // MARK: - Enums
 
   /// UserDefault Keys for the app prefs
@@ -143,14 +194,23 @@ class Utils: NSObject {
     /// Does the app start when plugged to an external monitor
     case startWhenExternal
 
+    /// Hide menu icon
+    case hideMenuIcon
+
     /// Keys listened for (Brightness/Volume)
     case listenFor
 
     /// Show contrast sliders
     case showContrast
 
-    /// Lower contrast after brightness
-    case lowerContrast
+    /// Show volume sliders
+    case showVolume
+
+    /// Lower via software after brightness
+    case lowerSwAfterBrightness
+
+    /// Fallback to software control for external displays with no DDC
+    case fallbackSw
 
     /// Change Brightness/Volume for all screens
     case allScreens
@@ -163,6 +223,9 @@ class Utils: NSObject {
 
     /// Used for notification when displays are updated in DisplayManager
     case displayListUpdate
+
+    /// Show advanced options under Displays tab in Preferences
+    case showAdvancedDisplays
   }
 
   /// Keys for the value of listenFor option

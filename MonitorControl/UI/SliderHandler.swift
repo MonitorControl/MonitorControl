@@ -12,6 +12,9 @@ class SliderHandler {
   }
 
   @objc func valueChanged(slider: NSSlider) {
+    guard app.sleepID == 0, app.reconfigureID == 0 else {
+      return
+    }
     let snapInterval = 25
     let snapThreshold = 3
 
@@ -28,17 +31,27 @@ class SliderHandler {
       self.display.toggleMute(fromVolumeSlider: true)
     }
 
-    // If the command is to adjust brightness, also instruct the display to set the contrast value, if necessary
-    if self.cmd == .brightness {
-      self.display.setContrastValueForBrightness(value)
+    if !self.display.isSw() {
+      if self.cmd == DDC.Command.brightness, prefs.bool(forKey: Utils.PrefKeys.lowerSwAfterBrightness.rawValue) {
+        var brightnessDDCValue: Int = 0
+        var brightnessSwValue: Int = 100
+        if value >= Int(slider.maxValue / 2) {
+          brightnessDDCValue = slider.integerValue - Int(slider.maxValue / 2)
+          brightnessSwValue = Int(self.display.getSwMaxBrightness())
+        } else {
+          brightnessDDCValue = 0
+          brightnessSwValue = Int((Float(value) / Float(slider.maxValue / 2)) * Float(self.display.getSwMaxBrightness()))
+        }
+        _ = self.display.writeDDCValues(command: self.cmd, value: UInt16(brightnessDDCValue))
+        _ = self.display.setSwBrightness(value: UInt8(brightnessSwValue))
+        self.display.saveValue(brightnessDDCValue, for: self.cmd)
+      } else {
+        _ = self.display.writeDDCValues(command: self.cmd, value: UInt16(value))
+        self.display.saveValue(value, for: self.cmd)
+      }
+    } else if self.cmd == DDC.Command.brightness {
+      _ = self.display.setSwBrightness(value: UInt8(value))
+      self.display.saveValue(value, for: self.cmd)
     }
-
-    // If the command is to adjust contrast, erase the previous value for the contrast to restore after brightness is increased
-    if self.cmd == .contrast {
-      self.display.setRestoreValue(nil, for: .contrast)
-    }
-
-    _ = self.display.ddc?.write(command: self.cmd, value: UInt16(value))
-    self.display.saveValue(value, for: self.cmd)
   }
 }

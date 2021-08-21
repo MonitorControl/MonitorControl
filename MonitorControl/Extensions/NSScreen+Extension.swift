@@ -47,13 +47,8 @@ public extension NSScreen {
     while case let object = IOIteratorNext(servicePortIterator), object != 0 {
       let dict = (IODisplayCreateInfoDictionary(object, UInt32(kIODisplayOnlyPreferredName)).takeRetainedValue() as NSDictionary as? [String: AnyObject])!
 
-      if dict[kDisplayVendorID] as? UInt32 == self.vendorNumber,
-         dict[kDisplayProductID] as? UInt32 == self.modelNumber,
-         dict[kDisplaySerialNumber] as? UInt32 == self.serialNumber
-      {
-        if let productName = dict["DisplayProductName"] as? [String: String],
-           let firstKey = Array(productName.keys).first
-        {
+      if dict[kDisplayVendorID] as? UInt32 == self.vendorNumber, dict[kDisplayProductID] as? UInt32 == self.modelNumber, dict[kDisplaySerialNumber] as? UInt32 == self.serialNumber {
+        if let productName = dict["DisplayProductName"] as? [String: String], let firstKey = Array(productName.keys).first {
           return productName[firstKey]!
         }
       }

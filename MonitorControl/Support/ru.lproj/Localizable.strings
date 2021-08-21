@@ -1,5 +1,8 @@
-/* Shown in the main prefs window  */
-"Advanced" = "Дополнительные";
+/* Shown in the main prefs window */
+"About" = "About";
+
+/* Apple Silicon designation (shown after the version number in Preferences) */
+"Apple Silicon" = "Apple Silicon";
 
 /* Shown in the alert dialog */
 "Are you sure you want to enable a longer delay? Doing so may freeze your system and require a restart. Start at login will be disabled as a safety measure." = "Are you sure you want to enable a longer delay? Doing so may freeze your system and require a restart. Start at login will be disabled as a safety measure.";
@@ -13,26 +16,41 @@
 /* Build */
 "Build" = "Сборка";
 
+/* Shown in the Display Preferences */
+"Built-in Display" = "Built-in Display";
+
 /* Shown in menu */
 "Contrast" = "Контрастность";
 
-/* Shown in menu */
-"Default" = "По умолчанию";
+/* Version */
+"Copyright Ⓒ MonitorControl, " = "Copyright Ⓒ MonitorControl, ";
 
-/* No comment provided by engineer. */
-"Display" = "Мониторы";
+/* Shown in the main prefs window */
+"Displays" = "Displays";
 
 /* Shown in the alert dialog */
 "Enable Longer Delay?" = "Enable Longer Delay?";
 
+/* Shown in the Display Preferences */
+"External Display" = "External Display";
+
 /* Shown in the main prefs window */
 "General" = "Основные";
 
-/* Shown in the main prefs window */
-"Keys" = "Сочетания клавиш";
+/* Shown in the Display Preferences */
+"Hardware (CoreDisplay)" = "Hardware (CoreDisplay)";
+
+/* Shown in the Display Preferences */
+"Hardware (DDC)" = "Hardware (DDC)";
+
+/* Intel designation (shown after the version number in Preferences) */
+"Intel" = "Intel";
 
 /* Shown in the alert dialog */
 "No" = "No";
+
+/* Shown in the Display Preferences */
+"No Control Available" = "No Control Available";
 
 /* Shown in menu */
 "No supported display found" = "Поддерживаемых мониторов не найдено";
@@ -40,25 +58,34 @@
 /* Shown in the alert dialog */
 "Ok" = "ОК";
 
-/* Shown in Preferences window */
-"Preferences" = "Настройки";
+/* Shown in the Display Preferences */
+"Other Display" = "Other Display";
 
 /* Shown in the alert dialog */
 "Reset Preferences?" = "Reset Preferences?";
 
-/* Shown in menu */
-"Set as default" = "Сделать основным";
-
 /* Shown in the alert dialog */
 "Shortcuts not available" = "Сочетания клавиш недоступны";
+
+/* Shown in the Display Preferences */
+"Software (Forced)" = "Software (Forced)";
+
+/* Shown in the Display Preferences */
+"Software Only" = "Software Only";
 
 /* Unknown display name
  Unknown model
  Unknown vendor */
 "Unknown" = "Неизвестный";
 
+/* Shown in the Display Preferences */
+"Unspecified" = "Unspecified";
+
 /* Version */
 "Version" = "Версия";
+
+/* Shown in the Display Preferences */
+"Virtual Display" = "Virtual Display";
 
 /* Shown in menu */
 "Volume" = "Громкость";
