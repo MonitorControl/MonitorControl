@@ -10,7 +10,7 @@ body:
       options:
         - label: Searched for existing issues
           required: true
-        - label: Looked through [the wiki](https://github.com/MonitorControl/MonitorControl/wiki)
+        - label: I have read through [the Monitor-Troubleshooting Wiki](https://github.com/MonitorControl/MonitorControl/wiki/Monitor-Troubleshooting)
           required: true
         - label: Updated MonitorControl to the latest version (if applicable)
           required: true
