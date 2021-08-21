@@ -271,13 +271,7 @@ class ExternalDisplay: Display {
       }
       return Arm64DDCUtils.write(service: self.arm64avService, command: command.rawValue, value: value)
     } else {
-      // NOTE: Loop is a hacky workaround that should probably be removed as it wasn't necessary before and makes things choppy.
-      // SEE: https://github.com/MonitorControl/MonitorControl/issues/478
-      var success = false
-      for _ in 1 ... 2 {
-        success = self.ddc?.write(command: command, value: value, errorRecoveryWaitTime: 2000) ?? false
-      }
-      return success
+      return self.ddc?.write(command: command, value: value, errorRecoveryWaitTime: 2000) ?? false
     }
   }
 
