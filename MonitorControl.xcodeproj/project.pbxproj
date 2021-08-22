@@ -69,6 +69,9 @@
 		2EAA5B7F24BF9E9A00937821 /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3CCA5F962442EFF800B4DB84 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/MainMenu.strings; sourceTree = "<group>"; };
 		3CCA5F972442EFF800B4DB84 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
+		44706EBA26D25F7100C82ECB /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/Main.strings; sourceTree = "<group>"; };
+		44706EBB26D25F7100C82ECB /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/MainMenu.strings; sourceTree = "<group>"; };
+		44706EBC26D25F7100C82ECB /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		47A9F5A022ACAFBE00F649BB /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/MainMenu.strings"; sourceTree = "<group>"; };
 		47A9F5A122ACAFBE00F649BB /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		56754EAB1D9A4016007BCDC5 /* MonitorControl.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MonitorControl.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -362,6 +365,7 @@
 				ja,
 				pl,
 				hu,
+				tr,
 			);
 			mainGroup = 56754EA21D9A4016007BCDC5;
 			packageReferences = (
@@ -546,6 +550,7 @@
 				6CDA0FD726485AAC00F52125 /* ru */,
 				6CDA0FD826485AAE00F52125 /* uk */,
 				AA6686F026B8172E00AF74A2 /* hu */,
+				44706EBA26D25F7100C82ECB /* tr */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -563,6 +568,7 @@
 				3CCA5F972442EFF800B4DB84 /* ja */,
 				2EAA5B7F24BF9E9A00937821 /* pl */,
 				AA6686F226B8172E00AF74A2 /* hu */,
+				44706EBC26D25F7100C82ECB /* tr */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -581,6 +587,7 @@
 				3CCA5F962442EFF800B4DB84 /* ja */,
 				2EAA5B7E24BF9E9A00937821 /* pl */,
 				AA6686F126B8172E00AF74A2 /* hu */,
+				44706EBB26D25F7100C82ECB /* tr */,
 			);
 			name = MainMenu.xib;
 			sourceTree = "<group>";
