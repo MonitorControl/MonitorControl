@@ -1,6 +1,6 @@
 name: Monitor Issue
 description: MonitorControl is not working as expected on my monitor.
-labels: ["Type: Monitor Issue"]
+labels: ["Monitor Issue"]
 assignees: []
 body:
   - type: checkboxes
