@@ -1,0 +1,95 @@
+/* Shown in the main prefs window */
+"About" = "Acerca de";
+
+/* Apple Silicon designation (shown after the version number in Preferences) */
+"Apple Silicon" = "Apple Silicon";
+
+/* Shown in the alert dialog */
+"Are you sure you want to enable a longer delay? Doing so may freeze your system and require a restart. Start at login will be disabled as a safety measure." = "¿Está seguro de que quiere activar un retraso mayor? Hacerlo puede congelar su sistema y requerir un reinicio. El inicio al iniciar la sesión se desactivará como medida de seguridad.";
+
+/* Shown in the alert dialog */
+"Are you sure you want to reset all preferences?" = "¿Estás seguro de que quieres restablecer todas las preferencias?";
+
+/* Shown in menu */
+"Brightness" = "Brillo";
+
+/* Build */
+"Build" = "Compilación";
+
+/* Shown in the Display Preferences */
+"Built-in Display" = "Pantalla incorporada";
+
+/* Shown in menu */
+"Contrast" = "Contraste";
+
+/* Version */
+"Copyright Ⓒ MonitorControl, " = "Copyright Ⓒ MonitorControl, ";
+
+/* Shown in the main prefs window */
+"Displays" = "Pantallas";
+
+/* Shown in the alert dialog */
+"Enable Longer Delay?" = "¿Permitir un mayor atenuación?";
+
+/* Shown in the Display Preferences */
+"External Display" = "Pantallas externas";
+
+/* Shown in the main prefs window */
+"General" = "General";
+
+/* Shown in the Display Preferences */
+"Hardware (CoreDisplay)" = "Hardware (CoreDisplay)";
+
+/* Shown in the Display Preferences */
+"Hardware (DDC)" = "Hardware (DDC)";
+
+/* Intel designation (shown after the version number in Preferences) */
+"Intel" = "Intel";
+
+/* Shown in the alert dialog */
+"No" = "No";
+
+/* Shown in the Display Preferences */
+"No Control Available" = "Control no disponible";
+
+/* Shown in menu */
+"No supported display found" = "No se encontraron pantallas soportadas";
+
+/* Shown in the alert dialog */
+"Ok" = "Ok";
+
+/* Shown in the Display Preferences */
+"Other Display" = "Otras pantallas";
+
+/* Shown in the alert dialog */
+"Reset Preferences?" = "¿Restablecer las preferencias?";
+
+/* Shown in the alert dialog */
+"Shortcuts not available" = "Atajos no disponibles";
+
+/* Shown in the Display Preferences */
+"Software (Forced)" = "Software (Forzado)";
+
+/* Shown in the Display Preferences */
+"Software Only" = "Solo Software";
+
+/* Unknown display name */
+"Unknown" = "Desconocido";
+
+/* Shown in the Display Preferences */
+"Unspecified" = "Sin especificar";
+
+/* Version */
+"Version" = "Versión";
+
+/* Shown in the Display Preferences */
+"Virtual Display" = "Pantalla virtual";
+
+/* Shown in menu */
+"Volume" = "Volumen";
+
+/* Shown in the alert dialog */
+"Yes" = "Sí";
+
+/* Shown in the alert dialog */
+"You need to enable MonitorControl in System Preferences > Security and Privacy > Accessibility for the keyboard shortcuts to work" = "Es necesario activar MonitorControl en Preferencias del Sistema > Seguridad y Privacidad > Accesibilidad para que los atajos de teclado funcionen";

@@ -113,6 +113,9 @@
 		AADB625926BC196900DFFAA5 /* DisplayServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DisplayServices.framework; path = ../../../../../System/Library/PrivateFrameworks/DisplayServices.framework; sourceTree = "<group>"; };
 		B0C4810623357CE500053F91 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		B0C4810823357CE500053F91 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/MainMenu.strings; sourceTree = "<group>"; };
+		CE14313826D54C8C001883F8 /* es-419 */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-419"; path = "es-419.lproj/Main.strings"; sourceTree = "<group>"; };
+		CE14313926D54C8C001883F8 /* es-419 */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-419"; path = "es-419.lproj/MainMenu.strings"; sourceTree = "<group>"; };
+		CE14313A26D54C8C001883F8 /* es-419 */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-419"; path = "es-419.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		F01B0681228221B6008E64DB /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F01B0682228221B6008E64DB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F01B0683228221B6008E64DB /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
@@ -369,6 +372,7 @@
 				pl,
 				hu,
 				tr,
+				"es-419",
 				"zh-Hant-TW",
 			);
 			mainGroup = 56754EA21D9A4016007BCDC5;
@@ -555,6 +559,7 @@
 				6CDA0FD826485AAE00F52125 /* uk */,
 				AA6686F026B8172E00AF74A2 /* hu */,
 				44706EBA26D25F7100C82ECB /* tr */,
+				CE14313826D54C8C001883F8 /* es-419 */,
 				AA8B7A5426D6501D0005C4D9 /* zh-Hant-TW */,
 			);
 			name = Main.storyboard;
@@ -574,6 +579,7 @@
 				2EAA5B7F24BF9E9A00937821 /* pl */,
 				AA6686F226B8172E00AF74A2 /* hu */,
 				44706EBC26D25F7100C82ECB /* tr */,
+				CE14313A26D54C8C001883F8 /* es-419 */,
 				AA8B7A5626D6501D0005C4D9 /* zh-Hant-TW */,
 			);
 			name = Localizable.strings;
@@ -594,6 +600,7 @@
 				2EAA5B7E24BF9E9A00937821 /* pl */,
 				AA6686F126B8172E00AF74A2 /* hu */,
 				44706EBB26D25F7100C82ECB /* tr */,
+				CE14313926D54C8C001883F8 /* es-419 */,
 				AA8B7A5526D6501D0005C4D9 /* zh-Hant-TW */,
 			);
 			name = MainMenu.xib;

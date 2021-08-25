@@ -1,0 +1,162 @@
+
+/* Class = "NSTextFieldCell"; title = "MonitorControl"; ObjectID = "1PJ-14-Bvn"; */
+"1PJ-14-Bvn.title" = "MonitorControl";
+
+/* Class = "NSTextFieldCell"; title = "#bc-ignore!"; ObjectID = "6GJ-6Q-gqz"; */
+"6GJ-6Q-gqz.title" = "#bc-ignore!";
+
+/* Class = "NSButtonCell"; title = "Special thanks to our contributors!"; ObjectID = "95V-M4-2l5"; */
+"95V-M4-2l5.title" = "Agradecimientos especiales para colaboradores!";
+
+/* Class = "NSButtonCell"; title = "Reset settings"; ObjectID = "BYS-7Y-bRz"; */
+"BYS-7Y-bRz.title" = "Reiniciar configuraciones";
+
+/* Class = "NSMenuItem"; title = "Custom"; ObjectID = "Cle-DD-vR7"; */
+"Cle-DD-vR7.title" = "Custom";
+
+/* Class = "NSButtonCell"; title = "Website"; ObjectID = "Cln-uW-2dd"; */
+"Cln-uW-2dd.title" = "Sitio web";
+
+/* Class = "NSTextFieldCell"; title = "⚠️ Warning! Changing some of these settings may cause system freezes or unexpected behavior!"; ObjectID = "Cz1-Mh-llk"; */
+"Cz1-Mh-llk.title" = "⚠️ Advertencia! La modificación de algunos de estos ajustes puede provocar un comportamiento inesperado.";
+
+/* Class = "NSButtonCell"; title = "Change Brightness and Volume for all screens"; ObjectID = "E6M-ih-S8Y"; */
+"E6M-ih-S8Y.title" = "Cambiar el brillo y volumen para todas las pantallas";
+
+/* Class = "NSMenuItem"; title = "Minimal"; ObjectID = "Eq3-z9-yIo"; */
+"Eq3-z9-yIo.title" = "Minimal";
+
+/* Class = "NSMenuItem"; title = "None"; ObjectID = "FoA-yh-Yx3"; */
+"FoA-yh-Yx3.title" = "Ninguno";
+
+/* Class = "NSTextFieldCell"; title = "Custom read polling count:"; ObjectID = "J77-r0-djA"; */
+"J77-r0-djA.title" = "Recuento de lectura personalizado:";
+
+/* Class = "NSTextFieldCell"; title = "Use the media keys of your keyboard to control Brightness & Volume."; ObjectID = "K2r-aD-eec"; */
+"K2r-aD-eec.title" = "Usa las teclas de brillo o volumen de tu teclado";
+
+/* Class = "NSTextFieldCell"; title = "Menu contents:"; ObjectID = "MJx-MK-e7D"; */
+"MJx-MK-e7D.title" = "Menú de contenidos:";
+
+/* Class = "NSMenuItem"; title = "Volume only"; ObjectID = "NLP-dU-Dam"; */
+"NLP-dU-Dam.title" = "Volumen";
+
+/* Class = "NSTextFieldCell"; title = "If the menu item is hidden, just relaunch the app to reveal Preferences!"; ObjectID = "PVE-y7-zIk"; */
+"PVE-y7-zIk.title" = "Si el menú está oculto, solo reinicia la app para mostrar las configuraciones!";
+
+/* Class = "NSTextFieldCell"; title = "Control method:"; ObjectID = "PaK-1f-DsW"; */
+"PaK-1f-DsW.title" = "Método de control:";
+
+/* Class = "NSTextFieldCell"; title = "#bc-ignore!"; ObjectID = "Pqk-VW-JGY"; */
+"Pqk-VW-JGY.title" = "#bc-ignore!";
+
+/* Class = "NSMenuItem"; title = "Normal"; ObjectID = "Riq-uM-bTs"; */
+"Riq-uM-bTs.title" = "Normal";
+
+/* Class = "NSTextFieldCell"; title = "@the0neyouseek\n@JoniVR\n@waydabber"; ObjectID = "TKd-J8-Iyk"; */
+"TKd-J8-Iyk.title" = "@the0neyouseek\n@JoniVR\n@waydabber";
+
+/* Class = "NSButtonCell"; title = "Enable keyboard control for display"; ObjectID = "UqR-WE-jHl"; */
+"UqR-WE-jHl.title" = "Habilitar el control de pantalla en teclado";
+
+/* Class = "NSMenuItem"; title = "Both Brightness & Volume"; ObjectID = "Vr4-xb-B4o"; */
+"Vr4-xb-B4o.title" = "Brillo y volumen";
+
+/* Class = "NSButtonCell"; title = "Show advanced settings under Displays"; ObjectID = "Wnd-hx-Meb"; */
+"Wnd-hx-Meb.title" = "Mostrar configuraciones avanzadas debajo de las pantallas";
+
+/* Class = "NSMenuItem"; title = "None"; ObjectID = "X96-ny-lAP"; */
+"X96-ny-lAP.title" = "None";
+
+/* Class = "NSTextFieldCell"; title = "Additional settings:"; ObjectID = "Xz0-X0-rB4"; */
+"Xz0-X0-rB4.title" = "Configuraciones adicionales:";
+
+/* Class = "NSTextFieldCell"; title = "Identifier:"; ObjectID = "YqZ-LS-YvR"; */
+"YqZ-LS-YvR.title" = "Identificador:";
+
+/* Class = "NSButtonCell"; title = "Donate"; ObjectID = "ZKk-ve-rS4"; */
+"ZKk-ve-rS4.title" = "Donar";
+
+/* Class = "NSButtonCell"; title = "Use hardware DDC control"; ObjectID = "ZdU-gV-V05"; */
+"ZdU-gV-V05.title" = "Utilizar el control DDC por hardware";
+
+/* Class = "NSButtonCell"; title = "Hide Menu Icon"; ObjectID = "aXL-i8-S6R"; */
+"aXL-i8-S6R.title" = "Ocultar ícono de menú";
+
+/* Class = "NSButtonCell"; title = "Enable Mute DDC command"; ObjectID = "bZq-0d-lJa"; */
+"bZq-0d-lJa.title" = "Activar el comando DDC de silenciamiento";
+
+/* Class = "NSButtonCell"; title = "Disable macOS volume OSD"; ObjectID = "bkM-Px-U3b"; */
+"bkM-Px-U3b.title" = "Desactivar el OSD de volumen de macOS";
+
+/* Class = "NSTextFieldCell"; title = "Keyboard:"; ObjectID = "c7N-cO-759"; */
+"c7N-cO-759.title" = "Teclado:";
+
+/* Class = "NSButtonCell"; title = "Show volume slider in menu"; ObjectID = "dhP-eB-1L6"; */
+"dhP-eB-1L6.title" = "Mostrar barra de volumen en el menú";
+
+/* Class = "NSTextFieldCell"; title = "#bc-ignore!"; ObjectID = "e0q-fb-k7R"; */
+"e0q-fb-k7R.title" = "#bc-ignore!";
+
+/* Class = "NSButtonCell"; title = "Reset Name"; ObjectID = "f9g-8s-gdd"; */
+"f9g-8s-gdd.title" = "Reset Name";
+
+/* Class = "NSButtonCell"; title = "Further lower brightness via software dimming"; ObjectID = "fhy-Er-0aI"; */
+"fhy-Er-0aI.title" = "Reducir aún más el brillo mediante la atenuación por software";
+
+/* Class = "NSTextFieldCell"; title = "Brightness control:"; ObjectID = "hdd-Zz-buN"; */
+"hdd-Zz-buN.title" = "Control de brillo:";
+
+/* Class = "NSMenuItem"; title = "Brightness only"; ObjectID = "hjz-0c-rvK"; */
+"hjz-0c-rvK.title" = "Brillo";
+
+/* Class = "NSTextFieldCell"; title = "These options work for hardware (DDC) controlled displays only."; ObjectID = "iBZ-8c-JDY"; */
+"iBZ-8c-JDY.title" = "Estas opciones sólo funcionan para pantallas controladas por hardware (DDC).";
+
+/* Class = "NSTextFieldCell"; title = "#bc-ignore!"; ObjectID = "ibQ-4u-ClE"; */
+"ibQ-4u-ClE.title" = "#bc-ignore!";
+
+/* Class = "NSButtonCell"; title = "Start at Login"; ObjectID = "j72-NF-zsW"; */
+"j72-NF-zsW.title" = "Iniciar app en inicio";
+
+/* Class = "NSButtonCell"; title = "Enable software dimming if required"; ObjectID = "kMa-3q-udl"; */
+"kMa-3q-udl.title" = "Habilitar la atenuación por software si es necesario";
+
+/* Class = "NSButton"; ibShadowedToolTip = "More Info"; ObjectID = "kqn-gU-mZX"; */
+"kqn-gU-mZX.ibShadowedToolTip" = "More Info";
+
+/* Class = "NSTextFieldCell"; title = "Display type:"; ObjectID = "lSJ-6w-KJ2"; */
+"lSJ-6w-KJ2.title" = "Tipo de pantalla:";
+
+/* Class = "NSTextFieldCell"; title = "#bc-ignore!"; ObjectID = "mBs-6m-13Q"; */
+"mBs-6m-13Q.title" = "#bc-ignore!";
+
+/* Class = "NSTextFieldCell"; title = "If an external display can't be controlled, software dimming will be used instead."; ObjectID = "n4V-jQ-1Ri"; */
+"n4V-jQ-1Ri.title" = "Si no se puede controlar una pantalla externa, se utilizará la atenuación por software.";
+
+/* Class = "NSTextFieldCell"; title = "Application:"; ObjectID = "okD-DG-pYa"; */
+"okD-DG-pYa.title" = "Aplicación:";
+
+/* Class = "NSButtonCell"; title = "Longer delay during DDC read operations"; ObjectID = "pF5-Sw-7BR"; */
+"pF5-Sw-7BR.title" = "Mayor retardo en las operaciones de lectura del DDC";
+
+/* Class = "NSTextFieldCell"; title = "#bc-ignore!"; ObjectID = "pIy-Lk-kkm"; */
+"pIy-Lk-kkm.title" = "#bc-ignore!";
+
+/* Class = "NSTextFieldCell"; title = "Advanced:"; ObjectID = "r7i-oG-Ab6"; */
+"r7i-oG-Ab6.title" = "Avanzado:";
+
+/* Class = "NSMenuItem"; title = "Heavy"; ObjectID = "vik-vN-bJe"; */
+"vik-vN-bJe.title" = "Heavy";
+
+/* Class = "NSTextFieldCell"; title = "DDC read polling mode:"; ObjectID = "vwm-hY-on5"; */
+"vwm-hY-on5.title" = "Modo de lectura DDC:";
+
+/* Class = "NSButtonCell"; title = "Show contrast slider in menu"; ObjectID = "xSI-8W-Xd0"; */
+"xSI-8W-Xd0.title" = "Mostrar barra de contraste en el menú";
+
+/* Class = "NSButtonCell"; title = "Reset Preferences"; ObjectID = "xY6-aw-o9u"; */
+"xY6-aw-o9u.title" = "Restaurar preferencias";
+
+/* Class = "NSTextFieldCell"; title = "This activates additional software dimming after the display reached zero hardware brightness. Menu slider is also affected with 50% being the transition point. Works for DDC controlled displays only."; ObjectID = "yeg-GN-SuO"; */
+"yeg-GN-SuO.title" = "Esto activa la atenuación adicional por software después de que la pantalla haya alcanzado el brillo cero por hardware. El deslizador del menú también se ve afectado, siendo el 50% el punto de transición. Sólo funciona para pantallas controladas por DDC.";
