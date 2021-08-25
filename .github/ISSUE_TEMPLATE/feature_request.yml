@@ -1,6 +1,6 @@
 name: Feature request
 description: Suggest an idea for this project
-labels: ["Type: Feature Request"]
+labels: ["Feature Request"]
 assignees: []
 body:
   - type: checkboxes

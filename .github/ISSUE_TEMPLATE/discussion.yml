@@ -1,6 +1,6 @@
 name: Discussion
 description: I want to discuss something that is related to this project
-labels: ["Type: Other"]
+labels: ["Other"]
 assignees: []
 body:
   - type: checkboxes

@@ -1,6 +1,6 @@
 name: Question
 description: I have a question related to this project
-labels: ["Type: Question"]
+labels: ["Question"]
 assignees: []
 body:
   - type: checkboxes
