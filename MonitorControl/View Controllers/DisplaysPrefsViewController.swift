@@ -131,7 +131,7 @@ class DisplaysPrefsViewController: NSViewController, PreferencePane, NSTableView
         cell.displayImage.image = NSImage(named: NSImage.computerName)!
       }
       // Disable Volume OSD
-      if let externalDisplay = display as? ExternalDisplay, !externalDisplay.isVirtual {
+      if let externalDisplay = display as? ExternalDisplay, !externalDisplay.isVirtual, !externalDisplay.isSw() {
         cell.disableVolumeOSDButton.state = externalDisplay.hideOsd ? .on : .off
         cell.disableVolumeOSDButton.isEnabled = true
       } else {
