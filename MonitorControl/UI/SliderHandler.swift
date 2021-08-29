@@ -45,6 +45,11 @@ class SliderHandler {
         _ = self.display.writeDDCValues(command: self.cmd, value: UInt16(brightnessDDCValue))
         _ = self.display.setSwBrightness(value: UInt8(brightnessSwValue))
         self.display.saveValue(brightnessDDCValue, for: self.cmd)
+      } else if self.cmd == DDC.Command.audioSpeakerVolume {
+        if !display.enableMuteUnmute || value != 0 {
+          _ = self.display.writeDDCValues(command: self.cmd, value: UInt16(value))
+        }
+        self.display.saveValue(value, for: self.cmd)
       } else {
         _ = self.display.writeDDCValues(command: self.cmd, value: UInt16(value))
         self.display.saveValue(value, for: self.cmd)

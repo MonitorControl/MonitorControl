@@ -81,10 +81,6 @@ class ExternalDisplay: Display {
 
     let volumeDDCValue = UInt16(volumeOSDValue)
 
-    guard self.writeDDCValues(command: .audioSpeakerVolume, value: volumeDDCValue) == true else {
-      return
-    }
-
     if self.enableMuteUnmute {
       guard self.writeDDCValues(command: .audioMuteScreenBlank, value: UInt16(muteValue)) == true else {
         return
@@ -92,7 +88,11 @@ class ExternalDisplay: Display {
     }
 
     self.saveValue(muteValue, for: .audioMuteScreenBlank)
-
+    
+    if !self.enableMuteUnmute || volumeOSDValue > 0 {
+      _ = self.writeDDCValues(command: .audioSpeakerVolume, value: volumeDDCValue)
+    }
+    
     if !fromVolumeSlider {
       if !self.hideOsd {
         self.showOsd(command: volumeOSDValue > 0 ? .audioSpeakerVolume : .audioMuteScreenBlank, value: volumeOSDValue, roundChiclet: true)
@@ -122,19 +122,23 @@ class ExternalDisplay: Display {
 
     let isAlreadySet = volumeOSDValue == self.getValue(for: .audioSpeakerVolume)
 
-    guard self.writeDDCValues(command: .audioSpeakerVolume, value: volumeDDCValue) == true else {
-      return
-    }
-
-    if let muteValue = muteValue {
-      if self.enableMuteUnmute {
-        guard self.writeDDCValues(command: .audioMuteScreenBlank, value: UInt16(muteValue)) == true else {
-          return
+    if !isAlreadySet {
+          
+      if let muteValue = muteValue {
+        if self.enableMuteUnmute {
+          guard self.writeDDCValues(command: .audioMuteScreenBlank, value: UInt16(muteValue)) == true else {
+            return
+          }
         }
+        self.saveValue(muteValue, for: .audioMuteScreenBlank)
       }
-      self.saveValue(muteValue, for: .audioMuteScreenBlank)
-    }
 
+      if !self.enableMuteUnmute || volumeOSDValue != 0 {
+        _ = self.writeDDCValues(command: .audioSpeakerVolume, value: volumeDDCValue)
+      }
+        
+    }
+      
     if !self.hideOsd {
       self.showOsd(command: .audioSpeakerVolume, value: volumeOSDValue, roundChiclet: !isSmallIncrement)
     }
