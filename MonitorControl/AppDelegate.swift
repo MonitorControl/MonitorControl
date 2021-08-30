@@ -97,13 +97,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   }
 
   func updateArm64AVServices() {
-    if Arm64DDCUtils.isArm64 {
+    if Arm64DDC.isArm64 {
       os_log("arm64 AVService update requested", type: .info)
       var displayIDs: [CGDirectDisplayID] = []
       for externalDisplay in DisplayManager.shared.getExternalDisplays() {
         displayIDs.append(externalDisplay.identifier)
       }
-      for serviceMatch in Arm64DDCUtils.getServiceMatches(displayIDs: displayIDs) {
+      for serviceMatch in Arm64DDC.getServiceMatches(displayIDs: displayIDs) {
         for externalDisplay in DisplayManager.shared.getExternalDisplays() where externalDisplay.identifier == serviceMatch.displayID && serviceMatch.service != nil {
           externalDisplay.arm64avService = serviceMatch.service
           os_log("Display service match successful for display %{public}@", type: .info, String(serviceMatch.displayID))

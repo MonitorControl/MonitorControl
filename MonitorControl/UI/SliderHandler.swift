@@ -3,9 +3,9 @@ import Cocoa
 class SliderHandler {
   var slider: NSSlider?
   var display: ExternalDisplay
-  let cmd: DDC.Command
+  let cmd: Command
 
-  public init(display: ExternalDisplay, command: DDC.Command) {
+  public init(display: ExternalDisplay, command: Command) {
     self.display = display
     self.cmd = command
   }
@@ -31,7 +31,7 @@ class SliderHandler {
     }
 
     if !self.display.isSw() {
-      if self.cmd == DDC.Command.brightness, prefs.bool(forKey: Utils.PrefKeys.lowerSwAfterBrightness.rawValue) {
+      if self.cmd == Command.brightness, prefs.bool(forKey: Utils.PrefKeys.lowerSwAfterBrightness.rawValue) {
         var brightnessDDCValue: Int = 0
         var brightnessSwValue: Int = 100
         if value >= Int(slider.maxValue / 2) {
@@ -44,7 +44,7 @@ class SliderHandler {
         _ = self.display.writeDDCValues(command: self.cmd, value: UInt16(brightnessDDCValue))
         _ = self.display.setSwBrightness(value: UInt8(brightnessSwValue))
         self.display.saveValue(brightnessDDCValue, for: self.cmd)
-      } else if self.cmd == DDC.Command.audioSpeakerVolume {
+      } else if self.cmd == Command.audioSpeakerVolume {
         if !self.display.enableMuteUnmute || value != 0 {
           _ = self.display.writeDDCValues(command: self.cmd, value: UInt16(value))
         }
@@ -53,7 +53,7 @@ class SliderHandler {
         _ = self.display.writeDDCValues(command: self.cmd, value: UInt16(value))
         self.display.saveValue(value, for: self.cmd)
       }
-    } else if self.cmd == DDC.Command.brightness {
+    } else if self.cmd == Command.brightness {
       _ = self.display.setSwBrightness(value: UInt8(value))
       self.display.saveValue(value, for: self.cmd)
     }

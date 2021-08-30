@@ -179,7 +179,7 @@ class Display {
     return false
   }
 
-  func showOsd(command: DDC.Command, value: Int, maxValue: Int = 100, roundChiclet: Bool = false, lock: Bool = false) {
+  func showOsd(command: Command, value: Int, maxValue: Int = 100, roundChiclet: Bool = false, lock: Bool = false) {
     guard let manager = OSDManager.sharedManager() as? OSDManager else {
       return
     }

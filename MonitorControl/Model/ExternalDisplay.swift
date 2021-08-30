@@ -7,7 +7,7 @@ class ExternalDisplay: Display {
   var brightnessSliderHandler: SliderHandler?
   var volumeSliderHandler: SliderHandler?
   var contrastSliderHandler: SliderHandler?
-  var ddc: DDC?
+  var ddc: IntelDDC?
   var arm64ddc: Bool = false
   var arm64avService: IOAVService?
 
@@ -50,8 +50,8 @@ class ExternalDisplay: Display {
   override init(_ identifier: CGDirectDisplayID, name: String, vendorNumber: UInt32?, modelNumber: UInt32?, isVirtual: Bool = false) {
     super.init(identifier, name: name, vendorNumber: vendorNumber, modelNumber: modelNumber, isVirtual: isVirtual)
 
-    if !isVirtual, !Arm64DDCUtils.isArm64 {
-      self.ddc = DDC(for: identifier)
+    if !isVirtual, !Arm64DDC.isArm64 {
+      self.ddc = IntelDDC(for: identifier)
     }
   }
 
@@ -122,11 +122,9 @@ class ExternalDisplay: Display {
     let isAlreadySet = volumeOSDValue == self.getValue(for: .audioSpeakerVolume)
 
     if !isAlreadySet {
-      if let muteValue = muteValue {
-        if self.enableMuteUnmute {
-          guard self.writeDDCValues(command: .audioMuteScreenBlank, value: UInt16(muteValue)) == true else {
-            return
-          }
+      if let muteValue = muteValue, self.enableMuteUnmute {
+        guard self.writeDDCValues(command: .audioMuteScreenBlank, value: UInt16(muteValue)) == true else {
+          return
         }
         self.saveValue(muteValue, for: .audioMuteScreenBlank)
       }
@@ -262,48 +260,36 @@ class ExternalDisplay: Display {
     self.saveValue(osdValue, for: .brightness)
   }
 
-  public func writeDDCValues(command: DDC.Command, value: UInt16, errorRecoveryWaitTime _: UInt32? = nil) -> Bool? {
+  public func writeDDCValues(command: Command, value: UInt16, errorRecoveryWaitTime _: UInt32? = nil) -> Bool? {
     guard app.sleepID == 0, app.reconfigureID == 0, !self.forceSw else {
       return false
     }
-    if Arm64DDCUtils.isArm64 {
+    if Arm64DDC.isArm64 {
       guard self.arm64ddc else {
         return false
       }
-      return Arm64DDCUtils.write(service: self.arm64avService, command: command.rawValue, value: value)
+      return Arm64DDC.write(service: self.arm64avService, command: command.rawValue, value: value)
     } else {
-      return self.ddc?.write(command: command, value: value, errorRecoveryWaitTime: 2000) ?? false
+      return self.ddc?.write(command: command.rawValue, value: value, errorRecoveryWaitTime: 2000) ?? false
     }
   }
 
-  func readDDCValues(for command: DDC.Command, tries: UInt, minReplyDelay delay: UInt64?) -> (current: UInt16, max: UInt16)? {
+  func readDDCValues(for command: Command, tries: UInt, minReplyDelay delay: UInt64?) -> (current: UInt16, max: UInt16)? {
     var values: (UInt16, UInt16)?
     guard app.sleepID == 0, app.reconfigureID == 0, !self.forceSw else {
       return values
     }
-    if Arm64DDCUtils.isArm64 {
+    if Arm64DDC.isArm64 {
       guard self.arm64ddc else {
         return nil
       }
       if let unwrappedDelay = delay {
-        values = Arm64DDCUtils.read(service: self.arm64avService, command: command.rawValue, tries: UInt8(min(tries, 255)), minReplyDelay: UInt32(unwrappedDelay / 1000))
+        values = Arm64DDC.read(service: self.arm64avService, command: command.rawValue, tries: UInt8(min(tries, 255)), minReplyDelay: UInt32(unwrappedDelay / 1000))
       } else {
-        values = Arm64DDCUtils.read(service: self.arm64avService, command: command.rawValue, tries: UInt8(min(tries, 255)))
+        values = Arm64DDC.read(service: self.arm64avService, command: command.rawValue, tries: UInt8(min(tries, 255)))
       }
     } else {
-      if self.ddc?.supported(minReplyDelay: delay) == true {
-        os_log("Display supports DDC.", type: .debug)
-      } else {
-        os_log("Display does not support DDC.", type: .debug)
-      }
-
-      if self.ddc?.enableAppReport() == true {
-        os_log("Display supports enabling DDC application report.", type: .debug)
-      } else {
-        os_log("Display does not support enabling DDC application report.", type: .debug)
-      }
-
-      values = self.ddc?.read(command: command, tries: tries, minReplyDelay: delay)
+      values = self.ddc?.read(command: command.rawValue, tries: tries, minReplyDelay: delay)
     }
     return values
   }
@@ -337,28 +323,28 @@ class ExternalDisplay: Display {
     return max(0, min(maxValue, nextValue))
   }
 
-  func getValue(for command: DDC.Command) -> Int {
+  func getValue(for command: Command) -> Int {
     return self.prefs.integer(forKey: "\(command.rawValue)-\(self.identifier)")
   }
 
-  func saveValue(_ value: Int, for command: DDC.Command) {
+  func saveValue(_ value: Int, for command: Command) {
     self.prefs.set(value, forKey: "\(command.rawValue)-\(self.identifier)")
   }
 
-  func saveMaxValue(_ maxValue: Int, for command: DDC.Command) {
+  func saveMaxValue(_ maxValue: Int, for command: Command) {
     self.prefs.set(maxValue, forKey: "max-\(command.rawValue)-\(self.identifier)")
   }
 
-  func getMaxValue(for command: DDC.Command) -> Int {
+  func getMaxValue(for command: Command) -> Int {
     let max = self.prefs.integer(forKey: "max-\(command.rawValue)-\(self.identifier)")
     return min(self.DDC_HARD_MAX_LIMIT, max == 0 ? self.DDC_HARD_MAX_LIMIT : max)
   }
 
-  func getRestoreValue(for command: DDC.Command) -> Int {
+  func getRestoreValue(for command: Command) -> Int {
     return self.prefs.integer(forKey: "restore-\(command.rawValue)-\(self.identifier)")
   }
 
-  func setRestoreValue(_ value: Int?, for command: DDC.Command) {
+  func setRestoreValue(_ value: Int?, for command: Command) {
     self.prefs.set(value, forKey: "restore-\(command.rawValue)-\(self.identifier)")
   }
 
@@ -402,11 +388,11 @@ class ExternalDisplay: Display {
     self.prefs.set(value, forKey: "pollingCount-\(self.identifier)")
   }
 
-  private func stepSize(for command: DDC.Command, isSmallIncrement: Bool) -> Int {
+  private func stepSize(for command: Command, isSmallIncrement: Bool) -> Int {
     return isSmallIncrement ? 1 : Int(floor(Float(self.getMaxValue(for: command)) / OSDUtils.chicletCount))
   }
 
-  override func showOsd(command: DDC.Command, value: Int, maxValue _: Int = 100, roundChiclet: Bool = false, lock: Bool = false) {
+  override func showOsd(command: Command, value: Int, maxValue _: Int = 100, roundChiclet: Bool = false, lock: Bool = false) {
     super.showOsd(command: command, value: value, maxValue: self.getMaxValue(for: command), roundChiclet: roundChiclet, lock: lock)
   }
 
