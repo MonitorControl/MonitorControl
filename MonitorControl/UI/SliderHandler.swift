@@ -1,5 +1,4 @@
 import Cocoa
-import DDC
 
 class SliderHandler {
   var slider: NSSlider?

@@ -6,7 +6,6 @@
 //  Copyright © 2020 MonitorControl. All rights reserved.
 //
 
-import DDC
 import Foundation
 import os.log
 

@@ -607,6 +607,7 @@ public class DDC {
     }
 
     // MARK: This is experimental
+
     var servicePortUsingCGSServiceForDisplayNumber: io_service_t = 0
     CGSServiceForDisplayNumber(displayId, &servicePortUsingCGSServiceForDisplayNumber)
     if servicePortUsingCGSServiceForDisplayNumber != 0 {

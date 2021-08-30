@@ -1,6 +1,5 @@
 import AVFoundation
 import Cocoa
-import DDC
 import IOKit
 import os.log
 

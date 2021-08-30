@@ -1,5 +1,4 @@
 import Cocoa
-import DDC
 import os.log
 import ServiceManagement
 

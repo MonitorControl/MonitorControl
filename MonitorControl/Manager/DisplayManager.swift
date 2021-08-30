@@ -1,5 +1,4 @@
 import Cocoa
-import DDC
 
 class DisplayManager {
   public static let shared = DisplayManager()
