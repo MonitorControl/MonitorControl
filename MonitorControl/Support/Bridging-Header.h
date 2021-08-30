@@ -15,6 +15,8 @@ extern void DisplayServicesBrightnessChanged(CGDirectDisplayID display, double b
 extern int DisplayServicesGetBrightness(CGDirectDisplayID display, float *brightness);
 extern int DisplayServicesSetBrightness(CGDirectDisplayID display, float brightness);
 
+extern void CGSServiceForDisplayNumber(CGDirectDisplayID display, io_service_t* service);
+
 @class NSString;
 
 @protocol OSDUIHelperProtocol
