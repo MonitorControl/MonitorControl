@@ -1,11 +1,3 @@
-//
-//  Command.swift
-//  Command
-//
-//  Created by Steve on 2021. 08. 30..
-//  Copyright © 2021. MonitorControl. All rights reserved.
-//
-
 import Foundation
 
 public enum Command: UInt8 {
