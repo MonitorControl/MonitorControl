@@ -13,6 +13,8 @@ class ExternalDisplay: Display {
 
   let DDC_HARD_MAX_LIMIT: Int = 100
 
+  let ddcQueue = DispatchQueue(label: "DDC queue")
+
   private let prefs = UserDefaults.standard
 
   var enableMuteUnmute: Bool {
@@ -264,14 +266,17 @@ class ExternalDisplay: Display {
     guard app.sleepID == 0, app.reconfigureID == 0, !self.forceSw else {
       return false
     }
-    if Arm64DDC.isArm64 {
-      guard self.arm64ddc else {
-        return false
+    var success: Bool = false
+    self.ddcQueue.sync {
+      if Arm64DDC.isArm64 {
+        if self.arm64ddc {
+          success = Arm64DDC.write(service: self.arm64avService, command: command.rawValue, value: value)
+        }
+      } else {
+        success = self.ddc?.write(command: command.rawValue, value: value, errorRecoveryWaitTime: 2000) ?? false
       }
-      return Arm64DDC.write(service: self.arm64avService, command: command.rawValue, value: value)
-    } else {
-      return self.ddc?.write(command: command.rawValue, value: value, errorRecoveryWaitTime: 2000) ?? false
     }
+    return success
   }
 
   func readDDCValues(for command: Command, tries: UInt, minReplyDelay delay: UInt64?) -> (current: UInt16, max: UInt16)? {
@@ -283,13 +288,17 @@ class ExternalDisplay: Display {
       guard self.arm64ddc else {
         return nil
       }
-      if let unwrappedDelay = delay {
-        values = Arm64DDC.read(service: self.arm64avService, command: command.rawValue, tries: UInt8(min(tries, 255)), minReplyDelay: UInt32(unwrappedDelay / 1000))
-      } else {
-        values = Arm64DDC.read(service: self.arm64avService, command: command.rawValue, tries: UInt8(min(tries, 255)))
+      self.ddcQueue.sync {
+        if let unwrappedDelay = delay {
+          values = Arm64DDC.read(service: self.arm64avService, command: command.rawValue, tries: UInt8(min(tries, 255)), minReplyDelay: UInt32(unwrappedDelay / 1000))
+        } else {
+          values = Arm64DDC.read(service: self.arm64avService, command: command.rawValue, tries: UInt8(min(tries, 255)))
+        }
       }
     } else {
-      values = self.ddc?.read(command: command.rawValue, tries: tries, minReplyDelay: delay)
+      self.ddcQueue.sync {
+        values = self.ddc?.read(command: command.rawValue, tries: tries, minReplyDelay: delay)
+      }
     }
     return values
   }

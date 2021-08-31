@@ -213,8 +213,7 @@ public class IntelDDC {
       let portSerialNumber = valueForKey(kDisplaySerialNumber)
       let displaySerialNumber = CGDisplaySerialNumber(displayId)
       guard portSerialNumber == displaySerialNumber else {
-        os_log("Service port serial number %u differs from display serial number %u.", type: .debug,
-               portSerialNumber, displaySerialNumber)
+        os_log("Service port serial number %u differs from display serial number %u.", type: .debug, portSerialNumber, displaySerialNumber)
         continue
       }
       if let displayLocation = dict[kIODisplayLocationKey] as? NSString {
