@@ -262,7 +262,7 @@ class ExternalDisplay: Display {
     self.saveValue(osdValue, for: .brightness)
   }
 
-  public func writeDDCValues(command: Command, value: UInt16, errorRecoveryWaitTime _: UInt32? = nil) -> Bool? {
+  public func writeDDCValues(command: Utils.Command, value: UInt16, errorRecoveryWaitTime _: UInt32? = nil) -> Bool? {
     guard app.sleepID == 0, app.reconfigureID == 0, !self.forceSw else {
       return false
     }
@@ -279,7 +279,7 @@ class ExternalDisplay: Display {
     return success
   }
 
-  func readDDCValues(for command: Command, tries: UInt, minReplyDelay delay: UInt64?) -> (current: UInt16, max: UInt16)? {
+  func readDDCValues(for command: Utils.Command, tries: UInt, minReplyDelay delay: UInt64?) -> (current: UInt16, max: UInt16)? {
     var values: (UInt16, UInt16)?
     guard app.sleepID == 0, app.reconfigureID == 0, !self.forceSw else {
       return values
@@ -332,32 +332,32 @@ class ExternalDisplay: Display {
     return max(0, min(maxValue, nextValue))
   }
 
-  func getValue(for command: Command) -> Int {
+  func getValue(for command: Utils.Command) -> Int {
     return self.prefs.integer(forKey: "\(command.rawValue)-\(self.identifier)")
   }
 
-  func getValueExists(for command: Command) -> Bool {
+  func getValueExists(for command: Utils.Command) -> Bool {
     return self.prefs.object(forKey: "\(command.rawValue)-\(self.identifier)") != nil
   }
 
-  func saveValue(_ value: Int, for command: Command) {
+  func saveValue(_ value: Int, for command: Utils.Command) {
     self.prefs.set(value, forKey: "\(command.rawValue)-\(self.identifier)")
   }
 
-  func saveMaxValue(_ maxValue: Int, for command: Command) {
+  func saveMaxValue(_ maxValue: Int, for command: Utils.Command) {
     self.prefs.set(maxValue, forKey: "max-\(command.rawValue)-\(self.identifier)")
   }
 
-  func getMaxValue(for command: Command) -> Int {
+  func getMaxValue(for command: Utils.Command) -> Int {
     let max = self.prefs.integer(forKey: "max-\(command.rawValue)-\(self.identifier)")
     return min(self.DDC_HARD_MAX_LIMIT, max == 0 ? self.DDC_HARD_MAX_LIMIT : max)
   }
 
-  func getRestoreValue(for command: Command) -> Int {
+  func getRestoreValue(for command: Utils.Command) -> Int {
     return self.prefs.integer(forKey: "restore-\(command.rawValue)-\(self.identifier)")
   }
 
-  func setRestoreValue(_ value: Int?, for command: Command) {
+  func setRestoreValue(_ value: Int?, for command: Utils.Command) {
     self.prefs.set(value, forKey: "restore-\(command.rawValue)-\(self.identifier)")
   }
 
@@ -382,16 +382,16 @@ class ExternalDisplay: Display {
     let selectedMode = self.getPollingMode()
     switch selectedMode {
     case 0:
-      return PollingMode.none.value
+      return Utils.PollingMode.none.value
     case 1:
-      return PollingMode.minimal.value
+      return Utils.PollingMode.minimal.value
     case 2:
-      return PollingMode.normal.value
+      return Utils.PollingMode.normal.value
     case 3:
-      return PollingMode.heavy.value
+      return Utils.PollingMode.heavy.value
     case 4:
       let val = self.prefs.integer(forKey: "pollingCount-\(self.identifier)")
-      return PollingMode.custom(value: val).value
+      return Utils.PollingMode.custom(value: val).value
     default:
       return 0
     }
@@ -401,11 +401,11 @@ class ExternalDisplay: Display {
     self.prefs.set(value, forKey: "pollingCount-\(self.identifier)")
   }
 
-  private func stepSize(for command: Command, isSmallIncrement: Bool) -> Int {
+  private func stepSize(for command: Utils.Command, isSmallIncrement: Bool) -> Int {
     return isSmallIncrement ? 1 : Int(floor(Float(self.getMaxValue(for: command)) / OSDUtils.chicletCount))
   }
 
-  override func showOsd(command: Command, value: Int, maxValue _: Int = 100, roundChiclet: Bool = false, lock: Bool = false) {
+  override func showOsd(command: Utils.Command, value: Int, maxValue _: Int = 100, roundChiclet: Bool = false, lock: Bool = false) {
     super.showOsd(command: command, value: value, maxValue: self.getMaxValue(for: command), roundChiclet: roundChiclet, lock: lock)
   }
 
