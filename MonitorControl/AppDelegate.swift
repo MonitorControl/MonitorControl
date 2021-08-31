@@ -283,11 +283,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     if self.sleepID == dispatchedSleepID {
       os_log("Sober from sleep %{public}@", type: .info, String(self.sleepID))
       self.sleepID = 0
-      if self.reconfigureID != 0 {
-        let dispatchedReconfigureID = self.reconfigureID
-        os_log("Display needs reconfig after sober with reconfigureID %{public}@", type: .info, String(dispatchedReconfigureID))
-        self.updateDisplays(dispatchedReconfigureID: dispatchedReconfigureID)
-      }
+      self.reconfigureID += 1
+      os_log("Mandatroy bumping of reconfigureID after sleep to %{public}@", type: .info, String(self.reconfigureID))
+      let dispatchedReconfigureID = self.reconfigureID
+      os_log("Display needs reconfig after sober with reconfigureID %{public}@", type: .info, String(dispatchedReconfigureID))
+      self.updateDisplays(dispatchedReconfigureID: dispatchedReconfigureID)
     }
   }
 
