@@ -336,6 +336,10 @@ class ExternalDisplay: Display {
     return self.prefs.integer(forKey: "\(command.rawValue)-\(self.identifier)")
   }
 
+  func getValueExists(for command: Command) -> Bool {
+    return self.prefs.object(forKey: "\(command.rawValue)-\(self.identifier)") != nil
+  }
+
   func saveValue(_ value: Int, for command: Command) {
     self.prefs.set(value, forKey: "\(command.rawValue)-\(self.identifier)")
   }

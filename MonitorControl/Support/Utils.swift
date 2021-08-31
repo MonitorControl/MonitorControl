@@ -70,7 +70,7 @@ class Utils: NSObject {
       if tries != 0, !(app.safeMode) {
         values = display.readDDCValues(for: command, tries: tries, minReplyDelay: delay)
       }
-      (currentValue, maxValue) = values ?? (UInt16(display.getValue(for: command)), 0) // We set 0 for max. value to indicate that there is no real DDC reported max. value - ExternalDisplay.getMaxValue() will return 100 in case of 0 max. values.
+      (currentValue, maxValue) = values ?? (UInt16(display.getValueExists(for: command) ? display.getValue(for: command) : 75), 100) // We set 100 as max value if we could not read DDC, the previous setting as current value or 75 if not present.
     }
     display.saveMaxValue(Int(maxValue), for: command)
     display.saveValue(min(Int(currentValue), display.getMaxValue(for: command)), for: command) // We won't allow currrent value to be higher than the max. value
