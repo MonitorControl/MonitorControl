@@ -47,8 +47,6 @@ class ExternalDisplay: Display {
     }
   }
 
-  private var audioPlayer: AVAudioPlayer?
-
   override init(_ identifier: CGDirectDisplayID, name: String, vendorNumber: UInt32?, modelNumber: UInt32?, isVirtual: Bool = false) {
     super.init(identifier, name: name, vendorNumber: vendorNumber, modelNumber: modelNumber, isVirtual: isVirtual)
 
@@ -109,46 +107,47 @@ class ExternalDisplay: Display {
     }
   }
 
-  func stepVolume(isUp: Bool, isSmallIncrement: Bool) {
-    var muteValue: Int?
+  func stepVolume(isUp: Bool, isSmallIncrement: Bool, isPressed: Bool) {
     let currentValue = self.getValue(for: .audioSpeakerVolume)
-    let maxValue = self.getMaxValue(for: .audioSpeakerVolume)
-    let volumeOSDValue = self.calcNewValue(currentValue: currentValue, maxValue: maxValue, isUp: isUp, isSmallIncrement: isSmallIncrement)
-    let volumeDDCValue = UInt16(volumeOSDValue)
-    if self.isMuted(), volumeOSDValue > 0 {
-      muteValue = 2
-    } else if !self.isMuted(), volumeOSDValue == 0 {
-      muteValue = 1
-    }
+    if isPressed {
+      var muteValue: Int?
+      let maxValue = self.getMaxValue(for: .audioSpeakerVolume)
+      let volumeOSDValue = self.calcNewValue(currentValue: currentValue, maxValue: maxValue, isUp: isUp, isSmallIncrement: isSmallIncrement)
+      let volumeDDCValue = UInt16(volumeOSDValue)
+      if self.isMuted(), volumeOSDValue > 0 {
+        muteValue = 2
+      } else if !self.isMuted(), volumeOSDValue == 0 {
+        muteValue = 1
+      }
 
-    let isAlreadySet = volumeOSDValue == self.getValue(for: .audioSpeakerVolume)
+      let isAlreadySet = volumeOSDValue == self.getValue(for: .audioSpeakerVolume)
 
-    if !isAlreadySet {
-      if let muteValue = muteValue, self.enableMuteUnmute {
-        guard self.writeDDCValues(command: .audioMuteScreenBlank, value: UInt16(muteValue)) == true else {
-          return
+      if !isAlreadySet {
+        if let muteValue = muteValue, self.enableMuteUnmute {
+          guard self.writeDDCValues(command: .audioMuteScreenBlank, value: UInt16(muteValue)) == true else {
+            return
+          }
+          self.saveValue(muteValue, for: .audioMuteScreenBlank)
         }
-        self.saveValue(muteValue, for: .audioMuteScreenBlank)
+
+        if !self.enableMuteUnmute || volumeOSDValue != 0 {
+          _ = self.writeDDCValues(command: .audioSpeakerVolume, value: volumeDDCValue)
+        }
       }
 
-      if !self.enableMuteUnmute || volumeOSDValue != 0 {
-        _ = self.writeDDCValues(command: .audioSpeakerVolume, value: volumeDDCValue)
+      if !self.hideOsd {
+        self.showOsd(command: .audioSpeakerVolume, value: volumeOSDValue, roundChiclet: !isSmallIncrement)
       }
-    }
 
-    if !self.hideOsd {
-      self.showOsd(command: .audioSpeakerVolume, value: volumeOSDValue, roundChiclet: !isSmallIncrement)
-    }
-
-    if !isAlreadySet {
-      self.saveValue(volumeOSDValue, for: .audioSpeakerVolume)
-
-      if volumeOSDValue > 0 {
+      if !isAlreadySet {
+        self.saveValue(volumeOSDValue, for: .audioSpeakerVolume)
+        if let slider = self.volumeSliderHandler?.slider {
+          slider.intValue = Int32(volumeDDCValue)
+        }
+      }
+    } else {
+      if currentValue > 0 {
         self.playVolumeChangedSound()
-      }
-
-      if let slider = self.volumeSliderHandler?.slider {
-        slider.intValue = Int32(volumeDDCValue)
       }
     }
   }
@@ -409,23 +408,17 @@ class ExternalDisplay: Display {
     super.showOsd(command: command, value: value, maxValue: self.getMaxValue(for: command), roundChiclet: roundChiclet, lock: lock)
   }
 
-  private func playVolumeChangedSound() {
-    let soundPath = "/System/Library/LoginPlugins/BezelServices.loginPlugin/Contents/Resources/volume.aiff"
-    let soundUrl = URL(fileURLWithPath: soundPath)
+  private var audioPlayer: AVAudioPlayer?
 
+  private func playVolumeChangedSound() {
     // Check if user has enabled "Play feedback when volume is changed" in Sound Preferences
-    guard let preferences = Utils.getSystemPreferences(),
-          let hasSoundEnabled = preferences["com.apple.sound.beep.feedback"] as? Int,
-          hasSoundEnabled == 1
+    guard let preferences = Utils.getSystemPreferences(), let hasSoundEnabled = preferences["com.apple.sound.beep.feedback"] as? Int, hasSoundEnabled == 1
     else {
-      os_log("sound not enabled", type: .info)
       return
     }
-
     do {
-      self.audioPlayer = try AVAudioPlayer(contentsOf: soundUrl)
+      self.audioPlayer = try AVAudioPlayer(contentsOf: URL(fileURLWithPath: "/System/Library/LoginPlugins/BezelServices.loginPlugin/Contents/Resources/volume.aiff"))
       self.audioPlayer?.volume = 1
-      self.audioPlayer?.prepareToPlay()
       self.audioPlayer?.play()
     } catch {
       os_log("%{public}@", type: .error, error.localizedDescription)

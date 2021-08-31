@@ -337,20 +337,21 @@ extension AppDelegate: MediaKeyTapDelegate {
       }
       return
     }
-    if self.handleOpenPrefPane(mediaKey: mediaKey, event: event, modifiers: modifiers) {
+    let isPressed = event?.keyPressed ?? true
+    let isRepeat = event?.keyRepeat ?? false
+    if isPressed, self.handleOpenPrefPane(mediaKey: mediaKey, event: event, modifiers: modifiers) {
       return
     }
     let isSmallIncrement = modifiers?.isSuperset(of: NSEvent.ModifierFlags([.shift, .option])) ?? false
     // control internal display when holding ctrl modifier
     let isControlModifier = modifiers?.isSuperset(of: NSEvent.ModifierFlags([.control])) ?? false
     if isControlModifier, mediaKey == .brightnessUp || mediaKey == .brightnessDown {
-      if let internalDisplay = DisplayManager.shared.getBuiltInDisplay() as? InternalDisplay {
+      if isPressed, let internalDisplay = DisplayManager.shared.getBuiltInDisplay() as? InternalDisplay {
         internalDisplay.stepBrightness(isUp: mediaKey == .brightnessUp, isSmallIncrement: isSmallIncrement)
         return
       }
     }
     let oppositeKey: MediaKey? = self.oppositeMediaKey(mediaKey: mediaKey)
-    let isRepeat = event?.keyRepeat ?? false
     // If the opposite key to the one being held has an active timer, cancel it - we'll be going in the opposite direction
     if let oppositeKey = oppositeKey, let oppositeKeyTimer = self.keyRepeatTimers[oppositeKey], oppositeKeyTimer.isValid {
       oppositeKeyTimer.invalidate()
@@ -361,7 +362,7 @@ extension AppDelegate: MediaKeyTapDelegate {
       }
       mediaKeyTimer.invalidate()
     }
-    self.sendDisplayCommand(mediaKey: mediaKey, isRepeat: isRepeat, isSmallIncrement: isSmallIncrement)
+    self.sendDisplayCommand(mediaKey: mediaKey, isRepeat: isRepeat, isSmallIncrement: isSmallIncrement, isPressed: isPressed)
   }
 
   private func getAffectedDisplays() -> [Display]? {
@@ -384,27 +385,29 @@ extension AppDelegate: MediaKeyTapDelegate {
     return affectedDisplays
   }
 
-  private func sendDisplayCommand(mediaKey: MediaKey, isRepeat: Bool, isSmallIncrement: Bool) {
+  private func sendDisplayCommand(mediaKey: MediaKey, isRepeat: Bool, isSmallIncrement: Bool, isPressed: Bool) {
     guard self.sleepID == 0, self.reconfigureID == 0, let affectedDisplays = self.getAffectedDisplays() else {
       return
-    }
-    var isAnyDisplayInSwAfterBrightnessMode: Bool = false
-    for display in affectedDisplays where ((display as? ExternalDisplay)?.isSwBrightnessNotDefault() ?? false) && !((display as? ExternalDisplay)?.isSw() ?? false) {
-      isAnyDisplayInSwAfterBrightnessMode = true
     }
     // let delay = isRepeat ? 0.05 : 0 // Introduce a small delay to handle the media key being held down - Update: it is not clear why this is needed but it blocks the media keys working when the menu is open and also it doesn't seem to affect external bluetooth keyboards but slows down internal keyboards for some reason. Things seem to work better this being disabled.
     // self.keyRepeatTimers[mediaKey] = Timer.scheduledTimer(withTimeInterval: delay, repeats: false, block: { _ in
     for display in affectedDisplays where display.isEnabled && !display.isVirtual {
       switch mediaKey {
       case .brightnessUp:
-        if !(isAnyDisplayInSwAfterBrightnessMode && !(((display as? ExternalDisplay)?.isSwBrightnessNotDefault() ?? false) && !((display as? ExternalDisplay)?.isSw() ?? false))) {
+        var isAnyDisplayInSwAfterBrightnessMode: Bool = false
+        for display in affectedDisplays where ((display as? ExternalDisplay)?.isSwBrightnessNotDefault() ?? false) && !((display as? ExternalDisplay)?.isSw() ?? false) {
+          isAnyDisplayInSwAfterBrightnessMode = true
+        }
+        if isPressed, !(isAnyDisplayInSwAfterBrightnessMode && !(((display as? ExternalDisplay)?.isSwBrightnessNotDefault() ?? false) && !((display as? ExternalDisplay)?.isSw() ?? false))) {
           display.stepBrightness(isUp: mediaKey == .brightnessUp, isSmallIncrement: isSmallIncrement)
         }
       case .brightnessDown:
-        display.stepBrightness(isUp: mediaKey == .brightnessUp, isSmallIncrement: isSmallIncrement)
+        if isPressed {
+          display.stepBrightness(isUp: mediaKey == .brightnessUp, isSmallIncrement: isSmallIncrement)
+        }
       case .mute:
-        // The mute key should not respond to press + hold
-        if !isRepeat {
+        // The mute key should not respond to press + hold or keyup
+        if !isRepeat, isPressed {
           // mute only matters for external displays
           if let display = display as? ExternalDisplay {
             display.toggleMute()
@@ -413,7 +416,7 @@ extension AppDelegate: MediaKeyTapDelegate {
       case .volumeUp, .volumeDown:
         // volume only matters for external displays
         if let display = display as? ExternalDisplay {
-          display.stepVolume(isUp: mediaKey == .volumeUp, isSmallIncrement: isSmallIncrement)
+          display.stepVolume(isUp: mediaKey == .volumeUp, isSmallIncrement: isSmallIncrement, isPressed: isPressed)
         }
       default:
         return
@@ -475,7 +478,7 @@ extension AppDelegate: MediaKeyTapDelegate {
     self.mediaKeyTap?.stop()
     // returning an empty array listens for all mediakeys in MediaKeyTap
     if keys.count > 0 {
-      self.mediaKeyTap = MediaKeyTap(delegate: self, for: keys, observeBuiltIn: true)
+      self.mediaKeyTap = MediaKeyTap(delegate: self, on: KeyPressMode.keyDownAndUp, for: keys, observeBuiltIn: true)
       self.mediaKeyTap?.start()
     }
   }
