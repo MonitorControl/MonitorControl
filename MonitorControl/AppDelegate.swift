@@ -19,6 +19,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   var accessibilityObserver: NSObjectProtocol!
   var reconfigureID: Int = 0 // dispatched reconfigure command ID
   var sleepID: Int = 0 // Don't reconfigure display as the system or display is sleeping or wake just recently.
+  var safeMode = false // Safe mode engaged during startup?
   let debugSw: Bool = false
   lazy var preferencesWindowController: PreferencesWindowController = {
     let storyboard = NSStoryboard(name: "Main", bundle: Bundle.main)
@@ -38,6 +39,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   func applicationDidFinishLaunching(_: Notification) {
     app = self
     self.subscribeEventListeners()
+    if NSEvent.modifierFlags.contains(NSEvent.ModifierFlags.shift) {
+      self.safeMode = true
+      self.handlePreferenceReset()
+      Utils.alert(text: NSLocalizedString("Safe Mode Activated", comment: "Shown in the alert dialog"), info: NSLocalizedString("Shift was pressed during launch. MonitorControl started in safe mode. Default preferences are reloaded, DDC read is blocked.", comment: "Shown in the alert dialog"))
+    }
     self.setDefaultPrefs()
     if #available(macOS 11.0, *) {
       self.statusItem.button?.image = NSImage(systemSymbolName: "sun.max", accessibilityDescription: "MonitorControl")
@@ -88,7 +94,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       for i in 0 ..< self.statusMenu.items.count - 2 {
         items.append(self.statusMenu.items[i])
       }
-
       for item in items {
         self.statusMenu.removeItem(item)
       }
@@ -258,10 +263,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     NSWorkspace.shared.notificationCenter.addObserver(self, selector: #selector(self.wakeNotofication), name: NSWorkspace.screensDidWakeNotification, object: nil)
     NSWorkspace.shared.notificationCenter.addObserver(self, selector: #selector(self.sleepNotification), name: NSWorkspace.willSleepNotification, object: nil)
     NSWorkspace.shared.notificationCenter.addObserver(self, selector: #selector(self.wakeNotofication), name: NSWorkspace.didWakeNotification, object: nil)
-    _ = DistributedNotificationCenter.default().addObserver(forName: .accessibilityApi, object: nil, queue: nil) { _ in DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-      self.updateMediaKeyTap() // listen for accessibility status changes
-    }
-    }
+    _ = DistributedNotificationCenter.default().addObserver(forName: .accessibilityApi, object: nil, queue: nil) { _ in DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { self.updateMediaKeyTap() } } // listen for accessibility status changes
   }
 
   @objc private func sleepNotification() {

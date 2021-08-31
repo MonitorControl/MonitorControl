@@ -67,7 +67,7 @@ class Utils: NSObject {
     if display.isSw(), command == Command.brightness {
       (currentValue, maxValue) = (UInt16(display.getSwBrightnessPrefValue()), UInt16(display.getSwMaxBrightness()))
     } else {
-      if tries != 0 {
+      if tries != 0, !(app.safeMode) {
         values = display.readDDCValues(for: command, tries: tries, minReplyDelay: delay)
       }
       (currentValue, maxValue) = values ?? (UInt16(display.getValue(for: command)), 0) // We set 0 for max. value to indicate that there is no real DDC reported max. value - ExternalDisplay.getMaxValue() will return 100 in case of 0 max. values.
@@ -93,14 +93,13 @@ class Utils: NSObject {
       os_log("Polling %{public}@ times", type: .info, String(tries))
       os_log("%{public}@ (%{public}@):", type: .info, display.name, String(reflecting: Command.audioMuteScreenBlank))
 
-      if tries != 0 {
+      if display.enableMuteUnmute, tries != 0, !app.safeMode {
         muteValues = display.readDDCValues(for: .audioMuteScreenBlank, tries: tries, minReplyDelay: delay)
       }
 
       if let muteValues = muteValues {
         os_log(" - current ddc value: %{public}@", type: .info, String(muteValues.current))
         os_log(" - maximum ddc value: %{public}@", type: .info, String(muteValues.max))
-
         display.saveValue(Int(muteValues.current), for: .audioMuteScreenBlank)
         display.saveMaxValue(Int(muteValues.max), for: .audioMuteScreenBlank)
       } else {
@@ -175,9 +174,12 @@ class Utils: NSObject {
     return chkd
   }
 
-  static func alert(text: String) {
+  static func alert(text: String, info: String = "") {
     let alert = NSAlert()
     alert.messageText = text
+    if info != "" {
+      alert.informativeText = info
+    }
     alert.alertStyle = NSAlert.Style.informational
     alert.addButton(withTitle: "OK")
     alert.runModal()

@@ -65,6 +65,12 @@
 "Reset Preferences?" = "Alapértelmezett beállítások";
 
 /* Shown in the alert dialog */
+"Safe Mode Activated" = "Biztonsági mód engedélyezve";
+
+/* Shown in the alert dialog */
+"Shift was pressed during launch. MonitorControl started in safe mode. Default preferences are reloaded, DDC read is blocked." = "A Shift gomb le lett nyomva indítás közben, az alkalmazás biztonsági módban indult el. Az alapértelmezett beállításokat visszaállítottuk, a DDC olvasás letiltásra került.";
+
+/* Shown in the alert dialog */
 "Shortcuts not available" = "Gyorsbillentyűk nem elérhetők";
 
 /* Shown in the Display Preferences */
