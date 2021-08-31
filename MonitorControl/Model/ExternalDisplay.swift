@@ -109,45 +109,39 @@ class ExternalDisplay: Display {
 
   func stepVolume(isUp: Bool, isSmallIncrement: Bool, isPressed: Bool) {
     let currentValue = self.getValue(for: .audioSpeakerVolume)
-    if isPressed {
-      var muteValue: Int?
-      let maxValue = self.getMaxValue(for: .audioSpeakerVolume)
-      let volumeOSDValue = self.calcNewValue(currentValue: currentValue, maxValue: maxValue, isUp: isUp, isSmallIncrement: isSmallIncrement)
-      let volumeDDCValue = UInt16(volumeOSDValue)
-      if self.isMuted(), volumeOSDValue > 0 {
-        muteValue = 2
-      } else if !self.isMuted(), volumeOSDValue == 0 {
-        muteValue = 1
-      }
-
-      let isAlreadySet = volumeOSDValue == self.getValue(for: .audioSpeakerVolume)
-
-      if !isAlreadySet {
-        if let muteValue = muteValue, self.enableMuteUnmute {
-          guard self.writeDDCValues(command: .audioMuteScreenBlank, value: UInt16(muteValue)) == true else {
-            return
-          }
-          self.saveValue(muteValue, for: .audioMuteScreenBlank)
+    guard isPressed else {
+      self.playVolumeChangedSound()
+      return
+    }
+    var muteValue: Int?
+    let maxValue = self.getMaxValue(for: .audioSpeakerVolume)
+    let volumeOSDValue = self.calcNewValue(currentValue: currentValue, maxValue: maxValue, isUp: isUp, isSmallIncrement: isSmallIncrement)
+    let volumeDDCValue = UInt16(volumeOSDValue)
+    if self.isMuted(), volumeOSDValue > 0 {
+      muteValue = 2
+    } else if !self.isMuted(), volumeOSDValue == 0 {
+      muteValue = 1
+    }
+    let isAlreadySet = volumeOSDValue == self.getValue(for: .audioSpeakerVolume)
+    if !isAlreadySet {
+      if let muteValue = muteValue, self.enableMuteUnmute {
+        guard self.writeDDCValues(command: .audioMuteScreenBlank, value: UInt16(muteValue)) == true else {
+          return
         }
-
-        if !self.enableMuteUnmute || volumeOSDValue != 0 {
-          _ = self.writeDDCValues(command: .audioSpeakerVolume, value: volumeDDCValue)
-        }
+        self.saveValue(muteValue, for: .audioMuteScreenBlank)
       }
 
-      if !self.hideOsd {
-        self.showOsd(command: .audioSpeakerVolume, value: volumeOSDValue, roundChiclet: !isSmallIncrement)
+      if !self.enableMuteUnmute || volumeOSDValue != 0 {
+        _ = self.writeDDCValues(command: .audioSpeakerVolume, value: volumeDDCValue)
       }
-
-      if !isAlreadySet {
-        self.saveValue(volumeOSDValue, for: .audioSpeakerVolume)
-        if let slider = self.volumeSliderHandler?.slider {
-          slider.intValue = Int32(volumeDDCValue)
-        }
-      }
-    } else {
-      if currentValue > 0 {
-        self.playVolumeChangedSound()
+    }
+    if !self.hideOsd {
+      self.showOsd(command: .audioSpeakerVolume, value: volumeOSDValue, roundChiclet: !isSmallIncrement)
+    }
+    if !isAlreadySet {
+      self.saveValue(volumeOSDValue, for: .audioSpeakerVolume)
+      if let slider = self.volumeSliderHandler?.slider {
+        slider.intValue = Int32(volumeDDCValue)
       }
     }
   }
