@@ -150,4 +150,24 @@ class DisplayManager {
     }
     return defaultName
   }
+
+  func getAffectedDisplays() -> [Display]? {
+    var affectedDisplays: [Display]
+    let allDisplays = DisplayManager.shared.getAllNonVirtualDisplays()
+    guard let currentDisplay = DisplayManager.shared.getCurrentDisplay() else {
+      return nil
+    }
+    // let allDisplays = prefs.bool(forKey: Utils.PrefKeys.allScreens.rawValue) ? displays : [currentDisplay]
+    if prefs.bool(forKey: Utils.PrefKeys.allScreens.rawValue) {
+      affectedDisplays = allDisplays
+    } else {
+      affectedDisplays = [currentDisplay]
+      if CGDisplayIsInHWMirrorSet(currentDisplay.identifier) != 0 || CGDisplayIsInMirrorSet(currentDisplay.identifier) != 0, CGDisplayMirrorsDisplay(currentDisplay.identifier) == 0 {
+        for display in allDisplays where CGDisplayMirrorsDisplay(display.identifier) == currentDisplay.identifier {
+          affectedDisplays.append(display)
+        }
+      }
+    }
+    return affectedDisplays
+  }
 }

@@ -368,30 +368,11 @@ extension AppDelegate: MediaKeyTapDelegate {
     self.sendDisplayCommand(mediaKey: mediaKey, isRepeat: isRepeat, isSmallIncrement: isSmallIncrement, isPressed: isPressed)
   }
 
-  private func getAffectedDisplays() -> [Display]? {
-    var affectedDisplays: [Display]
-    let allDisplays = DisplayManager.shared.getAllNonVirtualDisplays()
-    guard let currentDisplay = DisplayManager.shared.getCurrentDisplay() else {
-      return nil
-    }
-    // let allDisplays = prefs.bool(forKey: Utils.PrefKeys.allScreens.rawValue) ? displays : [currentDisplay]
-    if prefs.bool(forKey: Utils.PrefKeys.allScreens.rawValue) {
-      affectedDisplays = allDisplays
-    } else {
-      affectedDisplays = [currentDisplay]
-      if CGDisplayIsInHWMirrorSet(currentDisplay.identifier) != 0 || CGDisplayIsInMirrorSet(currentDisplay.identifier) != 0, CGDisplayMirrorsDisplay(currentDisplay.identifier) == 0 {
-        for display in allDisplays where CGDisplayMirrorsDisplay(display.identifier) == currentDisplay.identifier {
-          affectedDisplays.append(display)
-        }
-      }
-    }
-    return affectedDisplays
-  }
-
   private func sendDisplayCommand(mediaKey: MediaKey, isRepeat: Bool, isSmallIncrement: Bool, isPressed: Bool) {
-    guard self.sleepID == 0, self.reconfigureID == 0, let affectedDisplays = self.getAffectedDisplays() else {
+    guard self.sleepID == 0, self.reconfigureID == 0, let affectedDisplays = DisplayManager.shared.getAffectedDisplays() else {
       return
     }
+    var wasNotIsPressedVolumeSentAlready = false
     for display in affectedDisplays where display.isEnabled && !display.isVirtual {
       switch mediaKey {
       case .brightnessUp:
@@ -417,7 +398,10 @@ extension AppDelegate: MediaKeyTapDelegate {
       case .volumeUp, .volumeDown:
         // volume only matters for external displays
         if let display = display as? ExternalDisplay {
-          display.stepVolume(isUp: mediaKey == .volumeUp, isSmallIncrement: isSmallIncrement, isPressed: isPressed)
+          if isPressed || !wasNotIsPressedVolumeSentAlready {
+            display.stepVolume(isUp: mediaKey == .volumeUp, isSmallIncrement: isSmallIncrement, isPressed: isPressed)
+          }
+          wasNotIsPressedVolumeSentAlready = true
         }
       default:
         return
