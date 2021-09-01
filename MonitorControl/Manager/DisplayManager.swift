@@ -1,5 +1,4 @@
 import Cocoa
-import DDC
 
 class DisplayManager {
   public static let shared = DisplayManager()
@@ -115,7 +114,7 @@ class DisplayManager {
           if savedPrefValue < externalDisplay.getSwMaxBrightness() {
             self.setBrightnessSliderValue(externalDisplay: externalDisplay, value: Int32(Float(sliderMax / 2) * (Float(savedPrefValue) / Float(externalDisplay.getSwMaxBrightness()))))
           } else {
-            self.setBrightnessSliderValue(externalDisplay: externalDisplay, value: Int32(sliderMax / 2) + Int32(externalDisplay.getValue(for: DDC.Command.brightness)))
+            self.setBrightnessSliderValue(externalDisplay: externalDisplay, value: Int32(sliderMax / 2) + Int32(externalDisplay.getValue(for: .brightness)))
           }
         } else if externalDisplay.isSw() {
           self.setBrightnessSliderValue(externalDisplay: externalDisplay, value: Int32(Float(sliderMax) * (Float(savedPrefValue) / Float(externalDisplay.getSwMaxBrightness()))))
@@ -150,5 +149,25 @@ class DisplayManager {
       }
     }
     return defaultName
+  }
+
+  func getAffectedDisplays() -> [Display]? {
+    var affectedDisplays: [Display]
+    let allDisplays = DisplayManager.shared.getAllNonVirtualDisplays()
+    guard let currentDisplay = DisplayManager.shared.getCurrentDisplay() else {
+      return nil
+    }
+    // let allDisplays = prefs.bool(forKey: Utils.PrefKeys.allScreens.rawValue) ? displays : [currentDisplay]
+    if prefs.bool(forKey: Utils.PrefKeys.allScreens.rawValue) {
+      affectedDisplays = allDisplays
+    } else {
+      affectedDisplays = [currentDisplay]
+      if CGDisplayIsInHWMirrorSet(currentDisplay.identifier) != 0 || CGDisplayIsInMirrorSet(currentDisplay.identifier) != 0, CGDisplayMirrorsDisplay(currentDisplay.identifier) == 0 {
+        for display in allDisplays where CGDisplayMirrorsDisplay(display.identifier) == currentDisplay.identifier {
+          affectedDisplays.append(display)
+        }
+      }
+    }
+    return affectedDisplays
   }
 }

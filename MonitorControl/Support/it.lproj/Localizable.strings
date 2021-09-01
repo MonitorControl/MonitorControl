@@ -65,6 +65,12 @@
 "Reset Preferences?" = "Reset Preferences?";
 
 /* Shown in the alert dialog */
+"Safe Mode Activated" = "Safe Mode Activated";
+
+/* Shown in the alert dialog */
+"Shift was pressed during launch. MonitorControl started in safe mode. Default preferences are reloaded, DDC read is blocked." = "Shift was pressed during launch. MonitorControl started in safe mode. Default preferences are reloaded, DDC read is blocked.";
+
+/* Shown in the alert dialog */
 "Shortcuts not available" = "Comandi rapidi non disponibili";
 
 /* Shown in the Display Preferences */

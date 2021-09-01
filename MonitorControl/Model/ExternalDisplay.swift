@@ -1,6 +1,5 @@
 import AVFoundation
 import Cocoa
-import DDC
 import IOKit
 import os.log
 
@@ -8,11 +7,13 @@ class ExternalDisplay: Display {
   var brightnessSliderHandler: SliderHandler?
   var volumeSliderHandler: SliderHandler?
   var contrastSliderHandler: SliderHandler?
-  var ddc: DDC?
+  var ddc: IntelDDC?
   var arm64ddc: Bool = false
   var arm64avService: IOAVService?
 
   let DDC_HARD_MAX_LIMIT: Int = 100
+
+  let ddcQueue = DispatchQueue(label: "DDC queue")
 
   private let prefs = UserDefaults.standard
 
@@ -46,13 +47,11 @@ class ExternalDisplay: Display {
     }
   }
 
-  private var audioPlayer: AVAudioPlayer?
-
   override init(_ identifier: CGDirectDisplayID, name: String, vendorNumber: UInt32?, modelNumber: UInt32?, isVirtual: Bool = false) {
     super.init(identifier, name: name, vendorNumber: vendorNumber, modelNumber: modelNumber, isVirtual: isVirtual)
 
-    if !isVirtual, !Arm64DDCUtils.isArm64 {
-      self.ddc = DDC(for: identifier)
+    if !isVirtual, !Arm64DDC.isArm64 {
+      self.ddc = IntelDDC(for: identifier)
     }
   }
 
@@ -81,10 +80,6 @@ class ExternalDisplay: Display {
 
     let volumeDDCValue = UInt16(volumeOSDValue)
 
-    guard self.writeDDCValues(command: .audioSpeakerVolume, value: volumeDDCValue) == true else {
-      return
-    }
-
     if self.enableMuteUnmute {
       guard self.writeDDCValues(command: .audioMuteScreenBlank, value: UInt16(muteValue)) == true else {
         return
@@ -92,6 +87,10 @@ class ExternalDisplay: Display {
     }
 
     self.saveValue(muteValue, for: .audioMuteScreenBlank)
+
+    if !self.enableMuteUnmute || volumeOSDValue > 0 {
+      _ = self.writeDDCValues(command: .audioSpeakerVolume, value: volumeDDCValue)
+    }
 
     if !fromVolumeSlider {
       if !self.hideOsd {
@@ -108,9 +107,13 @@ class ExternalDisplay: Display {
     }
   }
 
-  func stepVolume(isUp: Bool, isSmallIncrement: Bool) {
-    var muteValue: Int?
+  func stepVolume(isUp: Bool, isSmallIncrement: Bool, isPressed: Bool) {
     let currentValue = self.getValue(for: .audioSpeakerVolume)
+    guard isPressed else {
+      self.playVolumeChangedSound()
+      return
+    }
+    var muteValue: Int?
     let maxValue = self.getMaxValue(for: .audioSpeakerVolume)
     let volumeOSDValue = self.calcNewValue(currentValue: currentValue, maxValue: maxValue, isUp: isUp, isSmallIncrement: isSmallIncrement)
     let volumeDDCValue = UInt16(volumeOSDValue)
@@ -119,33 +122,24 @@ class ExternalDisplay: Display {
     } else if !self.isMuted(), volumeOSDValue == 0 {
       muteValue = 1
     }
-
     let isAlreadySet = volumeOSDValue == self.getValue(for: .audioSpeakerVolume)
-
-    guard self.writeDDCValues(command: .audioSpeakerVolume, value: volumeDDCValue) == true else {
-      return
-    }
-
-    if let muteValue = muteValue {
-      if self.enableMuteUnmute {
+    if !isAlreadySet {
+      if let muteValue = muteValue, self.enableMuteUnmute {
         guard self.writeDDCValues(command: .audioMuteScreenBlank, value: UInt16(muteValue)) == true else {
           return
         }
+        self.saveValue(muteValue, for: .audioMuteScreenBlank)
       }
-      self.saveValue(muteValue, for: .audioMuteScreenBlank)
-    }
 
+      if !self.enableMuteUnmute || volumeOSDValue != 0 {
+        _ = self.writeDDCValues(command: .audioSpeakerVolume, value: volumeDDCValue)
+      }
+    }
     if !self.hideOsd {
       self.showOsd(command: .audioSpeakerVolume, value: volumeOSDValue, roundChiclet: !isSmallIncrement)
     }
-
     if !isAlreadySet {
       self.saveValue(volumeOSDValue, for: .audioSpeakerVolume)
-
-      if volumeOSDValue > 0 {
-        self.playVolumeChangedSound()
-      }
-
       if let slider = self.volumeSliderHandler?.slider {
         slider.intValue = Int32(volumeDDCValue)
       }
@@ -261,48 +255,43 @@ class ExternalDisplay: Display {
     self.saveValue(osdValue, for: .brightness)
   }
 
-  public func writeDDCValues(command: DDC.Command, value: UInt16, errorRecoveryWaitTime _: UInt32? = nil) -> Bool? {
+  public func writeDDCValues(command: Command, value: UInt16, errorRecoveryWaitTime _: UInt32? = nil) -> Bool? {
     guard app.sleepID == 0, app.reconfigureID == 0, !self.forceSw else {
       return false
     }
-    if Arm64DDCUtils.isArm64 {
-      guard self.arm64ddc else {
-        return false
+    var success: Bool = false
+    self.ddcQueue.sync {
+      if Arm64DDC.isArm64 {
+        if self.arm64ddc {
+          success = Arm64DDC.write(service: self.arm64avService, command: command.rawValue, value: value)
+        }
+      } else {
+        success = self.ddc?.write(command: command.rawValue, value: value, errorRecoveryWaitTime: 2000) ?? false
       }
-      return Arm64DDCUtils.write(service: self.arm64avService, command: command.rawValue, value: value)
-    } else {
-      return self.ddc?.write(command: command, value: value, errorRecoveryWaitTime: 2000) ?? false
     }
+    return success
   }
 
-  func readDDCValues(for command: DDC.Command, tries: UInt, minReplyDelay delay: UInt64?) -> (current: UInt16, max: UInt16)? {
+  func readDDCValues(for command: Command, tries: UInt, minReplyDelay delay: UInt64?) -> (current: UInt16, max: UInt16)? {
     var values: (UInt16, UInt16)?
     guard app.sleepID == 0, app.reconfigureID == 0, !self.forceSw else {
       return values
     }
-    if Arm64DDCUtils.isArm64 {
+    if Arm64DDC.isArm64 {
       guard self.arm64ddc else {
         return nil
       }
-      if let unwrappedDelay = delay {
-        values = Arm64DDCUtils.read(service: self.arm64avService, command: command.rawValue, tries: UInt8(min(tries, 255)), minReplyDelay: UInt32(unwrappedDelay / 1000))
-      } else {
-        values = Arm64DDCUtils.read(service: self.arm64avService, command: command.rawValue, tries: UInt8(min(tries, 255)))
+      self.ddcQueue.sync {
+        if let unwrappedDelay = delay {
+          values = Arm64DDC.read(service: self.arm64avService, command: command.rawValue, tries: UInt8(min(tries, 255)), minReplyDelay: UInt32(unwrappedDelay / 1000))
+        } else {
+          values = Arm64DDC.read(service: self.arm64avService, command: command.rawValue, tries: UInt8(min(tries, 255)))
+        }
       }
     } else {
-      if self.ddc?.supported(minReplyDelay: delay) == true {
-        os_log("Display supports DDC.", type: .debug)
-      } else {
-        os_log("Display does not support DDC.", type: .debug)
+      self.ddcQueue.sync {
+        values = self.ddc?.read(command: command.rawValue, tries: tries, minReplyDelay: delay)
       }
-
-      if self.ddc?.enableAppReport() == true {
-        os_log("Display supports enabling DDC application report.", type: .debug)
-      } else {
-        os_log("Display does not support enabling DDC application report.", type: .debug)
-      }
-
-      values = self.ddc?.read(command: command, tries: tries, minReplyDelay: delay)
     }
     return values
   }
@@ -336,28 +325,32 @@ class ExternalDisplay: Display {
     return max(0, min(maxValue, nextValue))
   }
 
-  func getValue(for command: DDC.Command) -> Int {
+  func getValue(for command: Command) -> Int {
     return self.prefs.integer(forKey: "\(command.rawValue)-\(self.identifier)")
   }
 
-  func saveValue(_ value: Int, for command: DDC.Command) {
+  func getValueExists(for command: Command) -> Bool {
+    return self.prefs.object(forKey: "\(command.rawValue)-\(self.identifier)") != nil
+  }
+
+  func saveValue(_ value: Int, for command: Command) {
     self.prefs.set(value, forKey: "\(command.rawValue)-\(self.identifier)")
   }
 
-  func saveMaxValue(_ maxValue: Int, for command: DDC.Command) {
+  func saveMaxValue(_ maxValue: Int, for command: Command) {
     self.prefs.set(maxValue, forKey: "max-\(command.rawValue)-\(self.identifier)")
   }
 
-  func getMaxValue(for command: DDC.Command) -> Int {
+  func getMaxValue(for command: Command) -> Int {
     let max = self.prefs.integer(forKey: "max-\(command.rawValue)-\(self.identifier)")
     return min(self.DDC_HARD_MAX_LIMIT, max == 0 ? self.DDC_HARD_MAX_LIMIT : max)
   }
 
-  func getRestoreValue(for command: DDC.Command) -> Int {
+  func getRestoreValue(for command: Command) -> Int {
     return self.prefs.integer(forKey: "restore-\(command.rawValue)-\(self.identifier)")
   }
 
-  func setRestoreValue(_ value: Int?, for command: DDC.Command) {
+  func setRestoreValue(_ value: Int?, for command: Command) {
     self.prefs.set(value, forKey: "restore-\(command.rawValue)-\(self.identifier)")
   }
 
@@ -382,16 +375,16 @@ class ExternalDisplay: Display {
     let selectedMode = self.getPollingMode()
     switch selectedMode {
     case 0:
-      return PollingMode.none.value
+      return Utils.PollingMode.none.value
     case 1:
-      return PollingMode.minimal.value
+      return Utils.PollingMode.minimal.value
     case 2:
-      return PollingMode.normal.value
+      return Utils.PollingMode.normal.value
     case 3:
-      return PollingMode.heavy.value
+      return Utils.PollingMode.heavy.value
     case 4:
       let val = self.prefs.integer(forKey: "pollingCount-\(self.identifier)")
-      return PollingMode.custom(value: val).value
+      return Utils.PollingMode.custom(value: val).value
     default:
       return 0
     }
@@ -401,31 +394,25 @@ class ExternalDisplay: Display {
     self.prefs.set(value, forKey: "pollingCount-\(self.identifier)")
   }
 
-  private func stepSize(for command: DDC.Command, isSmallIncrement: Bool) -> Int {
+  private func stepSize(for command: Command, isSmallIncrement: Bool) -> Int {
     return isSmallIncrement ? 1 : Int(floor(Float(self.getMaxValue(for: command)) / OSDUtils.chicletCount))
   }
 
-  override func showOsd(command: DDC.Command, value: Int, maxValue _: Int = 100, roundChiclet: Bool = false, lock: Bool = false) {
+  override func showOsd(command: Command, value: Int, maxValue _: Int = 100, roundChiclet: Bool = false, lock: Bool = false) {
     super.showOsd(command: command, value: value, maxValue: self.getMaxValue(for: command), roundChiclet: roundChiclet, lock: lock)
   }
 
-  private func playVolumeChangedSound() {
-    let soundPath = "/System/Library/LoginPlugins/BezelServices.loginPlugin/Contents/Resources/volume.aiff"
-    let soundUrl = URL(fileURLWithPath: soundPath)
+  private var audioPlayer: AVAudioPlayer?
 
+  private func playVolumeChangedSound() {
     // Check if user has enabled "Play feedback when volume is changed" in Sound Preferences
-    guard let preferences = Utils.getSystemPreferences(),
-          let hasSoundEnabled = preferences["com.apple.sound.beep.feedback"] as? Int,
-          hasSoundEnabled == 1
+    guard let preferences = Utils.getSystemPreferences(), let hasSoundEnabled = preferences["com.apple.sound.beep.feedback"] as? Int, hasSoundEnabled == 1
     else {
-      os_log("sound not enabled", type: .info)
       return
     }
-
     do {
-      self.audioPlayer = try AVAudioPlayer(contentsOf: soundUrl)
+      self.audioPlayer = try AVAudioPlayer(contentsOf: URL(fileURLWithPath: "/System/Library/LoginPlugins/BezelServices.loginPlugin/Contents/Resources/volume.aiff"))
       self.audioPlayer?.volume = 1
-      self.audioPlayer?.prepareToPlay()
       self.audioPlayer?.play()
     } catch {
       os_log("%{public}@", type: .error, error.localizedDescription)

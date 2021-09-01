@@ -1,5 +1,5 @@
 //
-//  Arm64DDCUitls.swift
+//  Arm64DDC.swift
 //  MonitorControl
 //
 //  Created by @waydabber, 2021
@@ -9,7 +9,7 @@
 import Foundation
 import IOKit
 
-class Arm64DDCUtils: NSObject {
+class Arm64DDC: NSObject {
   public struct DisplayService {
     var displayID: CGDirectDisplayID = 0
     var service: IOAVService?
@@ -60,7 +60,7 @@ class Arm64DDCUtils: NSObject {
     var values: (UInt16, UInt16)?
     var send: [UInt8] = [command]
     var reply = [UInt8](repeating: 0, count: 11)
-    if Arm64DDCUtils.performDDCCommunication(service: service, send: &send, reply: &reply, readSleepTime: minReplyDelay, numOfRetryAttemps: tries) {
+    if Arm64DDC.performDDCCommunication(service: service, send: &send, reply: &reply, readSleepTime: minReplyDelay, numOfRetryAttemps: tries) {
       let max = UInt16(reply[6]) * 256 + UInt16(reply[7])
       let current = UInt16(reply[8]) * 256 + UInt16(reply[9])
       values = (current, max)
@@ -74,7 +74,7 @@ class Arm64DDCUtils: NSObject {
   public static func write(service: IOAVService?, command: UInt8, value: UInt16) -> Bool {
     var send: [UInt8] = [command, UInt8(value >> 8), UInt8(value & 255)]
     var reply: [UInt8] = []
-    return Arm64DDCUtils.performDDCCommunication(service: service, send: &send, reply: &reply)
+    return Arm64DDC.performDDCCommunication(service: service, send: &send, reply: &reply)
   }
 
   // Performs DDC read or write

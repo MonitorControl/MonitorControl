@@ -19,6 +19,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   var accessibilityObserver: NSObjectProtocol!
   var reconfigureID: Int = 0 // dispatched reconfigure command ID
   var sleepID: Int = 0 // Don't reconfigure display as the system or display is sleeping or wake just recently.
+  var safeMode = false // Safe mode engaged during startup?
   let debugSw: Bool = false
   lazy var preferencesWindowController: PreferencesWindowController = {
     let storyboard = NSStoryboard(name: "Main", bundle: Bundle.main)
@@ -38,6 +39,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   func applicationDidFinishLaunching(_: Notification) {
     app = self
     self.subscribeEventListeners()
+    if NSEvent.modifierFlags.contains(NSEvent.ModifierFlags.shift) {
+      self.safeMode = true
+      self.handlePreferenceReset()
+      Utils.alert(text: NSLocalizedString("Safe Mode Activated", comment: "Shown in the alert dialog"), info: NSLocalizedString("Shift was pressed during launch. MonitorControl started in safe mode. Default preferences are reloaded, DDC read is blocked.", comment: "Shown in the alert dialog"))
+    }
     self.setDefaultPrefs()
     if #available(macOS 11.0, *) {
       self.statusItem.button?.image = NSImage(systemSymbolName: "sun.max", accessibilityDescription: "MonitorControl")
@@ -88,7 +94,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       for i in 0 ..< self.statusMenu.items.count - 2 {
         items.append(self.statusMenu.items[i])
       }
-
       for item in items {
         self.statusMenu.removeItem(item)
       }
@@ -97,13 +102,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   }
 
   func updateArm64AVServices() {
-    if Arm64DDCUtils.isArm64 {
+    if Arm64DDC.isArm64 {
       os_log("arm64 AVService update requested", type: .info)
       var displayIDs: [CGDirectDisplayID] = []
       for externalDisplay in DisplayManager.shared.getExternalDisplays() {
         displayIDs.append(externalDisplay.identifier)
       }
-      for serviceMatch in Arm64DDCUtils.getServiceMatches(displayIDs: displayIDs) {
+      for serviceMatch in Arm64DDC.getServiceMatches(displayIDs: displayIDs) {
         for externalDisplay in DisplayManager.shared.getExternalDisplays() where externalDisplay.identifier == serviceMatch.displayID && serviceMatch.service != nil {
           externalDisplay.arm64avService = serviceMatch.service
           os_log("Display service match successful for display %{public}@", type: .info, String(serviceMatch.displayID))
@@ -213,11 +218,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     if !display.isSw() {
       if prefs.bool(forKey: Utils.PrefKeys.showVolume.rawValue) {
-        let volumeSliderHandler = Utils.addSliderMenuItem(toMenu: monitorSubMenu, forDisplay: display, command: .audioSpeakerVolume, title: NSLocalizedString("Volume", comment: "Shown in menu"))
+        let volumeSliderHandler = SliderHandler.addSliderMenuItem(toMenu: monitorSubMenu, forDisplay: display, command: .audioSpeakerVolume, title: NSLocalizedString("Volume", comment: "Shown in menu"))
         display.volumeSliderHandler = volumeSliderHandler
       }
       if prefs.bool(forKey: Utils.PrefKeys.showContrast.rawValue) {
-        let contrastSliderHandler = Utils.addSliderMenuItem(toMenu: monitorSubMenu, forDisplay: display, command: .contrast, title: NSLocalizedString("Contrast", comment: "Shown in menu"))
+        let contrastSliderHandler = SliderHandler.addSliderMenuItem(toMenu: monitorSubMenu, forDisplay: display, command: .contrast, title: NSLocalizedString("Contrast", comment: "Shown in menu"))
         display.contrastSliderHandler = contrastSliderHandler
       }
     }
@@ -225,7 +230,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     if !display.isSw(), prefs.bool(forKey: Utils.PrefKeys.lowerSwAfterBrightness.rawValue) {
       numOfTickMarks = 0 // 1 - I  disabled this because tickmarks are buggy in dark mode on Monterey (probably Big Sur as well).
     }
-    let brightnessSliderHandler = Utils.addSliderMenuItem(toMenu: monitorSubMenu, forDisplay: display, command: .brightness, title: NSLocalizedString("Brightness", comment: "Shown in menu"), numOfTickMarks: numOfTickMarks)
+    let brightnessSliderHandler = SliderHandler.addSliderMenuItem(toMenu: monitorSubMenu, forDisplay: display, command: .brightness, title: NSLocalizedString("Brightness", comment: "Shown in menu"), numOfTickMarks: numOfTickMarks)
     display.brightnessSliderHandler = brightnessSliderHandler
 
     let monitorMenuItem = NSMenuItem()
@@ -258,10 +263,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     NSWorkspace.shared.notificationCenter.addObserver(self, selector: #selector(self.wakeNotofication), name: NSWorkspace.screensDidWakeNotification, object: nil)
     NSWorkspace.shared.notificationCenter.addObserver(self, selector: #selector(self.sleepNotification), name: NSWorkspace.willSleepNotification, object: nil)
     NSWorkspace.shared.notificationCenter.addObserver(self, selector: #selector(self.wakeNotofication), name: NSWorkspace.didWakeNotification, object: nil)
-    _ = DistributedNotificationCenter.default().addObserver(forName: .accessibilityApi, object: nil, queue: nil) { _ in DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-      self.updateMediaKeyTap() // listen for accessibility status changes
-    }
-    }
+    _ = DistributedNotificationCenter.default().addObserver(forName: .accessibilityApi, object: nil, queue: nil) { _ in DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { self.updateMediaKeyTap() } } // listen for accessibility status changes
   }
 
   @objc private func sleepNotification() {
@@ -287,6 +289,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let dispatchedReconfigureID = self.reconfigureID
         os_log("Display needs reconfig after sober with reconfigureID %{public}@", type: .info, String(dispatchedReconfigureID))
         self.updateDisplays(dispatchedReconfigureID: dispatchedReconfigureID)
+      } else if Arm64DDC.isArm64 {
+        os_log("Displays don't need reconfig after sober but might need AVServices update", type: .info)
+        self.updateArm64AVServices()
       }
     }
   }
@@ -335,20 +340,21 @@ extension AppDelegate: MediaKeyTapDelegate {
       }
       return
     }
-    if self.handleOpenPrefPane(mediaKey: mediaKey, event: event, modifiers: modifiers) {
+    let isPressed = event?.keyPressed ?? true
+    let isRepeat = event?.keyRepeat ?? false
+    if isPressed, self.handleOpenPrefPane(mediaKey: mediaKey, event: event, modifiers: modifiers) {
       return
     }
     let isSmallIncrement = modifiers?.isSuperset(of: NSEvent.ModifierFlags([.shift, .option])) ?? false
     // control internal display when holding ctrl modifier
     let isControlModifier = modifiers?.isSuperset(of: NSEvent.ModifierFlags([.control])) ?? false
     if isControlModifier, mediaKey == .brightnessUp || mediaKey == .brightnessDown {
-      if let internalDisplay = DisplayManager.shared.getBuiltInDisplay() as? InternalDisplay {
+      if isPressed, let internalDisplay = DisplayManager.shared.getBuiltInDisplay() as? InternalDisplay {
         internalDisplay.stepBrightness(isUp: mediaKey == .brightnessUp, isSmallIncrement: isSmallIncrement)
         return
       }
     }
     let oppositeKey: MediaKey? = self.oppositeMediaKey(mediaKey: mediaKey)
-    let isRepeat = event?.keyRepeat ?? false
     // If the opposite key to the one being held has an active timer, cancel it - we'll be going in the opposite direction
     if let oppositeKey = oppositeKey, let oppositeKeyTimer = self.keyRepeatTimers[oppositeKey], oppositeKeyTimer.isValid {
       oppositeKeyTimer.invalidate()
@@ -359,50 +365,31 @@ extension AppDelegate: MediaKeyTapDelegate {
       }
       mediaKeyTimer.invalidate()
     }
-    self.sendDisplayCommand(mediaKey: mediaKey, isRepeat: isRepeat, isSmallIncrement: isSmallIncrement)
+    self.sendDisplayCommand(mediaKey: mediaKey, isRepeat: isRepeat, isSmallIncrement: isSmallIncrement, isPressed: isPressed)
   }
 
-  private func getAffectedDisplays() -> [Display]? {
-    var affectedDisplays: [Display]
-    let allDisplays = DisplayManager.shared.getAllNonVirtualDisplays()
-    guard let currentDisplay = DisplayManager.shared.getCurrentDisplay() else {
-      return nil
-    }
-    // let allDisplays = prefs.bool(forKey: Utils.PrefKeys.allScreens.rawValue) ? displays : [currentDisplay]
-    if prefs.bool(forKey: Utils.PrefKeys.allScreens.rawValue) {
-      affectedDisplays = allDisplays
-    } else {
-      affectedDisplays = [currentDisplay]
-      if CGDisplayIsInHWMirrorSet(currentDisplay.identifier) != 0 || CGDisplayIsInMirrorSet(currentDisplay.identifier) != 0, CGDisplayMirrorsDisplay(currentDisplay.identifier) == 0 {
-        for display in allDisplays where CGDisplayMirrorsDisplay(display.identifier) == currentDisplay.identifier {
-          affectedDisplays.append(display)
-        }
-      }
-    }
-    return affectedDisplays
-  }
-
-  private func sendDisplayCommand(mediaKey: MediaKey, isRepeat: Bool, isSmallIncrement: Bool) {
-    guard self.sleepID == 0, self.reconfigureID == 0, let affectedDisplays = self.getAffectedDisplays() else {
+  private func sendDisplayCommand(mediaKey: MediaKey, isRepeat: Bool, isSmallIncrement: Bool, isPressed: Bool) {
+    guard self.sleepID == 0, self.reconfigureID == 0, let affectedDisplays = DisplayManager.shared.getAffectedDisplays() else {
       return
     }
-    var isAnyDisplayInSwAfterBrightnessMode: Bool = false
-    for display in affectedDisplays where ((display as? ExternalDisplay)?.isSwBrightnessNotDefault() ?? false) && !((display as? ExternalDisplay)?.isSw() ?? false) {
-      isAnyDisplayInSwAfterBrightnessMode = true
-    }
-    // let delay = isRepeat ? 0.05 : 0 // Introduce a small delay to handle the media key being held down - Update: it is not clear why this is needed but it blocks the media keys working when the menu is open and also it doesn't seem to affect external bluetooth keyboards but slows down internal keyboards for some reason. Things seem to work better this being disabled.
-    // self.keyRepeatTimers[mediaKey] = Timer.scheduledTimer(withTimeInterval: delay, repeats: false, block: { _ in
+    var wasNotIsPressedVolumeSentAlready = false
     for display in affectedDisplays where display.isEnabled && !display.isVirtual {
       switch mediaKey {
       case .brightnessUp:
-        if !(isAnyDisplayInSwAfterBrightnessMode && !(((display as? ExternalDisplay)?.isSwBrightnessNotDefault() ?? false) && !((display as? ExternalDisplay)?.isSw() ?? false))) {
+        var isAnyDisplayInSwAfterBrightnessMode: Bool = false
+        for display in affectedDisplays where ((display as? ExternalDisplay)?.isSwBrightnessNotDefault() ?? false) && !((display as? ExternalDisplay)?.isSw() ?? false) {
+          isAnyDisplayInSwAfterBrightnessMode = true
+        }
+        if isPressed, !(isAnyDisplayInSwAfterBrightnessMode && !(((display as? ExternalDisplay)?.isSwBrightnessNotDefault() ?? false) && !((display as? ExternalDisplay)?.isSw() ?? false))) {
           display.stepBrightness(isUp: mediaKey == .brightnessUp, isSmallIncrement: isSmallIncrement)
         }
       case .brightnessDown:
-        display.stepBrightness(isUp: mediaKey == .brightnessUp, isSmallIncrement: isSmallIncrement)
+        if isPressed {
+          display.stepBrightness(isUp: mediaKey == .brightnessUp, isSmallIncrement: isSmallIncrement)
+        }
       case .mute:
-        // The mute key should not respond to press + hold
-        if !isRepeat {
+        // The mute key should not respond to press + hold or keyup
+        if !isRepeat, isPressed {
           // mute only matters for external displays
           if let display = display as? ExternalDisplay {
             display.toggleMute()
@@ -411,13 +398,15 @@ extension AppDelegate: MediaKeyTapDelegate {
       case .volumeUp, .volumeDown:
         // volume only matters for external displays
         if let display = display as? ExternalDisplay {
-          display.stepVolume(isUp: mediaKey == .volumeUp, isSmallIncrement: isSmallIncrement)
+          if isPressed || !wasNotIsPressedVolumeSentAlready {
+            display.stepVolume(isUp: mediaKey == .volumeUp, isSmallIncrement: isSmallIncrement, isPressed: isPressed)
+          }
+          wasNotIsPressedVolumeSentAlready = true
         }
       default:
         return
       }
     }
-    // })
   }
 
   @objc func handleListenForChanged() {
@@ -473,7 +462,7 @@ extension AppDelegate: MediaKeyTapDelegate {
     self.mediaKeyTap?.stop()
     // returning an empty array listens for all mediakeys in MediaKeyTap
     if keys.count > 0 {
-      self.mediaKeyTap = MediaKeyTap(delegate: self, for: keys, observeBuiltIn: true)
+      self.mediaKeyTap = MediaKeyTap(delegate: self, on: KeyPressMode.keyDownAndUp, for: keys, observeBuiltIn: true)
       self.mediaKeyTap?.start()
     }
   }
