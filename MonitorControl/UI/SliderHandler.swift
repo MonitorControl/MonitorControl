@@ -4,9 +4,9 @@ import os.log
 class SliderHandler {
   var slider: NSSlider?
   var display: ExternalDisplay
-  let cmd: Utils.Command
+  let cmd: Command
 
-  public init(display: ExternalDisplay, command: Utils.Command) {
+  public init(display: ExternalDisplay, command: Command) {
     self.display = display
     self.cmd = command
   }
@@ -33,7 +33,7 @@ class SliderHandler {
     }
 
     if !self.display.isSw() {
-      if self.cmd == Utils.Command.brightness, prefs.bool(forKey: Utils.PrefKeys.lowerSwAfterBrightness.rawValue) {
+      if self.cmd == Command.brightness, prefs.bool(forKey: Utils.PrefKeys.lowerSwAfterBrightness.rawValue) {
         var brightnessDDCValue: Int = 0
         var brightnessSwValue: Int = 100
         if value >= Int(slider.maxValue / 2) {
@@ -46,7 +46,7 @@ class SliderHandler {
         _ = self.display.writeDDCValues(command: self.cmd, value: UInt16(brightnessDDCValue))
         _ = self.display.setSwBrightness(value: UInt8(brightnessSwValue))
         self.display.saveValue(brightnessDDCValue, for: self.cmd)
-      } else if self.cmd == Utils.Command.audioSpeakerVolume {
+      } else if self.cmd == Command.audioSpeakerVolume {
         if !self.display.enableMuteUnmute || value != 0 {
           _ = self.display.writeDDCValues(command: self.cmd, value: UInt16(value))
         }
@@ -55,13 +55,13 @@ class SliderHandler {
         _ = self.display.writeDDCValues(command: self.cmd, value: UInt16(value))
         self.display.saveValue(value, for: self.cmd)
       }
-    } else if self.cmd == Utils.Command.brightness {
+    } else if self.cmd == Command.brightness {
       _ = self.display.setSwBrightness(value: UInt8(value))
       self.display.saveValue(value, for: self.cmd)
     }
   }
 
-  static func addSliderMenuItem(toMenu menu: NSMenu, forDisplay display: ExternalDisplay, command: Utils.Command, title: String, numOfTickMarks: Int = 0) -> SliderHandler {
+  static func addSliderMenuItem(toMenu menu: NSMenu, forDisplay display: ExternalDisplay, command: Command, title: String, numOfTickMarks: Int = 0) -> SliderHandler {
     let item = NSMenuItem()
 
     let handler = SliderHandler(display: display, command: command)
@@ -111,7 +111,7 @@ class SliderHandler {
 
     let tries = UInt(display.getPollingCount())
 
-    if display.isSw(), command == Utils.Command.brightness {
+    if display.isSw(), command == Command.brightness {
       (currentValue, maxValue) = (UInt16(display.getSwBrightnessPrefValue()), UInt16(display.getSwMaxBrightness()))
     } else {
       if tries != 0, !(app.safeMode) {
@@ -140,7 +140,7 @@ class SliderHandler {
 
       if display.enableMuteUnmute, tries != 0, !app.safeMode {
         os_log("Polling %{public}@ times", type: .info, String(tries))
-        os_log("%{public}@ (%{public}@):", type: .info, display.name, String(reflecting: Utils.Command.audioMuteScreenBlank))
+        os_log("%{public}@ (%{public}@):", type: .info, display.name, String(reflecting: Command.audioMuteScreenBlank))
         muteValues = display.readDDCValues(for: .audioMuteScreenBlank, tries: tries, minReplyDelay: delay)
       }
 

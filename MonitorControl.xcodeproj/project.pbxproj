@@ -27,6 +27,7 @@
 		AA16139B26BE772E00DCF027 /* Arm64DDC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA16139A26BE772E00DCF027 /* Arm64DDC.swift */; };
 		AA3B4A2826AE103C00B74CD2 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = AA3B4A2726AE103C00B74CD2 /* README.md */; };
 		AA4398A926DD55DA00943F16 /* IntelDDC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4398A826DD55DA00943F16 /* IntelDDC.swift */; };
+		AA473EB126DFF8DE0063A181 /* Command.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA473EB026DFF8DE0063A181 /* Command.swift */; };
 		AA665A5D26C5892800FEF2C1 /* AboutPrefsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA665A5C26C5892800FEF2C1 /* AboutPrefsViewController.swift */; };
 		AA9AE86F26B5BF3D00B6CA65 /* OSD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA9AE86E26B5BF3D00B6CA65 /* OSD.framework */; };
 		AA9AE87126B5BFB700B6CA65 /* CoreDisplay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA9AE87026B5BFB700B6CA65 /* CoreDisplay.framework */; };
@@ -99,6 +100,7 @@
 		AA16139A26BE772E00DCF027 /* Arm64DDC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Arm64DDC.swift; sourceTree = "<group>"; };
 		AA3B4A2726AE103C00B74CD2 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		AA4398A826DD55DA00943F16 /* IntelDDC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntelDDC.swift; sourceTree = "<group>"; };
+		AA473EB026DFF8DE0063A181 /* Command.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Command.swift; sourceTree = "<group>"; };
 		AA665A5C26C5892800FEF2C1 /* AboutPrefsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutPrefsViewController.swift; sourceTree = "<group>"; };
 		AA6686F026B8172E00AF74A2 /* hu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hu; path = hu.lproj/Main.strings; sourceTree = "<group>"; };
 		AA6686F126B8172E00AF74A2 /* hu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hu; path = hu.lproj/MainMenu.strings; sourceTree = "<group>"; };
@@ -244,6 +246,7 @@
 				FE4E0895249D584C003A50BB /* OSDUtils.swift */,
 				AA16139A26BE772E00DCF027 /* Arm64DDC.swift */,
 				AA4398A826DD55DA00943F16 /* IntelDDC.swift */,
+				AA473EB026DFF8DE0063A181 /* Command.swift */,
 			);
 			path = Support;
 			sourceTree = "<group>";
@@ -506,6 +509,7 @@
 				56754EAF1D9A4016007BCDC5 /* AppDelegate.swift in Sources */,
 				6C85EFE122CC00AD00227EA1 /* NSNotification+Extension.swift in Sources */,
 				AA062E8A26C9A039007E628C /* DisplaysPrefsViewController.swift in Sources */,
+				AA473EB126DFF8DE0063A181 /* Command.swift in Sources */,
 				2894D9B82280B30500DF58DA /* CGDirectDisplayID+Extension.swift in Sources */,
 				6CC260F6256AD8F900613714 /* Preferences+Extension.swift in Sources */,
 				AA665A5D26C5892800FEF2C1 /* AboutPrefsViewController.swift in Sources */,
