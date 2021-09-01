@@ -285,11 +285,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     if self.sleepID == dispatchedSleepID {
       os_log("Sober from sleep %{public}@", type: .info, String(self.sleepID))
       self.sleepID = 0
-      self.reconfigureID += 1
-      os_log("Mandatroy bumping of reconfigureID after sleep to %{public}@", type: .info, String(self.reconfigureID))
-      let dispatchedReconfigureID = self.reconfigureID
-      os_log("Display needs reconfig after sober with reconfigureID %{public}@", type: .info, String(dispatchedReconfigureID))
-      self.updateDisplays(dispatchedReconfigureID: dispatchedReconfigureID)
+      if self.reconfigureID != 0 {
+        let dispatchedReconfigureID = self.reconfigureID
+        os_log("Display needs reconfig after sober with reconfigureID %{public}@", type: .info, String(dispatchedReconfigureID))
+        self.updateDisplays(dispatchedReconfigureID: dispatchedReconfigureID)
+      } else if Arm64DDC.isArm64 {
+        os_log("Displays don't need reconfig after sober but might need AVServices update", type: .info)
+        self.updateArm64AVServices()
+      }
     }
   }
 
@@ -389,8 +392,6 @@ extension AppDelegate: MediaKeyTapDelegate {
     guard self.sleepID == 0, self.reconfigureID == 0, let affectedDisplays = self.getAffectedDisplays() else {
       return
     }
-    // let delay = isRepeat ? 0.05 : 0 // Introduce a small delay to handle the media key being held down - Update: it is not clear why this is needed but it blocks the media keys working when the menu is open and also it doesn't seem to affect external bluetooth keyboards but slows down internal keyboards for some reason. Things seem to work better this being disabled.
-    // self.keyRepeatTimers[mediaKey] = Timer.scheduledTimer(withTimeInterval: delay, repeats: false, block: { _ in
     for display in affectedDisplays where display.isEnabled && !display.isVirtual {
       switch mediaKey {
       case .brightnessUp:
@@ -422,7 +423,6 @@ extension AppDelegate: MediaKeyTapDelegate {
         return
       }
     }
-    // })
   }
 
   @objc func handleListenForChanged() {
