@@ -107,15 +107,15 @@ class SliderHandler {
     var values: (UInt16, UInt16)?
     let delay = display.needsLongerDelay ? UInt64(40 * kMillisecondScale) : nil
 
-    let tries = UInt(display.getPollingCount())
-    os_log("Polling %{public}@ times", type: .info, String(tries))
-
     var (currentValue, maxValue) = (UInt16(0), UInt16(0))
+
+    let tries = UInt(display.getPollingCount())
 
     if display.isSw(), command == Utils.Command.brightness {
       (currentValue, maxValue) = (UInt16(display.getSwBrightnessPrefValue()), UInt16(display.getSwMaxBrightness()))
     } else {
       if tries != 0, !(app.safeMode) {
+        os_log("Polling %{public}@ times", type: .info, String(tries))
         values = display.readDDCValues(for: command, tries: tries, minReplyDelay: delay)
       }
       (currentValue, maxValue) = values ?? (UInt16(display.getValueExists(for: command) ? display.getValue(for: command) : 75), 100) // We set 100 as max value if we could not read DDC, the previous setting as current value or 75 if not present.
@@ -138,10 +138,9 @@ class SliderHandler {
       // If we're looking at the audio speaker volume, also retrieve the values for the mute command
       var muteValues: (current: UInt16, max: UInt16)?
 
-      os_log("Polling %{public}@ times", type: .info, String(tries))
-      os_log("%{public}@ (%{public}@):", type: .info, display.name, String(reflecting: Utils.Command.audioMuteScreenBlank))
-
       if display.enableMuteUnmute, tries != 0, !app.safeMode {
+        os_log("Polling %{public}@ times", type: .info, String(tries))
+        os_log("%{public}@ (%{public}@):", type: .info, display.name, String(reflecting: Utils.Command.audioMuteScreenBlank))
         muteValues = display.readDDCValues(for: .audioMuteScreenBlank, tries: tries, minReplyDelay: delay)
       }
 
