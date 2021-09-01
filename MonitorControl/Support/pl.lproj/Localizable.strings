@@ -1,5 +1,5 @@
 /* Shown in the main prefs window */
-"About" = "About";
+"About" = "Informacje";
 
 /* Apple Silicon designation (shown after the version number in Preferences) */
 "Apple Silicon" = "Apple Silicon";
@@ -17,7 +17,7 @@
 "Build" = "Kompilacja";
 
 /* Shown in the Display Preferences */
-"Built-in Display" = "Built-in Display";
+"Built-in Display" = "Wbudowany Wyświetlacz";
 
 /* Shown in menu */
 "Contrast" = "Kontrast";
@@ -26,13 +26,13 @@
 "Copyright Ⓒ MonitorControl, " = "Copyright Ⓒ MonitorControl, ";
 
 /* Shown in the main prefs window */
-"Displays" = "Displays";
+"Displays" = "Wyświetlacze";
 
 /* Shown in the alert dialog */
-"Enable Longer Delay?" = "Enable Longer Delay?";
+"Enable Longer Delay?" = "Włączyć dłuższe opóźnienie?";
 
 /* Shown in the Display Preferences */
-"External Display" = "External Display";
+"External Display" = "Zewnętrzny Wyświetlacz";
 
 /* Shown in the main prefs window */
 "General" = "Ogólne";
@@ -50,7 +50,7 @@
 "No" = "Nie";
 
 /* Shown in the Display Preferences */
-"No Control Available" = "No Control Available";
+"No Control Available" = "Brak dostępnego sterowania";
 
 /* Shown in menu */
 "No supported display found" = "Nie znaleziono obsługiwanego wyświetlacza";
@@ -59,19 +59,19 @@
 "Ok" = "Ok";
 
 /* Shown in the Display Preferences */
-"Other Display" = "Other Display";
+"Other Display" = "Inny Wyświetlacz";
 
 /* Shown in the alert dialog */
-"Reset Preferences?" = "Reset Preferences?";
+"Reset Preferences?" = "Zresetować Preferencje?";
 
 /* Shown in the alert dialog */
 "Shortcuts not available" = "Skróty klawiszowe niedostępne";
 
 /* Shown in the Display Preferences */
-"Software (Forced)" = "Software (Forced)";
+"Software (Forced)" = "Software (Wymuszone)";
 
 /* Shown in the Display Preferences */
-"Software Only" = "Software Only";
+"Software Only" = "Wyłącznie Software";
 
 /* Unknown display name
  Unknown model
@@ -79,13 +79,13 @@
 "Unknown" = "Nieznany";
 
 /* Shown in the Display Preferences */
-"Unspecified" = "Unspecified";
+"Unspecified" = "Nieokreślone";
 
 /* Version */
 "Version" = "Wersja";
 
 /* Shown in the Display Preferences */
-"Virtual Display" = "Virtual Display";
+"Virtual Display" = "Wirtualny Wyświetlacz";
 
 /* Shown in menu */
 "Volume" = "Głośność";
