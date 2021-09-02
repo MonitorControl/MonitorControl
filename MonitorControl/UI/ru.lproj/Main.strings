@@ -2,100 +2,100 @@
 "1PJ-14-Bvn.title" = "MonitorControl";
 
 /* Class = "NSButtonCell"; title = "Special thanks to our contributors!"; ObjectID = "95V-M4-2l5"; */
-"95V-M4-2l5.title" = "Special thanks to our contributors!";
+"95V-M4-2l5.title" = "Особая благодарность нашим контрибьюторам!";
 
 /* Class = "NSButtonCell"; title = "Hide Menu Icon"; ObjectID = "aXL-i8-S6R"; */
-"aXL-i8-S6R.title" = "Hide Menu Icon";
+"aXL-i8-S6R.title" = "Скрыть иконку в меню";
 
 /* Class = "NSButtonCell"; title = "Disable macOS volume OSD"; ObjectID = "bkM-Px-U3b"; */
-"bkM-Px-U3b.title" = "Disable macOS volume OSD";
+"bkM-Px-U3b.title" = "Выключить наэкранную индикацию macOS (OSD)";
 
 /* Class = "NSButtonCell"; title = "Reset settings"; ObjectID = "BYS-7Y-bRz"; */
-"BYS-7Y-bRz.title" = "Reset settings";
+"BYS-7Y-bRz.title" = "Сбросить параметры";
 
 /* Class = "NSButtonCell"; title = "Enable Mute DDC command"; ObjectID = "bZq-0d-lJa"; */
-"bZq-0d-lJa.title" = "Enable Mute DDC command";
+"bZq-0d-lJa.title" = "Включить DDC-команду 'Отключить звук'";
 
 /* Class = "NSTextFieldCell"; title = "Keyboard:"; ObjectID = "c7N-cO-759"; */
-"c7N-cO-759.title" = "Keyboard:";
+"c7N-cO-759.title" = "Клавиатура:";
 
 /* Class = "NSMenuItem"; title = "Custom"; ObjectID = "Cle-DD-vR7"; */
 "Cle-DD-vR7.title" = "Другое";
 
 /* Class = "NSButtonCell"; title = "Website"; ObjectID = "Cln-uW-2dd"; */
-"Cln-uW-2dd.title" = "Website";
+"Cln-uW-2dd.title" = "Веб-сайт";
 
 /* Class = "NSTextFieldCell"; title = "⚠️ Warning! Changing some of these settings may cause system freezes or unexpected behavior!"; ObjectID = "Cz1-Mh-llk"; */
-"Cz1-Mh-llk.title" = "⚠️ Warning! Changing some of these settings may cause system freezes or unexpected behavior!";
+"Cz1-Mh-llk.title" = "⚠️ Внимание! Изменение некоторых из этих настроек может привести к зависаниям системы или неожиданному поведению!";
 
 /* Class = "NSButtonCell"; title = "Show volume slider in menu"; ObjectID = "dhP-eB-1L6"; */
-"dhP-eB-1L6.title" = "Show volume slider in menu";
+"dhP-eB-1L6.title" = "Показывать ползунок громкости в меню";
 
 /* Class = "NSButtonCell"; title = "Change Brightness and Volume for all screens"; ObjectID = "E6M-ih-S8Y"; */
-"E6M-ih-S8Y.title" = "Change Brightness and Volume for all screens";
+"E6M-ih-S8Y.title" = "Изменить яркость и громоксть на всех экранах";
 
 /* Class = "NSMenuItem"; title = "Minimal"; ObjectID = "Eq3-z9-yIo"; */
 "Eq3-z9-yIo.title" = "Редко";
 
 /* Class = "NSButtonCell"; title = "Reset Name"; ObjectID = "f9g-8s-gdd"; */
-"f9g-8s-gdd.title" = "Reset Name";
+"f9g-8s-gdd.title" = "Сбросить название";
 
 /* Class = "NSButtonCell"; title = "Further lower brightness via software dimming"; ObjectID = "fhy-Er-0aI"; */
-"fhy-Er-0aI.title" = "Уменьшать контрастность после яркости";
+"fhy-Er-0aI.title" = "Снижать яркость дальше с помощью программного затемнения";
 
 /* Class = "NSMenuItem"; title = "None"; ObjectID = "FoA-yh-Yx3"; */
 "FoA-yh-Yx3.title" = "Нет";
 
 /* Class = "NSTextFieldCell"; title = "Brightness control:"; ObjectID = "hdd-Zz-buN"; */
-"hdd-Zz-buN.title" = "Brightness control:";
+"hdd-Zz-buN.title" = "Управление яркостью:";
 
 /* Class = "NSMenuItem"; title = "Brightness only"; ObjectID = "hjz-0c-rvK"; */
 "hjz-0c-rvK.title" = "Только яркость";
 
 /* Class = "NSTextFieldCell"; title = "These options work for hardware (DDC) controlled displays only."; ObjectID = "iBZ-8c-JDY"; */
-"iBZ-8c-JDY.title" = "These options work for hardware (DDC) controlled displays only.";
+"iBZ-8c-JDY.title" = "Эти опции работают только для дисплеев с аппаратным управлением (DDC).";
 
 /* Class = "NSButtonCell"; title = "Start at Login"; ObjectID = "j72-NF-zsW"; */
-"j72-NF-zsW.title" = "Запускать MonitorControl при входе в систему";
+"j72-NF-zsW.title" = "Запуск при входе в систему";
 
 /* Class = "NSTextFieldCell"; title = "Custom read polling count:"; ObjectID = "J77-r0-djA"; */
-"J77-r0-djA.title" = "Custom read polling count:";
+"J77-r0-djA.title" = "Свой счетчик сбора показаний:";
 
 /* Class = "NSTextFieldCell"; title = "Use the media keys of your keyboard to control Brightness & Volume."; ObjectID = "K2r-aD-eec"; */
-"K2r-aD-eec.title" = "Use the media keys of your keyboard to control Brightness & Volume.";
+"K2r-aD-eec.title" = "Использовать мультимедийные клавиши клавиатуры для управления яркостью и громкостью.";
 
 /* Class = "NSButtonCell"; title = "Enable software dimming if required"; ObjectID = "kMa-3q-udl"; */
-"kMa-3q-udl.title" = "Enable software dimming if required";
+"kMa-3q-udl.title" = "Включить программное затемнение при необходимости";
 
 /* Class = "NSButton"; ibShadowedToolTip = "More Info"; ObjectID = "kqn-gU-mZX"; */
-"kqn-gU-mZX.ibShadowedToolTip" = "Больше информации";
+"kqn-gU-mZX.ibShadowedToolTip" = "Подробнее";
 
 /* Class = "NSTextFieldCell"; title = "Display type:"; ObjectID = "lSJ-6w-KJ2"; */
-"lSJ-6w-KJ2.title" = "Display type:";
+"lSJ-6w-KJ2.title" = "Тип дисплея:";
 
 /* Class = "NSTextFieldCell"; title = "Menu contents:"; ObjectID = "MJx-MK-e7D"; */
-"MJx-MK-e7D.title" = "Menu contents:";
+"MJx-MK-e7D.title" = "Содержание меню:";
 
 /* Class = "NSTextFieldCell"; title = "If an external display can't be controlled, software dimming will be used instead."; ObjectID = "n4V-jQ-1Ri"; */
-"n4V-jQ-1Ri.title" = "If an external display can't be controlled, software dimming will be used instead.";
+"n4V-jQ-1Ri.title" = "Когда нет возможности управлять внешним дисплеем, вместо него будет использовано программное затемнение.";
 
 /* Class = "NSMenuItem"; title = "Volume only"; ObjectID = "NLP-dU-Dam"; */
 "NLP-dU-Dam.title" = "Только громкость";
 
 /* Class = "NSTextFieldCell"; title = "Application:"; ObjectID = "okD-DG-pYa"; */
-"okD-DG-pYa.title" = "Application:";
+"okD-DG-pYa.title" = "Приложение:";
 
 /* Class = "NSTextFieldCell"; title = "Control method:"; ObjectID = "PaK-1f-DsW"; */
-"PaK-1f-DsW.title" = "Control method:";
+"PaK-1f-DsW.title" = "Метод управления:";
 
 /* Class = "NSButtonCell"; title = "Longer delay during DDC read operations"; ObjectID = "pF5-Sw-7BR"; */
-"pF5-Sw-7BR.title" = "Longer delay during DDC read operations";
+"pF5-Sw-7BR.title" = "Более длительная задержка при выполнении операций считывания данных DDC";
 
 /* Class = "NSTextFieldCell"; title = "If the menu item is hidden, just relaunch the app to reveal Preferences!"; ObjectID = "PVE-y7-zIk"; */
-"PVE-y7-zIk.title" = "If the menu item is hidden, just relaunch the app to reveal Preferences!";
+"PVE-y7-zIk.title" = "Если пункт меню скрыт, просто перезапустите приложение, чтобы открыть Параметры!";
 
 /* Class = "NSTextFieldCell"; title = "Advanced:"; ObjectID = "r7i-oG-Ab6"; */
-"r7i-oG-Ab6.title" = "Advanced:";
+"r7i-oG-Ab6.title" = "Расширенные:";
 
 /* Class = "NSMenuItem"; title = "Normal"; ObjectID = "Riq-uM-bTs"; */
 "Riq-uM-bTs.title" = "Нормально";
@@ -104,40 +104,40 @@
 "TKd-J8-Iyk.title" = "@the0neyouseek\n@reitermarkus\n@JoniVR\n@waydabber";
 
 /* Class = "NSButtonCell"; title = "Enable keyboard control for display"; ObjectID = "UqR-WE-jHl"; */
-"UqR-WE-jHl.title" = "Enable keyboard control for display";
+"UqR-WE-jHl.title" = "Включить управление клавиатурой для дисплея";
 
 /* Class = "NSMenuItem"; title = "Heavy"; ObjectID = "vik-vN-bJe"; */
 "vik-vN-bJe.title" = "Часто";
 
 /* Class = "NSMenuItem"; title = "Both Brightness & Volume"; ObjectID = "Vr4-xb-B4o"; */
-"Vr4-xb-B4o.title" = "Яркость и громкость вместе";
+"Vr4-xb-B4o.title" = "Как яркость, так и громкость";
 
 /* Class = "NSTextFieldCell"; title = "DDC read polling mode:"; ObjectID = "vwm-hY-on5"; */
-"vwm-hY-on5.title" = "DDC read polling mode:";
+"vwm-hY-on5.title" = "Режим сбора показаний DDC:";
 
 /* Class = "NSButtonCell"; title = "Show advanced settings under Displays"; ObjectID = "Wnd-hx-Meb"; */
-"Wnd-hx-Meb.title" = "Show advanced settings under Displays";
+"Wnd-hx-Meb.title" = "Показать расширенные настройки в разделе Дисплеи";
 
 /* Class = "NSMenuItem"; title = "None"; ObjectID = "X96-ny-lAP"; */
-"X96-ny-lAP.title" = "None";
+"X96-ny-lAP.title" = "Нет";
 
 /* Class = "NSButtonCell"; title = "Show contrast slider in menu"; ObjectID = "xSI-8W-Xd0"; */
-"xSI-8W-Xd0.title" = "Показать ползунок для контрастности";
+"xSI-8W-Xd0.title" = "Показать ползунок контрастности в меню";
 
 /* Class = "NSButtonCell"; title = "Reset Preferences"; ObjectID = "xY6-aw-o9u"; */
-"xY6-aw-o9u.title" = "Reset Preferences";
+"xY6-aw-o9u.title" = "Сбросить параметры";
 
 /* Class = "NSTextFieldCell"; title = "Additional settings:"; ObjectID = "Xz0-X0-rB4"; */
-"Xz0-X0-rB4.title" = "Additional settings:";
+"Xz0-X0-rB4.title" = "Дополнительные настройки:";
 
 /* Class = "NSTextFieldCell"; title = "This activates additional software dimming after the display reached zero hardware brightness. Menu slider is also affected with 50% being the transition point. Works for DDC controlled displays only."; ObjectID = "yeg-GN-SuO"; */
-"yeg-GN-SuO.title" = "This activates additional software dimming after the display reached zero hardware brightness. Menu slider is also affected with 50% being the transition point. Works for DDC controlled displays only.";
+"yeg-GN-SuO.title" = "Это активирует дополнительное программное затемнение после достижения дисплеем нулевой аппаратной яркости. На ползунок меню также влияет 50% - точка перехода. Работает только для дисплеев с управлением DDC.";
 
 /* Class = "NSTextFieldCell"; title = "Identifier:"; ObjectID = "YqZ-LS-YvR"; */
-"YqZ-LS-YvR.title" = "Identifier:";
+"YqZ-LS-YvR.title" = "Идентификатор:";
 
 /* Class = "NSButtonCell"; title = "Use hardware DDC control"; ObjectID = "ZdU-gV-V05"; */
-"ZdU-gV-V05.title" = "Use hardware DDC control";
+"ZdU-gV-V05.title" = "Использовать аппаратное управление DDC";
 
 /* Class = "NSButtonCell"; title = "Donate"; ObjectID = "ZKk-ve-rS4"; */
-"ZKk-ve-rS4.title" = "Donate";
+"ZKk-ve-rS4.title" = "Пожертвовать";
