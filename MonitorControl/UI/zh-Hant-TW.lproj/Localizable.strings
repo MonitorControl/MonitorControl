@@ -1,68 +1,68 @@
 /* Shown in the main prefs window */
-"About" = "About";
+"About" = "關於";
 
 /* Apple Silicon designation (shown after the version number in Preferences) */
 "Apple Silicon" = "Apple Silicon";
 
 /* Shown in the alert dialog */
-"Are you sure you want to enable a longer delay? Doing so may freeze your system and require a restart. Start at login will be disabled as a safety measure." = "Are you sure you want to enable a longer delay? Doing so may freeze your system and require a restart. Start at login will be disabled as a safety measure.";
+"Are you sure you want to enable a longer delay? Doing so may freeze your system and require a restart. Start at login will be disabled as a safety measure." = "您確定要啟用更長的延遲嗎？ 這樣做可能會使系統崩潰並需要重新啟動。 作為安全措施，登錄時啟動將被禁用。";
 
 /* Shown in the alert dialog */
-"Are you sure you want to reset all preferences?" = "Are you sure you want to reset all preferences?";
+"Are you sure you want to reset all preferences?" = "確定要重置嗎？";
 
 /* Sown in menu */
 "Brightness" = "亮度";
 
 /* Build */
-"Build" = "Build";
+"Build" = "建構";
 
 /* Shown in the Display Preferences */
-"Built-in Display" = "Built-in Display";
+"Built-in Display" = "內置螢幕";
 
 /* Shown in menu */
-"Contrast" = "对比度";
+"Contrast" = "對比度";
 
 /* Version */
 "Copyright Ⓒ MonitorControl, " = "Copyright Ⓒ MonitorControl, ";
 
 /* Shown in the main prefs window */
-"Displays" = "Displays";
+"Displays" = "螢幕";
 
 /* Shown in the alert dialog */
-"Enable Longer Delay?" = "Enable Longer Delay?";
+"Enable Longer Delay?" = "啟用更長的延遲？";
 
 /* Shown in the Display Preferences */
-"External Display" = "External Display";
+"External Display" = "外接螢幕";
 
 /* Shown in the main prefs window */
 "General" = "通用";
 
 /* Shown in the Display Preferences */
-"Hardware (CoreDisplay)" = "Hardware (CoreDisplay)";
+"Hardware (Apple)" = "硬體(Apple)";
 
 /* Shown in the Display Preferences */
-"Hardware (DDC)" = "Hardware (DDC)";
+"Hardware (DDC)" = "硬體(DDC)";
 
 /* Intel designation (shown after the version number in Preferences) */
 "Intel" = "Intel";
 
 /* Shown in the alert dialog */
-"No" = "No";
+"No" = "否";
 
 /* Shown in the Display Preferences */
-"No Control Available" = "No Control Available";
+"No Control Available" = "沒有可用的控制項";
 
 /* Shown in menu */
-"No supported display found" = "未发现支持的显示器";
+"No supported display found" = "找不到支援的螢幕";
 
 /* Shown in the alert dialog */
-"Ok" = "Ok";
+"Ok" = "好";
 
 /* Shown in the Display Preferences */
-"Other Display" = "Other Display";
+"Other Display" = "其他螢幕";
 
 /* Shown in the alert dialog */
-"Reset Preferences?" = "Reset Preferences?";
+"Reset Preferences?" = "重置偏好設定？";
 
 /* Shown in the alert dialog */
 "Safe Mode Activated" = "Safe Mode Activated";
@@ -71,33 +71,33 @@
 "Shift was pressed during launch. MonitorControl started in safe mode. Default preferences are reloaded, DDC read is blocked." = "Shift was pressed during launch. MonitorControl started in safe mode. Default preferences are reloaded, DDC read is blocked.";
 
 /* Shown in the alert dialog */
-"Shortcuts not available" = "快捷键不可用";
+"Shortcuts not available" = "快捷鍵不可使用";
 
 /* Shown in the Display Preferences */
-"Software (Forced)" = "Software (Forced)";
+"Software (Forced)" = "軟體（強制）";
 
 /* Shown in the Display Preferences */
-"Software Only" = "Software Only";
+"Software Only" = "僅用軟體";
 
 /* Unknown display name
  Unknown model
  Unknown vendor */
-"Unknown" = "Unknown";
+"Unknown" = "未知";
 
 /* Shown in the Display Preferences */
-"Unspecified" = "Unspecified";
+"Unspecified" = "未指定";
 
 /* Version */
-"Version" = "Version";
+"Version" = "版本";
 
 /* Shown in the Display Preferences */
-"Virtual Display" = "Virtual Display";
+"Virtual Display" = "虛擬螢幕";
 
 /* Shown in menu */
 "Volume" = "音量";
 
 /* Shown in the alert dialog */
-"Yes" = "Yes";
+"Yes" = "是";
 
 /* Shown in the alert dialog */
-"You need to enable MonitorControl in System Preferences > Security and Privacy > Accessibility for the keyboard shortcuts to work" = "您需要在「系统偏好设置」>「安全性与隐私」>「辅助功能」中开启 MonitorControl 以便使快捷键生效";
+"You need to enable MonitorControl in System Preferences > Security and Privacy > Accessibility for the keyboard shortcuts to work" = "您需要在「系統偏好設定」>「安全性與隱私權」>「輔助使用」中開啟 MonitorControl 使快捷鍵生效";

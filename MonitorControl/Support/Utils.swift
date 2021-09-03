@@ -3,7 +3,7 @@ import os.log
 import ServiceManagement
 
 class Utils: NSObject {
-  /// Acquire Privileges (Necessary to listen to keyboard event globally)
+  // Acquire Privileges (Necessary to listen to keyboard event globally)
   static func acquirePrivileges() {
     if !self.readPrivileges(prompt: true) {
       let alert = NSAlert()
@@ -63,60 +63,49 @@ class Utils: NSObject {
 
   // MARK: - Enums
 
-  /// UserDefault Keys for the app prefs
+  // UserDefault Keys for the app prefs
   enum PrefKeys: String {
-    /// Was the app launched once
+    // Was the app launched once
     case appAlreadyLaunched
-
-    /// Does the app start when plugged to an external monitor
+    // Does the app start when plugged to an external monitor
     case startWhenExternal
-
-    /// Hide menu icon
+    // Hide menu icon
     case hideMenuIcon
-
-    /// Keys listened for (Brightness/Volume)
+    // Keys listened for (Brightness/Volume)
     case listenFor
-
-    /// Show contrast sliders
+    // Show contrast sliders
     case showContrast
-
-    /// Show volume sliders
+    // Show volume sliders
     case showVolume
-
-    /// Lower via software after brightness
+    // Lower via software after brightness
     case lowerSwAfterBrightness
-
-    /// Fallback to software control for external displays with no DDC
+    // Fallback to software control for external displays with no DDC
     case fallbackSw
-
-    /// Change Brightness/Volume for all screens
+    // Do not show sliders for Apple displays (including built-in display) in menu
+    case hideAppleFromMenu
+    // Change Brightness/Volume for all screens MARK: TODO: This has no outlet in Preferences yet
+    case disableSliderSnap
+    // Change Brightness/Volume for all screens MARK: TODO: This has no outlet in Preferences yet
     case allScreens
-
-    /// Friendly name changed
+    // Friendly name changed
     case friendlyName
-
-    /// Prefs Reset
+    // Prefs Reset
     case preferenceReset
-
-    /// Used for notification when displays are updated in DisplayManager
+    // Used for notification when displays are updated in DisplayManager
     case displayListUpdate
-
-    /// Show advanced options under Displays tab in Preferences
+    // Show advanced options under Displays tab in Preferences
     case showAdvancedDisplays
   }
 
-  /// Keys for the value of listenFor option
+  // Keys for the value of listenFor option
   enum ListenForKeys: Int {
-    /// Listen for Brightness and Volume keys
+    // Listen for Brightness and Volume keys
     case brightnessAndVolumeKeys = 0
-
-    /// Listen for Brightness keys only
+    // Listen for Brightness keys only
     case brightnessOnlyKeys = 1
-
-    /// Listen for Volume keys only
+    // Listen for Volume keys only
     case volumeOnlyKeys = 2
-
-    /// Don't listen for any keys
+    // Don't listen for any keys
     case none = 3
   }
 

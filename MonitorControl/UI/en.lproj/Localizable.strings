@@ -10,8 +10,8 @@
 /* Shown in the alert dialog */
 "Are you sure you want to reset all preferences?" = "Are you sure you want to reset all preferences?";
 
-/* Sown in menu */
-"Brightness" = "Luminosità";
+/* Shown in menu */
+"Brightness" = "Brightness";
 
 /* Build */
 "Build" = "Build";
@@ -20,7 +20,7 @@
 "Built-in Display" = "Built-in Display";
 
 /* Shown in menu */
-"Contrast" = "Contrasto";
+"Contrast" = "Contrast";
 
 /* Version */
 "Copyright Ⓒ MonitorControl, " = "Copyright Ⓒ MonitorControl, ";
@@ -35,10 +35,10 @@
 "External Display" = "External Display";
 
 /* Shown in the main prefs window */
-"General" = "Generale";
+"General" = "General";
 
 /* Shown in the Display Preferences */
-"Hardware (CoreDisplay)" = "Hardware (CoreDisplay)";
+"Hardware (Apple)" = "Hardware (Apple)";
 
 /* Shown in the Display Preferences */
 "Hardware (DDC)" = "Hardware (DDC)";
@@ -53,7 +53,7 @@
 "No Control Available" = "No Control Available";
 
 /* Shown in menu */
-"No supported display found" = "Nessuno schermo supportato è stato trovato";
+"No supported display found" = "No supported display found";
 
 /* Shown in the alert dialog */
 "Ok" = "Ok";
@@ -71,7 +71,7 @@
 "Shift was pressed during launch. MonitorControl started in safe mode. Default preferences are reloaded, DDC read is blocked." = "Shift was pressed during launch. MonitorControl started in safe mode. Default preferences are reloaded, DDC read is blocked.";
 
 /* Shown in the alert dialog */
-"Shortcuts not available" = "Comandi rapidi non disponibili";
+"Shortcuts not available" = "Shortcuts not available";
 
 /* Shown in the Display Preferences */
 "Software (Forced)" = "Software (Forced)";
@@ -79,16 +79,14 @@
 /* Shown in the Display Preferences */
 "Software Only" = "Software Only";
 
-/* Unknown display name
- Unknown model
- Unknown vendor */
-"Unknown" = "Sconosciuto";
+/* Unknown display name */
+"Unknown" = "Unknown";
 
 /* Shown in the Display Preferences */
 "Unspecified" = "Unspecified";
 
 /* Version */
-"Version" = "Versione";
+"Version" = "Version";
 
 /* Shown in the Display Preferences */
 "Virtual Display" = "Virtual Display";
@@ -100,4 +98,4 @@
 "Yes" = "Yes";
 
 /* Shown in the alert dialog */
-"You need to enable MonitorControl in System Preferences > Security and Privacy > Accessibility for the keyboard shortcuts to work" = "E' necessario abilitare MonitorControl nelle Preferenze di Sistema > Sicurezza e Privacy > Accessibilità affinchè le abbreviazioni da tastiera funzionino";
+"You need to enable MonitorControl in System Preferences > Security and Privacy > Accessibility for the keyboard shortcuts to work" = "You need to enable MonitorControl in System Preferences > Security and Privacy > Accessibility for the keyboard shortcuts to work";

@@ -81,14 +81,14 @@ class DisplaysPrefsViewController: NSViewController, PreferencePane, NSTableView
       } else {
         controlMethod = NSLocalizedString("Unspecified", comment: "Shown in the Display Preferences")
       }
-    } else if display is InternalDisplay {
+    } else if display is AppleDisplay {
       displayType = NSLocalizedString("Built-in Display", comment: "Shown in the Display Preferences")
       if self.isImac() {
         displayImage = "desktopcomputer"
       } else {
         displayImage = "laptopcomputer"
       }
-      controlMethod = NSLocalizedString("Hardware (CoreDisplay)", comment: "Shown in the Display Preferences")
+      controlMethod = NSLocalizedString("Hardware (Apple)", comment: "Shown in the Display Preferences")
     } else {
       displayType = NSLocalizedString("Other Display", comment: "Shown in the Display Preferences")
       displayImage = "display.trianglebadge.exclamationmark"

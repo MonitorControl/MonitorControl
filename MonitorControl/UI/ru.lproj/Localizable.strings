@@ -38,7 +38,7 @@
 "General" = "Основные";
 
 /* Shown in the Display Preferences */
-"Hardware (CoreDisplay)" = "Аппаратно (CoreDisplay)";
+"Hardware (Apple)" = "Аппаратно (Apple)";
 
 /* Shown in the Display Preferences */
 "Hardware (DDC)" = "Аппаратно (DDC)";

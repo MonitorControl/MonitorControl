@@ -21,6 +21,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   var sleepID: Int = 0 // Don't reconfigure display as the system or display is sleeping or wake just recently.
   var safeMode = false // Safe mode engaged during startup?
   let debugSw: Bool = false
+  let ddcQueue = DispatchQueue(label: "DDC queue")
   lazy var preferencesWindowController: PreferencesWindowController = {
     let storyboard = NSStoryboard(name: "Main", bundle: Bundle.main)
     let mainPrefsVc = storyboard.instantiateController(withIdentifier: "MainPrefsVC") as? MainPrefsViewController
@@ -83,6 +84,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       prefs.set(true, forKey: Utils.PrefKeys.showVolume.rawValue)
       prefs.set(false, forKey: Utils.PrefKeys.lowerSwAfterBrightness.rawValue)
       prefs.set(true, forKey: Utils.PrefKeys.fallbackSw.rawValue)
+      prefs.set(false, forKey: Utils.PrefKeys.hideAppleFromMenu.rawValue)
+      prefs.set(false, forKey: Utils.PrefKeys.disableSliderSnap.rawValue)
       prefs.set(false, forKey: Utils.PrefKeys.hideMenuIcon.rawValue)
       prefs.set(false, forKey: Utils.PrefKeys.showAdvancedDisplays.rawValue)
     }
@@ -135,13 +138,16 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
   func updateMenus() {
     self.clearMenu()
-    var controllableExternalDisplays: [ExternalDisplay] = []
-    if prefs.bool(forKey: Utils.PrefKeys.fallbackSw.rawValue) {
-      controllableExternalDisplays = DisplayManager.shared.getNonVirtualExternalDisplays()
-    } else {
-      controllableExternalDisplays = DisplayManager.shared.getDdcCapableDisplays()
+    var displays: [Display] = []
+    if !prefs.bool(forKey: Utils.PrefKeys.hideAppleFromMenu.rawValue) {
+      displays.append(contentsOf: DisplayManager.shared.getAppleDisplays())
     }
-    if controllableExternalDisplays.count == 0 {
+    if prefs.bool(forKey: Utils.PrefKeys.fallbackSw.rawValue) {
+      displays.append(contentsOf: DisplayManager.shared.getNonVirtualExternalDisplays())
+    } else {
+      displays.append(contentsOf: DisplayManager.shared.getDdcCapableDisplays())
+    }
+    if displays.count == 0 {
       let item = NSMenuItem()
       item.title = NSLocalizedString("No supported display found", comment: "Shown in menu")
       item.isEnabled = false
@@ -149,9 +155,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       self.statusMenu.insertItem(item, at: 0)
       self.statusMenu.insertItem(NSMenuItem.separator(), at: 1)
     } else {
-      for display in controllableExternalDisplays {
+      let asSubmenu: Bool = displays.count > 3 ? true : false
+      for display in displays {
         os_log("Supported display found: %{public}@", type: .info, "\(display.name) (Vendor: \(display.vendorNumber ?? 0), Model: \(display.modelNumber ?? 0))")
-        let asSubmenu: Bool = controllableExternalDisplays.count > 2 ? true : false
         if asSubmenu {
           self.statusMenu.insertItem(NSMenuItem.separator(), at: 0)
         }
@@ -174,7 +180,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       return
     }
     for onlineDisplayID in onlineDisplayIDs where onlineDisplayID != 0 {
-      let name = DisplayManager.shared.getDisplayNameByID(displayID: onlineDisplayID)
+      let name = DisplayManager.getDisplayNameByID(displayID: onlineDisplayID)
       let id = onlineDisplayID
       let vendorNumber = CGDisplayVendorNumber(onlineDisplayID)
       let modelNumber = CGDisplayVendorNumber(onlineDisplayID)
@@ -189,8 +195,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
           }
         }
       }
-      if !debugSw, CGDisplayIsBuiltin(onlineDisplayID) != 0 { // MARK: (point of interest for testing)
-        display = InternalDisplay(id, name: name, vendorNumber: vendorNumber, modelNumber: modelNumber, isVirtual: isVirtual)
+      if !debugSw, DisplayManager.isAppleDisplay(displayID: onlineDisplayID) { // MARK: (point of interest for testing)
+        display = AppleDisplay(id, name: name, vendorNumber: vendorNumber, modelNumber: modelNumber, isVirtual: isVirtual)
       } else {
         display = ExternalDisplay(id, name: name, vendorNumber: vendorNumber, modelNumber: modelNumber, isVirtual: isVirtual)
       }
@@ -210,29 +216,27 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     updateMediaKeyTap()
   }
 
-  private func addDisplayToMenu(display: ExternalDisplay, asSubMenu: Bool) {
+  private func addDisplayToMenu(display: Display, asSubMenu: Bool) {
     if !asSubMenu {
       self.statusMenu.insertItem(NSMenuItem.separator(), at: 0)
     }
     let monitorSubMenu: NSMenu = asSubMenu ? NSMenu() : self.statusMenu
-
-    if !display.isSw() {
+    var numOfBrightnessTickMarks = 0
+    if let externalDisplay = display as? ExternalDisplay, !externalDisplay.isSw() {
       if prefs.bool(forKey: Utils.PrefKeys.showVolume.rawValue) {
-        let volumeSliderHandler = SliderHandler.addSliderMenuItem(toMenu: monitorSubMenu, forDisplay: display, command: .audioSpeakerVolume, title: NSLocalizedString("Volume", comment: "Shown in menu"))
-        display.volumeSliderHandler = volumeSliderHandler
+        let volumeSliderHandler = SliderHandler.addSliderMenuItem(toMenu: monitorSubMenu, forDisplay: externalDisplay, command: .audioSpeakerVolume, title: NSLocalizedString("Volume", comment: "Shown in menu"))
+        externalDisplay.volumeSliderHandler = volumeSliderHandler
       }
       if prefs.bool(forKey: Utils.PrefKeys.showContrast.rawValue) {
-        let contrastSliderHandler = SliderHandler.addSliderMenuItem(toMenu: monitorSubMenu, forDisplay: display, command: .contrast, title: NSLocalizedString("Contrast", comment: "Shown in menu"))
-        display.contrastSliderHandler = contrastSliderHandler
+        let contrastSliderHandler = SliderHandler.addSliderMenuItem(toMenu: monitorSubMenu, forDisplay: externalDisplay, command: .contrast, title: NSLocalizedString("Contrast", comment: "Shown in menu"))
+        externalDisplay.contrastSliderHandler = contrastSliderHandler
+      }
+      if prefs.bool(forKey: Utils.PrefKeys.lowerSwAfterBrightness.rawValue) {
+        numOfBrightnessTickMarks = 0 // 1 - I  disabled this because tickmarks are buggy in dark mode on Monterey (probably Big Sur as well).
       }
     }
-    var numOfTickMarks = 0
-    if !display.isSw(), prefs.bool(forKey: Utils.PrefKeys.lowerSwAfterBrightness.rawValue) {
-      numOfTickMarks = 0 // 1 - I  disabled this because tickmarks are buggy in dark mode on Monterey (probably Big Sur as well).
-    }
-    let brightnessSliderHandler = SliderHandler.addSliderMenuItem(toMenu: monitorSubMenu, forDisplay: display, command: .brightness, title: NSLocalizedString("Brightness", comment: "Shown in menu"), numOfTickMarks: numOfTickMarks)
+    let brightnessSliderHandler = SliderHandler.addSliderMenuItem(toMenu: monitorSubMenu, forDisplay: display, command: .brightness, title: NSLocalizedString("Brightness", comment: "Shown in menu"), numOfTickMarks: numOfBrightnessTickMarks)
     display.brightnessSliderHandler = brightnessSliderHandler
-
     let monitorMenuItem = NSMenuItem()
     if asSubMenu {
       monitorMenuItem.title = "\(display.getFriendlyName())"
@@ -241,7 +245,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       let attrs: [NSAttributedString.Key: Any] = [.foregroundColor: NSColor.systemGray, .font: NSFont.boldSystemFont(ofSize: 12)]
       monitorMenuItem.attributedTitle = NSAttributedString(string: "\(display.getFriendlyName())", attributes: attrs)
     }
-
     self.monitorItems.append(monitorMenuItem)
     self.statusMenu.insertItem(monitorMenuItem, at: 0)
   }
@@ -349,7 +352,7 @@ extension AppDelegate: MediaKeyTapDelegate {
     // control internal display when holding ctrl modifier
     let isControlModifier = modifiers?.isSuperset(of: NSEvent.ModifierFlags([.control])) ?? false
     if isControlModifier, mediaKey == .brightnessUp || mediaKey == .brightnessDown {
-      if isPressed, let internalDisplay = DisplayManager.shared.getBuiltInDisplay() as? InternalDisplay {
+      if isPressed, let internalDisplay = DisplayManager.shared.getBuiltInDisplay() as? AppleDisplay {
         internalDisplay.stepBrightness(isUp: mediaKey == .brightnessUp, isSmallIncrement: isSmallIncrement)
         return
       }

@@ -45,8 +45,12 @@ class DisplayManager {
     }
   }
 
+  func getAppleDisplays() -> [AppleDisplay] {
+    return self.displays.compactMap { $0 as? AppleDisplay }
+  }
+
   func getBuiltInDisplay() -> Display? {
-    return self.displays.first { $0 is InternalDisplay }
+    return self.displays.first { CGDisplayIsBuiltin($0.identifier) != 0 }
   }
 
   func getCurrentDisplay() -> Display? {
@@ -62,15 +66,11 @@ class DisplayManager {
     self.displays.append(display)
   }
 
-  func updateDisplay(display updatedDisplay: Display) {
-    if let indexToUpdate = self.displays.firstIndex(of: updatedDisplay) {
-      self.displays[indexToUpdate] = updatedDisplay
-    }
-  }
-
   func clearDisplays() {
     self.displays = []
   }
+
+  // Semi-static functions (could be moved elsewhere easily)
 
   func resetSwBrightnessForAllDisplays(settingsOnly: Bool = false, async: Bool = false) {
     for externalDisplay in self.getNonVirtualExternalDisplays() {
@@ -85,22 +85,9 @@ class DisplayManager {
     }
   }
 
-  func setBrightnessSliderValue(externalDisplay: ExternalDisplay, value: Int32) {
-    if let slider = externalDisplay.brightnessSliderHandler?.slider {
-      slider.intValue = value
-    }
-  }
-
-  func getBrightnessSliderMaxValue(externalDisplay: ExternalDisplay) -> Double {
-    if let slider = externalDisplay.brightnessSliderHandler?.slider {
-      return slider.maxValue
-    }
-    return 0
-  }
-
   func restoreSwBrightnessForAllDisplays(async: Bool = false) {
     for externalDisplay in self.getExternalDisplays() {
-      let sliderMax = self.getBrightnessSliderMaxValue(externalDisplay: externalDisplay)
+      let sliderMax = DisplayManager.getBrightnessSliderMaxValue(externalDisplay: externalDisplay)
       if externalDisplay.getValue(for: .brightness) == 0 || externalDisplay.isSw() {
         let savedPrefValue = externalDisplay.getSwBrightnessPrefValue()
         if externalDisplay.getSwBrightness() != savedPrefValue {
@@ -112,23 +99,96 @@ class DisplayManager {
         _ = externalDisplay.setSwBrightness(value: UInt8(savedPrefValue), smooth: async)
         if !externalDisplay.isSw(), prefs.bool(forKey: Utils.PrefKeys.lowerSwAfterBrightness.rawValue) {
           if savedPrefValue < externalDisplay.getSwMaxBrightness() {
-            self.setBrightnessSliderValue(externalDisplay: externalDisplay, value: Int32(Float(sliderMax / 2) * (Float(savedPrefValue) / Float(externalDisplay.getSwMaxBrightness()))))
+            DisplayManager.setBrightnessSliderValue(externalDisplay: externalDisplay, value: Int32(Float(sliderMax / 2) * (Float(savedPrefValue) / Float(externalDisplay.getSwMaxBrightness()))))
           } else {
-            self.setBrightnessSliderValue(externalDisplay: externalDisplay, value: Int32(sliderMax / 2) + Int32(externalDisplay.getValue(for: .brightness)))
+            DisplayManager.setBrightnessSliderValue(externalDisplay: externalDisplay, value: Int32(sliderMax / 2) + Int32(externalDisplay.getValue(for: .brightness)))
           }
         } else if externalDisplay.isSw() {
-          self.setBrightnessSliderValue(externalDisplay: externalDisplay, value: Int32(Float(sliderMax) * (Float(savedPrefValue) / Float(externalDisplay.getSwMaxBrightness()))))
+          DisplayManager.setBrightnessSliderValue(externalDisplay: externalDisplay, value: Int32(Float(sliderMax) * (Float(savedPrefValue) / Float(externalDisplay.getSwMaxBrightness()))))
         }
       } else {
         _ = externalDisplay.setSwBrightness(value: externalDisplay.getSwMaxBrightness())
         if externalDisplay.isSw() {
-          self.setBrightnessSliderValue(externalDisplay: externalDisplay, value: Int32(sliderMax))
+          DisplayManager.setBrightnessSliderValue(externalDisplay: externalDisplay, value: Int32(sliderMax))
         }
       }
     }
   }
 
-  func getDisplayNameByID(displayID: CGDirectDisplayID) -> String {
+  func getAffectedDisplays() -> [Display]? {
+    var affectedDisplays: [Display]
+    let allDisplays = self.getAllNonVirtualDisplays()
+    guard let currentDisplay = self.getCurrentDisplay() else {
+      return nil
+    }
+    // let allDisplays = prefs.bool(forKey: Utils.PrefKeys.allScreens.rawValue) ? displays : [currentDisplay]
+    if prefs.bool(forKey: Utils.PrefKeys.allScreens.rawValue) {
+      affectedDisplays = allDisplays
+    } else {
+      affectedDisplays = [currentDisplay]
+      if CGDisplayIsInHWMirrorSet(currentDisplay.identifier) != 0 || CGDisplayIsInMirrorSet(currentDisplay.identifier) != 0, CGDisplayMirrorsDisplay(currentDisplay.identifier) == 0 {
+        for display in allDisplays where CGDisplayMirrorsDisplay(display.identifier) == currentDisplay.identifier {
+          affectedDisplays.append(display)
+        }
+      }
+    }
+    return affectedDisplays
+  }
+
+  // Static functions (could be anywhere)
+
+  static func setBrightnessSliderValue(externalDisplay: ExternalDisplay, value: Int32) {
+    if let slider = externalDisplay.brightnessSliderHandler?.slider {
+      slider.intValue = value
+    }
+  }
+
+  static func getBrightnessSliderMaxValue(externalDisplay: ExternalDisplay) -> Double {
+    if let slider = externalDisplay.brightnessSliderHandler?.slider {
+      return slider.maxValue
+    }
+    return 0
+  }
+
+  static func isAppleDisplay(displayID: CGDirectDisplayID) -> Bool {
+    var brightness: Float = -1
+    let ret = DisplayServicesGetBrightness(displayID, &brightness)
+    // If brightness read appears to be successful using DisplayServices then it should be an Apple display
+    if ret == 0, brightness >= 0 {
+      return true
+    }
+    // If built-in display then it should be Apple (except for hackintosh notebooks...)
+    if CGDisplayIsBuiltin(displayID) != 0 {
+      return true
+    }
+    /*
+     // If Vendor ID is Anpple, then it is probably an Apple display
+     if CGDisplayVendorNumber(displayID) == 0x05AC {
+       return true
+     }
+     // If the display has a known Apple name, then it might be an Apple display. I am not sure about this one though
+     let rawName = self.getDisplayRawNameByID(displayID: displayID)
+     if rawName.contains("LG UltraFine") || rawName.contains("Thunderbolt") || rawName.contains("Cinema") || rawName.contains("Color LCD") {
+        return true
+     }
+     */
+    return false
+  }
+
+  static func getDisplayRawNameByID(displayID: CGDirectDisplayID) -> String {
+    let defaultName: String = ""
+    if #available(macOS 11.0, *) {
+      if let dictionary = ((CoreDisplay_DisplayCreateInfoDictionary(displayID))?.takeRetainedValue() as NSDictionary?), let nameList = dictionary["DisplayProductName"] as? [String: String], let name = nameList["en_US"] ?? nameList.first?.value {
+        return name
+      }
+    }
+    if let screen = NSScreen.getByDisplayID(displayID: displayID) {
+      return screen.displayName ?? defaultName
+    }
+    return defaultName
+  }
+
+  static func getDisplayNameByID(displayID: CGDirectDisplayID) -> String {
     let defaultName: String = NSLocalizedString("Unknown", comment: "Unknown display name")
     if #available(macOS 11.0, *) {
       if let dictionary = ((CoreDisplay_DisplayCreateInfoDictionary(displayID))?.takeRetainedValue() as NSDictionary?), let nameList = dictionary["DisplayProductName"] as? [String: String], var name = nameList[Locale.current.identifier] ?? nameList["en_US"] ?? nameList.first?.value {
@@ -149,25 +209,5 @@ class DisplayManager {
       }
     }
     return defaultName
-  }
-
-  func getAffectedDisplays() -> [Display]? {
-    var affectedDisplays: [Display]
-    let allDisplays = DisplayManager.shared.getAllNonVirtualDisplays()
-    guard let currentDisplay = DisplayManager.shared.getCurrentDisplay() else {
-      return nil
-    }
-    // let allDisplays = prefs.bool(forKey: Utils.PrefKeys.allScreens.rawValue) ? displays : [currentDisplay]
-    if prefs.bool(forKey: Utils.PrefKeys.allScreens.rawValue) {
-      affectedDisplays = allDisplays
-    } else {
-      affectedDisplays = [currentDisplay]
-      if CGDisplayIsInHWMirrorSet(currentDisplay.identifier) != 0 || CGDisplayIsInMirrorSet(currentDisplay.identifier) != 0, CGDisplayMirrorsDisplay(currentDisplay.identifier) == 0 {
-        for display in allDisplays where CGDisplayMirrorsDisplay(display.identifier) == currentDisplay.identifier {
-          affectedDisplays.append(display)
-        }
-      }
-    }
-    return affectedDisplays
   }
 }

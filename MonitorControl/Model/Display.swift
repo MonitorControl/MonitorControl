@@ -39,6 +39,7 @@ class Display {
     }
   }
 
+  var brightnessSliderHandler: SliderHandler?
   var isVirtual: Bool = false
 
   var defaultGammaTableRed = [CGGammaValue](repeating: 0, count: 256)

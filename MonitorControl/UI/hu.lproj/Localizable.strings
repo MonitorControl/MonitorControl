@@ -38,7 +38,7 @@
 "General" = "Általános";
 
 /* Shown in the Display Preferences */
-"Hardware (CoreDisplay)" = "Hardver (CoreDisplay)";
+"Hardware (Apple)" = "Hardver (Apple)";
 
 /* Shown in the Display Preferences */
 "Hardware (DDC)" = "Hardver (DDC)";

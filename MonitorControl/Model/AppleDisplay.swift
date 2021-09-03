@@ -1,18 +1,14 @@
 //
-//  InternalDisplay.swift
+//  AppleDisplay.swift
 //  MonitorControl
 //
 //  Created by Joni Van Roost on 24/01/2020.
 //  Copyright © 2020 MonitorControl. All rights reserved.
 //
-//  Some of the code in this file was sourced from:
-//  https://github.com/fnesveda/ExternalDisplayBrightness
-//  all credit goes to @fnesveda
 
 import Foundation
 
-class InternalDisplay: Display {
-  // the queue for dispatching display operations, so they're not performed directly and concurrently
+class AppleDisplay: Display {
   private var displayQueue: DispatchQueue
 
   override init(_ identifier: CGDirectDisplayID, name: String, vendorNumber: UInt32?, modelNumber: UInt32?, isVirtual: Bool = false) {
@@ -35,12 +31,19 @@ class InternalDisplay: Display {
     return brightness
   }
 
-  override func stepBrightness(isUp: Bool, isSmallIncrement: Bool) {
-    let value = self.calcNewBrightness(isUp: isUp, isSmallIncrement: isSmallIncrement)
+  public func setBrightness(value: Float) {
     self.displayQueue.sync {
       DisplayServicesSetBrightness(self.identifier, Float(value))
       DisplayServicesBrightnessChanged(self.identifier, Double(value))
-      self.showOsd(command: .brightness, value: Int(value * 64), maxValue: 64)
+    }
+  }
+
+  override func stepBrightness(isUp: Bool, isSmallIncrement: Bool) {
+    let value = self.calcNewBrightness(isUp: isUp, isSmallIncrement: isSmallIncrement)
+    self.setBrightness(value: value)
+    self.showOsd(command: .brightness, value: Int(value * 64), maxValue: 64)
+    if let slider = brightnessSliderHandler?.slider {
+      slider.intValue = Int32(value * 100)
     }
   }
 }

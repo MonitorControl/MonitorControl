@@ -1,26 +1,26 @@
 /* Shown in the main prefs window */
-"About" = "Über";
+"About" = "Over";
 
 /* Apple Silicon designation (shown after the version number in Preferences) */
 "Apple Silicon" = "Apple Silicon";
 
 /* Shown in the alert dialog */
-"Are you sure you want to enable a longer delay? Doing so may freeze your system and require a restart. Start at login will be disabled as a safety measure." = "Bist du sicher, dass du eine längere Verzögerung aktivieren willst? Wenn du dies tust, kann dein System einfrieren und einen Neustart erfordern. Der Start bei der Anmeldung wird als Sicherheitsmassnahme deaktiviert.";
+"Are you sure you want to enable a longer delay? Doing so may freeze your system and require a restart. Start at login will be disabled as a safety measure." = "Weet u zeker dat je een langere vertraging wilt inschakelen? Als u dit doet kan uw systeem vastlopen en een herstart nodig hebben. Start bij het inloggen wordt uitgeschakeld als veiligheidsmaatregel.";
 
 /* Shown in the alert dialog */
-"Are you sure you want to reset all preferences?" = "Bist du sicher, dass du alle Einstellungen zurücksetzen willst?";
+"Are you sure you want to reset all preferences?" = "Weet je zeker dat je alle voorkeuren wilt resetten?";
 
 /* Shown in menu */
-"Brightness" = "Helligkeit";
+"Brightness" = "Helderheid";
 
 /* Build */
 "Build" = "Build";
 
 /* Shown in the Display Preferences */
-"Built-in Display" = "Integriertes Display";
+"Built-in Display" = "Ingebouwd Display";
 
 /* Shown in menu */
-"Contrast" = "Kontrast";
+"Contrast" = "Contrast";
 
 /* Version */
 "Copyright Ⓒ MonitorControl, " = "Copyright Ⓒ MonitorControl, ";
@@ -29,16 +29,16 @@
 "Displays" = "Displays";
 
 /* Shown in the alert dialog */
-"Enable Longer Delay?" = "Längere Verzögerung einschalten?";
+"Enable Longer Delay?" = "Langere vertraging inschakelen?";
 
 /* Shown in the Display Preferences */
-"External Display" = "Externes Display";
+"External Display" = "Extern Display";
 
 /* Shown in the main prefs window */
-"General" = "Allgemein";
+"General" = "Algemeen";
 
 /* Shown in the Display Preferences */
-"Hardware (CoreDisplay)" = "Hardware (CoreDisplay)";
+"Hardware (Apple)" = "Hardware (Apple)";
 
 /* Shown in the Display Preferences */
 "Hardware (DDC)" = "Hardware (DDC)";
@@ -47,22 +47,22 @@
 "Intel" = "Intel";
 
 /* Shown in the alert dialog */
-"No" = "Nein";
+"No" = "Nee";
 
 /* Shown in the Display Preferences */
-"No Control Available" = "Keine Steuerung verfügbar";
+"No Control Available" = "Geen Controle Beschikbaar";
 
 /* Shown in menu */
-"No supported display found" = "Keine unterstützter Display gefunden";
+"No supported display found" = "Geen ondersteend scherm gevonden";
 
 /* Shown in the alert dialog */
-"Ok" = "OK";
+"Ok" = "Oké";
 
 /* Shown in the Display Preferences */
-"Other Display" = "Anderes Display";
+"Other Display" = "Ander Display";
 
 /* Shown in the alert dialog */
-"Reset Preferences?" = "Einstellungen zurücksetzen?";
+"Reset Preferences?" = "Reset Voorkeuren?";
 
 /* Shown in the alert dialog */
 "Safe Mode Activated" = "Safe Mode Activated";
@@ -71,33 +71,33 @@
 "Shift was pressed during launch. MonitorControl started in safe mode. Default preferences are reloaded, DDC read is blocked." = "Shift was pressed during launch. MonitorControl started in safe mode. Default preferences are reloaded, DDC read is blocked.";
 
 /* Shown in the alert dialog */
-"Shortcuts not available" = "Kurzbefehle nicht verfügbar";
+"Shortcuts not available" = "Shortcuts niet beschikbaar";
 
 /* Shown in the Display Preferences */
-"Software (Forced)" = "Software (Erzwungen)";
+"Software (Forced)" = "Software (Geforceerd)";
 
 /* Shown in the Display Preferences */
-"Software Only" = "Nur Software";
+"Software Only" = "Alleen Software";
 
 /* unknown display name
  unknown model
  unknown vendor */
-"Unknown" = "Unbekannt";
+"Unknown" = "Onbekend";
 
 /* Shown in the Display Preferences */
-"Unspecified" = "Unbestimmt";
+"Unspecified" = "Niet gespecificeerd";
 
 /* Version */
-"Version" = "Version";
+"Version" = "Versie";
 
 /* Shown in the Display Preferences */
-"Virtual Display" = "Virtuelles Display";
+"Virtual Display" = "Virtueel Display";
 
 /* Shown in menu */
-"Volume" = "Lautstärke";
+"Volume" = "Volume";
 
 /* Shown in the alert dialog */
 "Yes" = "Ja";
 
 /* Shown in the alert dialog */
-"You need to enable MonitorControl in System Preferences > Security and Privacy > Accessibility for the keyboard shortcuts to work" = "Du musst MonitorControl in Systemeinstellungen > Sicherheit > Datenschutz > Bedienungshilfen aktivieren, damit die Kurzbefehle funktionieren.";
+"You need to enable MonitorControl in System Preferences > Security and Privacy > Accessibility for the keyboard shortcuts to work" = "U moet MonitorControl inschakelen in Systeemvoorkeuren > Beveiliging en Privacy > Privacy > Toegankelijkheid inschakelen, zodat de sneltoetsen werken.";

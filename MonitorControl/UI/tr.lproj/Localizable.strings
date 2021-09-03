@@ -38,7 +38,7 @@
 "General" = "Genel";
 
 /* Shown in the Display Preferences */
-"Hardware (CoreDisplay)" = "Donanım (CoreDisplay)";
+"Hardware (Apple)" = "Donanım (Apple)";
 
 /* Shown in the Display Preferences */
 "Hardware (DDC)" = "Donanım (DDC)";

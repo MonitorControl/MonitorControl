@@ -4,7 +4,6 @@ import IOKit
 import os.log
 
 class ExternalDisplay: Display {
-  var brightnessSliderHandler: SliderHandler?
   var volumeSliderHandler: SliderHandler?
   var contrastSliderHandler: SliderHandler?
   var ddc: IntelDDC?
@@ -12,8 +11,6 @@ class ExternalDisplay: Display {
   var arm64avService: IOAVService?
 
   let DDC_HARD_MAX_LIMIT: Int = 100
-
-  let ddcQueue = DispatchQueue(label: "DDC queue")
 
   private let prefs = UserDefaults.standard
 
@@ -105,6 +102,74 @@ class ExternalDisplay: Display {
         slider.intValue = Int32(volumeDDCValue)
       }
     }
+  }
+
+  func setupCurrentAndMaxValues(command: Command) -> (value: Int, maxValue: Int) {
+    var returnIntegerValue: Int
+    var returnMaxValue: Int
+    var values: (UInt16, UInt16)?
+    let delay = self.needsLongerDelay ? UInt64(40 * kMillisecondScale) : nil
+
+    var (currentValue, maxValue) = (UInt16(0), UInt16(0))
+
+    let tries = UInt(self.getPollingCount())
+
+    if self.isSw(), command == Command.brightness {
+      (currentValue, maxValue) = (UInt16(self.getSwBrightnessPrefValue()), UInt16(self.getSwMaxBrightness()))
+    } else {
+      if tries != 0, !(app.safeMode) {
+        os_log("Polling %{public}@ times", type: .info, String(tries))
+        values = self.readDDCValues(for: command, tries: tries, minReplyDelay: delay)
+      }
+      (currentValue, maxValue) = values ?? (UInt16(self.getValueExists(for: command) ? self.getValue(for: command) : 75), 100) // We set 100 as max value if we could not read DDC, the previous setting as current value or 75 if not present.
+    }
+    self.saveMaxValue(Int(maxValue), for: command)
+    self.saveValue(min(Int(currentValue), self.getMaxValue(for: command)), for: command) // We won't allow currrent value to be higher than the max. value
+    os_log("%{public}@ (%{public}@):", type: .info, self.name, String(reflecting: command))
+    os_log(" - current value: %{public}@ - from display? %{public}@", type: .info, String(currentValue), String(values != nil))
+    os_log(" - maximum value: %{public}@ - from display? %{public}@", type: .info, String(self.getMaxValue(for: command)), String(values != nil))
+
+    if command == .brightness {
+      if !self.isSw(), self.prefs.bool(forKey: Utils.PrefKeys.lowerSwAfterBrightness.rawValue) {
+        returnMaxValue = self.getMaxValue(for: command) * 2
+        returnIntegerValue = returnMaxValue / 2 + Int(currentValue)
+      } else {
+        returnIntegerValue = Int(currentValue)
+        returnMaxValue = self.getMaxValue(for: command)
+      }
+    } else if command == .audioSpeakerVolume {
+      // If we're looking at the audio speaker volume, also retrieve the values for the mute command
+      var muteValues: (current: UInt16, max: UInt16)?
+
+      if self.enableMuteUnmute, tries != 0, !app.safeMode {
+        os_log("Polling %{public}@ times", type: .info, String(tries))
+        os_log("%{public}@ (%{public}@):", type: .info, self.name, String(reflecting: Command.audioMuteScreenBlank))
+        muteValues = self.readDDCValues(for: .audioMuteScreenBlank, tries: tries, minReplyDelay: delay)
+      }
+
+      if let muteValues = muteValues {
+        os_log(" - current ddc value: %{public}@", type: .info, String(muteValues.current))
+        os_log(" - maximum ddc value: %{public}@", type: .info, String(muteValues.max))
+        self.saveValue(Int(muteValues.current), for: .audioMuteScreenBlank)
+        self.saveMaxValue(Int(muteValues.max), for: .audioMuteScreenBlank)
+      } else {
+        os_log(" - current ddc value: unknown", type: .info)
+        os_log(" - stored maximum ddc value: %{public}@", type: .info, String(self.getMaxValue(for: .audioMuteScreenBlank)))
+      }
+
+      // If the system is not currently muted, or doesn't support the mute command, display the current volume as the slider value
+      if muteValues == nil || muteValues!.current == 2 {
+        returnIntegerValue = Int(currentValue)
+      } else {
+        returnIntegerValue = 0
+      }
+
+      returnMaxValue = self.getMaxValue(for: command)
+    } else {
+      returnIntegerValue = Int(currentValue)
+      returnMaxValue = self.getMaxValue(for: command)
+    }
+    return (returnIntegerValue, returnMaxValue)
   }
 
   func stepVolume(isUp: Bool, isSmallIncrement: Bool, isPressed: Bool) {
@@ -260,7 +325,7 @@ class ExternalDisplay: Display {
       return false
     }
     var success: Bool = false
-    self.ddcQueue.sync {
+    app.ddcQueue.sync {
       if Arm64DDC.isArm64 {
         if self.arm64ddc {
           success = Arm64DDC.write(service: self.arm64avService, command: command.rawValue, value: value)
@@ -281,7 +346,7 @@ class ExternalDisplay: Display {
       guard self.arm64ddc else {
         return nil
       }
-      self.ddcQueue.sync {
+      app.ddcQueue.sync {
         if let unwrappedDelay = delay {
           values = Arm64DDC.read(service: self.arm64avService, command: command.rawValue, tries: UInt8(min(tries, 255)), minReplyDelay: UInt32(unwrappedDelay / 1000))
         } else {
@@ -289,7 +354,7 @@ class ExternalDisplay: Display {
         }
       }
     } else {
-      self.ddcQueue.sync {
+      app.ddcQueue.sync {
         values = self.ddc?.read(command: command.rawValue, tries: tries, minReplyDelay: delay)
       }
     }
