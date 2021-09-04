@@ -17,7 +17,7 @@ enum OSDImage: Int64 {
 
 class Display {
   internal let identifier: CGDirectDisplayID
-  internal let name: String
+  internal var name: String
   internal var vendorNumber: UInt32?
   internal var modelNumber: UInt32?
   internal var isEnabled: Bool {

@@ -70,6 +70,14 @@ class DisplayManager {
     self.displays = []
   }
 
+  func addDisplayCounterSuffixes() {
+    // MARK: TODO: Here comes the display suffix (n) if multiple similar named displays are present
+
+    for display in self.displays {
+      display.name = "" + display.name + ""
+    }
+  }
+
   // Semi-static functions (could be moved elsewhere easily)
 
   func resetSwBrightnessForAllDisplays(settingsOnly: Bool = false, async: Bool = false) {

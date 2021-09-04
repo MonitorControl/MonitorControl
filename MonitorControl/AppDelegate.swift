@@ -202,6 +202,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       }
       DisplayManager.shared.addDisplay(display: display)
     }
+    DisplayManager.shared.addDisplayCounterSuffixes()
     self.updateArm64AVServices()
     if firstrun {
       DisplayManager.shared.resetSwBrightnessForAllDisplays(settingsOnly: true)
