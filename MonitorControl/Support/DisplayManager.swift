@@ -71,10 +71,20 @@ class DisplayManager {
   }
 
   func addDisplayCounterSuffixes() {
-    // MARK: TODO: Here comes the display suffix (n) if multiple similar named displays are present
-
+    var nameDisplays: [String: [Display]] = [:]
     for display in self.displays {
-      display.name = "" + display.name + ""
+      if nameDisplays[display.name] != nil {
+        nameDisplays[display.name]?.append(display)
+      } else {
+        nameDisplays[display.name] = [display]
+      }
+    }
+    for nameDisplayKey in nameDisplays.keys where nameDisplays[nameDisplayKey]?.count ?? 0 > 1 {
+      for i in 0 ... (nameDisplays[nameDisplayKey]?.count ?? 1) - 1 {
+        if let display = nameDisplays[nameDisplayKey]?[i] {
+          display.name = "" + display.name + " (" + String(i + 1) + ")"
+        }
+      }
     }
   }
 
