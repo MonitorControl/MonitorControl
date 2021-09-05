@@ -44,7 +44,7 @@ public class IntelDDC {
     data[0] = 0x51
     data[1] = 0x84
     data[2] = 0x03
-    data[3] = command;
+    data[3] = command
     data[4] = UInt8(value >> 8)
     data[5] = UInt8(value & 255)
     data[6] = 0x6E ^ data[0] ^ data[1] ^ data[2] ^ data[3] ^ data[4] ^ data[5]
@@ -57,8 +57,8 @@ public class IntelDDC {
       request.sendTransactionType = IOOptionBits(kIOI2CSimpleTransactionType)
       request.sendBuffer = withUnsafePointer(to: &data[0]) { vm_address_t(bitPattern: $0) }
       request.sendBytes = UInt32(data.count)
-      request.replyTransactionType = IOOptionBits(kIOI2CNoTransactionType);
-      request.replyBytes = 0;
+      request.replyTransactionType = IOOptionBits(kIOI2CNoTransactionType)
+      request.replyBytes = 0
       if IntelDDC.send(request: &request, to: self.framebuffer, errorRecoveryWaitTime: errorRecoveryWaitTime) {
         success = true
       }
@@ -73,11 +73,10 @@ public class IntelDDC {
     data[0] = 0x51
     data[1] = 0x82
     data[2] = 0x01
-    data[3] = command;
+    data[3] = command
     data[4] = 0x6E ^ data[0] ^ data[1] ^ data[2] ^ data[3]
 
     for i in 1 ... tries {
-      
       usleep(writeSleepTime)
       usleep(errorRecoveryWaitTime ?? 0)
       var request = IOI2CRequest()
@@ -94,7 +93,6 @@ public class IntelDDC {
       request.replyBuffer = withUnsafePointer(to: &replyData[0]) { vm_address_t(bitPattern: $0) }
 
       if IntelDDC.send(request: &request, to: self.framebuffer, errorRecoveryWaitTime: errorRecoveryWaitTime) {
-
         if replyData.count > 0 {
           let checksum = replyData.last!
           var calculated = UInt8(0x50)
@@ -127,7 +125,7 @@ public class IntelDDC {
     }
     return nil
   }
-  
+
   private static func supportedTransactionType() -> IOOptionBits? {
     var ioIterator = io_iterator_t()
     guard IOServiceGetMatchingServices(kIOMasterPortDefault, IOServiceNameMatching("IOFramebufferI2CInterface"), &ioIterator) == KERN_SUCCESS else {
