@@ -4,7 +4,7 @@
 //
 //  Original code: https://github.com/reitermarkus/DDC.swift
 //  Adapted for MonitorControl
-//  Credits to @reitermarkus
+//  Credits to @reitermarkus, @waydabber
 //
 
 import Foundation
@@ -38,87 +38,97 @@ public class IntelDDC {
   }
 
   public func write(command: UInt8, value: UInt16, errorRecoveryWaitTime: UInt32? = nil, writeSleepTime: UInt32 = 10000, numofWriteCycles: UInt8 = 2) -> Bool {
-    let message: [UInt8] = [0x03, command, UInt8(value >> 8), UInt8(value & 0xFF)]
-    var replyData: [UInt8] = []
     var success: Bool = false
+    var data: [UInt8] = Array(repeating: 0, count: 7)
+
+    data[0] = 0x51
+    data[1] = 0x84
+    data[2] = 0x03
+    data[3] = command;
+    data[4] = UInt8(value >> 8)
+    data[5] = UInt8(value & 255)
+    data[6] = 0x6E ^ data[0] ^ data[1] ^ data[2] ^ data[3] ^ data[4] ^ data[5]
+
     for _ in 1 ... numofWriteCycles {
       usleep(writeSleepTime)
-      if self.sendMessage(message, replyData: &replyData, errorRecoveryWaitTime: errorRecoveryWaitTime ?? 20000) != nil {
+      var request = IOI2CRequest()
+      request.commFlags = 0
+      request.sendAddress = 0x6E
+      request.sendTransactionType = IOOptionBits(kIOI2CSimpleTransactionType)
+      request.sendBuffer = withUnsafePointer(to: &data[0]) { vm_address_t(bitPattern: $0) }
+      request.sendBytes = UInt32(data.count)
+      request.replyTransactionType = IOOptionBits(kIOI2CNoTransactionType);
+      request.replyBytes = 0;
+      if IntelDDC.send(request: &request, to: self.framebuffer, errorRecoveryWaitTime: errorRecoveryWaitTime) {
         success = true
       }
     }
     return success
   }
 
-  public func sendMessage(_ message: [UInt8], replyData: inout [UInt8], minReplyDelay: UInt64? = nil, errorRecoveryWaitTime: UInt32? = nil) -> IOI2CRequest? {
-    var data: [UInt8] = [UInt8(0x51), UInt8(0x80 + message.count)] + message + [UInt8(0x6E)]
-    for i in 0 ..< (data.count - 1) {
-      data[data.count - 1] ^= data[i]
-    }
-    var request = IOI2CRequest()
-    request.commFlags = 0
-    request.sendAddress = 0x6E
-    request.sendTransactionType = IOOptionBits(kIOI2CSimpleTransactionType)
-    request.sendBytes = UInt32(data.count)
-    request.sendBuffer = withUnsafePointer(to: &data[0]) { vm_address_t(bitPattern: $0) }
-    if replyData.count == 0 {
-      request.replyTransactionType = IOOptionBits(kIOI2CNoTransactionType)
-      request.replyBytes = 0
-    } else {
+  public func read(command: UInt8, tries: UInt = 1, replyTransactionType _: IOOptionBits? = nil, minReplyDelay: UInt64? = nil, errorRecoveryWaitTime: UInt32? = nil, writeSleepTime: UInt32 = 10000) -> (UInt16, UInt16)? {
+    var data: [UInt8] = Array(repeating: 0, count: 5)
+    var replyData: [UInt8] = Array(repeating: 0, count: 11)
+
+    data[0] = 0x51
+    data[1] = 0x82
+    data[2] = 0x01
+    data[3] = command;
+    data[4] = 0x6E ^ data[0] ^ data[1] ^ data[2] ^ data[3]
+
+    for i in 1 ... tries {
+      
+      usleep(writeSleepTime)
+      usleep(errorRecoveryWaitTime ?? 0)
+      var request = IOI2CRequest()
+      request.commFlags = 0
+      request.sendAddress = 0x6E
+      request.sendTransactionType = IOOptionBits(kIOI2CSimpleTransactionType)
+      request.sendBuffer = withUnsafePointer(to: &data[0]) { vm_address_t(bitPattern: $0) }
+      request.sendBytes = UInt32(data.count)
+      request.replyTransactionType = IOOptionBits(kIOI2CNoTransactionType);
       request.minReplyDelay = minReplyDelay ?? 10
       request.replyAddress = 0x6F
       request.replySubAddress = 0x51
       request.replyTransactionType = self.replyTransactionType
       request.replyBytes = UInt32(replyData.count)
       request.replyBuffer = withUnsafePointer(to: &replyData[0]) { vm_address_t(bitPattern: $0) }
-    }
-    guard IntelDDC.send(request: &request, to: self.framebuffer, errorRecoveryWaitTime: errorRecoveryWaitTime) else {
-      return nil
-    }
-    if replyData.count > 0 {
-      let checksum = replyData.last!
-      var calculated = UInt8(0x50)
-      for i in 0 ..< (replyData.count - 1) {
-        calculated ^= replyData[i]
-      }
-      guard checksum == calculated else {
-        os_log("Checksum of reply does not match. Expected %u, got %u.", type: .error, checksum, calculated)
-        os_log("Response was: %{public}@", type: .debug, replyData.map { String(format: "%02X", $0) }.joined(separator: " "))
-        return nil
-      }
-    }
-    return request
-  }
 
-  public func read(command: UInt8, tries: UInt = 1, replyTransactionType _: IOOptionBits? = nil, minReplyDelay: UInt64? = nil, errorRecoveryWaitTime: UInt32? = nil) -> (UInt16, UInt16)? {
-    assert(tries > 0)
-    let message: [UInt8] = [0x01, command]
-    var replyData: [UInt8] = Array(repeating: 0, count: 11)
-    for i in 1 ... tries {
-      guard self.sendMessage(message, replyData: &replyData, minReplyDelay: minReplyDelay, errorRecoveryWaitTime: errorRecoveryWaitTime ?? 40000) != nil else {
-        continue
+      if IntelDDC.send(request: &request, to: self.framebuffer, errorRecoveryWaitTime: errorRecoveryWaitTime) {
+
+        if replyData.count > 0 {
+          let checksum = replyData.last!
+          var calculated = UInt8(0x50)
+          for i in 0 ..< (replyData.count - 1) {
+            calculated ^= replyData[i]
+          }
+          guard checksum == calculated else {
+            os_log("Checksum of reply does not match. Expected %u, got %u.", type: .debug, checksum, calculated)
+            os_log("Response was: %{public}@", type: .debug, replyData.map { String(format: "%02X", $0) }.joined(separator: " "))
+            continue
+          }
+        }
+        guard replyData[2] == 0x02 else {
+          os_log("Got wrong response type for %{public}@. Expected %u, got %u.", type: .debug, String(reflecting: command), 0x02, replyData[2])
+          os_log("Response was: %{public}@", type: .debug, replyData.map { String(format: "%02X", $0) }.joined(separator: " "))
+          continue
+        }
+        guard replyData[3] == 0x00 else {
+          os_log("Reading %{public}@ is not supported.", type: .debug, String(reflecting: command))
+          return nil
+        }
+        if i > 1 {
+          os_log("Reading %{public}@ took %u tries.", type: .debug, String(reflecting: command), i)
+        }
+        let (mh, ml, sh, sl) = (replyData[6], replyData[7], replyData[8], replyData[9])
+        let maxValue = UInt16(mh << 8) + UInt16(ml)
+        let currentValue = UInt16(sh << 8) + UInt16(sl)
+        return (currentValue, maxValue)
       }
-      guard replyData[2] == 0x02 else {
-        os_log("Got wrong response type for %{public}@. Expected %u, got %u.", type: .debug, String(reflecting: command), 0x02, replyData[2])
-        os_log("Response was: %{public}@", type: .debug, replyData.map { String(format: "%02X", $0) }.joined(separator: " "))
-        continue
-      }
-      guard replyData[3] == 0x00 else {
-        os_log("Reading %{public}@ is not supported.", type: .debug, String(reflecting: command))
-        return nil
-      }
-      if i > 1 {
-        os_log("Reading %{public}@ took %u tries.", type: .debug, String(reflecting: command), i)
-      }
-      let (mh, ml, sh, sl) = (replyData[6], replyData[7], replyData[8], replyData[9])
-      let maxValue = UInt16(mh << 8) + UInt16(ml)
-      let currentValue = UInt16(sh << 8) + UInt16(sl)
-      return (currentValue, maxValue)
     }
-    os_log("Reading %{public}@ failed.", type: .error, String(reflecting: command))
     return nil
   }
-
+  
   private static func supportedTransactionType() -> IOOptionBits? {
     var ioIterator = io_iterator_t()
     guard IOServiceGetMatchingServices(kIOMasterPortDefault, IOServiceNameMatching("IOFramebufferI2CInterface"), &ioIterator) == KERN_SUCCESS else {

@@ -42,14 +42,6 @@ class Utils: NSObject {
     }
   }
 
-  static func checksum(chk: UInt8, data: inout [UInt8], start: Int, end: Int) -> UInt8 {
-    var chkd: UInt8 = chk
-    for i in start ... end {
-      chkd ^= data[i]
-    }
-    return chkd
-  }
-
   static func alert(text: String, info: String = "") {
     let alert = NSAlert()
     alert.messageText = text

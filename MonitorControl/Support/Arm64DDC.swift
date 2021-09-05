@@ -84,7 +84,7 @@ class Arm64DDC: NSObject {
       return success
     }
     var checkedsend: [UInt8] = [UInt8(0x80 | (send.count + 1)), UInt8(send.count)] + send + [0]
-    checkedsend[checkedsend.count - 1] = Utils.checksum(chk: send.count == 1 ? 0x6E : 0x6E ^ 0x51, data: &checkedsend, start: 0, end: checkedsend.count - 2)
+    checkedsend[checkedsend.count - 1] = checksum(chk: send.count == 1 ? 0x6E : 0x6E ^ 0x51, data: &checkedsend, start: 0, end: checkedsend.count - 2)
     for _ in 1 ... numOfRetryAttemps {
       for _ in 1 ... numofWriteCycles {
         usleep(writeSleepTime)
@@ -95,7 +95,7 @@ class Arm64DDC: NSObject {
       if reply.count > 0 {
         usleep(readSleepTime)
         if IOAVServiceReadI2C(service, 0x37, 0x51, &reply, UInt32(reply.count)) == 0 {
-          if Utils.checksum(chk: 0x50, data: &reply, start: 0, end: reply.count - 2) == reply[reply.count - 1] {
+          if checksum(chk: 0x50, data: &reply, start: 0, end: reply.count - 2) == reply[reply.count - 1] {
             success = true
           } else {
             success = false
@@ -126,6 +126,15 @@ class Arm64DDC: NSObject {
 
   private static let MAX_MATCH_SCORE: Int = 13
 
+  // DDC checksum calculator
+  private static func checksum(chk: UInt8, data: inout [UInt8], start: Int, end: Int) -> UInt8 {
+    var chkd: UInt8 = chk
+    for i in start ... end {
+      chkd ^= data[i]
+    }
+    return chkd
+  }
+  
   // Scores the likelihood of a display match based on EDID UUID, ProductName and SerialNumber from in ioreg, compared to DisplayCreateInfoDictionary.
   private static func ioregMatchScore(displayID: CGDirectDisplayID, ioregEdidUUID: String, ioregProductName: String = "", ioregSerialNumber: Int64 = 0, serviceLocation: Int = 0) -> Int {
     var matchScore: Int = 0
