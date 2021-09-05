@@ -86,7 +86,6 @@ public class IntelDDC {
       request.sendTransactionType = IOOptionBits(kIOI2CSimpleTransactionType)
       request.sendBuffer = withUnsafePointer(to: &data[0]) { vm_address_t(bitPattern: $0) }
       request.sendBytes = UInt32(data.count)
-      request.replyTransactionType = IOOptionBits(kIOI2CNoTransactionType);
       request.minReplyDelay = minReplyDelay ?? 10
       request.replyAddress = 0x6F
       request.replySubAddress = 0x51
