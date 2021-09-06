@@ -11,8 +11,7 @@ class MainPrefsViewController: NSViewController, PreferencePane {
     if #available(macOS 11.0, *) {
       return NSImage(systemSymbolName: "switch.2", accessibilityDescription: "Display")!
     } else {
-      // Fallback on earlier versions
-      return NSImage(named: NSImage.preferencesGeneralName)!
+      return NSImage(named: NSImage.infoName)!
     }
   }
 

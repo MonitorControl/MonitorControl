@@ -46,4 +46,12 @@ class AppleDisplay: Display {
       slider.intValue = Int32(value * 100)
     }
   }
+
+  func isBuiltIn() -> Bool {
+    if CGDisplayIsBuiltin(self.identifier) != 0 {
+      return true
+    } else {
+      return false
+    }
+  }
 }

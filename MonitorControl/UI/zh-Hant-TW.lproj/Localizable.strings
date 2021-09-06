@@ -1,6 +1,12 @@
 /* Shown in the main prefs window */
 "About" = "關於";
 
+/* Shown in the main prefs window */
+"Advanced" = "Advanced";
+
+/* Shown in the main prefs window */
+"App menu" = "App menu";
+
 /* Apple Silicon designation (shown after the version number in Preferences) */
 "Apple Silicon" = "Apple Silicon";
 
@@ -45,6 +51,9 @@
 
 /* Intel designation (shown after the version number in Preferences) */
 "Intel" = "Intel";
+
+/* Shown in the main prefs window */
+"Keyboard" = "Keyboard";
 
 /* Shown in the alert dialog */
 "No" = "否";

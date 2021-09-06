@@ -10,7 +10,6 @@ class AboutPrefsViewController: NSViewController, PreferencePane {
     if #available(macOS 11.0, *) {
       return NSImage(systemSymbolName: "info.circle", accessibilityDescription: "About")!
     } else {
-      // Fallback on earlier versions
       return NSImage(named: NSImage.infoName)!
     }
   }
@@ -25,7 +24,6 @@ class AboutPrefsViewController: NSViewController, PreferencePane {
     self.setCopyrightInfo()
   }
 
-  @available(macOS, deprecated: 10.10)
   override func viewWillAppear() {
     super.viewWillAppear()
   }

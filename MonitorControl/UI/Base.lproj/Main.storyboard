@@ -446,7 +446,7 @@
                 </viewController>
                 <customObject id="5Vf-Rd-nyE" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="300.5" y="814.5"/>
+            <point key="canvasLocation" x="301" y="1449"/>
         </scene>
         <!--Displays Prefs View Controller-->
         <scene sceneID="lLH-hh-1EK">
@@ -788,7 +788,55 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="300.5" y="369.5"/>
+            <point key="canvasLocation" x="301" y="340"/>
+        </scene>
+        <!--Menusliders Prefs View Controller-->
+        <scene sceneID="YU5-7I-f0n">
+            <objects>
+                <viewController storyboardIdentifier="MenuslidersPrefsVC" id="tLm-u5-aZ2" customClass="MenuslidersPrefsViewController" customModule="MonitorControl" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" translatesAutoresizingMaskIntoConstraints="NO" id="5un-m0-FM4">
+                        <rect key="frame" x="0.0" y="0.0" width="691" height="155"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="155" id="QTu-ms-0vP"/>
+                            <constraint firstAttribute="width" constant="691" id="qER-8F-0mP"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <customObject id="oB1-KW-86Y" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="300.5" y="711.5"/>
+        </scene>
+        <!--Keyboard Prefs View Controller-->
+        <scene sceneID="VuM-5u-zkv">
+            <objects>
+                <viewController storyboardIdentifier="KeyboardPrefsVC" id="eJ2-Cv-Vfp" customClass="KeyboardPrefsViewController" customModule="MonitorControl" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" translatesAutoresizingMaskIntoConstraints="NO" id="yCl-jO-kpd">
+                        <rect key="frame" x="0.0" y="0.0" width="691" height="155"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="155" id="1lO-o8-Q6V"/>
+                            <constraint firstAttribute="width" constant="691" id="OTL-ix-IL6"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <customObject id="aU5-zc-suQ" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="301" y="932"/>
+        </scene>
+        <!--Advanced Prefs View Controller-->
+        <scene sceneID="HQD-kX-nIZ">
+            <objects>
+                <viewController storyboardIdentifier="AdvancedPrefsVC" id="tIl-09-MX8" customClass="AdvancedPrefsViewController" customModule="MonitorControl" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" translatesAutoresizingMaskIntoConstraints="NO" id="v8U-Q4-FZe">
+                        <rect key="frame" x="0.0" y="0.0" width="691" height="155"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="155" id="2t2-2v-e47"/>
+                            <constraint firstAttribute="width" constant="691" id="8hN-7t-UhM"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <customObject id="jjr-Ld-rWI" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="301" y="1153"/>
         </scene>
     </scenes>
     <resources>

@@ -10,8 +10,7 @@ class DisplaysPrefsViewController: NSViewController, PreferencePane, NSTableView
     if #available(macOS 11.0, *) {
       return NSImage(systemSymbolName: "display.2", accessibilityDescription: "Displays")!
     } else {
-      // Fallback on earlier versions
-      return NSImage(named: NSImage.computerName)!
+      return NSImage(named: NSImage.infoName)!
     }
   }
 
@@ -81,12 +80,17 @@ class DisplaysPrefsViewController: NSViewController, PreferencePane, NSTableView
       } else {
         controlMethod = NSLocalizedString("Unspecified", comment: "Shown in the Display Preferences")
       }
-    } else if display is AppleDisplay {
-      displayType = NSLocalizedString("Built-in Display", comment: "Shown in the Display Preferences")
-      if self.isImac() {
-        displayImage = "desktopcomputer"
+    } else if let appleDisplay: AppleDisplay = display as? AppleDisplay {
+      if appleDisplay.isBuiltIn() {
+        displayType = NSLocalizedString("Built-in Display", comment: "Shown in the Display Preferences")
+        if self.isImac() {
+          displayImage = "desktopcomputer"
+        } else {
+          displayImage = "laptopcomputer"
+        }
       } else {
-        displayImage = "laptopcomputer"
+        displayType = NSLocalizedString("External Display", comment: "Shown in the Display Preferences")
+        displayImage = "display"
       }
       controlMethod = NSLocalizedString("Hardware (Apple)", comment: "Shown in the Display Preferences")
     } else {

@@ -1,6 +1,12 @@
 /* Shown in the main prefs window */
 "About" = "Névjegy";
 
+/* Shown in the main prefs window */
+"Advanced" = "Haladó";
+
+/* Shown in the main prefs window */
+"App menu" = "App menü";
+
 /* Apple Silicon designation (shown after the version number in Preferences) */
 "Apple Silicon" = "Apple Silicon";
 
@@ -17,7 +23,7 @@
 "Build" = "Build";
 
 /* Shown in the Display Preferences */
-"Built-in Display" = "Built-in Display";
+"Built-in Display" = "Beépített kijelző";
 
 /* Shown in menu */
 "Contrast" = "Kontraszt";
@@ -32,7 +38,7 @@
 "Enable Longer Delay?" = "Hosszabb várakozás engedélyezése?";
 
 /* Shown in the Display Preferences */
-"External Display" = "External Display";
+"External Display" = "Külső kijelző";
 
 /* Shown in the main prefs window */
 "General" = "Általános";
@@ -45,6 +51,9 @@
 
 /* Intel designation (shown after the version number in Preferences) */
 "Intel" = "Intel";
+
+/* Shown in the main prefs window */
+"Keyboard" = "Billentyűzet";
 
 /* Shown in the alert dialog */
 "No" = "Nem";

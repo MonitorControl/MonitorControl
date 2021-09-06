@@ -1,4 +1,5 @@
 import Cocoa
+import os.log
 
 class DisplayManager {
   public static let shared = DisplayManager()
@@ -9,8 +10,37 @@ class DisplayManager {
     self.displays = []
   }
 
-  func updateDisplays(displays: [Display]) {
-    self.displays = displays
+  func updateDisplays() {
+    self.clearDisplays()
+    var onlineDisplayIDs = [CGDirectDisplayID](repeating: 0, count: 16)
+    var displayCount: UInt32 = 0
+    guard CGGetOnlineDisplayList(10, &onlineDisplayIDs, &displayCount) == .success else {
+      os_log("Unable to get display list.", type: .info)
+      return
+    }
+    for onlineDisplayID in onlineDisplayIDs where onlineDisplayID != 0 {
+      let name = DisplayManager.getDisplayNameByID(displayID: onlineDisplayID)
+      let id = onlineDisplayID
+      let vendorNumber = CGDisplayVendorNumber(onlineDisplayID)
+      let modelNumber = CGDisplayVendorNumber(onlineDisplayID)
+      let display: Display
+      var isVirtual: Bool = false
+      if #available(macOS 11.0, *) {
+        if let dictionary = ((CoreDisplay_DisplayCreateInfoDictionary(onlineDisplayID))?.takeRetainedValue() as NSDictionary?) {
+          let isVirtualDevice = dictionary["kCGDisplayIsVirtualDevice"] as? Bool
+          let displayIsAirplay = dictionary["kCGDisplayIsAirPlay"] as? Bool
+          if isVirtualDevice ?? displayIsAirplay ?? false {
+            isVirtual = true
+          }
+        }
+      }
+      if DisplayManager.isAppleDisplay(displayID: onlineDisplayID) { // MARK: (point of interest for testing)
+        display = AppleDisplay(id, name: name, vendorNumber: vendorNumber, modelNumber: modelNumber, isVirtual: isVirtual)
+      } else {
+        display = ExternalDisplay(id, name: name, vendorNumber: vendorNumber, modelNumber: modelNumber, isVirtual: isVirtual)
+      }
+      self.addDisplay(display: display)
+    }
   }
 
   func getExternalDisplays() -> [ExternalDisplay] {
@@ -85,6 +115,26 @@ class DisplayManager {
           display.name = "" + display.name + " (" + String(i + 1) + ")"
         }
       }
+    }
+  }
+
+  func updateArm64AVServices() {
+    if Arm64DDC.isArm64 {
+      os_log("arm64 AVService update requested", type: .info)
+      var displayIDs: [CGDirectDisplayID] = []
+      for externalDisplay in self.getExternalDisplays() {
+        displayIDs.append(externalDisplay.identifier)
+      }
+      for serviceMatch in Arm64DDC.getServiceMatches(displayIDs: displayIDs) {
+        for externalDisplay in self.getExternalDisplays() where externalDisplay.identifier == serviceMatch.displayID && serviceMatch.service != nil {
+          externalDisplay.arm64avService = serviceMatch.service
+          os_log("Display service match successful for display %{public}@", type: .info, String(serviceMatch.displayID))
+          if !serviceMatch.isDiscouraged {
+            externalDisplay.arm64ddc = true // MARK: (point of interest when testing)
+          }
+        }
+      }
+      os_log("AVService update done", type: .info)
     }
   }
 

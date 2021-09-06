@@ -25,6 +25,10 @@
 		AA062E8A26C9A039007E628C /* DisplaysPrefsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA062E8926C9A039007E628C /* DisplaysPrefsViewController.swift */; };
 		AA062E8E26CA7BE5007E628C /* DisplaysPrefsCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA062E8D26CA7BE5007E628C /* DisplaysPrefsCellView.swift */; };
 		AA16139B26BE772E00DCF027 /* Arm64DDC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA16139A26BE772E00DCF027 /* Arm64DDC.swift */; };
+		AA25F6CF26E680510087F3A2 /* MenuslidersPrefsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA25F6CE26E680510087F3A2 /* MenuslidersPrefsViewController.swift */; };
+		AA25F6D126E681D30087F3A2 /* KeyboardPrefsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA25F6D026E681D30087F3A2 /* KeyboardPrefsViewController.swift */; };
+		AA25F6D326E681F20087F3A2 /* AdvancedPrefsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA25F6D226E681F20087F3A2 /* AdvancedPrefsViewController.swift */; };
+		AA25F6D726E68C160087F3A2 /* MediaKeyTapManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA25F6D626E68C160087F3A2 /* MediaKeyTapManager.swift */; };
 		AA3B4A2826AE103C00B74CD2 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = AA3B4A2726AE103C00B74CD2 /* README.md */; };
 		AA4398A926DD55DA00943F16 /* IntelDDC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4398A826DD55DA00943F16 /* IntelDDC.swift */; };
 		AA473EB126DFF8DE0063A181 /* Command.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA473EB026DFF8DE0063A181 /* Command.swift */; };
@@ -101,6 +105,10 @@
 		AA062E8926C9A039007E628C /* DisplaysPrefsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplaysPrefsViewController.swift; sourceTree = "<group>"; };
 		AA062E8D26CA7BE5007E628C /* DisplaysPrefsCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplaysPrefsCellView.swift; sourceTree = "<group>"; };
 		AA16139A26BE772E00DCF027 /* Arm64DDC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Arm64DDC.swift; sourceTree = "<group>"; };
+		AA25F6CE26E680510087F3A2 /* MenuslidersPrefsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuslidersPrefsViewController.swift; sourceTree = "<group>"; };
+		AA25F6D026E681D30087F3A2 /* KeyboardPrefsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardPrefsViewController.swift; sourceTree = "<group>"; };
+		AA25F6D226E681F20087F3A2 /* AdvancedPrefsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvancedPrefsViewController.swift; sourceTree = "<group>"; };
+		AA25F6D626E68C160087F3A2 /* MediaKeyTapManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaKeyTapManager.swift; sourceTree = "<group>"; };
 		AA3B4A2726AE103C00B74CD2 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		AA4398A826DD55DA00943F16 /* IntelDDC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntelDDC.swift; sourceTree = "<group>"; };
 		AA473EB026DFF8DE0063A181 /* Command.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Command.swift; sourceTree = "<group>"; };
@@ -235,6 +243,7 @@
 			isa = PBXGroup;
 			children = (
 				F01B0685228221B6008E64DB /* Bridging-Header.h */,
+				AA25F6D626E68C160087F3A2 /* MediaKeyTapManager.swift */,
 				6C85EFD922C941B000227EA1 /* DisplayManager.swift */,
 				F01B068F228221B7008E64DB /* SliderHandler.swift */,
 				AA473EB026DFF8DE0063A181 /* Command.swift */,
@@ -260,9 +269,12 @@
 			isa = PBXGroup;
 			children = (
 				F0445D3720023E710025AE82 /* MainPrefsViewController.swift */,
-				AA665A5C26C5892800FEF2C1 /* AboutPrefsViewController.swift */,
 				AA062E8926C9A039007E628C /* DisplaysPrefsViewController.swift */,
 				AA062E8D26CA7BE5007E628C /* DisplaysPrefsCellView.swift */,
+				AA25F6CE26E680510087F3A2 /* MenuslidersPrefsViewController.swift */,
+				AA25F6D026E681D30087F3A2 /* KeyboardPrefsViewController.swift */,
+				AA25F6D226E681F20087F3A2 /* AdvancedPrefsViewController.swift */,
+				AA665A5C26C5892800FEF2C1 /* AboutPrefsViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -502,6 +514,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA25F6D326E681F20087F3A2 /* AdvancedPrefsViewController.swift in Sources */,
 				56754EAF1D9A4016007BCDC5 /* AppDelegate.swift in Sources */,
 				6C85EFE122CC00AD00227EA1 /* NSNotification+Extension.swift in Sources */,
 				AA062E8A26C9A039007E628C /* DisplaysPrefsViewController.swift in Sources */,
@@ -511,6 +524,7 @@
 				AA665A5D26C5892800FEF2C1 /* AboutPrefsViewController.swift in Sources */,
 				6CBFE27C23DB27A200D1BC41 /* AppleDisplay.swift in Sources */,
 				AA062E8E26CA7BE5007E628C /* DisplaysPrefsCellView.swift in Sources */,
+				AA25F6D726E68C160087F3A2 /* MediaKeyTapManager.swift in Sources */,
 				FE4E0896249D584C003A50BB /* OSDUtils.swift in Sources */,
 				6CBFE27A23DB266000D1BC41 /* Display.swift in Sources */,
 				F03A8DF21FFBAA6F0034DC27 /* ExternalDisplay.swift in Sources */,
@@ -518,7 +532,9 @@
 				AA16139B26BE772E00DCF027 /* Arm64DDC.swift in Sources */,
 				F0445D3820023E710025AE82 /* MainPrefsViewController.swift in Sources */,
 				28D1DDF2227FBE71004CB494 /* NSScreen+Extension.swift in Sources */,
+				AA25F6D126E681D30087F3A2 /* KeyboardPrefsViewController.swift in Sources */,
 				F01B069F228221B7008E64DB /* SliderHandler.swift in Sources */,
+				AA25F6CF26E680510087F3A2 /* MenuslidersPrefsViewController.swift in Sources */,
 				AA4398A926DD55DA00943F16 /* IntelDDC.swift in Sources */,
 				6C85EFDA22C941B000227EA1 /* DisplayManager.swift in Sources */,
 				F01B069A228221B7008E64DB /* Utils.swift in Sources */,
