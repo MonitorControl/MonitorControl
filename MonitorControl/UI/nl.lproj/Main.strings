@@ -16,8 +16,8 @@
 /* Class = "NSButtonCell"; title = "Special thanks to our contributors!"; ObjectID = "95V-M4-2l5"; */
 "95V-M4-2l5.title" = "Speciale dank aan onze bijdragers!";
 
-/* Class = "NSTextFieldCell"; title = "Show tick marks at 0%, 25%, 50%, 75% and 100% for accurarcy."; ObjectID = "A8P-vn-DEJ"; */
-"A8P-vn-DEJ.title" = "Show tick marks at 0%, 25%, 50%, 75% and 100% for accurarcy.";
+/* Class = "NSTextFieldCell"; title = "Show tick marks at 0%, 25%, 50%, 75% and 100% for accuracy."; ObjectID = "A8P-vn-DEJ"; */
+"A8P-vn-DEJ.title" = "Show tick marks at 0%, 25%, 50%, 75% and 100% for accuracy.";
 
 /* Class = "NSTextFieldCell"; title = "These options work for hardware (DDC) controlled displays only."; ObjectID = "bIe-6O-xEH"; */
 "bIe-6O-xEH.title" = "Deze optie's werkt alleen voor hardware (DDC) gecontrolleerde displays.";
