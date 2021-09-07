@@ -58,8 +58,8 @@ class SliderHandler {
     let maxValue = slider.maxValue
 
     if !prefs.bool(forKey: Utils.PrefKeys.disableSliderSnap.rawValue) {
-      let snapInterval = 25
-      let snapThreshold = 3
+      let snapInterval = Int(Float(maxValue) / 4)
+      let snapThreshold = Int(Float(maxValue * 0.04))
       let closest = (value + snapInterval / 2) / snapInterval * snapInterval
       if abs(closest - value) <= snapThreshold {
         value = closest
