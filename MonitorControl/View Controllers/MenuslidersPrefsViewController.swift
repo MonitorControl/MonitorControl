@@ -21,6 +21,7 @@ class MenuslidersPrefsViewController: NSViewController, PreferencePane {
   @IBOutlet var showVolumeSlider: NSButton!
   @IBOutlet var showContrastSlider: NSButton!
   @IBOutlet var enableSliderSnap: NSButton!
+  @IBOutlet var showTickMarks: NSButton!
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -37,6 +38,7 @@ class MenuslidersPrefsViewController: NSViewController, PreferencePane {
     self.showContrastSlider.state = self.prefs.bool(forKey: Utils.PrefKeys.showContrast.rawValue) ? .on : .off
     self.showVolumeSlider.state = self.prefs.bool(forKey: Utils.PrefKeys.showVolume.rawValue) ? .on : .off
     self.enableSliderSnap.state = !self.prefs.bool(forKey: Utils.PrefKeys.disableSliderSnap.rawValue) ? .on : .off
+    self.showTickMarks.state = self.prefs.bool(forKey: Utils.PrefKeys.showTickMarks.rawValue) ? .on : .off
   }
 
   @IBAction func hideMenuIconClicked(_ sender: NSButton) {
@@ -90,6 +92,17 @@ class MenuslidersPrefsViewController: NSViewController, PreferencePane {
       self.prefs.set(true, forKey: Utils.PrefKeys.disableSliderSnap.rawValue)
     case .on:
       self.prefs.set(false, forKey: Utils.PrefKeys.disableSliderSnap.rawValue)
+    default: break
+    }
+    app.updateMenus()
+  }
+
+  @IBAction func showTickMarks(_ sender: NSButton) {
+    switch sender.state {
+    case .on:
+      self.prefs.set(true, forKey: Utils.PrefKeys.showTickMarks.rawValue)
+    case .off:
+      self.prefs.set(false, forKey: Utils.PrefKeys.showTickMarks.rawValue)
     default: break
     }
     app.updateMenus()

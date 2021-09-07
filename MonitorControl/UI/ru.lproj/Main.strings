@@ -7,11 +7,17 @@
 /* Class = "NSTextFieldCell"; title = "Slider behavior:"; ObjectID = "75n-7M-1mS"; */
 "75n-7M-1mS.title" = "Slider behavior:";
 
+/* Class = "NSButtonCell"; title = "Show slider tick marks"; ObjectID = "7zf-m1-gJO"; */
+"7zf-m1-gJO.title" = "Show slider tick marks";
+
 /* Class = "NSTextFieldCell"; title = "Slider knob will snap to 0%, 25%, 50%, 75% and 100% when in proximity making setting these values easier. Disable for finer control."; ObjectID = "8Gx-Ya-zhp"; */
 "8Gx-Ya-zhp.title" = "Slider knob will snap to 0%, 25%, 50%, 75% and 100% when in proximity making setting these values easier. Disable for finer control.";
 
 /* Class = "NSButtonCell"; title = "Special thanks to our contributors!"; ObjectID = "95V-M4-2l5"; */
 "95V-M4-2l5.title" = "Особая благодарность нашим контрибьюторам!";
+
+/* Class = "NSTextFieldCell"; title = "Show tick marks at 0%, 25%, 50%, 75% and 100% for help accurarcy."; ObjectID = "A8P-vn-DEJ"; */
+"A8P-vn-DEJ.title" = "Show tick marks at 0%, 25%, 50%, 75% and 100% for help accurarcy.";
 
 /* Class = "NSTextFieldCell"; title = "These options work for hardware (DDC) controlled displays only."; ObjectID = "bIe-6O-xEH"; */
 "bIe-6O-xEH.title" = "Эти опции работают только для дисплеев с аппаратным управлением (DDC).";

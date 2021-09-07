@@ -77,6 +77,8 @@ class Utils: NSObject {
     case hideAppleFromMenu
     // Disable slider snapping
     case disableSliderSnap
+    // Show tick marks for sliders
+    case showTickMarks
     // Change Brightness/Volume for all screens
     case allScreens
     // Friendly name changed

@@ -188,21 +188,21 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       self.statusMenu.insertItem(NSMenuItem.separator(), at: 0)
     }
     let monitorSubMenu: NSMenu = asSubMenu ? NSMenu() : self.statusMenu
-    var numOfBrightnessTickMarks = 0
+    var numOfTickMarks = 0
+    if prefs.bool(forKey: Utils.PrefKeys.showTickMarks.rawValue) {
+      numOfTickMarks = 5
+    }
     if let externalDisplay = display as? ExternalDisplay, !externalDisplay.isSw() {
       if prefs.bool(forKey: Utils.PrefKeys.showVolume.rawValue) {
-        let volumeSliderHandler = SliderHandler.addSliderMenuItem(toMenu: monitorSubMenu, forDisplay: externalDisplay, command: .audioSpeakerVolume, title: NSLocalizedString("Volume", comment: "Shown in menu"))
+        let volumeSliderHandler = SliderHandler.addSliderMenuItem(toMenu: monitorSubMenu, forDisplay: externalDisplay, command: .audioSpeakerVolume, title: NSLocalizedString("Volume", comment: "Shown in menu"), numOfTickMarks: numOfTickMarks)
         externalDisplay.volumeSliderHandler = volumeSliderHandler
       }
       if prefs.bool(forKey: Utils.PrefKeys.showContrast.rawValue) {
-        let contrastSliderHandler = SliderHandler.addSliderMenuItem(toMenu: monitorSubMenu, forDisplay: externalDisplay, command: .contrast, title: NSLocalizedString("Contrast", comment: "Shown in menu"))
+        let contrastSliderHandler = SliderHandler.addSliderMenuItem(toMenu: monitorSubMenu, forDisplay: externalDisplay, command: .contrast, title: NSLocalizedString("Contrast", comment: "Shown in menu"), numOfTickMarks: numOfTickMarks)
         externalDisplay.contrastSliderHandler = contrastSliderHandler
       }
-      if prefs.bool(forKey: Utils.PrefKeys.lowerSwAfterBrightness.rawValue) {
-        numOfBrightnessTickMarks = 0 // 1 - I  disabled this because tickmarks are buggy in dark mode on Monterey (probably Big Sur as well).
-      }
     }
-    let brightnessSliderHandler = SliderHandler.addSliderMenuItem(toMenu: monitorSubMenu, forDisplay: display, command: .brightness, title: NSLocalizedString("Brightness", comment: "Shown in menu"), numOfTickMarks: numOfBrightnessTickMarks)
+    let brightnessSliderHandler = SliderHandler.addSliderMenuItem(toMenu: monitorSubMenu, forDisplay: display, command: .brightness, title: NSLocalizedString("Brightness", comment: "Shown in menu"), numOfTickMarks: numOfTickMarks)
     display.brightnessSliderHandler = brightnessSliderHandler
     let monitorMenuItem = NSMenuItem()
     if asSubMenu {
