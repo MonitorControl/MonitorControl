@@ -66,19 +66,22 @@ class MediaKeyTapManager: MediaKeyTapDelegate {
         }
       case .mute:
         // The mute key should not respond to press + hold or keyup
-        if !isRepeat, isPressed {
-          // mute only matters for external displays
-          if let display = display as? ExternalDisplay {
-            display.toggleMute()
+        if !isRepeat, isPressed, let display = display as? ExternalDisplay {
+          display.toggleMute()
+          if !wasNotIsPressedVolumeSentAlready, !display.isMuted() {
+            display.playVolumeChangedSound()
+            wasNotIsPressedVolumeSentAlready = true
           }
         }
       case .volumeUp, .volumeDown:
         // volume only matters for external displays
         if let display = display as? ExternalDisplay {
-          if isPressed || !wasNotIsPressedVolumeSentAlready {
-            display.stepVolume(isUp: mediaKey == .volumeUp, isSmallIncrement: isSmallIncrement, isPressed: isPressed)
+          if isPressed {
+            display.stepVolume(isUp: mediaKey == .volumeUp, isSmallIncrement: isSmallIncrement)
+          } else if !wasNotIsPressedVolumeSentAlready {
+            display.playVolumeChangedSound()
+            wasNotIsPressedVolumeSentAlready = true
           }
-          wasNotIsPressedVolumeSentAlready = true
         }
       default:
         return

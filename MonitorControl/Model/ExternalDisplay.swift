@@ -94,10 +94,6 @@ class ExternalDisplay: Display {
         self.showOsd(command: volumeOSDValue > 0 ? .audioSpeakerVolume : .audioMuteScreenBlank, value: volumeOSDValue, roundChiclet: true)
       }
 
-      if volumeOSDValue > 0 {
-        self.playVolumeChangedSound()
-      }
-
       if let slider = self.volumeSliderHandler?.slider {
         slider.intValue = Int32(volumeDDCValue)
       }
@@ -172,12 +168,9 @@ class ExternalDisplay: Display {
     return (returnIntegerValue, returnMaxValue)
   }
 
-  func stepVolume(isUp: Bool, isSmallIncrement: Bool, isPressed: Bool) {
+  func stepVolume(isUp: Bool, isSmallIncrement: Bool) {
     let currentValue = self.getValue(for: .audioSpeakerVolume)
-    guard isPressed else {
-      self.playVolumeChangedSound()
-      return
-    }
+
     var muteValue: Int?
     let maxValue = self.getMaxValue(for: .audioSpeakerVolume)
     let volumeOSDValue = self.calcNewValue(currentValue: currentValue, maxValue: maxValue, isUp: isUp, isSmallIncrement: isSmallIncrement)
@@ -469,7 +462,7 @@ class ExternalDisplay: Display {
 
   private var audioPlayer: AVAudioPlayer?
 
-  private func playVolumeChangedSound() {
+  func playVolumeChangedSound() {
     // Check if user has enabled "Play feedback when volume is changed" in Sound Preferences
     guard let preferences = Utils.getSystemPreferences(), let hasSoundEnabled = preferences["com.apple.sound.beep.feedback"] as? Int, hasSoundEnabled == 1
     else {

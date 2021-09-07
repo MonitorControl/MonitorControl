@@ -34,7 +34,7 @@ class DisplayManager {
           }
         }
       }
-      if DisplayManager.isAppleDisplay(displayID: onlineDisplayID) { // MARK: (point of interest for testing)
+      if !app.debugSw, DisplayManager.isAppleDisplay(displayID: onlineDisplayID) { // MARK: (point of interest for testing)
         display = AppleDisplay(id, name: name, vendorNumber: vendorNumber, modelNumber: modelNumber, isVirtual: isVirtual)
       } else {
         display = ExternalDisplay(id, name: name, vendorNumber: vendorNumber, modelNumber: modelNumber, isVirtual: isVirtual)
@@ -130,7 +130,7 @@ class DisplayManager {
           externalDisplay.arm64avService = serviceMatch.service
           os_log("Display service match successful for display %{public}@", type: .info, String(serviceMatch.displayID))
           if !serviceMatch.isDiscouraged {
-            externalDisplay.arm64ddc = true // MARK: (point of interest when testing)
+            externalDisplay.arm64ddc = app.debugSw ? false : true // MARK: (point of interest when testing)
           }
         }
       }
