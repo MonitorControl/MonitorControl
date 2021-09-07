@@ -48,7 +48,7 @@ Go to [Releases](https://github.com/MonitorControl/MonitorControl/releases) and 
 
 ## Compatibility
 
-- macOS Mojave (`10.15`) and up _(note: you can download [version 2.1.0](https://github.com/MonitorControl/MonitorControl/releases/tag/v2.1.0) for Sierra `10.12` and [version 3.0.0](https://github.com/MonitorControl/MonitorControl/releases/tag/v3.0.0) for Mojave `10.14`
+- macOS Mojave (`10.15`) and up _(note: you can download [version 2.1.0](https://github.com/MonitorControl/MonitorControl/releases/tag/v2.1.0) for Sierra `10.12` and [version 3.0.0](https://github.com/MonitorControl/MonitorControl/releases/tag/v3.0.0) for Mojave `10.14`)_
 - Works with monitors controllable via [DDC](https://en.wikipedia.org/wiki/Display_Data_Channel) (or any other display via software dimming)
 
 ## How to help
