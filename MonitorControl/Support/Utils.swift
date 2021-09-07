@@ -73,9 +73,9 @@ class Utils: NSObject {
     case lowerSwAfterBrightness
     // Fallback to software control for external displays with no DDC
     case fallbackSw
-    // Do not show sliders for Apple displays (including built-in display) in menu MARK: TODO: This has no outlet in Preferences yet
+    // Do not show sliders for Apple displays (including built-in display) in menu
     case hideAppleFromMenu
-    // Disable slider snapping MARK: TODO: This has no outlet in Preferences yet
+    // Disable slider snapping
     case disableSliderSnap
     // Change Brightness/Volume for all screens
     case allScreens

@@ -1,11 +1,20 @@
+/* Class = "NSTextFieldCell"; title = "If the menu item is hidden, just relaunch the app to reveal Preferences!"; ObjectID = "0OK-pk-ecx"; */
+"0OK-pk-ecx.title" = "이 메뉴 항목이 안 보인다면, 앱을 재실행해야 설정에 나타납니다!";
+
 /* Class = "NSTextFieldCell"; title = "MonitorControl"; ObjectID = "1PJ-14-Bvn"; */
 "1PJ-14-Bvn.title" = "MonitorControl";
+
+/* Class = "NSTextFieldCell"; title = "Slider behavior:"; ObjectID = "75n-7M-1mS"; */
+"75n-7M-1mS.title" = "Slider behavior:";
+
+/* Class = "NSTextFieldCell"; title = "Slider knob will snap to 0%, 25%, 50%, 75% and 100% when in proximity making setting these values easier. Disable for finer control."; ObjectID = "8Gx-Ya-zhp"; */
+"8Gx-Ya-zhp.title" = "Slider knob will snap to 0%, 25%, 50%, 75% and 100% when in proximity making setting these values easier. Disable for finer control.";
 
 /* Class = "NSButtonCell"; title = "Special thanks to our contributors!"; ObjectID = "95V-M4-2l5"; */
 "95V-M4-2l5.title" = "기여자에게 특별한 감사를 드립니다!";
 
-/* Class = "NSButtonCell"; title = "Hide Menu Icon"; ObjectID = "aXL-i8-S6R"; */
-"aXL-i8-S6R.title" = "메뉴 항목 숨기기";
+/* Class = "NSTextFieldCell"; title = "These options work for hardware (DDC) controlled displays only."; ObjectID = "bIe-6O-xEH"; */
+"bIe-6O-xEH.title" = "이 옵션들은 하드웨어 (DDC) 제어 방식의 디스플레이에서만 작동됩니다.";
 
 /* Class = "NSButtonCell"; title = "Disable macOS volume OSD"; ObjectID = "bkM-Px-U3b"; */
 "bkM-Px-U3b.title" = "맥OS 볼륨 OSD 비활성화";
@@ -19,6 +28,9 @@
 /* Class = "NSTextFieldCell"; title = "Keyboard:"; ObjectID = "c7N-cO-759"; */
 "c7N-cO-759.title" = "키보드:";
 
+/* Class = "NSButtonCell"; title = "Show volume slider in menu"; ObjectID = "c9D-MB-lma"; */
+"c9D-MB-lma.title" = "메뉴에서 볼륨 슬라이더 표시";
+
 /* Class = "NSMenuItem"; title = "Custom"; ObjectID = "Cle-DD-vR7"; */
 "Cle-DD-vR7.title" = "사용자 설정";
 
@@ -27,9 +39,6 @@
 
 /* Class = "NSTextFieldCell"; title = "⚠️ Warning! Changing some of these settings may cause system freezes or unexpected behavior!"; ObjectID = "Cz1-Mh-llk"; */
 "Cz1-Mh-llk.title" = "⚠️ 경고! 이 설정을 변경하면 시스템이 멈추거나 예기치 않은 동작이 발생할 수 있습니다";
-
-/* Class = "NSButtonCell"; title = "Show volume slider in menu"; ObjectID = "dhP-eB-1L6"; */
-"dhP-eB-1L6.title" = "메뉴에서 볼륨 슬라이더 표시";
 
 /* Class = "NSButtonCell"; title = "Change Brightness and Volume for all screens"; ObjectID = "E6M-ih-S8Y"; */
 "E6M-ih-S8Y.title" = "모든 화면의 밝기와 볼륨 조절";
@@ -40,8 +49,14 @@
 /* Class = "NSButtonCell"; title = "Reset Name"; ObjectID = "f9g-8s-gdd"; */
 "f9g-8s-gdd.title" = "Reset Name";
 
+/* Class = "NSTextFieldCell"; title = "Menu contents:"; ObjectID = "fe9-Ia-t9m"; */
+"fe9-Ia-t9m.title" = "메뉴 컨텐츠:";
+
 /* Class = "NSButtonCell"; title = "Further lower brightness via software dimming"; ObjectID = "fhy-Er-0aI"; */
 "fhy-Er-0aI.title" = "소프트웨어 디밍을 통한 더 낮은 밝기";
+
+/* Class = "NSTextFieldCell"; title = "Apple and built-in displays have a brightness slider in Control Center as well."; ObjectID = "fmZ-HI-Mdc"; */
+"fmZ-HI-Mdc.title" = "Apple and built-in displays have a brightness slider in Control Center as well.";
 
 /* Class = "NSMenuItem"; title = "None"; ObjectID = "FoA-yh-Yx3"; */
 "FoA-yh-Yx3.title" = "설정하지 않음";
@@ -52,9 +67,6 @@
 /* Class = "NSMenuItem"; title = "Brightness only"; ObjectID = "hjz-0c-rvK"; */
 "hjz-0c-rvK.title" = "밝기";
 
-/* Class = "NSTextFieldCell"; title = "These options work for hardware (DDC) controlled displays only."; ObjectID = "iBZ-8c-JDY"; */
-"iBZ-8c-JDY.title" = "이 옵션들은 하드웨어 (DDC) 제어 방식의 디스플레이에서만 작동됩니다.";
-
 /* Class = "NSButtonCell"; title = "Start at Login"; ObjectID = "j72-NF-zsW"; */
 "j72-NF-zsW.title" = "로그인 시 시작";
 
@@ -63,6 +75,9 @@
 
 /* Class = "NSTextFieldCell"; title = "Use the media keys of your keyboard to control Brightness & Volume."; ObjectID = "K2r-aD-eec"; */
 "K2r-aD-eec.title" = "밝기와 볼륨을 조절하기 위해 미디어 키를 사용합니다.";
+
+/* Class = "NSButtonCell"; title = "Show brightness slider for Apple and built-in displays"; ObjectID = "K6A-4z-1aQ"; */
+"K6A-4z-1aQ.title" = "Show brightness slider for Apple and built-in displays";
 
 /* Class = "NSButtonCell"; title = "Enable software dimming if required"; ObjectID = "kMa-3q-udl"; */
 "kMa-3q-udl.title" = "필요할 때 소프트웨어 디밍 활성화";
@@ -73,8 +88,11 @@
 /* Class = "NSTextFieldCell"; title = "Display type:"; ObjectID = "lSJ-6w-KJ2"; */
 "lSJ-6w-KJ2.title" = "디스플레이 타입:";
 
-/* Class = "NSTextFieldCell"; title = "Menu contents:"; ObjectID = "MJx-MK-e7D"; */
-"MJx-MK-e7D.title" = "메뉴 컨텐츠:";
+/* Class = "NSButtonCell"; title = "Enable slider snapping"; ObjectID = "MlU-hl-d46"; */
+"MlU-hl-d46.title" = "Enable slider snapping";
+
+/* Class = "NSButtonCell"; title = "Hide Menu Icon"; ObjectID = "msX-fb-2Qd"; */
+"msX-fb-2Qd.title" = "메뉴 항목 숨기기";
 
 /* Class = "NSTextFieldCell"; title = "If an external display can't be controlled, software dimming will be used instead."; ObjectID = "n4V-jQ-1Ri"; */
 "n4V-jQ-1Ri.title" = "외장 디스플레이가 제어되지 않을 때, 소프트웨어 디밍을 대신 사용합니다.";
@@ -91,8 +109,8 @@
 /* Class = "NSButtonCell"; title = "Longer delay during DDC read operations"; ObjectID = "pF5-Sw-7BR"; */
 "pF5-Sw-7BR.title" = "DDC 리드 작업 중 응답지연 시간 연장";
 
-/* Class = "NSTextFieldCell"; title = "If the menu item is hidden, just relaunch the app to reveal Preferences!"; ObjectID = "PVE-y7-zIk"; */
-"PVE-y7-zIk.title" = "이 메뉴 항목이 안 보인다면, 앱을 재실행해야 설정에 나타납니다!";
+/* Class = "NSButtonCell"; title = "Show contrast slider in menu"; ObjectID = "qO0-dB-yUs"; */
+"qO0-dB-yUs.title" = "메뉴에서 대비 슬라이더 표시";
 
 /* Class = "NSTextFieldCell"; title = "Advanced:"; ObjectID = "r7i-oG-Ab6"; */
 "r7i-oG-Ab6.title" = "고급:";
@@ -102,6 +120,9 @@
 
 /* Class = "NSTextFieldCell"; title = "@the0neyouseek\n@JoniVR\n@waydabber"; ObjectID = "TKd-J8-Iyk"; */
 "TKd-J8-Iyk.title" = "@the0neyouseek\n@JoniVR\n@waydabber";
+
+/* Class = "NSTextFieldCell"; title = "Menu Icon:"; ObjectID = "u6s-Pb-BCG"; */
+"u6s-Pb-BCG.title" = "Menu Icon:";
 
 /* Class = "NSButtonCell"; title = "Enable keyboard control for display"; ObjectID = "UqR-WE-jHl"; */
 "UqR-WE-jHl.title" = "디스플레이 키보드 제어 활성화";
@@ -120,9 +141,6 @@
 
 /* Class = "NSMenuItem"; title = "None"; ObjectID = "X96-ny-lAP"; */
 "X96-ny-lAP.title" = "안함";
-
-/* Class = "NSButtonCell"; title = "Show contrast slider in menu"; ObjectID = "xSI-8W-Xd0"; */
-"xSI-8W-Xd0.title" = "메뉴에서 대비 슬라이더 표시";
 
 /* Class = "NSButtonCell"; title = "Reset Preferences"; ObjectID = "xY6-aw-o9u"; */
 "xY6-aw-o9u.title" = "설정 초기화";

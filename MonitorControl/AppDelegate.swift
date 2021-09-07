@@ -41,10 +41,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     return PreferencesWindowController(
       preferencePanes: [
         mainPrefsVc!,
+        menuslidersPrefsVc!,
+        // keyboardPrefsVc!,
         displaysPrefsVc!,
-//        menuslidersPrefsVc!,
-//        keyboardPrefsVc!,
-//        advancedPrefsVc!,
+        // advancedPrefsVc!,
         aboutPrefsVc!,
       ],
       style: preferencePaneStyle,

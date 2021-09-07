@@ -18,9 +18,6 @@ class MainPrefsViewController: NSViewController, PreferencePane {
   let prefs = UserDefaults.standard
 
   @IBOutlet var startAtLogin: NSButton!
-  @IBOutlet var hideMenuIcon: NSButton!
-  @IBOutlet var showContrastSlider: NSButton!
-  @IBOutlet var showVolumeSlider: NSButton!
   @IBOutlet var lowerSwAfterBrightness: NSButton!
   @IBOutlet var fallbackSw: NSButton!
   @IBOutlet var listenFor: NSPopUpButton!
@@ -42,10 +39,6 @@ class MainPrefsViewController: NSViewController, PreferencePane {
     // This is marked as deprectated but according to the function header it still does not have a replacement as of macOS 12 Monterey and is valid to use.
     let startAtLogin = (SMCopyAllJobDictionaries(kSMDomainUserLaunchd).takeRetainedValue() as? [[String: AnyObject]])?.first { $0["Label"] as? String == "\(Bundle.main.bundleIdentifier!)Helper" }?["OnDemand"] as? Bool ?? false
     self.startAtLogin.state = startAtLogin ? .on : .off
-
-    self.hideMenuIcon.state = self.prefs.bool(forKey: Utils.PrefKeys.hideMenuIcon.rawValue) ? .on : .off
-    self.showContrastSlider.state = self.prefs.bool(forKey: Utils.PrefKeys.showContrast.rawValue) ? .on : .off
-    self.showVolumeSlider.state = self.prefs.bool(forKey: Utils.PrefKeys.showVolume.rawValue) ? .on : .off
     self.lowerSwAfterBrightness.state = self.prefs.bool(forKey: Utils.PrefKeys.lowerSwAfterBrightness.rawValue) ? .on : .off
     self.fallbackSw.state = self.prefs.bool(forKey: Utils.PrefKeys.fallbackSw.rawValue) ? .on : .off
     self.listenFor.selectItem(at: self.prefs.integer(forKey: Utils.PrefKeys.listenFor.rawValue))
@@ -75,46 +68,6 @@ class MainPrefsViewController: NSViewController, PreferencePane {
       Utils.setStartAtLogin(enabled: false)
     default: break
     }
-  }
-
-  @IBAction func hideMenuIconClicked(_ sender: NSButton) {
-    switch sender.state {
-    case .on:
-      self.prefs.set(true, forKey: Utils.PrefKeys.hideMenuIcon.rawValue)
-      app.statusItem.isVisible = false
-    case .off:
-      self.prefs.set(false, forKey: Utils.PrefKeys.hideMenuIcon.rawValue)
-      app.statusItem.isVisible = true
-    default: break
-    }
-  }
-
-  @IBAction func showContrastSliderClicked(_ sender: NSButton) {
-    switch sender.state {
-    case .on:
-      self.prefs.set(true, forKey: Utils.PrefKeys.showContrast.rawValue)
-    case .off:
-      self.prefs.set(false, forKey: Utils.PrefKeys.showContrast.rawValue)
-    default: break
-    }
-    app.updateMenus()
-    #if DEBUG
-      os_log("Toggle show contrast slider state: %{public}@", type: .info, sender.state == .on ? "on" : "off")
-    #endif
-  }
-
-  @IBAction func showVolumeSliderClicked(_ sender: NSButton) {
-    switch sender.state {
-    case .on:
-      self.prefs.set(true, forKey: Utils.PrefKeys.showVolume.rawValue)
-    case .off:
-      self.prefs.set(false, forKey: Utils.PrefKeys.showVolume.rawValue)
-    default: break
-    }
-    app.updateMenus()
-    #if DEBUG
-      os_log("Toggle show volume slider state: %{public}@", type: .info, sender.state == .on ? "on" : "off")
-    #endif
   }
 
   @IBAction func lowerSwAfterBrightnessClicked(_ sender: NSButton) {

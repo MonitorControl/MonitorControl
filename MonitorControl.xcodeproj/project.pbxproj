@@ -269,10 +269,10 @@
 			isa = PBXGroup;
 			children = (
 				F0445D3720023E710025AE82 /* MainPrefsViewController.swift */,
-				AA062E8926C9A039007E628C /* DisplaysPrefsViewController.swift */,
-				AA062E8D26CA7BE5007E628C /* DisplaysPrefsCellView.swift */,
 				AA25F6CE26E680510087F3A2 /* MenuslidersPrefsViewController.swift */,
 				AA25F6D026E681D30087F3A2 /* KeyboardPrefsViewController.swift */,
+				AA062E8926C9A039007E628C /* DisplaysPrefsViewController.swift */,
+				AA062E8D26CA7BE5007E628C /* DisplaysPrefsCellView.swift */,
 				AA25F6D226E681F20087F3A2 /* AdvancedPrefsViewController.swift */,
 				AA665A5C26C5892800FEF2C1 /* AboutPrefsViewController.swift */,
 			);
