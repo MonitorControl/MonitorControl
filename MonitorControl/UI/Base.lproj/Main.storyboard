@@ -449,7 +449,7 @@
                                     <gridCell row="JCM-Me-DIg" column="V6M-Jv-Agj" id="BrS-uz-AmN">
                                         <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="3UH-lb-LtK">
                                             <rect key="frame" x="235" y="0.0" width="418" height="14"/>
-                                            <textFieldCell key="cell" controlSize="small" title="Show tick marks at 0%, 25%, 50%, 75% and 100% for help accurarcy." id="A8P-vn-DEJ">
+                                            <textFieldCell key="cell" controlSize="small" title="Show tick marks at 0%, 25%, 50%, 75% and 100% for accurarcy." id="A8P-vn-DEJ">
                                                 <font key="font" metaFont="smallSystem"/>
                                                 <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
