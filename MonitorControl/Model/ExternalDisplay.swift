@@ -9,6 +9,7 @@ class ExternalDisplay: Display {
   var ddc: IntelDDC?
   var arm64ddc: Bool = false
   var arm64avService: IOAVService?
+  var isDiscouraged: Bool = false
 
   let DDC_HARD_MAX_LIMIT: Int = 100
 

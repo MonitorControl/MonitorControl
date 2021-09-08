@@ -139,7 +139,10 @@ class DisplayManager {
         for externalDisplay in self.getExternalDisplays() where externalDisplay.identifier == serviceMatch.displayID && serviceMatch.service != nil {
           externalDisplay.arm64avService = serviceMatch.service
           os_log("Display service match successful for display %{public}@", type: .info, String(serviceMatch.displayID))
-          if !serviceMatch.isDiscouraged {
+          if serviceMatch.isDiscouraged {
+            os_log("Display %{public}@ is flagged as discouraged by Arm64DDC.", type: .info, String(serviceMatch.displayID))
+            externalDisplay.isDiscouraged = serviceMatch.isDiscouraged
+          } else {
             externalDisplay.arm64ddc = app.debugSw ? false : true // MARK: (point of interest when testing)
           }
         }
