@@ -96,12 +96,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   func setDefaultPrefs() {
     if !prefs.bool(forKey: Utils.PrefKeys.appAlreadyLaunched.rawValue) {
       prefs.set(true, forKey: Utils.PrefKeys.appAlreadyLaunched.rawValue)
+      prefs.set(false, forKey: Utils.PrefKeys.hideBrightness.rawValue)
       prefs.set(false, forKey: Utils.PrefKeys.showContrast.rawValue)
       prefs.set(true, forKey: Utils.PrefKeys.showVolume.rawValue)
       prefs.set(false, forKey: Utils.PrefKeys.lowerSwAfterBrightness.rawValue)
       prefs.set(true, forKey: Utils.PrefKeys.fallbackSw.rawValue)
       prefs.set(false, forKey: Utils.PrefKeys.hideAppleFromMenu.rawValue)
-      prefs.set(false, forKey: Utils.PrefKeys.disableSliderSnap.rawValue)
+      prefs.set(false, forKey: Utils.PrefKeys.enableSliderSnap.rawValue)
       prefs.set(false, forKey: Utils.PrefKeys.hideMenuIcon.rawValue)
       prefs.set(false, forKey: Utils.PrefKeys.showAdvancedDisplays.rawValue)
     }

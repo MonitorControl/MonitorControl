@@ -78,7 +78,7 @@ class Utils: NSObject {
     // Do not show sliders for Apple displays (including built-in display) in menu
     case hideAppleFromMenu
     // Disable slider snapping
-    case disableSliderSnap
+    case enableSliderSnap
     // Show tick marks for sliders
     case showTickMarks
     // Change Brightness/Volume for all screens

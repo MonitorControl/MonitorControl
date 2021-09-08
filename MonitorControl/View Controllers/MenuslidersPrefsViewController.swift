@@ -45,7 +45,7 @@ class MenuslidersPrefsViewController: NSViewController, PreferencePane {
     }
     self.showContrastSlider.state = self.prefs.bool(forKey: Utils.PrefKeys.showContrast.rawValue) ? .on : .off
     self.showVolumeSlider.state = self.prefs.bool(forKey: Utils.PrefKeys.showVolume.rawValue) ? .on : .off
-    self.enableSliderSnap.state = !self.prefs.bool(forKey: Utils.PrefKeys.disableSliderSnap.rawValue) ? .on : .off
+    self.enableSliderSnap.state = self.prefs.bool(forKey: Utils.PrefKeys.enableSliderSnap.rawValue) ? .on : .off
     self.showTickMarks.state = self.prefs.bool(forKey: Utils.PrefKeys.showTickMarks.rawValue) ? .on : .off
   }
 
@@ -111,10 +111,10 @@ class MenuslidersPrefsViewController: NSViewController, PreferencePane {
 
   @IBAction func enableSliderSnapClicked(_ sender: NSButton) {
     switch sender.state {
-    case .off:
-      self.prefs.set(true, forKey: Utils.PrefKeys.disableSliderSnap.rawValue)
     case .on:
-      self.prefs.set(false, forKey: Utils.PrefKeys.disableSliderSnap.rawValue)
+      self.prefs.set(true, forKey: Utils.PrefKeys.enableSliderSnap.rawValue)
+    case .off:
+      self.prefs.set(false, forKey: Utils.PrefKeys.enableSliderSnap.rawValue)
     default: break
     }
     app.updateMenus()
