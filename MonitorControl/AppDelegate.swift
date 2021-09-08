@@ -181,6 +181,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       }
     }
     self.updateMediaKeyTap()
+    self.refreshBrightnessJob()
   }
 
   private func addDisplayToMenu(display: Display, asSubMenu: Bool) {
@@ -262,6 +263,18 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       } else if Arm64DDC.isArm64 {
         os_log("Displays don't need reconfig after sober but might need AVServices update", type: .info)
         DisplayManager.shared.updateArm64AVServices()
+      }
+    }
+  }
+
+  private func refreshBrightnessJob() {
+    if self.sleepID == 0, self.reconfigureID == 0 {
+      var nextRefresh = 1.0
+      if DisplayManager.shared.refreshDisplaysBrightness() {
+        nextRefresh = 0.25
+      }
+      DispatchQueue.main.asyncAfter(deadline: .now() + nextRefresh) {
+        self.refreshBrightnessJob()
       }
     }
   }

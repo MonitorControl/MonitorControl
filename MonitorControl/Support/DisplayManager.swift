@@ -43,6 +43,16 @@ class DisplayManager {
     }
   }
 
+  func refreshDisplaysBrightness() -> Bool {
+    var refreshedSomething = false
+    for display in self.displays {
+      if display.refreshBrightness() {
+        refreshedSomething = true
+      }
+    }
+    return refreshedSomething
+  }
+
   func getExternalDisplays() -> [ExternalDisplay] {
     return self.displays.compactMap { $0 as? ExternalDisplay }
   }

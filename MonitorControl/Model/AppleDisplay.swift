@@ -43,8 +43,19 @@ class AppleDisplay: Display {
     self.setBrightness(value: value)
     self.showOsd(command: .brightness, value: Int(value * 64), maxValue: 64)
     if let slider = brightnessSliderHandler?.slider {
-      slider.intValue = Int32(value * 100)
+      slider.integerValue = Int(value * 100)
     }
+  }
+
+  override func refreshBrightness() -> Bool {
+    let brightness = Int(getBrightness() * 100)
+    if let sliderHandler = brightnessSliderHandler, let slider = sliderHandler.slider {
+      if slider.integerValue != brightness {
+        slider.integerValue = brightness
+        return true
+      }
+    }
+    return false
   }
 
   func isBuiltIn() -> Bool {
