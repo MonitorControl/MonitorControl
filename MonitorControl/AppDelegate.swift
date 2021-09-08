@@ -144,14 +144,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     } else {
       displays.append(contentsOf: DisplayManager.shared.getDdcCapableDisplays())
     }
-    if displays.count == 0 {
-      let item = NSMenuItem()
-      item.title = NSLocalizedString("No supported display found", comment: "Shown in menu")
-      item.isEnabled = false
-      self.monitorItems.append(item)
-      self.statusMenu.insertItem(item, at: 0)
-      self.statusMenu.insertItem(NSMenuItem.separator(), at: 1)
-    } else {
+    if displays.count != 0 {
       let asSubmenu: Bool = displays.count > 3 ? true : false
       for display in displays {
         os_log("Supported display found: %{public}@", type: .info, "\(display.name) (Vendor: \(display.vendorNumber ?? 0), Model: \(display.modelNumber ?? 0))")
