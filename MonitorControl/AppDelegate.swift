@@ -19,6 +19,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   var reconfigureID: Int = 0 // dispatched reconfigure command ID
   var sleepID: Int = 0 // Don't reconfigure display as the system or display is sleeping or wake just recently.
   var safeMode = false // Safe mode engaged during startup?
+  var brightnessJobRunning = false // Is brightness job active?
   let debugSw: Bool = false
   let ddcQueue = DispatchQueue(label: "DDC queue")
 
@@ -181,7 +182,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       }
     }
     self.updateMediaKeyTap()
-    self.refreshBrightnessJob()
+    self.refreshBrightnessJob(start: true)
   }
 
   private func addDisplayToMenu(display: Display, asSubMenu: Bool) {
@@ -263,12 +264,20 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       } else if Arm64DDC.isArm64 {
         os_log("Displays don't need reconfig after sober but might need AVServices update", type: .info)
         DisplayManager.shared.updateArm64AVServices()
+        self.refreshBrightnessJob(start: true)
       }
     }
   }
 
-  private func refreshBrightnessJob() {
+  private func refreshBrightnessJob(start: Bool = false) {
+    guard !(self.brightnessJobRunning && start) else {
+      return
+    }
     if self.sleepID == 0, self.reconfigureID == 0 {
+      if !self.brightnessJobRunning {
+        os_log("Refresh brightness job started.", type: .info)
+        self.brightnessJobRunning = true
+      }
       var nextRefresh = 1.0
       if DisplayManager.shared.refreshDisplaysBrightness() {
         nextRefresh = 0.25
@@ -276,6 +285,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       DispatchQueue.main.asyncAfter(deadline: .now() + nextRefresh) {
         self.refreshBrightnessJob()
       }
+    } else {
+      // Brightness refresh job dies if there is sleep or reconfiguration.
+      self.brightnessJobRunning = false
+      os_log("Refresh brightness job died because of sleep or reconfiguration.", type: .info)
     }
   }
 
