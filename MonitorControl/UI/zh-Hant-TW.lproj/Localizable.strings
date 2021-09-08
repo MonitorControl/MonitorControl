@@ -59,7 +59,7 @@
 "No" = "否";
 
 /* Shown in the Display Preferences */
-"No Control Available" = "沒有可用的控制項";
+"No Control" = "沒有可用的控制項";
 
 /* Shown in menu */
 "No supported display found" = "找不到支援的螢幕";
@@ -87,6 +87,24 @@
 
 /* Shown in the Display Preferences */
 "Software Only" = "僅用軟體";
+
+/* Shown in the Display Preferences */
+"This display allows for software control only. Reasons for this might be using the HDMI port of a Mac mini (which blocks hardware DDC control) or having a blacklisted display." = "This display allows for software control only. Reasons for this might be using the HDMI port of a Mac mini (which blocks hardware DDC control) or having a blacklisted display.";
+
+/* Shown in the Display Preferences */
+"This display has an unspecified control status." = "This display has an unspecified control status.";
+
+/* Shown in the Display Preferences */
+"This display is reported to support hardware DDC control but the current settings allow for software control only." = "This display is reported to support hardware DDC control but the current settings allow for software control only.";
+
+/* Shown in the Display Preferences */
+"This display is reported to support hardware DDC control. If you encounter issues, you can disable hardware DDC control to force software control." = "This display is reported to support hardware DDC control. If you encounter issues, you can disable hardware DDC control to force software control.";
+
+/* Shown in the Display Preferences */
+"This display supports native Apple brightness protocol. This allows macOS to control this display without MonitorControl as well." = "This display supports native Apple brightness protocol. This allows macOS to control this display without MonitorControl as well.";
+
+/* Shown in the Display Preferences */
+"This is a virtual display (examples: AirPlay, SideCar, display connected via a DisplayLink Dock or similar) which does not allow control." = "This is a virtual display (examples: AirPlay, SideCar, display connected via a DisplayLink Dock or similar) which does not allow control.";
 
 /* Unknown display name
  Unknown model

@@ -59,24 +59,24 @@ class DisplaysPrefsViewController: NSViewController, PreferencePane, NSTableView
   public static func getDisplayInfo(display: Display) -> DisplayInfo {
     var displayType = NSLocalizedString("Other Display", comment: "Shown in the Display Preferences")
     var displayImage = "display.trianglebadge.exclamationmark"
-    var controlMethod = NSLocalizedString("No Control Available", comment: "Shown in the Display Preferences")
+    var controlMethod = NSLocalizedString("No Control", comment: "Shown in the Display Preferences") + "  ⚠️"
     var controlStatus = NSLocalizedString("This display has an unspecified control status.", comment: "Shown in the Display Preferences")
     if display.isVirtual {
       displayType = NSLocalizedString("Virtual Display", comment: "Shown in the Display Preferences")
       displayImage = "tv.and.mediabox"
-      controlMethod = NSLocalizedString("No Control Available", comment: "Shown in the Display Preferences")
+      controlMethod = NSLocalizedString("No Control", comment: "Shown in the Display Preferences") + "  ⚠️"
       controlStatus = NSLocalizedString("This is a virtual display (examples: AirPlay, SideCar, display connected via a DisplayLink Dock or similar) which does not allow control.", comment: "Shown in the Display Preferences")
     } else if display is ExternalDisplay {
       displayType = NSLocalizedString("External Display", comment: "Shown in the Display Preferences")
       displayImage = "display"
       if let externalDisplay: ExternalDisplay = display as? ExternalDisplay {
         if externalDisplay.isSwOnly() {
-          controlMethod = NSLocalizedString("Software Only", comment: "Shown in the Display Preferences")
+          controlMethod = NSLocalizedString("Software Only", comment: "Shown in the Display Preferences") + "  ⚠️"
           displayImage = "display.trianglebadge.exclamationmark"
           controlStatus = NSLocalizedString("This display allows for software control only. Reasons for this might be using the HDMI port of a Mac mini (which blocks hardware DDC control) or having a blacklisted display.", comment: "Shown in the Display Preferences")
         } else {
           if externalDisplay.isSw() {
-            controlMethod = NSLocalizedString("Software (Forced)", comment: "Shown in the Display Preferences")
+            controlMethod = NSLocalizedString("Software (Forced)", comment: "Shown in the Display Preferences") + "  ⚠️"
             controlStatus = NSLocalizedString("This display is reported to support hardware DDC control but the current settings allow for software control only.", comment: "Shown in the Display Preferences")
           } else {
             controlMethod = NSLocalizedString("Hardware (DDC)", comment: "Shown in the Display Preferences")
@@ -97,7 +97,7 @@ class DisplaysPrefsViewController: NSViewController, PreferencePane, NSTableView
         displayImage = "display"
       }
       controlMethod = NSLocalizedString("Hardware (Apple)", comment: "Shown in the Display Preferences")
-      controlStatus = NSLocalizedString("This display is detected to support native Apple brightness protocol. This allows macOS to control this display without MonitorControl as well.", comment: "Shown in the Display Preferences")
+      controlStatus = NSLocalizedString("This display supports native Apple brightness protocol. This allows macOS to control this display without MonitorControl as well.", comment: "Shown in the Display Preferences")
     }
     return DisplayInfo(displayType: displayType, displayImage: displayImage, controlMethod: controlMethod, controlStatus: controlStatus)
   }
@@ -130,6 +130,7 @@ class DisplaysPrefsViewController: NSViewController, PreferencePane, NSTableView
       let displayInfo = DisplaysPrefsViewController.getDisplayInfo(display: display)
       cell.displayType.stringValue = displayInfo.displayType
       cell.controlMethod.stringValue = displayInfo.controlMethod
+      cell.controlMethod.controlView?.toolTip = displayInfo.controlStatus
       if #available(macOS 11.0, *) {
         cell.displayImage.image = NSImage(systemSymbolName: displayInfo.displayImage, accessibilityDescription: display.name)!
       } else {
