@@ -55,23 +55,29 @@
 /* Class = "NSButtonCell"; title = "Reset Name"; ObjectID = "f9g-8s-gdd"; */
 "f9g-8s-gdd.title" = "重設名稱";
 
-/* Class = "NSTextFieldCell"; title = "Menu contents:"; ObjectID = "fe9-Ia-t9m"; */
+/* Class = "NSTextFieldCell"; title = "Brightness slider:"; ObjectID = "fe9-Ia-t9m"; */
 "fe9-Ia-t9m.title" = "選單內容:";
 
 /* Class = "NSButtonCell"; title = "Further lower brightness via software dimming"; ObjectID = "fhy-Er-0aI"; */
 "fhy-Er-0aI.title" = "亮度和對比度同時降低";
 
-/* Class = "NSTextFieldCell"; title = "Apple and built-in displays have a brightness slider in Control Center as well."; ObjectID = "fmZ-HI-Mdc"; */
+/* Class = "NSTextFieldCell"; title = "Apple and built-in displays already have a brightness slider in Control Center."; ObjectID = "fmZ-HI-Mdc"; */
 "fmZ-HI-Mdc.title" = "Apple and built-in displays have a brightness slider in Control Center as well.";
 
 /* Class = "NSMenuItem"; title = "None"; ObjectID = "FoA-yh-Yx3"; */
 "FoA-yh-Yx3.title" = "不請求";
+
+/* Class = "NSTextFieldCell"; title = "Brightness slider for hardware or software controlled displays or TVs."; ObjectID = "gXH-HL-ZOL"; */
+"gXH-HL-ZOL.title" = "Brightness slider for hardware or software controlled displays or TVs.";
 
 /* Class = "NSTextFieldCell"; title = "Brightness control:"; ObjectID = "hdd-Zz-buN"; */
 "hdd-Zz-buN.title" = "亮度控制:";
 
 /* Class = "NSMenuItem"; title = "Brightness only"; ObjectID = "hjz-0c-rvK"; */
 "hjz-0c-rvK.title" = "僅亮度";
+
+/* Class = "NSTextFieldCell"; title = "Additional sliders:"; ObjectID = "i5X-M5-Tf5"; */
+"i5X-M5-Tf5.title" = "Additional sliders:";
 
 /* Class = "NSButtonCell"; title = "Start at Login"; ObjectID = "j72-NF-zsW"; */
 "j72-NF-zsW.title" = "登入時啟動 MonitorControl";
@@ -82,7 +88,7 @@
 /* Class = "NSTextFieldCell"; title = "Use the media keys of your keyboard to control Brightness & Volume."; ObjectID = "K2r-aD-eec"; */
 "K2r-aD-eec.title" = "用鍵盤上的媒體按鍵控制亮度和音量";
 
-/* Class = "NSButtonCell"; title = "Show brightness slider for Apple and built-in displays"; ObjectID = "K6A-4z-1aQ"; */
+/* Class = "NSButtonCell"; title = "Enable for Apple branded and built-in displays as well"; ObjectID = "K6A-4z-1aQ"; */
 "K6A-4z-1aQ.title" = "Show brightness slider for Apple and built-in displays";
 
 /* Class = "NSButtonCell"; title = "Enable software dimming if required"; ObjectID = "kMa-3q-udl"; */
@@ -99,6 +105,9 @@
 
 /* Class = "NSButtonCell"; title = "Hide Menu Icon"; ObjectID = "msX-fb-2Qd"; */
 "msX-fb-2Qd.title" = "隱藏選單列圖示";
+
+/* Class = "NSButtonCell"; title = "Show brightness slider in menu"; ObjectID = "MWo-6I-s9L"; */
+"MWo-6I-s9L.title" = "Show brightness slider in menu";
 
 /* Class = "NSTextFieldCell"; title = "If an external display can't be controlled, software dimming will be used instead."; ObjectID = "n4V-jQ-1Ri"; */
 "n4V-jQ-1Ri.title" = "如果無法控制外接螢幕，將會啟用軟體調光";

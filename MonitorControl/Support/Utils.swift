@@ -65,7 +65,9 @@ class Utils: NSObject {
     case hideMenuIcon
     // Keys listened for (Brightness/Volume)
     case listenFor
-    // Show contrast sliders
+    // Hide brightness sliders
+    case hideBrightness
+    // Show volume sliders
     case showContrast
     // Show volume sliders
     case showVolume

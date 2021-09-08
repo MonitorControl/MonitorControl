@@ -194,28 +194,36 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     if prefs.bool(forKey: Utils.PrefKeys.showTickMarks.rawValue) {
       numOfTickMarks = 5
     }
+    var hasSlider = false
     if let externalDisplay = display as? ExternalDisplay, !externalDisplay.isSw() {
       if prefs.bool(forKey: Utils.PrefKeys.showVolume.rawValue) {
         let volumeSliderHandler = SliderHandler.addSliderMenuItem(toMenu: monitorSubMenu, forDisplay: externalDisplay, command: .audioSpeakerVolume, title: NSLocalizedString("Volume", comment: "Shown in menu"), numOfTickMarks: numOfTickMarks)
         externalDisplay.volumeSliderHandler = volumeSliderHandler
+        hasSlider = true
       }
       if prefs.bool(forKey: Utils.PrefKeys.showContrast.rawValue) {
         let contrastSliderHandler = SliderHandler.addSliderMenuItem(toMenu: monitorSubMenu, forDisplay: externalDisplay, command: .contrast, title: NSLocalizedString("Contrast", comment: "Shown in menu"), numOfTickMarks: numOfTickMarks)
         externalDisplay.contrastSliderHandler = contrastSliderHandler
+        hasSlider = true
       }
     }
-    let brightnessSliderHandler = SliderHandler.addSliderMenuItem(toMenu: monitorSubMenu, forDisplay: display, command: .brightness, title: NSLocalizedString("Brightness", comment: "Shown in menu"), numOfTickMarks: numOfTickMarks)
-    display.brightnessSliderHandler = brightnessSliderHandler
-    let monitorMenuItem = NSMenuItem()
-    if asSubMenu {
-      monitorMenuItem.title = "\(display.getFriendlyName())"
-      monitorMenuItem.submenu = monitorSubMenu
-    } else {
-      let attrs: [NSAttributedString.Key: Any] = [.foregroundColor: NSColor.systemGray, .font: NSFont.boldSystemFont(ofSize: 12)]
-      monitorMenuItem.attributedTitle = NSAttributedString(string: "\(display.getFriendlyName())", attributes: attrs)
+    if !prefs.bool(forKey: Utils.PrefKeys.hideBrightness.rawValue) {
+      let brightnessSliderHandler = SliderHandler.addSliderMenuItem(toMenu: monitorSubMenu, forDisplay: display, command: .brightness, title: NSLocalizedString("Brightness", comment: "Shown in menu"), numOfTickMarks: numOfTickMarks)
+      display.brightnessSliderHandler = brightnessSliderHandler
+      hasSlider = true
     }
-    self.monitorItems.append(monitorMenuItem)
-    self.statusMenu.insertItem(monitorMenuItem, at: 0)
+    if hasSlider {
+      let monitorMenuItem = NSMenuItem()
+      if asSubMenu {
+        monitorMenuItem.title = "\(display.getFriendlyName())"
+        monitorMenuItem.submenu = monitorSubMenu
+      } else {
+        let attrs: [NSAttributedString.Key: Any] = [.foregroundColor: NSColor.systemGray, .font: NSFont.boldSystemFont(ofSize: 12)]
+        monitorMenuItem.attributedTitle = NSAttributedString(string: "\(display.getFriendlyName())", attributes: attrs)
+      }
+      self.monitorItems.append(monitorMenuItem)
+      self.statusMenu.insertItem(monitorMenuItem, at: 0)
+    }
   }
 
   func checkPermissions() {

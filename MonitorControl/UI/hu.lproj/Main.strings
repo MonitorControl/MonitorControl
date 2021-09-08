@@ -55,23 +55,29 @@
 /* Class = "NSButtonCell"; title = "Reset Name"; ObjectID = "f9g-8s-gdd"; */
 "f9g-8s-gdd.title" = "Alaphelyzet";
 
-/* Class = "NSTextFieldCell"; title = "Menu contents:"; ObjectID = "fe9-Ia-t9m"; */
-"fe9-Ia-t9m.title" = "Menü tartalom:";
+/* Class = "NSTextFieldCell"; title = "Brightness slider:"; ObjectID = "fe9-Ia-t9m"; */
+"fe9-Ia-t9m.title" = "Fényerő csúszka:";
 
 /* Class = "NSButtonCell"; title = "Further lower brightness via software dimming"; ObjectID = "fhy-Er-0aI"; */
 "fhy-Er-0aI.title" = "Fényerő tovább csökkentése szoftveres sötétítéssel";
 
-/* Class = "NSTextFieldCell"; title = "Apple and built-in displays have a brightness slider in Control Center as well."; ObjectID = "fmZ-HI-Mdc"; */
+/* Class = "NSTextFieldCell"; title = "Apple and built-in displays already have a brightness slider in Control Center."; ObjectID = "fmZ-HI-Mdc"; */
 "fmZ-HI-Mdc.title" = "Az Apple kijelzők esetén az operációs rendszer is biztosít vezérlést.";
 
 /* Class = "NSMenuItem"; title = "None"; ObjectID = "FoA-yh-Yx3"; */
 "FoA-yh-Yx3.title" = "Nincs";
+
+/* Class = "NSTextFieldCell"; title = "Brightness slider for hardware or software controlled displays or TVs."; ObjectID = "gXH-HL-ZOL"; */
+"gXH-HL-ZOL.title" = "Hardveres vagy szoftveres vezérlésű kijelzők illetve TV-k esetén.";
 
 /* Class = "NSTextFieldCell"; title = "Brightness control:"; ObjectID = "hdd-Zz-buN"; */
 "hdd-Zz-buN.title" = "Fényerő billentyűk:";
 
 /* Class = "NSMenuItem"; title = "Brightness only"; ObjectID = "hjz-0c-rvK"; */
 "hjz-0c-rvK.title" = "Csak a fényerő billentyűk";
+
+/* Class = "NSTextFieldCell"; title = "Additional sliders:"; ObjectID = "i5X-M5-Tf5"; */
+"i5X-M5-Tf5.title" = "További csúszkák:";
 
 /* Class = "NSButtonCell"; title = "Start at Login"; ObjectID = "j72-NF-zsW"; */
 "j72-NF-zsW.title" = "Automatikus indítás bejelentkezéskor";
@@ -82,8 +88,8 @@
 /* Class = "NSTextFieldCell"; title = "Use the media keys of your keyboard to control Brightness & Volume."; ObjectID = "K2r-aD-eec"; */
 "K2r-aD-eec.title" = "A képernyő fényerejét és hangerejét az Apple Billentyűzet fényerő és hangerő gombjaival lehet szabályozni.";
 
-/* Class = "NSButtonCell"; title = "Show brightness slider for Apple and built-in displays"; ObjectID = "K6A-4z-1aQ"; */
-"K6A-4z-1aQ.title" = "Fényerő csúszka megjelenítése Apple kijelzők esetén";
+/* Class = "NSButtonCell"; title = "Enable for Apple branded and built-in displays as well"; ObjectID = "K6A-4z-1aQ"; */
+"K6A-4z-1aQ.title" = "A csúszka megjelenítése Apple és beépített kijelzők esetén is";
 
 /* Class = "NSButtonCell"; title = "Enable software dimming if required"; ObjectID = "kMa-3q-udl"; */
 "kMa-3q-udl.title" = "Átállás szoftveres sötétítésre, ha szükséges";
@@ -99,6 +105,9 @@
 
 /* Class = "NSButtonCell"; title = "Hide Menu Icon"; ObjectID = "msX-fb-2Qd"; */
 "msX-fb-2Qd.title" = "Menü ikon elrejtése";
+
+/* Class = "NSButtonCell"; title = "Show brightness slider in menu"; ObjectID = "MWo-6I-s9L"; */
+"MWo-6I-s9L.title" = "Fényerő csúszka megjelenítése a menüben";
 
 /* Class = "NSTextFieldCell"; title = "If an external display can't be controlled, software dimming will be used instead."; ObjectID = "n4V-jQ-1Ri"; */
 "n4V-jQ-1Ri.title" = "Szoftveres sötétítés használata, ha egy külső kijelzőt nem lehet vezérelni. Csak a fényerő szabályozás elérhető ilyen kijelzőknél.";

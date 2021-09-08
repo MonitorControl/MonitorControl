@@ -17,6 +17,7 @@ class MenuslidersPrefsViewController: NSViewController, PreferencePane {
   let prefs = UserDefaults.standard
 
   @IBOutlet var hideMenuIcon: NSButton!
+  @IBOutlet var showBrightnessSlider: NSButton!
   @IBOutlet var showAppleFromMenu: NSButton!
   @IBOutlet var showVolumeSlider: NSButton!
   @IBOutlet var showContrastSlider: NSButton!
@@ -34,7 +35,14 @@ class MenuslidersPrefsViewController: NSViewController, PreferencePane {
 
   func populateSettings() {
     self.hideMenuIcon.state = self.prefs.bool(forKey: Utils.PrefKeys.hideMenuIcon.rawValue) ? .on : .off
-    self.showAppleFromMenu.state = !self.prefs.bool(forKey: Utils.PrefKeys.hideAppleFromMenu.rawValue) ? .on : .off
+    self.showBrightnessSlider.state = !self.prefs.bool(forKey: Utils.PrefKeys.hideBrightness.rawValue) ? .on : .off
+    if !self.prefs.bool(forKey: Utils.PrefKeys.hideBrightness.rawValue) {
+      self.showAppleFromMenu.isEnabled = true
+      self.showAppleFromMenu.state = !self.prefs.bool(forKey: Utils.PrefKeys.hideAppleFromMenu.rawValue) ? .on : .off
+    } else {
+      self.showAppleFromMenu.state = .off
+      self.showAppleFromMenu.isEnabled = false
+    }
     self.showContrastSlider.state = self.prefs.bool(forKey: Utils.PrefKeys.showContrast.rawValue) ? .on : .off
     self.showVolumeSlider.state = self.prefs.bool(forKey: Utils.PrefKeys.showVolume.rawValue) ? .on : .off
     self.enableSliderSnap.state = !self.prefs.bool(forKey: Utils.PrefKeys.disableSliderSnap.rawValue) ? .on : .off
@@ -51,6 +59,21 @@ class MenuslidersPrefsViewController: NSViewController, PreferencePane {
       app.statusItem.isVisible = true
     default: break
     }
+  }
+
+  @IBAction func showBrightnessSliderClicked(_ sender: NSButton) {
+    switch sender.state {
+    case .off:
+      self.prefs.set(true, forKey: Utils.PrefKeys.hideBrightness.rawValue)
+      self.showAppleFromMenu.state = .off
+      self.showAppleFromMenu.isEnabled = false
+    case .on:
+      self.prefs.set(false, forKey: Utils.PrefKeys.hideBrightness.rawValue)
+      self.showAppleFromMenu.isEnabled = true
+      self.showAppleFromMenu.state = !self.prefs.bool(forKey: Utils.PrefKeys.hideAppleFromMenu.rawValue) ? .on : .off
+    default: break
+    }
+    app.updateMenus()
   }
 
   @IBAction func showAppleFromMenuClicked(_ sender: NSButton) {
