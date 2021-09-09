@@ -136,7 +136,7 @@ class DisplaysPrefsCellView: NSTableCellView {
         break
       }
       _ = disp.resetSwBrightness()
-      app.updateMenus()
+      app.updateDisplaysAndMenus()
       let displayInfo = DisplaysPrefsViewController.getDisplayInfo(display: disp)
       self.controlMethod.stringValue = displayInfo.controlMethod
       self.controlMethod.controlView?.toolTip = displayInfo.controlStatus

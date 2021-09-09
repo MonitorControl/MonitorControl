@@ -73,7 +73,7 @@ class MenuslidersPrefsViewController: NSViewController, PreferencePane {
       self.showAppleFromMenu.state = !self.prefs.bool(forKey: Utils.PrefKeys.hideAppleFromMenu.rawValue) ? .on : .off
     default: break
     }
-    app.updateMenus()
+    app.updateDisplaysAndMenus()
   }
 
   @IBAction func showAppleFromMenuClicked(_ sender: NSButton) {
@@ -84,7 +84,7 @@ class MenuslidersPrefsViewController: NSViewController, PreferencePane {
       self.prefs.set(false, forKey: Utils.PrefKeys.hideAppleFromMenu.rawValue)
     default: break
     }
-    app.updateMenus()
+    app.updateDisplaysAndMenus()
   }
 
   @IBAction func showVolumeSliderClicked(_ sender: NSButton) {
@@ -95,7 +95,7 @@ class MenuslidersPrefsViewController: NSViewController, PreferencePane {
       self.prefs.set(false, forKey: Utils.PrefKeys.showVolume.rawValue)
     default: break
     }
-    app.updateMenus()
+    app.updateDisplaysAndMenus()
   }
 
   @IBAction func showContrastSliderClicked(_ sender: NSButton) {
@@ -106,7 +106,7 @@ class MenuslidersPrefsViewController: NSViewController, PreferencePane {
       self.prefs.set(false, forKey: Utils.PrefKeys.showContrast.rawValue)
     default: break
     }
-    app.updateMenus()
+    app.updateDisplaysAndMenus()
   }
 
   @IBAction func enableSliderSnapClicked(_ sender: NSButton) {
@@ -117,7 +117,7 @@ class MenuslidersPrefsViewController: NSViewController, PreferencePane {
       self.prefs.set(false, forKey: Utils.PrefKeys.enableSliderSnap.rawValue)
     default: break
     }
-    app.updateMenus()
+    app.updateDisplaysAndMenus()
   }
 
   @IBAction func showTickMarks(_ sender: NSButton) {
@@ -128,6 +128,6 @@ class MenuslidersPrefsViewController: NSViewController, PreferencePane {
       self.prefs.set(false, forKey: Utils.PrefKeys.showTickMarks.rawValue)
     default: break
     }
-    app.updateMenus()
+    app.updateDisplaysAndMenus()
   }
 }

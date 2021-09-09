@@ -65,7 +65,7 @@ class MainPrefsViewController: NSViewController, PreferencePane {
       DisplayManager.shared.resetSwBrightnessForAllDisplays()
     default: break
     }
-    app.updateMenus()
+    app.updateDisplaysAndMenus()
   }
 
   @IBAction func fallbackSwClicked(_ sender: NSButton) {
@@ -77,7 +77,7 @@ class MainPrefsViewController: NSViewController, PreferencePane {
     default: break
     }
     DisplayManager.shared.resetSwBrightnessForAllDisplays()
-    app.updateMenus()
+    app.updateDisplaysAndMenus()
   }
 
   @IBAction func restoreLastSavedValuesOffClicked(_ sender: NSButton) {

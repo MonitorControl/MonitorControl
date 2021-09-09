@@ -145,7 +145,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
   }
 
-  func updateMenus() {
+  func updateDisplaysAndMenus() {
     self.clearMenu()
     var displays: [Display] = []
     if !prefs.bool(forKey: Utils.PrefKeys.hideAppleFromMenu.rawValue) {
@@ -163,7 +163,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         if asSubmenu {
           self.statusMenu.insertItem(NSMenuItem.separator(), at: 0)
         }
-        self.addDisplayToMenu(display: display, asSubMenu: asSubmenu)
+        self.configureDisplayAndAddToMenuIfNeeded(display: display, asSubMenu: asSubmenu)
       }
     }
   }
@@ -181,7 +181,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     if firstrun {
       DisplayManager.shared.resetSwBrightnessForAllDisplays(settingsOnly: true)
     }
-    self.updateMenus()
+    self.updateDisplaysAndMenus()
     if !firstrun {
       if prefs.bool(forKey: Utils.PrefKeys.fallbackSw.rawValue) || prefs.bool(forKey: Utils.PrefKeys.lowerSwAfterBrightness.rawValue) {
         DisplayManager.shared.restoreSwBrightnessForAllDisplays(async: true)
@@ -191,7 +191,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     self.refreshBrightnessJob(start: true)
   }
 
-  private func addDisplayToMenu(display: Display, asSubMenu: Bool) {
+  private func configureDisplayAndAddToMenuIfNeeded(display: Display, asSubMenu: Bool) {
     if !asSubMenu {
       self.statusMenu.insertItem(NSMenuItem.separator(), at: 0)
     }
@@ -206,6 +206,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let volumeSliderHandler = SliderHandler.addSliderMenuItem(toMenu: monitorSubMenu, forDisplay: externalDisplay, command: .audioSpeakerVolume, title: NSLocalizedString("Volume", comment: "Shown in menu"), numOfTickMarks: numOfTickMarks)
         externalDisplay.volumeSliderHandler = volumeSliderHandler
         hasSlider = true
+      } else {
+        _ = externalDisplay.setupCurrentAndMaxValues(command: .audioSpeakerVolume) // We have to initialize speaker DDC without menu as well
       }
       if prefs.bool(forKey: Utils.PrefKeys.showContrast.rawValue) {
         let contrastSliderHandler = SliderHandler.addSliderMenuItem(toMenu: monitorSubMenu, forDisplay: externalDisplay, command: .contrast, title: NSLocalizedString("Contrast", comment: "Shown in menu"), numOfTickMarks: numOfTickMarks)
@@ -217,6 +219,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       let brightnessSliderHandler = SliderHandler.addSliderMenuItem(toMenu: monitorSubMenu, forDisplay: display, command: .brightness, title: NSLocalizedString("Brightness", comment: "Shown in menu"), numOfTickMarks: numOfTickMarks)
       display.brightnessSliderHandler = brightnessSliderHandler
       hasSlider = true
+    } else if let externalDisplay = display as? ExternalDisplay, !externalDisplay.isSw() {
+      _ = externalDisplay.setupCurrentAndMaxValues(command: .brightness) // We have to initialize brightness DDC without menu as well
     }
     if hasSlider {
       let monitorMenuItem = NSMenuItem()
@@ -317,7 +321,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   }
 
   @objc func handleFriendlyNameChanged() {
-    self.updateMenus()
+    self.updateDisplaysAndMenus()
   }
 
   @objc func handlePreferenceReset() {
