@@ -31,18 +31,18 @@ class KeyboardPrefsViewController: NSViewController, PreferencePane {
 
   func populateSettings() {
     self.listenFor.selectItem(at: self.prefs.integer(forKey: Utils.PrefKeys.listenFor.rawValue))
-    self.allScreens.state = self.prefs.bool(forKey: Utils.PrefKeys.allScreens.rawValue) ? .on : .off
+    self.allScreens.state = self.prefs.bool(forKey: Utils.PrefKeys.allScreensBrightness.rawValue) ? .on : .off
     self.useFocusInsteadOfMouse.state = self.prefs.bool(forKey: Utils.PrefKeys.useFocusInsteadOfMouse.rawValue) ? .on : .off
   }
 
   @IBAction func allScreensClicked(_ sender: NSButton) {
     switch sender.state {
     case .on:
-      self.prefs.set(true, forKey: Utils.PrefKeys.allScreens.rawValue)
+      self.prefs.set(true, forKey: Utils.PrefKeys.allScreensBrightness.rawValue)
       self.useFocusInsteadOfMouse.state = .off
       self.useFocusInsteadOfMouse.isEnabled = false
     case .off:
-      self.prefs.set(false, forKey: Utils.PrefKeys.allScreens.rawValue)
+      self.prefs.set(false, forKey: Utils.PrefKeys.allScreensBrightness.rawValue)
       self.useFocusInsteadOfMouse.isEnabled = true
       self.useFocusInsteadOfMouse.state = self.prefs.bool(forKey: Utils.PrefKeys.useFocusInsteadOfMouse.rawValue) ? .on : .off
     default: break

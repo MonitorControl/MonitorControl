@@ -21,6 +21,8 @@ class MainPrefsViewController: NSViewController, PreferencePane {
   @IBOutlet var lowerSwAfterBrightness: NSButton!
   @IBOutlet var fallbackSw: NSButton!
   @IBOutlet var showAdvancedDisplays: NSButton!
+  @IBOutlet var restoreLastSavedValuesOff: NSButton!
+  @IBOutlet var restoreLastSavedValuesOn: NSButton!
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -40,6 +42,8 @@ class MainPrefsViewController: NSViewController, PreferencePane {
     self.lowerSwAfterBrightness.state = self.prefs.bool(forKey: Utils.PrefKeys.lowerSwAfterBrightness.rawValue) ? .on : .off
     self.fallbackSw.state = self.prefs.bool(forKey: Utils.PrefKeys.fallbackSw.rawValue) ? .on : .off
     self.showAdvancedDisplays.state = self.prefs.bool(forKey: Utils.PrefKeys.showAdvancedDisplays.rawValue) ? .on : .off
+    self.restoreLastSavedValuesOff.state = self.prefs.bool(forKey: Utils.PrefKeys.restoreLastSavedValues.rawValue) ? .off : .on
+    self.restoreLastSavedValuesOn.state = self.prefs.bool(forKey: Utils.PrefKeys.restoreLastSavedValues.rawValue) ? .on : .off
   }
 
   @IBAction func startAtLoginClicked(_ sender: NSButton) {
@@ -74,6 +78,30 @@ class MainPrefsViewController: NSViewController, PreferencePane {
     }
     DisplayManager.shared.resetSwBrightnessForAllDisplays()
     app.updateMenus()
+  }
+
+  @IBAction func restoreLastSavedValuesOffClicked(_ sender: NSButton) {
+    switch sender.state {
+    case .on:
+      self.prefs.set(false, forKey: Utils.PrefKeys.restoreLastSavedValues.rawValue)
+      self.restoreLastSavedValuesOn.state = .off
+    case .off:
+      self.prefs.set(true, forKey: Utils.PrefKeys.restoreLastSavedValues.rawValue)
+      self.restoreLastSavedValuesOn.state = .on
+    default: break
+    }
+  }
+
+  @IBAction func restoreLastSavedValuesOnClicked(_ sender: NSButton) {
+    switch sender.state {
+    case .on:
+      self.prefs.set(true, forKey: Utils.PrefKeys.restoreLastSavedValues.rawValue)
+      self.restoreLastSavedValuesOff.state = .off
+    case .off:
+      self.prefs.set(false, forKey: Utils.PrefKeys.restoreLastSavedValues.rawValue)
+      self.restoreLastSavedValuesOff.state = .on
+    default: break
+    }
   }
 
   @IBAction func showAdvancedClicked(_ sender: NSButton) {

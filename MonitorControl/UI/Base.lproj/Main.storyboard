@@ -146,6 +146,9 @@
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                 <font key="font" metaFont="system"/>
                                             </buttonCell>
+                                            <connections>
+                                                <action selector="restoreLastSavedValuesOffClicked:" target="BGD-tY-Myx" id="vQR-Vt-qO7"/>
+                                            </connections>
                                         </button>
                                     </gridCell>
                                     <gridCell row="0ue-QI-RgH" column="eHC-Ur-UsS" id="Sm5-Fc-F4S"/>
@@ -168,6 +171,9 @@
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                 <font key="font" metaFont="system"/>
                                             </buttonCell>
+                                            <connections>
+                                                <action selector="restoreLastSavedValuesOnClicked:" target="BGD-tY-Myx" id="zHp-WB-8qG"/>
+                                            </connections>
                                         </button>
                                     </gridCell>
                                     <gridCell row="UAP-kZ-c0z" column="eHC-Ur-UsS" id="AX0-yT-SVr"/>
@@ -248,6 +254,8 @@
                     <connections>
                         <outlet property="fallbackSw" destination="IDx-gH-haW" id="WsQ-CF-y3I"/>
                         <outlet property="lowerSwAfterBrightness" destination="i5K-Cd-wxm" id="sE8-Ra-JSn"/>
+                        <outlet property="restoreLastSavedValuesOff" destination="5M2-Ww-w0G" id="2rU-xF-aCC"/>
+                        <outlet property="restoreLastSavedValuesOn" destination="AjD-Oy-S0f" id="5hH-wX-uHn"/>
                         <outlet property="showAdvancedDisplays" destination="oYk-xl-5gr" id="b5v-35-j1p"/>
                         <outlet property="startAtLogin" destination="9Gu-aU-Td2" id="Tyx-Ub-Cyf"/>
                     </connections>

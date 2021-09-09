@@ -11,6 +11,7 @@ let prefs = UserDefaults.standard
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
   @IBOutlet var statusMenu: NSMenu!
+  let minPreviousBuildNumber = 3300 // Below this version there is a mandatory preferences reset!
   let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
   var mediaKeyTap = MediaKeyTapManager()
   var monitorItems: [NSMenuItem] = []
@@ -94,19 +95,28 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   }
 
   func setDefaultPrefs() {
-    if !prefs.bool(forKey: Utils.PrefKeys.appAlreadyLaunched.rawValue) {
+    let currentBuildNumber = Int(Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String ?? "1") ?? 1
+    let previousBuildNumber: Int = (Int(prefs.string(forKey: Utils.PrefKeys.buildNumber.rawValue) ?? "0") ?? 0)
+    if !prefs.bool(forKey: Utils.PrefKeys.appAlreadyLaunched.rawValue) || (previousBuildNumber < self.minPreviousBuildNumber && previousBuildNumber > 0) || previousBuildNumber > currentBuildNumber {
+      // Preferences reset is needed
       prefs.set(true, forKey: Utils.PrefKeys.appAlreadyLaunched.rawValue)
       prefs.set(false, forKey: Utils.PrefKeys.hideBrightness.rawValue)
       prefs.set(false, forKey: Utils.PrefKeys.showContrast.rawValue)
       prefs.set(true, forKey: Utils.PrefKeys.showVolume.rawValue)
-      prefs.set(false, forKey: Utils.PrefKeys.lowerSwAfterBrightness.rawValue)
       prefs.set(true, forKey: Utils.PrefKeys.fallbackSw.rawValue)
       prefs.set(false, forKey: Utils.PrefKeys.hideAppleFromMenu.rawValue)
       prefs.set(false, forKey: Utils.PrefKeys.enableSliderSnap.rawValue)
       prefs.set(false, forKey: Utils.PrefKeys.hideMenuIcon.rawValue)
       prefs.set(false, forKey: Utils.PrefKeys.showAdvancedDisplays.rawValue)
+      prefs.set(false, forKey: Utils.PrefKeys.lowerSwAfterBrightness.rawValue)
       prefs.set(false, forKey: Utils.PrefKeys.useFocusInsteadOfMouse.rawValue)
+      prefs.set(false, forKey: Utils.PrefKeys.restoreLastSavedValues.rawValue)
+      prefs.set(false, forKey: Utils.PrefKeys.useFocusInsteadOfMouse.rawValue)
+      prefs.set(false, forKey: Utils.PrefKeys.allScreensVolume.rawValue)
+      prefs.set(false, forKey: Utils.PrefKeys.useAudioDeviceNameMatching.rawValue)
+      prefs.set(false, forKey: Utils.PrefKeys.useFineScale.rawValue)
     }
+    prefs.set(currentBuildNumber, forKey: Utils.PrefKeys.buildNumber.rawValue)
   }
 
   func clearMenu() {

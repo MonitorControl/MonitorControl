@@ -57,6 +57,8 @@ class Utils: NSObject {
 
   // UserDefault Keys for the app prefs
   enum PrefKeys: String {
+    // Build number
+    case buildNumber
     // Was the app launched once
     case appAlreadyLaunched
     // Does the app start when plugged to an external monitor
@@ -81,18 +83,26 @@ class Utils: NSObject {
     case enableSliderSnap
     // Show tick marks for sliders
     case showTickMarks
-    // Change Brightness/Volume for all screens
-    case allScreens
     // Friendly name changed
     case friendlyName
     // Prefs Reset
     case preferenceReset
     // Used for notification when displays are updated in DisplayManager
     case displayListUpdate
+    // Restore last saved values upon startup or wake MARK: TODO: Not implemented yet
+    case restoreLastSavedValues
     // Show advanced options under Displays tab in Preferences
     case showAdvancedDisplays
-    // Use focus instead of mouse position to determine which display to control
+    // Change Brightness for all screens MARK: TODO: Still works for volume as well (outdated implementation)
+    case allScreensBrightness
+    // Use focus instead of mouse position to determine which display to control for brightness MARK: TODO: Still works for volume as well (outdated implementation)
     case useFocusInsteadOfMouse
+    // Change Volume for all screens MARK: TODO: Not implemented yet
+    case allScreensVolume
+    // Use audio device name matching to determine display to control for volume MARK: TODO: Not implemented yet
+    case useAudioDeviceNameMatching
+    // Use fine OSD scale for brightness and volume MARK: TODO: Not implemented yet
+    case useFineScale
   }
 
   // Keys for the value of listenFor option

@@ -210,7 +210,7 @@ class DisplayManager {
       return nil
     }
     // let allDisplays = prefs.bool(forKey: Utils.PrefKeys.allScreens.rawValue) ? displays : [currentDisplay]
-    if prefs.bool(forKey: Utils.PrefKeys.allScreens.rawValue) {
+    if prefs.bool(forKey: Utils.PrefKeys.allScreensBrightness.rawValue) {
       affectedDisplays = allDisplays
     } else {
       affectedDisplays = [currentDisplay]
