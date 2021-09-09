@@ -25,9 +25,9 @@ class MediaKeyTapManager: MediaKeyTapDelegate {
     let isSmallIncrement = modifiers?.isSuperset(of: NSEvent.ModifierFlags([.shift, .option])) ?? false
     // control internal display when holding ctrl modifier
     let isControlModifier = modifiers?.isSuperset(of: NSEvent.ModifierFlags([.control])) ?? false
-    let isShiftModifier = modifiers?.isSuperset(of: NSEvent.ModifierFlags([.shift])) ?? false
+    let isCommandModifier = modifiers?.isSuperset(of: NSEvent.ModifierFlags([.command])) ?? false
     if isPressed, isControlModifier, mediaKey == .brightnessUp || mediaKey == .brightnessDown {
-      if isShiftModifier {
+      if isCommandModifier {
         for externalDisplay in DisplayManager.shared.getExternalDisplays() {
           externalDisplay.stepBrightness(isUp: mediaKey == .brightnessUp, isSmallIncrement: isSmallIncrement)
         }
