@@ -9,12 +9,7 @@ class MediaKeyTapManager: MediaKeyTapDelegate {
 
   func handle(mediaKey: MediaKey, event: KeyEvent?, modifiers: NSEvent.ModifierFlags?) {
     guard app.sleepID == 0, app.reconfigureID == 0 else {
-      if [.brightnessUp, .brightnessDown].contains(mediaKey) {
-        OSDUtils.showOSDLockOnAllDisplays(osdImage: 1)
-      }
-      if [.volumeUp, .volumeDown, .mute].contains(mediaKey) {
-        OSDUtils.showOSDLockOnAllDisplays(osdImage: 3)
-      }
+      self.showOSDLock(mediaKey)
       return
     }
     let isPressed = event?.keyPressed ?? true
@@ -23,7 +18,6 @@ class MediaKeyTapManager: MediaKeyTapDelegate {
       return
     }
     let isSmallIncrement = modifiers?.isSuperset(of: NSEvent.ModifierFlags([.shift, .option])) ?? false
-    // control internal display when holding ctrl modifier
     let isControlModifier = modifiers?.isSuperset(of: NSEvent.ModifierFlags([.control])) ?? false
     let isCommandModifier = modifiers?.isSuperset(of: NSEvent.ModifierFlags([.command])) ?? false
     if isPressed, isControlModifier, mediaKey == .brightnessUp || mediaKey == .brightnessDown {
@@ -35,11 +29,9 @@ class MediaKeyTapManager: MediaKeyTapDelegate {
           appleDisplay.stepBrightness(isUp: mediaKey == .brightnessUp, isSmallIncrement: isSmallIncrement)
         }
         return
-      } else {
-        if let internalDisplay = DisplayManager.shared.getBuiltInDisplay() as? AppleDisplay {
-          internalDisplay.stepBrightness(isUp: mediaKey == .brightnessUp, isSmallIncrement: isSmallIncrement)
-          return
-        }
+      } else if let internalDisplay = DisplayManager.shared.getBuiltInDisplay() as? AppleDisplay {
+        internalDisplay.stepBrightness(isUp: mediaKey == .brightnessUp, isSmallIncrement: isSmallIncrement)
+        return
       }
     }
     let oppositeKey: MediaKey? = self.oppositeMediaKey(mediaKey: mediaKey)
@@ -54,6 +46,15 @@ class MediaKeyTapManager: MediaKeyTapDelegate {
       mediaKeyTimer.invalidate()
     }
     self.sendDisplayCommand(mediaKey: mediaKey, isRepeat: isRepeat, isSmallIncrement: isSmallIncrement, isPressed: isPressed)
+  }
+
+  private func showOSDLock(_ mediaKey: MediaKey) {
+    if [.brightnessUp, .brightnessDown].contains(mediaKey) {
+      OSDUtils.showOSDLockOnAllDisplays(osdImage: 1)
+    }
+    if [.volumeUp, .volumeDown, .mute].contains(mediaKey) {
+      OSDUtils.showOSDLockOnAllDisplays(osdImage: 3)
+    }
   }
 
   private func sendDisplayCommand(mediaKey: MediaKey, isRepeat: Bool, isSmallIncrement: Bool, isPressed: Bool) {
