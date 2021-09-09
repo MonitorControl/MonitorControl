@@ -25,10 +25,21 @@ class MediaKeyTapManager: MediaKeyTapDelegate {
     let isSmallIncrement = modifiers?.isSuperset(of: NSEvent.ModifierFlags([.shift, .option])) ?? false
     // control internal display when holding ctrl modifier
     let isControlModifier = modifiers?.isSuperset(of: NSEvent.ModifierFlags([.control])) ?? false
-    if isControlModifier, mediaKey == .brightnessUp || mediaKey == .brightnessDown {
-      if isPressed, let internalDisplay = DisplayManager.shared.getBuiltInDisplay() as? AppleDisplay {
-        internalDisplay.stepBrightness(isUp: mediaKey == .brightnessUp, isSmallIncrement: isSmallIncrement)
+    let isShiftModifier = modifiers?.isSuperset(of: NSEvent.ModifierFlags([.shift])) ?? false
+    if isPressed, isControlModifier, mediaKey == .brightnessUp || mediaKey == .brightnessDown {
+      if isShiftModifier {
+        for externalDisplay in DisplayManager.shared.getExternalDisplays() {
+          externalDisplay.stepBrightness(isUp: mediaKey == .brightnessUp, isSmallIncrement: isSmallIncrement)
+        }
+        for appleDisplay in DisplayManager.shared.getAppleDisplays() where !appleDisplay.isBuiltIn() {
+          appleDisplay.stepBrightness(isUp: mediaKey == .brightnessUp, isSmallIncrement: isSmallIncrement)
+        }
         return
+      } else {
+        if let internalDisplay = DisplayManager.shared.getBuiltInDisplay() as? AppleDisplay {
+          internalDisplay.stepBrightness(isUp: mediaKey == .brightnessUp, isSmallIncrement: isSmallIncrement)
+          return
+        }
       }
     }
     let oppositeKey: MediaKey? = self.oppositeMediaKey(mediaKey: mediaKey)
