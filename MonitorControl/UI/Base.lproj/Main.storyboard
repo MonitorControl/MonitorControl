@@ -760,7 +760,7 @@
                                     <gridCell row="fUL-yd-WWe" column="EiG-65-CTv" id="E3y-Dw-dnI">
                                         <button key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="aab-nY-XnS">
                                             <rect key="frame" x="235" y="23" width="416" height="18"/>
-                                            <buttonCell key="cell" type="check" title="Use fine scale for volume" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="J3L-MW-iJL">
+                                            <buttonCell key="cell" type="check" title="Use fine scale for volume" bezelStyle="regularSquare" imagePosition="left" inset="2" id="J3L-MW-iJL">
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                 <font key="font" metaFont="system"/>
                                             </buttonCell>
