@@ -1,8 +1,14 @@
 /* Class = "NSTextFieldCell"; title = "If the menu item is hidden, just relaunch the app to reveal Preferences!"; ObjectID = "0OK-pk-ecx"; */
 "0OK-pk-ecx.title" = "If the menu item is hidden, just relaunch the app to reveal Preferences!";
 
+/* Class = "NSButtonCell"; title = "Attempt to read current display settings"; ObjectID = "0qp-fq-8MI"; */
+"0qp-fq-8MI.title" = "Attempt to read current display settings";
+
 /* Class = "NSTextFieldCell"; title = "MonitorControl"; ObjectID = "1PJ-14-Bvn"; */
 "1PJ-14-Bvn.title" = "MonitorControl";
+
+/* Class = "NSButtonCell"; title = "Change volume for all screens"; ObjectID = "1XT-3S-UuD"; */
+"1XT-3S-UuD.title" = "Change volume for all screens";
 
 /* Class = "NSTextFieldCell"; title = "MonitorControl uses mouse position to determine which display to control. Using window focus instead might not work well with full screen apps."; ObjectID = "4dX-o1-xAc"; */
 "4dX-o1-xAc.title" = "MonitorControl uses mouse position to determine which display to control. Using window focus instead might not work well with full screen apps.";
@@ -15,6 +21,9 @@
 
 /* Class = "NSTextFieldCell"; title = "Slider knob will snap to 0%, 25%, 50%, 75% and 100% when in proximity making setting these values easier. Disable for finer control."; ObjectID = "8Gx-Ya-zhp"; */
 "8Gx-Ya-zhp.title" = "Slider knob will snap to 0%, 25%, 50%, 75% and 100% when in proximity making setting these values easier. Disable for finer control.";
+
+/* Class = "NSButtonCell"; title = "Use fine scale for brightness and volume"; ObjectID = "8Q8-57-xnT"; */
+"8Q8-57-xnT.title" = "Use fine scale for brightness and volume";
 
 /* Class = "NSButtonCell"; title = "Special thanks to our contributors!"; ObjectID = "95V-M4-2l5"; */
 "95V-M4-2l5.title" = "Special thanks to our contributors!";
@@ -34,7 +43,7 @@
 /* Class = "NSButtonCell"; title = "Enable Mute DDC command"; ObjectID = "bZq-0d-lJa"; */
 "bZq-0d-lJa.title" = "Enable Mute DDC command";
 
-/* Class = "NSTextFieldCell"; title = "Keyboard:"; ObjectID = "c7N-cO-759"; */
+/* Class = "NSTextFieldCell"; title = "Keyboard control:"; ObjectID = "c7N-cO-759"; */
 "c7N-cO-759.title" = "Keyboard:";
 
 /* Class = "NSButtonCell"; title = "Show volume slider in menu"; ObjectID = "c9D-MB-lma"; */
@@ -46,11 +55,14 @@
 /* Class = "NSButtonCell"; title = "Website"; ObjectID = "Cln-uW-2dd"; */
 "Cln-uW-2dd.title" = "Website";
 
+/* Class = "NSTextFieldCell"; title = "Upon startup or wake:"; ObjectID = "cNt-Cq-vK4"; */
+"cNt-Cq-vK4.title" = "Upon startup or wake:";
+
 /* Class = "NSTextFieldCell"; title = "⚠️ Warning! Changing some of these settings may cause system freezes or unexpected behavior!"; ObjectID = "Cz1-Mh-llk"; */
 "Cz1-Mh-llk.title" = "⚠️ Warning! Changing some of these settings may cause system freezes or unexpected behavior!";
 
-/* Class = "NSButtonCell"; title = "Change Brightness and Volume for all screens"; ObjectID = "E6M-ih-S8Y"; */
-"E6M-ih-S8Y.title" = "Change Brightness and Volume for all screens";
+/* Class = "NSTextFieldCell"; title = "This might not work properly with multiple similarly named displays. By default the app uses mouse position to determine control for volume."; ObjectID = "Dha-Tm-cDM"; */
+"Dha-Tm-cDM.title" = "This might not work properly with multiple similarly named displays. By default the app uses mouse position to determine control for volume.";
 
 /* Class = "NSMenuItem"; title = "Minimal"; ObjectID = "Eq3-z9-yIo"; */
 "Eq3-z9-yIo.title" = "Minimal";
@@ -60,6 +72,9 @@
 
 /* Class = "NSTextFieldCell"; title = "Brightness slider:"; ObjectID = "fe9-Ia-t9m"; */
 "fe9-Ia-t9m.title" = "Menu contents:";
+
+/* Class = "NSTextFieldCell"; title = "Style:"; ObjectID = "Fgh-vj-glX"; */
+"Fgh-vj-glX.title" = "Style:";
 
 /* Class = "NSButtonCell"; title = "Further lower brightness via software dimming"; ObjectID = "fhy-Er-0aI"; */
 "fhy-Er-0aI.title" = "Diminuer le contraste après la luminosité";
@@ -72,6 +87,9 @@
 
 /* Class = "NSTextFieldCell"; title = "Brightness slider for hardware or software controlled displays or TVs."; ObjectID = "gXH-HL-ZOL"; */
 "gXH-HL-ZOL.title" = "Brightness slider for hardware or software controlled displays or TVs.";
+
+/* Class = "NSTextFieldCell"; title = "Note: you can always use Ctrl+Brightness to control internal display only and Ctrl+Command+Brightness to control external displays only."; ObjectID = "Gy9-Of-tpz"; */
+"Gy9-Of-tpz.title" = "Note: you can always use Ctrl+Brightness to control internal display only and Ctrl+Command+Brightness to control external displays only.";
 
 /* Class = "NSTextFieldCell"; title = "Brightness control:"; ObjectID = "hdd-Zz-buN"; */
 "hdd-Zz-buN.title" = "Brightness control:";
@@ -88,6 +106,15 @@
 /* Class = "NSTextFieldCell"; title = "Custom read polling count:"; ObjectID = "J77-r0-djA"; */
 "J77-r0-djA.title" = "Custom read polling count:";
 
+/* Class = "NSButtonCell"; title = "Change brightness for all screens"; ObjectID = "JC3-pb-XnR"; */
+"JC3-pb-XnR.title" = "Change brightness for all screens";
+
+/* Class = "NSTextFieldCell"; title = "Note: you can press Shift during startup for 'Safe mode' to restore defaults and avoid reading or setting anything."; ObjectID = "Jx2-gO-nq9"; */
+"Jx2-gO-nq9.title" = "Note: you can press Shift during startup for 'Safe mode' to restore defaults and avoid reading or setting anything.";
+
+/* Class = "NSButtonCell"; title = "Restore last saved values"; ObjectID = "K0S-zN-M4k"; */
+"K0S-zN-M4k.title" = "Restore last saved values";
+
 /* Class = "NSTextFieldCell"; title = "Use the media keys of your keyboard to control Brightness & Volume."; ObjectID = "K2r-aD-eec"; */
 "K2r-aD-eec.title" = "Use the media keys of your keyboard to control Brightness & Volume.";
 
@@ -102,6 +129,9 @@
 
 /* Class = "NSTextFieldCell"; title = "Display type:"; ObjectID = "lSJ-6w-KJ2"; */
 "lSJ-6w-KJ2.title" = "Display type:";
+
+/* Class = "NSTextFieldCell"; title = "Brightness control target:"; ObjectID = "ltL-gR-K3Z"; */
+"ltL-gR-K3Z.title" = "Brightness control target:";
 
 /* Class = "NSButtonCell"; title = "Enable slider snapping"; ObjectID = "MlU-hl-d46"; */
 "MlU-hl-d46.title" = "Enable slider snapping";
@@ -121,6 +151,9 @@
 /* Class = "NSMenuItem"; title = "Volume only"; ObjectID = "NLP-dU-Dam"; */
 "NLP-dU-Dam.title" = "Volume uniquement";
 
+/* Class = "NSButtonCell"; title = "Check for audio device name match to determine display"; ObjectID = "OAa-B4-8r3"; */
+"OAa-B4-8r3.title" = "Check for audio device name match to determine display";
+
 /* Class = "NSTextFieldCell"; title = "Application:"; ObjectID = "okD-DG-pYa"; */
 "okD-DG-pYa.title" = "Application:";
 
@@ -133,8 +166,14 @@
 /* Class = "NSButtonCell"; title = "Show contrast slider in menu"; ObjectID = "qO0-dB-yUs"; */
 "qO0-dB-yUs.title" = "Afficher un slide pour le contraste";
 
+/* Class = "NSTextFieldCell"; title = "Volume control target:"; ObjectID = "qoh-Gn-f11"; */
+"qoh-Gn-f11.title" = "Volume control target:";
+
 /* Class = "NSTextFieldCell"; title = "Advanced:"; ObjectID = "r7i-oG-Ab6"; */
 "r7i-oG-Ab6.title" = "Advanced:";
+
+/* Class = "NSTextFieldCell"; title = "Normally keyboard controls will change one OSD chiclet worth of value (approx. 6%) and pressing Shift+Option allows for fine control. This setting makes fine control default."; ObjectID = "RCO-lP-HDT"; */
+"RCO-lP-HDT.title" = "Normally keyboard controls will change one OSD chiclet worth of value (approx. 6%) and pressing Shift+Option allows for fine control. This setting makes fine control default.";
 
 /* Class = "NSMenuItem"; title = "Normal"; ObjectID = "Riq-uM-bTs"; */
 "Riq-uM-bTs.title" = "Normal";
@@ -157,11 +196,17 @@
 /* Class = "NSTextFieldCell"; title = "DDC read polling mode:"; ObjectID = "vwm-hY-on5"; */
 "vwm-hY-on5.title" = "DDC read polling mode:";
 
+/* Class = "NSTextFieldCell"; title = "Restore settings from last run or from before sleep. Useful when a display tends to reset brightness during sleep or hardware has issues with reading DDC data. Not relevant for Apple displays."; ObjectID = "w8B-x6-sq5"; */
+"w8B-x6-sq5.title" = "Restore settings from last run or from before sleep. Useful when a display tends to reset brightness during sleep or hardware has issues with reading DDC data. Not relevant for Apple displays.";
+
 /* Class = "NSButtonCell"; title = "Show advanced settings under Displays"; ObjectID = "Wnd-hx-Meb"; */
 "Wnd-hx-Meb.title" = "Show advanced settings under Displays";
 
 /* Class = "NSMenuItem"; title = "None"; ObjectID = "X96-ny-lAP"; */
 "X96-ny-lAP.title" = "None";
+
+/* Class = "NSTextFieldCell"; title = "Attempt to read current settings from the display. If unsuccessful, last saved values are presumed or generic defaults are used instead."; ObjectID = "xjq-hs-wWB"; */
+"xjq-hs-wWB.title" = "Attempt to read current settings from the display. If unsuccessful, last saved values are presumed or generic defaults are used instead.";
 
 /* Class = "NSButtonCell"; title = "Reset Preferences"; ObjectID = "xY6-aw-o9u"; */
 "xY6-aw-o9u.title" = "Reset Preferences";

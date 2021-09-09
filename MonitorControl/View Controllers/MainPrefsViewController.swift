@@ -20,9 +20,6 @@ class MainPrefsViewController: NSViewController, PreferencePane {
   @IBOutlet var startAtLogin: NSButton!
   @IBOutlet var lowerSwAfterBrightness: NSButton!
   @IBOutlet var fallbackSw: NSButton!
-  @IBOutlet var listenFor: NSPopUpButton!
-  @IBOutlet var allScreens: NSButton!
-  @IBOutlet var useFocusInsteadOfMouse: NSButton!
   @IBOutlet var showAdvancedDisplays: NSButton!
 
   override func viewDidLoad() {
@@ -42,35 +39,7 @@ class MainPrefsViewController: NSViewController, PreferencePane {
     self.startAtLogin.state = startAtLogin ? .on : .off
     self.lowerSwAfterBrightness.state = self.prefs.bool(forKey: Utils.PrefKeys.lowerSwAfterBrightness.rawValue) ? .on : .off
     self.fallbackSw.state = self.prefs.bool(forKey: Utils.PrefKeys.fallbackSw.rawValue) ? .on : .off
-    self.listenFor.selectItem(at: self.prefs.integer(forKey: Utils.PrefKeys.listenFor.rawValue))
-    self.allScreens.state = self.prefs.bool(forKey: Utils.PrefKeys.allScreens.rawValue) ? .on : .off
-    self.useFocusInsteadOfMouse.state = self.prefs.bool(forKey: Utils.PrefKeys.useFocusInsteadOfMouse.rawValue) ? .on : .off
     self.showAdvancedDisplays.state = self.prefs.bool(forKey: Utils.PrefKeys.showAdvancedDisplays.rawValue) ? .on : .off
-  }
-
-  @IBAction func allScreensTouched(_ sender: NSButton) {
-    switch sender.state {
-    case .on:
-      self.prefs.set(true, forKey: Utils.PrefKeys.allScreens.rawValue)
-      self.useFocusInsteadOfMouse.state = .off
-      self.useFocusInsteadOfMouse.isEnabled = false
-    case .off:
-      self.prefs.set(false, forKey: Utils.PrefKeys.allScreens.rawValue)
-      self.useFocusInsteadOfMouse.isEnabled = true
-      self.useFocusInsteadOfMouse.state = self.prefs.bool(forKey: Utils.PrefKeys.useFocusInsteadOfMouse.rawValue) ? .on : .off
-    default: break
-    }
-  }
-
-  @IBAction func useFocusInsteadOfMouseClicked(_ sender: NSButton) {
-    switch sender.state {
-    case .on:
-      self.prefs.set(true, forKey: Utils.PrefKeys.useFocusInsteadOfMouse.rawValue)
-    case .off:
-      self.prefs.set(false, forKey: Utils.PrefKeys.useFocusInsteadOfMouse.rawValue)
-    default: break
-    }
-    NotificationCenter.default.post(name: Notification.Name(Utils.PrefKeys.displayListUpdate.rawValue), object: nil)
   }
 
   @IBAction func startAtLoginClicked(_ sender: NSButton) {
@@ -116,11 +85,6 @@ class MainPrefsViewController: NSViewController, PreferencePane {
     default: break
     }
     NotificationCenter.default.post(name: Notification.Name(Utils.PrefKeys.displayListUpdate.rawValue), object: nil)
-  }
-
-  @IBAction func listenForChanged(_ sender: NSPopUpButton) {
-    self.prefs.set(sender.selectedTag(), forKey: Utils.PrefKeys.listenFor.rawValue)
-    NotificationCenter.default.post(name: Notification.Name(Utils.PrefKeys.listenFor.rawValue), object: nil)
   }
 
   @available(macOS, deprecated: 10.10)

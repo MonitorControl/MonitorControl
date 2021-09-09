@@ -43,7 +43,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       preferencePanes: [
         mainPrefsVc!,
         menuslidersPrefsVc!,
-        // keyboardPrefsVc!,
+        keyboardPrefsVc!,
         displaysPrefsVc!,
         // advancedPrefsVc!,
         aboutPrefsVc!,
