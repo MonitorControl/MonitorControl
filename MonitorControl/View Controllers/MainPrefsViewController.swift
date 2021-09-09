@@ -22,6 +22,7 @@ class MainPrefsViewController: NSViewController, PreferencePane {
   @IBOutlet var fallbackSw: NSButton!
   @IBOutlet var listenFor: NSPopUpButton!
   @IBOutlet var allScreens: NSButton!
+  @IBOutlet var useFocusInsteadOfMouse: NSButton!
   @IBOutlet var showAdvancedDisplays: NSButton!
 
   override func viewDidLoad() {
@@ -43,6 +44,7 @@ class MainPrefsViewController: NSViewController, PreferencePane {
     self.fallbackSw.state = self.prefs.bool(forKey: Utils.PrefKeys.fallbackSw.rawValue) ? .on : .off
     self.listenFor.selectItem(at: self.prefs.integer(forKey: Utils.PrefKeys.listenFor.rawValue))
     self.allScreens.state = self.prefs.bool(forKey: Utils.PrefKeys.allScreens.rawValue) ? .on : .off
+    self.useFocusInsteadOfMouse.state = self.prefs.bool(forKey: Utils.PrefKeys.useFocusInsteadOfMouse.rawValue) ? .on : .off
     self.showAdvancedDisplays.state = self.prefs.bool(forKey: Utils.PrefKeys.showAdvancedDisplays.rawValue) ? .on : .off
   }
 
@@ -50,14 +52,25 @@ class MainPrefsViewController: NSViewController, PreferencePane {
     switch sender.state {
     case .on:
       self.prefs.set(true, forKey: Utils.PrefKeys.allScreens.rawValue)
+      self.useFocusInsteadOfMouse.state = .off
+      self.useFocusInsteadOfMouse.isEnabled = false
     case .off:
       self.prefs.set(false, forKey: Utils.PrefKeys.allScreens.rawValue)
+      self.useFocusInsteadOfMouse.isEnabled = true
+      self.useFocusInsteadOfMouse.state = self.prefs.bool(forKey: Utils.PrefKeys.useFocusInsteadOfMouse.rawValue) ? .on : .off
     default: break
     }
+  }
 
-    #if DEBUG
-      os_log("Toggle allScreens state: %{public}@", type: .info, sender.state == .on ? "on" : "off")
-    #endif
+  @IBAction func useFocusInsteadOfMouseClicked(_ sender: NSButton) {
+    switch sender.state {
+    case .on:
+      self.prefs.set(true, forKey: Utils.PrefKeys.useFocusInsteadOfMouse.rawValue)
+    case .off:
+      self.prefs.set(false, forKey: Utils.PrefKeys.useFocusInsteadOfMouse.rawValue)
+    default: break
+    }
+    NotificationCenter.default.post(name: Notification.Name(Utils.PrefKeys.displayListUpdate.rawValue), object: nil)
   }
 
   @IBAction func startAtLoginClicked(_ sender: NSButton) {
@@ -80,9 +93,6 @@ class MainPrefsViewController: NSViewController, PreferencePane {
     default: break
     }
     app.updateMenus()
-    #if DEBUG
-      os_log("Toggle software control after brightness state: %{public}@", type: .info, sender.state == .on ? "on" : "off")
-    #endif
   }
 
   @IBAction func fallbackSwClicked(_ sender: NSButton) {
@@ -95,9 +105,6 @@ class MainPrefsViewController: NSViewController, PreferencePane {
     }
     DisplayManager.shared.resetSwBrightnessForAllDisplays()
     app.updateMenus()
-    #if DEBUG
-      os_log("Toggle fallback to software if no DDC: %{public}@", type: .info, sender.state == .on ? "on" : "off")
-    #endif
   }
 
   @IBAction func showAdvancedClicked(_ sender: NSButton) {
@@ -109,16 +116,10 @@ class MainPrefsViewController: NSViewController, PreferencePane {
     default: break
     }
     NotificationCenter.default.post(name: Notification.Name(Utils.PrefKeys.displayListUpdate.rawValue), object: nil)
-    #if DEBUG
-      os_log("Show advanced settings in Display clicked: %{public}@", type: .info, sender.state == .on ? "on" : "off")
-    #endif
   }
 
   @IBAction func listenForChanged(_ sender: NSPopUpButton) {
     self.prefs.set(sender.selectedTag(), forKey: Utils.PrefKeys.listenFor.rawValue)
-    #if DEBUG
-      os_log("Toggle keys listened for state state: %{public}@", type: .info, sender.selectedItem?.title ?? "")
-    #endif
     NotificationCenter.default.post(name: Notification.Name(Utils.PrefKeys.listenFor.rawValue), object: nil)
   }
 

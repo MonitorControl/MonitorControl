@@ -105,6 +105,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       prefs.set(false, forKey: Utils.PrefKeys.enableSliderSnap.rawValue)
       prefs.set(false, forKey: Utils.PrefKeys.hideMenuIcon.rawValue)
       prefs.set(false, forKey: Utils.PrefKeys.showAdvancedDisplays.rawValue)
+      prefs.set(false, forKey: Utils.PrefKeys.useFocusInsteadOfMouse.rawValue)
     }
   }
 

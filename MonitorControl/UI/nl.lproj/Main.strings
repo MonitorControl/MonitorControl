@@ -4,6 +4,9 @@
 /* Class = "NSTextFieldCell"; title = "MonitorControl"; ObjectID = "1PJ-14-Bvn"; */
 "1PJ-14-Bvn.title" = "MonitorControl";
 
+/* Class = "NSTextFieldCell"; title = "MonitorControl uses mouse position to determine which display to control. Using window focus instead might not work well with full screen apps."; ObjectID = "4dX-o1-xAc"; */
+"4dX-o1-xAc.title" = "MonitorControl uses mouse position to determine which display to control. Using window focus instead might not work well with full screen apps.";
+
 /* Class = "NSTextFieldCell"; title = "Slider behavior:"; ObjectID = "75n-7M-1mS"; */
 "75n-7M-1mS.title" = "Slider behavior:";
 
@@ -102,6 +105,9 @@
 
 /* Class = "NSButtonCell"; title = "Enable slider snapping"; ObjectID = "MlU-hl-d46"; */
 "MlU-hl-d46.title" = "Enable slider snapping";
+
+/* Class = "NSButtonCell"; title = "Use window focus to determine which display to control"; ObjectID = "mMG-Ac-gdB"; */
+"mMG-Ac-gdB.title" = "Use window focus to determine which display to control";
 
 /* Class = "NSButtonCell"; title = "Hide Menu Icon"; ObjectID = "msX-fb-2Qd"; */
 "msX-fb-2Qd.title" = "Verberg Menu Icon";

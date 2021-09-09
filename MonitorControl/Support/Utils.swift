@@ -91,6 +91,8 @@ class Utils: NSObject {
     case displayListUpdate
     // Show advanced options under Displays tab in Preferences
     case showAdvancedDisplays
+    // Use focus instead of mouse position to determine which display to control
+    case useFocusInsteadOfMouse
   }
 
   // Keys for the value of listenFor option

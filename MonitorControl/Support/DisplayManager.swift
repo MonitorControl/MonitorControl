@@ -93,13 +93,20 @@ class DisplayManager {
     return self.displays.first { CGDisplayIsBuiltin($0.identifier) != 0 }
   }
 
-  func getCurrentDisplay() -> Display? {
-    let mouseLocation = NSEvent.mouseLocation
-    let screens = NSScreen.screens
-    if let screenWithMouse = (screens.first { NSMouseInRect(mouseLocation, $0.frame, false) }) {
-      return self.displays.first { $0.identifier == screenWithMouse.displayID }
+  func getCurrentDisplay(byFocus: Bool = false) -> Display? {
+    if byFocus {
+      guard let mainDisplayID = NSScreen.main?.displayID else {
+        return nil
+      }
+      return self.displays.first { $0.identifier == mainDisplayID }
+    } else {
+      let mouseLocation = NSEvent.mouseLocation
+      let screens = NSScreen.screens
+      if let screenWithMouse = (screens.first { NSMouseInRect(mouseLocation, $0.frame, false) }) {
+        return self.displays.first { $0.identifier == screenWithMouse.displayID }
+      }
+      return nil
     }
-    return nil
   }
 
   func addDisplay(display: Display) {
@@ -199,7 +206,7 @@ class DisplayManager {
   func getAffectedDisplays() -> [Display]? {
     var affectedDisplays: [Display]
     let allDisplays = self.getAllNonVirtualDisplays()
-    guard let currentDisplay = self.getCurrentDisplay() else {
+    guard let currentDisplay = self.getCurrentDisplay(byFocus: prefs.bool(forKey: Utils.PrefKeys.useFocusInsteadOfMouse.rawValue)) else {
       return nil
     }
     // let allDisplays = prefs.bool(forKey: Utils.PrefKeys.allScreens.rawValue) ? displays : [currentDisplay]
