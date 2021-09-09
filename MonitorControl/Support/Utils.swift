@@ -117,13 +117,13 @@ class Utils: NSObject {
     // Use focus instead of mouse position to determine which display to control for brightness
     case useFocusInsteadOfMouse
 
-    // Change Volume for all screens MARK: TODO: Preference pane INCOMPLETE
+    // Change Volume for all screens
     case allScreensVolume
 
-    // Use audio device name matching to determine display to control for volume MARK: TODO: Preference pane INCOMPLETE, Implementation MISSING
+    // Use audio device name matching to determine display to control for volume MARK: TODO: Implementation MISSING
     case useAudioDeviceNameMatching
 
-    // Use fine OSD scale for brightness and volume MARK: TODO: Preference pane INCOMPLETE, Implementation MISSING
+    // Use fine OSD scale for brightness and volume
     case useFineScale
   }
 

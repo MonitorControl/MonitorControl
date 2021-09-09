@@ -17,22 +17,15 @@ class MediaKeyTapManager: MediaKeyTapDelegate {
     if isPressed, self.handleOpenPrefPane(mediaKey: mediaKey, event: event, modifiers: modifiers) {
       return
     }
-    let isSmallIncrement = modifiers?.isSuperset(of: NSEvent.ModifierFlags([.shift, .option])) ?? false
+    var isSmallIncrement = modifiers?.isSuperset(of: NSEvent.ModifierFlags([.shift, .option])) ?? false
+    if prefs.bool(forKey: Utils.PrefKeys.useFineScale.rawValue) {
+      isSmallIncrement = !isSmallIncrement
+    }
     let isControlModifier = modifiers?.isSuperset(of: NSEvent.ModifierFlags([.control])) ?? false
     let isCommandModifier = modifiers?.isSuperset(of: NSEvent.ModifierFlags([.command])) ?? false
     if isPressed, isControlModifier, mediaKey == .brightnessUp || mediaKey == .brightnessDown {
-      if isCommandModifier {
-        for externalDisplay in DisplayManager.shared.getExternalDisplays() {
-          externalDisplay.stepBrightness(isUp: mediaKey == .brightnessUp, isSmallIncrement: isSmallIncrement)
-        }
-        for appleDisplay in DisplayManager.shared.getAppleDisplays() where !appleDisplay.isBuiltIn() {
-          appleDisplay.stepBrightness(isUp: mediaKey == .brightnessUp, isSmallIncrement: isSmallIncrement)
-        }
-        return
-      } else if let internalDisplay = DisplayManager.shared.getBuiltInDisplay() as? AppleDisplay {
-        internalDisplay.stepBrightness(isUp: mediaKey == .brightnessUp, isSmallIncrement: isSmallIncrement)
-        return
-      }
+      self.handleBrightness(isCommandModifier: isCommandModifier, isUp: mediaKey == .brightnessUp, isSmallIncrement: isSmallIncrement)
+      return
     }
     let oppositeKey: MediaKey? = self.oppositeMediaKey(mediaKey: mediaKey)
     // If the opposite key to the one being held has an active timer, cancel it - we'll be going in the opposite direction
@@ -48,6 +41,21 @@ class MediaKeyTapManager: MediaKeyTapDelegate {
     self.sendDisplayCommand(mediaKey: mediaKey, isRepeat: isRepeat, isSmallIncrement: isSmallIncrement, isPressed: isPressed)
   }
 
+  func handleBrightness(isCommandModifier: Bool, isUp: Bool, isSmallIncrement: Bool) {
+    if isCommandModifier {
+      for externalDisplay in DisplayManager.shared.getExternalDisplays() {
+        externalDisplay.stepBrightness(isUp: isUp, isSmallIncrement: isSmallIncrement)
+      }
+      for appleDisplay in DisplayManager.shared.getAppleDisplays() where !appleDisplay.isBuiltIn() {
+        appleDisplay.stepBrightness(isUp: isUp, isSmallIncrement: isSmallIncrement)
+      }
+      return
+    } else if let internalDisplay = DisplayManager.shared.getBuiltInDisplay() as? AppleDisplay {
+      internalDisplay.stepBrightness(isUp: isUp, isSmallIncrement: isSmallIncrement)
+      return
+    }
+  }
+
   private func showOSDLock(_ mediaKey: MediaKey) {
     if [.brightnessUp, .brightnessDown].contains(mediaKey) {
       OSDUtils.showOSDLockOnAllDisplays(osdImage: 1)
@@ -58,7 +66,7 @@ class MediaKeyTapManager: MediaKeyTapDelegate {
   }
 
   private func sendDisplayCommand(mediaKey: MediaKey, isRepeat: Bool, isSmallIncrement: Bool, isPressed: Bool) {
-    guard app.sleepID == 0, app.reconfigureID == 0, let affectedDisplays = DisplayManager.shared.getAffectedDisplays(isBrightness: [.brightnessUp, .brightnessDown].contains(mediaKey), isVolume: [.volumeUp, .volumeUp, .mute].contains(mediaKey)) else {
+    guard app.sleepID == 0, app.reconfigureID == 0, let affectedDisplays = DisplayManager.shared.getAffectedDisplays(isBrightness: [.brightnessUp, .brightnessDown].contains(mediaKey), isVolume: [.volumeUp, .volumeDown, .mute].contains(mediaKey)) else {
       return
     }
     var wasNotIsPressedVolumeSentAlready = false
