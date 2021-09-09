@@ -18,7 +18,10 @@ class MediaKeyTapManager: MediaKeyTapDelegate {
       return
     }
     var isSmallIncrement = modifiers?.isSuperset(of: NSEvent.ModifierFlags([.shift, .option])) ?? false
-    if prefs.bool(forKey: Utils.PrefKeys.useFineScale.rawValue) {
+    if [.brightnessUp, .brightnessDown].contains(mediaKey), prefs.bool(forKey: Utils.PrefKeys.useFineScaleBrightness.rawValue) {
+      isSmallIncrement = !isSmallIncrement
+    }
+    if [.volumeUp, .volumeDown, .mute].contains(mediaKey), prefs.bool(forKey: Utils.PrefKeys.useFineScaleVolume.rawValue) {
       isSmallIncrement = !isSmallIncrement
     }
     let isControlModifier = modifiers?.isSuperset(of: NSEvent.ModifierFlags([.control])) ?? false

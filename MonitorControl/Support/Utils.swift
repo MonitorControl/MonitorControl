@@ -123,8 +123,11 @@ class Utils: NSObject {
     // Use audio device name matching to determine display to control for volume MARK: TODO: Implementation MISSING
     case useAudioDeviceNameMatching
 
-    // Use fine OSD scale for brightness and volume
-    case useFineScale
+    // Use fine OSD scale for brightness
+    case useFineScaleBrightness
+
+    // Use fine OSD scale for volume
+    case useFineScaleVolume
   }
 
   // Keys for the value of listenFor option

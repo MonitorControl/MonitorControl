@@ -114,7 +114,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       prefs.set(false, forKey: Utils.PrefKeys.useFocusInsteadOfMouse.rawValue)
       prefs.set(false, forKey: Utils.PrefKeys.allScreensVolume.rawValue)
       prefs.set(false, forKey: Utils.PrefKeys.useAudioDeviceNameMatching.rawValue)
-      prefs.set(false, forKey: Utils.PrefKeys.useFineScale.rawValue)
+      prefs.set(false, forKey: Utils.PrefKeys.useFineScaleBrightness.rawValue)
+      prefs.set(false, forKey: Utils.PrefKeys.useFineScaleVolume.rawValue)
     }
     prefs.set(currentBuildNumber, forKey: Utils.PrefKeys.buildNumber.rawValue)
   }

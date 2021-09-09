@@ -22,8 +22,8 @@
 /* Class = "NSTextFieldCell"; title = "Slider knob will snap to 0%, 25%, 50%, 75% and 100% when in proximity making setting these values easier. Disable for finer control."; ObjectID = "8Gx-Ya-zhp"; */
 "8Gx-Ya-zhp.title" = "Slider knob will snap to 0%, 25%, 50%, 75% and 100% when in proximity making setting these values easier. Disable for finer control.";
 
-/* Class = "NSButtonCell"; title = "Use fine scale for brightness and volume"; ObjectID = "8Q8-57-xnT"; */
-"8Q8-57-xnT.title" = "Use fine scale for brightness and volume";
+/* Class = "NSButtonCell"; title = "Use fine scale for brightness"; ObjectID = "8Q8-57-xnT"; */
+"8Q8-57-xnT.title" = "Use fine scale for brightness";
 
 /* Class = "NSButtonCell"; title = "Special thanks to our contributors!"; ObjectID = "95V-M4-2l5"; */
 "95V-M4-2l5.title" = "Special thanks to our contributors!";
@@ -67,14 +67,14 @@
 /* Class = "NSMenuItem"; title = "Minimal"; ObjectID = "Eq3-z9-yIo"; */
 "Eq3-z9-yIo.title" = "Мінім.";
 
+/* Class = "NSTextFieldCell"; title = "Normally keyboard controls change one OSD chiclet worth of value and Shift+Option allows fine control. This makes fine control default."; ObjectID = "f6J-Ui-uMB"; */
+"f6J-Ui-uMB.title" = "Normally keyboard controls change one OSD chiclet worth of value and Shift+Option allows fine control. This makes fine control default.";
+
 /* Class = "NSButtonCell"; title = "Reset Name"; ObjectID = "f9g-8s-gdd"; */
 "f9g-8s-gdd.title" = "Reset Name";
 
 /* Class = "NSTextFieldCell"; title = "Brightness slider:"; ObjectID = "fe9-Ia-t9m"; */
 "fe9-Ia-t9m.title" = "Menu contents:";
-
-/* Class = "NSTextFieldCell"; title = "Style:"; ObjectID = "Fgh-vj-glX"; */
-"Fgh-vj-glX.title" = "Style:";
 
 /* Class = "NSButtonCell"; title = "Further lower brightness via software dimming"; ObjectID = "fhy-Er-0aI"; */
 "fhy-Er-0aI.title" = "Зменшувати Контраст після Яскравості";
@@ -99,6 +99,9 @@
 
 /* Class = "NSTextFieldCell"; title = "Additional sliders:"; ObjectID = "i5X-M5-Tf5"; */
 "i5X-M5-Tf5.title" = "Additional sliders:";
+
+/* Class = "NSButtonCell"; title = "Use fine scale for volume"; ObjectID = "J3L-MW-iJL"; */
+"J3L-MW-iJL.title" = "Use fine scale for volume";
 
 /* Class = "NSButtonCell"; title = "Start at Login"; ObjectID = "j72-NF-zsW"; */
 "j72-NF-zsW.title" = "Запускати MonitorControl разом із системою";
@@ -130,8 +133,11 @@
 /* Class = "NSTextFieldCell"; title = "Display type:"; ObjectID = "lSJ-6w-KJ2"; */
 "lSJ-6w-KJ2.title" = "Display type:";
 
-/* Class = "NSTextFieldCell"; title = "Brightness control target:"; ObjectID = "ltL-gR-K3Z"; */
-"ltL-gR-K3Z.title" = "Brightness control target:";
+/* Class = "NSTextFieldCell"; title = "Brightness control:"; ObjectID = "ltL-gR-K3Z"; */
+"ltL-gR-K3Z.title" = "Brightness control:";
+
+/* Class = "NSTextFieldCell"; title = "Makes fine control default, see explanation for the option at brightness"; ObjectID = "maJ-0q-XI3"; */
+"maJ-0q-XI3.title" = "Makes fine control default, see explanation for the option at brightness";
 
 /* Class = "NSButtonCell"; title = "Enable slider snapping"; ObjectID = "MlU-hl-d46"; */
 "MlU-hl-d46.title" = "Enable slider snapping";
@@ -166,14 +172,11 @@
 /* Class = "NSButtonCell"; title = "Show contrast slider in menu"; ObjectID = "qO0-dB-yUs"; */
 "qO0-dB-yUs.title" = "Показувати слайдер для контрасту";
 
-/* Class = "NSTextFieldCell"; title = "Volume control target:"; ObjectID = "qoh-Gn-f11"; */
-"qoh-Gn-f11.title" = "Volume control target:";
+/* Class = "NSTextFieldCell"; title = "Volume control:"; ObjectID = "qoh-Gn-f11"; */
+"qoh-Gn-f11.title" = "Volume control:";
 
 /* Class = "NSTextFieldCell"; title = "Advanced:"; ObjectID = "r7i-oG-Ab6"; */
 "r7i-oG-Ab6.title" = "Advanced:";
-
-/* Class = "NSTextFieldCell"; title = "Normally keyboard controls will change one OSD chiclet worth of value (approx. 6%) and pressing Shift+Option allows for fine control. This setting makes fine control default."; ObjectID = "RCO-lP-HDT"; */
-"RCO-lP-HDT.title" = "Normally keyboard controls will change one OSD chiclet worth of value (approx. 6%) and pressing Shift+Option allows for fine control. This setting makes fine control default.";
 
 /* Class = "NSMenuItem"; title = "Normal"; ObjectID = "Riq-uM-bTs"; */
 "Riq-uM-bTs.title" = "Звич.";

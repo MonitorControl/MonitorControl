@@ -22,6 +22,7 @@ class KeyboardPrefsViewController: NSViewController, PreferencePane {
   @IBOutlet var allScreensVolume: NSButton!
   @IBOutlet var useAudioDeviceNameMatching: NSButton!
   @IBOutlet var useFineScale: NSButton!
+  @IBOutlet var useFineScaleVolume: NSButton!
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -38,7 +39,8 @@ class KeyboardPrefsViewController: NSViewController, PreferencePane {
     self.useFocusInsteadOfMouse.state = self.prefs.bool(forKey: Utils.PrefKeys.useFocusInsteadOfMouse.rawValue) ? .on : .off
     self.allScreensVolume.state = self.prefs.bool(forKey: Utils.PrefKeys.allScreensVolume.rawValue) ? .on : .off
     self.useAudioDeviceNameMatching.state = self.prefs.bool(forKey: Utils.PrefKeys.useAudioDeviceNameMatching.rawValue) ? .on : .off
-    self.useFineScale.state = self.prefs.bool(forKey: Utils.PrefKeys.useFineScale.rawValue) ? .on : .off
+    self.useFineScale.state = self.prefs.bool(forKey: Utils.PrefKeys.useFineScaleBrightness.rawValue) ? .on : .off
+    self.useFineScaleVolume.state = self.prefs.bool(forKey: Utils.PrefKeys.useFineScaleVolume.rawValue) ? .on : .off
     self.allScreensClicked(self.allScreens)
     self.allScreensVolumeClicked(self.allScreensVolume)
   }
@@ -94,9 +96,19 @@ class KeyboardPrefsViewController: NSViewController, PreferencePane {
   @IBAction func useFineScaleClicked(_ sender: NSButton) {
     switch sender.state {
     case .on:
-      self.prefs.set(true, forKey: Utils.PrefKeys.useFineScale.rawValue)
+      self.prefs.set(true, forKey: Utils.PrefKeys.useFineScaleBrightness.rawValue)
     case .off:
-      self.prefs.set(false, forKey: Utils.PrefKeys.useFineScale.rawValue)
+      self.prefs.set(false, forKey: Utils.PrefKeys.useFineScaleBrightness.rawValue)
+    default: break
+    }
+  }
+
+  @IBAction func useFineScaleVolumeClicked(_ sender: NSButton) {
+    switch sender.state {
+    case .on:
+      self.prefs.set(true, forKey: Utils.PrefKeys.useFineScaleVolume.rawValue)
+    case .off:
+      self.prefs.set(false, forKey: Utils.PrefKeys.useFineScaleVolume.rawValue)
     default: break
     }
   }
