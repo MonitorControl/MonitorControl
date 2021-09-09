@@ -203,22 +203,33 @@ class DisplayManager {
     }
   }
 
-  func getAffectedDisplays() -> [Display]? {
+  func getAffectedDisplays(isBrightness: Bool = false, isVolume: Bool = false) -> [Display]? {
     var affectedDisplays: [Display]
     let allDisplays = self.getAllNonVirtualDisplays()
-    guard let currentDisplay = self.getCurrentDisplay(byFocus: prefs.bool(forKey: Utils.PrefKeys.useFocusInsteadOfMouse.rawValue)) else {
-      return nil
+    var currentDisplay: Display?
+    if isBrightness {
+      if prefs.bool(forKey: Utils.PrefKeys.allScreensBrightness.rawValue) {
+        affectedDisplays = allDisplays
+        return affectedDisplays
+      }
+      currentDisplay = self.getCurrentDisplay(byFocus: prefs.bool(forKey: Utils.PrefKeys.useFocusInsteadOfMouse.rawValue))
     }
-    // let allDisplays = prefs.bool(forKey: Utils.PrefKeys.allScreens.rawValue) ? displays : [currentDisplay]
-    if prefs.bool(forKey: Utils.PrefKeys.allScreensBrightness.rawValue) {
-      affectedDisplays = allDisplays
-    } else {
+    if isVolume {
+      if prefs.bool(forKey: Utils.PrefKeys.allScreensVolume.rawValue) {
+        affectedDisplays = allDisplays
+        return affectedDisplays
+      }
+      currentDisplay = self.getCurrentDisplay(byFocus: false)
+    }
+    if let currentDisplay = currentDisplay {
       affectedDisplays = [currentDisplay]
       if CGDisplayIsInHWMirrorSet(currentDisplay.identifier) != 0 || CGDisplayIsInMirrorSet(currentDisplay.identifier) != 0, CGDisplayMirrorsDisplay(currentDisplay.identifier) == 0 {
         for display in allDisplays where CGDisplayMirrorsDisplay(display.identifier) == currentDisplay.identifier {
           affectedDisplays.append(display)
         }
       }
+    } else {
+      affectedDisplays = []
     }
     return affectedDisplays
   }
