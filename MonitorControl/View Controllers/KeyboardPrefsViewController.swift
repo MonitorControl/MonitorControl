@@ -81,6 +81,7 @@ class KeyboardPrefsViewController: NSViewController, PreferencePane {
       self.useAudioDeviceNameMatching.state = self.prefs.bool(forKey: Utils.PrefKeys.useAudioDeviceNameMatching.rawValue) ? .on : .off
     default: break
     }
+    app.updateMediaKeyTap()
   }
 
   @IBAction func useAudioDeviceNameMatchingClicked(_ sender: NSButton) {
@@ -91,6 +92,7 @@ class KeyboardPrefsViewController: NSViewController, PreferencePane {
       self.prefs.set(false, forKey: Utils.PrefKeys.useAudioDeviceNameMatching.rawValue)
     default: break
     }
+    app.updateMediaKeyTap()
   }
 
   @IBAction func useFineScaleClicked(_ sender: NSButton) {

@@ -61,9 +61,6 @@
 /* Shown in the Display Preferences */
 "No Control" = "Keine Steuerung verfügbar";
 
-/* Shown in menu */
-"No supported display found" = "Keine unterstützter Display gefunden";
-
 /* Shown in the alert dialog */
 "Ok" = "OK";
 
@@ -110,9 +107,6 @@
  unknown model
  unknown vendor */
 "Unknown" = "Unbekannt";
-
-/* Shown in the Display Preferences */
-"Unspecified" = "Unbestimmt";
 
 /* Version */
 "Version" = "Version";

@@ -61,9 +61,6 @@
 /* Shown in the Display Preferences */
 "No Control" = "No Control";
 
-/* Shown in menu */
-"No supported display found" = "サポートされていないディスプレイが検知されました";
-
 /* Shown in the alert dialog */
 "Ok" = "OK";
 
@@ -110,9 +107,6 @@
  Unknown model
  Unknown vendor */
 "Unknown" = "不明";
-
-/* Shown in the Display Preferences */
-"Unspecified" = "Unspecified";
 
 /* Version */
 "Version" = "バージョン";

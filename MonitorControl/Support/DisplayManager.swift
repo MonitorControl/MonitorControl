@@ -4,11 +4,8 @@ import os.log
 class DisplayManager {
   public static let shared = DisplayManager()
 
-  private var displays: [Display]
-
-  init() {
-    self.displays = []
-  }
+  var displays: [Display] = []
+  var audioControlTargetDisplays: [ExternalDisplay] = []
 
   func updateDisplays() {
     self.clearDisplays()
@@ -41,6 +38,20 @@ class DisplayManager {
       }
       self.addDisplay(display: display)
     }
+  }
+
+  func updateAudioControlTargetDisplays(deviceName: String) -> Int {
+    self.audioControlTargetDisplays.removeAll()
+    os_log("Detecting displays for audio control via audio device name matching...", type: .debug)
+    var numOfAddedDisplays: Int = 0
+    for ddcCapableDisplay in self.getDdcCapableDisplays() {
+      if DisplayManager.getDisplayRawNameByID(displayID: ddcCapableDisplay.identifier) == deviceName {
+        self.audioControlTargetDisplays.append(ddcCapableDisplay)
+        numOfAddedDisplays += 1
+        os_log("Added display for audio control - %{public}@", type: .debug, ddcCapableDisplay.name)
+      }
+    }
+    return numOfAddedDisplays
   }
 
   func refreshDisplaysBrightness() -> Bool {
@@ -218,6 +229,8 @@ class DisplayManager {
       if prefs.bool(forKey: Utils.PrefKeys.allScreensVolume.rawValue) {
         affectedDisplays = allDisplays
         return affectedDisplays
+      } else if prefs.bool(forKey: Utils.PrefKeys.useAudioDeviceNameMatching.rawValue) {
+        return self.audioControlTargetDisplays
       }
       currentDisplay = self.getCurrentDisplay(byFocus: false)
     }

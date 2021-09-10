@@ -61,9 +61,6 @@
 /* Shown in the Display Preferences */
 "No Control" = "Nincs vezérlés";
 
-/* Shown in menu */
-"No supported display found" = "Nincs támogatott kijelző";
-
 /* Shown in the alert dialog */
 "Ok" = "Ok";
 
@@ -110,9 +107,6 @@
  Unknown model
  Unknown vendor */
 "Unknown" = "Ismeretlen";
-
-/* Shown in the Display Preferences */
-"Unspecified" = "Meghatározatlan";
 
 /* Version */
 "Version" = "Verzió";

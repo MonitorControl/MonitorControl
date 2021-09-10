@@ -61,9 +61,6 @@
 /* Shown in the Display Preferences */
 "No Control" = "No Control";
 
-/* Shown in menu */
-"No supported display found" = "Не знайдено жодного дісплею";
-
 /* Shown in the alert dialog */
 "Ok" = "ОК";
 
@@ -110,9 +107,6 @@
  Unknown model
  Unknown vendor */
 "Unknown" = "Невідомо";
-
-/* Shown in the Display Preferences */
-"Unspecified" = "Unspecified";
 
 /* Version */
 "Version" = "Версія";

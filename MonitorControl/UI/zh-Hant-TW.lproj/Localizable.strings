@@ -61,9 +61,6 @@
 /* Shown in the Display Preferences */
 "No Control" = "沒有可用的控制項";
 
-/* Shown in menu */
-"No supported display found" = "找不到支援的螢幕";
-
 /* Shown in the alert dialog */
 "Ok" = "好";
 
@@ -110,9 +107,6 @@
  Unknown model
  Unknown vendor */
 "Unknown" = "未知";
-
-/* Shown in the Display Preferences */
-"Unspecified" = "未指定";
 
 /* Version */
 "Version" = "版本";

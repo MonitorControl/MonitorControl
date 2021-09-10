@@ -61,9 +61,6 @@
 /* Shown in the Display Preferences */
 "No Control" = "No Control";
 
-/* Shown in menu */
-"No supported display found" = "No supported display found";
-
 /* Shown in the alert dialog */
 "Ok" = "Ok";
 
@@ -108,9 +105,6 @@
 
 /* Unknown display name */
 "Unknown" = "Unknown";
-
-/* Shown in the Display Preferences */
-"Unspecified" = "Unspecified";
 
 /* Version */
 "Version" = "Version";

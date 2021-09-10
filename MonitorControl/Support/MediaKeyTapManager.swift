@@ -1,3 +1,4 @@
+import AudioToolbox
 import Cocoa
 import Foundation
 import MediaKeyTap
@@ -147,9 +148,15 @@ class MediaKeyTapManager: MediaKeyTapDelegate {
       keys.removeAll { keysToDelete.contains($0) }
     }
     // Remove volume related keys if audio device is controllable
-    if app.coreAudio.defaultOutputDevice?.canSetVirtualMasterVolume(scope: .output) == true {
+    if let defaultAudioDevice = app.coreAudio.defaultOutputDevice {
       let keysToDelete: [MediaKey] = [.volumeUp, .volumeDown, .mute]
-      keys.removeAll { keysToDelete.contains($0) }
+      if !prefs.bool(forKey: Utils.PrefKeys.allScreensVolume.rawValue), prefs.bool(forKey: Utils.PrefKeys.useAudioDeviceNameMatching.rawValue) {
+        if DisplayManager.shared.updateAudioControlTargetDisplays(deviceName: defaultAudioDevice.name) == 0 {
+          keys.removeAll { keysToDelete.contains($0) }
+        }
+      } else if defaultAudioDevice.canSetVirtualMasterVolume(scope: .output) == true {
+        keys.removeAll { keysToDelete.contains($0) }
+      }
     }
     self.mediaKeyTap?.stop()
     // returning an empty array listens for all mediakeys in MediaKeyTap

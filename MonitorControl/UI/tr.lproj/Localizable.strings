@@ -61,9 +61,6 @@
 /* Shown in the Display Preferences */
 "No Control" = "Kontrol yok";
 
-/* Shown in menu */
-"No supported display found" = "Desteklenen ekran bulunamadı";
-
 /* Shown in the alert dialog */
 "Ok" = "Tamam";
 
@@ -108,9 +105,6 @@
 
 /* Unknown display name */
 "Unknown" = "Bilinmeyen";
-
-/* Shown in the Display Preferences */
-"Unspecified" = "Belirtilmemiş";
 
 /* Version */
 "Version" = "Versiyon";

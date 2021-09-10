@@ -61,9 +61,6 @@
 /* Shown in the Display Preferences */
 "No Control" = "Нет возможности управления";
 
-/* Shown in menu */
-"No supported display found" = "Поддерживаемых дисплеев не найдено";
-
 /* Shown in the alert dialog */
 "Ok" = "ОК";
 
@@ -110,9 +107,6 @@
  Unknown model
  Unknown vendor */
 "Unknown" = "Неизвестный";
-
-/* Shown in the Display Preferences */
-"Unspecified" = "Неопределённый";
 
 /* Version */
 "Version" = "Версия";

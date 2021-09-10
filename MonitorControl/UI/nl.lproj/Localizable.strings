@@ -61,9 +61,6 @@
 /* Shown in the Display Preferences */
 "No Control" = "Geen Controle Beschikbaar";
 
-/* Shown in menu */
-"No supported display found" = "Geen ondersteend scherm gevonden";
-
 /* Shown in the alert dialog */
 "Ok" = "Oké";
 
@@ -110,9 +107,6 @@
  unknown model
  unknown vendor */
 "Unknown" = "Onbekend";
-
-/* Shown in the Display Preferences */
-"Unspecified" = "Niet gespecificeerd";
 
 /* Version */
 "Version" = "Versie";

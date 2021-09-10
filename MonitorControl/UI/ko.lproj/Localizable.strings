@@ -61,9 +61,6 @@
 /* Shown in the Display Preferences */
 "No Control" = "사용가능한 제어 없음";
 
-/* Shown in menu */
-"No supported display found" = "감지된 디스플레이 없음";
-
 /* Shown in the alert dialog */
 "Ok" = "확인";
 
@@ -108,9 +105,6 @@
 
 /* Unknown display name */
 "Unknown" = "알 수 없음";
-
-/* Shown in the Display Preferences */
-"Unspecified" = "지정되지 않음";
 
 /* Version */
 "Version" = "버전";
