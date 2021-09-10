@@ -171,7 +171,7 @@ class DisplaysPrefsViewController: NSViewController, PreferencePane, NSTableView
         cell.enableMuteButton.state = .off
         cell.enableMuteButton.isEnabled = false
       }
-      if self.prefs.bool(forKey: Utils.PrefKeys.showAdvancedDisplays.rawValue) {
+      if self.prefs.bool(forKey: PrefKeys.showAdvancedDisplays.rawValue) {
         cell.advancedSettings.isHidden = false
       } else {
         cell.advancedSettings.isHidden = true
@@ -182,7 +182,7 @@ class DisplaysPrefsViewController: NSViewController, PreferencePane, NSTableView
   }
 
   func updateDisplayListRowHeight() {
-    if self.prefs.bool(forKey: Utils.PrefKeys.showAdvancedDisplays.rawValue) {
+    if self.prefs.bool(forKey: PrefKeys.showAdvancedDisplays.rawValue) {
       self.displayList.rowHeight = 300
     } else {
       self.displayList.rowHeight = 150

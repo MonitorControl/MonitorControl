@@ -21,7 +21,7 @@ class SliderHandler {
     }
 
     if !externalDisplay.isSw() {
-      if self.cmd == Command.brightness, prefs.bool(forKey: Utils.PrefKeys.lowerSwAfterBrightness.rawValue) {
+      if self.cmd == Command.brightness, prefs.bool(forKey: PrefKeys.lowerSwAfterBrightness.rawValue) {
         var brightnessDDCValue: Int = 0
         var brightnessSwValue: Int = 100
         if value >= Int(maxValue / 2) {
@@ -57,7 +57,7 @@ class SliderHandler {
     var value = slider.integerValue
     let maxValue = slider.maxValue
 
-    if prefs.bool(forKey: Utils.PrefKeys.enableSliderSnap.rawValue) {
+    if prefs.bool(forKey: PrefKeys.enableSliderSnap.rawValue) {
       let snapInterval = Int(Float(maxValue) / 4)
       let snapThreshold = Int(Float(maxValue * 0.04))
       let closest = (value + snapInterval / 2) / snapInterval * snapInterval

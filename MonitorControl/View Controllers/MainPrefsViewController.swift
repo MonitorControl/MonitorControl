@@ -39,11 +39,11 @@ class MainPrefsViewController: NSViewController, PreferencePane {
     // This is marked as deprectated but according to the function header it still does not have a replacement as of macOS 12 Monterey and is valid to use.
     let startAtLogin = (SMCopyAllJobDictionaries(kSMDomainUserLaunchd).takeRetainedValue() as? [[String: AnyObject]])?.first { $0["Label"] as? String == "\(Bundle.main.bundleIdentifier!)Helper" }?["OnDemand"] as? Bool ?? false
     self.startAtLogin.state = startAtLogin ? .on : .off
-    self.lowerSwAfterBrightness.state = self.prefs.bool(forKey: Utils.PrefKeys.lowerSwAfterBrightness.rawValue) ? .on : .off
-    self.fallbackSw.state = self.prefs.bool(forKey: Utils.PrefKeys.fallbackSw.rawValue) ? .on : .off
-    self.showAdvancedDisplays.state = self.prefs.bool(forKey: Utils.PrefKeys.showAdvancedDisplays.rawValue) ? .on : .off
-    self.restoreLastSavedValuesOff.state = self.prefs.bool(forKey: Utils.PrefKeys.restoreLastSavedValues.rawValue) ? .off : .on
-    self.restoreLastSavedValuesOn.state = self.prefs.bool(forKey: Utils.PrefKeys.restoreLastSavedValues.rawValue) ? .on : .off
+    self.lowerSwAfterBrightness.state = self.prefs.bool(forKey: PrefKeys.lowerSwAfterBrightness.rawValue) ? .on : .off
+    self.fallbackSw.state = self.prefs.bool(forKey: PrefKeys.fallbackSw.rawValue) ? .on : .off
+    self.showAdvancedDisplays.state = self.prefs.bool(forKey: PrefKeys.showAdvancedDisplays.rawValue) ? .on : .off
+    self.restoreLastSavedValuesOff.state = self.prefs.bool(forKey: PrefKeys.restoreLastSavedValues.rawValue) ? .off : .on
+    self.restoreLastSavedValuesOn.state = self.prefs.bool(forKey: PrefKeys.restoreLastSavedValues.rawValue) ? .on : .off
   }
 
   @IBAction func startAtLoginClicked(_ sender: NSButton) {
@@ -59,9 +59,9 @@ class MainPrefsViewController: NSViewController, PreferencePane {
   @IBAction func lowerSwAfterBrightnessClicked(_ sender: NSButton) {
     switch sender.state {
     case .on:
-      self.prefs.set(true, forKey: Utils.PrefKeys.lowerSwAfterBrightness.rawValue)
+      self.prefs.set(true, forKey: PrefKeys.lowerSwAfterBrightness.rawValue)
     case .off:
-      self.prefs.set(false, forKey: Utils.PrefKeys.lowerSwAfterBrightness.rawValue)
+      self.prefs.set(false, forKey: PrefKeys.lowerSwAfterBrightness.rawValue)
       DisplayManager.shared.resetSwBrightnessForAllDisplays()
     default: break
     }
@@ -71,9 +71,9 @@ class MainPrefsViewController: NSViewController, PreferencePane {
   @IBAction func fallbackSwClicked(_ sender: NSButton) {
     switch sender.state {
     case .on:
-      self.prefs.set(true, forKey: Utils.PrefKeys.fallbackSw.rawValue)
+      self.prefs.set(true, forKey: PrefKeys.fallbackSw.rawValue)
     case .off:
-      self.prefs.set(false, forKey: Utils.PrefKeys.fallbackSw.rawValue)
+      self.prefs.set(false, forKey: PrefKeys.fallbackSw.rawValue)
     default: break
     }
     DisplayManager.shared.resetSwBrightnessForAllDisplays()
@@ -83,10 +83,10 @@ class MainPrefsViewController: NSViewController, PreferencePane {
   @IBAction func restoreLastSavedValuesOffClicked(_ sender: NSButton) {
     switch sender.state {
     case .on:
-      self.prefs.set(false, forKey: Utils.PrefKeys.restoreLastSavedValues.rawValue)
+      self.prefs.set(false, forKey: PrefKeys.restoreLastSavedValues.rawValue)
       self.restoreLastSavedValuesOn.state = .off
     case .off:
-      self.prefs.set(true, forKey: Utils.PrefKeys.restoreLastSavedValues.rawValue)
+      self.prefs.set(true, forKey: PrefKeys.restoreLastSavedValues.rawValue)
       self.restoreLastSavedValuesOn.state = .on
     default: break
     }
@@ -95,10 +95,10 @@ class MainPrefsViewController: NSViewController, PreferencePane {
   @IBAction func restoreLastSavedValuesOnClicked(_ sender: NSButton) {
     switch sender.state {
     case .on:
-      self.prefs.set(true, forKey: Utils.PrefKeys.restoreLastSavedValues.rawValue)
+      self.prefs.set(true, forKey: PrefKeys.restoreLastSavedValues.rawValue)
       self.restoreLastSavedValuesOff.state = .off
     case .off:
-      self.prefs.set(false, forKey: Utils.PrefKeys.restoreLastSavedValues.rawValue)
+      self.prefs.set(false, forKey: PrefKeys.restoreLastSavedValues.rawValue)
       self.restoreLastSavedValuesOff.state = .on
     default: break
     }
@@ -107,18 +107,18 @@ class MainPrefsViewController: NSViewController, PreferencePane {
   @IBAction func showAdvancedClicked(_ sender: NSButton) {
     switch sender.state {
     case .on:
-      self.prefs.set(true, forKey: Utils.PrefKeys.showAdvancedDisplays.rawValue)
+      self.prefs.set(true, forKey: PrefKeys.showAdvancedDisplays.rawValue)
     case .off:
-      self.prefs.set(false, forKey: Utils.PrefKeys.showAdvancedDisplays.rawValue)
+      self.prefs.set(false, forKey: PrefKeys.showAdvancedDisplays.rawValue)
     default: break
     }
-    NotificationCenter.default.post(name: Notification.Name(Utils.PrefKeys.displayListUpdate.rawValue), object: nil)
+    NotificationCenter.default.post(name: Notification.Name(PrefKeys.displayListUpdate.rawValue), object: nil)
   }
 
   @available(macOS, deprecated: 10.10)
   func resetSheetModalHander(modalResponse: NSApplication.ModalResponse) {
     if modalResponse == NSApplication.ModalResponse.alertFirstButtonReturn {
-      NotificationCenter.default.post(name: Notification.Name(Utils.PrefKeys.preferenceReset.rawValue), object: nil)
+      NotificationCenter.default.post(name: Notification.Name(PrefKeys.preferenceReset.rawValue), object: nil)
       self.populateSettings()
     }
   }

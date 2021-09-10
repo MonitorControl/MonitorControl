@@ -11,7 +11,7 @@ let prefs = UserDefaults.standard
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
   @IBOutlet var statusMenu: NSMenu!
-  let minPreviousBuildNumber = 3300 // Below this previous app version there is a mandatory preferences reset!
+  let minPreviousBuildNumber = 3380 // Below this previous app version there is a mandatory preferences reset!
   let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
   var mediaKeyTap = MediaKeyTapManager()
   var monitorItems: [NSMenuItem] = []
@@ -68,7 +68,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     } else {
       self.statusItem.button?.image = NSImage(named: "status")
     }
-    self.statusItem.isVisible = prefs.bool(forKey: Utils.PrefKeys.hideMenuIcon.rawValue) ? false : true
+    self.statusItem.isVisible = prefs.bool(forKey: PrefKeys.hideMenuIcon.rawValue) ? false : true
     self.statusItem.menu = self.statusMenu
     self.checkPermissions()
     CGDisplayRegisterReconfigurationCallback({ _, _, _ in app.displayReconfigured() }, nil)
@@ -96,28 +96,28 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
   func setDefaultPrefs() {
     let currentBuildNumber = Int(Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String ?? "1") ?? 1
-    let previousBuildNumber: Int = (Int(prefs.string(forKey: Utils.PrefKeys.buildNumber.rawValue) ?? "0") ?? 0)
-    if !prefs.bool(forKey: Utils.PrefKeys.appAlreadyLaunched.rawValue) || (previousBuildNumber < self.minPreviousBuildNumber && previousBuildNumber > 0) || previousBuildNumber > currentBuildNumber {
+    let previousBuildNumber: Int = (Int(prefs.string(forKey: PrefKeys.buildNumber.rawValue) ?? "0") ?? 0)
+    if !prefs.bool(forKey: PrefKeys.appAlreadyLaunched.rawValue) || (previousBuildNumber < self.minPreviousBuildNumber && previousBuildNumber > 0) || previousBuildNumber > currentBuildNumber {
       // Preferences reset is needed
-      prefs.set(true, forKey: Utils.PrefKeys.appAlreadyLaunched.rawValue)
-      prefs.set(false, forKey: Utils.PrefKeys.hideBrightness.rawValue)
-      prefs.set(false, forKey: Utils.PrefKeys.showContrast.rawValue)
-      prefs.set(true, forKey: Utils.PrefKeys.showVolume.rawValue)
-      prefs.set(true, forKey: Utils.PrefKeys.fallbackSw.rawValue)
-      prefs.set(false, forKey: Utils.PrefKeys.hideAppleFromMenu.rawValue)
-      prefs.set(false, forKey: Utils.PrefKeys.enableSliderSnap.rawValue)
-      prefs.set(false, forKey: Utils.PrefKeys.hideMenuIcon.rawValue)
-      prefs.set(false, forKey: Utils.PrefKeys.showAdvancedDisplays.rawValue)
-      prefs.set(false, forKey: Utils.PrefKeys.lowerSwAfterBrightness.rawValue)
-      prefs.set(false, forKey: Utils.PrefKeys.useFocusInsteadOfMouse.rawValue)
-      prefs.set(false, forKey: Utils.PrefKeys.restoreLastSavedValues.rawValue)
-      prefs.set(false, forKey: Utils.PrefKeys.useFocusInsteadOfMouse.rawValue)
-      prefs.set(false, forKey: Utils.PrefKeys.allScreensVolume.rawValue)
-      prefs.set(false, forKey: Utils.PrefKeys.useAudioDeviceNameMatching.rawValue)
-      prefs.set(false, forKey: Utils.PrefKeys.useFineScaleBrightness.rawValue)
-      prefs.set(false, forKey: Utils.PrefKeys.useFineScaleVolume.rawValue)
+      prefs.set(true, forKey: PrefKeys.appAlreadyLaunched.rawValue)
+      prefs.set(false, forKey: PrefKeys.hideBrightness.rawValue)
+      prefs.set(false, forKey: PrefKeys.showContrast.rawValue)
+      prefs.set(true, forKey: PrefKeys.showVolume.rawValue)
+      prefs.set(true, forKey: PrefKeys.fallbackSw.rawValue)
+      prefs.set(false, forKey: PrefKeys.hideAppleFromMenu.rawValue)
+      prefs.set(false, forKey: PrefKeys.enableSliderSnap.rawValue)
+      prefs.set(false, forKey: PrefKeys.hideMenuIcon.rawValue)
+      prefs.set(false, forKey: PrefKeys.showAdvancedDisplays.rawValue)
+      prefs.set(false, forKey: PrefKeys.lowerSwAfterBrightness.rawValue)
+      prefs.set(false, forKey: PrefKeys.useFocusInsteadOfMouse.rawValue)
+      prefs.set(false, forKey: PrefKeys.restoreLastSavedValues.rawValue)
+      prefs.set(false, forKey: PrefKeys.useFocusInsteadOfMouse.rawValue)
+      prefs.set(false, forKey: PrefKeys.allScreensVolume.rawValue)
+      prefs.set(false, forKey: PrefKeys.useAudioDeviceNameMatching.rawValue)
+      prefs.set(false, forKey: PrefKeys.useFineScaleBrightness.rawValue)
+      prefs.set(false, forKey: PrefKeys.useFineScaleVolume.rawValue)
     }
-    prefs.set(currentBuildNumber, forKey: Utils.PrefKeys.buildNumber.rawValue)
+    prefs.set(currentBuildNumber, forKey: PrefKeys.buildNumber.rawValue)
   }
 
   func clearMenu() {
@@ -149,18 +149,18 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     guard self.sleepID == 0, dispatchedReconfigureID == self.reconfigureID else {
       return
     }
-    os_log("Request for updateDisplay with reconfigreID %{public}@", type: .info, String(dispatchedReconfigureID))
+    os_log("Request for configuration with reconfigreID %{public}@", type: .info, String(dispatchedReconfigureID))
     self.reconfigureID = 0
     DisplayManager.shared.updateDisplays()
     DisplayManager.shared.addDisplayCounterSuffixes()
     DisplayManager.shared.updateArm64AVServices()
-    NotificationCenter.default.post(name: Notification.Name(Utils.PrefKeys.displayListUpdate.rawValue), object: nil)
+    NotificationCenter.default.post(name: Notification.Name(PrefKeys.displayListUpdate.rawValue), object: nil)
     if firstrun {
       DisplayManager.shared.resetSwBrightnessForAllDisplays(settingsOnly: true)
     }
     self.updateDisplaysAndMenus()
     if !firstrun {
-      if prefs.bool(forKey: Utils.PrefKeys.fallbackSw.rawValue) || prefs.bool(forKey: Utils.PrefKeys.lowerSwAfterBrightness.rawValue) {
+      if prefs.bool(forKey: PrefKeys.fallbackSw.rawValue) || prefs.bool(forKey: PrefKeys.lowerSwAfterBrightness.rawValue) {
         DisplayManager.shared.restoreSwBrightnessForAllDisplays(async: true)
       }
     }
@@ -170,10 +170,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   func updateDisplaysAndMenus() {
     self.clearMenu()
     var displays: [Display] = []
-    if !prefs.bool(forKey: Utils.PrefKeys.hideAppleFromMenu.rawValue) {
+    if !prefs.bool(forKey: PrefKeys.hideAppleFromMenu.rawValue) {
       displays.append(contentsOf: DisplayManager.shared.getAppleDisplays())
     }
-    if prefs.bool(forKey: Utils.PrefKeys.fallbackSw.rawValue) {
+    if prefs.bool(forKey: PrefKeys.fallbackSw.rawValue) {
       displays.append(contentsOf: DisplayManager.shared.getNonVirtualExternalDisplays())
     } else {
       displays.append(contentsOf: DisplayManager.shared.getDdcCapableDisplays())
@@ -197,25 +197,25 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     let monitorSubMenu: NSMenu = asSubMenu ? NSMenu() : self.statusMenu
     var numOfTickMarks = 0
-    if prefs.bool(forKey: Utils.PrefKeys.showTickMarks.rawValue) {
+    if prefs.bool(forKey: PrefKeys.showTickMarks.rawValue) {
       numOfTickMarks = 5
     }
     var hasSlider = false
     if let externalDisplay = display as? ExternalDisplay, !externalDisplay.isSw() {
-      if prefs.bool(forKey: Utils.PrefKeys.showVolume.rawValue) {
+      if prefs.bool(forKey: PrefKeys.showVolume.rawValue) {
         let volumeSliderHandler = SliderHandler.addSliderMenuItem(toMenu: monitorSubMenu, forDisplay: externalDisplay, command: .audioSpeakerVolume, title: NSLocalizedString("Volume", comment: "Shown in menu"), numOfTickMarks: numOfTickMarks)
         externalDisplay.volumeSliderHandler = volumeSliderHandler
         hasSlider = true
       } else {
         _ = externalDisplay.setupCurrentAndMaxValues(command: .audioSpeakerVolume) // We have to initialize speaker DDC without menu as well
       }
-      if prefs.bool(forKey: Utils.PrefKeys.showContrast.rawValue) {
+      if prefs.bool(forKey: PrefKeys.showContrast.rawValue) {
         let contrastSliderHandler = SliderHandler.addSliderMenuItem(toMenu: monitorSubMenu, forDisplay: externalDisplay, command: .contrast, title: NSLocalizedString("Contrast", comment: "Shown in menu"), numOfTickMarks: numOfTickMarks)
         externalDisplay.contrastSliderHandler = contrastSliderHandler
         hasSlider = true
       }
     }
-    if !prefs.bool(forKey: Utils.PrefKeys.hideBrightness.rawValue) {
+    if !prefs.bool(forKey: PrefKeys.hideBrightness.rawValue) {
       let brightnessSliderHandler = SliderHandler.addSliderMenuItem(toMenu: monitorSubMenu, forDisplay: display, command: .brightness, title: NSLocalizedString("Brightness", comment: "Shown in menu"), numOfTickMarks: numOfTickMarks)
       display.brightnessSliderHandler = brightnessSliderHandler
       hasSlider = true
@@ -237,7 +237,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   }
 
   func checkPermissions() {
-    let permissionsRequired: Bool = prefs.integer(forKey: Utils.PrefKeys.listenFor.rawValue) != Utils.ListenForKeys.none.rawValue
+    let permissionsRequired: Bool = prefs.integer(forKey: PrefKeys.listenFor.rawValue) != Utils.ListenForKeys.none.rawValue
     if !Utils.readPrivileges(prompt: false) && permissionsRequired {
       Utils.acquirePrivileges()
     }
@@ -326,7 +326,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
   @objc func handlePreferenceReset() {
     os_log("Resetting all preferences.")
-    if prefs.bool(forKey: Utils.PrefKeys.fallbackSw.rawValue) || prefs.bool(forKey: Utils.PrefKeys.lowerSwAfterBrightness.rawValue) {
+    if prefs.bool(forKey: PrefKeys.fallbackSw.rawValue) || prefs.bool(forKey: PrefKeys.lowerSwAfterBrightness.rawValue) {
       DisplayManager.shared.resetSwBrightnessForAllDisplays()
     }
     if let bundleID = Bundle.main.bundleIdentifier {

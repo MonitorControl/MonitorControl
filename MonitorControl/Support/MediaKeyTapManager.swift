@@ -19,10 +19,10 @@ class MediaKeyTapManager: MediaKeyTapDelegate {
       return
     }
     var isSmallIncrement = modifiers?.isSuperset(of: NSEvent.ModifierFlags([.shift, .option])) ?? false
-    if [.brightnessUp, .brightnessDown].contains(mediaKey), prefs.bool(forKey: Utils.PrefKeys.useFineScaleBrightness.rawValue) {
+    if [.brightnessUp, .brightnessDown].contains(mediaKey), prefs.bool(forKey: PrefKeys.useFineScaleBrightness.rawValue) {
       isSmallIncrement = !isSmallIncrement
     }
-    if [.volumeUp, .volumeDown, .mute].contains(mediaKey), prefs.bool(forKey: Utils.PrefKeys.useFineScaleVolume.rawValue) {
+    if [.volumeUp, .volumeDown, .mute].contains(mediaKey), prefs.bool(forKey: PrefKeys.useFineScaleVolume.rawValue) {
       isSmallIncrement = !isSmallIncrement
     }
     let isControlModifier = modifiers?.isSuperset(of: NSEvent.ModifierFlags([.control])) ?? false
@@ -128,7 +128,7 @@ class MediaKeyTapManager: MediaKeyTapDelegate {
 
   func updateMediaKeyTap() {
     var keys: [MediaKey]
-    switch prefs.integer(forKey: Utils.PrefKeys.listenFor.rawValue) {
+    switch prefs.integer(forKey: PrefKeys.listenFor.rawValue) {
     case Utils.ListenForKeys.brightnessOnlyKeys.rawValue:
       keys = [.brightnessUp, .brightnessDown]
     case Utils.ListenForKeys.volumeOnlyKeys.rawValue:
@@ -150,7 +150,7 @@ class MediaKeyTapManager: MediaKeyTapDelegate {
     // Remove volume related keys if audio device is controllable
     if let defaultAudioDevice = app.coreAudio.defaultOutputDevice {
       let keysToDelete: [MediaKey] = [.volumeUp, .volumeDown, .mute]
-      if !prefs.bool(forKey: Utils.PrefKeys.allScreensVolume.rawValue), prefs.bool(forKey: Utils.PrefKeys.useAudioDeviceNameMatching.rawValue) {
+      if !prefs.bool(forKey: PrefKeys.allScreensVolume.rawValue), prefs.bool(forKey: PrefKeys.useAudioDeviceNameMatching.rawValue) {
         if DisplayManager.shared.updateAudioControlTargetDisplays(deviceName: defaultAudioDevice.name) == 0 {
           keys.removeAll { keysToDelete.contains($0) }
         }

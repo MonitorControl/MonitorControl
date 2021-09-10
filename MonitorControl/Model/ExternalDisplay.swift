@@ -17,30 +17,30 @@ class ExternalDisplay: Display {
 
   var enableMuteUnmute: Bool {
     get {
-      return self.prefs.bool(forKey: "enableMuteUnmute-\(self.identifier)")
+      return self.prefs.bool(forKey: PrefKeys.enableMuteUnmute.rawValue + self.prefsId)
     }
     set {
-      self.prefs.set(newValue, forKey: "enableMuteUnmute-\(self.identifier)")
+      self.prefs.set(newValue, forKey: PrefKeys.enableMuteUnmute.rawValue + self.prefsId)
       os_log("Set `enableMuteUnmute` for %{private}@ to: %{public}@", type: .info, String(self.identifier), String(newValue))
     }
   }
 
   var hideOsd: Bool {
     get {
-      return self.prefs.bool(forKey: "hideOsd-\(self.identifier)")
+      return self.prefs.bool(forKey: PrefKeys.hideOsd.rawValue + self.prefsId)
     }
     set {
-      self.prefs.set(newValue, forKey: "hideOsd-\(self.identifier)")
+      self.prefs.set(newValue, forKey: PrefKeys.hideOsd.rawValue + self.prefsId)
       os_log("Set `hideOsd` to: %{public}@", type: .info, String(newValue))
     }
   }
 
   var needsLongerDelay: Bool {
     get {
-      return self.prefs.object(forKey: "longerDelay-\(self.identifier)") as? Bool ?? false
+      return self.prefs.object(forKey: PrefKeys.longerDelay.rawValue + self.prefsId) as? Bool ?? false
     }
     set {
-      self.prefs.set(newValue, forKey: "longerDelay-\(self.identifier)")
+      self.prefs.set(newValue, forKey: PrefKeys.longerDelay.rawValue + self.prefsId)
       os_log("Set `needsLongerDisplay` to: %{public}@", type: .info, String(newValue))
     }
   }
@@ -115,12 +115,12 @@ class ExternalDisplay: Display {
     if self.isSw(), command == Command.brightness {
       (currentValue, maxValue) = (UInt16(self.getSwBrightnessPrefValue()), UInt16(self.getSwMaxBrightness()))
     } else {
-      if !self.prefs.bool(forKey: Utils.PrefKeys.restoreLastSavedValues.rawValue), tries != 0, !(app.safeMode) {
+      if !self.prefs.bool(forKey: PrefKeys.restoreLastSavedValues.rawValue), tries != 0, !(app.safeMode) {
         os_log("Polling %{public}@ times", type: .info, String(tries))
         ddcValues = self.readDDCValues(for: command, tries: tries, minReplyDelay: delay)
       }
       (currentValue, maxValue) = ddcValues ?? (UInt16(self.getValueExists(for: command) ? self.getValue(for: command) : 75), 100) // We set 100 as max value if we could not read DDC, the previous setting as current value or 75 if not present.
-      if self.prefs.bool(forKey: Utils.PrefKeys.restoreLastSavedValues.rawValue) {
+      if self.prefs.bool(forKey: PrefKeys.restoreLastSavedValues.rawValue) {
         os_log("Setting last saved DDC values.", type: .info, self.name, String(reflecting: command))
         _ = self.writeDDCValues(command: command, value: currentValue)
       }
@@ -131,7 +131,7 @@ class ExternalDisplay: Display {
     os_log(" - maximum value: %{public}@ - from display? %{public}@", type: .info, String(self.getMaxValue(for: command)), String(ddcValues != nil))
 
     if command == .brightness {
-      if !self.isSw(), self.prefs.bool(forKey: Utils.PrefKeys.lowerSwAfterBrightness.rawValue) {
+      if !self.isSw(), self.prefs.bool(forKey: PrefKeys.lowerSwAfterBrightness.rawValue) {
         returnMaxValue = self.getMaxValue(for: command) * 2
         returnIntegerValue = returnMaxValue / 2 + Int(currentValue)
       } else {
@@ -214,7 +214,7 @@ class ExternalDisplay: Display {
   }
 
   func isSw() -> Bool {
-    if self.prefs.bool(forKey: "forceSw-\(self.identifier)") || self.isSwOnly() {
+    if self.prefs.bool(forKey: PrefKeys.forceSw.rawValue + self.prefsId) || self.isSwOnly() {
       return true
     } else {
       return false
@@ -253,7 +253,7 @@ class ExternalDisplay: Display {
   }
 
   func stepBrightnessPart(osdValue: Int, isSmallIncrement: Bool) -> Bool {
-    if self.isSw(), self.prefs.bool(forKey: Utils.PrefKeys.fallbackSw.rawValue) {
+    if self.isSw(), self.prefs.bool(forKey: PrefKeys.fallbackSw.rawValue) {
       if self.setSwBrightness(value: UInt8(osdValue), smooth: true) {
         self.showOsd(command: .brightness, value: osdValue, roundChiclet: !isSmallIncrement)
         self.saveValue(osdValue, for: .brightness)
@@ -269,7 +269,7 @@ class ExternalDisplay: Display {
   func stepBrightnessswAfterBirghtnessMode(osdValue: Int, isUp: Bool, isSmallIncrement: Bool) -> Bool {
     let isAlreadySet = osdValue == self.getValue(for: .brightness)
     var swAfterBirghtnessMode: Bool = isSwBrightnessNotDefault()
-    if isAlreadySet, !isUp, !swAfterBirghtnessMode, self.prefs.bool(forKey: Utils.PrefKeys.lowerSwAfterBrightness.rawValue) {
+    if isAlreadySet, !isUp, !swAfterBirghtnessMode, self.prefs.bool(forKey: PrefKeys.lowerSwAfterBrightness.rawValue) {
       swAfterBirghtnessMode = true
     }
 
@@ -308,7 +308,7 @@ class ExternalDisplay: Display {
       return
     }
     if let slider = brightnessSliderHandler?.slider {
-      if !self.isSw(), self.prefs.bool(forKey: Utils.PrefKeys.lowerSwAfterBrightness.rawValue) {
+      if !self.isSw(), self.prefs.bool(forKey: PrefKeys.lowerSwAfterBrightness.rawValue) {
         slider.intValue = Int32(slider.maxValue / 2) + Int32(ddcValue)
       } else {
         slider.intValue = Int32(ddcValue)
@@ -389,36 +389,36 @@ class ExternalDisplay: Display {
   }
 
   func getValue(for command: Command) -> Int {
-    return self.prefs.integer(forKey: "\(command.rawValue)-\(self.identifier)")
+    return self.prefs.integer(forKey: PrefKeys.value.rawValue + String(command.rawValue) + self.prefsId)
   }
 
   func getValueExists(for command: Command) -> Bool {
-    return self.prefs.object(forKey: "\(command.rawValue)-\(self.identifier)") != nil
+    return self.prefs.object(forKey: PrefKeys.value.rawValue + String(command.rawValue) + self.prefsId) != nil
   }
 
   func saveValue(_ value: Int, for command: Command) {
-    self.prefs.set(value, forKey: "\(command.rawValue)-\(self.identifier)")
+    self.prefs.set(value, forKey: PrefKeys.value.rawValue + String(command.rawValue) + self.prefsId)
   }
 
   func saveMaxValue(_ maxValue: Int, for command: Command) {
-    self.prefs.set(maxValue, forKey: "max-\(command.rawValue)-\(self.identifier)")
+    self.prefs.set(maxValue, forKey: PrefKeys.max.rawValue + String(command.rawValue) + self.prefsId)
   }
 
   func getMaxValue(for command: Command) -> Int {
-    let max = self.prefs.integer(forKey: "max-\(command.rawValue)-\(self.identifier)")
+    let max = self.prefs.integer(forKey: PrefKeys.max.rawValue + String(command.rawValue) + self.prefsId)
     return min(self.DDC_HARD_MAX_LIMIT, max == 0 ? self.DDC_HARD_MAX_LIMIT : max)
   }
 
   func getRestoreValue(for command: Command) -> Int {
-    return self.prefs.integer(forKey: "restore-\(command.rawValue)-\(self.identifier)")
+    return self.prefs.integer(forKey: PrefKeys.restore.rawValue + String(command.rawValue) + self.prefsId)
   }
 
   func setRestoreValue(_ value: Int?, for command: Command) {
-    self.prefs.set(value, forKey: "restore-\(command.rawValue)-\(self.identifier)")
+    self.prefs.set(value, forKey: PrefKeys.restore.rawValue + String(command.rawValue) + self.prefsId)
   }
 
   func setPollingMode(_ value: Int) {
-    self.prefs.set(String(value), forKey: "pollingMode-\(self.identifier)")
+    self.prefs.set(String(value), forKey: PrefKeys.pollingMode.rawValue + self.prefsId)
   }
 
   /*
@@ -431,7 +431,7 @@ class ExternalDisplay: Display {
    */
   func getPollingMode() -> Int {
     // Reading as string so we don't get "0" as the default value
-    return Int(self.prefs.string(forKey: "pollingMode-\(self.identifier)") ?? "2") ?? 2
+    return Int(self.prefs.string(forKey: PrefKeys.pollingMode.rawValue + self.prefsId) ?? "2") ?? 2
   }
 
   func getPollingCount() -> Int {
@@ -446,7 +446,7 @@ class ExternalDisplay: Display {
     case 3:
       return Utils.PollingMode.heavy.value
     case 4:
-      let val = self.prefs.integer(forKey: "pollingCount-\(self.identifier)")
+      let val = self.prefs.integer(forKey: PrefKeys.pollingCount.rawValue + self.prefsId)
       return Utils.PollingMode.custom(value: val).value
     default:
       return 0
@@ -454,7 +454,7 @@ class ExternalDisplay: Display {
   }
 
   func setPollingCount(_ value: Int) {
-    self.prefs.set(value, forKey: "pollingCount-\(self.identifier)")
+    self.prefs.set(value, forKey: PrefKeys.pollingCount.rawValue + self.prefsId)
   }
 
   private func stepSize(for command: Command, isSmallIncrement: Bool) -> Int {

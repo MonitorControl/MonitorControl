@@ -155,7 +155,7 @@ class DisplaysPrefsCellView: NSTableCellView {
 
       if newValue != originalValue, !newValue.isEmpty {
         disp.setFriendlyName(newValue)
-        NotificationCenter.default.post(name: Notification.Name(Utils.PrefKeys.friendlyName.rawValue), object: nil)
+        NotificationCenter.default.post(name: Notification.Name(PrefKeys.friendlyName.rawValue), object: nil)
         #if DEBUG
           os_log("Value changed for friendly name: %{public}@", type: .info, "from `\(originalValue)` to `\(newValue)`")
         #endif

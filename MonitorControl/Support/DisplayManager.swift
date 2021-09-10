@@ -19,7 +19,7 @@ class DisplayManager {
       let name = DisplayManager.getDisplayNameByID(displayID: onlineDisplayID)
       let id = onlineDisplayID
       let vendorNumber = CGDisplayVendorNumber(onlineDisplayID)
-      let modelNumber = CGDisplayVendorNumber(onlineDisplayID)
+      let modelNumber = CGDisplayModelNumber(onlineDisplayID)
       let display: Display
       var isVirtual: Bool = false
       if #available(macOS 11.0, *) {
@@ -196,7 +196,7 @@ class DisplayManager {
         }
         externalDisplay.saveSwBirghtnessPrefValue(Int(externalDisplay.getSwBrightness()))
         _ = externalDisplay.setSwBrightness(value: UInt8(savedPrefValue), smooth: async)
-        if !externalDisplay.isSw(), prefs.bool(forKey: Utils.PrefKeys.lowerSwAfterBrightness.rawValue) {
+        if !externalDisplay.isSw(), prefs.bool(forKey: PrefKeys.lowerSwAfterBrightness.rawValue) {
           if savedPrefValue < externalDisplay.getSwMaxBrightness() {
             DisplayManager.setBrightnessSliderValue(externalDisplay: externalDisplay, value: Int32(Float(sliderMax / 2) * (Float(savedPrefValue) / Float(externalDisplay.getSwMaxBrightness()))))
           } else {
@@ -219,17 +219,17 @@ class DisplayManager {
     let allDisplays = self.getAllNonVirtualDisplays()
     var currentDisplay: Display?
     if isBrightness {
-      if prefs.bool(forKey: Utils.PrefKeys.allScreensBrightness.rawValue) {
+      if prefs.bool(forKey: PrefKeys.allScreensBrightness.rawValue) {
         affectedDisplays = allDisplays
         return affectedDisplays
       }
-      currentDisplay = self.getCurrentDisplay(byFocus: prefs.bool(forKey: Utils.PrefKeys.useFocusInsteadOfMouse.rawValue))
+      currentDisplay = self.getCurrentDisplay(byFocus: prefs.bool(forKey: PrefKeys.useFocusInsteadOfMouse.rawValue))
     }
     if isVolume {
-      if prefs.bool(forKey: Utils.PrefKeys.allScreensVolume.rawValue) {
+      if prefs.bool(forKey: PrefKeys.allScreensVolume.rawValue) {
         affectedDisplays = allDisplays
         return affectedDisplays
-      } else if prefs.bool(forKey: Utils.PrefKeys.useAudioDeviceNameMatching.rawValue) {
+      } else if prefs.bool(forKey: PrefKeys.useAudioDeviceNameMatching.rawValue) {
         return self.audioControlTargetDisplays
       }
       currentDisplay = self.getCurrentDisplay(byFocus: false)

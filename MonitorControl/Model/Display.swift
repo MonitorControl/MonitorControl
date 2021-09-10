@@ -17,24 +17,25 @@ enum OSDImage: Int64 {
 
 class Display {
   internal let identifier: CGDirectDisplayID
+  internal let prefsId: String
   internal var name: String
   internal var vendorNumber: UInt32?
   internal var modelNumber: UInt32?
   internal var isEnabled: Bool {
     get {
-      self.prefs.object(forKey: "\(self.identifier)-state") as? Bool ?? true
+      self.prefs.object(forKey: PrefKeys.state.rawValue + self.prefsId) as? Bool ?? true
     }
     set {
-      self.prefs.set(newValue, forKey: "\(self.identifier)-state")
+      self.prefs.set(newValue, forKey: PrefKeys.state.rawValue + self.prefsId)
     }
   }
 
   var forceSw: Bool {
     get {
-      return self.prefs.bool(forKey: "forceSw-\(self.identifier)")
+      return self.prefs.bool(forKey: PrefKeys.forceSw.rawValue + self.prefsId)
     }
     set {
-      self.prefs.set(newValue, forKey: "forceSw-\(self.identifier)")
+      self.prefs.set(newValue, forKey: PrefKeys.forceSw.rawValue + self.prefsId)
       os_log("Set `forceSw` to: %{public}@", type: .info, String(newValue))
     }
   }
@@ -55,6 +56,8 @@ class Display {
     self.name = name
     self.vendorNumber = vendorNumber
     self.modelNumber = modelNumber
+    self.prefsId = "(" + String(name.filter { !$0.isWhitespace }) + String(vendorNumber ?? 0) + String(modelNumber ?? 0) + "@" + String(identifier) + ")"
+    os_log("Display init with prefsIdentifier %{public}@", type: .info, self.prefsId)
     self.isVirtual = isVirtual
     self.swUpdateDefaultGammaTable()
   }
@@ -62,11 +65,11 @@ class Display {
   func stepBrightness(isUp _: Bool, isSmallIncrement _: Bool) {}
 
   func setFriendlyName(_ value: String) {
-    self.prefs.set(value, forKey: "friendlyName-\(self.identifier)")
+    self.prefs.set(value, forKey: PrefKeys.friendlyName.rawValue + self.prefsId)
   }
 
   func getFriendlyName() -> String {
-    return self.prefs.string(forKey: "friendlyName-\(self.identifier)") ?? self.name
+    return self.prefs.string(forKey: PrefKeys.friendlyName.rawValue + self.prefsId) ?? self.name
   }
 
   func getShowOsdDisplayId() -> CGDirectDisplayID {
@@ -159,11 +162,11 @@ class Display {
   }
 
   func saveSwBirghtnessPrefValue(_ value: Int) {
-    self.prefs.set(value, forKey: "SwBrightness-\(self.identifier)")
+    self.prefs.set(value, forKey: PrefKeys.SwBrightness.rawValue + self.prefsId)
   }
 
   func getSwBrightnessPrefValue() -> Int {
-    return self.prefs.integer(forKey: "SwBrightness-\(self.identifier)")
+    return self.prefs.integer(forKey: PrefKeys.SwBrightness.rawValue + self.prefsId)
   }
 
   func getSwMaxBrightness() -> UInt8 {
