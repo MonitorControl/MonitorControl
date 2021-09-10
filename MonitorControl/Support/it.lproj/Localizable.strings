@@ -1,14 +1,14 @@
 /* Shown in the main prefs window */
-"About" = "About";
+"About" = "Informazioni";
 
 /* Apple Silicon designation (shown after the version number in Preferences) */
 "Apple Silicon" = "Apple Silicon";
 
 /* Shown in the alert dialog */
-"Are you sure you want to enable a longer delay? Doing so may freeze your system and require a restart. Start at login will be disabled as a safety measure." = "Are you sure you want to enable a longer delay? Doing so may freeze your system and require a restart. Start at login will be disabled as a safety measure.";
+"Are you sure you want to enable a longer delay? Doing so may freeze your system and require a restart. Start at login will be disabled as a safety measure." = "Sei sicuro di voler abilitare un delay più lungo? Ciò potrebbe causare un freeze del sistema e richeidere un riavvio. L'avvio al login sarà disabilitato per sicurezza.";
 
 /* Shown in the alert dialog */
-"Are you sure you want to reset all preferences?" = "Are you sure you want to reset all preferences?";
+"Are you sure you want to reset all preferences?" = "Sei sicuro di voler resettare tutte le preferenze?";
 
 /* Sown in menu */
 "Brightness" = "Luminosità";
@@ -17,7 +17,7 @@
 "Build" = "Build";
 
 /* Shown in the Display Preferences */
-"Built-in Display" = "Built-in Display";
+"Built-in Display" = "Monitor Built-in";
 
 /* Shown in menu */
 "Contrast" = "Contrasto";
@@ -26,13 +26,13 @@
 "Copyright Ⓒ MonitorControl, " = "Copyright Ⓒ MonitorControl, ";
 
 /* Shown in the main prefs window */
-"Displays" = "Displays";
+"Displays" = "Monitor";
 
 /* Shown in the alert dialog */
-"Enable Longer Delay?" = "Enable Longer Delay?";
+"Enable Longer Delay?" = "Abilitare Delay più Lungo?";
 
 /* Shown in the Display Preferences */
-"External Display" = "External Display";
+"External Display" = "Monitor esterno";
 
 /* Shown in the main prefs window */
 "General" = "Generale";
@@ -50,7 +50,7 @@
 "No" = "No";
 
 /* Shown in the Display Preferences */
-"No Control Available" = "No Control Available";
+"No Control Available" = "Nessun Controlo Disponibile";
 
 /* Shown in menu */
 "No supported display found" = "Nessuno schermo supportato è stato trovato";
@@ -59,25 +59,25 @@
 "Ok" = "Ok";
 
 /* Shown in the Display Preferences */
-"Other Display" = "Other Display";
+"Other Display" = "Altri monitor";
 
 /* Shown in the alert dialog */
-"Reset Preferences?" = "Reset Preferences?";
+"Reset Preferences?" = "Resettare Preferenze?";
 
 /* Shown in the alert dialog */
-"Safe Mode Activated" = "Safe Mode Activated";
+"Safe Mode Activated" = "Safe Mode attivata";
 
 /* Shown in the alert dialog */
-"Shift was pressed during launch. MonitorControl started in safe mode. Default preferences are reloaded, DDC read is blocked." = "Shift was pressed during launch. MonitorControl started in safe mode. Default preferences are reloaded, DDC read is blocked.";
+"Shift was pressed during launch. MonitorControl started in safe mode. Default preferences are reloaded, DDC read is blocked." = "Il tasto shift è stato premuto durante l'avvio. MonitorControl avviato in safe mode. Verranno caricate le impostazioni di default, la lettura DDC è bloccata.";
 
 /* Shown in the alert dialog */
 "Shortcuts not available" = "Comandi rapidi non disponibili";
 
 /* Shown in the Display Preferences */
-"Software (Forced)" = "Software (Forced)";
+"Software (Forced)" = "Software (Forzato)";
 
 /* Shown in the Display Preferences */
-"Software Only" = "Software Only";
+"Software Only" = "Solo Software";
 
 /* Unknown display name
  Unknown model
@@ -85,19 +85,19 @@
 "Unknown" = "Sconosciuto";
 
 /* Shown in the Display Preferences */
-"Unspecified" = "Unspecified";
+"Unspecified" = "Non specificato";
 
 /* Version */
 "Version" = "Versione";
 
 /* Shown in the Display Preferences */
-"Virtual Display" = "Virtual Display";
+"Virtual Display" = "Monitor virtuale";
 
 /* Shown in menu */
 "Volume" = "Volume";
 
 /* Shown in the alert dialog */
-"Yes" = "Yes";
+"Yes" = "Sì";
 
 /* Shown in the alert dialog */
 "You need to enable MonitorControl in System Preferences > Security and Privacy > Accessibility for the keyboard shortcuts to work" = "E' necessario abilitare MonitorControl nelle Preferenze di Sistema > Sicurezza e Privacy > Accessibilità affinchè le abbreviazioni da tastiera funzionino";
