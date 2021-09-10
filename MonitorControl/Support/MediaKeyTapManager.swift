@@ -28,7 +28,9 @@ class MediaKeyTapManager: MediaKeyTapDelegate {
     let isControlModifier = modifiers?.isSuperset(of: NSEvent.ModifierFlags([.control])) ?? false
     let isCommandModifier = modifiers?.isSuperset(of: NSEvent.ModifierFlags([.command])) ?? false
     if isPressed, isControlModifier, mediaKey == .brightnessUp || mediaKey == .brightnessDown {
-      self.handleBrightness(isCommandModifier: isCommandModifier, isUp: mediaKey == .brightnessUp, isSmallIncrement: isSmallIncrement)
+      self.handleDirectedBrightness(isCommandModifier: isCommandModifier, isUp: mediaKey == .brightnessUp, isSmallIncrement: isSmallIncrement)
+      return
+    } else if isPressed, isCommandModifier, mediaKey == .brightnessDown, self.engageMirror() {
       return
     }
     let oppositeKey: MediaKey? = self.oppositeMediaKey(mediaKey: mediaKey)
@@ -45,7 +47,11 @@ class MediaKeyTapManager: MediaKeyTapDelegate {
     self.sendDisplayCommand(mediaKey: mediaKey, isRepeat: isRepeat, isSmallIncrement: isSmallIncrement, isPressed: isPressed)
   }
 
-  func handleBrightness(isCommandModifier: Bool, isUp: Bool, isSmallIncrement: Bool) {
+  func engageMirror() -> Bool {
+    return false // MARK: TODO: Here should come the display mirror logic on CMD+Brightness
+  }
+
+  func handleDirectedBrightness(isCommandModifier: Bool, isUp: Bool, isSmallIncrement: Bool) {
     if isCommandModifier {
       for externalDisplay in DisplayManager.shared.getExternalDisplays() {
         externalDisplay.stepBrightness(isUp: isUp, isSmallIncrement: isSmallIncrement)
