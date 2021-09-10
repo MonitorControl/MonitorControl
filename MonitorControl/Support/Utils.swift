@@ -105,7 +105,7 @@ class Utils: NSObject {
     // Used for notification when displays are updated in DisplayManager
     case displayListUpdate
 
-    // Restore last saved values upon startup or wake MARK: TODO: Implementation MISSING
+    // Restore last saved values upon startup or wake
     case restoreLastSavedValues
 
     // Show advanced options under Displays tab in Preferences
@@ -120,7 +120,7 @@ class Utils: NSObject {
     // Change Volume for all screens
     case allScreensVolume
 
-    // Use audio device name matching to determine display to control for volume MARK: TODO: Implementation MISSING
+    // Use audio device name matching to determine display to control for volume
     case useAudioDeviceNameMatching
 
     // Use fine OSD scale for brightness

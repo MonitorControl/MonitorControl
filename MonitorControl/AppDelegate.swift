@@ -72,7 +72,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     self.statusItem.menu = self.statusMenu
     self.checkPermissions()
     CGDisplayRegisterReconfigurationCallback({ _, _, _ in app.displayReconfigured() }, nil)
-    self.updateDisplays(firstrun: true)
+    self.configuration(firstrun: true)
   }
 
   func applicationShouldHandleReopen(_: NSApplication, hasVisibleWindows _: Bool) -> Bool {
@@ -140,9 +140,31 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       let dispatchedReconfigureID = self.reconfigureID
       os_log("Display to be reconfigured with reconfigureID %{public}@", type: .info, String(dispatchedReconfigureID))
       DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-        self.updateDisplays(dispatchedReconfigureID: dispatchedReconfigureID)
+        self.configuration(dispatchedReconfigureID: dispatchedReconfigureID)
       }
     }
+  }
+
+  func configuration(dispatchedReconfigureID: Int = 0, firstrun: Bool = false) {
+    guard self.sleepID == 0, dispatchedReconfigureID == self.reconfigureID else {
+      return
+    }
+    os_log("Request for updateDisplay with reconfigreID %{public}@", type: .info, String(dispatchedReconfigureID))
+    self.reconfigureID = 0
+    DisplayManager.shared.updateDisplays()
+    DisplayManager.shared.addDisplayCounterSuffixes()
+    DisplayManager.shared.updateArm64AVServices()
+    NotificationCenter.default.post(name: Notification.Name(Utils.PrefKeys.displayListUpdate.rawValue), object: nil)
+    if firstrun {
+      DisplayManager.shared.resetSwBrightnessForAllDisplays(settingsOnly: true)
+    }
+    self.updateDisplaysAndMenus()
+    if !firstrun {
+      if prefs.bool(forKey: Utils.PrefKeys.fallbackSw.rawValue) || prefs.bool(forKey: Utils.PrefKeys.lowerSwAfterBrightness.rawValue) {
+        DisplayManager.shared.restoreSwBrightnessForAllDisplays(async: true)
+      }
+    }
+    self.refreshBrightnessJob(start: true)
   }
 
   func updateDisplaysAndMenus() {
@@ -163,35 +185,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         if asSubmenu {
           self.statusMenu.insertItem(NSMenuItem.separator(), at: 0)
         }
-        self.configureDisplayAndAddToMenuIfNeeded(display: display, asSubMenu: asSubmenu)
-      }
-    }
-  }
-
-  func updateDisplays(dispatchedReconfigureID: Int = 0, firstrun: Bool = false) {
-    guard self.sleepID == 0, dispatchedReconfigureID == self.reconfigureID else {
-      return
-    }
-    os_log("Request for updateDisplay with reconfigreID %{public}@", type: .info, String(dispatchedReconfigureID))
-    self.reconfigureID = 0
-    DisplayManager.shared.updateDisplays()
-    DisplayManager.shared.addDisplayCounterSuffixes()
-    DisplayManager.shared.updateArm64AVServices()
-    NotificationCenter.default.post(name: Notification.Name(Utils.PrefKeys.displayListUpdate.rawValue), object: nil)
-    if firstrun {
-      DisplayManager.shared.resetSwBrightnessForAllDisplays(settingsOnly: true)
-    }
-    self.updateDisplaysAndMenus()
-    if !firstrun {
-      if prefs.bool(forKey: Utils.PrefKeys.fallbackSw.rawValue) || prefs.bool(forKey: Utils.PrefKeys.lowerSwAfterBrightness.rawValue) {
-        DisplayManager.shared.restoreSwBrightnessForAllDisplays(async: true)
+        self.updateDisplayAndMenu(display: display, asSubMenu: asSubmenu)
       }
     }
     self.updateMediaKeyTap()
-    self.refreshBrightnessJob(start: true)
   }
 
-  private func configureDisplayAndAddToMenuIfNeeded(display: Display, asSubMenu: Bool) {
+  private func updateDisplayAndMenu(display: Display, asSubMenu: Bool) {
     if !asSubMenu {
       self.statusMenu.insertItem(NSMenuItem.separator(), at: 0)
     }
@@ -278,7 +278,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       if self.reconfigureID != 0 {
         let dispatchedReconfigureID = self.reconfigureID
         os_log("Display needs reconfig after sober with reconfigureID %{public}@", type: .info, String(dispatchedReconfigureID))
-        self.updateDisplays(dispatchedReconfigureID: dispatchedReconfigureID)
+        self.configuration(dispatchedReconfigureID: dispatchedReconfigureID)
       } else if Arm64DDC.isArm64 {
         os_log("Displays don't need reconfig after sober but might need AVServices update", type: .info)
         DisplayManager.shared.updateArm64AVServices()
@@ -336,7 +336,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     self.setDefaultPrefs()
     self.checkPermissions()
     self.updateMediaKeyTap()
-    self.updateDisplays(firstrun: true)
+    self.configuration(firstrun: true)
   }
 
   @objc func audioDeviceChanged() {

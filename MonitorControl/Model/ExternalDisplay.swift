@@ -104,27 +104,31 @@ class ExternalDisplay: Display {
   func setupCurrentAndMaxValues(command: Command) -> (value: Int, maxValue: Int) {
     var returnIntegerValue: Int
     var returnMaxValue: Int
-    var values: (UInt16, UInt16)?
+    var ddcValues: (UInt16, UInt16)?
     let delay = self.needsLongerDelay ? UInt64(40 * kMillisecondScale) : nil
 
     var (currentValue, maxValue) = (UInt16(0), UInt16(0))
 
     let tries = UInt(self.getPollingCount())
 
+    os_log("%{public}@ (%{public}@):", type: .info, self.name, String(reflecting: command))
     if self.isSw(), command == Command.brightness {
       (currentValue, maxValue) = (UInt16(self.getSwBrightnessPrefValue()), UInt16(self.getSwMaxBrightness()))
     } else {
-      if tries != 0, !(app.safeMode) {
+      if !self.prefs.bool(forKey: Utils.PrefKeys.restoreLastSavedValues.rawValue), tries != 0, !(app.safeMode) {
         os_log("Polling %{public}@ times", type: .info, String(tries))
-        values = self.readDDCValues(for: command, tries: tries, minReplyDelay: delay)
+        ddcValues = self.readDDCValues(for: command, tries: tries, minReplyDelay: delay)
       }
-      (currentValue, maxValue) = values ?? (UInt16(self.getValueExists(for: command) ? self.getValue(for: command) : 75), 100) // We set 100 as max value if we could not read DDC, the previous setting as current value or 75 if not present.
+      (currentValue, maxValue) = ddcValues ?? (UInt16(self.getValueExists(for: command) ? self.getValue(for: command) : 75), 100) // We set 100 as max value if we could not read DDC, the previous setting as current value or 75 if not present.
+      if self.prefs.bool(forKey: Utils.PrefKeys.restoreLastSavedValues.rawValue) {
+        os_log("Setting last saved DDC values.", type: .info, self.name, String(reflecting: command))
+        _ = self.writeDDCValues(command: command, value: currentValue)
+      }
     }
     self.saveMaxValue(Int(maxValue), for: command)
     self.saveValue(min(Int(currentValue), self.getMaxValue(for: command)), for: command) // We won't allow currrent value to be higher than the max. value
-    os_log("%{public}@ (%{public}@):", type: .info, self.name, String(reflecting: command))
-    os_log(" - current value: %{public}@ - from display? %{public}@", type: .info, String(currentValue), String(values != nil))
-    os_log(" - maximum value: %{public}@ - from display? %{public}@", type: .info, String(self.getMaxValue(for: command)), String(values != nil))
+    os_log(" - current value: %{public}@ - from display? %{public}@", type: .info, String(currentValue), String(ddcValues != nil))
+    os_log(" - maximum value: %{public}@ - from display? %{public}@", type: .info, String(self.getMaxValue(for: command)), String(ddcValues != nil))
 
     if command == .brightness {
       if !self.isSw(), self.prefs.bool(forKey: Utils.PrefKeys.lowerSwAfterBrightness.rawValue) {
