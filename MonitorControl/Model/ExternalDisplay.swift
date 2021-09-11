@@ -10,8 +10,7 @@ class ExternalDisplay: Display {
   var arm64ddc: Bool = false
   var arm64avService: IOAVService?
   var isDiscouraged: Bool = false
-  let DDC_HARD_MAX_LIMIT: Int = 100
-  let DDC_HARD_MIN_LIMIT: Int = 0
+  let DDC_MAX_DETECT_LIMIT: Int = 100
   private var audioPlayer: AVAudioPlayer?
 
   var enableMuteUnmute: Bool {
@@ -104,7 +103,7 @@ class ExternalDisplay: Display {
         ddcValues = self.readDDCValues(for: command, tries: tries, minReplyDelay: delay)
         if ddcValues != nil {
           (currentDDCValue, maxDDCValue) = ddcValues ?? (75, 100)
-          self.saveMaxDDCValue(Int(maxDDCValue), for: command)
+          self.saveMaxDDCValue(min(Int(maxDDCValue), self.DDC_MAX_DETECT_LIMIT), for: command)
           self.saveValue(self.convDDCToValue(for: command, from: currentDDCValue), for: command)
           os_log("DDC read successful.", type: .info)
         } else {
@@ -411,8 +410,7 @@ class ExternalDisplay: Display {
   }
 
   func getMaxDDCValue(for command: Command) -> Int {
-    let maxVal = prefs.integer(forKey: PrefKeys.maxDDC.rawValue + String(command.rawValue) + self.prefsId)
-    return min(self.DDC_HARD_MAX_LIMIT, maxVal)
+    return prefs.integer(forKey: PrefKeys.maxDDC.rawValue + String(command.rawValue) + self.prefsId)
   }
 
   func saveMaxDDCOverrideValue(_ maxValue: Int, for command: Command) {
@@ -420,8 +418,7 @@ class ExternalDisplay: Display {
   }
 
   func getMaxDDCOverrideValue(for command: Command) -> Int {
-    let maxVal = prefs.integer(forKey: PrefKeys.maxDDCOverride.rawValue + String(command.rawValue) + self.prefsId)
-    return min(self.DDC_HARD_MAX_LIMIT, maxVal)
+    return prefs.integer(forKey: PrefKeys.maxDDCOverride.rawValue + String(command.rawValue) + self.prefsId)
   }
 
   func saveMinDDCOverrideValue(_ minValue: Int, for command: Command) {
@@ -429,8 +426,7 @@ class ExternalDisplay: Display {
   }
 
   func getMinDDCOverrideValue(for command: Command) -> Int {
-    let minVal = prefs.integer(forKey: PrefKeys.mindDDCOverride.rawValue + String(command.rawValue) + self.prefsId)
-    return max(self.DDC_HARD_MIN_LIMIT, minVal)
+    return prefs.integer(forKey: PrefKeys.mindDDCOverride.rawValue + String(command.rawValue) + self.prefsId)
   }
 
   func getCurveDDC(for command: Command) -> Float {
