@@ -244,6 +244,7 @@
 		F01B067F228221B6008E64DB /* Support */ = {
 			isa = PBXGroup;
 			children = (
+				F01B0680228221B6008E64DB /* Localizable.strings */,
 				F01B0685228221B6008E64DB /* Bridging-Header.h */,
 				AA25F6D626E68C160087F3A2 /* MediaKeyTapManager.swift */,
 				6C85EFD922C941B000227EA1 /* DisplayManager.swift */,
@@ -261,7 +262,6 @@
 		F01B0687228221B6008E64DB /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				F01B0680228221B6008E64DB /* Localizable.strings */,
 				6CDA0FCD26485A8300F52125 /* Main.storyboard */,
 				F01B0692228221B7008E64DB /* MainMenu.xib */,
 			);
