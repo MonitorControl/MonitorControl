@@ -247,6 +247,16 @@ class DisplayManager {
     return affectedDisplays
   }
 
+  func engageMirror() -> Bool {
+    // Return if there is only one display
+    guard [displays].count > 1 else {
+      return false
+    }
+    // Break mirror if there is any and then return // MARK: TODO: Finish implementation
+    // Establish mirror if there is no any and then return // MARK: TODO: Finish implementation
+    return false
+  }
+
   // Static functions (could be anywhere)
 
   static func setBrightnessSliderValue(externalDisplay: ExternalDisplay, value: Int32) {

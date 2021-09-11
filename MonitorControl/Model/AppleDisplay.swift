@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import os.log
 
 class AppleDisplay: Display {
   private var displayQueue: DispatchQueue
@@ -49,11 +50,14 @@ class AppleDisplay: Display {
 
   override func refreshBrightness() -> Bool {
     let brightness = Int(getBrightness() * 100)
-    if let sliderHandler = brightnessSliderHandler, let slider = sliderHandler.slider {
-      if slider.integerValue != brightness {
-        slider.integerValue = brightness
-        return true
+    if let sliderHandler = brightnessSliderHandler, let slider = sliderHandler.slider, brightness != slider.integerValue {
+      os_log("Pushing slider towards actual brightness for Apple display %{public}@", type: .debug, self.name)
+      if brightness>slider.integerValue {
+        slider.integerValue += max(Int((brightness - slider.integerValue) / 3),1)
+      } else {
+        slider.integerValue += min(Int((brightness - slider.integerValue) / 3),-1)
       }
+      return true
     }
     return false
   }

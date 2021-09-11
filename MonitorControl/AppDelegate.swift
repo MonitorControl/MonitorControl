@@ -298,7 +298,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       }
       var nextRefresh = 1.0
       if DisplayManager.shared.refreshDisplaysBrightness() {
-        nextRefresh = 0.25
+        nextRefresh = 0.1
       }
       DispatchQueue.main.asyncAfter(deadline: .now() + nextRefresh) {
         self.refreshBrightnessJob()

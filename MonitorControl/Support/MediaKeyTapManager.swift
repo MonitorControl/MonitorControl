@@ -30,7 +30,7 @@ class MediaKeyTapManager: MediaKeyTapDelegate {
     if isPressed, isControlModifier, mediaKey == .brightnessUp || mediaKey == .brightnessDown {
       self.handleDirectedBrightness(isCommandModifier: isCommandModifier, isUp: mediaKey == .brightnessUp, isSmallIncrement: isSmallIncrement)
       return
-    } else if isPressed, isCommandModifier, mediaKey == .brightnessDown, self.engageMirror() {
+    } else if isPressed, isCommandModifier, mediaKey == .brightnessDown, DisplayManager.shared.engageMirror() {
       return
     }
     let oppositeKey: MediaKey? = self.oppositeMediaKey(mediaKey: mediaKey)
@@ -45,10 +45,6 @@ class MediaKeyTapManager: MediaKeyTapDelegate {
       mediaKeyTimer.invalidate()
     }
     self.sendDisplayCommand(mediaKey: mediaKey, isRepeat: isRepeat, isSmallIncrement: isSmallIncrement, isPressed: isPressed)
-  }
-
-  func engageMirror() -> Bool {
-    return false // MARK: TODO: Here should come the display mirror logic on CMD+Brightness
   }
 
   func handleDirectedBrightness(isCommandModifier: Bool, isUp: Bool, isSmallIncrement: Bool) {
