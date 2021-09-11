@@ -19,7 +19,13 @@ enum PrefKeys: String {
   case value
 
   // Max command value display
-  case max
+  case minDDC
+
+  // Max command value display
+  case maxDDC
+
+  // Max command value display
+  case curveDDC
 
   // Restore command value display
   case restore
