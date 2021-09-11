@@ -108,6 +108,9 @@
  Unknown vendor */
 "Unknown" = "Sconosciuto";
 
+/* Shown in the Display Preferences */
+"Unspecified" = "Non specificato";
+
 /* Version */
 "Version" = "Versione";
 
