@@ -98,7 +98,7 @@ class Display {
   }
 
   func swBrightnessTransform(value: Float, reverse: Bool = false) -> Float {
-    let lowTreshold: Float = 0.1 // We don't allow decrease lower than 5% for safety reasons and because some displays blank off after a while on full black screen due to energy saving settings
+    let lowTreshold: Float = 0.0 // If we don't want to allow zero brightness for safety reason, this value can be modified (for example to 0.1 for a 10% minimum)
     if !reverse {
       return value * (1 - lowTreshold) + lowTreshold
     } else {

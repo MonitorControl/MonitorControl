@@ -30,7 +30,7 @@ class MediaKeyTapManager: MediaKeyTapDelegate {
     if isPressed, isControlModifier, mediaKey == .brightnessUp || mediaKey == .brightnessDown {
       self.handleDirectedBrightness(isCommandModifier: isCommandModifier, isUp: mediaKey == .brightnessUp, isSmallIncrement: isSmallIncrement)
       return
-    } else if isPressed, isCommandModifier, mediaKey == .brightnessDown, DisplayManager.shared.engageMirror() {
+    } else if isPressed, isCommandModifier, mediaKey == .brightnessDown, DisplayManager.engageMirror() {
       return
     }
     let oppositeKey: MediaKey? = self.oppositeMediaKey(mediaKey: mediaKey)

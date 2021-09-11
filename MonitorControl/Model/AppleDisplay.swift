@@ -52,10 +52,10 @@ class AppleDisplay: Display {
     let brightness = Int(getBrightness() * 100)
     if let sliderHandler = brightnessSliderHandler, let slider = sliderHandler.slider, brightness != slider.integerValue {
       os_log("Pushing slider towards actual brightness for Apple display %{public}@", type: .debug, self.name)
-      if brightness>slider.integerValue {
-        slider.integerValue += max(Int((brightness - slider.integerValue) / 3),1)
+      if brightness > slider.integerValue {
+        slider.integerValue += max(Int((brightness - slider.integerValue) / 3), 1)
       } else {
-        slider.integerValue += min(Int((brightness - slider.integerValue) / 3),-1)
+        slider.integerValue += min(Int((brightness - slider.integerValue) / 3), -1)
       }
       return true
     }

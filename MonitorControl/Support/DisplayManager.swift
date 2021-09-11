@@ -11,7 +11,7 @@ class DisplayManager {
     self.clearDisplays()
     var onlineDisplayIDs = [CGDirectDisplayID](repeating: 0, count: 16)
     var displayCount: UInt32 = 0
-    guard CGGetOnlineDisplayList(10, &onlineDisplayIDs, &displayCount) == .success else {
+    guard CGGetOnlineDisplayList(16, &onlineDisplayIDs, &displayCount) == .success else {
       os_log("Unable to get display list.", type: .info)
       return
     }
@@ -247,13 +247,20 @@ class DisplayManager {
     return affectedDisplays
   }
 
-  func engageMirror() -> Bool {
-    // Return if there is only one display
-    guard [displays].count > 1 else {
+  static func engageMirror() -> Bool {
+    var onlineDisplayIDs = [CGDirectDisplayID](repeating: 0, count: 16)
+    var displayCount: UInt32 = 0
+    guard CGGetOnlineDisplayList(16, &onlineDisplayIDs, &displayCount) == .success, displayCount > 1 else {
       return false
     }
-    // Break mirror if there is any and then return // MARK: TODO: Finish implementation
-    // Establish mirror if there is no any and then return // MARK: TODO: Finish implementation
+    // Break display mirror if there is any
+    for onlineDisplayID in onlineDisplayIDs where onlineDisplayID != 0 {
+      // TODO:
+    }
+    // Build display mirror
+    for onlineDisplayID in onlineDisplayIDs where onlineDisplayID != 0 {
+      // TODO:
+    }
     return false
   }
 
