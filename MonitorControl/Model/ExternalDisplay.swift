@@ -371,14 +371,11 @@ class ExternalDisplay: Display {
   }
 
   func convValueToDDC(for command: Command, from: Int) -> UInt16 {
-    let curValue: Float = max(min(Float(from), 100), 0)
     let minDDCValue = Float(self.getMinDDCOverrideValue(for: command))
     let maxDDCValue = Float(self.getMaxDDCValue(for: command))
-    let curveFactor: Float = self.getCurveDDC(for: command)
-    let curvedValue: Float = pow(curValue / 100, curveFactor) * 100
+    let curvedValue: Float = pow(max(min(Float(from), 100), 0) / 100, self.getCurveDDC(for: command)) * 100
     let deNormalizedValue: Float = (maxDDCValue - minDDCValue) * (curvedValue / 100) + minDDCValue
-    let curDDCValue: Float = min(max(Float(deNormalizedValue), minDDCValue), maxDDCValue)
-    var intDDCValue = UInt16(curDDCValue)
+    var intDDCValue = UInt16(min(max(Float(deNormalizedValue), minDDCValue), maxDDCValue))
     if from > 0, command == Command.audioSpeakerVolume {
       intDDCValue = max(1, intDDCValue) // Never let sound to mute accidentally, keep it digitally to at digital 1 if needed as muting breaks some displays
     }
@@ -388,12 +385,9 @@ class ExternalDisplay: Display {
   func convDDCToValue(for command: Command, from: UInt16) -> Int {
     let minDDCValue = Float(self.getMinDDCOverrideValue(for: command))
     let maxDDCValue = Float(self.getMaxDDCValue(for: command))
-    let curDDCValue: Float = min(max(Float(from), minDDCValue), maxDDCValue)
-    let curveFactor: Float = self.getCurveDDC(for: command)
-    let normalizedValue: Float = ((curDDCValue - minDDCValue) / (maxDDCValue - minDDCValue)) * 100
-    let deCurvedValue: Float = pow(normalizedValue / 100, 1.0 / curveFactor) * 100
-    let curValue: Float = max(min(Float(deCurvedValue), 100), 0)
-    var intValue = Int(curValue)
+    let normalizedValue: Float = ((min(max(Float(from), minDDCValue), maxDDCValue) - minDDCValue) / (maxDDCValue - minDDCValue)) * 100
+    let deCurvedValue: Float = pow(normalizedValue / 100, 1.0 / self.getCurveDDC(for: command)) * 100
+    var intValue = Int(max(min(Float(deCurvedValue), 100), 0))
     if from > 0, command == Command.audioSpeakerVolume {
       intValue = max(1, intValue) // Never let sound to mute accidentally, keep it digitally to at digital 1 if needed as muting breaks some displays
     }
@@ -486,8 +480,7 @@ class ExternalDisplay: Display {
 
   func playVolumeChangedSound() {
     // Check if user has enabled "Play feedback when volume is changed" in Sound Preferences
-    guard let preferences = Utils.getSystemPreferences(), let hasSoundEnabled = preferences["com.apple.sound.beep.feedback"] as? Int, hasSoundEnabled == 1
-    else {
+    guard let preferences = Utils.getSystemPreferences(), let hasSoundEnabled = preferences["com.apple.sound.beep.feedback"] as? Int, hasSoundEnabled == 1 else {
       return
     }
     do {
