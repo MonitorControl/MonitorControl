@@ -11,7 +11,7 @@ class SliderHandler {
     self.cmd = command
   }
 
-  func valueChangedExternalDisplay(value: Int, maxValue: Double) {
+  func valueChangedExternalDisplay(value: Float, maxValue: Float) {
     guard let externalDisplay = self.display as? ExternalDisplay else {
       return
     }
@@ -22,17 +22,17 @@ class SliderHandler {
 
     if !externalDisplay.isSw() {
       if self.cmd == Command.brightness, prefs.bool(forKey: PrefKeys.lowerSwAfterBrightness.rawValue) {
-        var brightnessValue: Int = 0
-        var brightnessSwValue: Int = 100
-        if value >= Int(maxValue / 2) {
-          brightnessValue = value - Int(maxValue / 2)
-          brightnessSwValue = Int(self.display.getSwMaxBrightness())
+        var brightnessValue: Float = 0
+        var brightnessSwValue: Float = SCALE
+        if value >= Float(maxValue) / 2 {
+          brightnessValue = value - maxValue / 2
+          brightnessSwValue = SCALE
         } else {
           brightnessValue = 0
-          brightnessSwValue = Int((Float(value) / Float(maxValue / 2)) * Float(self.display.getSwMaxBrightness()))
+          brightnessSwValue = (Float(value) / Float(maxValue / 2)) * SCALE
         }
         _ = externalDisplay.writeDDCValues(command: self.cmd, value: externalDisplay.convValueToDDC(for: self.cmd, from: brightnessValue))
-        _ = externalDisplay.setSwBrightness(value: UInt8(brightnessSwValue))
+        _ = externalDisplay.setSwBrightness(value: brightnessSwValue)
         externalDisplay.saveValue(brightnessValue, for: self.cmd)
       } else if self.cmd == Command.audioSpeakerVolume {
         if !externalDisplay.enableMuteUnmute || value != 0 {
@@ -44,7 +44,7 @@ class SliderHandler {
         externalDisplay.saveValue(value, for: self.cmd)
       }
     } else if self.cmd == Command.brightness {
-      _ = externalDisplay.setSwBrightness(value: UInt8(value))
+      _ = externalDisplay.setSwBrightness(value: value)
       externalDisplay.saveValue(value, for: self.cmd)
     }
   }
@@ -54,21 +54,21 @@ class SliderHandler {
       return
     }
 
-    var value = slider.integerValue
-    let maxValue = slider.maxValue
+    var value = slider.floatValue
+    let maxValue = Float(slider.maxValue)
 
     if prefs.bool(forKey: PrefKeys.enableSliderSnap.rawValue) {
-      let snapInterval = Int(Float(maxValue) / 4)
-      let snapThreshold = Int(Float(maxValue * 0.04))
+      let snapInterval = Float(maxValue) / 4
+      let snapThreshold = Float(maxValue * 0.04)
       let closest = (value + snapInterval / 2) / snapInterval * snapInterval
       if abs(closest - value) <= snapThreshold {
         value = closest
-        slider.integerValue = value
+        slider.floatValue = value
       }
     }
 
     if let appleDisplay = self.display as? AppleDisplay {
-      appleDisplay.setBrightness(value: Float(value) / 100)
+      appleDisplay.setBrightness(value: Float(value) / SCALE)
     } else {
       self.valueChangedExternalDisplay(value: value, maxValue: maxValue)
     }
@@ -79,7 +79,7 @@ class SliderHandler {
 
     let handler = SliderHandler(display: display, command: command)
 
-    let slider = NSSlider(value: 0, minValue: 0, maxValue: 100, target: handler, action: #selector(SliderHandler.valueChanged))
+    let slider = NSSlider(value: 0, minValue: 0, maxValue: Double(SCALE), target: handler, action: #selector(SliderHandler.valueChanged))
     slider.isEnabled = true
     slider.numberOfTickMarks = numOfTickMarks
     handler.slider = slider
@@ -122,11 +122,11 @@ class SliderHandler {
       externalDisplay.setupCurrentAndMaxValues(command: command)
       let (integerValue, maxValue) = externalDisplay.getSliderCurrentAndMaxValues(command: command)
       slider.maxValue = Double(maxValue)
-      slider.integerValue = integerValue
+      slider.floatValue = Float(integerValue)
     } else if let appleDisplay = display as? AppleDisplay {
       if command == .brightness {
-        slider.maxValue = 100
-        slider.integerValue = Int(appleDisplay.getBrightness() * 100)
+        slider.maxValue = Double(SCALE)
+        slider.floatValue = appleDisplay.getBrightness() * SCALE
       }
     }
     return handler

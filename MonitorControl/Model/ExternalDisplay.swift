@@ -48,12 +48,12 @@ class ExternalDisplay: Display {
   }
 
   func isMuted() -> Bool {
-    return self.getValue(for: .audioMuteScreenBlank) == 1
+    return self.getIntValue(for: .audioMuteScreenBlank) == 1
   }
 
   func toggleMute(fromVolumeSlider: Bool = false) {
     var muteValue: Int
-    var volumeOSDValue: Int
+    var volumeOSDValue: Float
     if !self.isMuted() {
       muteValue = 1
       volumeOSDValue = 0
@@ -71,7 +71,7 @@ class ExternalDisplay: Display {
         return
       }
     }
-    self.saveValue(muteValue, for: .audioMuteScreenBlank)
+    self.saveIntValue(muteValue, for: .audioMuteScreenBlank)
     if !self.enableMuteUnmute || volumeOSDValue > 0 {
       _ = self.writeDDCValues(command: .audioSpeakerVolume, value: self.convValueToDDC(for: .audioSpeakerVolume, from: volumeOSDValue))
     }
@@ -80,16 +80,16 @@ class ExternalDisplay: Display {
         self.showOsd(command: volumeOSDValue > 0 ? .audioSpeakerVolume : .audioMuteScreenBlank, value: volumeOSDValue, roundChiclet: true)
       }
       if let slider = self.volumeSliderHandler?.slider {
-        slider.intValue = Int32(volumeOSDValue)
+        slider.floatValue = Float(volumeOSDValue)
       }
     }
   }
 
   func setupCurrentAndMaxValues(command: Command) {
     var ddcValues: (UInt16, UInt16)?
-    var maxDDCValue: UInt16 = 100
-    var currentDDCValue: UInt16 = 0
-    var currentValue: Int = 0
+    var maxDDCValue = UInt16(DDC_MAX_DETECT_LIMIT)
+    var currentDDCValue = UInt16(Float(DDC_MAX_DETECT_LIMIT) * 0.75)
+    var currentValue: Float = SCALE
     os_log("** Setting up %{public}@ for %{public}@ **", type: .info, self.name, String(reflecting: command))
     if self.isSw(), command == Command.brightness {
       os_log("Software control is used.", type: .info)
@@ -102,7 +102,7 @@ class ExternalDisplay: Display {
         let delay = self.needsLongerDelay ? UInt64(40 * kMillisecondScale) : nil
         ddcValues = self.readDDCValues(for: command, tries: tries, minReplyDelay: delay)
         if ddcValues != nil {
-          (currentDDCValue, maxDDCValue) = ddcValues ?? (75, 100)
+          (currentDDCValue, maxDDCValue) = ddcValues ?? (currentDDCValue, maxDDCValue)
           self.saveMaxDDCValue(min(Int(maxDDCValue), self.DDC_MAX_DETECT_LIMIT), for: command)
           self.saveValue(self.convDDCToValue(for: command, from: currentDDCValue), for: command)
           os_log("DDC read successful.", type: .info)
@@ -113,7 +113,7 @@ class ExternalDisplay: Display {
         os_log("DDC read disabled.", type: .info)
       }
       if ddcValues == nil {
-        self.saveValue(self.getValueExists(for: command) ? self.getValue(for: command) : 75, for: command)
+        self.saveValue(self.getValueExists(for: command) ? self.getValue(for: command) : SCALE * 0.75, for: command)
         currentDDCValue = self.convValueToDDC(for: command, from: self.getValue(for: command))
         self.saveMaxDDCValue(Int(maxDDCValue), for: command)
       }
@@ -128,16 +128,16 @@ class ExternalDisplay: Display {
     }
   }
 
-  func getSliderCurrentAndMaxValues(command: Command) -> (value: Int, maxValue: Int) {
-    var returnIntegerValue: Int = 75
-    var returnMaxValue: Int = 100
+  func getSliderCurrentAndMaxValues(command: Command) -> (value: Float, maxValue: Float) {
+    var returnValue: Float = 0.75 * SCALE
+    var returnMaxValue: Float = SCALE
     let currentValue = self.getValue(for: command)
     if command == .brightness {
       if !self.isSw(), prefs.bool(forKey: PrefKeys.lowerSwAfterBrightness.rawValue) {
-        returnMaxValue = 200
-        returnIntegerValue = returnMaxValue / 2 + Int(currentValue)
+        returnMaxValue = SCALE + SCALE
+        returnValue = returnMaxValue / 2 + currentValue
       } else {
-        returnIntegerValue = Int(currentValue)
+        returnValue = currentValue
       }
     } else if command == .audioSpeakerVolume, !self.isSw() {
       // If we're looking at the audio speaker volume, also retrieve the values for the mute command
@@ -149,28 +149,27 @@ class ExternalDisplay: Display {
         muteValues = self.readDDCValues(for: .audioMuteScreenBlank, tries: tries, minReplyDelay: delay)
         if let muteValues = muteValues {
           os_log(" - success, current DDC value: %{public}@", type: .info, String(muteValues.current))
-          self.saveValue(Int(muteValues.current), for: .audioMuteScreenBlank)
-          self.saveMaxDDCValue(Int(muteValues.max), for: .audioMuteScreenBlank)
+          self.saveIntValue(Int(muteValues.current), for: .audioMuteScreenBlank)
         } else {
           os_log(" - read failed or disabled, skipping", type: .info)
         }
       }
       // If the system is not currently muted, or doesn't support the mute command, display the current volume as the slider value
       if muteValues == nil || muteValues!.current == 2 {
-        returnIntegerValue = Int(currentValue)
+        returnValue = currentValue
       } else {
-        returnIntegerValue = 0
+        returnValue = 0
       }
     } else {
-      returnIntegerValue = currentValue
+      returnValue = currentValue
     }
-    return (returnIntegerValue, returnMaxValue)
+    return (returnValue, returnMaxValue)
   }
 
   func stepVolume(isUp: Bool, isSmallIncrement: Bool) {
     let currentValue = self.getValue(for: .audioSpeakerVolume)
     var muteValue: Int?
-    let volumeOSDValue = self.calcNewValue(currentValue: currentValue, maxValue: 100, isUp: isUp, isSmallIncrement: isSmallIncrement)
+    let volumeOSDValue = self.calcNewValue(currentValue: currentValue, maxValue: SCALE, isUp: isUp, isSmallIncrement: isSmallIncrement)
     if self.isMuted(), volumeOSDValue > 0 {
       muteValue = 2
     } else if !self.isMuted(), volumeOSDValue == 0 {
@@ -182,7 +181,7 @@ class ExternalDisplay: Display {
         guard self.writeDDCValues(command: .audioMuteScreenBlank, value: UInt16(muteValue)) == true else {
           return
         }
-        self.saveValue(muteValue, for: .audioMuteScreenBlank)
+        self.saveIntValue(muteValue, for: .audioMuteScreenBlank)
       }
       if !self.enableMuteUnmute || volumeOSDValue != 0 {
         _ = self.writeDDCValues(command: .audioSpeakerVolume, value: self.convValueToDDC(for: .audioSpeakerVolume, from: volumeOSDValue))
@@ -194,7 +193,7 @@ class ExternalDisplay: Display {
     if !isAlreadySet {
       self.saveValue(volumeOSDValue, for: .audioSpeakerVolume)
       if let slider = self.volumeSliderHandler?.slider {
-        slider.intValue = Int32(volumeOSDValue)
+        slider.floatValue = Float(volumeOSDValue)
       }
     }
   }
@@ -226,7 +225,7 @@ class ExternalDisplay: Display {
           self.swAfterOsdAnimationSemaphore.signal()
           return
         }
-        self.showOsd(command: .brightness, value: value, roundChiclet: false)
+        self.showOsd(command: .brightness, value: Float(value), maxValue: 100, roundChiclet: false)
         Thread.sleep(forTimeInterval: Double(value * 2) / 300)
       }
       for value: Int in stride(from: 5, to: 0, by: -1) {
@@ -234,7 +233,7 @@ class ExternalDisplay: Display {
           self.swAfterOsdAnimationSemaphore.signal()
           return
         }
-        self.showOsd(command: .brightness, value: value, roundChiclet: false)
+        self.showOsd(command: .brightness, value: Float(value), maxValue: 100, roundChiclet: false)
         Thread.sleep(forTimeInterval: Double(value * 2) / 300)
       }
       self.showOsd(command: .brightness, value: 0, roundChiclet: true)
@@ -242,13 +241,13 @@ class ExternalDisplay: Display {
     }
   }
 
-  func stepBrightnessPart(osdValue: Int, isSmallIncrement: Bool) -> Bool {
+  func stepBrightnessPart(osdValue: Float, isSmallIncrement: Bool) -> Bool {
     if self.isSw(), prefs.bool(forKey: PrefKeys.fallbackSw.rawValue) {
-      if self.setSwBrightness(value: UInt8(osdValue), smooth: true) {
-        self.showOsd(command: .brightness, value: osdValue, roundChiclet: !isSmallIncrement)
+      if self.setSwBrightness(value: osdValue, smooth: true) {
+        self.showOsd(command: .brightness, value: osdValue, maxValue: SCALE, roundChiclet: !isSmallIncrement)
         self.saveValue(osdValue, for: .brightness)
         if let slider = brightnessSliderHandler?.slider {
-          slider.intValue = Int32(osdValue)
+          slider.floatValue = Float(osdValue)
         }
       }
       return true
@@ -256,7 +255,7 @@ class ExternalDisplay: Display {
     return false
   }
 
-  func stepBrightnessswAfterBirghtnessMode(osdValue: Int, isUp: Bool, isSmallIncrement: Bool) -> Bool {
+  func stepBrightnessswAfterBirghtnessMode(osdValue: Float, isUp: Bool, isSmallIncrement: Bool) -> Bool {
     let isAlreadySet = osdValue == self.getValue(for: .brightness)
     var swAfterBirghtnessMode: Bool = isSwBrightnessNotDefault()
     if isAlreadySet, !isUp, !swAfterBirghtnessMode, prefs.bool(forKey: PrefKeys.lowerSwAfterBrightness.rawValue) {
@@ -264,15 +263,15 @@ class ExternalDisplay: Display {
     }
 
     if swAfterBirghtnessMode {
-      let currentSwBrightness = UInt8(self.getSwBrightnessPrefValue())
-      var swBirghtnessValue = self.calcNewValue(currentValue: Int(currentSwBrightness), maxValue: Int(getSwMaxBrightness()), isUp: isUp, isSmallIncrement: isSmallIncrement)
-      if swBirghtnessValue >= Int(getSwMaxBrightness()) {
-        swBirghtnessValue = Int(getSwMaxBrightness())
+      let currentSwBrightness = self.getSwBrightnessPrefValue()
+      var swBirghtnessValue = self.calcNewValue(currentValue: currentSwBrightness, maxValue: SCALE, isUp: isUp, isSmallIncrement: isSmallIncrement)
+      if swBirghtnessValue >= SCALE {
+        swBirghtnessValue = SCALE
         swAfterBirghtnessMode = false
       }
-      if self.setSwBrightness(value: UInt8(swBirghtnessValue)) {
+      if self.setSwBrightness(value: swBirghtnessValue) {
         if let slider = brightnessSliderHandler?.slider {
-          slider.intValue = Int32(Float(slider.maxValue / 2) * (Float(swBirghtnessValue) / Float(getSwMaxBrightness())))
+          slider.floatValue = (Float(slider.maxValue / 2) * (Float(swBirghtnessValue) / SCALE))
         }
         self.doSwAfterOsdAnimation()
       }
@@ -282,7 +281,7 @@ class ExternalDisplay: Display {
 
   override func stepBrightness(isUp: Bool, isSmallIncrement: Bool) {
     let currentValue = self.getValue(for: .brightness)
-    let maxValue = self.isSw() ? Int(self.getSwMaxBrightness()) : 100
+    let maxValue: Float = SCALE
     let osdValue = self.calcNewValue(currentValue: currentValue, maxValue: maxValue, isUp: isUp, isSmallIncrement: isSmallIncrement)
     if self.stepBrightnessPart(osdValue: osdValue, isSmallIncrement: isSmallIncrement) {
       return
@@ -295,9 +294,9 @@ class ExternalDisplay: Display {
     }
     if let slider = brightnessSliderHandler?.slider {
       if !self.isSw(), prefs.bool(forKey: PrefKeys.lowerSwAfterBrightness.rawValue) {
-        slider.intValue = Int32(slider.maxValue / 2) + Int32(osdValue)
+        slider.floatValue = Float(slider.maxValue / 2) + Float(osdValue)
       } else {
-        slider.intValue = Int32(osdValue)
+        slider.floatValue = Float(osdValue)
       }
     }
     self.showOsd(command: .brightness, value: osdValue, roundChiclet: !isSmallIncrement)
@@ -345,35 +344,35 @@ class ExternalDisplay: Display {
     return values
   }
 
-  func calcNewValue(currentValue: Int, maxValue: Int, isUp: Bool, isSmallIncrement: Bool) -> Int {
-    let nextValue: Int
+  func calcNewValue(currentValue: Float, maxValue: Float, isUp: Bool, isSmallIncrement: Bool) -> Float {
+    let nextValue: Float
     if isSmallIncrement {
-      nextValue = currentValue + (isUp ? 1 : -1)
+      nextValue = currentValue + (isUp ? SCALE * 0.01 : SCALE * -0.01)
     } else {
-      let osdChicletFromValue = OSDUtils.chiclet(fromValue: Float(currentValue), maxValue: Float(maxValue))
+      let osdChicletFromValue = OSDUtils.chiclet(fromValue: currentValue, maxValue: maxValue)
       let distance = OSDUtils.getDistance(fromNearestChiclet: osdChicletFromValue)
       // get the next rounded chiclet
       var nextFilledChiclet = isUp ? ceil(osdChicletFromValue) : floor(osdChicletFromValue)
       // Depending on the direction, if the chiclet is above or below a certain threshold, we go to the next whole chiclet
       let distanceThreshold = Float(0.25) // 25% of the distance between the edges of an osd box
       if distance == 0 {
-        nextFilledChiclet += isUp ? 1 : -1
+        nextFilledChiclet += (isUp ? 1 : -1)
       } else if !isUp, distance < distanceThreshold {
         nextFilledChiclet -= 1
       } else if isUp, distance > (1 - distanceThreshold) {
         nextFilledChiclet += 1
       }
-      nextValue = Int(round(OSDUtils.value(fromChiclet: nextFilledChiclet, maxValue: Float(maxValue))))
+      nextValue = OSDUtils.value(fromChiclet: nextFilledChiclet, maxValue: Float(maxValue))
       os_log("next: .value %{public}@/%{public}@, .osd %{public}@/%{public}@", type: .debug, String(nextValue), String(maxValue), String(nextFilledChiclet), String(OSDUtils.chicletCount))
     }
     return max(0, min(maxValue, nextValue))
   }
 
-  func convValueToDDC(for command: Command, from: Int) -> UInt16 {
+  func convValueToDDC(for command: Command, from: Float) -> UInt16 {
     let minDDCValue = Float(self.getMinDDCOverrideValue(for: command))
     let maxDDCValue = Float(self.getMaxDDCValue(for: command))
-    let curvedValue: Float = pow(max(min(Float(from), 100), 0) / 100, self.getCurveDDC(for: command)) * 100
-    let deNormalizedValue: Float = (maxDDCValue - minDDCValue) * (curvedValue / 100) + minDDCValue
+    let curvedValue: Float = pow(max(min(Float(from), SCALE), 0) / SCALE, self.getCurveDDC(for: command)) * SCALE
+    let deNormalizedValue: Float = (maxDDCValue - minDDCValue) * (curvedValue / SCALE) + minDDCValue
     var intDDCValue = UInt16(min(max(Float(deNormalizedValue), minDDCValue), maxDDCValue))
     if from > 0, command == Command.audioSpeakerVolume {
       intDDCValue = max(1, intDDCValue) // Never let sound to mute accidentally, keep it digitally to at digital 1 if needed as muting breaks some displays
@@ -381,27 +380,35 @@ class ExternalDisplay: Display {
     return intDDCValue
   }
 
-  func convDDCToValue(for command: Command, from: UInt16) -> Int {
+  func convDDCToValue(for command: Command, from: UInt16) -> Float {
     let minDDCValue = Float(self.getMinDDCOverrideValue(for: command))
     let maxDDCValue = Float(self.getMaxDDCValue(for: command))
-    let normalizedValue: Float = ((min(max(Float(from), minDDCValue), maxDDCValue) - minDDCValue) / (maxDDCValue - minDDCValue)) * 100
-    let deCurvedValue: Float = pow(normalizedValue / 100, 1.0 / self.getCurveDDC(for: command)) * 100
-    var intValue = Int(max(min(Float(deCurvedValue), 100), 0))
+    let normalizedValue: Float = ((min(max(Float(from), minDDCValue), maxDDCValue) - minDDCValue) / (maxDDCValue - minDDCValue)) * SCALE
+    let deCurvedValue: Float = pow(normalizedValue / SCALE, 1.0 / self.getCurveDDC(for: command)) * SCALE
+    var floatValue = Float(max(min(Float(deCurvedValue), SCALE), 0))
     if from > 0, command == Command.audioSpeakerVolume {
-      intValue = max(1, intValue) // Never let sound to mute accidentally, keep it digitally to at digital 1 if needed as muting breaks some displays
+      floatValue = max(1, floatValue) // Never let sound to mute accidentally, keep it digitally to at digital 1 if needed as muting breaks some displays
     }
-    return intValue
-  }
-
-  func getValue(for command: Command) -> Int {
-    return prefs.integer(forKey: PrefKeys.value.rawValue + String(command.rawValue) + self.prefsId)
+    return floatValue
   }
 
   func getValueExists(for command: Command) -> Bool {
     return prefs.object(forKey: PrefKeys.value.rawValue + String(command.rawValue) + self.prefsId) != nil
   }
 
-  func saveValue(_ value: Int, for command: Command) {
+  func getValue(for command: Command) -> Float {
+    return prefs.float(forKey: PrefKeys.value.rawValue + String(command.rawValue) + self.prefsId)
+  }
+
+  func getIntValue(for command: Command) -> Int {
+    return prefs.integer(forKey: PrefKeys.value.rawValue + String(command.rawValue) + self.prefsId)
+  }
+
+  func saveValue(_ value: Float, for command: Command) {
+    prefs.set(value, forKey: PrefKeys.value.rawValue + String(command.rawValue) + self.prefsId)
+  }
+
+  func saveIntValue(_ value: Int, for command: Command) {
     prefs.set(value, forKey: PrefKeys.value.rawValue + String(command.rawValue) + self.prefsId)
   }
 
@@ -466,12 +473,12 @@ class ExternalDisplay: Display {
     prefs.set(value, forKey: PrefKeys.pollingCount.rawValue + self.prefsId)
   }
 
-  private func stepSize(for _: Command, isSmallIncrement: Bool) -> Int {
-    return isSmallIncrement ? 1 : Int(floor(Float(100) / OSDUtils.chicletCount))
+  private func stepSize(for _: Command, isSmallIncrement: Bool) -> Float {
+    return isSmallIncrement ? 1 : floor(Float(SCALE) / OSDUtils.chicletCount)
   }
 
-  override func showOsd(command: Command, value: Int, maxValue _: Int = 100, roundChiclet: Bool = false, lock: Bool = false) {
-    super.showOsd(command: command, value: value, maxValue: 100, roundChiclet: roundChiclet, lock: lock)
+  override func showOsd(command: Command, value: Float, maxValue: Float = SCALE, roundChiclet: Bool = false, lock: Bool = false) {
+    super.showOsd(command: command, value: value, maxValue: maxValue, roundChiclet: roundChiclet, lock: lock)
   }
 
   func playVolumeChangedSound() {

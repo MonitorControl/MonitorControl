@@ -7,6 +7,7 @@ import SimplyCoreAudio
 
 var app: AppDelegate!
 let prefs = UserDefaults.standard
+let SCALE: Float = 1
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {

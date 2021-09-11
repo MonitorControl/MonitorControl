@@ -107,11 +107,11 @@ class Display {
   }
 
   let swBrightnessSemaphore = DispatchSemaphore(value: 1)
-  func setSwBrightness(value: UInt8, smooth: Bool = false) -> Bool {
-    let brightnessValue: UInt8 = min(getSwMaxBrightness(), value)
-    var currentValue = Float(self.getSwBrightnessPrefValue()) / Float(self.getSwMaxBrightness())
-    self.saveSwBirghtnessPrefValue(Int(brightnessValue))
-    var newValue = Float(Float(brightnessValue)) / Float(self.getSwMaxBrightness())
+  func setSwBrightness(value: Float, smooth: Bool = false) -> Bool {
+    let brightnessValue: Float = min(SCALE, value)
+    var currentValue = Float(self.getSwBrightnessPrefValue()) / SCALE
+    self.saveSwBirghtnessPrefValue(brightnessValue)
+    var newValue = Float(Float(brightnessValue)) / SCALE
     currentValue = self.swBrightnessTransform(value: currentValue)
     newValue = self.swBrightnessTransform(value: newValue)
     os_log("setting software brightness to: %{public}@", type: .debug, String(newValue))
@@ -131,15 +131,15 @@ class Display {
         self.swBrightnessSemaphore.signal()
       }
     } else {
-      let gammaTableRed = self.defaultGammaTableRed.map { $0 * /* transientValue */ newValue }
-      let gammaTableGreen = self.defaultGammaTableGreen.map { $0 * /* transientValue */ newValue }
-      let gammaTableBlue = self.defaultGammaTableBlue.map { $0 * /* transientValue */ newValue }
+      let gammaTableRed = self.defaultGammaTableRed.map { $0 * newValue }
+      let gammaTableGreen = self.defaultGammaTableGreen.map { $0 * newValue }
+      let gammaTableBlue = self.defaultGammaTableBlue.map { $0 * newValue }
       CGSetDisplayTransferByTable(self.identifier, self.defaultGammaTableSampleCount, gammaTableRed, gammaTableGreen, gammaTableBlue)
     }
     return true
   }
 
-  func getSwBrightness() -> UInt8 {
+  func getSwBrightness() -> Float {
     var gammaTableRed = [CGGammaValue](repeating: 0, count: 256)
     var gammaTableGreen = [CGGammaValue](repeating: 0, count: 256)
     var gammaTableBlue = [CGGammaValue](repeating: 0, count: 256)
@@ -150,34 +150,30 @@ class Display {
       let bluePeak = gammaTableBlue.max() ?? 0
       let gammaTablePeak = max(redPeak, greenPeak, bluePeak)
       let peakRatio = gammaTablePeak / self.defaultGammaTablePeak
-      let brightnessValue = UInt8(round(self.swBrightnessTransform(value: peakRatio, reverse: true) * Float(self.getSwMaxBrightness())))
+      let brightnessValue = round(self.swBrightnessTransform(value: peakRatio, reverse: true) * 10000) / 10000 * SCALE
       os_log("Current software gammatable brightness is: %{public}@", type: .debug, String(brightnessValue))
       return brightnessValue
     }
-    return self.getSwMaxBrightness()
+    return SCALE
   }
 
   func resetSwBrightness() -> Bool {
-    return self.setSwBrightness(value: self.getSwMaxBrightness())
+    return self.setSwBrightness(value: SCALE)
   }
 
-  func saveSwBirghtnessPrefValue(_ value: Int) {
+  func saveSwBirghtnessPrefValue(_ value: Float) {
     self.prefs.set(value, forKey: PrefKeys.SwBrightness.rawValue + self.prefsId)
   }
 
-  func getSwBrightnessPrefValue() -> Int {
-    return self.prefs.integer(forKey: PrefKeys.SwBrightness.rawValue + self.prefsId)
-  }
-
-  func getSwMaxBrightness() -> UInt8 {
-    return 100
+  func getSwBrightnessPrefValue() -> Float {
+    return self.prefs.float(forKey: PrefKeys.SwBrightness.rawValue + self.prefsId)
   }
 
   func isSwBrightnessNotDefault() -> Bool {
     guard !self.isVirtual else {
       return false
     }
-    if self.getSwBrightness() < self.getSwMaxBrightness() {
+    if self.getSwBrightness() < SCALE {
       return true
     }
     return false
@@ -187,7 +183,7 @@ class Display {
     return false
   }
 
-  func showOsd(command: Command, value: Int, maxValue: Int = 100, roundChiclet: Bool = false, lock: Bool = false) {
+  func showOsd(command: Command, value: Float, maxValue: Float = SCALE, roundChiclet: Bool = false, lock: Bool = false) {
     guard let manager = OSDManager.sharedManager() as? OSDManager else {
       return
     }
@@ -211,8 +207,8 @@ class Display {
       filledChiclets = Int(round(osdChiclet))
       totalChiclets = 16
     } else {
-      filledChiclets = value
-      totalChiclets = maxValue
+      filledChiclets = Int(value * 100)
+      totalChiclets = Int(maxValue * 100)
     }
 
     manager.showImage(osdImage.rawValue, onDisplayID: self.getShowOsdDisplayId(), priority: 0x1F4, msecUntilFade: 1000, filledChiclets: UInt32(filledChiclets), totalChiclets: UInt32(totalChiclets), locked: lock)

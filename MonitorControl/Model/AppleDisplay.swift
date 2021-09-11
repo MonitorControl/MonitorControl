@@ -29,33 +29,36 @@ class AppleDisplay: Display {
   public func getBrightness() -> Float {
     var brightness: Float = 0
     DisplayServicesGetBrightness(self.identifier, &brightness)
-    return brightness
+    return brightness * SCALE
   }
 
   public func setBrightness(value: Float) {
     self.displayQueue.sync {
-      DisplayServicesSetBrightness(self.identifier, Float(value))
-      DisplayServicesBrightnessChanged(self.identifier, Double(value))
+      DisplayServicesSetBrightness(self.identifier, Float(value / SCALE))
+      DisplayServicesBrightnessChanged(self.identifier, Double(value / SCALE))
     }
   }
 
   override func stepBrightness(isUp: Bool, isSmallIncrement: Bool) {
     let value = self.calcNewBrightness(isUp: isUp, isSmallIncrement: isSmallIncrement)
     self.setBrightness(value: value)
-    self.showOsd(command: .brightness, value: Int(value * 64), maxValue: 64)
+    self.showOsd(command: .brightness, value: value * 64, maxValue: 64)
     if let slider = brightnessSliderHandler?.slider {
-      slider.integerValue = Int(value * 100)
+      slider.floatValue = Float(value * SCALE)
     }
   }
 
   override func refreshBrightness() -> Bool {
-    let brightness = Int(getBrightness() * 100)
-    if let sliderHandler = brightnessSliderHandler, let slider = sliderHandler.slider, brightness != slider.integerValue {
+    let brightness = self.getBrightness() * SCALE
+    if let sliderHandler = brightnessSliderHandler, let slider = sliderHandler.slider, brightness != slider.floatValue {
       os_log("Pushing slider towards actual brightness for Apple display %{public}@", type: .debug, self.name)
-      if brightness > slider.integerValue {
-        slider.integerValue += max(Int((brightness - slider.integerValue) / 3), 1)
+      if abs(brightness - slider.floatValue) < 0.01 * SCALE {
+        slider.floatValue = brightness
+        return false
+      } else if brightness > slider.floatValue {
+        slider.floatValue += max((brightness - slider.floatValue) / 3, 0.005 * SCALE)
       } else {
-        slider.integerValue += min(Int((brightness - slider.integerValue) / 3), -1)
+        slider.floatValue += min((brightness - slider.floatValue) / 3, -0.005 * SCALE)
       }
       return true
     }

@@ -175,19 +175,19 @@ class DisplayManager {
   func resetSwBrightnessForAllDisplays(settingsOnly: Bool = false, async: Bool = false) {
     for externalDisplay in self.getNonVirtualExternalDisplays() {
       if !settingsOnly {
-        _ = externalDisplay.setSwBrightness(value: externalDisplay.getSwMaxBrightness(), smooth: async)
+        _ = externalDisplay.setSwBrightness(value: SCALE, smooth: async)
       } else {
-        externalDisplay.saveSwBirghtnessPrefValue(Int(externalDisplay.getSwMaxBrightness()))
+        externalDisplay.saveSwBirghtnessPrefValue(SCALE)
       }
       if externalDisplay.isSw() {
-        externalDisplay.saveValue(Int(externalDisplay.getSwMaxBrightness()), for: .brightness)
+        externalDisplay.saveValue(SCALE, for: .brightness)
       }
     }
   }
 
   func restoreSwBrightnessForAllDisplays(async: Bool = false) {
     for externalDisplay in self.getExternalDisplays() {
-      let sliderMax = DisplayManager.getBrightnessSliderMaxValue(externalDisplay: externalDisplay)
+      let sliderMax = Float(DisplayManager.getBrightnessSliderMaxValue(externalDisplay: externalDisplay))
       if externalDisplay.getValue(for: .brightness) == 0 || externalDisplay.isSw() {
         let savedPrefValue = externalDisplay.getSwBrightnessPrefValue()
         if externalDisplay.getSwBrightness() != savedPrefValue {
@@ -195,21 +195,21 @@ class DisplayManager {
             manager.showImage(OSDImage.brightness.rawValue, onDisplayID: externalDisplay.identifier, priority: 0x1F4, msecUntilFade: 0)
           }
         }
-        externalDisplay.saveSwBirghtnessPrefValue(Int(externalDisplay.getSwBrightness()))
-        _ = externalDisplay.setSwBrightness(value: UInt8(savedPrefValue), smooth: async)
+        externalDisplay.saveSwBirghtnessPrefValue(externalDisplay.getSwBrightness())
+        _ = externalDisplay.setSwBrightness(value: savedPrefValue, smooth: async)
         if !externalDisplay.isSw(), prefs.bool(forKey: PrefKeys.lowerSwAfterBrightness.rawValue) {
-          if savedPrefValue < externalDisplay.getSwMaxBrightness() {
-            DisplayManager.setBrightnessSliderValue(externalDisplay: externalDisplay, value: Int32(Float(sliderMax / 2) * (Float(savedPrefValue) / Float(externalDisplay.getSwMaxBrightness()))))
+          if savedPrefValue < SCALE {
+            DisplayManager.setBrightnessSliderValue(externalDisplay: externalDisplay, value: sliderMax / 2 * (Float(savedPrefValue) / SCALE))
           } else {
-            DisplayManager.setBrightnessSliderValue(externalDisplay: externalDisplay, value: Int32(sliderMax / 2) + Int32(externalDisplay.getValue(for: .brightness)))
+            DisplayManager.setBrightnessSliderValue(externalDisplay: externalDisplay, value: sliderMax / 2 + Float(externalDisplay.getValue(for: .brightness)))
           }
         } else if externalDisplay.isSw() {
-          DisplayManager.setBrightnessSliderValue(externalDisplay: externalDisplay, value: Int32(Float(sliderMax) * (Float(savedPrefValue) / Float(externalDisplay.getSwMaxBrightness()))))
+          DisplayManager.setBrightnessSliderValue(externalDisplay: externalDisplay, value: sliderMax * (Float(savedPrefValue) / SCALE))
         }
       } else {
-        _ = externalDisplay.setSwBrightness(value: externalDisplay.getSwMaxBrightness())
+        _ = externalDisplay.setSwBrightness(value: SCALE)
         if externalDisplay.isSw() {
-          DisplayManager.setBrightnessSliderValue(externalDisplay: externalDisplay, value: Int32(sliderMax))
+          DisplayManager.setBrightnessSliderValue(externalDisplay: externalDisplay, value: sliderMax)
         }
       }
     }
@@ -290,9 +290,9 @@ class DisplayManager {
 
   // Static functions (could be anywhere)
 
-  static func setBrightnessSliderValue(externalDisplay: ExternalDisplay, value: Int32) {
+  static func setBrightnessSliderValue(externalDisplay: ExternalDisplay, value: Float) {
     if let slider = externalDisplay.brightnessSliderHandler?.slider {
-      slider.intValue = value
+      slider.floatValue = value
     }
   }
 
