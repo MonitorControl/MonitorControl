@@ -1,0 +1,122 @@
+/* Shown in the main prefs window */
+"About" = "Hakkında";
+
+/* Shown in the main prefs window */
+"Advanced" = "Advanced";
+
+/* Shown in the main prefs window */
+"App menu" = "App menu";
+
+/* Apple Silicon designation (shown after the version number in Preferences) */
+"Apple Silicon" = "Apple Silicon";
+
+/* Shown in the alert dialog */
+"Are you sure you want to enable a longer delay? Doing so may freeze your system and require a restart. Start at login will be disabled as a safety measure." = "Daha uzun bir gecikmeyi etkinleştirmek istediğinizden emin misiniz? Bunu yapmak sisteminizi dondurabilir ve yeniden başlatılabilir. Başlangıçta güvenlik önlemi olarak devre dışı bırakılır.";
+
+/* Shown in the alert dialog */
+"Are you sure you want to reset all preferences?" = "Tüm ayarları sıfırlamak istediğinize emin misiniz?";
+
+/* Shown in menu */
+"Brightness" = "Parlaklık";
+
+/* Build */
+"Build" = "Derleme";
+
+/* Shown in the Display Preferences */
+"Built-in Display" = "Dahili Ekran";
+
+/* Shown in menu */
+"Contrast" = "Kontrast";
+
+/* Version */
+"Copyright Ⓒ MonitorControl, " = "Telif Hakkı Ⓒ MonitorControl, ";
+
+/* Shown in the main prefs window */
+"Displays" = "Ekranlar";
+
+/* Shown in the alert dialog */
+"Enable Longer Delay?" = "Daha Uzun Gecikmeyi Etkinleştir?";
+
+/* Shown in the Display Preferences */
+"External Display" = "Harici Ekran";
+
+/* Shown in the main prefs window */
+"General" = "Genel";
+
+/* Shown in the Display Preferences */
+"Hardware (Apple)" = "Donanım (Apple)";
+
+/* Shown in the Display Preferences */
+"Hardware (DDC)" = "Donanım (DDC)";
+
+/* Intel designation (shown after the version number in Preferences) */
+"Intel" = "Intel";
+
+/* Shown in the main prefs window */
+"Keyboard" = "Keyboard";
+
+/* Shown in the alert dialog */
+"No" = "Hayır";
+
+/* Shown in the Display Preferences */
+"No Control" = "Kontrol yok";
+
+/* Shown in the alert dialog */
+"Ok" = "Tamam";
+
+/* Shown in the Display Preferences */
+"Other Display" = "Diğer Ekran";
+
+/* Shown in the alert dialog */
+"Reset Preferences?" = "Ayarları Sıfırla?";
+
+/* Shown in the alert dialog */
+"Safe Mode Activated" = "Safe Mode Activated";
+
+/* Shown in the alert dialog */
+"Shift was pressed during launch. MonitorControl started in safe mode. Default preferences are reloaded, DDC read is blocked." = "Shift was pressed during launch. MonitorControl started in safe mode. Default preferences are reloaded, DDC read is blocked.";
+
+/* Shown in the alert dialog */
+"Shortcuts not available" = "Kısayollar bulunamadı";
+
+/* Shown in the Display Preferences */
+"Software (Forced)" = "Yazılım (Zorunlu)";
+
+/* Shown in the Display Preferences */
+"Software Only" = "Sadece Yazılım";
+
+/* Shown in the Display Preferences */
+"This display allows for software control only. Reasons for this might be using the HDMI port of a Mac mini (which blocks hardware DDC control) or having a blacklisted display." = "This display allows for software control only. Reasons for this might be using the HDMI port of a Mac mini (which blocks hardware DDC control) or having a blacklisted display.";
+
+/* Shown in the Display Preferences */
+"This display has an unspecified control status." = "This display has an unspecified control status.";
+
+/* Shown in the Display Preferences */
+"This display is reported to support hardware DDC control but the current settings allow for software control only." = "This display is reported to support hardware DDC control but the current settings allow for software control only.";
+
+/* Shown in the Display Preferences */
+"This display is reported to support hardware DDC control. If you encounter issues, you can disable hardware DDC control to force software control." = "This display is reported to support hardware DDC control. If you encounter issues, you can disable hardware DDC control to force software control.";
+
+/* Shown in the Display Preferences */
+"This display supports native Apple brightness protocol. This allows macOS to control this display without MonitorControl as well." = "This display supports native Apple brightness protocol. This allows macOS to control this display without MonitorControl as well.";
+
+/* Shown in the Display Preferences */
+"This is a virtual display (examples: AirPlay, SideCar, display connected via a DisplayLink Dock or similar) which does not allow control." = "This is a virtual display (examples: AirPlay, SideCar, display connected via a DisplayLink Dock or similar) which does not allow control.";
+
+/* Unknown display name */
+"Unknown" = "Bilinmeyen";
+
+/* Version */
+"Version" = "Versiyon";
+
+/* Shown in the Display Preferences */
+"Virtual Display" = "Sanal Ekran";
+
+/* Shown in menu */
+"Volume" = "Ses";
+
+/* Shown in the alert dialog */
+"Yes" = "Evet";
+
+/* Shown in the alert dialog */
+"You need to enable MonitorControl in System Preferences > Security and Privacy > Accessibility for the keyboard shortcuts to work" = "MonitorControl klavye kısayollarını aktif hale getirmek için Sistem Tercihleri > Güvenlik ve Gizlilik > Erişebilirlik altından izin vermeniz gerekmektedir";
