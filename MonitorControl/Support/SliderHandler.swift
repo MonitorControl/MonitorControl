@@ -22,25 +22,25 @@ class SliderHandler {
 
     if !externalDisplay.isSw() {
       if self.cmd == Command.brightness, prefs.bool(forKey: PrefKeys.lowerSwAfterBrightness.rawValue) {
-        var brightnessDDCValue: Int = 0
+        var brightnessValue: Int = 0
         var brightnessSwValue: Int = 100
         if value >= Int(maxValue / 2) {
-          brightnessDDCValue = value - Int(maxValue / 2)
+          brightnessValue = value - Int(maxValue / 2)
           brightnessSwValue = Int(self.display.getSwMaxBrightness())
         } else {
-          brightnessDDCValue = 0
+          brightnessValue = 0
           brightnessSwValue = Int((Float(value) / Float(maxValue / 2)) * Float(self.display.getSwMaxBrightness()))
         }
-        _ = externalDisplay.writeDDCValues(command: self.cmd, value: UInt16(brightnessDDCValue))
+        _ = externalDisplay.writeDDCValues(command: self.cmd, value: externalDisplay.convValueToDDC(for: self.cmd, from: brightnessValue))
         _ = externalDisplay.setSwBrightness(value: UInt8(brightnessSwValue))
-        externalDisplay.saveValue(brightnessDDCValue, for: self.cmd)
+        externalDisplay.saveValue(brightnessValue, for: self.cmd)
       } else if self.cmd == Command.audioSpeakerVolume {
         if !externalDisplay.enableMuteUnmute || value != 0 {
-          _ = externalDisplay.writeDDCValues(command: self.cmd, value: UInt16(value))
+          _ = externalDisplay.writeDDCValues(command: self.cmd, value: externalDisplay.convValueToDDC(for: self.cmd, from: value))
         }
         externalDisplay.saveValue(value, for: self.cmd)
       } else {
-        _ = externalDisplay.writeDDCValues(command: self.cmd, value: UInt16(value))
+        _ = externalDisplay.writeDDCValues(command: self.cmd, value: externalDisplay.convValueToDDC(for: self.cmd, from: value))
         externalDisplay.saveValue(value, for: self.cmd)
       }
     } else if self.cmd == Command.brightness {
@@ -119,7 +119,8 @@ class SliderHandler {
     }
 
     if let externalDisplay = display as? ExternalDisplay {
-      let (integerValue, maxValue) = externalDisplay.setupCurrentAndMaxValues(command: command)
+      externalDisplay.setupCurrentAndMaxValues(command: command)
+      let (integerValue, maxValue) = externalDisplay.getSliderCurrentAndMaxValues(command: command)
       slider.maxValue = Double(maxValue)
       slider.integerValue = integerValue
     } else if let appleDisplay = display as? AppleDisplay {

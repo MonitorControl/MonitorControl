@@ -215,12 +215,6 @@ class Display {
       totalChiclets = maxValue
     }
 
-    manager.showImage(osdImage.rawValue,
-                      onDisplayID: self.getShowOsdDisplayId(),
-                      priority: 0x1F4,
-                      msecUntilFade: 1000,
-                      filledChiclets: UInt32(filledChiclets),
-                      totalChiclets: UInt32(totalChiclets),
-                      locked: lock)
+    manager.showImage(osdImage.rawValue, onDisplayID: self.getShowOsdDisplayId(), priority: 0x1F4, msecUntilFade: 1000, filledChiclets: UInt32(filledChiclets), totalChiclets: UInt32(totalChiclets), locked: lock)
   }
 }

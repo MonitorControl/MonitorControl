@@ -18,17 +18,17 @@ enum PrefKeys: String {
   // Command value display
   case value
 
-  // Max command value display
-  case minDDC
+  // Min command value display TODO: Implementation: DONE, Preferences pane setting: MISSING
+  case mindDDCOverride
 
   // Max command value display
   case maxDDC
 
-  // Max command value display
-  case curveDDC
+  // Max user override command value display TODO: Implementation: MISSING, Preferences pane setting: MISSING
+  case maxDDCOverride
 
-  // Restore command value display
-  case restore
+  // Max command value display TODO: Implementation: DONE, Preferences pane setting: MISSING
+  case curveDDC
 
   // Display enabled
   case state

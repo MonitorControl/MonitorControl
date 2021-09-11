@@ -207,7 +207,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         externalDisplay.volumeSliderHandler = volumeSliderHandler
         hasSlider = true
       } else {
-        _ = externalDisplay.setupCurrentAndMaxValues(command: .audioSpeakerVolume) // We have to initialize speaker DDC without menu as well
+        externalDisplay.setupCurrentAndMaxValues(command: .audioSpeakerVolume) // We have to initialize speaker DDC without menu as well
       }
       if prefs.bool(forKey: PrefKeys.showContrast.rawValue) {
         let contrastSliderHandler = SliderHandler.addSliderMenuItem(toMenu: monitorSubMenu, forDisplay: externalDisplay, command: .contrast, title: NSLocalizedString("Contrast", comment: "Shown in menu"), numOfTickMarks: numOfTickMarks)
@@ -220,7 +220,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       display.brightnessSliderHandler = brightnessSliderHandler
       hasSlider = true
     } else if let externalDisplay = display as? ExternalDisplay, !externalDisplay.isSw() {
-      _ = externalDisplay.setupCurrentAndMaxValues(command: .brightness) // We have to initialize brightness DDC without menu as well
+      externalDisplay.setupCurrentAndMaxValues(command: .brightness) // We have to initialize brightness DDC without menu as well
     }
     if hasSlider {
       let monitorMenuItem = NSMenuItem()
