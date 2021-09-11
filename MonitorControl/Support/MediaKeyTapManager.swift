@@ -9,12 +9,17 @@ class MediaKeyTapManager: MediaKeyTapDelegate {
   var keyRepeatTimers: [MediaKey: Timer] = [:]
 
   func handle(mediaKey: MediaKey, event: KeyEvent?, modifiers: NSEvent.ModifierFlags?) {
+    let isPressed = event?.keyPressed ?? true
+    let isRepeat = event?.keyRepeat ?? false
+    let isControlModifier = modifiers?.isSuperset(of: NSEvent.ModifierFlags([.control])) ?? false
+    let isCommandModifier = modifiers?.isSuperset(of: NSEvent.ModifierFlags([.command])) ?? false
+    if isPressed, isCommandModifier, !isControlModifier, mediaKey == .brightnessDown, DisplayManager.engageMirror() {
+      return
+    }
     guard app.sleepID == 0, app.reconfigureID == 0 else {
       self.showOSDLock(mediaKey)
       return
     }
-    let isPressed = event?.keyPressed ?? true
-    let isRepeat = event?.keyRepeat ?? false
     if isPressed, self.handleOpenPrefPane(mediaKey: mediaKey, event: event, modifiers: modifiers) {
       return
     }
@@ -25,12 +30,8 @@ class MediaKeyTapManager: MediaKeyTapDelegate {
     if [.volumeUp, .volumeDown, .mute].contains(mediaKey), prefs.bool(forKey: PrefKeys.useFineScaleVolume.rawValue) {
       isSmallIncrement = !isSmallIncrement
     }
-    let isControlModifier = modifiers?.isSuperset(of: NSEvent.ModifierFlags([.control])) ?? false
-    let isCommandModifier = modifiers?.isSuperset(of: NSEvent.ModifierFlags([.command])) ?? false
     if isPressed, isControlModifier, mediaKey == .brightnessUp || mediaKey == .brightnessDown {
       self.handleDirectedBrightness(isCommandModifier: isCommandModifier, isUp: mediaKey == .brightnessUp, isSmallIncrement: isSmallIncrement)
-      return
-    } else if isPressed, isCommandModifier, mediaKey == .brightnessDown, DisplayManager.engageMirror() {
       return
     }
     let oppositeKey: MediaKey? = self.oppositeMediaKey(mediaKey: mediaKey)

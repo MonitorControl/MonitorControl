@@ -1,4 +1,5 @@
 import Cocoa
+import CoreGraphics
 import os.log
 
 class DisplayManager {
@@ -254,14 +255,46 @@ class DisplayManager {
       return false
     }
     // Break display mirror if there is any
+    var mirrorBreak = false
+    var displayConfigRef: CGDisplayConfigRef?
     for onlineDisplayID in onlineDisplayIDs where onlineDisplayID != 0 {
-      // TODO:
+      if CGDisplayIsInHWMirrorSet(onlineDisplayID) != 0 || CGDisplayIsInMirrorSet(onlineDisplayID) != 0 {
+        if mirrorBreak == false {
+          let result = CGBeginDisplayConfiguration(&displayConfigRef)
+          if result.rawValue != 0 {
+            return false
+          }
+        }
+        CGConfigureDisplayMirrorOfDisplay(displayConfigRef, onlineDisplayID, kCGNullDirectDisplay)
+        mirrorBreak = true
+      }
+    }
+    if mirrorBreak {
+      let result = CGCompleteDisplayConfiguration(displayConfigRef, CGConfigureOption.permanently)
+      if result.rawValue != 0 {
+        return false
+      }
+      return true
     }
     // Build display mirror
+    var maestroDisplayId = kCGNullDirectDisplay // We use 'maestro' because 'master' does not feel inclusive to SwiftLint and posts a warning which is ridiculous. I write master, master, master here three times to counter orwellian doubletalk. :P But let's pretend to be woke for a minute and go on...
     for onlineDisplayID in onlineDisplayIDs where onlineDisplayID != 0 {
-      // TODO:
+      if CGDisplayIsBuiltin(onlineDisplayID) == 0, maestroDisplayId == kCGNullDirectDisplay {
+        maestroDisplayId = onlineDisplayID
+      }
     }
-    return false
+    guard maestroDisplayId != kCGNullDirectDisplay else {
+      return false
+    }
+    CGBeginDisplayConfiguration(&displayConfigRef)
+    for onlineDisplayID in onlineDisplayIDs where onlineDisplayID != 0 && onlineDisplayID != maestroDisplayId {
+      CGConfigureDisplayMirrorOfDisplay(displayConfigRef, onlineDisplayID, maestroDisplayId)
+    }
+    let result = CGCompleteDisplayConfiguration(displayConfigRef, CGConfigureOption.permanently)
+    if result.rawValue != 0 {
+      return false
+    }
+    return true
   }
 
   // Static functions (could be anywhere)
