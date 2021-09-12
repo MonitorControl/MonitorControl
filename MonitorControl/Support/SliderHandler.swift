@@ -11,7 +11,7 @@ class SliderHandler {
     self.cmd = command
   }
 
-  func valueChangedExternalDisplay(value: Float, maxValue: Float) {
+  func valueChangedExternalDisplay(value: Float) {
     guard let externalDisplay = self.display as? ExternalDisplay else {
       return
     }
@@ -23,13 +23,13 @@ class SliderHandler {
     if !externalDisplay.isSw() {
       if self.cmd == Command.brightness, prefs.bool(forKey: PrefKeys.lowerSwAfterBrightness.rawValue) {
         var brightnessValue: Float = 0
-        var brightnessSwValue: Float = SCALE
-        if value >= maxValue / 2 {
-          brightnessValue = value - maxValue / 2
-          brightnessSwValue = SCALE
+        var brightnessSwValue: Float = 1
+        if value >= 0.5 {
+          brightnessValue = (value - 0.5) * 2
+          brightnessSwValue = 1
         } else {
           brightnessValue = 0
-          brightnessSwValue = (value / (maxValue / 2)) * SCALE
+          brightnessSwValue = (value / 0.5)
         }
         _ = externalDisplay.writeDDCValues(command: self.cmd, value: externalDisplay.convValueToDDC(for: self.cmd, from: brightnessValue))
         _ = externalDisplay.setSwBrightness(value: brightnessSwValue)
@@ -55,11 +55,10 @@ class SliderHandler {
     }
 
     var value = slider.floatValue
-    let maxValue = Float(slider.maxValue)
 
     if prefs.bool(forKey: PrefKeys.enableSliderSnap.rawValue) {
-      let snapInterval = maxValue / 4
-      let snapThreshold = maxValue * 0.04
+      let snapInterval: Float = 0.25
+      let snapThreshold: Float = 0.04
       let closest = (value + snapInterval / 2) / snapInterval * snapInterval
       if abs(closest - value) <= snapThreshold {
         value = closest
@@ -68,9 +67,9 @@ class SliderHandler {
     }
 
     if let appleDisplay = self.display as? AppleDisplay {
-      appleDisplay.setBrightness(value: value / SCALE)
+      appleDisplay.setBrightness(value: value)
     } else {
-      self.valueChangedExternalDisplay(value: value, maxValue: maxValue)
+      self.valueChangedExternalDisplay(value: value)
     }
   }
 
@@ -79,7 +78,7 @@ class SliderHandler {
 
     let handler = SliderHandler(display: display, command: command)
 
-    let slider = NSSlider(value: 0, minValue: 0, maxValue: Double(SCALE), target: handler, action: #selector(SliderHandler.valueChanged))
+    let slider = NSSlider(value: 0, minValue: 0, maxValue: 1, target: handler, action: #selector(SliderHandler.valueChanged))
     slider.isEnabled = true
     slider.numberOfTickMarks = numOfTickMarks
     handler.slider = slider
@@ -118,15 +117,14 @@ class SliderHandler {
       menu.insertItem(sliderHeaderItem, at: 0)
     }
 
+    slider.maxValue = 1
     if let externalDisplay = display as? ExternalDisplay {
       externalDisplay.setupCurrentAndMaxValues(command: command)
-      let (value, maxValue) = externalDisplay.getSliderCurrentAndMaxValues(command: command)
-      slider.maxValue = Double(maxValue)
+      let value = externalDisplay.setupSliderCurrentValue(command: command)
       slider.floatValue = value
     } else if let appleDisplay = display as? AppleDisplay {
       if command == .brightness {
-        slider.maxValue = Double(SCALE)
-        slider.floatValue = appleDisplay.getBrightness() * SCALE
+        slider.floatValue = appleDisplay.getBrightness()
       }
     }
     return handler

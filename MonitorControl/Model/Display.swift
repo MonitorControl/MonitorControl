@@ -107,10 +107,10 @@ class Display {
 
   let swBrightnessSemaphore = DispatchSemaphore(value: 1)
   func setSwBrightness(value: Float, smooth: Bool = false) -> Bool {
-    let brightnessValue = min(SCALE, value)
-    var currentValue = self.getSwBrightnessPrefValue() / SCALE
+    let brightnessValue = min(1, value)
+    var currentValue = self.getSwBrightnessPrefValue()
     self.saveSwBirghtnessPrefValue(brightnessValue)
-    var newValue = brightnessValue / SCALE
+    var newValue = brightnessValue
     currentValue = self.swBrightnessTransform(value: currentValue)
     newValue = self.swBrightnessTransform(value: newValue)
     if smooth {
@@ -148,14 +148,14 @@ class Display {
       let bluePeak = gammaTableBlue.max() ?? 0
       let gammaTablePeak = max(redPeak, greenPeak, bluePeak)
       let peakRatio = gammaTablePeak / self.defaultGammaTablePeak
-      let brightnessValue = round(self.swBrightnessTransform(value: peakRatio, reverse: true) * 10000) / 10000 * SCALE
+      let brightnessValue = round(self.swBrightnessTransform(value: peakRatio, reverse: true) * 10000) / 10000
       return brightnessValue
     }
-    return SCALE
+    return 1
   }
 
   func resetSwBrightness() -> Bool {
-    return self.setSwBrightness(value: SCALE)
+    return self.setSwBrightness(value: 1)
   }
 
   func saveSwBirghtnessPrefValue(_ value: Float) {
@@ -170,7 +170,7 @@ class Display {
     guard !self.isVirtual else {
       return false
     }
-    if self.getSwBrightness() < SCALE {
+    if self.getSwBrightness() < 1 {
       return true
     }
     return false
@@ -180,7 +180,7 @@ class Display {
     return false
   }
 
-  func showOsd(command: Command, value: Float, maxValue: Float = SCALE, roundChiclet: Bool = false, lock: Bool = false) {
+  func showOsd(command: Command, value: Float, maxValue: Float = 1, roundChiclet: Bool = false, lock: Bool = false) {
     guard let manager = OSDManager.sharedManager() as? OSDManager else {
       return
     }

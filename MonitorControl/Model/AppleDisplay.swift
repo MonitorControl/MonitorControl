@@ -29,13 +29,13 @@ class AppleDisplay: Display {
   public func getBrightness() -> Float {
     var brightness: Float = 0
     DisplayServicesGetBrightness(self.identifier, &brightness)
-    return brightness * SCALE
+    return brightness
   }
 
   public func setBrightness(value: Float) {
     self.displayQueue.sync {
-      DisplayServicesSetBrightness(self.identifier, value / SCALE)
-      DisplayServicesBrightnessChanged(self.identifier, Double(value / SCALE))
+      DisplayServicesSetBrightness(self.identifier, value)
+      DisplayServicesBrightnessChanged(self.identifier, Double(value))
     }
   }
 
@@ -44,21 +44,21 @@ class AppleDisplay: Display {
     self.setBrightness(value: value)
     self.showOsd(command: .brightness, value: value * 64, maxValue: 64)
     if let slider = brightnessSliderHandler?.slider {
-      slider.floatValue = value * SCALE
+      slider.floatValue = value
     }
   }
 
   override func refreshBrightness() -> Bool {
-    let brightness = self.getBrightness() * SCALE
+    let brightness = self.getBrightness()
     if let sliderHandler = brightnessSliderHandler, let slider = sliderHandler.slider, brightness != slider.floatValue {
       os_log("Pushing slider towards actual brightness for Apple display %{public}@", type: .debug, self.name)
-      if abs(brightness - slider.floatValue) < 0.01 * SCALE {
+      if abs(brightness - slider.floatValue) < 0.01 {
         slider.floatValue = brightness
         return false
       } else if brightness > slider.floatValue {
-        slider.floatValue += max((brightness - slider.floatValue) / 3, 0.005 * SCALE)
+        slider.floatValue += max((brightness - slider.floatValue) / 3, 0.005)
       } else {
-        slider.floatValue += min((brightness - slider.floatValue) / 3, -0.005 * SCALE)
+        slider.floatValue += min((brightness - slider.floatValue) / 3, -0.005)
       }
       return true
     }
