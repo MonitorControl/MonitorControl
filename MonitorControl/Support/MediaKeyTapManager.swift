@@ -200,10 +200,8 @@ class MediaKeyTapManager: MediaKeyTapDelegate {
   static func acquirePrivileges() {
     if !self.readPrivileges(prompt: true) {
       let alert = NSAlert()
-      alert.addButton(withTitle: NSLocalizedString("OK", comment: "Shown in the alert dialog"))
       alert.messageText = NSLocalizedString("Shortcuts not available", comment: "Shown in the alert dialog")
       alert.informativeText = NSLocalizedString("You need to enable MonitorControl in System Preferences > Security and Privacy > Accessibility for the keyboard shortcuts to work", comment: "Shown in the alert dialog")
-      alert.alertStyle = .warning
       alert.runModal()
     }
   }

@@ -14,7 +14,7 @@ let prefs = UserDefaults.standard
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
   @IBOutlet var statusMenu: NSMenu!
-  let minPreviousBuildNumber = 3380 // Below this previous app version there is a mandatory preferences reset!
+  let minPreviousBuildNumber = 3680 // Below this previous app version there is a mandatory preferences reset!
   let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
   var mediaKeyTap = MediaKeyTapManager()
   var monitorItems: [NSMenuItem] = []
@@ -63,15 +63,17 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     if NSEvent.modifierFlags.contains(NSEvent.ModifierFlags.shift) {
       self.safeMode = true
       let alert = NSAlert()
-      alert.alertStyle = NSAlert.Style.informational
       alert.messageText = NSLocalizedString("Safe Mode Activated", comment: "Shown in the alert dialog")
       alert.informativeText = NSLocalizedString("Shift was pressed during launch. MonitorControl started in safe mode. Default preferences are reloaded, DDC read is blocked.", comment: "Shown in the alert dialog")
-      alert.addButton(withTitle: NSLocalizedString("OK", comment: "Shown in the alert dialog"))
       alert.runModal()
     }
     let currentBuildNumber = Int(Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String ?? "1") ?? 1
     let previousBuildNumber: Int = (Int(prefs.string(forKey: PrefKey.buildNumber.rawValue) ?? "0") ?? 0)
     if self.safeMode || ((previousBuildNumber < self.minPreviousBuildNumber) && previousBuildNumber > 0) || (previousBuildNumber > currentBuildNumber), let bundleID = Bundle.main.bundleIdentifier {
+      let alert = NSAlert()
+      alert.messageText = NSLocalizedString("Incompatible previous version", comment: "Shown in the alert dialog")
+      alert.informativeText = NSLocalizedString("Preferences for an incompatible previous app version detected. Default preferences are reloaded.", comment: "Shown in the alert dialog")
+      alert.runModal()
       UserDefaults.standard.removePersistentDomain(forName: bundleID)
     }
     prefs.set(currentBuildNumber, forKey: PrefKey.buildNumber.rawValue)

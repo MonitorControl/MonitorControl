@@ -49,6 +49,9 @@
 /* Shown in the Display Preferences */
 "Hardware (DDC)" = "Hardware (DDC)";
 
+/* Shown in the alert dialog */
+"Incompatible previous version" = "Incompatible previous version";
+
 /* Intel designation (shown after the version number in Preferences) */
 "Intel" = "Intel";
 
@@ -66,6 +69,9 @@
 
 /* Shown in the Display Preferences */
 "Other Display" = "Inny Wyświetlacz";
+
+/* Shown in the alert dialog */
+"Preferences for an incompatible previous app version detected. Default preferences are reloaded." = "Preferences for an incompatible previous app version detected. Default preferences are reloaded.";
 
 /* Shown in the alert dialog */
 "Reset Preferences?" = "Zresetować Preferencje?";
