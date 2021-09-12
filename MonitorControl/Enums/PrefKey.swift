@@ -35,6 +35,12 @@ enum PrefKey: String {
   // Is the specific control is set as available for display? TODO: Implementation: MISSING, Preferences outlet: PRESENT, NOT CONNECTED
   case availableDDC
 
+  // Invert DDC scale? TODO: Implementation: MISSING, Preferences outlet: PRESENT, NOT CONNECTED
+  case invertDDC
+
+  // Override DDC control command code TODO: Implementation: MISSING, Preferences outlet: PRESENT, NOT CONNECTED
+  case remapDDC
+
   // User assigned audio device name for display TODO: Implementation: MISSING, Preferences outlet: PRESENT, NOT CONNECTED
   case audioDeviceNameOverride
 

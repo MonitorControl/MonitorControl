@@ -16,6 +16,9 @@
 /* Class = "NSTextFieldCell"; title = "MonitorControl uses mouse position to determine which display to control. Using window focus instead might not work well with full screen apps."; ObjectID = "4dX-o1-xAc"; */
 "4dX-o1-xAc.title" = "MonitorControl uses mouse position to determine which display to control. Using window focus instead might not work well with full screen apps.";
 
+/* Class = "NSTextFieldCell"; title = "Invert"; ObjectID = "6zE-AH-mXf"; */
+"6zE-AH-mXf.title" = "Invert";
+
 /* Class = "NSTextFieldCell"; title = "Slider behavior:"; ObjectID = "75n-7M-1mS"; */
 "75n-7M-1mS.title" = "Slider behavior:";
 
@@ -70,6 +73,9 @@
 /* Class = "NSTextFieldCell"; title = "⚠️ Warning! Changing some of these settings may cause system freezes or unexpected behavior!"; ObjectID = "Cz1-Mh-llk"; */
 "Cz1-Mh-llk.title" = "⚠️ Uyarı! Bu ayarların bazılarını değiştirmek, sistemin donmasına veya beklenmeyen davranışlara neden olabilir!";
 
+/* Class = "NSTextFieldCell"; title = "Remap"; ObjectID = "D9t-vT-gNJ"; */
+"D9t-vT-gNJ.title" = "Remap";
+
 /* Class = "NSTextFieldCell"; title = "Might not work well with multiple identical displays. Without this the app uses mouse position to determine which display to control."; ObjectID = "Dha-Tm-cDM"; */
 "Dha-Tm-cDM.title" = "Might not work well with multiple identical displays. Without this the app uses mouse position to determine which display to control.";
 
@@ -99,6 +105,9 @@
 
 /* Class = "NSMenuItem"; title = "None"; ObjectID = "FoA-yh-Yx3"; */
 "FoA-yh-Yx3.title" = "Yok";
+
+/* Class = "NSTextFieldCell"; title = "Invert"; ObjectID = "G5A-y3-eZz"; */
+"G5A-y3-eZz.title" = "Invert";
 
 /* Class = "NSTextFieldCell"; title = "Brightness slider for hardware or software controlled displays or TVs."; ObjectID = "gXH-HL-ZOL"; */
 "gXH-HL-ZOL.title" = "Brightness slider for hardware or software controlled displays or TVs.";
