@@ -23,8 +23,9 @@ class MainPrefsViewController: NSViewController, PreferencePane {
   @IBOutlet var lowerSwAfterBrightness: NSButton!
   @IBOutlet var fallbackSw: NSButton!
   @IBOutlet var showAdvancedDisplays: NSButton!
-  @IBOutlet var restoreLastSavedValuesOff: NSButton!
-  @IBOutlet var restoreLastSavedValuesOn: NSButton!
+  @IBOutlet var notEnableDDCDuringStartup: NSButton!
+  @IBOutlet var writeDDCOnStartup: NSButton!
+  @IBOutlet var readDDCOnStartup: NSButton!
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -44,8 +45,9 @@ class MainPrefsViewController: NSViewController, PreferencePane {
     self.lowerSwAfterBrightness.state = self.prefs.bool(forKey: PrefKey.lowerSwAfterBrightness.rawValue) ? .on : .off
     self.fallbackSw.state = self.prefs.bool(forKey: PrefKey.fallbackSw.rawValue) ? .on : .off
     self.showAdvancedDisplays.state = self.prefs.bool(forKey: PrefKey.showAdvancedDisplays.rawValue) ? .on : .off
-    self.restoreLastSavedValuesOff.state = self.prefs.bool(forKey: PrefKey.readDDCInsteadOfRestoreValues.rawValue) ? .on : .off
-    self.restoreLastSavedValuesOn.state = self.prefs.bool(forKey: PrefKey.readDDCInsteadOfRestoreValues.rawValue) ? .off : .on
+    self.notEnableDDCDuringStartup.state = !self.prefs.bool(forKey: PrefKey.enableDDCDuringStartup.rawValue) ? .on : .off
+    self.writeDDCOnStartup.state = !self.prefs.bool(forKey: PrefKey.readDDCInsteadOfRestoreValues.rawValue) && self.prefs.bool(forKey: PrefKey.enableDDCDuringStartup.rawValue) ? .on : .off
+    self.readDDCOnStartup.state = self.prefs.bool(forKey: PrefKey.readDDCInsteadOfRestoreValues.rawValue) && self.prefs.bool(forKey: PrefKey.enableDDCDuringStartup.rawValue) ? .on : .off
   }
 
   @IBAction func startAtLoginClicked(_ sender: NSButton) {
@@ -82,26 +84,35 @@ class MainPrefsViewController: NSViewController, PreferencePane {
     app.updateDisplaysAndMenus()
   }
 
-  @IBAction func restoreLastSavedValuesOffClicked(_ sender: NSButton) {
+  @IBAction func notEnableDDCDuringStartupClicked(_ sender: NSButton) {
     switch sender.state {
     case .on:
-      self.prefs.set(true, forKey: PrefKey.readDDCInsteadOfRestoreValues.rawValue)
-      self.restoreLastSavedValuesOn.state = .off
-    case .off:
+      self.prefs.set(false, forKey: PrefKey.enableDDCDuringStartup.rawValue)
       self.prefs.set(false, forKey: PrefKey.readDDCInsteadOfRestoreValues.rawValue)
-      self.restoreLastSavedValuesOn.state = .on
+      self.writeDDCOnStartup.state = .off
+      self.readDDCOnStartup.state = .off
     default: break
     }
   }
 
-  @IBAction func restoreLastSavedValuesOnClicked(_ sender: NSButton) {
+  @IBAction func writeDDCOnStartupClicked(_ sender: NSButton) {
     switch sender.state {
     case .on:
       self.prefs.set(false, forKey: PrefKey.readDDCInsteadOfRestoreValues.rawValue)
-      self.restoreLastSavedValuesOff.state = .off
-    case .off:
+      self.prefs.set(true, forKey: PrefKey.enableDDCDuringStartup.rawValue)
+      self.notEnableDDCDuringStartup.state = .off
+      self.readDDCOnStartup.state = .off
+    default: break
+    }
+  }
+
+  @IBAction func readDDCOnStartupClicked(_ sender: NSButton) {
+    switch sender.state {
+    case .on:
       self.prefs.set(true, forKey: PrefKey.readDDCInsteadOfRestoreValues.rawValue)
-      self.restoreLastSavedValuesOff.state = .on
+      self.prefs.set(true, forKey: PrefKey.enableDDCDuringStartup.rawValue)
+      self.notEnableDDCDuringStartup.state = .off
+      self.writeDDCOnStartup.state = .off
     default: break
     }
   }

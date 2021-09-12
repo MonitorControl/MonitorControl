@@ -89,6 +89,9 @@ enum PrefKey: String {
   // Used for notification when displays are updated in DisplayManager
   case displayListUpdate
 
+  // Instead of assuming default values, enable read or write upon startup (according to readDDCInsteadOfRestoreValues)
+  case enableDDCDuringStartup
+
   // Restore last saved values upon startup or wake
   case readDDCInsteadOfRestoreValues
 

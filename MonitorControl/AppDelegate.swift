@@ -62,7 +62,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     self.subscribeEventListeners()
     if NSEvent.modifierFlags.contains(NSEvent.ModifierFlags.shift) {
       self.safeMode = true
-      self.handlePreferenceReset()
       let alert = NSAlert()
       alert.alertStyle = NSAlert.Style.informational
       alert.messageText = NSLocalizedString("Safe Mode Activated", comment: "Shown in the alert dialog")
@@ -70,6 +69,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       alert.addButton(withTitle: NSLocalizedString("OK", comment: "Shown in the alert dialog"))
       alert.runModal()
     }
+    let currentBuildNumber = Int(Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String ?? "1") ?? 1
+    let previousBuildNumber: Int = (Int(prefs.string(forKey: PrefKey.buildNumber.rawValue) ?? "0") ?? 0)
+    if self.safeMode || ((previousBuildNumber < self.minPreviousBuildNumber) && previousBuildNumber > 0) || (previousBuildNumber > currentBuildNumber), let bundleID = Bundle.main.bundleIdentifier {
+      UserDefaults.standard.removePersistentDomain(forName: bundleID)
+    }
+    prefs.set(currentBuildNumber, forKey: PrefKey.buildNumber.rawValue)
     self.setDefaultPrefs()
     if #available(macOS 11.0, *) {
       self.statusItem.button?.image = NSImage(systemSymbolName: "sun.max", accessibilityDescription: "MonitorControl")
@@ -103,29 +108,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   }
 
   func setDefaultPrefs() {
-    let currentBuildNumber = Int(Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String ?? "1") ?? 1
-    let previousBuildNumber: Int = (Int(prefs.string(forKey: PrefKey.buildNumber.rawValue) ?? "0") ?? 0)
-    if !prefs.bool(forKey: PrefKey.appAlreadyLaunched.rawValue) || (previousBuildNumber < self.minPreviousBuildNumber && previousBuildNumber > 0) || previousBuildNumber > currentBuildNumber {
-      // Preferences reset is needed
+    if !prefs.bool(forKey: PrefKey.appAlreadyLaunched.rawValue) {
+      // Only preferences that are not false, 0 or "" by default are set here. Assumes pre-wiped database.
       prefs.set(true, forKey: PrefKey.appAlreadyLaunched.rawValue)
-      prefs.set(false, forKey: PrefKey.hideBrightness.rawValue)
-      prefs.set(false, forKey: PrefKey.showContrast.rawValue)
       prefs.set(true, forKey: PrefKey.showVolume.rawValue)
       prefs.set(true, forKey: PrefKey.fallbackSw.rawValue)
-      prefs.set(false, forKey: PrefKey.hideAppleFromMenu.rawValue)
-      prefs.set(false, forKey: PrefKey.enableSliderSnap.rawValue)
-      prefs.set(false, forKey: PrefKey.hideMenuIcon.rawValue)
-      prefs.set(false, forKey: PrefKey.showAdvancedDisplays.rawValue)
-      prefs.set(false, forKey: PrefKey.lowerSwAfterBrightness.rawValue)
-      prefs.set(false, forKey: PrefKey.useFocusInsteadOfMouse.rawValue)
-      prefs.set(false, forKey: PrefKey.readDDCInsteadOfRestoreValues.rawValue)
-      prefs.set(false, forKey: PrefKey.useFocusInsteadOfMouse.rawValue)
-      prefs.set(false, forKey: PrefKey.allScreensVolume.rawValue)
-      prefs.set(false, forKey: PrefKey.useAudioDeviceNameMatching.rawValue)
-      prefs.set(false, forKey: PrefKey.useFineScaleBrightness.rawValue)
-      prefs.set(false, forKey: PrefKey.useFineScaleVolume.rawValue)
     }
-    prefs.set(currentBuildNumber, forKey: PrefKey.buildNumber.rawValue)
   }
 
   func clearMenu() {

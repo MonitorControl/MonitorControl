@@ -1,7 +1,7 @@
 /* Class = "NSTextFieldCell"; title = "If the menu item is hidden, just relaunch the app to reveal Preferences!"; ObjectID = "0OK-pk-ecx"; */
 "0OK-pk-ecx.title" = "Menü öğesi gizlenirse, tercihleri ortaya çıkarmak için uygulamayı yeniden başlatın!";
 
-/* Class = "NSButtonCell"; title = "Attempt to read current display settings"; ObjectID = "0qp-fq-8MI"; */
+/* Class = "NSButtonCell"; title = "Attempt to read display settings"; ObjectID = "0qp-fq-8MI"; */
 "0qp-fq-8MI.title" = "Attempt to read current display settings";
 
 /* Class = "NSTextFieldCell"; title = "MonitorControl"; ObjectID = "1PJ-14-Bvn"; */
@@ -30,6 +30,9 @@
 
 /* Class = "NSTextFieldCell"; title = "Show tick marks at 0%, 25%, 50%, 75% and 100% for accuracy."; ObjectID = "A8P-vn-DEJ"; */
 "A8P-vn-DEJ.title" = "Show tick marks at 0%, 25%, 50%, 75% and 100% for accuracy.";
+
+/* Class = "NSTextFieldCell"; title = "Use brightness, volume and other settings from last time or use defaults. Values will be applied to the display upon first change by the user."; ObjectID = "an7-Aj-3fZ"; */
+"an7-Aj-3fZ.title" = "Use brightness, volume and other settings from last time or use defaults. Values will be applied to the display upon first change by the user.";
 
 /* Class = "NSTextFieldCell"; title = "These options work for hardware (DDC) controlled displays only."; ObjectID = "bIe-6O-xEH"; */
 "bIe-6O-xEH.title" = "Bu seçenekler yalnızca donanım (DDC) kontrollü ekranlar için çalışır.";
@@ -76,7 +79,7 @@
 /* Class = "NSTextFieldCell"; title = "Brightness slider:"; ObjectID = "fe9-Ia-t9m"; */
 "fe9-Ia-t9m.title" = "Menü içerikleri:";
 
-/* Class = "NSButtonCell"; title = "Further lower brightness via software dimming"; ObjectID = "fhy-Er-0aI"; */
+/* Class = "NSButtonCell"; title = "Combine hardware and software dimming"; ObjectID = "fhy-Er-0aI"; */
 "fhy-Er-0aI.title" = "Yazılımsal karartma yoluyla daha düşük parlaklık";
 
 /* Class = "NSTextFieldCell"; title = "Apple and built-in displays already have a brightness slider in Control Center."; ObjectID = "fmZ-HI-Mdc"; */
@@ -115,7 +118,7 @@
 /* Class = "NSTextFieldCell"; title = "Note: you can press Shift during startup for 'Safe mode' to restore defaults and avoid reading or setting anything."; ObjectID = "Jx2-gO-nq9"; */
 "Jx2-gO-nq9.title" = "Note: you can press Shift during startup for 'Safe mode' to restore defaults and avoid reading or setting anything.";
 
-/* Class = "NSButtonCell"; title = "Restore last saved values"; ObjectID = "K0S-zN-M4k"; */
+/* Class = "NSButtonCell"; title = "Apply last saved values to the display"; ObjectID = "K0S-zN-M4k"; */
 "K0S-zN-M4k.title" = "Restore last saved values";
 
 /* Class = "NSTextFieldCell"; title = "Use the media keys of your keyboard to control Brightness & Volume."; ObjectID = "K2r-aD-eec"; */
@@ -148,7 +151,7 @@
 /* Class = "NSButtonCell"; title = "Show brightness slider in menu"; ObjectID = "MWo-6I-s9L"; */
 "MWo-6I-s9L.title" = "Show brightness slider in menu";
 
-/* Class = "NSTextFieldCell"; title = "If an external display can't be controlled, software dimming will be used instead."; ObjectID = "n4V-jQ-1Ri"; */
+/* Class = "NSTextFieldCell"; title = "If a display can't be controlled, software dimming will be used instead."; ObjectID = "n4V-jQ-1Ri"; */
 "n4V-jQ-1Ri.title" = "Harici bir ekran kontrol edilemezse, yazılımsal karartma yerine kullanılacaktır.";
 
 /* Class = "NSMenuItem"; title = "Volume only"; ObjectID = "NLP-dU-Dam"; */
@@ -199,7 +202,7 @@
 /* Class = "NSTextFieldCell"; title = "DDC read polling mode:"; ObjectID = "vwm-hY-on5"; */
 "vwm-hY-on5.title" = "DDC Okuma Oylama Modu:";
 
-/* Class = "NSTextFieldCell"; title = "Restore settings from last run or from before sleep. Useful when a display tends to reset brightness during sleep or hardware has issues with reading DDC data. Not relevant for Apple displays."; ObjectID = "w8B-x6-sq5"; */
+/* Class = "NSTextFieldCell"; title = "Useful when a display tends to reset its settings during sleep."; ObjectID = "w8B-x6-sq5"; */
 "w8B-x6-sq5.title" = "Restore settings from last run or from before sleep. Useful when a display tends to reset brightness during sleep or hardware has issues with reading DDC data. Not relevant for Apple displays.";
 
 /* Class = "NSButtonCell"; title = "Show advanced settings under Displays"; ObjectID = "Wnd-hx-Meb"; */
@@ -208,7 +211,7 @@
 /* Class = "NSMenuItem"; title = "None"; ObjectID = "X96-ny-lAP"; */
 "X96-ny-lAP.title" = "Yok";
 
-/* Class = "NSTextFieldCell"; title = "Attempt to read current settings from the display. If unsuccessful, last saved values are presumed or generic defaults are used instead."; ObjectID = "xjq-hs-wWB"; */
+/* Class = "NSTextFieldCell"; title = "Update settings from the display. May not work with some hardware."; ObjectID = "xjq-hs-wWB"; */
 "xjq-hs-wWB.title" = "Attempt to read current settings from the display. If unsuccessful, last saved values are presumed or generic defaults are used instead.";
 
 /* Class = "NSButtonCell"; title = "Reset Preferences"; ObjectID = "xY6-aw-o9u"; */
@@ -217,8 +220,11 @@
 /* Class = "NSTextFieldCell"; title = "Additional settings:"; ObjectID = "Xz0-X0-rB4"; */
 "Xz0-X0-rB4.title" = "Ek ayarlar:";
 
-/* Class = "NSTextFieldCell"; title = "This activates additional software dimming after the display reached zero hardware brightness. Menu slider is also affected with 50% being the transition point. Works for DDC controlled displays only."; ObjectID = "yeg-GN-SuO"; */
+/* Class = "NSTextFieldCell"; title = "Use software dimming after the display reached zero hardware brightness for extended range. Works for DDC controlled displays only."; ObjectID = "yeg-GN-SuO"; */
 "yeg-GN-SuO.title" = "Bu, ekran sıfır donanım parlaklığına ulaştıktan sonra ek yazılımsal karartmayı etkinleştirir. Menü kaydırıcısı ayrıca geçiş noktası olan %50'sinden de etkilenir. Yalnızca DDC kontrollü ekranlar için çalışır.";
+
+/* Class = "NSButtonCell"; title = "Assume last saved settings are valid (recommended)"; ObjectID = "yn8-Nd-o89"; */
+"yn8-Nd-o89.title" = "Assume last saved settings are valid (recommended)";
 
 /* Class = "NSTextFieldCell"; title = "Identifier:"; ObjectID = "YqZ-LS-YvR"; */
 "YqZ-LS-YvR.title" = "Tanımlayıcı:";
