@@ -48,7 +48,11 @@ class DisplayManager {
     os_log("Detecting displays for audio control via audio device name matching...", type: .debug)
     var numOfAddedDisplays: Int = 0
     for ddcCapableDisplay in self.getDdcCapableDisplays() {
-      if DisplayManager.getDisplayRawNameByID(displayID: ddcCapableDisplay.identifier) == deviceName {
+      var displayAudioDeviceName = ddcCapableDisplay.audioDeviceNameOverride
+      if displayAudioDeviceName == "" {
+        displayAudioDeviceName = DisplayManager.getDisplayRawNameByID(displayID: ddcCapableDisplay.identifier)
+      }
+      if displayAudioDeviceName == deviceName {
         self.audioControlTargetDisplays.append(ddcCapableDisplay)
         numOfAddedDisplays += 1
         os_log("Added display for audio control - %{public}@", type: .debug, ddcCapableDisplay.name)

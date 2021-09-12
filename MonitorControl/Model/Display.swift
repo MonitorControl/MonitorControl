@@ -85,6 +85,14 @@ class Display: Equatable {
     self.prefs.set(value, forKey: forkey.rawValue + String(command.rawValue) + self.prefsId)
   }
 
+  func readPrefValueKeyBool(forkey: PrefKey, for command: Command) -> Bool {
+    return self.prefs.bool(forKey: forkey.rawValue + String(command.rawValue) + self.prefsId)
+  }
+
+  func savePrefValueKeyBool(forkey: PrefKey, value: Bool, for command: Command) {
+    self.prefs.set(value, forKey: forkey.rawValue + String(command.rawValue) + self.prefsId)
+  }
+  
   internal init(_ identifier: CGDirectDisplayID, name: String, vendorNumber: UInt32?, modelNumber: UInt32?, isVirtual: Bool = false) {
     self.identifier = identifier
     self.name = name

@@ -49,6 +49,11 @@ class ExternalDisplay: Display {
     set { prefs.set(newValue, forKey: PrefKey.pollingCount.rawValue + self.prefsId) }
   }
 
+  var audioDeviceNameOverride: String {
+    get { return prefs.string(forKey: PrefKey.audioDeviceNameOverride.rawValue + self.prefsId) ?? "" }
+    set { prefs.set(newValue, forKey: PrefKey.pollingMode.rawValue + self.prefsId) }
+  }
+  
   override init(_ identifier: CGDirectDisplayID, name: String, vendorNumber: UInt32?, modelNumber: UInt32?, isVirtual: Bool = false) {
     super.init(identifier, name: name, vendorNumber: vendorNumber, modelNumber: modelNumber, isVirtual: isVirtual)
     if !isVirtual, !Arm64DDC.isArm64 {
@@ -321,10 +326,14 @@ class ExternalDisplay: Display {
       return false
     }
     var success: Bool = false
+    var controlCode = UInt8(self.readPrefValueKeyInt(forkey: PrefKey.remapDDC, for: command))
+    if controlCode == 0 {
+      controlCode = command.rawValue
+    }
     app.ddcQueue.sync {
       if Arm64DDC.isArm64 {
         if self.arm64ddc {
-          success = Arm64DDC.write(service: self.arm64avService, command: command.rawValue, value: value)
+          success = Arm64DDC.write(service: self.arm64avService, command: controlCode, value: value)
         }
       } else {
         success = self.ddc?.write(command: command.rawValue, value: value, errorRecoveryWaitTime: 2000) ?? false
@@ -337,6 +346,10 @@ class ExternalDisplay: Display {
     var values: (UInt16, UInt16)?
     guard app.sleepID == 0, app.reconfigureID == 0, !self.forceSw else {
       return values
+    }
+    var controlCode = UInt8(self.readPrefValueKeyInt(forkey: PrefKey.remapDDC, for: command))
+    if controlCode == 0 {
+      controlCode = command.rawValue
     }
     if Arm64DDC.isArm64 {
       guard self.arm64ddc else {
@@ -381,10 +394,14 @@ class ExternalDisplay: Display {
   }
 
   func convValueToDDC(for command: Command, from: Float) -> UInt16 {
+    var value = from
+    if self.readPrefValueKeyBool(forkey: PrefKey.invertDDC, for: command) {
+      value = 1 - value
+    }
     let curveDDC = self.prefValueExistsKey(forkey: PrefKey.curveDDC, for: command) ? self.readPrefValueKey(forkey: PrefKey.curveDDC, for: command) : 1
     let minDDCValue = Float(self.readPrefValueKeyInt(forkey: PrefKey.minDDCOverride, for: command))
     let maxDDCValue = Float(self.readPrefValueKeyInt(forkey: PrefKey.maxDDC, for: command))
-    let curvedValue = pow(max(min(from, 1), 0), curveDDC)
+    let curvedValue = pow(max(min(value, 1), 0), curveDDC)
     let deNormalizedValue = (maxDDCValue - minDDCValue) * curvedValue + minDDCValue
     var intDDCValue = UInt16(min(max(deNormalizedValue, minDDCValue), maxDDCValue))
     if from > 0, command == Command.audioSpeakerVolume {
@@ -399,7 +416,11 @@ class ExternalDisplay: Display {
     let maxDDCValue = Float(self.readPrefValueKeyInt(forkey: PrefKey.maxDDC, for: command))
     let normalizedValue = ((min(max(Float(from), minDDCValue), maxDDCValue) - minDDCValue) / (maxDDCValue - minDDCValue))
     let deCurvedValue = pow(normalizedValue, 1.0 / curveDDC)
-    return max(min(deCurvedValue, 1), 0)
+    var value = deCurvedValue
+    if self.readPrefValueKeyBool(forkey: PrefKey.invertDDC, for: command) {
+      value = 1 - value
+    }
+    return max(min(value, 1), 0)
   }
 
   func playVolumeChangedSound() {
