@@ -44,8 +44,8 @@ class MainPrefsViewController: NSViewController, PreferencePane {
     self.lowerSwAfterBrightness.state = self.prefs.bool(forKey: PrefKey.lowerSwAfterBrightness.rawValue) ? .on : .off
     self.fallbackSw.state = self.prefs.bool(forKey: PrefKey.fallbackSw.rawValue) ? .on : .off
     self.showAdvancedDisplays.state = self.prefs.bool(forKey: PrefKey.showAdvancedDisplays.rawValue) ? .on : .off
-    self.restoreLastSavedValuesOff.state = self.prefs.bool(forKey: PrefKey.restoreLastSavedValues.rawValue) ? .off : .on
-    self.restoreLastSavedValuesOn.state = self.prefs.bool(forKey: PrefKey.restoreLastSavedValues.rawValue) ? .on : .off
+    self.restoreLastSavedValuesOff.state = self.prefs.bool(forKey: PrefKey.readDDCInsteadOfRestoreValues.rawValue) ? .on : .off
+    self.restoreLastSavedValuesOn.state = self.prefs.bool(forKey: PrefKey.readDDCInsteadOfRestoreValues.rawValue) ? .off : .on
   }
 
   @IBAction func startAtLoginClicked(_ sender: NSButton) {
@@ -85,10 +85,10 @@ class MainPrefsViewController: NSViewController, PreferencePane {
   @IBAction func restoreLastSavedValuesOffClicked(_ sender: NSButton) {
     switch sender.state {
     case .on:
-      self.prefs.set(false, forKey: PrefKey.restoreLastSavedValues.rawValue)
+      self.prefs.set(true, forKey: PrefKey.readDDCInsteadOfRestoreValues.rawValue)
       self.restoreLastSavedValuesOn.state = .off
     case .off:
-      self.prefs.set(true, forKey: PrefKey.restoreLastSavedValues.rawValue)
+      self.prefs.set(false, forKey: PrefKey.readDDCInsteadOfRestoreValues.rawValue)
       self.restoreLastSavedValuesOn.state = .on
     default: break
     }
@@ -97,10 +97,10 @@ class MainPrefsViewController: NSViewController, PreferencePane {
   @IBAction func restoreLastSavedValuesOnClicked(_ sender: NSButton) {
     switch sender.state {
     case .on:
-      self.prefs.set(true, forKey: PrefKey.restoreLastSavedValues.rawValue)
+      self.prefs.set(false, forKey: PrefKey.readDDCInsteadOfRestoreValues.rawValue)
       self.restoreLastSavedValuesOff.state = .off
     case .off:
-      self.prefs.set(false, forKey: PrefKey.restoreLastSavedValues.rawValue)
+      self.prefs.set(true, forKey: PrefKey.readDDCInsteadOfRestoreValues.rawValue)
       self.restoreLastSavedValuesOff.state = .on
     default: break
     }

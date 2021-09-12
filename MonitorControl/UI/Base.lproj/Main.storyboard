@@ -10,8 +10,8 @@
         <scene sceneID="zAg-r8-WQ5">
             <objects>
                 <viewController storyboardIdentifier="MainPrefsVC" id="BGD-tY-Myx" customClass="MainPrefsViewController" customModule="MonitorControl" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" horizontalHuggingPriority="1" translatesAutoresizingMaskIntoConstraints="NO" id="COE-Oc-gZs">
-                        <rect key="frame" x="0.0" y="0.0" width="691" height="500"/>
+                    <view key="view" horizontalHuggingPriority="1" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="COE-Oc-gZs">
+                        <rect key="frame" x="0.0" y="0.0" width="691" height="504"/>
                         <subviews>
                             <gridView xPlacement="leading" yPlacement="fill" rowAlignment="none" rowSpacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="noT-gJ-0yS">
                                 <rect key="frame" x="20" y="20" width="651" height="460"/>
@@ -140,33 +140,8 @@
                                         </textField>
                                     </gridCell>
                                     <gridCell row="g3B-cE-vmT" column="64O-72-10l" xPlacement="leading" id="eYR-Th-VbP">
-                                        <button key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="5M2-Ww-w0G">
-                                            <rect key="frame" x="235" y="236" width="267" height="18"/>
-                                            <buttonCell key="cell" type="radio" title="Attempt to read current display settings" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="0qp-fq-8MI">
-                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                                <font key="font" metaFont="system"/>
-                                            </buttonCell>
-                                            <connections>
-                                                <action selector="restoreLastSavedValuesOffClicked:" target="BGD-tY-Myx" id="vQR-Vt-qO7"/>
-                                            </connections>
-                                        </button>
-                                    </gridCell>
-                                    <gridCell row="0ue-QI-RgH" column="eHC-Ur-UsS" id="Sm5-Fc-F4S"/>
-                                    <gridCell row="0ue-QI-RgH" column="64O-72-10l" id="S8M-Pw-kzT">
-                                        <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" preferredMaxLayoutWidth="400" translatesAutoresizingMaskIntoConstraints="NO" id="uVw-0p-A1a">
-                                            <rect key="frame" x="235" y="199" width="418" height="28"/>
-                                            <textFieldCell key="cell" controlSize="small" id="xjq-hs-wWB">
-                                                <font key="font" metaFont="smallSystem"/>
-                                                <string key="title">Attempt to read current settings from the display. If unsuccessful, last saved values are presumed or generic defaults are used instead.</string>
-                                                <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
-                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                            </textFieldCell>
-                                        </textField>
-                                    </gridCell>
-                                    <gridCell row="tGg-mO-YiD" column="eHC-Ur-UsS" id="My8-pJ-kb1"/>
-                                    <gridCell row="tGg-mO-YiD" column="64O-72-10l" id="Gdm-K9-Mzv">
                                         <button key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="AjD-Oy-S0f">
-                                            <rect key="frame" x="235" y="172" width="416" height="18"/>
+                                            <rect key="frame" x="235" y="236" width="179" height="18"/>
                                             <buttonCell key="cell" type="radio" title="Restore last saved values" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="K0S-zN-M4k">
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                 <font key="font" metaFont="system"/>
@@ -176,13 +151,38 @@
                                             </connections>
                                         </button>
                                     </gridCell>
-                                    <gridCell row="UAP-kZ-c0z" column="eHC-Ur-UsS" id="AX0-yT-SVr"/>
-                                    <gridCell row="UAP-kZ-c0z" column="64O-72-10l" id="w1F-2K-Kmv">
+                                    <gridCell row="0ue-QI-RgH" column="eHC-Ur-UsS" id="Sm5-Fc-F4S"/>
+                                    <gridCell row="0ue-QI-RgH" column="64O-72-10l" id="S8M-Pw-kzT">
                                         <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" preferredMaxLayoutWidth="400" translatesAutoresizingMaskIntoConstraints="NO" id="cwW-VH-Nqj">
-                                            <rect key="frame" x="235" y="121" width="418" height="42"/>
+                                            <rect key="frame" x="235" y="185" width="418" height="42"/>
                                             <textFieldCell key="cell" controlSize="small" id="w8B-x6-sq5">
                                                 <font key="font" metaFont="smallSystem"/>
                                                 <string key="title">Restore settings from last run or from before sleep. Useful when a display tends to reset brightness during sleep or hardware has issues with reading DDC data. Not relevant for Apple displays.</string>
+                                                <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            </textFieldCell>
+                                        </textField>
+                                    </gridCell>
+                                    <gridCell row="tGg-mO-YiD" column="eHC-Ur-UsS" id="My8-pJ-kb1"/>
+                                    <gridCell row="tGg-mO-YiD" column="64O-72-10l" id="Gdm-K9-Mzv">
+                                        <button key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="5M2-Ww-w0G">
+                                            <rect key="frame" x="235" y="158" width="416" height="18"/>
+                                            <buttonCell key="cell" type="radio" title="Attempt to read current display settings" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="0qp-fq-8MI">
+                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="restoreLastSavedValuesOffClicked:" target="BGD-tY-Myx" id="vQR-Vt-qO7"/>
+                                            </connections>
+                                        </button>
+                                    </gridCell>
+                                    <gridCell row="UAP-kZ-c0z" column="eHC-Ur-UsS" id="AX0-yT-SVr"/>
+                                    <gridCell row="UAP-kZ-c0z" column="64O-72-10l" id="w1F-2K-Kmv">
+                                        <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" preferredMaxLayoutWidth="400" translatesAutoresizingMaskIntoConstraints="NO" id="uVw-0p-A1a">
+                                            <rect key="frame" x="235" y="121" width="418" height="28"/>
+                                            <textFieldCell key="cell" controlSize="small" id="xjq-hs-wWB">
+                                                <font key="font" metaFont="smallSystem"/>
+                                                <string key="title">Attempt to read current settings from the display. If unsuccessful, last saved values are presumed or generic defaults are used instead.</string>
                                                 <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
@@ -262,7 +262,7 @@
                 </viewController>
                 <customObject id="JDw-du-OST" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="301" y="-320"/>
+            <point key="canvasLocation" x="300.5" y="-310"/>
         </scene>
         <!--Menusliders Prefs View Controller-->
         <scene sceneID="YU5-7I-f0n">

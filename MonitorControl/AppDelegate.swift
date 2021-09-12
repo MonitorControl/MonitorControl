@@ -118,7 +118,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       prefs.set(false, forKey: PrefKey.showAdvancedDisplays.rawValue)
       prefs.set(false, forKey: PrefKey.lowerSwAfterBrightness.rawValue)
       prefs.set(false, forKey: PrefKey.useFocusInsteadOfMouse.rawValue)
-      prefs.set(false, forKey: PrefKey.restoreLastSavedValues.rawValue)
+      prefs.set(false, forKey: PrefKey.readDDCInsteadOfRestoreValues.rawValue)
       prefs.set(false, forKey: PrefKey.useFocusInsteadOfMouse.rawValue)
       prefs.set(false, forKey: PrefKey.allScreensVolume.rawValue)
       prefs.set(false, forKey: PrefKey.useAudioDeviceNameMatching.rawValue)

@@ -90,7 +90,7 @@ enum PrefKey: String {
   case displayListUpdate
 
   // Restore last saved values upon startup or wake
-  case restoreLastSavedValues
+  case readDDCInsteadOfRestoreValues
 
   // Show advanced options under Displays tab in Preferences
   case showAdvancedDisplays

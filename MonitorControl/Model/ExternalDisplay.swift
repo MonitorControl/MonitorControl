@@ -101,11 +101,10 @@ class ExternalDisplay: Display {
       currentValue = self.swBrightness
       os_log(" - current internal value: %{public}@", type: .info, String(currentValue))
     } else {
-      let tries = UInt(self.pollingCount)
-      if !prefs.bool(forKey: PrefKey.restoreLastSavedValues.rawValue), tries != 0, !(app.safeMode) {
-        os_log("Reading DDC from display %{public}@ times", type: .info, String(tries))
+      if prefs.bool(forKey: PrefKey.readDDCInsteadOfRestoreValues.rawValue), self.pollingCount != 0, !(app.safeMode) {
+        os_log("Reading DDC from display %{public}@ times", type: .info, String(self.pollingCount))
         let delay = self.needsLongerDelay ? UInt64(40 * kMillisecondScale) : nil
-        ddcValues = self.readDDCValues(for: command, tries: tries, minReplyDelay: delay)
+        ddcValues = self.readDDCValues(for: command, tries: UInt(self.pollingCount), minReplyDelay: delay)
         if ddcValues != nil {
           (currentDDCValue, maxDDCValue) = ddcValues ?? (currentDDCValue, maxDDCValue)
           self.savePrefValue(self.convDDCToValue(for: command, from: currentDDCValue), for: command)
@@ -116,58 +115,65 @@ class ExternalDisplay: Display {
       } else {
         os_log("DDC read disabled.", type: .info)
       }
-      if ddcValues == nil {
-        self.savePrefValue(self.prefValueExists(for: command) ? self.readPrefValue(for: command) : 0.75, for: command)
-        currentDDCValue = self.convValueToDDC(for: command, from: self.readPrefValue(for: command))
-      }
       if self.readPrefValueKeyInt(forkey: PrefKey.maxDDCOverride, for: command) > self.readPrefValueKeyInt(forkey: PrefKey.minDDCOverride, for: command) {
         self.savePrefValueKeyInt(forkey: PrefKey.maxDDC, value: self.readPrefValueKeyInt(forkey: PrefKey.maxDDCOverride, for: command), for: command)
       } else {
         self.savePrefValueKeyInt(forkey: PrefKey.maxDDC, value: min(Int(maxDDCValue), self.DDC_MAX_DETECT_LIMIT), for: command)
       }
+      if ddcValues == nil {
+        self.savePrefValue(self.prefValueExists(for: command) ? self.readPrefValue(for: command) : 0.75, for: command)
+        currentDDCValue = self.convValueToDDC(for: command, from: self.readPrefValue(for: command))
+      }
       os_log(" - current DDC value: %{public}@", type: .info, String(currentDDCValue))
       os_log(" - minimum DDC value: %{public}@ (overrides 0)", type: .info, String(self.readPrefValueKeyInt(forkey: PrefKey.minDDCOverride, for: command)))
       os_log(" - maximum DDC value: %{public}@ (overrides %{public}@)", type: .info, String(self.readPrefValueKeyInt(forkey: PrefKey.maxDDC, for: command)), String(maxDDCValue))
       os_log(" - current internal value: %{public}@", type: .info, String(self.readPrefValue(for: command)))
-      if prefs.bool(forKey: PrefKey.restoreLastSavedValues.rawValue) {
+      if !prefs.bool(forKey: PrefKey.readDDCInsteadOfRestoreValues.rawValue), !(app.safeMode) {
         os_log("Writing last saved DDC values.", type: .info, self.name, String(reflecting: command))
         _ = self.writeDDCValues(command: command, value: currentDDCValue)
       }
     }
+    if command == .audioSpeakerVolume {
+      self.setupMuteUnMute()
+    }
+  }
+
+  func setupMuteUnMute() {
+    var currentMuteValue = self.readPrefValueInt(for: .audioMuteScreenBlank)
+    currentMuteValue = currentMuteValue == 0 ? 2 : currentMuteValue
+    // If we're looking at the audio speaker volume, also retrieve the values for the mute command
+    var muteValues: (current: UInt16, max: UInt16)?
+    if self.enableMuteUnmute {
+      if self.pollingCount != 0, !app.safeMode, prefs.bool(forKey: PrefKey.readDDCInsteadOfRestoreValues.rawValue) {
+        os_log("Reading DDC from display %{public}@ times for Mute", type: .info, String(self.pollingCount))
+        let delay = self.needsLongerDelay ? UInt64(40 * kMillisecondScale) : nil
+        muteValues = self.readDDCValues(for: .audioMuteScreenBlank, tries: UInt(self.pollingCount), minReplyDelay: delay)
+        if let muteValues = muteValues {
+          os_log("Success, current Mute setting: %{public}@", type: .info, String(muteValues.current))
+          currentMuteValue = Int(muteValues.current)
+        } else {
+          os_log("Mute read failed", type: .info)
+        }
+      }
+      if !prefs.bool(forKey: PrefKey.readDDCInsteadOfRestoreValues.rawValue), !(app.safeMode) {
+        os_log("Writing last saved DDC value for Mute: %{public}@", type: .info, String(currentMuteValue))
+        _ = self.writeDDCValues(command: .audioMuteScreenBlank, value: UInt16(currentMuteValue))
+      }
+      self.savePrefValueInt(Int(currentMuteValue), for: .audioMuteScreenBlank)
+    }
   }
 
   func setupSliderCurrentValue(command: Command) -> Float {
-    var returnValue: Float = 0.75
     let currentValue = self.readPrefValue(for: command)
+    var returnValue = currentValue
     if command == .brightness {
       if !self.isSw(), prefs.bool(forKey: PrefKey.lowerSwAfterBrightness.rawValue) {
         returnValue = 0.5 + currentValue / 2
-      } else {
-        returnValue = currentValue
       }
-    } else if command == .audioSpeakerVolume, !self.isSw() {
-      // If we're looking at the audio speaker volume, also retrieve the values for the mute command
-      var muteValues: (current: UInt16, max: UInt16)?
-      let tries = UInt(self.pollingCount)
-      if self.enableMuteUnmute, tries != 0, !app.safeMode, !prefs.bool(forKey: PrefKey.restoreLastSavedValues.rawValue) {
-        os_log("Reading DDC from display %{public}@ times for mute", type: .info, String(tries))
-        let delay = self.needsLongerDelay ? UInt64(40 * kMillisecondScale) : nil
-        muteValues = self.readDDCValues(for: .audioMuteScreenBlank, tries: tries, minReplyDelay: delay)
-        if let muteValues = muteValues {
-          os_log(" - success, current DDC value: %{public}@", type: .info, String(muteValues.current))
-          self.savePrefValueInt(Int(muteValues.current), for: .audioMuteScreenBlank)
-        } else {
-          os_log(" - read failed or disabled, skipping", type: .info)
-        }
-      }
-      // If the system is not currently muted, or doesn't support the mute command, display the current volume as the slider value
-      if muteValues == nil || muteValues!.current == 2 {
-        returnValue = currentValue
-      } else {
+    } else if command == .audioSpeakerVolume, self.enableMuteUnmute {
+      if self.readPrefValueInt(for: .audioMuteScreenBlank) == 1 {
         returnValue = 0
       }
-    } else {
-      returnValue = currentValue
     }
     return returnValue
   }
