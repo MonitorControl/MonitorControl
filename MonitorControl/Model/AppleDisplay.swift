@@ -1,10 +1,4 @@
-//
-//  AppleDisplay.swift
-//  MonitorControl
-//
-//  Created by Joni Van Roost on 24/01/2020.
-//  Copyright © 2020 MonitorControl. All rights reserved.
-//
+//  Copyright © MonitorControl. @JoniVR, @theOneyouseek, @waydabber and others
 
 import Foundation
 import os.log

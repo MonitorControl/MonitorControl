@@ -1,3 +1,5 @@
+//  Copyright © MonitorControl. @JoniVR, @theOneyouseek, @waydabber and others
+
 import AudioToolbox
 import Cocoa
 import Foundation

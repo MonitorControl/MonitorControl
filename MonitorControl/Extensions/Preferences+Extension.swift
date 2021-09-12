@@ -1,10 +1,4 @@
-//
-//  Preferences+Extension.swift
-//  MonitorControl
-//
-//  Created by Joni Van Roost on 22/11/2020.
-//  Copyright © 2020 MonitorControl. All rights reserved.
-//
+//  Copyright © MonitorControl. @JoniVR, @theOneyouseek, @waydabber and others
 
 import Preferences
 

@@ -1,10 +1,5 @@
-//
-//  OSDUtils.swift
-//  MonitorControl
-//
-//  Created by Victor Chabbert on 19/06/2020.
-//  Copyright © 2020 MonitorControl. All rights reserved.
-//
+//  Copyright © MonitorControl. @JoniVR, @theOneyouseek, @waydabber and others
+//  Victor Chabbert on 19/06/2020.
 
 import Cocoa
 

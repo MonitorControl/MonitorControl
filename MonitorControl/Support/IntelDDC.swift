@@ -1,11 +1,5 @@
-//
-//  IntelDDC.swift
-//  MonitorControl
-//
-//  Original code: https://github.com/reitermarkus/DDC.swift
-//  Adapted for MonitorControl
-//  Credits to @reitermarkus, @waydabber
-//
+//  Copyright © MonitorControl. @JoniVR, @theOneyouseek, @waydabber and others
+//  Adapted from IntelDDC.swift, @reitermarkus
 
 import Foundation
 import IOKit.i2c

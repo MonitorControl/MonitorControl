@@ -1,3 +1,5 @@
+//  Copyright © MonitorControl. @JoniVR, @theOneyouseek, @waydabber and others
+
 #pragma once
 
 #import <Foundation/Foundation.h>

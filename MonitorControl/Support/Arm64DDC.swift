@@ -1,10 +1,4 @@
-//
-//  Arm64DDC.swift
-//  MonitorControl
-//
-//  Created by @waydabber, 2021
-//  Copyright © 2021. MonitorControl. All rights reserved.
-//
+//  Copyright © MonitorControl. @JoniVR, @theOneyouseek, @waydabber and others
 
 import Foundation
 import IOKit
