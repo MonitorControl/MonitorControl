@@ -24,7 +24,7 @@ enum PrefKeys: String {
   // Max command value display
   case maxDDC
 
-  // Max user override command value display TODO: Implementation: MISSING, Preferences pane setting: MISSING
+  // Max user override command value display TODO: Implementation: DONE, Preferences pane setting: MISSING
   case maxDDCOverride
 
   // Max command value display TODO: Implementation: DONE, Preferences pane setting: MISSING

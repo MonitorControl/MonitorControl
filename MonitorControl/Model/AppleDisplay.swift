@@ -34,7 +34,7 @@ class AppleDisplay: Display {
 
   public func setBrightness(value: Float) {
     self.displayQueue.sync {
-      DisplayServicesSetBrightness(self.identifier, Float(value / SCALE))
+      DisplayServicesSetBrightness(self.identifier, value / SCALE)
       DisplayServicesBrightnessChanged(self.identifier, Double(value / SCALE))
     }
   }
@@ -44,7 +44,7 @@ class AppleDisplay: Display {
     self.setBrightness(value: value)
     self.showOsd(command: .brightness, value: value * 64, maxValue: 64)
     if let slider = brightnessSliderHandler?.slider {
-      slider.floatValue = Float(value * SCALE)
+      slider.floatValue = value * SCALE
     }
   }
 

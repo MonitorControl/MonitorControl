@@ -187,7 +187,7 @@ class DisplayManager {
 
   func restoreSwBrightnessForAllDisplays(async: Bool = false) {
     for externalDisplay in self.getExternalDisplays() {
-      let sliderMax = Float(DisplayManager.getBrightnessSliderMaxValue(externalDisplay: externalDisplay))
+      let sliderMax = DisplayManager.getBrightnessSliderMaxValue(externalDisplay: externalDisplay)
       if externalDisplay.getValue(for: .brightness) == 0 || externalDisplay.isSw() {
         let savedPrefValue = externalDisplay.getSwBrightnessPrefValue()
         if externalDisplay.getSwBrightness() != savedPrefValue {
@@ -199,12 +199,12 @@ class DisplayManager {
         _ = externalDisplay.setSwBrightness(value: savedPrefValue, smooth: async)
         if !externalDisplay.isSw(), prefs.bool(forKey: PrefKeys.lowerSwAfterBrightness.rawValue) {
           if savedPrefValue < SCALE {
-            DisplayManager.setBrightnessSliderValue(externalDisplay: externalDisplay, value: sliderMax / 2 * (Float(savedPrefValue) / SCALE))
+            DisplayManager.setBrightnessSliderValue(externalDisplay: externalDisplay, value: sliderMax / 2 * (savedPrefValue / SCALE))
           } else {
-            DisplayManager.setBrightnessSliderValue(externalDisplay: externalDisplay, value: sliderMax / 2 + Float(externalDisplay.getValue(for: .brightness)))
+            DisplayManager.setBrightnessSliderValue(externalDisplay: externalDisplay, value: sliderMax / 2 + externalDisplay.getValue(for: .brightness))
           }
         } else if externalDisplay.isSw() {
-          DisplayManager.setBrightnessSliderValue(externalDisplay: externalDisplay, value: sliderMax * (Float(savedPrefValue) / SCALE))
+          DisplayManager.setBrightnessSliderValue(externalDisplay: externalDisplay, value: sliderMax * savedPrefValue / SCALE)
         }
       } else {
         _ = externalDisplay.setSwBrightness(value: SCALE)
@@ -296,9 +296,9 @@ class DisplayManager {
     }
   }
 
-  static func getBrightnessSliderMaxValue(externalDisplay: ExternalDisplay) -> Double {
+  static func getBrightnessSliderMaxValue(externalDisplay: ExternalDisplay) -> Float {
     if let slider = externalDisplay.brightnessSliderHandler?.slider {
-      return slider.maxValue
+      return Float(slider.maxValue)
     }
     return 0
   }

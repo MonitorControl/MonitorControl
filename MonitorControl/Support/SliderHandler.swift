@@ -24,12 +24,12 @@ class SliderHandler {
       if self.cmd == Command.brightness, prefs.bool(forKey: PrefKeys.lowerSwAfterBrightness.rawValue) {
         var brightnessValue: Float = 0
         var brightnessSwValue: Float = SCALE
-        if value >= Float(maxValue) / 2 {
+        if value >= maxValue / 2 {
           brightnessValue = value - maxValue / 2
           brightnessSwValue = SCALE
         } else {
           brightnessValue = 0
-          brightnessSwValue = (Float(value) / Float(maxValue / 2)) * SCALE
+          brightnessSwValue = (value / (maxValue / 2)) * SCALE
         }
         _ = externalDisplay.writeDDCValues(command: self.cmd, value: externalDisplay.convValueToDDC(for: self.cmd, from: brightnessValue))
         _ = externalDisplay.setSwBrightness(value: brightnessSwValue)
@@ -58,8 +58,8 @@ class SliderHandler {
     let maxValue = Float(slider.maxValue)
 
     if prefs.bool(forKey: PrefKeys.enableSliderSnap.rawValue) {
-      let snapInterval = Float(maxValue) / 4
-      let snapThreshold = Float(maxValue * 0.04)
+      let snapInterval = maxValue / 4
+      let snapThreshold = maxValue * 0.04
       let closest = (value + snapInterval / 2) / snapInterval * snapInterval
       if abs(closest - value) <= snapThreshold {
         value = closest
@@ -68,7 +68,7 @@ class SliderHandler {
     }
 
     if let appleDisplay = self.display as? AppleDisplay {
-      appleDisplay.setBrightness(value: Float(value) / SCALE)
+      appleDisplay.setBrightness(value: value / SCALE)
     } else {
       self.valueChangedExternalDisplay(value: value, maxValue: maxValue)
     }
@@ -120,9 +120,9 @@ class SliderHandler {
 
     if let externalDisplay = display as? ExternalDisplay {
       externalDisplay.setupCurrentAndMaxValues(command: command)
-      let (integerValue, maxValue) = externalDisplay.getSliderCurrentAndMaxValues(command: command)
+      let (value, maxValue) = externalDisplay.getSliderCurrentAndMaxValues(command: command)
       slider.maxValue = Double(maxValue)
-      slider.floatValue = Float(integerValue)
+      slider.floatValue = value
     } else if let appleDisplay = display as? AppleDisplay {
       if command == .brightness {
         slider.maxValue = Double(SCALE)

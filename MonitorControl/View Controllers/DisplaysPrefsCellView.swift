@@ -43,7 +43,6 @@ class DisplaysPrefsCellView: NSTableCellView {
           self.pollingCount.isEnabled = false
         }
         self.pollingCount.stringValue = String(display.getPollingCount())
-        os_log("Value changed for polling count: %{public}@", type: .info, "from `\(originalValue)` to `\(newValue)`")
       }
     }
   }
@@ -63,7 +62,6 @@ class DisplaysPrefsCellView: NSTableCellView {
 
       if newValue != originalValue, !newValue.isEmpty, let newValue = Int(newValue) {
         display.setPollingCount(newValue)
-        os_log("Value changed for polling count: %{public}@", type: .info, "from `\(originalValue)` to `\(newValue)`")
       }
     }
   }
@@ -119,9 +117,6 @@ class DisplaysPrefsCellView: NSTableCellView {
     if let disp = display {
       let isEnabled = sender.state == .on
       disp.isEnabled = isEnabled
-      #if DEBUG
-        os_log("Toggle enabled display state: %{public}@", type: .info, isEnabled ? "on" : "off")
-      #endif
     }
   }
 
@@ -156,9 +151,6 @@ class DisplaysPrefsCellView: NSTableCellView {
       if newValue != originalValue, !newValue.isEmpty {
         disp.setFriendlyName(newValue)
         NotificationCenter.default.post(name: Notification.Name(PrefKeys.friendlyName.rawValue), object: nil)
-        #if DEBUG
-          os_log("Value changed for friendly name: %{public}@", type: .info, "from `\(originalValue)` to `\(newValue)`")
-        #endif
       }
     }
   }

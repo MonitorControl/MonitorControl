@@ -25,7 +25,6 @@ class Utils: NSObject {
   static func setStartAtLogin(enabled: Bool) {
     let identifier = "\(Bundle.main.bundleIdentifier!)Helper" as CFString
     SMLoginItemSetEnabled(identifier, enabled)
-    os_log("Toggle start at login state: %{public}@", type: .info, enabled ? "on" : "off")
   }
 
   static func getSystemPreferences() -> [String: AnyObject]? {

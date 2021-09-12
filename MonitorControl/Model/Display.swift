@@ -36,7 +36,6 @@ class Display {
     }
     set {
       self.prefs.set(newValue, forKey: PrefKeys.forceSw.rawValue + self.prefsId)
-      os_log("Set `forceSw` to: %{public}@", type: .info, String(newValue))
     }
   }
 
@@ -108,13 +107,12 @@ class Display {
 
   let swBrightnessSemaphore = DispatchSemaphore(value: 1)
   func setSwBrightness(value: Float, smooth: Bool = false) -> Bool {
-    let brightnessValue: Float = min(SCALE, value)
-    var currentValue = Float(self.getSwBrightnessPrefValue()) / SCALE
+    let brightnessValue = min(SCALE, value)
+    var currentValue = self.getSwBrightnessPrefValue() / SCALE
     self.saveSwBirghtnessPrefValue(brightnessValue)
-    var newValue = Float(Float(brightnessValue)) / SCALE
+    var newValue = brightnessValue / SCALE
     currentValue = self.swBrightnessTransform(value: currentValue)
     newValue = self.swBrightnessTransform(value: newValue)
-    os_log("setting software brightness to: %{public}@", type: .debug, String(newValue))
     if smooth {
       DispatchQueue.global(qos: .userInteractive).async {
         self.swBrightnessSemaphore.wait()
@@ -151,7 +149,6 @@ class Display {
       let gammaTablePeak = max(redPeak, greenPeak, bluePeak)
       let peakRatio = gammaTablePeak / self.defaultGammaTablePeak
       let brightnessValue = round(self.swBrightnessTransform(value: peakRatio, reverse: true) * 10000) / 10000 * SCALE
-      os_log("Current software gammatable brightness is: %{public}@", type: .debug, String(brightnessValue))
       return brightnessValue
     }
     return SCALE
@@ -202,7 +199,7 @@ class Display {
     let totalChiclets: Int
 
     if roundChiclet {
-      let osdChiclet = OSDUtils.chiclet(fromValue: Float(value), maxValue: Float(maxValue))
+      let osdChiclet = OSDUtils.chiclet(fromValue: value, maxValue: maxValue)
 
       filledChiclets = Int(round(osdChiclet))
       totalChiclets = 16
