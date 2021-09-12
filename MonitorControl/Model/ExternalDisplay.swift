@@ -38,13 +38,11 @@ class ExternalDisplay: Display {
   var pollingCount: Int {
     get {
       switch self.pollingMode {
-      case 0: return Utils.PollingMode.none.value
-      case 1: return Utils.PollingMode.minimal.value
-      case 2: return Utils.PollingMode.normal.value
-      case 3: return Utils.PollingMode.heavy.value
-      case 4:
-        let val = prefs.integer(forKey: PrefKey.pollingCount.rawValue + self.prefsId)
-        return Utils.PollingMode.custom(value: val).value
+      case 0: return 0 // none
+      case 1: return 5 // minimal
+      case 2: return 10 // normal
+      case 3: return 100 // heavy
+      case 4: return prefs.integer(forKey: PrefKey.pollingCount.rawValue + self.prefsId)
       default: return 0
       }
     }
@@ -84,7 +82,7 @@ class ExternalDisplay: Display {
     }
     if !fromVolumeSlider {
       if !self.hideOsd {
-        self.showOsd(command: volumeOSDValue > 0 ? .audioSpeakerVolume : .audioMuteScreenBlank, value: volumeOSDValue, roundChiclet: true)
+        OSDUtils.showOsd(displayID: self.identifier, command: volumeOSDValue > 0 ? .audioSpeakerVolume : .audioMuteScreenBlank, value: volumeOSDValue, roundChiclet: true)
       }
       if let slider = self.volumeSliderHandler?.slider {
         slider.floatValue = volumeOSDValue
@@ -196,7 +194,7 @@ class ExternalDisplay: Display {
       }
     }
     if !self.hideOsd {
-      self.showOsd(command: .audioSpeakerVolume, value: volumeOSDValue, roundChiclet: !isSmallIncrement)
+      OSDUtils.showOsd(displayID: self.identifier, command: .audioSpeakerVolume, value: volumeOSDValue, roundChiclet: !isSmallIncrement)
     }
     if !isAlreadySet {
       self.savePrefValue(volumeOSDValue, for: .audioSpeakerVolume)
@@ -233,7 +231,7 @@ class ExternalDisplay: Display {
           self.swAfterOsdAnimationSemaphore.signal()
           return
         }
-        self.showOsd(command: .brightness, value: Float(value), maxValue: 100, roundChiclet: false)
+        OSDUtils.showOsd(displayID: self.identifier, command: .brightness, value: Float(value), maxValue: 100, roundChiclet: false)
         Thread.sleep(forTimeInterval: Double(value * 2) / 300)
       }
       for value: Int in stride(from: 5, to: 0, by: -1) {
@@ -241,10 +239,10 @@ class ExternalDisplay: Display {
           self.swAfterOsdAnimationSemaphore.signal()
           return
         }
-        self.showOsd(command: .brightness, value: Float(value), maxValue: 100, roundChiclet: false)
+        OSDUtils.showOsd(displayID: self.identifier, command: .brightness, value: Float(value), maxValue: 100, roundChiclet: false)
         Thread.sleep(forTimeInterval: Double(value * 2) / 300)
       }
-      self.showOsd(command: .brightness, value: 0, roundChiclet: true)
+      OSDUtils.showOsd(displayID: self.identifier, command: .brightness, value: 0, roundChiclet: true)
       self.swAfterOsdAnimationSemaphore.signal()
     }
   }
@@ -252,7 +250,7 @@ class ExternalDisplay: Display {
   func stepBrightnessPart(osdValue: Float, isSmallIncrement: Bool) -> Bool {
     if self.isSw(), prefs.bool(forKey: PrefKey.fallbackSw.rawValue) {
       if self.setSwBrightness(value: osdValue, smooth: true) {
-        self.showOsd(command: .brightness, value: osdValue, maxValue: 1, roundChiclet: !isSmallIncrement)
+        OSDUtils.showOsd(displayID: self.identifier, command: .brightness, value: osdValue, maxValue: 1, roundChiclet: !isSmallIncrement)
         self.savePrefValue(osdValue, for: .brightness)
         if let slider = brightnessSliderHandler?.slider {
           slider.floatValue = osdValue
@@ -306,7 +304,7 @@ class ExternalDisplay: Display {
         slider.floatValue = osdValue
       }
     }
-    self.showOsd(command: .brightness, value: osdValue, roundChiclet: !isSmallIncrement)
+    OSDUtils.showOsd(displayID: self.identifier, command: .brightness, value: osdValue, roundChiclet: !isSmallIncrement)
     self.savePrefValue(osdValue, for: .brightness)
   }
 
@@ -396,13 +394,9 @@ class ExternalDisplay: Display {
     return max(min(deCurvedValue, 1), 0)
   }
 
-  override func showOsd(command: Command, value: Float, maxValue: Float = 1, roundChiclet: Bool = false, lock: Bool = false) {
-    super.showOsd(command: command, value: value, maxValue: maxValue, roundChiclet: roundChiclet, lock: lock)
-  }
-
   func playVolumeChangedSound() {
     // Check if user has enabled "Play feedback when volume is changed" in Sound Preferences
-    guard let preferences = Utils.getSystemPreferences(), let hasSoundEnabled = preferences["com.apple.sound.beep.feedback"] as? Int, hasSoundEnabled == 1 else {
+    guard let preferences = app.getSystemPreferences(), let hasSoundEnabled = preferences["com.apple.sound.beep.feedback"] as? Int, hasSoundEnabled == 1 else {
       return
     }
     do {

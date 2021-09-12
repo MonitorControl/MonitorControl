@@ -62,7 +62,7 @@
 "No Control" = "Nincs vezérlés";
 
 /* Shown in the alert dialog */
-"Ok" = "Ok";
+"OK" = "Ok";
 
 /* Shown in the Display Preferences */
 "Other Display" = "Egyéb kijelző";

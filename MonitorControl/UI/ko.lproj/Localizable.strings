@@ -62,7 +62,7 @@
 "No Control" = "사용가능한 제어 없음";
 
 /* Shown in the alert dialog */
-"Ok" = "확인";
+"OK" = "확인";
 
 /* Shown in the Display Preferences */
 "Other Display" = "그 외 디스플레이";

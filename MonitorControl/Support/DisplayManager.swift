@@ -192,9 +192,7 @@ class DisplayManager {
       if externalDisplay.readPrefValue(for: .brightness) == 0 || externalDisplay.isSw() {
         let savedPrefValue = externalDisplay.swBrightness
         if externalDisplay.getSwBrightness() != savedPrefValue {
-          if let manager = OSDManager.sharedManager() as? OSDManager { // This will give the user a hint why is the brightness suddenly changes and also give screen activity to counter the 'no gamma change when there is no screen activity' issue on some macs
-            manager.showImage(OSDImage.brightness.rawValue, onDisplayID: externalDisplay.identifier, priority: 0x1F4, msecUntilFade: 0)
-          }
+          OSDUtils.popEmptyOsd(displayID: externalDisplay.identifier, command: Command.brightness) // This will give the user a hint why is the brightness suddenly changes and also give screen activity to counter the 'no gamma change when there is no screen activity' issue on some macs
         }
         externalDisplay.swBrightness = externalDisplay.getSwBrightness()
         _ = externalDisplay.setSwBrightness(value: savedPrefValue, smooth: async)

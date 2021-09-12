@@ -62,7 +62,7 @@
 "No Control" = "Geen Controle Beschikbaar";
 
 /* Shown in the alert dialog */
-"Ok" = "Oké";
+"OK" = "Oké";
 
 /* Shown in the Display Preferences */
 "Other Display" = "Ander Display";

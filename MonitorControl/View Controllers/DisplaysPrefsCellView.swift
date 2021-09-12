@@ -100,7 +100,7 @@ class DisplaysPrefsCellView: NSTableCellView {
         if let window = self.window {
           alert.beginSheetModal(for: window, completionHandler: { modalResponse in
             if modalResponse == NSApplication.ModalResponse.alertFirstButtonReturn {
-              Utils.setStartAtLogin(enabled: false)
+              app.setStartAtLogin(enabled: false)
               display.needsLongerDelay = true
             } else {
               sender.state = .off

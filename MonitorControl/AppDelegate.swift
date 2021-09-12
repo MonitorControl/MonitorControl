@@ -5,6 +5,7 @@ import Foundation
 import MediaKeyTap
 import os.log
 import Preferences
+import ServiceManagement
 import SimplyCoreAudio
 
 var app: AppDelegate!
@@ -62,7 +63,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     if NSEvent.modifierFlags.contains(NSEvent.ModifierFlags.shift) {
       self.safeMode = true
       self.handlePreferenceReset()
-      Utils.alert(text: NSLocalizedString("Safe Mode Activated", comment: "Shown in the alert dialog"), info: NSLocalizedString("Shift was pressed during launch. MonitorControl started in safe mode. Default preferences are reloaded, DDC read is blocked.", comment: "Shown in the alert dialog"))
+      let alert = NSAlert()
+      alert.alertStyle = NSAlert.Style.informational
+      alert.messageText = NSLocalizedString("Safe Mode Activated", comment: "Shown in the alert dialog")
+      alert.informativeText = NSLocalizedString("Shift was pressed during launch. MonitorControl started in safe mode. Default preferences are reloaded, DDC read is blocked.", comment: "Shown in the alert dialog")
+      alert.addButton(withTitle: NSLocalizedString("OK", comment: "Shown in the alert dialog"))
+      alert.runModal()
     }
     self.setDefaultPrefs()
     if #available(macOS 11.0, *) {
@@ -239,9 +245,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   }
 
   func checkPermissions() {
-    let permissionsRequired: Bool = prefs.integer(forKey: PrefKey.listenFor.rawValue) != Utils.ListenForKeys.none.rawValue
-    if !Utils.readPrivileges(prompt: false) && permissionsRequired {
-      Utils.acquirePrivileges()
+    let permissionsRequired: Bool = prefs.integer(forKey: PrefKey.listenFor.rawValue) != MediaKeyTapManager.ListenForKeys.none.rawValue
+    if !MediaKeyTapManager.readPrivileges(prompt: false) && permissionsRequired {
+      MediaKeyTapManager.acquirePrivileges()
     }
   }
 
@@ -353,5 +359,24 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
   func updateMediaKeyTap() {
     self.mediaKeyTap.updateMediaKeyTap()
+  }
+
+  func setStartAtLogin(enabled: Bool) {
+    let identifier = "\(Bundle.main.bundleIdentifier!)Helper" as CFString
+    SMLoginItemSetEnabled(identifier, enabled)
+  }
+
+  func getSystemPreferences() -> [String: AnyObject]? {
+    var propertyListFormat = PropertyListSerialization.PropertyListFormat.xml
+    let plistPath = NSString(string: "~/Library/Preferences/.GlobalPreferences.plist").expandingTildeInPath
+    guard let plistXML = FileManager.default.contents(atPath: plistPath) else {
+      return nil
+    }
+    do {
+      return try PropertyListSerialization.propertyList(from: plistXML, options: .mutableContainersAndLeaves, format: &propertyListFormat) as? [String: AnyObject]
+    } catch {
+      os_log("Error reading system prefs plist: %{public}@", type: .info, error.localizedDescription)
+      return nil
+    }
   }
 }

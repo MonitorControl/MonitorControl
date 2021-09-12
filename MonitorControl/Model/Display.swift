@@ -3,18 +3,16 @@
 import Foundation
 import os.log
 
-enum OSDImage: Int64 {
-  case brightness = 1
-  case audioSpeaker = 3
-  case audioSpeakerMuted = 4
-}
-
-class Display {
+class Display: Equatable {
   internal let identifier: CGDirectDisplayID
   internal let prefsId: String
   internal var name: String
   internal var vendorNumber: UInt32?
   internal var modelNumber: UInt32?
+
+  static func == (lhs: Display, rhs: Display) -> Bool {
+    return lhs.identifier == rhs.identifier
+  }
 
   var isEnabled: Bool {
     get { self.prefs.object(forKey: PrefKey.state.rawValue + self.prefsId) as? Bool ?? true }
@@ -199,36 +197,5 @@ class Display {
 
   func refreshBrightness() -> Bool {
     return false
-  }
-
-  func showOsd(command: Command, value: Float, maxValue: Float = 1, roundChiclet: Bool = false, lock: Bool = false) {
-    guard let manager = OSDManager.sharedManager() as? OSDManager else {
-      return
-    }
-
-    var osdImage: OSDImage
-    switch command {
-    case .audioSpeakerVolume:
-      osdImage = value > 0 ? .audioSpeaker : .audioSpeakerMuted
-    case .audioMuteScreenBlank:
-      osdImage = .audioSpeakerMuted
-    default:
-      osdImage = .brightness
-    }
-
-    let filledChiclets: Int
-    let totalChiclets: Int
-
-    if roundChiclet {
-      let osdChiclet = OSDUtils.chiclet(fromValue: value, maxValue: maxValue)
-
-      filledChiclets = Int(round(osdChiclet))
-      totalChiclets = 16
-    } else {
-      filledChiclets = Int(value * 100)
-      totalChiclets = Int(maxValue * 100)
-    }
-
-    manager.showImage(osdImage.rawValue, onDisplayID: self.getShowOsdDisplayId(), priority: 0x1F4, msecUntilFade: 1000, filledChiclets: UInt32(filledChiclets), totalChiclets: UInt32(totalChiclets), locked: lock)
   }
 }

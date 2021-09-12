@@ -36,7 +36,7 @@ class AppleDisplay: Display {
   override func stepBrightness(isUp: Bool, isSmallIncrement: Bool) {
     let value = self.calcNewBrightness(isUp: isUp, isSmallIncrement: isSmallIncrement)
     self.setAppleBrightness(value: value)
-    self.showOsd(command: .brightness, value: value * 64, maxValue: 64)
+    OSDUtils.showOsd(displayID: self.identifier, command: .brightness, value: value * 64, maxValue: 64)
     if let slider = brightnessSliderHandler?.slider {
       slider.floatValue = value
     }

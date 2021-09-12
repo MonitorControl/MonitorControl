@@ -51,9 +51,9 @@ class MainPrefsViewController: NSViewController, PreferencePane {
   @IBAction func startAtLoginClicked(_ sender: NSButton) {
     switch sender.state {
     case .on:
-      Utils.setStartAtLogin(enabled: true)
+      app.setStartAtLogin(enabled: true)
     case .off:
-      Utils.setStartAtLogin(enabled: false)
+      app.setStartAtLogin(enabled: false)
     default: break
     }
   }

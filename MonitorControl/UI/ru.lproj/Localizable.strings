@@ -62,7 +62,7 @@
 "No Control" = "Нет возможности управления";
 
 /* Shown in the alert dialog */
-"Ok" = "ОК";
+"OK" = "ОК";
 
 /* Shown in the Display Preferences */
 "Other Display" = "Другой дисплей";

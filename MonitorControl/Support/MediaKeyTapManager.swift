@@ -10,6 +10,13 @@ class MediaKeyTapManager: MediaKeyTapDelegate {
   var mediaKeyTap: MediaKeyTap?
   var keyRepeatTimers: [MediaKey: Timer] = [:]
 
+  enum ListenForKeys: Int {
+    case brightnessAndVolumeKeys = 0 // Listen for Brightness and Volume keys
+    case brightnessOnlyKeys = 1 // Listen for Brightness keys only
+    case volumeOnlyKeys = 2 // Listen for Volume keys only
+    case none = 3 // Don't listen for any keys
+  }
+
   func handle(mediaKey: MediaKey, event: KeyEvent?, modifiers: NSEvent.ModifierFlags?) {
     let isPressed = event?.keyPressed ?? true
     let isRepeat = event?.keyRepeat ?? false
@@ -134,11 +141,11 @@ class MediaKeyTapManager: MediaKeyTapDelegate {
   func updateMediaKeyTap() {
     var keys: [MediaKey]
     switch prefs.integer(forKey: PrefKey.listenFor.rawValue) {
-    case Utils.ListenForKeys.brightnessOnlyKeys.rawValue:
+    case ListenForKeys.brightnessOnlyKeys.rawValue:
       keys = [.brightnessUp, .brightnessDown]
-    case Utils.ListenForKeys.volumeOnlyKeys.rawValue:
+    case ListenForKeys.volumeOnlyKeys.rawValue:
       keys = [.mute, .volumeUp, .volumeDown]
-    case Utils.ListenForKeys.none.rawValue:
+    case ListenForKeys.none.rawValue:
       keys = []
     default:
       keys = [.brightnessUp, .brightnessDown, .mute, .volumeUp, .volumeDown]
@@ -188,5 +195,23 @@ class MediaKeyTapManager: MediaKeyTapDelegate {
       return false
     }
     return true
+  }
+
+  static func acquirePrivileges() {
+    if !self.readPrivileges(prompt: true) {
+      let alert = NSAlert()
+      alert.addButton(withTitle: NSLocalizedString("OK", comment: "Shown in the alert dialog"))
+      alert.messageText = NSLocalizedString("Shortcuts not available", comment: "Shown in the alert dialog")
+      alert.informativeText = NSLocalizedString("You need to enable MonitorControl in System Preferences > Security and Privacy > Accessibility for the keyboard shortcuts to work", comment: "Shown in the alert dialog")
+      alert.alertStyle = .warning
+      alert.runModal()
+    }
+  }
+
+  static func readPrivileges(prompt: Bool) -> Bool {
+    let options: NSDictionary = [kAXTrustedCheckOptionPrompt.takeRetainedValue() as NSString: prompt]
+    let status = AXIsProcessTrustedWithOptions(options)
+    os_log("Reading Accessibility privileges - Current access status %{public}@", type: .info, String(status))
+    return status
   }
 }

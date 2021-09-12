@@ -62,7 +62,7 @@
 "No Control" = "No Control";
 
 /* Shown in the alert dialog */
-"Ok" = "Ok";
+"OK" = "Ok";
 
 /* Shown in the Display Preferences */
 "Other Display" = "Other Display";
