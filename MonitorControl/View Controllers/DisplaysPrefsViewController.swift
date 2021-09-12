@@ -185,7 +185,7 @@ class DisplaysPrefsViewController: NSViewController, PreferencePane, NSTableView
 
   func updateDisplayListRowHeight() {
     if self.prefs.bool(forKey: PrefKey.showAdvancedDisplays.rawValue) {
-      self.displayList.rowHeight = 420
+      self.displayList.rowHeight = 440
     } else {
       self.displayList.rowHeight = 150
     }

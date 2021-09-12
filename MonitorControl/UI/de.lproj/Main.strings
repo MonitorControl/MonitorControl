@@ -106,6 +106,9 @@
 /* Class = "NSTextFieldCell"; title = "Note: you can always use Ctrl+Brightness to control internal display only and Ctrl+Command+Brightness to control external displays only."; ObjectID = "Gy9-Of-tpz"; */
 "Gy9-Of-tpz.title" = "Note: you can always use Ctrl+Brightness to control internal display only and Ctrl+Command+Brightness to control external displays only.";
 
+/* Class = "NSTextFieldCell"; title = "Override audio device name:"; ObjectID = "H9X-it-sXs"; */
+"H9X-it-sXs.title" = "Override audio device name:";
+
 /* Class = "NSTextFieldCell"; title = "Brightness control:"; ObjectID = "hdd-Zz-buN"; */
 "hdd-Zz-buN.title" = "Helligkeitsregelung:";
 
@@ -231,9 +234,6 @@
 
 /* Class = "NSButtonCell"; title = "Reset Preferences"; ObjectID = "xY6-aw-o9u"; */
 "xY6-aw-o9u.title" = "Einstellungen zurücksetzen";
-
-/* Class = "NSTextFieldCell"; title = "Additional settings:"; ObjectID = "Xz0-X0-rB4"; */
-"Xz0-X0-rB4.title" = "Zusätzliche Einstellungen:";
 
 /* Class = "NSTextFieldCell"; title = "Available"; ObjectID = "yBJ-5d-I7e"; */
 "yBJ-5d-I7e.title" = "Available";
