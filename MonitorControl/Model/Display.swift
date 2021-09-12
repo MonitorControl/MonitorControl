@@ -92,7 +92,7 @@ class Display: Equatable {
   func savePrefValueKeyBool(forkey: PrefKey, value: Bool, for command: Command) {
     self.prefs.set(value, forKey: forkey.rawValue + String(command.rawValue) + self.prefsId)
   }
-  
+
   internal init(_ identifier: CGDirectDisplayID, name: String, vendorNumber: UInt32?, modelNumber: UInt32?, isVirtual: Bool = false) {
     self.identifier = identifier
     self.name = name
@@ -206,4 +206,13 @@ class Display: Equatable {
   func refreshBrightness() -> Bool {
     return false
   }
+  
+  func isBuiltIn() -> Bool {
+    if CGDisplayIsBuiltin(self.identifier) != 0 {
+      return true
+    } else {
+      return false
+    }
+  }
+
 }

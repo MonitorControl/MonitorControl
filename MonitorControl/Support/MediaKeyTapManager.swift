@@ -152,7 +152,7 @@ class MediaKeyTapManager: MediaKeyTapDelegate {
     }
     // Remove keys if no external displays are connected
     var isInternalDisplayOnly = true
-    for display in DisplayManager.shared.getAllDisplays() where display is ExternalDisplay {
+    for display in DisplayManager.shared.getAllDisplays() where !display.isBuiltIn() {
       isInternalDisplayOnly = false
     }
     if isInternalDisplayOnly {
@@ -160,7 +160,7 @@ class MediaKeyTapManager: MediaKeyTapDelegate {
       keys.removeAll { keysToDelete.contains($0) }
     }
     // Remove volume related keys if audio device is controllable
-    if let defaultAudioDevice = app.coreAudio.defaultOutputDevice {
+    if !isInternalDisplayOnly, let defaultAudioDevice = app.coreAudio.defaultOutputDevice {
       let keysToDelete: [MediaKey] = [.volumeUp, .volumeDown, .mute]
       if !prefs.bool(forKey: PrefKey.allScreensVolume.rawValue), prefs.bool(forKey: PrefKey.useAudioDeviceNameMatching.rawValue) {
         if DisplayManager.shared.updateAudioControlTargetDisplays(deviceName: defaultAudioDevice.name) == 0 {

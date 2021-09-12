@@ -32,8 +32,8 @@ enum PrefKey: String {
   // Max command value display TODO: Implementation: DONE, Preferences outlet: PRESENT, NOT CONNECTED
   case curveDDC
 
-  // Is the specific control is set as available for display? TODO: Implementation: MISSING, Preferences outlet: PRESENT, NOT CONNECTED
-  case availableDDC
+  // Is the specific control is set as unavailable for display? TODO: Implementation: MISSING, Preferences outlet: PRESENT, NOT CONNECTED
+  case unavailableDDC
 
   // Invert DDC scale? TODO: Implementation: DONE, Preferences outlet: PRESENT, NOT CONNECTED
   case invertDDC

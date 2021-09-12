@@ -59,11 +59,4 @@ class AppleDisplay: Display {
     return false
   }
 
-  func isBuiltIn() -> Bool {
-    if CGDisplayIsBuiltin(self.identifier) != 0 {
-      return true
-    } else {
-      return false
-    }
-  }
 }
