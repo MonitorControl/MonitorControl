@@ -33,16 +33,16 @@ class DisplaysPrefsCellView: NSTableCellView {
   @IBAction func pollingModeValueChanged(_ sender: NSPopUpButton) {
     if let display = display as? ExternalDisplay {
       let newValue = sender.selectedTag()
-      let originalValue = display.getPollingMode()
+      let originalValue = display.pollingMode
 
       if newValue != originalValue {
-        display.setPollingMode(newValue)
-        if display.getPollingMode() == 4 {
+        display.pollingMode = newValue
+        if display.pollingMode == 4 {
           self.pollingCount.isEnabled = true
         } else {
           self.pollingCount.isEnabled = false
         }
-        self.pollingCount.stringValue = String(display.getPollingCount())
+        self.pollingCount.stringValue = String(display.pollingCount)
       }
     }
   }
@@ -50,7 +50,7 @@ class DisplaysPrefsCellView: NSTableCellView {
   @IBAction func pollingCountValueChanged(_ sender: NSTextFieldCell) {
     if let display = display as? ExternalDisplay {
       let newValue = sender.stringValue
-      let originalValue = "\(display.getPollingCount())"
+      let originalValue = "\(display.pollingCount)"
 
       if newValue.isEmpty {
         self.pollingCount.stringValue = originalValue
@@ -61,7 +61,7 @@ class DisplaysPrefsCellView: NSTableCellView {
       }
 
       if newValue != originalValue, !newValue.isEmpty, let newValue = Int(newValue) {
-        display.setPollingCount(newValue)
+        display.pollingCount = newValue
       }
     }
   }
@@ -74,7 +74,7 @@ class DisplaysPrefsCellView: NSTableCellView {
       case .off:
         // If the display is currently muted, toggle back to unmute
         // to prevent the display becoming stuck in the muted state
-        if display.isMuted() {
+        if display.readPrefValueInt(for: .audioMuteScreenBlank) == 1 {
           display.toggleMute()
         }
         display.enableMuteUnmute = false
@@ -141,7 +141,7 @@ class DisplaysPrefsCellView: NSTableCellView {
   @IBAction func friendlyNameValueChanged(_ sender: NSTextFieldCell) {
     if let disp = display {
       let newValue = sender.stringValue
-      let originalValue = disp.getFriendlyName()
+      let originalValue = disp.friendlyName
 
       if newValue.isEmpty {
         self.friendlyName.stringValue = originalValue
@@ -149,8 +149,8 @@ class DisplaysPrefsCellView: NSTableCellView {
       }
 
       if newValue != originalValue, !newValue.isEmpty {
-        disp.setFriendlyName(newValue)
-        NotificationCenter.default.post(name: Notification.Name(PrefKeys.friendlyName.rawValue), object: nil)
+        disp.friendlyName = newValue
+        NotificationCenter.default.post(name: Notification.Name(PrefKey.friendlyName.rawValue), object: nil)
       }
     }
   }

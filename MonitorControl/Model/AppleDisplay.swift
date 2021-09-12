@@ -23,16 +23,16 @@ class AppleDisplay: Display {
     if isSmallIncrement {
       step = delta
     }
-    return min(max(0, ceil((self.getBrightness() + delta) / step) * step), 1)
+    return min(max(0, ceil((self.getAppleBrightness() + delta) / step) * step), 1)
   }
 
-  public func getBrightness() -> Float {
+  public func getAppleBrightness() -> Float {
     var brightness: Float = 0
     DisplayServicesGetBrightness(self.identifier, &brightness)
     return brightness
   }
 
-  public func setBrightness(value: Float) {
+  public func setAppleBrightness(value: Float) {
     self.displayQueue.sync {
       DisplayServicesSetBrightness(self.identifier, value)
       DisplayServicesBrightnessChanged(self.identifier, Double(value))
@@ -41,7 +41,7 @@ class AppleDisplay: Display {
 
   override func stepBrightness(isUp: Bool, isSmallIncrement: Bool) {
     let value = self.calcNewBrightness(isUp: isUp, isSmallIncrement: isSmallIncrement)
-    self.setBrightness(value: value)
+    self.setAppleBrightness(value: value)
     self.showOsd(command: .brightness, value: value * 64, maxValue: 64)
     if let slider = brightnessSliderHandler?.slider {
       slider.floatValue = value
@@ -49,7 +49,7 @@ class AppleDisplay: Display {
   }
 
   override func refreshBrightness() -> Bool {
-    let brightness = self.getBrightness()
+    let brightness = self.getAppleBrightness()
     if let sliderHandler = brightnessSliderHandler, let slider = sliderHandler.slider, brightness != slider.floatValue {
       os_log("Pushing slider towards actual brightness for Apple display %{public}@", type: .debug, self.name)
       if abs(brightness - slider.floatValue) < 0.01 {

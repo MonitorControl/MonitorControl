@@ -16,12 +16,12 @@ class SliderHandler {
       return
     }
     // For the speaker volume slider, also set/unset the mute command when the value is changed from/to 0
-    if self.cmd == .audioSpeakerVolume, (externalDisplay.isMuted() && value > 0) || (!externalDisplay.isMuted() && value == 0) {
+    if self.cmd == .audioSpeakerVolume, (externalDisplay.readPrefValueInt(for: .audioMuteScreenBlank) == 1 && value > 0) || (externalDisplay.readPrefValueInt(for: .audioMuteScreenBlank) != 1 && value == 0) {
       externalDisplay.toggleMute(fromVolumeSlider: true)
     }
 
     if !externalDisplay.isSw() {
-      if self.cmd == Command.brightness, prefs.bool(forKey: PrefKeys.lowerSwAfterBrightness.rawValue) {
+      if self.cmd == Command.brightness, prefs.bool(forKey: PrefKey.lowerSwAfterBrightness.rawValue) {
         var brightnessValue: Float = 0
         var brightnessSwValue: Float = 1
         if value >= 0.5 {
@@ -33,19 +33,19 @@ class SliderHandler {
         }
         _ = externalDisplay.writeDDCValues(command: self.cmd, value: externalDisplay.convValueToDDC(for: self.cmd, from: brightnessValue))
         _ = externalDisplay.setSwBrightness(value: brightnessSwValue)
-        externalDisplay.saveValue(brightnessValue, for: self.cmd)
+        externalDisplay.savePrefValue(brightnessValue, for: self.cmd)
       } else if self.cmd == Command.audioSpeakerVolume {
         if !externalDisplay.enableMuteUnmute || value != 0 {
           _ = externalDisplay.writeDDCValues(command: self.cmd, value: externalDisplay.convValueToDDC(for: self.cmd, from: value))
         }
-        externalDisplay.saveValue(value, for: self.cmd)
+        externalDisplay.savePrefValue(value, for: self.cmd)
       } else {
         _ = externalDisplay.writeDDCValues(command: self.cmd, value: externalDisplay.convValueToDDC(for: self.cmd, from: value))
-        externalDisplay.saveValue(value, for: self.cmd)
+        externalDisplay.savePrefValue(value, for: self.cmd)
       }
     } else if self.cmd == Command.brightness {
       _ = externalDisplay.setSwBrightness(value: value)
-      externalDisplay.saveValue(value, for: self.cmd)
+      externalDisplay.savePrefValue(value, for: self.cmd)
     }
   }
 
@@ -56,7 +56,7 @@ class SliderHandler {
 
     var value = slider.floatValue
 
-    if prefs.bool(forKey: PrefKeys.enableSliderSnap.rawValue) {
+    if prefs.bool(forKey: PrefKey.enableSliderSnap.rawValue) {
       let snapInterval: Float = 0.25
       let snapThreshold: Float = 0.04
       let closest = (value + snapInterval / 2) / snapInterval * snapInterval
@@ -67,7 +67,7 @@ class SliderHandler {
     }
 
     if let appleDisplay = self.display as? AppleDisplay {
-      appleDisplay.setBrightness(value: value)
+      appleDisplay.setAppleBrightness(value: value)
     } else {
       self.valueChangedExternalDisplay(value: value)
     }
@@ -124,7 +124,7 @@ class SliderHandler {
       slider.floatValue = value
     } else if let appleDisplay = display as? AppleDisplay {
       if command == .brightness {
-        slider.floatValue = appleDisplay.getBrightness()
+        slider.floatValue = appleDisplay.getAppleBrightness()
       }
     }
     return handler

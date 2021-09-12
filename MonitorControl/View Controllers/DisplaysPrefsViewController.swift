@@ -114,7 +114,7 @@ class DisplaysPrefsViewController: NSViewController, PreferencePane, NSTableView
       // ID
       cell.displayId.stringValue = String(display.identifier)
       // Firendly name
-      cell.friendlyName.stringValue = display.getFriendlyName()
+      cell.friendlyName.stringValue = display.friendlyName
       cell.friendlyName.isEditable = true
       // Enabled
       cell.enabledButton.state = display.isEnabled && !display.isVirtual ? .on : .off
@@ -148,14 +148,14 @@ class DisplaysPrefsViewController: NSViewController, PreferencePane, NSTableView
       if let externalDisplay = display as? ExternalDisplay, !externalDisplay.isSwOnly(), !externalDisplay.isVirtual {
         // DDC read polling mode
         cell.pollingModeMenu.isEnabled = true
-        cell.pollingModeMenu.selectItem(withTag: externalDisplay.getPollingMode())
+        cell.pollingModeMenu.selectItem(withTag: externalDisplay.pollingMode)
         // Custom read polling count
-        if externalDisplay.getPollingMode() == 4 {
+        if externalDisplay.pollingMode == 4 {
           cell.pollingCount.isEnabled = true
         } else {
           cell.pollingCount.isEnabled = false
         }
-        cell.pollingCount.stringValue = String(externalDisplay.getPollingCount())
+        cell.pollingCount.stringValue = String(externalDisplay.pollingCount)
         // DDC read delay
         cell.longerDelayButton.isEnabled = true
         cell.longerDelayButton.state = externalDisplay.needsLongerDelay ? .on : .off
@@ -171,7 +171,7 @@ class DisplaysPrefsViewController: NSViewController, PreferencePane, NSTableView
         cell.enableMuteButton.state = .off
         cell.enableMuteButton.isEnabled = false
       }
-      if self.prefs.bool(forKey: PrefKeys.showAdvancedDisplays.rawValue) {
+      if self.prefs.bool(forKey: PrefKey.showAdvancedDisplays.rawValue) {
         cell.advancedSettings.isHidden = false
       } else {
         cell.advancedSettings.isHidden = true
@@ -182,7 +182,7 @@ class DisplaysPrefsViewController: NSViewController, PreferencePane, NSTableView
   }
 
   func updateDisplayListRowHeight() {
-    if self.prefs.bool(forKey: PrefKeys.showAdvancedDisplays.rawValue) {
+    if self.prefs.bool(forKey: PrefKey.showAdvancedDisplays.rawValue) {
       self.displayList.rowHeight = 300
     } else {
       self.displayList.rowHeight = 150

@@ -1,5 +1,5 @@
 // UserDefault Keys for the app prefs
-enum PrefKeys: String {
+enum PrefKey: String {
   // Enable mute DDC for display
   case enableMuteUnmute
 
@@ -19,7 +19,7 @@ enum PrefKeys: String {
   case value
 
   // Min command value display TODO: Implementation: DONE, Preferences pane setting: MISSING
-  case mindDDCOverride
+  case minDDCOverride
 
   // Max command value display
   case maxDDC

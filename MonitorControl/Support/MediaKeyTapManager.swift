@@ -24,10 +24,10 @@ class MediaKeyTapManager: MediaKeyTapDelegate {
       return
     }
     var isSmallIncrement = modifiers?.isSuperset(of: NSEvent.ModifierFlags([.shift, .option])) ?? false
-    if [.brightnessUp, .brightnessDown].contains(mediaKey), prefs.bool(forKey: PrefKeys.useFineScaleBrightness.rawValue) {
+    if [.brightnessUp, .brightnessDown].contains(mediaKey), prefs.bool(forKey: PrefKey.useFineScaleBrightness.rawValue) {
       isSmallIncrement = !isSmallIncrement
     }
-    if [.volumeUp, .volumeDown, .mute].contains(mediaKey), prefs.bool(forKey: PrefKeys.useFineScaleVolume.rawValue) {
+    if [.volumeUp, .volumeDown, .mute].contains(mediaKey), prefs.bool(forKey: PrefKey.useFineScaleVolume.rawValue) {
       isSmallIncrement = !isSmallIncrement
     }
     if isPressed, isControlModifier, mediaKey == .brightnessUp || mediaKey == .brightnessDown {
@@ -95,7 +95,7 @@ class MediaKeyTapManager: MediaKeyTapDelegate {
         // The mute key should not respond to press + hold or keyup
         if !isRepeat, isPressed, let display = display as? ExternalDisplay {
           display.toggleMute()
-          if !wasNotIsPressedVolumeSentAlready, !display.isMuted() {
+          if !wasNotIsPressedVolumeSentAlready, display.readPrefValueInt(for: .audioMuteScreenBlank) != 1 {
             display.playVolumeChangedSound()
             wasNotIsPressedVolumeSentAlready = true
           }
@@ -131,7 +131,7 @@ class MediaKeyTapManager: MediaKeyTapDelegate {
 
   func updateMediaKeyTap() {
     var keys: [MediaKey]
-    switch prefs.integer(forKey: PrefKeys.listenFor.rawValue) {
+    switch prefs.integer(forKey: PrefKey.listenFor.rawValue) {
     case Utils.ListenForKeys.brightnessOnlyKeys.rawValue:
       keys = [.brightnessUp, .brightnessDown]
     case Utils.ListenForKeys.volumeOnlyKeys.rawValue:
@@ -153,7 +153,7 @@ class MediaKeyTapManager: MediaKeyTapDelegate {
     // Remove volume related keys if audio device is controllable
     if let defaultAudioDevice = app.coreAudio.defaultOutputDevice {
       let keysToDelete: [MediaKey] = [.volumeUp, .volumeDown, .mute]
-      if !prefs.bool(forKey: PrefKeys.allScreensVolume.rawValue), prefs.bool(forKey: PrefKeys.useAudioDeviceNameMatching.rawValue) {
+      if !prefs.bool(forKey: PrefKey.allScreensVolume.rawValue), prefs.bool(forKey: PrefKey.useAudioDeviceNameMatching.rawValue) {
         if DisplayManager.shared.updateAudioControlTargetDisplays(deviceName: defaultAudioDevice.name) == 0 {
           keys.removeAll { keysToDelete.contains($0) }
         }

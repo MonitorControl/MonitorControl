@@ -21,22 +21,25 @@ class Display {
   internal var name: String
   internal var vendorNumber: UInt32?
   internal var modelNumber: UInt32?
-  internal var isEnabled: Bool {
-    get {
-      self.prefs.object(forKey: PrefKeys.state.rawValue + self.prefsId) as? Bool ?? true
-    }
-    set {
-      self.prefs.set(newValue, forKey: PrefKeys.state.rawValue + self.prefsId)
-    }
+
+  var isEnabled: Bool {
+    get { self.prefs.object(forKey: PrefKey.state.rawValue + self.prefsId) as? Bool ?? true }
+    set { self.prefs.set(newValue, forKey: PrefKey.state.rawValue + self.prefsId) }
   }
 
   var forceSw: Bool {
-    get {
-      return self.prefs.bool(forKey: PrefKeys.forceSw.rawValue + self.prefsId)
-    }
-    set {
-      self.prefs.set(newValue, forKey: PrefKeys.forceSw.rawValue + self.prefsId)
-    }
+    get { return self.prefs.bool(forKey: PrefKey.forceSw.rawValue + self.prefsId) }
+    set { self.prefs.set(newValue, forKey: PrefKey.forceSw.rawValue + self.prefsId) }
+  }
+
+  var swBrightness: Float {
+    get { return self.prefs.float(forKey: PrefKey.SwBrightness.rawValue + self.prefsId) }
+    set { self.prefs.set(newValue, forKey: PrefKey.SwBrightness.rawValue + self.prefsId) }
+  }
+
+  var friendlyName: String {
+    get { return self.prefs.string(forKey: PrefKey.friendlyName.rawValue + self.prefsId) ?? self.name }
+    set { self.prefs.set(newValue, forKey: PrefKey.friendlyName.rawValue + self.prefsId) }
   }
 
   var brightnessSliderHandler: SliderHandler?
@@ -50,6 +53,46 @@ class Display {
 
   private let prefs = UserDefaults.standard
 
+  func prefValueExists(for command: Command) -> Bool {
+    return self.prefs.object(forKey: PrefKey.value.rawValue + String(command.rawValue) + self.prefsId) != nil
+  }
+
+  func readPrefValue(for command: Command) -> Float {
+    return self.prefs.float(forKey: PrefKey.value.rawValue + String(command.rawValue) + self.prefsId)
+  }
+
+  func savePrefValue(_ value: Float, for command: Command) {
+    self.prefs.set(value, forKey: PrefKey.value.rawValue + String(command.rawValue) + self.prefsId)
+  }
+
+  func readPrefValueInt(for command: Command) -> Int {
+    return self.prefs.integer(forKey: PrefKey.value.rawValue + String(command.rawValue) + self.prefsId)
+  }
+
+  func savePrefValueInt(_ value: Int, for command: Command) {
+    self.prefs.set(value, forKey: PrefKey.value.rawValue + String(command.rawValue) + self.prefsId)
+  }
+
+  func prefValueExistsKey(forkey: PrefKey, for command: Command) -> Bool {
+    return self.prefs.object(forKey: forkey.rawValue + String(command.rawValue) + self.prefsId) != nil
+  }
+
+  func readPrefValueKey(forkey: PrefKey, for command: Command) -> Float {
+    return self.prefs.float(forKey: forkey.rawValue + String(command.rawValue) + self.prefsId)
+  }
+
+  func savePrefValueKey(forkey: PrefKey, value: Float, for command: Command) {
+    self.prefs.set(value, forKey: forkey.rawValue + String(command.rawValue) + self.prefsId)
+  }
+
+  func readPrefValueKeyInt(forkey: PrefKey, for command: Command) -> Int {
+    return self.prefs.integer(forKey: forkey.rawValue + String(command.rawValue) + self.prefsId)
+  }
+
+  func savePrefValueKeyInt(forkey: PrefKey, value: Int, for command: Command) {
+    self.prefs.set(value, forKey: forkey.rawValue + String(command.rawValue) + self.prefsId)
+  }
+
   internal init(_ identifier: CGDirectDisplayID, name: String, vendorNumber: UInt32?, modelNumber: UInt32?, isVirtual: Bool = false) {
     self.identifier = identifier
     self.name = name
@@ -62,14 +105,6 @@ class Display {
   }
 
   func stepBrightness(isUp _: Bool, isSmallIncrement _: Bool) {}
-
-  func setFriendlyName(_ value: String) {
-    self.prefs.set(value, forKey: PrefKeys.friendlyName.rawValue + self.prefsId)
-  }
-
-  func getFriendlyName() -> String {
-    return self.prefs.string(forKey: PrefKeys.friendlyName.rawValue + self.prefsId) ?? self.name
-  }
 
   func getShowOsdDisplayId() -> CGDirectDisplayID {
     if CGDisplayIsInHWMirrorSet(self.identifier) != 0 || CGDisplayIsInMirrorSet(self.identifier) != 0, CGDisplayMirrorsDisplay(self.identifier) != 0 {
@@ -108,8 +143,8 @@ class Display {
   let swBrightnessSemaphore = DispatchSemaphore(value: 1)
   func setSwBrightness(value: Float, smooth: Bool = false) -> Bool {
     let brightnessValue = min(1, value)
-    var currentValue = self.getSwBrightnessPrefValue()
-    self.saveSwBirghtnessPrefValue(brightnessValue)
+    var currentValue = self.swBrightness
+    self.swBrightness = brightnessValue
     var newValue = brightnessValue
     currentValue = self.swBrightnessTransform(value: currentValue)
     newValue = self.swBrightnessTransform(value: newValue)
@@ -148,7 +183,7 @@ class Display {
       let bluePeak = gammaTableBlue.max() ?? 0
       let gammaTablePeak = max(redPeak, greenPeak, bluePeak)
       let peakRatio = gammaTablePeak / self.defaultGammaTablePeak
-      let brightnessValue = round(self.swBrightnessTransform(value: peakRatio, reverse: true) * 10000) / 10000
+      let brightnessValue = round(self.swBrightnessTransform(value: peakRatio, reverse: true) * 256) / 256
       return brightnessValue
     }
     return 1
@@ -156,14 +191,6 @@ class Display {
 
   func resetSwBrightness() -> Bool {
     return self.setSwBrightness(value: 1)
-  }
-
-  func saveSwBirghtnessPrefValue(_ value: Float) {
-    self.prefs.set(value, forKey: PrefKeys.SwBrightness.rawValue + self.prefsId)
-  }
-
-  func getSwBrightnessPrefValue() -> Float {
-    return self.prefs.float(forKey: PrefKeys.SwBrightness.rawValue + self.prefsId)
   }
 
   func isSwBrightnessNotDefault() -> Bool {

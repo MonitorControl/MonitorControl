@@ -177,30 +177,30 @@ class DisplayManager {
       if !settingsOnly {
         _ = externalDisplay.setSwBrightness(value: 1, smooth: async)
       } else {
-        externalDisplay.saveSwBirghtnessPrefValue(1)
+        externalDisplay.swBrightness = 1
       }
       if externalDisplay.isSw() {
-        externalDisplay.saveValue(1, for: .brightness)
+        externalDisplay.savePrefValue(1, for: .brightness)
       }
     }
   }
 
   func restoreSwBrightnessForAllDisplays(async: Bool = false) {
     for externalDisplay in self.getExternalDisplays() {
-      if externalDisplay.getValue(for: .brightness) == 0 || externalDisplay.isSw() {
-        let savedPrefValue = externalDisplay.getSwBrightnessPrefValue()
+      if externalDisplay.readPrefValue(for: .brightness) == 0 || externalDisplay.isSw() {
+        let savedPrefValue = externalDisplay.swBrightness
         if externalDisplay.getSwBrightness() != savedPrefValue {
           if let manager = OSDManager.sharedManager() as? OSDManager { // This will give the user a hint why is the brightness suddenly changes and also give screen activity to counter the 'no gamma change when there is no screen activity' issue on some macs
             manager.showImage(OSDImage.brightness.rawValue, onDisplayID: externalDisplay.identifier, priority: 0x1F4, msecUntilFade: 0)
           }
         }
-        externalDisplay.saveSwBirghtnessPrefValue(externalDisplay.getSwBrightness())
+        externalDisplay.swBrightness = externalDisplay.getSwBrightness()
         _ = externalDisplay.setSwBrightness(value: savedPrefValue, smooth: async)
-        if !externalDisplay.isSw(), prefs.bool(forKey: PrefKeys.lowerSwAfterBrightness.rawValue) {
+        if !externalDisplay.isSw(), prefs.bool(forKey: PrefKey.lowerSwAfterBrightness.rawValue) {
           if savedPrefValue < 0.5 {
             DisplayManager.setBrightnessSliderValue(externalDisplay: externalDisplay, value: 0.5 * (savedPrefValue / 2))
           } else {
-            DisplayManager.setBrightnessSliderValue(externalDisplay: externalDisplay, value: 0.5 + (externalDisplay.getValue(for: .brightness) / 2))
+            DisplayManager.setBrightnessSliderValue(externalDisplay: externalDisplay, value: 0.5 + (externalDisplay.readPrefValue(for: .brightness) / 2))
           }
         } else if externalDisplay.isSw() {
           DisplayManager.setBrightnessSliderValue(externalDisplay: externalDisplay, value: savedPrefValue)
@@ -219,17 +219,17 @@ class DisplayManager {
     let allDisplays = self.getAllNonVirtualDisplays()
     var currentDisplay: Display?
     if isBrightness {
-      if prefs.bool(forKey: PrefKeys.allScreensBrightness.rawValue) {
+      if prefs.bool(forKey: PrefKey.allScreensBrightness.rawValue) {
         affectedDisplays = allDisplays
         return affectedDisplays
       }
-      currentDisplay = self.getCurrentDisplay(byFocus: prefs.bool(forKey: PrefKeys.useFocusInsteadOfMouse.rawValue))
+      currentDisplay = self.getCurrentDisplay(byFocus: prefs.bool(forKey: PrefKey.useFocusInsteadOfMouse.rawValue))
     }
     if isVolume {
-      if prefs.bool(forKey: PrefKeys.allScreensVolume.rawValue) {
+      if prefs.bool(forKey: PrefKey.allScreensVolume.rawValue) {
         affectedDisplays = allDisplays
         return affectedDisplays
-      } else if prefs.bool(forKey: PrefKeys.useAudioDeviceNameMatching.rawValue) {
+      } else if prefs.bool(forKey: PrefKey.useAudioDeviceNameMatching.rawValue) {
         return self.audioControlTargetDisplays
       }
       currentDisplay = self.getCurrentDisplay(byFocus: false)

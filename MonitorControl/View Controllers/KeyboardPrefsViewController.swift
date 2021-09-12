@@ -34,13 +34,13 @@ class KeyboardPrefsViewController: NSViewController, PreferencePane {
   }
 
   func populateSettings() {
-    self.listenFor.selectItem(at: self.prefs.integer(forKey: PrefKeys.listenFor.rawValue))
-    self.allScreens.state = self.prefs.bool(forKey: PrefKeys.allScreensBrightness.rawValue) ? .on : .off
-    self.useFocusInsteadOfMouse.state = self.prefs.bool(forKey: PrefKeys.useFocusInsteadOfMouse.rawValue) ? .on : .off
-    self.allScreensVolume.state = self.prefs.bool(forKey: PrefKeys.allScreensVolume.rawValue) ? .on : .off
-    self.useAudioDeviceNameMatching.state = self.prefs.bool(forKey: PrefKeys.useAudioDeviceNameMatching.rawValue) ? .on : .off
-    self.useFineScale.state = self.prefs.bool(forKey: PrefKeys.useFineScaleBrightness.rawValue) ? .on : .off
-    self.useFineScaleVolume.state = self.prefs.bool(forKey: PrefKeys.useFineScaleVolume.rawValue) ? .on : .off
+    self.listenFor.selectItem(at: self.prefs.integer(forKey: PrefKey.listenFor.rawValue))
+    self.allScreens.state = self.prefs.bool(forKey: PrefKey.allScreensBrightness.rawValue) ? .on : .off
+    self.useFocusInsteadOfMouse.state = self.prefs.bool(forKey: PrefKey.useFocusInsteadOfMouse.rawValue) ? .on : .off
+    self.allScreensVolume.state = self.prefs.bool(forKey: PrefKey.allScreensVolume.rawValue) ? .on : .off
+    self.useAudioDeviceNameMatching.state = self.prefs.bool(forKey: PrefKey.useAudioDeviceNameMatching.rawValue) ? .on : .off
+    self.useFineScale.state = self.prefs.bool(forKey: PrefKey.useFineScaleBrightness.rawValue) ? .on : .off
+    self.useFineScaleVolume.state = self.prefs.bool(forKey: PrefKey.useFineScaleVolume.rawValue) ? .on : .off
     self.allScreensClicked(self.allScreens)
     self.allScreensVolumeClicked(self.allScreensVolume)
   }
@@ -48,13 +48,13 @@ class KeyboardPrefsViewController: NSViewController, PreferencePane {
   @IBAction func allScreensClicked(_ sender: NSButton) {
     switch sender.state {
     case .on:
-      self.prefs.set(true, forKey: PrefKeys.allScreensBrightness.rawValue)
+      self.prefs.set(true, forKey: PrefKey.allScreensBrightness.rawValue)
       self.useFocusInsteadOfMouse.state = .off
       self.useFocusInsteadOfMouse.isEnabled = false
     case .off:
-      self.prefs.set(false, forKey: PrefKeys.allScreensBrightness.rawValue)
+      self.prefs.set(false, forKey: PrefKey.allScreensBrightness.rawValue)
       self.useFocusInsteadOfMouse.isEnabled = true
-      self.useFocusInsteadOfMouse.state = self.prefs.bool(forKey: PrefKeys.useFocusInsteadOfMouse.rawValue) ? .on : .off
+      self.useFocusInsteadOfMouse.state = self.prefs.bool(forKey: PrefKey.useFocusInsteadOfMouse.rawValue) ? .on : .off
     default: break
     }
   }
@@ -62,9 +62,9 @@ class KeyboardPrefsViewController: NSViewController, PreferencePane {
   @IBAction func useFocusInsteadOfMouseClicked(_ sender: NSButton) {
     switch sender.state {
     case .on:
-      self.prefs.set(true, forKey: PrefKeys.useFocusInsteadOfMouse.rawValue)
+      self.prefs.set(true, forKey: PrefKey.useFocusInsteadOfMouse.rawValue)
     case .off:
-      self.prefs.set(false, forKey: PrefKeys.useFocusInsteadOfMouse.rawValue)
+      self.prefs.set(false, forKey: PrefKey.useFocusInsteadOfMouse.rawValue)
     default: break
     }
   }
@@ -72,13 +72,13 @@ class KeyboardPrefsViewController: NSViewController, PreferencePane {
   @IBAction func allScreensVolumeClicked(_ sender: NSButton) {
     switch sender.state {
     case .on:
-      self.prefs.set(true, forKey: PrefKeys.allScreensVolume.rawValue)
+      self.prefs.set(true, forKey: PrefKey.allScreensVolume.rawValue)
       self.useAudioDeviceNameMatching.state = .off
       self.useAudioDeviceNameMatching.isEnabled = false
     case .off:
-      self.prefs.set(false, forKey: PrefKeys.allScreensVolume.rawValue)
+      self.prefs.set(false, forKey: PrefKey.allScreensVolume.rawValue)
       self.useAudioDeviceNameMatching.isEnabled = true
-      self.useAudioDeviceNameMatching.state = self.prefs.bool(forKey: PrefKeys.useAudioDeviceNameMatching.rawValue) ? .on : .off
+      self.useAudioDeviceNameMatching.state = self.prefs.bool(forKey: PrefKey.useAudioDeviceNameMatching.rawValue) ? .on : .off
     default: break
     }
     app.updateMediaKeyTap()
@@ -87,9 +87,9 @@ class KeyboardPrefsViewController: NSViewController, PreferencePane {
   @IBAction func useAudioDeviceNameMatchingClicked(_ sender: NSButton) {
     switch sender.state {
     case .on:
-      self.prefs.set(true, forKey: PrefKeys.useAudioDeviceNameMatching.rawValue)
+      self.prefs.set(true, forKey: PrefKey.useAudioDeviceNameMatching.rawValue)
     case .off:
-      self.prefs.set(false, forKey: PrefKeys.useAudioDeviceNameMatching.rawValue)
+      self.prefs.set(false, forKey: PrefKey.useAudioDeviceNameMatching.rawValue)
     default: break
     }
     app.updateMediaKeyTap()
@@ -98,9 +98,9 @@ class KeyboardPrefsViewController: NSViewController, PreferencePane {
   @IBAction func useFineScaleClicked(_ sender: NSButton) {
     switch sender.state {
     case .on:
-      self.prefs.set(true, forKey: PrefKeys.useFineScaleBrightness.rawValue)
+      self.prefs.set(true, forKey: PrefKey.useFineScaleBrightness.rawValue)
     case .off:
-      self.prefs.set(false, forKey: PrefKeys.useFineScaleBrightness.rawValue)
+      self.prefs.set(false, forKey: PrefKey.useFineScaleBrightness.rawValue)
     default: break
     }
   }
@@ -108,15 +108,15 @@ class KeyboardPrefsViewController: NSViewController, PreferencePane {
   @IBAction func useFineScaleVolumeClicked(_ sender: NSButton) {
     switch sender.state {
     case .on:
-      self.prefs.set(true, forKey: PrefKeys.useFineScaleVolume.rawValue)
+      self.prefs.set(true, forKey: PrefKey.useFineScaleVolume.rawValue)
     case .off:
-      self.prefs.set(false, forKey: PrefKeys.useFineScaleVolume.rawValue)
+      self.prefs.set(false, forKey: PrefKey.useFineScaleVolume.rawValue)
     default: break
     }
   }
 
   @IBAction func listenForChanged(_ sender: NSPopUpButton) {
-    self.prefs.set(sender.selectedTag(), forKey: PrefKeys.listenFor.rawValue)
-    NotificationCenter.default.post(name: Notification.Name(PrefKeys.listenFor.rawValue), object: nil)
+    self.prefs.set(sender.selectedTag(), forKey: PrefKey.listenFor.rawValue)
+    NotificationCenter.default.post(name: Notification.Name(PrefKey.listenFor.rawValue), object: nil)
   }
 }
