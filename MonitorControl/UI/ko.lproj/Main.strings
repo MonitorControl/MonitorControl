@@ -10,6 +10,9 @@
 /* Class = "NSButtonCell"; title = "Change volume for all screens"; ObjectID = "1XT-3S-UuD"; */
 "1XT-3S-UuD.title" = "Change volume for all screens";
 
+/* Class = "NSTextFieldCell"; title = "DDC min"; ObjectID = "1zE-fg-xEm"; */
+"1zE-fg-xEm.title" = "DDC min";
+
 /* Class = "NSTextFieldCell"; title = "MonitorControl uses mouse position to determine which display to control. Using window focus instead might not work well with full screen apps."; ObjectID = "4dX-o1-xAc"; */
 "4dX-o1-xAc.title" = "MonitorControl uses mouse position to determine which display to control. Using window focus instead might not work well with full screen apps.";
 
@@ -33,6 +36,9 @@
 
 /* Class = "NSTextFieldCell"; title = "Use brightness, volume and other settings from last time or use defaults. Values will be applied to the display upon first change by the user."; ObjectID = "an7-Aj-3fZ"; */
 "an7-Aj-3fZ.title" = "Use brightness, volume and other settings from last time or use defaults. Values will be applied to the display upon first change by the user.";
+
+/* Class = "NSTextFieldCell"; title = "Brightness:"; ObjectID = "Bhb-6l-uPQ"; */
+"Bhb-6l-uPQ.title" = "Brightness:";
 
 /* Class = "NSTextFieldCell"; title = "These options work for hardware (DDC) controlled displays only."; ObjectID = "bIe-6O-xEH"; */
 "bIe-6O-xEH.title" = "이 옵션들은 하드웨어 (DDC) 제어 방식의 디스플레이에서만 작동됩니다.";
@@ -70,6 +76,9 @@
 /* Class = "NSMenuItem"; title = "Minimal"; ObjectID = "Eq3-z9-yIo"; */
 "Eq3-z9-yIo.title" = "최소";
 
+/* Class = "NSTextFieldCell"; title = "Scale skew"; ObjectID = "Eui-5S-JR6"; */
+"Eui-5S-JR6.title" = "Scale skew";
+
 /* Class = "NSTextFieldCell"; title = "Normally keyboard controls change one OSD chiclet worth of value and Shift+Option allows fine control. This makes fine control default."; ObjectID = "f6J-Ui-uMB"; */
 "f6J-Ui-uMB.title" = "Normally keyboard controls change one OSD chiclet worth of value and Shift+Option allows fine control. This makes fine control default.";
 
@@ -78,6 +87,9 @@
 
 /* Class = "NSTextFieldCell"; title = "Brightness slider:"; ObjectID = "fe9-Ia-t9m"; */
 "fe9-Ia-t9m.title" = "메뉴 컨텐츠:";
+
+/* Class = "NSTextFieldCell"; title = "Volume:"; ObjectID = "FER-Ri-4UO"; */
+"FER-Ri-4UO.title" = "Volume:";
 
 /* Class = "NSButtonCell"; title = "Combine hardware and software dimming"; ObjectID = "fhy-Er-0aI"; */
 "fhy-Er-0aI.title" = "소프트웨어 디밍을 통한 더 낮은 밝기";
@@ -130,9 +142,6 @@
 /* Class = "NSButtonCell"; title = "Enable software dimming if required"; ObjectID = "kMa-3q-udl"; */
 "kMa-3q-udl.title" = "필요할 때 소프트웨어 디밍 활성화";
 
-/* Class = "NSButton"; ibShadowedToolTip = "More Info"; ObjectID = "kqn-gU-mZX"; */
-"kqn-gU-mZX.ibShadowedToolTip" = "더 알아보기";
-
 /* Class = "NSTextFieldCell"; title = "Display type:"; ObjectID = "lSJ-6w-KJ2"; */
 "lSJ-6w-KJ2.title" = "디스플레이 타입:";
 
@@ -144,6 +153,9 @@
 
 /* Class = "NSButtonCell"; title = "Use window focus to determine which display to control"; ObjectID = "mMG-Ac-gdB"; */
 "mMG-Ac-gdB.title" = "Use window focus to determine which display to control";
+
+/* Class = "NSTextFieldCell"; title = "Contrast:"; ObjectID = "MMk-S2-yJN"; */
+"MMk-S2-yJN.title" = "Contrast:";
 
 /* Class = "NSButtonCell"; title = "Hide Menu Icon"; ObjectID = "msX-fb-2Qd"; */
 "msX-fb-2Qd.title" = "메뉴 항목 숨기기";
@@ -168,6 +180,9 @@
 
 /* Class = "NSButtonCell"; title = "Longer delay during DDC read operations"; ObjectID = "pF5-Sw-7BR"; */
 "pF5-Sw-7BR.title" = "DDC 리드 작업 중 응답지연 시간 연장";
+
+/* Class = "NSTextFieldCell"; title = "DDC max"; ObjectID = "psF-vX-AFB"; */
+"psF-vX-AFB.title" = "DDC max";
 
 /* Class = "NSButtonCell"; title = "Show contrast slider in menu"; ObjectID = "qO0-dB-yUs"; */
 "qO0-dB-yUs.title" = "메뉴에서 대비 슬라이더 표시";
@@ -219,6 +234,9 @@
 
 /* Class = "NSTextFieldCell"; title = "Additional settings:"; ObjectID = "Xz0-X0-rB4"; */
 "Xz0-X0-rB4.title" = "추가 설정:";
+
+/* Class = "NSTextFieldCell"; title = "Available"; ObjectID = "yBJ-5d-I7e"; */
+"yBJ-5d-I7e.title" = "Available";
 
 /* Class = "NSTextFieldCell"; title = "Use software dimming after the display reached zero hardware brightness for extended range. Works for DDC controlled displays only."; ObjectID = "yeg-GN-SuO"; */
 "yeg-GN-SuO.title" = "이 옵션은 하드웨어 밝기가 최소에 다다르면 추가적인 소프트웨어 디밍을 활성화합니다. 메뉴 슬라이더의 50%를 기준으로 전환합니다. DDC 제어 방식 디스플레이에서만 작동됩니다.";

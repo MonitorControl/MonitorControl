@@ -14,7 +14,7 @@ let prefs = UserDefaults.standard
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
   @IBOutlet var statusMenu: NSMenu!
-  let minPreviousBuildNumber = 3680 // Below this previous app version there is a mandatory preferences reset!
+  let minPreviousBuildNumber = 3600 // Below this previous app version there is a mandatory preferences reset!
   let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
   var mediaKeyTap = MediaKeyTapManager()
   var monitorItems: [NSMenuItem] = []

@@ -10,6 +10,9 @@
 /* Class = "NSButtonCell"; title = "Change volume for all screens"; ObjectID = "1XT-3S-UuD"; */
 "1XT-3S-UuD.title" = "Change volume for all screens";
 
+/* Class = "NSTextFieldCell"; title = "DDC min"; ObjectID = "1zE-fg-xEm"; */
+"1zE-fg-xEm.title" = "DDC min";
+
 /* Class = "NSTextFieldCell"; title = "MonitorControl uses mouse position to determine which display to control. Using window focus instead might not work well with full screen apps."; ObjectID = "4dX-o1-xAc"; */
 "4dX-o1-xAc.title" = "MonitorControl uses mouse position to determine which display to control. Using window focus instead might not work well with full screen apps.";
 
@@ -33,6 +36,9 @@
 
 /* Class = "NSTextFieldCell"; title = "Use brightness, volume and other settings from last time or use defaults. Values will be applied to the display upon first change by the user."; ObjectID = "an7-Aj-3fZ"; */
 "an7-Aj-3fZ.title" = "Use brightness, volume and other settings from last time or use defaults. Values will be applied to the display upon first change by the user.";
+
+/* Class = "NSTextFieldCell"; title = "Brightness:"; ObjectID = "Bhb-6l-uPQ"; */
+"Bhb-6l-uPQ.title" = "Brightness:";
 
 /* Class = "NSTextFieldCell"; title = "These options work for hardware (DDC) controlled displays only."; ObjectID = "bIe-6O-xEH"; */
 "bIe-6O-xEH.title" = "These options work for hardware (DDC) controlled displays only.";
@@ -70,6 +76,9 @@
 /* Class = "NSMenuItem"; title = "Minimal"; ObjectID = "Eq3-z9-yIo"; */
 "Eq3-z9-yIo.title" = "Minimal";
 
+/* Class = "NSTextFieldCell"; title = "Scale skew"; ObjectID = "Eui-5S-JR6"; */
+"Eui-5S-JR6.title" = "Scale skew";
+
 /* Class = "NSTextFieldCell"; title = "Normally keyboard controls change one OSD chiclet worth of value and Shift+Option allows fine control. This makes fine control default."; ObjectID = "f6J-Ui-uMB"; */
 "f6J-Ui-uMB.title" = "Normally keyboard controls change one OSD chiclet worth of value and Shift+Option allows fine control. This makes fine control default.";
 
@@ -78,6 +87,9 @@
 
 /* Class = "NSTextFieldCell"; title = "Brightness slider:"; ObjectID = "fe9-Ia-t9m"; */
 "fe9-Ia-t9m.title" = "Menu contents:";
+
+/* Class = "NSTextFieldCell"; title = "Volume:"; ObjectID = "FER-Ri-4UO"; */
+"FER-Ri-4UO.title" = "Volume:";
 
 /* Class = "NSButtonCell"; title = "Combine hardware and software dimming"; ObjectID = "fhy-Er-0aI"; */
 "fhy-Er-0aI.title" = "Diminuer le contraste après la luminosité";
@@ -130,9 +142,6 @@
 /* Class = "NSButtonCell"; title = "Enable software dimming if required"; ObjectID = "kMa-3q-udl"; */
 "kMa-3q-udl.title" = "Enable software dimming if required";
 
-/* Class = "NSButton"; ibShadowedToolTip = "More Info"; ObjectID = "kqn-gU-mZX"; */
-"kqn-gU-mZX.ibShadowedToolTip" = "More Info";
-
 /* Class = "NSTextFieldCell"; title = "Display type:"; ObjectID = "lSJ-6w-KJ2"; */
 "lSJ-6w-KJ2.title" = "Display type:";
 
@@ -144,6 +153,9 @@
 
 /* Class = "NSButtonCell"; title = "Use window focus to determine which display to control"; ObjectID = "mMG-Ac-gdB"; */
 "mMG-Ac-gdB.title" = "Use window focus to determine which display to control";
+
+/* Class = "NSTextFieldCell"; title = "Contrast:"; ObjectID = "MMk-S2-yJN"; */
+"MMk-S2-yJN.title" = "Contrast:";
 
 /* Class = "NSButtonCell"; title = "Hide Menu Icon"; ObjectID = "msX-fb-2Qd"; */
 "msX-fb-2Qd.title" = "Hide Menu Icon";
@@ -168,6 +180,9 @@
 
 /* Class = "NSButtonCell"; title = "Longer delay during DDC read operations"; ObjectID = "pF5-Sw-7BR"; */
 "pF5-Sw-7BR.title" = "Longer delay during DDC read operations";
+
+/* Class = "NSTextFieldCell"; title = "DDC max"; ObjectID = "psF-vX-AFB"; */
+"psF-vX-AFB.title" = "DDC max";
 
 /* Class = "NSButtonCell"; title = "Show contrast slider in menu"; ObjectID = "qO0-dB-yUs"; */
 "qO0-dB-yUs.title" = "Afficher un slide pour le contraste";
@@ -219,6 +234,9 @@
 
 /* Class = "NSTextFieldCell"; title = "Additional settings:"; ObjectID = "Xz0-X0-rB4"; */
 "Xz0-X0-rB4.title" = "Additional settings:";
+
+/* Class = "NSTextFieldCell"; title = "Available"; ObjectID = "yBJ-5d-I7e"; */
+"yBJ-5d-I7e.title" = "Available";
 
 /* Class = "NSTextFieldCell"; title = "Use software dimming after the display reached zero hardware brightness for extended range. Works for DDC controlled displays only."; ObjectID = "yeg-GN-SuO"; */
 "yeg-GN-SuO.title" = "This activates additional software dimming after the display reached zero hardware brightness. Menu slider is also affected with 50% being the transition point. Works for DDC controlled displays only.";
