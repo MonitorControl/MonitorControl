@@ -93,7 +93,10 @@ class ExternalDisplay: Display {
   func setupCurrentAndMaxValues(command: Command) {
     var ddcValues: (UInt16, UInt16)?
     var maxDDCValue = UInt16(DDC_MAX_DETECT_LIMIT)
-    var currentDDCValue = UInt16(Float(DDC_MAX_DETECT_LIMIT) * 0.75)
+    var currentDDCValue = UInt16(Float(DDC_MAX_DETECT_LIMIT) * 0.7)
+    if command == .audioSpeakerVolume {
+      currentDDCValue = UInt16(Float(self.DDC_MAX_DETECT_LIMIT) * 0.15) // lower default audio value as high volume might rattle the user.
+    }
     var currentValue: Float = 1
     os_log("** Setting up %{public}@ for %{public}@ **", type: .info, self.name, String(reflecting: command))
     if self.isSw(), command == Command.brightness {
@@ -121,8 +124,7 @@ class ExternalDisplay: Display {
         self.savePrefValueKeyInt(forkey: PrefKey.maxDDC, value: min(Int(maxDDCValue), self.DDC_MAX_DETECT_LIMIT), for: command)
       }
       if ddcValues == nil {
-        self.savePrefValue(self.prefValueExists(for: command) ? self.readPrefValue(for: command) : 0.75, for: command)
-        currentDDCValue = self.convValueToDDC(for: command, from: self.readPrefValue(for: command))
+        self.savePrefValue(self.prefValueExists(for: command) ? self.readPrefValue(for: command) : self.convDDCToValue(for: command, from: currentDDCValue), for: command)
       }
       os_log(" - current DDC value: %{public}@", type: .info, String(currentDDCValue))
       os_log(" - minimum DDC value: %{public}@ (overrides 0)", type: .info, String(self.readPrefValueKeyInt(forkey: PrefKey.minDDCOverride, for: command)))
