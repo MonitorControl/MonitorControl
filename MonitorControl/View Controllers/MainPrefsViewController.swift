@@ -26,6 +26,47 @@ class MainPrefsViewController: NSViewController, PreferencePane {
   @IBOutlet var notEnableDDCDuringStartup: NSButton!
   @IBOutlet var writeDDCOnStartup: NSButton!
   @IBOutlet var readDDCOnStartup: NSButton!
+  @IBOutlet var rowStartupSeparator: NSGridRow!
+  @IBOutlet var rowDoNothingStartupCheck: NSGridRow!
+  @IBOutlet var rowDoNothingStartupText: NSGridRow!
+  @IBOutlet var rowWriteStartupCheck: NSGridRow!
+  @IBOutlet var rowWriteStartupText: NSGridRow!
+  @IBOutlet var rowReadStartupCheck: NSGridRow!
+  @IBOutlet var rowReadStartupText: NSGridRow!
+  @IBOutlet var rowSafeModeText: NSGridRow!
+  @IBOutlet var rowResetButton: NSGridRow!
+
+  func showAdvanced() -> Bool {
+    let hide = !self.prefs.bool(forKey: PrefKey.showAdvancedSettings.rawValue)
+    if self.notEnableDDCDuringStartup.state == .on {
+      self.rowStartupSeparator.isHidden = hide
+      self.rowDoNothingStartupCheck.isHidden = hide
+      self.rowDoNothingStartupText.isHidden = hide
+      self.rowWriteStartupCheck.isHidden = hide
+      self.rowWriteStartupText.isHidden = hide
+      self.rowReadStartupCheck.isHidden = hide
+      self.rowReadStartupText.isHidden = hide
+      self.rowSafeModeText.isHidden = hide
+    } else {
+      self.rowStartupSeparator.isHidden = false
+      self.rowDoNothingStartupCheck.isHidden = false
+      self.rowDoNothingStartupText.isHidden = false
+      if self.writeDDCOnStartup.state == .on {
+        self.rowWriteStartupCheck.isHidden = false
+        self.rowWriteStartupText.isHidden = false
+        self.rowReadStartupCheck.isHidden = hide
+        self.rowReadStartupText.isHidden = hide
+      } else {
+        self.rowWriteStartupCheck.isHidden = hide
+        self.rowWriteStartupText.isHidden = hide
+        self.rowReadStartupCheck.isHidden = false
+        self.rowReadStartupText.isHidden = false
+      }
+      self.rowSafeModeText.isHidden = false
+    }
+    self.rowResetButton.isHidden = hide
+    return !hide
+  }
 
   @available(macOS, deprecated: 10.10)
   override func viewDidLoad() {
@@ -40,7 +81,7 @@ class MainPrefsViewController: NSViewController, PreferencePane {
     self.startAtLogin.state = startAtLogin ? .on : .off
     self.lowerSwAfterBrightness.state = self.prefs.bool(forKey: PrefKey.lowerSwAfterBrightness.rawValue) ? .on : .off
     self.fallbackSw.state = self.prefs.bool(forKey: PrefKey.fallbackSw.rawValue) ? .on : .off
-    self.showAdvancedDisplays.state = self.prefs.bool(forKey: PrefKey.showAdvancedDisplays.rawValue) ? .on : .off
+    self.showAdvancedDisplays.state = self.prefs.bool(forKey: PrefKey.showAdvancedSettings.rawValue) ? .on : .off
     self.notEnableDDCDuringStartup.state = !self.prefs.bool(forKey: PrefKey.enableDDCDuringStartup.rawValue) ? .on : .off
     self.writeDDCOnStartup.state = !self.prefs.bool(forKey: PrefKey.readDDCInsteadOfRestoreValues.rawValue) && self.prefs.bool(forKey: PrefKey.enableDDCDuringStartup.rawValue) ? .on : .off
     self.readDDCOnStartup.state = self.prefs.bool(forKey: PrefKey.readDDCInsteadOfRestoreValues.rawValue) && self.prefs.bool(forKey: PrefKey.enableDDCDuringStartup.rawValue) ? .on : .off
@@ -49,6 +90,7 @@ class MainPrefsViewController: NSViewController, PreferencePane {
     keyboardPrefsVc?.view.layoutSubtreeIfNeeded()
     displaysPrefsVc?.view.layoutSubtreeIfNeeded()
     aboutPrefsVc?.view.layoutSubtreeIfNeeded()
+    _ = self.showAdvanced()
   }
 
   @IBAction func startAtLoginClicked(_ sender: NSButton) {
@@ -94,6 +136,7 @@ class MainPrefsViewController: NSViewController, PreferencePane {
       self.readDDCOnStartup.state = .off
     default: break
     }
+    _ = self.showAdvanced()
   }
 
   @IBAction func writeDDCOnStartupClicked(_ sender: NSButton) {
@@ -105,6 +148,7 @@ class MainPrefsViewController: NSViewController, PreferencePane {
       self.readDDCOnStartup.state = .off
     default: break
     }
+    _ = self.showAdvanced()
   }
 
   @IBAction func readDDCOnStartupClicked(_ sender: NSButton) {
@@ -116,17 +160,21 @@ class MainPrefsViewController: NSViewController, PreferencePane {
       self.writeDDCOnStartup.state = .off
     default: break
     }
+    _ = self.showAdvanced()
   }
 
   @IBAction func showAdvancedClicked(_ sender: NSButton) {
     switch sender.state {
     case .on:
-      self.prefs.set(true, forKey: PrefKey.showAdvancedDisplays.rawValue)
+      self.prefs.set(true, forKey: PrefKey.showAdvancedSettings.rawValue)
     case .off:
-      self.prefs.set(false, forKey: PrefKey.showAdvancedDisplays.rawValue)
+      self.prefs.set(false, forKey: PrefKey.showAdvancedSettings.rawValue)
     default: break
     }
-    NotificationCenter.default.post(name: Notification.Name(PrefKey.displayListUpdate.rawValue), object: nil)
+    _ = self.showAdvanced()
+    _ = menuslidersPrefsVc?.showAdvanced()
+    _ = keyboardPrefsVc?.showAdvanced()
+    _ = displaysPrefsVc?.showAdvanced()
   }
 
   @available(macOS, deprecated: 10.10)

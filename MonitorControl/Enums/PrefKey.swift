@@ -108,7 +108,7 @@ enum PrefKey: String {
   case readDDCInsteadOfRestoreValues
 
   // Show advanced options under Displays tab in Preferences
-  case showAdvancedDisplays
+  case showAdvancedSettings
 
   // Change Brightness for all screens
   case allScreensBrightness

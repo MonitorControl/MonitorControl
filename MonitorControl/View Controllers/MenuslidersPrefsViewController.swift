@@ -19,12 +19,73 @@ class MenuslidersPrefsViewController: NSViewController, PreferencePane {
   let prefs = UserDefaults.standard
 
   @IBOutlet var hideMenuIcon: NSButton!
+  @IBOutlet var quitApplication: NSButton!
   @IBOutlet var showBrightnessSlider: NSButton!
   @IBOutlet var showAppleFromMenu: NSButton!
   @IBOutlet var showVolumeSlider: NSButton!
   @IBOutlet var showContrastSlider: NSButton!
   @IBOutlet var enableSliderSnap: NSButton!
   @IBOutlet var showTickMarks: NSButton!
+
+  @IBOutlet var rowHideIconCheck: NSGridRow!
+  @IBOutlet var rowHideIconText: NSGridRow!
+  @IBOutlet var rowQuitButton: NSGridRow!
+  @IBOutlet var rowQuitText: NSGridRow!
+  @IBOutlet var rowHideIconSpearator: NSGridRow!
+  @IBOutlet var rowShowContrastCheck: NSGridRow!
+  @IBOutlet var rowShowContrastText: NSGridRow!
+  @IBOutlet var rowAdvSliderSeparator: NSGridRow!
+  @IBOutlet var rowSnappingCheck: NSGridRow!
+  @IBOutlet var rowSnappingText: NSGridRow!
+  @IBOutlet var rowTickCheck: NSGridRow!
+  @IBOutlet var rowTickText: NSGridRow!
+
+  func showAdvanced() -> Bool {
+    let hide = !self.prefs.bool(forKey: PrefKey.showAdvancedSettings.rawValue)
+    if self.hideMenuIcon.state == .on {
+      self.rowHideIconCheck.isHidden = false
+      self.rowHideIconText.isHidden = false
+      self.rowHideIconSpearator.isHidden = false
+    } else {
+      self.rowHideIconCheck.isHidden = hide
+      self.rowHideIconText.isHidden = hide
+      self.rowHideIconSpearator.isHidden = hide
+    }
+    if self.hideMenuIcon.state == .on {
+      self.rowQuitButton.isHidden = false
+      self.rowQuitText.isHidden = false
+    } else {
+      self.rowQuitButton.isHidden = true
+      self.rowQuitText.isHidden = true
+    }
+    if self.showContrastSlider.state == .on {
+      self.rowShowContrastCheck.isHidden = false
+      self.rowShowContrastText.isHidden = false
+    } else {
+      self.rowShowContrastCheck.isHidden = hide
+      self.rowShowContrastText.isHidden = hide
+    }
+    if self.enableSliderSnap.state == .on || self.showTickMarks.state == .on {
+      self.rowAdvSliderSeparator.isHidden = false
+    } else {
+      self.rowAdvSliderSeparator.isHidden = hide
+    }
+    if self.enableSliderSnap.state == .on {
+      self.rowSnappingCheck.isHidden = false
+      self.rowSnappingText.isHidden = false
+    } else {
+      self.rowSnappingCheck.isHidden = hide
+      self.rowSnappingText.isHidden = hide
+    }
+    if self.showTickMarks.state == .on {
+      self.rowTickCheck.isHidden = false
+      self.rowTickText.isHidden = false
+    } else {
+      self.rowTickCheck.isHidden = hide
+      self.rowTickText.isHidden = hide
+    }
+    return !hide
+  }
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -45,6 +106,7 @@ class MenuslidersPrefsViewController: NSViewController, PreferencePane {
     self.showVolumeSlider.state = self.prefs.bool(forKey: PrefKey.showVolume.rawValue) ? .on : .off
     self.enableSliderSnap.state = self.prefs.bool(forKey: PrefKey.enableSliderSnap.rawValue) ? .on : .off
     self.showTickMarks.state = self.prefs.bool(forKey: PrefKey.showTickMarks.rawValue) ? .on : .off
+    _ = self.showAdvanced()
   }
 
   @IBAction func hideMenuIconClicked(_ sender: NSButton) {
@@ -57,6 +119,11 @@ class MenuslidersPrefsViewController: NSViewController, PreferencePane {
       app.statusItem.isVisible = true
     default: break
     }
+    _ = self.showAdvanced()
+  }
+
+  @IBAction func quitApplicationClicked(_: NSButton) {
+    NSApplication.shared.terminate(self)
   }
 
   @IBAction func showBrightnessSliderClicked(_ sender: NSButton) {
@@ -105,6 +172,7 @@ class MenuslidersPrefsViewController: NSViewController, PreferencePane {
     default: break
     }
     app.updateDisplaysAndMenus()
+    _ = self.showAdvanced()
   }
 
   @IBAction func enableSliderSnapClicked(_ sender: NSButton) {
@@ -116,6 +184,7 @@ class MenuslidersPrefsViewController: NSViewController, PreferencePane {
     default: break
     }
     app.updateDisplaysAndMenus()
+    _ = self.showAdvanced()
   }
 
   @IBAction func showTickMarks(_ sender: NSButton) {
@@ -127,5 +196,6 @@ class MenuslidersPrefsViewController: NSViewController, PreferencePane {
     default: break
     }
     app.updateDisplaysAndMenus()
+    _ = self.showAdvanced()
   }
 }

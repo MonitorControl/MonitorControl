@@ -26,6 +26,24 @@ class KeyboardPrefsViewController: NSViewController, PreferencePane {
   @IBOutlet var useFineScale: NSButton!
   @IBOutlet var useFineScaleVolume: NSButton!
 
+  @IBOutlet var rowUseFocusCheck: NSGridRow!
+  @IBOutlet var rowUseFocusText: NSGridRow!
+  @IBOutlet var rowUseAudioNameCheck: NSGridRow!
+  @IBOutlet var rowUseAudioNameText: NSGridRow!
+  @IBOutlet var rowUseFineScaleCheck: NSGridRow!
+  @IBOutlet var rowUseFineScaleText: NSGridRow!
+
+  func showAdvanced() -> Bool {
+    let hide = !self.prefs.bool(forKey: PrefKey.showAdvancedSettings.rawValue)
+    self.rowUseFocusCheck.isHidden = hide
+    self.rowUseFocusText.isHidden = hide
+    self.rowUseAudioNameCheck.isHidden = hide
+    self.rowUseAudioNameText.isHidden = hide
+    self.rowUseFineScaleCheck.isHidden = hide
+    self.rowUseFineScaleText.isHidden = hide
+    return !hide
+  }
+
   override func viewDidLoad() {
     super.viewDidLoad()
     self.populateSettings()
@@ -41,6 +59,7 @@ class KeyboardPrefsViewController: NSViewController, PreferencePane {
     self.useFineScaleVolume.state = self.prefs.bool(forKey: PrefKey.useFineScaleVolume.rawValue) ? .on : .off
     self.allScreensClicked(self.allScreens)
     self.allScreensVolumeClicked(self.allScreensVolume)
+    _ = self.showAdvanced()
   }
 
   @IBAction func allScreensClicked(_ sender: NSButton) {

@@ -16,6 +16,9 @@
 /* Class = "NSTextFieldCell"; title = "MonitorControl uses mouse position to determine which display to control. Using window focus instead might not work well with full screen apps."; ObjectID = "4dX-o1-xAc"; */
 "4dX-o1-xAc.title" = "MonitorControl uses mouse position to determine which display to control. Using window focus instead might not work well with full screen apps.";
 
+/* Class = "NSButtonCell"; title = "Reset Preferences"; ObjectID = "5yT-5F-X5R"; */
+"5yT-5F-X5R.title" = "Reset Preferences";
+
 /* Class = "NSTextFieldCell"; title = "Invert"; ObjectID = "6zE-AH-mXf"; */
 "6zE-AH-mXf.title" = "Invert";
 
@@ -43,7 +46,7 @@
 /* Class = "NSTextFieldCell"; title = "Brightness:"; ObjectID = "Bhb-6l-uPQ"; */
 "Bhb-6l-uPQ.title" = "Brightness:";
 
-/* Class = "NSTextFieldCell"; title = "These options work for hardware (DDC) controlled displays only."; ObjectID = "bIe-6O-xEH"; */
+/* Class = "NSTextFieldCell"; title = "For hardware (DDC) controlled displays only. Results may very."; ObjectID = "bIe-6O-xEH"; */
 "bIe-6O-xEH.title" = "这些选项只对于硬件(DDC)控制的显示器有效";
 
 /* Class = "NSButtonCell"; title = "Disable macOS volume OSD"; ObjectID = "bkM-Px-U3b"; */
@@ -139,6 +142,9 @@
 /* Class = "NSButtonCell"; title = "Change brightness for all screens"; ObjectID = "JC3-pb-XnR"; */
 "JC3-pb-XnR.title" = "Change brightness for all screens";
 
+/* Class = "NSTextFieldCell"; title = "You can still quit the app even if the menu is hidden!"; ObjectID = "jee-J9-i01"; */
+"jee-J9-i01.title" = "You can still quit the app even if the menu is hidden!";
+
 /* Class = "NSTextFieldCell"; title = "Note: you can press Shift during startup for 'Safe mode' to restore defaults and avoid reading or setting anything."; ObjectID = "Jx2-gO-nq9"; */
 "Jx2-gO-nq9.title" = "Note: you can press Shift during startup for 'Safe mode' to restore defaults and avoid reading or setting anything.";
 
@@ -193,8 +199,14 @@
 /* Class = "NSButtonCell"; title = "Longer delay during DDC read operations"; ObjectID = "pF5-Sw-7BR"; */
 "pF5-Sw-7BR.title" = "Longer delay during DDC read operations";
 
+/* Class = "NSTextFieldCell"; title = "For hardware (DDC) controlled displays only."; ObjectID = "POy-35-bh0"; */
+"POy-35-bh0.title" = "For hardware (DDC) controlled displays only.";
+
 /* Class = "NSTextFieldCell"; title = "DDC max"; ObjectID = "psF-vX-AFB"; */
 "psF-vX-AFB.title" = "DDC max";
+
+/* Class = "NSButtonCell"; title = "Quit appliation"; ObjectID = "qlb-wH-qr4"; */
+"qlb-wH-qr4.title" = "Quit appliation";
 
 /* Class = "NSButtonCell"; title = "Show contrast slider in menu"; ObjectID = "qO0-dB-yUs"; */
 "qO0-dB-yUs.title" = "显示对比度滑动条";
@@ -232,17 +244,17 @@
 /* Class = "NSTextFieldCell"; title = "Useful when a display tends to reset its settings during sleep."; ObjectID = "w8B-x6-sq5"; */
 "w8B-x6-sq5.title" = "Restore settings from last run or from before sleep. Useful when a display tends to reset brightness during sleep or hardware has issues with reading DDC data. Not relevant for Apple displays.";
 
-/* Class = "NSButtonCell"; title = "Show advanced settings under Displays"; ObjectID = "Wnd-hx-Meb"; */
+/* Class = "NSButtonCell"; title = "Show advanced settings and information"; ObjectID = "Wnd-hx-Meb"; */
 "Wnd-hx-Meb.title" = "在显示器下显示高级设置";
+
+/* Class = "NSTextFieldCell"; title = "Display advanced settings and additional information in Preferences."; ObjectID = "X6w-Ee-9Jq"; */
+"X6w-Ee-9Jq.title" = "Display advanced settings and additional information in Preferences.";
 
 /* Class = "NSMenuItem"; title = "None"; ObjectID = "X96-ny-lAP"; */
 "X96-ny-lAP.title" = "无";
 
 /* Class = "NSTextFieldCell"; title = "Update settings from the display. May not work with some hardware."; ObjectID = "xjq-hs-wWB"; */
 "xjq-hs-wWB.title" = "Attempt to read current settings from the display. If unsuccessful, last saved values are presumed or generic defaults are used instead.";
-
-/* Class = "NSButtonCell"; title = "Reset Preferences"; ObjectID = "xY6-aw-o9u"; */
-"xY6-aw-o9u.title" = "重置偏好设置";
 
 /* Class = "NSTextFieldCell"; title = "This makes fine control default."; ObjectID = "YAb-HH-s3p"; */
 "YAb-HH-s3p.title" = "This makes fine control default.";

@@ -11,7 +11,6 @@ import SwiftUI
 
 var app: AppDelegate!
 let prefs = UserDefaults.standard
-
 let storyboard = NSStoryboard(name: "Main", bundle: Bundle.main)
 let mainPrefsVc = storyboard.instantiateController(withIdentifier: "MainPrefsVC") as? MainPrefsViewController
 let displaysPrefsVc = storyboard.instantiateController(withIdentifier: "DisplaysPrefsVC") as? DisplaysPrefsViewController

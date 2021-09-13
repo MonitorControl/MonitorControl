@@ -33,6 +33,12 @@ class DisplaysPrefsViewController: NSViewController, PreferencePane, NSTableView
     super.viewWillAppear()
   }
 
+  func showAdvanced() -> Bool {
+    let hide = !self.prefs.bool(forKey: PrefKey.showAdvancedSettings.rawValue)
+    self.loadDisplayList()
+    return !hide
+  }
+
   @objc func loadDisplayList() {
     os_log("Reloading Displays preferences display list", type: .info)
     self.displays = DisplayManager.shared.getAllDisplays()
@@ -175,7 +181,7 @@ class DisplaysPrefsViewController: NSViewController, PreferencePane, NSTableView
         cell.enableMuteButton.state = .off
         cell.enableMuteButton.isEnabled = false
       }
-      if self.prefs.bool(forKey: PrefKey.showAdvancedDisplays.rawValue) {
+      if self.prefs.bool(forKey: PrefKey.showAdvancedSettings.rawValue) {
         cell.advancedSettings.isHidden = false
       } else {
         cell.advancedSettings.isHidden = true
@@ -186,12 +192,12 @@ class DisplaysPrefsViewController: NSViewController, PreferencePane, NSTableView
   }
 
   func updateDisplayListRowHeight() {
-    if self.prefs.bool(forKey: PrefKey.showAdvancedDisplays.rawValue) {
-      self.displayList.rowHeight = 440
-      self.constraintHeight.constant = 456
+    if self.prefs.bool(forKey: PrefKey.showAdvancedSettings.rawValue) {
+      self.displayList.rowHeight = 445
+      self.constraintHeight.constant = self.displayList.rowHeight + 15
     } else {
-      self.displayList.rowHeight = 160
-      self.constraintHeight.constant = 325
+      self.displayList.rowHeight = 165
+      self.constraintHeight.constant = self.displayList.rowHeight * 2 + 15
     }
   }
 }

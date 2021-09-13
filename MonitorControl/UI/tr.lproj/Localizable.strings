@@ -64,9 +64,6 @@
 /* Shown in the Display Preferences */
 "No Control" = "Kontrol yok";
 
-/* Shown in the alert dialog */
-"OK" = "Tamam";
-
 /* Shown in the Display Preferences */
 "Other Display" = "Diğer Ekran";
 

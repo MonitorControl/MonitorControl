@@ -64,9 +64,6 @@
 /* Shown in the Display Preferences */
 "No Control" = "Keine Steuerung verfügbar";
 
-/* Shown in the alert dialog */
-"OK" = "OK";
-
 /* Shown in the Display Preferences */
 "Other Display" = "Anderes Display";
 

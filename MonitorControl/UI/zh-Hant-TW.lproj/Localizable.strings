@@ -64,9 +64,6 @@
 /* Shown in the Display Preferences */
 "No Control" = "沒有可用的控制項";
 
-/* Shown in the alert dialog */
-"OK" = "好";
-
 /* Shown in the Display Preferences */
 "Other Display" = "其他螢幕";
 
