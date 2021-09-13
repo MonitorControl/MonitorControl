@@ -93,6 +93,10 @@ class Display: Equatable {
     self.prefs.set(value, forKey: forkey.rawValue + String(command.rawValue) + self.prefsId)
   }
 
+  func removePrefValueKey(forkey: PrefKey, for command: Command) {
+    self.prefs.removeObject(forKey: forkey.rawValue + String(command.rawValue) + self.prefsId)
+  }
+
   internal init(_ identifier: CGDirectDisplayID, name: String, vendorNumber: UInt32?, modelNumber: UInt32?, isVirtual: Bool = false) {
     self.identifier = identifier
     self.name = name

@@ -171,6 +171,7 @@ class DisplaysPrefsViewController: NSViewController, PreferencePane, NSTableView
         cell.longerDelayButton.state = externalDisplay.needsLongerDelay ? .on : .off
         cell.enableMuteButton.isEnabled = true
         cell.enableMuteButton.state = externalDisplay.enableMuteUnmute ? .on : .off
+        // TODO: Population of new settins is missing!
       } else {
         cell.pollingModeMenu.selectItem(withTag: 0)
         cell.pollingModeMenu.isEnabled = false
@@ -180,6 +181,7 @@ class DisplaysPrefsViewController: NSViewController, PreferencePane, NSTableView
         cell.longerDelayButton.isEnabled = false
         cell.enableMuteButton.state = .off
         cell.enableMuteButton.isEnabled = false
+        // TODO: Cleaning of new settins is missing!
       }
       if self.prefs.bool(forKey: PrefKey.showAdvancedSettings.rawValue) {
         cell.advancedSettings.isHidden = false

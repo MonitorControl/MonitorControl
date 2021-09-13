@@ -26,6 +26,32 @@ class DisplaysPrefsCellView: NSTableCellView {
   @IBOutlet var pollingCount: NSTextFieldCell!
   @IBOutlet var enableMuteButton: NSButton!
 
+  @IBOutlet var audioDeviceNameOverride: NSTextField!
+
+  @IBOutlet var unavailableDDCBrightness: NSButton!
+  @IBOutlet var unavailableDDCVolume: NSButton!
+  @IBOutlet var unavailableDDCContrast: NSButton!
+
+  @IBOutlet var minDDCOverrideBrightness: NSTextField!
+  @IBOutlet var minDDCOverrideVolume: NSTextField!
+  @IBOutlet var minDDCOverrideContrast: NSTextField!
+
+  @IBOutlet var maxDDCOverrideBrightness: NSTextField!
+  @IBOutlet var maxDDCOverrideVolume: NSTextField!
+  @IBOutlet var maxDDCOverrideContrast: NSTextField!
+
+  @IBOutlet var curveDDCBrightness: NSSlider!
+  @IBOutlet var curveDDCVolume: NSSlider!
+  @IBOutlet var curveDDCContrast: NSSlider!
+
+  @IBOutlet var invertDDCBrightness: NSButton!
+  @IBOutlet var invertDDCVolume: NSButton!
+  @IBOutlet var invertDDCContrast: NSButton!
+
+  @IBOutlet var remapDDCBrightness: NSTextField!
+  @IBOutlet var remapDDCVolume: NSTextField!
+  @IBOutlet var remapDDCContrast: NSTextField!
+
   @IBAction func openAdvancedHelp(_: NSButton) {
     if let url = URL(string: "https://github.com/the0neyouseek/MonitorControl/wiki/Advanced-Preferences") {
       NSWorkspace.shared.open(url)
@@ -53,7 +79,6 @@ class DisplaysPrefsCellView: NSTableCellView {
     if let display = display as? ExternalDisplay {
       let newValue = sender.stringValue
       let originalValue = "\(display.pollingCount)"
-
       if newValue.isEmpty {
         self.pollingCount.stringValue = originalValue
       } else if let intValue = Int(newValue) {
@@ -61,7 +86,6 @@ class DisplaysPrefsCellView: NSTableCellView {
       } else {
         self.pollingCount.stringValue = ""
       }
-
       if newValue != originalValue, !newValue.isEmpty, let newValue = Int(newValue) {
         display.pollingCount = newValue
       }
@@ -170,6 +194,121 @@ class DisplaysPrefsCellView: NSTableCellView {
     }
   }
 
+  func tagCommand(_ tag: Int) -> Command {
+    var command: Command
+    switch tag {
+    case 2: command = Command.audioSpeakerVolume
+    case 3: command = Command.contrast
+    default: command = Command.brightness
+    }
+    return command
+  }
+
+  @IBAction func audioDeviceNameOverride(_ sender: NSTextField) {
+    if let display = display as? ExternalDisplay {
+      display.audioDeviceNameOverride = sender.stringValue
+    }
+  }
+
+  @IBAction func unavailableDDC(_ sender: NSButton) {
+    let command = self.tagCommand(sender.tag)
+    let prefKey = PrefKey.unavailableDDC
+    if let display = display as? ExternalDisplay {
+      switch sender.state {
+      case .on:
+        display.savePrefValueKeyBool(forkey: prefKey, value: false, for: command)
+      case .off:
+        display.savePrefValueKeyBool(forkey: prefKey, value: true, for: command)
+      default:
+        break
+      }
+      app.configuration()
+    }
+  }
+
+  @IBAction func minDDCOverride(_ sender: NSTextField) {
+    let command = self.tagCommand(sender.tag)
+    let prefKey = PrefKey.minDDCOverride
+    let value = sender.stringValue
+    if let display = display as? ExternalDisplay {
+      if let intValue = Int(value), intValue >= 0, intValue <= 65535 {
+        display.savePrefValueKeyInt(forkey: prefKey, value: intValue, for: command)
+      } else {
+        display.removePrefValueKey(forkey: prefKey, for: command)
+      }
+      app.configuration()
+      if display.prefValueExistsKey(forkey: prefKey, for: command) {
+        sender.stringValue = String(display.readPrefValueKeyInt(forkey: prefKey, for: command))
+      } else {
+        sender.stringValue = ""
+      }
+    } else {
+      sender.stringValue = ""
+    }
+  }
+
+  @IBAction func maxDDCOverride(_ sender: NSTextField) {
+    let command = self.tagCommand(sender.tag)
+    let prefKey = PrefKey.maxDDCOverride
+    let value = sender.stringValue
+    if let display = display as? ExternalDisplay {
+      if !value.isEmpty, let intValue = UInt(value) {
+        display.savePrefValueKeyInt(forkey: prefKey, value: Int(intValue), for: command)
+      } else {
+        display.removePrefValueKey(forkey: prefKey, for: command)
+      }
+      app.configuration()
+      if display.prefValueExistsKey(forkey: prefKey, for: command) {
+        sender.stringValue = String(display.readPrefValueKeyInt(forkey: prefKey, for: command))
+      } else {
+        sender.stringValue = ""
+      }
+    } else {
+      sender.stringValue = ""
+    }
+  }
+
+  @IBAction func curveDDC(_: NSSlider) {
+    // TODO: Missing implementation
+  }
+
+  @IBAction func invertDDC(_ sender: NSButton) {
+    let command = self.tagCommand(sender.tag)
+    let prefKey = PrefKey.invertDDC
+    if let display = display as? ExternalDisplay {
+      switch sender.state {
+      case .on:
+        display.savePrefValueKeyBool(forkey: prefKey, value: true, for: command)
+      case .off:
+        display.savePrefValueKeyBool(forkey: prefKey, value: false, for: command)
+      default:
+        break
+      }
+      app.configuration()
+    }
+  }
+
+  @IBAction func remapDDC(_ sender: NSTextField) {
+    let command = self.tagCommand(sender.tag)
+    let prefKey = PrefKey.maxDDCOverride
+    let value = sender.stringValue
+    if let display = display as? ExternalDisplay {
+      if !value.isEmpty, let intValue = UInt(value, radix: 16), intValue != 0 {
+        display.savePrefValueKeyInt(forkey: prefKey, value: Int(intValue), for: command)
+      } else {
+        display.removePrefValueKey(forkey: prefKey, for: command)
+      }
+      app.configuration()
+      if display.prefValueExistsKey(forkey: prefKey, for: command) {
+        sender.stringValue = String(format: "%02x", display.readPrefValueKeyInt(forkey: prefKey, for: command))
+      } else {
+        sender.stringValue = ""
+      }
+    } else {
+      sender.stringValue = ""
+    }
+  }
+
   @IBAction func resetSettings(_: NSButton) {
     if let disp = display {
       if self.ddcButton.isEnabled {
@@ -198,6 +337,7 @@ class DisplaysPrefsCellView: NSTableCellView {
       }
       self.friendlyName.stringValue = disp.name
       self.friendlyNameValueChanged(self.friendlyName)
+      // TODO: Reset of new settings is missing
     }
   }
 }

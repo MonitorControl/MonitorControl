@@ -16,6 +16,9 @@
 /* Class = "NSTextFieldCell"; title = "MonitorControl uses mouse position to determine which display to control. Using window focus instead might not work well with full screen apps."; ObjectID = "4dX-o1-xAc"; */
 "4dX-o1-xAc.title" = "MonitorControl uses mouse position to determine which display to control. Using window focus instead might not work well with full screen apps.";
 
+/* Class = "NSTextField"; ibExternalAccessibilityDescription = "Brightness"; ObjectID = "567-le-fLg"; */
+"567-le-fLg.ibExternalAccessibilityDescription" = "Brightness";
+
 /* Class = "NSButtonCell"; title = "Reset Preferences"; ObjectID = "5yT-5F-X5R"; */
 "5yT-5F-X5R.title" = "Reset Preferences";
 
@@ -36,6 +39,9 @@
 
 /* Class = "NSButtonCell"; title = "Special thanks to our contributors!"; ObjectID = "95V-M4-2l5"; */
 "95V-M4-2l5.title" = "特別感謝的貢獻者們!";
+
+/* Class = "NSSlider"; ibExternalAccessibilityDescription = "Brightness"; ObjectID = "9H1-0z-xsx"; */
+"9H1-0z-xsx.ibExternalAccessibilityDescription" = "Brightness";
 
 /* Class = "NSTextFieldCell"; title = "Show tick marks at 0%, 25%, 50%, 75% and 100% for accuracy."; ObjectID = "A8P-vn-DEJ"; */
 "A8P-vn-DEJ.title" = "Show tick marks at 0%, 25%, 50%, 75% and 100% for accuracy.";
@@ -76,7 +82,7 @@
 /* Class = "NSTextFieldCell"; title = "⚠️ Warning! Changing some of these settings may cause system freezes or unexpected behavior!"; ObjectID = "Cz1-Mh-llk"; */
 "Cz1-Mh-llk.title" = "⚠️ 警告！ 更改這些設定可能導致系統崩潰或不可預期的結果";
 
-/* Class = "NSTextFieldCell"; title = "Remap"; ObjectID = "D9t-vT-gNJ"; */
+/* Class = "NSTextFieldCell"; title = "VCP 0x"; ObjectID = "D9t-vT-gNJ"; */
 "D9t-vT-gNJ.title" = "Remap";
 
 /* Class = "NSTextFieldCell"; title = "Might not work well with multiple identical displays. Without this the app uses mouse position to determine which display to control."; ObjectID = "Dha-Tm-cDM"; */
@@ -220,6 +226,18 @@
 /* Class = "NSMenuItem"; title = "Normal"; ObjectID = "Riq-uM-bTs"; */
 "Riq-uM-bTs.title" = "正常";
 
+/* Class = "NSButton"; ibExternalAccessibilityDescription = "Brightness"; ObjectID = "RkH-7d-KvR"; */
+"RkH-7d-KvR.ibExternalAccessibilityDescription" = "Brightness";
+
+/* Class = "NSButton"; ibExternalAccessibilityDescription = "a3"; ObjectID = "Su5-Vg-rpV"; */
+"Su5-Vg-rpV.ibExternalAccessibilityDescription" = "a1";
+
+/* Class = "NSButton"; ibExternalAccessibilityHelp = "a2"; ObjectID = "Su5-Vg-rpV"; */
+"Su5-Vg-rpV.ibExternalAccessibilityHelp" = "a2";
+
+/* Class = "NSButton"; ibShadowedToolTip = "a4"; ObjectID = "Su5-Vg-rpV"; */
+"Su5-Vg-rpV.ibShadowedToolTip" = "a4";
+
 /* Class = "NSTextFieldCell"; title = "@the0neyouseek\n@JoniVR\n@waydabber"; ObjectID = "TKd-J8-Iyk"; */
 "TKd-J8-Iyk.title" = "@the0neyouseek\n@reitermarkus\n@JoniVR\n@waydabber";
 
@@ -228,6 +246,9 @@
 
 /* Class = "NSTextFieldCell"; title = "Works if an audio device is selected with no volume control."; ObjectID = "uF5-a9-Ngz"; */
 "uF5-a9-Ngz.title" = "Works if an audio device is selected with no volume control.";
+
+/* Class = "NSTextField"; ibExternalAccessibilityDescription = "Brightness"; ObjectID = "uJS-s3-Zpi"; */
+"uJS-s3-Zpi.ibExternalAccessibilityDescription" = "Brightness";
 
 /* Class = "NSButtonCell"; title = "Enable keyboard control for display"; ObjectID = "UqR-WE-jHl"; */
 "UqR-WE-jHl.title" = "允許鍵盤控制螢幕";
@@ -252,6 +273,9 @@
 
 /* Class = "NSMenuItem"; title = "None"; ObjectID = "X96-ny-lAP"; */
 "X96-ny-lAP.title" = "不使用";
+
+/* Class = "NSTextField"; ibExternalAccessibilityDescription = "Brightness"; ObjectID = "xDF-IA-bBh"; */
+"xDF-IA-bBh.ibExternalAccessibilityDescription" = "Brightness";
 
 /* Class = "NSTextFieldCell"; title = "Update settings from the display. May not work with some hardware."; ObjectID = "xjq-hs-wWB"; */
 "xjq-hs-wWB.title" = "Attempt to read current settings from the display. If unsuccessful, last saved values are presumed or generic defaults are used instead.";
