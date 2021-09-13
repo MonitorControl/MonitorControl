@@ -131,7 +131,7 @@
 "J3L-MW-iJL.title" = "Use fine scale for volume";
 
 /* Class = "NSButtonCell"; title = "Start at Login"; ObjectID = "j72-NF-zsW"; */
-"j72-NF-zsW.title" = "ログイン時にMonitorCoontrolを起動する";
+"j72-NF-zsW.title" = "ログイン時にMonitorControlを起動する";
 
 /* Class = "NSTextFieldCell"; title = "Custom read polling count:"; ObjectID = "J77-r0-djA"; */
 "J77-r0-djA.title" = "Custom read polling count:";
