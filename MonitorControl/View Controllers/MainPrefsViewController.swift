@@ -175,6 +175,10 @@ class MainPrefsViewController: NSViewController, PreferencePane {
     _ = menuslidersPrefsVc?.showAdvanced()
     _ = keyboardPrefsVc?.showAdvanced()
     _ = displaysPrefsVc?.showAdvanced()
+    menuslidersPrefsVc?.view.layoutSubtreeIfNeeded()
+    keyboardPrefsVc?.view.layoutSubtreeIfNeeded()
+    displaysPrefsVc?.view.layoutSubtreeIfNeeded()
+    aboutPrefsVc?.view.layoutSubtreeIfNeeded()
   }
 
   @available(macOS, deprecated: 10.10)
