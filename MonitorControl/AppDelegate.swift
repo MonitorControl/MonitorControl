@@ -7,9 +7,18 @@ import os.log
 import Preferences
 import ServiceManagement
 import SimplyCoreAudio
+import SwiftUI
 
 var app: AppDelegate!
 let prefs = UserDefaults.standard
+
+let storyboard = NSStoryboard(name: "Main", bundle: Bundle.main)
+let mainPrefsVc = storyboard.instantiateController(withIdentifier: "MainPrefsVC") as? MainPrefsViewController
+let displaysPrefsVc = storyboard.instantiateController(withIdentifier: "DisplaysPrefsVC") as? DisplaysPrefsViewController
+let menuslidersPrefsVc = storyboard.instantiateController(withIdentifier: "MenuslidersPrefsVC") as? MenuslidersPrefsViewController
+let keyboardPrefsVc = storyboard.instantiateController(withIdentifier: "KeyboardPrefsVC") as? KeyboardPrefsViewController
+let advancedPrefsVc = storyboard.instantiateController(withIdentifier: "AdvancedPrefsVC") as? AdvancedPrefsViewController
+let aboutPrefsVc = storyboard.instantiateController(withIdentifier: "AboutPrefsVC") as? AboutPrefsViewController
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
@@ -36,14 +45,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   }
 
   lazy var preferencesWindowController: PreferencesWindowController = {
-    let storyboard = NSStoryboard(name: "Main", bundle: Bundle.main)
-    let mainPrefsVc = storyboard.instantiateController(withIdentifier: "MainPrefsVC") as? MainPrefsViewController
-    let displaysPrefsVc = storyboard.instantiateController(withIdentifier: "DisplaysPrefsVC") as? DisplaysPrefsViewController
-    let menuslidersPrefsVc = storyboard.instantiateController(withIdentifier: "MenuslidersPrefsVC") as? MenuslidersPrefsViewController
-    let keyboardPrefsVc = storyboard.instantiateController(withIdentifier: "KeyboardPrefsVC") as? KeyboardPrefsViewController
-    let advancedPrefsVc = storyboard.instantiateController(withIdentifier: "AdvancedPrefsVC") as? AdvancedPrefsViewController
-    let aboutPrefsVc = storyboard.instantiateController(withIdentifier: "AboutPrefsVC") as? AboutPrefsViewController
-    return PreferencesWindowController(
+    PreferencesWindowController(
       preferencePanes: [
         mainPrefsVc!,
         menuslidersPrefsVc!,

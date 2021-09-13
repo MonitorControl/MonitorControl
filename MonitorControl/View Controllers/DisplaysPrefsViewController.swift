@@ -20,15 +20,17 @@ class DisplaysPrefsViewController: NSViewController, PreferencePane, NSTableView
   var displays: [Display] = []
 
   @IBOutlet var displayList: NSTableView!
+  @IBOutlet var displayScrollView: NSScrollView!
+  @IBOutlet var constraintHeight: NSLayoutConstraint!
 
   override func viewDidLoad() {
     super.viewDidLoad()
+    self.loadDisplayList()
+    NotificationCenter.default.addObserver(self, selector: #selector(self.loadDisplayList), name: .displayListUpdate, object: nil)
   }
 
   override func viewWillAppear() {
     super.viewWillAppear()
-    self.loadDisplayList()
-    NotificationCenter.default.addObserver(self, selector: #selector(self.loadDisplayList), name: .displayListUpdate, object: nil)
   }
 
   @objc func loadDisplayList() {
@@ -186,8 +188,10 @@ class DisplaysPrefsViewController: NSViewController, PreferencePane, NSTableView
   func updateDisplayListRowHeight() {
     if self.prefs.bool(forKey: PrefKey.showAdvancedDisplays.rawValue) {
       self.displayList.rowHeight = 440
+      self.constraintHeight.constant = 456
     } else {
-      self.displayList.rowHeight = 150
+      self.displayList.rowHeight = 160
+      self.constraintHeight.constant = 325
     }
   }
 }

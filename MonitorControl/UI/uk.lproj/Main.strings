@@ -244,6 +244,9 @@
 /* Class = "NSButtonCell"; title = "Reset Preferences"; ObjectID = "xY6-aw-o9u"; */
 "xY6-aw-o9u.title" = "Reset Preferences";
 
+/* Class = "NSTextFieldCell"; title = "This makes fine control default."; ObjectID = "YAb-HH-s3p"; */
+"YAb-HH-s3p.title" = "This makes fine control default.";
+
 /* Class = "NSTextFieldCell"; title = "Available"; ObjectID = "yBJ-5d-I7e"; */
 "yBJ-5d-I7e.title" = "Available";
 

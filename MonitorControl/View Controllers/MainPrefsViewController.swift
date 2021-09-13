@@ -27,13 +27,9 @@ class MainPrefsViewController: NSViewController, PreferencePane {
   @IBOutlet var writeDDCOnStartup: NSButton!
   @IBOutlet var readDDCOnStartup: NSButton!
 
+  @available(macOS, deprecated: 10.10)
   override func viewDidLoad() {
     super.viewDidLoad()
-  }
-
-  @available(macOS, deprecated: 10.10)
-  override func viewWillAppear() {
-    super.viewWillAppear()
     self.populateSettings()
   }
 
@@ -48,6 +44,11 @@ class MainPrefsViewController: NSViewController, PreferencePane {
     self.notEnableDDCDuringStartup.state = !self.prefs.bool(forKey: PrefKey.enableDDCDuringStartup.rawValue) ? .on : .off
     self.writeDDCOnStartup.state = !self.prefs.bool(forKey: PrefKey.readDDCInsteadOfRestoreValues.rawValue) && self.prefs.bool(forKey: PrefKey.enableDDCDuringStartup.rawValue) ? .on : .off
     self.readDDCOnStartup.state = self.prefs.bool(forKey: PrefKey.readDDCInsteadOfRestoreValues.rawValue) && self.prefs.bool(forKey: PrefKey.enableDDCDuringStartup.rawValue) ? .on : .off
+    // Preload Display preferences to some extent to properly set up size in orther that animation won't fail
+    menuslidersPrefsVc?.view.layoutSubtreeIfNeeded()
+    keyboardPrefsVc?.view.layoutSubtreeIfNeeded()
+    displaysPrefsVc?.view.layoutSubtreeIfNeeded()
+    aboutPrefsVc?.view.layoutSubtreeIfNeeded()
   }
 
   @IBAction func startAtLoginClicked(_ sender: NSButton) {

@@ -28,10 +28,6 @@ class MenuslidersPrefsViewController: NSViewController, PreferencePane {
 
   override func viewDidLoad() {
     super.viewDidLoad()
-  }
-
-  override func viewWillAppear() {
-    super.viewWillAppear()
     self.populateSettings()
   }
 
