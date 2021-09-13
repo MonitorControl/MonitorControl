@@ -58,5 +58,4 @@ class AppleDisplay: Display {
     }
     return false
   }
-
 }

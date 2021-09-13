@@ -206,7 +206,7 @@ class Display: Equatable {
   func refreshBrightness() -> Bool {
     return false
   }
-  
+
   func isBuiltIn() -> Bool {
     if CGDisplayIsBuiltin(self.identifier) != 0 {
       return true
@@ -214,5 +214,4 @@ class Display: Equatable {
       return false
     }
   }
-
 }
