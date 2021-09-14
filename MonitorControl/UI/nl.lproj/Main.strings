@@ -5,7 +5,7 @@
 "95V-M4-2l5.title" = "Speciale dank aan onze bijdragers!";
 
 /* Class = "NSButtonCell"; title = "Hide Menu Icon"; ObjectID = "aXL-i8-S6R"; */
-"aXL-i8-S6R.title" = "Verberg Menu Icon";
+"aXL-i8-S6R.title" = "Verberg Menu Icoon";
 
 /* Class = "NSButtonCell"; title = "Disable macOS volume OSD"; ObjectID = "bkM-Px-U3b"; */
 "bkM-Px-U3b.title" = "MacOS volume OSD uitzetten";
@@ -14,7 +14,7 @@
 "BYS-7Y-bRz.title" = "Reset instellingen";
 
 /* Class = "NSButtonCell"; title = "Enable Mute DDC command"; ObjectID = "bZq-0d-lJa"; */
-"bZq-0d-lJa.title" = "Schakkel dempen DDC command in";
+"bZq-0d-lJa.title" = "Schakkel DDC commando voor dempen in";
 
 /* Class = "NSTextFieldCell"; title = "Keyboard:"; ObjectID = "c7N-cO-759"; */
 "c7N-cO-759.title" = "Toetsenbord:";
@@ -32,7 +32,7 @@
 "dhP-eB-1L6.title" = "Toon volumeschuifregelaar in menu";
 
 /* Class = "NSButtonCell"; title = "Change Brightness and Volume for all screens"; ObjectID = "E6M-ih-S8Y"; */
-"E6M-ih-S8Y.title" = "Verander Helderheid and Volume voor alle schermen";
+"E6M-ih-S8Y.title" = "Verander Helderheid en Volume voor alle schermen";
 
 /* Class = "NSMenuItem"; title = "Minimal"; ObjectID = "Eq3-z9-yIo"; */
 "Eq3-z9-yIo.title" = "Minimaal";
@@ -41,37 +41,37 @@
 "f9g-8s-gdd.title" = "Reset Naam";
 
 /* Class = "NSButtonCell"; title = "Further lower brightness via software dimming"; ObjectID = "fhy-Er-0aI"; */
-"fhy-Er-0aI.title" = "Verder verlagen van helderheid via softwarematig dimming";
+"fhy-Er-0aI.title" = "Verder verlagen van helderheid via softwarematig dimmen";
 
 /* Class = "NSMenuItem"; title = "None"; ObjectID = "FoA-yh-Yx3"; */
 "FoA-yh-Yx3.title" = "Geen";
 
 /* Class = "NSTextFieldCell"; title = "Brightness control:"; ObjectID = "hdd-Zz-buN"; */
-"hdd-Zz-buN.title" = "Helderheid control:";
+"hdd-Zz-buN.title" = "Helderheid besturen:";
 
 /* Class = "NSMenuItem"; title = "Brightness only"; ObjectID = "hjz-0c-rvK"; */
 "hjz-0c-rvK.title" = "Alleen Helderheid";
 
 /* Class = "NSTextFieldCell"; title = "These options work for hardware (DDC) controlled displays only."; ObjectID = "iBZ-8c-JDY"; */
-"iBZ-8c-JDY.title" = "Deze optie's werkt alleen voor hardware (DDC) gecontrolleerde displays.";
+"iBZ-8c-JDY.title" = "Deze opties werken alleen voor hardware (DDC) gecontroleerde displays.";
 
 /* Class = "NSButtonCell"; title = "Start at Login"; ObjectID = "j72-NF-zsW"; */
 "j72-NF-zsW.title" = "Start bij Inloggen";
 
 /* Class = "NSTextFieldCell"; title = "Custom read polling count:"; ObjectID = "J77-r0-djA"; */
-"J77-r0-djA.title" = "Aangepaste aantal gelezen peilingen:";
+"J77-r0-djA.title" = "Aangepast aantal peilingen:";
 
 /* Class = "NSTextFieldCell"; title = "Use the media keys of your keyboard to control Brightness & Volume."; ObjectID = "K2r-aD-eec"; */
-"K2r-aD-eec.title" = "Gebruik de mediatoetsen van uw toetsenbord om de Helderheid en Volume te regelen";
+"K2r-aD-eec.title" = "Gebruik de mediatoetsen van uw toetsenbord om Helderheid en Volume te regelen";
 
 /* Class = "NSButtonCell"; title = "Enable software dimming if required"; ObjectID = "kMa-3q-udl"; */
-"kMa-3q-udl.title" = "Schakel indien nodig softwarematig dimmen in.";
+"kMa-3q-udl.title" = "Schakel indien nodig softwarematig dimmen in";
 
 /* Class = "NSButton"; ibShadowedToolTip = "More Info"; ObjectID = "kqn-gU-mZX"; */
 "kqn-gU-mZX.ibShadowedToolTip" = "Meer Info";
 
 /* Class = "NSTextFieldCell"; title = "Display type:"; ObjectID = "lSJ-6w-KJ2"; */
-"lSJ-6w-KJ2.title" = "Display type:";
+"lSJ-6w-KJ2.title" = "Beeldscherm type:";
 
 /* Class = "NSTextFieldCell"; title = "Menu contents:"; ObjectID = "MJx-MK-e7D"; */
 "MJx-MK-e7D.title" = "Menu inhoud:";
@@ -80,13 +80,13 @@
 "n4V-jQ-1Ri.title" = "Als een extern beeldscherm niet kan worden bediend, wordt in plaats daarvan softwarematig dimmen gebruikt.";
 
 /* Class = "NSMenuItem"; title = "Volume only"; ObjectID = "NLP-dU-Dam"; */
-"NLP-dU-Dam.title" = "Alleen Volume";
+"NLP-dU-Dam.title" = "Alleen volume";
 
 /* Class = "NSTextFieldCell"; title = "Application:"; ObjectID = "okD-DG-pYa"; */
 "okD-DG-pYa.title" = "Applicatie:";
 
 /* Class = "NSTextFieldCell"; title = "Control method:"; ObjectID = "PaK-1f-DsW"; */
-"PaK-1f-DsW.title" = "Controle methode:";
+"PaK-1f-DsW.title" = "Besturingsmethode:";
 
 /* Class = "NSButtonCell"; title = "Longer delay during DDC read operations"; ObjectID = "pF5-Sw-7BR"; */
 "pF5-Sw-7BR.title" = "Langere vertraging tijdens DDC-leesbewerkingen";
@@ -113,7 +113,7 @@
 "Vr4-xb-B4o.title" = "Zowel Helderheid als Volume";
 
 /* Class = "NSTextFieldCell"; title = "DDC read polling mode:"; ObjectID = "vwm-hY-on5"; */
-"vwm-hY-on5.title" = "DDC lees peiling modus:";
+"vwm-hY-on5.title" = "DDC peiling modus:";
 
 /* Class = "NSButtonCell"; title = "Show advanced settings under Displays"; ObjectID = "Wnd-hx-Meb"; */
 "Wnd-hx-Meb.title" = "Geavanceerde instellingen weergeven onder Displays";
@@ -131,13 +131,13 @@
 "Xz0-X0-rB4.title" = "Aanvullende instellingen:";
 
 /* Class = "NSTextFieldCell"; title = "This activates additional software dimming after the display reached zero hardware brightness. Menu slider is also affected with 50% being the transition point. Works for DDC controlled displays only."; ObjectID = "yeg-GN-SuO"; */
-"yeg-GN-SuO.title" = "Dit activeert extra software-dimmen nadat het display de hardwarehelderheid nul heeft bereikt. De menuschuifregelaar wordt ook beïnvloed, waarbij 50% het overgangspunt is. Werkt alleen voor DDC-gestuurde displays.";
+"yeg-GN-SuO.title" = "Dit activeert extra softwarematig dimmen nadat het display de hardwarehelderheid nul heeft bereikt. De menuschuifregelaar wordt ook beïnvloed, waarbij 50% het overgangspunt is. Werkt alleen voor DDC-gestuurde displays.";
 
 /* Class = "NSTextFieldCell"; title = "Identifier:"; ObjectID = "YqZ-LS-YvR"; */
 "YqZ-LS-YvR.title" = "Identificatie:";
 
 /* Class = "NSButtonCell"; title = "Use hardware DDC control"; ObjectID = "ZdU-gV-V05"; */
-"ZdU-gV-V05.title" = "Gebruik hardware DDC-besturing";
+"ZdU-gV-V05.title" = "Gebruik hardwarematige DDC-besturing";
 
 /* Class = "NSButtonCell"; title = "Donate"; ObjectID = "ZKk-ve-rS4"; */
 "ZKk-ve-rS4.title" = "Doneer";
