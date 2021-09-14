@@ -59,11 +59,12 @@ class SliderHandler {
     var value = slider.floatValue
 
     if prefs.bool(forKey: PrefKey.enableSliderSnap.rawValue) {
-      let snapInterval: Float = 0.25
-      let snapThreshold: Float = 0.04
-      let closest = (value + snapInterval / 2) / snapInterval * snapInterval
-      if abs(closest - value) <= snapThreshold {
-        value = closest
+      let intPercent = Int(value * 100)
+      let snapInterval = 25
+      let snapThreshold = 3
+      let closest = (intPercent + snapInterval / 2) / snapInterval * snapInterval
+      if abs(closest - intPercent) <= snapThreshold {
+        value = Float(closest) / 100
         slider.floatValue = value
       }
     }

@@ -98,9 +98,9 @@ class ExternalDisplay: Display {
   func setupCurrentAndMaxValues(command: Command) {
     var ddcValues: (UInt16, UInt16)?
     var maxDDCValue = UInt16(DDC_MAX_DETECT_LIMIT)
-    var currentDDCValue = UInt16(Float(DDC_MAX_DETECT_LIMIT) * 0.7)
+    var currentDDCValue = UInt16(Float(DDC_MAX_DETECT_LIMIT) * 0.75)
     if command == .audioSpeakerVolume {
-      currentDDCValue = UInt16(Float(self.DDC_MAX_DETECT_LIMIT) * 0.15) // lower default audio value as high volume might rattle the user.
+      currentDDCValue = UInt16(Float(self.DDC_MAX_DETECT_LIMIT) * 0.125) // lower default audio value as high volume might rattle the user.
     }
     var currentValue: Float = 1
     os_log("** Setting up %{public}@ for %{public}@ **", type: .info, self.name, String(reflecting: command))

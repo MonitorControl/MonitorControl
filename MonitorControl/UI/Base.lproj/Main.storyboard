@@ -609,7 +609,6 @@
                         <outlet property="enableSliderSnap" destination="lao-JI-LJH" id="HGa-Fb-E7e"/>
                         <outlet property="hideMenuIcon" destination="Jt9-Hj-qtg" id="FOn-8C-RHh"/>
                         <outlet property="quitApplication" destination="dy4-nH-cIr" id="aXV-0Q-H4L"/>
-                        <outlet property="rowAdvSliderSeparator" destination="7kD-xD-py0" id="8dr-oA-aHs"/>
                         <outlet property="rowHideIconCheck" destination="jyr-gk-BEN" id="yRw-fu-ki4"/>
                         <outlet property="rowHideIconSpearator" destination="Cor-61-8R5" id="LUu-BS-I2D"/>
                         <outlet property="rowHideIconText" destination="ZS3-Gy-pfA" id="fXd-dt-whF"/>
@@ -617,8 +616,6 @@
                         <outlet property="rowQuitText" destination="ZBA-LY-gOz" id="flD-iR-YJ6"/>
                         <outlet property="rowShowContrastCheck" destination="xbz-Tf-py0" id="JRd-Xz-Sz8"/>
                         <outlet property="rowShowContrastText" destination="KPA-bi-7h3" id="vqt-0f-Qbv"/>
-                        <outlet property="rowSnappingCheck" destination="BmS-ju-SrX" id="jDg-jX-UUI"/>
-                        <outlet property="rowSnappingText" destination="dqd-4Y-f2g" id="IT0-K7-jzY"/>
                         <outlet property="rowTickCheck" destination="Ojm-8A-t1d" id="0Aq-FJ-wGD"/>
                         <outlet property="rowTickText" destination="JCM-Me-DIg" id="iZR-F3-x4s"/>
                         <outlet property="showAppleFromMenu" destination="jnZ-Nf-GaQ" id="d8s-zB-efU"/>

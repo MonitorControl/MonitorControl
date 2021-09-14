@@ -34,9 +34,6 @@ class MenuslidersPrefsViewController: NSViewController, PreferencePane {
   @IBOutlet var rowHideIconSpearator: NSGridRow!
   @IBOutlet var rowShowContrastCheck: NSGridRow!
   @IBOutlet var rowShowContrastText: NSGridRow!
-  @IBOutlet var rowAdvSliderSeparator: NSGridRow!
-  @IBOutlet var rowSnappingCheck: NSGridRow!
-  @IBOutlet var rowSnappingText: NSGridRow!
   @IBOutlet var rowTickCheck: NSGridRow!
   @IBOutlet var rowTickText: NSGridRow!
 
@@ -64,18 +61,6 @@ class MenuslidersPrefsViewController: NSViewController, PreferencePane {
     } else {
       self.rowShowContrastCheck.isHidden = hide
       self.rowShowContrastText.isHidden = hide
-    }
-    if self.enableSliderSnap.state == .on || self.showTickMarks.state == .on {
-      self.rowAdvSliderSeparator.isHidden = false
-    } else {
-      self.rowAdvSliderSeparator.isHidden = hide
-    }
-    if self.enableSliderSnap.state == .on {
-      self.rowSnappingCheck.isHidden = false
-      self.rowSnappingText.isHidden = false
-    } else {
-      self.rowSnappingCheck.isHidden = hide
-      self.rowSnappingText.isHidden = hide
     }
     if self.showTickMarks.state == .on {
       self.rowTickCheck.isHidden = false
