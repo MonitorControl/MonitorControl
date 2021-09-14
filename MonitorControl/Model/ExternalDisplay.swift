@@ -393,15 +393,29 @@ class ExternalDisplay: Display {
     return max(0, min(1, nextValue))
   }
 
+  func getCurveMultiplier(_ curveDDC: Int) -> Float {
+    switch curveDDC {
+    case 1: return 0.6
+    case 2: return 0.7
+    case 3: return 0.8
+    case 4: return 0.9
+    case 6: return 1.3
+    case 7: return 1.5
+    case 8: return 1.7
+    case 9: return 1.88
+    default: return 1.0
+    }
+  }
+
   func convValueToDDC(for command: Command, from: Float) -> UInt16 {
     var value = from
     if self.readPrefValueKeyBool(forkey: PrefKey.invertDDC, for: command) {
       value = 1 - value
     }
-    let curveDDC = self.prefValueExistsKey(forkey: PrefKey.curveDDC, for: command) ? self.readPrefValueKey(forkey: PrefKey.curveDDC, for: command) : 1
+    let curveMultiplier = self.getCurveMultiplier(self.readPrefValueKeyInt(forkey: PrefKey.curveDDC, for: command))
     let minDDCValue = Float(self.readPrefValueKeyInt(forkey: PrefKey.minDDCOverride, for: command))
     let maxDDCValue = Float(self.readPrefValueKeyInt(forkey: PrefKey.maxDDC, for: command))
-    let curvedValue = pow(max(min(value, 1), 0), curveDDC)
+    let curvedValue = pow(max(min(value, 1), 0), curveMultiplier)
     let deNormalizedValue = (maxDDCValue - minDDCValue) * curvedValue + minDDCValue
     var intDDCValue = UInt16(min(max(deNormalizedValue, minDDCValue), maxDDCValue))
     if from > 0, command == Command.audioSpeakerVolume {
@@ -411,11 +425,11 @@ class ExternalDisplay: Display {
   }
 
   func convDDCToValue(for command: Command, from: UInt16) -> Float {
-    let curveDDC = self.prefValueExistsKey(forkey: PrefKey.curveDDC, for: command) ? self.readPrefValueKey(forkey: PrefKey.curveDDC, for: command) : 1
+    let curveMultiplier = self.getCurveMultiplier(self.readPrefValueKeyInt(forkey: PrefKey.curveDDC, for: command))
     let minDDCValue = Float(self.readPrefValueKeyInt(forkey: PrefKey.minDDCOverride, for: command))
     let maxDDCValue = Float(self.readPrefValueKeyInt(forkey: PrefKey.maxDDC, for: command))
     let normalizedValue = ((min(max(Float(from), minDDCValue), maxDDCValue) - minDDCValue) / (maxDDCValue - minDDCValue))
-    let deCurvedValue = pow(normalizedValue, 1.0 / curveDDC)
+    let deCurvedValue = pow(normalizedValue, 1.0 / curveMultiplier)
     var value = deCurvedValue
     if self.readPrefValueKeyBool(forkey: PrefKey.invertDDC, for: command) {
       value = 1 - value

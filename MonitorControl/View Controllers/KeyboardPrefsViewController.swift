@@ -57,7 +57,6 @@ class KeyboardPrefsViewController: NSViewController, PreferencePane {
       self.rowUseFineScaleCheck.isHidden = hide
       self.rowUseFineScaleText.isHidden = hide
     }
-
     return !hide
   }
 

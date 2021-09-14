@@ -268,8 +268,13 @@ class DisplaysPrefsCellView: NSTableCellView {
     }
   }
 
-  @IBAction func curveDDC(_: NSSlider) {
-    // TODO: Missing implementation
+  @IBAction func curveDDC(_ sender: NSSlider) {
+    let command = self.tagCommand(sender.tag)
+    let prefKey = PrefKey.curveDDC
+    let value = Int(sender.intValue)
+    if let display = display as? ExternalDisplay {
+      display.savePrefValueKeyInt(forkey: prefKey, value: value, for: command)
+    }
   }
 
   @IBAction func invertDDC(_ sender: NSButton) {

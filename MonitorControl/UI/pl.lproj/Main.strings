@@ -22,9 +22,6 @@
 /* Class = "NSButtonCell"; title = "Reset Preferences"; ObjectID = "5yT-5F-X5R"; */
 "5yT-5F-X5R.title" = "Reset Preferences";
 
-/* Class = "NSTextFieldCell"; title = "Invert"; ObjectID = "6zE-AH-mXf"; */
-"6zE-AH-mXf.title" = "Invert";
-
 /* Class = "NSTextFieldCell"; title = "Slider behavior:"; ObjectID = "75n-7M-1mS"; */
 "75n-7M-1mS.title" = "Slider behavior:";
 
@@ -91,7 +88,7 @@
 /* Class = "NSMenuItem"; title = "Minimal"; ObjectID = "Eq3-z9-yIo"; */
 "Eq3-z9-yIo.title" = "Minimalny";
 
-/* Class = "NSTextFieldCell"; title = "Scale skew"; ObjectID = "Eui-5S-JR6"; */
+/* Class = "NSTextFieldCell"; title = "Scale mapping curve"; ObjectID = "Eui-5S-JR6"; */
 "Eui-5S-JR6.title" = "Scale skew";
 
 /* Class = "NSTextFieldCell"; title = "Normally keyboard controls change one OSD chiclet worth of value and Shift+Option allows fine control. This makes fine control default."; ObjectID = "f6J-Ui-uMB"; */

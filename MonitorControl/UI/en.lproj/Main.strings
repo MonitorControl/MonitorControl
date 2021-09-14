@@ -22,9 +22,6 @@
 /* Class = "NSButtonCell"; title = "Reset Preferences"; ObjectID = "5yT-5F-X5R"; */
 "5yT-5F-X5R.title" = "Reset Preferences";
 
-/* Class = "NSTextFieldCell"; title = "Invert"; ObjectID = "6zE-AH-mXf"; */
-"6zE-AH-mXf.title" = "Invert";
-
 /* Class = "NSTextFieldCell"; title = "Slider behavior:"; ObjectID = "75n-7M-1mS"; */
 "75n-7M-1mS.title" = "Slider behavior:";
 
@@ -53,7 +50,7 @@
 "Bhb-6l-uPQ.title" = "Brightness:";
 
 /* Class = "NSTextFieldCell"; title = "For hardware (DDC) controlled displays only. Results may very."; ObjectID = "bIe-6O-xEH"; */
-"bIe-6O-xEH.title" = "These options work for hardware (DDC) controlled displays only.";
+"bIe-6O-xEH.title" = "For hardware (DDC) controlled displays only. Results may very.";
 
 /* Class = "NSButtonCell"; title = "Disable macOS volume OSD"; ObjectID = "bkM-Px-U3b"; */
 "bkM-Px-U3b.title" = "Disable macOS volume OSD";
@@ -83,7 +80,7 @@
 "Cz1-Mh-llk.title" = "⚠️ Warning! Changing some of these settings may cause system freezes or unexpected behavior!";
 
 /* Class = "NSTextFieldCell"; title = "VCP 0x"; ObjectID = "D9t-vT-gNJ"; */
-"D9t-vT-gNJ.title" = "Remap";
+"D9t-vT-gNJ.title" = "VCP 0x";
 
 /* Class = "NSTextFieldCell"; title = "Might not work well with multiple identical displays. Without this the app uses mouse position to determine which display to control."; ObjectID = "Dha-Tm-cDM"; */
 "Dha-Tm-cDM.title" = "Might not work well with multiple identical displays. Without this the app uses mouse position to determine which display to control.";
@@ -91,8 +88,8 @@
 /* Class = "NSMenuItem"; title = "Minimal"; ObjectID = "Eq3-z9-yIo"; */
 "Eq3-z9-yIo.title" = "Minimal";
 
-/* Class = "NSTextFieldCell"; title = "Scale skew"; ObjectID = "Eui-5S-JR6"; */
-"Eui-5S-JR6.title" = "Scale skew";
+/* Class = "NSTextFieldCell"; title = "Scale mapping curve"; ObjectID = "Eui-5S-JR6"; */
+"Eui-5S-JR6.title" = "Scale mapping curve";
 
 /* Class = "NSTextFieldCell"; title = "Normally keyboard controls change one OSD chiclet worth of value and Shift+Option allows fine control. This makes fine control default."; ObjectID = "f6J-Ui-uMB"; */
 "f6J-Ui-uMB.title" = "Normally keyboard controls change one OSD chiclet worth of value and Shift+Option allows fine control. This makes fine control default.";
@@ -230,7 +227,7 @@
 "RkH-7d-KvR.ibExternalAccessibilityDescription" = "Brightness";
 
 /* Class = "NSButton"; ibExternalAccessibilityDescription = "a3"; ObjectID = "Su5-Vg-rpV"; */
-"Su5-Vg-rpV.ibExternalAccessibilityDescription" = "a1";
+"Su5-Vg-rpV.ibExternalAccessibilityDescription" = "a3";
 
 /* Class = "NSButton"; ibExternalAccessibilityHelp = "a2"; ObjectID = "Su5-Vg-rpV"; */
 "Su5-Vg-rpV.ibExternalAccessibilityHelp" = "a2";
