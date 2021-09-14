@@ -59,13 +59,13 @@
 "j72-NF-zsW.title" = "登录时启动 MonitorControl";
 
 /* Class = "NSTextFieldCell"; title = "Custom read polling count:"; ObjectID = "J77-r0-djA"; */
-"J77-r0-djA.title" = "Custom read polling count:";
+"J77-r0-djA.title" = "自定义轮询计数:";
 
 /* Class = "NSTextFieldCell"; title = "Use the media keys of your keyboard to control Brightness & Volume."; ObjectID = "K2r-aD-eec"; */
 "K2r-aD-eec.title" = "使用媒体按键控制亮度和音量";
 
 /* Class = "NSButtonCell"; title = "Enable software dimming if required"; ObjectID = "kMa-3q-udl"; */
-"kMa-3q-udl.title" = "Enable software dimming if required";
+"kMa-3q-udl.title" = "按需开启软件遮罩";
 
 /* Class = "NSButton"; ibShadowedToolTip = "More Info"; ObjectID = "kqn-gU-mZX"; */
 "kqn-gU-mZX.ibShadowedToolTip" = "了解更多";
@@ -77,7 +77,7 @@
 "MJx-MK-e7D.title" = "菜单内容:";
 
 /* Class = "NSTextFieldCell"; title = "If an external display can't be controlled, software dimming will be used instead."; ObjectID = "n4V-jQ-1Ri"; */
-"n4V-jQ-1Ri.title" = "If an external display can't be controlled, software dimming will be used instead.";
+"n4V-jQ-1Ri.title" = "如果外置显示器无法控制，可以尝试使用软件遮罩。";
 
 /* Class = "NSMenuItem"; title = "Volume only"; ObjectID = "NLP-dU-Dam"; */
 "NLP-dU-Dam.title" = "仅音量";
@@ -89,7 +89,7 @@
 "PaK-1f-DsW.title" = "控制方法:";
 
 /* Class = "NSButtonCell"; title = "Longer delay during DDC read operations"; ObjectID = "pF5-Sw-7BR"; */
-"pF5-Sw-7BR.title" = "Longer delay during DDC read operations";
+"pF5-Sw-7BR.title" = "为 DDC 读取提供更长等待时间";
 
 /* Class = "NSTextFieldCell"; title = "If the menu item is hidden, just relaunch the app to reveal Preferences!"; ObjectID = "PVE-y7-zIk"; */
 "PVE-y7-zIk.title" = "如果菜单项目被隐藏，只需重启软件即可恢复偏好设置！";
@@ -131,7 +131,7 @@
 "Xz0-X0-rB4.title" = "高级设置:";
 
 /* Class = "NSTextFieldCell"; title = "This activates additional software dimming after the display reached zero hardware brightness. Menu slider is also affected with 50% being the transition point. Works for DDC controlled displays only."; ObjectID = "yeg-GN-SuO"; */
-"yeg-GN-SuO.title" = "This activates additional software dimming after the display reached zero hardware brightness. Menu slider is also affected with 50% being the transition point. Works for DDC controlled displays only.";
+"yeg-GN-SuO.title" = "当显示器硬件亮度到达0时，会激活软件遮罩。50%是过度点，该选项对菜单中的滑块也适用。仅对可以通过 DDC 控制的显示器有效。";
 
 /* Class = "NSTextFieldCell"; title = "Identifier:"; ObjectID = "YqZ-LS-YvR"; */
 "YqZ-LS-YvR.title" = "ID:";
