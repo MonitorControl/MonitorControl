@@ -35,12 +35,29 @@ class KeyboardPrefsViewController: NSViewController, PreferencePane {
 
   func showAdvanced() -> Bool {
     let hide = !self.prefs.bool(forKey: PrefKey.showAdvancedSettings.rawValue)
-    self.rowUseFocusCheck.isHidden = hide
-    self.rowUseFocusText.isHidden = hide
-    self.rowUseAudioNameCheck.isHidden = hide
-    self.rowUseAudioNameText.isHidden = hide
-    self.rowUseFineScaleCheck.isHidden = hide
-    self.rowUseFineScaleText.isHidden = hide
+    if self.useFocusInsteadOfMouse.state == .on {
+      self.rowUseFocusCheck.isHidden = false
+      self.rowUseFocusText.isHidden = false
+    } else {
+      self.rowUseFocusCheck.isHidden = hide
+      self.rowUseFocusText.isHidden = hide
+    }
+    if self.useAudioDeviceNameMatching.state == .on {
+      self.rowUseAudioNameCheck.isHidden = false
+      self.rowUseAudioNameText.isHidden = false
+    } else {
+      self.rowUseAudioNameCheck.isHidden = hide
+      self.rowUseAudioNameText.isHidden = hide
+    }
+
+    if self.useFineScale.state == .on {
+      self.rowUseFineScaleCheck.isHidden = false
+      self.rowUseFineScaleText.isHidden = false
+    } else {
+      self.rowUseFineScaleCheck.isHidden = hide
+      self.rowUseFineScaleText.isHidden = hide
+    }
+
     return !hide
   }
 
@@ -84,6 +101,7 @@ class KeyboardPrefsViewController: NSViewController, PreferencePane {
       self.prefs.set(false, forKey: PrefKey.useFocusInsteadOfMouse.rawValue)
     default: break
     }
+    _ = self.showAdvanced()
   }
 
   @IBAction func allScreensVolumeClicked(_ sender: NSButton) {
@@ -110,6 +128,7 @@ class KeyboardPrefsViewController: NSViewController, PreferencePane {
     default: break
     }
     app.updateMediaKeyTap()
+    _ = self.showAdvanced()
   }
 
   @IBAction func useFineScaleClicked(_ sender: NSButton) {
@@ -120,6 +139,7 @@ class KeyboardPrefsViewController: NSViewController, PreferencePane {
       self.prefs.set(false, forKey: PrefKey.useFineScaleBrightness.rawValue)
     default: break
     }
+    _ = self.showAdvanced()
   }
 
   @IBAction func useFineScaleVolumeClicked(_ sender: NSButton) {
