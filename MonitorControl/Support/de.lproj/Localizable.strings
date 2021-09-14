@@ -53,7 +53,7 @@
 "No Control Available" = "Keine Steuerung verfügbar";
 
 /* Shown in menu */
-"No supported display found" = "Keine unterstützter Display gefunden";
+"No supported display found" = "Kein unterstütztes Display gefunden";
 
 /* Shown in the alert dialog */
 "Ok" = "OK";
@@ -68,10 +68,10 @@
 "Safe Mode Activated" = "Safe Mode Activated";
 
 /* Shown in the alert dialog */
-"Shift was pressed during launch. MonitorControl started in safe mode. Default preferences are reloaded, DDC read is blocked." = "Shift was pressed during launch. MonitorControl started in safe mode. Default preferences are reloaded, DDC read is blocked.";
+"Shift was pressed during launch. MonitorControl started in safe mode. preferences are reloaded, DDC read is blocked." = "Die Shift-Taste wurde beim Programmstart gehalten. MonitorControl wurde im Safe Mode gestartet. Die Standard-Einstellungen werden geladen, DDC lesen ist blockiert.";
 
 /* Shown in the alert dialog */
-"Shortcuts not available" = "Kurzbefehle nicht verfügbar";
+"Shortcuts not available" = "Kurzbefehle sind nicht verfügbar";
 
 /* Shown in the Display Preferences */
 "Software (Forced)" = "Software (Erzwungen)";
