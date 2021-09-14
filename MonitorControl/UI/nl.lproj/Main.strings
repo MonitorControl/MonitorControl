@@ -14,7 +14,7 @@
 "BYS-7Y-bRz.title" = "Reset instellingen";
 
 /* Class = "NSButtonCell"; title = "Enable Mute DDC command"; ObjectID = "bZq-0d-lJa"; */
-"bZq-0d-lJa.title" = "Schakkel DDC commando voor dempen in";
+"bZq-0d-lJa.title" = "Schakel DDC commando voor dempen in";
 
 /* Class = "NSTextFieldCell"; title = "Keyboard:"; ObjectID = "c7N-cO-759"; */
 "c7N-cO-759.title" = "Toetsenbord:";
