@@ -208,7 +208,7 @@ class DisplaysPrefsCellView: NSTableCellView {
     if let display = display as? ExternalDisplay {
       display.audioDeviceNameOverride = sender.stringValue
     }
-    app.configuration()
+    app.configure()
   }
 
   @IBAction func unavailableDDC(_ sender: NSButton) {
@@ -223,7 +223,7 @@ class DisplaysPrefsCellView: NSTableCellView {
       default:
         break
       }
-      app.configuration()
+      app.configure()
     }
   }
 
@@ -237,7 +237,7 @@ class DisplaysPrefsCellView: NSTableCellView {
       } else {
         display.removePrefValueKey(forkey: prefKey, for: command)
       }
-      app.configuration()
+      app.configure()
       if display.prefValueExistsKey(forkey: prefKey, for: command) {
         sender.stringValue = String(display.readPrefValueKeyInt(forkey: prefKey, for: command))
       } else {
@@ -258,7 +258,7 @@ class DisplaysPrefsCellView: NSTableCellView {
       } else {
         display.removePrefValueKey(forkey: prefKey, for: command)
       }
-      app.configuration()
+      app.configure()
       if display.prefValueExistsKey(forkey: prefKey, for: command) {
         sender.stringValue = String(display.readPrefValueKeyInt(forkey: prefKey, for: command))
       } else {
@@ -290,7 +290,7 @@ class DisplaysPrefsCellView: NSTableCellView {
       default:
         break
       }
-      app.configuration()
+      app.configure()
     }
   }
 
@@ -304,7 +304,7 @@ class DisplaysPrefsCellView: NSTableCellView {
       } else {
         display.removePrefValueKey(forkey: prefKey, for: command)
       }
-      app.configuration()
+      app.configure()
       if display.prefValueExistsKey(forkey: prefKey, for: command) {
         sender.stringValue = String(format: "%02x", display.readPrefValueKeyInt(forkey: prefKey, for: command))
       } else {
@@ -336,9 +336,9 @@ class DisplaysPrefsCellView: NSTableCellView {
         self.audioDeviceNameOverride.stringValue = ""
         self.audioDeviceNameOverride(self.audioDeviceNameOverride)
 
-        self.unavailableDDCBrightness.state = .off
-        self.unavailableDDCVolume.state = .off
-        self.unavailableDDCContrast.state = .off
+        self.unavailableDDCBrightness.state = .on
+        self.unavailableDDCVolume.state = .on
+        self.unavailableDDCContrast.state = .on
 
         self.minDDCOverrideBrightness.stringValue = ""
         self.minDDCOverrideVolume.stringValue = ""

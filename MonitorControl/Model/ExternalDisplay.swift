@@ -61,40 +61,6 @@ class ExternalDisplay: Display {
     }
   }
 
-  func toggleMute(fromVolumeSlider: Bool = false) {
-    var muteValue: Int
-    var volumeOSDValue: Float
-    if self.readPrefValueInt(for: .audioMuteScreenBlank) != 1 {
-      muteValue = 1
-      volumeOSDValue = 0
-    } else {
-      muteValue = 2
-      volumeOSDValue = self.readPrefValue(for: .audioSpeakerVolume)
-      // The volume that will be set immediately after setting unmute while the old set volume was 0 is unpredictable. Hence, just set it to a single filled chiclet
-      if volumeOSDValue == 0 {
-        volumeOSDValue = 1 / OSDUtils.chicletCount
-        self.savePrefValue(volumeOSDValue, for: .audioSpeakerVolume)
-      }
-    }
-    if self.enableMuteUnmute {
-      guard self.writeDDCValues(command: .audioMuteScreenBlank, value: UInt16(muteValue)) == true else {
-        return
-      }
-    }
-    self.savePrefValueInt(muteValue, for: .audioMuteScreenBlank)
-    if !self.enableMuteUnmute || volumeOSDValue > 0 {
-      _ = self.writeDDCValues(command: .audioSpeakerVolume, value: self.convValueToDDC(for: .audioSpeakerVolume, from: volumeOSDValue))
-    }
-    if !fromVolumeSlider {
-      if !self.hideOsd {
-        OSDUtils.showOsd(displayID: self.identifier, command: volumeOSDValue > 0 ? .audioSpeakerVolume : .audioMuteScreenBlank, value: volumeOSDValue, roundChiclet: true)
-      }
-      if let slider = self.volumeSliderHandler?.slider {
-        slider.floatValue = volumeOSDValue
-      }
-    }
-  }
-
   func setupCurrentAndMaxValues(command: Command) {
     var ddcValues: (UInt16, UInt16)?
     var maxDDCValue = UInt16(DDC_MAX_DETECT_LIMIT)
@@ -146,6 +112,9 @@ class ExternalDisplay: Display {
   }
 
   func setupMuteUnMute() {
+    guard !self.readPrefValueKeyBool(forkey: PrefKey.unavailableDDC, for: .audioSpeakerVolume) else {
+      return
+    }
     var currentMuteValue = self.readPrefValueInt(for: .audioMuteScreenBlank)
     currentMuteValue = currentMuteValue == 0 ? 2 : currentMuteValue
     // If we're looking at the audio speaker volume, also retrieve the values for the mute command
@@ -186,6 +155,10 @@ class ExternalDisplay: Display {
   }
 
   func stepVolume(isUp: Bool, isSmallIncrement: Bool) {
+    guard !self.readPrefValueKeyBool(forkey: PrefKey.unavailableDDC, for: .audioSpeakerVolume) else {
+      OSDUtils.showOsdVolumeDisabled(displayID: self.identifier)
+      return
+    }
     let currentValue = self.readPrefValue(for: .audioSpeakerVolume)
     var muteValue: Int?
     let volumeOSDValue = self.calcNewValue(currentValue: currentValue, isUp: isUp, isSmallIncrement: isSmallIncrement)
@@ -211,6 +184,44 @@ class ExternalDisplay: Display {
     }
     if !isAlreadySet {
       self.savePrefValue(volumeOSDValue, for: .audioSpeakerVolume)
+      if let slider = self.volumeSliderHandler?.slider {
+        slider.floatValue = volumeOSDValue
+      }
+    }
+  }
+
+  func toggleMute(fromVolumeSlider: Bool = false) {
+    guard !self.readPrefValueKeyBool(forkey: PrefKey.unavailableDDC, for: .audioSpeakerVolume) else {
+      OSDUtils.showOsdMuteDisabled(displayID: self.identifier)
+      return
+    }
+    var muteValue: Int
+    var volumeOSDValue: Float
+    if self.readPrefValueInt(for: .audioMuteScreenBlank) != 1 {
+      muteValue = 1
+      volumeOSDValue = 0
+    } else {
+      muteValue = 2
+      volumeOSDValue = self.readPrefValue(for: .audioSpeakerVolume)
+      // The volume that will be set immediately after setting unmute while the old set volume was 0 is unpredictable. Hence, just set it to a single filled chiclet
+      if volumeOSDValue == 0 {
+        volumeOSDValue = 1 / OSDUtils.chicletCount
+        self.savePrefValue(volumeOSDValue, for: .audioSpeakerVolume)
+      }
+    }
+    if self.enableMuteUnmute {
+      guard self.writeDDCValues(command: .audioMuteScreenBlank, value: UInt16(muteValue)) == true else {
+        return
+      }
+    }
+    self.savePrefValueInt(muteValue, for: .audioMuteScreenBlank)
+    if !self.enableMuteUnmute || volumeOSDValue > 0 {
+      _ = self.writeDDCValues(command: .audioSpeakerVolume, value: self.convValueToDDC(for: .audioSpeakerVolume, from: volumeOSDValue))
+    }
+    if !fromVolumeSlider {
+      if !self.hideOsd {
+        OSDUtils.showOsd(displayID: self.identifier, command: volumeOSDValue > 0 ? .audioSpeakerVolume : .audioMuteScreenBlank, value: volumeOSDValue, roundChiclet: true)
+      }
       if let slider = self.volumeSliderHandler?.slider {
         slider.floatValue = volumeOSDValue
       }
@@ -299,6 +310,9 @@ class ExternalDisplay: Display {
   }
 
   override func stepBrightness(isUp: Bool, isSmallIncrement: Bool) {
+    guard !self.readPrefValueKeyBool(forkey: PrefKey.unavailableDDC, for: .brightness) else {
+      return
+    }
     let currentValue = self.readPrefValue(for: .brightness)
     let osdValue = self.calcNewValue(currentValue: currentValue, isUp: isUp, isSmallIncrement: isSmallIncrement)
     if self.stepBrightnessPart(osdValue: osdValue, isSmallIncrement: isSmallIncrement) {
@@ -322,7 +336,7 @@ class ExternalDisplay: Display {
   }
 
   public func writeDDCValues(command: Command, value: UInt16, errorRecoveryWaitTime _: UInt32? = nil) -> Bool? {
-    guard app.sleepID == 0, app.reconfigureID == 0, !self.forceSw else {
+    guard app.sleepID == 0, app.reconfigureID == 0, !self.forceSw, !self.readPrefValueKeyBool(forkey: PrefKey.unavailableDDC, for: command) else {
       return false
     }
     var success: Bool = false
@@ -344,7 +358,7 @@ class ExternalDisplay: Display {
 
   func readDDCValues(for command: Command, tries: UInt, minReplyDelay delay: UInt64?) -> (current: UInt16, max: UInt16)? {
     var values: (UInt16, UInt16)?
-    guard app.sleepID == 0, app.reconfigureID == 0, !self.forceSw else {
+    guard app.sleepID == 0, app.reconfigureID == 0, !self.forceSw, !self.readPrefValueKeyBool(forkey: PrefKey.unavailableDDC, for: command) else {
       return values
     }
     var controlCode = UInt8(self.readPrefValueKeyInt(forkey: PrefKey.remapDDC, for: command))

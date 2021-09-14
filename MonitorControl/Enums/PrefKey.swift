@@ -32,7 +32,7 @@ enum PrefKey: String {
   // Max command value display
   case curveDDC
 
-  // Is the specific control is set as unavailable for display? TODO: Implementation: MISSING, Preferences outlet: DONE
+  // Is the specific control is set as unavailable for display?
   case unavailableDDC
 
   // Invert DDC scale?

@@ -88,7 +88,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     self.statusItem.menu = self.statusMenu
     self.checkPermissions()
     CGDisplayRegisterReconfigurationCallback({ _, _, _ in app.displayReconfigured() }, nil)
-    self.configuration(firstrun: true)
+    self.configure(firstrun: true)
   }
 
   func applicationShouldHandleReopen(_: NSApplication, hasVisibleWindows _: Bool) -> Bool {
@@ -139,12 +139,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       let dispatchedReconfigureID = self.reconfigureID
       os_log("Display to be reconfigured with reconfigureID %{public}@", type: .info, String(dispatchedReconfigureID))
       DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-        self.configuration(dispatchedReconfigureID: dispatchedReconfigureID)
+        self.configure(dispatchedReconfigureID: dispatchedReconfigureID)
       }
     }
   }
 
-  func configuration(dispatchedReconfigureID: Int = 0, firstrun: Bool = false) {
+  func configure(dispatchedReconfigureID: Int = 0, firstrun: Bool = false) {
     guard self.sleepID == 0, dispatchedReconfigureID == self.reconfigureID else {
       return
     }
@@ -201,24 +201,24 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     var hasSlider = false
     if let externalDisplay = display as? ExternalDisplay, !externalDisplay.isSw() {
-      if prefs.bool(forKey: PrefKey.showVolume.rawValue) {
+      if prefs.bool(forKey: PrefKey.showVolume.rawValue), !display.readPrefValueKeyBool(forkey: PrefKey.unavailableDDC, for: .audioSpeakerVolume) {
         let volumeSliderHandler = SliderHandler.addSliderMenuItem(toMenu: monitorSubMenu, forDisplay: externalDisplay, command: .audioSpeakerVolume, title: NSLocalizedString("Volume", comment: "Shown in menu"), numOfTickMarks: numOfTickMarks)
         externalDisplay.volumeSliderHandler = volumeSliderHandler
         hasSlider = true
-      } else {
+      } else if !display.readPrefValueKeyBool(forkey: PrefKey.unavailableDDC, for: .audioSpeakerVolume) {
         externalDisplay.setupCurrentAndMaxValues(command: .audioSpeakerVolume) // We have to initialize speaker DDC without menu as well
       }
-      if prefs.bool(forKey: PrefKey.showContrast.rawValue) {
+      if prefs.bool(forKey: PrefKey.showContrast.rawValue), !display.readPrefValueKeyBool(forkey: PrefKey.unavailableDDC, for: .contrast) {
         let contrastSliderHandler = SliderHandler.addSliderMenuItem(toMenu: monitorSubMenu, forDisplay: externalDisplay, command: .contrast, title: NSLocalizedString("Contrast", comment: "Shown in menu"), numOfTickMarks: numOfTickMarks)
         externalDisplay.contrastSliderHandler = contrastSliderHandler
         hasSlider = true
       }
     }
-    if !prefs.bool(forKey: PrefKey.hideBrightness.rawValue) {
+    if !prefs.bool(forKey: PrefKey.hideBrightness.rawValue), !display.readPrefValueKeyBool(forkey: PrefKey.unavailableDDC, for: .brightness) {
       let brightnessSliderHandler = SliderHandler.addSliderMenuItem(toMenu: monitorSubMenu, forDisplay: display, command: .brightness, title: NSLocalizedString("Brightness", comment: "Shown in menu"), numOfTickMarks: numOfTickMarks)
       display.brightnessSliderHandler = brightnessSliderHandler
       hasSlider = true
-    } else if let externalDisplay = display as? ExternalDisplay, !externalDisplay.isSw() {
+    } else if let externalDisplay = display as? ExternalDisplay, !externalDisplay.isSw(), !display.readPrefValueKeyBool(forkey: PrefKey.unavailableDDC, for: .brightness) {
       externalDisplay.setupCurrentAndMaxValues(command: .brightness) // We have to initialize brightness DDC without menu as well
     }
     if hasSlider {
@@ -277,7 +277,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       if self.reconfigureID != 0 {
         let dispatchedReconfigureID = self.reconfigureID
         os_log("Display needs reconfig after sober with reconfigureID %{public}@", type: .info, String(dispatchedReconfigureID))
-        self.configuration(dispatchedReconfigureID: dispatchedReconfigureID)
+        self.configure(dispatchedReconfigureID: dispatchedReconfigureID)
       } else if Arm64DDC.isArm64 {
         os_log("Displays don't need reconfig after sober but might need AVServices update", type: .info)
         DisplayManager.shared.updateArm64AVServices()
@@ -335,16 +335,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     self.setDefaultPrefs()
     self.checkPermissions()
     self.updateMediaKeyTap()
-    self.configuration(firstrun: true)
+    self.configure(firstrun: true)
   }
 
   @objc func audioDeviceChanged() {
-    #if DEBUG
-      if let defaultDevice = self.coreAudio.defaultOutputDevice {
-        os_log("Default output device changed to “%{public}@”.", type: .info, defaultDevice.name)
-        os_log("Can device set its own volume? %{public}@", type: .info, defaultDevice.canSetVirtualMasterVolume(scope: .output).description)
-      }
-    #endif
+    if let defaultDevice = self.coreAudio.defaultOutputDevice {
+      os_log("Default output device changed to “%{public}@”.", type: .debug, defaultDevice.name)
+      os_log("Can device set its own volume? %{public}@", type: .debug, defaultDevice.canSetVirtualMasterVolume(scope: .output).description)
+    }
     self.updateMediaKeyTap()
   }
 

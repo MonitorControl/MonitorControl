@@ -97,6 +97,7 @@ class MediaKeyTapManager: MediaKeyTapDelegate {
           display.stepBrightness(isUp: mediaKey == .brightnessUp, isSmallIncrement: isSmallIncrement)
         }
       case .brightnessDown:
+
         if isPressed {
           display.stepBrightness(isUp: mediaKey == .brightnessUp, isSmallIncrement: isSmallIncrement)
         }
@@ -104,7 +105,7 @@ class MediaKeyTapManager: MediaKeyTapDelegate {
         // The mute key should not respond to press + hold or keyup
         if !isRepeat, isPressed, let display = display as? ExternalDisplay {
           display.toggleMute()
-          if !wasNotIsPressedVolumeSentAlready, display.readPrefValueInt(for: .audioMuteScreenBlank) != 1 {
+          if !wasNotIsPressedVolumeSentAlready, display.readPrefValueInt(for: .audioMuteScreenBlank) != 1, !display.readPrefValueKeyBool(forkey: PrefKey.unavailableDDC, for: .audioSpeakerVolume) {
             display.playVolumeChangedSound()
             wasNotIsPressedVolumeSentAlready = true
           }
@@ -114,7 +115,7 @@ class MediaKeyTapManager: MediaKeyTapDelegate {
         if let display = display as? ExternalDisplay {
           if isPressed {
             display.stepVolume(isUp: mediaKey == .volumeUp, isSmallIncrement: isSmallIncrement)
-          } else if !wasNotIsPressedVolumeSentAlready {
+          } else if !wasNotIsPressedVolumeSentAlready, !display.readPrefValueKeyBool(forkey: PrefKey.unavailableDDC, for: .audioSpeakerVolume) {
             display.playVolumeChangedSound()
             wasNotIsPressedVolumeSentAlready = true
           }

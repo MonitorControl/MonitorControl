@@ -23,23 +23,32 @@ class OSDUtils: NSObject {
     guard let manager = OSDManager.sharedManager() as? OSDManager else {
       return
     }
-
     let osdImage = self.getOSDImageByCommand(command: command, value: value)
-
     let filledChiclets: Int
     let totalChiclets: Int
-
     if roundChiclet {
       let osdChiclet = OSDUtils.chiclet(fromValue: value, maxValue: maxValue)
-
       filledChiclets = Int(round(osdChiclet))
       totalChiclets = 16
     } else {
       filledChiclets = Int(value * 100)
       totalChiclets = Int(maxValue * 100)
     }
-
     manager.showImage(osdImage.rawValue, onDisplayID: displayID, priority: 0x1F4, msecUntilFade: 1000, filledChiclets: UInt32(filledChiclets), totalChiclets: UInt32(totalChiclets), locked: lock)
+  }
+
+  static func showOsdVolumeDisabled(displayID: CGDirectDisplayID) {
+    guard let manager = OSDManager.sharedManager() as? OSDManager else {
+      return
+    }
+    manager.showImage(22, onDisplayID: displayID, priority: 0x1F4, msecUntilFade: 1000)
+  }
+
+  static func showOsdMuteDisabled(displayID: CGDirectDisplayID) {
+    guard let manager = OSDManager.sharedManager() as? OSDManager else {
+      return
+    }
+    manager.showImage(21, onDisplayID: displayID, priority: 0x1F4, msecUntilFade: 1000)
   }
 
   static func popEmptyOsd(displayID: CGDirectDisplayID, command: Command) {
