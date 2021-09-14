@@ -208,6 +208,7 @@ class DisplaysPrefsCellView: NSTableCellView {
     if let display = display as? ExternalDisplay {
       display.audioDeviceNameOverride = sender.stringValue
     }
+    app.configuration()
   }
 
   @IBAction func unavailableDDC(_ sender: NSButton) {
@@ -295,7 +296,7 @@ class DisplaysPrefsCellView: NSTableCellView {
 
   @IBAction func remapDDC(_ sender: NSTextField) {
     let command = self.tagCommand(sender.tag)
-    let prefKey = PrefKey.maxDDCOverride
+    let prefKey = PrefKey.remapDDC
     let value = sender.stringValue
     if let display = display as? ExternalDisplay {
       if !value.isEmpty, let intValue = UInt(value, radix: 16), intValue != 0 {
@@ -316,33 +317,75 @@ class DisplaysPrefsCellView: NSTableCellView {
 
   @IBAction func resetSettings(_: NSButton) {
     if let disp = display {
-      if self.ddcButton.isEnabled {
+      if self.ddcButton.isEnabled { // This signifies that the DDC block is enabled
         self.ddcButton.state = .on
         self.ddcButtonToggled(self.ddcButton)
-      }
-      if self.enabledButton.isEnabled {
         self.enabledButton.state = .on
         self.enabledButtonToggled(self.enabledButton)
-      }
-      if self.disableVolumeOSDButton.isEnabled {
         self.disableVolumeOSDButton.state = .off
         self.disableVolumeOSDButton(self.disableVolumeOSDButton)
-      }
-      if self.pollingModeMenu.isEnabled {
         self.pollingModeMenu.selectItem(withTag: 2)
         self.pollingModeValueChanged(self.pollingModeMenu)
-      }
-      if self.longerDelayButton.isEnabled {
         self.longerDelayButton.state = .off
         self.longerDelayButtonToggled(self.longerDelayButton)
-      }
-      if self.enableMuteButton.isEnabled {
         self.enableMuteButton.state = .off
         self.enableMuteButtonToggled(self.enableMuteButton)
+        self.friendlyName.stringValue = disp.name
+        self.friendlyNameValueChanged(self.friendlyName)
+
+        self.audioDeviceNameOverride.stringValue = ""
+        self.audioDeviceNameOverride(self.audioDeviceNameOverride)
+
+        self.unavailableDDCBrightness.state = .off
+        self.unavailableDDCVolume.state = .off
+        self.unavailableDDCContrast.state = .off
+
+        self.minDDCOverrideBrightness.stringValue = ""
+        self.minDDCOverrideVolume.stringValue = ""
+        self.minDDCOverrideContrast.stringValue = ""
+
+        self.maxDDCOverrideBrightness.stringValue = ""
+        self.maxDDCOverrideVolume.stringValue = ""
+        self.maxDDCOverrideContrast.stringValue = ""
+
+        self.curveDDCBrightness.intValue = 5
+        self.curveDDCVolume.intValue = 5
+        self.curveDDCContrast.intValue = 5
+
+        self.invertDDCBrightness.state = .off
+        self.invertDDCVolume.state = .off
+        self.invertDDCContrast.state = .off
+
+        self.remapDDCBrightness.stringValue = ""
+        self.remapDDCVolume.stringValue = ""
+        self.remapDDCContrast.stringValue = ""
+
+        self.unavailableDDC(self.unavailableDDCBrightness)
+
+        self.unavailableDDC(self.unavailableDDCBrightness)
+        self.unavailableDDC(self.unavailableDDCVolume)
+        self.unavailableDDC(self.unavailableDDCContrast)
+
+        self.minDDCOverride(self.minDDCOverrideBrightness)
+        self.minDDCOverride(self.minDDCOverrideVolume)
+        self.minDDCOverride(self.minDDCOverrideContrast)
+
+        self.maxDDCOverride(self.maxDDCOverrideBrightness)
+        self.maxDDCOverride(self.maxDDCOverrideVolume)
+        self.maxDDCOverride(self.maxDDCOverrideContrast)
+
+        self.curveDDC(self.curveDDCBrightness)
+        self.curveDDC(self.curveDDCVolume)
+        self.curveDDC(self.curveDDCContrast)
+
+        self.invertDDC(self.invertDDCBrightness)
+        self.invertDDC(self.invertDDCVolume)
+        self.invertDDC(self.invertDDCContrast)
+
+        self.remapDDC(self.remapDDCBrightness)
+        self.remapDDC(self.remapDDCVolume)
+        self.remapDDC(self.remapDDCContrast)
       }
-      self.friendlyName.stringValue = disp.name
-      self.friendlyNameValueChanged(self.friendlyName)
-      // TODO: Reset of new settings is missing
     }
   }
 }

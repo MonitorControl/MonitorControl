@@ -20,28 +20,28 @@ enum PrefKey: String {
   // Command value display
   case value
 
-  // Min command value display TODO: Implementation: DONE, Preferences outlet: PRESENT, NOT CONNECTED
+  // Min command value display
   case minDDCOverride
 
   // Max command value display
   case maxDDC
 
-  // Max user override command value display TODO: Implementation: DONE, Preferences outlet: PRESENT, NOT CONNECTED
+  // Max user override command value display
   case maxDDCOverride
 
-  // Max command value display TODO: Implementation: DONE, Preferences outlet: PRESENT, NOT CONNECTED
+  // Max command value display
   case curveDDC
 
-  // Is the specific control is set as unavailable for display? TODO: Implementation: MISSING, Preferences outlet: PRESENT, NOT CONNECTED
+  // Is the specific control is set as unavailable for display? TODO: Implementation: MISSING, Preferences outlet: DONE
   case unavailableDDC
 
-  // Invert DDC scale? TODO: Implementation: DONE, Preferences outlet: PRESENT, NOT CONNECTED
+  // Invert DDC scale?
   case invertDDC
 
-  // Override DDC control command code TODO: Implementation: DONE, Preferences outlet: PRESENT, NOT CONNECTED
+  // Override DDC control command code
   case remapDDC
 
-  // User assigned audio device name for display TODO: Implementation: DONE, Preferences outlet: PRESENT, NOT CONNECTED
+  // User assigned audio device name for display
   case audioDeviceNameOverride
 
   // Display enabled

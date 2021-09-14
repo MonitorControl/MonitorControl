@@ -85,6 +85,14 @@ class Display: Equatable {
     self.prefs.set(value, forKey: forkey.rawValue + String(command.rawValue) + self.prefsId)
   }
 
+  func readPrefValueKeyString(forkey: PrefKey, for command: Command) -> String {
+    return self.prefs.string(forKey: forkey.rawValue + String(command.rawValue) + self.prefsId) ?? ""
+  }
+
+  func savePrefValueKeyString(forkey: PrefKey, value: String, for command: Command) {
+    self.prefs.set(value, forKey: forkey.rawValue + String(command.rawValue) + self.prefsId)
+  }
+
   func readPrefValueKeyBool(forkey: PrefKey, for command: Command) -> Bool {
     return self.prefs.bool(forKey: forkey.rawValue + String(command.rawValue) + self.prefsId)
   }

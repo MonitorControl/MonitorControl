@@ -1104,7 +1104,7 @@
                                                                             <textField autoresizesSubviews="NO" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" preferredMaxLayoutWidth="102" id="zz1-Dn-410">
                                                                                 <rect key="frame" x="191" y="142" width="202" height="19"/>
                                                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES"/>
-                                                                                <textFieldCell key="cell" controlSize="small" selectable="YES" editable="YES" enabled="NO" sendsActionOnEndEditing="YES" borderStyle="bezel" alignment="center" bezelStyle="round" id="BeE-eB-GgA">
+                                                                                <textFieldCell key="cell" controlSize="small" selectable="YES" editable="YES" enabled="NO" sendsActionOnEndEditing="YES" borderStyle="bezel" alignment="left" bezelStyle="round" id="BeE-eB-GgA">
                                                                                     <font key="font" metaFont="smallSystem"/>
                                                                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -1284,13 +1284,12 @@
                                                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                                 </textFieldCell>
                                                                             </textField>
-                                                                            <slider verticalHuggingPriority="750" tag="1" id="9H1-0z-xsx">
-                                                                                <rect key="frame" x="307" y="52" width="110" height="36"/>
+                                                                            <slider verticalHuggingPriority="750" tag="2" id="2ae-8s-A50">
+                                                                                <rect key="frame" x="307" y="30" width="110" height="28"/>
                                                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                                                <sliderCell key="cell" state="on" alignment="left" minValue="1" maxValue="9" doubleValue="5" tickMarkPosition="above" numberOfTickMarks="9" allowsTickMarkValuesOnly="YES" sliderType="linear" id="HPs-Bd-Ymf"/>
-                                                                                <accessibility description="Brightness"/>
+                                                                                <sliderCell key="cell" state="on" alignment="left" minValue="1" maxValue="9" doubleValue="5" tickMarkPosition="above" numberOfTickMarks="9" allowsTickMarkValuesOnly="YES" sliderType="linear" id="vh6-Rx-yYl"/>
                                                                                 <connections>
-                                                                                    <action selector="curveDDC:" target="hCY-wr-B84" id="LLn-ot-OHw"/>
+                                                                                    <action selector="curveDDC:" target="hCY-wr-B84" id="xMA-H8-d6n"/>
                                                                                 </connections>
                                                                             </slider>
                                                                             <slider verticalHuggingPriority="750" tag="3" id="W4G-N2-vlQ">
@@ -1484,12 +1483,13 @@
                                                                                     <action selector="unavailableDDC:" target="hCY-wr-B84" id="zTp-UI-cSU"/>
                                                                                 </connections>
                                                                             </button>
-                                                                            <slider verticalHuggingPriority="750" tag="2" id="2ae-8s-A50">
-                                                                                <rect key="frame" x="307" y="30" width="110" height="28"/>
+                                                                            <slider verticalHuggingPriority="750" tag="1" id="9H1-0z-xsx">
+                                                                                <rect key="frame" x="307" y="56" width="110" height="28"/>
                                                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                                                <sliderCell key="cell" state="on" alignment="left" minValue="1" maxValue="9" doubleValue="5" tickMarkPosition="above" numberOfTickMarks="9" allowsTickMarkValuesOnly="YES" sliderType="linear" id="vh6-Rx-yYl"/>
+                                                                                <sliderCell key="cell" state="on" alignment="left" minValue="1" maxValue="9" doubleValue="5" tickMarkPosition="above" numberOfTickMarks="9" allowsTickMarkValuesOnly="YES" sliderType="linear" id="HPs-Bd-Ymf"/>
+                                                                                <accessibility description="Brightness"/>
                                                                                 <connections>
-                                                                                    <action selector="curveDDC:" target="hCY-wr-B84" id="xMA-H8-d6n"/>
+                                                                                    <action selector="curveDDC:" target="hCY-wr-B84" id="LLn-ot-OHw"/>
                                                                                 </connections>
                                                                             </slider>
                                                                         </subviews>

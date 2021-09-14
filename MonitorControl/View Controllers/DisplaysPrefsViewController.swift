@@ -156,22 +156,63 @@ class DisplaysPrefsViewController: NSViewController, PreferencePane, NSTableView
       }
       // Advanced settings
       if let externalDisplay = display as? ExternalDisplay, !externalDisplay.isSwOnly(), !externalDisplay.isVirtual {
-        // DDC read polling mode
         cell.pollingModeMenu.isEnabled = true
         cell.pollingModeMenu.selectItem(withTag: externalDisplay.pollingMode)
-        // Custom read polling count
         if externalDisplay.pollingMode == 4 {
           cell.pollingCount.isEnabled = true
         } else {
           cell.pollingCount.isEnabled = false
         }
         cell.pollingCount.stringValue = String(externalDisplay.pollingCount)
-        // DDC read delay
         cell.longerDelayButton.isEnabled = true
         cell.longerDelayButton.state = externalDisplay.needsLongerDelay ? .on : .off
         cell.enableMuteButton.isEnabled = true
         cell.enableMuteButton.state = externalDisplay.enableMuteUnmute ? .on : .off
-        // TODO: Population of new settins is missing!
+
+        cell.audioDeviceNameOverride.isEnabled = true
+        cell.audioDeviceNameOverride.stringValue = externalDisplay.audioDeviceNameOverride
+
+        cell.unavailableDDCBrightness.isEnabled = true
+        cell.unavailableDDCVolume.isEnabled = true
+        cell.unavailableDDCContrast.isEnabled = true
+        cell.unavailableDDCBrightness.state = !externalDisplay.readPrefValueKeyBool(forkey: PrefKey.unavailableDDC, for: .brightness) ? .on : .off
+        cell.unavailableDDCVolume.state = !externalDisplay.readPrefValueKeyBool(forkey: PrefKey.unavailableDDC, for: .audioSpeakerVolume) ? .on : .off
+        cell.unavailableDDCContrast.state = !externalDisplay.readPrefValueKeyBool(forkey: PrefKey.unavailableDDC, for: .contrast) ? .on : .off
+
+        cell.minDDCOverrideBrightness.isEnabled = true
+        cell.minDDCOverrideVolume.isEnabled = true
+        cell.minDDCOverrideContrast.isEnabled = true
+        cell.minDDCOverrideBrightness.stringValue = externalDisplay.readPrefValueKeyString(forkey: PrefKey.minDDCOverride, for: .brightness)
+        cell.minDDCOverrideVolume.stringValue = externalDisplay.readPrefValueKeyString(forkey: PrefKey.minDDCOverride, for: .audioSpeakerVolume)
+        cell.minDDCOverrideContrast.stringValue = externalDisplay.readPrefValueKeyString(forkey: PrefKey.minDDCOverride, for: .contrast)
+
+        cell.maxDDCOverrideBrightness.isEnabled = true
+        cell.maxDDCOverrideVolume.isEnabled = true
+        cell.maxDDCOverrideContrast.isEnabled = true
+        cell.maxDDCOverrideBrightness.stringValue = externalDisplay.readPrefValueKeyString(forkey: PrefKey.maxDDCOverride, for: .brightness)
+        cell.maxDDCOverrideVolume.stringValue = externalDisplay.readPrefValueKeyString(forkey: PrefKey.maxDDCOverride, for: .audioSpeakerVolume)
+        cell.maxDDCOverrideContrast.stringValue = externalDisplay.readPrefValueKeyString(forkey: PrefKey.maxDDCOverride, for: .contrast)
+
+        cell.curveDDCBrightness.isEnabled = true
+        cell.curveDDCVolume.isEnabled = true
+        cell.curveDDCContrast.isEnabled = true
+        cell.curveDDCBrightness.intValue = Int32(externalDisplay.readPrefValueKeyInt(forkey: PrefKey.curveDDC, for: .brightness) == 0 ? 5 : externalDisplay.readPrefValueKeyInt(forkey: PrefKey.curveDDC, for: .brightness))
+        cell.curveDDCVolume.intValue = Int32(externalDisplay.readPrefValueKeyInt(forkey: PrefKey.curveDDC, for: .audioSpeakerVolume) == 0 ? 5 : externalDisplay.readPrefValueKeyInt(forkey: PrefKey.curveDDC, for: .audioSpeakerVolume))
+        cell.curveDDCContrast.intValue = Int32(externalDisplay.readPrefValueKeyInt(forkey: PrefKey.curveDDC, for: .contrast) == 0 ? 5 : externalDisplay.readPrefValueKeyInt(forkey: PrefKey.curveDDC, for: .contrast))
+
+        cell.invertDDCBrightness.state = externalDisplay.readPrefValueKeyBool(forkey: PrefKey.invertDDC, for: .brightness) ? .on : .off
+        cell.invertDDCVolume.state = externalDisplay.readPrefValueKeyBool(forkey: PrefKey.invertDDC, for: .audioSpeakerVolume) ? .on : .off
+        cell.invertDDCContrast.state = externalDisplay.readPrefValueKeyBool(forkey: PrefKey.invertDDC, for: .contrast) ? .on : .off
+        cell.invertDDCBrightness.isEnabled = true
+        cell.invertDDCVolume.isEnabled = true
+        cell.invertDDCContrast.isEnabled = true
+
+        cell.remapDDCBrightness.isEnabled = true
+        cell.remapDDCVolume.isEnabled = true
+        cell.remapDDCContrast.isEnabled = true
+        cell.remapDDCBrightness.stringValue = externalDisplay.readPrefValueKeyString(forkey: PrefKey.remapDDC, for: .brightness) == "" ? "" : String(format: "%02x", externalDisplay.readPrefValueKeyInt(forkey: PrefKey.remapDDC, for: .brightness))
+        cell.remapDDCVolume.stringValue = externalDisplay.readPrefValueKeyString(forkey: PrefKey.remapDDC, for: .audioSpeakerVolume) == "" ? "" : String(format: "%02x", externalDisplay.readPrefValueKeyInt(forkey: PrefKey.remapDDC, for: .audioSpeakerVolume))
+        cell.remapDDCContrast.stringValue = externalDisplay.readPrefValueKeyString(forkey: PrefKey.remapDDC, for: .contrast) == "" ? "" : String(format: "%02x", externalDisplay.readPrefValueKeyInt(forkey: PrefKey.remapDDC, for: .contrast))
       } else {
         cell.pollingModeMenu.selectItem(withTag: 0)
         cell.pollingModeMenu.isEnabled = false
@@ -181,7 +222,51 @@ class DisplaysPrefsViewController: NSViewController, PreferencePane, NSTableView
         cell.longerDelayButton.isEnabled = false
         cell.enableMuteButton.state = .off
         cell.enableMuteButton.isEnabled = false
-        // TODO: Cleaning of new settins is missing!
+
+        cell.audioDeviceNameOverride.isEnabled = false
+        cell.audioDeviceNameOverride.stringValue = ""
+
+        cell.unavailableDDCBrightness.state = .off
+        cell.unavailableDDCVolume.state = .off
+        cell.unavailableDDCContrast.state = .off
+        cell.unavailableDDCBrightness.isEnabled = false
+        cell.unavailableDDCVolume.isEnabled = false
+        cell.unavailableDDCContrast.isEnabled = false
+
+        cell.minDDCOverrideBrightness.stringValue = ""
+        cell.minDDCOverrideVolume.stringValue = ""
+        cell.minDDCOverrideContrast.stringValue = ""
+        cell.minDDCOverrideBrightness.isEnabled = false
+        cell.minDDCOverrideVolume.isEnabled = false
+        cell.minDDCOverrideContrast.isEnabled = false
+
+        cell.maxDDCOverrideBrightness.stringValue = ""
+        cell.maxDDCOverrideVolume.stringValue = ""
+        cell.maxDDCOverrideContrast.stringValue = ""
+        cell.maxDDCOverrideBrightness.isEnabled = false
+        cell.maxDDCOverrideVolume.isEnabled = false
+        cell.maxDDCOverrideContrast.isEnabled = false
+
+        cell.curveDDCBrightness.intValue = 5
+        cell.curveDDCVolume.intValue = 5
+        cell.curveDDCContrast.intValue = 5
+        cell.curveDDCBrightness.isEnabled = false
+        cell.curveDDCVolume.isEnabled = false
+        cell.curveDDCContrast.isEnabled = false
+
+        cell.invertDDCBrightness.state = .off
+        cell.invertDDCVolume.state = .off
+        cell.invertDDCContrast.state = .off
+        cell.invertDDCBrightness.isEnabled = false
+        cell.invertDDCVolume.isEnabled = false
+        cell.invertDDCContrast.isEnabled = false
+
+        cell.remapDDCBrightness.stringValue = ""
+        cell.remapDDCVolume.stringValue = ""
+        cell.remapDDCContrast.stringValue = ""
+        cell.remapDDCBrightness.isEnabled = false
+        cell.remapDDCVolume.isEnabled = false
+        cell.remapDDCContrast.isEnabled = false
       }
       if self.prefs.bool(forKey: PrefKey.showAdvancedSettings.rawValue) {
         cell.advancedSettings.isHidden = false

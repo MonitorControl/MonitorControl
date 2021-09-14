@@ -51,7 +51,7 @@ class ExternalDisplay: Display {
 
   var audioDeviceNameOverride: String {
     get { return prefs.string(forKey: PrefKey.audioDeviceNameOverride.rawValue + self.prefsId) ?? "" }
-    set { prefs.set(newValue, forKey: PrefKey.pollingMode.rawValue + self.prefsId) }
+    set { prefs.set(newValue, forKey: PrefKey.audioDeviceNameOverride.rawValue + self.prefsId) }
   }
 
   override init(_ identifier: CGDirectDisplayID, name: String, vendorNumber: UInt32?, modelNumber: UInt32?, isVirtual: Bool = false) {
