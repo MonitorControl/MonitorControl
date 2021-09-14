@@ -17,7 +17,7 @@
 "Build" = "Build";
 
 /* Shown in the Display Preferences */
-"Built-in Display" = "Ingebouwd Display";
+"Built-in Display" = "Ingebouwd Beeldscherm";
 
 /* Shown in menu */
 "Contrast" = "Contrast";
@@ -26,13 +26,13 @@
 "Copyright Ⓒ MonitorControl, " = "Copyright Ⓒ MonitorControl, ";
 
 /* Shown in the main prefs window */
-"Displays" = "Displays";
+"Displays" = "Beeldschermen";
 
 /* Shown in the alert dialog */
 "Enable Longer Delay?" = "Langere vertraging inschakelen?";
 
 /* Shown in the Display Preferences */
-"External Display" = "Extern Display";
+"External Display" = "Extern Beeldscherm";
 
 /* Shown in the main prefs window */
 "General" = "Algemeen";
@@ -53,13 +53,13 @@
 "No Control Available" = "Geen Controle Beschikbaar";
 
 /* Shown in menu */
-"No supported display found" = "Geen ondersteend scherm gevonden";
+"No supported display found" = "Geen ondersteund scherm gevonden";
 
 /* Shown in the alert dialog */
 "Ok" = "Oké";
 
 /* Shown in the Display Preferences */
-"Other Display" = "Ander Display";
+"Other Display" = "Ander Beeldscherm";
 
 /* Shown in the alert dialog */
 "Reset Preferences?" = "Reset Voorkeuren?";
@@ -68,10 +68,10 @@
 "Safe Mode Activated" = "Safe Mode Activated";
 
 /* Shown in the alert dialog */
-"Shift was pressed during launch. MonitorControl started in safe mode. Default preferences are reloaded, DDC read is blocked." = "Shift was pressed during launch. MonitorControl started in safe mode. Default preferences are reloaded, DDC read is blocked.";
+"Shift was pressed during launch. MonitorControl started in safe mode. Default preferences are reloaded, DDC read is blocked." = "Shift werd ingedrukt tijdens het opstarten. MonitorControl is gestart in veilige modus. Standaardinstellingen zijn herladen, DDC uitlezen is geblokkeerd.";
 
 /* Shown in the alert dialog */
-"Shortcuts not available" = "Shortcuts niet beschikbaar";
+"Shortcuts not available" = "Sneltoetsen niet beschikbaar";
 
 /* Shown in the Display Preferences */
 "Software (Forced)" = "Software (Geforceerd)";
@@ -91,7 +91,7 @@
 "Version" = "Versie";
 
 /* Shown in the Display Preferences */
-"Virtual Display" = "Virtueel Display";
+"Virtual Display" = "Virtueel Beeldscherm";
 
 /* Shown in menu */
 "Volume" = "Volume";
