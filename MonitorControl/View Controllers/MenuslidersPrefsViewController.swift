@@ -18,7 +18,9 @@ class MenuslidersPrefsViewController: NSViewController, PreferencePane {
 
   let prefs = UserDefaults.standard
 
-  @IBOutlet var hideMenuIcon: NSButton!
+  @IBOutlet var iconShow: NSButton!
+  @IBOutlet var iconSliderOnly: NSButton!
+  @IBOutlet var iconHide: NSButton!
   @IBOutlet var quitApplication: NSButton!
   @IBOutlet var showBrightnessSlider: NSButton!
   @IBOutlet var showAppleFromMenu: NSButton!
@@ -27,7 +29,9 @@ class MenuslidersPrefsViewController: NSViewController, PreferencePane {
   @IBOutlet var enableSliderSnap: NSButton!
   @IBOutlet var showTickMarks: NSButton!
 
-  @IBOutlet var rowHideIconCheck: NSGridRow!
+  @IBOutlet var rowIconShow: NSGridRow!
+  @IBOutlet var rowIconSliderOnly: NSGridRow!
+  @IBOutlet var rowIconHide: NSGridRow!
   @IBOutlet var rowHideIconText: NSGridRow!
   @IBOutlet var rowQuitButton: NSGridRow!
   @IBOutlet var rowQuitText: NSGridRow!
@@ -39,22 +43,32 @@ class MenuslidersPrefsViewController: NSViewController, PreferencePane {
 
   func showAdvanced() -> Bool {
     let hide = !self.prefs.bool(forKey: PrefKey.showAdvancedSettings.rawValue)
-    if self.hideMenuIcon.state == .on {
-      self.rowHideIconCheck.isHidden = false
+    if self.iconShow.state == .off {
+      self.rowIconShow.isHidden = false
       self.rowHideIconText.isHidden = false
       self.rowHideIconSpearator.isHidden = false
-    } else {
-      self.rowHideIconCheck.isHidden = hide
-      self.rowHideIconText.isHidden = hide
-      self.rowHideIconSpearator.isHidden = hide
-    }
-    if self.hideMenuIcon.state == .on {
       self.rowQuitButton.isHidden = false
       self.rowQuitText.isHidden = false
     } else {
+      self.rowIconShow.isHidden = hide
+      self.rowHideIconText.isHidden = hide
+      self.rowHideIconSpearator.isHidden = hide
       self.rowQuitButton.isHidden = true
       self.rowQuitText.isHidden = true
     }
+    if self.iconSliderOnly.state == .on {
+      self.rowIconSliderOnly.isHidden = false
+    } else {
+      self.rowIconSliderOnly.isHidden = hide
+    }
+    if self.iconHide.state == .on {
+      self.rowIconHide.isHidden = false
+    } else {
+      self.rowIconHide.isHidden = false
+    }
+    self.rowIconSliderOnly.isHidden = hide
+    self.rowIconHide.isHidden = hide
+
     if self.showContrastSlider.state == .on {
       self.rowShowContrastCheck.isHidden = false
       self.rowShowContrastText.isHidden = false
@@ -78,7 +92,14 @@ class MenuslidersPrefsViewController: NSViewController, PreferencePane {
   }
 
   func populateSettings() {
-    self.hideMenuIcon.state = self.prefs.bool(forKey: PrefKey.hideMenuIcon.rawValue) ? .on : .off
+    self.iconShow.state = .off
+    self.iconSliderOnly.state = .off
+    self.iconHide.state = .off
+    switch self.prefs.string(forKey: PrefKey.menuIcon.rawValue) ?? "" {
+    case "sliderOnly": self.iconSliderOnly.state = .on
+    case "hide": self.iconHide.state = .on
+    default: self.iconShow.state = .on
+    }
     self.showBrightnessSlider.state = !self.prefs.bool(forKey: PrefKey.hideBrightness.rawValue) ? .on : .off
     if !self.prefs.bool(forKey: PrefKey.hideBrightness.rawValue) {
       self.showAppleFromMenu.isEnabled = true
@@ -94,14 +115,17 @@ class MenuslidersPrefsViewController: NSViewController, PreferencePane {
     _ = self.showAdvanced()
   }
 
-  @IBAction func hideMenuIconClicked(_ sender: NSButton) {
-    switch sender.state {
-    case .on:
-      self.prefs.set(true, forKey: PrefKey.hideMenuIcon.rawValue)
-      app.statusItem.isVisible = false
-    case .off:
-      self.prefs.set(false, forKey: PrefKey.hideMenuIcon.rawValue)
+  @IBAction func icon(_ sender: NSButton) {
+    switch sender.tag {
+    case 0:
+      self.prefs.set("", forKey: PrefKey.menuIcon.rawValue)
       app.statusItem.isVisible = true
+    case 1:
+      self.prefs.set("sliderOnly", forKey: PrefKey.menuIcon.rawValue)
+      app.updateDisplaysAndMenus()
+    case 2:
+      self.prefs.set("hide", forKey: PrefKey.menuIcon.rawValue)
+      app.statusItem.isVisible = false
     default: break
     }
     _ = self.showAdvanced()

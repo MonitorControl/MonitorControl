@@ -13,6 +13,9 @@
 /* Class = "NSTextFieldCell"; title = "DDC min"; ObjectID = "1zE-fg-xEm"; */
 "1zE-fg-xEm.title" = "DDC min";
 
+/* Class = "NSButtonCell"; title = "Always hide"; ObjectID = "3Wd-mq-7nO"; */
+"3Wd-mq-7nO.title" = "Always hide";
+
 /* Class = "NSTextFieldCell"; title = "MonitorControl uses mouse position to determine which display to control. Using window focus instead might not work well with full screen apps."; ObjectID = "4dX-o1-xAc"; */
 "4dX-o1-xAc.title" = "MonitorControl uses mouse position to determine which display to control. Using window focus instead might not work well with full screen apps.";
 
@@ -84,6 +87,9 @@
 
 /* Class = "NSTextFieldCell"; title = "Might not work well with multiple identical displays. Without this the app uses mouse position to determine which display to control."; ObjectID = "Dha-Tm-cDM"; */
 "Dha-Tm-cDM.title" = "Might not work well with multiple identical displays. Without this the app uses mouse position to determine which display to control.";
+
+/* Class = "NSButtonCell"; title = "Only if at least one slider is present"; ObjectID = "EM1-zD-fVZ"; */
+"EM1-zD-fVZ.title" = "Only if at least one slider is present";
 
 /* Class = "NSMenuItem"; title = "Minimal"; ObjectID = "Eq3-z9-yIo"; */
 "Eq3-z9-yIo.title" = "少量";
@@ -181,9 +187,6 @@
 /* Class = "NSTextFieldCell"; title = "Contrast:"; ObjectID = "MMk-S2-yJN"; */
 "MMk-S2-yJN.title" = "Contrast:";
 
-/* Class = "NSButtonCell"; title = "Hide Menu Icon"; ObjectID = "msX-fb-2Qd"; */
-"msX-fb-2Qd.title" = "隐藏菜单图标";
-
 /* Class = "NSButtonCell"; title = "Show brightness slider in menu"; ObjectID = "MWo-6I-s9L"; */
 "MWo-6I-s9L.title" = "Show brightness slider in menu";
 
@@ -252,6 +255,9 @@
 
 /* Class = "NSButtonCell"; title = "Enable keyboard control for display"; ObjectID = "UqR-WE-jHl"; */
 "UqR-WE-jHl.title" = "启用键盘控制显示";
+
+/* Class = "NSButtonCell"; title = "Always show"; ObjectID = "Vc0-XK-Lce"; */
+"Vc0-XK-Lce.title" = "Always show";
 
 /* Class = "NSMenuItem"; title = "Heavy"; ObjectID = "vik-vN-bJe"; */
 "vik-vN-bJe.title" = "多次";

@@ -309,19 +309,21 @@
                 </viewController>
                 <customObject id="JDw-du-OST" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="301" y="-360"/>
+            <point key="canvasLocation" x="301" y="-401"/>
         </scene>
         <!--Menusliders Prefs View Controller-->
         <scene sceneID="YU5-7I-f0n">
             <objects>
                 <viewController storyboardIdentifier="MenuslidersPrefsVC" id="tLm-u5-aZ2" customClass="MenuslidersPrefsViewController" customModule="MonitorControl" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" translatesAutoresizingMaskIntoConstraints="NO" id="5un-m0-FM4">
-                        <rect key="frame" x="0.0" y="0.0" width="691" height="499"/>
+                        <rect key="frame" x="0.0" y="0.0" width="691" height="547"/>
                         <subviews>
                             <gridView xPlacement="leading" yPlacement="fill" rowAlignment="none" rowSpacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="ZrF-7t-BP5">
-                                <rect key="frame" x="20" y="20" width="651" height="459"/>
+                                <rect key="frame" x="20" y="20" width="651" height="507"/>
                                 <rows>
-                                    <gridRow bottomPadding="-10" id="jyr-gk-BEN"/>
+                                    <gridRow bottomPadding="-12" id="jyr-gk-BEN"/>
+                                    <gridRow bottomPadding="-12" id="9bV-vs-bz2"/>
+                                    <gridRow bottomPadding="-10" id="9FK-VA-agR"/>
                                     <gridRow bottomPadding="-10" id="ZS3-Gy-pfA"/>
                                     <gridRow bottomPadding="-10" id="HAl-L8-LPI"/>
                                     <gridRow bottomPadding="-10" id="ZBA-LY-gOz"/>
@@ -348,7 +350,7 @@
                                 <gridCells>
                                     <gridCell row="jyr-gk-BEN" column="FRJ-Rb-RRh" xPlacement="trailing" id="vn6-rs-m8R">
                                         <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ELU-jk-ITc">
-                                            <rect key="frame" x="157" y="443" width="71" height="16"/>
+                                            <rect key="frame" x="157" y="491" width="71" height="16"/>
                                             <textFieldCell key="cell" lineBreakMode="truncatingTail" baseWritingDirection="leftToRight" alignment="right" title="Menu Icon:" id="u6s-Pb-BCG">
                                                 <font key="font" usesAppearanceFont="YES"/>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -357,14 +359,40 @@
                                         </textField>
                                     </gridCell>
                                     <gridCell row="jyr-gk-BEN" column="V6M-Jv-Agj" xPlacement="leading" id="wUb-Z3-UWb">
-                                        <button key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Jt9-Hj-qtg">
-                                            <rect key="frame" x="235" y="442" width="121" height="18"/>
-                                            <buttonCell key="cell" type="check" title="Hide Menu Icon" bezelStyle="regularSquare" imagePosition="left" inset="2" id="msX-fb-2Qd">
+                                        <button key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="k2e-nN-MBe">
+                                            <rect key="frame" x="235" y="490" width="104" height="18"/>
+                                            <buttonCell key="cell" type="radio" title="Always show" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="Vc0-XK-Lce">
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                 <font key="font" metaFont="system"/>
                                             </buttonCell>
                                             <connections>
-                                                <action selector="hideMenuIconClicked:" target="tLm-u5-aZ2" id="Bfv-c8-9sz"/>
+                                                <action selector="icon:" target="tLm-u5-aZ2" id="Zox-dk-yJx"/>
+                                            </connections>
+                                        </button>
+                                    </gridCell>
+                                    <gridCell row="9bV-vs-bz2" column="FRJ-Rb-RRh" id="BdQ-WB-ogt"/>
+                                    <gridCell row="9bV-vs-bz2" column="V6M-Jv-Agj" id="nIk-nv-ITs">
+                                        <button key="contentView" verticalHuggingPriority="750" tag="1" translatesAutoresizingMaskIntoConstraints="NO" id="gje-hW-o5p">
+                                            <rect key="frame" x="235" y="466" width="416" height="18"/>
+                                            <buttonCell key="cell" type="radio" title="Only if at least one slider is present" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="EM1-zD-fVZ">
+                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="icon:" target="tLm-u5-aZ2" id="1WG-WV-lny"/>
+                                            </connections>
+                                        </button>
+                                    </gridCell>
+                                    <gridCell row="9FK-VA-agR" column="FRJ-Rb-RRh" id="YL7-Dv-7Tt"/>
+                                    <gridCell row="9FK-VA-agR" column="V6M-Jv-Agj" id="8ry-UY-eU1">
+                                        <button key="contentView" verticalHuggingPriority="750" tag="2" translatesAutoresizingMaskIntoConstraints="NO" id="1Dj-Kp-rqz">
+                                            <rect key="frame" x="235" y="442" width="416" height="18"/>
+                                            <buttonCell key="cell" type="radio" title="Always hide" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="3Wd-mq-7nO">
+                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="icon:" target="tLm-u5-aZ2" id="ixp-U7-pVm"/>
                                             </connections>
                                         </button>
                                     </gridCell>
@@ -606,11 +634,15 @@
                     </view>
                     <connections>
                         <outlet property="enableSliderSnap" destination="lao-JI-LJH" id="HGa-Fb-E7e"/>
-                        <outlet property="hideMenuIcon" destination="Jt9-Hj-qtg" id="FOn-8C-RHh"/>
+                        <outlet property="iconHide" destination="1Dj-Kp-rqz" id="dEZ-Hb-o9Y"/>
+                        <outlet property="iconShow" destination="k2e-nN-MBe" id="ATD-sR-pMm"/>
+                        <outlet property="iconSliderOnly" destination="gje-hW-o5p" id="RcH-er-frc"/>
                         <outlet property="quitApplication" destination="dy4-nH-cIr" id="aXV-0Q-H4L"/>
-                        <outlet property="rowHideIconCheck" destination="jyr-gk-BEN" id="yRw-fu-ki4"/>
                         <outlet property="rowHideIconSpearator" destination="Cor-61-8R5" id="LUu-BS-I2D"/>
                         <outlet property="rowHideIconText" destination="ZS3-Gy-pfA" id="fXd-dt-whF"/>
+                        <outlet property="rowIconHide" destination="9FK-VA-agR" id="85M-Cc-Xxo"/>
+                        <outlet property="rowIconShow" destination="jyr-gk-BEN" id="Kba-Sr-L56"/>
+                        <outlet property="rowIconSliderOnly" destination="9bV-vs-bz2" id="Exg-0H-XVM"/>
                         <outlet property="rowQuitButton" destination="HAl-L8-LPI" id="kcG-t9-1wE"/>
                         <outlet property="rowQuitText" destination="ZBA-LY-gOz" id="flD-iR-YJ6"/>
                         <outlet property="rowShowContrastCheck" destination="xbz-Tf-py0" id="JRd-Xz-Sz8"/>
@@ -626,7 +658,7 @@
                 </viewController>
                 <customObject id="oB1-KW-86Y" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="300.5" y="235.5"/>
+            <point key="canvasLocation" x="300.5" y="185.5"/>
         </scene>
         <!--Keyboard Prefs View Controller-->
         <scene sceneID="VuM-5u-zkv">

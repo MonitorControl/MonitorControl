@@ -63,7 +63,7 @@ enum PrefKey: String {
   case startWhenExternal
 
   // Hide menu icon
-  case hideMenuIcon
+  case menuIcon
 
   // Keys listened for (Brightness/Volume)
   case listenFor

@@ -118,6 +118,10 @@ class Display: Equatable {
 
   func stepBrightness(isUp _: Bool, isSmallIncrement _: Bool) {}
 
+  func pushBrightness(to _: Float) -> Bool {
+    return false
+  }
+
   func getShowOsdDisplayId() -> CGDirectDisplayID {
     if CGDisplayIsInHWMirrorSet(self.identifier) != 0 || CGDisplayIsInMirrorSet(self.identifier) != 0, CGDisplayMirrorsDisplay(self.identifier) != 0 {
       for mirrorMaestro in DisplayManager.shared.getAllNonVirtualDisplays() where CGDisplayMirrorsDisplay(self.identifier) == mirrorMaestro.identifier {

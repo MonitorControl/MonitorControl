@@ -84,7 +84,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     } else {
       self.statusItem.button?.image = NSImage(named: "status")
     }
-    self.statusItem.isVisible = prefs.bool(forKey: PrefKey.hideMenuIcon.rawValue) ? false : true
+    self.statusItem.isVisible = (prefs.string(forKey: PrefKey.menuIcon.rawValue) ?? "") == "" ? true : false
     self.statusItem.menu = self.statusMenu
     self.checkPermissions()
     CGDisplayRegisterReconfigurationCallback({ _, _, _ in app.displayReconfigured() }, nil)
@@ -222,17 +222,24 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       externalDisplay.setupCurrentAndMaxValues(command: .brightness) // We have to initialize brightness DDC without menu as well
     }
     if hasSlider {
-      let monitorMenuItem = NSMenuItem()
-      if asSubMenu {
-        monitorMenuItem.title = "\(display.friendlyName)"
-        monitorMenuItem.submenu = monitorSubMenu
-      } else {
-        let attrs: [NSAttributedString.Key: Any] = [.foregroundColor: NSColor.systemGray, .font: NSFont.boldSystemFont(ofSize: 12)]
-        monitorMenuItem.attributedTitle = NSAttributedString(string: "\(display.friendlyName)", attributes: attrs)
-      }
-      self.monitorItems.append(monitorMenuItem)
-      self.statusMenu.insertItem(monitorMenuItem, at: 0)
+      self.appendMenu(friendlyName: display.friendlyName, monitorSubMenu: monitorSubMenu, asSubMenu: asSubMenu)
     }
+    if prefs.string(forKey: PrefKey.menuIcon.rawValue) == "sliderOnly" {
+      app.statusItem.isVisible = hasSlider
+    }
+  }
+
+  private func appendMenu(friendlyName: String, monitorSubMenu: NSMenu, asSubMenu: Bool) {
+    let monitorMenuItem = NSMenuItem()
+    if asSubMenu {
+      monitorMenuItem.title = "\(friendlyName)"
+      monitorMenuItem.submenu = monitorSubMenu
+    } else {
+      let attrs: [NSAttributedString.Key: Any] = [.foregroundColor: NSColor.systemGray, .font: NSFont.boldSystemFont(ofSize: 12)]
+      monitorMenuItem.attributedTitle = NSAttributedString(string: "\(friendlyName)", attributes: attrs)
+    }
+    self.monitorItems.append(monitorMenuItem)
+    self.statusMenu.insertItem(monitorMenuItem, at: 0)
   }
 
   func checkPermissions() {
