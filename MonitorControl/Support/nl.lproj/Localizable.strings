@@ -5,10 +5,10 @@
 "Apple Silicon" = "Apple Silicon";
 
 /* Shown in the alert dialog */
-"Are you sure you want to enable a longer delay? Doing so may freeze your system and require a restart. Start at login will be disabled as a safety measure." = "Weet u zeker dat je een langere vertraging wilt inschakelen? Als u dit doet kan uw systeem vastlopen en een herstart nodig hebben. Start bij het inloggen wordt uitgeschakeld als veiligheidsmaatregel.";
+"Are you sure you want to enable a longer delay? Doing so may freeze your system and require a restart. Start at login will be disabled as a safety measure." = "Weet u zeker dat u een langere vertraging wilt inschakelen? Als u dit doet kan uw systeem vastlopen en een herstart nodig hebben. Start bij het inloggen wordt uitgeschakeld als veiligheidsmaatregel.";
 
 /* Shown in the alert dialog */
-"Are you sure you want to reset all preferences?" = "Weet je zeker dat je alle voorkeuren wilt resetten?";
+"Are you sure you want to reset all preferences?" = "Weet u zeker dat u alle voorkeuren wilt herstellen?";
 
 /* Shown in menu */
 "Brightness" = "Helderheid";
@@ -50,7 +50,7 @@
 "No" = "Nee";
 
 /* Shown in the Display Preferences */
-"No Control Available" = "Geen Controle Beschikbaar";
+"No Control Available" = "Geen Besturing Beschikbaar";
 
 /* Shown in menu */
 "No supported display found" = "Geen ondersteund scherm gevonden";
@@ -65,7 +65,7 @@
 "Reset Preferences?" = "Reset Voorkeuren?";
 
 /* Shown in the alert dialog */
-"Safe Mode Activated" = "Safe Mode Activated";
+"Safe Mode Activated" = "Veilige Modus Geactiveerd";
 
 /* Shown in the alert dialog */
 "Shift was pressed during launch. MonitorControl started in safe mode. Default preferences are reloaded, DDC read is blocked." = "Shift werd ingedrukt tijdens het opstarten. MonitorControl is gestart in veilige modus. Standaardinstellingen zijn herladen, DDC uitlezen is geblokkeerd.";
