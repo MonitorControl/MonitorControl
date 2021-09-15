@@ -16,8 +16,6 @@ class MenuslidersPrefsViewController: NSViewController, PreferencePane {
     }
   }
 
-  let prefs = UserDefaults.standard
-
   @IBOutlet var iconShow: NSButton!
   @IBOutlet var iconSliderOnly: NSButton!
   @IBOutlet var iconHide: NSButton!
@@ -42,7 +40,7 @@ class MenuslidersPrefsViewController: NSViewController, PreferencePane {
   @IBOutlet var rowTickText: NSGridRow!
 
   func showAdvanced() -> Bool {
-    let hide = !self.prefs.bool(forKey: PrefKey.showAdvancedSettings.rawValue)
+    let hide = !prefs.bool(forKey: PrefKey.showAdvancedSettings.rawValue)
     if self.iconShow.state == .off {
       self.rowIconShow.isHidden = false
       self.rowHideIconText.isHidden = false
@@ -64,10 +62,8 @@ class MenuslidersPrefsViewController: NSViewController, PreferencePane {
     if self.iconHide.state == .on {
       self.rowIconHide.isHidden = false
     } else {
-      self.rowIconHide.isHidden = false
+      self.rowIconHide.isHidden = hide
     }
-    self.rowIconSliderOnly.isHidden = hide
-    self.rowIconHide.isHidden = hide
 
     if self.showContrastSlider.state == .on {
       self.rowShowContrastCheck.isHidden = false
@@ -95,36 +91,36 @@ class MenuslidersPrefsViewController: NSViewController, PreferencePane {
     self.iconShow.state = .off
     self.iconSliderOnly.state = .off
     self.iconHide.state = .off
-    switch self.prefs.string(forKey: PrefKey.menuIcon.rawValue) ?? "" {
+    switch prefs.string(forKey: PrefKey.menuIcon.rawValue) ?? "" {
     case "sliderOnly": self.iconSliderOnly.state = .on
     case "hide": self.iconHide.state = .on
     default: self.iconShow.state = .on
     }
-    self.showBrightnessSlider.state = !self.prefs.bool(forKey: PrefKey.hideBrightness.rawValue) ? .on : .off
-    if !self.prefs.bool(forKey: PrefKey.hideBrightness.rawValue) {
+    self.showBrightnessSlider.state = !prefs.bool(forKey: PrefKey.hideBrightness.rawValue) ? .on : .off
+    if !prefs.bool(forKey: PrefKey.hideBrightness.rawValue) {
       self.showAppleFromMenu.isEnabled = true
-      self.showAppleFromMenu.state = !self.prefs.bool(forKey: PrefKey.hideAppleFromMenu.rawValue) ? .on : .off
+      self.showAppleFromMenu.state = !prefs.bool(forKey: PrefKey.hideAppleFromMenu.rawValue) ? .on : .off
     } else {
       self.showAppleFromMenu.state = .off
       self.showAppleFromMenu.isEnabled = false
     }
-    self.showContrastSlider.state = self.prefs.bool(forKey: PrefKey.showContrast.rawValue) ? .on : .off
-    self.showVolumeSlider.state = self.prefs.bool(forKey: PrefKey.showVolume.rawValue) ? .on : .off
-    self.enableSliderSnap.state = self.prefs.bool(forKey: PrefKey.enableSliderSnap.rawValue) ? .on : .off
-    self.showTickMarks.state = self.prefs.bool(forKey: PrefKey.showTickMarks.rawValue) ? .on : .off
+    self.showContrastSlider.state = prefs.bool(forKey: PrefKey.showContrast.rawValue) ? .on : .off
+    self.showVolumeSlider.state = prefs.bool(forKey: PrefKey.showVolume.rawValue) ? .on : .off
+    self.enableSliderSnap.state = prefs.bool(forKey: PrefKey.enableSliderSnap.rawValue) ? .on : .off
+    self.showTickMarks.state = prefs.bool(forKey: PrefKey.showTickMarks.rawValue) ? .on : .off
     _ = self.showAdvanced()
   }
 
   @IBAction func icon(_ sender: NSButton) {
     switch sender.tag {
     case 0:
-      self.prefs.set("", forKey: PrefKey.menuIcon.rawValue)
+      prefs.set("", forKey: PrefKey.menuIcon.rawValue)
       app.statusItem.isVisible = true
     case 1:
-      self.prefs.set("sliderOnly", forKey: PrefKey.menuIcon.rawValue)
+      prefs.set("sliderOnly", forKey: PrefKey.menuIcon.rawValue)
       app.updateDisplaysAndMenus()
     case 2:
-      self.prefs.set("hide", forKey: PrefKey.menuIcon.rawValue)
+      prefs.set("hide", forKey: PrefKey.menuIcon.rawValue)
       app.statusItem.isVisible = false
     default: break
     }
@@ -138,13 +134,13 @@ class MenuslidersPrefsViewController: NSViewController, PreferencePane {
   @IBAction func showBrightnessSliderClicked(_ sender: NSButton) {
     switch sender.state {
     case .off:
-      self.prefs.set(true, forKey: PrefKey.hideBrightness.rawValue)
+      prefs.set(true, forKey: PrefKey.hideBrightness.rawValue)
       self.showAppleFromMenu.state = .off
       self.showAppleFromMenu.isEnabled = false
     case .on:
-      self.prefs.set(false, forKey: PrefKey.hideBrightness.rawValue)
+      prefs.set(false, forKey: PrefKey.hideBrightness.rawValue)
       self.showAppleFromMenu.isEnabled = true
-      self.showAppleFromMenu.state = !self.prefs.bool(forKey: PrefKey.hideAppleFromMenu.rawValue) ? .on : .off
+      self.showAppleFromMenu.state = !prefs.bool(forKey: PrefKey.hideAppleFromMenu.rawValue) ? .on : .off
     default: break
     }
     app.updateDisplaysAndMenus()
@@ -153,9 +149,9 @@ class MenuslidersPrefsViewController: NSViewController, PreferencePane {
   @IBAction func showAppleFromMenuClicked(_ sender: NSButton) {
     switch sender.state {
     case .off:
-      self.prefs.set(true, forKey: PrefKey.hideAppleFromMenu.rawValue)
+      prefs.set(true, forKey: PrefKey.hideAppleFromMenu.rawValue)
     case .on:
-      self.prefs.set(false, forKey: PrefKey.hideAppleFromMenu.rawValue)
+      prefs.set(false, forKey: PrefKey.hideAppleFromMenu.rawValue)
     default: break
     }
     app.updateDisplaysAndMenus()
@@ -164,9 +160,9 @@ class MenuslidersPrefsViewController: NSViewController, PreferencePane {
   @IBAction func showVolumeSliderClicked(_ sender: NSButton) {
     switch sender.state {
     case .on:
-      self.prefs.set(true, forKey: PrefKey.showVolume.rawValue)
+      prefs.set(true, forKey: PrefKey.showVolume.rawValue)
     case .off:
-      self.prefs.set(false, forKey: PrefKey.showVolume.rawValue)
+      prefs.set(false, forKey: PrefKey.showVolume.rawValue)
     default: break
     }
     app.updateDisplaysAndMenus()
@@ -175,9 +171,9 @@ class MenuslidersPrefsViewController: NSViewController, PreferencePane {
   @IBAction func showContrastSliderClicked(_ sender: NSButton) {
     switch sender.state {
     case .on:
-      self.prefs.set(true, forKey: PrefKey.showContrast.rawValue)
+      prefs.set(true, forKey: PrefKey.showContrast.rawValue)
     case .off:
-      self.prefs.set(false, forKey: PrefKey.showContrast.rawValue)
+      prefs.set(false, forKey: PrefKey.showContrast.rawValue)
     default: break
     }
     app.updateDisplaysAndMenus()
@@ -187,9 +183,9 @@ class MenuslidersPrefsViewController: NSViewController, PreferencePane {
   @IBAction func enableSliderSnapClicked(_ sender: NSButton) {
     switch sender.state {
     case .on:
-      self.prefs.set(true, forKey: PrefKey.enableSliderSnap.rawValue)
+      prefs.set(true, forKey: PrefKey.enableSliderSnap.rawValue)
     case .off:
-      self.prefs.set(false, forKey: PrefKey.enableSliderSnap.rawValue)
+      prefs.set(false, forKey: PrefKey.enableSliderSnap.rawValue)
     default: break
     }
     app.updateDisplaysAndMenus()
@@ -199,9 +195,9 @@ class MenuslidersPrefsViewController: NSViewController, PreferencePane {
   @IBAction func showTickMarks(_ sender: NSButton) {
     switch sender.state {
     case .on:
-      self.prefs.set(true, forKey: PrefKey.showTickMarks.rawValue)
+      prefs.set(true, forKey: PrefKey.showTickMarks.rawValue)
     case .off:
-      self.prefs.set(false, forKey: PrefKey.showTickMarks.rawValue)
+      prefs.set(false, forKey: PrefKey.showTickMarks.rawValue)
     default: break
     }
     app.updateDisplaysAndMenus()

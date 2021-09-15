@@ -15,23 +15,23 @@ class Display: Equatable {
   }
 
   var isEnabled: Bool {
-    get { self.prefs.object(forKey: PrefKey.state.rawValue + self.prefsId) as? Bool ?? true }
-    set { self.prefs.set(newValue, forKey: PrefKey.state.rawValue + self.prefsId) }
+    get { prefs.object(forKey: PrefKey.state.rawValue + self.prefsId) as? Bool ?? true }
+    set { prefs.set(newValue, forKey: PrefKey.state.rawValue + self.prefsId) }
   }
 
   var forceSw: Bool {
-    get { return self.prefs.bool(forKey: PrefKey.forceSw.rawValue + self.prefsId) }
-    set { self.prefs.set(newValue, forKey: PrefKey.forceSw.rawValue + self.prefsId) }
+    get { return prefs.bool(forKey: PrefKey.forceSw.rawValue + self.prefsId) }
+    set { prefs.set(newValue, forKey: PrefKey.forceSw.rawValue + self.prefsId) }
   }
 
   var swBrightness: Float {
-    get { return self.prefs.float(forKey: PrefKey.SwBrightness.rawValue + self.prefsId) }
-    set { self.prefs.set(newValue, forKey: PrefKey.SwBrightness.rawValue + self.prefsId) }
+    get { return prefs.float(forKey: PrefKey.SwBrightness.rawValue + self.prefsId) }
+    set { prefs.set(newValue, forKey: PrefKey.SwBrightness.rawValue + self.prefsId) }
   }
 
   var friendlyName: String {
-    get { return self.prefs.string(forKey: PrefKey.friendlyName.rawValue + self.prefsId) ?? self.name }
-    set { self.prefs.set(newValue, forKey: PrefKey.friendlyName.rawValue + self.prefsId) }
+    get { return prefs.string(forKey: PrefKey.friendlyName.rawValue + self.prefsId) ?? self.name }
+    set { prefs.set(newValue, forKey: PrefKey.friendlyName.rawValue + self.prefsId) }
   }
 
   var brightnessSliderHandler: SliderHandler?
@@ -43,66 +43,64 @@ class Display: Equatable {
   var defaultGammaTableSampleCount: UInt32 = 0
   var defaultGammaTablePeak: Float = 1
 
-  private let prefs = UserDefaults.standard
-
   func prefValueExists(for command: Command) -> Bool {
-    return self.prefs.object(forKey: PrefKey.value.rawValue + String(command.rawValue) + self.prefsId) != nil
+    return prefs.object(forKey: PrefKey.value.rawValue + String(command.rawValue) + self.prefsId) != nil
   }
 
   func readPrefValue(for command: Command) -> Float {
-    return self.prefs.float(forKey: PrefKey.value.rawValue + String(command.rawValue) + self.prefsId)
+    return prefs.float(forKey: PrefKey.value.rawValue + String(command.rawValue) + self.prefsId)
   }
 
   func savePrefValue(_ value: Float, for command: Command) {
-    self.prefs.set(value, forKey: PrefKey.value.rawValue + String(command.rawValue) + self.prefsId)
+    prefs.set(value, forKey: PrefKey.value.rawValue + String(command.rawValue) + self.prefsId)
   }
 
   func readPrefValueInt(for command: Command) -> Int {
-    return self.prefs.integer(forKey: PrefKey.value.rawValue + String(command.rawValue) + self.prefsId)
+    return prefs.integer(forKey: PrefKey.value.rawValue + String(command.rawValue) + self.prefsId)
   }
 
   func savePrefValueInt(_ value: Int, for command: Command) {
-    self.prefs.set(value, forKey: PrefKey.value.rawValue + String(command.rawValue) + self.prefsId)
+    prefs.set(value, forKey: PrefKey.value.rawValue + String(command.rawValue) + self.prefsId)
   }
 
   func prefValueExistsKey(forkey: PrefKey, for command: Command) -> Bool {
-    return self.prefs.object(forKey: forkey.rawValue + String(command.rawValue) + self.prefsId) != nil
+    return prefs.object(forKey: forkey.rawValue + String(command.rawValue) + self.prefsId) != nil
   }
 
   func readPrefValueKey(forkey: PrefKey, for command: Command) -> Float {
-    return self.prefs.float(forKey: forkey.rawValue + String(command.rawValue) + self.prefsId)
+    return prefs.float(forKey: forkey.rawValue + String(command.rawValue) + self.prefsId)
   }
 
   func savePrefValueKey(forkey: PrefKey, value: Float, for command: Command) {
-    self.prefs.set(value, forKey: forkey.rawValue + String(command.rawValue) + self.prefsId)
+    prefs.set(value, forKey: forkey.rawValue + String(command.rawValue) + self.prefsId)
   }
 
   func readPrefValueKeyInt(forkey: PrefKey, for command: Command) -> Int {
-    return self.prefs.integer(forKey: forkey.rawValue + String(command.rawValue) + self.prefsId)
+    return prefs.integer(forKey: forkey.rawValue + String(command.rawValue) + self.prefsId)
   }
 
   func savePrefValueKeyInt(forkey: PrefKey, value: Int, for command: Command) {
-    self.prefs.set(value, forKey: forkey.rawValue + String(command.rawValue) + self.prefsId)
+    prefs.set(value, forKey: forkey.rawValue + String(command.rawValue) + self.prefsId)
   }
 
   func readPrefValueKeyString(forkey: PrefKey, for command: Command) -> String {
-    return self.prefs.string(forKey: forkey.rawValue + String(command.rawValue) + self.prefsId) ?? ""
+    return prefs.string(forKey: forkey.rawValue + String(command.rawValue) + self.prefsId) ?? ""
   }
 
   func savePrefValueKeyString(forkey: PrefKey, value: String, for command: Command) {
-    self.prefs.set(value, forKey: forkey.rawValue + String(command.rawValue) + self.prefsId)
+    prefs.set(value, forKey: forkey.rawValue + String(command.rawValue) + self.prefsId)
   }
 
   func readPrefValueKeyBool(forkey: PrefKey, for command: Command) -> Bool {
-    return self.prefs.bool(forKey: forkey.rawValue + String(command.rawValue) + self.prefsId)
+    return prefs.bool(forKey: forkey.rawValue + String(command.rawValue) + self.prefsId)
   }
 
   func savePrefValueKeyBool(forkey: PrefKey, value: Bool, for command: Command) {
-    self.prefs.set(value, forKey: forkey.rawValue + String(command.rawValue) + self.prefsId)
+    prefs.set(value, forKey: forkey.rawValue + String(command.rawValue) + self.prefsId)
   }
 
   func removePrefValueKey(forkey: PrefKey, for command: Command) {
-    self.prefs.removeObject(forKey: forkey.rawValue + String(command.rawValue) + self.prefsId)
+    prefs.removeObject(forKey: forkey.rawValue + String(command.rawValue) + self.prefsId)
   }
 
   internal init(_ identifier: CGDirectDisplayID, name: String, vendorNumber: UInt32?, modelNumber: UInt32?, isVirtual: Bool = false) {

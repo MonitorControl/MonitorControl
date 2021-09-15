@@ -75,7 +75,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       alert.messageText = NSLocalizedString("Incompatible previous version", comment: "Shown in the alert dialog")
       alert.informativeText = NSLocalizedString("Preferences for an incompatible previous app version detected. Default preferences are reloaded.", comment: "Shown in the alert dialog")
       alert.runModal()
-      UserDefaults.standard.removePersistentDomain(forName: bundleID)
+      prefs.removePersistentDomain(forName: bundleID)
     }
     prefs.set(currentBuildNumber, forKey: PrefKey.buildNumber.rawValue)
     self.setDefaultPrefs()
@@ -336,7 +336,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       DisplayManager.shared.resetSwBrightnessForAllDisplays()
     }
     if let bundleID = Bundle.main.bundleIdentifier {
-      UserDefaults.standard.removePersistentDomain(forName: bundleID)
+      prefs.removePersistentDomain(forName: bundleID)
     }
     app.statusItem.isVisible = true
     self.setDefaultPrefs()

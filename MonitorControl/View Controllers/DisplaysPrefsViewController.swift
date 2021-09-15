@@ -16,7 +16,6 @@ class DisplaysPrefsViewController: NSViewController, PreferencePane, NSTableView
     }
   }
 
-  let prefs = UserDefaults.standard
   var displays: [Display] = []
 
   @IBOutlet var displayList: NSTableView!
@@ -34,7 +33,7 @@ class DisplaysPrefsViewController: NSViewController, PreferencePane, NSTableView
   }
 
   func showAdvanced() -> Bool {
-    let hide = !self.prefs.bool(forKey: PrefKey.showAdvancedSettings.rawValue)
+    let hide = !prefs.bool(forKey: PrefKey.showAdvancedSettings.rawValue)
     self.loadDisplayList()
     return !hide
   }
@@ -270,7 +269,7 @@ class DisplaysPrefsViewController: NSViewController, PreferencePane, NSTableView
         cell.remapDDCVolume.isEnabled = false
         cell.remapDDCContrast.isEnabled = false
       }
-      if self.prefs.bool(forKey: PrefKey.showAdvancedSettings.rawValue) {
+      if prefs.bool(forKey: PrefKey.showAdvancedSettings.rawValue) {
         cell.advancedSettings.isHidden = false
       } else {
         cell.advancedSettings.isHidden = true
@@ -281,7 +280,7 @@ class DisplaysPrefsViewController: NSViewController, PreferencePane, NSTableView
   }
 
   func updateDisplayListRowHeight() {
-    if self.prefs.bool(forKey: PrefKey.showAdvancedSettings.rawValue) {
+    if prefs.bool(forKey: PrefKey.showAdvancedSettings.rawValue) {
       self.displayList.rowHeight = 445
       self.constraintHeight.constant = self.displayList.rowHeight + 15
     } else {
