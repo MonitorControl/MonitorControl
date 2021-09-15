@@ -27,6 +27,7 @@ class DisplaysPrefsCellView: NSTableCellView {
   @IBOutlet var enableMuteButton: NSButton!
 
   @IBOutlet var audioDeviceNameOverride: NSTextField!
+  @IBOutlet var updateWithCurrentAudioName: NSButton!
 
   @IBOutlet var unavailableDDCBrightness: NSButton!
   @IBOutlet var unavailableDDCVolume: NSButton!
@@ -209,6 +210,13 @@ class DisplaysPrefsCellView: NSTableCellView {
       display.audioDeviceNameOverride = sender.stringValue
     }
     app.configure()
+  }
+
+  @IBAction func updateWithCurrentAudioName(_: NSButton) {
+    if let defaultDevice = app.coreAudio.defaultOutputDevice {
+      self.audioDeviceNameOverride.stringValue = defaultDevice.name
+      self.audioDeviceNameOverride(self.audioDeviceNameOverride)
+    }
   }
 
   @IBAction func unavailableDDC(_ sender: NSButton) {

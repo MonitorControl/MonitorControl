@@ -130,6 +130,9 @@
 /* Class = "NSMenuItem"; title = "Brightness only"; ObjectID = "hjz-0c-rvK"; */
 "hjz-0c-rvK.title" = "Sadece parlaklık";
 
+/* Class = "NSButtonCell"; title = "Get current"; ObjectID = "hkC-vq-IcD"; */
+"hkC-vq-IcD.title" = "Get current";
+
 /* Class = "NSTextFieldCell"; title = "Additional sliders:"; ObjectID = "i5X-M5-Tf5"; */
 "i5X-M5-Tf5.title" = "Additional sliders:";
 

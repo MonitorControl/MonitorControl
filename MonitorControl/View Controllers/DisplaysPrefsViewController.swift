@@ -171,6 +171,7 @@ class DisplaysPrefsViewController: NSViewController, PreferencePane, NSTableView
 
         cell.audioDeviceNameOverride.isEnabled = true
         cell.audioDeviceNameOverride.stringValue = externalDisplay.audioDeviceNameOverride
+        cell.updateWithCurrentAudioName.isEnabled = true
 
         cell.unavailableDDCBrightness.isEnabled = true
         cell.unavailableDDCVolume.isEnabled = true
@@ -225,6 +226,7 @@ class DisplaysPrefsViewController: NSViewController, PreferencePane, NSTableView
 
         cell.audioDeviceNameOverride.isEnabled = false
         cell.audioDeviceNameOverride.stringValue = ""
+        cell.updateWithCurrentAudioName.isEnabled = false
 
         cell.unavailableDDCBrightness.state = .off
         cell.unavailableDDCVolume.state = .off

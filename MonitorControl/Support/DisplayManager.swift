@@ -43,6 +43,16 @@ class DisplayManager {
     }
   }
 
+  func normalizedName(_ name: String) -> String {
+    var normalizedName = name.replacingOccurrences(of: "(", with: "")
+    normalizedName = normalizedName.replacingOccurrences(of: ")", with: "")
+    normalizedName = normalizedName.replacingOccurrences(of: " ", with: "")
+    for i in 0 ... 9 {
+      normalizedName = normalizedName.replacingOccurrences(of: String(i), with: "")
+    }
+    return normalizedName
+  }
+
   func updateAudioControlTargetDisplays(deviceName: String) -> Int {
     self.audioControlTargetDisplays.removeAll()
     os_log("Detecting displays for audio control via audio device name matching...", type: .debug)
@@ -52,7 +62,7 @@ class DisplayManager {
       if displayAudioDeviceName == "" {
         displayAudioDeviceName = DisplayManager.getDisplayRawNameByID(displayID: ddcCapableDisplay.identifier)
       }
-      if displayAudioDeviceName == deviceName {
+      if self.normalizedName(displayAudioDeviceName) == self.normalizedName(deviceName) {
         self.audioControlTargetDisplays.append(ddcCapableDisplay)
         numOfAddedDisplays += 1
         os_log("Added display for audio control - %{public}@", type: .debug, ddcCapableDisplay.name)

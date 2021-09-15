@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="19150" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="19150"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="19162"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -293,7 +293,6 @@
                         <outlet property="lowerSwAfterBrightness" destination="i5K-Cd-wxm" id="sE8-Ra-JSn"/>
                         <outlet property="notEnableDDCDuringStartup" destination="mus-cc-See" id="q1w-87-I7Q"/>
                         <outlet property="readDDCOnStartup" destination="5M2-Ww-w0G" id="Qkl-87-Dik"/>
-                        <outlet property="rowDoNothingStartup" destination="g3B-cE-vmT" id="cFb-gt-WQ7"/>
                         <outlet property="rowDoNothingStartupCheck" destination="g3B-cE-vmT" id="WXd-ID-zYv"/>
                         <outlet property="rowDoNothingStartupText" destination="0ue-QI-RgH" id="kR9-4i-WDN"/>
                         <outlet property="rowReadStartupCheck" destination="tGg-mO-YiD" id="oku-ka-2tM"/>
@@ -1102,7 +1101,7 @@
                                                                                 </textFieldCell>
                                                                             </textField>
                                                                             <textField autoresizesSubviews="NO" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" preferredMaxLayoutWidth="102" id="zz1-Dn-410">
-                                                                                <rect key="frame" x="191" y="142" width="202" height="19"/>
+                                                                                <rect key="frame" x="191" y="142" width="224" height="19"/>
                                                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES"/>
                                                                                 <textFieldCell key="cell" controlSize="small" selectable="YES" editable="YES" enabled="NO" sendsActionOnEndEditing="YES" borderStyle="bezel" alignment="left" bezelStyle="round" id="BeE-eB-GgA">
                                                                                     <font key="font" metaFont="smallSystem"/>
@@ -1492,6 +1491,17 @@
                                                                                     <action selector="curveDDC:" target="hCY-wr-B84" id="LLn-ot-OHw"/>
                                                                                 </connections>
                                                                             </slider>
+                                                                            <button verticalHuggingPriority="750" id="veV-At-I0T">
+                                                                                <rect key="frame" x="419" y="134" width="120" height="31"/>
+                                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                                                <buttonCell key="cell" type="push" title="Get current" bezelStyle="rounded" alignment="center" controlSize="small" enabled="NO" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="hkC-vq-IcD">
+                                                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                                                    <font key="font" metaFont="smallSystem"/>
+                                                                                </buttonCell>
+                                                                                <connections>
+                                                                                    <action selector="updateWithCurrentAudioName:" target="hCY-wr-B84" id="R0i-Zd-7BI"/>
+                                                                                </connections>
+                                                                            </button>
                                                                         </subviews>
                                                                     </view>
                                                                     <constraints>
@@ -1525,7 +1535,6 @@
                                                                 <outlet property="enabledButton" destination="Y93-eX-6aR" id="ySF-ms-Byg"/>
                                                                 <outlet property="friendlyName" destination="ibQ-4u-ClE" id="Lvu-68-2n9"/>
                                                                 <outlet property="invertDDCBrightness" destination="RkH-7d-KvR" id="b8I-DA-bDT"/>
-                                                                <outlet property="invertDDCCBrightness" destination="RkH-7d-KvR" id="AQq-Oo-W7c"/>
                                                                 <outlet property="invertDDCContrast" destination="4rq-kh-t8s" id="ufz-6q-IoE"/>
                                                                 <outlet property="invertDDCVolume" destination="Mij-q3-1ft" id="1hq-35-MEx"/>
                                                                 <outlet property="longerDelayButton" destination="PJz-Jc-hZ4" id="3Gr-7L-zsi"/>
@@ -1543,6 +1552,7 @@
                                                                 <outlet property="unavailableDDCBrightness" destination="Su5-Vg-rpV" id="pVX-cO-ioo"/>
                                                                 <outlet property="unavailableDDCContrast" destination="Kb0-Ax-1cf" id="WTa-gI-ZPI"/>
                                                                 <outlet property="unavailableDDCVolume" destination="3fe-KY-R1n" id="PAU-nz-FaQ"/>
+                                                                <outlet property="updateWithCurrentAudioName" destination="veV-At-I0T" id="fsX-9o-HBL"/>
                                                             </connections>
                                                         </tableCellView>
                                                     </prototypeCellViews>
@@ -1577,7 +1587,6 @@
                     </view>
                     <connections>
                         <outlet property="constraintHeight" destination="O7b-uo-bc2" id="cez-vu-AG3"/>
-                        <outlet property="constraintWidth" destination="sZT-qe-hQV" id="EeJ-dW-pi3"/>
                         <outlet property="displayList" destination="zC9-dS-Tr3" id="zyk-pu-vrH"/>
                         <outlet property="displayScrollView" destination="O0W-8R-9c8" id="s4V-yS-umN"/>
                     </connections>
