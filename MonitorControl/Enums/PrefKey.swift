@@ -89,6 +89,9 @@ enum PrefKey: String {
   // Disable slider snapping
   case enableSliderSnap
 
+  // Disable slider snapping
+  case enableSliderPercent
+
   // Show tick marks for sliders
   case showTickMarks
 

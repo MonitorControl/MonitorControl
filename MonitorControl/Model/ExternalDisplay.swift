@@ -184,8 +184,8 @@ class ExternalDisplay: Display {
     }
     if !isAlreadySet {
       self.savePrefValue(volumeOSDValue, for: .audioSpeakerVolume)
-      if let slider = self.volumeSliderHandler?.slider {
-        slider.floatValue = volumeOSDValue
+      if let slider = self.volumeSliderHandler {
+        slider.setValue(volumeOSDValue)
       }
     }
   }
@@ -222,8 +222,8 @@ class ExternalDisplay: Display {
       if !self.hideOsd {
         OSDUtils.showOsd(displayID: self.identifier, command: volumeOSDValue > 0 ? .audioSpeakerVolume : .audioMuteScreenBlank, value: volumeOSDValue, roundChiclet: true)
       }
-      if let slider = self.volumeSliderHandler?.slider {
-        slider.floatValue = volumeOSDValue
+      if let slider = self.volumeSliderHandler {
+        slider.setValue(volumeOSDValue)
       }
     }
   }
@@ -276,8 +276,8 @@ class ExternalDisplay: Display {
       if self.setSwBrightness(value: osdValue, smooth: true) {
         OSDUtils.showOsd(displayID: self.identifier, command: .brightness, value: osdValue, maxValue: 1, roundChiclet: !isSmallIncrement)
         self.savePrefValue(osdValue, for: .brightness)
-        if let slider = brightnessSliderHandler?.slider {
-          slider.floatValue = osdValue
+        if let slider = brightnessSliderHandler {
+          slider.setValue(osdValue)
         }
       }
       return true
@@ -300,8 +300,8 @@ class ExternalDisplay: Display {
         swAfterBirghtnessMode = false
       }
       if self.setSwBrightness(value: swBirghtnessValue) {
-        if let slider = brightnessSliderHandler?.slider {
-          slider.floatValue = swBirghtnessValue * 0.5
+        if let slider = brightnessSliderHandler {
+          slider.setValue(swBirghtnessValue * 0.5)
         }
         self.doSwAfterOsdAnimation()
       }
@@ -324,11 +324,11 @@ class ExternalDisplay: Display {
     guard self.writeDDCValues(command: .brightness, value: self.convValueToDDC(for: .brightness, from: osdValue)) == true else {
       return
     }
-    if let slider = brightnessSliderHandler?.slider {
+    if let slider = brightnessSliderHandler {
       if !self.isSw(), prefs.bool(forKey: PrefKey.lowerSwAfterBrightness.rawValue) {
-        slider.floatValue = 0.5 + osdValue / 2
+        slider.setValue(0.5 + osdValue / 2)
       } else {
-        slider.floatValue = osdValue
+        slider.setValue(osdValue)
       }
     }
     OSDUtils.showOsd(displayID: self.identifier, command: .brightness, value: osdValue, roundChiclet: !isSmallIncrement)

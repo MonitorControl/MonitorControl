@@ -304,8 +304,8 @@ class DisplayManager {
   // Static functions (could be anywhere)
 
   static func setBrightnessSliderValue(externalDisplay: ExternalDisplay, value: Float) {
-    if let slider = externalDisplay.brightnessSliderHandler?.slider {
-      slider.floatValue = value
+    if let slider = externalDisplay.brightnessSliderHandler {
+      slider.setValue(value)
     }
   }
 

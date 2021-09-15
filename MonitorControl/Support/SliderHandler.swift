@@ -5,6 +5,7 @@ import os.log
 
 class SliderHandler {
   var slider: NSSlider?
+  var percentageBox: NSTextField?
   var display: Display
   let cmd: Command
 
@@ -69,10 +70,23 @@ class SliderHandler {
       }
     }
 
+    if self.percentageBox == self.percentageBox {
+      self.percentageBox?.stringValue = "" + String(Int(value * 100)) + "%"
+    }
+
     if let appleDisplay = self.display as? AppleDisplay {
       appleDisplay.setAppleBrightness(value: value)
     } else {
       self.valueChangedExternalDisplay(value: value)
+    }
+  }
+
+  func setValue(_ value: Float) {
+    if let slider = self.slider {
+      slider.floatValue = value
+    }
+    if self.percentageBox == self.percentageBox {
+      self.percentageBox?.stringValue = "" + String(Int(value * 100)) + "%"
     }
   }
 
@@ -85,11 +99,12 @@ class SliderHandler {
     slider.isEnabled = true
     slider.numberOfTickMarks = numOfTickMarks
     handler.slider = slider
+    let showPercent = prefs.bool(forKey: PrefKey.enableSliderPercent.rawValue)
 
     if #available(macOS 11.0, *) {
       slider.frame.size.width = 160
       slider.frame.origin = NSPoint(x: 35, y: 5)
-      let view = NSView(frame: NSRect(x: 0, y: 0, width: slider.frame.width + 47, height: slider.frame.height + 14))
+      let view = NSView(frame: NSRect(x: 0, y: 0, width: slider.frame.width + 47 + (showPercent ? 38 : 0), height: slider.frame.height + 14))
       view.frame.origin = NSPoint(x: 12, y: 0)
       var iconName: String = "circle.dashed"
       switch command {
@@ -105,6 +120,19 @@ class SliderHandler {
       icon.imageAlignment = NSImageAlignment.alignLeft
       view.addSubview(icon)
       view.addSubview(slider)
+      if showPercent {
+        let percentageBox = NSTextField(frame: NSRect(x: 35 + slider.frame.size.width - 2, y: 18, width: 40, height: 12))
+        percentageBox.font = NSFont.systemFont(ofSize: 12)
+        percentageBox.isEditable = false
+        percentageBox.isBordered = false
+        percentageBox.drawsBackground = false
+        percentageBox.textColor = NSColor.white
+        percentageBox.alignment = .right
+        percentageBox.alphaValue = 0.7
+        // percentageBox.frame.origin = NSPoint(x: 35 + slider.frame.size.width - 5, y: 8)
+        handler.percentageBox = percentageBox
+        view.addSubview(percentageBox)
+      }
       item.view = view
       menu.insertItem(item, at: 0)
     } else {
@@ -124,10 +152,10 @@ class SliderHandler {
     if let externalDisplay = display as? ExternalDisplay {
       externalDisplay.setupCurrentAndMaxValues(command: command)
       let value = externalDisplay.setupSliderCurrentValue(command: command)
-      slider.floatValue = value
+      handler.setValue(value)
     } else if let appleDisplay = display as? AppleDisplay {
       if command == .brightness {
-        slider.floatValue = appleDisplay.getAppleBrightness()
+        handler.setValue(appleDisplay.getAppleBrightness())
       }
     }
     return handler

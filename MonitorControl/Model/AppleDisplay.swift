@@ -37,8 +37,8 @@ class AppleDisplay: Display {
     let value = self.calcNewBrightness(isUp: isUp, isSmallIncrement: isSmallIncrement)
     self.setAppleBrightness(value: value)
     OSDUtils.showOsd(displayID: self.identifier, command: .brightness, value: value * 64, maxValue: 64)
-    if let slider = brightnessSliderHandler?.slider {
-      slider.floatValue = value
+    if let slider = brightnessSliderHandler {
+      slider.setValue(value)
     }
   }
 
@@ -47,12 +47,12 @@ class AppleDisplay: Display {
     if let sliderHandler = brightnessSliderHandler, let slider = sliderHandler.slider, brightness != slider.floatValue {
       os_log("Pushing slider towards actual brightness for Apple display %{public}@", type: .debug, self.name)
       if abs(brightness - slider.floatValue) < 0.01 {
-        slider.floatValue = brightness
+        sliderHandler.setValue(brightness)
         return false
       } else if brightness > slider.floatValue {
-        slider.floatValue += max((brightness - slider.floatValue) / 3, 0.005)
+        sliderHandler.setValue(slider.floatValue + max((brightness - slider.floatValue) / 3, 0.005))
       } else {
-        slider.floatValue += min((brightness - slider.floatValue) / 3, -0.005)
+        sliderHandler.setValue(slider.floatValue + min((brightness - slider.floatValue) / 3, -0.005))
       }
       return true
     }

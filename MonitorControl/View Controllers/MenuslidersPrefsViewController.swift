@@ -26,6 +26,7 @@ class MenuslidersPrefsViewController: NSViewController, PreferencePane {
   @IBOutlet var showContrastSlider: NSButton!
   @IBOutlet var enableSliderSnap: NSButton!
   @IBOutlet var showTickMarks: NSButton!
+  @IBOutlet var enableSliderPercent: NSButton!
 
   @IBOutlet var rowIconShow: NSGridRow!
   @IBOutlet var rowIconSliderOnly: NSGridRow!
@@ -38,6 +39,8 @@ class MenuslidersPrefsViewController: NSViewController, PreferencePane {
   @IBOutlet var rowShowContrastText: NSGridRow!
   @IBOutlet var rowTickCheck: NSGridRow!
   @IBOutlet var rowTickText: NSGridRow!
+  @IBOutlet var rowPercentCheck: NSGridRow!
+  @IBOutlet var rowPercentText: NSGridRow!
 
   func showAdvanced() -> Bool {
     let hide = !prefs.bool(forKey: PrefKey.showAdvancedSettings.rawValue)
@@ -79,6 +82,13 @@ class MenuslidersPrefsViewController: NSViewController, PreferencePane {
       self.rowTickCheck.isHidden = hide
       self.rowTickText.isHidden = hide
     }
+    if self.enableSliderPercent.state == .on {
+      self.rowPercentCheck.isHidden = false
+      self.rowPercentText.isHidden = false
+    } else {
+      self.rowPercentCheck.isHidden = hide
+      self.rowPercentText.isHidden = hide
+    }
     return !hide
   }
 
@@ -108,6 +118,7 @@ class MenuslidersPrefsViewController: NSViewController, PreferencePane {
     self.showVolumeSlider.state = prefs.bool(forKey: PrefKey.showVolume.rawValue) ? .on : .off
     self.enableSliderSnap.state = prefs.bool(forKey: PrefKey.enableSliderSnap.rawValue) ? .on : .off
     self.showTickMarks.state = prefs.bool(forKey: PrefKey.showTickMarks.rawValue) ? .on : .off
+    self.enableSliderPercent.state = prefs.bool(forKey: PrefKey.enableSliderPercent.rawValue) ? .on : .off
     _ = self.showAdvanced()
   }
 
@@ -198,6 +209,18 @@ class MenuslidersPrefsViewController: NSViewController, PreferencePane {
       prefs.set(true, forKey: PrefKey.showTickMarks.rawValue)
     case .off:
       prefs.set(false, forKey: PrefKey.showTickMarks.rawValue)
+    default: break
+    }
+    app.updateDisplaysAndMenus()
+    _ = self.showAdvanced()
+  }
+
+  @IBAction func enableSliderPercent(_ sender: NSButton) {
+    switch sender.state {
+    case .on:
+      prefs.set(true, forKey: PrefKey.enableSliderPercent.rawValue)
+    case .off:
+      prefs.set(false, forKey: PrefKey.enableSliderPercent.rawValue)
     default: break
     }
     app.updateDisplaysAndMenus()

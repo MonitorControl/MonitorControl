@@ -223,6 +223,9 @@
 /* Class = "NSTextFieldCell"; title = "Volume control (DDC only):"; ObjectID = "qoh-Gn-f11"; */
 "qoh-Gn-f11.title" = "Volume control (DDC only):";
 
+/* Class = "NSTextFieldCell"; title = "Show percentage next to slider for more precision."; ObjectID = "qXy-CL-Wf1"; */
+"qXy-CL-Wf1.title" = "Show percentage next to slider for more precision.";
+
 /* Class = "NSTextFieldCell"; title = "Advanced:"; ObjectID = "r7i-oG-Ab6"; */
 "r7i-oG-Ab6.title" = "高级:";
 
@@ -306,3 +309,6 @@
 
 /* Class = "NSButtonCell"; title = "Donate"; ObjectID = "ZKk-ve-rS4"; */
 "ZKk-ve-rS4.title" = "赞助";
+
+/* Class = "NSButtonCell"; title = "Show percentage level"; ObjectID = "ZUu-MR-XwA"; */
+"ZUu-MR-XwA.title" = "Show percentage level";
