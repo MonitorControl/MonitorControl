@@ -11,7 +11,7 @@
 "bkM-Px-U3b.title" = "MacOS volume OSD uitzetten";
 
 /* Class = "NSButtonCell"; title = "Reset settings"; ObjectID = "BYS-7Y-bRz"; */
-"BYS-7Y-bRz.title" = "Reset instellingen";
+"BYS-7Y-bRz.title" = "Herstel instellingen";
 
 /* Class = "NSButtonCell"; title = "Enable Mute DDC command"; ObjectID = "bZq-0d-lJa"; */
 "bZq-0d-lJa.title" = "Schakel DDC commando voor dempen in";
@@ -32,7 +32,7 @@
 "dhP-eB-1L6.title" = "Toon volumeschuifregelaar in menu";
 
 /* Class = "NSButtonCell"; title = "Change Brightness and Volume for all screens"; ObjectID = "E6M-ih-S8Y"; */
-"E6M-ih-S8Y.title" = "Verander Helderheid en Volume voor alle schermen";
+"E6M-ih-S8Y.title" = "Verander Helderheid en Volume voor alle beeldschermen";
 
 /* Class = "NSMenuItem"; title = "Minimal"; ObjectID = "Eq3-z9-yIo"; */
 "Eq3-z9-yIo.title" = "Minimaal";
@@ -47,13 +47,13 @@
 "FoA-yh-Yx3.title" = "Geen";
 
 /* Class = "NSTextFieldCell"; title = "Brightness control:"; ObjectID = "hdd-Zz-buN"; */
-"hdd-Zz-buN.title" = "Helderheid besturen:";
+"hdd-Zz-buN.title" = "Helderheid regelen:";
 
 /* Class = "NSMenuItem"; title = "Brightness only"; ObjectID = "hjz-0c-rvK"; */
 "hjz-0c-rvK.title" = "Alleen Helderheid";
 
 /* Class = "NSTextFieldCell"; title = "These options work for hardware (DDC) controlled displays only."; ObjectID = "iBZ-8c-JDY"; */
-"iBZ-8c-JDY.title" = "Deze opties werken alleen voor hardware (DDC) gecontroleerde displays.";
+"iBZ-8c-JDY.title" = "Deze opties werken alleen voor hardware (DDC) gestuurde beeldschermen.";
 
 /* Class = "NSButtonCell"; title = "Start at Login"; ObjectID = "j72-NF-zsW"; */
 "j72-NF-zsW.title" = "Start bij Inloggen";
@@ -86,7 +86,7 @@
 "okD-DG-pYa.title" = "Applicatie:";
 
 /* Class = "NSTextFieldCell"; title = "Control method:"; ObjectID = "PaK-1f-DsW"; */
-"PaK-1f-DsW.title" = "Besturingsmethode:";
+"PaK-1f-DsW.title" = "Regelmethode:";
 
 /* Class = "NSButtonCell"; title = "Longer delay during DDC read operations"; ObjectID = "pF5-Sw-7BR"; */
 "pF5-Sw-7BR.title" = "Langere vertraging tijdens DDC-leesbewerkingen";
@@ -104,7 +104,7 @@
 "TKd-J8-Iyk.title" = "@the0neyouseek\n@JoniVR\n@waydabber";
 
 /* Class = "NSButtonCell"; title = "Enable keyboard control for display"; ObjectID = "UqR-WE-jHl"; */
-"UqR-WE-jHl.title" = "Toetsenbordbediening inschakelen voor weergave";
+"UqR-WE-jHl.title" = "Toetsenbordbediening inschakelen voor beeldscherm";
 
 /* Class = "NSMenuItem"; title = "Heavy"; ObjectID = "vik-vN-bJe"; */
 "vik-vN-bJe.title" = "Zwaar";
@@ -116,13 +116,13 @@
 "vwm-hY-on5.title" = "DDC peiling modus:";
 
 /* Class = "NSButtonCell"; title = "Show advanced settings under Displays"; ObjectID = "Wnd-hx-Meb"; */
-"Wnd-hx-Meb.title" = "Geavanceerde instellingen weergeven onder Displays";
+"Wnd-hx-Meb.title" = "Geavanceerde instellingen weergeven onder Beeldschermen";
 
 /* Class = "NSMenuItem"; title = "None"; ObjectID = "X96-ny-lAP"; */
 "X96-ny-lAP.title" = "Geen";
 
 /* Class = "NSButtonCell"; title = "Show contrast slider in menu"; ObjectID = "xSI-8W-Xd0"; */
-"xSI-8W-Xd0.title" = "Toon contrast schuifregelaar in menu";
+"xSI-8W-Xd0.title" = "Toon contrastschuifregelaar in menu";
 
 /* Class = "NSButtonCell"; title = "Reset Preferences"; ObjectID = "xY6-aw-o9u"; */
 "xY6-aw-o9u.title" = "Reset Voorkeuren";
@@ -131,7 +131,7 @@
 "Xz0-X0-rB4.title" = "Aanvullende instellingen:";
 
 /* Class = "NSTextFieldCell"; title = "This activates additional software dimming after the display reached zero hardware brightness. Menu slider is also affected with 50% being the transition point. Works for DDC controlled displays only."; ObjectID = "yeg-GN-SuO"; */
-"yeg-GN-SuO.title" = "Dit activeert extra softwarematig dimmen nadat het display de hardwarehelderheid nul heeft bereikt. De menuschuifregelaar wordt ook beïnvloed, waarbij 50% het overgangspunt is. Werkt alleen voor DDC-gestuurde displays.";
+"yeg-GN-SuO.title" = "Dit activeert extra softwarematig dimmen nadat het beeldscherm de hardwarehelderheid nul heeft bereikt. De menuschuifregelaar wordt ook beïnvloed, waarbij 50% het overgangspunt is. Werkt alleen voor DDC-gestuurde beeldschermen.";
 
 /* Class = "NSTextFieldCell"; title = "Identifier:"; ObjectID = "YqZ-LS-YvR"; */
 "YqZ-LS-YvR.title" = "Identificatie:";
