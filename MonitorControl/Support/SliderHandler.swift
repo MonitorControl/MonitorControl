@@ -129,7 +129,6 @@ class SliderHandler {
         percentageBox.textColor = NSColor.white
         percentageBox.alignment = .right
         percentageBox.alphaValue = 0.7
-        // percentageBox.frame.origin = NSPoint(x: 35 + slider.frame.size.width - 5, y: 8)
         handler.percentageBox = percentageBox
         view.addSubview(percentageBox)
       }
