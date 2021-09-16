@@ -126,7 +126,6 @@ class SliderHandler {
         percentageBox.isEditable = false
         percentageBox.isBordered = false
         percentageBox.drawsBackground = false
-        percentageBox.textColor = NSColor.white
         percentageBox.alignment = .right
         percentageBox.alphaValue = 0.7
         handler.percentageBox = percentageBox
