@@ -23,6 +23,7 @@ class KeyboardPrefsViewController: NSViewController, PreferencePane {
   @IBOutlet var useAudioDeviceNameMatching: NSButton!
   @IBOutlet var useFineScale: NSButton!
   @IBOutlet var useFineScaleVolume: NSButton!
+  @IBOutlet var separateSwAfterScale: NSButton!
 
   @IBOutlet var rowUseFocusCheck: NSGridRow!
   @IBOutlet var rowUseFocusText: NSGridRow!
@@ -30,6 +31,8 @@ class KeyboardPrefsViewController: NSViewController, PreferencePane {
   @IBOutlet var rowUseAudioNameText: NSGridRow!
   @IBOutlet var rowUseFineScaleCheck: NSGridRow!
   @IBOutlet var rowUseFineScaleText: NSGridRow!
+  @IBOutlet var rowSeparateSwAfterScaleCheck: NSGridRow!
+  @IBOutlet var rowSeparateSwAfterScaleText: NSGridRow!
 
   func showAdvanced() -> Bool {
     let hide = !prefs.bool(forKey: PrefKey.showAdvancedSettings.rawValue)
@@ -55,6 +58,15 @@ class KeyboardPrefsViewController: NSViewController, PreferencePane {
       self.rowUseFineScaleCheck.isHidden = hide
       self.rowUseFineScaleText.isHidden = hide
     }
+
+    if self.separateSwAfterScale.state == .on {
+      self.rowSeparateSwAfterScaleCheck.isHidden = false
+      self.rowSeparateSwAfterScaleText.isHidden = false
+    } else {
+      self.rowSeparateSwAfterScaleCheck.isHidden = hide
+      self.rowSeparateSwAfterScaleText.isHidden = hide
+    }
+
     return !hide
   }
 
@@ -71,6 +83,7 @@ class KeyboardPrefsViewController: NSViewController, PreferencePane {
     self.useAudioDeviceNameMatching.state = prefs.bool(forKey: PrefKey.useAudioDeviceNameMatching.rawValue) ? .on : .off
     self.useFineScale.state = prefs.bool(forKey: PrefKey.useFineScaleBrightness.rawValue) ? .on : .off
     self.useFineScaleVolume.state = prefs.bool(forKey: PrefKey.useFineScaleVolume.rawValue) ? .on : .off
+    self.separateSwAfterScale.state = prefs.bool(forKey: PrefKey.separateSwAfterScale.rawValue) ? .on : .off
     self.allScreensClicked(self.allScreens)
     self.allScreensVolumeClicked(self.allScreensVolume)
     _ = self.showAdvanced()
@@ -147,6 +160,17 @@ class KeyboardPrefsViewController: NSViewController, PreferencePane {
       prefs.set(false, forKey: PrefKey.useFineScaleVolume.rawValue)
     default: break
     }
+  }
+
+  @IBAction func separateSwAfterScale(_ sender: NSButton) {
+    switch sender.state {
+    case .on:
+      prefs.set(true, forKey: PrefKey.separateSwAfterScale.rawValue)
+    case .off:
+      prefs.set(false, forKey: PrefKey.separateSwAfterScale.rawValue)
+    default: break
+    }
+    _ = self.showAdvanced()
   }
 
   @IBAction func listenForChanged(_ sender: NSPopUpButton) {

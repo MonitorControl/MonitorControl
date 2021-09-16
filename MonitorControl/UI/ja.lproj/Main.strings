@@ -58,6 +58,9 @@
 /* Class = "NSButtonCell"; title = "Disable macOS volume OSD"; ObjectID = "bkM-Px-U3b"; */
 "bkM-Px-U3b.title" = "Disable macOS volume OSD";
 
+/* Class = "NSTextFieldCell"; title = "Scale options:"; ObjectID = "bP4-GJ-vhJ"; */
+"bP4-GJ-vhJ.title" = "Scale options:";
+
 /* Class = "NSButtonCell"; title = "Reset settings"; ObjectID = "BYS-7Y-bRz"; */
 "BYS-7Y-bRz.title" = "Reset settings";
 
@@ -196,6 +199,9 @@
 /* Class = "NSMenuItem"; title = "Volume only"; ObjectID = "NLP-dU-Dam"; */
 "NLP-dU-Dam.title" = "音量のみ";
 
+/* Class = "NSButtonCell"; title = "Separate scales for combined hardware & software dimming"; ObjectID = "O8o-hI-8eR"; */
+"O8o-hI-8eR.title" = "Separate scales for combined hardware & software dimming";
+
 /* Class = "NSButtonCell"; title = "Use audio device name to determine which display to control"; ObjectID = "OAa-B4-8r3"; */
 "OAa-B4-8r3.title" = "Use audio device name to determine which display to control";
 
@@ -297,6 +303,9 @@
 
 /* Class = "NSTextFieldCell"; title = "Use software dimming after the display reached zero hardware brightness for extended range. Works for DDC controlled displays only."; ObjectID = "yeg-GN-SuO"; */
 "yeg-GN-SuO.title" = "This activates additional software dimming after the display reached zero hardware brightness. Menu slider is also affected with 50% being the transition point. Works for DDC controlled displays only.";
+
+/* Class = "NSTextFieldCell"; title = "Full OSD scale will be available for hardware brightness control and after reaching 0 brightness, further software dimming will be used."; ObjectID = "YHZ-VL-QJ3"; */
+"YHZ-VL-QJ3.title" = "Full OSD scale will be available for hardware brightness control and after reaching 0 brightness, further software dimming will be used.";
 
 /* Class = "NSButtonCell"; title = "Assume last saved settings are valid (recommended)"; ObjectID = "yn8-Nd-o89"; */
 "yn8-Nd-o89.title" = "Assume last saved settings are valid (recommended)";
