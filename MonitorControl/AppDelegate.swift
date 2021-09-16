@@ -37,6 +37,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   }()
 
   func applicationDidFinishLaunching(_: Notification) {
+    
+    MediaKeyTap.useAlternateBrightnessKeys = false;
+    
     app = self
     self.subscribeEventListeners()
     if NSEvent.modifierFlags.contains(NSEvent.ModifierFlags.shift) {
