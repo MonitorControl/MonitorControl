@@ -276,7 +276,7 @@
                                     <gridCell row="tGg-mO-YZD" column="64O-72-10l" id="Gdm-K9-MZv">
                                         <button key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="erj-Xe-0Z5">
                                             <rect key="frame" x="235" y="82" width="416" height="18"/>
-                                            <buttonCell key="cell" type="check" title="Enable F14/F15 for Brightness Control" bezelStyle="regularSquare" imagePosition="left" inset="2" id="E6M-ih-SZY">
+                                            <buttonCell key="cell" type="check" title="Enable F14 / F15 keys for Brightness Control" bezelStyle="regularSquare" imagePosition="left" inset="2" id="E6M-ih-SZY">
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                 <font key="font" metaFont="system"/>
                                             </buttonCell>
