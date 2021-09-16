@@ -11,6 +11,7 @@ class Display: Equatable {
   internal var modelNumber: UInt32?
   internal var smoothBrightnessTransient: Float = 1
   internal var smoothBrightnessRunning: Bool = false
+  internal var smoothBrightnessSlow: Bool = false
 
   static func == (lhs: Display, rhs: Display) -> Bool {
     return lhs.identifier == rhs.identifier
@@ -127,7 +128,7 @@ class Display: Equatable {
 
   func stepBrightness(isUp: Bool, isSmallIncrement: Bool) {
     let value = self.calcNewBrightness(isUp: isUp, isSmallIncrement: isSmallIncrement)
-    if self.setSmoothBrightness(value) {
+    if self.setBrightness(value) {
       OSDUtils.showOsd(displayID: self.identifier, command: .brightness, value: value * 64, maxValue: 64)
       if let slider = brightnessSliderHandler {
         slider.setValue(value)
@@ -135,12 +136,28 @@ class Display: Equatable {
     }
   }
 
-  func setSmoothBrightness(_ to: Float = -1, slow _: Bool = false) -> Bool {
+  func setBrightness(_ to: Float = -1, slow: Bool = false) -> Bool {
+    if prefs.bool(forKey: PrefKey.useSmoothBrightness.rawValue) {
+      return self.setSmoothBrightness(to, slow: slow)
+    } else {
+      return self.setDirectBrightness(to)
+    }
+  }
+
+  func setSmoothBrightness(_ to: Float = -1, slow: Bool = false) -> Bool {
+    if slow {
+      self.smoothBrightnessSlow = true
+    }
+    var stepDivider: Float = 6
+    if self.smoothBrightnessSlow {
+      stepDivider = 16
+    }
     var dontPushAgain = false
     if to != -1 {
       os_log("Pushing brightness towards goal of %{public}@ for Display  %{public}@", type: .debug, String(to), String(self.identifier))
       let value = max(min(to, 1), 0)
       self.savePrefValue(value, for: .brightness)
+      self.smoothBrightnessSlow = slow
       if self.smoothBrightnessRunning {
         return true
       }
@@ -153,14 +170,14 @@ class Display: Equatable {
         dontPushAgain = true
         self.smoothBrightnessRunning = false
       } else if brightness > self.smoothBrightnessTransient {
-        self.smoothBrightnessTransient += max((brightness - self.smoothBrightnessTransient) / 6, 0.005)
+        self.smoothBrightnessTransient += max((brightness - self.smoothBrightnessTransient) / stepDivider, 0.5 / 100)
       } else {
-        self.smoothBrightnessTransient += min((brightness - self.smoothBrightnessTransient) / 6, -0.005)
+        self.smoothBrightnessTransient += min((brightness - self.smoothBrightnessTransient) / stepDivider, 0.5 / 100)
       }
-      _ = self.setBrightness(self.smoothBrightnessTransient, transient: true)
+      _ = self.setDirectBrightness(self.smoothBrightnessTransient, transient: true)
       if !dontPushAgain {
         self.smoothBrightnessRunning = true
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.015) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.03) {
           _ = self.setSmoothBrightness()
         }
       }
@@ -172,7 +189,7 @@ class Display: Equatable {
     return true
   }
 
-  func setBrightness(_ to: Float, transient: Bool = false) -> Bool {
+  func setDirectBrightness(_ to: Float, transient: Bool = false) -> Bool {
     let value = max(min(to, 1), 0)
     if self.setSwBrightness(value: value) {
       if !transient {

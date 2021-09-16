@@ -24,7 +24,7 @@ class AppleDisplay: Display {
     }
   }
 
-  override func setBrightness(_ to: Float, transient: Bool = false) -> Bool {
+  override func setDirectBrightness(_ to: Float, transient: Bool = false) -> Bool {
     let value = max(min(to, 1), 0)
     self.setAppleBrightness(value: value)
     if !transient {

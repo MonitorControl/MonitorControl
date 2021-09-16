@@ -301,7 +301,7 @@ class OtherDisplay: Display {
     let currentValue = self.readPrefValue(for: .brightness)
     let osdValue = self.calcNewValue(currentValue: currentValue, isUp: isUp, isSmallIncrement: isSmallIncrement)
     if !prefs.bool(forKey: PrefKey.separateSwAfterScale.rawValue) {
-      _ = self.setSmoothBrightness(osdValue)
+      _ = self.setBrightness(osdValue)
       OSDUtils.showOsd(displayID: self.identifier, command: .brightness, value: osdValue, roundChiclet: !isSmallIncrement)
       if let slider = brightnessSliderHandler {
         slider.setValue(osdValue)
@@ -325,7 +325,7 @@ class OtherDisplay: Display {
     OSDUtils.showOsd(displayID: self.identifier, command: .brightness, value: osdValue, roundChiclet: !isSmallIncrement)
   }
 
-  override func setBrightness(_ to: Float, transient: Bool = false) -> Bool {
+  override func setDirectBrightness(_ to: Float, transient: Bool = false) -> Bool {
     let value = max(min(to, 1), 0)
     if !self.isSw() {
       if prefs.bool(forKey: PrefKey.lowerSwAfterBrightness.rawValue) {
