@@ -301,8 +301,11 @@ class OtherDisplay: Display {
     let currentValue = self.readPrefValue(for: .brightness)
     let osdValue = self.calcNewValue(currentValue: currentValue, isUp: isUp, isSmallIncrement: isSmallIncrement)
     if !prefs.bool(forKey: PrefKey.separateSwAfterScale.rawValue) {
-      _ = self.setBrightness(osdValue)
+      _ = self.setSmoothBrightness(osdValue)
       OSDUtils.showOsd(displayID: self.identifier, command: .brightness, value: osdValue, roundChiclet: !isSmallIncrement)
+      if let slider = brightnessSliderHandler {
+        slider.setValue(osdValue)
+      }
       return
     }
     if self.stepBrightnessswAfterBirghtnessMode(osdValue: osdValue, isUp: isUp, isSmallIncrement: isSmallIncrement) {
@@ -322,27 +325,31 @@ class OtherDisplay: Display {
     OSDUtils.showOsd(displayID: self.identifier, command: .brightness, value: osdValue, roundChiclet: !isSmallIncrement)
   }
 
-  override func setBrightness(_ to: Float) -> Bool {
+  override func setBrightness(_ to: Float, transient: Bool = false) -> Bool {
+    let value = max(min(to, 1), 0)
     if !self.isSw() {
       if prefs.bool(forKey: PrefKey.lowerSwAfterBrightness.rawValue) {
         var brightnessValue: Float = 0
         var brightnessSwValue: Float = 1
-        if to >= 0.5 {
-          brightnessValue = (to - 0.5) * 2
+        if value >= 0.5 {
+          brightnessValue = (value - 0.5) * 2
           brightnessSwValue = 1
         } else {
           brightnessValue = 0
-          brightnessSwValue = (to / 0.5)
+          brightnessSwValue = (value / 0.5)
         }
         _ = self.writeDDCValues(command: .brightness, value: self.convValueToDDC(for: .brightness, from: brightnessValue))
         _ = self.setSwBrightness(value: brightnessSwValue)
       } else {
-        _ = self.writeDDCValues(command: .brightness, value: self.convValueToDDC(for: .brightness, from: to))
+        _ = self.writeDDCValues(command: .brightness, value: self.convValueToDDC(for: .brightness, from: value))
       }
     } else {
-      _ = self.setSwBrightness(value: to)
+      _ = self.setSwBrightness(value: value)
     }
-    self.savePrefValue(to, for: .brightness)
+    if !transient {
+      self.savePrefValue(value, for: .brightness)
+      self.smoothBrightnessTransient = value
+    }
     return true
   }
 

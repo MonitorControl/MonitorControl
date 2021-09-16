@@ -688,7 +688,7 @@
                 </viewController>
                 <customObject id="oB1-KW-86Y" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="301" y="261"/>
+            <point key="canvasLocation" x="300.5" y="260.5"/>
         </scene>
         <!--Keyboard Prefs View Controller-->
         <scene sceneID="VuM-5u-zkv">

@@ -24,9 +24,13 @@ class AppleDisplay: Display {
     }
   }
 
-  override func setBrightness(_ to: Float) -> Bool {
-    self.setAppleBrightness(value: to)
-    self.savePrefValue(to, for: .brightness)
+  override func setBrightness(_ to: Float, transient: Bool = false) -> Bool {
+    let value = max(min(to, 1), 0)
+    self.setAppleBrightness(value: value)
+    if !transient {
+      self.savePrefValue(value, for: .brightness)
+      self.smoothBrightnessTransient = value
+    }
     return true
   }
 
@@ -39,10 +43,13 @@ class AppleDisplay: Display {
   }
 
   override func refreshBrightness() -> Bool {
+    guard !self.smoothBrightnessRunning else {
+      return false
+    }
     let brightness = self.getAppleBrightness()
     self.savePrefValue(brightness, for: .brightness)
     if let sliderHandler = brightnessSliderHandler, let slider = sliderHandler.slider, brightness != slider.floatValue {
-      os_log("Pushing slider towards actual brightness for Apple display %{public}@", type: .debug, self.name)
+      os_log("Pushing slider towards actual brightness for Apple display %{public}@", type: .debug, String(self.identifier))
       if abs(brightness - slider.floatValue) < 0.01 {
         sliderHandler.setValue(brightness)
         return false

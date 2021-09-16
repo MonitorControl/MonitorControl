@@ -90,7 +90,7 @@ class MediaKeyTapManager: MediaKeyTapDelegate {
       switch mediaKey {
       case .brightnessUp:
         var isAnyDisplayInSwAfterBrightnessMode: Bool = false
-        for display in affectedDisplays where ((display as? OtherDisplay)?.isSwBrightnessNotDefault() ?? false) && !((display as? OtherDisplay)?.isSw() ?? false) {
+        for display in affectedDisplays where ((display as? OtherDisplay)?.isSwBrightnessNotDefault() ?? false) && !((display as? OtherDisplay)?.isSw() ?? false) && prefs.bool(forKey: PrefKey.separateSwAfterScale.rawValue) {
           isAnyDisplayInSwAfterBrightnessMode = true
         }
         if isPressed, !(isAnyDisplayInSwAfterBrightnessMode && !(((display as? OtherDisplay)?.isSwBrightnessNotDefault() ?? false) && !((display as? OtherDisplay)?.isSw() ?? false))) {

@@ -23,7 +23,7 @@ class SliderHandler {
       otherDisplay.toggleMute(fromVolumeSlider: true)
     }
     if self.cmd == Command.brightness {
-      _ = otherDisplay.setBrightness(value)
+      _ = otherDisplay.setSmoothBrightness(value)
       return
     } else if !otherDisplay.isSw() {
       if self.cmd == Command.audioSpeakerVolume {
@@ -56,7 +56,7 @@ class SliderHandler {
       self.percentageBox?.stringValue = "" + String(Int(value * 100)) + "%"
     }
     if let appleDisplay = self.display as? AppleDisplay {
-      _ = appleDisplay.setBrightness(value)
+      _ = appleDisplay.setSmoothBrightness(value)
     } else {
       self.valueChangedOtherDisplay(value: value)
     }
