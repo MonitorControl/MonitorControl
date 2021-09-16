@@ -61,12 +61,12 @@ class OSDUtils: NSObject {
 
   static let chicletCount: Float = 16
 
-  static func chiclet(fromValue value: Float, maxValue: Float) -> Float {
-    return (value * self.chicletCount) / maxValue
+  static func chiclet(fromValue value: Float, maxValue: Float, half: Bool = false) -> Float {
+    return (value * self.chicletCount * (half ? 2 : 1)) / maxValue
   }
 
-  static func value(fromChiclet chiclet: Float, maxValue: Float) -> Float {
-    return (chiclet * maxValue) / self.chicletCount
+  static func value(fromChiclet chiclet: Float, maxValue: Float, half: Bool = false) -> Float {
+    return (chiclet * maxValue) / (self.chicletCount * (half ? 2 : 1))
   }
 
   static func getDistance(fromNearestChiclet chiclet: Float) -> Float {

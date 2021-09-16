@@ -247,7 +247,7 @@ class OtherDisplay: Display {
         return
       }
       for value: Int in stride(from: 1, to: 6, by: 1) {
-        guard self.readPrefValue(for: .brightness) == 0 else {
+        guard self.readPrefValue(for: .brightness) <= 0.5 else {
           self.swAfterOsdAnimationSemaphore.signal()
           return
         }
@@ -255,7 +255,7 @@ class OtherDisplay: Display {
         Thread.sleep(forTimeInterval: Double(value * 2) / 300)
       }
       for value: Int in stride(from: 5, to: 0, by: -1) {
-        guard self.readPrefValue(for: .brightness) == 0 else {
+        guard self.readPrefValue(for: .brightness) <= 0.5 else {
           self.swAfterOsdAnimationSemaphore.signal()
           return
         }
@@ -267,29 +267,6 @@ class OtherDisplay: Display {
     }
   }
 
-  func stepBrightnessswAfterBirghtnessMode(osdValue: Float, isUp: Bool, isSmallIncrement: Bool) -> Bool {
-    let isAlreadySet = osdValue == self.readPrefValue(for: .brightness)
-    var swAfterBirghtnessMode: Bool = isSwBrightnessNotDefault()
-    if isAlreadySet, !isUp, !swAfterBirghtnessMode, prefs.bool(forKey: PrefKey.lowerSwAfterBrightness.rawValue) {
-      swAfterBirghtnessMode = true
-    }
-    if swAfterBirghtnessMode {
-      let currentSwBrightness = self.swBrightness
-      var swBirghtnessValue = self.calcNewValue(currentValue: currentSwBrightness, isUp: isUp, isSmallIncrement: isSmallIncrement)
-      if swBirghtnessValue >= 1 {
-        swBirghtnessValue = 1
-        swAfterBirghtnessMode = false
-      }
-      if self.setSwBrightness(value: swBirghtnessValue) {
-        if let slider = brightnessSliderHandler {
-          slider.setValue(swBirghtnessValue * 0.5)
-        }
-        self.doSwAfterOsdAnimation()
-      }
-    }
-    return swAfterBirghtnessMode
-  }
-
   override func stepBrightness(isUp: Bool, isSmallIncrement: Bool) {
     if self.isSw(), prefs.bool(forKey: PrefKey.fallbackSw.rawValue) {
       super.stepBrightness(isUp: isUp, isSmallIncrement: isSmallIncrement)
@@ -299,30 +276,23 @@ class OtherDisplay: Display {
       return
     }
     let currentValue = self.readPrefValue(for: .brightness)
-    let osdValue = self.calcNewValue(currentValue: currentValue, isUp: isUp, isSmallIncrement: isSmallIncrement)
-    if !prefs.bool(forKey: PrefKey.separateSwAfterScale.rawValue) {
+    var osdValue: Float = 1
+    if prefs.bool(forKey: PrefKey.lowerSwAfterBrightness.rawValue), prefs.bool(forKey: PrefKey.separateSwAfterScale.rawValue) {
+      osdValue = self.calcNewValue(currentValue: currentValue, isUp: isUp, isSmallIncrement: isSmallIncrement, half: true)
+      _ = self.setBrightness(osdValue)
+      if osdValue > 0.5 {
+        OSDUtils.showOsd(displayID: self.identifier, command: .brightness, value: osdValue - 0.5, maxValue: 0.5, roundChiclet: !isSmallIncrement)
+      } else {
+        self.doSwAfterOsdAnimation()
+      }
+    } else {
+      osdValue = self.calcNewValue(currentValue: currentValue, isUp: isUp, isSmallIncrement: isSmallIncrement)
       _ = self.setBrightness(osdValue)
       OSDUtils.showOsd(displayID: self.identifier, command: .brightness, value: osdValue, roundChiclet: !isSmallIncrement)
-      if let slider = brightnessSliderHandler {
-        slider.setValue(osdValue)
-      }
-      return
-    }
-    if self.stepBrightnessswAfterBirghtnessMode(osdValue: osdValue, isUp: isUp, isSmallIncrement: isSmallIncrement) {
-      return
-    }
-    guard self.writeDDCValues(command: .brightness, value: self.convValueToDDC(for: .brightness, from: osdValue)) == true else {
-      return
     }
     if let slider = brightnessSliderHandler {
-      if !self.isSw(), prefs.bool(forKey: PrefKey.lowerSwAfterBrightness.rawValue) {
-        slider.setValue(0.5 + osdValue / 2)
-      } else {
-        slider.setValue(osdValue)
-      }
+      slider.setValue(osdValue)
     }
-    self.savePrefValue(osdValue, for: .brightness)
-    OSDUtils.showOsd(displayID: self.identifier, command: .brightness, value: osdValue, roundChiclet: !isSmallIncrement)
   }
 
   override func setDirectBrightness(_ to: Float, transient: Bool = false) -> Bool {
@@ -410,12 +380,12 @@ class OtherDisplay: Display {
     return values
   }
 
-  func calcNewValue(currentValue: Float, isUp: Bool, isSmallIncrement: Bool) -> Float {
+  func calcNewValue(currentValue: Float, isUp: Bool, isSmallIncrement: Bool, half: Bool = false) -> Float {
     let nextValue: Float
     if isSmallIncrement {
       nextValue = currentValue + (isUp ? 0.01 : -0.01)
     } else {
-      let osdChicletFromValue = OSDUtils.chiclet(fromValue: currentValue, maxValue: 1)
+      let osdChicletFromValue = OSDUtils.chiclet(fromValue: currentValue, maxValue: 1, half: half)
       let distance = OSDUtils.getDistance(fromNearestChiclet: osdChicletFromValue)
       // get the next rounded chiclet
       var nextFilledChiclet = isUp ? ceil(osdChicletFromValue) : floor(osdChicletFromValue)
@@ -428,7 +398,7 @@ class OtherDisplay: Display {
       } else if isUp, distance > (1 - distanceThreshold) {
         nextFilledChiclet += 1
       }
-      nextValue = OSDUtils.value(fromChiclet: nextFilledChiclet, maxValue: 1)
+      nextValue = OSDUtils.value(fromChiclet: nextFilledChiclet, maxValue: 1, half: half)
     }
     return max(0, min(1, nextValue))
   }
