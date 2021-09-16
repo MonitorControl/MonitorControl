@@ -131,6 +131,6 @@ enum PrefKey: String {
   // Use fine OSD scale for volume
   case useFineScaleVolume
 
-  // Use fine OSD scale for brightness
+  // Use fine OSD scale for brightness TODO: PrefPane OK, Implementation MISSING
   case separateSwAfterScale
 }
