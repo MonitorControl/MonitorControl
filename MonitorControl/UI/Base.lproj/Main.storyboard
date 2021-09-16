@@ -553,7 +553,7 @@
                                     <gridCell row="KPA-bi-7h3" column="V6M-Jv-Agj" id="vAI-Aq-T6c">
                                         <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Od3-K9-Ltb">
                                             <rect key="frame" x="235" y="181" width="418" height="14"/>
-                                            <textFieldCell key="cell" controlSize="small" lineBreakMode="clipping" title="For hardware (DDC) controlled displays only. Results may very." id="bIe-6O-xEH">
+                                            <textFieldCell key="cell" controlSize="small" lineBreakMode="clipping" title="For hardware (DDC) controlled displays only. Results may vary." id="bIe-6O-xEH">
                                                 <font key="font" metaFont="smallSystem"/>
                                                 <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>

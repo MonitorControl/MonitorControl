@@ -52,7 +52,7 @@
 /* Class = "NSTextFieldCell"; title = "Brightness:"; ObjectID = "Bhb-6l-uPQ"; */
 "Bhb-6l-uPQ.title" = "Brightness:";
 
-/* Class = "NSTextFieldCell"; title = "For hardware (DDC) controlled displays only. Results may very."; ObjectID = "bIe-6O-xEH"; */
+/* Class = "NSTextFieldCell"; title = "For hardware (DDC) controlled displays only. Results may vary."; ObjectID = "bIe-6O-xEH"; */
 "bIe-6O-xEH.title" = "Эти опции работают только для дисплеев с аппаратным управлением (DDC).";
 
 /* Class = "NSButtonCell"; title = "Disable macOS volume OSD"; ObjectID = "bkM-Px-U3b"; */
