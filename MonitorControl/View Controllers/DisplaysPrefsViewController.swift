@@ -75,16 +75,16 @@ class DisplaysPrefsViewController: NSViewController, PreferencePane, NSTableView
       displayImage = "tv.and.mediabox"
       controlMethod = NSLocalizedString("No Control", comment: "Shown in the Display Preferences") + "  ⚠️"
       controlStatus = NSLocalizedString("This is a virtual display (examples: AirPlay, SideCar, display connected via a DisplayLink Dock or similar) which does not allow control.", comment: "Shown in the Display Preferences")
-    } else if display is ExternalDisplay {
+    } else if display is OtherDisplay {
       displayType = NSLocalizedString("External Display", comment: "Shown in the Display Preferences")
       displayImage = "display"
-      if let externalDisplay: ExternalDisplay = display as? ExternalDisplay {
-        if externalDisplay.isSwOnly() {
+      if let otherDisplay: OtherDisplay = display as? OtherDisplay {
+        if otherDisplay.isSwOnly() {
           controlMethod = NSLocalizedString("Software Only", comment: "Shown in the Display Preferences") + "  ⚠️"
           displayImage = "display.trianglebadge.exclamationmark"
           controlStatus = NSLocalizedString("This display allows for software control only. Reasons for this might be using the HDMI port of a Mac mini (which blocks hardware DDC control) or having a blacklisted display.", comment: "Shown in the Display Preferences")
         } else {
-          if externalDisplay.isSw() {
+          if otherDisplay.isSw() {
             controlMethod = NSLocalizedString("Software (Forced)", comment: "Shown in the Display Preferences") + "  ⚠️"
             controlStatus = NSLocalizedString("This display is reported to support hardware DDC control but the current settings allow for software control only.", comment: "Shown in the Display Preferences")
           } else {
@@ -129,8 +129,8 @@ class DisplaysPrefsViewController: NSViewController, PreferencePane, NSTableView
       cell.enabledButton.state = display.isEnabled && !display.isVirtual ? .on : .off
       cell.enabledButton.isEnabled = !display.isVirtual
       // DDC
-      cell.ddcButton.state = ((display as? ExternalDisplay)?.isSw() ?? true) || ((display as? ExternalDisplay)?.isVirtual ?? true) ? .off : .on
-      if ((display as? ExternalDisplay)?.isSwOnly() ?? true) || ((display as? ExternalDisplay)?.isVirtual ?? true) {
+      cell.ddcButton.state = ((display as? OtherDisplay)?.isSw() ?? true) || ((display as? OtherDisplay)?.isVirtual ?? true) ? .off : .on
+      if ((display as? OtherDisplay)?.isSwOnly() ?? true) || ((display as? OtherDisplay)?.isVirtual ?? true) {
         cell.ddcButton.isEnabled = false
       } else {
         cell.ddcButton.isEnabled = true
@@ -146,63 +146,63 @@ class DisplaysPrefsViewController: NSViewController, PreferencePane, NSTableView
         cell.displayImage.image = NSImage(named: NSImage.computerName)!
       }
       // Disable Volume OSD
-      if let externalDisplay = display as? ExternalDisplay, !externalDisplay.isVirtual, !externalDisplay.isSw() {
-        cell.disableVolumeOSDButton.state = externalDisplay.hideOsd ? .on : .off
+      if let otherDisplay = display as? OtherDisplay, !otherDisplay.isVirtual, !otherDisplay.isSw() {
+        cell.disableVolumeOSDButton.state = otherDisplay.hideOsd ? .on : .off
         cell.disableVolumeOSDButton.isEnabled = true
       } else {
         cell.disableVolumeOSDButton.state = .off
         cell.disableVolumeOSDButton.isEnabled = false
       }
       // Advanced settings
-      if let externalDisplay = display as? ExternalDisplay, !externalDisplay.isSwOnly(), !externalDisplay.isVirtual {
+      if let otherDisplay = display as? OtherDisplay, !otherDisplay.isSwOnly(), !otherDisplay.isVirtual {
         cell.pollingModeMenu.isEnabled = true
-        cell.pollingModeMenu.selectItem(withTag: externalDisplay.pollingMode)
-        if externalDisplay.pollingMode == 4 {
+        cell.pollingModeMenu.selectItem(withTag: otherDisplay.pollingMode)
+        if otherDisplay.pollingMode == 4 {
           cell.pollingCount.isEnabled = true
         } else {
           cell.pollingCount.isEnabled = false
         }
-        cell.pollingCount.stringValue = String(externalDisplay.pollingCount)
+        cell.pollingCount.stringValue = String(otherDisplay.pollingCount)
         cell.longerDelayButton.isEnabled = true
-        cell.longerDelayButton.state = externalDisplay.needsLongerDelay ? .on : .off
+        cell.longerDelayButton.state = otherDisplay.needsLongerDelay ? .on : .off
         cell.enableMuteButton.isEnabled = true
-        cell.enableMuteButton.state = externalDisplay.enableMuteUnmute ? .on : .off
+        cell.enableMuteButton.state = otherDisplay.enableMuteUnmute ? .on : .off
 
         cell.audioDeviceNameOverride.isEnabled = true
-        cell.audioDeviceNameOverride.stringValue = externalDisplay.audioDeviceNameOverride
+        cell.audioDeviceNameOverride.stringValue = otherDisplay.audioDeviceNameOverride
         cell.updateWithCurrentAudioName.isEnabled = true
 
         cell.unavailableDDCBrightness.isEnabled = true
         cell.unavailableDDCVolume.isEnabled = true
         cell.unavailableDDCContrast.isEnabled = true
-        cell.unavailableDDCBrightness.state = !externalDisplay.readPrefValueKeyBool(forkey: PrefKey.unavailableDDC, for: .brightness) ? .on : .off
-        cell.unavailableDDCVolume.state = !externalDisplay.readPrefValueKeyBool(forkey: PrefKey.unavailableDDC, for: .audioSpeakerVolume) ? .on : .off
-        cell.unavailableDDCContrast.state = !externalDisplay.readPrefValueKeyBool(forkey: PrefKey.unavailableDDC, for: .contrast) ? .on : .off
+        cell.unavailableDDCBrightness.state = !otherDisplay.readPrefValueKeyBool(forkey: PrefKey.unavailableDDC, for: .brightness) ? .on : .off
+        cell.unavailableDDCVolume.state = !otherDisplay.readPrefValueKeyBool(forkey: PrefKey.unavailableDDC, for: .audioSpeakerVolume) ? .on : .off
+        cell.unavailableDDCContrast.state = !otherDisplay.readPrefValueKeyBool(forkey: PrefKey.unavailableDDC, for: .contrast) ? .on : .off
 
         cell.minDDCOverrideBrightness.isEnabled = true
         cell.minDDCOverrideVolume.isEnabled = true
         cell.minDDCOverrideContrast.isEnabled = true
-        cell.minDDCOverrideBrightness.stringValue = externalDisplay.readPrefValueKeyString(forkey: PrefKey.minDDCOverride, for: .brightness)
-        cell.minDDCOverrideVolume.stringValue = externalDisplay.readPrefValueKeyString(forkey: PrefKey.minDDCOverride, for: .audioSpeakerVolume)
-        cell.minDDCOverrideContrast.stringValue = externalDisplay.readPrefValueKeyString(forkey: PrefKey.minDDCOverride, for: .contrast)
+        cell.minDDCOverrideBrightness.stringValue = otherDisplay.readPrefValueKeyString(forkey: PrefKey.minDDCOverride, for: .brightness)
+        cell.minDDCOverrideVolume.stringValue = otherDisplay.readPrefValueKeyString(forkey: PrefKey.minDDCOverride, for: .audioSpeakerVolume)
+        cell.minDDCOverrideContrast.stringValue = otherDisplay.readPrefValueKeyString(forkey: PrefKey.minDDCOverride, for: .contrast)
 
         cell.maxDDCOverrideBrightness.isEnabled = true
         cell.maxDDCOverrideVolume.isEnabled = true
         cell.maxDDCOverrideContrast.isEnabled = true
-        cell.maxDDCOverrideBrightness.stringValue = externalDisplay.readPrefValueKeyString(forkey: PrefKey.maxDDCOverride, for: .brightness)
-        cell.maxDDCOverrideVolume.stringValue = externalDisplay.readPrefValueKeyString(forkey: PrefKey.maxDDCOverride, for: .audioSpeakerVolume)
-        cell.maxDDCOverrideContrast.stringValue = externalDisplay.readPrefValueKeyString(forkey: PrefKey.maxDDCOverride, for: .contrast)
+        cell.maxDDCOverrideBrightness.stringValue = otherDisplay.readPrefValueKeyString(forkey: PrefKey.maxDDCOverride, for: .brightness)
+        cell.maxDDCOverrideVolume.stringValue = otherDisplay.readPrefValueKeyString(forkey: PrefKey.maxDDCOverride, for: .audioSpeakerVolume)
+        cell.maxDDCOverrideContrast.stringValue = otherDisplay.readPrefValueKeyString(forkey: PrefKey.maxDDCOverride, for: .contrast)
 
         cell.curveDDCBrightness.isEnabled = true
         cell.curveDDCVolume.isEnabled = true
         cell.curveDDCContrast.isEnabled = true
-        cell.curveDDCBrightness.intValue = Int32(externalDisplay.readPrefValueKeyInt(forkey: PrefKey.curveDDC, for: .brightness) == 0 ? 5 : externalDisplay.readPrefValueKeyInt(forkey: PrefKey.curveDDC, for: .brightness))
-        cell.curveDDCVolume.intValue = Int32(externalDisplay.readPrefValueKeyInt(forkey: PrefKey.curveDDC, for: .audioSpeakerVolume) == 0 ? 5 : externalDisplay.readPrefValueKeyInt(forkey: PrefKey.curveDDC, for: .audioSpeakerVolume))
-        cell.curveDDCContrast.intValue = Int32(externalDisplay.readPrefValueKeyInt(forkey: PrefKey.curveDDC, for: .contrast) == 0 ? 5 : externalDisplay.readPrefValueKeyInt(forkey: PrefKey.curveDDC, for: .contrast))
+        cell.curveDDCBrightness.intValue = Int32(otherDisplay.readPrefValueKeyInt(forkey: PrefKey.curveDDC, for: .brightness) == 0 ? 5 : otherDisplay.readPrefValueKeyInt(forkey: PrefKey.curveDDC, for: .brightness))
+        cell.curveDDCVolume.intValue = Int32(otherDisplay.readPrefValueKeyInt(forkey: PrefKey.curveDDC, for: .audioSpeakerVolume) == 0 ? 5 : otherDisplay.readPrefValueKeyInt(forkey: PrefKey.curveDDC, for: .audioSpeakerVolume))
+        cell.curveDDCContrast.intValue = Int32(otherDisplay.readPrefValueKeyInt(forkey: PrefKey.curveDDC, for: .contrast) == 0 ? 5 : otherDisplay.readPrefValueKeyInt(forkey: PrefKey.curveDDC, for: .contrast))
 
-        cell.invertDDCBrightness.state = externalDisplay.readPrefValueKeyBool(forkey: PrefKey.invertDDC, for: .brightness) ? .on : .off
-        cell.invertDDCVolume.state = externalDisplay.readPrefValueKeyBool(forkey: PrefKey.invertDDC, for: .audioSpeakerVolume) ? .on : .off
-        cell.invertDDCContrast.state = externalDisplay.readPrefValueKeyBool(forkey: PrefKey.invertDDC, for: .contrast) ? .on : .off
+        cell.invertDDCBrightness.state = otherDisplay.readPrefValueKeyBool(forkey: PrefKey.invertDDC, for: .brightness) ? .on : .off
+        cell.invertDDCVolume.state = otherDisplay.readPrefValueKeyBool(forkey: PrefKey.invertDDC, for: .audioSpeakerVolume) ? .on : .off
+        cell.invertDDCContrast.state = otherDisplay.readPrefValueKeyBool(forkey: PrefKey.invertDDC, for: .contrast) ? .on : .off
         cell.invertDDCBrightness.isEnabled = true
         cell.invertDDCVolume.isEnabled = true
         cell.invertDDCContrast.isEnabled = true
@@ -210,9 +210,9 @@ class DisplaysPrefsViewController: NSViewController, PreferencePane, NSTableView
         cell.remapDDCBrightness.isEnabled = true
         cell.remapDDCVolume.isEnabled = true
         cell.remapDDCContrast.isEnabled = true
-        cell.remapDDCBrightness.stringValue = externalDisplay.readPrefValueKeyString(forkey: PrefKey.remapDDC, for: .brightness) == "" ? "" : String(format: "%02x", externalDisplay.readPrefValueKeyInt(forkey: PrefKey.remapDDC, for: .brightness))
-        cell.remapDDCVolume.stringValue = externalDisplay.readPrefValueKeyString(forkey: PrefKey.remapDDC, for: .audioSpeakerVolume) == "" ? "" : String(format: "%02x", externalDisplay.readPrefValueKeyInt(forkey: PrefKey.remapDDC, for: .audioSpeakerVolume))
-        cell.remapDDCContrast.stringValue = externalDisplay.readPrefValueKeyString(forkey: PrefKey.remapDDC, for: .contrast) == "" ? "" : String(format: "%02x", externalDisplay.readPrefValueKeyInt(forkey: PrefKey.remapDDC, for: .contrast))
+        cell.remapDDCBrightness.stringValue = otherDisplay.readPrefValueKeyString(forkey: PrefKey.remapDDC, for: .brightness) == "" ? "" : String(format: "%02x", otherDisplay.readPrefValueKeyInt(forkey: PrefKey.remapDDC, for: .brightness))
+        cell.remapDDCVolume.stringValue = otherDisplay.readPrefValueKeyString(forkey: PrefKey.remapDDC, for: .audioSpeakerVolume) == "" ? "" : String(format: "%02x", otherDisplay.readPrefValueKeyInt(forkey: PrefKey.remapDDC, for: .audioSpeakerVolume))
+        cell.remapDDCContrast.stringValue = otherDisplay.readPrefValueKeyString(forkey: PrefKey.remapDDC, for: .contrast) == "" ? "" : String(format: "%02x", otherDisplay.readPrefValueKeyInt(forkey: PrefKey.remapDDC, for: .contrast))
       } else {
         cell.pollingModeMenu.selectItem(withTag: 0)
         cell.pollingModeMenu.isEnabled = false

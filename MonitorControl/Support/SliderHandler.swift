@@ -14,16 +14,16 @@ class SliderHandler {
     self.cmd = command
   }
 
-  func valueChangedExternalDisplay(value: Float) {
-    guard let externalDisplay = self.display as? ExternalDisplay else {
+  func valueChangedOtherDisplay(value: Float) {
+    guard let otherDisplay = self.display as? OtherDisplay else {
       return
     }
     // For the speaker volume slider, also set/unset the mute command when the value is changed from/to 0
-    if self.cmd == .audioSpeakerVolume, (externalDisplay.readPrefValueInt(for: .audioMuteScreenBlank) == 1 && value > 0) || (externalDisplay.readPrefValueInt(for: .audioMuteScreenBlank) != 1 && value == 0) {
-      externalDisplay.toggleMute(fromVolumeSlider: true)
+    if self.cmd == .audioSpeakerVolume, (otherDisplay.readPrefValueInt(for: .audioMuteScreenBlank) == 1 && value > 0) || (otherDisplay.readPrefValueInt(for: .audioMuteScreenBlank) != 1 && value == 0) {
+      otherDisplay.toggleMute(fromVolumeSlider: true)
     }
 
-    if !externalDisplay.isSw() {
+    if !otherDisplay.isSw() {
       if self.cmd == Command.brightness, prefs.bool(forKey: PrefKey.lowerSwAfterBrightness.rawValue) {
         var brightnessValue: Float = 0
         var brightnessSwValue: Float = 1
@@ -34,22 +34,19 @@ class SliderHandler {
           brightnessValue = 0
           brightnessSwValue = (value / 0.5)
         }
-        _ = externalDisplay.writeDDCValues(command: self.cmd, value: externalDisplay.convValueToDDC(for: self.cmd, from: brightnessValue))
-        _ = externalDisplay.setSwBrightness(value: brightnessSwValue)
-        externalDisplay.savePrefValue(brightnessValue, for: self.cmd)
+        _ = otherDisplay.writeDDCValues(command: self.cmd, value: otherDisplay.convValueToDDC(for: self.cmd, from: brightnessValue))
+        _ = otherDisplay.setSwBrightness(value: brightnessSwValue)
       } else if self.cmd == Command.audioSpeakerVolume {
-        if !externalDisplay.enableMuteUnmute || value != 0 {
-          _ = externalDisplay.writeDDCValues(command: self.cmd, value: externalDisplay.convValueToDDC(for: self.cmd, from: value))
+        if !otherDisplay.enableMuteUnmute || value != 0 {
+          _ = otherDisplay.writeDDCValues(command: self.cmd, value: otherDisplay.convValueToDDC(for: self.cmd, from: value))
         }
-        externalDisplay.savePrefValue(value, for: self.cmd)
       } else {
-        _ = externalDisplay.writeDDCValues(command: self.cmd, value: externalDisplay.convValueToDDC(for: self.cmd, from: value))
-        externalDisplay.savePrefValue(value, for: self.cmd)
+        _ = otherDisplay.writeDDCValues(command: self.cmd, value: otherDisplay.convValueToDDC(for: self.cmd, from: value))
       }
     } else if self.cmd == Command.brightness {
-      _ = externalDisplay.setSwBrightness(value: value)
-      externalDisplay.savePrefValue(value, for: self.cmd)
+      _ = otherDisplay.setSwBrightness(value: value)
     }
+    otherDisplay.savePrefValue(value, for: self.cmd)
   }
 
   @objc func valueChanged(slider: NSSlider) {
@@ -75,9 +72,9 @@ class SliderHandler {
     }
 
     if let appleDisplay = self.display as? AppleDisplay {
-      appleDisplay.setAppleBrightness(value: value)
+      _ = appleDisplay.setBrightness(value)
     } else {
-      self.valueChangedExternalDisplay(value: value)
+      self.valueChangedOtherDisplay(value: value)
     }
   }
 
@@ -147,9 +144,9 @@ class SliderHandler {
     }
 
     slider.maxValue = 1
-    if let externalDisplay = display as? ExternalDisplay {
-      externalDisplay.setupCurrentAndMaxValues(command: command)
-      let value = externalDisplay.setupSliderCurrentValue(command: command)
+    if let otherDisplay = display as? OtherDisplay {
+      otherDisplay.setupCurrentAndMaxValues(command: command)
+      let value = otherDisplay.setupSliderCurrentValue(command: command)
       handler.setValue(value)
     } else if let appleDisplay = display as? AppleDisplay {
       if command == .brightness {

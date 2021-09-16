@@ -8,7 +8,7 @@ class DisplayManager {
   public static let shared = DisplayManager()
 
   var displays: [Display] = []
-  var audioControlTargetDisplays: [ExternalDisplay] = []
+  var audioControlTargetDisplays: [OtherDisplay] = []
 
   func updateDisplays() {
     self.clearDisplays()
@@ -37,7 +37,7 @@ class DisplayManager {
       if !app.debugSw, DisplayManager.isAppleDisplay(displayID: onlineDisplayID) { // MARK: (point of interest for testing)
         display = AppleDisplay(id, name: name, vendorNumber: vendorNumber, modelNumber: modelNumber, isVirtual: isVirtual)
       } else {
-        display = ExternalDisplay(id, name: name, vendorNumber: vendorNumber, modelNumber: modelNumber, isVirtual: isVirtual)
+        display = OtherDisplay(id, name: name, vendorNumber: vendorNumber, modelNumber: modelNumber, isVirtual: isVirtual)
       }
       self.addDisplay(display: display)
     }
@@ -81,8 +81,8 @@ class DisplayManager {
     return refreshedSomething
   }
 
-  func getExternalDisplays() -> [ExternalDisplay] {
-    return self.displays.compactMap { $0 as? ExternalDisplay }
+  func getOtherDisplays() -> [OtherDisplay] {
+    return self.displays.compactMap { $0 as? OtherDisplay }
   }
 
   func getAllDisplays() -> [Display] {
@@ -97,18 +97,18 @@ class DisplayManager {
     }
   }
 
-  func getDdcCapableDisplays() -> [ExternalDisplay] {
-    return self.displays.compactMap { display -> ExternalDisplay? in
-      if let externalDisplay = display as? ExternalDisplay, !externalDisplay.isSw(), !externalDisplay.isVirtual {
-        return externalDisplay
+  func getDdcCapableDisplays() -> [OtherDisplay] {
+    return self.displays.compactMap { display -> OtherDisplay? in
+      if let otherDisplay = display as? OtherDisplay, !otherDisplay.isSw(), !otherDisplay.isVirtual {
+        return otherDisplay
       } else { return nil }
     }
   }
 
-  func getNonVirtualExternalDisplays() -> [ExternalDisplay] {
-    return self.displays.compactMap { display -> ExternalDisplay? in
-      if let externalDisplay = display as? ExternalDisplay, !externalDisplay.isVirtual {
-        return externalDisplay
+  func getNonVirtualOtherDisplays() -> [OtherDisplay] {
+    return self.displays.compactMap { display -> OtherDisplay? in
+      if let otherDisplay = display as? OtherDisplay, !otherDisplay.isVirtual {
+        return otherDisplay
       } else { return nil }
     }
   }
@@ -167,18 +167,18 @@ class DisplayManager {
     if Arm64DDC.isArm64 {
       os_log("arm64 AVService update requested", type: .info)
       var displayIDs: [CGDirectDisplayID] = []
-      for externalDisplay in self.getExternalDisplays() {
-        displayIDs.append(externalDisplay.identifier)
+      for otherDisplay in self.getOtherDisplays() {
+        displayIDs.append(otherDisplay.identifier)
       }
       for serviceMatch in Arm64DDC.getServiceMatches(displayIDs: displayIDs) {
-        for externalDisplay in self.getExternalDisplays() where externalDisplay.identifier == serviceMatch.displayID && serviceMatch.service != nil {
-          externalDisplay.arm64avService = serviceMatch.service
+        for otherDisplay in self.getOtherDisplays() where otherDisplay.identifier == serviceMatch.displayID && serviceMatch.service != nil {
+          otherDisplay.arm64avService = serviceMatch.service
           os_log("Display service match successful for display %{public}@", type: .info, String(serviceMatch.displayID))
           if serviceMatch.isDiscouraged {
             os_log("Display %{public}@ is flagged as discouraged by Arm64DDC.", type: .info, String(serviceMatch.displayID))
-            externalDisplay.isDiscouraged = serviceMatch.isDiscouraged
+            otherDisplay.isDiscouraged = serviceMatch.isDiscouraged
           } else {
-            externalDisplay.arm64ddc = app.debugSw ? false : true // MARK: (point of interest when testing)
+            otherDisplay.arm64ddc = app.debugSw ? false : true // MARK: (point of interest when testing)
           }
         }
       }
@@ -189,40 +189,34 @@ class DisplayManager {
   // Semi-static functions (could be moved elsewhere easily)
 
   func resetSwBrightnessForAllDisplays(settingsOnly: Bool = false, async: Bool = false) {
-    for externalDisplay in self.getNonVirtualExternalDisplays() {
+    for otherDisplay in self.getNonVirtualOtherDisplays() {
       if !settingsOnly {
-        _ = externalDisplay.setSwBrightness(value: 1, smooth: async)
+        _ = otherDisplay.setSwBrightness(value: 1, smooth: async)
       } else {
-        externalDisplay.swBrightness = 1
+        otherDisplay.swBrightness = 1
       }
-      if externalDisplay.isSw() {
-        externalDisplay.savePrefValue(1, for: .brightness)
+      if otherDisplay.isSw() {
+        otherDisplay.savePrefValue(1, for: .brightness)
       }
     }
   }
 
   func restoreSwBrightnessForAllDisplays(async: Bool = false) {
-    for externalDisplay in self.getExternalDisplays() {
-      if externalDisplay.readPrefValue(for: .brightness) == 0 || externalDisplay.isSw() {
-        let savedPrefValue = externalDisplay.swBrightness
-        if externalDisplay.getSwBrightness() != savedPrefValue {
-          OSDUtils.popEmptyOsd(displayID: externalDisplay.identifier, command: Command.brightness) // This will give the user a hint why is the brightness suddenly changes and also give screen activity to counter the 'no gamma change when there is no screen activity' issue on some macs
+    for otherDisplay in self.getOtherDisplays() {
+      if otherDisplay.readPrefValue(for: .brightness) == 0 || otherDisplay.isSw() {
+        let savedPrefValue = otherDisplay.swBrightness
+        if otherDisplay.getSwBrightness() != savedPrefValue {
+          OSDUtils.popEmptyOsd(displayID: otherDisplay.identifier, command: Command.brightness) // This will give the user a hint why is the brightness suddenly changes and also give screen activity to counter the 'no gamma change when there is no screen activity' issue on some macs
         }
-        externalDisplay.swBrightness = externalDisplay.getSwBrightness()
-        _ = externalDisplay.setSwBrightness(value: savedPrefValue, smooth: async)
-        if !externalDisplay.isSw(), prefs.bool(forKey: PrefKey.lowerSwAfterBrightness.rawValue) {
-          if savedPrefValue < 0.5 {
-            DisplayManager.setBrightnessSliderValue(externalDisplay: externalDisplay, value: 0.5 * (savedPrefValue / 2))
-          } else {
-            DisplayManager.setBrightnessSliderValue(externalDisplay: externalDisplay, value: 0.5 + (externalDisplay.readPrefValue(for: .brightness) / 2))
-          }
-        } else if externalDisplay.isSw() {
-          DisplayManager.setBrightnessSliderValue(externalDisplay: externalDisplay, value: savedPrefValue)
+        otherDisplay.swBrightness = otherDisplay.getSwBrightness()
+        _ = otherDisplay.setSwBrightness(value: savedPrefValue, smooth: async)
+        if otherDisplay.isSw() {
+          DisplayManager.setBrightnessSliderValue(otherDisplay: otherDisplay, value: savedPrefValue)
         }
       } else {
-        _ = externalDisplay.setSwBrightness(value: 1)
-        if externalDisplay.isSw() {
-          DisplayManager.setBrightnessSliderValue(externalDisplay: externalDisplay, value: 1)
+        _ = otherDisplay.setSwBrightness(value: 1)
+        if otherDisplay.isSw() {
+          DisplayManager.setBrightnessSliderValue(otherDisplay: otherDisplay, value: 1)
         }
       }
     }
@@ -284,18 +278,18 @@ class DisplayManager {
       return true
     }
     // Build display mirror
-    var maestroDisplayId = kCGNullDirectDisplay // We use 'maestro' because 'master' does not feel inclusive to SwiftLint and posts a warning which is ridiculous. I write master, master, master here three times to counter doublespeak. :P But let's pretend to be woke for a minute and go on...
+    var mainDisplayId = kCGNullDirectDisplay
     for onlineDisplayID in onlineDisplayIDs where onlineDisplayID != 0 {
-      if CGDisplayIsBuiltin(onlineDisplayID) == 0, maestroDisplayId == kCGNullDirectDisplay {
-        maestroDisplayId = onlineDisplayID
+      if CGDisplayIsBuiltin(onlineDisplayID) == 0, mainDisplayId == kCGNullDirectDisplay {
+        mainDisplayId = onlineDisplayID
       }
     }
-    guard maestroDisplayId != kCGNullDirectDisplay else {
+    guard mainDisplayId != kCGNullDirectDisplay else {
       return false
     }
     CGBeginDisplayConfiguration(&displayConfigRef)
-    for onlineDisplayID in onlineDisplayIDs where onlineDisplayID != 0 && onlineDisplayID != maestroDisplayId {
-      CGConfigureDisplayMirrorOfDisplay(displayConfigRef, onlineDisplayID, maestroDisplayId)
+    for onlineDisplayID in onlineDisplayIDs where onlineDisplayID != 0 && onlineDisplayID != mainDisplayId {
+      CGConfigureDisplayMirrorOfDisplay(displayConfigRef, onlineDisplayID, mainDisplayId)
     }
     CGCompleteDisplayConfiguration(displayConfigRef, CGConfigureOption.permanently)
     return true
@@ -303,8 +297,8 @@ class DisplayManager {
 
   // Static functions (could be anywhere)
 
-  static func setBrightnessSliderValue(externalDisplay: ExternalDisplay, value: Float) {
-    if let slider = externalDisplay.brightnessSliderHandler {
+  static func setBrightnessSliderValue(otherDisplay: OtherDisplay, value: Float) {
+    if let slider = otherDisplay.brightnessSliderHandler {
       slider.setValue(value)
     }
   }

@@ -5,7 +5,7 @@ import Cocoa
 import IOKit
 import os.log
 
-class ExternalDisplay: Display {
+class OtherDisplay: Display {
   var volumeSliderHandler: SliderHandler?
   var contrastSliderHandler: SliderHandler?
   var ddc: IntelDDC?
@@ -142,11 +142,7 @@ class ExternalDisplay: Display {
   func setupSliderCurrentValue(command: Command) -> Float {
     let currentValue = self.readPrefValue(for: command)
     var returnValue = currentValue
-    if command == .brightness {
-      if !self.isSw(), prefs.bool(forKey: PrefKey.lowerSwAfterBrightness.rawValue) {
-        returnValue = 0.5 + currentValue / 2
-      }
-    } else if command == .audioSpeakerVolume, self.enableMuteUnmute {
+    if command == .audioSpeakerVolume, self.enableMuteUnmute {
       if self.readPrefValueInt(for: .audioMuteScreenBlank) == 1 {
         returnValue = 0
       }
@@ -273,7 +269,7 @@ class ExternalDisplay: Display {
 
   func stepBrightnessPart(osdValue: Float, isSmallIncrement: Bool) -> Bool {
     if self.isSw(), prefs.bool(forKey: PrefKey.fallbackSw.rawValue) {
-      if self.setSwBrightness(value: osdValue, smooth: true) {
+      if self.setSwBrightness(value: osdValue) {
         OSDUtils.showOsd(displayID: self.identifier, command: .brightness, value: osdValue, maxValue: 1, roundChiclet: !isSmallIncrement)
         self.savePrefValue(osdValue, for: .brightness)
         if let slider = brightnessSliderHandler {
@@ -291,7 +287,6 @@ class ExternalDisplay: Display {
     if isAlreadySet, !isUp, !swAfterBirghtnessMode, prefs.bool(forKey: PrefKey.lowerSwAfterBrightness.rawValue) {
       swAfterBirghtnessMode = true
     }
-
     if swAfterBirghtnessMode {
       let currentSwBrightness = self.swBrightness
       var swBirghtnessValue = self.calcNewValue(currentValue: currentSwBrightness, isUp: isUp, isSmallIncrement: isSmallIncrement)

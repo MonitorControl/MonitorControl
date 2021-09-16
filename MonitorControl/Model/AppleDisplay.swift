@@ -11,15 +11,6 @@ class AppleDisplay: Display {
     super.init(identifier, name: name, vendorNumber: vendorNumber, modelNumber: modelNumber, isVirtual: isVirtual)
   }
 
-  func calcNewBrightness(isUp: Bool, isSmallIncrement: Bool) -> Float {
-    var step: Float = (isUp ? 1 : -1) / 16.0
-    let delta = step / 4
-    if isSmallIncrement {
-      step = delta
-    }
-    return min(max(0, ceil((self.getAppleBrightness() + delta) / step) * step), 1)
-  }
-
   public func getAppleBrightness() -> Float {
     var brightness: Float = 0
     DisplayServicesGetBrightness(self.identifier, &brightness)
@@ -33,17 +24,23 @@ class AppleDisplay: Display {
     }
   }
 
-  override func stepBrightness(isUp: Bool, isSmallIncrement: Bool) {
-    let value = self.calcNewBrightness(isUp: isUp, isSmallIncrement: isSmallIncrement)
-    self.setAppleBrightness(value: value)
-    OSDUtils.showOsd(displayID: self.identifier, command: .brightness, value: value * 64, maxValue: 64)
-    if let slider = brightnessSliderHandler {
-      slider.setValue(value)
+  override func setBrightness(_ to: Float) -> Bool {
+    self.setAppleBrightness(value: to)
+    self.savePrefValue(to, for: .brightness)
+    return true
+  }
+
+  override func getBrightness() -> Float {
+    if self.prefValueExists(for: .brightness) {
+      return self.readPrefValue(for: .brightness)
+    } else {
+      return self.getAppleBrightness()
     }
   }
 
   override func refreshBrightness() -> Bool {
     let brightness = self.getAppleBrightness()
+    self.savePrefValue(brightness, for: .brightness)
     if let sliderHandler = brightnessSliderHandler, let slider = sliderHandler.slider, brightness != slider.floatValue {
       os_log("Pushing slider towards actual brightness for Apple display %{public}@", type: .debug, self.name)
       if abs(brightness - slider.floatValue) < 0.01 {

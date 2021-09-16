@@ -59,9 +59,6 @@ enum PrefKey: String {
   // Was the app launched once
   case appAlreadyLaunched
 
-  // Does the app start when plugged to an external monitor
-  case startWhenExternal
-
   // Hide menu icon
   case menuIcon
 
@@ -80,7 +77,7 @@ enum PrefKey: String {
   // Lower via software after brightness
   case lowerSwAfterBrightness
 
-  // Fallback to software control for external displays with no DDC
+  // Fallback to software control for other displays with no DDC
   case fallbackSw
 
   // Do not show sliders for Apple displays (including built-in display) in menu

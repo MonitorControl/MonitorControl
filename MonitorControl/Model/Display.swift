@@ -114,22 +114,51 @@ class Display: Equatable {
     self.swUpdateDefaultGammaTable()
   }
 
-  func stepBrightness(isUp _: Bool, isSmallIncrement _: Bool) {}
+  func calcNewBrightness(isUp: Bool, isSmallIncrement: Bool) -> Float {
+    var step: Float = (isUp ? 1 : -1) / 16.0
+    let delta = step / 4
+    if isSmallIncrement {
+      step = delta
+    }
+    return min(max(0, ceil((self.getBrightness() + delta) / step) * step), 1)
+  }
 
-  func pushBrightness(to _: Float) -> Bool {
+  func stepBrightness(isUp: Bool, isSmallIncrement: Bool) {
+    let value = self.calcNewBrightness(isUp: isUp, isSmallIncrement: isSmallIncrement)
+    if self.setBrightness(value) {
+      OSDUtils.showOsd(displayID: self.identifier, command: .brightness, value: value * 64, maxValue: 64)
+      if let slider = brightnessSliderHandler {
+        slider.setValue(value)
+      }
+    }
+  }
+
+  func setBrightness(_ to: Float) -> Bool {
+    if self.setSwBrightness(value: to) {
+      self.savePrefValue(to, for: .brightness)
+      return true
+    }
     return false
+  }
+
+  func getBrightness() -> Float {
+    if self.prefValueExists(for: .brightness) {
+      return self.readPrefValue(for: .brightness)
+    } else {
+      return self.getSwBrightness()
+    }
   }
 
   func getShowOsdDisplayId() -> CGDirectDisplayID {
     if CGDisplayIsInHWMirrorSet(self.identifier) != 0 || CGDisplayIsInMirrorSet(self.identifier) != 0, CGDisplayMirrorsDisplay(self.identifier) != 0 {
       for mirrorMaestro in DisplayManager.shared.getAllNonVirtualDisplays() where CGDisplayMirrorsDisplay(self.identifier) == mirrorMaestro.identifier {
-        if let externalMirrorMaestro = mirrorMaestro as? ExternalDisplay, externalMirrorMaestro.isSw() {
+        if let otherMirrorMain = mirrorMaestro as? OtherDisplay, otherMirrorMain.isSw() {
           var thereAreOthers = false
           for mirrorMember in DisplayManager.shared.getAllNonVirtualDisplays() where CGDisplayMirrorsDisplay(mirrorMember.identifier) == CGDisplayMirrorsDisplay(self.identifier) && mirrorMember.identifier != self.identifier {
             thereAreOthers = true
           }
           if !thereAreOthers {
-            return externalMirrorMaestro.identifier
+            return otherMirrorMain.identifier
           }
         }
       }

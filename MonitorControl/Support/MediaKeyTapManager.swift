@@ -59,8 +59,8 @@ class MediaKeyTapManager: MediaKeyTapDelegate {
 
   func handleDirectedBrightness(isCommandModifier: Bool, isUp: Bool, isSmallIncrement: Bool) {
     if isCommandModifier {
-      for externalDisplay in DisplayManager.shared.getExternalDisplays() {
-        externalDisplay.stepBrightness(isUp: isUp, isSmallIncrement: isSmallIncrement)
+      for otherDisplay in DisplayManager.shared.getOtherDisplays() {
+        otherDisplay.stepBrightness(isUp: isUp, isSmallIncrement: isSmallIncrement)
       }
       for appleDisplay in DisplayManager.shared.getAppleDisplays() where !appleDisplay.isBuiltIn() {
         appleDisplay.stepBrightness(isUp: isUp, isSmallIncrement: isSmallIncrement)
@@ -90,10 +90,10 @@ class MediaKeyTapManager: MediaKeyTapDelegate {
       switch mediaKey {
       case .brightnessUp:
         var isAnyDisplayInSwAfterBrightnessMode: Bool = false
-        for display in affectedDisplays where ((display as? ExternalDisplay)?.isSwBrightnessNotDefault() ?? false) && !((display as? ExternalDisplay)?.isSw() ?? false) {
+        for display in affectedDisplays where ((display as? OtherDisplay)?.isSwBrightnessNotDefault() ?? false) && !((display as? OtherDisplay)?.isSw() ?? false) {
           isAnyDisplayInSwAfterBrightnessMode = true
         }
-        if isPressed, !(isAnyDisplayInSwAfterBrightnessMode && !(((display as? ExternalDisplay)?.isSwBrightnessNotDefault() ?? false) && !((display as? ExternalDisplay)?.isSw() ?? false))) {
+        if isPressed, !(isAnyDisplayInSwAfterBrightnessMode && !(((display as? OtherDisplay)?.isSwBrightnessNotDefault() ?? false) && !((display as? OtherDisplay)?.isSw() ?? false))) {
           display.stepBrightness(isUp: mediaKey == .brightnessUp, isSmallIncrement: isSmallIncrement)
         }
       case .brightnessDown:
@@ -103,7 +103,7 @@ class MediaKeyTapManager: MediaKeyTapDelegate {
         }
       case .mute:
         // The mute key should not respond to press + hold or keyup
-        if !isRepeat, isPressed, let display = display as? ExternalDisplay {
+        if !isRepeat, isPressed, let display = display as? OtherDisplay {
           display.toggleMute()
           if !wasNotIsPressedVolumeSentAlready, display.readPrefValueInt(for: .audioMuteScreenBlank) != 1, !display.readPrefValueKeyBool(forkey: PrefKey.unavailableDDC, for: .audioSpeakerVolume) {
             display.playVolumeChangedSound()
@@ -111,8 +111,8 @@ class MediaKeyTapManager: MediaKeyTapDelegate {
           }
         }
       case .volumeUp, .volumeDown:
-        // volume only matters for external displays
-        if let display = display as? ExternalDisplay {
+        // volume only matters for other displays
+        if let display = display as? OtherDisplay {
           if isPressed {
             display.stepVolume(isUp: mediaKey == .volumeUp, isSmallIncrement: isSmallIncrement)
           } else if !wasNotIsPressedVolumeSentAlready, !display.readPrefValueKeyBool(forkey: PrefKey.unavailableDDC, for: .audioSpeakerVolume) {

@@ -60,7 +60,7 @@ class DisplaysPrefsCellView: NSTableCellView {
   }
 
   @IBAction func pollingModeValueChanged(_ sender: NSPopUpButton) {
-    if let display = display as? ExternalDisplay {
+    if let display = display as? OtherDisplay {
       let newValue = sender.selectedTag()
       let originalValue = display.pollingMode
 
@@ -77,7 +77,7 @@ class DisplaysPrefsCellView: NSTableCellView {
   }
 
   @IBAction func pollingCountValueChanged(_ sender: NSTextFieldCell) {
-    if let display = display as? ExternalDisplay {
+    if let display = display as? OtherDisplay {
       let newValue = sender.stringValue
       let originalValue = "\(display.pollingCount)"
       if newValue.isEmpty {
@@ -94,7 +94,7 @@ class DisplaysPrefsCellView: NSTableCellView {
   }
 
   @IBAction func enableMuteButtonToggled(_ sender: NSButton) {
-    if let display = display as? ExternalDisplay {
+    if let display = display as? OtherDisplay {
       switch sender.state {
       case .on:
         display.enableMuteUnmute = true
@@ -112,7 +112,7 @@ class DisplaysPrefsCellView: NSTableCellView {
   }
 
   @IBAction func longerDelayButtonToggled(_ sender: NSButton) {
-    if let display = self.display as? ExternalDisplay {
+    if let display = self.display as? OtherDisplay {
       switch sender.state {
       case .on:
         let alert = NSAlert()
@@ -183,7 +183,7 @@ class DisplaysPrefsCellView: NSTableCellView {
   }
 
   @IBAction func disableVolumeOSDButton(_ sender: NSButton) {
-    if let disp = display as? ExternalDisplay {
+    if let disp = display as? OtherDisplay {
       switch sender.state {
       case .on:
         disp.hideOsd = true
@@ -206,7 +206,7 @@ class DisplaysPrefsCellView: NSTableCellView {
   }
 
   @IBAction func audioDeviceNameOverride(_ sender: NSTextField) {
-    if let display = display as? ExternalDisplay {
+    if let display = display as? OtherDisplay {
       display.audioDeviceNameOverride = sender.stringValue
     }
     app.configure()
@@ -222,7 +222,7 @@ class DisplaysPrefsCellView: NSTableCellView {
   @IBAction func unavailableDDC(_ sender: NSButton) {
     let command = self.tagCommand(sender.tag)
     let prefKey = PrefKey.unavailableDDC
-    if let display = display as? ExternalDisplay {
+    if let display = display as? OtherDisplay {
       switch sender.state {
       case .on:
         display.savePrefValueKeyBool(forkey: prefKey, value: false, for: command)
@@ -239,7 +239,7 @@ class DisplaysPrefsCellView: NSTableCellView {
     let command = self.tagCommand(sender.tag)
     let prefKey = PrefKey.minDDCOverride
     let value = sender.stringValue
-    if let display = display as? ExternalDisplay {
+    if let display = display as? OtherDisplay {
       if let intValue = Int(value), intValue >= 0, intValue <= 65535 {
         display.savePrefValueKeyInt(forkey: prefKey, value: intValue, for: command)
       } else {
@@ -260,7 +260,7 @@ class DisplaysPrefsCellView: NSTableCellView {
     let command = self.tagCommand(sender.tag)
     let prefKey = PrefKey.maxDDCOverride
     let value = sender.stringValue
-    if let display = display as? ExternalDisplay {
+    if let display = display as? OtherDisplay {
       if !value.isEmpty, let intValue = UInt(value) {
         display.savePrefValueKeyInt(forkey: prefKey, value: Int(intValue), for: command)
       } else {
@@ -281,7 +281,7 @@ class DisplaysPrefsCellView: NSTableCellView {
     let command = self.tagCommand(sender.tag)
     let prefKey = PrefKey.curveDDC
     let value = Int(sender.intValue)
-    if let display = display as? ExternalDisplay {
+    if let display = display as? OtherDisplay {
       display.savePrefValueKeyInt(forkey: prefKey, value: value, for: command)
     }
   }
@@ -289,7 +289,7 @@ class DisplaysPrefsCellView: NSTableCellView {
   @IBAction func invertDDC(_ sender: NSButton) {
     let command = self.tagCommand(sender.tag)
     let prefKey = PrefKey.invertDDC
-    if let display = display as? ExternalDisplay {
+    if let display = display as? OtherDisplay {
       switch sender.state {
       case .on:
         display.savePrefValueKeyBool(forkey: prefKey, value: true, for: command)
@@ -306,7 +306,7 @@ class DisplaysPrefsCellView: NSTableCellView {
     let command = self.tagCommand(sender.tag)
     let prefKey = PrefKey.remapDDC
     let value = sender.stringValue
-    if let display = display as? ExternalDisplay {
+    if let display = display as? OtherDisplay {
       if !value.isEmpty, let intValue = UInt(value, radix: 16), intValue != 0 {
         display.savePrefValueKeyInt(forkey: prefKey, value: Int(intValue), for: command)
       } else {
