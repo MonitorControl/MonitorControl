@@ -22,40 +22,26 @@ class SliderHandler {
     if self.cmd == .audioSpeakerVolume, (otherDisplay.readPrefValueInt(for: .audioMuteScreenBlank) == 1 && value > 0) || (otherDisplay.readPrefValueInt(for: .audioMuteScreenBlank) != 1 && value == 0) {
       otherDisplay.toggleMute(fromVolumeSlider: true)
     }
-
-    if !otherDisplay.isSw() {
-      if self.cmd == Command.brightness, prefs.bool(forKey: PrefKey.lowerSwAfterBrightness.rawValue) {
-        var brightnessValue: Float = 0
-        var brightnessSwValue: Float = 1
-        if value >= 0.5 {
-          brightnessValue = (value - 0.5) * 2
-          brightnessSwValue = 1
-        } else {
-          brightnessValue = 0
-          brightnessSwValue = (value / 0.5)
-        }
-        _ = otherDisplay.writeDDCValues(command: self.cmd, value: otherDisplay.convValueToDDC(for: self.cmd, from: brightnessValue))
-        _ = otherDisplay.setSwBrightness(value: brightnessSwValue)
-      } else if self.cmd == Command.audioSpeakerVolume {
+    if self.cmd == Command.brightness {
+      _ = otherDisplay.setBrightness(value)
+      return
+    } else if !otherDisplay.isSw() {
+      if self.cmd == Command.audioSpeakerVolume {
         if !otherDisplay.enableMuteUnmute || value != 0 {
           _ = otherDisplay.writeDDCValues(command: self.cmd, value: otherDisplay.convValueToDDC(for: self.cmd, from: value))
         }
       } else {
         _ = otherDisplay.writeDDCValues(command: self.cmd, value: otherDisplay.convValueToDDC(for: self.cmd, from: value))
       }
-    } else if self.cmd == Command.brightness {
-      _ = otherDisplay.setSwBrightness(value: value)
+      otherDisplay.savePrefValue(value, for: self.cmd)
     }
-    otherDisplay.savePrefValue(value, for: self.cmd)
   }
 
   @objc func valueChanged(slider: NSSlider) {
     guard app.sleepID == 0, app.reconfigureID == 0 else {
       return
     }
-
     var value = slider.floatValue
-
     if prefs.bool(forKey: PrefKey.enableSliderSnap.rawValue) {
       let intPercent = Int(value * 100)
       let snapInterval = 25
@@ -66,11 +52,9 @@ class SliderHandler {
         slider.floatValue = value
       }
     }
-
     if self.percentageBox == self.percentageBox {
       self.percentageBox?.stringValue = "" + String(Int(value * 100)) + "%"
     }
-
     if let appleDisplay = self.display as? AppleDisplay {
       _ = appleDisplay.setBrightness(value)
     } else {
@@ -87,17 +71,23 @@ class SliderHandler {
     }
   }
 
+  static func setupPercentageBox(_ percentageBox: NSTextField) {
+    percentageBox.font = NSFont.systemFont(ofSize: 12)
+    percentageBox.isEditable = false
+    percentageBox.isBordered = false
+    percentageBox.drawsBackground = false
+    percentageBox.alignment = .right
+    percentageBox.alphaValue = 0.7
+  }
+
   static func addSliderMenuItem(toMenu menu: NSMenu, forDisplay display: Display, command: Command, title: String, numOfTickMarks: Int = 0) -> SliderHandler {
     let item = NSMenuItem()
-
     let handler = SliderHandler(display: display, command: command)
-
     let slider = NSSlider(value: 0, minValue: 0, maxValue: 1, target: handler, action: #selector(SliderHandler.valueChanged))
+    let showPercent = prefs.bool(forKey: PrefKey.enableSliderPercent.rawValue)
     slider.isEnabled = true
     slider.numberOfTickMarks = numOfTickMarks
     handler.slider = slider
-    let showPercent = prefs.bool(forKey: PrefKey.enableSliderPercent.rawValue)
-
     if #available(macOS 11.0, *) {
       slider.frame.size.width = 160
       slider.frame.origin = NSPoint(x: 35, y: 5)
@@ -119,12 +109,7 @@ class SliderHandler {
       view.addSubview(slider)
       if showPercent {
         let percentageBox = NSTextField(frame: NSRect(x: 35 + slider.frame.size.width - 2, y: 18, width: 40, height: 12))
-        percentageBox.font = NSFont.systemFont(ofSize: 12)
-        percentageBox.isEditable = false
-        percentageBox.isBordered = false
-        percentageBox.drawsBackground = false
-        percentageBox.alignment = .right
-        percentageBox.alphaValue = 0.7
+        self.setupPercentageBox(percentageBox)
         handler.percentageBox = percentageBox
         view.addSubview(percentageBox)
       }
@@ -133,16 +118,21 @@ class SliderHandler {
     } else {
       slider.frame.size.width = 180
       slider.frame.origin = NSPoint(x: 15, y: 5)
-      let view = NSView(frame: NSRect(x: 0, y: 0, width: slider.frame.width + 30, height: slider.frame.height + 10))
+      let view = NSView(frame: NSRect(x: 0, y: 0, width: slider.frame.width + 30 + (showPercent ? 38 : 0), height: slider.frame.height + 10))
       let sliderHeaderItem = NSMenuItem()
       let attrs: [NSAttributedString.Key: Any] = [.foregroundColor: NSColor.systemGray, .font: NSFont.systemFont(ofSize: 12)]
       sliderHeaderItem.attributedTitle = NSAttributedString(string: title, attributes: attrs)
       view.addSubview(slider)
+      if showPercent {
+        let percentageBox = NSTextField(frame: NSRect(x: 15 + slider.frame.size.width - 2, y: 18, width: 40, height: 12))
+        self.setupPercentageBox(percentageBox)
+        handler.percentageBox = percentageBox
+        view.addSubview(percentageBox)
+      }
       item.view = view
       menu.insertItem(item, at: 0)
       menu.insertItem(sliderHeaderItem, at: 0)
     }
-
     slider.maxValue = 1
     if let otherDisplay = display as? OtherDisplay {
       otherDisplay.setupCurrentAndMaxValues(command: command)
