@@ -191,7 +191,7 @@ class DisplayManager {
   func resetSwBrightnessForAllDisplays(settingsOnly: Bool = false, async: Bool = false) {
     for otherDisplay in self.getNonVirtualOtherDisplays() {
       if !settingsOnly {
-        _ = otherDisplay.setSwBrightness(value: 1, smooth: async)
+        _ = otherDisplay.setSwBrightness(1, smooth: async)
       } else {
         otherDisplay.swBrightness = 1
       }
@@ -209,12 +209,12 @@ class DisplayManager {
           OSDUtils.popEmptyOsd(displayID: otherDisplay.identifier, command: Command.brightness) // This will give the user a hint why is the brightness suddenly changes and also give screen activity to counter the 'no gamma change when there is no screen activity' issue on some macs
         }
         otherDisplay.swBrightness = otherDisplay.getSwBrightness()
-        _ = otherDisplay.setSwBrightness(value: savedPrefValue, smooth: async)
+        _ = otherDisplay.setSwBrightness(savedPrefValue, smooth: async)
         if otherDisplay.isSw() {
           DisplayManager.setBrightnessSliderValue(otherDisplay: otherDisplay, value: savedPrefValue)
         }
       } else {
-        _ = otherDisplay.setSwBrightness(value: 1)
+        _ = otherDisplay.setSwBrightness(1)
       }
     }
   }

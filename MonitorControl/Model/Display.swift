@@ -192,7 +192,7 @@ class Display: Equatable {
 
   func setDirectBrightness(_ to: Float, transient: Bool = false) -> Bool {
     let value = max(min(to, 1), 0)
-    if self.setSwBrightness(value: value) {
+    if self.setSwBrightness(value) {
       if !transient {
         self.savePrefValue(value, for: .brightness)
         self.smoothBrightnessTransient = value
@@ -245,7 +245,7 @@ class Display: Equatable {
   }
 
   let swBrightnessSemaphore = DispatchSemaphore(value: 1)
-  func setSwBrightness(value: Float, smooth: Bool = false) -> Bool {
+  func setSwBrightness(_ value: Float, smooth: Bool = false) -> Bool {
     let brightnessValue = min(1, value)
     var currentValue = self.swBrightness
     self.swBrightness = brightnessValue
@@ -294,7 +294,7 @@ class Display: Equatable {
   }
 
   func resetSwBrightness() -> Bool {
-    return self.setSwBrightness(value: 1)
+    return self.setSwBrightness(1)
   }
 
   func isSwBrightnessNotDefault() -> Bool {

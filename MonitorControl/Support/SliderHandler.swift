@@ -135,7 +135,6 @@ class SliderHandler {
     }
     slider.maxValue = 1
     if let otherDisplay = display as? OtherDisplay {
-      otherDisplay.setupCurrentAndMaxValues(command: command)
       let value = otherDisplay.setupSliderCurrentValue(command: command)
       handler.setValue(value)
     } else if let appleDisplay = display as? AppleDisplay {

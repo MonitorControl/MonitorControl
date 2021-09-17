@@ -208,6 +208,10 @@ class MainPrefsViewController: NSViewController, PreferencePane {
     if modalResponse == NSApplication.ModalResponse.alertFirstButtonReturn {
       NotificationCenter.default.post(name: Notification.Name(PrefKey.preferenceReset.rawValue), object: nil)
       self.populateSettings()
+      menuslidersPrefsVc?.populateSettings()
+      keyboardPrefsVc?.populateSettings()
+      displaysPrefsVc?.loadDisplayList()
+      self.showAdvancedClicked(self.showAdvancedDisplays)
     }
   }
 

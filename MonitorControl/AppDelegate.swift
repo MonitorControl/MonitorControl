@@ -155,7 +155,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     if firstrun {
       DisplayManager.shared.resetSwBrightnessForAllDisplays(settingsOnly: true)
     }
-    self.updateDisplaysAndMenus()
+    self.updateDisplaysAndMenus(firstrun: firstrun)
     if !firstrun {
       if !prefs.bool(forKey: PrefKey.disableSoftwareFallback.rawValue) || !prefs.bool(forKey: PrefKey.disableCombinedBrightness.rawValue) {
         DisplayManager.shared.restoreSwBrightnessForAllDisplays(async: prefs.bool(forKey: PrefKey.useSmoothBrightness.rawValue))
@@ -164,7 +164,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     self.refreshBrightnessJob(start: true)
   }
 
-  func updateDisplaysAndMenus() {
+  func updateDisplaysAndMenus(firstrun: Bool = false) {
     self.clearMenu()
     var displays: [Display] = []
     if !prefs.bool(forKey: PrefKey.hideAppleFromMenu.rawValue) {
@@ -182,13 +182,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         if asSubmenu {
           self.statusMenu.insertItem(NSMenuItem.separator(), at: 0)
         }
-        self.updateDisplayAndMenu(display: display, asSubMenu: asSubmenu)
+        self.updateDisplayAndMenu(display: display, asSubMenu: asSubmenu, firstrun: firstrun)
       }
     }
     self.updateMediaKeyTap()
   }
 
-  private func updateDisplayAndMenu(display: Display, asSubMenu: Bool) {
+  private func updateDisplayAndMenu(display: Display, asSubMenu: Bool, firstrun _: Bool = false) {
     if !asSubMenu {
       self.statusMenu.insertItem(NSMenuItem.separator(), at: 0)
     }
@@ -199,25 +199,28 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     var hasSlider = false
     if let otherDisplay = display as? OtherDisplay, !otherDisplay.isSw() {
-      if !prefs.bool(forKey: PrefKey.hideVolume.rawValue), !display.readPrefValueKeyBool(forkey: PrefKey.unavailableDDC, for: .audioSpeakerVolume) {
-        let volumeSliderHandler = SliderHandler.addSliderMenuItem(toMenu: monitorSubMenu, forDisplay: otherDisplay, command: .audioSpeakerVolume, title: NSLocalizedString("Volume", comment: "Shown in menu"), numOfTickMarks: numOfTickMarks)
-        otherDisplay.volumeSliderHandler = volumeSliderHandler
-        hasSlider = true
-      } else if !display.readPrefValueKeyBool(forkey: PrefKey.unavailableDDC, for: .audioSpeakerVolume) {
-        otherDisplay.setupCurrentAndMaxValues(command: .audioSpeakerVolume) // We have to initialize speaker DDC without menu as well
+      if !display.readPrefValueKeyBool(forkey: PrefKey.unavailableDDC, for: .audioSpeakerVolume) {
+        otherDisplay.setupCurrentAndMaxValues(command: .audioSpeakerVolume)
+        if !prefs.bool(forKey: PrefKey.hideVolume.rawValue) {
+          let volumeSliderHandler = SliderHandler.addSliderMenuItem(toMenu: monitorSubMenu, forDisplay: otherDisplay, command: .audioSpeakerVolume, title: NSLocalizedString("Volume", comment: "Shown in menu"), numOfTickMarks: numOfTickMarks)
+          otherDisplay.volumeSliderHandler = volumeSliderHandler
+          hasSlider = true
+        }
       }
       if prefs.bool(forKey: PrefKey.showContrast.rawValue), !display.readPrefValueKeyBool(forkey: PrefKey.unavailableDDC, for: .contrast) {
+        otherDisplay.setupCurrentAndMaxValues(command: .contrast)
         let contrastSliderHandler = SliderHandler.addSliderMenuItem(toMenu: monitorSubMenu, forDisplay: otherDisplay, command: .contrast, title: NSLocalizedString("Contrast", comment: "Shown in menu"), numOfTickMarks: numOfTickMarks)
         otherDisplay.contrastSliderHandler = contrastSliderHandler
         hasSlider = true
       }
+      if !display.readPrefValueKeyBool(forkey: PrefKey.unavailableDDC, for: .brightness) {
+        otherDisplay.setupCurrentAndMaxValues(command: .brightness)
+      }
     }
-    if !prefs.bool(forKey: PrefKey.hideBrightness.rawValue), !display.readPrefValueKeyBool(forkey: PrefKey.unavailableDDC, for: .brightness) {
+    if !prefs.bool(forKey: PrefKey.hideBrightness.rawValue), !display.isVirtual, !display.readPrefValueKeyBool(forkey: PrefKey.unavailableDDC, for: .brightness) {
       let brightnessSliderHandler = SliderHandler.addSliderMenuItem(toMenu: monitorSubMenu, forDisplay: display, command: .brightness, title: NSLocalizedString("Brightness", comment: "Shown in menu"), numOfTickMarks: numOfTickMarks)
       display.brightnessSliderHandler = brightnessSliderHandler
       hasSlider = true
-    } else if let otherDisplay = display as? OtherDisplay, !otherDisplay.isSw(), !display.readPrefValueKeyBool(forkey: PrefKey.unavailableDDC, for: .brightness) {
-      otherDisplay.setupCurrentAndMaxValues(command: .brightness) // We have to initialize brightness DDC without menu as well
     }
     if hasSlider {
       self.appendMenu(friendlyName: display.friendlyName, monitorSubMenu: monitorSubMenu, asSubMenu: asSubMenu)

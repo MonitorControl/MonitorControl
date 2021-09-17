@@ -311,12 +311,12 @@ class OtherDisplay: Display {
           brightnessSwValue = (value / 0.5)
         }
         _ = self.writeDDCValues(command: .brightness, value: self.convValueToDDC(for: .brightness, from: brightnessValue))
-        _ = self.setSwBrightness(value: brightnessSwValue)
+        _ = self.setSwBrightness(brightnessSwValue)
       } else {
         _ = self.writeDDCValues(command: .brightness, value: self.convValueToDDC(for: .brightness, from: value))
       }
     } else {
-      _ = self.setSwBrightness(value: value)
+      _ = self.setSwBrightness(value)
     }
     if !transient {
       self.savePrefValue(value, for: .brightness)
