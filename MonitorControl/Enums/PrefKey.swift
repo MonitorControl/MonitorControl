@@ -131,6 +131,6 @@ enum PrefKey: String {
   // Use fine OSD scale for volume
   case useFineScaleVolume
 
-  // Use smoothBrightness TODO: Implementation: MOSTLY DONE BUT GAMMA-ACTIVITY ISSUE STILL NOT SOLVED, Pref pane: MISSING
+  // Use smoothBrightness -- TODO: Implementation half-baked
   case useSmoothBrightness
 }

@@ -94,6 +94,9 @@
 /* Class = "NSButtonCell"; title = "Only if at least one slider is present"; ObjectID = "EM1-zD-fVZ"; */
 "EM1-zD-fVZ.title" = "Only if at least one slider is present";
 
+/* Class = "NSTextFieldCell"; title = "Disable this for a direct, immediate control."; ObjectID = "ENt-mP-0yH"; */
+"ENt-mP-0yH.title" = "Disable this for a direct, immediate control.";
+
 /* Class = "NSMenuItem"; title = "Minimal"; ObjectID = "Eq3-z9-yIo"; */
 "Eq3-z9-yIo.title" = "최소";
 
@@ -144,6 +147,9 @@
 
 /* Class = "NSTextFieldCell"; title = "Additional sliders:"; ObjectID = "i5X-M5-Tf5"; */
 "i5X-M5-Tf5.title" = "Additional sliders:";
+
+/* Class = "NSButtonCell"; title = "Enable smooth brightness transitions (experimental)"; ObjectID = "IK4-u5-qjf"; */
+"IK4-u5-qjf.title" = "Enable smooth brightness transitions";
 
 /* Class = "NSButtonCell"; title = "Use fine scale for volume"; ObjectID = "J3L-MW-iJL"; */
 "J3L-MW-iJL.title" = "Use fine scale for volume";

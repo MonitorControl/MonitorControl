@@ -18,8 +18,9 @@ class MainPrefsViewController: NSViewController, PreferencePane {
   }
 
   @IBOutlet var startAtLogin: NSButton!
-  @IBOutlet var combinedBrightness: NSButton!
   @IBOutlet var fallbackSw: NSButton!
+  @IBOutlet var combinedBrightness: NSButton!
+  @IBOutlet var enableSmooth: NSButton!
   @IBOutlet var showAdvancedDisplays: NSButton!
   @IBOutlet var notEnableDDCDuringStartup: NSButton!
   @IBOutlet var writeDDCOnStartup: NSButton!
@@ -79,6 +80,7 @@ class MainPrefsViewController: NSViewController, PreferencePane {
     self.startAtLogin.state = startAtLogin ? .on : .off
     self.combinedBrightness.state = prefs.bool(forKey: PrefKey.disableCombinedBrightness.rawValue) ? .off : .on
     self.fallbackSw.state = prefs.bool(forKey: PrefKey.disableSoftwareFallback.rawValue) ? .off : .on
+    self.enableSmooth.state = prefs.bool(forKey: PrefKey.useSmoothBrightness.rawValue) ? .on : .off
     self.showAdvancedDisplays.state = prefs.bool(forKey: PrefKey.showAdvancedSettings.rawValue) ? .on : .off
     self.notEnableDDCDuringStartup.state = !prefs.bool(forKey: PrefKey.enableDDCDuringStartup.rawValue) ? .on : .off
     self.writeDDCOnStartup.state = !prefs.bool(forKey: PrefKey.readDDCInsteadOfRestoreValues.rawValue) && prefs.bool(forKey: PrefKey.enableDDCDuringStartup.rawValue) ? .on : .off
@@ -107,7 +109,7 @@ class MainPrefsViewController: NSViewController, PreferencePane {
       prefs.set(false, forKey: PrefKey.disableCombinedBrightness.rawValue)
     case .off:
       prefs.set(true, forKey: PrefKey.disableCombinedBrightness.rawValue)
-      DisplayManager.shared.resetSwBrightnessForAllDisplays()
+      DisplayManager.shared.resetSwBrightnessForAllDisplays(async: prefs.bool(forKey: PrefKey.useSmoothBrightness.rawValue))
     default: break
     }
     app.updateDisplaysAndMenus()
@@ -121,8 +123,18 @@ class MainPrefsViewController: NSViewController, PreferencePane {
       prefs.set(true, forKey: PrefKey.disableSoftwareFallback.rawValue)
     default: break
     }
-    DisplayManager.shared.resetSwBrightnessForAllDisplays()
+    DisplayManager.shared.resetSwBrightnessForAllDisplays(async: prefs.bool(forKey: PrefKey.useSmoothBrightness.rawValue))
     app.updateDisplaysAndMenus()
+  }
+
+  @IBAction func enableSmooth(_ sender: NSButton) {
+    switch sender.state {
+    case .on:
+      prefs.set(true, forKey: PrefKey.useSmoothBrightness.rawValue)
+    case .off:
+      prefs.set(false, forKey: PrefKey.useSmoothBrightness.rawValue)
+    default: break
+    }
   }
 
   @IBAction func notEnableDDCDuringStartupClicked(_ sender: NSButton) {

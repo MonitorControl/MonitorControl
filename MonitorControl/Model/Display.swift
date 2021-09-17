@@ -170,14 +170,14 @@ class Display: Equatable {
         dontPushAgain = true
         self.smoothBrightnessRunning = false
       } else if brightness > self.smoothBrightnessTransient {
-        self.smoothBrightnessTransient += max((brightness - self.smoothBrightnessTransient) / stepDivider, 0.5 / 100)
+        self.smoothBrightnessTransient += max((brightness - self.smoothBrightnessTransient) / stepDivider, 1 / 100)
       } else {
-        self.smoothBrightnessTransient += min((brightness - self.smoothBrightnessTransient) / stepDivider, 0.5 / 100)
+        self.smoothBrightnessTransient += min((brightness - self.smoothBrightnessTransient) / stepDivider, 1 / 100)
       }
       _ = self.setDirectBrightness(self.smoothBrightnessTransient, transient: true)
       if !dontPushAgain {
         self.smoothBrightnessRunning = true
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.03) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.02) {
           _ = self.setSmoothBrightness()
         }
       }
