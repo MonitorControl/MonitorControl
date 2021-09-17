@@ -61,27 +61,35 @@ class OtherDisplay: Display {
     }
   }
 
-  func setupCurrentAndMaxValues(command: Command) {
+  func setupCurrentAndMaxValues(command: Command, firstrun: Bool = false) {
     var ddcValues: (UInt16, UInt16)?
     var maxDDCValue = UInt16(DDC_MAX_DETECT_LIMIT)
     var currentDDCValue = UInt16(Float(DDC_MAX_DETECT_LIMIT) * 0.75)
     if command == .audioSpeakerVolume {
       currentDDCValue = UInt16(Float(self.DDC_MAX_DETECT_LIMIT) * 0.125) // lower default audio value as high volume might rattle the user.
     }
-    var currentValue: Float = 1
     os_log("** Setting up %{public}@ for %{public}@ **", type: .info, self.name, String(reflecting: command))
-    if self.isSw(), command == Command.brightness {
-      os_log("Software control is used.", type: .info)
-      currentValue = self.swBrightness
-      os_log(" - current internal value: %{public}@", type: .info, String(currentValue))
-    } else {
+    if !self.isSw() {
       if prefs.bool(forKey: PrefKey.enableDDCDuringStartup.rawValue), prefs.bool(forKey: PrefKey.readDDCInsteadOfRestoreValues.rawValue), self.pollingCount != 0, !(app.safeMode) {
         os_log("Reading DDC from display %{public}@ times", type: .info, String(self.pollingCount))
         let delay = self.needsLongerDelay ? UInt64(40 * kMillisecondScale) : nil
         ddcValues = self.readDDCValues(for: command, tries: UInt(self.pollingCount), minReplyDelay: delay)
         if ddcValues != nil {
           (currentDDCValue, maxDDCValue) = ddcValues ?? (currentDDCValue, maxDDCValue)
-          self.savePrefValue(self.convDDCToValue(for: command, from: currentDDCValue), for: command)
+          var currentValue = self.convDDCToValue(for: command, from: currentDDCValue)
+          if !prefs.bool(forKey: PrefKey.disableCombinedBrightness.rawValue) {
+            if currentValue > 0 {
+              currentValue = 0.5 + currentValue / 2
+            } else if currentValue == 0, firstrun {
+              currentValue = 0.5
+            } else if self.prefValueExists(for: command), self.readPrefValue(for: command) <= 0.5 {
+              currentValue = self.readPrefValue(for: command)
+            } else {
+              currentValue = 0.5
+            }
+          }
+          self.smoothBrightnessTransient = currentValue
+          self.savePrefValue(currentValue, for: command)
           os_log("DDC read successful.", type: .info)
         } else {
           os_log("DDC read failed.", type: .info)

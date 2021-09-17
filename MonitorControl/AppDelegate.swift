@@ -188,7 +188,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     self.updateMediaKeyTap()
   }
 
-  private func updateDisplayAndMenu(display: Display, asSubMenu: Bool, firstrun _: Bool = false) {
+  private func updateDisplayAndMenu(display: Display, asSubMenu: Bool, firstrun: Bool = false) {
     if !asSubMenu {
       self.statusMenu.insertItem(NSMenuItem.separator(), at: 0)
     }
@@ -214,7 +214,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         hasSlider = true
       }
       if !display.readPrefValueKeyBool(forkey: PrefKey.unavailableDDC, for: .brightness) {
-        otherDisplay.setupCurrentAndMaxValues(command: .brightness)
+        otherDisplay.setupCurrentAndMaxValues(command: .brightness, firstrun: firstrun)
       }
     }
     if !prefs.bool(forKey: PrefKey.hideBrightness.rawValue), !display.isVirtual, !display.readPrefValueKeyBool(forkey: PrefKey.unavailableDDC, for: .brightness) {

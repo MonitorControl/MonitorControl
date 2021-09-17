@@ -233,7 +233,7 @@ class DisplaysPrefsCellView: NSTableCellView {
       default:
         break
       }
-      _ = display.setBrightness(1)
+      _ = display.setDirectBrightness(1)
       _ = display.setSwBrightness(1)
       app.configure()
     }

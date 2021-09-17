@@ -146,6 +146,12 @@ class Display: Equatable {
   }
 
   func setSmoothBrightness(_ to: Float = -1, slow: Bool = false) -> Bool {
+    guard app.sleepID == 0, app.reconfigureID == 0 else {
+      self.savePrefValue(self.smoothBrightnessTransient, for: .brightness)
+      self.smoothBrightnessRunning = false
+      os_log("Pushing brightness stopped for Display %{public}@ because of sleep or reconfiguration", type: .debug, String(self.identifier))
+      return false
+    }
     if slow {
       self.smoothBrightnessSlow = true
     }
