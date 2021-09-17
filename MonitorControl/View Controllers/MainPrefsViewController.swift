@@ -107,9 +107,16 @@ class MainPrefsViewController: NSViewController, PreferencePane {
     switch sender.state {
     case .on:
       prefs.set(false, forKey: PrefKey.disableCombinedBrightness.rawValue)
+      DisplayManager.shared.resetSwBrightnessForAllDisplays(async: false)
+      for display in DisplayManager.shared.getDdcCapableDisplays() where !display.isSw() {
+        _ = display.setDirectBrightness(0.5 + display.getBrightness() / 2)
+      }
     case .off:
       prefs.set(true, forKey: PrefKey.disableCombinedBrightness.rawValue)
       DisplayManager.shared.resetSwBrightnessForAllDisplays(async: prefs.bool(forKey: PrefKey.useSmoothBrightness.rawValue))
+      for display in DisplayManager.shared.getDdcCapableDisplays() where !display.isSw() {
+        _ = display.setDirectBrightness(max(0, (display.getBrightness() - 0.5) * 2))
+      }
     default: break
     }
     app.updateDisplaysAndMenus()
@@ -119,11 +126,16 @@ class MainPrefsViewController: NSViewController, PreferencePane {
     switch sender.state {
     case .on:
       prefs.set(false, forKey: PrefKey.disableSoftwareFallback.rawValue)
+      for display in DisplayManager.shared.getOtherDisplays() where display.isSw() {
+        _ = display.setBrightness(1)
+      }
     case .off:
+      for display in DisplayManager.shared.getOtherDisplays() where display.isSw() {
+        _ = display.setBrightness(1)
+      }
       prefs.set(true, forKey: PrefKey.disableSoftwareFallback.rawValue)
     default: break
     }
-    DisplayManager.shared.resetSwBrightnessForAllDisplays(async: prefs.bool(forKey: PrefKey.useSmoothBrightness.rawValue))
     app.updateDisplaysAndMenus()
   }
 

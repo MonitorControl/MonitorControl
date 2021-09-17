@@ -152,12 +152,14 @@ class DisplaysPrefsCellView: NSTableCellView {
       switch sender.state {
       case .off:
         disp.forceSw = true
+        _ = disp.setDirectBrightness(disp.getSwBrightness())
       case .on:
         disp.forceSw = false
+        _ = disp.setSwBrightness(value: 1, smooth: prefs.bool(forKey: PrefKey.useSmoothBrightness.rawValue))
+        _ = disp.setBrightness(1)
       default:
         break
       }
-      _ = disp.resetSwBrightness()
       app.updateDisplaysAndMenus()
       let displayInfo = DisplaysPrefsViewController.getDisplayInfo(display: disp)
       self.controlMethod.stringValue = displayInfo.controlMethod

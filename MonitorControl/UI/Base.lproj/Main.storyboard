@@ -1427,14 +1427,13 @@
                                                                                     <action selector="curveDDC:" target="hCY-wr-B84" id="gYl-oM-AVw"/>
                                                                                 </connections>
                                                                             </slider>
-                                                                            <button identifier="a5" toolTip="a4" verticalHuggingPriority="750" tag="1" id="Su5-Vg-rpV">
+                                                                            <button verticalHuggingPriority="750" tag="1" id="Su5-Vg-rpV">
                                                                                 <rect key="frame" x="120" y="62" width="18" height="18"/>
                                                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                                                 <buttonCell key="cell" type="check" bezelStyle="regularSquare" imagePosition="left" inset="2" id="xMw-Wd-xQ6">
                                                                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                                                     <font key="font" metaFont="system"/>
                                                                                 </buttonCell>
-                                                                                <accessibility description="a3" help="a2" identifier="a1"/>
                                                                                 <connections>
                                                                                     <action selector="unavailableDDC:" target="hCY-wr-B84" id="y2A-Fp-NKI"/>
                                                                                 </connections>

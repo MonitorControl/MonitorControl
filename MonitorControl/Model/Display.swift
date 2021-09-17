@@ -115,6 +115,7 @@ class Display: Equatable {
     os_log("Display init with prefsIdentifier %{public}@", type: .info, self.prefsId)
     self.isVirtual = isVirtual
     self.swUpdateDefaultGammaTable()
+    self.smoothBrightnessTransient = self.getBrightness()
   }
 
   func calcNewBrightness(isUp: Bool, isSmallIncrement: Bool) -> Float {

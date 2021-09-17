@@ -268,8 +268,10 @@ class OtherDisplay: Display {
   }
 
   override func stepBrightness(isUp: Bool, isSmallIncrement: Bool) {
-    if self.isSw(), !prefs.bool(forKey: PrefKey.disableSoftwareFallback.rawValue) {
-      super.stepBrightness(isUp: isUp, isSmallIncrement: isSmallIncrement)
+    if self.isSw() {
+      if !prefs.bool(forKey: PrefKey.disableSoftwareFallback.rawValue) {
+        super.stepBrightness(isUp: isUp, isSmallIncrement: isSmallIncrement)
+      }
       return
     }
     guard !self.readPrefValueKeyBool(forkey: PrefKey.unavailableDDC, for: .brightness) else {
