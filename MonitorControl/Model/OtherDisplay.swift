@@ -77,7 +77,7 @@ class OtherDisplay: Display {
         if ddcValues != nil {
           (currentDDCValue, maxDDCValue) = ddcValues ?? (currentDDCValue, maxDDCValue)
           var currentValue = self.convDDCToValue(for: command, from: currentDDCValue)
-          if !prefs.bool(forKey: PrefKey.disableCombinedBrightness.rawValue) {
+          if !prefs.bool(forKey: PrefKey.disableCombinedBrightness.rawValue), command == .brightness {
             if currentValue > 0 {
               currentValue = 0.5 + currentValue / 2
             } else if currentValue == 0, firstrun {
@@ -88,8 +88,10 @@ class OtherDisplay: Display {
               currentValue = 0.5
             }
           }
-          self.smoothBrightnessTransient = currentValue
           self.savePrefValue(currentValue, for: command)
+          if command == .brightness {
+            self.smoothBrightnessTransient = currentValue
+          }
           os_log("DDC read successful.", type: .info)
         } else {
           os_log("DDC read failed.", type: .info)
@@ -103,7 +105,20 @@ class OtherDisplay: Display {
         self.savePrefValueKeyInt(forkey: PrefKey.maxDDC, value: min(Int(maxDDCValue), self.DDC_MAX_DETECT_LIMIT), for: command)
       }
       if ddcValues == nil {
-        self.savePrefValue(self.prefValueExists(for: command) ? self.readPrefValue(for: command) : self.convDDCToValue(for: command, from: currentDDCValue), for: command)
+        var currentValue: Float = self.readPrefValue(for: command)
+        if !prefs.bool(forKey: PrefKey.disableCombinedBrightness.rawValue), command == .brightness {
+          if !self.prefValueExists(for: command) {
+            currentValue = 0.5 + self.convDDCToValue(for: command, from: currentDDCValue) / 2
+          } else if firstrun, currentValue < 0.5 {
+            currentValue = 0.5
+          }
+        } else {
+          currentValue = self.prefValueExists(for: command) ? self.readPrefValue(for: command) : self.convDDCToValue(for: command, from: currentDDCValue)
+        }
+        self.savePrefValue(currentValue, for: command)
+        if command == .brightness {
+          self.smoothBrightnessTransient = currentValue
+        }
       }
       os_log(" - current DDC value: %{public}@", type: .info, String(currentDDCValue))
       os_log(" - minimum DDC value: %{public}@ (overrides 0)", type: .info, String(self.readPrefValueKeyInt(forkey: PrefKey.minDDCOverride, for: command)))
@@ -111,6 +126,8 @@ class OtherDisplay: Display {
       os_log(" - current internal value: %{public}@", type: .info, String(self.readPrefValue(for: command)))
       if prefs.bool(forKey: PrefKey.enableDDCDuringStartup.rawValue), !prefs.bool(forKey: PrefKey.readDDCInsteadOfRestoreValues.rawValue), !(app.safeMode) {
         os_log("Writing last saved DDC values.", type: .info, self.name, String(reflecting: command))
+        let currentValue = (!prefs.bool(forKey: PrefKey.disableCombinedBrightness.rawValue) && command == .brightness) ? max(0, self.readPrefValue(for: command) - 0.5) * 2 : self.readPrefValue(for: command)
+        currentDDCValue = self.convValueToDDC(for: command, from: currentValue)
         _ = self.writeDDCValues(command: command, value: currentDDCValue)
       }
     }
