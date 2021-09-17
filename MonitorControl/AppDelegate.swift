@@ -334,7 +334,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   @objc func handlePreferenceReset() {
     os_log("Resetting all preferences.")
     if !prefs.bool(forKey: PrefKey.disableSoftwareFallback.rawValue) || !prefs.bool(forKey: PrefKey.disableCombinedBrightness.rawValue) {
-      DisplayManager.shared.resetSwBrightnessForAllDisplays(async: prefs.bool(forKey: PrefKey.useSmoothBrightness.rawValue))
+      DisplayManager.shared.resetSwBrightnessForAllDisplays(async: false)
     }
     if let bundleID = Bundle.main.bundleIdentifier {
       prefs.removePersistentDomain(forName: bundleID)

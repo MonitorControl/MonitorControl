@@ -192,8 +192,10 @@ class DisplayManager {
     for otherDisplay in self.getNonVirtualOtherDisplays() {
       if !settingsOnly {
         _ = otherDisplay.setSwBrightness(1, smooth: async)
+        otherDisplay.smoothBrightnessTransient = 1
       } else {
         otherDisplay.swBrightness = 1
+        otherDisplay.smoothBrightnessTransient = 1
       }
       if otherDisplay.isSw() {
         otherDisplay.savePrefValue(1, for: .brightness)
