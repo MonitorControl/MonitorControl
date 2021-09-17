@@ -23,7 +23,7 @@ class KeyboardPrefsViewController: NSViewController, PreferencePane {
   @IBOutlet var useAudioDeviceNameMatching: NSButton!
   @IBOutlet var useFineScale: NSButton!
   @IBOutlet var useFineScaleVolume: NSButton!
-  @IBOutlet var separateSwAfterScale: NSButton!
+  @IBOutlet var separateCombinedScale: NSButton!
 
   @IBOutlet var rowUseFocusCheck: NSGridRow!
   @IBOutlet var rowUseFocusText: NSGridRow!
@@ -31,8 +31,8 @@ class KeyboardPrefsViewController: NSViewController, PreferencePane {
   @IBOutlet var rowUseAudioNameText: NSGridRow!
   @IBOutlet var rowUseFineScaleCheck: NSGridRow!
   @IBOutlet var rowUseFineScaleText: NSGridRow!
-  @IBOutlet var rowSeparateSwAfterScaleCheck: NSGridRow!
-  @IBOutlet var rowSeparateSwAfterScaleText: NSGridRow!
+  @IBOutlet var rowSeparateCombinedScaleCheck: NSGridRow!
+  @IBOutlet var rowSeparateCombinedScaleText: NSGridRow!
 
   func showAdvanced() -> Bool {
     let hide = !prefs.bool(forKey: PrefKey.showAdvancedSettings.rawValue)
@@ -59,12 +59,12 @@ class KeyboardPrefsViewController: NSViewController, PreferencePane {
       self.rowUseFineScaleText.isHidden = hide
     }
 
-    if self.separateSwAfterScale.state == .on {
-      self.rowSeparateSwAfterScaleCheck.isHidden = false
-      self.rowSeparateSwAfterScaleText.isHidden = false
+    if self.separateCombinedScale.state == .on {
+      self.rowSeparateCombinedScaleCheck.isHidden = false
+      self.rowSeparateCombinedScaleText.isHidden = false
     } else {
-      self.rowSeparateSwAfterScaleCheck.isHidden = hide
-      self.rowSeparateSwAfterScaleText.isHidden = hide
+      self.rowSeparateCombinedScaleCheck.isHidden = hide
+      self.rowSeparateCombinedScaleText.isHidden = hide
     }
 
     return !hide
@@ -83,7 +83,7 @@ class KeyboardPrefsViewController: NSViewController, PreferencePane {
     self.useAudioDeviceNameMatching.state = prefs.bool(forKey: PrefKey.useAudioDeviceNameMatching.rawValue) ? .on : .off
     self.useFineScale.state = prefs.bool(forKey: PrefKey.useFineScaleBrightness.rawValue) ? .on : .off
     self.useFineScaleVolume.state = prefs.bool(forKey: PrefKey.useFineScaleVolume.rawValue) ? .on : .off
-    self.separateSwAfterScale.state = prefs.bool(forKey: PrefKey.separateSwAfterScale.rawValue) ? .on : .off
+    self.separateCombinedScale.state = prefs.bool(forKey: PrefKey.separateCombinedScale.rawValue) ? .on : .off
     self.allScreensClicked(self.allScreens)
     self.allScreensVolumeClicked(self.allScreensVolume)
     _ = self.showAdvanced()
@@ -162,12 +162,12 @@ class KeyboardPrefsViewController: NSViewController, PreferencePane {
     }
   }
 
-  @IBAction func separateSwAfterScale(_ sender: NSButton) {
+  @IBAction func separateCombinedScale(_ sender: NSButton) {
     switch sender.state {
     case .on:
-      prefs.set(true, forKey: PrefKey.separateSwAfterScale.rawValue)
+      prefs.set(true, forKey: PrefKey.separateCombinedScale.rawValue)
     case .off:
-      prefs.set(false, forKey: PrefKey.separateSwAfterScale.rawValue)
+      prefs.set(false, forKey: PrefKey.separateCombinedScale.rawValue)
     default: break
     }
     _ = self.showAdvanced()

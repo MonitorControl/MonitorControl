@@ -115,7 +115,7 @@ class MenuslidersPrefsViewController: NSViewController, PreferencePane {
       self.showAppleFromMenu.isEnabled = false
     }
     self.showContrastSlider.state = prefs.bool(forKey: PrefKey.showContrast.rawValue) ? .on : .off
-    self.showVolumeSlider.state = prefs.bool(forKey: PrefKey.showVolume.rawValue) ? .on : .off
+    self.showVolumeSlider.state = prefs.bool(forKey: PrefKey.hideVolume.rawValue) ? .off : .on
     self.enableSliderSnap.state = prefs.bool(forKey: PrefKey.enableSliderSnap.rawValue) ? .on : .off
     self.showTickMarks.state = prefs.bool(forKey: PrefKey.showTickMarks.rawValue) ? .on : .off
     self.enableSliderPercent.state = prefs.bool(forKey: PrefKey.enableSliderPercent.rawValue) ? .on : .off
@@ -171,9 +171,9 @@ class MenuslidersPrefsViewController: NSViewController, PreferencePane {
   @IBAction func showVolumeSliderClicked(_ sender: NSButton) {
     switch sender.state {
     case .on:
-      prefs.set(true, forKey: PrefKey.showVolume.rawValue)
+      prefs.set(false, forKey: PrefKey.hideVolume.rawValue)
     case .off:
-      prefs.set(false, forKey: PrefKey.showVolume.rawValue)
+      prefs.set(true, forKey: PrefKey.hideVolume.rawValue)
     default: break
     }
     app.updateDisplaysAndMenus()

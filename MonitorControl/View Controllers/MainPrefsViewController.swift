@@ -18,7 +18,7 @@ class MainPrefsViewController: NSViewController, PreferencePane {
   }
 
   @IBOutlet var startAtLogin: NSButton!
-  @IBOutlet var lowerSwAfterBrightness: NSButton!
+  @IBOutlet var combinedBrightness: NSButton!
   @IBOutlet var fallbackSw: NSButton!
   @IBOutlet var showAdvancedDisplays: NSButton!
   @IBOutlet var notEnableDDCDuringStartup: NSButton!
@@ -77,8 +77,8 @@ class MainPrefsViewController: NSViewController, PreferencePane {
     // This is marked as deprectated but according to the function header it still does not have a replacement as of macOS 12 Monterey and is valid to use.
     let startAtLogin = (SMCopyAllJobDictionaries(kSMDomainUserLaunchd).takeRetainedValue() as? [[String: AnyObject]])?.first { $0["Label"] as? String == "\(Bundle.main.bundleIdentifier!)Helper" }?["OnDemand"] as? Bool ?? false
     self.startAtLogin.state = startAtLogin ? .on : .off
-    self.lowerSwAfterBrightness.state = prefs.bool(forKey: PrefKey.lowerSwAfterBrightness.rawValue) ? .on : .off
-    self.fallbackSw.state = prefs.bool(forKey: PrefKey.fallbackSw.rawValue) ? .on : .off
+    self.combinedBrightness.state = prefs.bool(forKey: PrefKey.disableCombinedBrightness.rawValue) ? .off : .on
+    self.fallbackSw.state = prefs.bool(forKey: PrefKey.disableSoftwareFallback.rawValue) ? .off : .on
     self.showAdvancedDisplays.state = prefs.bool(forKey: PrefKey.showAdvancedSettings.rawValue) ? .on : .off
     self.notEnableDDCDuringStartup.state = !prefs.bool(forKey: PrefKey.enableDDCDuringStartup.rawValue) ? .on : .off
     self.writeDDCOnStartup.state = !prefs.bool(forKey: PrefKey.readDDCInsteadOfRestoreValues.rawValue) && prefs.bool(forKey: PrefKey.enableDDCDuringStartup.rawValue) ? .on : .off
@@ -101,12 +101,12 @@ class MainPrefsViewController: NSViewController, PreferencePane {
     }
   }
 
-  @IBAction func lowerSwAfterBrightnessClicked(_ sender: NSButton) {
+  @IBAction func combinedBrightness(_ sender: NSButton) {
     switch sender.state {
     case .on:
-      prefs.set(true, forKey: PrefKey.lowerSwAfterBrightness.rawValue)
+      prefs.set(false, forKey: PrefKey.disableCombinedBrightness.rawValue)
     case .off:
-      prefs.set(false, forKey: PrefKey.lowerSwAfterBrightness.rawValue)
+      prefs.set(true, forKey: PrefKey.disableCombinedBrightness.rawValue)
       DisplayManager.shared.resetSwBrightnessForAllDisplays()
     default: break
     }
@@ -116,9 +116,9 @@ class MainPrefsViewController: NSViewController, PreferencePane {
   @IBAction func fallbackSwClicked(_ sender: NSButton) {
     switch sender.state {
     case .on:
-      prefs.set(true, forKey: PrefKey.fallbackSw.rawValue)
+      prefs.set(false, forKey: PrefKey.disableSoftwareFallback.rawValue)
     case .off:
-      prefs.set(false, forKey: PrefKey.fallbackSw.rawValue)
+      prefs.set(true, forKey: PrefKey.disableSoftwareFallback.rawValue)
     default: break
     }
     DisplayManager.shared.resetSwBrightnessForAllDisplays()

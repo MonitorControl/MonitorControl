@@ -114,8 +114,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     if !prefs.bool(forKey: PrefKey.appAlreadyLaunched.rawValue) {
       // Only preferences that are not false, 0 or "" by default are set here. Assumes pre-wiped database.
       prefs.set(true, forKey: PrefKey.appAlreadyLaunched.rawValue)
-      prefs.set(true, forKey: PrefKey.showVolume.rawValue)
-      prefs.set(true, forKey: PrefKey.fallbackSw.rawValue)
     }
   }
 
@@ -159,7 +157,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     self.updateDisplaysAndMenus()
     if !firstrun {
-      if prefs.bool(forKey: PrefKey.fallbackSw.rawValue) || prefs.bool(forKey: PrefKey.lowerSwAfterBrightness.rawValue) {
+      if !prefs.bool(forKey: PrefKey.disableSoftwareFallback.rawValue) || !prefs.bool(forKey: PrefKey.disableCombinedBrightness.rawValue) {
         DisplayManager.shared.restoreSwBrightnessForAllDisplays(async: true)
       }
     }
@@ -172,7 +170,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     if !prefs.bool(forKey: PrefKey.hideAppleFromMenu.rawValue) {
       displays.append(contentsOf: DisplayManager.shared.getAppleDisplays())
     }
-    if prefs.bool(forKey: PrefKey.fallbackSw.rawValue) {
+    if !prefs.bool(forKey: PrefKey.disableSoftwareFallback.rawValue) {
       displays.append(contentsOf: DisplayManager.shared.getNonVirtualOtherDisplays())
     } else {
       displays.append(contentsOf: DisplayManager.shared.getDdcCapableDisplays())
@@ -201,7 +199,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     var hasSlider = false
     if let otherDisplay = display as? OtherDisplay, !otherDisplay.isSw() {
-      if prefs.bool(forKey: PrefKey.showVolume.rawValue), !display.readPrefValueKeyBool(forkey: PrefKey.unavailableDDC, for: .audioSpeakerVolume) {
+      if !prefs.bool(forKey: PrefKey.hideVolume.rawValue), !display.readPrefValueKeyBool(forkey: PrefKey.unavailableDDC, for: .audioSpeakerVolume) {
         let volumeSliderHandler = SliderHandler.addSliderMenuItem(toMenu: monitorSubMenu, forDisplay: otherDisplay, command: .audioSpeakerVolume, title: NSLocalizedString("Volume", comment: "Shown in menu"), numOfTickMarks: numOfTickMarks)
         otherDisplay.volumeSliderHandler = volumeSliderHandler
         hasSlider = true
@@ -332,7 +330,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
   @objc func handlePreferenceReset() {
     os_log("Resetting all preferences.")
-    if prefs.bool(forKey: PrefKey.fallbackSw.rawValue) || prefs.bool(forKey: PrefKey.lowerSwAfterBrightness.rawValue) {
+    if !prefs.bool(forKey: PrefKey.disableSoftwareFallback.rawValue) || !prefs.bool(forKey: PrefKey.disableCombinedBrightness.rawValue) {
       DisplayManager.shared.resetSwBrightnessForAllDisplays()
     }
     if let bundleID = Bundle.main.bundleIdentifier {

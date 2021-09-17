@@ -72,13 +72,16 @@ enum PrefKey: String {
   case showContrast
 
   // Show volume sliders
-  case showVolume
+  case hideVolume
 
   // Lower via software after brightness
-  case lowerSwAfterBrightness
+  case disableCombinedBrightness
+
+  // Use separated OSD scale for combined brightness
+  case separateCombinedScale
 
   // Fallback to software control for other displays with no DDC
-  case fallbackSw
+  case disableSoftwareFallback
 
   // Do not show sliders for Apple displays (including built-in display) in menu
   case hideAppleFromMenu
@@ -127,9 +130,6 @@ enum PrefKey: String {
 
   // Use fine OSD scale for volume
   case useFineScaleVolume
-
-  // Use fine OSD scale for brightness
-  case separateSwAfterScale
 
   // Use smoothBrightness TODO: Implementation: MOSTLY DONE BUT GAMMA-ACTIVITY ISSUE STILL NOT SOLVED, Pref pane: MISSING
   case useSmoothBrightness

@@ -110,7 +110,7 @@
                                                 <font key="font" metaFont="system"/>
                                             </buttonCell>
                                             <connections>
-                                                <action selector="lowerSwAfterBrightnessClicked:" target="BGD-tY-Myx" id="iTd-hI-jbv"/>
+                                                <action selector="combinedBrightness:" target="BGD-tY-Myx" id="fCj-39-hue"/>
                                             </connections>
                                         </button>
                                     </gridCell>
@@ -290,8 +290,8 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="combinedBrightness" destination="i5K-Cd-wxm" id="sE8-Ra-JSn"/>
                         <outlet property="fallbackSw" destination="IDx-gH-haW" id="WsQ-CF-y3I"/>
-                        <outlet property="lowerSwAfterBrightness" destination="i5K-Cd-wxm" id="sE8-Ra-JSn"/>
                         <outlet property="notEnableDDCDuringStartup" destination="mus-cc-See" id="q1w-87-I7Q"/>
                         <outlet property="readDDCOnStartup" destination="5M2-Ww-w0G" id="Qkl-87-Dik"/>
                         <outlet property="rowDoNothingStartupCheck" destination="g3B-cE-vmT" id="WXd-ID-zYv"/>
@@ -310,7 +310,7 @@
                 </viewController>
                 <customObject id="JDw-du-OST" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="301" y="-375"/>
+            <point key="canvasLocation" x="301" y="-385"/>
         </scene>
         <!--Menusliders Prefs View Controller-->
         <scene sceneID="YU5-7I-f0n">
@@ -881,7 +881,7 @@
                                                 <font key="font" metaFont="system"/>
                                             </buttonCell>
                                             <connections>
-                                                <action selector="separateSwAfterScale:" target="eJ2-Cv-Vfp" id="ZFq-n7-vKZ"/>
+                                                <action selector="separateCombinedScale:" target="eJ2-Cv-Vfp" id="efX-QG-qB9"/>
                                             </connections>
                                         </button>
                                     </gridCell>
@@ -1000,15 +1000,15 @@
                         <outlet property="allScreens" destination="5kF-5S-gp2" id="8vy-4o-WEc"/>
                         <outlet property="allScreensVolume" destination="P7n-7y-LzH" id="JpT-1i-iJs"/>
                         <outlet property="listenFor" destination="fUf-UM-yW3" id="e43-Pl-ntO"/>
-                        <outlet property="rowSeparateSwAfterScaleCheck" destination="4hU-dS-J9a" id="6Zr-4J-FsI"/>
-                        <outlet property="rowSeparateSwAfterScaleText" destination="ON8-Vi-iMV" id="lRE-Ad-h8L"/>
+                        <outlet property="rowSeparateCombinedScaleCheck" destination="4hU-dS-J9a" id="6Zr-4J-FsI"/>
+                        <outlet property="rowSeparateCombinedScaleText" destination="ON8-Vi-iMV" id="lRE-Ad-h8L"/>
                         <outlet property="rowUseAudioNameCheck" destination="1kc-MK-daX" id="2AH-sK-k1p"/>
                         <outlet property="rowUseAudioNameText" destination="73k-Ho-qxa" id="yHm-CV-4aa"/>
                         <outlet property="rowUseFineScaleCheck" destination="jJT-as-drf" id="2fT-4t-kAg"/>
                         <outlet property="rowUseFineScaleText" destination="4Ie-T6-Ifw" id="faU-z6-bgQ"/>
                         <outlet property="rowUseFocusCheck" destination="7CD-Vz-yse" id="EdV-ap-6tr"/>
                         <outlet property="rowUseFocusText" destination="UIH-jA-Cfi" id="NAn-5h-Shx"/>
-                        <outlet property="separateSwAfterScale" destination="f8L-OE-kAQ" id="Pgg-cY-eTx"/>
+                        <outlet property="separateCombinedScale" destination="f8L-OE-kAQ" id="Pgg-cY-eTx"/>
                         <outlet property="useAudioDeviceNameMatching" destination="Jvd-Zg-MJL" id="uLi-xg-l26"/>
                         <outlet property="useFineScale" destination="M5g-VZ-qiM" id="5ZM-Nh-97j"/>
                         <outlet property="useFineScaleVolume" destination="aab-nY-XnS" id="1kA-7E-785"/>

@@ -268,7 +268,7 @@ class OtherDisplay: Display {
   }
 
   override func stepBrightness(isUp: Bool, isSmallIncrement: Bool) {
-    if self.isSw(), prefs.bool(forKey: PrefKey.fallbackSw.rawValue) {
+    if self.isSw(), !prefs.bool(forKey: PrefKey.disableSoftwareFallback.rawValue) {
       super.stepBrightness(isUp: isUp, isSmallIncrement: isSmallIncrement)
       return
     }
@@ -277,7 +277,7 @@ class OtherDisplay: Display {
     }
     let currentValue = self.readPrefValue(for: .brightness)
     var osdValue: Float = 1
-    if prefs.bool(forKey: PrefKey.lowerSwAfterBrightness.rawValue), prefs.bool(forKey: PrefKey.separateSwAfterScale.rawValue) {
+    if !prefs.bool(forKey: PrefKey.disableCombinedBrightness.rawValue), prefs.bool(forKey: PrefKey.separateCombinedScale.rawValue) {
       osdValue = self.calcNewValue(currentValue: currentValue, isUp: isUp, isSmallIncrement: isSmallIncrement, half: true)
       _ = self.setBrightness(osdValue)
       if osdValue > 0.5 {
@@ -298,7 +298,7 @@ class OtherDisplay: Display {
   override func setDirectBrightness(_ to: Float, transient: Bool = false) -> Bool {
     let value = max(min(to, 1), 0)
     if !self.isSw() {
-      if prefs.bool(forKey: PrefKey.lowerSwAfterBrightness.rawValue) {
+      if !prefs.bool(forKey: PrefKey.disableCombinedBrightness.rawValue) {
         var brightnessValue: Float = 0
         var brightnessSwValue: Float = 1
         if value >= 0.5 {
