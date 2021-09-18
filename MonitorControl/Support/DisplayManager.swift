@@ -15,14 +15,14 @@ class DisplayManager {
   // Gamma activity enforcer and window shade
 
   func resolveEffectiveDisplayID(_ displayID: CGDirectDisplayID) -> CGDirectDisplayID {
-    var realDisplayId = displayID
+    var realDisplayID = displayID
     if CGDisplayIsInHWMirrorSet(displayID) != 0 || CGDisplayIsInMirrorSet(displayID) != 0 {
       let mirroredDisplayID = CGDisplayMirrorsDisplay(displayID)
       if mirroredDisplayID != 0 {
-        realDisplayId = mirroredDisplayID
+        realDisplayID = mirroredDisplayID
       }
     }
-    return realDisplayId
+    return realDisplayID
   }
 
   let gammaActivityEnforcer = NSWindow(contentRect: .init(origin: NSPoint(x: 0, y: 0), size: .init(width: DEBUG_GAMMA_ENFORCER ? 15 : 1, height: DEBUG_GAMMA_ENFORCER ? 15 : 1)), styleMask: [], backing: .buffered, defer: false)
@@ -55,6 +55,10 @@ class DisplayManager {
 
   internal var shades: [CGDirectDisplayID: NSWindow] = [:]
 
+  func isDisqualifiedFromShade(_ displayID: CGDirectDisplayID) -> Bool { // We ban mirror members from shade control as it might lead to double control
+    return (CGDisplayIsInHWMirrorSet(displayID) != 0 || CGDisplayIsInMirrorSet(displayID) != 0) ? true : false
+  }
+
   internal func createShadeOnDisplay(displayID: CGDirectDisplayID) -> NSWindow? {
     if let screen = NSScreen.getByDisplayID(displayID: displayID) {
       let windowShade = NSWindow(contentRect: .init(origin: NSPoint(x: 0, y: 0), size: .init(width: 10, height: 1)), styleMask: [], backing: .buffered, defer: false)
@@ -62,22 +66,25 @@ class DisplayManager {
       windowShade.isMovableByWindowBackground = false
       windowShade.backgroundColor = .black
       windowShade.ignoresMouseEvents = true
-      windowShade.level = .screenSaver
+      windowShade.level = NSWindow.Level(rawValue: Int(CGShieldingWindowLevel()))
       windowShade.alphaValue = 0
       windowShade.orderFrontRegardless()
-      windowShade.collectionBehavior = [.stationary, .canJoinAllSpaces]
+      windowShade.collectionBehavior = [.stationary, .canJoinAllSpaces, .ignoresCycle]
       windowShade.setFrame(screen.frame, display: true)
-      os_log("Window shade enforcer created.", type: .debug)
+      os_log("Window shade created.", type: .debug)
       return windowShade
     }
     return nil
   }
 
   func getShade(displayID: CGDirectDisplayID) -> NSWindow? {
-    if let shade = shades[resolveEffectiveDisplayID(displayID)] {
+    guard !self.isDisqualifiedFromShade(displayID) else {
+      return nil
+    }
+    if let shade = shades[displayID] {
       return shade
     } else {
-      if let shade = self.createShadeOnDisplay(displayID: resolveEffectiveDisplayID(displayID)) {
+      if let shade = self.createShadeOnDisplay(displayID: displayID) {
         self.shades[displayID] = shade
         return shade
       }
@@ -86,17 +93,23 @@ class DisplayManager {
   }
 
   func destroyShade(displayID: CGDirectDisplayID) -> Bool {
-    if let shade = shades[resolveEffectiveDisplayID(displayID)] {
+    guard !self.isDisqualifiedFromShade(displayID) else {
+      return false
+    }
+    if let shade = shades[displayID] {
       shade.alphaValue = 1
       shade.close()
-      self.shades.removeValue(forKey: self.resolveEffectiveDisplayID(displayID))
+      self.shades.removeValue(forKey: displayID)
       return true
     }
     return false
   }
 
   func updateShade(displayID: CGDirectDisplayID) -> Bool {
-    if let screen = NSScreen.getByDisplayID(displayID: resolveEffectiveDisplayID(displayID)) {
+    guard !self.isDisqualifiedFromShade(displayID) else {
+      return false
+    }
+    if let screen = NSScreen.getByDisplayID(displayID: displayID) {
       if let shade = getShade(displayID: displayID) {
         shade.setFrame(screen.frame, display: true)
         return true
@@ -106,6 +119,9 @@ class DisplayManager {
   }
 
   func getShadeAlpha(displayID: CGDirectDisplayID) -> Float? {
+    guard !self.isDisqualifiedFromShade(displayID) else {
+      return 1
+    }
     if let shade = getShade(displayID: displayID) {
       return Float(shade.alphaValue)
     } else {
@@ -114,6 +130,9 @@ class DisplayManager {
   }
 
   func setShadeAlpha(value: Float, displayID: CGDirectDisplayID) -> Bool {
+    guard !self.isDisqualifiedFromShade(displayID) else {
+      return false
+    }
     if let shade = getShade(displayID: displayID) {
       shade.alphaValue = CGFloat(value)
       return true
@@ -202,25 +221,9 @@ class DisplayManager {
     return self.displays
   }
 
-  func getAllNonVirtualDisplays() -> [Display] {
-    return self.displays.compactMap { display -> Display? in
-      if !display.isVirtual {
-        return display
-      } else { return nil }
-    }
-  }
-
   func getDdcCapableDisplays() -> [OtherDisplay] {
     return self.displays.compactMap { display -> OtherDisplay? in
       if let otherDisplay = display as? OtherDisplay, !otherDisplay.isSw() {
-        return otherDisplay
-      } else { return nil }
-    }
-  }
-
-  func getNonVirtualOtherDisplays() -> [OtherDisplay] {
-    return self.displays.compactMap { display -> OtherDisplay? in
-      if let otherDisplay = display as? OtherDisplay, !otherDisplay.isVirtual {
         return otherDisplay
       } else { return nil }
     }

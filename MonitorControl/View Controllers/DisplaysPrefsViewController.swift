@@ -74,7 +74,7 @@ class DisplaysPrefsViewController: NSViewController, PreferencePane, NSTableView
       displayType = NSLocalizedString("Virtual Display", comment: "Shown in the Display Preferences")
       displayImage = "tv.and.mediabox"
       controlMethod = NSLocalizedString("Software (Shade)", comment: "Shown in the Display Preferences") + "  ⚠️"
-      controlStatus = NSLocalizedString("This is a virtual display (examples: AirPlay, SideCar, display connected via a DisplayLink Dock or similar) which does not allow hardware or software gamma control.", comment: "Shown in the Display Preferences")
+      controlStatus = NSLocalizedString("This is a virtual display (examples: AirPlay, Sidecar, display connected via a DisplayLink Dock or similar) which does not allow hardware or software gammatable control. Shading is used as a substitute but only in non-mirror scenarios. Mouse cursor will be unaffected and artifacts may appear when entering/leaving full screen mode.", comment: "Shown in the Display Preferences")
     } else if display is OtherDisplay {
       displayType = NSLocalizedString("External Display", comment: "Shown in the Display Preferences")
       displayImage = "display"
@@ -82,7 +82,7 @@ class DisplaysPrefsViewController: NSViewController, PreferencePane, NSTableView
         if otherDisplay.isSwOnly() {
           controlMethod = NSLocalizedString("Software (Gamma)", comment: "Shown in the Display Preferences") + "  ⚠️"
           displayImage = "display.trianglebadge.exclamationmark"
-          controlStatus = NSLocalizedString("This display allows for software control only. Reasons for this might be using the HDMI port of a Mac mini (which blocks hardware DDC control) or having a blacklisted display.", comment: "Shown in the Display Preferences")
+          controlStatus = NSLocalizedString("This display allows for software brightness control via gammatable manipulation as it does not support hardware control. Reasons for this might be using the HDMI port of a Mac mini (which blocks hardware DDC control) or having a blacklisted display.", comment: "Shown in the Display Preferences")
         } else {
           if otherDisplay.isSw() {
             controlMethod = NSLocalizedString("Software (Gamma, Forced)", comment: "Shown in the Display Preferences") + "  ⚠️"

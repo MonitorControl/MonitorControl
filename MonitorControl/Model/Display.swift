@@ -224,23 +224,6 @@ class Display: Equatable {
     }
   }
 
-  func getShowOsdDisplayId() -> CGDirectDisplayID {
-    if CGDisplayIsInHWMirrorSet(self.identifier) != 0 || CGDisplayIsInMirrorSet(self.identifier) != 0, CGDisplayMirrorsDisplay(self.identifier) != 0 {
-      for mirrorMaestro in DisplayManager.shared.getAllDisplays() where CGDisplayMirrorsDisplay(self.identifier) == mirrorMaestro.identifier {
-        if let otherMirrorMain = mirrorMaestro as? OtherDisplay, otherMirrorMain.isSw() {
-          var thereAreOthers = false
-          for mirrorMember in DisplayManager.shared.getAllNonVirtualDisplays() where CGDisplayMirrorsDisplay(mirrorMember.identifier) == CGDisplayMirrorsDisplay(self.identifier) && mirrorMember.identifier != self.identifier {
-            thereAreOthers = true
-          }
-          if !thereAreOthers {
-            return otherMirrorMain.identifier
-          }
-        }
-      }
-    }
-    return self.identifier
-  }
-
   func swUpdateDefaultGammaTable() {
     CGGetDisplayTransferByTable(self.identifier, 256, &self.defaultGammaTableRed, &self.defaultGammaTableGreen, &self.defaultGammaTableBlue, &self.defaultGammaTableSampleCount)
     let redPeak = self.defaultGammaTableRed.max() ?? 0
@@ -287,7 +270,7 @@ class Display: Equatable {
       }
     } else {
       if self.isVirtual {
-        _ = DisplayManager.shared.setShadeAlpha(value: 1 - value, displayID: self.identifier)
+        return DisplayManager.shared.setShadeAlpha(value: 1 - value, displayID: self.identifier)
       } else {
         let gammaTableRed = self.defaultGammaTableRed.map { $0 * newValue }
         let gammaTableGreen = self.defaultGammaTableGreen.map { $0 * newValue }

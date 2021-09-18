@@ -83,9 +83,6 @@
 "Shortcuts not available" = "Atajos no disponibles";
 
 /* Shown in the Display Preferences */
-"Software (Forced)" = "Software (Forzado)";
-
-/* Shown in the Display Preferences */
 "Software (Gamma)" = "Software (Gamma)";
 
 /* Shown in the Display Preferences */
@@ -95,10 +92,7 @@
 "Software (Shade)" = "Software (Shade)";
 
 /* Shown in the Display Preferences */
-"Software Only" = "Solo Software";
-
-/* Shown in the Display Preferences */
-"This display allows for software control only. Reasons for this might be using the HDMI port of a Mac mini (which blocks hardware DDC control) or having a blacklisted display." = "This display allows for software control only. Reasons for this might be using the HDMI port of a Mac mini (which blocks hardware DDC control) or having a blacklisted display.";
+"This display allows for software brightness control via gammatable manipulation as it does not support hardware control. Reasons for this might be using the HDMI port of a Mac mini (which blocks hardware DDC control) or having a blacklisted display." = "This display allows for software brightness control via gammatable manipulation as it does not support hardware control. Reasons for this might be using the HDMI port of a Mac mini (which blocks hardware DDC control) or having a blacklisted display.";
 
 /* Shown in the Display Preferences */
 "This display has an unspecified control status." = "This display has an unspecified control status.";
@@ -113,10 +107,7 @@
 "This display supports native Apple brightness protocol. This allows macOS to control this display without MonitorControl as well." = "This display supports native Apple brightness protocol. This allows macOS to control this display without MonitorControl as well.";
 
 /* Shown in the Display Preferences */
-"This is a virtual display (examples: AirPlay, SideCar, display connected via a DisplayLink Dock or similar) which does not allow control." = "This is a virtual display (examples: AirPlay, SideCar, display connected via a DisplayLink Dock or similar) which does not allow control.";
-
-/* Shown in the Display Preferences */
-"This is a virtual display (examples: AirPlay, SideCar, display connected via a DisplayLink Dock or similar) which does not allow hardware or software gamma control." = "This is a virtual display (examples: AirPlay, SideCar, display connected via a DisplayLink Dock or similar) which does not allow hardware or software gamma control.";
+"This is a virtual display (examples: AirPlay, Sidecar, display connected via a DisplayLink Dock or similar) which does not allow hardware or software gammatable control. Shading is used as a substitute but only in non-mirror scenarios. Mouse cursor will be unaffected and artifacts may appear when entering/leaving full screen mode." = "This is a virtual display (examples: AirPlay, Sidecar, display connected via a DisplayLink Dock or similar) which does not allow hardware or software gammatable control. Shading is used as a substitute but only in non-mirror scenarios. Mouse cursor will be unaffected and artifacts may appear when entering/leaving full screen mode.";
 
 /* Unknown display name */
 "Unknown" = "Desconocido";
