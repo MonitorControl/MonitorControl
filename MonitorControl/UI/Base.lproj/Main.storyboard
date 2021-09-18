@@ -10,7 +10,7 @@
         <scene sceneID="zAg-r8-WQ5">
             <objects>
                 <viewController storyboardIdentifier="MainPrefsVC" id="BGD-tY-Myx" customClass="MainPrefsViewController" customModule="MonitorControl" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" horizontalHuggingPriority="1" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="COE-Oc-gZs">
+                    <view key="view" horizontalHuggingPriority="1" translatesAutoresizingMaskIntoConstraints="NO" id="COE-Oc-gZs">
                         <rect key="frame" x="0.0" y="0.0" width="691" height="563"/>
                         <subviews>
                             <gridView xPlacement="leading" yPlacement="fill" rowAlignment="none" rowSpacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="noT-gJ-0yS">

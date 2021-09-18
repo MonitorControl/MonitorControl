@@ -86,6 +86,15 @@
 "Software (Forced)" = "Yazılım (Zorunlu)";
 
 /* Shown in the Display Preferences */
+"Software (Gamma)" = "Software (Gamma)";
+
+/* Shown in the Display Preferences */
+"Software (Gamma, Forced)" = "Software (Gamma, Forced)";
+
+/* Shown in the Display Preferences */
+"Software (Shade)" = "Software (Shade)";
+
+/* Shown in the Display Preferences */
 "Software Only" = "Sadece Yazılım";
 
 /* Shown in the Display Preferences */
@@ -105,6 +114,9 @@
 
 /* Shown in the Display Preferences */
 "This is a virtual display (examples: AirPlay, SideCar, display connected via a DisplayLink Dock or similar) which does not allow control." = "This is a virtual display (examples: AirPlay, SideCar, display connected via a DisplayLink Dock or similar) which does not allow control.";
+
+/* Shown in the Display Preferences */
+"This is a virtual display (examples: AirPlay, SideCar, display connected via a DisplayLink Dock or similar) which does not allow hardware or software gamma control." = "This is a virtual display (examples: AirPlay, SideCar, display connected via a DisplayLink Dock or similar) which does not allow hardware or software gamma control.";
 
 /* Unknown display name */
 "Unknown" = "Bilinmeyen";

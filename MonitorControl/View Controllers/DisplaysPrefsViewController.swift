@@ -73,19 +73,19 @@ class DisplaysPrefsViewController: NSViewController, PreferencePane, NSTableView
     if display.isVirtual {
       displayType = NSLocalizedString("Virtual Display", comment: "Shown in the Display Preferences")
       displayImage = "tv.and.mediabox"
-      controlMethod = NSLocalizedString("No Control", comment: "Shown in the Display Preferences") + "  ⚠️"
-      controlStatus = NSLocalizedString("This is a virtual display (examples: AirPlay, SideCar, display connected via a DisplayLink Dock or similar) which does not allow control.", comment: "Shown in the Display Preferences")
+      controlMethod = NSLocalizedString("Software (Shade)", comment: "Shown in the Display Preferences") + "  ⚠️"
+      controlStatus = NSLocalizedString("This is a virtual display (examples: AirPlay, SideCar, display connected via a DisplayLink Dock or similar) which does not allow hardware or software gamma control.", comment: "Shown in the Display Preferences")
     } else if display is OtherDisplay {
       displayType = NSLocalizedString("External Display", comment: "Shown in the Display Preferences")
       displayImage = "display"
       if let otherDisplay: OtherDisplay = display as? OtherDisplay {
         if otherDisplay.isSwOnly() {
-          controlMethod = NSLocalizedString("Software Only", comment: "Shown in the Display Preferences") + "  ⚠️"
+          controlMethod = NSLocalizedString("Software (Gamma)", comment: "Shown in the Display Preferences") + "  ⚠️"
           displayImage = "display.trianglebadge.exclamationmark"
           controlStatus = NSLocalizedString("This display allows for software control only. Reasons for this might be using the HDMI port of a Mac mini (which blocks hardware DDC control) or having a blacklisted display.", comment: "Shown in the Display Preferences")
         } else {
           if otherDisplay.isSw() {
-            controlMethod = NSLocalizedString("Software (Forced)", comment: "Shown in the Display Preferences") + "  ⚠️"
+            controlMethod = NSLocalizedString("Software (Gamma, Forced)", comment: "Shown in the Display Preferences") + "  ⚠️"
             controlStatus = NSLocalizedString("This display is reported to support hardware DDC control but the current settings allow for software control only.", comment: "Shown in the Display Preferences")
           } else {
             controlMethod = NSLocalizedString("Hardware (DDC)", comment: "Shown in the Display Preferences")
@@ -126,10 +126,9 @@ class DisplaysPrefsViewController: NSViewController, PreferencePane, NSTableView
       cell.friendlyName.stringValue = display.friendlyName
       cell.friendlyName.isEditable = true
       // Enabled
-      cell.enabledButton.state = display.isEnabled && !display.isVirtual ? .on : .off
-      cell.enabledButton.isEnabled = !display.isVirtual
+      cell.enabledButton.state = display.isEnabled ? .on : .off
       // DDC
-      cell.ddcButton.state = ((display as? OtherDisplay)?.isSw() ?? true) || ((display as? OtherDisplay)?.isVirtual ?? true) ? .off : .on
+      cell.ddcButton.state = ((display as? OtherDisplay)?.isSw() ?? true) ? .off : .on
       if ((display as? OtherDisplay)?.isSwOnly() ?? true) || ((display as? OtherDisplay)?.isVirtual ?? true) {
         cell.ddcButton.isEnabled = false
       } else {
@@ -146,7 +145,7 @@ class DisplaysPrefsViewController: NSViewController, PreferencePane, NSTableView
         cell.displayImage.image = NSImage(named: NSImage.computerName)!
       }
       // Disable Volume OSD
-      if let otherDisplay = display as? OtherDisplay, !otherDisplay.isVirtual, !otherDisplay.isSw() {
+      if let otherDisplay = display as? OtherDisplay, !otherDisplay.isSw() {
         cell.disableVolumeOSDButton.state = otherDisplay.hideOsd ? .on : .off
         cell.disableVolumeOSDButton.isEnabled = true
       } else {
@@ -154,7 +153,7 @@ class DisplaysPrefsViewController: NSViewController, PreferencePane, NSTableView
         cell.disableVolumeOSDButton.isEnabled = false
       }
       // Advanced settings
-      if let otherDisplay = display as? OtherDisplay, !otherDisplay.isSwOnly(), !otherDisplay.isVirtual {
+      if let otherDisplay = display as? OtherDisplay, !otherDisplay.isSwOnly() {
         cell.pollingModeMenu.isEnabled = true
         cell.pollingModeMenu.selectItem(withTag: otherDisplay.pollingMode)
         if otherDisplay.pollingMode == 4 {

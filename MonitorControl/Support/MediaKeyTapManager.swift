@@ -86,7 +86,7 @@ class MediaKeyTapManager: MediaKeyTapDelegate {
       return
     }
     var wasNotIsPressedVolumeSentAlready = false
-    for display in affectedDisplays where display.isEnabled && !display.isVirtual {
+    for display in affectedDisplays where display.isEnabled {
       switch mediaKey {
       case .brightnessUp:
         var isAnyDisplayInSwAfterBrightnessMode: Bool = false

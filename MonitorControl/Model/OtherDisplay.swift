@@ -259,7 +259,7 @@ class OtherDisplay: Display {
   }
 
   func isSwOnly() -> Bool {
-    return (!self.arm64ddc && self.ddc == nil && !self.isVirtual)
+    return (!self.arm64ddc && self.ddc == nil) || self.isVirtual
   }
 
   func isSw() -> Bool {

@@ -220,7 +220,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         otherDisplay.setupCurrentAndMaxValues(command: .brightness, firstrun: firstrun)
       }
     }
-    if !prefs.bool(forKey: PrefKey.hideBrightness.rawValue), !display.isVirtual, !display.readPrefValueKeyBool(forkey: PrefKey.unavailableDDC, for: .brightness) {
+    if !prefs.bool(forKey: PrefKey.hideBrightness.rawValue), !display.readPrefValueKeyBool(forkey: PrefKey.unavailableDDC, for: .brightness) {
       let brightnessSliderHandler = SliderHandler.addSliderMenuItem(toMenu: monitorSubMenu, forDisplay: display, command: .brightness, title: NSLocalizedString("Brightness", comment: "Shown in menu"), numOfTickMarks: numOfTickMarks)
       display.brightnessSliderHandler = brightnessSliderHandler
       hasSlider = true

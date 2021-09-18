@@ -12,6 +12,19 @@ class DisplayManager {
   var displays: [Display] = []
   var audioControlTargetDisplays: [OtherDisplay] = []
 
+  // Gamma activity enforcer and window shade
+
+  func resolveEffectiveDisplayID(_ displayID: CGDirectDisplayID) -> CGDirectDisplayID {
+    var realDisplayId = displayID
+    if CGDisplayIsInHWMirrorSet(displayID) != 0 || CGDisplayIsInMirrorSet(displayID) != 0 {
+      let mirroredDisplayID = CGDisplayMirrorsDisplay(displayID)
+      if mirroredDisplayID != 0 {
+        realDisplayId = mirroredDisplayID
+      }
+    }
+    return realDisplayId
+  }
+
   let gammaActivityEnforcer = NSWindow(contentRect: .init(origin: NSPoint(x: 0, y: 0), size: .init(width: DEBUG_GAMMA_ENFORCER ? 15 : 1, height: DEBUG_GAMMA_ENFORCER ? 15 : 1)), styleMask: [], backing: .buffered, defer: false)
 
   func createGammaActivityEnforcer() {
@@ -21,8 +34,8 @@ class DisplayManager {
     self.gammaActivityEnforcer.ignoresMouseEvents = true
     self.gammaActivityEnforcer.level = .screenSaver
     self.gammaActivityEnforcer.orderFrontRegardless()
-    os_log("Gamma activity enforcer created.", type: .debug)
     self.gammaActivityEnforcer.collectionBehavior = [.stationary, .canJoinAllSpaces]
+    os_log("Gamma activity enforcer created.", type: .debug)
   }
 
   func enforceGammaActivity() {
@@ -34,18 +47,71 @@ class DisplayManager {
   }
 
   func moveGammaActivityEnforcer(displayID: CGDirectDisplayID) {
-    var focusDisplayId = displayID
-    if CGDisplayIsInHWMirrorSet(displayID) != 0 || CGDisplayIsInMirrorSet(displayID) != 0 {
-      let mirroredDisplayID = CGDisplayMirrorsDisplay(displayID)
-      if mirroredDisplayID != 0 {
-        focusDisplayId = mirroredDisplayID
-      }
-    }
-    if let screen = NSScreen.getByDisplayID(displayID: focusDisplayId) {
+    if let screen = NSScreen.getByDisplayID(displayID: resolveEffectiveDisplayID(displayID)) {
       self.gammaActivityEnforcer.setFrameOrigin(screen.frame.origin)
     }
     self.gammaActivityEnforcer.orderFrontRegardless()
   }
+
+  internal var shades: [CGDirectDisplayID: NSWindow] = [:]
+
+  internal func createShadeOnDisplay(displayID: CGDirectDisplayID) -> NSWindow? {
+    if let screen = NSScreen.getByDisplayID(displayID: displayID) {
+      let windowShade = NSWindow(contentRect: .init(origin: NSPoint(x: 0, y: 0), size: .init(width: 10, height: 1)), styleMask: [], backing: .buffered, defer: false)
+      windowShade.title = "Monitor Control Window Shade for Display " + String(displayID)
+      windowShade.isMovableByWindowBackground = false
+      windowShade.backgroundColor = .black
+      windowShade.ignoresMouseEvents = true
+      windowShade.level = .screenSaver
+      windowShade.alphaValue = 0
+      windowShade.orderFrontRegardless()
+      windowShade.collectionBehavior = [.stationary, .canJoinAllSpaces]
+      windowShade.setFrame(screen.frame, display: true)
+      os_log("Window shade enforcer created.", type: .debug)
+      return windowShade
+    }
+    return nil
+  }
+
+  func getShade(displayID: CGDirectDisplayID) -> NSWindow? {
+    if let shade = shades[resolveEffectiveDisplayID(displayID)] {
+      return shade
+    } else {
+      if let shade = self.createShadeOnDisplay(displayID: resolveEffectiveDisplayID(displayID)) {
+        self.shades[displayID] = shade
+        return shade
+      }
+    }
+    return nil
+  }
+
+  func updateShade(displayID: CGDirectDisplayID) -> Bool {
+    if let screen = NSScreen.getByDisplayID(displayID: resolveEffectiveDisplayID(displayID)) {
+      if let shade = getShade(displayID: displayID) {
+        shade.setFrame(screen.frame, display: true)
+        return true
+      }
+    }
+    return false
+  }
+
+  func getShadeAlpha(displayID: CGDirectDisplayID) -> Float? {
+    if let shade = getShade(displayID: displayID) {
+      return Float(shade.alphaValue)
+    } else {
+      return 1
+    }
+  }
+
+  func setShadeAlpha(value: Float, displayID: CGDirectDisplayID) -> Bool {
+    if let shade = getShade(displayID: displayID) {
+      shade.alphaValue = CGFloat(value)
+      return true
+    }
+    return false
+  }
+
+  // Display utilities
 
   func updateDisplays() {
     self.clearDisplays()
@@ -136,7 +202,7 @@ class DisplayManager {
 
   func getDdcCapableDisplays() -> [OtherDisplay] {
     return self.displays.compactMap { display -> OtherDisplay? in
-      if let otherDisplay = display as? OtherDisplay, !otherDisplay.isSw(), !otherDisplay.isVirtual {
+      if let otherDisplay = display as? OtherDisplay, !otherDisplay.isSw() {
         return otherDisplay
       } else { return nil }
     }
