@@ -8,7 +8,7 @@
 "Are you sure you want to enable a longer delay? Doing so may freeze your system and require a restart. Start at login will be disabled as a safety measure." = "Are you sure you want to enable a longer delay? Doing so may freeze your system and require a restart. Start at login will be disabled as a safety measure.";
 
 /* Shown in the alert dialog */
-"Are you sure you want to reset all preferences?" = "Are you sure you want to reset all preferences?";
+"Are you sure you want to reset all preferences?" = "すべての環境設定を初期状態に戻してよろしいですか？";
 
 /* Sown in menu */
 "Brightness" = "画面輝度";
@@ -26,7 +26,7 @@
 "Copyright Ⓒ MonitorControl, " = "Copyright Ⓒ MonitorControl, ";
 
 /* Shown in the main prefs window */
-"Displays" = "Displays";
+"Displays" = "画面";
 
 /* Shown in the alert dialog */
 "Enable Longer Delay?" = "Enable Longer Delay?";
@@ -62,7 +62,7 @@
 "Other Display" = "Other Display";
 
 /* Shown in the alert dialog */
-"Reset Preferences?" = "Reset Preferences?";
+"Reset Preferences?" = "環境設定を初期状態に戻しますか？";
 
 /* Shown in the alert dialog */
 "Safe Mode Activated" = "Safe Mode Activated";
