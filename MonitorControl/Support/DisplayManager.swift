@@ -85,6 +85,16 @@ class DisplayManager {
     return nil
   }
 
+  func destroyShade(displayID: CGDirectDisplayID) -> Bool {
+    if let shade = shades[resolveEffectiveDisplayID(displayID)] {
+      shade.alphaValue = 1
+      shade.close()
+      self.shades.removeValue(forKey: self.resolveEffectiveDisplayID(displayID))
+      return true
+    }
+    return false
+  }
+
   func updateShade(displayID: CGDirectDisplayID) -> Bool {
     if let screen = NSScreen.getByDisplayID(displayID: resolveEffectiveDisplayID(displayID)) {
       if let shade = getShade(displayID: displayID) {
@@ -292,7 +302,7 @@ class DisplayManager {
   // Semi-static functions (could be moved elsewhere easily)
 
   func resetSwBrightnessForAllDisplays(settingsOnly: Bool = false, async: Bool = false) {
-    for otherDisplay in self.getNonVirtualOtherDisplays() {
+    for otherDisplay in self.getOtherDisplays() {
       if !settingsOnly {
         _ = otherDisplay.setSwBrightness(1, smooth: async)
         otherDisplay.smoothBrightnessTransient = 1
@@ -326,7 +336,7 @@ class DisplayManager {
 
   func getAffectedDisplays(isBrightness: Bool = false, isVolume: Bool = false) -> [Display]? {
     var affectedDisplays: [Display]
-    let allDisplays = self.getAllNonVirtualDisplays()
+    let allDisplays = self.getAllDisplays()
     var currentDisplay: Display?
     if isBrightness {
       if prefs.bool(forKey: PrefKey.allScreensBrightness.rawValue) {

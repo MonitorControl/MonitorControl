@@ -175,7 +175,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       displays.append(contentsOf: DisplayManager.shared.getAppleDisplays())
     }
     if !prefs.bool(forKey: PrefKey.disableSoftwareFallback.rawValue) {
-      displays.append(contentsOf: DisplayManager.shared.getNonVirtualOtherDisplays())
+      displays.append(contentsOf: DisplayManager.shared.getOtherDisplays())
     } else {
       displays.append(contentsOf: DisplayManager.shared.getDdcCapableDisplays())
     }

@@ -349,12 +349,12 @@ class OtherDisplay: Display {
       } else {
         _ = self.writeDDCValues(command: .brightness, value: self.convValueToDDC(for: .brightness, from: value))
       }
+      if !transient {
+        self.savePrefValue(value, for: .brightness)
+        self.smoothBrightnessTransient = value
+      }
     } else {
-      _ = self.setSwBrightness(value)
-    }
-    if !transient {
-      self.savePrefValue(value, for: .brightness)
-      self.smoothBrightnessTransient = value
+      _ = super.setDirectBrightness(to, transient: transient)
     }
     return true
   }

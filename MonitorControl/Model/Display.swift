@@ -117,6 +117,11 @@ class Display: Equatable {
     self.isVirtual = DEBUG_VIRTUAL ? true : isVirtual
     self.swUpdateDefaultGammaTable()
     self.smoothBrightnessTransient = self.getBrightness()
+    if isVirtual {
+      _ = DisplayManager.shared.updateShade(displayID: self.identifier)
+    } else {
+      _ = DisplayManager.shared.destroyShade(displayID: self.identifier)
+    }
   }
 
   func calcNewBrightness(isUp: Bool, isSmallIncrement: Bool) -> Float {
@@ -219,7 +224,7 @@ class Display: Equatable {
 
   func getShowOsdDisplayId() -> CGDirectDisplayID {
     if CGDisplayIsInHWMirrorSet(self.identifier) != 0 || CGDisplayIsInMirrorSet(self.identifier) != 0, CGDisplayMirrorsDisplay(self.identifier) != 0 {
-      for mirrorMaestro in DisplayManager.shared.getAllNonVirtualDisplays() where CGDisplayMirrorsDisplay(self.identifier) == mirrorMaestro.identifier {
+      for mirrorMaestro in DisplayManager.shared.getAllDisplays() where CGDisplayMirrorsDisplay(self.identifier) == mirrorMaestro.identifier {
         if let otherMirrorMain = mirrorMaestro as? OtherDisplay, otherMirrorMain.isSw() {
           var thereAreOthers = false
           for mirrorMember in DisplayManager.shared.getAllNonVirtualDisplays() where CGDisplayMirrorsDisplay(mirrorMember.identifier) == CGDisplayMirrorsDisplay(self.identifier) && mirrorMember.identifier != self.identifier {
@@ -263,29 +268,40 @@ class Display: Equatable {
       DispatchQueue.global(qos: .userInteractive).async {
         self.swBrightnessSemaphore.wait()
         for transientValue in stride(from: currentValue, to: newValue, by: 0.005 * (currentValue > newValue ? -1 : 1)) {
-          let gammaTableRed = self.defaultGammaTableRed.map { $0 * transientValue }
-          let gammaTableGreen = self.defaultGammaTableGreen.map { $0 * transientValue }
-          let gammaTableBlue = self.defaultGammaTableBlue.map { $0 * transientValue }
           guard app.reconfigureID == 0 else {
             return
           }
-          CGSetDisplayTransferByTable(self.identifier, self.defaultGammaTableSampleCount, gammaTableRed, gammaTableGreen, gammaTableBlue)
+          if self.isVirtual {
+            _ = DisplayManager.shared.setShadeAlpha(value: 1 - transientValue, displayID: self.identifier)
+          } else {
+            let gammaTableRed = self.defaultGammaTableRed.map { $0 * transientValue }
+            let gammaTableGreen = self.defaultGammaTableGreen.map { $0 * transientValue }
+            let gammaTableBlue = self.defaultGammaTableBlue.map { $0 * transientValue }
+            CGSetDisplayTransferByTable(self.identifier, self.defaultGammaTableSampleCount, gammaTableRed, gammaTableGreen, gammaTableBlue)
+          }
           Thread.sleep(forTimeInterval: 0.001) // Let's make things quick if not performed in the background
         }
         self.swBrightnessSemaphore.signal()
       }
     } else {
-      let gammaTableRed = self.defaultGammaTableRed.map { $0 * newValue }
-      let gammaTableGreen = self.defaultGammaTableGreen.map { $0 * newValue }
-      let gammaTableBlue = self.defaultGammaTableBlue.map { $0 * newValue }
-      DisplayManager.shared.moveGammaActivityEnforcer(displayID: self.identifier)
-      CGSetDisplayTransferByTable(self.identifier, self.defaultGammaTableSampleCount, gammaTableRed, gammaTableGreen, gammaTableBlue)
-      DisplayManager.shared.enforceGammaActivity()
+      if self.isVirtual {
+        _ = DisplayManager.shared.setShadeAlpha(value: 1 - value, displayID: self.identifier)
+      } else {
+        let gammaTableRed = self.defaultGammaTableRed.map { $0 * newValue }
+        let gammaTableGreen = self.defaultGammaTableGreen.map { $0 * newValue }
+        let gammaTableBlue = self.defaultGammaTableBlue.map { $0 * newValue }
+        DisplayManager.shared.moveGammaActivityEnforcer(displayID: self.identifier)
+        CGSetDisplayTransferByTable(self.identifier, self.defaultGammaTableSampleCount, gammaTableRed, gammaTableGreen, gammaTableBlue)
+        DisplayManager.shared.enforceGammaActivity()
+      }
     }
     return true
   }
 
   func getSwBrightness() -> Float {
+    if self.isVirtual {
+      return 1 - (DisplayManager.shared.getShadeAlpha(displayID: self.identifier) ?? 1)
+    }
     var gammaTableRed = [CGGammaValue](repeating: 0, count: 256)
     var gammaTableGreen = [CGGammaValue](repeating: 0, count: 256)
     var gammaTableBlue = [CGGammaValue](repeating: 0, count: 256)
