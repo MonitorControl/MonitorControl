@@ -46,6 +46,9 @@
 /* Class = "NSTextFieldCell"; title = "Show tick marks at 0%, 25%, 50%, 75% and 100% for accuracy."; ObjectID = "A8P-vn-DEJ"; */
 "A8P-vn-DEJ.title" = "Show tick marks at 0%, 25%, 50%, 75% and 100% for accuracy.";
 
+/* Class = "NSButtonCell"; title = "Disable software dimming as fallback"; ObjectID = "afB-Xx-Lta"; */
+"afB-Xx-Lta.title" = "Disable software dimming as fallback";
+
 /* Class = "NSTextFieldCell"; title = "Use brightness, volume and other settings from last time or use defaults. Values will be applied to the display upon first change by the user."; ObjectID = "an7-Aj-3fZ"; */
 "an7-Aj-3fZ.title" = "Use brightness, volume and other settings from last time or use defaults. Values will be applied to the display upon first change by the user.";
 
@@ -94,7 +97,7 @@
 /* Class = "NSButtonCell"; title = "Only if at least one slider is present"; ObjectID = "EM1-zD-fVZ"; */
 "EM1-zD-fVZ.title" = "Only if at least one slider is present";
 
-/* Class = "NSTextFieldCell"; title = "Disable this for a direct, immediate control."; ObjectID = "ENt-mP-0yH"; */
+/* Class = "NSTextFieldCell"; title = "You can disable smooth transitions for a more direct, immediate control."; ObjectID = "ENt-mP-0yH"; */
 "ENt-mP-0yH.title" = "Disable this for a direct, immediate control.";
 
 /* Class = "NSMenuItem"; title = "Minimal"; ObjectID = "Eq3-z9-yIo"; */
@@ -178,8 +181,8 @@
 /* Class = "NSButtonCell"; title = "Enable for Apple branded and built-in displays as well"; ObjectID = "K6A-4z-1aQ"; */
 "K6A-4z-1aQ.title" = "Show brightness slider for Apple and built-in displays";
 
-/* Class = "NSButtonCell"; title = "Enable software dimming if required"; ObjectID = "kMa-3q-udl"; */
-"kMa-3q-udl.title" = "需要時啟用軟體調光";
+/* Class = "NSTextFieldCell"; title = "Don't use software dimming as fallback if no hardware control is available."; ObjectID = "kgh-b4-gmO"; */
+"kgh-b4-gmO.title" = "Don't use software dimming as fallback if no hardware control is available.";
 
 /* Class = "NSTextFieldCell"; title = "Display type:"; ObjectID = "lSJ-6w-KJ2"; */
 "lSJ-6w-KJ2.title" = "螢幕類型:";
@@ -198,9 +201,6 @@
 
 /* Class = "NSButtonCell"; title = "Show brightness slider in menu"; ObjectID = "MWo-6I-s9L"; */
 "MWo-6I-s9L.title" = "Show brightness slider in menu";
-
-/* Class = "NSTextFieldCell"; title = "If a display can't be controlled, software dimming will be used instead."; ObjectID = "n4V-jQ-1Ri"; */
-"n4V-jQ-1Ri.title" = "如果無法控制外接螢幕，將會啟用軟體調光";
 
 /* Class = "NSMenuItem"; title = "Volume only"; ObjectID = "NLP-dU-Dam"; */
 "NLP-dU-Dam.title" = "僅音量";

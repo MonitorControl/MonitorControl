@@ -18,7 +18,7 @@ class MainPrefsViewController: NSViewController, PreferencePane {
   }
 
   @IBOutlet var startAtLogin: NSButton!
-  @IBOutlet var fallbackSw: NSButton!
+  @IBOutlet var disableSoftwareFallback: NSButton!
   @IBOutlet var combinedBrightness: NSButton!
   @IBOutlet var enableSmooth: NSButton!
   @IBOutlet var showAdvancedDisplays: NSButton!
@@ -34,6 +34,8 @@ class MainPrefsViewController: NSViewController, PreferencePane {
   @IBOutlet var rowReadStartupText: NSGridRow!
   @IBOutlet var rowSafeModeText: NSGridRow!
   @IBOutlet var rowResetButton: NSGridRow!
+  @IBOutlet var rowDisableSoftwareFallbackCheck: NSGridRow!
+  @IBOutlet var rowDisableSoftwareFallbackText: NSGridRow!
 
   func showAdvanced() -> Bool {
     let hide = !prefs.bool(forKey: PrefKey.showAdvancedSettings.rawValue)
@@ -63,6 +65,13 @@ class MainPrefsViewController: NSViewController, PreferencePane {
       }
       self.rowSafeModeText.isHidden = false
     }
+    if self.disableSoftwareFallback.state == .on {
+      self.rowDisableSoftwareFallbackCheck.isHidden = false
+      self.rowDisableSoftwareFallbackText.isHidden = false
+    } else {
+      self.rowDisableSoftwareFallbackCheck.isHidden = hide
+      self.rowDisableSoftwareFallbackText.isHidden = hide
+    }
     self.rowResetButton.isHidden = hide
     return !hide
   }
@@ -79,7 +88,7 @@ class MainPrefsViewController: NSViewController, PreferencePane {
     let startAtLogin = (SMCopyAllJobDictionaries(kSMDomainUserLaunchd).takeRetainedValue() as? [[String: AnyObject]])?.first { $0["Label"] as? String == "\(Bundle.main.bundleIdentifier!)Helper" }?["OnDemand"] as? Bool ?? false
     self.startAtLogin.state = startAtLogin ? .on : .off
     self.combinedBrightness.state = prefs.bool(forKey: PrefKey.disableCombinedBrightness.rawValue) ? .off : .on
-    self.fallbackSw.state = prefs.bool(forKey: PrefKey.disableSoftwareFallback.rawValue) ? .off : .on
+    self.disableSoftwareFallback.state = prefs.bool(forKey: PrefKey.disableSoftwareFallback.rawValue) ? .on : .off
     self.enableSmooth.state = prefs.bool(forKey: PrefKey.disableSmoothBrightness.rawValue) ? .off : .on
     self.showAdvancedDisplays.state = prefs.bool(forKey: PrefKey.showAdvancedSettings.rawValue) ? .on : .off
     self.notEnableDDCDuringStartup.state = !prefs.bool(forKey: PrefKey.enableDDCDuringStartup.rawValue) ? .on : .off
@@ -122,20 +131,21 @@ class MainPrefsViewController: NSViewController, PreferencePane {
     app.updateDisplaysAndMenus()
   }
 
-  @IBAction func fallbackSwClicked(_ sender: NSButton) {
+  @IBAction func disableSoftwareFallback(_ sender: NSButton) {
     switch sender.state {
     case .on:
-      prefs.set(false, forKey: PrefKey.disableSoftwareFallback.rawValue)
-      for display in DisplayManager.shared.getOtherDisplays() where display.isSw() {
-        _ = display.setBrightness(1)
-      }
-    case .off:
       for display in DisplayManager.shared.getOtherDisplays() where display.isSw() {
         _ = display.setBrightness(1)
       }
       prefs.set(true, forKey: PrefKey.disableSoftwareFallback.rawValue)
+    case .off:
+      prefs.set(false, forKey: PrefKey.disableSoftwareFallback.rawValue)
+      for display in DisplayManager.shared.getOtherDisplays() where display.isSw() {
+        _ = display.setBrightness(1)
+      }
     default: break
     }
+    _ = self.showAdvanced()
     app.updateDisplaysAndMenus()
   }
 
