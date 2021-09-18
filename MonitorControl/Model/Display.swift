@@ -117,9 +117,11 @@ class Display: Equatable {
     self.isVirtual = DEBUG_VIRTUAL ? true : isVirtual
     self.swUpdateDefaultGammaTable()
     self.smoothBrightnessTransient = self.getBrightness()
-    if isVirtual {
+    if self.isVirtual {
+      os_log("Creating or updating shade for virtual display %{public}@", type: .debug, String(self.identifier))
       _ = DisplayManager.shared.updateShade(displayID: self.identifier)
     } else {
+      os_log("Destroying shade (if exists) for real display %{public}@", type: .debug, String(self.identifier))
       _ = DisplayManager.shared.destroyShade(displayID: self.identifier)
     }
   }

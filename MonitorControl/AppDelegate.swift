@@ -7,7 +7,6 @@ import os.log
 import Preferences
 import ServiceManagement
 import SimplyCoreAudio
-import SwiftUI
 
 let DEBUG_SW = false
 let DEBUG_VIRTUAL = false
