@@ -80,7 +80,7 @@ class MainPrefsViewController: NSViewController, PreferencePane {
     self.startAtLogin.state = startAtLogin ? .on : .off
     self.combinedBrightness.state = prefs.bool(forKey: PrefKey.disableCombinedBrightness.rawValue) ? .off : .on
     self.fallbackSw.state = prefs.bool(forKey: PrefKey.disableSoftwareFallback.rawValue) ? .off : .on
-    self.enableSmooth.state = prefs.bool(forKey: PrefKey.useSmoothBrightness.rawValue) ? .on : .off
+    self.enableSmooth.state = prefs.bool(forKey: PrefKey.disableSmoothBrightness.rawValue) ? .off : .on
     self.showAdvancedDisplays.state = prefs.bool(forKey: PrefKey.showAdvancedSettings.rawValue) ? .on : .off
     self.notEnableDDCDuringStartup.state = !prefs.bool(forKey: PrefKey.enableDDCDuringStartup.rawValue) ? .on : .off
     self.writeDDCOnStartup.state = !prefs.bool(forKey: PrefKey.readDDCInsteadOfRestoreValues.rawValue) && prefs.bool(forKey: PrefKey.enableDDCDuringStartup.rawValue) ? .on : .off
@@ -113,7 +113,7 @@ class MainPrefsViewController: NSViewController, PreferencePane {
       }
     case .off:
       prefs.set(true, forKey: PrefKey.disableCombinedBrightness.rawValue)
-      DisplayManager.shared.resetSwBrightnessForAllDisplays(async: prefs.bool(forKey: PrefKey.useSmoothBrightness.rawValue))
+      DisplayManager.shared.resetSwBrightnessForAllDisplays(async: !prefs.bool(forKey: PrefKey.disableSmoothBrightness.rawValue))
       for display in DisplayManager.shared.getDdcCapableDisplays() where !display.isSw() {
         _ = display.setDirectBrightness(max(0, (display.getBrightness() - 0.5) * 2))
       }
@@ -142,9 +142,9 @@ class MainPrefsViewController: NSViewController, PreferencePane {
   @IBAction func enableSmooth(_ sender: NSButton) {
     switch sender.state {
     case .on:
-      prefs.set(true, forKey: PrefKey.useSmoothBrightness.rawValue)
+      prefs.set(false, forKey: PrefKey.disableSmoothBrightness.rawValue)
     case .off:
-      prefs.set(false, forKey: PrefKey.useSmoothBrightness.rawValue)
+      prefs.set(true, forKey: PrefKey.disableSmoothBrightness.rawValue)
     default: break
     }
   }

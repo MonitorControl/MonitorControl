@@ -148,8 +148,8 @@
 /* Class = "NSTextFieldCell"; title = "Additional sliders:"; ObjectID = "i5X-M5-Tf5"; */
 "i5X-M5-Tf5.title" = "Additional sliders:";
 
-/* Class = "NSButtonCell"; title = "Enable smooth brightness transitions (experimental)"; ObjectID = "IK4-u5-qjf"; */
-"IK4-u5-qjf.title" = "Enable smooth brightness transitions (experimental)";
+/* Class = "NSButtonCell"; title = "Enable smooth brightness transitions"; ObjectID = "IK4-u5-qjf"; */
+"IK4-u5-qjf.title" = "Enable smooth brightness transitions";
 
 /* Class = "NSButtonCell"; title = "Use fine scale for volume"; ObjectID = "J3L-MW-iJL"; */
 "J3L-MW-iJL.title" = "Use fine scale for volume";

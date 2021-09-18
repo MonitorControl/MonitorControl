@@ -139,7 +139,7 @@ class Display: Equatable {
   }
 
   func setBrightness(_ to: Float = -1, slow: Bool = false) -> Bool {
-    if prefs.bool(forKey: PrefKey.useSmoothBrightness.rawValue) {
+    if !prefs.bool(forKey: PrefKey.disableSmoothBrightness.rawValue) {
       return self.setSmoothBrightness(to, slow: slow)
     } else {
       return self.setDirectBrightness(to)

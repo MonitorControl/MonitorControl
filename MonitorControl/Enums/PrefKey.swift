@@ -131,6 +131,6 @@ enum PrefKey: String {
   // Use fine OSD scale for volume
   case useFineScaleVolume
 
-  // Use smoothBrightness -- TODO: Implementation half-baked
-  case useSmoothBrightness
+  // Use smoothBrightness
+  case disableSmoothBrightness
 }

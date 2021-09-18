@@ -161,7 +161,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     self.updateDisplaysAndMenus(firstrun: firstrun)
     if !firstrun {
       if !prefs.bool(forKey: PrefKey.disableSoftwareFallback.rawValue) || !prefs.bool(forKey: PrefKey.disableCombinedBrightness.rawValue) {
-        DisplayManager.shared.restoreSwBrightnessForAllDisplays(async: prefs.bool(forKey: PrefKey.useSmoothBrightness.rawValue))
+        DisplayManager.shared.restoreSwBrightnessForAllDisplays(async: !prefs.bool(forKey: PrefKey.disableSmoothBrightness.rawValue))
       }
     }
     self.refreshBrightnessJob(start: true)

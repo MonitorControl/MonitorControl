@@ -155,7 +155,7 @@ class DisplaysPrefsCellView: NSTableCellView {
         _ = disp.setDirectBrightness(disp.getSwBrightness())
       case .on:
         disp.forceSw = false
-        _ = disp.setSwBrightness(1, smooth: prefs.bool(forKey: PrefKey.useSmoothBrightness.rawValue))
+        _ = disp.setSwBrightness(1, smooth: !prefs.bool(forKey: PrefKey.disableSmoothBrightness.rawValue))
         _ = disp.setBrightness(1)
       default:
         break

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="19162"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -132,7 +131,7 @@
                                     <gridCell row="Ypu-QY-Cja" column="64O-72-10l" id="UmJ-Q7-F5C">
                                         <button key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7cl-Ma-fc4">
                                             <rect key="frame" x="235" y="344" width="416" height="18"/>
-                                            <buttonCell key="cell" type="check" title="Enable smooth brightness transitions (experimental)" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="IK4-u5-qjf">
+                                            <buttonCell key="cell" type="check" title="Enable smooth brightness transitions" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="IK4-u5-qjf">
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                 <font key="font" metaFont="system"/>
                                             </buttonCell>
@@ -1058,7 +1057,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="691" height="449"/>
                                 <clipView key="contentView" drawsBackground="NO" id="yDV-Al-LQT">
                                     <rect key="frame" x="0.0" y="0.0" width="691" height="449"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="none" tableStyle="inset" selectionHighlightStyle="none" columnReordering="NO" columnResizing="NO" multipleSelection="NO" emptySelection="NO" autosaveColumns="NO" typeSelect="NO" rowHeight="440" rowSizeStyle="automatic" viewBased="YES" id="zC9-dS-Tr3">
                                             <rect key="frame" x="0.0" y="0.0" width="691" height="449"/>
