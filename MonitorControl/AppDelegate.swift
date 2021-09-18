@@ -10,6 +10,7 @@ import SimplyCoreAudio
 import SwiftUI
 
 let DEBUG_SW = false
+let DEBUG_VIRTUAL = false
 
 var app: AppDelegate!
 
