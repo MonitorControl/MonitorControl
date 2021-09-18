@@ -9,7 +9,7 @@ import ServiceManagement
 import SimplyCoreAudio
 import SwiftUI
 
-let DEBUG_SW = true
+let DEBUG_SW = false
 
 var app: AppDelegate!
 

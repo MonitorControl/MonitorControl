@@ -4,7 +4,7 @@ import Cocoa
 import CoreGraphics
 import os.log
 
-let DEBUG_GAMMA_ENFORCER = true // MARK: TODO: Set it to false for production if you don't want the hideous red square at the bottom of the screen!
+let DEBUG_GAMMA_ENFORCER = false
 
 class DisplayManager {
   public static let shared = DisplayManager()
