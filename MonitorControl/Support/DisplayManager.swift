@@ -4,11 +4,48 @@ import Cocoa
 import CoreGraphics
 import os.log
 
+let DEBUG_GAMMA_ENFORCER = true // MARK: TODO: Set it to false for production if you don't want the hideous red square at the bottom of the screen!
+
 class DisplayManager {
   public static let shared = DisplayManager()
 
   var displays: [Display] = []
   var audioControlTargetDisplays: [OtherDisplay] = []
+
+  let gammaActivityEnforcer = NSWindow(contentRect: .init(origin: NSPoint(x: 0, y: 0), size: .init(width: DEBUG_GAMMA_ENFORCER ? 15 : 1, height: DEBUG_GAMMA_ENFORCER ? 15 : 1)), styleMask: [], backing: .buffered, defer: false)
+
+  func createGammaActivityEnforcer() {
+    self.gammaActivityEnforcer.title = "Monior Control Gamma Activity Enforcer"
+    self.gammaActivityEnforcer.isMovableByWindowBackground = false
+    self.gammaActivityEnforcer.backgroundColor = DEBUG_GAMMA_ENFORCER ? .red : .black
+    self.gammaActivityEnforcer.ignoresMouseEvents = true
+    self.gammaActivityEnforcer.level = .screenSaver
+    self.gammaActivityEnforcer.orderFrontRegardless()
+    os_log("Gamma activity enforcer created.", type: .debug)
+    self.gammaActivityEnforcer.collectionBehavior = [.stationary, .canJoinAllSpaces]
+  }
+
+  func enforceGammaActivity() {
+    if self.gammaActivityEnforcer.alphaValue == 1 * (DEBUG_GAMMA_ENFORCER ? 0.5 : 0.01) {
+      self.gammaActivityEnforcer.alphaValue = 2 * (DEBUG_GAMMA_ENFORCER ? 0.5 : 0.01)
+    } else {
+      self.gammaActivityEnforcer.alphaValue = 1 * (DEBUG_GAMMA_ENFORCER ? 0.5 : 0.01)
+    }
+  }
+
+  func moveGammaActivityEnforcer(displayID: CGDirectDisplayID) {
+    var focusDisplayId = displayID
+    if CGDisplayIsInHWMirrorSet(displayID) != 0 || CGDisplayIsInMirrorSet(displayID) != 0 {
+      let mirroredDisplayID = CGDisplayMirrorsDisplay(displayID)
+      if mirroredDisplayID != 0 {
+        focusDisplayId = mirroredDisplayID
+      }
+    }
+    if let screen = NSScreen.getByDisplayID(displayID: focusDisplayId) {
+      self.gammaActivityEnforcer.setFrameOrigin(screen.frame.origin)
+    }
+    self.gammaActivityEnforcer.orderFrontRegardless()
+  }
 
   func updateDisplays() {
     self.clearDisplays()
@@ -34,7 +71,7 @@ class DisplayManager {
           }
         }
       }
-      if !app.debugSw, DisplayManager.isAppleDisplay(displayID: onlineDisplayID) { // MARK: (point of interest for testing)
+      if !DEBUG_SW, DisplayManager.isAppleDisplay(displayID: onlineDisplayID) { // MARK: (point of interest for testing)
         display = AppleDisplay(id, name: name, vendorNumber: vendorNumber, modelNumber: modelNumber, isVirtual: isVirtual)
       } else {
         display = OtherDisplay(id, name: name, vendorNumber: vendorNumber, modelNumber: modelNumber, isVirtual: isVirtual)
@@ -178,7 +215,7 @@ class DisplayManager {
             os_log("Display %{public}@ is flagged as discouraged by Arm64DDC.", type: .info, String(serviceMatch.displayID))
             otherDisplay.isDiscouraged = serviceMatch.isDiscouraged
           } else {
-            otherDisplay.arm64ddc = app.debugSw ? false : true // MARK: (point of interest when testing)
+            otherDisplay.arm64ddc = DEBUG_SW ? false : true // MARK: (point of interest when testing)
           }
         }
       }

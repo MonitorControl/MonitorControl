@@ -9,7 +9,10 @@ import ServiceManagement
 import SimplyCoreAudio
 import SwiftUI
 
+let DEBUG_SW = true
+
 var app: AppDelegate!
+
 let prefs = UserDefaults.standard
 let storyboard = NSStoryboard(name: "Main", bundle: Bundle.main)
 let mainPrefsVc = storyboard.instantiateController(withIdentifier: "MainPrefsVC") as? MainPrefsViewController
@@ -32,7 +35,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   var sleepID: Int = 0 // Don't reconfigure display as the system or display is sleeping or wake just recently.
   var safeMode = false // Safe mode engaged during startup?
   var brightnessJobRunning = false // Is brightness job active?
-  let debugSw: Bool = false
   let ddcQueue = DispatchQueue(label: "DDC queue")
 
   var preferencePaneStyle: Preferences.Style {
@@ -89,6 +91,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     self.checkPermissions()
     CGDisplayRegisterReconfigurationCallback({ _, _, _ in app.displayReconfigured() }, nil)
     self.configure(firstrun: true)
+    DisplayManager.shared.createGammaActivityEnforcer()
   }
 
   func applicationShouldHandleReopen(_: NSApplication, hasVisibleWindows _: Bool) -> Bool {

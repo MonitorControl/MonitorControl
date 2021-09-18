@@ -1,5 +1,6 @@
 //  Copyright © MonitorControl. @JoniVR, @theOneyouseek, @waydabber and others
 
+import Cocoa
 import Foundation
 import os.log
 
@@ -277,7 +278,9 @@ class Display: Equatable {
       let gammaTableRed = self.defaultGammaTableRed.map { $0 * newValue }
       let gammaTableGreen = self.defaultGammaTableGreen.map { $0 * newValue }
       let gammaTableBlue = self.defaultGammaTableBlue.map { $0 * newValue }
+      DisplayManager.shared.moveGammaActivityEnforcer(displayID: self.identifier)
       CGSetDisplayTransferByTable(self.identifier, self.defaultGammaTableSampleCount, gammaTableRed, gammaTableGreen, gammaTableBlue)
+      DisplayManager.shared.enforceGammaActivity()
     }
     return true
   }
