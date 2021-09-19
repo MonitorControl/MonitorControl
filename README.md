@@ -1,3 +1,11 @@
+<p><b><a href="https://github.com/MonitorControl/MonitorControl/discussions/596">Check out this discussion</a> for the changelog and current state of the next major release of MonitorControl!</b></p>
+        
+<p>The code in this branch still evolves and might contain bugs or unfinished, half-baked features. With this in mind you are free to build and try the version and give feedback.</p>
+
+<hr>
+
+<h>
+
 <img src=".github/Icon-1024.png" width="175" alt="App icon" align="left"/>
 
 <h2>MonitorControl - Now with Apple Silicon support!</h2>
@@ -38,23 +46,23 @@ Shows native brightness and volume OSDs as well!</b>
 
 </div>
 
-<img src=".github/screenshot.png" width="840" alt="Screenshot"/><br/>
+<!--<img src=".github/screenshot.png" width="840" alt="Screenshot"/><br/>-->
 
 <hr>
 
 ## Download
 
-Go to [Releases](https://github.com/MonitorControl/MonitorControl/releases) and download the latest `.dmg`
+There is no official pre-release build available for this version yet.
 
 ## Compatibility
 
 - macOS Mojave (`10.15`) and up _(note: you can download [version 2.1.0](https://github.com/MonitorControl/MonitorControl/releases/tag/v2.1.0) for Sierra `10.12` and [version 3.0.0](https://github.com/MonitorControl/MonitorControl/releases/tag/v3.0.0) for Mojave `10.14`)_
-- Works with monitors controllable via [DDC](https://en.wikipedia.org/wiki/Display_Data_Channel) (or any other display via software dimming)
+- Works with monitors controllable via [DDC](https://en.wikipedia.org/wiki/Display_Data_Channel) (or any other display via software dimming).
 
 ## How to help
 
 Open [issues](https://github.com/MonitorControl/MonitorControl/issues) if you have a question, an enhancement to suggest or a bug you've found. If you want you can fork the code yourself and submit a pull request to improve the app.
-
+        
 ## How to build
 
 ### Required
