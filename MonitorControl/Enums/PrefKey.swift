@@ -136,4 +136,10 @@ enum PrefKey: String {
 
   // Synchronize brightness from sync source displays among all other displays
   case enableBrightnessSync
+
+  // Combine sliders for all displays
+  case combineBrightnessSliders // TODO: Unimplemented
+
+  // Combine sliders for all displays
+  case combineVolumeSliders // TODO: Unimplemented
 }

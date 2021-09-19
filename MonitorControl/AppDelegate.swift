@@ -19,7 +19,7 @@ let mainPrefsVc = storyboard.instantiateController(withIdentifier: "MainPrefsVC"
 let displaysPrefsVc = storyboard.instantiateController(withIdentifier: "DisplaysPrefsVC") as? DisplaysPrefsViewController
 let menuslidersPrefsVc = storyboard.instantiateController(withIdentifier: "MenuslidersPrefsVC") as? MenuslidersPrefsViewController
 let keyboardPrefsVc = storyboard.instantiateController(withIdentifier: "KeyboardPrefsVC") as? KeyboardPrefsViewController
-let advancedPrefsVc = storyboard.instantiateController(withIdentifier: "AdvancedPrefsVC") as? AdvancedPrefsViewController
+let SynchronizationVc = storyboard.instantiateController(withIdentifier: "SynchronizationVC") as? SynchronizationViewController
 let aboutPrefsVc = storyboard.instantiateController(withIdentifier: "AboutPrefsVC") as? AboutPrefsViewController
 
 @NSApplicationMain
@@ -51,8 +51,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         mainPrefsVc!,
         menuslidersPrefsVc!,
         keyboardPrefsVc!,
+        SynchronizationVc!,
         displaysPrefsVc!,
-        // advancedPrefsVc!,
         aboutPrefsVc!,
       ],
       style: preferencePaneStyle,

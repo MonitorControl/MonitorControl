@@ -6,7 +6,7 @@ extension Preferences.PaneIdentifier {
   static let main = Self("Main")
   static let menusliders = Self("Menu & Sliders")
   static let keyboard = Self("Keyboard")
-  static let advanced = Self("Advanced")
+  static let synchronization = Self("Synchronization")
   static let displays = Self("Displays")
   static let about = Self("About")
 }
