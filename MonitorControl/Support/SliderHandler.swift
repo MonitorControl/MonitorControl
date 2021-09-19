@@ -4,10 +4,45 @@ import Cocoa
 import os.log
 
 class SliderHandler {
-  var slider: NSSlider?
+  var slider: ScrollableSlider?
   var percentageBox: NSTextField?
   var display: Display
   let cmd: Command
+
+  //  Credits for this class go to @thompsonate - https://github.com/thompsonate/Scrollable-NSSlider
+  class ScrollableSlider: NSSlider {
+    override func scrollWheel(with event: NSEvent) {
+      guard self.isEnabled else { return }
+      let range = Float(self.maxValue - self.minValue)
+      var delta = Float(0)
+      // Allow horizontal scrolling on horizontal and circular sliders
+      if self.isVertical, self.sliderType == .linear {
+        delta = Float(event.deltaY)
+      } else if self.userInterfaceLayoutDirection == .rightToLeft {
+        delta = Float(event.deltaY + event.deltaX)
+      } else {
+        delta = Float(event.deltaY - event.deltaX)
+      }
+      // Account for natural scrolling
+      if event.isDirectionInvertedFromDevice {
+        delta *= -1
+      }
+      let increment = range * delta / 100
+      var value = self.floatValue + increment
+      // Wrap around if slider is circular
+      if self.sliderType == .circular {
+        let minValue = Float(self.minValue)
+        let maxValue = Float(self.maxValue)
+        if value < minValue {
+          value = maxValue - abs(increment)
+        } else if value > maxValue {
+          value = minValue + abs(increment)
+        }
+      }
+      self.floatValue = value
+      self.sendAction(self.action, to: self.target)
+    }
+  }
 
   public init(display: Display, command: Command) {
     self.display = display
@@ -83,7 +118,7 @@ class SliderHandler {
   static func addSliderMenuItem(toMenu menu: NSMenu, forDisplay display: Display, command: Command, title: String, numOfTickMarks: Int = 0) -> SliderHandler {
     let item = NSMenuItem()
     let handler = SliderHandler(display: display, command: command)
-    let slider = NSSlider(value: 0, minValue: 0, maxValue: 1, target: handler, action: #selector(SliderHandler.valueChanged))
+    let slider = ScrollableSlider(value: 0, minValue: 0, maxValue: 1, target: handler, action: #selector(SliderHandler.valueChanged))
     let showPercent = prefs.bool(forKey: PrefKey.enableSliderPercent.rawValue)
     slider.isEnabled = true
     slider.numberOfTickMarks = numOfTickMarks
