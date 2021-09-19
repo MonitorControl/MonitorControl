@@ -42,24 +42,30 @@ class AppleDisplay: Display {
     }
   }
 
-  override func refreshBrightness() -> Bool {
+  override func refreshBrightness() -> Float {
     guard !self.smoothBrightnessRunning else {
-      return false
+      return 0
     }
     let brightness = self.getAppleBrightness()
+    let oldValue = self.brightnessSyncSourceValue
     self.savePrefValue(brightness, for: .brightness)
-    if let sliderHandler = brightnessSliderHandler, let slider = sliderHandler.slider, brightness != slider.floatValue {
-      os_log("Pushing slider towards actual brightness for Apple display %{public}@", type: .debug, String(self.identifier))
-      if abs(brightness - slider.floatValue) < 0.01 {
-        sliderHandler.setValue(brightness)
-        return false
-      } else if brightness > slider.floatValue {
-        sliderHandler.setValue(slider.floatValue + max((brightness - slider.floatValue) / 3, 0.005))
+    if brightness != oldValue {
+      os_log("Pushing slider and reporting delta for Apple display %{public}@", type: .debug, String(self.identifier))
+      var newValue: Float
+
+      if abs(brightness - oldValue) < 0.01 {
+        newValue = brightness
+      } else if brightness > oldValue {
+        newValue = oldValue + max((brightness - oldValue) / 3, 0.005)
       } else {
-        sliderHandler.setValue(slider.floatValue + min((brightness - slider.floatValue) / 3, -0.005))
+        newValue = oldValue + min((brightness - oldValue) / 3, -0.005)
       }
-      return true
+      self.brightnessSyncSourceValue = newValue
+      if let sliderHandler = brightnessSliderHandler {
+        sliderHandler.setValue(newValue)
+      }
+      return newValue - oldValue
     }
-    return false
+    return 0
   }
 }

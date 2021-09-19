@@ -203,16 +203,6 @@ class DisplayManager {
     return numOfAddedDisplays
   }
 
-  func refreshDisplaysBrightness() -> Bool {
-    var refreshedSomething = false
-    for display in self.displays {
-      if display.refreshBrightness() {
-        refreshedSomething = true
-      }
-    }
-    return refreshedSomething
-  }
-
   func getOtherDisplays() -> [OtherDisplay] {
     return self.displays.compactMap { $0 as? OtherDisplay }
   }

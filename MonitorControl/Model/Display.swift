@@ -39,6 +39,7 @@ class Display: Equatable {
   }
 
   var brightnessSliderHandler: SliderHandler?
+  var brightnessSyncSourceValue: Float = 1
   var isVirtual: Bool = false
 
   var defaultGammaTableRed = [CGGammaValue](repeating: 0, count: 256)
@@ -124,6 +125,7 @@ class Display: Equatable {
       os_log("Destroying shade (if exists) for real display %{public}@", type: .debug, String(self.identifier))
       _ = DisplayManager.shared.destroyShade(displayID: self.identifier)
     }
+    self.brightnessSyncSourceValue = self.getBrightness()
   }
 
   func calcNewBrightness(isUp: Bool, isSmallIncrement: Bool) -> Float {
@@ -141,6 +143,7 @@ class Display: Equatable {
       OSDUtils.showOsd(displayID: self.identifier, command: .brightness, value: value * 64, maxValue: 64)
       if let slider = brightnessSliderHandler {
         slider.setValue(value)
+        self.brightnessSyncSourceValue = value
       }
     }
   }
@@ -172,6 +175,7 @@ class Display: Equatable {
       os_log("Pushing brightness towards goal of %{public}@ for Display  %{public}@", type: .debug, String(to), String(self.identifier))
       let value = max(min(to, 1), 0)
       self.savePrefValue(value, for: .brightness)
+      self.brightnessSyncSourceValue = value
       self.smoothBrightnessSlow = slow
       if self.smoothBrightnessRunning {
         return true
@@ -209,6 +213,7 @@ class Display: Equatable {
     if self.setSwBrightness(value) {
       if !transient {
         self.savePrefValue(value, for: .brightness)
+        self.brightnessSyncSourceValue = value
         self.smoothBrightnessTransient = value
       }
       return true
@@ -317,8 +322,8 @@ class Display: Equatable {
     return false
   }
 
-  func refreshBrightness() -> Bool {
-    return false
+  func refreshBrightness() -> Float {
+    return 0
   }
 
   func isBuiltIn() -> Bool {

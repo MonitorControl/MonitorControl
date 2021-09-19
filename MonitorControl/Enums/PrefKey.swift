@@ -133,4 +133,7 @@ enum PrefKey: String {
 
   // Use smoothBrightness
   case disableSmoothBrightness
+
+  // Synchronize brightness from sync source displays among all other displays
+  case enableBrightnessSync
 }

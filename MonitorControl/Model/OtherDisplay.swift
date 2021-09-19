@@ -328,6 +328,7 @@ class OtherDisplay: Display {
     }
     if let slider = brightnessSliderHandler {
       slider.setValue(osdValue)
+      self.brightnessSyncSourceValue = osdValue
     }
   }
 

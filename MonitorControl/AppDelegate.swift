@@ -218,6 +218,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       }
       if !display.readPrefValueKeyBool(forkey: PrefKey.unavailableDDC, for: .brightness) {
         otherDisplay.setupCurrentAndMaxValues(command: .brightness, firstrun: firstrun)
+        otherDisplay.brightnessSyncSourceValue = otherDisplay.readPrefValue(for: .brightness)
       }
     }
     if !prefs.bool(forKey: PrefKey.hideBrightness.rawValue), !display.readPrefValueKeyBool(forkey: PrefKey.unavailableDDC, for: .brightness) {
@@ -303,18 +304,31 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     if self.sleepID == 0, self.reconfigureID == 0 {
       if !self.brightnessJobRunning {
-        os_log("Refresh brightness job started.", type: .info)
+        os_log("Refresh brightness job started.", type: .debug)
         self.brightnessJobRunning = true
       }
-      var nextRefresh = 1.0
-      if DisplayManager.shared.refreshDisplaysBrightness() {
-        nextRefresh = 0.1
+      var refreshedSomething = false
+      for display in DisplayManager.shared.displays {
+        let delta = display.refreshBrightness()
+        if delta != 0 {
+          refreshedSomething = true
+          if prefs.bool(forKey: PrefKey.enableBrightnessSync.rawValue) {
+            for targetDisplay in DisplayManager.shared.displays where targetDisplay != display {
+              os_log("Updating delta from display %{public}@ to display %{public}@", type: .debug, String(display.identifier), String(targetDisplay.identifier))
+              let newValue = targetDisplay.getBrightness() + delta
+              _ = targetDisplay.setBrightness(newValue)
+              if let slider = targetDisplay.brightnessSliderHandler {
+                slider.setValue(newValue)
+              }
+            }
+          }
+        }
       }
+      let nextRefresh = refreshedSomething ? 0.1 : 1.0
       DispatchQueue.main.asyncAfter(deadline: .now() + nextRefresh) {
         self.refreshBrightnessJob()
       }
     } else {
-      // Brightness refresh job dies if there is sleep or reconfiguration.
       self.brightnessJobRunning = false
       os_log("Refresh brightness job died because of sleep or reconfiguration.", type: .info)
     }

@@ -21,6 +21,7 @@ class MainPrefsViewController: NSViewController, PreferencePane {
   @IBOutlet var disableSoftwareFallback: NSButton!
   @IBOutlet var combinedBrightness: NSButton!
   @IBOutlet var enableSmooth: NSButton!
+  @IBOutlet var enableBrightnessSync: NSButton!
   @IBOutlet var showAdvancedDisplays: NSButton!
   @IBOutlet var notEnableDDCDuringStartup: NSButton!
   @IBOutlet var writeDDCOnStartup: NSButton!
@@ -155,6 +156,16 @@ class MainPrefsViewController: NSViewController, PreferencePane {
       prefs.set(false, forKey: PrefKey.disableSmoothBrightness.rawValue)
     case .off:
       prefs.set(true, forKey: PrefKey.disableSmoothBrightness.rawValue)
+    default: break
+    }
+  }
+
+  @IBAction func enableBrightnessSync(_ sender: NSButton) {
+    switch sender.state {
+    case .on:
+      prefs.set(true, forKey: PrefKey.enableBrightnessSync.rawValue)
+    case .off:
+      prefs.set(false, forKey: PrefKey.enableBrightnessSync.rawValue)
     default: break
     }
   }
