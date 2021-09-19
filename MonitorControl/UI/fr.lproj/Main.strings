@@ -1,3 +1,6 @@
+/* Class = "NSButtonCell"; title = "Sync brightness changes from Built-in and Apple displays"; ObjectID = "0ca-DG-AgB"; */
+"0ca-DG-AgB.title" = "Sync brightness changes from Built-in and Apple displays";
+
 /* Class = "NSTextFieldCell"; title = "If the menu item is hidden, just relaunch the app to reveal Preferences!"; ObjectID = "0OK-pk-ecx"; */
 "0OK-pk-ecx.title" = "If the menu item is hidden, just relaunch the app to reveal Preferences!";
 
@@ -276,6 +279,9 @@
 
 /* Class = "NSTextFieldCell"; title = "Useful when a display tends to reset its settings during sleep."; ObjectID = "w8B-x6-sq5"; */
 "w8B-x6-sq5.title" = "Restore settings from last run or from before sleep. Useful when a display tends to reset brightness during sleep or hardware has issues with reading DDC data. Not relevant for Apple displays.";
+
+/* Class = "NSTextFieldCell"; title = "Changes that are caused by the Ambient light sensor or made using Touch Bar, Control Center, System Preferences will be replicated to all displays."; ObjectID = "wjv-tq-iUx"; */
+"wjv-tq-iUx.title" = "Changes that are caused by the Ambient light sensor or made using Touch Bar, Control Center, System Preferences will be replicated to all displays.";
 
 /* Class = "NSButtonCell"; title = "Show advanced settings and information"; ObjectID = "Wnd-hx-Meb"; */
 "Wnd-hx-Meb.title" = "Show advanced settings under Displays";
