@@ -114,7 +114,7 @@ class SliderHandler {
     if display.isSw(), command == Command.brightness {
       (currentValue, maxValue) = (UInt16(display.getSwBrightnessPrefValue()), UInt16(display.getSwMaxBrightness()))
     } else {
-      if tries != 0, !(app.safeMode) {
+      if tries != 0, !app.safeMode {
         os_log("Polling %{public}@ times", type: .info, String(tries))
         values = display.readDDCValues(for: command, tries: tries, minReplyDelay: delay)
       }
