@@ -51,7 +51,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         mainPrefsVc!,
         menuslidersPrefsVc!,
         keyboardPrefsVc!,
-        SynchronizationVc!,
+//        SynchronizationVc!,
         displaysPrefsVc!,
         aboutPrefsVc!,
       ],
