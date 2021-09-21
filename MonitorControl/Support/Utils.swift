@@ -92,6 +92,9 @@ class Utils: NSObject {
     /// Change Brightness/Volume for all screens
     case allScreens
 
+    /// Use F14 / F15 keys to control brightness
+    case altBrightnessKeys
+
     /// Friendly name changed
     case friendlyName
 

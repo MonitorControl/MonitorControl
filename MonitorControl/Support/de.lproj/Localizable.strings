@@ -68,7 +68,7 @@
 "Safe Mode Activated" = "Safe Mode Activated";
 
 /* Shown in the alert dialog */
-"Shift was pressed during launch. MonitorControl started in safe mode. Default preferences are reloaded, DDC read is blocked." = "Die Shift-Taste wurde beim Programmstart gehalten. MonitorControl wurde im Safe Mode gestartet. Die Standard-Einstellungen werden geladen, DDC lesen ist blockiert.";
+"Shift was pressed during launch. MonitorControl started in safe mode. Default preferences are reloaded, DDC read is blocked." = "Shift was pressed during launch. MonitorControl started in safe mode. Default preferences are reloaded, DDC read is blocked.";
 
 /* Shown in the alert dialog */
 "Shortcuts not available" = "Kurzbefehle sind nicht verfügbar";

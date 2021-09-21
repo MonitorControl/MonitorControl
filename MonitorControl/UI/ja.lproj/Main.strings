@@ -34,6 +34,9 @@
 /* Class = "NSButtonCell"; title = "Change Brightness and Volume for all screens"; ObjectID = "E6M-ih-S8Y"; */
 "E6M-ih-S8Y.title" = "すべての画面の画面輝度と音量を変更する";
 
+/* Class = "NSButtonCell"; title = "Enable F14 / F15 keys for Brightness Control"; ObjectID = "E6M-ih-SZY"; */
+"E6M-ih-SZY.title" = "Enable F14 / F15 keys for Brightness Control";
+
 /* Class = "NSMenuItem"; title = "Minimal"; ObjectID = "Eq3-z9-yIo"; */
 "Eq3-z9-yIo.title" = "低頻度";
 
@@ -41,7 +44,7 @@
 "f9g-8s-gdd.title" = "Reset Name";
 
 /* Class = "NSButtonCell"; title = "Further lower brightness via software dimming"; ObjectID = "fhy-Er-0aI"; */
-"fhy-Er-0aI.title" = "画面輝度変更後、コントラストを下げる";
+"fhy-Er-0aI.title" = "ソフトウェアディミングを用いて輝度を通常以上に下げる";
 
 /* Class = "NSMenuItem"; title = "None"; ObjectID = "FoA-yh-Yx3"; */
 "FoA-yh-Yx3.title" = "設定しない";

@@ -34,6 +34,9 @@
 /* Class = "NSButtonCell"; title = "Change Brightness and Volume for all screens"; ObjectID = "E6M-ih-S8Y"; */
 "E6M-ih-S8Y.title" = "Verander Helderheid en Volume voor alle beeldschermen";
 
+/* Class = "NSButtonCell"; title = "Enable F14 / F15 keys for Brightness Control"; ObjectID = "E6M-ih-SZY"; */
+"E6M-ih-SZY.title" = "Gebruik F14 / F15 keys voor helderheid";
+
 /* Class = "NSMenuItem"; title = "Minimal"; ObjectID = "Eq3-z9-yIo"; */
 "Eq3-z9-yIo.title" = "Minimaal";
 
