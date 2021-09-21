@@ -1151,7 +1151,7 @@
                 </viewController>
                 <customObject id="aU5-zc-suQ" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="300.5" y="958"/>
+            <point key="canvasLocation" x="301" y="924"/>
         </scene>
         <!--Displays Prefs View Controller-->
         <scene sceneID="lLH-hh-1EK">
@@ -1828,22 +1828,6 @@
             </objects>
             <point key="canvasLocation" x="301" y="1524"/>
         </scene>
-        <!--Synchronization View Controller-->
-        <scene sceneID="HQD-kX-nIZ">
-            <objects>
-                <viewController storyboardIdentifier="SynchronizationVC" id="tIl-09-MX8" customClass="SynchronizationViewController" customModule="MonitorControl" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" translatesAutoresizingMaskIntoConstraints="NO" id="v8U-Q4-FZe">
-                        <rect key="frame" x="0.0" y="0.0" width="691" height="155"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="155" id="2t2-2v-e47"/>
-                            <constraint firstAttribute="width" constant="691" id="8hN-7t-UhM"/>
-                        </constraints>
-                    </view>
-                </viewController>
-                <customObject id="jjr-Ld-rWI" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="301" y="1901"/>
-        </scene>
         <!--About Prefs View Controller-->
         <scene sceneID="Ot2-lL-eIg">
             <objects>
@@ -1951,7 +1935,7 @@
                 </viewController>
                 <customObject id="5Vf-Rd-nyE" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="301" y="2214"/>
+            <point key="canvasLocation" x="301" y="2013"/>
         </scene>
     </scenes>
     <resources>

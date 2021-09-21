@@ -140,6 +140,6 @@ enum PrefKey: String {
   // Combine sliders for all displays
   case slidersCombine // TODO: Implemetation: MISSING, pref pane: OK
 
-  // Combine sliders for all displays
+  // Show only relevant slider for menu (depending on which display shows the menu)
   case slidersRelevant // TODO: Unimplemented: MISSING, pref pane: OK
 }
