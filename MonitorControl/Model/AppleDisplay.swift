@@ -62,7 +62,7 @@ class AppleDisplay: Display {
       }
       self.brightnessSyncSourceValue = newValue
       if let sliderHandler = brightnessSliderHandler {
-        sliderHandler.setValue(newValue)
+        sliderHandler.setValue(newValue, displayID: self.identifier)
       }
       return newValue - oldValue
     }

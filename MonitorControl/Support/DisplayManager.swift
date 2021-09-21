@@ -338,8 +338,8 @@ class DisplayManager {
         }
         otherDisplay.swBrightness = otherDisplay.getSwBrightness()
         _ = otherDisplay.setSwBrightness(savedPrefValue, smooth: async)
-        if otherDisplay.isSw() {
-          DisplayManager.setBrightnessSliderValue(otherDisplay: otherDisplay, value: savedPrefValue)
+        if otherDisplay.isSw(), let slider = otherDisplay.brightnessSliderHandler {
+          slider.setValue(savedPrefValue, displayID: otherDisplay.identifier)
         }
       } else {
         _ = otherDisplay.setSwBrightness(1)
@@ -421,12 +421,6 @@ class DisplayManager {
   }
 
   // Static functions (could be anywhere)
-
-  static func setBrightnessSliderValue(otherDisplay: OtherDisplay, value: Float) {
-    if let slider = otherDisplay.brightnessSliderHandler {
-      slider.setValue(value)
-    }
-  }
 
   static func isAppleDisplay(displayID: CGDirectDisplayID) -> Bool {
     var brightness: Float = -1

@@ -142,7 +142,7 @@ class Display: Equatable {
     if self.setBrightness(value) {
       OSDUtils.showOsd(displayID: self.identifier, command: .brightness, value: value * 64, maxValue: 64)
       if let slider = brightnessSliderHandler {
-        slider.setValue(value)
+        slider.setValue(value, displayID: self.identifier)
         self.brightnessSyncSourceValue = value
       }
     }

@@ -137,9 +137,9 @@ enum PrefKey: String {
   // Synchronize brightness from sync source displays among all other displays
   case enableBrightnessSync
 
-  // Combine sliders for all displays
-  case slidersCombine // TODO: Implemetation: MISSING, pref pane: OK
-
   // Show only relevant slider for menu (depending on which display shows the menu)
-  case slidersRelevant // TODO: Unimplemented: MISSING, pref pane: OK
+  case slidersRelevant
+
+  // Combine sliders for all displays
+  case slidersCombine
 }
