@@ -129,7 +129,7 @@ class MainPrefsViewController: NSViewController, PreferencePane {
       }
     default: break
     }
-    app.updateDisplaysAndMenus()
+    app.configure()
   }
 
   @IBAction func disableSoftwareFallback(_ sender: NSButton) {
@@ -147,7 +147,7 @@ class MainPrefsViewController: NSViewController, PreferencePane {
     default: break
     }
     _ = self.showAdvanced()
-    app.updateDisplaysAndMenus()
+    app.configure()
   }
 
   @IBAction func enableSmooth(_ sender: NSButton) {

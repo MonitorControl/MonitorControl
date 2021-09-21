@@ -34,6 +34,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   var sleepID: Int = 0 // Don't reconfigure display as the system or display is sleeping or wake just recently.
   var safeMode = false // Safe mode engaged during startup?
   var brightnessJobRunning = false // Is brightness job active?
+  var lastMenuRelevantDisplayId: CGDirectDisplayID = 0
   let ddcQueue = DispatchQueue(label: "DDC queue")
 
   var preferencePaneStyle: Preferences.Style {
@@ -149,14 +150,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     os_log("Request for configuration with reconfigreID %{public}@", type: .info, String(dispatchedReconfigureID))
     self.reconfigureID = 0
-    DisplayManager.shared.updateDisplays()
+    DisplayManager.shared.configureDisplays()
     DisplayManager.shared.addDisplayCounterSuffixes()
     DisplayManager.shared.updateArm64AVServices()
     NotificationCenter.default.post(name: Notification.Name(PrefKey.displayListUpdate.rawValue), object: nil)
     if firstrun {
       DisplayManager.shared.resetSwBrightnessForAllDisplays(settingsOnly: true)
     }
-    self.updateDisplaysAndMenus(firstrun: firstrun)
+    DisplayManager.shared.setupOtherDisplays(firstrun: firstrun)
+    self.updateMenusAndKeys()
     if !firstrun {
       if !prefs.bool(forKey: PrefKey.disableSoftwareFallback.rawValue) || !prefs.bool(forKey: PrefKey.disableCombinedBrightness.rawValue) {
         DisplayManager.shared.restoreSwBrightnessForAllDisplays(async: !prefs.bool(forKey: PrefKey.disableSmoothBrightness.rawValue))
@@ -165,8 +167,24 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     self.refreshBrightnessJob(start: true)
   }
 
-  func updateDisplaysAndMenus(firstrun: Bool = false) {
+  func updateMenusAndKeys() {
+    self.updateMenus()
+    self.updateMediaKeyTap()
+  }
+
+  func updateMenuRelevantDisplay() {
+    if prefs.bool(forKey: PrefKey.slidersRelevant.rawValue) {
+      if let display = DisplayManager.shared.getCurrentDisplay(), display.identifier != self.lastMenuRelevantDisplayId {
+        os_log("Menu must be refreshed as relevant display changed since last time.")
+        self.lastMenuRelevantDisplayId = display.identifier
+        self.updateMenus()
+      }
+    }
+  }
+
+  func updateMenus() {
     self.clearMenu()
+    let currentDisplay = DisplayManager.shared.getCurrentDisplay()
     var displays: [Display] = []
     if !prefs.bool(forKey: PrefKey.hideAppleFromMenu.rawValue) {
       displays.append(contentsOf: DisplayManager.shared.getAppleDisplays())
@@ -177,20 +195,18 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       displays.append(contentsOf: DisplayManager.shared.getDdcCapableDisplays())
     }
     if displays.count != 0 {
-      let asSubmenu: Bool = displays.count > 3 ? true : false
-      for display in displays {
-        os_log("Supported display found: %{public}@", type: .info, "\(display.name) (Vendor: \(display.vendorNumber ?? 0), Model: \(display.modelNumber ?? 0))")
-        if asSubmenu {
-          self.statusMenu.insertItem(NSMenuItem.separator(), at: 0)
-        }
-        self.updateDisplayAndMenu(display: display, asSubMenu: asSubmenu, firstrun: firstrun)
+      let asSubMenu: Bool = (displays.count > 3 && !prefs.bool(forKey: PrefKey.slidersRelevant.rawValue)) ? true : false
+      for display in displays where !prefs.bool(forKey: PrefKey.slidersRelevant.rawValue) || display == currentDisplay {
+        self.updateDisplayMenu(display: display, asSubMenu: asSubMenu)
       }
     }
-    self.updateMediaKeyTap()
   }
 
-  private func updateDisplayAndMenu(display: Display, asSubMenu: Bool, firstrun: Bool = false) {
-    if !asSubMenu {
+  private func updateDisplayMenu(display: Display, asSubMenu: Bool) {
+    os_log("Addig menu item for display %{public}@", type: .info, "\(display.identifier)")
+    if asSubMenu {
+      self.statusMenu.insertItem(NSMenuItem.separator(), at: 0)
+    } else {
       self.statusMenu.insertItem(NSMenuItem.separator(), at: 0)
     }
     let monitorSubMenu: NSMenu = asSubMenu ? NSMenu() : self.statusMenu
@@ -200,31 +216,29 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     var hasSlider = false
     if let otherDisplay = display as? OtherDisplay, !otherDisplay.isSw() {
-      if !display.readPrefValueKeyBool(forkey: PrefKey.unavailableDDC, for: .audioSpeakerVolume) {
-        otherDisplay.setupCurrentAndMaxValues(command: .audioSpeakerVolume)
-        if !prefs.bool(forKey: PrefKey.hideVolume.rawValue) {
-          let volumeSliderHandler = SliderHandler.addSliderMenuItem(toMenu: monitorSubMenu, forDisplay: otherDisplay, command: .audioSpeakerVolume, title: NSLocalizedString("Volume", comment: "Shown in menu"), numOfTickMarks: numOfTickMarks)
-          otherDisplay.volumeSliderHandler = volumeSliderHandler
-          hasSlider = true
-        }
+      if !display.readPrefValueKeyBool(forkey: PrefKey.unavailableDDC, for: .audioSpeakerVolume), !prefs.bool(forKey: PrefKey.hideVolume.rawValue) {
+        let volumeSliderHandler = SliderHandler.addSliderMenuItem(toMenu: monitorSubMenu, forDisplay: otherDisplay, command: .audioSpeakerVolume, title: NSLocalizedString("Volume", comment: "Shown in menu"), numOfTickMarks: numOfTickMarks)
+        otherDisplay.volumeSliderHandler = volumeSliderHandler
+        hasSlider = true
+      } else {
+        otherDisplay.volumeSliderHandler = nil
       }
       if prefs.bool(forKey: PrefKey.showContrast.rawValue), !display.readPrefValueKeyBool(forkey: PrefKey.unavailableDDC, for: .contrast) {
-        otherDisplay.setupCurrentAndMaxValues(command: .contrast)
         let contrastSliderHandler = SliderHandler.addSliderMenuItem(toMenu: monitorSubMenu, forDisplay: otherDisplay, command: .contrast, title: NSLocalizedString("Contrast", comment: "Shown in menu"), numOfTickMarks: numOfTickMarks)
         otherDisplay.contrastSliderHandler = contrastSliderHandler
         hasSlider = true
-      }
-      if !display.readPrefValueKeyBool(forkey: PrefKey.unavailableDDC, for: .brightness) {
-        otherDisplay.setupCurrentAndMaxValues(command: .brightness, firstrun: firstrun)
-        otherDisplay.brightnessSyncSourceValue = otherDisplay.readPrefValue(for: .brightness)
+      } else {
+        otherDisplay.contrastSliderHandler = nil
       }
     }
     if !prefs.bool(forKey: PrefKey.hideBrightness.rawValue), !display.readPrefValueKeyBool(forkey: PrefKey.unavailableDDC, for: .brightness) {
       let brightnessSliderHandler = SliderHandler.addSliderMenuItem(toMenu: monitorSubMenu, forDisplay: display, command: .brightness, title: NSLocalizedString("Brightness", comment: "Shown in menu"), numOfTickMarks: numOfTickMarks)
       display.brightnessSliderHandler = brightnessSliderHandler
       hasSlider = true
+    } else {
+      display.brightnessSliderHandler = nil
     }
-    if hasSlider {
+    if hasSlider, !prefs.bool(forKey: PrefKey.slidersRelevant.rawValue) {
       self.appendMenu(friendlyName: display.friendlyName, monitorSubMenu: monitorSubMenu, asSubMenu: asSubMenu)
     }
     if prefs.string(forKey: PrefKey.menuIcon.rawValue) == "sliderOnly" {
@@ -263,6 +277,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     NSWorkspace.shared.notificationCenter.addObserver(self, selector: #selector(self.sleepNotification), name: NSWorkspace.willSleepNotification, object: nil)
     NSWorkspace.shared.notificationCenter.addObserver(self, selector: #selector(self.wakeNotofication), name: NSWorkspace.didWakeNotification, object: nil)
     _ = DistributedNotificationCenter.default().addObserver(forName: .accessibilityApi, object: nil, queue: nil) { _ in DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { self.updateMediaKeyTap() } } // listen for accessibility status changes
+    NotificationCenter.default.addObserver(forName: NSWindow.didChangeOcclusionStateNotification, object: self.statusItem.button?.menu, queue: nil) { _ in self.updateMenuRelevantDisplay() }
   }
 
   @objc private func sleepNotification() {
@@ -343,7 +358,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   }
 
   @objc func handleFriendlyNameChanged() {
-    self.updateDisplaysAndMenus()
+    self.updateMenusAndKeys()
   }
 
   @objc func handlePreferenceReset() {

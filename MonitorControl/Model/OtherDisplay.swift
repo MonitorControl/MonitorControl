@@ -65,7 +65,7 @@ class OtherDisplay: Display {
     if read {
       var currentValue = self.convDDCToValue(for: command, from: currentDDCValue)
       if !prefs.bool(forKey: PrefKey.disableCombinedBrightness.rawValue), command == .brightness {
-        os_log("Combined brightness mapping on DDC data.", type: .info)
+        os_log("- Combined brightness mapping on DDC data.", type: .info)
         if currentValue > 0 {
           currentValue = 0.5 + currentValue / 2
         } else if currentValue == 0, firstrun {
@@ -83,7 +83,7 @@ class OtherDisplay: Display {
     } else {
       var currentValue: Float = self.readPrefValue(for: command)
       if !prefs.bool(forKey: PrefKey.disableCombinedBrightness.rawValue), command == .brightness {
-        os_log("Combined brightness mapping on saved data.", type: .info)
+        os_log("- Combined brightness mapping on saved data.", type: .info)
         if !self.prefValueExists(for: command) {
           currentValue = 0.5 + self.convDDCToValue(for: command, from: currentDDCValue) / 2
         } else if firstrun, currentValue < 0.5 {
@@ -106,21 +106,21 @@ class OtherDisplay: Display {
     if command == .audioSpeakerVolume {
       currentDDCValue = UInt16(Float(self.DDC_MAX_DETECT_LIMIT) * 0.125) // lower default audio value as high volume might rattle the user.
     }
-    os_log("** Setting up %{public}@ for %{public}@ **", type: .info, self.name, String(reflecting: command))
+    os_log("Setting up display %{public}@ for %{public}@", type: .info, String(self.identifier), String(reflecting: command))
     if !self.isSw() {
       if prefs.bool(forKey: PrefKey.enableDDCDuringStartup.rawValue), prefs.bool(forKey: PrefKey.readDDCInsteadOfRestoreValues.rawValue), self.pollingCount != 0, !(app.safeMode) {
-        os_log("Reading DDC from display %{public}@ times", type: .info, String(self.pollingCount))
+        os_log("- Reading DDC from display %{public}@ times", type: .info, String(self.pollingCount))
         let delay = self.needsLongerDelay ? UInt64(40 * kMillisecondScale) : nil
         ddcValues = self.readDDCValues(for: command, tries: UInt(self.pollingCount), minReplyDelay: delay)
         if ddcValues != nil {
           (currentDDCValue, maxDDCValue) = ddcValues ?? (currentDDCValue, maxDDCValue)
           self.processCurrentDDCValue(read: true, command: command, firstrun: firstrun, currentDDCValue: currentDDCValue)
-          os_log("DDC read successful.", type: .info)
+          os_log("- DDC read successful.", type: .info)
         } else {
-          os_log("DDC read failed.", type: .info)
+          os_log("- DDC read failed.", type: .info)
         }
       } else {
-        os_log("DDC read disabled.", type: .info)
+        os_log("- DDC read disabled.", type: .info)
       }
       if self.readPrefValueKeyInt(forkey: PrefKey.maxDDCOverride, for: command) > self.readPrefValueKeyInt(forkey: PrefKey.minDDCOverride, for: command) {
         self.savePrefValueKeyInt(forkey: PrefKey.maxDDC, value: self.readPrefValueKeyInt(forkey: PrefKey.maxDDCOverride, for: command), for: command)
@@ -131,12 +131,12 @@ class OtherDisplay: Display {
         self.processCurrentDDCValue(read: false, command: command, firstrun: firstrun, currentDDCValue: currentDDCValue)
         currentDDCValue = self.convValueToDDC(for: command, from: (!prefs.bool(forKey: PrefKey.disableCombinedBrightness.rawValue) && command == .brightness) ? max(0, self.readPrefValue(for: command) - 0.5) * 2 : self.readPrefValue(for: command))
       }
-      os_log(" - current DDC value: %{public}@", type: .info, String(currentDDCValue))
-      os_log(" - minimum DDC value: %{public}@ (overrides 0)", type: .info, String(self.readPrefValueKeyInt(forkey: PrefKey.minDDCOverride, for: command)))
-      os_log(" - maximum DDC value: %{public}@ (overrides %{public}@)", type: .info, String(self.readPrefValueKeyInt(forkey: PrefKey.maxDDC, for: command)), String(maxDDCValue))
-      os_log(" - current internal value: %{public}@", type: .info, String(self.readPrefValue(for: command)))
+      os_log("- Current DDC value: %{public}@", type: .info, String(currentDDCValue))
+      os_log("- Minimum DDC value: %{public}@ (overrides 0)", type: .info, String(self.readPrefValueKeyInt(forkey: PrefKey.minDDCOverride, for: command)))
+      os_log("- Maximum DDC value: %{public}@ (overrides %{public}@)", type: .info, String(self.readPrefValueKeyInt(forkey: PrefKey.maxDDC, for: command)), String(maxDDCValue))
+      os_log("- Current internal value: %{public}@", type: .info, String(self.readPrefValue(for: command)))
       if prefs.bool(forKey: PrefKey.enableDDCDuringStartup.rawValue), !prefs.bool(forKey: PrefKey.readDDCInsteadOfRestoreValues.rawValue), !(app.safeMode) {
-        os_log("Writing last saved DDC values.", type: .info, self.name, String(reflecting: command))
+        os_log("- Writing last saved DDC values.", type: .info, self.name, String(reflecting: command))
         _ = self.writeDDCValues(command: command, value: currentDDCValue)
       }
     }

@@ -172,7 +172,7 @@ class MenuslidersPrefsViewController: NSViewController, PreferencePane {
       app.statusItem.isVisible = true
     case 1:
       prefs.set("sliderOnly", forKey: PrefKey.menuIcon.rawValue)
-      app.updateDisplaysAndMenus()
+      app.updateMenusAndKeys()
     case 2:
       prefs.set("hide", forKey: PrefKey.menuIcon.rawValue)
       app.statusItem.isVisible = false
@@ -197,7 +197,7 @@ class MenuslidersPrefsViewController: NSViewController, PreferencePane {
       self.showAppleFromMenu.state = !prefs.bool(forKey: PrefKey.hideAppleFromMenu.rawValue) ? .on : .off
     default: break
     }
-    app.updateDisplaysAndMenus()
+    app.updateMenusAndKeys()
   }
 
   @IBAction func showAppleFromMenuClicked(_ sender: NSButton) {
@@ -208,7 +208,7 @@ class MenuslidersPrefsViewController: NSViewController, PreferencePane {
       prefs.set(false, forKey: PrefKey.hideAppleFromMenu.rawValue)
     default: break
     }
-    app.updateDisplaysAndMenus()
+    app.updateMenusAndKeys()
   }
 
   @IBAction func showVolumeSliderClicked(_ sender: NSButton) {
@@ -219,7 +219,7 @@ class MenuslidersPrefsViewController: NSViewController, PreferencePane {
       prefs.set(true, forKey: PrefKey.hideVolume.rawValue)
     default: break
     }
-    app.updateDisplaysAndMenus()
+    app.updateMenusAndKeys()
   }
 
   @IBAction func showContrastSliderClicked(_ sender: NSButton) {
@@ -230,7 +230,7 @@ class MenuslidersPrefsViewController: NSViewController, PreferencePane {
       prefs.set(false, forKey: PrefKey.showContrast.rawValue)
     default: break
     }
-    app.updateDisplaysAndMenus()
+    app.updateMenusAndKeys()
     _ = self.showAdvanced()
   }
 
@@ -242,7 +242,7 @@ class MenuslidersPrefsViewController: NSViewController, PreferencePane {
       prefs.set(false, forKey: PrefKey.enableSliderSnap.rawValue)
     default: break
     }
-    app.updateDisplaysAndMenus()
+    app.updateMenusAndKeys()
     _ = self.showAdvanced()
   }
 
@@ -252,7 +252,7 @@ class MenuslidersPrefsViewController: NSViewController, PreferencePane {
     self.slidersSeparate.state = .on
     self.slidersCombine.state = .off
     self.slidersRelevant.state = .off
-    app.updateDisplaysAndMenus()
+    app.updateMenusAndKeys()
     _ = self.showAdvanced()
   }
 
@@ -262,7 +262,7 @@ class MenuslidersPrefsViewController: NSViewController, PreferencePane {
     self.slidersSeparate.state = .off
     self.slidersCombine.state = .off
     self.slidersRelevant.state = .on
-    app.updateDisplaysAndMenus()
+    app.updateMenusAndKeys()
     _ = self.showAdvanced()
   }
 
@@ -272,7 +272,7 @@ class MenuslidersPrefsViewController: NSViewController, PreferencePane {
     self.slidersSeparate.state = .off
     self.slidersCombine.state = .on
     self.slidersRelevant.state = .off
-    app.updateDisplaysAndMenus()
+    app.updateMenusAndKeys()
     _ = self.showAdvanced()
   }
 
@@ -284,7 +284,7 @@ class MenuslidersPrefsViewController: NSViewController, PreferencePane {
       prefs.set(false, forKey: PrefKey.showTickMarks.rawValue)
     default: break
     }
-    app.updateDisplaysAndMenus()
+    app.updateMenusAndKeys()
     _ = self.showAdvanced()
   }
 
@@ -296,7 +296,7 @@ class MenuslidersPrefsViewController: NSViewController, PreferencePane {
       prefs.set(false, forKey: PrefKey.enableSliderPercent.rawValue)
     default: break
     }
-    app.updateDisplaysAndMenus()
+    app.updateMenusAndKeys()
     _ = self.showAdvanced()
   }
 }

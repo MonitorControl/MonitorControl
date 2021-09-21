@@ -145,7 +145,7 @@ class DisplayManager {
 
   // Display utilities
 
-  func updateDisplays() {
+  func configureDisplays() {
     self.clearDisplays()
     var onlineDisplayIDs = [CGDirectDisplayID](repeating: 0, count: 16)
     var displayCount: UInt32 = 0
@@ -158,7 +158,6 @@ class DisplayManager {
       let id = onlineDisplayID
       let vendorNumber = CGDisplayVendorNumber(onlineDisplayID)
       let modelNumber = CGDisplayModelNumber(onlineDisplayID)
-      let display: Display
       var isVirtual: Bool = false
       if #available(macOS 11.0, *) {
         if let dictionary = ((CoreDisplay_DisplayCreateInfoDictionary(onlineDisplayID))?.takeRetainedValue() as NSDictionary?) {
@@ -170,11 +169,29 @@ class DisplayManager {
         }
       }
       if !DEBUG_SW, DisplayManager.isAppleDisplay(displayID: onlineDisplayID) { // MARK: (point of interest for testing)
-        display = AppleDisplay(id, name: name, vendorNumber: vendorNumber, modelNumber: modelNumber, isVirtual: isVirtual)
+        let appleDisplay = AppleDisplay(id, name: name, vendorNumber: vendorNumber, modelNumber: modelNumber, isVirtual: isVirtual)
+        os_log("Apple display found - %{public}@", type: .info, "ID: \(appleDisplay.identifier) Name: \(appleDisplay.name) (Vendor: \(appleDisplay.vendorNumber ?? 0), Model: \(appleDisplay.modelNumber ?? 0))")
+        self.addDisplay(display: appleDisplay)
       } else {
-        display = OtherDisplay(id, name: name, vendorNumber: vendorNumber, modelNumber: modelNumber, isVirtual: isVirtual)
+        let otherDisplay = OtherDisplay(id, name: name, vendorNumber: vendorNumber, modelNumber: modelNumber, isVirtual: isVirtual)
+        os_log("Other display found - %{public}@", type: .info, "ID: \(otherDisplay.identifier) Name: \(otherDisplay.name) (Vendor: \(otherDisplay.vendorNumber ?? 0), Model: \(otherDisplay.modelNumber ?? 0))")
+        self.addDisplay(display: otherDisplay)
       }
-      self.addDisplay(display: display)
+    }
+  }
+
+  func setupOtherDisplays(firstrun: Bool = false) {
+    for otherDisplay in self.getOtherDisplays() {
+      if !otherDisplay.isSw(), !otherDisplay.readPrefValueKeyBool(forkey: PrefKey.unavailableDDC, for: .audioSpeakerVolume) {
+        otherDisplay.setupCurrentAndMaxValues(command: .audioSpeakerVolume, firstrun: firstrun)
+      }
+      if !otherDisplay.isSw(), !otherDisplay.readPrefValueKeyBool(forkey: PrefKey.unavailableDDC, for: .contrast) {
+        otherDisplay.setupCurrentAndMaxValues(command: .contrast, firstrun: firstrun)
+      }
+      if !otherDisplay.readPrefValueKeyBool(forkey: PrefKey.unavailableDDC, for: .brightness) {
+        otherDisplay.setupCurrentAndMaxValues(command: .brightness, firstrun: firstrun)
+        otherDisplay.brightnessSyncSourceValue = otherDisplay.readPrefValue(for: .brightness)
+      }
     }
   }
 

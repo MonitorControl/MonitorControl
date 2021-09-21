@@ -160,7 +160,7 @@ class DisplaysPrefsCellView: NSTableCellView {
       default:
         break
       }
-      app.updateDisplaysAndMenus()
+      app.configure()
       let displayInfo = DisplaysPrefsViewController.getDisplayInfo(display: disp)
       self.controlMethod.stringValue = displayInfo.controlMethod
       self.controlMethod.controlView?.toolTip = displayInfo.controlStatus
