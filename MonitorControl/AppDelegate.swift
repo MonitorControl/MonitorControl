@@ -37,7 +37,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   }()
 
   func applicationDidFinishLaunching(_: Notification) {
-        
     app = self
     self.subscribeEventListeners()
     if NSEvent.modifierFlags.contains(NSEvent.ModifierFlags.shift) {
@@ -55,8 +54,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     self.statusItem.menu = self.statusMenu
     self.checkPermissions()
     CGDisplayRegisterReconfigurationCallback({ _, _, _ in app.displayReconfigured() }, nil)
-    
-    MediaKeyTap.useAlternateBrightnessKeys = prefs.bool(forKey: Utils.PrefKeys.altBrightnessKeys.rawValue);
+
+    MediaKeyTap.useAlternateBrightnessKeys = prefs.bool(forKey: Utils.PrefKeys.altBrightnessKeys.rawValue)
     self.updateDisplays(firstrun: true)
   }
 

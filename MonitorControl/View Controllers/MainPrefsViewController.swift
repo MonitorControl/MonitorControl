@@ -1,8 +1,8 @@
 import Cocoa
+import MediaKeyTap
 import os.log
 import Preferences
 import ServiceManagement
-import MediaKeyTap
 
 class MainPrefsViewController: NSViewController, PreferencePane {
   let preferencePaneIdentifier = Preferences.PaneIdentifier.main
@@ -53,7 +53,7 @@ class MainPrefsViewController: NSViewController, PreferencePane {
     self.fallbackSw.state = self.prefs.bool(forKey: Utils.PrefKeys.fallbackSw.rawValue) ? .on : .off
     self.listenFor.selectItem(at: self.prefs.integer(forKey: Utils.PrefKeys.listenFor.rawValue))
     self.allScreens.state = self.prefs.bool(forKey: Utils.PrefKeys.allScreens.rawValue) ? .on : .off
-    self.altBrightnessKeys.state = self.prefs.bool(forKey: Utils.PrefKeys.altBrightnessKeys.rawValue) ? .on : .off;
+    self.altBrightnessKeys.state = self.prefs.bool(forKey: Utils.PrefKeys.altBrightnessKeys.rawValue) ? .on : .off
     self.showAdvancedDisplays.state = self.prefs.bool(forKey: Utils.PrefKeys.showAdvancedDisplays.rawValue) ? .on : .off
   }
 
@@ -79,7 +79,7 @@ class MainPrefsViewController: NSViewController, PreferencePane {
       self.prefs.set(false, forKey: Utils.PrefKeys.altBrightnessKeys.rawValue)
     default: break
     }
-    MediaKeyTap.useAlternateBrightnessKeys = (sender.state == .on);
+    MediaKeyTap.useAlternateBrightnessKeys = (sender.state == .on)
     #if DEBUG
       os_log("Toggle altBrightnessKeys state: %{public}@", type: .info, sender.state == .on ? "on" : "off")
     #endif
