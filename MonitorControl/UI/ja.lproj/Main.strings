@@ -5,13 +5,13 @@
 "95V-M4-2l5.title" = "Special thanks to our contributors!";
 
 /* Class = "NSButtonCell"; title = "Hide Menu Icon"; ObjectID = "aXL-i8-S6R"; */
-"aXL-i8-S6R.title" = "Hide Menu Icon";
+"aXL-i8-S6R.title" = "メニューアイコンを隠す";
 
 /* Class = "NSButtonCell"; title = "Disable macOS volume OSD"; ObjectID = "bkM-Px-U3b"; */
-"bkM-Px-U3b.title" = "Disable macOS volume OSD";
+"bkM-Px-U3b.title" = "macOSの音量調節OSDを無効にする";
 
 /* Class = "NSButtonCell"; title = "Reset settings"; ObjectID = "BYS-7Y-bRz"; */
-"BYS-7Y-bRz.title" = "Reset settings";
+"BYS-7Y-bRz.title" = "初期設定に戻す";
 
 /* Class = "NSButtonCell"; title = "Enable Mute DDC command"; ObjectID = "bZq-0d-lJa"; */
 "bZq-0d-lJa.title" = "Enable Mute DDC command";
@@ -23,16 +23,16 @@
 "Cle-DD-vR7.title" = "カスタム";
 
 /* Class = "NSButtonCell"; title = "Website"; ObjectID = "Cln-uW-2dd"; */
-"Cln-uW-2dd.title" = "Website";
+"Cln-uW-2dd.title" = "ウェブサイト";
 
 /* Class = "NSTextFieldCell"; title = "⚠️ Warning! Changing some of these settings may cause system freezes or unexpected behavior!"; ObjectID = "Cz1-Mh-llk"; */
 "Cz1-Mh-llk.title" = "⚠️ Warning! Changing some of these settings may cause system freezes or unexpected behavior!";
 
 /* Class = "NSButtonCell"; title = "Show volume slider in menu"; ObjectID = "dhP-eB-1L6"; */
-"dhP-eB-1L6.title" = "Show volume slider in menu";
+"dhP-eB-1L6.title" = "音量変更用のスライダーをメニューに表示する";
 
 /* Class = "NSButtonCell"; title = "Change Brightness and Volume for all screens"; ObjectID = "E6M-ih-S8Y"; */
-"E6M-ih-S8Y.title" = "Change Brightness and Volume for all screens";
+"E6M-ih-S8Y.title" = "すべての画面の画面輝度と音量を変更する";
 
 /* Class = "NSButtonCell"; title = "Enable F14 / F15 keys for Brightness Control"; ObjectID = "E6M-ih-SZY"; */
 "E6M-ih-SZY.title" = "Enable F14 / F15 keys for Brightness Control";
@@ -68,7 +68,7 @@
 "K2r-aD-eec.title" = "Use the media keys of your keyboard to control Brightness & Volume.";
 
 /* Class = "NSButtonCell"; title = "Enable software dimming if required"; ObjectID = "kMa-3q-udl"; */
-"kMa-3q-udl.title" = "Enable software dimming if required";
+"kMa-3q-udl.title" = "必要に応じてソフトウェア調光を有効にする";
 
 /* Class = "NSButton"; ibShadowedToolTip = "More Info"; ObjectID = "kqn-gU-mZX"; */
 "kqn-gU-mZX.ibShadowedToolTip" = "More Info";
@@ -107,7 +107,7 @@
 "TKd-J8-Iyk.title" = "@the0neyouseek\n@reitermarkus\n@JoniVR\n@waydabber";
 
 /* Class = "NSButtonCell"; title = "Enable keyboard control for display"; ObjectID = "UqR-WE-jHl"; */
-"UqR-WE-jHl.title" = "Enable keyboard control for display";
+"UqR-WE-jHl.title" = "画面のキーボード操作を有効にする";
 
 /* Class = "NSMenuItem"; title = "Heavy"; ObjectID = "vik-vN-bJe"; */
 "vik-vN-bJe.title" = "高頻度";
@@ -119,16 +119,16 @@
 "vwm-hY-on5.title" = "DDC read polling mode:";
 
 /* Class = "NSButtonCell"; title = "Show advanced settings under Displays"; ObjectID = "Wnd-hx-Meb"; */
-"Wnd-hx-Meb.title" = "Show advanced settings under Displays";
+"Wnd-hx-Meb.title" = "画面に詳細設定を表示";
 
 /* Class = "NSMenuItem"; title = "None"; ObjectID = "X96-ny-lAP"; */
-"X96-ny-lAP.title" = "None";
+"X96-ny-lAP.title" = "設定しない";
 
 /* Class = "NSButtonCell"; title = "Show contrast slider in menu"; ObjectID = "xSI-8W-Xd0"; */
 "xSI-8W-Xd0.title" = "コントラスト変更用のスライダーをメニューに表示する";
 
 /* Class = "NSButtonCell"; title = "Reset Preferences"; ObjectID = "xY6-aw-o9u"; */
-"xY6-aw-o9u.title" = "Reset Preferences";
+"xY6-aw-o9u.title" = "環境設定を初期状態に戻す";
 
 /* Class = "NSTextFieldCell"; title = "Additional settings:"; ObjectID = "Xz0-X0-rB4"; */
 "Xz0-X0-rB4.title" = "Additional settings:";
@@ -140,7 +140,7 @@
 "YqZ-LS-YvR.title" = "Identifier:";
 
 /* Class = "NSButtonCell"; title = "Use hardware DDC control"; ObjectID = "ZdU-gV-V05"; */
-"ZdU-gV-V05.title" = "Use hardware DDC control";
+"ZdU-gV-V05.title" = "ハードウェアDDC制御を使用する";
 
 /* Class = "NSButtonCell"; title = "Donate"; ObjectID = "ZKk-ve-rS4"; */
-"ZKk-ve-rS4.title" = "Donate";
+"ZKk-ve-rS4.title" = "寄付";
