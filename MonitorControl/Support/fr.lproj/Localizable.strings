@@ -8,7 +8,7 @@
 "Are you sure you want to enable a longer delay? Doing so may freeze your system and require a restart. Start at login will be disabled as a safety measure." = "Êtes-vous sûr de vouloir augmenter cette durée? Cela peut entrainer un gêle du système et nécessiter un redémarrage. Par sécurité, cette option sera désactivée au démarrage.";
 
 /* Shown in the alert dialog */
-"Are you sure you want to reset all preferences?" = "Êtes-vous sûr de vouloir réinitialiser toutes les préférences?";
+"Are you sure you want to reset all preferences?" = "Êtes-vous sûr de vouloir réinitialiser tous les réglages?";
 
 /* Sown in menu */
 "Brightness" = "Luminosité";
@@ -62,13 +62,13 @@
 "Other Display" = "Autre écran";
 
 /* Shown in the alert dialog */
-"Reset Preferences?" = "Réinitialiser les préférences ?";
+"Reset Preferences?" = "Réinitialiser les réglages ?";
 
 /* Shown in the alert dialog */
 "Safe Mode Activated" = "Mode sans échec activé";
 
 /* Shown in the alert dialog */
-"Shift was pressed during launch. MonitorControl started in safe mode. Default preferences are reloaded, DDC read is blocked." = "Maj. appuyée pendant le démarrage. MonitorControl démarré en mode sans échec. Les préférences par défaut sont utilisées, la communication via DDC est bloquée.";
+"Shift was pressed during launch. MonitorControl started in safe mode. Default preferences are reloaded, DDC read is blocked." = "Maj. appuyée pendant le démarrage. MonitorControl démarre en mode sans échec. Les préférences par défaut sont utilisées, la communication via DDC est bloquée.";
 
 /* Shown in the alert dialog */
 "Shortcuts not available" = "Raccourcis non disponible";
