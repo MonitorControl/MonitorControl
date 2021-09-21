@@ -138,8 +138,8 @@ enum PrefKey: String {
   case enableBrightnessSync
 
   // Combine sliders for all displays
-  case combineBrightnessSliders // TODO: Unimplemented
+  case slidersCombine // TODO: Implemetation: MISSING, pref pane: OK
 
   // Combine sliders for all displays
-  case combineVolumeSliders // TODO: Unimplemented
+  case slidersRelevant // TODO: Unimplemented: MISSING, pref pane: OK
 }

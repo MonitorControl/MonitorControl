@@ -20,10 +20,16 @@ class MenuslidersPrefsViewController: NSViewController, PreferencePane {
   @IBOutlet var iconSliderOnly: NSButton!
   @IBOutlet var iconHide: NSButton!
   @IBOutlet var quitApplication: NSButton!
+
   @IBOutlet var showBrightnessSlider: NSButton!
   @IBOutlet var showAppleFromMenu: NSButton!
   @IBOutlet var showVolumeSlider: NSButton!
   @IBOutlet var showContrastSlider: NSButton!
+
+  @IBOutlet var slidersSeparate: NSButton!
+  @IBOutlet var slidersRelevant: NSButton!
+  @IBOutlet var slidersCombine: NSButton!
+
   @IBOutlet var enableSliderSnap: NSButton!
   @IBOutlet var showTickMarks: NSButton!
   @IBOutlet var enableSliderPercent: NSButton!
@@ -35,8 +41,16 @@ class MenuslidersPrefsViewController: NSViewController, PreferencePane {
   @IBOutlet var rowQuitButton: NSGridRow!
   @IBOutlet var rowQuitText: NSGridRow!
   @IBOutlet var rowHideIconSpearator: NSGridRow!
+
   @IBOutlet var rowShowContrastCheck: NSGridRow!
   @IBOutlet var rowShowContrastText: NSGridRow!
+
+  @IBOutlet var rowSlidersSeparator: NSButton!
+  @IBOutlet var rowSlidersSeparate: NSButton!
+  @IBOutlet var rowSlidersRelevant: NSButton!
+  @IBOutlet var rowSlidersCombine: NSButton!
+  @IBOutlet var rowSlidersCombineText: NSButton!
+
   @IBOutlet var rowTickCheck: NSGridRow!
   @IBOutlet var rowTickText: NSGridRow!
   @IBOutlet var rowPercentCheck: NSGridRow!
@@ -75,6 +89,30 @@ class MenuslidersPrefsViewController: NSViewController, PreferencePane {
       self.rowShowContrastCheck.isHidden = hide
       self.rowShowContrastText.isHidden = hide
     }
+
+    if self.slidersSeparate.state == .on {
+      self.rowSlidersSeparator.isHidden = hide
+      self.rowSlidersSeparate.isHidden = hide
+      self.rowSlidersRelevant.isHidden = hide
+      self.rowSlidersCombine.isHidden = hide
+      self.rowSlidersCombineText.isHidden = hide
+    } else {
+      self.rowSlidersSeparator.isHidden = false
+      self.rowSlidersSeparate.isHidden = false
+      if self.slidersRelevant.state == .on {
+        self.rowSlidersRelevant.isHidden = false
+      } else {
+        self.rowSlidersRelevant.isHidden = hide
+      }
+      if self.slidersCombine.state == .on {
+        self.rowSlidersCombine.isHidden = false
+        self.rowSlidersCombineText.isHidden = false
+      } else {
+        self.rowSlidersCombine.isHidden = hide
+        self.rowSlidersCombineText.isHidden = hide
+      }
+    }
+
     if self.showTickMarks.state == .on {
       self.rowTickCheck.isHidden = false
       self.rowTickText.isHidden = false
@@ -115,6 +153,11 @@ class MenuslidersPrefsViewController: NSViewController, PreferencePane {
       self.showAppleFromMenu.isEnabled = false
     }
     self.showContrastSlider.state = prefs.bool(forKey: PrefKey.showContrast.rawValue) ? .on : .off
+
+    self.slidersSeparate.state = prefs.bool(forKey: PrefKey.slidersRelevant.rawValue) || prefs.bool(forKey: PrefKey.slidersCombine.rawValue) ? .off : .on
+    self.slidersRelevant.state = prefs.bool(forKey: PrefKey.slidersRelevant.rawValue) ? .on : .off
+    self.slidersCombine.state = prefs.bool(forKey: PrefKey.slidersCombine.rawValue) ? .on : .off
+
     self.showVolumeSlider.state = prefs.bool(forKey: PrefKey.hideVolume.rawValue) ? .off : .on
     self.enableSliderSnap.state = prefs.bool(forKey: PrefKey.enableSliderSnap.rawValue) ? .on : .off
     self.showTickMarks.state = prefs.bool(forKey: PrefKey.showTickMarks.rawValue) ? .on : .off
@@ -199,6 +242,36 @@ class MenuslidersPrefsViewController: NSViewController, PreferencePane {
       prefs.set(false, forKey: PrefKey.enableSliderSnap.rawValue)
     default: break
     }
+    app.updateDisplaysAndMenus()
+    _ = self.showAdvanced()
+  }
+
+  @IBAction func slidersSeparate(_: NSButton) {
+    prefs.set(false, forKey: PrefKey.slidersCombine.rawValue)
+    prefs.set(false, forKey: PrefKey.slidersRelevant.rawValue)
+    self.slidersSeparate.state = .on
+    self.slidersCombine.state = .off
+    self.slidersRelevant.state = .off
+    app.updateDisplaysAndMenus()
+    _ = self.showAdvanced()
+  }
+
+  @IBAction func slidersRelevant(_: NSButton) {
+    prefs.set(false, forKey: PrefKey.slidersCombine.rawValue)
+    prefs.set(true, forKey: PrefKey.slidersRelevant.rawValue)
+    self.slidersSeparate.state = .off
+    self.slidersCombine.state = .off
+    self.slidersRelevant.state = .on
+    app.updateDisplaysAndMenus()
+    _ = self.showAdvanced()
+  }
+
+  @IBAction func slidersCombine(_: NSButton) {
+    prefs.set(true, forKey: PrefKey.slidersCombine.rawValue)
+    prefs.set(false, forKey: PrefKey.slidersRelevant.rawValue)
+    self.slidersSeparate.state = .off
+    self.slidersCombine.state = .on
+    self.slidersRelevant.state = .off
     app.updateDisplaysAndMenus()
     _ = self.showAdvanced()
   }

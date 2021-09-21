@@ -22,6 +22,9 @@
 /* Class = "NSTextFieldCell"; title = "MonitorControl uses mouse position to determine which display to control. Using window focus instead might not work well with full screen apps."; ObjectID = "4dX-o1-xAc"; */
 "4dX-o1-xAc.title" = "MonitorControl uses mouse position to determine which display to control. Using window focus instead might not work well with full screen apps.";
 
+/* Class = "NSButtonCell"; title = "Show separate controls for each display in menu"; ObjectID = "4t2-Rv-njr"; */
+"4t2-Rv-njr.title" = "Show separate controls for each display in menu";
+
 /* Class = "NSTextField"; ibExternalAccessibilityDescription = "Brightness"; ObjectID = "567-le-fLg"; */
 "567-le-fLg.ibExternalAccessibilityDescription" = "Brightness";
 
@@ -30,6 +33,9 @@
 
 /* Class = "NSTextFieldCell"; title = "Slider behavior:"; ObjectID = "75n-7M-1mS"; */
 "75n-7M-1mS.title" = "Slider behavior:";
+
+/* Class = "NSButtonCell"; title = "Use combined slider for all displays"; ObjectID = "7rn-Lu-fcl"; */
+"7rn-Lu-fcl.title" = "Use combined slider for all displays";
 
 /* Class = "NSButtonCell"; title = "Show slider tick marks"; ObjectID = "7zf-m1-gJO"; */
 "7zf-m1-gJO.title" = "Show slider tick marks";
@@ -94,7 +100,7 @@
 /* Class = "NSTextFieldCell"; title = "VCP 0x"; ObjectID = "D9t-vT-gNJ"; */
 "D9t-vT-gNJ.title" = "Remap";
 
-/* Class = "NSTextFieldCell"; title = "Might not work well with multiple identical displays. Without this the app uses mouse position to determine which display to control."; ObjectID = "Dha-Tm-cDM"; */
+/* Class = "NSTextFieldCell"; title = "Without this the app uses mouse position to determine which display to control. Works well with combined slider."; ObjectID = "Dha-Tm-cDM"; */
 "Dha-Tm-cDM.title" = "Might not work well with multiple identical displays. Without this the app uses mouse position to determine which display to control.";
 
 /* Class = "NSButtonCell"; title = "Only if at least one slider is present"; ObjectID = "EM1-zD-fVZ"; */
@@ -151,7 +157,7 @@
 /* Class = "NSButtonCell"; title = "Get current"; ObjectID = "hkC-vq-IcD"; */
 "hkC-vq-IcD.title" = "Get current";
 
-/* Class = "NSTextFieldCell"; title = "Additional sliders:"; ObjectID = "i5X-M5-Tf5"; */
+/* Class = "NSTextFieldCell"; title = "Additional controls:"; ObjectID = "i5X-M5-Tf5"; */
 "i5X-M5-Tf5.title" = "Additional sliders:";
 
 /* Class = "NSButtonCell"; title = "Enable smooth brightness transitions"; ObjectID = "IK4-u5-qjf"; */
@@ -229,6 +235,9 @@
 /* Class = "NSTextFieldCell"; title = "DDC max"; ObjectID = "psF-vX-AFB"; */
 "psF-vX-AFB.title" = "DDC max";
 
+/* Class = "NSButtonCell"; title = "Show sliders only for the display currently showing the menu"; ObjectID = "PvP-TV-OmT"; */
+"PvP-TV-OmT.title" = "Show sliders only for the display currently showing the menu";
+
 /* Class = "NSButtonCell"; title = "Quit appliation"; ObjectID = "qlb-wH-qr4"; */
 "qlb-wH-qr4.title" = "Quit appliation";
 
@@ -274,6 +283,9 @@
 /* Class = "NSMenuItem"; title = "Both Brightness & Volume"; ObjectID = "Vr4-xb-B4o"; */
 "Vr4-xb-B4o.title" = "Luminosità e Volume";
 
+/* Class = "NSTextFieldCell"; title = "Multiple displays:"; ObjectID = "vri-pv-tJ4"; */
+"vri-pv-tJ4.title" = "Multiple displays:";
+
 /* Class = "NSTextFieldCell"; title = "DDC read polling mode:"; ObjectID = "vwm-hY-on5"; */
 "vwm-hY-on5.title" = "Modalità lettura polling DDC:";
 
@@ -297,6 +309,9 @@
 
 /* Class = "NSTextFieldCell"; title = "Update settings from the display. May not work with some hardware."; ObjectID = "xjq-hs-wWB"; */
 "xjq-hs-wWB.title" = "Attempt to read current settings from the display. If unsuccessful, last saved values are presumed or generic defaults are used instead.";
+
+/* Class = "NSTextFieldCell"; title = "Works best with various syncing and 'control all' keyboard settings enabled."; ObjectID = "XU4-Bn-bwH"; */
+"XU4-Bn-bwH.title" = "Works best with various syncing and 'control all' keyboard settings enabled.";
 
 /* Class = "NSTextFieldCell"; title = "This makes fine control default."; ObjectID = "YAb-HH-s3p"; */
 "YAb-HH-s3p.title" = "This makes fine control default.";

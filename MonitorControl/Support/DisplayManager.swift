@@ -11,6 +11,9 @@ class DisplayManager {
 
   var displays: [Display] = []
   var audioControlTargetDisplays: [OtherDisplay] = []
+  var unifiedBrightnessSliderHandler: SliderHandler?
+  var unifiedVolumeSliderHandler: SliderHandler?
+  var unifiedContrastSliderHandler: SliderHandler?
 
   // Gamma activity enforcer and window shade
 

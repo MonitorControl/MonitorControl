@@ -6,7 +6,7 @@ import os.log
 class SliderHandler {
   var slider: ScrollableSlider?
   var percentageBox: NSTextField?
-  var display: Display
+  var display: Display?
   let cmd: Command
 
   //  Credits for this class go to @thompsonate - https://github.com/thompsonate/Scrollable-NSSlider
@@ -44,15 +44,14 @@ class SliderHandler {
     }
   }
 
-  public init(display: Display, command: Command) {
-    self.display = display
+  public init(display: Display?, command: Command) {
+    if display == display {
+      self.display = display
+    }
     self.cmd = command
   }
 
-  func valueChangedOtherDisplay(value: Float) {
-    guard let otherDisplay = self.display as? OtherDisplay else {
-      return
-    }
+  func valueChangedOtherDisplay(otherDisplay: OtherDisplay, value: Float) {
     // For the speaker volume slider, also set/unset the mute command when the value is changed from/to 0
     if self.cmd == .audioSpeakerVolume, (otherDisplay.readPrefValueInt(for: .audioMuteScreenBlank) == 1 && value > 0) || (otherDisplay.readPrefValueInt(for: .audioMuteScreenBlank) != 1 && value == 0) {
       otherDisplay.toggleMute(fromVolumeSlider: true)
@@ -70,6 +69,10 @@ class SliderHandler {
       }
       otherDisplay.savePrefValue(value, for: self.cmd)
     }
+  }
+
+  func valueChangedUnified(value _: Float) {
+    // TODO: What happens if the slider is unified?
   }
 
   @objc func valueChanged(slider: NSSlider) {
@@ -92,8 +95,10 @@ class SliderHandler {
     }
     if let appleDisplay = self.display as? AppleDisplay {
       _ = appleDisplay.setBrightness(value)
+    } else if let otherDisplay = self.display as? OtherDisplay {
+      self.valueChangedOtherDisplay(otherDisplay: otherDisplay, value: value)
     } else {
-      self.valueChangedOtherDisplay(value: value)
+      self.valueChangedUnified(value: value)
     }
   }
 
