@@ -1,4 +1,5 @@
 import Cocoa
+import MediaKeyTap
 import os.log
 import Preferences
 import ServiceManagement
@@ -26,6 +27,7 @@ class MainPrefsViewController: NSViewController, PreferencePane {
   @IBOutlet var fallbackSw: NSButton!
   @IBOutlet var listenFor: NSPopUpButton!
   @IBOutlet var allScreens: NSButton!
+  @IBOutlet var altBrightnessKeys: NSButton!
   @IBOutlet var showAdvancedDisplays: NSButton!
 
   override func viewDidLoad() {
@@ -51,6 +53,7 @@ class MainPrefsViewController: NSViewController, PreferencePane {
     self.fallbackSw.state = self.prefs.bool(forKey: Utils.PrefKeys.fallbackSw.rawValue) ? .on : .off
     self.listenFor.selectItem(at: self.prefs.integer(forKey: Utils.PrefKeys.listenFor.rawValue))
     self.allScreens.state = self.prefs.bool(forKey: Utils.PrefKeys.allScreens.rawValue) ? .on : .off
+    self.altBrightnessKeys.state = self.prefs.bool(forKey: Utils.PrefKeys.altBrightnessKeys.rawValue) ? .on : .off
     self.showAdvancedDisplays.state = self.prefs.bool(forKey: Utils.PrefKeys.showAdvancedDisplays.rawValue) ? .on : .off
   }
 
@@ -65,6 +68,20 @@ class MainPrefsViewController: NSViewController, PreferencePane {
 
     #if DEBUG
       os_log("Toggle allScreens state: %{public}@", type: .info, sender.state == .on ? "on" : "off")
+    #endif
+  }
+
+  @IBAction func altBrightnessKeysTouched(_ sender: NSButton) {
+    switch sender.state {
+    case .on:
+      self.prefs.set(true, forKey: Utils.PrefKeys.altBrightnessKeys.rawValue)
+    case .off:
+      self.prefs.set(false, forKey: Utils.PrefKeys.altBrightnessKeys.rawValue)
+    default: break
+    }
+    MediaKeyTap.useAlternateBrightnessKeys = (sender.state == .on)
+    #if DEBUG
+      os_log("Toggle altBrightnessKeys state: %{public}@", type: .info, sender.state == .on ? "on" : "off")
     #endif
   }
 

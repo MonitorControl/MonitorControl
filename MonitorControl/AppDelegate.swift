@@ -54,6 +54,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     self.statusItem.menu = self.statusMenu
     self.checkPermissions()
     CGDisplayRegisterReconfigurationCallback({ _, _, _ in app.displayReconfigured() }, nil)
+
+    MediaKeyTap.useAlternateBrightnessKeys = prefs.bool(forKey: Utils.PrefKeys.altBrightnessKeys.rawValue)
     self.updateDisplays(firstrun: true)
   }
 
