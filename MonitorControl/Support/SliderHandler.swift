@@ -12,6 +12,9 @@ class SliderHandler {
 
   class MCSliderCell: NSSliderCell {
     var numOfCustomTickmarks: Int = 0
+    var isFillBar: Bool = true
+    var isHighlightDisplayItems: Bool = false
+    var displayItems: [CGDirectDisplayID: Float] = [:]
 
     required init(coder aDecoder: NSCoder) {
       super.init(coder: aDecoder)
@@ -22,7 +25,12 @@ class SliderHandler {
     }
 
     override func drawKnob(_ knobRect: NSRect) {
-      let sliderKnob = NSBezierPath(ovalIn: NSRect(x: knobRect.origin.x - 1.5, y: knobRect.origin.y - 2, width: knobRect.height, height: knobRect.height).insetBy(dx: 4, dy: 4))
+      var sliderKnob: NSBezierPath
+      if self.numOfCustomTickmarks > 0 {
+        sliderKnob = NSBezierPath(roundedRect: NSRect(x: knobRect.origin.x + 2, y: knobRect.origin.y - 2, width: knobRect.height * 0.75, height: knobRect.height).insetBy(dx: 4, dy: 4), xRadius: 5, yRadius: 5)
+      } else {
+        sliderKnob = NSBezierPath(ovalIn: NSRect(x: knobRect.origin.x - 1.5, y: knobRect.origin.y - 2, width: knobRect.height, height: knobRect.height).insetBy(dx: 4, dy: 4))
+      }
       NSColor(white: 1, alpha: 1).setFill()
       sliderKnob.fill()
       NSColor.tertiaryLabelColor.setStroke()
@@ -30,25 +38,29 @@ class SliderHandler {
     }
 
     override func drawBar(inside aRect: NSRect, flipped _: Bool) {
-      // Base bar
-
       let lastKnobRect = knobRect(flipped: false)
-      let sliderBarBounds = aRect.insetBy(dx: 2, dy: 0)
-      let sliderBar = NSBezierPath(roundedRect: sliderBarBounds, xRadius: sliderBarBounds.height * 0.5, yRadius: sliderBarBounds.height * 0.5)
+      let sliderBar = NSBezierPath(roundedRect: aRect.insetBy(dx: 2, dy: 0), xRadius: aRect.height * 0.5, yRadius: aRect.height * 0.5)
       NSColor.tertiaryLabelColor.setFill()
       sliderBar.fill()
 
-      // Tickmarks
+      if self.isFillBar {
+        // TODO: Fill from and to and highlight displays in lazy combined mode
+        let sliderBarFillBounds = NSRect(x: aRect.insetBy(dx: 2, dy: 0).minX, y: aRect.minY, width: lastKnobRect.midX - 3, height: aRect.height)
+        let sliderBarFill = NSBezierPath(roundedRect: sliderBarFillBounds, xRadius: aRect.height * 0.5, yRadius: aRect.height * 0.5)
+        NSColor.controlAccentColor.setFill()
+        sliderBarFill.fill()
+      }
 
-      // Filled part
-
-      let sliderBarFillBounds = NSRect(x: sliderBarBounds.minX, y: sliderBarBounds.minY, width: lastKnobRect.midX, height: sliderBarBounds.height)
-      let sliderBarFill = NSBezierPath(roundedRect: sliderBarFillBounds, xRadius: sliderBarBounds.height * 0.5, yRadius: sliderBarBounds.height * 0.5)
-      NSColor.controlAccentColor.setFill()
-      sliderBarFill.fill()
-
-      // NSColor.systemBlue.setStroke()
-      // sliderBar.stroke()
+      if self.numOfCustomTickmarks > 0 {
+        for i in 0 ... self.numOfCustomTickmarks - 1 {
+          let currentMarkLocation = (Float(1) / Float(self.numOfCustomTickmarks - 1)) * Float(i)
+          // os_log("Tickmark %{public}@", "\(currentMarkLocation)")
+          let tickMarkBounds = NSRect(x: aRect.minX + 2 + 7 + CGFloat(Float(aRect.width - 6 - 14) * currentMarkLocation), y: aRect.minY - 3, width: 2, height: aRect.height + 6)
+          let tickmark = NSBezierPath(roundedRect: tickMarkBounds, xRadius: 0.5, yRadius: 0.5)
+          NSColor.quaternaryLabelColor.setFill()
+          tickmark.fill()
+        }
+      }
     }
   }
 
@@ -57,11 +69,6 @@ class SliderHandler {
     required init?(coder: NSCoder) {
       super.init(coder: coder)
     }
-
-    var isBarFilled: Bool = true
-    var isBarFromTo: Bool = false
-    var barFilledFrom: Float = 0
-    var barFilledTo: Float = 1
 
     override init(frame frameRect: NSRect) {
       super.init(frame: frameRect)
@@ -93,34 +100,6 @@ class SliderHandler {
       self.floatValue = value
       self.sendAction(self.action, to: self.target)
     }
-
-    /*
-     override func draw(_: NSRect) {
-       let sliderBarMargin: CGFloat = 4
-       let innerRect = bounds.insetBy(dx: bounds.height / 2, dy: 0)
-       let knobLocation: CGFloat = innerRect.minX + CGFloat((doubleValue - minValue) / maxValue) * innerRect.width
-
-       let sliderBarBounds = bounds.insetBy(dx: sliderBarMargin, dy: sliderBarMargin)
-       let sliderBar = NSBezierPath(roundedRect: sliderBarBounds, xRadius: sliderBarBounds.height * 0.5, yRadius: sliderBarBounds.height * 0.5)
-       NSColor(white: 0, alpha: 0.15).setFill()
-       NSColor(white: 0, alpha: 0.2).setStroke()
-       sliderBar.fill()
-       sliderBar.stroke()
-
-       let sliderBarFillBounds = NSRect(x: bounds.minX, y: 0, width: knobLocation + bounds.height / 2, height: bounds.height).insetBy(dx: sliderBarMargin, dy: sliderBarMargin)
-       let sliderBarFill = NSBezierPath(roundedRect: sliderBarFillBounds, xRadius: sliderBarBounds.height * 0.5, yRadius: sliderBarBounds.height * 0.5)
-       NSColor(white: 1, alpha: 1).setFill()
-       // NSColor(white: 0, alpha: 0.2).setStroke()
-       sliderBarFill.fill()
-       sliderBarFill.stroke()
-
-       let sliderKnob = NSBezierPath(ovalIn: NSRect(x: knobLocation - bounds.height * 0.5, y: 0, width: bounds.height, height: bounds.height).insetBy(dx: sliderBarMargin, dy: sliderBarMargin))
-       NSColor(white: 1, alpha: 1).setFill()
-       NSColor(white: 0, alpha: 0.2).setStroke()
-       sliderKnob.fill()
-       sliderKnob.stroke()
-     }
-     */
   }
 
   public init(display: Display?, command: Command) {
