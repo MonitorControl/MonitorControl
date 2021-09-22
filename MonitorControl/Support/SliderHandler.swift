@@ -4,19 +4,80 @@ import Cocoa
 import os.log
 
 class SliderHandler {
-  var slider: ScrollableSlider?
+  var slider: MCSlider?
   var percentageBox: NSTextField?
   var displays: [Display] = []
   var values: [CGDirectDisplayID: Float] = [:]
   let cmd: Command
 
+  class MCSliderCell: NSSliderCell {
+    var numOfCustomTickmarks: Int = 0
+
+    required init(coder aDecoder: NSCoder) {
+      super.init(coder: aDecoder)
+    }
+
+    override init() {
+      super.init()
+    }
+
+    override func drawKnob(_ knobRect: NSRect) {
+      let sliderKnob = NSBezierPath(ovalIn: NSRect(x: knobRect.origin.x - 1.5, y: knobRect.origin.y - 2, width: knobRect.height, height: knobRect.height).insetBy(dx: 4, dy: 4))
+      NSColor(white: 1, alpha: 1).setFill()
+      sliderKnob.fill()
+      NSColor.tertiaryLabelColor.setStroke()
+      sliderKnob.stroke()
+    }
+
+    override func drawBar(inside aRect: NSRect, flipped _: Bool) {
+      // Base bar
+
+      let lastKnobRect = knobRect(flipped: false)
+      let sliderBarBounds = aRect.insetBy(dx: 2, dy: 0)
+      let sliderBar = NSBezierPath(roundedRect: sliderBarBounds, xRadius: sliderBarBounds.height * 0.5, yRadius: sliderBarBounds.height * 0.5)
+      NSColor.tertiaryLabelColor.setFill()
+      sliderBar.fill()
+
+      // Tickmarks
+
+      // Filled part
+
+      let sliderBarFillBounds = NSRect(x: sliderBarBounds.minX, y: sliderBarBounds.minY, width: lastKnobRect.midX, height: sliderBarBounds.height)
+      let sliderBarFill = NSBezierPath(roundedRect: sliderBarFillBounds, xRadius: sliderBarBounds.height * 0.5, yRadius: sliderBarBounds.height * 0.5)
+      NSColor.controlAccentColor.setFill()
+      sliderBarFill.fill()
+
+      // NSColor.systemBlue.setStroke()
+      // sliderBar.stroke()
+    }
+  }
+
   //  Credits for this class go to @thompsonate - https://github.com/thompsonate/Scrollable-NSSlider
-  class ScrollableSlider: NSSlider {
+  class MCSlider: NSSlider {
+    required init?(coder: NSCoder) {
+      super.init(coder: coder)
+    }
+
+    var isBarFilled: Bool = true
+    var isBarFromTo: Bool = false
+    var barFilledFrom: Float = 0
+    var barFilledTo: Float = 1
+
+    override init(frame frameRect: NSRect) {
+      super.init(frame: frameRect)
+      self.cell = MCSliderCell()
+    }
+
+    func setNumOfCustomTickmarks(_ numOfCustomTickmarks: Int) {
+      if let cell = self.cell as? MCSliderCell {
+        cell.numOfCustomTickmarks = numOfCustomTickmarks
+      }
+    }
+
     override func scrollWheel(with event: NSEvent) {
       guard self.isEnabled else { return }
       let range = Float(self.maxValue - self.minValue)
       var delta = Float(0)
-      // Allow horizontal scrolling on horizontal and circular sliders
       if self.isVertical, self.sliderType == .linear {
         delta = Float(event.deltaY)
       } else if self.userInterfaceLayoutDirection == .rightToLeft {
@@ -24,25 +85,42 @@ class SliderHandler {
       } else {
         delta = Float(event.deltaY - event.deltaX)
       }
-      // Account for natural scrolling
       if event.isDirectionInvertedFromDevice {
         delta *= -1
       }
       let increment = range * delta / 100
-      var value = self.floatValue + increment
-      // Wrap around if slider is circular
-      if self.sliderType == .circular {
-        let minValue = Float(self.minValue)
-        let maxValue = Float(self.maxValue)
-        if value < minValue {
-          value = maxValue - abs(increment)
-        } else if value > maxValue {
-          value = minValue + abs(increment)
-        }
-      }
+      let value = self.floatValue + increment
       self.floatValue = value
       self.sendAction(self.action, to: self.target)
     }
+
+    /*
+     override func draw(_: NSRect) {
+       let sliderBarMargin: CGFloat = 4
+       let innerRect = bounds.insetBy(dx: bounds.height / 2, dy: 0)
+       let knobLocation: CGFloat = innerRect.minX + CGFloat((doubleValue - minValue) / maxValue) * innerRect.width
+
+       let sliderBarBounds = bounds.insetBy(dx: sliderBarMargin, dy: sliderBarMargin)
+       let sliderBar = NSBezierPath(roundedRect: sliderBarBounds, xRadius: sliderBarBounds.height * 0.5, yRadius: sliderBarBounds.height * 0.5)
+       NSColor(white: 0, alpha: 0.15).setFill()
+       NSColor(white: 0, alpha: 0.2).setStroke()
+       sliderBar.fill()
+       sliderBar.stroke()
+
+       let sliderBarFillBounds = NSRect(x: bounds.minX, y: 0, width: knobLocation + bounds.height / 2, height: bounds.height).insetBy(dx: sliderBarMargin, dy: sliderBarMargin)
+       let sliderBarFill = NSBezierPath(roundedRect: sliderBarFillBounds, xRadius: sliderBarBounds.height * 0.5, yRadius: sliderBarBounds.height * 0.5)
+       NSColor(white: 1, alpha: 1).setFill()
+       // NSColor(white: 0, alpha: 0.2).setStroke()
+       sliderBarFill.fill()
+       sliderBarFill.stroke()
+
+       let sliderKnob = NSBezierPath(ovalIn: NSRect(x: knobLocation - bounds.height * 0.5, y: 0, width: bounds.height, height: bounds.height).insetBy(dx: sliderBarMargin, dy: sliderBarMargin))
+       NSColor(white: 1, alpha: 1).setFill()
+       NSColor(white: 0, alpha: 0.2).setStroke()
+       sliderKnob.fill()
+       sliderKnob.stroke()
+     }
+     */
   }
 
   public init(display: Display?, command: Command) {
@@ -155,10 +233,10 @@ class SliderHandler {
     } else {
       let item = NSMenuItem()
       handler = SliderHandler(display: display, command: command)
-      let slider = ScrollableSlider(value: 0, minValue: 0, maxValue: 1, target: handler, action: #selector(SliderHandler.valueChanged))
+      let slider = MCSlider(value: 0, minValue: 0, maxValue: 1, target: handler, action: #selector(SliderHandler.valueChanged))
       let showPercent = prefs.bool(forKey: PrefKey.enableSliderPercent.rawValue)
       slider.isEnabled = true
-      slider.numberOfTickMarks = numOfTickMarks
+      slider.setNumOfCustomTickmarks(numOfTickMarks)
       handler.slider = slider
       if #available(macOS 11.0, *) {
         slider.frame.size.width = 160
