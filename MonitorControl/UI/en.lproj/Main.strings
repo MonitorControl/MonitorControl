@@ -100,8 +100,8 @@
 /* Class = "NSTextFieldCell"; title = "VCP 0x"; ObjectID = "D9t-vT-gNJ"; */
 "D9t-vT-gNJ.title" = "VCP 0x";
 
-/* Class = "NSTextFieldCell"; title = "Without this the app uses mouse position to determine which display to control. Works well with combined slider."; ObjectID = "Dha-Tm-cDM"; */
-"Dha-Tm-cDM.title" = "Without this the app uses mouse position to determine which display to control. Works well with combined slider.";
+/* Class = "NSTextFieldCell"; title = "Without this the app uses mouse position to determine which display to control. You can override audio device name under Displays if needed."; ObjectID = "Dha-Tm-cDM"; */
+"Dha-Tm-cDM.title" = "Without this the app uses mouse position to determine which display to control. You can override audio device name under Displays if needed.";
 
 /* Class = "NSButtonCell"; title = "Only if at least one slider is present"; ObjectID = "EM1-zD-fVZ"; */
 "EM1-zD-fVZ.title" = "Only if at least one slider is present";

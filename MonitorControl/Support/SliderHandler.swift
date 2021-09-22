@@ -147,7 +147,7 @@ class SliderHandler {
     percentageBox.alphaValue = 0.7
   }
 
-  static func addSliderMenuItem(toMenu menu: NSMenu, forDisplay display: Display, command: Command, title: String, numOfTickMarks: Int = 0, sliderHandler: SliderHandler? = nil) -> SliderHandler {
+  static func addSliderMenuItem(toMenu menu: NSMenu, forDisplay display: Display, command: Command, title: String, numOfTickMarks: Int = 0, sliderHandler: SliderHandler? = nil, position: Int = 0) -> SliderHandler {
     var handler: SliderHandler
     if sliderHandler != nil {
       handler = sliderHandler!
@@ -186,7 +186,7 @@ class SliderHandler {
           view.addSubview(percentageBox)
         }
         item.view = view
-        menu.insertItem(item, at: 0)
+        menu.insertItem(item, at: position)
       } else {
         slider.frame.size.width = 180
         slider.frame.origin = NSPoint(x: 15, y: 5)
@@ -202,8 +202,8 @@ class SliderHandler {
           view.addSubview(percentageBox)
         }
         item.view = view
-        menu.insertItem(item, at: 0)
-        menu.insertItem(sliderHeaderItem, at: 0)
+        menu.insertItem(item, at: position)
+        menu.insertItem(sliderHeaderItem, at: position)
       }
       slider.maxValue = 1
     }

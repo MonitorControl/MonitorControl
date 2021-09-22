@@ -100,7 +100,7 @@
 /* Class = "NSTextFieldCell"; title = "VCP 0x"; ObjectID = "D9t-vT-gNJ"; */
 "D9t-vT-gNJ.title" = "Remap";
 
-/* Class = "NSTextFieldCell"; title = "Without this the app uses mouse position to determine which display to control. Works well with combined slider."; ObjectID = "Dha-Tm-cDM"; */
+/* Class = "NSTextFieldCell"; title = "Without this the app uses mouse position to determine which display to control. You can override audio device name under Displays if needed."; ObjectID = "Dha-Tm-cDM"; */
 "Dha-Tm-cDM.title" = "Might not work well with multiple identical displays. Without this the app uses mouse position to determine which display to control.";
 
 /* Class = "NSButtonCell"; title = "Only if at least one slider is present"; ObjectID = "EM1-zD-fVZ"; */

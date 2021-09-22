@@ -1088,8 +1088,9 @@
                                     <gridCell row="73k-Ho-qxa" column="EiG-65-CTv" id="zDs-rB-tfY">
                                         <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" preferredMaxLayoutWidth="400" translatesAutoresizingMaskIntoConstraints="NO" id="1lU-Y6-hCU">
                                             <rect key="frame" x="235" y="47" width="418" height="28"/>
-                                            <textFieldCell key="cell" controlSize="small" title="Without this the app uses mouse position to determine which display to control. Works well with combined slider." id="Dha-Tm-cDM">
+                                            <textFieldCell key="cell" controlSize="small" id="Dha-Tm-cDM">
                                                 <font key="font" metaFont="smallSystem"/>
+                                                <string key="title">Without this the app uses mouse position to determine which display to control. You can override audio device name under Displays if needed.</string>
                                                 <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
