@@ -29,6 +29,7 @@ class AppleDisplay: Display {
     self.setAppleBrightness(value: value)
     if !transient {
       self.savePrefValue(value, for: .brightness)
+      self.brightnessSyncSourceValue = value
       self.smoothBrightnessTransient = value
     }
     return true
