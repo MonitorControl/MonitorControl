@@ -101,7 +101,8 @@ class SliderHandler {
         self.valueChangedOtherDisplay(otherDisplay: otherDisplay, value: value)
       }
     }
-    slider.trackFillColor = NSColor.systemBlue
+    // Slider coloring seem to be broken in Monterey beta 7. Let's see if they fix it. Until that time we skip this.
+    // slider.trackFillColor = NSColor.systemBlue
   }
 
   func setValue(_ value: Float, displayID: CGDirectDisplayID = 0) {
@@ -123,11 +124,12 @@ class SliderHandler {
     let average = sumVal / Float(num)
     if let slider = self.slider {
       slider.floatValue = average
-      if abs(maxVal - minVal) > (2 / 100) {
-        slider.trackFillColor = NSColor.systemGray // This is a subtle indication of the fact that the slider position does not reflect all displays.
-      } else {
-        slider.trackFillColor = NSColor.systemBlue
-      }
+//      Slider coloring seem to be broken in Monterey beta 7. Let's see if they fix it. Until that time we skip this.
+//      if abs(maxVal - minVal) > (2 / 100) {
+//        slider.trackFillColor = NSColor.systemGray // This is a subtle indication of the fact that the slider position does not reflect all displays.
+//      } else {
+//        slider.trackFillColor = NSColor.systemBlue
+//      }
     }
     if self.percentageBox == self.percentageBox {
       self.percentageBox?.stringValue = "" + String(Int(value * 100)) + "%"

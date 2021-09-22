@@ -141,5 +141,5 @@ enum PrefKey: String {
   case slidersRelevant
 
   // Combine sliders for all displays
-  case slidersCombine
+  case slidersCombine // TODO: Implementation is still somewhat shaky, needs refinement + order of sliders sometimes not right.
 }
