@@ -336,7 +336,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
           if prefs.bool(forKey: PrefKey.enableBrightnessSync.rawValue) {
             for targetDisplay in DisplayManager.shared.displays where targetDisplay != display {
               os_log("Updating delta from display %{public}@ to display %{public}@", type: .debug, String(display.identifier), String(targetDisplay.identifier))
-              let newValue = targetDisplay.getBrightness() + delta
+              let newValue = max(0, min(1, targetDisplay.getBrightness() + delta))
               _ = targetDisplay.setBrightness(newValue)
               if let slider = targetDisplay.brightnessSliderHandler {
                 slider.setValue(newValue, displayID: targetDisplay.identifier)

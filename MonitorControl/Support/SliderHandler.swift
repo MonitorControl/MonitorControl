@@ -14,7 +14,7 @@ class SliderHandler {
     var numOfCustomTickmarks: Int = 0
     var isFillBar: Bool = true
     var isHighlightDisplayItems: Bool = false
-    var displayItems: [CGDirectDisplayID: Float] = [:]
+    var displayHighlightItems: [CGDirectDisplayID: Float] = [:]
 
     required init(coder aDecoder: NSCoder) {
       super.init(coder: aDecoder)
@@ -38,14 +38,13 @@ class SliderHandler {
     }
 
     override func drawBar(inside aRect: NSRect, flipped _: Bool) {
-      let lastKnobRect = knobRect(flipped: false)
+      let knobRect = knobRect(flipped: false)
       let sliderBar = NSBezierPath(roundedRect: aRect.insetBy(dx: 2, dy: 0), xRadius: aRect.height * 0.5, yRadius: aRect.height * 0.5)
       NSColor.tertiaryLabelColor.setFill()
       sliderBar.fill()
 
       if self.isFillBar {
-        // TODO: Fill from and to and highlight displays in lazy combined mode
-        let sliderBarFillBounds = NSRect(x: aRect.insetBy(dx: 2, dy: 0).minX, y: aRect.minY, width: lastKnobRect.midX - 3, height: aRect.height)
+        let sliderBarFillBounds = NSRect(x: aRect.insetBy(dx: 2, dy: 0).minX, y: aRect.minY, width: knobRect.midX - 3, height: aRect.height)
         let sliderBarFill = NSBezierPath(roundedRect: sliderBarFillBounds, xRadius: aRect.height * 0.5, yRadius: aRect.height * 0.5)
         NSColor.controlAccentColor.setFill()
         sliderBarFill.fill()
@@ -54,12 +53,32 @@ class SliderHandler {
       if self.numOfCustomTickmarks > 0 {
         for i in 0 ... self.numOfCustomTickmarks - 1 {
           let currentMarkLocation = (Float(1) / Float(self.numOfCustomTickmarks - 1)) * Float(i)
-          // os_log("Tickmark %{public}@", "\(currentMarkLocation)")
           let tickMarkBounds = NSRect(x: aRect.minX + 2 + 7 + CGFloat(Float(aRect.width - 6 - 14) * currentMarkLocation), y: aRect.minY - 3, width: 2, height: aRect.height + 6)
           let tickmark = NSBezierPath(roundedRect: tickMarkBounds, xRadius: 0.5, yRadius: 0.5)
           NSColor.quaternaryLabelColor.setFill()
           tickmark.fill()
         }
+      }
+
+      if self.isHighlightDisplayItems {
+        var minValue: Float = 1
+        var maxValue: Float = 0
+        for displayID in self.displayHighlightItems.keys {
+          if let currentMarkLocation = self.displayHighlightItems[displayID] {
+            minValue = min(minValue, currentMarkLocation)
+            maxValue = max(maxValue, currentMarkLocation)
+            let HighlightBounds = NSRect(x: aRect.minX + (aRect.height + 6) / 2 + 0.5 + CGFloat(Float(aRect.width - 6 - 14) * currentMarkLocation), y: aRect.minY - 3, width: aRect.height + 6, height: aRect.height + 6)
+            let highlight = NSBezierPath(ovalIn: HighlightBounds)
+            NSColor(white: 1, alpha: 1).setFill()
+            highlight.fill()
+            NSColor.tertiaryLabelColor.setStroke()
+            highlight.stroke()
+          }
+        }
+        let sliderBarFillBounds = NSRect(x: aRect.minX + (aRect.height + 6) / 2 + 0.5 + CGFloat(Float(aRect.width - 6 - 14) * minValue) + 1, y: aRect.minY + 1, width: CGFloat(Float(aRect.width - 6 - 14) * maxValue) - CGFloat(Float(aRect.width - 6 - 14) * minValue) + 3, height: aRect.height - 2)
+        let sliderBarFill = NSBezierPath(roundedRect: sliderBarFillBounds, xRadius: aRect.height * 0.5, yRadius: aRect.height * 0.5)
+        NSColor(white: 1, alpha: 1).setFill()
+        sliderBarFill.fill()
       }
     }
   }
@@ -78,6 +97,32 @@ class SliderHandler {
     func setNumOfCustomTickmarks(_ numOfCustomTickmarks: Int) {
       if let cell = self.cell as? MCSliderCell {
         cell.numOfCustomTickmarks = numOfCustomTickmarks
+      }
+    }
+
+    func setDisplayHighlightItems(_ isHighlightDisplayItems: Bool) {
+      if let cell = self.cell as? MCSliderCell {
+        cell.isHighlightDisplayItems = isHighlightDisplayItems
+      }
+    }
+
+    func setHighlightItem(_ displayID: CGDirectDisplayID, value: Float) {
+      if let cell = self.cell as? MCSliderCell {
+        cell.displayHighlightItems[displayID] = value
+      }
+    }
+
+    func removeHighlightItem(_ displayID: CGDirectDisplayID) {
+      if let cell = self.cell as? MCSliderCell {
+        if cell.displayHighlightItems[displayID] != nil {
+          cell.displayHighlightItems[displayID] = nil
+        }
+      }
+    }
+
+    func resetHighlightItems() {
+      if let cell = self.cell as? MCSliderCell {
+        cell.displayHighlightItems.removeAll()
       }
     }
 
@@ -133,7 +178,7 @@ class SliderHandler {
     }
   }
 
-  @objc func valueChanged(slider: NSSlider) {
+  @objc func valueChanged(slider: MCSlider) {
     guard app.sleepID == 0, app.reconfigureID == 0 else {
       return
     }
@@ -152,44 +197,44 @@ class SliderHandler {
       self.percentageBox?.stringValue = "" + String(Int(value * 100)) + "%"
     }
     for display in self.displays {
+      slider.setHighlightItem(display.identifier, value: value)
       if self.cmd == .brightness, let appleDisplay = display as? AppleDisplay {
         _ = appleDisplay.setBrightness(value)
       } else if let otherDisplay = display as? OtherDisplay {
         self.valueChangedOtherDisplay(otherDisplay: otherDisplay, value: value)
       }
     }
-    // Slider coloring seem to be broken in Monterey beta 7. Let's see if they fix it. Until that time we skip this.
-    // slider.trackFillColor = NSColor.systemBlue
+    slider.setDisplayHighlightItems(false)
   }
 
   func setValue(_ value: Float, displayID: CGDirectDisplayID = 0) {
-    if displayID != 0 {
-      self.values[displayID] = value
-    }
-    var sumVal: Float = 0
-    var maxVal: Float = 0
-    var minVal: Float = 1
-    var num: Int = 0
-    for key in self.values.keys {
-      if let val = values[key] {
-        sumVal += val
-        maxVal = max(maxVal, val)
-        minVal = min(minVal, val)
-        num += 1
-      }
-    }
-    let average = sumVal / Float(num)
     if let slider = self.slider {
-      slider.floatValue = average
-//      Slider coloring seem to be broken in Monterey beta 7. Let's see if they fix it. Until that time we skip this.
-//      if abs(maxVal - minVal) > (2 / 100) {
-//        slider.trackFillColor = NSColor.systemGray // This is a subtle indication of the fact that the slider position does not reflect all displays.
-//      } else {
-//        slider.trackFillColor = NSColor.systemBlue
-//      }
-    }
-    if self.percentageBox == self.percentageBox {
-      self.percentageBox?.stringValue = "" + String(Int(value * 100)) + "%"
+      if displayID != 0 {
+        self.values[displayID] = value
+        slider.setHighlightItem(displayID, value: value)
+      }
+      var sumVal: Float = 0
+      var maxVal: Float = 0
+      var minVal: Float = 1
+      var num: Int = 0
+      for key in self.values.keys {
+        if let val = values[key] {
+          sumVal += val
+          maxVal = max(maxVal, val)
+          minVal = min(minVal, val)
+          num += 1
+        }
+      }
+      // let average = sumVal / Float(num)
+      slider.floatValue = value
+      if abs(maxVal - minVal) > (2 / 100) {
+        slider.setDisplayHighlightItems(true)
+      } else {
+        slider.setDisplayHighlightItems(false)
+      }
+      if self.percentageBox == self.percentageBox {
+        self.percentageBox?.stringValue = "" + String(Int(value * 100)) + "%"
+      }
     }
   }
 

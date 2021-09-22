@@ -91,6 +91,7 @@ class MainPrefsViewController: NSViewController, PreferencePane {
     self.combinedBrightness.state = prefs.bool(forKey: PrefKey.disableCombinedBrightness.rawValue) ? .off : .on
     self.disableSoftwareFallback.state = prefs.bool(forKey: PrefKey.disableSoftwareFallback.rawValue) ? .on : .off
     self.enableSmooth.state = prefs.bool(forKey: PrefKey.disableSmoothBrightness.rawValue) ? .off : .on
+    self.enableBrightnessSync.state = prefs.bool(forKey: PrefKey.enableBrightnessSync.rawValue) ? .off : .on
     self.showAdvancedDisplays.state = prefs.bool(forKey: PrefKey.showAdvancedSettings.rawValue) ? .on : .off
     self.notEnableDDCDuringStartup.state = !prefs.bool(forKey: PrefKey.enableDDCDuringStartup.rawValue) ? .on : .off
     self.writeDDCOnStartup.state = !prefs.bool(forKey: PrefKey.readDDCInsteadOfRestoreValues.rawValue) && prefs.bool(forKey: PrefKey.enableDDCDuringStartup.rawValue) ? .on : .off
