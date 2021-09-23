@@ -17,7 +17,6 @@
                 <outlet property="statusMenu" destination="lCi-vw-mwp" id="iBf-iw-RcA"/>
             </connections>
         </customObject>
-        <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
         <menu id="lCi-vw-mwp">
             <items>
                 <menuItem isSeparatorItem="YES" id="F5R-GH-0ZO"/>
@@ -36,6 +35,5 @@
             </items>
             <point key="canvasLocation" x="-1180" y="-1189"/>
         </menu>
-        <sliderCell controlSize="small" state="on" alignment="left" maxValue="100" doubleValue="50" tickMarkPosition="above" sliderType="linear" id="JEl-jP-rdy"/>
     </objects>
 </document>

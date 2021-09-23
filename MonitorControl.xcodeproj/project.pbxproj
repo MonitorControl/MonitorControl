@@ -425,7 +425,7 @@
 /* Begin PBXShellScriptBuildPhase section */
 		28D1DE0C227FCFAF004CB494 /* [Format] Run SwiftFormat */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 12;
 			files = (
 			);
 			inputFileListPaths = (
@@ -479,7 +479,7 @@
 		};
 		6CB1BDB2253C7EBE00B52124 /* [Localization] Run BartyCrouch */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 12;
 			files = (
 			);
 			inputFileListPaths = (
@@ -757,7 +757,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				MARKETING_VERSION = 4.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = me.guillaumeb.MonitorControl;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -792,7 +792,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				MARKETING_VERSION = 4.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = me.guillaumeb.MonitorControl;
 				PRODUCT_NAME = "$(TARGET_NAME)";

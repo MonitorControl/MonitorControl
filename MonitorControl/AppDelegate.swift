@@ -204,6 +204,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     let combine = prefs.bool(forKey: PrefKey.slidersCombine.rawValue)
     let numOfDisplays = displays.count
     if numOfDisplays != 0 {
+      if relevant || combine {
+        self.statusMenu.insertItem(NSMenuItem.separator(), at: 0)
+      }
       let asSubMenu: Bool = (displays.count > 3 && relevant && !combine) ? true : false
       for display in displays where !relevant || display == currentDisplay {
         self.updateDisplayMenu(display: display, asSubMenu: asSubMenu, numOfDisplays: numOfDisplays)
