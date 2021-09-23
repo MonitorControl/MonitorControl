@@ -91,7 +91,7 @@ class SliderHandler {
       if self.numOfTickmarks > 0 {
         for i in 1 ... self.numOfTickmarks - 2 {
           let currentMarkLocation = CGFloat((Float(1) / Float(self.numOfTickmarks - 1)) * Float(i))
-          let tickMarkBounds = NSRect(x: aRect.origin.x + aRect.height + self.tickMarkKnobExtraInset - knobRect.width + CGFloat(Float((aRect.width - self.tickMarkKnobExtraInset * 5) * currentMarkLocation)), y: aRect.origin.y + aRect.height * (1 / 3), width: 4, height: aRect.height / 3)
+          let tickMarkBounds = NSRect(x: aRect.origin.x + aRect.height + self.tickMarkKnobExtraInset - knobRect.height + self.tickMarkKnobExtraInset * 2 + CGFloat(Float((aRect.width - self.tickMarkKnobExtraInset * 5) * currentMarkLocation)), y: aRect.origin.y + aRect.height * (1 / 3), width: 4, height: aRect.height / 3)
           let tickmark = NSBezierPath(roundedRect: tickMarkBounds, xRadius: 2, yRadius: 2)
           self.tickMarkColor.setFill()
           tickmark.fill()
@@ -112,8 +112,9 @@ class SliderHandler {
       if self.isHighlightDisplayItems, self.displayHighlightItems.count > 2 {
         for currentMarkLocation in self.displayHighlightItems.values {
           let highlightKnobX = aRect.origin.x + (aRect.width - aRect.height) * CGFloat(currentMarkLocation)
-          let highlightKnobRect = NSRect(x: highlightKnobX + (self.numOfTickmarks == 0 ? CGFloat(0) : self.tickMarkKnobExtraInset), y: aRect.origin.y, width: aRect.height, height: aRect.height).insetBy(dx: (self.numOfTickmarks == 0 ? CGFloat(0) : self.tickMarkKnobExtraInset) + 6, dy: 6)
-          let highlightKnob = NSBezierPath(roundedRect: highlightKnobRect, xRadius: knobRadius, yRadius: knobRadius)
+          let highlightKnobRect = NSRect(x: highlightKnobX + (self.numOfTickmarks == 0 ? CGFloat(0) : self.tickMarkKnobExtraInset), y: aRect.origin.y, width: aRect.height, height: aRect.height).insetBy(dx: (self.numOfTickmarks == 0 ? CGFloat(0) : self.tickMarkKnobExtraInset) + CGFloat(self.numOfTickmarks == 0 ? 6 : 3), dy: CGFloat(self.numOfTickmarks == 0 ? 6 : 6))
+          let highlightKnobRadius = highlightKnobRect.height * 0.5 * (self.numOfTickmarks == 0 ? 1 : self.tickMarkKnobExtraRadiusMultiplier)
+          let highlightKnob = NSBezierPath(roundedRect: highlightKnobRect, xRadius: highlightKnobRadius, yRadius: highlightKnobRadius)
           let highlightDisplayIndicatorAlpha = CGFloat(max(0, min(1, (currentMarkLocation - 0.08) * 5)))
           self.highlightDisplayIndicatorColor.withAlphaComponent(self.highlightDisplayIndicatorColor.alphaComponent * highlightDisplayIndicatorAlpha).setFill()
           highlightKnob.fill()
