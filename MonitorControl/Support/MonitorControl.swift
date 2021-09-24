@@ -74,7 +74,7 @@ class MonitorControl: NSObject, NSApplicationDelegate {
     self.configure(firstrun: true)
     DisplayManager.shared.createGammaActivityEnforcer()
   }
-  
+
   @objc func quitClicked(_: AnyObject) {
     os_log("Quit clicked", type: .debug)
     NSApplication.shared.terminate(self)
