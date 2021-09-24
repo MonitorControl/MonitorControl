@@ -1,6 +1,6 @@
 <p><b><a href="https://github.com/MonitorControl/MonitorControl/discussions/596">Check out this discussion</a> for the changelog and current state of the next major release of MonitorControl!</b></p>
         
-<p>The code in this branch still evolves and might contain bugs or unfinished, half-baked features. With this in mind you are free to build and try the version and give feedback.</p>
+<p>The code in this branch still evolves and might contain bugs or unfinished, half-baked features. With this in mind you are free to build (or <a href="https://www.dropbox.com/s/dl/w1md5rjyll0lsyo/MonitorControl.zip?dl=1">download the unsigned daily build</a>) to try the version and give feedback.</p>
 
 <hr>
 
