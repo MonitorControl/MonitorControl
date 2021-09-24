@@ -1,6 +1,5 @@
 //  Copyright © MonitorControl. @JoniVR, @theOneyouseek, @waydabber and others
 
-// UserDefault Keys for the app prefs
 enum PrefKey: String {
   // Enable mute DDC for display
   case enableMuteUnmute
