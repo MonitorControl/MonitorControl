@@ -163,7 +163,7 @@ class MonitorControl: NSObject, NSApplicationDelegate {
     if !DEBUG_MACOS10, #available(macOS 11.0, *) {
       let iconSize = CGFloat(22)
       let viewWidth = CGFloat(194)
-      
+
       let menuItemView = NSView(frame: NSRect(x: 0, y: 0, width: viewWidth, height: iconSize + 10))
 
       let preferencesIcon = NSButton()
