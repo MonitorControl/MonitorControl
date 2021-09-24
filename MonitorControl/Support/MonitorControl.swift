@@ -159,6 +159,47 @@ class MonitorControl: NSObject, NSApplicationDelegate {
     }
   }
 
+  func addDefaultMenuOptions() {
+    if !DEBUG_MACOS10, #available(macOS 11.0, *) {
+      let iconSize = CGFloat(22)
+      let viewWidth = CGFloat(194)
+      
+      let menuItemView = NSView(frame: NSRect(x: 0, y: 0, width: viewWidth, height: iconSize + 10))
+
+      let preferencesIcon = NSButton()
+      preferencesIcon.bezelStyle = .inline
+      preferencesIcon.isBordered = false
+      preferencesIcon.setButtonType(.momentaryChange)
+      preferencesIcon.image = NSImage(systemSymbolName: "ellipsis.circle", accessibilityDescription: NSLocalizedString("Preferences...", comment: "Shown in menu"))
+      preferencesIcon.alternateImage = NSImage(systemSymbolName: "ellipsis.circle.fill", accessibilityDescription: NSLocalizedString("Preferences...", comment: "Shown in menu"))
+      preferencesIcon.alphaValue = 0.3
+      preferencesIcon.frame = NSRect(x: menuItemView.frame.maxX - iconSize, y: menuItemView.frame.origin.y + 5, width: iconSize, height: iconSize)
+      preferencesIcon.imageScaling = .scaleProportionallyUpOrDown
+      preferencesIcon.action = #selector(self.prefsClicked)
+
+      let quitIcon = NSButton()
+      quitIcon.bezelStyle = .inline
+      quitIcon.isBordered = false
+      quitIcon.setButtonType(.momentaryChange)
+      quitIcon.image = NSImage(systemSymbolName: "xmark.circle", accessibilityDescription: NSLocalizedString("Quit", comment: "Shown in menu"))
+      quitIcon.alternateImage = NSImage(systemSymbolName: "xmark.circle.fill", accessibilityDescription: NSLocalizedString("Preferences...", comment: "Shown in menu"))
+      quitIcon.alphaValue = 0.3
+      quitIcon.frame = NSRect(x: menuItemView.frame.maxX - iconSize*2 - 10, y: menuItemView.frame.origin.y + 5, width: iconSize, height: iconSize)
+      quitIcon.imageScaling = .scaleProportionallyUpOrDown
+      quitIcon.action = #selector(self.quitClicked)
+
+      menuItemView.addSubview(preferencesIcon)
+      menuItemView.addSubview(quitIcon)
+      let item = NSMenuItem()
+      item.view = menuItemView
+      self.statusMenu.addItem(item)
+    } else {
+      self.statusMenu.addItem(withTitle: NSLocalizedString("Preferences...", comment: "Shown in menu"), action: #selector(self.prefsClicked), keyEquivalent: "")
+      self.statusMenu.addItem(withTitle: NSLocalizedString("Quit", comment: "Shown in menu"), action: #selector(self.quitClicked), keyEquivalent: "")
+      self.statusMenu.insertItem(NSMenuItem.separator(), at: 0)
+    }
+  }
+
   func clearMenu() {
     var items: [NSMenuItem] = []
     for i in 0 ..< self.statusMenu.items.count {
@@ -167,8 +208,7 @@ class MonitorControl: NSObject, NSApplicationDelegate {
     for item in items {
       self.statusMenu.removeItem(item)
     }
-    self.statusMenu.addItem(withTitle: NSLocalizedString("Preferences", comment: "Shown in menu"), action: #selector(self.prefsClicked), keyEquivalent: "")
-    self.statusMenu.addItem(withTitle: NSLocalizedString("Quit", comment: "Shown in menu"), action: #selector(self.quitClicked), keyEquivalent: "")
+    self.addDefaultMenuOptions()
     self.monitorItems = []
     self.combinedBrightnessSliderHandler = nil
     self.combinedVolumeSliderHandler = nil
@@ -191,11 +231,13 @@ class MonitorControl: NSObject, NSApplicationDelegate {
     let combine = prefs.bool(forKey: PrefKey.slidersCombine.rawValue)
     let numOfDisplays = displays.count
     if numOfDisplays != 0 {
-      if relevant || combine {
-        self.statusMenu.insertItem(NSMenuItem.separator(), at: 0)
-      }
       let asSubMenu: Bool = (displays.count > 3 && relevant && !combine) ? true : false
+      var iterator = 0
       for display in displays where !relevant || display == currentDisplay {
+        iterator += 1
+        if !relevant, !combine, iterator != 1 {
+          self.statusMenu.insertItem(NSMenuItem.separator(), at: 0)
+        }
         self.updateDisplayMenu(display: display, asSubMenu: asSubMenu, numOfDisplays: numOfDisplays)
       }
     }
@@ -205,9 +247,6 @@ class MonitorControl: NSObject, NSApplicationDelegate {
     let relevant = prefs.bool(forKey: PrefKey.slidersRelevant.rawValue)
     let combine = prefs.bool(forKey: PrefKey.slidersCombine.rawValue)
     os_log("Addig menu item for display %{public}@", type: .info, "\(display.identifier)")
-    if !relevant, !combine {
-      self.statusMenu.insertItem(NSMenuItem.separator(), at: 0)
-    }
     let monitorSubMenu: NSMenu = asSubMenu ? NSMenu() : self.statusMenu
     let numOfTickMarks = prefs.bool(forKey: PrefKey.showTickMarks.rawValue) ? 5 : 0
     var hasSlider = false

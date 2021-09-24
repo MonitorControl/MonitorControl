@@ -269,7 +269,7 @@ class SliderHandler {
   }
 
   func updateIcon() {
-    // This looks hideous so I disable it for now. Maybe after a bit tinkering it will be better
+    // This looks hideous so I disable it for now. Maybe after a bit of tinkering it will look better
     /*
      if self.cmd == .audioSpeakerVolume {
        let value = self.slider?.floatValue ?? 0.5
@@ -359,8 +359,6 @@ class SliderHandler {
         icon.contentTintColor = NSColor.black.withAlphaComponent(0.6)
         icon.frame = NSRect(x: view.frame.origin.x + 6.5, y: view.frame.origin.y + 13, width: 15, height: 15)
         icon.imageAlignment = .alignCenter
-        icon.wantsLayer = true
-        icon.imageAlignment = NSImageAlignment.alignLeft
         view.addSubview(slider)
         view.addSubview(icon)
         handler.icon = icon
@@ -373,7 +371,6 @@ class SliderHandler {
         item.view = view
         menu.insertItem(item, at: position)
       } else {
-        // This is codepath is probably not working anymore...
         slider.frame.size.width = 180
         slider.frame.origin = NSPoint(x: 15, y: 5)
         let view = NSView(frame: NSRect(x: 0, y: 0, width: slider.frame.width + 30 + (showPercent ? 38 : 0), height: slider.frame.height + 10))

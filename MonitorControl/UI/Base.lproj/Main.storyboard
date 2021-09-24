@@ -1761,6 +1761,14 @@
                                                                     <color key="borderColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                                                     <color key="fillColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                 </box>
+                                                                <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XqS-eh-mYu">
+                                                                    <rect key="frame" x="10" y="276" width="58" height="65"/>
+                                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSAdvanced" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="t5o-eR-aYG">
+                                                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                                        <font key="font" metaFont="system"/>
+                                                                    </buttonCell>
+                                                                </button>
                                                             </subviews>
                                                             <constraints>
                                                                 <constraint firstItem="ihQ-SK-x7Y" firstAttribute="top" secondItem="ARW-va-sn0" secondAttribute="bottom" constant="20" id="lYu-y9-iVv"/>
@@ -1839,7 +1847,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="301" y="1604"/>
+            <point key="canvasLocation" x="300.5" y="1604"/>
         </scene>
         <!--About Prefs View Controller-->
         <scene sceneID="Ot2-lL-eIg">
@@ -1952,6 +1960,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="NSAdvanced" width="32" height="32"/>
         <image name="NSApplicationIcon" width="32" height="32"/>
         <image name="NSTouchBarIconViewTemplate" width="15" height="14"/>
     </resources>
