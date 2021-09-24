@@ -48,7 +48,7 @@ class DisplayManager {
   }
 
   func moveGammaActivityEnforcer(displayID: CGDirectDisplayID) {
-    if let screen = NSScreen.getByDisplayID(displayID: resolveEffectiveDisplayID(displayID)) {
+    if let screen = DisplayManager.getByDisplayID(displayID: resolveEffectiveDisplayID(displayID)) {
       self.gammaActivityEnforcer.setFrameOrigin(screen.frame.origin)
     }
     self.gammaActivityEnforcer.orderFrontRegardless()
@@ -61,7 +61,7 @@ class DisplayManager {
   }
 
   internal func createShadeOnDisplay(displayID: CGDirectDisplayID) -> NSWindow? {
-    if let screen = NSScreen.getByDisplayID(displayID: displayID) {
+    if let screen = DisplayManager.getByDisplayID(displayID: displayID) {
       let windowShade = NSWindow(contentRect: .init(origin: NSPoint(x: 0, y: 0), size: .init(width: 10, height: 1)), styleMask: [], backing: .buffered, defer: false)
       windowShade.title = "Monitor Control Window Shade for Display " + String(displayID)
       windowShade.isMovableByWindowBackground = false
@@ -110,7 +110,7 @@ class DisplayManager {
     guard !self.isDisqualifiedFromShade(displayID) else {
       return false
     }
-    if let screen = NSScreen.getByDisplayID(displayID: displayID) {
+    if let screen = DisplayManager.getByDisplayID(displayID: displayID) {
       if let shade = getShade(displayID: displayID) {
         shade.setFrame(screen.frame, display: true)
         return true
@@ -445,6 +445,10 @@ class DisplayManager {
     return false
   }
 
+  static func getByDisplayID(displayID: CGDirectDisplayID) -> NSScreen? {
+    return NSScreen.screens.first { $0.displayID == displayID }
+  }
+
   static func getDisplayRawNameByID(displayID: CGDirectDisplayID) -> String {
     let defaultName: String = ""
     if !DEBUG_MACOS10, #available(macOS 11.0, *) {
@@ -452,7 +456,7 @@ class DisplayManager {
         return name
       }
     }
-    if let screen = NSScreen.getByDisplayID(displayID: displayID) {
+    if let screen = getByDisplayID(displayID: displayID) {
       return screen.displayName ?? defaultName
     }
     return defaultName
@@ -471,7 +475,7 @@ class DisplayManager {
         return name
       }
     }
-    if let screen = NSScreen.getByDisplayID(displayID: displayID) {
+    if let screen = getByDisplayID(displayID: displayID) { // MARK: This, and NSScreen+Extension.swift will not be needed when we drop MacOS 10 support.
       return screen.localizedName
     }
     return defaultName

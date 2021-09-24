@@ -6,6 +6,10 @@ import Foundation
 let DEBUG_SW = false
 let DEBUG_VIRTUAL = false
 let DEBUG_MACOS10 = false
+let MIN_PREVIOUS_BUILD_NUMBER = 5560
+
+var app: MonitorControl!
+var menu: MenuHandler!
 
 let prefs = UserDefaults.standard
 let storyboard = NSStoryboard(name: "Main", bundle: Bundle.main)
@@ -14,8 +18,6 @@ let displaysPrefsVc = storyboard.instantiateController(withIdentifier: "Displays
 let menuslidersPrefsVc = storyboard.instantiateController(withIdentifier: "MenuslidersPrefsVC") as? MenuslidersPrefsViewController
 let keyboardPrefsVc = storyboard.instantiateController(withIdentifier: "KeyboardPrefsVC") as? KeyboardPrefsViewController
 let aboutPrefsVc = storyboard.instantiateController(withIdentifier: "AboutPrefsVC") as? AboutPrefsViewController
-
-var app: MonitorControl!
 
 autoreleasepool { () -> Void in
   let mc = NSApplication.shared

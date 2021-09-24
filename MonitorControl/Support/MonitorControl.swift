@@ -9,16 +9,14 @@ import ServiceManagement
 import SimplyCoreAudio
 
 class MonitorControl: NSObject, NSApplicationDelegate {
-  var statusMenu: MenuHandler!
-  let minPreviousBuildNumber = 3600 // Below this previous app version there is a mandatory preferences reset!
   let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
   var mediaKeyTap = MediaKeyTapManager()
   let coreAudio = SimplyCoreAudio()
   var accessibilityObserver: NSObjectProtocol!
   var reconfigureID: Int = 0 // dispatched reconfigure command ID
-  var sleepID: Int = 0 // Don't reconfigure display as the system or display is sleeping or wake just recently.
-  var safeMode = false // Safe mode engaged during startup?
-  var brightnessJobRunning = false // Is brightness job active?
+  var sleepID: Int = 0 // sleep event ID
+  var safeMode = false
+  var jobRunning = false
 
   var preferencePaneStyle: Preferences.Style {
     if !DEBUG_MACOS10, #available(macOS 11.0, *) {
@@ -44,6 +42,7 @@ class MonitorControl: NSObject, NSApplicationDelegate {
 
   func applicationDidFinishLaunching(_: Notification) {
     app = self
+    menu = MenuHandler()
     self.subscribeEventListeners()
     if NSEvent.modifierFlags.contains(NSEvent.ModifierFlags.shift) {
       self.safeMode = true
@@ -54,7 +53,7 @@ class MonitorControl: NSObject, NSApplicationDelegate {
     }
     let currentBuildNumber = Int(Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String ?? "1") ?? 1
     let previousBuildNumber: Int = (Int(prefs.string(forKey: PrefKey.buildNumber.rawValue) ?? "0") ?? 0)
-    if self.safeMode || ((previousBuildNumber < self.minPreviousBuildNumber) && previousBuildNumber > 0) || (previousBuildNumber > currentBuildNumber), let bundleID = Bundle.main.bundleIdentifier {
+    if self.safeMode || ((previousBuildNumber < MIN_PREVIOUS_BUILD_NUMBER) && previousBuildNumber > 0) || (previousBuildNumber > currentBuildNumber), let bundleID = Bundle.main.bundleIdentifier {
       let alert = NSAlert()
       alert.messageText = NSLocalizedString("Incompatible previous version", comment: "Shown in the alert dialog")
       alert.informativeText = NSLocalizedString("Preferences for an incompatible previous app version detected. Default preferences are reloaded.", comment: "Shown in the alert dialog")
@@ -63,20 +62,19 @@ class MonitorControl: NSObject, NSApplicationDelegate {
     }
     prefs.set(currentBuildNumber, forKey: PrefKey.buildNumber.rawValue)
     self.setDefaultPrefs()
-    self.statusMenu = MenuHandler()
     if !DEBUG_MACOS10, #available(macOS 11.0, *) {
       self.statusItem.button?.image = NSImage(systemSymbolName: "sun.max", accessibilityDescription: "MonitorControl")
     } else {
       self.statusItem.button?.image = NSImage(named: "status")
     }
     self.statusItem.isVisible = (prefs.string(forKey: PrefKey.menuIcon.rawValue) ?? "") == "" ? true : false
-    self.statusItem.menu = self.statusMenu
+    self.statusItem.menu = menu
     self.checkPermissions()
     CGDisplayRegisterReconfigurationCallback({ _, _, _ in app.displayReconfigured() }, nil)
     self.configure(firstrun: true)
     DisplayManager.shared.createGammaActivityEnforcer()
   }
-
+  
   @objc func quitClicked(_: AnyObject) {
     os_log("Quit clicked", type: .debug)
     NSApplication.shared.terminate(self)
@@ -136,11 +134,11 @@ class MonitorControl: NSObject, NSApplicationDelegate {
         DisplayManager.shared.restoreSwBrightnessForAllDisplays(async: !prefs.bool(forKey: PrefKey.disableSmoothBrightness.rawValue))
       }
     }
-    self.refreshBrightnessJob(start: true)
+    self.job(start: true)
   }
 
   func updateMenusAndKeys() {
-    self.statusMenu.updateMenus()
+    menu.updateMenus()
     self.updateMediaKeyTap()
   }
 
@@ -159,7 +157,7 @@ class MonitorControl: NSObject, NSApplicationDelegate {
     NSWorkspace.shared.notificationCenter.addObserver(self, selector: #selector(self.sleepNotification), name: NSWorkspace.willSleepNotification, object: nil)
     NSWorkspace.shared.notificationCenter.addObserver(self, selector: #selector(self.wakeNotofication), name: NSWorkspace.didWakeNotification, object: nil)
     _ = DistributedNotificationCenter.default().addObserver(forName: .accessibilityApi, object: nil, queue: nil) { _ in DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { self.updateMediaKeyTap() } } // listen for accessibility status changes
-    NotificationCenter.default.addObserver(forName: NSWindow.didChangeOcclusionStateNotification, object: self.statusItem.button?.menu, queue: nil) { _ in self.statusMenu.updateMenuRelevantDisplay() }
+    NotificationCenter.default.addObserver(forName: NSWindow.didChangeOcclusionStateNotification, object: self.statusItem.button?.menu, queue: nil) { _ in menu.updateMenuRelevantDisplay() }
   }
 
   @objc private func sleepNotification() {
@@ -188,19 +186,19 @@ class MonitorControl: NSObject, NSApplicationDelegate {
       } else if Arm64DDC.isArm64 {
         os_log("Displays don't need reconfig after sober but might need AVServices update", type: .info)
         DisplayManager.shared.updateArm64AVServices()
-        self.refreshBrightnessJob(start: true)
+        self.job(start: true)
       }
     }
   }
 
-  private func refreshBrightnessJob(start: Bool = false) {
-    guard !(self.brightnessJobRunning && start) else {
+  private func job(start: Bool = false) {
+    guard !(self.jobRunning && start) else {
       return
     }
     if self.sleepID == 0, self.reconfigureID == 0 {
-      if !self.brightnessJobRunning {
-        os_log("Refresh brightness job started.", type: .debug)
-        self.brightnessJobRunning = true
+      if !self.jobRunning {
+        os_log("MonitorControl job started.", type: .debug)
+        self.jobRunning = true
       }
       var refreshedSomething = false
       for display in DisplayManager.shared.displays {
@@ -221,11 +219,11 @@ class MonitorControl: NSObject, NSApplicationDelegate {
       }
       let nextRefresh = refreshedSomething ? 0.1 : 1.0
       DispatchQueue.main.asyncAfter(deadline: .now() + nextRefresh) {
-        self.refreshBrightnessJob()
+        self.job()
       }
     } else {
-      self.brightnessJobRunning = false
-      os_log("Refresh brightness job died because of sleep or reconfiguration.", type: .info)
+      self.jobRunning = false
+      os_log("MonitorControl job died because of sleep or reconfiguration.", type: .info)
     }
   }
 

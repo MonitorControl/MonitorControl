@@ -4,7 +4,6 @@ import AppKit
 import os.log
 
 class MenuHandler: NSMenu {
-
   var combinedBrightnessSliderHandler: SliderHandler?
   var combinedVolumeSliderHandler: SliderHandler?
   var combinedContrastSliderHandler: SliderHandler?
