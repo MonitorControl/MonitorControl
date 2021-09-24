@@ -9,7 +9,7 @@ class DisplaysPrefsViewController: NSViewController, PreferencePane, NSTableView
   let preferencePaneTitle: String = NSLocalizedString("Displays", comment: "Shown in the main prefs window")
 
   var toolbarItemIcon: NSImage {
-    if #available(macOS 11.0, *) {
+    if !DEBUG_MACOS10, #available(macOS 11.0, *) {
       return NSImage(systemSymbolName: "display.2", accessibilityDescription: "Displays")!
     } else {
       return NSImage(named: NSImage.infoName)!
@@ -138,7 +138,7 @@ class DisplaysPrefsViewController: NSViewController, PreferencePane, NSTableView
       cell.displayType.stringValue = displayInfo.displayType
       cell.controlMethod.stringValue = displayInfo.controlMethod
       cell.controlMethod.controlView?.toolTip = displayInfo.controlStatus
-      if #available(macOS 11.0, *) {
+      if !DEBUG_MACOS10, #available(macOS 11.0, *) {
         cell.displayImage.image = NSImage(systemSymbolName: displayInfo.displayImage, accessibilityDescription: display.name)!
       } else {
         cell.displayImage.image = NSImage(named: NSImage.computerName)!

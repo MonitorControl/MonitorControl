@@ -9,7 +9,7 @@ class MenuslidersPrefsViewController: NSViewController, PreferencePane {
   let preferencePaneTitle: String = NSLocalizedString("App menu", comment: "Shown in the main prefs window")
 
   var toolbarItemIcon: NSImage {
-    if #available(macOS 11.0, *) {
+    if !DEBUG_MACOS10, #available(macOS 11.0, *) {
       return NSImage(systemSymbolName: "filemenu.and.cursorarrow", accessibilityDescription: "App menu")!
     } else {
       return NSImage(named: NSImage.infoName)!

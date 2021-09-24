@@ -9,7 +9,7 @@ class AboutPrefsViewController: NSViewController, PreferencePane {
   let preferencePaneTitle: String = NSLocalizedString("About", comment: "Shown in the main prefs window")
 
   var toolbarItemIcon: NSImage {
-    if #available(macOS 11.0, *) {
+    if !DEBUG_MACOS10, #available(macOS 11.0, *) {
       return NSImage(systemSymbolName: "info.circle", accessibilityDescription: "About")!
     } else {
       return NSImage(named: NSImage.infoName)!

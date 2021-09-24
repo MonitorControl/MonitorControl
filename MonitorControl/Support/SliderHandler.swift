@@ -59,11 +59,19 @@ class SliderHandler {
       return super.stopTracking(last: lastPoint, current: stopPoint, in: controlView, mouseIsUp: flag)
     }
 
-    override func drawKnob(_: NSRect) {
+    override func drawKnob(_ knobRect: NSRect) {
+      guard !DEBUG_MACOS10, #available(macOS 11.0, *) else {
+        super.drawKnob(knobRect)
+        return
+      }
       // This is intentionally empty as the knob is inside the bar. Please leave it like this!
     }
 
-    override func drawBar(inside aRect: NSRect, flipped _: Bool) {
+    override func drawBar(inside aRect: NSRect, flipped: Bool) {
+      guard !DEBUG_MACOS10, #available(macOS 11.0, *) else {
+        super.drawBar(inside: aRect, flipped: flipped)
+        return
+      }
       var maxValue: Float = self.floatValue
       var minValue: Float = self.floatValue
 
@@ -334,7 +342,7 @@ class SliderHandler {
       slider.isEnabled = true
       slider.setNumOfCustomTickmarks(numOfTickMarks)
       handler.slider = slider
-      if #available(macOS 11.0, *) {
+      if !DEBUG_MACOS10, #available(macOS 11.0, *) {
         slider.frame.size.width = 180
         slider.frame.origin = NSPoint(x: 15, y: 5)
         let view = NSView(frame: NSRect(x: 0, y: 0, width: slider.frame.width + 30 + (showPercent ? 38 : 0), height: slider.frame.height + 14))

@@ -9,7 +9,7 @@ class KeyboardPrefsViewController: NSViewController, PreferencePane {
   let preferencePaneTitle: String = NSLocalizedString("Keyboard", comment: "Shown in the main prefs window")
 
   var toolbarItemIcon: NSImage {
-    if #available(macOS 11.0, *) {
+    if !DEBUG_MACOS10, #available(macOS 11.0, *) {
       return NSImage(systemSymbolName: "keyboard", accessibilityDescription: "Keyboard")!
     } else {
       return NSImage(named: NSImage.infoName)!

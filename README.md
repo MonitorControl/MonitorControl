@@ -56,8 +56,10 @@ There is no official pre-release build available for this version yet.
 
 ## Compatibility
 
-- macOS Big Sur (`macOS 11`) and up _(note: you can download [version 2.1.0](https://github.com/MonitorControl/MonitorControl/releases/tag/v2.1.0) for Sierra `10.12` and [version 3.0.0](https://github.com/MonitorControl/MonitorControl/releases/tag/v3.0.0) for Mojave `10.14`)_
-- Works with monitors controllable via [DDC](https://en.wikipedia.org/wiki/Display_Data_Channel) (or any other display via software dimming).
+- macOS Big Sur (`macOS 11`) and newer are supported
+- Current version is compatible with macOS Catalina (`10.15`) as well (with some minor limitations).
+
+_(Note: you can download [version 2.1.0](https://github.com/MonitorControl/MonitorControl/releases/tag/v2.1.0) for Sierra `10.12` and [version 3.0.0](https://github.com/MonitorControl/MonitorControl/releases/tag/v3.0.0) for Mojave `10.14` support)_
 
 ## How to help
 

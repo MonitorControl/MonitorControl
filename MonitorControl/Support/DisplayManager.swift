@@ -159,7 +159,7 @@ class DisplayManager {
       let vendorNumber = CGDisplayVendorNumber(onlineDisplayID)
       let modelNumber = CGDisplayModelNumber(onlineDisplayID)
       var isVirtual: Bool = false
-      if #available(macOS 11.0, *) {
+      if !DEBUG_MACOS10, #available(macOS 11.0, *) {
         if let dictionary = ((CoreDisplay_DisplayCreateInfoDictionary(onlineDisplayID))?.takeRetainedValue() as NSDictionary?) {
           let isVirtualDevice = dictionary["kCGDisplayIsVirtualDevice"] as? Bool
           let displayIsAirplay = dictionary["kCGDisplayIsAirPlay"] as? Bool
@@ -449,7 +449,7 @@ class DisplayManager {
 
   static func getDisplayRawNameByID(displayID: CGDirectDisplayID) -> String {
     let defaultName: String = ""
-    if #available(macOS 11.0, *) {
+    if !DEBUG_MACOS10, #available(macOS 11.0, *) {
       if let dictionary = ((CoreDisplay_DisplayCreateInfoDictionary(displayID))?.takeRetainedValue() as NSDictionary?), let nameList = dictionary["DisplayProductName"] as? [String: String], let name = nameList["en_US"] ?? nameList.first?.value {
         return name
       }
@@ -462,7 +462,7 @@ class DisplayManager {
 
   static func getDisplayNameByID(displayID: CGDirectDisplayID) -> String {
     let defaultName: String = NSLocalizedString("Unknown", comment: "Unknown display name")
-    if #available(macOS 11.0, *) {
+    if !DEBUG_MACOS10, #available(macOS 11.0, *) {
       if let dictionary = ((CoreDisplay_DisplayCreateInfoDictionary(displayID))?.takeRetainedValue() as NSDictionary?), let nameList = dictionary["DisplayProductName"] as? [String: String], var name = nameList[Locale.current.identifier] ?? nameList["en_US"] ?? nameList.first?.value {
         if CGDisplayIsInHWMirrorSet(displayID) != 0 || CGDisplayIsInMirrorSet(displayID) != 0 {
           let mirroredDisplayID = CGDisplayMirrorsDisplay(displayID)
@@ -474,11 +474,7 @@ class DisplayManager {
       }
     }
     if let screen = NSScreen.getByDisplayID(displayID: displayID) {
-      if #available(OSX 10.15, *) {
-        return screen.localizedName
-      } else {
-        return screen.displayName ?? defaultName
-      }
+      return screen.localizedName
     }
     return defaultName
   }

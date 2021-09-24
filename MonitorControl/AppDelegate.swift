@@ -10,6 +10,7 @@ import SimplyCoreAudio
 
 let DEBUG_SW = false
 let DEBUG_VIRTUAL = false
+let DEBUG_MACOS10 = false
 
 var app: AppDelegate!
 
@@ -41,7 +42,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   var combinedContrastSliderHandler: SliderHandler?
 
   var preferencePaneStyle: Preferences.Style {
-    if #available(macOS 11.0, *) {
+    if !DEBUG_MACOS10, #available(macOS 11.0, *) {
       return Preferences.Style.toolbarItems
     } else {
       return Preferences.Style.segmentedControl
@@ -84,7 +85,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     prefs.set(currentBuildNumber, forKey: PrefKey.buildNumber.rawValue)
     self.setDefaultPrefs()
     self.statusMenu = NSMenu()
-    if #available(macOS 11.0, *) {
+    if !DEBUG_MACOS10, #available(macOS 11.0, *) {
       self.statusItem.button?.image = NSImage(systemSymbolName: "sun.max", accessibilityDescription: "MonitorControl")
     } else {
       self.statusItem.button?.image = NSImage(named: "status")

@@ -10,7 +10,7 @@ class MainPrefsViewController: NSViewController, PreferencePane {
   let preferencePaneTitle: String = NSLocalizedString("General", comment: "Shown in the main prefs window")
 
   var toolbarItemIcon: NSImage {
-    if #available(macOS 11.0, *) {
+    if !DEBUG_MACOS10, #available(macOS 11.0, *) {
       return NSImage(systemSymbolName: "switch.2", accessibilityDescription: "Display")!
     } else {
       return NSImage(named: NSImage.infoName)!
