@@ -377,7 +377,7 @@ class OtherDisplay: Display {
     if controlCode == 0 {
       controlCode = command.rawValue
     }
-    app.ddcQueue.sync {
+    DisplayManager.shared.ddcQueue.sync {
       if Arm64DDC.isArm64 {
         if self.arm64ddc {
           success = Arm64DDC.write(service: self.arm64avService, command: controlCode, value: value)
@@ -402,7 +402,7 @@ class OtherDisplay: Display {
       guard self.arm64ddc else {
         return nil
       }
-      app.ddcQueue.sync {
+      DisplayManager.shared.ddcQueue.sync {
         if let unwrappedDelay = delay {
           values = Arm64DDC.read(service: self.arm64avService, command: command.rawValue, tries: UInt8(min(tries, 255)), minReplyDelay: UInt32(unwrappedDelay / 1000))
         } else {
@@ -410,7 +410,7 @@ class OtherDisplay: Display {
         }
       }
     } else {
-      app.ddcQueue.sync {
+      DisplayManager.shared.ddcQueue.sync {
         values = self.ddc?.read(command: command.rawValue, tries: tries, minReplyDelay: delay)
       }
     }

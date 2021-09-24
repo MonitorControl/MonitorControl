@@ -11,9 +11,7 @@ class DisplayManager {
 
   var displays: [Display] = []
   var audioControlTargetDisplays: [OtherDisplay] = []
-  var unifiedBrightnessSliderHandler: SliderHandler?
-  var unifiedVolumeSliderHandler: SliderHandler?
-  var unifiedContrastSliderHandler: SliderHandler?
+  let ddcQueue = DispatchQueue(label: "DDC queue")
 
   // Gamma activity enforcer and window shade
 

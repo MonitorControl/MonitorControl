@@ -9,23 +9,16 @@ import ServiceManagement
 import SimplyCoreAudio
 
 class MonitorControl: NSObject, NSApplicationDelegate {
-  var statusMenu: NSMenu!
+  var statusMenu: MenuHandler!
   let minPreviousBuildNumber = 3600 // Below this previous app version there is a mandatory preferences reset!
   let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
   var mediaKeyTap = MediaKeyTapManager()
-  var monitorItems: [NSMenuItem] = []
   let coreAudio = SimplyCoreAudio()
   var accessibilityObserver: NSObjectProtocol!
   var reconfigureID: Int = 0 // dispatched reconfigure command ID
   var sleepID: Int = 0 // Don't reconfigure display as the system or display is sleeping or wake just recently.
   var safeMode = false // Safe mode engaged during startup?
   var brightnessJobRunning = false // Is brightness job active?
-  var lastMenuRelevantDisplayId: CGDirectDisplayID = 0
-  let ddcQueue = DispatchQueue(label: "DDC queue")
-  var combinedBrightnessSliderHandler: SliderHandler?
-  var combinedVolumeSliderHandler: SliderHandler?
-  var combinedContrastSliderHandler: SliderHandler?
-  var isBootstrapped: Bool = false
 
   var preferencePaneStyle: Preferences.Style {
     if !DEBUG_MACOS10, #available(macOS 11.0, *) {
@@ -70,7 +63,7 @@ class MonitorControl: NSObject, NSApplicationDelegate {
     }
     prefs.set(currentBuildNumber, forKey: PrefKey.buildNumber.rawValue)
     self.setDefaultPrefs()
-    self.statusMenu = NSMenu()
+    self.statusMenu = MenuHandler()
     if !DEBUG_MACOS10, #available(macOS 11.0, *) {
       self.statusItem.button?.image = NSImage(systemSymbolName: "sun.max", accessibilityDescription: "MonitorControl")
     } else {
@@ -84,8 +77,18 @@ class MonitorControl: NSObject, NSApplicationDelegate {
     DisplayManager.shared.createGammaActivityEnforcer()
   }
 
+  @objc func quitClicked(_: AnyObject) {
+    os_log("Quit clicked", type: .debug)
+    NSApplication.shared.terminate(self)
+  }
+
+  @objc func prefsClicked(_: AnyObject) {
+    os_log("Preferences clicked", type: .debug)
+    self.preferencesWindowController.show()
+  }
+
   func applicationShouldHandleReopen(_: NSApplication, hasVisibleWindows _: Bool) -> Bool {
-    self.prefsClicked(self)
+    app.prefsClicked(self)
     return true
   }
 
@@ -93,14 +96,6 @@ class MonitorControl: NSObject, NSApplicationDelegate {
     os_log("Goodbye!", type: .info)
     DisplayManager.shared.resetSwBrightnessForAllDisplays()
     self.statusItem.isVisible = true
-  }
-
-  @objc func quitClicked(_: AnyObject) {
-    NSApplication.shared.terminate(self)
-  }
-
-  @objc func prefsClicked(_: AnyObject) {
-    self.preferencesWindowController.show()
   }
 
   func setDefaultPrefs() {
@@ -145,155 +140,8 @@ class MonitorControl: NSObject, NSApplicationDelegate {
   }
 
   func updateMenusAndKeys() {
-    self.updateMenus()
+    self.statusMenu.updateMenus()
     self.updateMediaKeyTap()
-  }
-
-  func updateMenuRelevantDisplay() {
-    if prefs.bool(forKey: PrefKey.slidersRelevant.rawValue) {
-      if let display = DisplayManager.shared.getCurrentDisplay(), display.identifier != self.lastMenuRelevantDisplayId {
-        os_log("Menu must be refreshed as relevant display changed since last time.")
-        self.lastMenuRelevantDisplayId = display.identifier
-        self.updateMenus()
-      }
-    }
-  }
-
-  func addDefaultMenuOptions() {
-    if !DEBUG_MACOS10, #available(macOS 11.0, *) {
-      let iconSize = CGFloat(22)
-      let viewWidth = CGFloat(194)
-
-      let menuItemView = NSView(frame: NSRect(x: 0, y: 0, width: viewWidth, height: iconSize + 10))
-
-      let preferencesIcon = NSButton()
-      preferencesIcon.bezelStyle = .inline
-      preferencesIcon.isBordered = false
-      preferencesIcon.setButtonType(.momentaryChange)
-      preferencesIcon.image = NSImage(systemSymbolName: "ellipsis.circle", accessibilityDescription: NSLocalizedString("Preferences...", comment: "Shown in menu"))
-      preferencesIcon.alternateImage = NSImage(systemSymbolName: "ellipsis.circle.fill", accessibilityDescription: NSLocalizedString("Preferences...", comment: "Shown in menu"))
-      preferencesIcon.alphaValue = 0.3
-      preferencesIcon.frame = NSRect(x: menuItemView.frame.maxX - iconSize, y: menuItemView.frame.origin.y + 5, width: iconSize, height: iconSize)
-      preferencesIcon.imageScaling = .scaleProportionallyUpOrDown
-      preferencesIcon.action = #selector(self.prefsClicked)
-
-      let quitIcon = NSButton()
-      quitIcon.bezelStyle = .inline
-      quitIcon.isBordered = false
-      quitIcon.setButtonType(.momentaryChange)
-      quitIcon.image = NSImage(systemSymbolName: "xmark.circle", accessibilityDescription: NSLocalizedString("Quit", comment: "Shown in menu"))
-      quitIcon.alternateImage = NSImage(systemSymbolName: "xmark.circle.fill", accessibilityDescription: NSLocalizedString("Preferences...", comment: "Shown in menu"))
-      quitIcon.alphaValue = 0.3
-      quitIcon.frame = NSRect(x: menuItemView.frame.maxX - iconSize*2 - 10, y: menuItemView.frame.origin.y + 5, width: iconSize, height: iconSize)
-      quitIcon.imageScaling = .scaleProportionallyUpOrDown
-      quitIcon.action = #selector(self.quitClicked)
-
-      menuItemView.addSubview(preferencesIcon)
-      menuItemView.addSubview(quitIcon)
-      let item = NSMenuItem()
-      item.view = menuItemView
-      self.statusMenu.addItem(item)
-    } else {
-      self.statusMenu.addItem(withTitle: NSLocalizedString("Preferences...", comment: "Shown in menu"), action: #selector(self.prefsClicked), keyEquivalent: "")
-      self.statusMenu.addItem(withTitle: NSLocalizedString("Quit", comment: "Shown in menu"), action: #selector(self.quitClicked), keyEquivalent: "")
-      self.statusMenu.insertItem(NSMenuItem.separator(), at: 0)
-    }
-  }
-
-  func clearMenu() {
-    var items: [NSMenuItem] = []
-    for i in 0 ..< self.statusMenu.items.count {
-      items.append(self.statusMenu.items[i])
-    }
-    for item in items {
-      self.statusMenu.removeItem(item)
-    }
-    self.addDefaultMenuOptions()
-    self.monitorItems = []
-    self.combinedBrightnessSliderHandler = nil
-    self.combinedVolumeSliderHandler = nil
-    self.combinedContrastSliderHandler = nil
-  }
-
-  func updateMenus() {
-    self.clearMenu()
-    let currentDisplay = DisplayManager.shared.getCurrentDisplay()
-    var displays: [Display] = []
-    if !prefs.bool(forKey: PrefKey.hideAppleFromMenu.rawValue) {
-      displays.append(contentsOf: DisplayManager.shared.getAppleDisplays())
-    }
-    if !prefs.bool(forKey: PrefKey.disableSoftwareFallback.rawValue) {
-      displays.append(contentsOf: DisplayManager.shared.getOtherDisplays())
-    } else {
-      displays.append(contentsOf: DisplayManager.shared.getDdcCapableDisplays())
-    }
-    let relevant = prefs.bool(forKey: PrefKey.slidersRelevant.rawValue)
-    let combine = prefs.bool(forKey: PrefKey.slidersCombine.rawValue)
-    let numOfDisplays = displays.count
-    if numOfDisplays != 0 {
-      let asSubMenu: Bool = (displays.count > 3 && relevant && !combine) ? true : false
-      var iterator = 0
-      for display in displays where !relevant || display == currentDisplay {
-        iterator += 1
-        if !relevant, !combine, iterator != 1 {
-          self.statusMenu.insertItem(NSMenuItem.separator(), at: 0)
-        }
-        self.updateDisplayMenu(display: display, asSubMenu: asSubMenu, numOfDisplays: numOfDisplays)
-      }
-    }
-  }
-
-  private func updateDisplayMenu(display: Display, asSubMenu: Bool, numOfDisplays: Int) {
-    let relevant = prefs.bool(forKey: PrefKey.slidersRelevant.rawValue)
-    let combine = prefs.bool(forKey: PrefKey.slidersCombine.rawValue)
-    os_log("Addig menu item for display %{public}@", type: .info, "\(display.identifier)")
-    let monitorSubMenu: NSMenu = asSubMenu ? NSMenu() : self.statusMenu
-    let numOfTickMarks = prefs.bool(forKey: PrefKey.showTickMarks.rawValue) ? 5 : 0
-    var hasSlider = false
-    display.brightnessSliderHandler = nil
-    if let otherDisplay = display as? OtherDisplay, !otherDisplay.isSw() {
-      otherDisplay.contrastSliderHandler = nil
-      otherDisplay.volumeSliderHandler = nil
-      if !display.readPrefValueKeyBool(forkey: PrefKey.unavailableDDC, for: .audioSpeakerVolume), !prefs.bool(forKey: PrefKey.hideVolume.rawValue) {
-        let position = (combine && self.combinedBrightnessSliderHandler != nil) ? (self.combinedContrastSliderHandler != nil ? 2 : 1) : 0
-        let volumeSliderHandler = SliderHandler.addSliderMenuItem(toMenu: monitorSubMenu, forDisplay: otherDisplay, command: .audioSpeakerVolume, title: NSLocalizedString("Volume", comment: "Shown in menu"), numOfTickMarks: numOfTickMarks, sliderHandler: combine ? self.combinedVolumeSliderHandler : nil, position: position)
-        self.combinedVolumeSliderHandler = combine ? volumeSliderHandler : nil
-        otherDisplay.volumeSliderHandler = volumeSliderHandler
-        hasSlider = true
-      }
-      if prefs.bool(forKey: PrefKey.showContrast.rawValue), !display.readPrefValueKeyBool(forkey: PrefKey.unavailableDDC, for: .contrast) {
-        let position = (combine && self.combinedBrightnessSliderHandler != nil) ? 1 : 0
-        let contrastSliderHandler = SliderHandler.addSliderMenuItem(toMenu: monitorSubMenu, forDisplay: otherDisplay, command: .contrast, title: NSLocalizedString("Contrast", comment: "Shown in menu"), numOfTickMarks: numOfTickMarks, sliderHandler: combine ? self.combinedContrastSliderHandler : nil, position: position)
-        self.combinedContrastSliderHandler = combine ? contrastSliderHandler : nil
-        otherDisplay.contrastSliderHandler = contrastSliderHandler
-        hasSlider = true
-      }
-    }
-    if !prefs.bool(forKey: PrefKey.hideBrightness.rawValue), !display.readPrefValueKeyBool(forkey: PrefKey.unavailableDDC, for: .brightness) {
-      let brightnessSliderHandler = SliderHandler.addSliderMenuItem(toMenu: monitorSubMenu, forDisplay: display, command: .brightness, title: NSLocalizedString("Brightness", comment: "Shown in menu"), numOfTickMarks: numOfTickMarks, sliderHandler: combine ? self.combinedBrightnessSliderHandler : nil)
-      display.brightnessSliderHandler = brightnessSliderHandler
-      self.combinedBrightnessSliderHandler = combine ? brightnessSliderHandler : nil
-      hasSlider = true
-    }
-    if hasSlider, !relevant, !combine, numOfDisplays > 1 {
-      self.appendMenuHeader(friendlyName: display.friendlyName, monitorSubMenu: monitorSubMenu, asSubMenu: asSubMenu)
-    }
-    if prefs.string(forKey: PrefKey.menuIcon.rawValue) == "sliderOnly" {
-      app.statusItem.isVisible = hasSlider
-    }
-  }
-
-  private func appendMenuHeader(friendlyName: String, monitorSubMenu: NSMenu, asSubMenu: Bool) {
-    let monitorMenuItem = NSMenuItem()
-    if asSubMenu {
-      monitorMenuItem.title = "\(friendlyName)"
-      monitorMenuItem.submenu = monitorSubMenu
-    } else {
-      let attrs: [NSAttributedString.Key: Any] = [.foregroundColor: NSColor.systemGray, .font: NSFont.boldSystemFont(ofSize: 12)]
-      monitorMenuItem.attributedTitle = NSAttributedString(string: "\(friendlyName)", attributes: attrs)
-    }
-    self.monitorItems.append(monitorMenuItem)
-    self.statusMenu.insertItem(monitorMenuItem, at: 0)
   }
 
   func checkPermissions() {
@@ -311,7 +159,7 @@ class MonitorControl: NSObject, NSApplicationDelegate {
     NSWorkspace.shared.notificationCenter.addObserver(self, selector: #selector(self.sleepNotification), name: NSWorkspace.willSleepNotification, object: nil)
     NSWorkspace.shared.notificationCenter.addObserver(self, selector: #selector(self.wakeNotofication), name: NSWorkspace.didWakeNotification, object: nil)
     _ = DistributedNotificationCenter.default().addObserver(forName: .accessibilityApi, object: nil, queue: nil) { _ in DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { self.updateMediaKeyTap() } } // listen for accessibility status changes
-    NotificationCenter.default.addObserver(forName: NSWindow.didChangeOcclusionStateNotification, object: self.statusItem.button?.menu, queue: nil) { _ in self.updateMenuRelevantDisplay() }
+    NotificationCenter.default.addObserver(forName: NSWindow.didChangeOcclusionStateNotification, object: self.statusItem.button?.menu, queue: nil) { _ in self.statusMenu.updateMenuRelevantDisplay() }
   }
 
   @objc private func sleepNotification() {
