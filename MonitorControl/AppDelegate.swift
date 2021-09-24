@@ -23,7 +23,7 @@ let aboutPrefsVc = storyboard.instantiateController(withIdentifier: "AboutPrefsV
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
-  @IBOutlet var statusMenu: NSMenu!
+  var statusMenu: NSMenu!
   let minPreviousBuildNumber = 3600 // Below this previous app version there is a mandatory preferences reset!
   let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
   var mediaKeyTap = MediaKeyTapManager()
@@ -83,6 +83,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     prefs.set(currentBuildNumber, forKey: PrefKey.buildNumber.rawValue)
     self.setDefaultPrefs()
+    self.statusMenu = NSMenu()
     if #available(macOS 11.0, *) {
       self.statusItem.button?.image = NSImage(systemSymbolName: "sun.max", accessibilityDescription: "MonitorControl")
     } else {
@@ -107,11 +108,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     self.statusItem.isVisible = true
   }
 
-  @IBAction func quitClicked(_: AnyObject) {
+  @objc func quitClicked(_: AnyObject) {
     NSApplication.shared.terminate(self)
   }
 
-  @IBAction func prefsClicked(_: AnyObject) {
+  @objc func prefsClicked(_: AnyObject) {
     self.preferencesWindowController.show()
   }
 
@@ -172,15 +173,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   }
 
   func clearMenu() {
-    if self.statusMenu.items.count > 2 {
-      var items: [NSMenuItem] = []
-      for i in 0 ..< self.statusMenu.items.count - 2 {
-        items.append(self.statusMenu.items[i])
-      }
-      for item in items {
-        self.statusMenu.removeItem(item)
-      }
+    var items: [NSMenuItem] = []
+    for i in 0 ..< self.statusMenu.items.count {
+      items.append(self.statusMenu.items[i])
     }
+    for item in items {
+      self.statusMenu.removeItem(item)
+    }
+    self.statusMenu.addItem(withTitle: "Preferences...", action: #selector(self.prefsClicked), keyEquivalent: "")
+    self.statusMenu.addItem(withTitle: "Quit", action: #selector(self.quitClicked), keyEquivalent: "")
     self.monitorItems = []
     self.combinedBrightnessSliderHandler = nil
     self.combinedVolumeSliderHandler = nil
