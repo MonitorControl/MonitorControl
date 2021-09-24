@@ -104,9 +104,6 @@ enum PrefKey: String {
   // Friendly name changed
   case friendlyName
 
-  // Prefs Reset
-  case preferenceReset
-
   // Instead of assuming default values, enable read or write upon startup (according to readDDCInsteadOfRestoreValues)
   case enableDDCDuringStartup
 

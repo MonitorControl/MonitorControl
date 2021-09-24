@@ -228,7 +228,7 @@ class MainPrefsViewController: NSViewController, PreferencePane {
   @available(macOS, deprecated: 10.10)
   func resetSheetModalHander(modalResponse: NSApplication.ModalResponse) {
     if modalResponse == NSApplication.ModalResponse.alertFirstButtonReturn {
-      NotificationCenter.default.post(name: Notification.Name(PrefKey.preferenceReset.rawValue), object: nil)
+      app.preferenceReset()
       self.populateSettings()
       menuslidersPrefsVc?.populateSettings()
       keyboardPrefsVc?.populateSettings()

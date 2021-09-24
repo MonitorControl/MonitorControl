@@ -286,8 +286,6 @@ class MonitorControl: NSObject, NSApplicationDelegate {
   }
 
   private func subscribeEventListeners() {
-    NotificationCenter.default.addObserver(self, selector: #selector(self.handleFriendlyNameChanged), name: .friendlyName, object: nil)
-    NotificationCenter.default.addObserver(self, selector: #selector(self.handlePreferenceReset), name: .preferenceReset, object: nil)
     NotificationCenter.default.addObserver(self, selector: #selector(self.audioDeviceChanged), name: Notification.Name.defaultOutputDeviceChanged, object: nil) // subscribe Audio output detector (SimplyCoreAudio)
     DistributedNotificationCenter.default.addObserver(self, selector: #selector(self.colorSyncSettingsChanged), name: NSNotification.Name(rawValue: kColorSyncDisplayDeviceProfilesNotification.takeRetainedValue() as String), object: nil) // ColorSync change
     NSWorkspace.shared.notificationCenter.addObserver(self, selector: #selector(self.sleepNotification), name: NSWorkspace.screensDidSleepNotification, object: nil) // sleep and wake listeners
@@ -375,11 +373,7 @@ class MonitorControl: NSObject, NSApplicationDelegate {
     self.updateMediaKeyTap()
   }
 
-  @objc func handleFriendlyNameChanged() {
-    self.updateMenusAndKeys()
-  }
-
-  @objc func handlePreferenceReset() {
+  func preferenceReset() {
     os_log("Resetting all preferences.")
     if !prefs.bool(forKey: PrefKey.disableSoftwareFallback.rawValue) || !prefs.bool(forKey: PrefKey.disableCombinedBrightness.rawValue) {
       DisplayManager.shared.resetSwBrightnessForAllDisplays(async: false)

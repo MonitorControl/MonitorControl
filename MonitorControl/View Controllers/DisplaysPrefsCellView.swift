@@ -179,8 +179,8 @@ class DisplaysPrefsCellView: NSTableCellView {
 
       if newValue != originalValue, !newValue.isEmpty {
         disp.friendlyName = newValue
-        NotificationCenter.default.post(name: Notification.Name(PrefKey.friendlyName.rawValue), object: nil)
       }
+      app.updateMenusAndKeys()
     }
   }
 
