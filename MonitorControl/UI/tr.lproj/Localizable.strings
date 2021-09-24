@@ -1,8 +1,5 @@
 /* Shown in the main prefs window */
-"About" = "Hakkında";
-
-/* Shown in the main prefs window */
-"Advanced" = "Advanced";
+"About" = "About";
 
 /* Shown in the main prefs window */
 "App menu" = "App menu";
@@ -11,43 +8,43 @@
 "Apple Silicon" = "Apple Silicon";
 
 /* Shown in the alert dialog */
-"Are you sure you want to enable a longer delay? Doing so may freeze your system and require a restart. Start at login will be disabled as a safety measure." = "Daha uzun bir gecikmeyi etkinleştirmek istediğinizden emin misiniz? Bunu yapmak sisteminizi dondurabilir ve yeniden başlatılabilir. Başlangıçta güvenlik önlemi olarak devre dışı bırakılır.";
+"Are you sure you want to enable a longer delay? Doing so may freeze your system and require a restart. Start at login will be disabled as a safety measure." = "Are you sure you want to enable a longer delay? Doing so may freeze your system and require a restart. Start at login will be disabled as a safety measure.";
 
 /* Shown in the alert dialog */
-"Are you sure you want to reset all preferences?" = "Tüm ayarları sıfırlamak istediğinize emin misiniz?";
+"Are you sure you want to reset all preferences?" = "Are you sure you want to reset all preferences?";
 
 /* Shown in menu */
-"Brightness" = "Parlaklık";
+"Brightness" = "Brightness";
 
 /* Build */
-"Build" = "Derleme";
+"Build" = "Build";
 
 /* Shown in the Display Preferences */
-"Built-in Display" = "Dahili Ekran";
+"Built-in Display" = "Built-in Display";
 
 /* Shown in menu */
-"Contrast" = "Kontrast";
+"Contrast" = "Contrast";
 
 /* Version */
-"Copyright Ⓒ MonitorControl, " = "Telif Hakkı Ⓒ MonitorControl, ";
+"Copyright Ⓒ MonitorControl, " = "Copyright Ⓒ MonitorControl, ";
 
 /* Shown in the main prefs window */
-"Displays" = "Ekranlar";
+"Displays" = "Displays";
 
 /* Shown in the alert dialog */
-"Enable Longer Delay?" = "Daha Uzun Gecikmeyi Etkinleştir?";
+"Enable Longer Delay?" = "Enable Longer Delay?";
 
 /* Shown in the Display Preferences */
-"External Display" = "Harici Ekran";
+"External Display" = "External Display";
 
 /* Shown in the main prefs window */
-"General" = "Genel";
+"General" = "General";
 
 /* Shown in the Display Preferences */
-"Hardware (Apple)" = "Donanım (Apple)";
+"Hardware (Apple)" = "Hardware (Apple)";
 
 /* Shown in the Display Preferences */
-"Hardware (DDC)" = "Donanım (DDC)";
+"Hardware (DDC)" = "Hardware (DDC)";
 
 /* Shown in the alert dialog */
 "Incompatible previous version" = "Incompatible previous version";
@@ -59,19 +56,19 @@
 "Keyboard" = "Keyboard";
 
 /* Shown in the alert dialog */
-"No" = "Hayır";
+"No" = "No";
 
 /* Shown in the Display Preferences */
-"No Control" = "Kontrol yok";
+"No Control" = "No Control";
 
 /* Shown in the Display Preferences */
-"Other Display" = "Diğer Ekran";
+"Other Display" = "Other Display";
 
 /* Shown in the alert dialog */
 "Preferences for an incompatible previous app version detected. Default preferences are reloaded." = "Preferences for an incompatible previous app version detected. Default preferences are reloaded.";
 
 /* Shown in the alert dialog */
-"Reset Preferences?" = "Ayarları Sıfırla?";
+"Reset Preferences?" = "Reset Preferences?";
 
 /* Shown in the alert dialog */
 "Safe Mode Activated" = "Safe Mode Activated";
@@ -80,7 +77,7 @@
 "Shift was pressed during launch. MonitorControl started in safe mode. Default preferences are reloaded, DDC read is blocked." = "Shift was pressed during launch. MonitorControl started in safe mode. Default preferences are reloaded, DDC read is blocked.";
 
 /* Shown in the alert dialog */
-"Shortcuts not available" = "Kısayollar bulunamadı";
+"Shortcuts not available" = "Shortcuts not available";
 
 /* Shown in the Display Preferences */
 "Software (Gamma)" = "Software (Gamma)";
@@ -90,9 +87,6 @@
 
 /* Shown in the Display Preferences */
 "Software (Shade)" = "Software (Shade)";
-
-/* Shown in the main prefs window */
-"Syncing" = "Syncing";
 
 /* Shown in the Display Preferences */
 "This display allows for software brightness control via gammatable manipulation as it does not support hardware control. Reasons for this might be using the HDMI port of a Mac mini (which blocks hardware DDC control) or having a blacklisted display." = "This display allows for software brightness control via gammatable manipulation as it does not support hardware control. Reasons for this might be using the HDMI port of a Mac mini (which blocks hardware DDC control) or having a blacklisted display.";
@@ -113,19 +107,19 @@
 "This is a virtual display (examples: AirPlay, Sidecar, display connected via a DisplayLink Dock or similar) which does not allow hardware or software gammatable control. Shading is used as a substitute but only in non-mirror scenarios. Mouse cursor will be unaffected and artifacts may appear when entering/leaving full screen mode." = "This is a virtual display (examples: AirPlay, Sidecar, display connected via a DisplayLink Dock or similar) which does not allow hardware or software gammatable control. Shading is used as a substitute but only in non-mirror scenarios. Mouse cursor will be unaffected and artifacts may appear when entering/leaving full screen mode.";
 
 /* Unknown display name */
-"Unknown" = "Bilinmeyen";
+"Unknown" = "Unknown";
 
 /* Version */
-"Version" = "Versiyon";
+"Version" = "Version";
 
 /* Shown in the Display Preferences */
-"Virtual Display" = "Sanal Ekran";
+"Virtual Display" = "Virtual Display";
 
 /* Shown in menu */
-"Volume" = "Ses";
+"Volume" = "Volume";
 
 /* Shown in the alert dialog */
-"Yes" = "Evet";
+"Yes" = "Yes";
 
 /* Shown in the alert dialog */
-"You need to enable MonitorControl in System Preferences > Security and Privacy > Accessibility for the keyboard shortcuts to work" = "MonitorControl klavye kısayollarını aktif hale getirmek için Sistem Tercihleri > Güvenlik ve Gizlilik > Erişebilirlik altından izin vermeniz gerekmektedir";
+"You need to enable MonitorControl in System Preferences > Security and Privacy > Accessibility for the keyboard shortcuts to work" = "You need to enable MonitorControl in System Preferences > Security and Privacy > Accessibility for the keyboard shortcuts to work";

@@ -43,7 +43,7 @@
 /* Class = "NSTextFieldCell"; title = "Slider knob will snap to 0%, 25%, 50%, 75% and 100% when in proximity making setting these values easier. Disable for finer control."; ObjectID = "8Gx-Ya-zhp"; */
 "8Gx-Ya-zhp.title" = "Slider knob will snap to 0%, 25%, 50%, 75% and 100% when in proximity making setting these values easier. Disable for finer control.";
 
-/* Class = "NSButtonCell"; title = "Use fine scale for brightness"; ObjectID = "8Q8-57-xnT"; */
+/* Class = "NSButtonCell"; title = "Use fine OSD scale for brightness"; ObjectID = "8Q8-57-xnT"; */
 "8Q8-57-xnT.title" = "Use fine scale for brightness";
 
 /* Class = "NSButtonCell"; title = "Special thanks to our contributors!"; ObjectID = "95V-M4-2l5"; */
@@ -70,7 +70,7 @@
 /* Class = "NSButtonCell"; title = "Disable macOS volume OSD"; ObjectID = "bkM-Px-U3b"; */
 "bkM-Px-U3b.title" = "Desactivar el OSD de volumen de macOS";
 
-/* Class = "NSTextFieldCell"; title = "Scale options:"; ObjectID = "bP4-GJ-vhJ"; */
+/* Class = "NSTextFieldCell"; title = "OSD scale:"; ObjectID = "bP4-GJ-vhJ"; */
 "bP4-GJ-vhJ.title" = "Scale options:";
 
 /* Class = "NSButtonCell"; title = "Reset settings"; ObjectID = "BYS-7Y-bRz"; */
@@ -79,7 +79,7 @@
 /* Class = "NSButtonCell"; title = "Enable Mute DDC command"; ObjectID = "bZq-0d-lJa"; */
 "bZq-0d-lJa.title" = "Activar el comando DDC de silenciamiento";
 
-/* Class = "NSTextFieldCell"; title = "Keyboard control:"; ObjectID = "c7N-cO-759"; */
+/* Class = "NSTextFieldCell"; title = "Brightness control:"; ObjectID = "c7N-cO-759"; */
 "c7N-cO-759.title" = "Teclado:";
 
 /* Class = "NSButtonCell"; title = "Show volume slider in menu"; ObjectID = "c9D-MB-lma"; */
@@ -96,6 +96,9 @@
 
 /* Class = "NSTextFieldCell"; title = "⚠️ Warning! Changing some of these settings may cause system freezes or unexpected behavior!"; ObjectID = "Cz1-Mh-llk"; */
 "Cz1-Mh-llk.title" = "⚠️ Advertencia! La modificación de algunos de estos ajustes puede provocar un comportamiento inesperado.";
+
+/* Class = "NSTextFieldCell"; title = "Alternative keys are the F14/F15 (Scroll Lock and Pause on PC keyboards)"; ObjectID = "D4H-hU-FLn"; */
+"D4H-hU-FLn.title" = "Alternative keys are the F14/F15 (Scroll Lock and Pause on PC keyboards)";
 
 /* Class = "NSTextFieldCell"; title = "VCP 0x"; ObjectID = "D9t-vT-gNJ"; */
 "D9t-vT-gNJ.title" = "Remap";
@@ -148,11 +151,8 @@
 /* Class = "NSTextFieldCell"; title = "Override audio device name:"; ObjectID = "H9X-it-sXs"; */
 "H9X-it-sXs.title" = "Override audio device name:";
 
-/* Class = "NSTextFieldCell"; title = "Brightness control:"; ObjectID = "hdd-Zz-buN"; */
+/* Class = "NSTextFieldCell"; title = "General options:"; ObjectID = "hdd-Zz-buN"; */
 "hdd-Zz-buN.title" = "Control de brillo:";
-
-/* Class = "NSMenuItem"; title = "Brightness only"; ObjectID = "hjz-0c-rvK"; */
-"hjz-0c-rvK.title" = "Brillo";
 
 /* Class = "NSButtonCell"; title = "Get current"; ObjectID = "hkC-vq-IcD"; */
 "hkC-vq-IcD.title" = "Get current";
@@ -163,7 +163,7 @@
 /* Class = "NSButtonCell"; title = "Enable smooth brightness transitions"; ObjectID = "IK4-u5-qjf"; */
 "IK4-u5-qjf.title" = "Enable smooth brightness transitions";
 
-/* Class = "NSButtonCell"; title = "Use fine scale for volume"; ObjectID = "J3L-MW-iJL"; */
+/* Class = "NSButtonCell"; title = "Use fine OSD scale for volume"; ObjectID = "J3L-MW-iJL"; */
 "J3L-MW-iJL.title" = "Use fine scale for volume";
 
 /* Class = "NSButtonCell"; title = "Start at Login"; ObjectID = "j72-NF-zsW"; */
@@ -171,6 +171,9 @@
 
 /* Class = "NSTextFieldCell"; title = "Custom read polling count:"; ObjectID = "J77-r0-djA"; */
 "J77-r0-djA.title" = "Recuento de lectura personalizado:";
+
+/* Class = "NSButtonCell"; title = "Enable brightness control via keyboard"; ObjectID = "JbI-mI-f1r"; */
+"JbI-mI-f1r.title" = "Enable brightness control via keyboard";
 
 /* Class = "NSButtonCell"; title = "Change brightness for all screens"; ObjectID = "JC3-pb-XnR"; */
 "JC3-pb-XnR.title" = "Change brightness for all screens";
@@ -184,7 +187,7 @@
 /* Class = "NSButtonCell"; title = "Apply last saved values to the display"; ObjectID = "K0S-zN-M4k"; */
 "K0S-zN-M4k.title" = "Restore last saved values";
 
-/* Class = "NSTextFieldCell"; title = "Use the media keys of your keyboard to control Brightness & Volume."; ObjectID = "K2r-aD-eec"; */
+/* Class = "NSTextFieldCell"; title = "Use the brightness keys of your Apple keyboard to control brightness."; ObjectID = "K2r-aD-eec"; */
 "K2r-aD-eec.title" = "Usa las teclas de brillo o volumen de tu teclado";
 
 /* Class = "NSButtonCell"; title = "Enable for Apple branded and built-in displays as well"; ObjectID = "K6A-4z-1aQ"; */
@@ -196,7 +199,7 @@
 /* Class = "NSTextFieldCell"; title = "Display type:"; ObjectID = "lSJ-6w-KJ2"; */
 "lSJ-6w-KJ2.title" = "Tipo de pantalla:";
 
-/* Class = "NSTextFieldCell"; title = "Brightness control:"; ObjectID = "ltL-gR-K3Z"; */
+/* Class = "NSTextFieldCell"; title = "Screen to control:"; ObjectID = "ltL-gR-K3Z"; */
 "ltL-gR-K3Z.title" = "Brightness control:";
 
 /* Class = "NSButtonCell"; title = "Enable slider snapping"; ObjectID = "MlU-hl-d46"; */
@@ -210,9 +213,6 @@
 
 /* Class = "NSButtonCell"; title = "Show brightness slider in menu"; ObjectID = "MWo-6I-s9L"; */
 "MWo-6I-s9L.title" = "Show brightness slider in menu";
-
-/* Class = "NSMenuItem"; title = "Volume only"; ObjectID = "NLP-dU-Dam"; */
-"NLP-dU-Dam.title" = "Volumen";
 
 /* Class = "NSButtonCell"; title = "Separate scales for combined hardware & software dimming"; ObjectID = "O8o-hI-8eR"; */
 "O8o-hI-8eR.title" = "Separate scales for combined hardware & software dimming";
@@ -265,7 +265,7 @@
 /* Class = "NSTextFieldCell"; title = "Menu Icon:"; ObjectID = "u6s-Pb-BCG"; */
 "u6s-Pb-BCG.title" = "Menu Icon:";
 
-/* Class = "NSTextFieldCell"; title = "Works if an audio device is selected with no volume control."; ObjectID = "uF5-a9-Ngz"; */
+/* Class = "NSTextFieldCell"; title = "Works if an audio device is selected with no native volume control."; ObjectID = "uF5-a9-Ngz"; */
 "uF5-a9-Ngz.title" = "Works if an audio device is selected with no volume control.";
 
 /* Class = "NSTextField"; ibExternalAccessibilityDescription = "Brightness"; ObjectID = "uJS-s3-Zpi"; */
@@ -277,17 +277,20 @@
 /* Class = "NSButtonCell"; title = "Always show"; ObjectID = "Vc0-XK-Lce"; */
 "Vc0-XK-Lce.title" = "Always show";
 
+/* Class = "NSButtonCell"; title = "Do not use alternative brightness keys"; ObjectID = "vd2-Lk-neX"; */
+"vd2-Lk-neX.title" = "Do not use alternative brightness keys";
+
 /* Class = "NSMenuItem"; title = "Heavy"; ObjectID = "vik-vN-bJe"; */
 "vik-vN-bJe.title" = "Heavy";
-
-/* Class = "NSMenuItem"; title = "Both Brightness & Volume"; ObjectID = "Vr4-xb-B4o"; */
-"Vr4-xb-B4o.title" = "Brillo y volumen";
 
 /* Class = "NSTextFieldCell"; title = "Multiple displays:"; ObjectID = "vri-pv-tJ4"; */
 "vri-pv-tJ4.title" = "Multiple displays:";
 
 /* Class = "NSTextFieldCell"; title = "DDC read polling mode:"; ObjectID = "vwm-hY-on5"; */
 "vwm-hY-on5.title" = "Modo de lectura DDC:";
+
+/* Class = "NSButtonCell"; title = "Enable audio control via keyboard"; ObjectID = "W4n-ea-oj5"; */
+"W4n-ea-oj5.title" = "Enable audio control via keyboard";
 
 /* Class = "NSTextFieldCell"; title = "Useful when a display tends to reset its settings during sleep."; ObjectID = "w8B-x6-sq5"; */
 "w8B-x6-sq5.title" = "Restore settings from last run or from before sleep. Useful when a display tends to reset brightness during sleep or hardware has issues with reading DDC data. Not relevant for Apple displays.";
@@ -301,9 +304,6 @@
 /* Class = "NSTextFieldCell"; title = "Display advanced settings and additional information in Preferences."; ObjectID = "X6w-Ee-9Jq"; */
 "X6w-Ee-9Jq.title" = "Display advanced settings and additional information in Preferences.";
 
-/* Class = "NSMenuItem"; title = "None"; ObjectID = "X96-ny-lAP"; */
-"X96-ny-lAP.title" = "None";
-
 /* Class = "NSTextField"; ibExternalAccessibilityDescription = "Brightness"; ObjectID = "xDF-IA-bBh"; */
 "xDF-IA-bBh.ibExternalAccessibilityDescription" = "Brightness";
 
@@ -312,9 +312,6 @@
 
 /* Class = "NSTextFieldCell"; title = "Works best with various syncing and 'control all' keyboard settings enabled."; ObjectID = "XU4-Bn-bwH"; */
 "XU4-Bn-bwH.title" = "Works best with various syncing and 'control all' keyboard settings enabled.";
-
-/* Class = "NSTextFieldCell"; title = "This makes fine control default."; ObjectID = "YAb-HH-s3p"; */
-"YAb-HH-s3p.title" = "This makes fine control default.";
 
 /* Class = "NSTextFieldCell"; title = "Available"; ObjectID = "yBJ-5d-I7e"; */
 "yBJ-5d-I7e.title" = "Available";

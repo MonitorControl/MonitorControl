@@ -62,8 +62,14 @@ enum PrefKey: String {
   // Hide menu icon
   case menuIcon
 
-  // Keys listened for (Brightness/Volume)
-  case listenFor
+  // Keys listened for
+  case disableListenForBrightness
+
+  // Keys listened for
+  case disableListenForVolume
+
+  // Don't listen to F14/F15
+  case disableAltBrightnessKeys
 
   // Hide brightness sliders
   case hideBrightness
@@ -100,9 +106,6 @@ enum PrefKey: String {
 
   // Prefs Reset
   case preferenceReset
-
-  // Used for notification when displays are updated in DisplayManager
-  case displayListUpdate
 
   // Instead of assuming default values, enable read or write upon startup (according to readDDCInsteadOfRestoreValues)
   case enableDDCDuringStartup

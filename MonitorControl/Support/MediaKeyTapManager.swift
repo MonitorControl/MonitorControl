@@ -10,13 +10,6 @@ class MediaKeyTapManager: MediaKeyTapDelegate {
   var mediaKeyTap: MediaKeyTap?
   var keyRepeatTimers: [MediaKey: Timer] = [:]
 
-  enum ListenForKeys: Int {
-    case brightnessAndVolumeKeys = 0 // Listen for Brightness and Volume keys
-    case brightnessOnlyKeys = 1 // Listen for Brightness keys only
-    case volumeOnlyKeys = 2 // Listen for Volume keys only
-    case none = 3 // Don't listen for any keys
-  }
-
   func handle(mediaKey: MediaKey, event: KeyEvent?, modifiers: NSEvent.ModifierFlags?) {
     let isPressed = event?.keyPressed ?? true
     let isRepeat = event?.keyRepeat ?? false
@@ -140,16 +133,12 @@ class MediaKeyTapManager: MediaKeyTapDelegate {
   }
 
   func updateMediaKeyTap() {
-    var keys: [MediaKey]
-    switch prefs.integer(forKey: PrefKey.listenFor.rawValue) {
-    case ListenForKeys.brightnessOnlyKeys.rawValue:
-      keys = [.brightnessUp, .brightnessDown]
-    case ListenForKeys.volumeOnlyKeys.rawValue:
-      keys = [.mute, .volumeUp, .volumeDown]
-    case ListenForKeys.none.rawValue:
-      keys = []
-    default:
-      keys = [.brightnessUp, .brightnessDown, .mute, .volumeUp, .volumeDown]
+    var keys: [MediaKey] = []
+    if !prefs.bool(forKey: PrefKey.disableListenForBrightness.rawValue) {
+      keys.append(contentsOf: [.brightnessUp, .brightnessDown])
+    }
+    if !prefs.bool(forKey: PrefKey.disableListenForVolume.rawValue) {
+      keys.append(contentsOf: [.mute, .volumeUp, .volumeDown])
     }
     // Remove keys if no external displays are connected
     var isInternalDisplayOnly = true

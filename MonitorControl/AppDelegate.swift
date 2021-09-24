@@ -143,7 +143,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     DisplayManager.shared.configureDisplays()
     DisplayManager.shared.addDisplayCounterSuffixes()
     DisplayManager.shared.updateArm64AVServices()
-    NotificationCenter.default.post(name: Notification.Name(PrefKey.displayListUpdate.rawValue), object: nil)
     if firstrun {
       DisplayManager.shared.resetSwBrightnessForAllDisplays(settingsOnly: true)
     }
@@ -271,14 +270,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   }
 
   func checkPermissions() {
-    let permissionsRequired: Bool = prefs.integer(forKey: PrefKey.listenFor.rawValue) != MediaKeyTapManager.ListenForKeys.none.rawValue
+    let permissionsRequired: Bool = !prefs.bool(forKey: PrefKey.disableListenForVolume.rawValue) || !prefs.bool(forKey: PrefKey.disableListenForBrightness.rawValue)
     if !MediaKeyTapManager.readPrivileges(prompt: false) && permissionsRequired {
       MediaKeyTapManager.acquirePrivileges()
     }
   }
 
   private func subscribeEventListeners() {
-    NotificationCenter.default.addObserver(self, selector: #selector(self.handleListenForChanged), name: .listenFor, object: nil) // subscribe KeyTap event listeners
     NotificationCenter.default.addObserver(self, selector: #selector(self.handleFriendlyNameChanged), name: .friendlyName, object: nil)
     NotificationCenter.default.addObserver(self, selector: #selector(self.handlePreferenceReset), name: .preferenceReset, object: nil)
     NotificationCenter.default.addObserver(self, selector: #selector(self.audioDeviceChanged), name: Notification.Name.defaultOutputDeviceChanged, object: nil) // subscribe Audio output detector (SimplyCoreAudio)
@@ -363,7 +361,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     self.displayReconfigured()
   }
 
-  @objc func handleListenForChanged() {
+  func handleListenForChanged() {
     self.checkPermissions()
     self.updateMediaKeyTap()
   }
@@ -396,6 +394,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   }
 
   func updateMediaKeyTap() {
+    MediaKeyTap.useAlternateBrightnessKeys = !prefs.bool(forKey: PrefKey.disableAltBrightnessKeys.rawValue)
     self.mediaKeyTap.updateMediaKeyTap()
   }
 

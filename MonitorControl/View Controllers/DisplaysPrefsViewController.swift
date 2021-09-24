@@ -25,7 +25,6 @@ class DisplaysPrefsViewController: NSViewController, PreferencePane, NSTableView
   override func viewDidLoad() {
     super.viewDidLoad()
     self.loadDisplayList()
-    NotificationCenter.default.addObserver(self, selector: #selector(self.loadDisplayList), name: .displayListUpdate, object: nil)
   }
 
   override func viewWillAppear() {
