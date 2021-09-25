@@ -55,6 +55,7 @@ class DisplayManager {
   }
 
   internal var shades: [CGDirectDisplayID: NSWindow] = [:]
+  internal var shadeGrave: [NSWindow] = []
 
   func isDisqualifiedFromShade(_ displayID: CGDirectDisplayID) -> Bool { // We ban mirror members from shade control as it might lead to double control
     return (CGDisplayIsInHWMirrorSet(displayID) != 0 || CGDisplayIsInMirrorSet(displayID) != 0) ? true : false
@@ -93,28 +94,30 @@ class DisplayManager {
     return nil
   }
 
-  func destroyAllShades() -> Bool { // TODO: This creates a EXC_BAD_ACCESS if there are shades. Figure out why!
+  func destroyAllShades() -> Bool {
     var ret = false
     for displayID in shades.keys {
+      os_log("Attempting to destory shade for display  %{public}@", type: .debug, String(displayID))
       if destroyShade(displayID: displayID) {
         ret = true
       }
     }
     if ret {
       os_log("Destroyed all shades.", type: .debug)
+    } else {
+      os_log("No shades were found to be destroyed.", type: .debug)
     }
     return ret
   }
 
   func destroyShade(displayID: CGDirectDisplayID) -> Bool {
-    guard !self.isDisqualifiedFromShade(displayID) else {
-      return false
-    }
     if let shade = shades[displayID] {
       os_log("Destroying shade for display %{public}@", type: .debug, String(displayID))
-      shade.alphaValue = 1
-      shade.close()
+      shade.alphaValue = CGFloat(1)
+      shade.contentRect(forFrameRect: NSRect(x: 0, y: 0, width: 0, height: 0))
+      shadeGrave.append(shade)
       self.shades.removeValue(forKey: displayID)
+      shade.close()
       return true
     }
     return false

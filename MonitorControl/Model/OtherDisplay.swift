@@ -142,6 +142,7 @@ class OtherDisplay: Display {
     } else {
       self.savePrefValue(max(0.1, self.prefValueExists(for: command) ? self.readPrefValue(for: command) : Float(1)), for: command)
       self.swBrightness = self.readPrefValue(for: command)
+      self.brightnessSyncSourceValue = self.readPrefValue(for: command)
       os_log("- Software controlled display current internal value: %{public}@", type: .info, String(self.readPrefValue(for: command)))
     }
     if command == .audioSpeakerVolume {
@@ -155,7 +156,6 @@ class OtherDisplay: Display {
     }
     var currentMuteValue = self.readPrefValueInt(for: .audioMuteScreenBlank)
     currentMuteValue = currentMuteValue == 0 ? 2 : currentMuteValue
-    // If we're looking at the audio speaker volume, also retrieve the values for the mute command
     var muteValues: (current: UInt16, max: UInt16)?
     if self.enableMuteUnmute {
       if self.pollingCount != 0, !app.safeMode, prefs.bool(forKey: PrefKey.enableDDCDuringStartup.rawValue), prefs.bool(forKey: PrefKey.readDDCInsteadOfRestoreValues.rawValue) {
@@ -428,9 +428,7 @@ class OtherDisplay: Display {
     } else {
       let osdChicletFromValue = OSDUtils.chiclet(fromValue: currentValue, maxValue: 1, half: half)
       let distance = OSDUtils.getDistance(fromNearestChiclet: osdChicletFromValue)
-      // get the next rounded chiclet
       var nextFilledChiclet = isUp ? ceil(osdChicletFromValue) : floor(osdChicletFromValue)
-      // Depending on the direction, if the chiclet is above or below a certain threshold, we go to the next whole chiclet
       let distanceThreshold: Float = 0.25 // 25% of the distance between the edges of an osd box
       if distance == 0 {
         nextFilledChiclet += (isUp ? 1 : -1)
