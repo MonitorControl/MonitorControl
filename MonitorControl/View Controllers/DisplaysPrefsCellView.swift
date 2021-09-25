@@ -66,7 +66,7 @@ class DisplaysPrefsCellView: NSTableCellView {
 
       if newValue != originalValue {
         display.pollingMode = newValue
-        if display.pollingMode == 4 {
+        if display.pollingMode == PollingMode.custom.rawValue {
           self.pollingCount.isEnabled = true
         } else {
           self.pollingCount.isEnabled = false

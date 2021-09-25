@@ -31,19 +31,19 @@ class OtherDisplay: Display {
   }
 
   var pollingMode: Int {
-    get { return Int(prefs.string(forKey: PrefKey.pollingMode.rawValue + self.prefsId) ?? "2") ?? 2 }
+    get { return Int(prefs.string(forKey: PrefKey.pollingMode.rawValue + self.prefsId) ?? String(PollingMode.normal.rawValue)) ?? PollingMode.normal.rawValue }
     set { prefs.set(String(newValue), forKey: PrefKey.pollingMode.rawValue + self.prefsId) }
   }
 
   var pollingCount: Int {
     get {
       switch self.pollingMode {
-      case 0: return 0 // none
-      case 1: return 5 // minimal
-      case 2: return 10 // normal
-      case 3: return 100 // heavy
-      case 4: return prefs.integer(forKey: PrefKey.pollingCount.rawValue + self.prefsId)
-      default: return 0
+      case PollingMode.none.rawValue: return 0
+      case PollingMode.minimal.rawValue: return 5
+      case PollingMode.normal.rawValue: return 10
+      case PollingMode.heavy.rawValue: return 100
+      case PollingMode.custom.rawValue: return prefs.integer(forKey: PrefKey.pollingCount.rawValue + self.prefsId)
+      default: return PollingMode.none.rawValue
       }
     }
     set { prefs.set(newValue, forKey: PrefKey.pollingCount.rawValue + self.prefsId) }

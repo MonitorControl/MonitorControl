@@ -86,7 +86,7 @@ class MenuHandler: NSMenu {
     if hasSlider, !relevant, !combine, numOfDisplays > 1 {
       self.appendMenuHeader(friendlyName: display.friendlyName, monitorSubMenu: monitorSubMenu, asSubMenu: asSubMenu)
     }
-    if prefs.string(forKey: PrefKey.menuIcon.rawValue) == "sliderOnly" {
+    if prefs.integer(forKey: PrefKey.menuIcon.rawValue) == MenuIcon.sliderOnly.rawValue {
       app.statusItem.isVisible = hasSlider
     }
   }
@@ -114,31 +114,31 @@ class MenuHandler: NSMenu {
   }
 
   func addDefaultMenuOptions() {
-    if !DEBUG_MACOS10, #available(macOS 11.0, *) {
+    if !DEBUG_MACOS10, #available(macOS 11.0, *), prefs.integer(forKey: PrefKey.menuItemStyle.rawValue) == MenuItemStyle.icon.rawValue {
       let iconSize = CGFloat(22)
-      let viewWidth = CGFloat(194)
+      let viewWidth = CGFloat(194 + 16)
 
       let menuItemView = NSView(frame: NSRect(x: 0, y: 0, width: viewWidth, height: iconSize + 10))
 
       let preferencesIcon = NSButton()
-      preferencesIcon.bezelStyle = .inline
+      preferencesIcon.bezelStyle = .regularSquare
       preferencesIcon.isBordered = false
       preferencesIcon.setButtonType(.momentaryChange)
       preferencesIcon.image = NSImage(systemSymbolName: "ellipsis.circle", accessibilityDescription: NSLocalizedString("Preferences...", comment: "Shown in menu"))
       preferencesIcon.alternateImage = NSImage(systemSymbolName: "ellipsis.circle.fill", accessibilityDescription: NSLocalizedString("Preferences...", comment: "Shown in menu"))
       preferencesIcon.alphaValue = 0.3
-      preferencesIcon.frame = NSRect(x: menuItemView.frame.maxX - iconSize, y: menuItemView.frame.origin.y + 5, width: iconSize, height: iconSize)
+      preferencesIcon.frame = NSRect(x: menuItemView.frame.maxX - iconSize - 16, y: menuItemView.frame.origin.y + 5, width: iconSize, height: iconSize)
       preferencesIcon.imageScaling = .scaleProportionallyUpOrDown
       preferencesIcon.action = #selector(app.prefsClicked)
 
       let quitIcon = NSButton()
-      quitIcon.bezelStyle = .inline
+      quitIcon.bezelStyle = .regularSquare
       quitIcon.isBordered = false
       quitIcon.setButtonType(.momentaryChange)
       quitIcon.image = NSImage(systemSymbolName: "xmark.circle", accessibilityDescription: NSLocalizedString("Quit", comment: "Shown in menu"))
       quitIcon.alternateImage = NSImage(systemSymbolName: "xmark.circle.fill", accessibilityDescription: NSLocalizedString("Preferences...", comment: "Shown in menu"))
       quitIcon.alphaValue = 0.3
-      quitIcon.frame = NSRect(x: menuItemView.frame.maxX - iconSize*2 - 10, y: menuItemView.frame.origin.y + 5, width: iconSize, height: iconSize)
+      quitIcon.frame = NSRect(x: menuItemView.frame.maxX - iconSize*2 - 10 - 16, y: menuItemView.frame.origin.y + 5, width: iconSize, height: iconSize)
       quitIcon.imageScaling = .scaleProportionallyUpOrDown
       quitIcon.action = #selector(app.quitClicked)
 
@@ -147,7 +147,7 @@ class MenuHandler: NSMenu {
       let item = NSMenuItem()
       item.view = menuItemView
       self.addItem(item)
-    } else {
+    } else if prefs.integer(forKey: PrefKey.menuItemStyle.rawValue) == MenuItemStyle.text.rawValue {
       self.addItem(withTitle: NSLocalizedString("Preferences...", comment: "Shown in menu"), action: #selector(app.prefsClicked), keyEquivalent: "")
       self.addItem(withTitle: NSLocalizedString("Quit", comment: "Shown in menu"), action: #selector(app.quitClicked), keyEquivalent: "")
       self.insertItem(NSMenuItem.separator(), at: 0)

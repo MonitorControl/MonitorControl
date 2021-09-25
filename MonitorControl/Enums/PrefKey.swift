@@ -61,6 +61,9 @@ enum PrefKey: String {
   // Hide menu icon
   case menuIcon
 
+  // Menu item style
+  case menuItemStyle
+
   // Keys listened for
   case disableListenForBrightness
 
@@ -141,4 +144,24 @@ enum PrefKey: String {
 
   // Combine sliders for all displays
   case slidersCombine
+}
+
+enum PollingMode: Int {
+  case none = 0
+  case minimal = 1
+  case normal = 2
+  case heavy = 3
+  case custom = 4
+}
+
+enum MenuIcon: Int {
+  case show = 0
+  case sliderOnly = 1
+  case hide = 2
+}
+
+enum MenuItemStyle: Int {
+  case text = 0
+  case icon = 1
+  case hide = 2
 }

@@ -67,7 +67,6 @@ class MonitorControl: NSObject, NSApplicationDelegate {
     } else {
       self.statusItem.button?.image = NSImage(named: "status")
     }
-    self.statusItem.isVisible = (prefs.string(forKey: PrefKey.menuIcon.rawValue) ?? "") == "" ? true : false
     self.statusItem.menu = menu
     self.checkPermissions()
     CGDisplayRegisterReconfigurationCallback({ _, _, _ in app.displayReconfigured() }, nil)
@@ -138,6 +137,7 @@ class MonitorControl: NSObject, NSApplicationDelegate {
   }
 
   func updateMenusAndKeys() {
+    self.statusItem.isVisible = prefs.integer(forKey: PrefKey.menuIcon.rawValue) != MenuIcon.hide.rawValue ? true : false
     menu.updateMenus()
     self.updateMediaKeyTap()
   }

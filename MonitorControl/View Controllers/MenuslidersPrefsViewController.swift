@@ -3,6 +3,7 @@
 import Cocoa
 import Preferences
 import ServiceManagement
+import os.log
 
 class MenuslidersPrefsViewController: NSViewController, PreferencePane {
   let preferencePaneIdentifier = Preferences.PaneIdentifier.menusliders
@@ -16,9 +17,8 @@ class MenuslidersPrefsViewController: NSViewController, PreferencePane {
     }
   }
 
-  @IBOutlet var iconShow: NSButton!
-  @IBOutlet var iconSliderOnly: NSButton!
-  @IBOutlet var iconHide: NSButton!
+  @IBOutlet var iconShow: NSPopUpButton!
+  @IBOutlet var menuItemStyle: NSPopUpButton!
   @IBOutlet var quitApplication: NSButton!
 
   @IBOutlet var showBrightnessSlider: NSButton!
@@ -35,11 +35,9 @@ class MenuslidersPrefsViewController: NSViewController, PreferencePane {
   @IBOutlet var enableSliderPercent: NSButton!
 
   @IBOutlet var rowIconShow: NSGridRow!
-  @IBOutlet var rowIconSliderOnly: NSGridRow!
-  @IBOutlet var rowIconHide: NSGridRow!
-  @IBOutlet var rowHideIconText: NSGridRow!
+  @IBOutlet var rowMenuItemStyle: NSGridRow!
   @IBOutlet var rowQuitButton: NSGridRow!
-  @IBOutlet var rowQuitText: NSGridRow!
+  @IBOutlet var rowQuitButtonText: NSGridRow!
   @IBOutlet var rowHideIconSpearator: NSGridRow!
 
   @IBOutlet var rowShowContrastCheck: NSGridRow!
@@ -56,30 +54,48 @@ class MenuslidersPrefsViewController: NSViewController, PreferencePane {
   @IBOutlet var rowPercentCheck: NSGridRow!
   @IBOutlet var rowPercentText: NSGridRow!
 
+  // swiftlint:disable cyclomatic_complexity
   func showAdvanced() -> Bool {
     let hide = !prefs.bool(forKey: PrefKey.showAdvancedSettings.rawValue)
-    if self.iconShow.state == .off {
+
+    var doNotHideRowIconSeparator = false
+
+    var macOS11orUp = false
+    if !DEBUG_MACOS10, #available(macOS 11.0, *) {
+      macOS11orUp = true
+    }
+
+    if self.iconShow.selectedTag() != MenuIcon.show.rawValue {
       self.rowIconShow.isHidden = false
-      self.rowHideIconText.isHidden = false
-      self.rowHideIconSpearator.isHidden = false
-      self.rowQuitButton.isHidden = false
-      self.rowQuitText.isHidden = false
+      doNotHideRowIconSeparator = true
     } else {
       self.rowIconShow.isHidden = hide
-      self.rowHideIconText.isHidden = hide
-      self.rowHideIconSpearator.isHidden = hide
+    }
+
+    if !macOS11orUp {
+      self.rowMenuItemStyle.isHidden = true
+    } else if self.menuItemStyle.selectedTag() != MenuItemStyle.text.rawValue {
+      self.rowMenuItemStyle.isHidden = false
+      doNotHideRowIconSeparator = true
+    } else {
+      self.rowMenuItemStyle.isHidden = hide
+    }
+
+    if self.iconShow.selectedTag() != MenuIcon.show.rawValue || self.menuItemStyle.selectedTag() == MenuItemStyle.hide.rawValue {
+      self.rowQuitButton.isHidden = false
+      self.rowQuitButtonText.isHidden = false
+      doNotHideRowIconSeparator = true
+    } else {
       self.rowQuitButton.isHidden = true
-      self.rowQuitText.isHidden = true
+      self.rowQuitButtonText.isHidden = true
     }
-    if self.iconSliderOnly.state == .on {
-      self.rowIconSliderOnly.isHidden = false
+
+    if doNotHideRowIconSeparator {
+      self.rowHideIconSpearator.isHidden = false
+      self.rowHideIconSpearator.isHidden = false
     } else {
-      self.rowIconSliderOnly.isHidden = hide
-    }
-    if self.iconHide.state == .on {
-      self.rowIconHide.isHidden = false
-    } else {
-      self.rowIconHide.isHidden = hide
+      self.rowHideIconSpearator.isHidden = hide
+      self.rowHideIconSpearator.isHidden = hide
     }
 
     if self.showContrastSlider.state == .on {
@@ -113,13 +129,17 @@ class MenuslidersPrefsViewController: NSViewController, PreferencePane {
       }
     }
 
-    if self.showTickMarks.state == .on {
+    if !macOS11orUp {
+      self.rowTickCheck.isHidden = true
+      self.rowTickText.isHidden = true
+    } else if self.showTickMarks.state == .on {
       self.rowTickCheck.isHidden = false
       self.rowTickText.isHidden = false
     } else {
       self.rowTickCheck.isHidden = hide
       self.rowTickText.isHidden = hide
     }
+
     if self.enableSliderPercent.state == .on {
       self.rowPercentCheck.isHidden = false
       self.rowPercentText.isHidden = false
@@ -129,6 +149,7 @@ class MenuslidersPrefsViewController: NSViewController, PreferencePane {
     }
     return !hide
   }
+  // swiftlint:enable cyclomatic_complexity
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -136,14 +157,8 @@ class MenuslidersPrefsViewController: NSViewController, PreferencePane {
   }
 
   func populateSettings() {
-    self.iconShow.state = .off
-    self.iconSliderOnly.state = .off
-    self.iconHide.state = .off
-    switch prefs.string(forKey: PrefKey.menuIcon.rawValue) ?? "" {
-    case "sliderOnly": self.iconSliderOnly.state = .on
-    case "hide": self.iconHide.state = .on
-    default: self.iconShow.state = .on
-    }
+    self.iconShow.selectItem(withTag: prefs.integer(forKey: PrefKey.menuIcon.rawValue))
+    self.menuItemStyle.selectItem(withTag: prefs.integer(forKey: PrefKey.menuItemStyle.rawValue))
     self.showBrightnessSlider.state = !prefs.bool(forKey: PrefKey.hideBrightness.rawValue) ? .on : .off
     if !prefs.bool(forKey: PrefKey.hideBrightness.rawValue) {
       self.showAppleFromMenu.isEnabled = true
@@ -165,19 +180,15 @@ class MenuslidersPrefsViewController: NSViewController, PreferencePane {
     _ = self.showAdvanced()
   }
 
-  @IBAction func icon(_ sender: NSButton) {
-    switch sender.tag {
-    case 0:
-      prefs.set("", forKey: PrefKey.menuIcon.rawValue)
-      app.statusItem.isVisible = true
-    case 1:
-      prefs.set("sliderOnly", forKey: PrefKey.menuIcon.rawValue)
-      app.updateMenusAndKeys()
-    case 2:
-      prefs.set("hide", forKey: PrefKey.menuIcon.rawValue)
-      app.statusItem.isVisible = false
-    default: break
-    }
+  @IBAction func icon(_ sender: NSPopUpButton) {
+    prefs.set(sender.selectedTag(), forKey: PrefKey.menuIcon.rawValue)
+    app.updateMenusAndKeys()
+    _ = self.showAdvanced()
+  }
+
+  @IBAction func menuItemStyle(_ sender: NSPopUpButton) {
+    prefs.set(sender.selectedTag(), forKey: PrefKey.menuItemStyle.rawValue)
+    app.updateMenusAndKeys()
     _ = self.showAdvanced()
   }
 

@@ -155,7 +155,7 @@ class DisplaysPrefsViewController: NSViewController, PreferencePane, NSTableView
       if let otherDisplay = display as? OtherDisplay, !otherDisplay.isSwOnly() {
         cell.pollingModeMenu.isEnabled = true
         cell.pollingModeMenu.selectItem(withTag: otherDisplay.pollingMode)
-        if otherDisplay.pollingMode == 4 {
+        if otherDisplay.pollingMode == PollingMode.custom.rawValue {
           cell.pollingCount.isEnabled = true
         } else {
           cell.pollingCount.isEnabled = false
