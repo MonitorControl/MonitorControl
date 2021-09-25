@@ -139,6 +139,10 @@ class OtherDisplay: Display {
         os_log("- Writing last saved DDC values.", type: .info, self.name, String(reflecting: command))
         _ = self.writeDDCValues(command: command, value: currentDDCValue)
       }
+    } else {
+      self.savePrefValue(max(0.1, self.prefValueExists(for: command) ? self.readPrefValue(for: command) : Float(1)), for: command)
+      self.swBrightness = self.readPrefValue(for: command)
+      os_log("- Software controlled display current internal value: %{public}@", type: .info, String(self.readPrefValue(for: command)))
     }
     if command == .audioSpeakerVolume {
       self.setupMuteUnMute()

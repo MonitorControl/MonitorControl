@@ -186,7 +186,7 @@ class DisplayManager {
       if !otherDisplay.isSw(), !otherDisplay.readPrefValueKeyBool(forkey: PrefKey.unavailableDDC, for: .contrast) {
         otherDisplay.setupCurrentAndMaxValues(command: .contrast, firstrun: firstrun)
       }
-      if !otherDisplay.readPrefValueKeyBool(forkey: PrefKey.unavailableDDC, for: .brightness) {
+      if (!otherDisplay.isSw() && !otherDisplay.readPrefValueKeyBool(forkey: PrefKey.unavailableDDC, for: .brightness)) || otherDisplay.isSw() {
         otherDisplay.setupCurrentAndMaxValues(command: .brightness, firstrun: firstrun)
         otherDisplay.brightnessSyncSourceValue = otherDisplay.readPrefValue(for: .brightness)
       }
@@ -335,8 +335,10 @@ class DisplayManager {
           OSDUtils.popEmptyOsd(displayID: otherDisplay.identifier, command: Command.brightness) // This will give the user a hint why is the brightness suddenly changes and also give screen activity to counter the 'no gamma change when there is no screen activity' issue on some macs
         }
         otherDisplay.swBrightness = otherDisplay.getSwBrightness()
+        os_log("Restoring sw brightness to %{public}@ on other display %{public}@", type: .debug, String(savedPrefValue), String(otherDisplay.identifier))
         _ = otherDisplay.setSwBrightness(savedPrefValue, smooth: async)
         if otherDisplay.isSw(), let slider = otherDisplay.brightnessSliderHandler {
+          os_log("Restoring sw slider to %{public}@ for other display %{public}@", type: .debug, String(savedPrefValue), String(otherDisplay.identifier))
           slider.setValue(savedPrefValue, displayID: otherDisplay.identifier)
         }
       } else {
