@@ -366,11 +366,7 @@ class OtherDisplay: Display {
   }
 
   override func getBrightness() -> Float {
-    if self.prefValueExists(for: .brightness) {
-      return self.readPrefValue(for: .brightness)
-    } else {
-      return 0.75 // This should not happen, but let's put some default here.
-    }
+    return self.prefValueExists(for: .brightness) ? self.readPrefValue(for: .brightness) : 1
   }
 
   public func writeDDCValues(command: Command, value: UInt16, errorRecoveryWaitTime _: UInt32? = nil) -> Bool? {
