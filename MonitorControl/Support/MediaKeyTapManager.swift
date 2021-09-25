@@ -90,7 +90,6 @@ class MediaKeyTapManager: MediaKeyTapDelegate {
           display.stepBrightness(isUp: mediaKey == .brightnessUp, isSmallIncrement: isSmallIncrement)
         }
       case .brightnessDown:
-
         if isPressed {
           display.stepBrightness(isUp: mediaKey == .brightnessUp, isSmallIncrement: isSmallIncrement)
         }

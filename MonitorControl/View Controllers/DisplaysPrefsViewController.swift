@@ -38,9 +38,13 @@ class DisplaysPrefsViewController: NSViewController, PreferencePane, NSTableView
   }
 
   @objc func loadDisplayList() {
+    guard self.displayList != nil else {
+      os_log("Reloading Displays preferences display list skipped as there is no display list table yet.", type: .info)
+      return
+    }
     os_log("Reloading Displays preferences display list", type: .info)
     self.displays = DisplayManager.shared.getAllDisplays()
-    self.displayList.reloadData()
+    self.displayList?.reloadData()
     self.updateDisplayListRowHeight()
   }
 
@@ -279,11 +283,11 @@ class DisplaysPrefsViewController: NSViewController, PreferencePane, NSTableView
 
   func updateDisplayListRowHeight() {
     if prefs.bool(forKey: PrefKey.showAdvancedSettings.rawValue) {
-      self.displayList.rowHeight = 445
-      self.constraintHeight.constant = self.displayList.rowHeight + 15
+      self.displayList?.rowHeight = 445
+      self.constraintHeight?.constant = self.displayList.rowHeight + 15
     } else {
-      self.displayList.rowHeight = 165
-      self.constraintHeight.constant = self.displayList.rowHeight * 2 + 15
+      self.displayList?.rowHeight = 165
+      self.constraintHeight?.constant = self.displayList.rowHeight * 2 + 15
     }
   }
 }

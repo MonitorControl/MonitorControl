@@ -232,7 +232,6 @@ class MainPrefsViewController: NSViewController, PreferencePane {
       self.populateSettings()
       menuslidersPrefsVc?.populateSettings()
       keyboardPrefsVc?.populateSettings()
-      displaysPrefsVc?.loadDisplayList()
       self.showAdvancedClicked(self.showAdvancedDisplays)
     }
   }

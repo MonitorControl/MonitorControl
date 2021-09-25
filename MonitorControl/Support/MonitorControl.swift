@@ -133,6 +133,7 @@ class MonitorControl: NSObject, NSApplicationDelegate {
         DisplayManager.shared.restoreSwBrightnessForAllDisplays(async: !prefs.bool(forKey: PrefKey.disableSmoothBrightness.rawValue))
       }
     }
+    displaysPrefsVc?.loadDisplayList()
     self.job(start: true)
   }
 

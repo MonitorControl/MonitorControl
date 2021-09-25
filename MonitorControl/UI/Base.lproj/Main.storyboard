@@ -789,7 +789,6 @@
                         <outlet property="rowPercentText" destination="fDY-kq-bjz" id="BFa-2b-iQZ"/>
                         <outlet property="rowQuitButton" destination="OpF-3Q-ZZp" id="0vU-Ls-hJj"/>
                         <outlet property="rowQuitButtonText" destination="HAl-L8-LPI" id="6CN-Wq-CBJ"/>
-                        <outlet property="rowQuitText" destination="HAl-L8-LPI" id="Pvu-Rx-jgl"/>
                         <outlet property="rowShowContrastCheck" destination="xbz-Tf-py0" id="JRd-Xz-Sz8"/>
                         <outlet property="rowShowContrastText" destination="KPA-bi-7h3" id="vqt-0f-Qbv"/>
                         <outlet property="rowSlidersCombine" destination="GRh-ZZ-2dj" id="ebA-Hl-FBq"/>
