@@ -105,6 +105,7 @@ class MonitorControl: NSObject, NSApplicationDelegate {
   func displayReconfigured() {
     self.reconfigureID += 1
     os_log("Bumping reconfigureID to %{public}@", type: .info, String(self.reconfigureID))
+    _ = DisplayManager.shared.destroyAllShades()
     if self.sleepID == 0 {
       let dispatchedReconfigureID = self.reconfigureID
       os_log("Display to be reconfigured with reconfigureID %{public}@", type: .info, String(dispatchedReconfigureID))

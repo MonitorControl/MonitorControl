@@ -72,7 +72,7 @@ class DisplayManager {
       windowShade.orderFrontRegardless()
       windowShade.collectionBehavior = [.stationary, .canJoinAllSpaces, .ignoresCycle]
       windowShade.setFrame(screen.frame, display: true)
-      os_log("Window shade created.", type: .debug)
+      os_log("Window shade created for display %{public}@", type: .debug, String(displayID))
       return windowShade
     }
     return nil
@@ -93,11 +93,25 @@ class DisplayManager {
     return nil
   }
 
+  func destroyAllShades() -> Bool { // TODO: This creates a EXC_BAD_ACCESS if there are shades. Figure out why!
+    var ret = false
+    for displayID in shades.keys {
+      if destroyShade(displayID: displayID) {
+        ret = true
+      }
+    }
+    if ret {
+      os_log("Destroyed all shades.", type: .debug)
+    }
+    return ret
+  }
+
   func destroyShade(displayID: CGDirectDisplayID) -> Bool {
     guard !self.isDisqualifiedFromShade(displayID) else {
       return false
     }
     if let shade = shades[displayID] {
+      os_log("Destroying shade for display %{public}@", type: .debug, String(displayID))
       shade.alphaValue = 1
       shade.close()
       self.shades.removeValue(forKey: displayID)
