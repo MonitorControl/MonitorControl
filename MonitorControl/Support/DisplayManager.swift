@@ -63,18 +63,18 @@ class DisplayManager {
 
   internal func createShadeOnDisplay(displayID: CGDirectDisplayID) -> NSWindow? {
     if let screen = DisplayManager.getByDisplayID(displayID: displayID) {
-      let windowShade = NSWindow(contentRect: .init(origin: NSPoint(x: 0, y: 0), size: .init(width: 10, height: 1)), styleMask: [], backing: .buffered, defer: false)
-      windowShade.title = "Monitor Control Window Shade for Display " + String(displayID)
-      windowShade.isMovableByWindowBackground = false
-      windowShade.backgroundColor = .black
-      windowShade.ignoresMouseEvents = true
-      windowShade.level = NSWindow.Level(rawValue: Int(CGShieldingWindowLevel()))
-      windowShade.alphaValue = 0
-      windowShade.orderFrontRegardless()
-      windowShade.collectionBehavior = [.stationary, .canJoinAllSpaces, .ignoresCycle]
-      windowShade.setFrame(screen.frame, display: true)
+      let shade = NSWindow(contentRect: .init(origin: NSPoint(x: 0, y: 0), size: .init(width: 10, height: 1)), styleMask: [], backing: .buffered, defer: false)
+      shade.title = "Monitor Control Window Shade for Display " + String(displayID)
+      shade.isMovableByWindowBackground = false
+      shade.backgroundColor = .black
+      shade.ignoresMouseEvents = true
+      shade.level = NSWindow.Level(rawValue: Int(CGShieldingWindowLevel()))
+      shade.alphaValue = 0
+      shade.orderFrontRegardless()
+      shade.collectionBehavior = [.stationary, .canJoinAllSpaces, .ignoresCycle]
+      shade.setFrame(screen.frame, display: true)
       os_log("Window shade created for display %{public}@", type: .debug, String(displayID))
-      return windowShade
+      return shade
     }
     return nil
   }
@@ -113,8 +113,6 @@ class DisplayManager {
   func destroyShade(displayID: CGDirectDisplayID) -> Bool {
     if let shade = shades[displayID] {
       os_log("Destroying shade for display %{public}@", type: .debug, String(displayID))
-      shade.alphaValue = CGFloat(1)
-      shade.contentRect(forFrameRect: NSRect(x: 0, y: 0, width: 0, height: 0))
       shadeGrave.append(shade)
       self.shades.removeValue(forKey: displayID)
       shade.close()
@@ -451,7 +449,7 @@ class DisplayManager {
       return true
     }
     /*
-     // If Vendor ID is Anpple, then it is probably an Apple display
+     // If Vendor ID is Apple, then it is probably an Apple display
      if CGDisplayVendorNumber(displayID) == 0x05AC {
        return true
      }

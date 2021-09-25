@@ -143,6 +143,7 @@ class OtherDisplay: Display {
       self.savePrefValue(max(0.1, self.prefValueExists(for: command) ? self.readPrefValue(for: command) : Float(1)), for: command)
       self.swBrightness = self.readPrefValue(for: command)
       self.brightnessSyncSourceValue = self.readPrefValue(for: command)
+      self.smoothBrightnessTransient = self.readPrefValue(for: command)
       os_log("- Software controlled display current internal value: %{public}@", type: .info, String(self.readPrefValue(for: command)))
     }
     if command == .audioSpeakerVolume {
