@@ -52,7 +52,7 @@ class MonitorControl: NSObject, NSApplicationDelegate {
       alert.runModal()
     }
     let currentBuildNumber = Int(Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String ?? "1") ?? 1
-    let previousBuildNumber: Int = (Int(prefs.string(forKey: PrefKey.buildNumber.rawValue) ?? "0") ?? 0)
+    let previousBuildNumber: Int = (Int(prefs.string(forKey: PKey.buildNumber.rawValue) ?? "0") ?? 0)
     if self.safeMode || ((previousBuildNumber < MIN_PREVIOUS_BUILD_NUMBER) && previousBuildNumber > 0) || (previousBuildNumber > currentBuildNumber), let bundleID = Bundle.main.bundleIdentifier {
       if !(self.safeMode) {
         let alert = NSAlert()
@@ -62,7 +62,7 @@ class MonitorControl: NSObject, NSApplicationDelegate {
       }
       prefs.removePersistentDomain(forName: bundleID)
     }
-    prefs.set(currentBuildNumber, forKey: PrefKey.buildNumber.rawValue)
+    prefs.set(currentBuildNumber, forKey: PKey.buildNumber.rawValue)
     self.setDefaultPrefs()
     if !DEBUG_MACOS10, #available(macOS 11.0, *) {
       self.statusItem.button?.image = NSImage(systemSymbolName: "sun.max", accessibilityDescription: "MonitorControl")
@@ -98,9 +98,9 @@ class MonitorControl: NSObject, NSApplicationDelegate {
   }
 
   func setDefaultPrefs() {
-    if !prefs.bool(forKey: PrefKey.appAlreadyLaunched.rawValue) {
+    if !prefs.bool(forKey: PKey.appAlreadyLaunched.rawValue) {
       // Only preferences that are not false, 0 or "" by default are set here. Assumes pre-wiped database.
-      prefs.set(true, forKey: PrefKey.appAlreadyLaunched.rawValue)
+      prefs.set(true, forKey: PKey.appAlreadyLaunched.rawValue)
     }
   }
 
@@ -132,8 +132,8 @@ class MonitorControl: NSObject, NSApplicationDelegate {
     DisplayManager.shared.setupOtherDisplays(firstrun: firstrun)
     self.updateMenusAndKeys()
     if !firstrun {
-      if !prefs.bool(forKey: PrefKey.disableSoftwareFallback.rawValue) || !prefs.bool(forKey: PrefKey.disableCombinedBrightness.rawValue) {
-        DisplayManager.shared.restoreSwBrightnessForAllDisplays(async: !prefs.bool(forKey: PrefKey.disableSmoothBrightness.rawValue))
+      if !prefs.bool(forKey: PKey.disableSoftwareFallback.rawValue) || !prefs.bool(forKey: PKey.disableCombinedBrightness.rawValue) {
+        DisplayManager.shared.restoreSwBrightnessForAllDisplays(async: !prefs.bool(forKey: PKey.disableSmoothBrightness.rawValue))
       }
     }
     displaysPrefsVc?.loadDisplayList()
@@ -141,13 +141,13 @@ class MonitorControl: NSObject, NSApplicationDelegate {
   }
 
   func updateMenusAndKeys() {
-    self.statusItem.isVisible = prefs.integer(forKey: PrefKey.menuIcon.rawValue) != MenuIcon.hide.rawValue ? true : false
+    self.statusItem.isVisible = prefs.integer(forKey: PKey.menuIcon.rawValue) != MenuIcon.hide.rawValue ? true : false
     menu.updateMenus()
     self.updateMediaKeyTap()
   }
 
   func checkPermissions() {
-    let permissionsRequired: Bool = !prefs.bool(forKey: PrefKey.disableListenForVolume.rawValue) || !prefs.bool(forKey: PrefKey.disableListenForBrightness.rawValue)
+    let permissionsRequired: Bool = !prefs.bool(forKey: PKey.disableListenForVolume.rawValue) || !prefs.bool(forKey: PKey.disableListenForBrightness.rawValue)
     if !MediaKeyTapManager.readPrivileges(prompt: false) && permissionsRequired {
       MediaKeyTapManager.acquirePrivileges()
     }
@@ -209,7 +209,7 @@ class MonitorControl: NSObject, NSApplicationDelegate {
         let delta = display.refreshBrightness()
         if delta != 0 {
           refreshedSomething = true
-          if prefs.bool(forKey: PrefKey.enableBrightnessSync.rawValue) {
+          if prefs.bool(forKey: PKey.enableBrightnessSync.rawValue) {
             for targetDisplay in DisplayManager.shared.displays where targetDisplay != display {
               os_log("Updating delta from display %{public}@ to display %{public}@", type: .debug, String(display.identifier), String(targetDisplay.identifier))
               let newValue = max(0, min(1, targetDisplay.getBrightness() + delta))
@@ -243,7 +243,7 @@ class MonitorControl: NSObject, NSApplicationDelegate {
 
   func preferenceReset() {
     os_log("Resetting all preferences.")
-    if !prefs.bool(forKey: PrefKey.disableSoftwareFallback.rawValue) || !prefs.bool(forKey: PrefKey.disableCombinedBrightness.rawValue) {
+    if !prefs.bool(forKey: PKey.disableSoftwareFallback.rawValue) || !prefs.bool(forKey: PKey.disableCombinedBrightness.rawValue) {
       DisplayManager.shared.resetSwBrightnessForAllDisplays(async: false)
     }
     if let bundleID = Bundle.main.bundleIdentifier {
@@ -265,7 +265,7 @@ class MonitorControl: NSObject, NSApplicationDelegate {
   }
 
   func updateMediaKeyTap() {
-    MediaKeyTap.useAlternateBrightnessKeys = !prefs.bool(forKey: PrefKey.disableAltBrightnessKeys.rawValue)
+    MediaKeyTap.useAlternateBrightnessKeys = !prefs.bool(forKey: PKey.disableAltBrightnessKeys.rawValue)
     self.mediaKeyTap.updateMediaKeyTap()
   }
 

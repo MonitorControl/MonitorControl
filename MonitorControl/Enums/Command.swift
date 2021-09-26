@@ -1,6 +1,8 @@
 //  Copyright © MonitorControl. @JoniVR, @theOneyouseek, @waydabber and others
 
 enum Command: UInt8 {
+  case none = 0
+
   // Display Control
   case horizontalFrequency = 0xAC
   case verticalFrequency = 0xAE

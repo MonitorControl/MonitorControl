@@ -18,26 +18,6 @@ class Display: Equatable {
     return lhs.identifier == rhs.identifier
   }
 
-  var isEnabled: Bool {
-    get { prefs.object(forKey: PrefKey.state.rawValue + self.prefsId) as? Bool ?? true }
-    set { prefs.set(newValue, forKey: PrefKey.state.rawValue + self.prefsId) }
-  }
-
-  var forceSw: Bool {
-    get { return prefs.bool(forKey: PrefKey.forceSw.rawValue + self.prefsId) }
-    set { prefs.set(newValue, forKey: PrefKey.forceSw.rawValue + self.prefsId) }
-  }
-
-  var swBrightness: Float {
-    get { return prefs.float(forKey: PrefKey.SwBrightness.rawValue + self.prefsId) }
-    set { prefs.set(newValue, forKey: PrefKey.SwBrightness.rawValue + self.prefsId) }
-  }
-
-  var friendlyName: String {
-    get { return prefs.string(forKey: PrefKey.friendlyName.rawValue + self.prefsId) ?? self.name }
-    set { prefs.set(newValue, forKey: PrefKey.friendlyName.rawValue + self.prefsId) }
-  }
-
   var brightnessSliderHandler: SliderHandler?
   var brightnessSyncSourceValue: Float = 1
   var isVirtual: Bool = false
@@ -48,64 +28,32 @@ class Display: Equatable {
   var defaultGammaTableSampleCount: UInt32 = 0
   var defaultGammaTablePeak: Float = 1
 
-  func prefValueExists(for command: Command) -> Bool {
-    return prefs.object(forKey: PrefKey.value.rawValue + String(command.rawValue) + self.prefsId) != nil
+  func prefExists(key: PKey? = nil, for command: Command? = nil) -> Bool {
+    return prefs.object(forKey: (key ?? PKey.value).rawValue + (command != nil ? String((command ?? Command.none).rawValue) : "") + self.prefsId) != nil
   }
 
-  func readPrefValue(for command: Command) -> Float {
-    return prefs.float(forKey: PrefKey.value.rawValue + String(command.rawValue) + self.prefsId)
+  func removePref(key: PKey, for command: Command? = nil) {
+    prefs.removeObject(forKey: key.rawValue + (command != nil ? String((command ?? Command.none).rawValue) : "") + self.prefsId)
   }
 
-  func savePrefValue(_ value: Float, for command: Command) {
-    prefs.set(value, forKey: PrefKey.value.rawValue + String(command.rawValue) + self.prefsId)
+  func savePref<T>(_ value: T, key: PKey? = nil, for command: Command? = nil) {
+    prefs.set(value, forKey: (key ?? PKey.value).rawValue + (command != nil ? String((command ?? Command.none).rawValue) : "") + self.prefsId)
   }
 
-  func readPrefValueInt(for command: Command) -> Int {
-    return prefs.integer(forKey: PrefKey.value.rawValue + String(command.rawValue) + self.prefsId)
+  func readPrefAsFloat(key: PKey? = nil, for command: Command? = nil) -> Float {
+    return prefs.float(forKey: (key ?? PKey.value).rawValue + (command != nil ? String((command ?? Command.none).rawValue) : "") + self.prefsId)
   }
 
-  func savePrefValueInt(_ value: Int, for command: Command) {
-    prefs.set(value, forKey: PrefKey.value.rawValue + String(command.rawValue) + self.prefsId)
+  func readPrefAsInt(key: PKey? = nil, for command: Command? = nil) -> Int {
+    return prefs.integer(forKey: (key ?? PKey.value).rawValue + (command != nil ? String((command ?? Command.none).rawValue) : "") + self.prefsId)
   }
 
-  func prefValueExistsKey(forkey: PrefKey, for command: Command) -> Bool {
-    return prefs.object(forKey: forkey.rawValue + String(command.rawValue) + self.prefsId) != nil
+  func readPrefAsBool(key: PKey? = nil, for command: Command? = nil) -> Bool {
+    return prefs.bool(forKey: (key ?? PKey.value).rawValue + (command != nil ? String((command ?? Command.none).rawValue) : "") + self.prefsId)
   }
 
-  func readPrefValueKey(forkey: PrefKey, for command: Command) -> Float {
-    return prefs.float(forKey: forkey.rawValue + String(command.rawValue) + self.prefsId)
-  }
-
-  func savePrefValueKey(forkey: PrefKey, value: Float, for command: Command) {
-    prefs.set(value, forKey: forkey.rawValue + String(command.rawValue) + self.prefsId)
-  }
-
-  func readPrefValueKeyInt(forkey: PrefKey, for command: Command) -> Int {
-    return prefs.integer(forKey: forkey.rawValue + String(command.rawValue) + self.prefsId)
-  }
-
-  func savePrefValueKeyInt(forkey: PrefKey, value: Int, for command: Command) {
-    prefs.set(value, forKey: forkey.rawValue + String(command.rawValue) + self.prefsId)
-  }
-
-  func readPrefValueKeyString(forkey: PrefKey, for command: Command) -> String {
-    return prefs.string(forKey: forkey.rawValue + String(command.rawValue) + self.prefsId) ?? ""
-  }
-
-  func savePrefValueKeyString(forkey: PrefKey, value: String, for command: Command) {
-    prefs.set(value, forKey: forkey.rawValue + String(command.rawValue) + self.prefsId)
-  }
-
-  func readPrefValueKeyBool(forkey: PrefKey, for command: Command) -> Bool {
-    return prefs.bool(forKey: forkey.rawValue + String(command.rawValue) + self.prefsId)
-  }
-
-  func savePrefValueKeyBool(forkey: PrefKey, value: Bool, for command: Command) {
-    prefs.set(value, forKey: forkey.rawValue + String(command.rawValue) + self.prefsId)
-  }
-
-  func removePrefValueKey(forkey: PrefKey, for command: Command) {
-    prefs.removeObject(forKey: forkey.rawValue + String(command.rawValue) + self.prefsId)
+  func readPrefAsString(key: PKey? = nil, for command: Command? = nil) -> String {
+    return prefs.string(forKey: (key ?? PKey.value).rawValue + (command != nil ? String((command ?? Command.none).rawValue) : "") + self.prefsId) ?? ""
   }
 
   internal init(_ identifier: CGDirectDisplayID, name: String, vendorNumber: UInt32?, modelNumber: UInt32?, isVirtual: Bool = false) {
@@ -149,7 +97,7 @@ class Display: Equatable {
   }
 
   func setBrightness(_ to: Float = -1, slow: Bool = false) -> Bool {
-    if !prefs.bool(forKey: PrefKey.disableSmoothBrightness.rawValue) {
+    if !prefs.bool(forKey: PKey.disableSmoothBrightness.rawValue) {
       return self.setSmoothBrightness(to, slow: slow)
     } else {
       return self.setDirectBrightness(to)
@@ -158,7 +106,7 @@ class Display: Equatable {
 
   func setSmoothBrightness(_ to: Float = -1, slow: Bool = false) -> Bool {
     guard app.sleepID == 0, app.reconfigureID == 0 else {
-      self.savePrefValue(self.smoothBrightnessTransient, for: .brightness)
+      self.savePref(self.smoothBrightnessTransient, for: .brightness)
       self.smoothBrightnessRunning = false
       os_log("Pushing brightness stopped for Display %{public}@ because of sleep or reconfiguration", type: .debug, String(self.identifier))
       return false
@@ -174,14 +122,14 @@ class Display: Equatable {
     if to != -1 {
       os_log("Pushing brightness towards goal of %{public}@ for Display  %{public}@", type: .debug, String(to), String(self.identifier))
       let value = max(min(to, 1), 0)
-      self.savePrefValue(value, for: .brightness)
+      self.savePref(value, for: .brightness)
       self.brightnessSyncSourceValue = value
       self.smoothBrightnessSlow = slow
       if self.smoothBrightnessRunning {
         return true
       }
     }
-    let brightness = self.readPrefValue(for: .brightness)
+    let brightness = self.readPrefAsFloat(for: .brightness)
     if brightness != self.smoothBrightnessTransient {
       if abs(brightness - self.smoothBrightnessTransient) < 0.01 {
         self.smoothBrightnessTransient = brightness
@@ -212,7 +160,7 @@ class Display: Equatable {
     let value = max(min(to, 1), 0)
     if self.setSwBrightness(value) {
       if !transient {
-        self.savePrefValue(value, for: .brightness)
+        self.savePref(value, for: .brightness)
         self.brightnessSyncSourceValue = value
         self.smoothBrightnessTransient = value
       }
@@ -222,8 +170,8 @@ class Display: Equatable {
   }
 
   func getBrightness() -> Float {
-    if self.prefValueExists(for: .brightness) {
-      return self.readPrefValue(for: .brightness)
+    if self.prefExists(for: .brightness) {
+      return self.readPrefAsFloat(for: .brightness)
     } else {
       return self.getSwBrightness()
     }
@@ -249,8 +197,8 @@ class Display: Equatable {
   let swBrightnessSemaphore = DispatchSemaphore(value: 1)
   func setSwBrightness(_ value: Float, smooth: Bool = false) -> Bool {
     let brightnessValue = min(1, value)
-    var currentValue = self.swBrightness
-    self.swBrightness = brightnessValue
+    var currentValue = self.readPrefAsFloat(key: PKey.SwBrightness)
+    self.savePref(brightnessValue, key: PKey.SwBrightness)
     var newValue = brightnessValue
     currentValue = self.swBrightnessTransform(value: currentValue)
     newValue = self.swBrightnessTransform(value: newValue)

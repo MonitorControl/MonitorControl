@@ -97,14 +97,14 @@ class DisplaysPrefsCellView: NSTableCellView {
     if let display = display as? OtherDisplay {
       switch sender.state {
       case .on:
-        display.enableMuteUnmute = true
+        display.savePref(true, key: PKey.enableMuteUnmute)
       case .off:
         // If the display is currently muted, toggle back to unmute
         // to prevent the display becoming stuck in the muted state
-        if display.readPrefValueInt(for: .audioMuteScreenBlank) == 1 {
+        if display.readPrefAsInt(for: .audioMuteScreenBlank) == 1 {
           display.toggleMute()
         }
-        display.enableMuteUnmute = false
+        display.savePref(false, key: PKey.enableMuteUnmute)
       default:
         break
       }
@@ -126,14 +126,14 @@ class DisplaysPrefsCellView: NSTableCellView {
           alert.beginSheetModal(for: window, completionHandler: { modalResponse in
             if modalResponse == NSApplication.ModalResponse.alertFirstButtonReturn {
               app.setStartAtLogin(enabled: false)
-              display.needsLongerDelay = true
+              display.savePref(true, key: PKey.longerDelay)
             } else {
               sender.state = .off
             }
           })
         }
       case .off:
-        display.needsLongerDelay = false
+        display.savePref(false, key: PKey.longerDelay)
       default:
         break
       }
@@ -142,35 +142,34 @@ class DisplaysPrefsCellView: NSTableCellView {
 
   @IBAction func enabledButtonToggled(_ sender: NSButton) {
     if let disp = display {
-      let isEnabled = sender.state == .on
-      disp.isEnabled = isEnabled
+      disp.savePref((sender.state == .off), key: PKey.isDisabled)
     }
   }
 
   @IBAction func ddcButtonToggled(_ sender: NSButton) {
-    if let disp = display {
+    if let display = display {
       switch sender.state {
       case .off:
-        disp.forceSw = true
-        _ = disp.setDirectBrightness(disp.getSwBrightness())
+        display.savePref(true, key: PKey.forceSw)
+        _ = display.setDirectBrightness(display.getSwBrightness())
       case .on:
-        disp.forceSw = false
-        _ = disp.setSwBrightness(1, smooth: !prefs.bool(forKey: PrefKey.disableSmoothBrightness.rawValue))
-        _ = disp.setBrightness(1)
+        display.savePref(false, key: PKey.forceSw)
+        _ = display.setSwBrightness(1, smooth: !prefs.bool(forKey: PKey.disableSmoothBrightness.rawValue))
+        _ = display.setBrightness(1)
       default:
         break
       }
       app.configure()
-      let displayInfo = DisplaysPrefsViewController.getDisplayInfo(display: disp)
+      let displayInfo = DisplaysPrefsViewController.getDisplayInfo(display: display)
       self.controlMethod.stringValue = displayInfo.controlMethod
       self.controlMethod.controlView?.toolTip = displayInfo.controlStatus
     }
   }
 
   @IBAction func friendlyNameValueChanged(_ sender: NSTextFieldCell) {
-    if let disp = display {
+    if let display = display {
       let newValue = sender.stringValue
-      let originalValue = disp.friendlyName
+      let originalValue = (display.readPrefAsString(key: PKey.friendlyName) != "" ? display.readPrefAsString(key: PKey.friendlyName) : display.name)
 
       if newValue.isEmpty {
         self.friendlyName.stringValue = originalValue
@@ -178,19 +177,19 @@ class DisplaysPrefsCellView: NSTableCellView {
       }
 
       if newValue != originalValue, !newValue.isEmpty {
-        disp.friendlyName = newValue
+        display.savePref(newValue, key: PKey.friendlyName)
       }
       app.updateMenusAndKeys()
     }
   }
 
   @IBAction func disableVolumeOSDButton(_ sender: NSButton) {
-    if let disp = display as? OtherDisplay {
+    if let display = display as? OtherDisplay {
       switch sender.state {
       case .on:
-        disp.hideOsd = true
+        display.savePref(true, key: PKey.hideOsd)
       case .off:
-        disp.hideOsd = false
+        display.savePref(false, key: PKey.hideOsd)
       default:
         break
       }
@@ -223,13 +222,13 @@ class DisplaysPrefsCellView: NSTableCellView {
 
   @IBAction func unavailableDDC(_ sender: NSButton) {
     let command = self.tagCommand(sender.tag)
-    let prefKey = PrefKey.unavailableDDC
+    let prefKey = PKey.unavailableDDC
     if let display = display as? OtherDisplay {
       switch sender.state {
       case .on:
-        display.savePrefValueKeyBool(forkey: prefKey, value: false, for: command)
+        display.savePref(false, key: prefKey, for: command)
       case .off:
-        display.savePrefValueKeyBool(forkey: prefKey, value: true, for: command)
+        display.savePref(true, key: prefKey, for: command)
       default:
         break
       }
@@ -241,17 +240,17 @@ class DisplaysPrefsCellView: NSTableCellView {
 
   @IBAction func minDDCOverride(_ sender: NSTextField) {
     let command = self.tagCommand(sender.tag)
-    let prefKey = PrefKey.minDDCOverride
+    let prefKey = PKey.minDDCOverride
     let value = sender.stringValue
     if let display = display as? OtherDisplay {
       if let intValue = Int(value), intValue >= 0, intValue <= 65535 {
-        display.savePrefValueKeyInt(forkey: prefKey, value: intValue, for: command)
+        display.savePref(intValue, key: prefKey, for: command)
       } else {
-        display.removePrefValueKey(forkey: prefKey, for: command)
+        display.removePref(key: prefKey, for: command)
       }
       app.configure()
-      if display.prefValueExistsKey(forkey: prefKey, for: command) {
-        sender.stringValue = String(display.readPrefValueKeyInt(forkey: prefKey, for: command))
+      if display.prefExists(key: prefKey, for: command) {
+        sender.stringValue = String(display.readPrefAsInt(key: prefKey, for: command))
       } else {
         sender.stringValue = ""
       }
@@ -262,17 +261,17 @@ class DisplaysPrefsCellView: NSTableCellView {
 
   @IBAction func maxDDCOverride(_ sender: NSTextField) {
     let command = self.tagCommand(sender.tag)
-    let prefKey = PrefKey.maxDDCOverride
+    let prefKey = PKey.maxDDCOverride
     let value = sender.stringValue
     if let display = display as? OtherDisplay {
       if !value.isEmpty, let intValue = UInt(value) {
-        display.savePrefValueKeyInt(forkey: prefKey, value: Int(intValue), for: command)
+        display.savePref(Int(intValue), key: prefKey, for: command)
       } else {
-        display.removePrefValueKey(forkey: prefKey, for: command)
+        display.removePref(key: prefKey, for: command)
       }
       app.configure()
-      if display.prefValueExistsKey(forkey: prefKey, for: command) {
-        sender.stringValue = String(display.readPrefValueKeyInt(forkey: prefKey, for: command))
+      if display.prefExists(key: prefKey, for: command) {
+        sender.stringValue = String(display.readPrefAsInt(key: prefKey, for: command))
       } else {
         sender.stringValue = ""
       }
@@ -283,22 +282,22 @@ class DisplaysPrefsCellView: NSTableCellView {
 
   @IBAction func curveDDC(_ sender: NSSlider) {
     let command = self.tagCommand(sender.tag)
-    let prefKey = PrefKey.curveDDC
+    let prefKey = PKey.curveDDC
     let value = Int(sender.intValue)
     if let display = display as? OtherDisplay {
-      display.savePrefValueKeyInt(forkey: prefKey, value: value, for: command)
+      display.savePref(value, key: prefKey, for: command)
     }
   }
 
   @IBAction func invertDDC(_ sender: NSButton) {
     let command = self.tagCommand(sender.tag)
-    let prefKey = PrefKey.invertDDC
+    let prefKey = PKey.invertDDC
     if let display = display as? OtherDisplay {
       switch sender.state {
       case .on:
-        display.savePrefValueKeyBool(forkey: prefKey, value: true, for: command)
+        display.savePref(true, key: prefKey, for: command)
       case .off:
-        display.savePrefValueKeyBool(forkey: prefKey, value: false, for: command)
+        display.savePref(false, key: prefKey, for: command)
       default:
         break
       }
@@ -308,17 +307,17 @@ class DisplaysPrefsCellView: NSTableCellView {
 
   @IBAction func remapDDC(_ sender: NSTextField) {
     let command = self.tagCommand(sender.tag)
-    let prefKey = PrefKey.remapDDC
+    let prefKey = PKey.remapDDC
     let value = sender.stringValue
     if let display = display as? OtherDisplay {
       if !value.isEmpty, let intValue = UInt(value, radix: 16), intValue != 0 {
-        display.savePrefValueKeyInt(forkey: prefKey, value: Int(intValue), for: command)
+        display.savePref(Int(intValue), key: prefKey, for: command)
       } else {
-        display.removePrefValueKey(forkey: prefKey, for: command)
+        display.removePref(key: prefKey, for: command)
       }
       app.configure()
-      if display.prefValueExistsKey(forkey: prefKey, for: command) {
-        sender.stringValue = String(format: "%02x", display.readPrefValueKeyInt(forkey: prefKey, for: command))
+      if display.prefExists(key: prefKey, for: command) {
+        sender.stringValue = String(format: "%02x", display.readPrefAsInt(key: prefKey, for: command))
       } else {
         sender.stringValue = ""
       }

@@ -26,10 +26,10 @@ class MediaKeyTapManager: MediaKeyTapDelegate {
       return
     }
     var isSmallIncrement = modifiers?.isSuperset(of: NSEvent.ModifierFlags([.shift, .option])) ?? false
-    if [.brightnessUp, .brightnessDown].contains(mediaKey), prefs.bool(forKey: PrefKey.useFineScaleBrightness.rawValue) {
+    if [.brightnessUp, .brightnessDown].contains(mediaKey), prefs.bool(forKey: PKey.useFineScaleBrightness.rawValue) {
       isSmallIncrement = !isSmallIncrement
     }
-    if [.volumeUp, .volumeDown, .mute].contains(mediaKey), prefs.bool(forKey: PrefKey.useFineScaleVolume.rawValue) {
+    if [.volumeUp, .volumeDown, .mute].contains(mediaKey), prefs.bool(forKey: PKey.useFineScaleVolume.rawValue) {
       isSmallIncrement = !isSmallIncrement
     }
     if isPressed, isControlModifier, mediaKey == .brightnessUp || mediaKey == .brightnessDown {
@@ -79,11 +79,11 @@ class MediaKeyTapManager: MediaKeyTapDelegate {
       return
     }
     var wasNotIsPressedVolumeSentAlready = false
-    for display in affectedDisplays where display.isEnabled {
+    for display in affectedDisplays where !(display.readPrefAsBool(key: PKey.isDisabled)) {
       switch mediaKey {
       case .brightnessUp:
         var isAnyDisplayInSwAfterBrightnessMode: Bool = false
-        for display in affectedDisplays where ((display as? OtherDisplay)?.isSwBrightnessNotDefault() ?? false) && !((display as? OtherDisplay)?.isSw() ?? false) && prefs.bool(forKey: PrefKey.separateCombinedScale.rawValue) {
+        for display in affectedDisplays where ((display as? OtherDisplay)?.isSwBrightnessNotDefault() ?? false) && !((display as? OtherDisplay)?.isSw() ?? false) && prefs.bool(forKey: PKey.separateCombinedScale.rawValue) {
           isAnyDisplayInSwAfterBrightnessMode = true
         }
         if isPressed, !(isAnyDisplayInSwAfterBrightnessMode && !(((display as? OtherDisplay)?.isSwBrightnessNotDefault() ?? false) && !((display as? OtherDisplay)?.isSw() ?? false))) {
@@ -97,7 +97,7 @@ class MediaKeyTapManager: MediaKeyTapDelegate {
         // The mute key should not respond to press + hold or keyup
         if !isRepeat, isPressed, let display = display as? OtherDisplay {
           display.toggleMute()
-          if !wasNotIsPressedVolumeSentAlready, display.readPrefValueInt(for: .audioMuteScreenBlank) != 1, !display.readPrefValueKeyBool(forkey: PrefKey.unavailableDDC, for: .audioSpeakerVolume) {
+          if !wasNotIsPressedVolumeSentAlready, display.readPrefAsInt(for: .audioMuteScreenBlank) != 1, !display.readPrefAsBool(key: PKey.unavailableDDC, for: .audioSpeakerVolume) {
             display.playVolumeChangedSound()
             wasNotIsPressedVolumeSentAlready = true
           }
@@ -107,7 +107,7 @@ class MediaKeyTapManager: MediaKeyTapDelegate {
         if let display = display as? OtherDisplay {
           if isPressed {
             display.stepVolume(isUp: mediaKey == .volumeUp, isSmallIncrement: isSmallIncrement)
-          } else if !wasNotIsPressedVolumeSentAlready, !display.readPrefValueKeyBool(forkey: PrefKey.unavailableDDC, for: .audioSpeakerVolume) {
+          } else if !wasNotIsPressedVolumeSentAlready, !display.readPrefAsBool(key: PKey.unavailableDDC, for: .audioSpeakerVolume) {
             display.playVolumeChangedSound()
             wasNotIsPressedVolumeSentAlready = true
           }
@@ -133,10 +133,10 @@ class MediaKeyTapManager: MediaKeyTapDelegate {
 
   func updateMediaKeyTap() {
     var keys: [MediaKey] = []
-    if !prefs.bool(forKey: PrefKey.disableListenForBrightness.rawValue) {
+    if !prefs.bool(forKey: PKey.disableListenForBrightness.rawValue) {
       keys.append(contentsOf: [.brightnessUp, .brightnessDown])
     }
-    if !prefs.bool(forKey: PrefKey.disableListenForVolume.rawValue) {
+    if !prefs.bool(forKey: PKey.disableListenForVolume.rawValue) {
       keys.append(contentsOf: [.mute, .volumeUp, .volumeDown])
     }
     // Remove keys if no external displays are connected
@@ -151,7 +151,7 @@ class MediaKeyTapManager: MediaKeyTapDelegate {
     // Remove volume related keys if audio device is controllable
     if !isInternalDisplayOnly, let defaultAudioDevice = app.coreAudio.defaultOutputDevice {
       let keysToDelete: [MediaKey] = [.volumeUp, .volumeDown, .mute]
-      if !prefs.bool(forKey: PrefKey.allScreensVolume.rawValue), prefs.bool(forKey: PrefKey.useAudioDeviceNameMatching.rawValue) {
+      if !prefs.bool(forKey: PKey.allScreensVolume.rawValue), prefs.bool(forKey: PKey.useAudioDeviceNameMatching.rawValue) {
         if DisplayManager.shared.updateAudioControlTargetDisplays(deviceName: defaultAudioDevice.name) == 0 {
           keys.removeAll { keysToDelete.contains($0) }
         }

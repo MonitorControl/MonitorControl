@@ -1,6 +1,6 @@
 //  Copyright © MonitorControl. @JoniVR, @theOneyouseek, @waydabber and others
 
-enum PrefKey: String {
+enum PKey: String {
   // Enable mute DDC for display
   case enableMuteUnmute
 
@@ -43,8 +43,8 @@ enum PrefKey: String {
   // User assigned audio device name for display
   case audioDeviceNameOverride
 
-  // Display enabled
-  case state
+  // Display disabled for keyboard control
+  case isDisabled
 
   // Force software mode for display
   case forceSw

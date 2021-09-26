@@ -195,15 +195,15 @@ class DisplayManager {
 
   func setupOtherDisplays(firstrun: Bool = false) {
     for otherDisplay in self.getOtherDisplays() {
-      if !otherDisplay.isSw(), !otherDisplay.readPrefValueKeyBool(forkey: PrefKey.unavailableDDC, for: .audioSpeakerVolume) {
+      if !otherDisplay.isSw(), !otherDisplay.readPrefAsBool(key: PKey.unavailableDDC, for: .audioSpeakerVolume) {
         otherDisplay.setupCurrentAndMaxValues(command: .audioSpeakerVolume, firstrun: firstrun)
       }
-      if !otherDisplay.isSw(), !otherDisplay.readPrefValueKeyBool(forkey: PrefKey.unavailableDDC, for: .contrast) {
+      if !otherDisplay.isSw(), !otherDisplay.readPrefAsBool(key: PKey.unavailableDDC, for: .contrast) {
         otherDisplay.setupCurrentAndMaxValues(command: .contrast, firstrun: firstrun)
       }
-      if (!otherDisplay.isSw() && !otherDisplay.readPrefValueKeyBool(forkey: PrefKey.unavailableDDC, for: .brightness)) || otherDisplay.isSw() {
+      if (!otherDisplay.isSw() && !otherDisplay.readPrefAsBool(key: PKey.unavailableDDC, for: .brightness)) || otherDisplay.isSw() {
         otherDisplay.setupCurrentAndMaxValues(command: .brightness, firstrun: firstrun)
-        otherDisplay.brightnessSyncSourceValue = otherDisplay.readPrefValue(for: .brightness)
+        otherDisplay.brightnessSyncSourceValue = otherDisplay.readPrefAsFloat(for: .brightness)
       }
     }
   }
@@ -333,23 +333,23 @@ class DisplayManager {
         _ = otherDisplay.setSwBrightness(1, smooth: async)
         otherDisplay.smoothBrightnessTransient = 1
       } else {
-        otherDisplay.swBrightness = 1
+        otherDisplay.savePref(1, key: PKey.SwBrightness)
         otherDisplay.smoothBrightnessTransient = 1
       }
       if otherDisplay.isSw() {
-        otherDisplay.savePrefValue(1, for: .brightness)
+        otherDisplay.savePref(1, for: .brightness)
       }
     }
   }
 
   func restoreSwBrightnessForAllDisplays(async: Bool = false) {
     for otherDisplay in self.getOtherDisplays() {
-      if (otherDisplay.readPrefValue(for: .brightness) == 0 && !prefs.bool(forKey: PrefKey.disableCombinedBrightness.rawValue)) || (otherDisplay.readPrefValue(for: .brightness) < 0.5 && !prefs.bool(forKey: PrefKey.separateCombinedScale.rawValue) && !prefs.bool(forKey: PrefKey.disableCombinedBrightness.rawValue)) || otherDisplay.isSw() {
-        let savedPrefValue = otherDisplay.swBrightness
+      if (otherDisplay.readPrefAsFloat(for: .brightness) == 0 && !prefs.bool(forKey: PKey.disableCombinedBrightness.rawValue)) || (otherDisplay.readPrefAsFloat(for: .brightness) < 0.5 && !prefs.bool(forKey: PKey.separateCombinedScale.rawValue) && !prefs.bool(forKey: PKey.disableCombinedBrightness.rawValue)) || otherDisplay.isSw() {
+        let savedPrefValue = otherDisplay.readPrefAsFloat(key: PKey.SwBrightness)
         if otherDisplay.getSwBrightness() != savedPrefValue {
           OSDUtils.popEmptyOsd(displayID: otherDisplay.identifier, command: Command.brightness) // This will give the user a hint why is the brightness suddenly changes and also give screen activity to counter the 'no gamma change when there is no screen activity' issue on some macs
         }
-        otherDisplay.swBrightness = otherDisplay.getSwBrightness()
+        otherDisplay.savePref(otherDisplay.getSwBrightness(), key: PKey.SwBrightness)
         os_log("Restoring sw brightness to %{public}@ on other display %{public}@", type: .debug, String(savedPrefValue), String(otherDisplay.identifier))
         _ = otherDisplay.setSwBrightness(savedPrefValue, smooth: async)
         if otherDisplay.isSw(), let slider = otherDisplay.brightnessSliderHandler {
@@ -367,17 +367,17 @@ class DisplayManager {
     let allDisplays = self.getAllDisplays()
     var currentDisplay: Display?
     if isBrightness {
-      if prefs.bool(forKey: PrefKey.allScreensBrightness.rawValue) {
+      if prefs.bool(forKey: PKey.allScreensBrightness.rawValue) {
         affectedDisplays = allDisplays
         return affectedDisplays
       }
-      currentDisplay = self.getCurrentDisplay(byFocus: prefs.bool(forKey: PrefKey.useFocusInsteadOfMouse.rawValue))
+      currentDisplay = self.getCurrentDisplay(byFocus: prefs.bool(forKey: PKey.useFocusInsteadOfMouse.rawValue))
     }
     if isVolume {
-      if prefs.bool(forKey: PrefKey.allScreensVolume.rawValue) {
+      if prefs.bool(forKey: PKey.allScreensVolume.rawValue) {
         affectedDisplays = allDisplays
         return affectedDisplays
-      } else if prefs.bool(forKey: PrefKey.useAudioDeviceNameMatching.rawValue) {
+      } else if prefs.bool(forKey: PKey.useAudioDeviceNameMatching.rawValue) {
         return self.audioControlTargetDisplays
       }
       currentDisplay = self.getCurrentDisplay(byFocus: false)

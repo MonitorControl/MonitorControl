@@ -220,7 +220,7 @@ class SliderHandler {
 
   func valueChangedOtherDisplay(otherDisplay: OtherDisplay, value: Float) {
     // For the speaker volume slider, also set/unset the mute command when the value is changed from/to 0
-    if self.cmd == .audioSpeakerVolume, (otherDisplay.readPrefValueInt(for: .audioMuteScreenBlank) == 1 && value > 0) || (otherDisplay.readPrefValueInt(for: .audioMuteScreenBlank) != 1 && value == 0) {
+    if self.cmd == .audioSpeakerVolume, (otherDisplay.readPrefAsInt(for: .audioMuteScreenBlank) == 1 && value > 0) || (otherDisplay.readPrefAsInt(for: .audioMuteScreenBlank) != 1 && value == 0) {
       otherDisplay.toggleMute(fromVolumeSlider: true)
     }
     if self.cmd == Command.brightness {
@@ -228,13 +228,13 @@ class SliderHandler {
       return
     } else if !otherDisplay.isSw() {
       if self.cmd == Command.audioSpeakerVolume {
-        if !otherDisplay.enableMuteUnmute || value != 0 {
+        if !otherDisplay.readPrefAsBool(key: PKey.enableMuteUnmute) || value != 0 {
           _ = otherDisplay.writeDDCValues(command: self.cmd, value: otherDisplay.convValueToDDC(for: self.cmd, from: value))
         }
       } else {
         _ = otherDisplay.writeDDCValues(command: self.cmd, value: otherDisplay.convValueToDDC(for: self.cmd, from: value))
       }
-      otherDisplay.savePrefValue(value, for: self.cmd)
+      otherDisplay.savePref(value, for: self.cmd)
     }
   }
 
@@ -244,7 +244,7 @@ class SliderHandler {
     }
     var value = slider.floatValue
     self.updateIcon()
-    if prefs.bool(forKey: PrefKey.enableSliderSnap.rawValue) {
+    if prefs.bool(forKey: PKey.enableSliderSnap.rawValue) {
       let intPercent = Int(value * 100)
       let snapInterval = 25
       let snapThreshold = 3

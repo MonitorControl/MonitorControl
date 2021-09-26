@@ -28,7 +28,7 @@ class AppleDisplay: Display {
     let value = max(min(to, 1), 0)
     self.setAppleBrightness(value: value)
     if !transient {
-      self.savePrefValue(value, for: .brightness)
+      self.savePref(value, for: .brightness)
       self.brightnessSyncSourceValue = value
       self.smoothBrightnessTransient = value
     }
@@ -36,8 +36,8 @@ class AppleDisplay: Display {
   }
 
   override func getBrightness() -> Float {
-    if self.prefValueExists(for: .brightness) {
-      return self.readPrefValue(for: .brightness)
+    if self.prefExists(for: .brightness) {
+      return self.readPrefAsFloat(for: .brightness)
     } else {
       return self.getAppleBrightness()
     }
@@ -49,7 +49,7 @@ class AppleDisplay: Display {
     }
     let brightness = self.getAppleBrightness()
     let oldValue = self.brightnessSyncSourceValue
-    self.savePrefValue(brightness, for: .brightness)
+    self.savePref(brightness, for: .brightness)
     if brightness != oldValue {
       os_log("Pushing slider and reporting delta for Apple display %{public}@", type: .debug, String(self.identifier))
       var newValue: Float
