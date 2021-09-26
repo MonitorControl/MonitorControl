@@ -149,7 +149,8 @@ class Display: Equatable {
         }
       }
     } else {
-      os_log("No more need to push brightness for Display  %{public}@", type: .debug, String(self.identifier))
+      os_log("No more need to push brightness for Display  %{public}@ (setting one final time)", type: .debug, String(self.identifier))
+      _ = self.setDirectBrightness(self.smoothBrightnessTransient, transient: true)
       self.smoothBrightnessRunning = false
     }
     self.swBrightnessSemaphore.signal()
