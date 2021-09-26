@@ -64,21 +64,21 @@ class MenuHandler: NSMenu {
       otherDisplay.volumeSliderHandler = nil
       if !display.readPrefAsBool(key: .unavailableDDC, for: .audioSpeakerVolume), !prefs.bool(forKey: PKey.hideVolume.rawValue) {
         let position = (combine && self.combinedBrightnessSliderHandler != nil) ? (self.combinedContrastSliderHandler != nil ? 2 : 1) : 0
-        let volumeSliderHandler = self.addSliderMenuItem(toMenu: monitorSubMenu, forDisplay: otherDisplay, command: .audioSpeakerVolume, title: NSLocalizedString("Volume", comment: "Shown in menu"), numOfTickMarks: numOfTickMarks, sliderHandler: combine ? self.combinedVolumeSliderHandler : nil, position: position)
+        let volumeSliderHandler = SliderHandler.configureSliderHandler(toMenu: monitorSubMenu, display: otherDisplay, command: .audioSpeakerVolume, title: NSLocalizedString("Volume", comment: "Shown in menu"), numOfTickMarks: numOfTickMarks, combinedSliderHandler: combine ? self.combinedVolumeSliderHandler : nil, position: position)
         self.combinedVolumeSliderHandler = combine ? volumeSliderHandler : nil
         otherDisplay.volumeSliderHandler = volumeSliderHandler
         hasSlider = true
       }
       if prefs.bool(forKey: PKey.showContrast.rawValue), !display.readPrefAsBool(key: .unavailableDDC, for: .contrast) {
         let position = (combine && self.combinedBrightnessSliderHandler != nil) ? 1 : 0
-        let contrastSliderHandler = self.addSliderMenuItem(toMenu: monitorSubMenu, forDisplay: otherDisplay, command: .contrast, title: NSLocalizedString("Contrast", comment: "Shown in menu"), numOfTickMarks: numOfTickMarks, sliderHandler: combine ? self.combinedContrastSliderHandler : nil, position: position)
+        let contrastSliderHandler = SliderHandler.configureSliderHandler(toMenu: monitorSubMenu, display: otherDisplay, command: .contrast, title: NSLocalizedString("Contrast", comment: "Shown in menu"), numOfTickMarks: numOfTickMarks, combinedSliderHandler: combine ? self.combinedContrastSliderHandler : nil, position: position)
         self.combinedContrastSliderHandler = combine ? contrastSliderHandler : nil
         otherDisplay.contrastSliderHandler = contrastSliderHandler
         hasSlider = true
       }
     }
     if !prefs.bool(forKey: PKey.hideBrightness.rawValue), !display.readPrefAsBool(key: .unavailableDDC, for: .brightness) {
-      let brightnessSliderHandler = self.addSliderMenuItem(toMenu: monitorSubMenu, forDisplay: display, command: .brightness, title: NSLocalizedString("Brightness", comment: "Shown in menu"), numOfTickMarks: numOfTickMarks, sliderHandler: combine ? self.combinedBrightnessSliderHandler : nil)
+      let brightnessSliderHandler = SliderHandler.configureSliderHandler(toMenu: monitorSubMenu, display: display, command: .brightness, title: NSLocalizedString("Brightness", comment: "Shown in menu"), numOfTickMarks: numOfTickMarks, combinedSliderHandler: combine ? self.combinedBrightnessSliderHandler : nil)
       display.brightnessSliderHandler = brightnessSliderHandler
       self.combinedBrightnessSliderHandler = combine ? brightnessSliderHandler : nil
       hasSlider = true
@@ -152,86 +152,5 @@ class MenuHandler: NSMenu {
       self.addItem(withTitle: NSLocalizedString("Quit", comment: "Shown in menu"), action: #selector(app.quitClicked), keyEquivalent: "")
       self.insertItem(NSMenuItem.separator(), at: 0)
     }
-  }
-
-  func setupPercentageBox(_ percentageBox: NSTextField) {
-    percentageBox.font = NSFont.systemFont(ofSize: 12)
-    percentageBox.isEditable = false
-    percentageBox.isBordered = false
-    percentageBox.drawsBackground = false
-    percentageBox.alignment = .right
-    percentageBox.alphaValue = 0.7
-  }
-
-  func addSliderMenuItem(toMenu menu: NSMenu, forDisplay display: Display, command: Command, title: String, numOfTickMarks: Int = 0, sliderHandler: SliderHandler? = nil, position: Int = 0) -> SliderHandler {
-    var handler: SliderHandler
-    if sliderHandler != nil {
-      handler = sliderHandler!
-      handler.add(display)
-    } else {
-      let item = NSMenuItem()
-      handler = SliderHandler(display: display, command: command)
-      let slider = SliderHandler.MCSlider(value: 0, minValue: 0, maxValue: 1, target: handler, action: #selector(SliderHandler.valueChanged))
-      let showPercent = prefs.bool(forKey: PKey.enableSliderPercent.rawValue)
-      slider.isEnabled = true
-      slider.setNumOfCustomTickmarks(numOfTickMarks)
-      handler.slider = slider
-      if !DEBUG_MACOS10, #available(macOS 11.0, *) {
-        slider.frame.size.width = 180
-        slider.frame.origin = NSPoint(x: 15, y: 5)
-        let view = NSView(frame: NSRect(x: 0, y: 0, width: slider.frame.width + 30 + (showPercent ? 38 : 0), height: slider.frame.height + 14))
-        view.frame.origin = NSPoint(x: 12, y: 0)
-        var iconName: String = "circle.dashed"
-        switch command {
-        case .audioSpeakerVolume: iconName = "speaker.wave.2.fill"
-        case .brightness: iconName = "sun.max.fill"
-        case .contrast: iconName = "circle.lefthalf.fill"
-        default: break
-        }
-        let icon = SliderHandler.ClickThroughImageView()
-        icon.image = NSImage(systemSymbolName: iconName, accessibilityDescription: title)
-        icon.contentTintColor = NSColor.black.withAlphaComponent(0.6)
-        icon.frame = NSRect(x: view.frame.origin.x + 6.5, y: view.frame.origin.y + 13, width: 15, height: 15)
-        icon.imageAlignment = .alignCenter
-        view.addSubview(slider)
-        view.addSubview(icon)
-        handler.icon = icon
-        if showPercent {
-          let percentageBox = NSTextField(frame: NSRect(x: 15 + slider.frame.size.width - 2, y: 17, width: 40, height: 12))
-          self.setupPercentageBox(percentageBox)
-          handler.percentageBox = percentageBox
-          view.addSubview(percentageBox)
-        }
-        item.view = view
-        menu.insertItem(item, at: position)
-      } else {
-        slider.frame.size.width = 180
-        slider.frame.origin = NSPoint(x: 15, y: 5)
-        let view = NSView(frame: NSRect(x: 0, y: 0, width: slider.frame.width + 30 + (showPercent ? 38 : 0), height: slider.frame.height + 10))
-        let sliderHeaderItem = NSMenuItem()
-        let attrs: [NSAttributedString.Key: Any] = [.foregroundColor: NSColor.systemGray, .font: NSFont.systemFont(ofSize: 12)]
-        sliderHeaderItem.attributedTitle = NSAttributedString(string: title, attributes: attrs)
-        view.addSubview(slider)
-        if showPercent {
-          let percentageBox = NSTextField(frame: NSRect(x: 15 + slider.frame.size.width - 2, y: 18, width: 40, height: 12))
-          self.setupPercentageBox(percentageBox)
-          handler.percentageBox = percentageBox
-          view.addSubview(percentageBox)
-        }
-        item.view = view
-        menu.insertItem(item, at: position)
-        menu.insertItem(sliderHeaderItem, at: position)
-      }
-      slider.maxValue = 1
-    }
-    if let otherDisplay = display as? OtherDisplay {
-      let value = otherDisplay.setupSliderCurrentValue(command: command)
-      handler.setValue(value, displayID: otherDisplay.identifier)
-    } else if let appleDisplay = display as? AppleDisplay {
-      if command == .brightness {
-        handler.setValue(appleDisplay.getAppleBrightness(), displayID: appleDisplay.identifier)
-      }
-    }
-    return handler
   }
 }
