@@ -208,15 +208,78 @@ class SliderHandler {
     }
   }
 
-  public init(display: Display?, command: Command) {
+  public init(display: Display?, command: Command, title: String) {
     self.cmd = command
+    let slider = SliderHandler.MCSlider(value: 0, minValue: 0, maxValue: 1, target: self, action: #selector(SliderHandler.valueChanged))
+    let showPercent = prefs.bool(forKey: PrefKey.enableSliderPercent.rawValue)
+    slider.isEnabled = true
+    slider.setNumOfCustomTickmarks(prefs.bool(forKey: PrefKey.showTickMarks.rawValue) ? 5 : 0)
+    self.slider = slider
+    if !DEBUG_MACOS10, #available(macOS 11.0, *) {
+      slider.frame.size.width = 180
+      slider.frame.origin = NSPoint(x: 15, y: 5)
+      let view = NSView(frame: NSRect(x: 0, y: 0, width: slider.frame.width + 30 + (showPercent ? 38 : 0), height: slider.frame.height + 14))
+      view.frame.origin = NSPoint(x: 12, y: 0)
+      var iconName: String = "circle.dashed"
+      switch command {
+      case .audioSpeakerVolume: iconName = "speaker.wave.2.fill"
+      case .brightness: iconName = "sun.max.fill"
+      case .contrast: iconName = "circle.lefthalf.fill"
+      default: break
+      }
+      let icon = SliderHandler.ClickThroughImageView()
+      icon.image = NSImage(systemSymbolName: iconName, accessibilityDescription: title)
+      icon.contentTintColor = NSColor.black.withAlphaComponent(0.6)
+      icon.frame = NSRect(x: view.frame.origin.x + 6.5, y: view.frame.origin.y + 13, width: 15, height: 15)
+      icon.imageAlignment = .alignCenter
+      view.addSubview(slider)
+      view.addSubview(icon)
+      self.icon = icon
+      if showPercent {
+        let percentageBox = NSTextField(frame: NSRect(x: 15 + slider.frame.size.width - 2, y: 17, width: 40, height: 12))
+        self.setupPercentageBox(percentageBox)
+        self.percentageBox = percentageBox
+        view.addSubview(percentageBox)
+      }
+      self.view = view
+    } else {
+      slider.frame.size.width = 180
+      slider.frame.origin = NSPoint(x: 15, y: 5)
+      let view = NSView(frame: NSRect(x: 0, y: 0, width: slider.frame.width + 30 + (showPercent ? 38 : 0), height: slider.frame.height + 10))
+      view.addSubview(slider)
+      if showPercent {
+        let percentageBox = NSTextField(frame: NSRect(x: 15 + slider.frame.size.width - 2, y: 18, width: 40, height: 12))
+        self.setupPercentageBox(percentageBox)
+        self.percentageBox = percentageBox
+        view.addSubview(percentageBox)
+      }
+      self.view = view
+    }
+    slider.maxValue = 1
     if let displayToAppend = display {
-      self.add(displayToAppend)
+      self.addDisplay(displayToAppend)
     }
   }
 
-  func add(_ display: Display) {
+  func addDisplay(_ display: Display) {
     self.displays.append(display)
+    if let otherDisplay = display as? OtherDisplay {
+      let value = otherDisplay.setupSliderCurrentValue(command: self.cmd)
+      self.setValue(value, displayID: otherDisplay.identifier)
+    } else if let appleDisplay = display as? AppleDisplay {
+      if self.cmd == .brightness {
+        self.setValue(appleDisplay.getAppleBrightness(), displayID: appleDisplay.identifier)
+      }
+    }
+  }
+
+  func setupPercentageBox(_ percentageBox: NSTextField) {
+    percentageBox.font = NSFont.systemFont(ofSize: 12)
+    percentageBox.isEditable = false
+    percentageBox.isBordered = false
+    percentageBox.drawsBackground = false
+    percentageBox.alignment = .right
+    percentageBox.alphaValue = 0.7
   }
 
   func valueChangedOtherDisplay(otherDisplay: OtherDisplay, value: Float) {
@@ -317,79 +380,5 @@ class SliderHandler {
         self.percentageBox?.stringValue = "" + String(Int(value * 100)) + "%"
       }
     }
-  }
-
-  static func setupPercentageBox(_ percentageBox: NSTextField) {
-    percentageBox.font = NSFont.systemFont(ofSize: 12)
-    percentageBox.isEditable = false
-    percentageBox.isBordered = false
-    percentageBox.drawsBackground = false
-    percentageBox.alignment = .right
-    percentageBox.alphaValue = 0.7
-  }
-
-  static func sliderHandlerFactory(display: Display, command: Command, title: String, combinedSliderHandler: SliderHandler? = nil) -> SliderHandler {
-    var handler: SliderHandler
-    if combinedSliderHandler != nil {
-      handler = combinedSliderHandler!
-      handler.add(display)
-    } else {
-      handler = SliderHandler(display: display, command: command)
-      let slider = SliderHandler.MCSlider(value: 0, minValue: 0, maxValue: 1, target: handler, action: #selector(SliderHandler.valueChanged))
-      let showPercent = prefs.bool(forKey: PrefKey.enableSliderPercent.rawValue)
-      slider.isEnabled = true
-      slider.setNumOfCustomTickmarks(prefs.bool(forKey: PrefKey.showTickMarks.rawValue) ? 5 : 0)
-      handler.slider = slider
-      if !DEBUG_MACOS10, #available(macOS 11.0, *) {
-        slider.frame.size.width = 180
-        slider.frame.origin = NSPoint(x: 15, y: 5)
-        let view = NSView(frame: NSRect(x: 0, y: 0, width: slider.frame.width + 30 + (showPercent ? 38 : 0), height: slider.frame.height + 14))
-        view.frame.origin = NSPoint(x: 12, y: 0)
-        var iconName: String = "circle.dashed"
-        switch command {
-        case .audioSpeakerVolume: iconName = "speaker.wave.2.fill"
-        case .brightness: iconName = "sun.max.fill"
-        case .contrast: iconName = "circle.lefthalf.fill"
-        default: break
-        }
-        let icon = SliderHandler.ClickThroughImageView()
-        icon.image = NSImage(systemSymbolName: iconName, accessibilityDescription: title)
-        icon.contentTintColor = NSColor.black.withAlphaComponent(0.6)
-        icon.frame = NSRect(x: view.frame.origin.x + 6.5, y: view.frame.origin.y + 13, width: 15, height: 15)
-        icon.imageAlignment = .alignCenter
-        view.addSubview(slider)
-        view.addSubview(icon)
-        handler.icon = icon
-        if showPercent {
-          let percentageBox = NSTextField(frame: NSRect(x: 15 + slider.frame.size.width - 2, y: 17, width: 40, height: 12))
-          self.setupPercentageBox(percentageBox)
-          handler.percentageBox = percentageBox
-          view.addSubview(percentageBox)
-        }
-        handler.view = view
-      } else {
-        slider.frame.size.width = 180
-        slider.frame.origin = NSPoint(x: 15, y: 5)
-        let view = NSView(frame: NSRect(x: 0, y: 0, width: slider.frame.width + 30 + (showPercent ? 38 : 0), height: slider.frame.height + 10))
-        view.addSubview(slider)
-        if showPercent {
-          let percentageBox = NSTextField(frame: NSRect(x: 15 + slider.frame.size.width - 2, y: 18, width: 40, height: 12))
-          self.setupPercentageBox(percentageBox)
-          handler.percentageBox = percentageBox
-          view.addSubview(percentageBox)
-        }
-        handler.view = view
-      }
-      slider.maxValue = 1
-    }
-    if let otherDisplay = display as? OtherDisplay {
-      let value = otherDisplay.setupSliderCurrentValue(command: command)
-      handler.setValue(value, displayID: otherDisplay.identifier)
-    } else if let appleDisplay = display as? AppleDisplay {
-      if command == .brightness {
-        handler.setValue(appleDisplay.getAppleBrightness(), displayID: appleDisplay.identifier)
-      }
-    }
-    return handler
   }
 }

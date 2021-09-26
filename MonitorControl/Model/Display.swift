@@ -18,7 +18,7 @@ class Display: Equatable {
     return lhs.identifier == rhs.identifier
   }
 
-  var brightnessSliderHandler: SliderHandler?
+  var sliderHandler: [Command: SliderHandler] = [:]
   var brightnessSyncSourceValue: Float = 1
   var isVirtual: Bool = false
 
@@ -89,7 +89,7 @@ class Display: Equatable {
     let value = self.calcNewBrightness(isUp: isUp, isSmallIncrement: isSmallIncrement)
     if self.setBrightness(value) {
       OSDUtils.showOsd(displayID: self.identifier, command: .brightness, value: value * 64, maxValue: 64)
-      if let slider = brightnessSliderHandler {
+      if let slider = self.sliderHandler[.brightness] {
         slider.setValue(value, displayID: self.identifier)
         self.brightnessSyncSourceValue = value
       }

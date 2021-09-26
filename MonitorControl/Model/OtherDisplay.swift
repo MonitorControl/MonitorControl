@@ -187,7 +187,7 @@ class OtherDisplay: Display {
     }
     if !isAlreadySet {
       self.savePref(volumeOSDValue, for: .audioSpeakerVolume)
-      if let slider = self.volumeSliderHandler {
+      if let slider = self.sliderHandler[.audioSpeakerVolume] {
         slider.setValue(volumeOSDValue, displayID: self.identifier)
       }
     }
@@ -225,7 +225,7 @@ class OtherDisplay: Display {
       if !self.readPrefAsBool(key: .hideOsd) {
         OSDUtils.showOsd(displayID: self.identifier, command: volumeOSDValue > 0 ? .audioSpeakerVolume : .audioMuteScreenBlank, value: volumeOSDValue, roundChiclet: true)
       }
-      if let slider = self.volumeSliderHandler {
+      if let slider = self.sliderHandler[.audioSpeakerVolume] {
         slider.setValue(volumeOSDValue)
       }
     }
@@ -299,7 +299,7 @@ class OtherDisplay: Display {
       _ = self.setBrightness(osdValue)
       OSDUtils.showOsd(displayID: self.identifier, command: .brightness, value: osdValue, roundChiclet: !isSmallIncrement)
     }
-    if let slider = brightnessSliderHandler {
+    if let slider = self.sliderHandler[.brightness] {
       slider.setValue(osdValue, displayID: self.identifier)
       self.brightnessSyncSourceValue = osdValue
     }

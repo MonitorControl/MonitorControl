@@ -332,7 +332,7 @@ class DisplayManager {
         otherDisplay.savePref(otherDisplay.getSwBrightness(), key: .SwBrightness)
         os_log("Restoring sw brightness to %{public}@ on other display %{public}@", type: .debug, String(savedPrefValue), String(otherDisplay.identifier))
         _ = otherDisplay.setSwBrightness(savedPrefValue, smooth: async)
-        if otherDisplay.isSw(), let slider = otherDisplay.brightnessSliderHandler {
+        if otherDisplay.isSw(), let slider = otherDisplay.sliderHandler[.brightness] {
           os_log("Restoring sw slider to %{public}@ for other display %{public}@", type: .debug, String(savedPrefValue), String(otherDisplay.identifier))
           slider.setValue(savedPrefValue, displayID: otherDisplay.identifier)
         }
