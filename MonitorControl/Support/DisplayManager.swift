@@ -12,20 +12,6 @@ class DisplayManager {
   var displays: [Display] = []
   var audioControlTargetDisplays: [OtherDisplay] = []
   let ddcQueue = DispatchQueue(label: "DDC queue")
-
-  // Gamma activity enforcer and window shade
-
-  func resolveEffectiveDisplayID(_ displayID: CGDirectDisplayID) -> CGDirectDisplayID {
-    var realDisplayID = displayID
-    if CGDisplayIsInHWMirrorSet(displayID) != 0 || CGDisplayIsInMirrorSet(displayID) != 0 {
-      let mirroredDisplayID = CGDisplayMirrorsDisplay(displayID)
-      if mirroredDisplayID != 0 {
-        realDisplayID = mirroredDisplayID
-      }
-    }
-    return realDisplayID
-  }
-
   let gammaActivityEnforcer = NSWindow(contentRect: .init(origin: NSPoint(x: 0, y: 0), size: .init(width: DEBUG_GAMMA_ENFORCER ? 15 : 1, height: DEBUG_GAMMA_ENFORCER ? 15 : 1)), styleMask: [], backing: .buffered, defer: false)
 
   func createGammaActivityEnforcer() {
@@ -48,7 +34,7 @@ class DisplayManager {
   }
 
   func moveGammaActivityEnforcer(displayID: CGDirectDisplayID) {
-    if let screen = DisplayManager.getByDisplayID(displayID: resolveEffectiveDisplayID(displayID)) {
+    if let screen = DisplayManager.getByDisplayID(displayID: DisplayManager.resolveEffectiveDisplayID(displayID)) {
       self.gammaActivityEnforcer.setFrameOrigin(screen.frame.origin)
     }
     self.gammaActivityEnforcer.orderFrontRegardless()
@@ -155,8 +141,6 @@ class DisplayManager {
     }
     return false
   }
-
-  // Display utilities
 
   func configureDisplays() {
     self.clearDisplays()
@@ -325,8 +309,6 @@ class DisplayManager {
     }
   }
 
-  // Semi-static functions (could be moved elsewhere easily)
-
   func resetSwBrightnessForAllDisplays(settingsOnly: Bool = false, async: Bool = false) {
     for otherDisplay in self.getOtherDisplays() {
       if !settingsOnly {
@@ -435,30 +417,26 @@ class DisplayManager {
     return true
   }
 
-  // Static functions (could be anywhere)
+  static func resolveEffectiveDisplayID(_ displayID: CGDirectDisplayID) -> CGDirectDisplayID {
+    var realDisplayID = displayID
+    if CGDisplayIsInHWMirrorSet(displayID) != 0 || CGDisplayIsInMirrorSet(displayID) != 0 {
+      let mirroredDisplayID = CGDisplayMirrorsDisplay(displayID)
+      if mirroredDisplayID != 0 {
+        realDisplayID = mirroredDisplayID
+      }
+    }
+    return realDisplayID
+  }
 
   static func isAppleDisplay(displayID: CGDirectDisplayID) -> Bool {
     var brightness: Float = -1
     let ret = DisplayServicesGetBrightness(displayID, &brightness)
-    // If brightness read appears to be successful using DisplayServices then it should be an Apple display
-    if ret == 0, brightness >= 0 {
+    if ret == 0, brightness >= 0 { // If brightness read appears to be successful using DisplayServices then it should be an Apple display
       return true
     }
-    // If built-in display then it should be Apple (except for hackintosh notebooks...)
-    if CGDisplayIsBuiltin(displayID) != 0 {
+    if CGDisplayIsBuiltin(displayID) != 0 { // If built-in display then it should be Apple (except for hackintosh notebooks...)
       return true
     }
-    /*
-     // If Vendor ID is Apple, then it is probably an Apple display
-     if CGDisplayVendorNumber(displayID) == 0x05AC {
-       return true
-     }
-     // If the display has a known Apple name, then it might be an Apple display. I am not sure about this one though
-     let rawName = self.getDisplayRawNameByID(displayID: displayID)
-     if rawName.contains("LG UltraFine") || rawName.contains("Thunderbolt") || rawName.contains("Cinema") || rawName.contains("Color LCD") {
-        return true
-     }
-     */
     return false
   }
 
