@@ -87,6 +87,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       prefs.set(true, forKey: Utils.PrefKeys.fallbackSw.rawValue)
       prefs.set(false, forKey: Utils.PrefKeys.hideMenuIcon.rawValue)
       prefs.set(false, forKey: Utils.PrefKeys.showAdvancedDisplays.rawValue)
+      prefs.set(true, forKey: Utils.PrefKeys.altBrightnessKeys.rawValue)
     }
   }
 
