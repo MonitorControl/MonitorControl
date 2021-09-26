@@ -228,7 +228,7 @@ class SliderHandler {
       return
     } else if !otherDisplay.isSw() {
       if self.cmd == Command.audioSpeakerVolume {
-        if !otherDisplay.readPrefAsBool(key: PKey.enableMuteUnmute) || value != 0 {
+        if !otherDisplay.readPrefAsBool(key: .enableMuteUnmute) || value != 0 {
           _ = otherDisplay.writeDDCValues(command: self.cmd, value: otherDisplay.convValueToDDC(for: self.cmd, from: value))
         }
       } else {

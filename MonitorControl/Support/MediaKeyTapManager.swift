@@ -79,7 +79,7 @@ class MediaKeyTapManager: MediaKeyTapDelegate {
       return
     }
     var wasNotIsPressedVolumeSentAlready = false
-    for display in affectedDisplays where !(display.readPrefAsBool(key: PKey.isDisabled)) {
+    for display in affectedDisplays where !(display.readPrefAsBool(key: .isDisabled)) {
       switch mediaKey {
       case .brightnessUp:
         var isAnyDisplayInSwAfterBrightnessMode: Bool = false
@@ -97,7 +97,7 @@ class MediaKeyTapManager: MediaKeyTapDelegate {
         // The mute key should not respond to press + hold or keyup
         if !isRepeat, isPressed, let display = display as? OtherDisplay {
           display.toggleMute()
-          if !wasNotIsPressedVolumeSentAlready, display.readPrefAsInt(for: .audioMuteScreenBlank) != 1, !display.readPrefAsBool(key: PKey.unavailableDDC, for: .audioSpeakerVolume) {
+          if !wasNotIsPressedVolumeSentAlready, display.readPrefAsInt(for: .audioMuteScreenBlank) != 1, !display.readPrefAsBool(key: .unavailableDDC, for: .audioSpeakerVolume) {
             display.playVolumeChangedSound()
             wasNotIsPressedVolumeSentAlready = true
           }
@@ -107,7 +107,7 @@ class MediaKeyTapManager: MediaKeyTapDelegate {
         if let display = display as? OtherDisplay {
           if isPressed {
             display.stepVolume(isUp: mediaKey == .volumeUp, isSmallIncrement: isSmallIncrement)
-          } else if !wasNotIsPressedVolumeSentAlready, !display.readPrefAsBool(key: PKey.unavailableDDC, for: .audioSpeakerVolume) {
+          } else if !wasNotIsPressedVolumeSentAlready, !display.readPrefAsBool(key: .unavailableDDC, for: .audioSpeakerVolume) {
             display.playVolumeChangedSound()
             wasNotIsPressedVolumeSentAlready = true
           }

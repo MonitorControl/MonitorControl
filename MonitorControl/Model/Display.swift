@@ -197,8 +197,8 @@ class Display: Equatable {
   let swBrightnessSemaphore = DispatchSemaphore(value: 1)
   func setSwBrightness(_ value: Float, smooth: Bool = false) -> Bool {
     let brightnessValue = min(1, value)
-    var currentValue = self.readPrefAsFloat(key: PKey.SwBrightness)
-    self.savePref(brightnessValue, key: PKey.SwBrightness)
+    var currentValue = self.readPrefAsFloat(key: .SwBrightness)
+    self.savePref(brightnessValue, key: .SwBrightness)
     var newValue = brightnessValue
     currentValue = self.swBrightnessTransform(value: currentValue)
     newValue = self.swBrightnessTransform(value: newValue)

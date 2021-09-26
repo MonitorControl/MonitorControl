@@ -126,10 +126,10 @@ class DisplaysPrefsViewController: NSViewController, PreferencePane, NSTableView
       // ID
       cell.displayId.stringValue = String(display.identifier)
       // Firendly name
-      cell.friendlyName.stringValue = (display.readPrefAsString(key: PKey.friendlyName) != "" ? display.readPrefAsString(key: PKey.friendlyName) : display.name)
+      cell.friendlyName.stringValue = (display.readPrefAsString(key: .friendlyName) != "" ? display.readPrefAsString(key: .friendlyName) : display.name)
       cell.friendlyName.isEditable = true
       // Enabled
-      cell.enabledButton.state = display.readPrefAsBool(key: PKey.isDisabled) ? .off : .on
+      cell.enabledButton.state = display.readPrefAsBool(key: .isDisabled) ? .off : .on
       // DDC
       cell.ddcButton.state = ((display as? OtherDisplay)?.isSw() ?? true) ? .off : .on
       if ((display as? OtherDisplay)?.isSwOnly() ?? true) || ((display as? OtherDisplay)?.isVirtual ?? true) {
@@ -149,7 +149,7 @@ class DisplaysPrefsViewController: NSViewController, PreferencePane, NSTableView
       }
       // Disable Volume OSD
       if let otherDisplay = display as? OtherDisplay, !otherDisplay.isSw() {
-        cell.disableVolumeOSDButton.state = otherDisplay.readPrefAsBool(key: PKey.hideOsd) ? .on : .off
+        cell.disableVolumeOSDButton.state = otherDisplay.readPrefAsBool(key: .hideOsd) ? .on : .off
         cell.disableVolumeOSDButton.isEnabled = true
       } else {
         cell.disableVolumeOSDButton.state = .off
@@ -166,9 +166,9 @@ class DisplaysPrefsViewController: NSViewController, PreferencePane, NSTableView
         }
         cell.pollingCount.stringValue = String(otherDisplay.pollingCount)
         cell.longerDelayButton.isEnabled = true
-        cell.longerDelayButton.state = otherDisplay.readPrefAsBool(key: PKey.longerDelay) ? .on : .off
+        cell.longerDelayButton.state = otherDisplay.readPrefAsBool(key: .longerDelay) ? .on : .off
         cell.enableMuteButton.isEnabled = true
-        cell.enableMuteButton.state = otherDisplay.readPrefAsBool(key: PKey.enableMuteUnmute) ? .on : .off
+        cell.enableMuteButton.state = otherDisplay.readPrefAsBool(key: .enableMuteUnmute) ? .on : .off
 
         cell.audioDeviceNameOverride.isEnabled = true
         cell.audioDeviceNameOverride.stringValue = otherDisplay.audioDeviceNameOverride
@@ -177,34 +177,34 @@ class DisplaysPrefsViewController: NSViewController, PreferencePane, NSTableView
         cell.unavailableDDCBrightness.isEnabled = true
         cell.unavailableDDCVolume.isEnabled = true
         cell.unavailableDDCContrast.isEnabled = true
-        cell.unavailableDDCBrightness.state = !otherDisplay.readPrefAsBool(key: PKey.unavailableDDC, for: .brightness) ? .on : .off
-        cell.unavailableDDCVolume.state = !otherDisplay.readPrefAsBool(key: PKey.unavailableDDC, for: .audioSpeakerVolume) ? .on : .off
-        cell.unavailableDDCContrast.state = !otherDisplay.readPrefAsBool(key: PKey.unavailableDDC, for: .contrast) ? .on : .off
+        cell.unavailableDDCBrightness.state = !otherDisplay.readPrefAsBool(key: .unavailableDDC, for: .brightness) ? .on : .off
+        cell.unavailableDDCVolume.state = !otherDisplay.readPrefAsBool(key: .unavailableDDC, for: .audioSpeakerVolume) ? .on : .off
+        cell.unavailableDDCContrast.state = !otherDisplay.readPrefAsBool(key: .unavailableDDC, for: .contrast) ? .on : .off
 
         cell.minDDCOverrideBrightness.isEnabled = true
         cell.minDDCOverrideVolume.isEnabled = true
         cell.minDDCOverrideContrast.isEnabled = true
-        cell.minDDCOverrideBrightness.stringValue = otherDisplay.readPrefAsString(key: PKey.minDDCOverride, for: .brightness)
-        cell.minDDCOverrideVolume.stringValue = otherDisplay.readPrefAsString(key: PKey.minDDCOverride, for: .audioSpeakerVolume)
-        cell.minDDCOverrideContrast.stringValue = otherDisplay.readPrefAsString(key: PKey.minDDCOverride, for: .contrast)
+        cell.minDDCOverrideBrightness.stringValue = otherDisplay.readPrefAsString(key: .minDDCOverride, for: .brightness)
+        cell.minDDCOverrideVolume.stringValue = otherDisplay.readPrefAsString(key: .minDDCOverride, for: .audioSpeakerVolume)
+        cell.minDDCOverrideContrast.stringValue = otherDisplay.readPrefAsString(key: .minDDCOverride, for: .contrast)
 
         cell.maxDDCOverrideBrightness.isEnabled = true
         cell.maxDDCOverrideVolume.isEnabled = true
         cell.maxDDCOverrideContrast.isEnabled = true
-        cell.maxDDCOverrideBrightness.stringValue = otherDisplay.readPrefAsString(key: PKey.maxDDCOverride, for: .brightness)
-        cell.maxDDCOverrideVolume.stringValue = otherDisplay.readPrefAsString(key: PKey.maxDDCOverride, for: .audioSpeakerVolume)
-        cell.maxDDCOverrideContrast.stringValue = otherDisplay.readPrefAsString(key: PKey.maxDDCOverride, for: .contrast)
+        cell.maxDDCOverrideBrightness.stringValue = otherDisplay.readPrefAsString(key: .maxDDCOverride, for: .brightness)
+        cell.maxDDCOverrideVolume.stringValue = otherDisplay.readPrefAsString(key: .maxDDCOverride, for: .audioSpeakerVolume)
+        cell.maxDDCOverrideContrast.stringValue = otherDisplay.readPrefAsString(key: .maxDDCOverride, for: .contrast)
 
         cell.curveDDCBrightness.isEnabled = true
         cell.curveDDCVolume.isEnabled = true
         cell.curveDDCContrast.isEnabled = true
-        cell.curveDDCBrightness.intValue = Int32(otherDisplay.readPrefAsInt(key: PKey.curveDDC, for: .brightness) == 0 ? 5 : otherDisplay.readPrefAsInt(key: PKey.curveDDC, for: .brightness))
-        cell.curveDDCVolume.intValue = Int32(otherDisplay.readPrefAsInt(key: PKey.curveDDC, for: .audioSpeakerVolume) == 0 ? 5 : otherDisplay.readPrefAsInt(key: PKey.curveDDC, for: .audioSpeakerVolume))
-        cell.curveDDCContrast.intValue = Int32(otherDisplay.readPrefAsInt(key: PKey.curveDDC, for: .contrast) == 0 ? 5 : otherDisplay.readPrefAsInt(key: PKey.curveDDC, for: .contrast))
+        cell.curveDDCBrightness.intValue = Int32(otherDisplay.readPrefAsInt(key: .curveDDC, for: .brightness) == 0 ? 5 : otherDisplay.readPrefAsInt(key: .curveDDC, for: .brightness))
+        cell.curveDDCVolume.intValue = Int32(otherDisplay.readPrefAsInt(key: .curveDDC, for: .audioSpeakerVolume) == 0 ? 5 : otherDisplay.readPrefAsInt(key: .curveDDC, for: .audioSpeakerVolume))
+        cell.curveDDCContrast.intValue = Int32(otherDisplay.readPrefAsInt(key: .curveDDC, for: .contrast) == 0 ? 5 : otherDisplay.readPrefAsInt(key: .curveDDC, for: .contrast))
 
-        cell.invertDDCBrightness.state = otherDisplay.readPrefAsBool(key: PKey.invertDDC, for: .brightness) ? .on : .off
-        cell.invertDDCVolume.state = otherDisplay.readPrefAsBool(key: PKey.invertDDC, for: .audioSpeakerVolume) ? .on : .off
-        cell.invertDDCContrast.state = otherDisplay.readPrefAsBool(key: PKey.invertDDC, for: .contrast) ? .on : .off
+        cell.invertDDCBrightness.state = otherDisplay.readPrefAsBool(key: .invertDDC, for: .brightness) ? .on : .off
+        cell.invertDDCVolume.state = otherDisplay.readPrefAsBool(key: .invertDDC, for: .audioSpeakerVolume) ? .on : .off
+        cell.invertDDCContrast.state = otherDisplay.readPrefAsBool(key: .invertDDC, for: .contrast) ? .on : .off
         cell.invertDDCBrightness.isEnabled = true
         cell.invertDDCVolume.isEnabled = true
         cell.invertDDCContrast.isEnabled = true
@@ -212,9 +212,9 @@ class DisplaysPrefsViewController: NSViewController, PreferencePane, NSTableView
         cell.remapDDCBrightness.isEnabled = true
         cell.remapDDCVolume.isEnabled = true
         cell.remapDDCContrast.isEnabled = true
-        cell.remapDDCBrightness.stringValue = otherDisplay.readPrefAsString(key: PKey.remapDDC, for: .brightness) == "" ? "" : String(format: "%02x", otherDisplay.readPrefAsInt(key: PKey.remapDDC, for: .brightness))
-        cell.remapDDCVolume.stringValue = otherDisplay.readPrefAsString(key: PKey.remapDDC, for: .audioSpeakerVolume) == "" ? "" : String(format: "%02x", otherDisplay.readPrefAsInt(key: PKey.remapDDC, for: .audioSpeakerVolume))
-        cell.remapDDCContrast.stringValue = otherDisplay.readPrefAsString(key: PKey.remapDDC, for: .contrast) == "" ? "" : String(format: "%02x", otherDisplay.readPrefAsInt(key: PKey.remapDDC, for: .contrast))
+        cell.remapDDCBrightness.stringValue = otherDisplay.readPrefAsString(key: .remapDDC, for: .brightness) == "" ? "" : String(format: "%02x", otherDisplay.readPrefAsInt(key: .remapDDC, for: .brightness))
+        cell.remapDDCVolume.stringValue = otherDisplay.readPrefAsString(key: .remapDDC, for: .audioSpeakerVolume) == "" ? "" : String(format: "%02x", otherDisplay.readPrefAsInt(key: .remapDDC, for: .audioSpeakerVolume))
+        cell.remapDDCContrast.stringValue = otherDisplay.readPrefAsString(key: .remapDDC, for: .contrast) == "" ? "" : String(format: "%02x", otherDisplay.readPrefAsInt(key: .remapDDC, for: .contrast))
       } else {
         cell.pollingModeMenu.selectItem(withTag: 0)
         cell.pollingModeMenu.isEnabled = false

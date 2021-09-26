@@ -97,14 +97,14 @@ class DisplaysPrefsCellView: NSTableCellView {
     if let display = display as? OtherDisplay {
       switch sender.state {
       case .on:
-        display.savePref(true, key: PKey.enableMuteUnmute)
+        display.savePref(true, key: .enableMuteUnmute)
       case .off:
         // If the display is currently muted, toggle back to unmute
         // to prevent the display becoming stuck in the muted state
         if display.readPrefAsInt(for: .audioMuteScreenBlank) == 1 {
           display.toggleMute()
         }
-        display.savePref(false, key: PKey.enableMuteUnmute)
+        display.savePref(false, key: .enableMuteUnmute)
       default:
         break
       }
@@ -126,14 +126,14 @@ class DisplaysPrefsCellView: NSTableCellView {
           alert.beginSheetModal(for: window, completionHandler: { modalResponse in
             if modalResponse == NSApplication.ModalResponse.alertFirstButtonReturn {
               app.setStartAtLogin(enabled: false)
-              display.savePref(true, key: PKey.longerDelay)
+              display.savePref(true, key: .longerDelay)
             } else {
               sender.state = .off
             }
           })
         }
       case .off:
-        display.savePref(false, key: PKey.longerDelay)
+        display.savePref(false, key: .longerDelay)
       default:
         break
       }
@@ -142,7 +142,7 @@ class DisplaysPrefsCellView: NSTableCellView {
 
   @IBAction func enabledButtonToggled(_ sender: NSButton) {
     if let disp = display {
-      disp.savePref((sender.state == .off), key: PKey.isDisabled)
+      disp.savePref((sender.state == .off), key: .isDisabled)
     }
   }
 
@@ -150,10 +150,10 @@ class DisplaysPrefsCellView: NSTableCellView {
     if let display = display {
       switch sender.state {
       case .off:
-        display.savePref(true, key: PKey.forceSw)
+        display.savePref(true, key: .forceSw)
         _ = display.setDirectBrightness(display.getSwBrightness())
       case .on:
-        display.savePref(false, key: PKey.forceSw)
+        display.savePref(false, key: .forceSw)
         _ = display.setSwBrightness(1, smooth: !prefs.bool(forKey: PKey.disableSmoothBrightness.rawValue))
         _ = display.setBrightness(1)
       default:
@@ -169,7 +169,7 @@ class DisplaysPrefsCellView: NSTableCellView {
   @IBAction func friendlyNameValueChanged(_ sender: NSTextFieldCell) {
     if let display = display {
       let newValue = sender.stringValue
-      let originalValue = (display.readPrefAsString(key: PKey.friendlyName) != "" ? display.readPrefAsString(key: PKey.friendlyName) : display.name)
+      let originalValue = (display.readPrefAsString(key: .friendlyName) != "" ? display.readPrefAsString(key: .friendlyName) : display.name)
 
       if newValue.isEmpty {
         self.friendlyName.stringValue = originalValue
@@ -177,7 +177,7 @@ class DisplaysPrefsCellView: NSTableCellView {
       }
 
       if newValue != originalValue, !newValue.isEmpty {
-        display.savePref(newValue, key: PKey.friendlyName)
+        display.savePref(newValue, key: .friendlyName)
       }
       app.updateMenusAndKeys()
     }
@@ -187,9 +187,9 @@ class DisplaysPrefsCellView: NSTableCellView {
     if let display = display as? OtherDisplay {
       switch sender.state {
       case .on:
-        display.savePref(true, key: PKey.hideOsd)
+        display.savePref(true, key: .hideOsd)
       case .off:
-        display.savePref(false, key: PKey.hideOsd)
+        display.savePref(false, key: .hideOsd)
       default:
         break
       }
