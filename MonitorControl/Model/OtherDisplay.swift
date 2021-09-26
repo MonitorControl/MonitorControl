@@ -15,28 +15,18 @@ class OtherDisplay: Display {
   let DDC_MAX_DETECT_LIMIT: Int = 100
   private var audioPlayer: AVAudioPlayer?
 
-  var pollingMode: Int {
-    get { return Int(prefs.string(forKey: PKey.pollingMode.rawValue + self.prefsId) ?? String(PollingMode.normal.rawValue)) ?? PollingMode.normal.rawValue }
-    set { prefs.set(String(newValue), forKey: PKey.pollingMode.rawValue + self.prefsId) }
-  }
-
   var pollingCount: Int {
     get {
-      switch self.pollingMode {
+      switch self.readPrefAsInt(key: .pollingMode) {
       case PollingMode.none.rawValue: return 0
-      case PollingMode.minimal.rawValue: return 5
-      case PollingMode.normal.rawValue: return 10
-      case PollingMode.heavy.rawValue: return 100
+      case PollingMode.minimal.rawValue: return 1
+      case PollingMode.normal.rawValue: return 5
+      case PollingMode.heavy.rawValue: return 20
       case PollingMode.custom.rawValue: return prefs.integer(forKey: PKey.pollingCount.rawValue + self.prefsId)
       default: return PollingMode.none.rawValue
       }
     }
     set { prefs.set(newValue, forKey: PKey.pollingCount.rawValue + self.prefsId) }
-  }
-
-  var audioDeviceNameOverride: String {
-    get { return prefs.string(forKey: PKey.audioDeviceNameOverride.rawValue + self.prefsId) ?? "" }
-    set { prefs.set(newValue, forKey: PKey.audioDeviceNameOverride.rawValue + self.prefsId) }
   }
 
   override init(_ identifier: CGDirectDisplayID, name: String, vendorNumber: UInt32?, modelNumber: UInt32?, isVirtual: Bool = false) {
@@ -164,14 +154,7 @@ class OtherDisplay: Display {
   }
 
   func setupSliderCurrentValue(command: Command) -> Float {
-    let currentValue = self.readPrefAsFloat(for: command)
-    var returnValue = currentValue
-    if command == .audioSpeakerVolume, self.readPrefAsBool(key: .enableMuteUnmute) {
-      if self.readPrefAsInt(for: .audioMuteScreenBlank) == 1 {
-        returnValue = 0
-      }
-    }
-    return returnValue
+    return (command == .audioSpeakerVolume && self.readPrefAsBool(key: .enableMuteUnmute) && self.readPrefAsInt(for: .audioMuteScreenBlank) == 1) ? 0 : self.readPrefAsFloat(for: command)
   }
 
   func stepVolume(isUp: Bool, isSmallIncrement: Bool) {
@@ -469,7 +452,6 @@ class OtherDisplay: Display {
   }
 
   func playVolumeChangedSound() {
-    // Check if user has enabled "Play feedback when volume is changed" in Sound Preferences
     guard let preferences = app.getSystemPreferences(), let hasSoundEnabled = preferences["com.apple.sound.beep.feedback"] as? Int, hasSoundEnabled == 1 else {
       return
     }

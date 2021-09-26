@@ -147,11 +147,11 @@ enum PKey: String {
 }
 
 enum PollingMode: Int {
-  case none = 0
-  case minimal = 1
-  case normal = 2
-  case heavy = 3
-  case custom = 4
+  case none = -2
+  case minimal = -1
+  case normal = 0
+  case heavy = 1
+  case custom = 2
 }
 
 enum MenuIcon: Int {

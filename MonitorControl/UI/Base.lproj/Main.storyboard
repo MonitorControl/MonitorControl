@@ -1400,16 +1400,16 @@
                                                                             <popUpButton verticalHuggingPriority="750" id="7FH-uw-jcn">
                                                                                 <rect key="frame" x="187" y="210" width="108" height="26"/>
                                                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                                                <popUpButtonCell key="cell" type="push" title="None" bezelStyle="rounded" alignment="center" controlSize="small" lineBreakMode="truncatingTail" enabled="NO" state="on" borderStyle="border" inset="2" selectedItem="FoA-yh-Yx3" id="M5p-a2-UEs">
+                                                                                <popUpButtonCell key="cell" type="push" title="None" bezelStyle="rounded" alignment="center" controlSize="small" lineBreakMode="truncatingTail" enabled="NO" state="on" borderStyle="border" tag="-2" inset="2" selectedItem="FoA-yh-Yx3" id="M5p-a2-UEs">
                                                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                                     <font key="font" metaFont="smallSystem"/>
                                                                                     <menu key="menu" id="Nil-kM-Hvj">
                                                                                         <items>
-                                                                                            <menuItem title="None" state="on" id="FoA-yh-Yx3"/>
-                                                                                            <menuItem title="Minimal" tag="1" id="Eq3-z9-yIo"/>
-                                                                                            <menuItem title="Normal" tag="2" id="Riq-uM-bTs"/>
-                                                                                            <menuItem title="Heavy" tag="3" id="vik-vN-bJe"/>
-                                                                                            <menuItem title="Custom" tag="4" id="Cle-DD-vR7"/>
+                                                                                            <menuItem title="None" state="on" tag="-2" id="FoA-yh-Yx3"/>
+                                                                                            <menuItem title="Minimal" tag="-1" id="Eq3-z9-yIo"/>
+                                                                                            <menuItem title="Normal" id="Riq-uM-bTs"/>
+                                                                                            <menuItem title="Heavy" tag="1" id="vik-vN-bJe"/>
+                                                                                            <menuItem title="Custom" tag="2" id="Cle-DD-vR7"/>
                                                                                         </items>
                                                                                     </menu>
                                                                                 </popUpButtonCell>

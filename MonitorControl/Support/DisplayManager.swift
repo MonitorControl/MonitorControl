@@ -223,7 +223,7 @@ class DisplayManager {
     os_log("Detecting displays for audio control via audio device name matching...", type: .debug)
     var numOfAddedDisplays: Int = 0
     for ddcCapableDisplay in self.getDdcCapableDisplays() {
-      var displayAudioDeviceName = ddcCapableDisplay.audioDeviceNameOverride
+      var displayAudioDeviceName = ddcCapableDisplay.readPrefAsString(key: .audioDeviceNameOverride)
       if displayAudioDeviceName == "" {
         displayAudioDeviceName = DisplayManager.getDisplayRawNameByID(displayID: ddcCapableDisplay.identifier)
       }

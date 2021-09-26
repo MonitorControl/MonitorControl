@@ -62,11 +62,11 @@ class DisplaysPrefsCellView: NSTableCellView {
   @IBAction func pollingModeValueChanged(_ sender: NSPopUpButton) {
     if let display = display as? OtherDisplay {
       let newValue = sender.selectedTag()
-      let originalValue = display.pollingMode
+      let originalValue = display.readPrefAsInt(key: .pollingMode)
 
       if newValue != originalValue {
-        display.pollingMode = newValue
-        if display.pollingMode == PollingMode.custom.rawValue {
+        display.savePref(newValue, key: .pollingMode)
+        if display.readPrefAsInt(key: .pollingMode) == PollingMode.custom.rawValue {
           self.pollingCount.isEnabled = true
         } else {
           self.pollingCount.isEnabled = false
@@ -207,7 +207,7 @@ class DisplaysPrefsCellView: NSTableCellView {
 
   @IBAction func audioDeviceNameOverride(_ sender: NSTextField) {
     if let display = display as? OtherDisplay {
-      display.audioDeviceNameOverride = sender.stringValue
+      display.savePref(sender.stringValue, key: .audioDeviceNameOverride)
     }
     app.configure()
   }

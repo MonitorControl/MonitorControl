@@ -158,8 +158,8 @@ class DisplaysPrefsViewController: NSViewController, PreferencePane, NSTableView
       // Advanced settings
       if let otherDisplay = display as? OtherDisplay, !otherDisplay.isSwOnly() {
         cell.pollingModeMenu.isEnabled = true
-        cell.pollingModeMenu.selectItem(withTag: otherDisplay.pollingMode)
-        if otherDisplay.pollingMode == PollingMode.custom.rawValue {
+        cell.pollingModeMenu.selectItem(withTag: otherDisplay.readPrefAsInt(key: .pollingMode))
+        if otherDisplay.readPrefAsInt(key: .pollingMode) == PollingMode.custom.rawValue {
           cell.pollingCount.isEnabled = true
         } else {
           cell.pollingCount.isEnabled = false
@@ -171,7 +171,7 @@ class DisplaysPrefsViewController: NSViewController, PreferencePane, NSTableView
         cell.enableMuteButton.state = otherDisplay.readPrefAsBool(key: .enableMuteUnmute) ? .on : .off
 
         cell.audioDeviceNameOverride.isEnabled = true
-        cell.audioDeviceNameOverride.stringValue = otherDisplay.audioDeviceNameOverride
+        cell.audioDeviceNameOverride.stringValue = otherDisplay.readPrefAsString(key: .audioDeviceNameOverride)
         cell.updateWithCurrentAudioName.isEnabled = true
 
         cell.unavailableDDCBrightness.isEnabled = true
