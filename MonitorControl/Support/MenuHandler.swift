@@ -41,7 +41,7 @@ class MenuHandler: NSMenu {
       for display in displays where !relevant || display == currentDisplay {
         iterator += 1
         if !relevant, !combine, iterator != 1 {
-          self.insertItem(NSMenuItem.separator(), at: 0)
+          self.insertItem(NSMenuItem.separator(), at: 0) // TODO: This stuff will be needed for macOS10 and classic menu view, but should not be located here!
         }
         self.updateDisplayMenu(display: display, asSubMenu: asSubMenu, numOfDisplays: numOfDisplays)
       }
@@ -83,8 +83,59 @@ class MenuHandler: NSMenu {
   }
 
   func addDisplayMenuBlock(addedSliderHandlers: [SliderHandler], blockName: String, monitorSubMenu: NSMenu) {
-    for addedSliderHandler in addedSliderHandlers {
-      addSliderItem(monitorSubMenu: monitorSubMenu, sliderHandler: addedSliderHandler)
+    if false, !DEBUG_MACOS10, #available(macOS 11.0, *) { // TODO: The new menu look is still under construction so it is disabled in the commit
+      class BlockView: NSView {
+        override func draw(_ dirtyRect: NSRect) {
+          let radius = CGFloat(11)
+          let outerMargin = CGFloat(15)
+          let blockRect = self.frame.insetBy(dx: outerMargin, dy: outerMargin/2 + 2).offsetBy(dx: 0, dy: outerMargin/2 * -1 + 1)
+          for i in 1...5 {
+            let blockPath = NSBezierPath(roundedRect: blockRect.insetBy(dx: CGFloat(i) * -1, dy: CGFloat(i) * -1), xRadius: radius + CGFloat(i) * 0.5, yRadius: radius + CGFloat(i) * 0.5)
+            NSColor.black.withAlphaComponent(0.1 / CGFloat(i)).setStroke()
+            blockPath.stroke()
+          }
+          let blockPath = NSBezierPath(roundedRect: blockRect, xRadius: radius, yRadius: radius)
+          if [NSAppearance.Name.darkAqua, NSAppearance.Name.vibrantDark].contains(effectiveAppearance.name) {
+            NSColor.systemGray.withAlphaComponent(0.3).setStroke()
+            blockPath.stroke()
+          }
+          if !([NSAppearance.Name.darkAqua, NSAppearance.Name.vibrantDark].contains(effectiveAppearance.name)) {
+            NSColor.white.withAlphaComponent(0.5).setFill()
+            blockPath.fill()
+          }
+        }
+      }
+      var contentWidth: CGFloat = 0
+      var contentHeight: CGFloat = 0
+      for addedSliderHandler in addedSliderHandlers {
+        contentWidth = max(addedSliderHandler.view!.frame.width, contentWidth)
+        contentHeight += addedSliderHandler.view!.frame.height
+      }
+      var blockNameView: NSTextField?
+      if blockName != "" {
+        contentHeight += 20
+        let attrs: [NSAttributedString.Key: Any] = [.foregroundColor: NSColor.systemGray, .font: NSFont.boldSystemFont(ofSize: 12)]
+        blockNameView = NSTextField(labelWithAttributedString: NSAttributedString(string: blockName, attributes: attrs))
+      }
+      let margin = CGFloat(15)
+      let itemView = BlockView(frame: NSRect(x: 0, y: 0, width: contentWidth + margin * 2, height: contentHeight + margin * 2))
+      var sliderPosition = CGFloat(margin * -1 + 1)
+      for addedSliderHandler in addedSliderHandlers {
+        addedSliderHandler.view!.setFrameOrigin(NSPoint(x: margin, y: margin + margin/2 + sliderPosition))
+        itemView.addSubview(addedSliderHandler.view!)
+        sliderPosition += addedSliderHandler.view!.frame.height
+      }
+      if let blockNameView = blockNameView {
+        blockNameView.setFrameOrigin(NSPoint(x: margin + 13, y: contentHeight - 10))
+        itemView.addSubview(blockNameView)
+      }
+      let item = NSMenuItem()
+      item.view = itemView
+      monitorSubMenu.insertItem(item, at: 0)
+    } else {
+      for addedSliderHandler in addedSliderHandlers {
+        addSliderItem(monitorSubMenu: monitorSubMenu, sliderHandler: addedSliderHandler)
+      }
     }
   }
 
@@ -120,11 +171,11 @@ class MenuHandler: NSMenu {
       addedSliderHandlers.append(setupMenuSliderHandler(command: .brightness, display: display, title: title))
     }
     if !prefs.bool(forKey: PrefKey.slidersCombine.rawValue) {
-      self.addDisplayMenuBlock(addedSliderHandlers: addedSliderHandlers, blockName: "", monitorSubMenu: monitorSubMenu)
+      self.addDisplayMenuBlock(addedSliderHandlers: addedSliderHandlers, blockName: (display.readPrefAsString(key: .friendlyName) != "" ? display.readPrefAsString(key: .friendlyName) : display.name), monitorSubMenu: monitorSubMenu)
     }
     if addedSliderHandlers.count>0, !prefs.bool(forKey: PrefKey.slidersRelevant.rawValue), !prefs.bool(forKey: PrefKey.slidersCombine.rawValue), numOfDisplays > 1 {
       self.appendMenuHeader(friendlyName: (display.readPrefAsString(key: .friendlyName) != "" ? display.readPrefAsString(key: .friendlyName) : display.name), monitorSubMenu: monitorSubMenu, asSubMenu: asSubMenu)
-    }
+    } // TODO: This stuff will be needed for macOS10 and classic menu view, but should not be located here!
     if prefs.integer(forKey: PrefKey.menuIcon.rawValue) == MenuIcon.sliderOnly.rawValue {
       app.statusItem.isVisible = addedSliderHandlers.count>0
     }
