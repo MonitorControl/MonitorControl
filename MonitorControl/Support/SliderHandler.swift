@@ -9,7 +9,8 @@ class SliderHandler {
   var percentageBox: NSTextField?
   var displays: [Display] = []
   var values: [CGDirectDisplayID: Float] = [:]
-  let cmd: Command
+  var title: String
+  let command: Command
   var icon: ClickThroughImageView?
 
   class MCSliderCell: NSSliderCell {
@@ -208,8 +209,9 @@ class SliderHandler {
     }
   }
 
-  public init(display: Display?, command: Command, title: String) {
-    self.cmd = command
+  public init(display: Display?, command: Command, title: String = "", position: Int = 0) {
+    self.command = command
+    self.title = title
     let slider = SliderHandler.MCSlider(value: 0, minValue: 0, maxValue: 1, target: self, action: #selector(SliderHandler.valueChanged))
     let showPercent = prefs.bool(forKey: PrefKey.enableSliderPercent.rawValue)
     slider.isEnabled = true
@@ -264,10 +266,10 @@ class SliderHandler {
   func addDisplay(_ display: Display) {
     self.displays.append(display)
     if let otherDisplay = display as? OtherDisplay {
-      let value = otherDisplay.setupSliderCurrentValue(command: self.cmd)
+      let value = otherDisplay.setupSliderCurrentValue(command: self.command)
       self.setValue(value, displayID: otherDisplay.identifier)
     } else if let appleDisplay = display as? AppleDisplay {
-      if self.cmd == .brightness {
+      if self.command == .brightness {
         self.setValue(appleDisplay.getAppleBrightness(), displayID: appleDisplay.identifier)
       }
     }
@@ -284,21 +286,21 @@ class SliderHandler {
 
   func valueChangedOtherDisplay(otherDisplay: OtherDisplay, value: Float) {
     // For the speaker volume slider, also set/unset the mute command when the value is changed from/to 0
-    if self.cmd == .audioSpeakerVolume, (otherDisplay.readPrefAsInt(for: .audioMuteScreenBlank) == 1 && value > 0) || (otherDisplay.readPrefAsInt(for: .audioMuteScreenBlank) != 1 && value == 0) {
+    if self.command == .audioSpeakerVolume, (otherDisplay.readPrefAsInt(for: .audioMuteScreenBlank) == 1 && value > 0) || (otherDisplay.readPrefAsInt(for: .audioMuteScreenBlank) != 1 && value == 0) {
       otherDisplay.toggleMute(fromVolumeSlider: true)
     }
-    if self.cmd == Command.brightness {
+    if self.command == Command.brightness {
       _ = otherDisplay.setBrightness(value)
       return
     } else if !otherDisplay.isSw() {
-      if self.cmd == Command.audioSpeakerVolume {
+      if self.command == Command.audioSpeakerVolume {
         if !otherDisplay.readPrefAsBool(key: .enableMuteUnmute) || value != 0 {
-          _ = otherDisplay.writeDDCValues(command: self.cmd, value: otherDisplay.convValueToDDC(for: self.cmd, from: value))
+          _ = otherDisplay.writeDDCValues(command: self.command, value: otherDisplay.convValueToDDC(for: self.command, from: value))
         }
       } else {
-        _ = otherDisplay.writeDDCValues(command: self.cmd, value: otherDisplay.convValueToDDC(for: self.cmd, from: value))
+        _ = otherDisplay.writeDDCValues(command: self.command, value: otherDisplay.convValueToDDC(for: self.command, from: value))
       }
-      otherDisplay.savePref(value, for: self.cmd)
+      otherDisplay.savePref(value, for: self.command)
     }
   }
 
@@ -323,7 +325,7 @@ class SliderHandler {
     }
     for display in self.displays {
       slider.setHighlightItem(display.identifier, value: value)
-      if self.cmd == .brightness, let appleDisplay = display as? AppleDisplay {
+      if self.command == .brightness, let appleDisplay = display as? AppleDisplay {
         _ = appleDisplay.setBrightness(value)
       } else if let otherDisplay = display as? OtherDisplay {
         self.valueChangedOtherDisplay(otherDisplay: otherDisplay, value: value)
@@ -335,7 +337,7 @@ class SliderHandler {
   func updateIcon() {
     // This looks hideous so I disable it for now. Maybe after a bit of tinkering it will look better
     /*
-     if self.cmd == .audioSpeakerVolume {
+     if self.command == .audioSpeakerVolume {
        let value = self.slider?.floatValue ?? 0.5
        if value > 2/3 {
          self.icon?.image = NSImage(systemSymbolName: "speaker.wave.3.fill", accessibilityDescription: "")
