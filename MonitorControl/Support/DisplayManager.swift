@@ -4,8 +4,6 @@ import Cocoa
 import CoreGraphics
 import os.log
 
-let DEBUG_GAMMA_ENFORCER = false
-
 class DisplayManager {
   public static let shared = DisplayManager()
 
