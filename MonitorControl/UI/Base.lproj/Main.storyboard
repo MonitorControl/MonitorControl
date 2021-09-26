@@ -373,14 +373,14 @@
         <scene sceneID="YU5-7I-f0n">
             <objects>
                 <viewController storyboardIdentifier="MenuslidersPrefsVC" id="tLm-u5-aZ2" customClass="MenuslidersPrefsViewController" customModule="MonitorControl" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" translatesAutoresizingMaskIntoConstraints="NO" id="5un-m0-FM4">
-                        <rect key="frame" x="0.0" y="0.0" width="691" height="632"/>
+                    <view key="view" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5un-m0-FM4">
+                        <rect key="frame" x="0.0" y="0.0" width="691" height="636"/>
                         <subviews>
                             <gridView xPlacement="leading" yPlacement="fill" rowAlignment="none" rowSpacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="ZrF-7t-BP5">
                                 <rect key="frame" x="20" y="20" width="651" height="592"/>
                                 <rows>
-                                    <gridRow bottomPadding="-6" id="jyr-gk-BEN"/>
-                                    <gridRow bottomPadding="-6" id="ZS3-Gy-pfA"/>
+                                    <gridRow height="20" bottomPadding="-6" id="jyr-gk-BEN"/>
+                                    <gridRow height="20" bottomPadding="-6" id="ZS3-Gy-pfA"/>
                                     <gridRow bottomPadding="-13" id="OpF-3Q-ZZp"/>
                                     <gridRow bottomPadding="-13" id="HAl-L8-LPI"/>
                                     <gridRow bottomPadding="-10" id="Cor-61-8R5"/>
@@ -450,8 +450,8 @@
                                         </textField>
                                     </gridCell>
                                     <gridCell row="ZS3-Gy-pfA" column="V6M-Jv-Agj" xPlacement="leading" id="QXg-i0-lVT">
-                                        <popUpButton key="contentView" verticalHuggingPriority="750" placeholderIntrinsicWidth="150" placeholderIntrinsicHeight="20" translatesAutoresizingMaskIntoConstraints="NO" id="6td-Zq-3e7">
-                                            <rect key="frame" x="234" y="534" width="157" height="25"/>
+                                        <popUpButton key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6td-Zq-3e7">
+                                            <rect key="frame" x="234" y="534" width="126" height="25"/>
                                             <popUpButtonCell key="cell" type="push" title="Show as text" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="fWd-Es-zsy" id="2lO-tb-DFv">
                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" metaFont="menu"/>
