@@ -5,6 +5,7 @@ import os.log
 
 class SliderHandler {
   var slider: MCSlider?
+  var view: NSView?
   var percentageBox: NSTextField?
   var displays: [Display] = []
   var values: [CGDirectDisplayID: Float] = [:]
@@ -327,13 +328,12 @@ class SliderHandler {
     percentageBox.alphaValue = 0.7
   }
 
-  static func configureSliderHandler(toMenu menu: NSMenu, display: Display, command: Command, title: String, numOfTickMarks: Int = 0, combinedSliderHandler: SliderHandler? = nil, position: Int = 0) -> SliderHandler {
+  static func configureSliderHandler(display: Display, command: Command, title: String, numOfTickMarks: Int = 0, combinedSliderHandler: SliderHandler? = nil) -> SliderHandler {
     var handler: SliderHandler
     if combinedSliderHandler != nil {
       handler = combinedSliderHandler!
       handler.add(display)
     } else {
-      let item = NSMenuItem()
       handler = SliderHandler(display: display, command: command)
       let slider = SliderHandler.MCSlider(value: 0, minValue: 0, maxValue: 1, target: handler, action: #selector(SliderHandler.valueChanged))
       let showPercent = prefs.bool(forKey: PKey.enableSliderPercent.rawValue)
@@ -366,15 +366,11 @@ class SliderHandler {
           handler.percentageBox = percentageBox
           view.addSubview(percentageBox)
         }
-        item.view = view
-        menu.insertItem(item, at: position)
+        handler.view = view
       } else {
         slider.frame.size.width = 180
         slider.frame.origin = NSPoint(x: 15, y: 5)
         let view = NSView(frame: NSRect(x: 0, y: 0, width: slider.frame.width + 30 + (showPercent ? 38 : 0), height: slider.frame.height + 10))
-        let sliderHeaderItem = NSMenuItem()
-        let attrs: [NSAttributedString.Key: Any] = [.foregroundColor: NSColor.systemGray, .font: NSFont.systemFont(ofSize: 12)]
-        sliderHeaderItem.attributedTitle = NSAttributedString(string: title, attributes: attrs)
         view.addSubview(slider)
         if showPercent {
           let percentageBox = NSTextField(frame: NSRect(x: 15 + slider.frame.size.width - 2, y: 18, width: 40, height: 12))
@@ -382,9 +378,7 @@ class SliderHandler {
           handler.percentageBox = percentageBox
           view.addSubview(percentageBox)
         }
-        item.view = view
-        menu.insertItem(item, at: position)
-        menu.insertItem(sliderHeaderItem, at: position)
+        handler.view = view
       }
       slider.maxValue = 1
     }
