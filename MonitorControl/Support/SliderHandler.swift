@@ -245,7 +245,7 @@ class SliderHandler {
     }
     var value = slider.floatValue
     self.updateIcon()
-    if prefs.bool(forKey: PKey.enableSliderSnap.rawValue) {
+    if prefs.bool(forKey: PrefKey.enableSliderSnap.rawValue) {
       let intPercent = Int(value * 100)
       let snapInterval = 25
       let snapThreshold = 3
@@ -328,7 +328,7 @@ class SliderHandler {
     percentageBox.alphaValue = 0.7
   }
 
-  static func configureSliderHandler(display: Display, command: Command, title: String, numOfTickMarks: Int = 0, combinedSliderHandler: SliderHandler? = nil) -> SliderHandler {
+  static func sliderHandlerFactory(display: Display, command: Command, title: String, combinedSliderHandler: SliderHandler? = nil) -> SliderHandler {
     var handler: SliderHandler
     if combinedSliderHandler != nil {
       handler = combinedSliderHandler!
@@ -336,9 +336,9 @@ class SliderHandler {
     } else {
       handler = SliderHandler(display: display, command: command)
       let slider = SliderHandler.MCSlider(value: 0, minValue: 0, maxValue: 1, target: handler, action: #selector(SliderHandler.valueChanged))
-      let showPercent = prefs.bool(forKey: PKey.enableSliderPercent.rawValue)
+      let showPercent = prefs.bool(forKey: PrefKey.enableSliderPercent.rawValue)
       slider.isEnabled = true
-      slider.setNumOfCustomTickmarks(numOfTickMarks)
+      slider.setNumOfCustomTickmarks(prefs.bool(forKey: PrefKey.showTickMarks.rawValue) ? 5 : 0)
       handler.slider = slider
       if !DEBUG_MACOS10, #available(macOS 11.0, *) {
         slider.frame.size.width = 180

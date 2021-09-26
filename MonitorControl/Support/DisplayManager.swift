@@ -324,7 +324,7 @@ class DisplayManager {
 
   func restoreSwBrightnessForAllDisplays(async: Bool = false) {
     for otherDisplay in self.getOtherDisplays() {
-      if (otherDisplay.readPrefAsFloat(for: .brightness) == 0 && !prefs.bool(forKey: PKey.disableCombinedBrightness.rawValue)) || (otherDisplay.readPrefAsFloat(for: .brightness) < 0.5 && !prefs.bool(forKey: PKey.separateCombinedScale.rawValue) && !prefs.bool(forKey: PKey.disableCombinedBrightness.rawValue)) || otherDisplay.isSw() {
+      if (otherDisplay.readPrefAsFloat(for: .brightness) == 0 && !prefs.bool(forKey: PrefKey.disableCombinedBrightness.rawValue)) || (otherDisplay.readPrefAsFloat(for: .brightness) < 0.5 && !prefs.bool(forKey: PrefKey.separateCombinedScale.rawValue) && !prefs.bool(forKey: PrefKey.disableCombinedBrightness.rawValue)) || otherDisplay.isSw() {
         let savedPrefValue = otherDisplay.readPrefAsFloat(key: .SwBrightness)
         if otherDisplay.getSwBrightness() != savedPrefValue {
           OSDUtils.popEmptyOsd(displayID: otherDisplay.identifier, command: Command.brightness) // This will give the user a hint why is the brightness suddenly changes and also give screen activity to counter the 'no gamma change when there is no screen activity' issue on some macs
@@ -347,17 +347,17 @@ class DisplayManager {
     let allDisplays = self.getAllDisplays()
     var currentDisplay: Display?
     if isBrightness {
-      if prefs.bool(forKey: PKey.allScreensBrightness.rawValue) {
+      if prefs.bool(forKey: PrefKey.allScreensBrightness.rawValue) {
         affectedDisplays = allDisplays
         return affectedDisplays
       }
-      currentDisplay = self.getCurrentDisplay(byFocus: prefs.bool(forKey: PKey.useFocusInsteadOfMouse.rawValue))
+      currentDisplay = self.getCurrentDisplay(byFocus: prefs.bool(forKey: PrefKey.useFocusInsteadOfMouse.rawValue))
     }
     if isVolume {
-      if prefs.bool(forKey: PKey.allScreensVolume.rawValue) {
+      if prefs.bool(forKey: PrefKey.allScreensVolume.rawValue) {
         affectedDisplays = allDisplays
         return affectedDisplays
-      } else if prefs.bool(forKey: PKey.useAudioDeviceNameMatching.rawValue) {
+      } else if prefs.bool(forKey: PrefKey.useAudioDeviceNameMatching.rawValue) {
         return self.audioControlTargetDisplays
       }
       currentDisplay = self.getCurrentDisplay(byFocus: false)

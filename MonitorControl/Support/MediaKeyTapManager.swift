@@ -26,10 +26,10 @@ class MediaKeyTapManager: MediaKeyTapDelegate {
       return
     }
     var isSmallIncrement = modifiers?.isSuperset(of: NSEvent.ModifierFlags([.shift, .option])) ?? false
-    if [.brightnessUp, .brightnessDown].contains(mediaKey), prefs.bool(forKey: PKey.useFineScaleBrightness.rawValue) {
+    if [.brightnessUp, .brightnessDown].contains(mediaKey), prefs.bool(forKey: PrefKey.useFineScaleBrightness.rawValue) {
       isSmallIncrement = !isSmallIncrement
     }
-    if [.volumeUp, .volumeDown, .mute].contains(mediaKey), prefs.bool(forKey: PKey.useFineScaleVolume.rawValue) {
+    if [.volumeUp, .volumeDown, .mute].contains(mediaKey), prefs.bool(forKey: PrefKey.useFineScaleVolume.rawValue) {
       isSmallIncrement = !isSmallIncrement
     }
     if isPressed, isControlModifier, mediaKey == .brightnessUp || mediaKey == .brightnessDown {
@@ -83,7 +83,7 @@ class MediaKeyTapManager: MediaKeyTapDelegate {
       switch mediaKey {
       case .brightnessUp:
         var isAnyDisplayInSwAfterBrightnessMode: Bool = false
-        for display in affectedDisplays where ((display as? OtherDisplay)?.isSwBrightnessNotDefault() ?? false) && !((display as? OtherDisplay)?.isSw() ?? false) && prefs.bool(forKey: PKey.separateCombinedScale.rawValue) {
+        for display in affectedDisplays where ((display as? OtherDisplay)?.isSwBrightnessNotDefault() ?? false) && !((display as? OtherDisplay)?.isSw() ?? false) && prefs.bool(forKey: PrefKey.separateCombinedScale.rawValue) {
           isAnyDisplayInSwAfterBrightnessMode = true
         }
         if isPressed, !(isAnyDisplayInSwAfterBrightnessMode && !(((display as? OtherDisplay)?.isSwBrightnessNotDefault() ?? false) && !((display as? OtherDisplay)?.isSw() ?? false))) {
@@ -133,10 +133,10 @@ class MediaKeyTapManager: MediaKeyTapDelegate {
 
   func updateMediaKeyTap() {
     var keys: [MediaKey] = []
-    if !prefs.bool(forKey: PKey.disableListenForBrightness.rawValue) {
+    if !prefs.bool(forKey: PrefKey.disableListenForBrightness.rawValue) {
       keys.append(contentsOf: [.brightnessUp, .brightnessDown])
     }
-    if !prefs.bool(forKey: PKey.disableListenForVolume.rawValue) {
+    if !prefs.bool(forKey: PrefKey.disableListenForVolume.rawValue) {
       keys.append(contentsOf: [.mute, .volumeUp, .volumeDown])
     }
     // Remove keys if no external displays are connected
@@ -151,7 +151,7 @@ class MediaKeyTapManager: MediaKeyTapDelegate {
     // Remove volume related keys if audio device is controllable
     if !isInternalDisplayOnly, let defaultAudioDevice = app.coreAudio.defaultOutputDevice {
       let keysToDelete: [MediaKey] = [.volumeUp, .volumeDown, .mute]
-      if !prefs.bool(forKey: PKey.allScreensVolume.rawValue), prefs.bool(forKey: PKey.useAudioDeviceNameMatching.rawValue) {
+      if !prefs.bool(forKey: PrefKey.allScreensVolume.rawValue), prefs.bool(forKey: PrefKey.useAudioDeviceNameMatching.rawValue) {
         if DisplayManager.shared.updateAudioControlTargetDisplays(deviceName: defaultAudioDevice.name) == 0 {
           keys.removeAll { keysToDelete.contains($0) }
         }

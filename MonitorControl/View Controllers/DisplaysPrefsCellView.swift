@@ -154,7 +154,7 @@ class DisplaysPrefsCellView: NSTableCellView {
         _ = display.setDirectBrightness(display.getSwBrightness())
       case .on:
         display.savePref(false, key: .forceSw)
-        _ = display.setSwBrightness(1, smooth: !prefs.bool(forKey: PKey.disableSmoothBrightness.rawValue))
+        _ = display.setSwBrightness(1, smooth: !prefs.bool(forKey: PrefKey.disableSmoothBrightness.rawValue))
         _ = display.setBrightness(1)
       default:
         break
@@ -221,7 +221,7 @@ class DisplaysPrefsCellView: NSTableCellView {
 
   @IBAction func unavailableDDC(_ sender: NSButton) {
     let command = self.tagCommand(sender.tag)
-    let prefKey = PKey.unavailableDDC
+    let prefKey = PrefKey.unavailableDDC
     if let display = display as? OtherDisplay {
       switch sender.state {
       case .on:
@@ -239,7 +239,7 @@ class DisplaysPrefsCellView: NSTableCellView {
 
   @IBAction func minDDCOverride(_ sender: NSTextField) {
     let command = self.tagCommand(sender.tag)
-    let prefKey = PKey.minDDCOverride
+    let prefKey = PrefKey.minDDCOverride
     let value = sender.stringValue
     if let display = display as? OtherDisplay {
       if let intValue = Int(value), intValue >= 0, intValue <= 65535 {
@@ -260,7 +260,7 @@ class DisplaysPrefsCellView: NSTableCellView {
 
   @IBAction func maxDDCOverride(_ sender: NSTextField) {
     let command = self.tagCommand(sender.tag)
-    let prefKey = PKey.maxDDCOverride
+    let prefKey = PrefKey.maxDDCOverride
     let value = sender.stringValue
     if let display = display as? OtherDisplay {
       if !value.isEmpty, let intValue = UInt(value) {
@@ -281,7 +281,7 @@ class DisplaysPrefsCellView: NSTableCellView {
 
   @IBAction func curveDDC(_ sender: NSSlider) {
     let command = self.tagCommand(sender.tag)
-    let prefKey = PKey.curveDDC
+    let prefKey = PrefKey.curveDDC
     let value = Int(sender.intValue)
     if let display = display as? OtherDisplay {
       display.savePref(value, key: prefKey, for: command)
@@ -290,7 +290,7 @@ class DisplaysPrefsCellView: NSTableCellView {
 
   @IBAction func invertDDC(_ sender: NSButton) {
     let command = self.tagCommand(sender.tag)
-    let prefKey = PKey.invertDDC
+    let prefKey = PrefKey.invertDDC
     if let display = display as? OtherDisplay {
       switch sender.state {
       case .on:
@@ -306,7 +306,7 @@ class DisplaysPrefsCellView: NSTableCellView {
 
   @IBAction func remapDDC(_ sender: NSTextField) {
     let command = self.tagCommand(sender.tag)
-    let prefKey = PKey.remapDDC
+    let prefKey = PrefKey.remapDDC
     let value = sender.stringValue
     if let display = display as? OtherDisplay {
       if !value.isEmpty, let intValue = UInt(value, radix: 16), intValue != 0 {

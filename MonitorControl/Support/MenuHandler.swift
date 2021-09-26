@@ -27,16 +27,16 @@ class MenuHandler: NSMenu {
     self.clearMenu()
     let currentDisplay = DisplayManager.shared.getCurrentDisplay()
     var displays: [Display] = []
-    if !prefs.bool(forKey: PKey.hideAppleFromMenu.rawValue) {
+    if !prefs.bool(forKey: PrefKey.hideAppleFromMenu.rawValue) {
       displays.append(contentsOf: DisplayManager.shared.getAppleDisplays())
     }
-    if !prefs.bool(forKey: PKey.disableSoftwareFallback.rawValue) {
+    if !prefs.bool(forKey: PrefKey.disableSoftwareFallback.rawValue) {
       displays.append(contentsOf: DisplayManager.shared.getOtherDisplays())
     } else {
       displays.append(contentsOf: DisplayManager.shared.getDdcCapableDisplays())
     }
-    let relevant = prefs.bool(forKey: PKey.slidersRelevant.rawValue)
-    let combine = prefs.bool(forKey: PKey.slidersCombine.rawValue)
+    let relevant = prefs.bool(forKey: PrefKey.slidersRelevant.rawValue)
+    let combine = prefs.bool(forKey: PrefKey.slidersCombine.rawValue)
     let numOfDisplays = displays.count
     if numOfDisplays != 0 {
       let asSubMenu: Bool = (displays.count > 3 && relevant && !combine) ? true : false
@@ -68,39 +68,38 @@ class MenuHandler: NSMenu {
   }
 
   func updateDisplayMenu(display: Display, asSubMenu: Bool, numOfDisplays: Int) {
-    let relevant = prefs.bool(forKey: PKey.slidersRelevant.rawValue)
-    let combine = prefs.bool(forKey: PKey.slidersCombine.rawValue)
+    let relevant = prefs.bool(forKey: PrefKey.slidersRelevant.rawValue)
+    let combine = prefs.bool(forKey: PrefKey.slidersCombine.rawValue)
     os_log("Addig menu item for display %{public}@", type: .info, "\(display.identifier)")
     let monitorSubMenu: NSMenu = asSubMenu ? NSMenu() : self
-    let numOfTickMarks = prefs.bool(forKey: PKey.showTickMarks.rawValue) ? 5 : 0
     var hasSlider = false
     display.brightnessSliderHandler = nil
     if let otherDisplay = display as? OtherDisplay, !otherDisplay.isSw() {
       otherDisplay.contrastSliderHandler = nil
       otherDisplay.volumeSliderHandler = nil
-      if !display.readPrefAsBool(key: .unavailableDDC, for: .audioSpeakerVolume), !prefs.bool(forKey: PKey.hideVolume.rawValue) {
+      if !display.readPrefAsBool(key: .unavailableDDC, for: .audioSpeakerVolume), !prefs.bool(forKey: PrefKey.hideVolume.rawValue) {
         let position = (combine && self.combinedBrightnessSliderHandler != nil) ? (self.combinedContrastSliderHandler != nil ? 2 : 1) : 0
         let title = NSLocalizedString("Volume", comment: "Shown in menu")
-        let volumeSliderHandler = SliderHandler.configureSliderHandler(display: otherDisplay, command: .audioSpeakerVolume, title: title, numOfTickMarks: numOfTickMarks, combinedSliderHandler: combine ? self.combinedVolumeSliderHandler : nil)
+        let volumeSliderHandler = SliderHandler.sliderHandlerFactory(display: otherDisplay, command: .audioSpeakerVolume, title: title, combinedSliderHandler: combine ? self.combinedVolumeSliderHandler : nil)
         self.combinedVolumeSliderHandler = combine ? volumeSliderHandler : nil
         otherDisplay.volumeSliderHandler = volumeSliderHandler
         hasSlider = true
         addSliderItem(monitorSubMenu: monitorSubMenu, sliderHandler: volumeSliderHandler, position: position, title: title)
       }
-      if prefs.bool(forKey: PKey.showContrast.rawValue), !display.readPrefAsBool(key: .unavailableDDC, for: .contrast) {
+      if prefs.bool(forKey: PrefKey.showContrast.rawValue), !display.readPrefAsBool(key: .unavailableDDC, for: .contrast) {
         let position = (combine && self.combinedBrightnessSliderHandler != nil) ? 1 : 0
         let title = NSLocalizedString("Contrast", comment: "Shown in menu")
-        let contrastSliderHandler = SliderHandler.configureSliderHandler(display: otherDisplay, command: .contrast, title: title, numOfTickMarks: numOfTickMarks, combinedSliderHandler: combine ? self.combinedContrastSliderHandler : nil)
+        let contrastSliderHandler = SliderHandler.sliderHandlerFactory(display: otherDisplay, command: .contrast, title: title, combinedSliderHandler: combine ? self.combinedContrastSliderHandler : nil)
         self.combinedContrastSliderHandler = combine ? contrastSliderHandler : nil
         otherDisplay.contrastSliderHandler = contrastSliderHandler
         hasSlider = true
         addSliderItem(monitorSubMenu: monitorSubMenu, sliderHandler: contrastSliderHandler, position: position, title: title)
       }
     }
-    if !prefs.bool(forKey: PKey.hideBrightness.rawValue), !display.readPrefAsBool(key: .unavailableDDC, for: .brightness) {
+    if !prefs.bool(forKey: PrefKey.hideBrightness.rawValue), !display.readPrefAsBool(key: .unavailableDDC, for: .brightness) {
       let position = 0
       let title = NSLocalizedString("Brightness", comment: "Shown in menu")
-      let brightnessSliderHandler = SliderHandler.configureSliderHandler(display: display, command: .brightness, title: title, numOfTickMarks: numOfTickMarks, combinedSliderHandler: combine ? self.combinedBrightnessSliderHandler : nil)
+      let brightnessSliderHandler = SliderHandler.sliderHandlerFactory(display: display, command: .brightness, title: title, combinedSliderHandler: combine ? self.combinedBrightnessSliderHandler : nil)
       display.brightnessSliderHandler = brightnessSliderHandler
       self.combinedBrightnessSliderHandler = combine ? brightnessSliderHandler : nil
       hasSlider = true
@@ -109,7 +108,7 @@ class MenuHandler: NSMenu {
     if hasSlider, !relevant, !combine, numOfDisplays > 1 {
       self.appendMenuHeader(friendlyName: (display.readPrefAsString(key: .friendlyName) != "" ? display.readPrefAsString(key: .friendlyName) : display.name), monitorSubMenu: monitorSubMenu, asSubMenu: asSubMenu)
     }
-    if prefs.integer(forKey: PKey.menuIcon.rawValue) == MenuIcon.sliderOnly.rawValue {
+    if prefs.integer(forKey: PrefKey.menuIcon.rawValue) == MenuIcon.sliderOnly.rawValue {
       app.statusItem.isVisible = hasSlider
     }
   }
@@ -127,7 +126,7 @@ class MenuHandler: NSMenu {
   }
 
   func updateMenuRelevantDisplay() {
-    if prefs.bool(forKey: PKey.slidersRelevant.rawValue) {
+    if prefs.bool(forKey: PrefKey.slidersRelevant.rawValue) {
       if let display = DisplayManager.shared.getCurrentDisplay(), display.identifier != self.lastMenuRelevantDisplayId {
         os_log("Menu must be refreshed as relevant display changed since last time.")
         self.lastMenuRelevantDisplayId = display.identifier
@@ -137,7 +136,7 @@ class MenuHandler: NSMenu {
   }
 
   func addDefaultMenuOptions() {
-    if !DEBUG_MACOS10, #available(macOS 11.0, *), prefs.integer(forKey: PKey.menuItemStyle.rawValue) == MenuItemStyle.icon.rawValue {
+    if !DEBUG_MACOS10, #available(macOS 11.0, *), prefs.integer(forKey: PrefKey.menuItemStyle.rawValue) == MenuItemStyle.icon.rawValue {
       let iconSize = CGFloat(22)
       let viewWidth = CGFloat(194 + 16)
 
@@ -170,7 +169,7 @@ class MenuHandler: NSMenu {
       let item = NSMenuItem()
       item.view = menuItemView
       self.addItem(item)
-    } else if prefs.integer(forKey: PKey.menuItemStyle.rawValue) == MenuItemStyle.text.rawValue {
+    } else if prefs.integer(forKey: PrefKey.menuItemStyle.rawValue) == MenuItemStyle.text.rawValue {
       self.addItem(withTitle: NSLocalizedString("Preferences...", comment: "Shown in menu"), action: #selector(app.prefsClicked), keyEquivalent: "")
       self.addItem(withTitle: NSLocalizedString("Quit", comment: "Shown in menu"), action: #selector(app.quitClicked), keyEquivalent: "")
       self.insertItem(NSMenuItem.separator(), at: 0)

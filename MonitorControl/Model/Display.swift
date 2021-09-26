@@ -28,32 +28,32 @@ class Display: Equatable {
   var defaultGammaTableSampleCount: UInt32 = 0
   var defaultGammaTablePeak: Float = 1
 
-  func prefExists(key: PKey? = nil, for command: Command? = nil) -> Bool {
-    return prefs.object(forKey: (key ?? PKey.value).rawValue + (command != nil ? String((command ?? Command.none).rawValue) : "") + self.prefsId) != nil
+  func prefExists(key: PrefKey? = nil, for command: Command? = nil) -> Bool {
+    return prefs.object(forKey: (key ?? PrefKey.value).rawValue + (command != nil ? String((command ?? Command.none).rawValue) : "") + self.prefsId) != nil
   }
 
-  func removePref(key: PKey, for command: Command? = nil) {
+  func removePref(key: PrefKey, for command: Command? = nil) {
     prefs.removeObject(forKey: key.rawValue + (command != nil ? String((command ?? Command.none).rawValue) : "") + self.prefsId)
   }
 
-  func savePref<T>(_ value: T, key: PKey? = nil, for command: Command? = nil) {
-    prefs.set(value, forKey: (key ?? PKey.value).rawValue + (command != nil ? String((command ?? Command.none).rawValue) : "") + self.prefsId)
+  func savePref<T>(_ value: T, key: PrefKey? = nil, for command: Command? = nil) {
+    prefs.set(value, forKey: (key ?? PrefKey.value).rawValue + (command != nil ? String((command ?? Command.none).rawValue) : "") + self.prefsId)
   }
 
-  func readPrefAsFloat(key: PKey? = nil, for command: Command? = nil) -> Float {
-    return prefs.float(forKey: (key ?? PKey.value).rawValue + (command != nil ? String((command ?? Command.none).rawValue) : "") + self.prefsId)
+  func readPrefAsFloat(key: PrefKey? = nil, for command: Command? = nil) -> Float {
+    return prefs.float(forKey: (key ?? PrefKey.value).rawValue + (command != nil ? String((command ?? Command.none).rawValue) : "") + self.prefsId)
   }
 
-  func readPrefAsInt(key: PKey? = nil, for command: Command? = nil) -> Int {
-    return prefs.integer(forKey: (key ?? PKey.value).rawValue + (command != nil ? String((command ?? Command.none).rawValue) : "") + self.prefsId)
+  func readPrefAsInt(key: PrefKey? = nil, for command: Command? = nil) -> Int {
+    return prefs.integer(forKey: (key ?? PrefKey.value).rawValue + (command != nil ? String((command ?? Command.none).rawValue) : "") + self.prefsId)
   }
 
-  func readPrefAsBool(key: PKey? = nil, for command: Command? = nil) -> Bool {
-    return prefs.bool(forKey: (key ?? PKey.value).rawValue + (command != nil ? String((command ?? Command.none).rawValue) : "") + self.prefsId)
+  func readPrefAsBool(key: PrefKey? = nil, for command: Command? = nil) -> Bool {
+    return prefs.bool(forKey: (key ?? PrefKey.value).rawValue + (command != nil ? String((command ?? Command.none).rawValue) : "") + self.prefsId)
   }
 
-  func readPrefAsString(key: PKey? = nil, for command: Command? = nil) -> String {
-    return prefs.string(forKey: (key ?? PKey.value).rawValue + (command != nil ? String((command ?? Command.none).rawValue) : "") + self.prefsId) ?? ""
+  func readPrefAsString(key: PrefKey? = nil, for command: Command? = nil) -> String {
+    return prefs.string(forKey: (key ?? PrefKey.value).rawValue + (command != nil ? String((command ?? Command.none).rawValue) : "") + self.prefsId) ?? ""
   }
 
   internal init(_ identifier: CGDirectDisplayID, name: String, vendorNumber: UInt32?, modelNumber: UInt32?, isVirtual: Bool = false) {
@@ -97,7 +97,7 @@ class Display: Equatable {
   }
 
   func setBrightness(_ to: Float = -1, slow: Bool = false) -> Bool {
-    if !prefs.bool(forKey: PKey.disableSmoothBrightness.rawValue) {
+    if !prefs.bool(forKey: PrefKey.disableSmoothBrightness.rawValue) {
       return self.setSmoothBrightness(to, slow: slow)
     } else {
       return self.setDirectBrightness(to)

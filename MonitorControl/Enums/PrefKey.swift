@@ -1,6 +1,6 @@
 //  Copyright © MonitorControl. @JoniVR, @theOneyouseek, @waydabber and others
 
-enum PKey: String {
+enum PrefKey: String {
   // Enable mute DDC for display
   case enableMuteUnmute
 

@@ -39,7 +39,7 @@ class MainPrefsViewController: NSViewController, PreferencePane {
   @IBOutlet var rowDisableSoftwareFallbackText: NSGridRow!
 
   func showAdvanced() -> Bool {
-    let hide = !prefs.bool(forKey: PKey.showAdvancedSettings.rawValue)
+    let hide = !prefs.bool(forKey: PrefKey.showAdvancedSettings.rawValue)
     if self.notEnableDDCDuringStartup.state == .on {
       self.rowStartupSeparator.isHidden = hide
       self.rowDoNothingStartupCheck.isHidden = hide
@@ -88,14 +88,14 @@ class MainPrefsViewController: NSViewController, PreferencePane {
     // This is marked as deprectated but according to the function header it still does not have a replacement as of macOS 12 Monterey and is valid to use.
     let startAtLogin = (SMCopyAllJobDictionaries(kSMDomainUserLaunchd).takeRetainedValue() as? [[String: AnyObject]])?.first { $0["Label"] as? String == "\(Bundle.main.bundleIdentifier!)Helper" }?["OnDemand"] as? Bool ?? false
     self.startAtLogin.state = startAtLogin ? .on : .off
-    self.combinedBrightness.state = prefs.bool(forKey: PKey.disableCombinedBrightness.rawValue) ? .off : .on
-    self.disableSoftwareFallback.state = prefs.bool(forKey: PKey.disableSoftwareFallback.rawValue) ? .on : .off
-    self.enableSmooth.state = prefs.bool(forKey: PKey.disableSmoothBrightness.rawValue) ? .off : .on
-    self.enableBrightnessSync.state = prefs.bool(forKey: PKey.enableBrightnessSync.rawValue) ? .on : .off
-    self.showAdvancedDisplays.state = prefs.bool(forKey: PKey.showAdvancedSettings.rawValue) ? .on : .off
-    self.notEnableDDCDuringStartup.state = !prefs.bool(forKey: PKey.enableDDCDuringStartup.rawValue) ? .on : .off
-    self.writeDDCOnStartup.state = !prefs.bool(forKey: PKey.readDDCInsteadOfRestoreValues.rawValue) && prefs.bool(forKey: PKey.enableDDCDuringStartup.rawValue) ? .on : .off
-    self.readDDCOnStartup.state = prefs.bool(forKey: PKey.readDDCInsteadOfRestoreValues.rawValue) && prefs.bool(forKey: PKey.enableDDCDuringStartup.rawValue) ? .on : .off
+    self.combinedBrightness.state = prefs.bool(forKey: PrefKey.disableCombinedBrightness.rawValue) ? .off : .on
+    self.disableSoftwareFallback.state = prefs.bool(forKey: PrefKey.disableSoftwareFallback.rawValue) ? .on : .off
+    self.enableSmooth.state = prefs.bool(forKey: PrefKey.disableSmoothBrightness.rawValue) ? .off : .on
+    self.enableBrightnessSync.state = prefs.bool(forKey: PrefKey.enableBrightnessSync.rawValue) ? .on : .off
+    self.showAdvancedDisplays.state = prefs.bool(forKey: PrefKey.showAdvancedSettings.rawValue) ? .on : .off
+    self.notEnableDDCDuringStartup.state = !prefs.bool(forKey: PrefKey.enableDDCDuringStartup.rawValue) ? .on : .off
+    self.writeDDCOnStartup.state = !prefs.bool(forKey: PrefKey.readDDCInsteadOfRestoreValues.rawValue) && prefs.bool(forKey: PrefKey.enableDDCDuringStartup.rawValue) ? .on : .off
+    self.readDDCOnStartup.state = prefs.bool(forKey: PrefKey.readDDCInsteadOfRestoreValues.rawValue) && prefs.bool(forKey: PrefKey.enableDDCDuringStartup.rawValue) ? .on : .off
     // Preload Display preferences to some extent to properly set up size in orther that animation won't fail
     menuslidersPrefsVc?.view.layoutSubtreeIfNeeded()
     keyboardPrefsVc?.view.layoutSubtreeIfNeeded()
@@ -117,14 +117,14 @@ class MainPrefsViewController: NSViewController, PreferencePane {
   @IBAction func combinedBrightness(_ sender: NSButton) {
     switch sender.state {
     case .on:
-      prefs.set(false, forKey: PKey.disableCombinedBrightness.rawValue)
+      prefs.set(false, forKey: PrefKey.disableCombinedBrightness.rawValue)
       DisplayManager.shared.resetSwBrightnessForAllDisplays(async: false)
       for display in DisplayManager.shared.getDdcCapableDisplays() where !display.isSw() {
         _ = display.setDirectBrightness(0.5 + display.getBrightness() / 2)
       }
     case .off:
-      prefs.set(true, forKey: PKey.disableCombinedBrightness.rawValue)
-      DisplayManager.shared.resetSwBrightnessForAllDisplays(async: !prefs.bool(forKey: PKey.disableSmoothBrightness.rawValue))
+      prefs.set(true, forKey: PrefKey.disableCombinedBrightness.rawValue)
+      DisplayManager.shared.resetSwBrightnessForAllDisplays(async: !prefs.bool(forKey: PrefKey.disableSmoothBrightness.rawValue))
       for display in DisplayManager.shared.getDdcCapableDisplays() where !display.isSw() {
         _ = display.setDirectBrightness(max(0, (display.getBrightness() - 0.5) * 2))
       }
@@ -139,9 +139,9 @@ class MainPrefsViewController: NSViewController, PreferencePane {
       for display in DisplayManager.shared.getOtherDisplays() where display.isSw() {
         _ = display.setBrightness(1)
       }
-      prefs.set(true, forKey: PKey.disableSoftwareFallback.rawValue)
+      prefs.set(true, forKey: PrefKey.disableSoftwareFallback.rawValue)
     case .off:
-      prefs.set(false, forKey: PKey.disableSoftwareFallback.rawValue)
+      prefs.set(false, forKey: PrefKey.disableSoftwareFallback.rawValue)
       for display in DisplayManager.shared.getOtherDisplays() where display.isSw() {
         _ = display.setBrightness(1)
       }
@@ -154,9 +154,9 @@ class MainPrefsViewController: NSViewController, PreferencePane {
   @IBAction func enableSmooth(_ sender: NSButton) {
     switch sender.state {
     case .on:
-      prefs.set(false, forKey: PKey.disableSmoothBrightness.rawValue)
+      prefs.set(false, forKey: PrefKey.disableSmoothBrightness.rawValue)
     case .off:
-      prefs.set(true, forKey: PKey.disableSmoothBrightness.rawValue)
+      prefs.set(true, forKey: PrefKey.disableSmoothBrightness.rawValue)
     default: break
     }
   }
@@ -164,9 +164,9 @@ class MainPrefsViewController: NSViewController, PreferencePane {
   @IBAction func enableBrightnessSync(_ sender: NSButton) {
     switch sender.state {
     case .on:
-      prefs.set(true, forKey: PKey.enableBrightnessSync.rawValue)
+      prefs.set(true, forKey: PrefKey.enableBrightnessSync.rawValue)
     case .off:
-      prefs.set(false, forKey: PKey.enableBrightnessSync.rawValue)
+      prefs.set(false, forKey: PrefKey.enableBrightnessSync.rawValue)
     default: break
     }
   }
@@ -174,8 +174,8 @@ class MainPrefsViewController: NSViewController, PreferencePane {
   @IBAction func notEnableDDCDuringStartupClicked(_ sender: NSButton) {
     switch sender.state {
     case .on:
-      prefs.set(false, forKey: PKey.enableDDCDuringStartup.rawValue)
-      prefs.set(false, forKey: PKey.readDDCInsteadOfRestoreValues.rawValue)
+      prefs.set(false, forKey: PrefKey.enableDDCDuringStartup.rawValue)
+      prefs.set(false, forKey: PrefKey.readDDCInsteadOfRestoreValues.rawValue)
       self.writeDDCOnStartup.state = .off
       self.readDDCOnStartup.state = .off
     default: break
@@ -186,8 +186,8 @@ class MainPrefsViewController: NSViewController, PreferencePane {
   @IBAction func writeDDCOnStartupClicked(_ sender: NSButton) {
     switch sender.state {
     case .on:
-      prefs.set(false, forKey: PKey.readDDCInsteadOfRestoreValues.rawValue)
-      prefs.set(true, forKey: PKey.enableDDCDuringStartup.rawValue)
+      prefs.set(false, forKey: PrefKey.readDDCInsteadOfRestoreValues.rawValue)
+      prefs.set(true, forKey: PrefKey.enableDDCDuringStartup.rawValue)
       self.notEnableDDCDuringStartup.state = .off
       self.readDDCOnStartup.state = .off
     default: break
@@ -198,8 +198,8 @@ class MainPrefsViewController: NSViewController, PreferencePane {
   @IBAction func readDDCOnStartupClicked(_ sender: NSButton) {
     switch sender.state {
     case .on:
-      prefs.set(true, forKey: PKey.readDDCInsteadOfRestoreValues.rawValue)
-      prefs.set(true, forKey: PKey.enableDDCDuringStartup.rawValue)
+      prefs.set(true, forKey: PrefKey.readDDCInsteadOfRestoreValues.rawValue)
+      prefs.set(true, forKey: PrefKey.enableDDCDuringStartup.rawValue)
       self.notEnableDDCDuringStartup.state = .off
       self.writeDDCOnStartup.state = .off
     default: break
@@ -210,9 +210,9 @@ class MainPrefsViewController: NSViewController, PreferencePane {
   @IBAction func showAdvancedClicked(_ sender: NSButton) {
     switch sender.state {
     case .on:
-      prefs.set(true, forKey: PKey.showAdvancedSettings.rawValue)
+      prefs.set(true, forKey: PrefKey.showAdvancedSettings.rawValue)
     case .off:
-      prefs.set(false, forKey: PKey.showAdvancedSettings.rawValue)
+      prefs.set(false, forKey: PrefKey.showAdvancedSettings.rawValue)
     default: break
     }
     _ = self.showAdvanced()
