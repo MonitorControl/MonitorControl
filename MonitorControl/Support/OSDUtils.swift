@@ -7,6 +7,7 @@ class OSDUtils: NSObject {
     case brightness = 1
     case audioSpeaker = 3
     case audioSpeakerMuted = 4
+    case contrast = 0
   }
 
   static func getOSDImageByCommand(command: Command, value: Float = 1) -> OSDImage {
@@ -14,6 +15,7 @@ class OSDUtils: NSObject {
     switch command {
     case .audioSpeakerVolume: osdImage = value > 0 ? .audioSpeaker : .audioSpeakerMuted
     case .audioMuteScreenBlank: osdImage = .audioSpeakerMuted
+    case .contrast: osdImage = .contrast
     default: osdImage = .brightness
     }
     return osdImage

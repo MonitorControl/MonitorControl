@@ -13,9 +13,11 @@ class MediaKeyTapManager: MediaKeyTapDelegate {
   func handle(mediaKey: MediaKey, event: KeyEvent?, modifiers: NSEvent.ModifierFlags?) {
     let isPressed = event?.keyPressed ?? true
     let isRepeat = event?.keyRepeat ?? false
-    let isControlModifier = modifiers?.isSuperset(of: NSEvent.ModifierFlags([.control])) ?? false
-    let isCommandModifier = modifiers?.isSuperset(of: NSEvent.ModifierFlags([.command])) ?? false
-    if isPressed, isCommandModifier, !isControlModifier, mediaKey == .brightnessDown, DisplayManager.engageMirror() {
+    let isControl = modifiers?.isSuperset(of: NSEvent.ModifierFlags([.control])) ?? false
+    let isCommand = modifiers?.isSuperset(of: NSEvent.ModifierFlags([.command])) ?? false
+    let isOption = modifiers?.isSuperset(of: NSEvent.ModifierFlags([.option])) ?? false
+    let isShift = modifiers?.isSuperset(of: NSEvent.ModifierFlags([.shift])) ?? false
+    if isPressed, isCommand, !isControl, mediaKey == .brightnessDown, DisplayManager.engageMirror() {
       return
     }
     guard app.sleepID == 0, app.reconfigureID == 0 else {
@@ -25,15 +27,16 @@ class MediaKeyTapManager: MediaKeyTapDelegate {
     if isPressed, self.handleOpenPrefPane(mediaKey: mediaKey, event: event, modifiers: modifiers) {
       return
     }
-    var isSmallIncrement = modifiers?.isSuperset(of: NSEvent.ModifierFlags([.shift, .option])) ?? false
+    var isSmallIncrement = isOption && isShift
+    let isContrast = isControl && isOption && isCommand
     if [.brightnessUp, .brightnessDown].contains(mediaKey), prefs.bool(forKey: PrefKey.useFineScaleBrightness.rawValue) {
       isSmallIncrement = !isSmallIncrement
     }
     if [.volumeUp, .volumeDown, .mute].contains(mediaKey), prefs.bool(forKey: PrefKey.useFineScaleVolume.rawValue) {
       isSmallIncrement = !isSmallIncrement
     }
-    if isPressed, isControlModifier, mediaKey == .brightnessUp || mediaKey == .brightnessDown {
-      self.handleDirectedBrightness(isCommandModifier: isCommandModifier, isUp: mediaKey == .brightnessUp, isSmallIncrement: isSmallIncrement)
+    if isPressed, isControl, !isOption, mediaKey == .brightnessUp || mediaKey == .brightnessDown {
+      self.handleDirectedBrightness(isCommandModifier: isCommand, isUp: mediaKey == .brightnessUp, isSmallIncrement: isSmallIncrement)
       return
     }
     let oppositeKey: MediaKey? = self.oppositeMediaKey(mediaKey: mediaKey)
@@ -47,7 +50,7 @@ class MediaKeyTapManager: MediaKeyTapDelegate {
       }
       mediaKeyTimer.invalidate()
     }
-    self.sendDisplayCommand(mediaKey: mediaKey, isRepeat: isRepeat, isSmallIncrement: isSmallIncrement, isPressed: isPressed)
+    self.sendDisplayCommand(mediaKey: mediaKey, isRepeat: isRepeat, isSmallIncrement: isSmallIncrement, isPressed: isPressed, isContrast: isContrast)
   }
 
   func handleDirectedBrightness(isCommandModifier: Bool, isUp: Bool, isSmallIncrement: Bool) {
@@ -74,7 +77,7 @@ class MediaKeyTapManager: MediaKeyTapDelegate {
     }
   }
 
-  private func sendDisplayCommand(mediaKey: MediaKey, isRepeat: Bool, isSmallIncrement: Bool, isPressed: Bool) {
+  private func sendDisplayCommand(mediaKey: MediaKey, isRepeat: Bool, isSmallIncrement: Bool, isPressed: Bool, isContrast: Bool = false) {
     guard app.sleepID == 0, app.reconfigureID == 0, let affectedDisplays = DisplayManager.shared.getAffectedDisplays(isBrightness: [.brightnessUp, .brightnessDown].contains(mediaKey), isVolume: [.volumeUp, .volumeDown, .mute].contains(mediaKey)) else {
       return
     }
@@ -82,15 +85,21 @@ class MediaKeyTapManager: MediaKeyTapDelegate {
     for display in affectedDisplays where !(display.readPrefAsBool(key: .isDisabled)) {
       switch mediaKey {
       case .brightnessUp:
-        var isAnyDisplayInSwAfterBrightnessMode: Bool = false
-        for display in affectedDisplays where ((display as? OtherDisplay)?.isSwBrightnessNotDefault() ?? false) && !((display as? OtherDisplay)?.isSw() ?? false) && prefs.bool(forKey: PrefKey.separateCombinedScale.rawValue) {
-          isAnyDisplayInSwAfterBrightnessMode = true
-        }
-        if isPressed, !(isAnyDisplayInSwAfterBrightnessMode && !(((display as? OtherDisplay)?.isSwBrightnessNotDefault() ?? false) && !((display as? OtherDisplay)?.isSw() ?? false))) {
-          display.stepBrightness(isUp: mediaKey == .brightnessUp, isSmallIncrement: isSmallIncrement)
+        if isContrast, isPressed, let otherDisplay = display as? OtherDisplay {
+          otherDisplay.stepContrast(isUp: mediaKey == .brightnessUp, isSmallIncrement: isSmallIncrement)
+        } else {
+          var isAnyDisplayInSwAfterBrightnessMode: Bool = false
+          for display in affectedDisplays where ((display as? OtherDisplay)?.isSwBrightnessNotDefault() ?? false) && !((display as? OtherDisplay)?.isSw() ?? false) && prefs.bool(forKey: PrefKey.separateCombinedScale.rawValue) {
+            isAnyDisplayInSwAfterBrightnessMode = true
+          }
+          if isPressed, !(isAnyDisplayInSwAfterBrightnessMode && !(((display as? OtherDisplay)?.isSwBrightnessNotDefault() ?? false) && !((display as? OtherDisplay)?.isSw() ?? false))) {
+            display.stepBrightness(isUp: mediaKey == .brightnessUp, isSmallIncrement: isSmallIncrement)
+          }
         }
       case .brightnessDown:
-        if isPressed {
+        if isContrast, isPressed, let otherDisplay = display as? OtherDisplay {
+          otherDisplay.stepContrast(isUp: mediaKey == .brightnessUp, isSmallIncrement: isSmallIncrement)
+        } else if isPressed {
           display.stepBrightness(isUp: mediaKey == .brightnessUp, isSmallIncrement: isSmallIncrement)
         }
       case .mute:
@@ -169,7 +178,7 @@ class MediaKeyTapManager: MediaKeyTapDelegate {
 
   func handleOpenPrefPane(mediaKey: MediaKey, event: KeyEvent?, modifiers: NSEvent.ModifierFlags?) -> Bool {
     guard let modifiers = modifiers else { return false }
-    if !(modifiers.contains(.option) && !modifiers.contains(.shift)) {
+    if !(modifiers.contains(.option) && !modifiers.contains(.shift) && !modifiers.contains(.control) && !modifiers.contains(.command)) {
       return false
     }
     if event?.keyRepeat == true {

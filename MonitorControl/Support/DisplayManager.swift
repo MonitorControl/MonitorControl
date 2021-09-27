@@ -342,7 +342,7 @@ class DisplayManager {
     }
   }
 
-  func getAffectedDisplays(isBrightness: Bool = false, isVolume: Bool = false) -> [Display]? {
+  func getAffectedDisplays(isBrightness: Bool = false, isVolume: Bool = false, isContrast: Bool = false) -> [Display]? {
     var affectedDisplays: [Display]
     let allDisplays = self.getAllDisplays()
     var currentDisplay: Display?

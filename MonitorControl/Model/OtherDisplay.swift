@@ -14,7 +14,6 @@ class OtherDisplay: Display {
   var isDiscouraged: Bool = false
   let DDC_MAX_DETECT_LIMIT: Int = 100
   private var audioPlayer: AVAudioPlayer?
-
   var pollingCount: Int {
     get {
       switch self.readPrefAsInt(key: .pollingMode) {
@@ -189,6 +188,25 @@ class OtherDisplay: Display {
       self.savePref(volumeOSDValue, for: .audioSpeakerVolume)
       if let slider = self.sliderHandler[.audioSpeakerVolume] {
         slider.setValue(volumeOSDValue, displayID: self.identifier)
+      }
+    }
+  }
+
+  func stepContrast(isUp: Bool, isSmallIncrement: Bool) {
+    guard !self.readPrefAsBool(key: .unavailableDDC, for: .contrast) else {
+      return
+    }
+    let currentValue = self.readPrefAsFloat(for: .contrast)
+    let contrastOSDValue = self.calcNewValue(currentValue: currentValue, isUp: isUp, isSmallIncrement: isSmallIncrement)
+    let isAlreadySet = contrastOSDValue == self.readPrefAsFloat(for: .contrast)
+    if !isAlreadySet {
+      _ = self.writeDDCValues(command: .contrast, value: self.convValueToDDC(for: .contrast, from: contrastOSDValue))
+    }
+    OSDUtils.showOsd(displayID: self.identifier, command: .contrast, value: contrastOSDValue, roundChiclet: !isSmallIncrement)
+    if !isAlreadySet {
+      self.savePref(contrastOSDValue, for: .contrast)
+      if let slider = self.sliderHandler[.contrast] {
+        slider.setValue(contrastOSDValue, displayID: self.identifier)
       }
     }
   }
