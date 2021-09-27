@@ -60,11 +60,6 @@ class MenuslidersPrefsViewController: NSViewController, PreferencePane {
 
     var doNotHideRowIconSeparator = false
 
-    var macOS11orUp = false
-    if !DEBUG_MACOS10, #available(macOS 11.0, *) {
-      macOS11orUp = true
-    }
-
     if self.iconShow.selectedTag() != MenuIcon.show.rawValue {
       self.rowIconShow.isHidden = false
       doNotHideRowIconSeparator = true
@@ -72,7 +67,7 @@ class MenuslidersPrefsViewController: NSViewController, PreferencePane {
       self.rowIconShow.isHidden = hide
     }
 
-    if !macOS11orUp {
+    if app.macOS10() {
       self.rowMenuItemStyle.isHidden = true
     } else if self.menuItemStyle.selectedTag() != MenuItemStyle.text.rawValue {
       self.rowMenuItemStyle.isHidden = false
@@ -129,7 +124,7 @@ class MenuslidersPrefsViewController: NSViewController, PreferencePane {
       }
     }
 
-    if !macOS11orUp {
+    if app.macOS10() {
       self.rowTickCheck.isHidden = true
       self.rowTickText.isHidden = true
     } else if self.showTickMarks.state == .on {

@@ -43,6 +43,7 @@ class MonitorControl: NSObject, NSApplicationDelegate {
   func applicationDidFinishLaunching(_: Notification) {
     app = self
     menu = MenuHandler()
+    menu.delegate = menu
     self.subscribeEventListeners()
     if NSEvent.modifierFlags.contains(NSEvent.ModifierFlags.shift) {
       self.safeMode = true
@@ -161,7 +162,7 @@ class MonitorControl: NSObject, NSApplicationDelegate {
     NSWorkspace.shared.notificationCenter.addObserver(self, selector: #selector(self.sleepNotification), name: NSWorkspace.willSleepNotification, object: nil)
     NSWorkspace.shared.notificationCenter.addObserver(self, selector: #selector(self.wakeNotofication), name: NSWorkspace.didWakeNotification, object: nil)
     _ = DistributedNotificationCenter.default().addObserver(forName: NSNotification.Name(rawValue: "com.apple.accessibility.api"), object: nil, queue: nil) { _ in DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { self.updateMediaKeyTap() } } // listen for accessibility status changes
-    NotificationCenter.default.addObserver(forName: NSWindow.didChangeOcclusionStateNotification, object: self.statusItem.button?.menu, queue: nil) { _ in menu.updateMenuRelevantDisplay() }
+    // NotificationCenter.default.addObserver(forName: NSWindow.didChangeOcclusionStateNotification, object: self.statusItem.button?.menu, queue: nil) { _ in menu.updateMenuRelevantDisplay() }
   }
 
   @objc private func sleepNotification() {
@@ -285,6 +286,14 @@ class MonitorControl: NSObject, NSApplicationDelegate {
     } catch {
       os_log("Error reading system prefs plist: %{public}@", type: .info, error.localizedDescription)
       return nil
+    }
+  }
+
+  func macOS10() -> Bool {
+    if !DEBUG_MACOS10, #available(macOS 11.0, *) {
+      return false
+    } else {
+      return true
     }
   }
 }
