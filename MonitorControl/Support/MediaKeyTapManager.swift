@@ -78,30 +78,17 @@ class MediaKeyTapManager: MediaKeyTapDelegate {
   }
 
   private func sendDisplayCommand(mediaKey: MediaKey, isRepeat: Bool, isSmallIncrement: Bool, isPressed: Bool, isContrast: Bool = false) {
-    guard app.sleepID == 0, app.reconfigureID == 0, let affectedDisplays = DisplayManager.shared.getAffectedDisplays(isBrightness: [.brightnessUp, .brightnessDown].contains(mediaKey), isVolume: [.volumeUp, .volumeDown, .mute].contains(mediaKey)) else {
+    self.sendDisplayCommandVolumeMute(mediaKey: mediaKey, isRepeat: isRepeat, isSmallIncrement: isSmallIncrement, isPressed: isPressed)
+    self.sendDisplayCommandBrightnessContrast(mediaKey: mediaKey, isRepeat: isRepeat, isSmallIncrement: isSmallIncrement, isPressed: isPressed, isContrast: isContrast)
+  }
+
+  private func sendDisplayCommandVolumeMute(mediaKey: MediaKey, isRepeat: Bool, isSmallIncrement: Bool, isPressed: Bool) {
+    guard [.volumeUp, .volumeDown, .mute].contains(mediaKey), app.sleepID == 0, app.reconfigureID == 0, let affectedDisplays = DisplayManager.shared.getAffectedDisplays(isBrightness: false, isVolume: true) else {
       return
     }
     var wasNotIsPressedVolumeSentAlready = false
     for display in affectedDisplays where !(display.readPrefAsBool(key: .isDisabled)) {
       switch mediaKey {
-      case .brightnessUp:
-        if isContrast, isPressed, let otherDisplay = display as? OtherDisplay {
-          otherDisplay.stepContrast(isUp: mediaKey == .brightnessUp, isSmallIncrement: isSmallIncrement)
-        } else {
-          var isAnyDisplayInSwAfterBrightnessMode: Bool = false
-          for display in affectedDisplays where ((display as? OtherDisplay)?.isSwBrightnessNotDefault() ?? false) && !((display as? OtherDisplay)?.isSw() ?? false) && prefs.bool(forKey: PrefKey.separateCombinedScale.rawValue) {
-            isAnyDisplayInSwAfterBrightnessMode = true
-          }
-          if isPressed, !(isAnyDisplayInSwAfterBrightnessMode && !(((display as? OtherDisplay)?.isSwBrightnessNotDefault() ?? false) && !((display as? OtherDisplay)?.isSw() ?? false))) {
-            display.stepBrightness(isUp: mediaKey == .brightnessUp, isSmallIncrement: isSmallIncrement)
-          }
-        }
-      case .brightnessDown:
-        if isContrast, isPressed, let otherDisplay = display as? OtherDisplay {
-          otherDisplay.stepContrast(isUp: mediaKey == .brightnessUp, isSmallIncrement: isSmallIncrement)
-        } else if isPressed {
-          display.stepBrightness(isUp: mediaKey == .brightnessUp, isSmallIncrement: isSmallIncrement)
-        }
       case .mute:
         // The mute key should not respond to press + hold or keyup
         if !isRepeat, isPressed, let display = display as? OtherDisplay {
@@ -121,8 +108,36 @@ class MediaKeyTapManager: MediaKeyTapDelegate {
             wasNotIsPressedVolumeSentAlready = true
           }
         }
-      default:
-        return
+      default: continue
+      }
+    }
+  }
+
+  private func sendDisplayCommandBrightnessContrast(mediaKey: MediaKey, isRepeat: Bool, isSmallIncrement: Bool, isPressed: Bool, isContrast: Bool = false) {
+    guard [.brightnessUp, .brightnessDown].contains(mediaKey), app.sleepID == 0, app.reconfigureID == 0, isPressed, let affectedDisplays = DisplayManager.shared.getAffectedDisplays(isBrightness: true, isVolume: false) else {
+      return
+    }
+    for display in affectedDisplays where !(display.readPrefAsBool(key: .isDisabled)) {
+      switch mediaKey {
+      case .brightnessUp:
+        if isContrast, let otherDisplay = display as? OtherDisplay {
+          otherDisplay.stepContrast(isUp: mediaKey == .brightnessUp, isSmallIncrement: isSmallIncrement)
+        } else {
+          var isAnyDisplayInSwAfterBrightnessMode: Bool = false
+          for display in affectedDisplays where ((display as? OtherDisplay)?.isSwBrightnessNotDefault() ?? false) && !((display as? OtherDisplay)?.isSw() ?? false) && prefs.bool(forKey: PrefKey.separateCombinedScale.rawValue) {
+            isAnyDisplayInSwAfterBrightnessMode = true
+          }
+          if !(isAnyDisplayInSwAfterBrightnessMode && !(((display as? OtherDisplay)?.isSwBrightnessNotDefault() ?? false) && !((display as? OtherDisplay)?.isSw() ?? false))) {
+            display.stepBrightness(isUp: mediaKey == .brightnessUp, isSmallIncrement: isSmallIncrement)
+          }
+        }
+      case .brightnessDown:
+        if isContrast, let otherDisplay = display as? OtherDisplay {
+          otherDisplay.stepContrast(isUp: mediaKey == .brightnessUp, isSmallIncrement: isSmallIncrement)
+        } else {
+          display.stepBrightness(isUp: mediaKey == .brightnessUp, isSmallIncrement: isSmallIncrement)
+        }
+      default: continue
       }
     }
   }

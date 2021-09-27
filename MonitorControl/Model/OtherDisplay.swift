@@ -193,7 +193,7 @@ class OtherDisplay: Display {
   }
 
   func stepContrast(isUp: Bool, isSmallIncrement: Bool) {
-    guard !self.readPrefAsBool(key: .unavailableDDC, for: .contrast) else {
+    guard !self.readPrefAsBool(key: .unavailableDDC, for: .contrast), !self.isSw() else {
       return
     }
     let currentValue = self.readPrefAsFloat(for: .contrast)
