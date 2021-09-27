@@ -145,7 +145,7 @@ class DisplaysPrefsViewController: NSViewController, PreferencePane, NSTableView
       if !DEBUG_MACOS10, #available(macOS 11.0, *) {
         cell.displayImage.image = NSImage(systemSymbolName: displayInfo.displayImage, accessibilityDescription: display.name)!
       } else {
-        cell.displayImage.image = NSImage(named: NSImage.computerName)!
+        cell.displayImage.image = NSImage(named: NSImage.touchBarIconViewTemplateName)!
       }
       // Disable Volume OSD
       if let otherDisplay = display as? OtherDisplay, !otherDisplay.isSw() {
@@ -169,6 +169,9 @@ class DisplaysPrefsViewController: NSViewController, PreferencePane, NSTableView
         cell.longerDelayButton.state = otherDisplay.readPrefAsBool(key: .longerDelay) ? .on : .off
         cell.enableMuteButton.isEnabled = true
         cell.enableMuteButton.state = otherDisplay.readPrefAsBool(key: .enableMuteUnmute) ? .on : .off
+
+        cell.combinedBrightnessSwitchingPoint.isEnabled = true
+        cell.combinedBrightnessSwitchingPoint.intValue = Int32(otherDisplay.readPrefAsInt(key: .combinedBrightnessSwitchingPoint))
 
         cell.audioDeviceNameOverride.isEnabled = true
         cell.audioDeviceNameOverride.stringValue = otherDisplay.readPrefAsString(key: .audioDeviceNameOverride)
@@ -224,6 +227,9 @@ class DisplaysPrefsViewController: NSViewController, PreferencePane, NSTableView
         cell.longerDelayButton.isEnabled = false
         cell.enableMuteButton.state = .off
         cell.enableMuteButton.isEnabled = false
+
+        cell.combinedBrightnessSwitchingPoint.intValue = 0
+        cell.combinedBrightnessSwitchingPoint.isEnabled = false
 
         cell.audioDeviceNameOverride.isEnabled = false
         cell.audioDeviceNameOverride.stringValue = ""
@@ -283,7 +289,7 @@ class DisplaysPrefsViewController: NSViewController, PreferencePane, NSTableView
 
   func updateDisplayListRowHeight() {
     if prefs.bool(forKey: PrefKey.showAdvancedSettings.rawValue) {
-      self.displayList?.rowHeight = 445
+      self.displayList?.rowHeight = 500
       self.constraintHeight?.constant = self.displayList.rowHeight + 15
     } else {
       self.displayList?.rowHeight = 165

@@ -85,6 +85,9 @@ enum PrefKey: String {
   // Lower via software after brightness
   case disableCombinedBrightness
 
+  // Lower via software after brightness
+  case combinedBrightnessSwitchingPoint
+
   // Use separated OSD scale for combined brightness
   case separateCombinedScale
 

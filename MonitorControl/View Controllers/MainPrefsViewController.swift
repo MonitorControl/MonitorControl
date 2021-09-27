@@ -115,19 +115,15 @@ class MainPrefsViewController: NSViewController, PreferencePane {
   }
 
   @IBAction func combinedBrightness(_ sender: NSButton) {
+    for display in DisplayManager.shared.getDdcCapableDisplays() where !display.isSw() {
+      _ = display.setDirectBrightness(1)
+    }
+    DisplayManager.shared.resetSwBrightnessForAllDisplays(async: false)
     switch sender.state {
     case .on:
       prefs.set(false, forKey: PrefKey.disableCombinedBrightness.rawValue)
-      DisplayManager.shared.resetSwBrightnessForAllDisplays(async: false)
-      for display in DisplayManager.shared.getDdcCapableDisplays() where !display.isSw() {
-        _ = display.setDirectBrightness(0.5 + display.getBrightness() / 2)
-      }
     case .off:
       prefs.set(true, forKey: PrefKey.disableCombinedBrightness.rawValue)
-      DisplayManager.shared.resetSwBrightnessForAllDisplays(async: !prefs.bool(forKey: PrefKey.disableSmoothBrightness.rawValue))
-      for display in DisplayManager.shared.getDdcCapableDisplays() where !display.isSw() {
-        _ = display.setDirectBrightness(max(0, (display.getBrightness() - 0.5) * 2))
-      }
     default: break
     }
     app.configure()

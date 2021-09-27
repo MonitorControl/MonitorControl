@@ -26,6 +26,8 @@ class DisplaysPrefsCellView: NSTableCellView {
   @IBOutlet var pollingCount: NSTextFieldCell!
   @IBOutlet var enableMuteButton: NSButton!
 
+  @IBOutlet var combinedBrightnessSwitchingPoint: NSSlider!
+
   @IBOutlet var audioDeviceNameOverride: NSTextField!
   @IBOutlet var updateWithCurrentAudioName: NSButton!
 
@@ -151,17 +153,18 @@ class DisplaysPrefsCellView: NSTableCellView {
       switch sender.state {
       case .off:
         display.savePref(true, key: .forceSw)
-        _ = display.setDirectBrightness(display.getSwBrightness())
       case .on:
+        _ = display.setDirectBrightness(1)
         display.savePref(false, key: .forceSw)
-        _ = display.setSwBrightness(1, smooth: !prefs.bool(forKey: PrefKey.disableSmoothBrightness.rawValue))
-        _ = display.setBrightness(1)
       default:
         break
       }
+      _ = display.setSwBrightness(1)
+      _ = display.setDirectBrightness(1)
       let displayInfo = DisplaysPrefsViewController.getDisplayInfo(display: display)
       self.controlMethod.stringValue = displayInfo.controlMethod
       self.controlMethod.controlView?.toolTip = displayInfo.controlStatus
+      app.configure()
     }
   }
 
@@ -203,6 +206,12 @@ class DisplaysPrefsCellView: NSTableCellView {
     default: command = Command.brightness
     }
     return command
+  }
+
+  @IBAction func combinedBrightnessSwitchingPoint(_ sender: NSSlider) {
+    if let display = display as? OtherDisplay {
+      display.savePref(Int(sender.intValue), key: .combinedBrightnessSwitchingPoint)
+    }
   }
 
   @IBAction func audioDeviceNameOverride(_ sender: NSTextField) {
@@ -342,7 +351,8 @@ class DisplaysPrefsCellView: NSTableCellView {
         self.enableMuteButtonToggled(self.enableMuteButton)
         self.friendlyName.stringValue = disp.name
         self.friendlyNameValueChanged(self.friendlyName)
-
+        self.combinedBrightnessSwitchingPoint.intValue = 0
+        self.combinedBrightnessSwitchingPoint(self.combinedBrightnessSwitchingPoint)
         self.audioDeviceNameOverride.stringValue = ""
         self.audioDeviceNameOverride(self.audioDeviceNameOverride)
 
