@@ -317,21 +317,27 @@ class DisplaysPrefsCellView: NSTableCellView {
     let command = self.tagCommand(sender.tag)
     let prefKey = PrefKey.remapDDC
     let value = sender.stringValue
-    if let display = display as? OtherDisplay {
-      if !value.isEmpty, let intValue = UInt(value, radix: 16), intValue != 0 {
-        display.savePref(Int(intValue), key: prefKey, for: command)
-      } else {
-        display.removePref(key: prefKey, for: command)
+    let values = value.components(separatedBy: ",")
+    var normalizedValues: [String] = []
+    var normalizedString: String = ""
+    for value in values {
+      let trimmedValue = value.trimmingCharacters(in: CharacterSet(charactersIn: " "))
+      if !trimmedValue.isEmpty, let intValue = UInt8(trimmedValue, radix: 16), intValue != 0 {
+        normalizedValues.append(String(format: "%02x", intValue))
       }
-      app.configure()
-      if display.prefExists(key: prefKey, for: command) {
-        sender.stringValue = String(format: "%02x", display.readPrefAsInt(key: prefKey, for: command))
-      } else {
-        sender.stringValue = ""
-      }
-    } else {
-      sender.stringValue = ""
     }
+    var first = true
+    for normalizedValue in normalizedValues {
+      if !first {
+        normalizedString.append(", ")
+      }
+      normalizedString.append(normalizedValue)
+      first = false
+    }
+    if let display = display as? OtherDisplay {
+      display.savePref(normalizedString, key: prefKey, for: command)
+    }
+    sender.stringValue = normalizedString
   }
 
   @IBAction func resetSettings(_: NSButton) {

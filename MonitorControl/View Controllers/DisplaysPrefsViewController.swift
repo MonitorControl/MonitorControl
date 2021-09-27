@@ -215,9 +215,9 @@ class DisplaysPrefsViewController: NSViewController, PreferencePane, NSTableView
         cell.remapDDCBrightness.isEnabled = true
         cell.remapDDCVolume.isEnabled = true
         cell.remapDDCContrast.isEnabled = true
-        cell.remapDDCBrightness.stringValue = otherDisplay.readPrefAsString(key: .remapDDC, for: .brightness) == "" ? "" : String(format: "%02x", otherDisplay.readPrefAsInt(key: .remapDDC, for: .brightness))
-        cell.remapDDCVolume.stringValue = otherDisplay.readPrefAsString(key: .remapDDC, for: .audioSpeakerVolume) == "" ? "" : String(format: "%02x", otherDisplay.readPrefAsInt(key: .remapDDC, for: .audioSpeakerVolume))
-        cell.remapDDCContrast.stringValue = otherDisplay.readPrefAsString(key: .remapDDC, for: .contrast) == "" ? "" : String(format: "%02x", otherDisplay.readPrefAsInt(key: .remapDDC, for: .contrast))
+        cell.remapDDCBrightness.stringValue = otherDisplay.readPrefAsString(key: .remapDDC, for: .brightness)
+        cell.remapDDCVolume.stringValue = otherDisplay.readPrefAsString(key: .remapDDC, for: .audioSpeakerVolume)
+        cell.remapDDCContrast.stringValue = otherDisplay.readPrefAsString(key: .remapDDC, for: .contrast)
       } else {
         cell.pollingModeMenu.selectItem(withTag: 0)
         cell.pollingModeMenu.isEnabled = false

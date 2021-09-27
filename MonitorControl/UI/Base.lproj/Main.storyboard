@@ -1615,7 +1615,7 @@
                                                                                 </connections>
                                                                             </textField>
                                                                             <textField autoresizesSubviews="NO" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" tag="2" preferredMaxLayoutWidth="102" id="1GJ-OV-hV7">
-                                                                                <rect key="frame" x="477" y="36" width="56" height="19"/>
+                                                                                <rect key="frame" x="470" y="36" width="63" height="19"/>
                                                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES"/>
                                                                                 <textFieldCell key="cell" controlSize="small" selectable="YES" editable="YES" enabled="NO" sendsActionOnEndEditing="YES" borderStyle="bezel" alignment="center" bezelStyle="round" id="pSA-6B-yWO">
                                                                                     <font key="font" metaFont="smallSystem"/>
@@ -1627,7 +1627,7 @@
                                                                                 </connections>
                                                                             </textField>
                                                                             <textField autoresizesSubviews="NO" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" tag="1" preferredMaxLayoutWidth="102" id="xDF-IA-bBh">
-                                                                                <rect key="frame" x="477" y="62" width="56" height="19"/>
+                                                                                <rect key="frame" x="470" y="62" width="63" height="19"/>
                                                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES"/>
                                                                                 <textFieldCell key="cell" controlSize="small" selectable="YES" editable="YES" enabled="NO" sendsActionOnEndEditing="YES" borderStyle="bezel" alignment="center" bezelStyle="round" id="8hh-S6-be0">
                                                                                     <font key="font" metaFont="smallSystem"/>
@@ -1640,7 +1640,7 @@
                                                                                 </connections>
                                                                             </textField>
                                                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="evc-ST-hPR">
-                                                                                <rect key="frame" x="472" y="95" width="66" height="14"/>
+                                                                                <rect key="frame" x="469" y="95" width="66" height="14"/>
                                                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                                                 <textFieldCell key="cell" controlSize="small" lineBreakMode="clipping" alignment="center" title="VCP list" id="D9t-vT-gNJ">
                                                                                     <font key="font" metaFont="smallSystem"/>
@@ -1649,7 +1649,7 @@
                                                                                 </textFieldCell>
                                                                             </textField>
                                                                             <textField autoresizesSubviews="NO" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" tag="3" preferredMaxLayoutWidth="102" id="l9M-iL-Kth">
-                                                                                <rect key="frame" x="477" y="11" width="56" height="19"/>
+                                                                                <rect key="frame" x="470" y="11" width="63" height="19"/>
                                                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES"/>
                                                                                 <textFieldCell key="cell" controlSize="small" selectable="YES" editable="YES" enabled="NO" sendsActionOnEndEditing="YES" borderStyle="bezel" alignment="center" bezelStyle="round" id="ANQ-Hz-2pj">
                                                                                     <font key="font" metaFont="smallSystem"/>
@@ -1681,7 +1681,7 @@
                                                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                                             </box>
                                                                             <box horizontalHuggingPriority="750" boxType="separator" id="Lwb-97-PiW">
-                                                                                <rect key="frame" x="464" y="6" width="5" height="102"/>
+                                                                                <rect key="frame" x="459" y="6" width="5" height="102"/>
                                                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                                             </box>
                                                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="WZ8-R0-wSk">
@@ -1866,7 +1866,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="301" y="1517"/>
+            <point key="canvasLocation" x="300.5" y="1516.5"/>
         </scene>
         <!--About Prefs View Controller-->
         <scene sceneID="Ot2-lL-eIg">

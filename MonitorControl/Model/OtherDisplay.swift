@@ -336,23 +336,37 @@ class OtherDisplay: Display {
   override func getBrightness() -> Float {
     return self.prefExists(for: .brightness) ? self.readPrefAsFloat(for: .brightness) : 1
   }
+  
+  func getRemapControlCodes(command: Command) -> [UInt8] {
+    let codes = self.readPrefAsString(key: PrefKey.remapDDC, for: command).components(separatedBy: ",")
+    var intCodes: [UInt8] = []
+    for code in codes {
+      let trimmedCode = code.trimmingCharacters(in: CharacterSet(charactersIn: " "))
+      if !trimmedCode.isEmpty, let intCode = UInt8(trimmedCode, radix: 16), intCode != 0 {
+        intCodes.append(intCode)
+      }
+    }
+    return intCodes
+  }
 
   public func writeDDCValues(command: Command, value: UInt16, errorRecoveryWaitTime _: UInt32? = nil) -> Bool? {
     guard app.sleepID == 0, app.reconfigureID == 0, !self.readPrefAsBool(key: .forceSw), !self.readPrefAsBool(key: .unavailableDDC, for: command) else {
       return false
     }
     var success: Bool = false
-    var controlCode = UInt8(self.readPrefAsInt(key: .remapDDC, for: command))
-    if controlCode == 0 {
-      controlCode = command.rawValue
+    var controlCodes = getRemapControlCodes(command: command)
+    if controlCodes.count == 0 {
+      controlCodes.append(command.rawValue)
     }
-    DisplayManager.shared.ddcQueue.sync {
-      if Arm64DDC.isArm64 {
-        if self.arm64ddc {
-          success = Arm64DDC.write(service: self.arm64avService, command: controlCode, value: value)
+    for controlCode in controlCodes {
+      DisplayManager.shared.ddcQueue.sync {
+        if Arm64DDC.isArm64 {
+          if self.arm64ddc {
+            success = Arm64DDC.write(service: self.arm64avService, command: controlCode, value: value)
+          }
+        } else {
+          success = self.ddc?.write(command: command.rawValue, value: value, errorRecoveryWaitTime: 2000) ?? false
         }
-      } else {
-        success = self.ddc?.write(command: command.rawValue, value: value, errorRecoveryWaitTime: 2000) ?? false
       }
     }
     return success
@@ -363,24 +377,22 @@ class OtherDisplay: Display {
     guard app.sleepID == 0, app.reconfigureID == 0, !self.readPrefAsBool(key: .forceSw), !self.readPrefAsBool(key: .unavailableDDC, for: command) else {
       return values
     }
-    var controlCode = UInt8(self.readPrefAsInt(key: .remapDDC, for: command))
-    if controlCode == 0 {
-      controlCode = command.rawValue
-    }
+    let controlCodes = getRemapControlCodes(command: command)
+    let controlCode = controlCodes.count == 0 ? command.rawValue : controlCodes[0]
     if Arm64DDC.isArm64 {
       guard self.arm64ddc else {
         return nil
       }
       DisplayManager.shared.ddcQueue.sync {
         if let unwrappedDelay = delay {
-          values = Arm64DDC.read(service: self.arm64avService, command: command.rawValue, tries: UInt8(min(tries, 255)), minReplyDelay: UInt32(unwrappedDelay / 1000))
+          values = Arm64DDC.read(service: self.arm64avService, command: controlCode, tries: UInt8(min(tries, 255)), minReplyDelay: UInt32(unwrappedDelay / 1000))
         } else {
-          values = Arm64DDC.read(service: self.arm64avService, command: command.rawValue, tries: UInt8(min(tries, 255)))
+          values = Arm64DDC.read(service: self.arm64avService, command: controlCode, tries: UInt8(min(tries, 255)))
         }
       }
     } else {
       DisplayManager.shared.ddcQueue.sync {
-        values = self.ddc?.read(command: command.rawValue, tries: tries, minReplyDelay: delay)
+        values = self.ddc?.read(command: controlCode, tries: tries, minReplyDelay: delay)
       }
     }
     return values
