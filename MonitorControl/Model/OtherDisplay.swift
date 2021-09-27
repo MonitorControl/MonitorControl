@@ -336,7 +336,7 @@ class OtherDisplay: Display {
   override func getBrightness() -> Float {
     return self.prefExists(for: .brightness) ? self.readPrefAsFloat(for: .brightness) : 1
   }
-  
+
   func getRemapControlCodes(command: Command) -> [UInt8] {
     let codes = self.readPrefAsString(key: PrefKey.remapDDC, for: command).components(separatedBy: ",")
     var intCodes: [UInt8] = []
