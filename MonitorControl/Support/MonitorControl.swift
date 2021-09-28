@@ -142,13 +142,12 @@ class MonitorControl: NSObject, NSApplicationDelegate {
   }
 
   func updateMenusAndKeys() {
-    self.statusItem.isVisible = prefs.integer(forKey: PrefKey.menuIcon.rawValue) != MenuIcon.hide.rawValue ? true : false
     menu.updateMenus()
     self.updateMediaKeyTap()
   }
 
   func checkPermissions() {
-    let permissionsRequired: Bool = !prefs.bool(forKey: PrefKey.disableListenForVolume.rawValue) || !prefs.bool(forKey: PrefKey.disableListenForBrightness.rawValue)
+    let permissionsRequired: Bool = prefs.integer(forKey: PrefKey.keyboardVolume.rawValue) == KeyboardVolume.media.rawValue || prefs.integer(forKey: PrefKey.keyboardBrightness.rawValue) == KeyboardBrightness.media.rawValue
     if !MediaKeyTapManager.readPrivileges(prompt: false) && permissionsRequired {
       MediaKeyTapManager.acquirePrivileges()
     }

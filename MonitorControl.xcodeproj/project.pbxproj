@@ -27,6 +27,7 @@
 		AA25F6D726E68C160087F3A2 /* MediaKeyTapManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA25F6D626E68C160087F3A2 /* MediaKeyTapManager.swift */; };
 		AA3B4A2826AE103C00B74CD2 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = AA3B4A2726AE103C00B74CD2 /* README.md */; };
 		AA4398A926DD55DA00943F16 /* IntelDDC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4398A826DD55DA00943F16 /* IntelDDC.swift */; };
+		AA44E6FE27035AF300E06865 /* KeyHolder in Frameworks */ = {isa = PBXBuildFile; productRef = AA44E6FD27035AF300E06865 /* KeyHolder */; };
 		AA473EB126DFF8DE0063A181 /* Command.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA473EB026DFF8DE0063A181 /* Command.swift */; };
 		AA5314C426EBF5170041D178 /* PrefKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5314C326EBF5170041D178 /* PrefKey.swift */; };
 		AA665A5D26C5892800FEF2C1 /* AboutPrefsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA665A5C26C5892800FEF2C1 /* AboutPrefsViewController.swift */; };
@@ -109,6 +110,7 @@
 				AA9AE86F26B5BF3D00B6CA65 /* OSD.framework in Frameworks */,
 				6CD35F5C2650003F001F1344 /* Preferences in Frameworks */,
 				AADB625A26BC196900DFFAA5 /* DisplayServices.framework in Frameworks */,
+				AA44E6FE27035AF300E06865 /* KeyHolder in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -269,6 +271,7 @@
 				6CD35F52264FFFC6001F1344 /* SimplyCoreAudio */,
 				6CD35F5526500008001F1344 /* MediaKeyTap */,
 				6CD35F5B2650003F001F1344 /* Preferences */,
+				AA44E6FD27035AF300E06865 /* KeyHolder */,
 			);
 			productName = MonitorControl.OSX;
 			productReference = 56754EAB1D9A4016007BCDC5 /* MonitorControl.app */;
@@ -328,6 +331,7 @@
 				6CD35F51264FFFC6001F1344 /* XCRemoteSwiftPackageReference "SimplyCoreAudio" */,
 				6CD35F5426500008001F1344 /* XCRemoteSwiftPackageReference "MediaKeyTap" */,
 				6CD35F5A2650003F001F1344 /* XCRemoteSwiftPackageReference "Preferences" */,
+				AA44E6FC27035AF300E06865 /* XCRemoteSwiftPackageReference "KeyHolder" */,
 			);
 			productRefGroup = 56754EAC1D9A4016007BCDC5 /* Products */;
 			projectDirPath = "";
@@ -810,6 +814,14 @@
 				minimumVersion = 2.3.0;
 			};
 		};
+		AA44E6FC27035AF300E06865 /* XCRemoteSwiftPackageReference "KeyHolder" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Clipy/KeyHolder";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -827,6 +839,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 6CD35F5A2650003F001F1344 /* XCRemoteSwiftPackageReference "Preferences" */;
 			productName = Preferences;
+		};
+		AA44E6FD27035AF300E06865 /* KeyHolder */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AA44E6FC27035AF300E06865 /* XCRemoteSwiftPackageReference "KeyHolder" */;
+			productName = KeyHolder;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -24,9 +24,11 @@ class MenuHandler: NSMenu, NSMenuDelegate {
   }
 
   func updateMenus(dontClose: Bool = false) {
+    os_log("Menu update initiated", type: .debug)
     if !dontClose {
       self.cancelTrackingWithoutAnimation()
     }
+    app.statusItem.isVisible = prefs.integer(forKey: PrefKey.menuIcon.rawValue) == MenuIcon.show.rawValue ? true : false
     self.clearMenu()
     let currentDisplay = DisplayManager.shared.getCurrentDisplay()
     var displays: [Display] = []
@@ -157,7 +159,7 @@ class MenuHandler: NSMenu, NSMenuDelegate {
   }
 
   func updateDisplayMenu(display: Display, asSubMenu: Bool, numOfDisplays: Int) {
-    os_log("Addig menu item for display %{public}@", type: .info, "\(display.identifier)")
+    os_log("Addig menu items for display %{public}@", type: .info, "\(display.identifier)")
     let monitorSubMenu: NSMenu = asSubMenu ? NSMenu() : self
     var addedSliderHandlers: [SliderHandler] = []
     display.sliderHandler[.audioSpeakerVolume] = nil
@@ -178,8 +180,8 @@ class MenuHandler: NSMenu, NSMenuDelegate {
     if !prefs.bool(forKey: PrefKey.slidersCombine.rawValue) {
       self.addDisplayMenuBlock(addedSliderHandlers: addedSliderHandlers, blockName: (display.readPrefAsString(key: .friendlyName) != "" ? display.readPrefAsString(key: .friendlyName) : display.name), monitorSubMenu: monitorSubMenu, numOfDisplays: numOfDisplays, asSubMenu: asSubMenu)
     }
-    if prefs.integer(forKey: PrefKey.menuIcon.rawValue) == MenuIcon.sliderOnly.rawValue {
-      app.statusItem.isVisible = addedSliderHandlers.count>0
+    if addedSliderHandlers.count>0, prefs.integer(forKey: PrefKey.menuIcon.rawValue) == MenuIcon.sliderOnly.rawValue {
+      app.statusItem.isVisible = true
     }
   }
 
@@ -209,7 +211,7 @@ class MenuHandler: NSMenu, NSMenuDelegate {
   func addDefaultMenuOptions() {
     if !DEBUG_MACOS10, #available(macOS 11.0, *), prefs.integer(forKey: PrefKey.menuItemStyle.rawValue) == MenuItemStyle.icon.rawValue {
       let iconSize = CGFloat(22)
-      let viewWidth = self.size.width
+      let viewWidth = max(85, self.size.width)
       var compensateForBlock: CGFloat = 0
       if viewWidth > 230 { // if there are display blocks, we need to compensate a bit for the negative inset of the blocks
         compensateForBlock = 4

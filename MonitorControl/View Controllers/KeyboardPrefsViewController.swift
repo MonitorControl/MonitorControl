@@ -16,9 +16,9 @@ class KeyboardPrefsViewController: NSViewController, PreferencePane {
     }
   }
 
-  @IBOutlet var listenForBrightness: NSButton!
+  @IBOutlet var keyboardBrightness: NSPopUpButton!
+  @IBOutlet var keyboardVolume: NSPopUpButton!
   @IBOutlet var disableAltBrightnessKeys: NSButton!
-  @IBOutlet var listenForVolume: NSButton!
 
   @IBOutlet var allScreens: NSButton!
   @IBOutlet var useFocusInsteadOfMouse: NSButton!
@@ -28,10 +28,14 @@ class KeyboardPrefsViewController: NSViewController, PreferencePane {
   @IBOutlet var useFineScaleVolume: NSButton!
   @IBOutlet var separateCombinedScale: NSButton!
 
+  @IBOutlet var rowKeyboardBrightnessPopUp: NSGridRow!
+  @IBOutlet var rowKeyboardBrightnessText: NSGridRow!
   @IBOutlet var rowDisableAltBrightnessKeysCheck: NSGridRow!
   @IBOutlet var rowDisableAltBrightnessKeysText: NSGridRow!
+  @IBOutlet var rowCustomBrightnessShortcuts: NSGridRow!
   @IBOutlet var rowUseFocusCheck: NSGridRow!
   @IBOutlet var rowUseFocusText: NSGridRow!
+  @IBOutlet var rowCustomAudioShortcuts: NSGridRow!
   @IBOutlet var rowUseAudioNameCheck: NSGridRow!
   @IBOutlet var rowUseAudioNameText: NSGridRow!
   @IBOutlet var rowUseFineScaleCheck: NSGridRow!
@@ -41,13 +45,38 @@ class KeyboardPrefsViewController: NSViewController, PreferencePane {
 
   func showAdvanced() -> Bool {
     let hide = !prefs.bool(forKey: PrefKey.showAdvancedSettings.rawValue)
-    if self.disableAltBrightnessKeys.state == .on {
-      self.rowDisableAltBrightnessKeysCheck.isHidden = false
-      self.rowDisableAltBrightnessKeysText.isHidden = false
+
+    if self.keyboardBrightness.selectedTag() == KeyboardBrightness.media.rawValue {
+      rowKeyboardBrightnessPopUp.bottomPadding = -13
+      rowKeyboardBrightnessText.isHidden = false
+      if self.disableAltBrightnessKeys.state == .on {
+        self.rowDisableAltBrightnessKeysCheck.isHidden = false
+        self.rowDisableAltBrightnessKeysText.isHidden = false
+      } else {
+        self.rowDisableAltBrightnessKeysCheck.isHidden = hide
+        self.rowDisableAltBrightnessKeysText.isHidden = hide
+      }
+      rowCustomBrightnessShortcuts.isHidden = true
+    } else if self.keyboardBrightness.selectedTag() == KeyboardBrightness.custom.rawValue {
+      rowKeyboardBrightnessPopUp.bottomPadding = -6
+      rowKeyboardBrightnessText.isHidden = true
+      rowDisableAltBrightnessKeysCheck.isHidden = true
+      rowDisableAltBrightnessKeysText.isHidden = true
+      rowCustomBrightnessShortcuts.isHidden = false
     } else {
-      self.rowDisableAltBrightnessKeysCheck.isHidden = hide
-      self.rowDisableAltBrightnessKeysText.isHidden = hide
+      rowKeyboardBrightnessPopUp.bottomPadding = -6
+      rowKeyboardBrightnessText.isHidden = true
+      rowDisableAltBrightnessKeysCheck.isHidden = true
+      rowDisableAltBrightnessKeysText.isHidden = true
+      rowCustomBrightnessShortcuts.isHidden = true
     }
+
+    if self.keyboardVolume.selectedTag() == KeyboardVolume.custom.rawValue {
+      rowCustomAudioShortcuts.isHidden = false
+    } else {
+      rowCustomAudioShortcuts.isHidden = true
+    }
+
     if self.useFocusInsteadOfMouse.state == .on {
       self.rowUseFocusCheck.isHidden = false
       self.rowUseFocusText.isHidden = false
@@ -88,9 +117,9 @@ class KeyboardPrefsViewController: NSViewController, PreferencePane {
   }
 
   func populateSettings() {
-    self.listenForBrightness.state = prefs.bool(forKey: PrefKey.disableListenForBrightness.rawValue) ? .off : .on
+    self.keyboardBrightness.selectItem(withTag: prefs.integer(forKey: PrefKey.keyboardBrightness.rawValue))
+    self.keyboardVolume.selectItem(withTag: prefs.integer(forKey: PrefKey.keyboardVolume.rawValue))
     self.disableAltBrightnessKeys.state = prefs.bool(forKey: PrefKey.disableAltBrightnessKeys.rawValue) ? .on : .off
-    self.listenForVolume.state = prefs.bool(forKey: PrefKey.disableListenForVolume.rawValue) ? .off : .on
     self.allScreens.state = prefs.bool(forKey: PrefKey.allScreensBrightness.rawValue) ? .on : .off
     self.useFocusInsteadOfMouse.state = prefs.bool(forKey: PrefKey.useFocusInsteadOfMouse.rawValue) ? .on : .off
     self.allScreensVolume.state = prefs.bool(forKey: PrefKey.allScreensVolume.rawValue) ? .on : .off
@@ -187,17 +216,6 @@ class KeyboardPrefsViewController: NSViewController, PreferencePane {
     _ = self.showAdvanced()
   }
 
-  @IBAction func listenForBrightness(_ sender: NSButton) {
-    switch sender.state {
-    case .on:
-      prefs.set(false, forKey: PrefKey.disableListenForBrightness.rawValue)
-    case .off:
-      prefs.set(true, forKey: PrefKey.disableListenForBrightness.rawValue)
-    default: break
-    }
-    app.handleListenForChanged()
-  }
-
   @IBAction func disableAltBrightnessKeys(_ sender: NSButton) {
     switch sender.state {
     case .on:
@@ -209,15 +227,17 @@ class KeyboardPrefsViewController: NSViewController, PreferencePane {
     _ = self.showAdvanced()
     app.updateMediaKeyTap()
   }
-
-  @IBAction func listenForVolume(_ sender: NSButton) {
-    switch sender.state {
-    case .on:
-      prefs.set(false, forKey: PrefKey.disableListenForVolume.rawValue)
-    case .off:
-      prefs.set(true, forKey: PrefKey.disableListenForVolume.rawValue)
-    default: break
-    }
-    app.handleListenForChanged()
+  
+  @IBAction func keyboardBrightness(_ sender: NSPopUpButton) {
+    prefs.set(sender.selectedTag(), forKey: PrefKey.keyboardBrightness.rawValue)
+    app.updateMenusAndKeys()
+    _ = self.showAdvanced()
   }
+
+  @IBAction func keyboardVolume(_ sender: NSPopUpButton) {
+    prefs.set(sender.selectedTag(), forKey: PrefKey.keyboardVolume.rawValue)
+    app.updateMenusAndKeys()
+    _ = self.showAdvanced()
+  }
+
 }

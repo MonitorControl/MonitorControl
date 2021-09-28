@@ -65,10 +65,10 @@ enum PrefKey: String {
   case menuItemStyle
 
   // Keys listened for
-  case disableListenForBrightness
+  case keyboardBrightness
 
   // Keys listened for
-  case disableListenForVolume
+  case keyboardVolume
 
   // Don't listen to F14/F15
   case disableAltBrightnessKeys
@@ -167,4 +167,16 @@ enum MenuItemStyle: Int {
   case text = 0
   case icon = 1
   case hide = 2
+}
+
+enum KeyboardBrightness: Int {
+  case media = 0
+  case custom = 1
+  case disabled = 2
+}
+
+enum KeyboardVolume: Int {
+  case media = 0
+  case custom = 1
+  case disabled = 2
 }
