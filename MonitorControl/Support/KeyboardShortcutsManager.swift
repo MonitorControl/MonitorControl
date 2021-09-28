@@ -6,27 +6,13 @@ import os.log
 
 class KeyboardShortcutsManager {
 
-  var initialKeyRepeat = 0.35 // This should come from UserDefaults instead
-  var keyRepeat = 0.03 // This should come from UserDefaults instead
+  var initialKeyRepeat = 0.35 // This should come from UserDefaults instead, but it's ok for now.
+  var keyRepeat = 0.03 // This should come from UserDefaults instead, but it's ok for now.
 
   var currentCommand: KeyboardShortcuts.Name = KeyboardShortcuts.Name.none
   var isFirstKeypress = false
   var currentEventId = 0
   var isHold = false
-
-  var isBrightnessUpFirstKeypress = false
-  var isBrightnessDownFirstKeypress = false
-  var isContrastUpFirstKeypress = false
-  var isContrastDownFirstKeypress = false
-  var isVolumeUpFirstKeypress = false
-  var isVolumeDownFirstKeypress = false
-
-  var isBrightnessUpHold = false
-  var isBrightnessDownHold = false
-  var isContrastUpHold = false
-  var isContrastDownHold = false
-  var isVolumeUpHold = false
-  var isVolumeDownHold = false
 
   init() {
     KeyboardShortcuts.onKeyDown(for: .brightnessUp) { [self] in
