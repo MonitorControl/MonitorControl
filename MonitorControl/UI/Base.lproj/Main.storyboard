@@ -923,7 +923,7 @@
                                                 <rect key="frame" x="1" y="1" width="408" height="98"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
-                                                    <gridView focusRingType="none" fixedFrame="YES" xPlacement="leading" yPlacement="top" rowAlignment="none" translatesAutoresizingMaskIntoConstraints="NO" id="lAP-Wd-eZk">
+                                                    <gridView focusRingType="none" fixedFrame="YES" misplaced="YES" xPlacement="leading" yPlacement="top" rowAlignment="none" translatesAutoresizingMaskIntoConstraints="NO" id="lAP-Wd-eZk">
                                                         <rect key="frame" x="8" y="10" width="372" height="78"/>
                                                         <rows>
                                                             <gridRow height="16" id="UIg-RD-fDW"/>
@@ -968,13 +968,13 @@
                                                                 </textField>
                                                             </gridCell>
                                                             <gridCell row="CrR-ah-GZK" column="kza-Ox-UgN" xPlacement="center" yPlacement="bottom" id="JRj-Ml-bRq">
-                                                                <customView key="contentView" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uJd-Dl-olj">
-                                                                    <rect key="frame" x="106" y="31" width="100" height="25"/>
+                                                                <customView key="contentView" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uJd-Dl-olj">
+                                                                    <rect key="frame" x="106" y="31" width="130" height="20"/>
                                                                 </customView>
                                                             </gridCell>
                                                             <gridCell row="CrR-ah-GZK" column="Nu7-d7-fu4" xPlacement="center" yPlacement="bottom" id="eCZ-RS-7gS">
-                                                                <customView key="contentView" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="C1Q-B9-TF4">
-                                                                    <rect key="frame" x="252" y="31" width="100" height="25"/>
+                                                                <customView key="contentView" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="C1Q-B9-TF4">
+                                                                    <rect key="frame" x="252" y="31" width="130" height="20"/>
                                                                 </customView>
                                                             </gridCell>
                                                             <gridCell row="BhM-93-wwI" column="7OZ-s8-7ea" xPlacement="trailing" yPlacement="bottom" id="eUm-0L-oYv">
@@ -988,13 +988,13 @@
                                                                 </textField>
                                                             </gridCell>
                                                             <gridCell row="BhM-93-wwI" column="kza-Ox-UgN" xPlacement="center" yPlacement="bottom" id="BhD-n3-0ve">
-                                                                <customView key="contentView" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ldh-IC-HUY">
-                                                                    <rect key="frame" x="106" y="0.0" width="100" height="25"/>
+                                                                <customView key="contentView" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ldh-IC-HUY">
+                                                                    <rect key="frame" x="106" y="0.0" width="130" height="20"/>
                                                                 </customView>
                                                             </gridCell>
                                                             <gridCell row="BhM-93-wwI" column="Nu7-d7-fu4" xPlacement="center" yPlacement="bottom" id="eKF-ZY-NnV">
-                                                                <customView key="contentView" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QpM-NB-Drp">
-                                                                    <rect key="frame" x="252" y="0.0" width="100" height="25"/>
+                                                                <customView key="contentView" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QpM-NB-Drp">
+                                                                    <rect key="frame" x="252" y="0.0" width="130" height="20"/>
                                                                 </customView>
                                                             </gridCell>
                                                         </gridCells>
@@ -1163,15 +1163,15 @@
                                         </popUpButton>
                                     </gridCell>
                                     <gridCell row="TxS-hN-bkf" column="ZC2-Ja-sIb" xPlacement="trailing" id="Ifk-Yb-maM"/>
-                                    <gridCell row="TxS-hN-bkf" column="EiG-65-CTv" id="rL9-yD-7Tk">
-                                        <box key="contentView" boxType="custom" borderType="line" cornerRadius="6" title="Box" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="9aX-gm-8TS">
-                                            <rect key="frame" x="237" y="145" width="414" height="100"/>
+                                    <gridCell row="TxS-hN-bkf" column="EiG-65-CTv" xPlacement="leading" id="rL9-yD-7Tk">
+                                        <box key="contentView" misplaced="YES" boxType="custom" borderType="line" cornerRadius="6" title="Box" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="9aX-gm-8TS">
+                                            <rect key="frame" x="237" y="145" width="410" height="105"/>
                                             <view key="contentView" id="iJ6-Kh-tv6">
-                                                <rect key="frame" x="1" y="1" width="412" height="98"/>
+                                                <rect key="frame" x="1" y="1" width="408" height="103"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <gridView focusRingType="none" fixedFrame="YES" xPlacement="leading" yPlacement="top" rowAlignment="none" translatesAutoresizingMaskIntoConstraints="NO" id="YtM-JQ-l82">
-                                                        <rect key="frame" x="7" y="5" width="226" height="87"/>
+                                                        <rect key="frame" x="7" y="10" width="226" height="87"/>
                                                         <rows>
                                                             <gridRow height="25" id="jWq-NI-VHe"/>
                                                             <gridRow height="25" id="xRS-PE-ePP"/>
@@ -1193,8 +1193,8 @@
                                                                 </textField>
                                                             </gridCell>
                                                             <gridCell row="jWq-NI-VHe" column="1Pn-Qh-jNz" xPlacement="center" yPlacement="bottom" id="oKm-MV-s5R">
-                                                                <customView key="contentView" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rFx-DX-nFb">
-                                                                    <rect key="frame" x="106" y="62" width="100" height="25"/>
+                                                                <customView key="contentView" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rFx-DX-nFb">
+                                                                    <rect key="frame" x="106" y="62" width="130" height="20"/>
                                                                 </customView>
                                                             </gridCell>
                                                             <gridCell row="xRS-PE-ePP" column="aft-Mx-M3g" xPlacement="trailing" yPlacement="bottom" id="aBh-ip-mgw">
@@ -1208,8 +1208,8 @@
                                                                 </textField>
                                                             </gridCell>
                                                             <gridCell row="xRS-PE-ePP" column="1Pn-Qh-jNz" xPlacement="center" yPlacement="bottom" id="76G-X8-38k">
-                                                                <customView key="contentView" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cag-2Q-I9P">
-                                                                    <rect key="frame" x="106" y="31" width="100" height="25"/>
+                                                                <customView key="contentView" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cag-2Q-I9P">
+                                                                    <rect key="frame" x="106" y="31" width="130" height="20"/>
                                                                 </customView>
                                                             </gridCell>
                                                             <gridCell row="zvF-Ib-hzw" column="aft-Mx-M3g" xPlacement="trailing" yPlacement="center" id="hkZ-6R-hdq">
@@ -1223,8 +1223,8 @@
                                                                 </textField>
                                                             </gridCell>
                                                             <gridCell row="zvF-Ib-hzw" column="1Pn-Qh-jNz" xPlacement="center" yPlacement="bottom" id="LV4-jR-KKe">
-                                                                <customView key="contentView" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0l2-EO-6Ip">
-                                                                    <rect key="frame" x="106" y="0.0" width="100" height="25"/>
+                                                                <customView key="contentView" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0l2-EO-6Ip">
+                                                                    <rect key="frame" x="106" y="0.0" width="130" height="20"/>
                                                                 </customView>
                                                             </gridCell>
                                                         </gridCells>
@@ -1233,7 +1233,7 @@
                                             </view>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="410" id="GMj-Ti-YUh"/>
-                                                <constraint firstAttribute="height" constant="100" id="r7A-vj-vfb"/>
+                                                <constraint firstAttribute="height" constant="105" id="r7A-vj-vfb"/>
                                             </constraints>
                                             <color key="borderColor" red="1" green="1" blue="1" alpha="0.14738301570000001" colorSpace="custom" customColorSpace="sRGB"/>
                                             <color key="fillColor" red="0.59607843140000005" green="0.59607843140000005" blue="0.61568627450000002" alpha="0.15133397109999999" colorSpace="custom" customColorSpace="sRGB"/>
