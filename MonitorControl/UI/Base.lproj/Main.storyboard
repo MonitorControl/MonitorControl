@@ -817,16 +817,16 @@
             <objects>
                 <viewController storyboardIdentifier="KeyboardPrefsVC" id="eJ2-Cv-Vfp" customClass="KeyboardPrefsViewController" customModule="MonitorControl" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yCl-jO-kpd">
-                        <rect key="frame" x="0.0" y="0.0" width="691" height="681"/>
+                        <rect key="frame" x="0.0" y="0.0" width="691" height="843"/>
                         <subviews>
-                            <gridView xPlacement="leading" yPlacement="fill" rowAlignment="none" rowSpacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="bKX-vi-7gY">
-                                <rect key="frame" x="20" y="20" width="651" height="635"/>
+                            <gridView misplaced="YES" xPlacement="leading" yPlacement="fill" rowAlignment="none" rowSpacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="bKX-vi-7gY">
+                                <rect key="frame" x="20" y="20" width="651" height="803"/>
                                 <rows>
                                     <gridRow height="20" bottomPadding="-13" id="dwB-Ku-aql"/>
                                     <gridRow topPadding="-13" bottomPadding="-10" id="pf1-cW-4bf"/>
                                     <gridRow bottomPadding="-13" id="yxK-w1-5wV"/>
                                     <gridRow bottomPadding="-10" id="eGd-bB-47V"/>
-                                    <gridRow bottomPadding="-6" id="bd8-PJ-Cme"/>
+                                    <gridRow height="100" bottomPadding="-6" id="bd8-PJ-Cme"/>
                                     <gridRow bottomPadding="-13" id="I9B-dr-BOu"/>
                                     <gridRow bottomPadding="-10" id="dI2-0J-8Ju"/>
                                     <gridRow bottomPadding="-13" id="7CD-Vz-yse"/>
@@ -852,7 +852,7 @@
                                 <gridCells>
                                     <gridCell row="dwB-Ku-aql" column="ZC2-Ja-sIb" xPlacement="trailing" id="1cK-xF-Xfy">
                                         <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Pc3-Mz-ZAW">
-                                            <rect key="frame" x="29" y="615" width="199" height="20"/>
+                                            <rect key="frame" x="29" y="783" width="199" height="20"/>
                                             <textFieldCell key="cell" lineBreakMode="clipping" title="Brightness and contrast control:" id="c7N-cO-759">
                                                 <font key="font" usesAppearanceFont="YES"/>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -862,7 +862,7 @@
                                     </gridCell>
                                     <gridCell row="dwB-Ku-aql" column="EiG-65-CTv" xPlacement="leading" id="YBq-zd-TZe">
                                         <popUpButton key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="2NF-gh-JBU">
-                                            <rect key="frame" x="234" y="611" width="253" height="25"/>
+                                            <rect key="frame" x="234" y="779" width="253" height="25"/>
                                             <popUpButtonCell key="cell" type="push" title="Standard keyboard brightness keys" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="Oke-bW-cb1" id="h0R-Cc-cJa">
                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" metaFont="menu"/>
@@ -882,7 +882,7 @@
                                     <gridCell row="pf1-cW-4bf" column="ZC2-Ja-sIb" id="qIV-EU-GF4"/>
                                     <gridCell row="pf1-cW-4bf" column="EiG-65-CTv" id="xAf-sh-mcN">
                                         <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" preferredMaxLayoutWidth="400" translatesAutoresizingMaskIntoConstraints="NO" id="Wtr-Ih-0Fb">
-                                            <rect key="frame" x="235" y="552" width="418" height="56"/>
+                                            <rect key="frame" x="235" y="720" width="418" height="56"/>
                                             <textFieldCell key="cell" controlSize="small" id="K2r-aD-eec">
                                                 <font key="font" metaFont="smallSystem"/>
                                                 <string key="title">Use the brightness keys of your Apple keyboard to control brightness. You can hold Control to adjust the built-in display, Control+Option to adjust external displays. Hold Shift+Option for fine control. Control+Option+Command adjusts contrast on DDC compatible displays.</string>
@@ -894,7 +894,7 @@
                                     <gridCell row="yxK-w1-5wV" column="ZC2-Ja-sIb" id="JgV-5K-BfL"/>
                                     <gridCell row="yxK-w1-5wV" column="EiG-65-CTv" id="mDy-Cw-udO">
                                         <button key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="EJp-ld-K4l">
-                                            <rect key="frame" x="235" y="525" width="416" height="18"/>
+                                            <rect key="frame" x="235" y="693" width="416" height="18"/>
                                             <buttonCell key="cell" type="check" title="Do not use alternative brightness keys" bezelStyle="regularSquare" imagePosition="left" inset="2" id="vd2-Lk-neX">
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                 <font key="font" metaFont="system"/>
@@ -907,7 +907,7 @@
                                     <gridCell row="eGd-bB-47V" column="ZC2-Ja-sIb" id="WGW-vl-p5x"/>
                                     <gridCell row="eGd-bB-47V" column="EiG-65-CTv" id="es9-X3-7zr">
                                         <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" preferredMaxLayoutWidth="400" translatesAutoresizingMaskIntoConstraints="NO" id="aFo-6H-zml">
-                                            <rect key="frame" x="235" y="491" width="418" height="28"/>
+                                            <rect key="frame" x="235" y="659" width="418" height="28"/>
                                             <textFieldCell key="cell" controlSize="small" title="Alternative keys are the F14/F15 (Scroll Lock and Pause on PC keyboards, brightness keys on some Logitech keyboards)." id="D4H-hU-FLn">
                                                 <font key="font" metaFont="smallSystem"/>
                                                 <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
@@ -916,19 +916,102 @@
                                         </textField>
                                     </gridCell>
                                     <gridCell row="bd8-PJ-Cme" column="ZC2-Ja-sIb" xPlacement="trailing" id="ePJ-iR-Byw"/>
-                                    <gridCell row="bd8-PJ-Cme" column="EiG-65-CTv" id="jQx-eE-g8b">
-                                        <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="IZw-Cu-gs3">
-                                            <rect key="frame" x="235" y="465" width="418" height="16"/>
-                                            <textFieldCell key="cell" lineBreakMode="clipping" title="##PLACEHOLDER##" id="F5J-1Y-jvD">
-                                                <font key="font" usesAppearanceFont="YES"/>
-                                                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                            </textFieldCell>
-                                        </textField>
+                                    <gridCell row="bd8-PJ-Cme" column="EiG-65-CTv" xPlacement="leading" yPlacement="top" id="jQx-eE-g8b">
+                                        <box key="contentView" boxType="custom" borderType="line" cornerRadius="6" title="Box" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="4wn-2u-KRo">
+                                            <rect key="frame" x="237" y="549" width="410" height="100"/>
+                                            <view key="contentView" translatesAutoresizingMaskIntoConstraints="NO" id="vxd-OX-xjN">
+                                                <rect key="frame" x="1" y="1" width="408" height="98"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                <subviews>
+                                                    <gridView focusRingType="none" fixedFrame="YES" xPlacement="leading" yPlacement="top" rowAlignment="none" translatesAutoresizingMaskIntoConstraints="NO" id="lAP-Wd-eZk">
+                                                        <rect key="frame" x="8" y="10" width="372" height="78"/>
+                                                        <rows>
+                                                            <gridRow height="16" id="UIg-RD-fDW"/>
+                                                            <gridRow height="25" id="CrR-ah-GZK"/>
+                                                            <gridRow height="25" id="BhM-93-wwI"/>
+                                                        </rows>
+                                                        <columns>
+                                                            <gridColumn width="80" id="7OZ-s8-7ea"/>
+                                                            <gridColumn width="140" id="kza-Ox-UgN"/>
+                                                            <gridColumn width="140" id="Nu7-d7-fu4"/>
+                                                        </columns>
+                                                        <gridCells>
+                                                            <gridCell row="UIg-RD-fDW" column="7OZ-s8-7ea" id="bF2-9n-GUy"/>
+                                                            <gridCell row="UIg-RD-fDW" column="kza-Ox-UgN" xPlacement="center" id="1ZW-BN-Xwn">
+                                                                <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="mFu-sR-Foi">
+                                                                    <rect key="frame" x="122" y="62" width="69" height="16"/>
+                                                                    <textFieldCell key="cell" lineBreakMode="clipping" title="Brightness" id="IJB-mO-e8I">
+                                                                        <font key="font" usesAppearanceFont="YES"/>
+                                                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                                    </textFieldCell>
+                                                                </textField>
+                                                            </gridCell>
+                                                            <gridCell row="UIg-RD-fDW" column="Nu7-d7-fu4" xPlacement="center" id="zpo-wB-jPH">
+                                                                <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="03L-DE-Tg7">
+                                                                    <rect key="frame" x="274" y="62" width="57" height="16"/>
+                                                                    <textFieldCell key="cell" lineBreakMode="clipping" title="Contrast" id="urd-Rh-aiL">
+                                                                        <font key="font" usesAppearanceFont="YES"/>
+                                                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                                    </textFieldCell>
+                                                                </textField>
+                                                            </gridCell>
+                                                            <gridCell row="CrR-ah-GZK" column="7OZ-s8-7ea" xPlacement="trailing" yPlacement="bottom" id="nMx-fx-vb3">
+                                                                <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="uro-lq-15o">
+                                                                    <rect key="frame" x="22" y="31" width="60" height="16"/>
+                                                                    <textFieldCell key="cell" lineBreakMode="clipping" title="Increase:" id="eue-as-VOR">
+                                                                        <font key="font" usesAppearanceFont="YES"/>
+                                                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                                    </textFieldCell>
+                                                                </textField>
+                                                            </gridCell>
+                                                            <gridCell row="CrR-ah-GZK" column="kza-Ox-UgN" xPlacement="center" yPlacement="bottom" id="JRj-Ml-bRq">
+                                                                <customView key="contentView" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uJd-Dl-olj">
+                                                                    <rect key="frame" x="106" y="31" width="100" height="25"/>
+                                                                </customView>
+                                                            </gridCell>
+                                                            <gridCell row="CrR-ah-GZK" column="Nu7-d7-fu4" xPlacement="center" yPlacement="bottom" id="eCZ-RS-7gS">
+                                                                <customView key="contentView" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="C1Q-B9-TF4">
+                                                                    <rect key="frame" x="252" y="31" width="100" height="25"/>
+                                                                </customView>
+                                                            </gridCell>
+                                                            <gridCell row="BhM-93-wwI" column="7OZ-s8-7ea" xPlacement="trailing" yPlacement="bottom" id="eUm-0L-oYv">
+                                                                <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="jXm-pI-2kM">
+                                                                    <rect key="frame" x="17" y="0.0" width="65" height="16"/>
+                                                                    <textFieldCell key="cell" lineBreakMode="clipping" title="Decrease:" id="Bzq-Co-fex">
+                                                                        <font key="font" usesAppearanceFont="YES"/>
+                                                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                                    </textFieldCell>
+                                                                </textField>
+                                                            </gridCell>
+                                                            <gridCell row="BhM-93-wwI" column="kza-Ox-UgN" xPlacement="center" yPlacement="bottom" id="BhD-n3-0ve">
+                                                                <customView key="contentView" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ldh-IC-HUY">
+                                                                    <rect key="frame" x="106" y="0.0" width="100" height="25"/>
+                                                                </customView>
+                                                            </gridCell>
+                                                            <gridCell row="BhM-93-wwI" column="Nu7-d7-fu4" xPlacement="center" yPlacement="bottom" id="eKF-ZY-NnV">
+                                                                <customView key="contentView" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QpM-NB-Drp">
+                                                                    <rect key="frame" x="252" y="0.0" width="100" height="25"/>
+                                                                </customView>
+                                                            </gridCell>
+                                                        </gridCells>
+                                                    </gridView>
+                                                </subviews>
+                                            </view>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="410" id="Fon-gj-YlX"/>
+                                                <constraint firstAttribute="height" constant="100" id="z4Q-La-eC5"/>
+                                            </constraints>
+                                            <color key="borderColor" red="1" green="1" blue="1" alpha="0.14738301570628254" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="fillColor" red="0.59607843137254901" green="0.59607843137254901" blue="0.61568627450980395" alpha="0.15133397108843538" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </box>
                                     </gridCell>
                                     <gridCell row="I9B-dr-BOu" column="ZC2-Ja-sIb" xPlacement="trailing" id="bAf-Bt-a5c">
                                         <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="tIh-qa-IGb">
-                                            <rect key="frame" x="116" y="435" width="112" height="16"/>
+                                            <rect key="frame" x="116" y="519" width="112" height="16"/>
                                             <textFieldCell key="cell" lineBreakMode="clipping" title="Screen to control:" id="ltL-gR-K3Z">
                                                 <font key="font" usesAppearanceFont="YES"/>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -938,7 +1021,7 @@
                                     </gridCell>
                                     <gridCell row="I9B-dr-BOu" column="EiG-65-CTv" id="buZ-hq-416">
                                         <button key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="5kF-5S-gp2">
-                                            <rect key="frame" x="235" y="434" width="416" height="18"/>
+                                            <rect key="frame" x="235" y="518" width="416" height="18"/>
                                             <buttonCell key="cell" type="check" title="Change for all screens" bezelStyle="regularSquare" imagePosition="left" inset="2" id="JC3-pb-XnR">
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                 <font key="font" metaFont="system"/>
@@ -951,7 +1034,7 @@
                                     <gridCell row="dI2-0J-8Ju" column="ZC2-Ja-sIb" id="Z5T-MD-xeS"/>
                                     <gridCell row="dI2-0J-8Ju" column="EiG-65-CTv" id="jbN-GS-8fj">
                                         <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" preferredMaxLayoutWidth="400" translatesAutoresizingMaskIntoConstraints="NO" id="JXV-qA-cZ8">
-                                            <rect key="frame" x="235" y="400" width="418" height="28"/>
+                                            <rect key="frame" x="235" y="484" width="418" height="28"/>
                                             <textFieldCell key="cell" controlSize="small" id="Gy9-Of-tpz">
                                                 <font key="font" metaFont="smallSystem"/>
                                                 <string key="title">Note: you can always use Ctrl+Brightness to control internal display only and Ctrl+Command+Brightness to control external displays only.</string>
@@ -963,7 +1046,7 @@
                                     <gridCell row="7CD-Vz-yse" column="ZC2-Ja-sIb" id="S2B-61-CdS"/>
                                     <gridCell row="7CD-Vz-yse" column="EiG-65-CTv" id="qIc-Sd-rrT">
                                         <button key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="8PE-jJ-woz">
-                                            <rect key="frame" x="235" y="373" width="416" height="18"/>
+                                            <rect key="frame" x="235" y="457" width="416" height="18"/>
                                             <buttonCell key="cell" type="check" title="Use window focus to determine which display to control" bezelStyle="regularSquare" imagePosition="left" inset="2" id="mMG-Ac-gdB">
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                 <font key="font" metaFont="system"/>
@@ -976,7 +1059,7 @@
                                     <gridCell row="UIH-jA-Cfi" column="ZC2-Ja-sIb" id="0mO-T1-WIu"/>
                                     <gridCell row="UIH-jA-Cfi" column="EiG-65-CTv" id="946-Ae-IAi">
                                         <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" preferredMaxLayoutWidth="400" translatesAutoresizingMaskIntoConstraints="NO" id="8uZ-DH-JRs">
-                                            <rect key="frame" x="235" y="339" width="418" height="28"/>
+                                            <rect key="frame" x="235" y="423" width="418" height="28"/>
                                             <textFieldCell key="cell" controlSize="small" id="4dX-o1-xAc">
                                                 <font key="font" metaFont="smallSystem"/>
                                                 <string key="title">MonitorControl uses mouse position to determine which display to control. Using window focus instead might not work well with full screen apps.</string>
@@ -987,7 +1070,7 @@
                                     </gridCell>
                                     <gridCell row="jJT-as-drf" column="ZC2-Ja-sIb" xPlacement="trailing" id="nrK-Hc-7nO">
                                         <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="vWz-eO-w5x">
-                                            <rect key="frame" x="157" y="313" width="71" height="16"/>
+                                            <rect key="frame" x="157" y="397" width="71" height="16"/>
                                             <textFieldCell key="cell" lineBreakMode="clipping" title="OSD scale:" id="bP4-GJ-vhJ">
                                                 <font key="font" usesAppearanceFont="YES"/>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -997,7 +1080,7 @@
                                     </gridCell>
                                     <gridCell row="jJT-as-drf" column="EiG-65-CTv" id="RS1-HU-liD">
                                         <button key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="M5g-VZ-qiM">
-                                            <rect key="frame" x="235" y="312" width="416" height="18"/>
+                                            <rect key="frame" x="235" y="396" width="416" height="18"/>
                                             <buttonCell key="cell" type="check" title="Use fine OSD scale" bezelStyle="regularSquare" imagePosition="left" inset="2" id="8Q8-57-xnT">
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                 <font key="font" metaFont="system"/>
@@ -1010,7 +1093,7 @@
                                     <gridCell row="4Ie-T6-Ifw" column="ZC2-Ja-sIb" id="5r9-mO-Jth"/>
                                     <gridCell row="4Ie-T6-Ifw" column="EiG-65-CTv" id="Ic1-hh-nwR">
                                         <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" preferredMaxLayoutWidth="400" translatesAutoresizingMaskIntoConstraints="NO" id="6IT-qa-vjW">
-                                            <rect key="frame" x="235" y="278" width="418" height="28"/>
+                                            <rect key="frame" x="235" y="362" width="418" height="28"/>
                                             <textFieldCell key="cell" controlSize="small" id="f6J-Ui-uMB">
                                                 <font key="font" metaFont="smallSystem"/>
                                                 <string key="title">Normally keyboard controls change one OSD chiclet worth of value and Shift+Option allows fine control. This makes fine control default.</string>
@@ -1022,7 +1105,7 @@
                                     <gridCell row="4hU-dS-J9a" column="ZC2-Ja-sIb" id="zvG-Rs-1Wp"/>
                                     <gridCell row="4hU-dS-J9a" column="EiG-65-CTv" id="5T9-2m-uH0">
                                         <button key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="f8L-OE-kAQ">
-                                            <rect key="frame" x="235" y="251" width="416" height="18"/>
+                                            <rect key="frame" x="235" y="335" width="416" height="18"/>
                                             <buttonCell key="cell" type="check" title="Separate scales for combined hardware &amp; software dimming" bezelStyle="regularSquare" imagePosition="left" inset="2" id="O8o-hI-8eR">
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                 <font key="font" metaFont="system"/>
@@ -1035,7 +1118,7 @@
                                     <gridCell row="ON8-Vi-iMV" column="ZC2-Ja-sIb" id="ZjD-la-smM"/>
                                     <gridCell row="ON8-Vi-iMV" column="EiG-65-CTv" id="5bt-Sc-Tne">
                                         <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" preferredMaxLayoutWidth="400" translatesAutoresizingMaskIntoConstraints="NO" id="qYT-s5-VcV">
-                                            <rect key="frame" x="235" y="217" width="418" height="28"/>
+                                            <rect key="frame" x="235" y="301" width="418" height="28"/>
                                             <textFieldCell key="cell" controlSize="small" id="YHZ-VL-QJ3">
                                                 <font key="font" metaFont="smallSystem"/>
                                                 <string key="title">Full OSD scale will be available for hardware brightness control and after reaching 0 brightness, further software dimming will be used.</string>
@@ -1046,13 +1129,13 @@
                                     </gridCell>
                                     <gridCell row="9sW-wk-3dM" column="ZC2-Ja-sIb" headOfMergedCell="JSH-kM-pjC" id="JSH-kM-pjC">
                                         <box key="contentView" autoresizesSubviews="NO" verticalHuggingPriority="750" placeholderIntrinsicWidth="651" placeholderIntrinsicHeight="2" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="TOH-xA-yYJ">
-                                            <rect key="frame" x="0.0" y="203" width="651" height="6"/>
+                                            <rect key="frame" x="0.0" y="287" width="651" height="6"/>
                                         </box>
                                     </gridCell>
                                     <gridCell row="9sW-wk-3dM" column="EiG-65-CTv" headOfMergedCell="JSH-kM-pjC" id="Nz7-FJ-WeR"/>
                                     <gridCell row="6od-Ek-qTW" column="ZC2-Ja-sIb" xPlacement="trailing" id="9Ea-cn-wzu">
                                         <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="gNu-Sd-s4E">
-                                            <rect key="frame" x="59" y="175" width="169" height="20"/>
+                                            <rect key="frame" x="59" y="259" width="169" height="20"/>
                                             <textFieldCell key="cell" lineBreakMode="clipping" title="Volume control (DDC only):" id="qoh-Gn-f11">
                                                 <font key="font" usesAppearanceFont="YES"/>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -1062,7 +1145,7 @@
                                     </gridCell>
                                     <gridCell row="6od-Ek-qTW" column="EiG-65-CTv" xPlacement="leading" id="pCd-dP-Y62">
                                         <popUpButton key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="9oZ-JM-bxD">
-                                            <rect key="frame" x="234" y="171" width="293" height="25"/>
+                                            <rect key="frame" x="234" y="255" width="293" height="25"/>
                                             <popUpButtonCell key="cell" type="push" title="Standard keyboard volume and mute keys" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="1sy-Kd-WL5" id="gTf-PQ-2fA">
                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" metaFont="menu"/>
@@ -1081,14 +1164,80 @@
                                     </gridCell>
                                     <gridCell row="TxS-hN-bkf" column="ZC2-Ja-sIb" xPlacement="trailing" id="Ifk-Yb-maM"/>
                                     <gridCell row="TxS-hN-bkf" column="EiG-65-CTv" id="rL9-yD-7Tk">
-                                        <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="8G7-ky-rI4">
-                                            <rect key="frame" x="235" y="145" width="418" height="16"/>
-                                            <textFieldCell key="cell" lineBreakMode="clipping" title="##PLACEHOLDER##" id="lxC-nk-sRq">
-                                                <font key="font" usesAppearanceFont="YES"/>
-                                                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                            </textFieldCell>
-                                        </textField>
+                                        <box key="contentView" boxType="custom" borderType="line" cornerRadius="6" title="Box" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="9aX-gm-8TS">
+                                            <rect key="frame" x="237" y="145" width="414" height="100"/>
+                                            <view key="contentView" id="iJ6-Kh-tv6">
+                                                <rect key="frame" x="1" y="1" width="412" height="98"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                <subviews>
+                                                    <gridView focusRingType="none" fixedFrame="YES" xPlacement="leading" yPlacement="top" rowAlignment="none" translatesAutoresizingMaskIntoConstraints="NO" id="YtM-JQ-l82">
+                                                        <rect key="frame" x="7" y="5" width="226" height="87"/>
+                                                        <rows>
+                                                            <gridRow height="25" id="jWq-NI-VHe"/>
+                                                            <gridRow height="25" id="xRS-PE-ePP"/>
+                                                            <gridRow height="25" id="zvF-Ib-hzw"/>
+                                                        </rows>
+                                                        <columns>
+                                                            <gridColumn width="80" id="aft-Mx-M3g"/>
+                                                            <gridColumn width="140" id="1Pn-Qh-jNz"/>
+                                                        </columns>
+                                                        <gridCells>
+                                                            <gridCell row="jWq-NI-VHe" column="aft-Mx-M3g" xPlacement="trailing" yPlacement="bottom" id="SWE-gc-VNH">
+                                                                <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="2JJ-38-ivO">
+                                                                    <rect key="frame" x="22" y="62" width="60" height="16"/>
+                                                                    <textFieldCell key="cell" lineBreakMode="clipping" title="Increase:" id="mue-fa-8z6">
+                                                                        <font key="font" usesAppearanceFont="YES"/>
+                                                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                                    </textFieldCell>
+                                                                </textField>
+                                                            </gridCell>
+                                                            <gridCell row="jWq-NI-VHe" column="1Pn-Qh-jNz" xPlacement="center" yPlacement="bottom" id="oKm-MV-s5R">
+                                                                <customView key="contentView" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rFx-DX-nFb">
+                                                                    <rect key="frame" x="106" y="62" width="100" height="25"/>
+                                                                </customView>
+                                                            </gridCell>
+                                                            <gridCell row="xRS-PE-ePP" column="aft-Mx-M3g" xPlacement="trailing" yPlacement="bottom" id="aBh-ip-mgw">
+                                                                <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="KNl-Fi-0Yu">
+                                                                    <rect key="frame" x="17" y="31" width="65" height="16"/>
+                                                                    <textFieldCell key="cell" lineBreakMode="clipping" title="Decrease:" id="yQh-Ve-WEE">
+                                                                        <font key="font" usesAppearanceFont="YES"/>
+                                                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                                    </textFieldCell>
+                                                                </textField>
+                                                            </gridCell>
+                                                            <gridCell row="xRS-PE-ePP" column="1Pn-Qh-jNz" xPlacement="center" yPlacement="bottom" id="76G-X8-38k">
+                                                                <customView key="contentView" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cag-2Q-I9P">
+                                                                    <rect key="frame" x="106" y="31" width="100" height="25"/>
+                                                                </customView>
+                                                            </gridCell>
+                                                            <gridCell row="zvF-Ib-hzw" column="aft-Mx-M3g" xPlacement="trailing" yPlacement="center" id="hkZ-6R-hdq">
+                                                                <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="mxu-LD-6Z3">
+                                                                    <rect key="frame" x="43" y="5" width="39" height="16"/>
+                                                                    <textFieldCell key="cell" lineBreakMode="clipping" title="Mute:" id="EvN-FT-vdZ">
+                                                                        <font key="font" usesAppearanceFont="YES"/>
+                                                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                                    </textFieldCell>
+                                                                </textField>
+                                                            </gridCell>
+                                                            <gridCell row="zvF-Ib-hzw" column="1Pn-Qh-jNz" xPlacement="center" yPlacement="bottom" id="LV4-jR-KKe">
+                                                                <customView key="contentView" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0l2-EO-6Ip">
+                                                                    <rect key="frame" x="106" y="0.0" width="100" height="25"/>
+                                                                </customView>
+                                                            </gridCell>
+                                                        </gridCells>
+                                                    </gridView>
+                                                </subviews>
+                                            </view>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="410" id="GMj-Ti-YUh"/>
+                                                <constraint firstAttribute="height" constant="100" id="r7A-vj-vfb"/>
+                                            </constraints>
+                                            <color key="borderColor" red="1" green="1" blue="1" alpha="0.14738301570000001" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="fillColor" red="0.59607843140000005" green="0.59607843140000005" blue="0.61568627450000002" alpha="0.15133397109999999" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </box>
                                     </gridCell>
                                     <gridCell row="LHa-CM-c46" column="ZC2-Ja-sIb" id="4xC-rW-7Hz"/>
                                     <gridCell row="LHa-CM-c46" column="EiG-65-CTv" id="MEm-fE-vTk">
@@ -1168,6 +1317,13 @@
                     <connections>
                         <outlet property="allScreens" destination="5kF-5S-gp2" id="8vy-4o-WEc"/>
                         <outlet property="allScreensVolume" destination="P7n-7y-LzH" id="JpT-1i-iJs"/>
+                        <outlet property="customBrightnessDown" destination="ldh-IC-HUY" id="g78-1G-w1U"/>
+                        <outlet property="customBrightnessUp" destination="uJd-Dl-olj" id="0o1-OX-8jv"/>
+                        <outlet property="customContrastDown" destination="QpM-NB-Drp" id="HLt-UA-orp"/>
+                        <outlet property="customContrastUp" destination="C1Q-B9-TF4" id="gHG-cT-1aK"/>
+                        <outlet property="customMute" destination="0l2-EO-6Ip" id="qQY-3Q-iWu"/>
+                        <outlet property="customVolumeDown" destination="cag-2Q-I9P" id="AuB-3g-Pwa"/>
+                        <outlet property="customVolumeUp" destination="rFx-DX-nFb" id="DpG-Xm-lRB"/>
                         <outlet property="disableAltBrightnessKeys" destination="EJp-ld-K4l" id="WzJ-1Q-YT4"/>
                         <outlet property="keyboardBrightness" destination="2NF-gh-JBU" id="3Cw-ob-T06"/>
                         <outlet property="keyboardVolume" destination="9oZ-JM-bxD" id="IJ6-6m-q0x"/>
@@ -1194,7 +1350,7 @@
                 </viewController>
                 <customObject id="aU5-zc-suQ" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="300.5" y="976.5"/>
+            <point key="canvasLocation" x="300.5" y="1134.5"/>
         </scene>
         <!--Displays Prefs View Controller-->
         <scene sceneID="lLH-hh-1EK">
@@ -1211,7 +1367,7 @@
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="none" tableStyle="inset" selectionHighlightStyle="none" columnReordering="NO" columnResizing="NO" multipleSelection="NO" emptySelection="NO" autosaveColumns="NO" typeSelect="NO" rowHeight="490" rowSizeStyle="automatic" viewBased="YES" id="zC9-dS-Tr3">
-                                            <rect key="frame" x="0.0" y="0.0" width="691" height="488"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="691" height="490"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <size key="intercellSpacing" width="17" height="0.0"/>
                                             <color key="backgroundColor" name="windowBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -1909,7 +2065,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="301" y="1682"/>
+            <point key="canvasLocation" x="301" y="1876"/>
         </scene>
         <!--About Prefs View Controller-->
         <scene sceneID="Ot2-lL-eIg">
@@ -2018,7 +2174,7 @@
                 </viewController>
                 <customObject id="5Vf-Rd-nyE" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="301" y="2152"/>
+            <point key="canvasLocation" x="301" y="2335"/>
         </scene>
     </scenes>
     <resources>

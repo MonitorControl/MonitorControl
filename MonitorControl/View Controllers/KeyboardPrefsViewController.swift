@@ -3,6 +3,7 @@
 import Cocoa
 import Preferences
 import ServiceManagement
+import KeyboardShortcuts
 
 class KeyboardPrefsViewController: NSViewController, PreferencePane {
   let preferencePaneIdentifier = Preferences.PaneIdentifier.keyboard
@@ -15,6 +16,14 @@ class KeyboardPrefsViewController: NSViewController, PreferencePane {
       return NSImage(named: NSImage.infoName)!
     }
   }
+
+  @IBOutlet var customBrightnessUp: NSView!
+  @IBOutlet var customBrightnessDown: NSView!
+  @IBOutlet var customContrastUp: NSView!
+  @IBOutlet var customContrastDown: NSView!
+  @IBOutlet var customVolumeUp: NSView!
+  @IBOutlet var customVolumeDown: NSView!
+  @IBOutlet var customMute: NSView!
 
   @IBOutlet var keyboardBrightness: NSPopUpButton!
   @IBOutlet var keyboardVolume: NSPopUpButton!
@@ -113,6 +122,21 @@ class KeyboardPrefsViewController: NSViewController, PreferencePane {
 
   override func viewDidLoad() {
     super.viewDidLoad()
+
+    let customBrightnessUpRecorder = KeyboardShortcuts.RecorderCocoa(for: .brightnessUp)
+    customBrightnessUp.addSubview(customBrightnessUpRecorder)
+    let customBrightnessDownRecorder = KeyboardShortcuts.RecorderCocoa(for: .brightnessDown)
+    customBrightnessDown.addSubview(customBrightnessDownRecorder)
+    let customContrastUpRecorder = KeyboardShortcuts.RecorderCocoa(for: .contrastUp)
+    customContrastUp.addSubview(customContrastUpRecorder)
+    let customContrastDownRecorder = KeyboardShortcuts.RecorderCocoa(for: .contrastDown)
+    customContrastDown.addSubview(customContrastDownRecorder)
+    let customVolumeUpRecorder = KeyboardShortcuts.RecorderCocoa(for: .volumeUp)
+    customVolumeUp.addSubview(customVolumeUpRecorder)
+    let customVolumeDownRecorder = KeyboardShortcuts.RecorderCocoa(for: .volumeDown)
+    customVolumeDown.addSubview(customVolumeDownRecorder)
+    let customMuteRecorder = KeyboardShortcuts.RecorderCocoa(for: .mute)
+    customMute.addSubview(customMuteRecorder)
     self.populateSettings()
   }
 
@@ -227,7 +251,7 @@ class KeyboardPrefsViewController: NSViewController, PreferencePane {
     _ = self.showAdvanced()
     app.updateMediaKeyTap()
   }
-  
+
   @IBAction func keyboardBrightness(_ sender: NSPopUpButton) {
     prefs.set(sender.selectedTag(), forKey: PrefKey.keyboardBrightness.rawValue)
     app.updateMenusAndKeys()
