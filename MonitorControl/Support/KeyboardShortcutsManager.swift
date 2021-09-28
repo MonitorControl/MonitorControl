@@ -7,6 +7,10 @@ import os.log
 // Please note that I understand that the level of redundancy in this class is astonishing. I'll make it professional l8r! :) - @waydabber
 class KeyboardShortcutsManager {
 
+  var currentCommand: KeyboardShortcuts.Name = KeyboardShortcuts.Name.none
+  var isFirstKeypress = false
+  var isHold = false
+
   var isBrightnessUpFirstKeypress = false
   var isBrightnessDownFirstKeypress = false
   var isContrastUpFirstKeypress = false
@@ -23,167 +27,82 @@ class KeyboardShortcutsManager {
 
   init() {
     KeyboardShortcuts.onKeyDown(for: .brightnessUp) { [self] in
-      self.isBrightnessUpFirstKeypress = true
-      self.isBrightnessUpHold = true
-      self.brightnessUp()
+      self.engage(KeyboardShortcuts.Name.brightnessUp)
     }
     KeyboardShortcuts.onKeyDown(for: .brightnessDown) { [self] in
-      self.isBrightnessDownFirstKeypress = true
-      self.isBrightnessDownHold = true
-      self.brightnessDown()
+      self.engage(KeyboardShortcuts.Name.brightnessDown)
     }
     KeyboardShortcuts.onKeyDown(for: .contrastUp) { [self] in
-      self.isContrastUpFirstKeypress = true
-      self.isContrastUpHold = true
-      self.contrastUp()
+      self.engage(KeyboardShortcuts.Name.contrastUp)
     }
     KeyboardShortcuts.onKeyDown(for: .contrastDown) { [self] in
-      self.isContrastDownFirstKeypress = true
-      self.isContrastDownHold = true
-      self.contrastDown()
+      self.engage(KeyboardShortcuts.Name.contrastDown)
     }
     KeyboardShortcuts.onKeyDown(for: .volumeUp) { [self] in
-      self.isVolumeUpFirstKeypress = true
-      self.isVolumeUpHold = true
-      self.volumeUp()
+      self.engage(KeyboardShortcuts.Name.volumeUp)
     }
     KeyboardShortcuts.onKeyDown(for: .volumeDown) { [self] in
-      self.isVolumeDownFirstKeypress = true
-      self.isVolumeDownHold = true
-      self.volumeDown()
+      self.engage(KeyboardShortcuts.Name.volumeDown)
     }
     KeyboardShortcuts.onKeyDown(for: .mute) { [self] in
       self.mute()
     }
     KeyboardShortcuts.onKeyUp(for: .brightnessUp) { [self] in
-      self.isBrightnessUpHold = false
+      disengage()
     }
     KeyboardShortcuts.onKeyUp(for: .brightnessDown) { [self] in
-      self.isBrightnessDownHold = false
+      disengage()
     }
     KeyboardShortcuts.onKeyUp(for: .contrastUp) { [self] in
-      self.isContrastUpHold = false
+      disengage()
     }
     KeyboardShortcuts.onKeyUp(for: .contrastDown) { [self] in
-      self.isContrastDownHold = false
+      disengage()
     }
     KeyboardShortcuts.onKeyUp(for: .volumeUp) { [self] in
-      self.isVolumeUpHold = false
+      disengage()
     }
     KeyboardShortcuts.onKeyUp(for: .volumeDown) { [self] in
-      self.isVolumeDownHold = false
+      disengage()
     }
   }
 
-  func resetAllHolds() {
-    self.isBrightnessUpHold = false
-    self.isBrightnessDownHold = false
-    self.isContrastUpHold = false
-    self.isContrastDownHold = false
-    self.isVolumeUpHold = false
-    self.isVolumeDownHold = false
+  func engage(_ shortcut: KeyboardShortcuts.Name) {
+    self.currentCommand = shortcut
+    self.isFirstKeypress = true
+    self.isHold = true
+    self.apply(shortcut)
   }
 
-  func brightnessUp() {
-    guard isBrightnessUpHold else {
+  func disengage() {
+    self.isHold = false
+    self.isFirstKeypress = false
+    self.currentCommand = KeyboardShortcuts.Name.none
+  }
+
+  func apply(_ shortcut: KeyboardShortcuts.Name) {
+    guard self.currentCommand == shortcut, self.isHold else {
       return
     }
-    if self.isBrightnessUpFirstKeypress {
-      self.isBrightnessUpFirstKeypress = false
+    if self.isFirstKeypress {
+      self.isFirstKeypress = false
       DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-        self.brightnessUp()
+        self.apply(shortcut)
       }
     } else {
       DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
-        self.brightnessUp()
+        self.apply(shortcut)
       }
     }
-    brightness(isUp: true)
-  }
-
-  func brightnessDown() {
-    guard isBrightnessDownHold else {
-      return
+    switch shortcut {
+    case KeyboardShortcuts.Name.brightnessUp: self.brightness(isUp: true)
+    case KeyboardShortcuts.Name.brightnessDown: self.brightness(isUp: false)
+    case KeyboardShortcuts.Name.contrastUp: self.contrast(isUp: true)
+    case KeyboardShortcuts.Name.contrastDown: self.contrast(isUp: false)
+    case KeyboardShortcuts.Name.volumeUp: self.volume(isUp: true)
+    case KeyboardShortcuts.Name.volumeDown: self.volume(isUp: false)
+    default: break
     }
-    if self.isBrightnessDownFirstKeypress {
-      self.isBrightnessDownFirstKeypress = false
-      DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-        self.brightnessDown()
-      }
-    } else {
-      DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
-        self.brightnessDown()
-      }
-    }
-    brightness(isUp: false)
-  }
-
-  func contrastUp() {
-    guard isContrastUpHold else {
-      return
-    }
-    if self.isContrastUpFirstKeypress {
-      self.isContrastUpFirstKeypress = false
-      DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-        self.contrastUp()
-      }
-    } else {
-      DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
-        self.contrastUp()
-      }
-    }
-    contrast(isUp: true)
-  }
-
-  func contrastDown() {
-    guard isContrastDownHold else {
-      return
-    }
-    if self.isContrastDownFirstKeypress {
-      self.isContrastDownFirstKeypress = false
-      DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-        self.contrastDown()
-      }
-    } else {
-      DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
-        self.contrastDown()
-      }
-    }
-    contrast(isUp: false)
-  }
-
-  func volumeUp() {
-    guard isVolumeUpHold else {
-      return
-    }
-    if self.isVolumeUpFirstKeypress {
-      self.isVolumeUpFirstKeypress = false
-      DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-        self.volumeUp()
-      }
-    } else {
-      DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
-        self.volumeUp()
-      }
-    }
-    volume(isUp: true)
-  }
-
-  func volumeDown() {
-    guard isVolumeDownHold else {
-      return
-    }
-    if self.isVolumeDownFirstKeypress {
-      self.isVolumeDownFirstKeypress = false
-      DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
-        self.volumeDown()
-      }
-    } else {
-      DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
-        self.volumeDown()
-      }
-    }
-    volume(isUp: false)
   }
 
   func brightness(isUp: Bool) {
