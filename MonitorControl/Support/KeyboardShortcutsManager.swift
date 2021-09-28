@@ -7,7 +7,7 @@ import os.log
 class KeyboardShortcutsManager {
 
   var initialKeyRepeat = 0.35 // This should come from UserDefaults instead, but it's ok for now.
-  var keyRepeat = 0.03 // This should come from UserDefaults instead, but it's ok for now.
+  var keyRepeat = 0.02 // This should come from UserDefaults instead, but it's ok for now.
 
   var currentCommand: KeyboardShortcuts.Name = KeyboardShortcuts.Name.none
   var isFirstKeypress = false
@@ -71,6 +71,10 @@ class KeyboardShortcutsManager {
   }
 
   func apply(_ shortcut: KeyboardShortcuts.Name, eventId: Int) {
+    guard app.sleepID == 0, app.reconfigureID == 0, prefs.integer(forKey: PrefKey.keyboardBrightness.rawValue) == KeyboardBrightness.custom.rawValue else {
+      disengage()
+      return
+    }
     guard self.currentCommand == shortcut, self.isHold, eventId == self.currentEventId else {
       if [KeyboardShortcuts.Name.volumeUp, KeyboardShortcuts.Name.volumeDown].contains(shortcut) {
         self.volume(isUp: true, isPressed: false)
@@ -99,7 +103,7 @@ class KeyboardShortcutsManager {
   }
 
   func brightness(isUp: Bool) {
-    guard app.sleepID == 0, app.reconfigureID == 0, prefs.integer(forKey: PrefKey.keyboardBrightness.rawValue) == KeyboardBrightness.custom.rawValue, let affectedDisplays = DisplayManager.shared.getAffectedDisplays(isBrightness: true, isVolume: false) else {
+    guard let affectedDisplays = DisplayManager.shared.getAffectedDisplays(isBrightness: true, isVolume: false) else {
       return
     }
     for display in affectedDisplays where !(display.readPrefAsBool(key: .isDisabled)) {
@@ -114,7 +118,7 @@ class KeyboardShortcutsManager {
   }
 
   func contrast(isUp: Bool) {
-    guard app.sleepID == 0, app.reconfigureID == 0, prefs.integer(forKey: PrefKey.keyboardBrightness.rawValue) == KeyboardBrightness.custom.rawValue, let affectedDisplays = DisplayManager.shared.getAffectedDisplays(isBrightness: true, isVolume: false) else {
+    guard let affectedDisplays = DisplayManager.shared.getAffectedDisplays(isBrightness: true, isVolume: false) else {
       return
     }
     for display in affectedDisplays where !(display.readPrefAsBool(key: .isDisabled)) {
@@ -125,7 +129,7 @@ class KeyboardShortcutsManager {
   }
 
   func volume(isUp: Bool, isPressed: Bool) {
-    guard app.sleepID == 0, app.reconfigureID == 0, prefs.integer(forKey: PrefKey.keyboardVolume.rawValue) == KeyboardVolume.custom.rawValue, let affectedDisplays = DisplayManager.shared.getAffectedDisplays(isBrightness: false, isVolume: true) else {
+    guard let affectedDisplays = DisplayManager.shared.getAffectedDisplays(isBrightness: false, isVolume: true) else {
       return
     }
     var wasNotIsPressedVolumeSentAlready = false
