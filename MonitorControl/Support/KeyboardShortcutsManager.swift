@@ -4,11 +4,14 @@ import Foundation
 import KeyboardShortcuts
 import os.log
 
-// Please note that I understand that the level of redundancy in this class is astonishing. I'll make it professional l8r! :) - @waydabber
 class KeyboardShortcutsManager {
+
+  var initialKeyRepeat = 0.35 // This should come from UserDefaults instead
+  var keyRepeat = 0.03 // This should come from UserDefaults instead
 
   var currentCommand: KeyboardShortcuts.Name = KeyboardShortcuts.Name.none
   var isFirstKeypress = false
+  var currentEventId = 0
   var isHold = false
 
   var isBrightnessUpFirstKeypress = false
@@ -71,7 +74,8 @@ class KeyboardShortcutsManager {
     self.currentCommand = shortcut
     self.isFirstKeypress = true
     self.isHold = true
-    self.apply(shortcut)
+    self.currentEventId += 1
+    self.apply(shortcut, eventId: self.currentEventId)
   }
 
   func disengage() {
@@ -80,18 +84,21 @@ class KeyboardShortcutsManager {
     self.currentCommand = KeyboardShortcuts.Name.none
   }
 
-  func apply(_ shortcut: KeyboardShortcuts.Name) {
-    guard self.currentCommand == shortcut, self.isHold else {
+  func apply(_ shortcut: KeyboardShortcuts.Name, eventId: Int) {
+    guard self.currentCommand == shortcut, self.isHold, eventId == self.currentEventId else {
+      if [KeyboardShortcuts.Name.volumeUp, KeyboardShortcuts.Name.volumeDown].contains(shortcut) {
+        self.volume(isUp: true, isPressed: false)
+      }
       return
     }
     if self.isFirstKeypress {
       self.isFirstKeypress = false
-      DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-        self.apply(shortcut)
+      DispatchQueue.main.asyncAfter(deadline: .now() + initialKeyRepeat) {
+        self.apply(shortcut, eventId: eventId)
       }
     } else {
-      DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
-        self.apply(shortcut)
+      DispatchQueue.main.asyncAfter(deadline: .now() + keyRepeat) {
+        self.apply(shortcut, eventId: eventId)
       }
     }
     switch shortcut {
@@ -99,8 +106,8 @@ class KeyboardShortcutsManager {
     case KeyboardShortcuts.Name.brightnessDown: self.brightness(isUp: false)
     case KeyboardShortcuts.Name.contrastUp: self.contrast(isUp: true)
     case KeyboardShortcuts.Name.contrastDown: self.contrast(isUp: false)
-    case KeyboardShortcuts.Name.volumeUp: self.volume(isUp: true)
-    case KeyboardShortcuts.Name.volumeDown: self.volume(isUp: false)
+    case KeyboardShortcuts.Name.volumeUp: self.volume(isUp: true, isPressed: true)
+    case KeyboardShortcuts.Name.volumeDown: self.volume(isUp: false, isPressed: true)
     default: break
     }
   }
@@ -131,15 +138,16 @@ class KeyboardShortcutsManager {
     }
   }
 
-  func volume(isUp: Bool) {
+  func volume(isUp: Bool, isPressed: Bool) {
     guard app.sleepID == 0, app.reconfigureID == 0, prefs.integer(forKey: PrefKey.keyboardVolume.rawValue) == KeyboardVolume.custom.rawValue, let affectedDisplays = DisplayManager.shared.getAffectedDisplays(isBrightness: false, isVolume: true) else {
       return
     }
     var wasNotIsPressedVolumeSentAlready = false
     for display in affectedDisplays where !(display.readPrefAsBool(key: .isDisabled)) {
       if let display = display as? OtherDisplay {
-        display.stepVolume(isUp: isUp, isSmallIncrement: false)
-        if !wasNotIsPressedVolumeSentAlready, !display.readPrefAsBool(key: .unavailableDDC, for: .audioSpeakerVolume) {
+        if isPressed {
+          display.stepVolume(isUp: isUp, isSmallIncrement: false)
+        } else if !wasNotIsPressedVolumeSentAlready, !display.readPrefAsBool(key: .unavailableDDC, for: .audioSpeakerVolume) {
           display.playVolumeChangedSound()
           wasNotIsPressedVolumeSentAlready = true
         }
