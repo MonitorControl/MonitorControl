@@ -112,7 +112,7 @@ class KeyboardShortcutsManager {
         isAnyDisplayInSwAfterBrightnessMode = true
       }
       if !(isAnyDisplayInSwAfterBrightnessMode && !(((display as? OtherDisplay)?.isSwBrightnessNotDefault() ?? false) && !((display as? OtherDisplay)?.isSw() ?? false))) {
-        display.stepBrightness(isUp: isUp, isSmallIncrement: false)
+        display.stepBrightness(isUp: isUp, isSmallIncrement: prefs.bool(forKey: PrefKey.useFineScaleBrightness.rawValue))
       }
     }
   }
@@ -123,7 +123,7 @@ class KeyboardShortcutsManager {
     }
     for display in affectedDisplays where !(display.readPrefAsBool(key: .isDisabled)) {
       if let otherDisplay = display as? OtherDisplay {
-        otherDisplay.stepContrast(isUp: isUp, isSmallIncrement: false)
+        otherDisplay.stepContrast(isUp: isUp, isSmallIncrement: prefs.bool(forKey: PrefKey.useFineScaleBrightness.rawValue))
       }
     }
   }
@@ -136,7 +136,7 @@ class KeyboardShortcutsManager {
     for display in affectedDisplays where !(display.readPrefAsBool(key: .isDisabled)) {
       if let display = display as? OtherDisplay {
         if isPressed {
-          display.stepVolume(isUp: isUp, isSmallIncrement: false)
+          display.stepVolume(isUp: isUp, isSmallIncrement: prefs.bool(forKey: PrefKey.useFineScaleVolume.rawValue))
         } else if !wasNotIsPressedVolumeSentAlready, !display.readPrefAsBool(key: .unavailableDDC, for: .audioSpeakerVolume) {
           display.playVolumeChangedSound()
           wasNotIsPressedVolumeSentAlready = true
