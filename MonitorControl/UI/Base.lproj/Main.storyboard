@@ -1037,7 +1037,7 @@
                                             <rect key="frame" x="235" y="484" width="418" height="28"/>
                                             <textFieldCell key="cell" controlSize="small" id="Gy9-Of-tpz">
                                                 <font key="font" metaFont="smallSystem"/>
-                                                <string key="title">Note: you can always use Ctrl+Brightness to control internal display only and Ctrl+Command+Brightness to control external displays only.</string>
+                                                <string key="title">Note: with standard keys you can use Ctrl+Brightness to control internal display and Ctrl+Command+Brightness to control external displays.</string>
                                                 <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
@@ -1367,7 +1367,7 @@
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="none" tableStyle="inset" selectionHighlightStyle="none" columnReordering="NO" columnResizing="NO" multipleSelection="NO" emptySelection="NO" autosaveColumns="NO" typeSelect="NO" rowHeight="490" rowSizeStyle="automatic" viewBased="YES" id="zC9-dS-Tr3">
-                                            <rect key="frame" x="0.0" y="0.0" width="691" height="490"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="691" height="488"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <size key="intercellSpacing" width="17" height="0.0"/>
                                             <color key="backgroundColor" name="windowBackgroundColor" catalog="System" colorSpace="catalog"/>

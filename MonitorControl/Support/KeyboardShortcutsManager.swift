@@ -31,23 +31,60 @@ class KeyboardShortcutsManager {
   }
 
   func handleBrightness(isUp: Bool) {
-    os_log("Pressed brightness custom shortcut.", type: .debug)
-    // TODO: Something is missing here...
+    guard app.sleepID == 0, app.reconfigureID == 0, prefs.integer(forKey: PrefKey.keyboardBrightness.rawValue) == KeyboardBrightness.custom.rawValue, let affectedDisplays = DisplayManager.shared.getAffectedDisplays(isBrightness: true, isVolume: false) else {
+      return
+    }
+    for display in affectedDisplays where !(display.readPrefAsBool(key: .isDisabled)) {
+      var isAnyDisplayInSwAfterBrightnessMode: Bool = false
+      for display in affectedDisplays where ((display as? OtherDisplay)?.isSwBrightnessNotDefault() ?? false) && !((display as? OtherDisplay)?.isSw() ?? false) && prefs.bool(forKey: PrefKey.separateCombinedScale.rawValue) {
+        isAnyDisplayInSwAfterBrightnessMode = true
+      }
+      if !(isAnyDisplayInSwAfterBrightnessMode && !(((display as? OtherDisplay)?.isSwBrightnessNotDefault() ?? false) && !((display as? OtherDisplay)?.isSw() ?? false))) {
+        display.stepBrightness(isUp: isUp, isSmallIncrement: false)
+      }
+    }
   }
 
   func handleContrast(isUp: Bool) {
-    os_log("Pressed contrast custom shortcut.", type: .debug)
-    // TODO: Something is missing here...
+    guard app.sleepID == 0, app.reconfigureID == 0, prefs.integer(forKey: PrefKey.keyboardBrightness.rawValue) == KeyboardBrightness.custom.rawValue, let affectedDisplays = DisplayManager.shared.getAffectedDisplays(isBrightness: true, isVolume: false) else {
+      return
+    }
+    for display in affectedDisplays where !(display.readPrefAsBool(key: .isDisabled)) {
+      if let otherDisplay = display as? OtherDisplay {
+        otherDisplay.stepContrast(isUp: isUp, isSmallIncrement: false)
+      }
+    }
   }
 
   func handleVolume(isUp: Bool) {
-    os_log("Pressed volume custom shortcut.", type: .debug)
-    // TODO: Something is missing here...
+    guard app.sleepID == 0, app.reconfigureID == 0, prefs.integer(forKey: PrefKey.keyboardVolume.rawValue) == KeyboardVolume.custom.rawValue, let affectedDisplays = DisplayManager.shared.getAffectedDisplays(isBrightness: false, isVolume: true) else {
+      return
+    }
+    var wasNotIsPressedVolumeSentAlready = false
+    for display in affectedDisplays where !(display.readPrefAsBool(key: .isDisabled)) {
+      if let display = display as? OtherDisplay {
+        display.stepVolume(isUp: isUp, isSmallIncrement: false)
+        if !wasNotIsPressedVolumeSentAlready, !display.readPrefAsBool(key: .unavailableDDC, for: .audioSpeakerVolume) {
+          display.playVolumeChangedSound()
+          wasNotIsPressedVolumeSentAlready = true
+        }
+      }
+    }
   }
 
   func handleMute() {
-    os_log("Pressed mute custom shortcut.", type: .debug)
-    // TODO: Something is missing here...
+    guard app.sleepID == 0, app.reconfigureID == 0, prefs.integer(forKey: PrefKey.keyboardVolume.rawValue) == KeyboardVolume.custom.rawValue, let affectedDisplays = DisplayManager.shared.getAffectedDisplays(isBrightness: false, isVolume: true) else {
+      return
+    }
+    var wasNotIsPressedVolumeSentAlready = false
+    for display in affectedDisplays where !(display.readPrefAsBool(key: .isDisabled)) {
+      if let display = display as? OtherDisplay {
+        display.toggleMute()
+        if !wasNotIsPressedVolumeSentAlready, display.readPrefAsInt(for: .audioMuteScreenBlank) != 1, !display.readPrefAsBool(key: .unavailableDDC, for: .audioSpeakerVolume) {
+          display.playVolumeChangedSound()
+          wasNotIsPressedVolumeSentAlready = true
+        }
+      }
+    }
   }
-
 }
