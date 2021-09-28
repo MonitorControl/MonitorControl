@@ -7,25 +7,25 @@ import os.log
 class KeyboardShortcutsManager {
 
   init() {
-    KeyboardShortcuts.onKeyUp(for: .brightnessUp) { [self] in
+    KeyboardShortcuts.onKeyDown(for: .brightnessUp) { [self] in
       self.handleBrightness(isUp: true)
     }
-    KeyboardShortcuts.onKeyUp(for: .brightnessDown) { [self] in
+    KeyboardShortcuts.onKeyDown(for: .brightnessDown) { [self] in
       self.handleBrightness(isUp: false)
     }
-    KeyboardShortcuts.onKeyUp(for: .contrastUp) { [self] in
+    KeyboardShortcuts.onKeyDown(for: .contrastUp) { [self] in
       self.handleContrast(isUp: true)
     }
-    KeyboardShortcuts.onKeyUp(for: .contrastDown) { [self] in
+    KeyboardShortcuts.onKeyDown(for: .contrastDown) { [self] in
       self.handleContrast(isUp: false)
     }
-    KeyboardShortcuts.onKeyUp(for: .volumeUp) { [self] in
+    KeyboardShortcuts.onKeyDown(for: .volumeUp) { [self] in
       self.handleVolume(isUp: true)
     }
-    KeyboardShortcuts.onKeyUp(for: .volumeDown) { [self] in
+    KeyboardShortcuts.onKeyDown(for: .volumeDown) { [self] in
       self.handleVolume(isUp: false)
     }
-    KeyboardShortcuts.onKeyUp(for: .mute) { [self] in
+    KeyboardShortcuts.onKeyDown(for: .mute) { [self] in
       self.handleMute()
     }
   }
