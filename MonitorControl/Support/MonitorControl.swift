@@ -7,6 +7,7 @@ import os.log
 import Preferences
 import ServiceManagement
 import SimplyCoreAudio
+import Sparkle
 
 class MonitorControl: NSObject, NSApplicationDelegate {
   let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
@@ -18,6 +19,7 @@ class MonitorControl: NSObject, NSApplicationDelegate {
   var sleepID: Int = 0 // sleep event ID
   var safeMode = false
   var jobRunning = false
+  let updaterController = SPUStandardUpdaterController(startingUpdater: false, updaterDelegate: nil, userDriverDelegate: nil)
 
   var preferencePaneStyle: Preferences.Style {
     if !DEBUG_MACOS10, #available(macOS 11.0, *) {
@@ -76,6 +78,7 @@ class MonitorControl: NSObject, NSApplicationDelegate {
     CGDisplayRegisterReconfigurationCallback({ _, _, _ in app.displayReconfigured() }, nil)
     self.configure(firstrun: true)
     DisplayManager.shared.createGammaActivityEnforcer()
+    updaterController.startUpdater()
   }
 
   @objc func quitClicked(_: AnyObject) {
