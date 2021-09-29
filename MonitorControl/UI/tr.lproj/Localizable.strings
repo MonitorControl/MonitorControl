@@ -1,5 +1,5 @@
 /* Shown in the main prefs window */
-"About" = "Névjegy";
+"About" = "Hakkında";
 
 /* Shown in the main prefs window */
 "App menu" = "App menu";
@@ -8,46 +8,46 @@
 "Apple Silicon" = "Apple Silicon";
 
 /* Shown in the alert dialog */
-"Are you sure you want to enable a longer delay? Doing so may freeze your system and require a restart. Start at login will be disabled as a safety measure." = "Biztos benne, hogy engedélyezni kívánja a hosszabb várakozást? Ez bizonyos esetekben a rendszer lefagyását eredményezheti, akár újraindítás is szükségessé válhat. A bejelentkezéskori automatikus indítást letiltjuk a biztonság kedvéért.";
+"Are you sure you want to enable a longer delay? Doing so may freeze your system and require a restart. Start at login will be disabled as a safety measure." = "Daha uzun bir gecikmeyi etkinleştirmek istediğinizden emin misiniz? Bunu yapmak sisteminizi dondurabilir ve yeniden başlatılabilir. Başlangıçta güvenlik önlemi olarak devre dışı bırakılır.";
 
 /* Shown in the alert dialog */
-"Are you sure you want to reset all preferences?" = "Biztos benne, hogy vissza kívánja állítani az alapértelmezett beállításokat?";
+"Are you sure you want to reset all preferences?" = "Tüm ayarları sıfırlamak istediğinize emin misiniz?";
 
-/* Sown in menu */
-"Brightness" = "Fényerő";
+/* Shown in menu */
+"Brightness" = "Parlaklık";
 
 /* Build */
-"Build" = "Build";
+"Build" = "Derleme";
 
 /* Shown in the Display Preferences */
-"Built-in Display" = "Built-in Display";
+"Built-in Display" = "Dahili Ekran";
 
 /* Shown in menu */
 "Check for updates..." = "Check for updates...";
 
 /* Shown in menu */
-"Contrast" = "Kontraszt";
+"Contrast" = "Kontrast";
 
 /* Version */
-"Copyright Ⓒ MonitorControl, " = "Copyright Ⓒ MonitorControl, ";
+"Copyright Ⓒ MonitorControl, " = "Telif Hakkı Ⓒ MonitorControl, ";
 
 /* Shown in the main prefs window */
-"Displays" = "Kijelzők";
+"Displays" = "Ekranlar";
 
 /* Shown in the alert dialog */
-"Enable Longer Delay?" = "Hosszabb várakozás engedélyezése?";
+"Enable Longer Delay?" = "Daha Uzun Gecikmeyi Etkinleştir?";
 
 /* Shown in the Display Preferences */
-"External Display" = "External Display";
+"External Display" = "Harici Ekran";
 
 /* Shown in the main prefs window */
-"General" = "Általános";
+"General" = "Genel";
 
 /* Shown in the Display Preferences */
 "Hardware (Apple)" = "Hardware (Apple)";
 
 /* Shown in the Display Preferences */
-"Hardware (DDC)" = "Hardver (DDC)";
+"Hardware (DDC)" = "Donanım (DDC)";
 
 /* Shown in the alert dialog */
 "Incompatible previous version" = "Incompatible previous version";
@@ -59,13 +59,13 @@
 "Keyboard" = "Keyboard";
 
 /* Shown in the alert dialog */
-"No" = "Nem";
+"No" = "Hayır";
 
 /* Shown in the Display Preferences */
 "No Control" = "No Control";
 
 /* Shown in the Display Preferences */
-"Other Display" = "Egyéb kijelző";
+"Other Display" = "Diğer Ekran";
 
 /* Shown in the alert dialog */
 "Preferences for an incompatible previous app version detected. Default preferences are reloaded." = "Preferences for an incompatible previous app version detected. Default preferences are reloaded.";
@@ -77,16 +77,16 @@
 "Quit" = "Quit";
 
 /* Shown in the alert dialog */
-"Reset Preferences?" = "Alapértelmezett beállítások";
+"Reset Preferences?" = "Ayarları Sıfırla?";
 
 /* Shown in the alert dialog */
-"Safe Mode Activated" = "Biztonsági mód engedélyezve";
+"Safe Mode Activated" = "Safe Mode Activated";
 
 /* Shown in the alert dialog */
-"Shift was pressed during launch. MonitorControl started in safe mode. Default preferences are reloaded, DDC read is blocked." = "A Shift gomb le lett nyomva indítás közben, az alkalmazás biztonsági módban indult el. Az alapértelmezett beállításokat visszaállítottuk, a DDC olvasás letiltásra került.";
+"Shift was pressed during launch. MonitorControl started in safe mode. Default preferences are reloaded, DDC read is blocked." = "Shift was pressed during launch. MonitorControl started in safe mode. Default preferences are reloaded, DDC read is blocked.";
 
 /* Shown in the alert dialog */
-"Shortcuts not available" = "Gyorsbillentyűk nem elérhetők";
+"Shortcuts not available" = "Kısayollar bulunamadı";
 
 /* Shown in the Display Preferences */
 "Software (Gamma)" = "Software (Gamma)";
@@ -115,22 +115,20 @@
 /* Shown in the Display Preferences */
 "This is a virtual display (examples: AirPlay, Sidecar, display connected via a DisplayLink Dock or similar) which does not allow hardware or software gammatable control. Shading is used as a substitute but only in non-mirror scenarios. Mouse cursor will be unaffected and artifacts may appear when entering/leaving full screen mode." = "This is a virtual display (examples: AirPlay, Sidecar, display connected via a DisplayLink Dock or similar) which does not allow hardware or software gammatable control. Shading is used as a substitute but only in non-mirror scenarios. Mouse cursor will be unaffected and artifacts may appear when entering/leaving full screen mode.";
 
-/* Unknown display name
- Unknown model
- Unknown vendor */
-"Unknown" = "Ismeretlen";
+/* Unknown display name */
+"Unknown" = "Bilinmeyen";
 
 /* Version */
-"Version" = "Verzió";
+"Version" = "Versiyon";
 
 /* Shown in the Display Preferences */
-"Virtual Display" = "Virtuális kijelző";
+"Virtual Display" = "Sanal Ekran";
 
 /* Shown in menu */
-"Volume" = "Hangerő";
+"Volume" = "Ses";
 
 /* Shown in the alert dialog */
-"Yes" = "Igen";
+"Yes" = "Evet";
 
 /* Shown in the alert dialog */
-"You need to enable MonitorControl in System Preferences > Security and Privacy > Accessibility for the keyboard shortcuts to work" = "Engedélyeznie kell a MonitorControlt a Rendszerbeállítások > Biztonság és adatvédelem > Kisegítő lehetőségek alatt a gyorsbillentyűk használatához!";
+"You need to enable MonitorControl in System Preferences > Security and Privacy > Accessibility for the keyboard shortcuts to work" = "MonitorControl klavye kısayollarını aktif hale getirmek için Sistem Tercihleri > Güvenlik ve Gizlilik > Erişebilirlik altından izin vermeniz gerekmektedir";

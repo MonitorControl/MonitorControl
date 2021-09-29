@@ -53,7 +53,7 @@
 "8Q8-57-xnT.title" = "Use fine OSD scale";
 
 /* Class = "NSButtonCell"; title = "Special thanks to our contributors!"; ObjectID = "95V-M4-2l5"; */
-"95V-M4-2l5.title" = "Agradecimientos especiales para colaboradores!";
+"95V-M4-2l5.title" = "Special thanks to our contributors!";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "9aX-gm-8TS"; */
 "9aX-gm-8TS.title" = "Box";
@@ -83,16 +83,16 @@
 "bIe-6O-xEH.title" = "For hardware (DDC) controlled displays only. Results may vary.";
 
 /* Class = "NSButtonCell"; title = "Disable macOS volume OSD"; ObjectID = "bkM-Px-U3b"; */
-"bkM-Px-U3b.title" = "Desactivar el OSD de volumen de macOS";
+"bkM-Px-U3b.title" = "Disable macOS volume OSD";
 
 /* Class = "NSTextFieldCell"; title = "OSD scale:"; ObjectID = "bP4-GJ-vhJ"; */
 "bP4-GJ-vhJ.title" = "OSD scale:";
 
 /* Class = "NSButtonCell"; title = "Reset settings"; ObjectID = "BYS-7Y-bRz"; */
-"BYS-7Y-bRz.title" = "Reiniciar configuraciones";
+"BYS-7Y-bRz.title" = "Reset settings";
 
 /* Class = "NSButtonCell"; title = "Enable Mute DDC command"; ObjectID = "bZq-0d-lJa"; */
-"bZq-0d-lJa.title" = "Activar el comando DDC de silenciamiento";
+"bZq-0d-lJa.title" = "Enable Mute DDC command";
 
 /* Class = "NSTextFieldCell"; title = "Decrease:"; ObjectID = "Bzq-Co-fex"; */
 "Bzq-Co-fex.title" = "Decrease:";
@@ -101,16 +101,16 @@
 "c9D-MB-lma.title" = "Show volume slider in menu";
 
 /* Class = "NSMenuItem"; title = "Custom"; ObjectID = "Cle-DD-vR7"; */
-"Cle-DD-vR7.title" = "Custom";
+"Cle-DD-vR7.title" = "Власне";
 
 /* Class = "NSButtonCell"; title = "Website"; ObjectID = "Cln-uW-2dd"; */
-"Cln-uW-2dd.title" = "Sitio web";
+"Cln-uW-2dd.title" = "Website";
 
 /* Class = "NSTextFieldCell"; title = "Upon startup or wake:"; ObjectID = "cNt-Cq-vK4"; */
 "cNt-Cq-vK4.title" = "Upon startup or wake:";
 
 /* Class = "NSTextFieldCell"; title = "⚠️ Warning! Changing some of these settings may cause system freezes or unexpected behavior!"; ObjectID = "Cz1-Mh-llk"; */
-"Cz1-Mh-llk.title" = "⚠️ Advertencia! La modificación de algunos de estos ajustes puede provocar un comportamiento inesperado.";
+"Cz1-Mh-llk.title" = "⚠️ Warning! Changing some of these settings may cause system freezes or unexpected behavior!";
 
 /* Class = "NSTextFieldCell"; title = "Alternative keys are the F14/F15 (Scroll Lock and Pause on PC keyboards, brightness keys on some Logitech keyboards)."; ObjectID = "D4H-hU-FLn"; */
 "D4H-hU-FLn.title" = "Alternative keys are the F14/F15 (Scroll Lock and Pause on PC keyboards, brightness keys on some Logitech keyboards).";
@@ -125,7 +125,7 @@
 "ENt-mP-0yH.title" = "You can disable smooth transitions for a more direct, immediate control.";
 
 /* Class = "NSMenuItem"; title = "Minimal"; ObjectID = "Eq3-z9-yIo"; */
-"Eq3-z9-yIo.title" = "Minimal";
+"Eq3-z9-yIo.title" = "Мінім.";
 
 /* Class = "NSTextFieldCell"; title = "Increase:"; ObjectID = "eue-as-VOR"; */
 "eue-as-VOR.title" = "Increase:";
@@ -152,7 +152,7 @@
 "fmZ-HI-Mdc.title" = "Apple and built-in displays already have a brightness slider in Control Center.";
 
 /* Class = "NSMenuItem"; title = "None"; ObjectID = "FoA-yh-Yx3"; */
-"FoA-yh-Yx3.title" = "Ninguno";
+"FoA-yh-Yx3.title" = "Немає";
 
 /* Class = "NSMenuItem"; title = "Show as icons"; ObjectID = "fR3-kq-cps"; */
 "fR3-kq-cps.title" = "Show as icons";
@@ -194,7 +194,7 @@
 "J3L-MW-iJL.title" = "Use fine OSD scale for volume";
 
 /* Class = "NSButtonCell"; title = "Start at Login"; ObjectID = "j72-NF-zsW"; */
-"j72-NF-zsW.title" = "Iniciar app en inicio";
+"j72-NF-zsW.title" = "Запускати MonitorControl разом із системою";
 
 /* Class = "NSButtonCell"; title = "Change for all screens"; ObjectID = "JC3-pb-XnR"; */
 "JC3-pb-XnR.title" = "Change for all screens";
@@ -215,7 +215,7 @@
 "LO4-4k-gxY.title" = "Brightness and contrast control:";
 
 /* Class = "NSTextFieldCell"; title = "Display type:"; ObjectID = "lSJ-6w-KJ2"; */
-"lSJ-6w-KJ2.title" = "Tipo de pantalla:";
+"lSJ-6w-KJ2.title" = "Display type:";
 
 /* Class = "NSTextFieldCell"; title = "Screen to control:"; ObjectID = "ltL-gR-K3Z"; */
 "ltL-gR-K3Z.title" = "Screen to control:";
@@ -251,7 +251,7 @@
 "oHf-Gh-68c.title" = "Disable keyboard";
 
 /* Class = "NSTextFieldCell"; title = "Application:"; ObjectID = "okD-DG-pYa"; */
-"okD-DG-pYa.title" = "Aplicación:";
+"okD-DG-pYa.title" = "Application:";
 
 /* Class = "NSMenuItem"; title = "Standard keyboard brightness keys"; ObjectID = "Oke-bW-cb1"; */
 "Oke-bW-cb1.title" = "Standard keyboard brightness keys";
@@ -263,10 +263,10 @@
 "pa0-Hz-ace.title" = "Use the brightness keys of your Apple keyboard to control brightness. You can hold Control to adjust the built-in display, Control+Option to adjust external displays. Hold Shift+Option for fine control. Control+Option+Command adjusts contrast on DDC compatible displays.";
 
 /* Class = "NSTextFieldCell"; title = "Control method:"; ObjectID = "PaK-1f-DsW"; */
-"PaK-1f-DsW.title" = "Método de control:";
+"PaK-1f-DsW.title" = "Control method:";
 
 /* Class = "NSButtonCell"; title = "Longer delay during DDC read operations"; ObjectID = "pF5-Sw-7BR"; */
-"pF5-Sw-7BR.title" = "Mayor retardo en las operaciones de lectura del DDC";
+"pF5-Sw-7BR.title" = "Longer delay during DDC read operations";
 
 /* Class = "NSTextFieldCell"; title = "For hardware (DDC) controlled displays only."; ObjectID = "POy-35-bh0"; */
 "POy-35-bh0.title" = "For hardware (DDC) controlled displays only.";
@@ -296,10 +296,10 @@
 "r76-Zc-x09.title" = "Combine hardware and software dimming";
 
 /* Class = "NSTextFieldCell"; title = "Advanced:"; ObjectID = "r7i-oG-Ab6"; */
-"r7i-oG-Ab6.title" = "Avanzado:";
+"r7i-oG-Ab6.title" = "Advanced:";
 
 /* Class = "NSMenuItem"; title = "Normal"; ObjectID = "Riq-uM-bTs"; */
-"Riq-uM-bTs.title" = "Normal";
+"Riq-uM-bTs.title" = "Звич.";
 
 /* Class = "NSButton"; ibExternalAccessibilityDescription = "Brightness"; ObjectID = "RkH-7d-KvR"; */
 "RkH-7d-KvR.ibExternalAccessibilityDescription" = "Brightness";
@@ -311,7 +311,7 @@
 "thh-DG-ecH.title" = "General menu items style:";
 
 /* Class = "NSTextFieldCell"; title = "@the0neyouseek\n@JoniVR\n@waydabber"; ObjectID = "TKd-J8-Iyk"; */
-"TKd-J8-Iyk.title" = "@the0neyouseek\n@JoniVR\n@waydabber";
+"TKd-J8-Iyk.title" = "@the0neyouseek\n@reitermarkus\n@JoniVR\n@waydabber";
 
 /* Class = "NSTextFieldCell"; title = "Menu Icon:"; ObjectID = "u6s-Pb-BCG"; */
 "u6s-Pb-BCG.title" = "Menu Icon:";
@@ -323,7 +323,7 @@
 "uJS-s3-Zpi.ibExternalAccessibilityDescription" = "Brightness";
 
 /* Class = "NSButtonCell"; title = "Enable keyboard control for display"; ObjectID = "UqR-WE-jHl"; */
-"UqR-WE-jHl.title" = "Habilitar el control de pantalla en teclado";
+"UqR-WE-jHl.title" = "Enable keyboard control for display";
 
 /* Class = "NSTextFieldCell"; title = "Contrast"; ObjectID = "urd-Rh-aiL"; */
 "urd-Rh-aiL.title" = "Contrast";
@@ -332,13 +332,13 @@
 "vd2-Lk-neX.title" = "Do not use alternative brightness keys";
 
 /* Class = "NSMenuItem"; title = "Heavy"; ObjectID = "vik-vN-bJe"; */
-"vik-vN-bJe.title" = "Heavy";
+"vik-vN-bJe.title" = "Част.";
 
 /* Class = "NSTextFieldCell"; title = "Multiple displays:"; ObjectID = "vri-pv-tJ4"; */
 "vri-pv-tJ4.title" = "Multiple displays:";
 
 /* Class = "NSTextFieldCell"; title = "DDC read polling mode:"; ObjectID = "vwm-hY-on5"; */
-"vwm-hY-on5.title" = "Modo de lectura DDC:";
+"vwm-hY-on5.title" = "DDC read polling mode:";
 
 /* Class = "NSTextFieldCell"; title = "General options:"; ObjectID = "W58-ch-j69"; */
 "W58-ch-j69.title" = "General options:";
@@ -377,16 +377,16 @@
 "yQh-Ve-WEE.title" = "Decrease:";
 
 /* Class = "NSTextFieldCell"; title = "Identifier:"; ObjectID = "YqZ-LS-YvR"; */
-"YqZ-LS-YvR.title" = "Identificador:";
+"YqZ-LS-YvR.title" = "Identifier:";
 
 /* Class = "NSButtonCell"; title = "Use hardware DDC control"; ObjectID = "ZdU-gV-V05"; */
-"ZdU-gV-V05.title" = "Utilizar el control DDC por hardware";
+"ZdU-gV-V05.title" = "Use hardware DDC control";
 
 /* Class = "NSMenuItem"; title = "Disable keyboard"; ObjectID = "zHa-xo-XPW"; */
 "zHa-xo-XPW.title" = "Disable keyboard";
 
 /* Class = "NSButtonCell"; title = "Donate"; ObjectID = "ZKk-ve-rS4"; */
-"ZKk-ve-rS4.title" = "Donar";
+"ZKk-ve-rS4.title" = "Donate";
 
 /* Class = "NSButtonCell"; title = "Show percentages"; ObjectID = "ZUu-MR-XwA"; */
 "ZUu-MR-XwA.title" = "Show percentages";

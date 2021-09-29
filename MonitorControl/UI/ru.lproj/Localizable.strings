@@ -1,5 +1,5 @@
 /* Shown in the main prefs window */
-"About" = "Névjegy";
+"About" = "О приложении";
 
 /* Shown in the main prefs window */
 "App menu" = "App menu";
@@ -8,46 +8,46 @@
 "Apple Silicon" = "Apple Silicon";
 
 /* Shown in the alert dialog */
-"Are you sure you want to enable a longer delay? Doing so may freeze your system and require a restart. Start at login will be disabled as a safety measure." = "Biztos benne, hogy engedélyezni kívánja a hosszabb várakozást? Ez bizonyos esetekben a rendszer lefagyását eredményezheti, akár újraindítás is szükségessé válhat. A bejelentkezéskori automatikus indítást letiltjuk a biztonság kedvéért.";
+"Are you sure you want to enable a longer delay? Doing so may freeze your system and require a restart. Start at login will be disabled as a safety measure." = "Вы уверены, что хотите включить более длительную задержку? Это может привести к зависанию системы и необходимости перезагрузки. Запуск при входе в систему будет отключен в качестве меры безопасности.";
 
 /* Shown in the alert dialog */
-"Are you sure you want to reset all preferences?" = "Biztos benne, hogy vissza kívánja állítani az alapértelmezett beállításokat?";
+"Are you sure you want to reset all preferences?" = "Вы уверены, что хотите сбросить все параметры?";
 
 /* Sown in menu */
-"Brightness" = "Fényerő";
+"Brightness" = "Яркость";
 
 /* Build */
-"Build" = "Build";
+"Build" = "Сборка";
 
 /* Shown in the Display Preferences */
-"Built-in Display" = "Built-in Display";
+"Built-in Display" = "Встроенный дисплей";
 
 /* Shown in menu */
 "Check for updates..." = "Check for updates...";
 
 /* Shown in menu */
-"Contrast" = "Kontraszt";
+"Contrast" = "Контрастность";
 
 /* Version */
 "Copyright Ⓒ MonitorControl, " = "Copyright Ⓒ MonitorControl, ";
 
 /* Shown in the main prefs window */
-"Displays" = "Kijelzők";
+"Displays" = "Дисплеи";
 
 /* Shown in the alert dialog */
-"Enable Longer Delay?" = "Hosszabb várakozás engedélyezése?";
+"Enable Longer Delay?" = "Включить более длительную задержку?";
 
 /* Shown in the Display Preferences */
-"External Display" = "External Display";
+"External Display" = "Внешний дисплей";
 
 /* Shown in the main prefs window */
-"General" = "Általános";
+"General" = "Основные";
 
 /* Shown in the Display Preferences */
 "Hardware (Apple)" = "Hardware (Apple)";
 
 /* Shown in the Display Preferences */
-"Hardware (DDC)" = "Hardver (DDC)";
+"Hardware (DDC)" = "Аппаратно (DDC)";
 
 /* Shown in the alert dialog */
 "Incompatible previous version" = "Incompatible previous version";
@@ -59,13 +59,13 @@
 "Keyboard" = "Keyboard";
 
 /* Shown in the alert dialog */
-"No" = "Nem";
+"No" = "Нет";
 
 /* Shown in the Display Preferences */
 "No Control" = "No Control";
 
 /* Shown in the Display Preferences */
-"Other Display" = "Egyéb kijelző";
+"Other Display" = "Другой дисплей";
 
 /* Shown in the alert dialog */
 "Preferences for an incompatible previous app version detected. Default preferences are reloaded." = "Preferences for an incompatible previous app version detected. Default preferences are reloaded.";
@@ -77,16 +77,16 @@
 "Quit" = "Quit";
 
 /* Shown in the alert dialog */
-"Reset Preferences?" = "Alapértelmezett beállítások";
+"Reset Preferences?" = "Сбросить параметры?";
 
 /* Shown in the alert dialog */
-"Safe Mode Activated" = "Biztonsági mód engedélyezve";
+"Safe Mode Activated" = "Активирован безопасный режим";
 
 /* Shown in the alert dialog */
-"Shift was pressed during launch. MonitorControl started in safe mode. Default preferences are reloaded, DDC read is blocked." = "A Shift gomb le lett nyomva indítás közben, az alkalmazás biztonsági módban indult el. Az alapértelmezett beállításokat visszaállítottuk, a DDC olvasás letiltásra került.";
+"Shift was pressed during launch. MonitorControl started in safe mode. Default preferences are reloaded, DDC read is blocked." = "Во время запуска был нажат Shift. MonitorControl запущен в безопасном режиме. Перезагружены параметры по умолчанию, DDC-чтение заблокировано.";
 
 /* Shown in the alert dialog */
-"Shortcuts not available" = "Gyorsbillentyűk nem elérhetők";
+"Shortcuts not available" = "Сочетания клавиш недоступны";
 
 /* Shown in the Display Preferences */
 "Software (Gamma)" = "Software (Gamma)";
@@ -118,19 +118,19 @@
 /* Unknown display name
  Unknown model
  Unknown vendor */
-"Unknown" = "Ismeretlen";
+"Unknown" = "Неизвестный";
 
 /* Version */
-"Version" = "Verzió";
+"Version" = "Версия";
 
 /* Shown in the Display Preferences */
-"Virtual Display" = "Virtuális kijelző";
+"Virtual Display" = "Виртуальный дисплей";
 
 /* Shown in menu */
-"Volume" = "Hangerő";
+"Volume" = "Громкость";
 
 /* Shown in the alert dialog */
-"Yes" = "Igen";
+"Yes" = "Да";
 
 /* Shown in the alert dialog */
-"You need to enable MonitorControl in System Preferences > Security and Privacy > Accessibility for the keyboard shortcuts to work" = "Engedélyeznie kell a MonitorControlt a Rendszerbeállítások > Biztonság és adatvédelem > Kisegítő lehetőségek alatt a gyorsbillentyűk használatához!";
+"You need to enable MonitorControl in System Preferences > Security and Privacy > Accessibility for the keyboard shortcuts to work" = "Вам нужно включить MonitorControl в Системных настройках > Защита и безопасность > Конфиденциальность > Универсальный доступ для работы сочетания клавиш";
