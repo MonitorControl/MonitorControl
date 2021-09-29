@@ -25,9 +25,6 @@
 /* Class = "NSButtonCell"; title = "Show separate controls for each display in menu"; ObjectID = "4t2-Rv-njr"; */
 "4t2-Rv-njr.title" = "Show separate controls for each display in menu";
 
-/* Class = "NSBox"; title = "Box"; ObjectID = "4wn-2u-KRo"; */
-"4wn-2u-KRo.title" = "Box";
-
 /* Class = "NSTextField"; ibExternalAccessibilityDescription = "Brightness"; ObjectID = "567-le-fLg"; */
 "567-le-fLg.ibExternalAccessibilityDescription" = "Brightness";
 
@@ -54,9 +51,6 @@
 
 /* Class = "NSButtonCell"; title = "Special thanks to our contributors!"; ObjectID = "95V-M4-2l5"; */
 "95V-M4-2l5.title" = "Speciale dank aan onze bijdragers!";
-
-/* Class = "NSBox"; title = "Box"; ObjectID = "9aX-gm-8TS"; */
-"9aX-gm-8TS.title" = "Box";
 
 /* Class = "NSMenuItem"; title = "Custom keyboard shortcuts"; ObjectID = "9eC-PD-FHl"; */
 "9eC-PD-FHl.title" = "Custom keyboard shortcuts";
@@ -325,7 +319,7 @@
 /* Class = "NSButtonCell"; title = "Enable keyboard control for display"; ObjectID = "UqR-WE-jHl"; */
 "UqR-WE-jHl.title" = "Toetsenbordbediening inschakelen voor beeldscherm";
 
-/* Class = "NSTextFieldCell"; title = "Contrast"; ObjectID = "urd-Rh-aiL"; */
+/* Class = "NSTextFieldCell"; title = "Contrast (DDC)"; ObjectID = "urd-Rh-aiL"; */
 "urd-Rh-aiL.title" = "Contrast";
 
 /* Class = "NSButtonCell"; title = "Do not use alternative brightness keys"; ObjectID = "vd2-Lk-neX"; */
