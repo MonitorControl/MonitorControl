@@ -16,10 +16,10 @@ class MenuHandler: NSMenu, NSMenuDelegate {
     for item in items {
       self.removeItem(item)
     }
-    combinedSliderHandler.removeAll()
+    self.combinedSliderHandler.removeAll()
   }
 
-  func menuWillOpen(_ menu: NSMenu) {
+  func menuWillOpen(_: NSMenu) {
     self.updateMenuRelevantDisplay()
   }
 
@@ -88,13 +88,13 @@ class MenuHandler: NSMenu, NSMenuDelegate {
   }
 
   func addDisplayMenuBlock(addedSliderHandlers: [SliderHandler], blockName: String, monitorSubMenu: NSMenu, numOfDisplays: Int, asSubMenu: Bool) {
-    if numOfDisplays>1, !prefs.bool(forKey: PrefKey.slidersRelevant.rawValue), !DEBUG_MACOS10, #available(macOS 11.0, *) {
+    if numOfDisplays > 1, !prefs.bool(forKey: PrefKey.slidersRelevant.rawValue), !DEBUG_MACOS10, #available(macOS 11.0, *) {
       class BlockView: NSView {
-        override func draw(_ dirtyRect: NSRect) {
+        override func draw(_: NSRect) {
           let radius = CGFloat(11)
           let outerMargin = CGFloat(15)
-          let blockRect = self.frame.insetBy(dx: outerMargin, dy: outerMargin/2 + 2).offsetBy(dx: 0, dy: outerMargin/2 * -1 + 7)
-          for i in 1...5 {
+          let blockRect = self.frame.insetBy(dx: outerMargin, dy: outerMargin / 2 + 2).offsetBy(dx: 0, dy: outerMargin / 2 * -1 + 7)
+          for i in 1 ... 5 {
             let blockPath = NSBezierPath(roundedRect: blockRect.insetBy(dx: CGFloat(i) * -1, dy: CGFloat(i) * -1), xRadius: radius + CGFloat(i) * 0.5, yRadius: radius + CGFloat(i) * 0.5)
             NSColor.black.withAlphaComponent(0.1 / CGFloat(i)).setStroke()
             blockPath.stroke()
@@ -140,7 +140,7 @@ class MenuHandler: NSMenu, NSMenuDelegate {
       monitorSubMenu.insertItem(item, at: 0)
     } else {
       for addedSliderHandler in addedSliderHandlers {
-        addSliderItem(monitorSubMenu: monitorSubMenu, sliderHandler: addedSliderHandler)
+        self.addSliderItem(monitorSubMenu: monitorSubMenu, sliderHandler: addedSliderHandler)
       }
     }
     self.appendMenuHeader(friendlyName: blockName, monitorSubMenu: monitorSubMenu, asSubMenu: asSubMenu, numOfDisplays: numOfDisplays)
@@ -148,13 +148,13 @@ class MenuHandler: NSMenu, NSMenuDelegate {
 
   func addCombinedDisplayMenuBlock() {
     if let sliderHandler = self.combinedSliderHandler[.audioSpeakerVolume] {
-      addSliderItem(monitorSubMenu: self, sliderHandler: sliderHandler)
+      self.addSliderItem(monitorSubMenu: self, sliderHandler: sliderHandler)
     }
     if let sliderHandler = self.combinedSliderHandler[.contrast] {
-      addSliderItem(monitorSubMenu: self, sliderHandler: sliderHandler)
+      self.addSliderItem(monitorSubMenu: self, sliderHandler: sliderHandler)
     }
     if let sliderHandler = self.combinedSliderHandler[.brightness] {
-      addSliderItem(monitorSubMenu: self, sliderHandler: sliderHandler)
+      self.addSliderItem(monitorSubMenu: self, sliderHandler: sliderHandler)
     }
   }
 
@@ -165,22 +165,22 @@ class MenuHandler: NSMenu, NSMenuDelegate {
     display.sliderHandler[.audioSpeakerVolume] = nil
     if let otherDisplay = display as? OtherDisplay, !otherDisplay.isSw(), !display.readPrefAsBool(key: .unavailableDDC, for: .audioSpeakerVolume), !prefs.bool(forKey: PrefKey.hideVolume.rawValue) {
       let title = NSLocalizedString("Volume", comment: "Shown in menu")
-      addedSliderHandlers.append(setupMenuSliderHandler(command: .audioSpeakerVolume, display: display, title: title))
+      addedSliderHandlers.append(self.setupMenuSliderHandler(command: .audioSpeakerVolume, display: display, title: title))
     }
     display.sliderHandler[.contrast] = nil
     if let otherDisplay = display as? OtherDisplay, !otherDisplay.isSw(), !display.readPrefAsBool(key: .unavailableDDC, for: .contrast), prefs.bool(forKey: PrefKey.showContrast.rawValue) {
       let title = NSLocalizedString("Contrast", comment: "Shown in menu")
-      addedSliderHandlers.append(setupMenuSliderHandler(command: .contrast, display: display, title: title))
+      addedSliderHandlers.append(self.setupMenuSliderHandler(command: .contrast, display: display, title: title))
     }
     display.sliderHandler[.brightness] = nil
     if !display.readPrefAsBool(key: .unavailableDDC, for: .brightness), !prefs.bool(forKey: PrefKey.hideBrightness.rawValue) {
       let title = NSLocalizedString("Brightness", comment: "Shown in menu")
-      addedSliderHandlers.append(setupMenuSliderHandler(command: .brightness, display: display, title: title))
+      addedSliderHandlers.append(self.setupMenuSliderHandler(command: .brightness, display: display, title: title))
     }
     if !prefs.bool(forKey: PrefKey.slidersCombine.rawValue) {
-      self.addDisplayMenuBlock(addedSliderHandlers: addedSliderHandlers, blockName: (display.readPrefAsString(key: .friendlyName) != "" ? display.readPrefAsString(key: .friendlyName) : display.name), monitorSubMenu: monitorSubMenu, numOfDisplays: numOfDisplays, asSubMenu: asSubMenu)
+      self.addDisplayMenuBlock(addedSliderHandlers: addedSliderHandlers, blockName: display.readPrefAsString(key: .friendlyName) != "" ? display.readPrefAsString(key: .friendlyName) : display.name, monitorSubMenu: monitorSubMenu, numOfDisplays: numOfDisplays, asSubMenu: asSubMenu)
     }
-    if addedSliderHandlers.count>0, prefs.integer(forKey: PrefKey.menuIcon.rawValue) == MenuIcon.sliderOnly.rawValue {
+    if addedSliderHandlers.count > 0, prefs.integer(forKey: PrefKey.menuIcon.rawValue) == MenuIcon.sliderOnly.rawValue {
       app.statusItem.isVisible = true
     }
   }
@@ -237,7 +237,7 @@ class MenuHandler: NSMenu, NSMenuDelegate {
       updateIcon.image = NSImage(systemSymbolName: "arrow.triangle.2.circlepath.circle", accessibilityDescription: NSLocalizedString("Check for updates...", comment: "Shown in menu"))
       updateIcon.alternateImage = NSImage(systemSymbolName: "arrow.triangle.2.circlepath.circle.fill", accessibilityDescription: NSLocalizedString("Check for updates...", comment: "Shown in menu"))
       updateIcon.alphaValue = 0.3
-      updateIcon.frame = NSRect(x: menuItemView.frame.maxX - iconSize*2 - 10 - 16 + compensateForBlock, y: menuItemView.frame.origin.y + 5, width: iconSize, height: iconSize)
+      updateIcon.frame = NSRect(x: menuItemView.frame.maxX - iconSize * 2 - 10 - 16 + compensateForBlock, y: menuItemView.frame.origin.y + 5, width: iconSize, height: iconSize)
       updateIcon.imageScaling = .scaleProportionallyUpOrDown
       updateIcon.action = #selector(app.updaterController.checkForUpdates(_:))
       updateIcon.target = app.updaterController
@@ -249,7 +249,7 @@ class MenuHandler: NSMenu, NSMenuDelegate {
       quitIcon.image = NSImage(systemSymbolName: "xmark.circle", accessibilityDescription: NSLocalizedString("Quit", comment: "Shown in menu"))
       quitIcon.alternateImage = NSImage(systemSymbolName: "xmark.circle.fill", accessibilityDescription: NSLocalizedString("Quit", comment: "Shown in menu"))
       quitIcon.alphaValue = 0.3
-      quitIcon.frame = NSRect(x: menuItemView.frame.maxX - iconSize*3 - 20 - 16 + compensateForBlock, y: menuItemView.frame.origin.y + 5, width: iconSize, height: iconSize)
+      quitIcon.frame = NSRect(x: menuItemView.frame.maxX - iconSize * 3 - 20 - 16 + compensateForBlock, y: menuItemView.frame.origin.y + 5, width: iconSize, height: iconSize)
       quitIcon.imageScaling = .scaleProportionallyUpOrDown
       quitIcon.action = #selector(app.quitClicked)
 

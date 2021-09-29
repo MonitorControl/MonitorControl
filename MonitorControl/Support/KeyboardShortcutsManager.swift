@@ -5,17 +5,15 @@ import KeyboardShortcuts
 import os.log
 
 class KeyboardShortcutsManager {
-
   var initialKeyRepeat = 0.24 // This should come from UserDefaults instead, but it's ok for now.
   var keyRepeat = 0.032 // This should come from UserDefaults instead, but it's ok for now.
 
-  var currentCommand: KeyboardShortcuts.Name = KeyboardShortcuts.Name.none
+  var currentCommand = KeyboardShortcuts.Name.none
   var isFirstKeypress = false
   var currentEventId = 0
   var isHold = false
 
   init() {
-
     KeyboardShortcuts.onKeyDown(for: .brightnessUp) { [self] in
       self.engage(KeyboardShortcuts.Name.brightnessUp)
     }
@@ -75,7 +73,7 @@ class KeyboardShortcutsManager {
 
   func apply(_ shortcut: KeyboardShortcuts.Name, eventId: Int) {
     guard app.sleepID == 0, app.reconfigureID == 0, prefs.integer(forKey: PrefKey.keyboardBrightness.rawValue) == KeyboardBrightness.custom.rawValue else {
-      disengage()
+      self.disengage()
       return
     }
     guard self.currentCommand == shortcut, self.isHold, eventId == self.currentEventId else {
@@ -86,11 +84,11 @@ class KeyboardShortcutsManager {
     }
     if self.isFirstKeypress {
       self.isFirstKeypress = false
-      DispatchQueue.main.asyncAfter(deadline: .now() + initialKeyRepeat) {
+      DispatchQueue.main.asyncAfter(deadline: .now() + self.initialKeyRepeat) {
         self.apply(shortcut, eventId: eventId)
       }
     } else {
-      DispatchQueue.main.asyncAfter(deadline: .now() + keyRepeat) {
+      DispatchQueue.main.asyncAfter(deadline: .now() + self.keyRepeat) {
         self.apply(shortcut, eventId: eventId)
       }
     }

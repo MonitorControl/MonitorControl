@@ -41,13 +41,13 @@ class OtherDisplay: Display {
       if !prefs.bool(forKey: PrefKey.disableCombinedBrightness.rawValue), command == .brightness {
         os_log("- Combined brightness mapping on DDC data.", type: .info)
         if currentValue > 0 {
-          currentValue = combinedBrightnessSwitchingValue() + currentValue * (1-combinedBrightnessSwitchingValue())
+          currentValue = self.combinedBrightnessSwitchingValue() + currentValue * (1 - self.combinedBrightnessSwitchingValue())
         } else if currentValue == 0, firstrun {
-          currentValue = combinedBrightnessSwitchingValue()
-        } else if self.prefExists(for: command), self.readPrefAsFloat(for: command) <= combinedBrightnessSwitchingValue() {
+          currentValue = self.combinedBrightnessSwitchingValue()
+        } else if self.prefExists(for: command), self.readPrefAsFloat(for: command) <= self.combinedBrightnessSwitchingValue() {
           currentValue = self.readPrefAsFloat(for: command)
         } else {
-          currentValue = combinedBrightnessSwitchingValue()
+          currentValue = self.combinedBrightnessSwitchingValue()
         }
       }
       self.savePref(currentValue, for: command)
@@ -59,9 +59,9 @@ class OtherDisplay: Display {
       if !prefs.bool(forKey: PrefKey.disableCombinedBrightness.rawValue), command == .brightness {
         os_log("- Combined brightness mapping on saved data.", type: .info)
         if !self.prefExists(for: command) {
-          currentValue = combinedBrightnessSwitchingValue() + self.convDDCToValue(for: command, from: currentDDCValue) * (1-combinedBrightnessSwitchingValue())
-        } else if firstrun, currentValue < combinedBrightnessSwitchingValue() {
-          currentValue = combinedBrightnessSwitchingValue()
+          currentValue = self.combinedBrightnessSwitchingValue() + self.convDDCToValue(for: command, from: currentDDCValue) * (1 - self.combinedBrightnessSwitchingValue())
+        } else if firstrun, currentValue < self.combinedBrightnessSwitchingValue() {
+          currentValue = self.combinedBrightnessSwitchingValue()
         }
       } else {
         currentValue = self.prefExists(for: command) ? self.readPrefAsFloat(for: command) : self.convDDCToValue(for: command, from: currentDDCValue)
@@ -103,7 +103,7 @@ class OtherDisplay: Display {
       }
       if ddcValues == nil {
         self.processCurrentDDCValue(read: false, command: command, firstrun: firstrun, currentDDCValue: currentDDCValue)
-        currentDDCValue = self.convValueToDDC(for: command, from: (!prefs.bool(forKey: PrefKey.disableCombinedBrightness.rawValue) && command == .brightness) ? max(0, self.readPrefAsFloat(for: command) - combinedBrightnessSwitchingValue()) * (1/(1-combinedBrightnessSwitchingValue())) : self.readPrefAsFloat(for: command))
+        currentDDCValue = self.convValueToDDC(for: command, from: (!prefs.bool(forKey: PrefKey.disableCombinedBrightness.rawValue) && command == .brightness) ? max(0, self.readPrefAsFloat(for: command) - self.combinedBrightnessSwitchingValue()) * (1 / (1 - self.combinedBrightnessSwitchingValue())) : self.readPrefAsFloat(for: command))
       }
       os_log("- Current DDC value: %{public}@", type: .info, String(currentDDCValue))
       os_log("- Minimum DDC value: %{public}@ (overrides 0)", type: .info, String(self.readPrefAsInt(key: .minDDCOverride, for: command)))
@@ -308,7 +308,7 @@ class OtherDisplay: Display {
       osdValue = self.calcNewValue(currentValue: currentValue, isUp: isUp, isSmallIncrement: isSmallIncrement, half: true)
       _ = self.setBrightness(osdValue)
       if osdValue > self.combinedBrightnessSwitchingValue() {
-        OSDUtils.showOsd(displayID: self.identifier, command: .brightness, value: osdValue - combinedBrightnessSwitchingValue(), maxValue: combinedBrightnessSwitchingValue(), roundChiclet: !isSmallIncrement)
+        OSDUtils.showOsd(displayID: self.identifier, command: .brightness, value: osdValue - self.combinedBrightnessSwitchingValue(), maxValue: self.combinedBrightnessSwitchingValue(), roundChiclet: !isSmallIncrement)
       } else {
         self.doSwAfterOsdAnimation()
       }
@@ -329,12 +329,12 @@ class OtherDisplay: Display {
       if !prefs.bool(forKey: PrefKey.disableCombinedBrightness.rawValue) {
         var brightnessValue: Float = 0
         var brightnessSwValue: Float = 1
-        if value >= combinedBrightnessSwitchingValue() {
-          brightnessValue = (value - combinedBrightnessSwitchingValue()) * (1/(1-combinedBrightnessSwitchingValue()))
+        if value >= self.combinedBrightnessSwitchingValue() {
+          brightnessValue = (value - self.combinedBrightnessSwitchingValue()) * (1 / (1 - self.combinedBrightnessSwitchingValue()))
           brightnessSwValue = 1
         } else {
           brightnessValue = 0
-          brightnessSwValue = (value / combinedBrightnessSwitchingValue())
+          brightnessSwValue = (value / self.combinedBrightnessSwitchingValue())
         }
         _ = self.writeDDCValues(command: .brightness, value: self.convValueToDDC(for: .brightness, from: brightnessValue))
         _ = self.setSwBrightness(brightnessSwValue)
@@ -372,7 +372,7 @@ class OtherDisplay: Display {
       return false
     }
     var success: Bool = false
-    var controlCodes = getRemapControlCodes(command: command)
+    var controlCodes = self.getRemapControlCodes(command: command)
     if controlCodes.count == 0 {
       controlCodes.append(command.rawValue)
     }
@@ -395,7 +395,7 @@ class OtherDisplay: Display {
     guard app.sleepID == 0, app.reconfigureID == 0, !self.readPrefAsBool(key: .forceSw), !self.readPrefAsBool(key: .unavailableDDC, for: command) else {
       return values
     }
-    let controlCodes = getRemapControlCodes(command: command)
+    let controlCodes = self.getRemapControlCodes(command: command)
     let controlCode = controlCodes.count == 0 ? command.rawValue : controlCodes[0]
     if Arm64DDC.isArm64 {
       guard self.arm64ddc else {
@@ -495,6 +495,6 @@ class OtherDisplay: Display {
   }
 
   func combinedBrightnessSwitchingValue() -> Float {
-    return Float(self.readPrefAsInt(key: .combinedBrightnessSwitchingPoint)+8)/16
+    return Float(self.readPrefAsInt(key: .combinedBrightnessSwitchingPoint) + 8) / 16
   }
 }

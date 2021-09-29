@@ -144,7 +144,7 @@ class DisplaysPrefsCellView: NSTableCellView {
 
   @IBAction func enabledButtonToggled(_ sender: NSButton) {
     if let disp = display {
-      disp.savePref((sender.state == .off), key: .isDisabled)
+      disp.savePref(sender.state == .off, key: .isDisabled)
     }
   }
 

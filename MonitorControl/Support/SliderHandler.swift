@@ -209,7 +209,7 @@ class SliderHandler {
     }
   }
 
-  public init(display: Display?, command: Command, title: String = "", position: Int = 0) {
+  public init(display: Display?, command: Command, title: String = "", position _: Int = 0) {
     self.command = command
     self.title = title
     let slider = SliderHandler.MCSlider(value: 0, minValue: 0, maxValue: 1, target: self, action: #selector(SliderHandler.valueChanged))

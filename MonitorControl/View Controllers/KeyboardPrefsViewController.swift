@@ -1,9 +1,9 @@
 //  Copyright © MonitorControl. @JoniVR, @theOneyouseek, @waydabber and others
 
 import Cocoa
+import KeyboardShortcuts
 import Preferences
 import ServiceManagement
-import KeyboardShortcuts
 
 class KeyboardPrefsViewController: NSViewController, PreferencePane {
   let preferencePaneIdentifier = Preferences.PaneIdentifier.keyboard
@@ -56,8 +56,8 @@ class KeyboardPrefsViewController: NSViewController, PreferencePane {
     let hide = !prefs.bool(forKey: PrefKey.showAdvancedSettings.rawValue)
 
     if self.keyboardBrightness.selectedTag() == KeyboardBrightness.media.rawValue {
-      rowKeyboardBrightnessPopUp.bottomPadding = -13
-      rowKeyboardBrightnessText.isHidden = false
+      self.rowKeyboardBrightnessPopUp.bottomPadding = -13
+      self.rowKeyboardBrightnessText.isHidden = false
       if self.disableAltBrightnessKeys.state == .on {
         self.rowDisableAltBrightnessKeysCheck.isHidden = false
         self.rowDisableAltBrightnessKeysText.isHidden = false
@@ -65,25 +65,25 @@ class KeyboardPrefsViewController: NSViewController, PreferencePane {
         self.rowDisableAltBrightnessKeysCheck.isHidden = hide
         self.rowDisableAltBrightnessKeysText.isHidden = hide
       }
-      rowCustomBrightnessShortcuts.isHidden = true
+      self.rowCustomBrightnessShortcuts.isHidden = true
     } else if self.keyboardBrightness.selectedTag() == KeyboardBrightness.custom.rawValue {
-      rowKeyboardBrightnessPopUp.bottomPadding = -6
-      rowKeyboardBrightnessText.isHidden = true
-      rowDisableAltBrightnessKeysCheck.isHidden = true
-      rowDisableAltBrightnessKeysText.isHidden = true
-      rowCustomBrightnessShortcuts.isHidden = false
+      self.rowKeyboardBrightnessPopUp.bottomPadding = -6
+      self.rowKeyboardBrightnessText.isHidden = true
+      self.rowDisableAltBrightnessKeysCheck.isHidden = true
+      self.rowDisableAltBrightnessKeysText.isHidden = true
+      self.rowCustomBrightnessShortcuts.isHidden = false
     } else {
-      rowKeyboardBrightnessPopUp.bottomPadding = -6
-      rowKeyboardBrightnessText.isHidden = true
-      rowDisableAltBrightnessKeysCheck.isHidden = true
-      rowDisableAltBrightnessKeysText.isHidden = true
-      rowCustomBrightnessShortcuts.isHidden = true
+      self.rowKeyboardBrightnessPopUp.bottomPadding = -6
+      self.rowKeyboardBrightnessText.isHidden = true
+      self.rowDisableAltBrightnessKeysCheck.isHidden = true
+      self.rowDisableAltBrightnessKeysText.isHidden = true
+      self.rowCustomBrightnessShortcuts.isHidden = true
     }
 
     if self.keyboardVolume.selectedTag() == KeyboardVolume.custom.rawValue {
-      rowCustomAudioShortcuts.isHidden = false
+      self.rowCustomAudioShortcuts.isHidden = false
     } else {
-      rowCustomAudioShortcuts.isHidden = true
+      self.rowCustomAudioShortcuts.isHidden = true
     }
 
     if self.useFocusInsteadOfMouse.state == .on {
@@ -124,19 +124,19 @@ class KeyboardPrefsViewController: NSViewController, PreferencePane {
     super.viewDidLoad()
 
     let customBrightnessUpRecorder = KeyboardShortcuts.RecorderCocoa(for: .brightnessUp)
-    customBrightnessUp.addSubview(customBrightnessUpRecorder)
+    self.customBrightnessUp.addSubview(customBrightnessUpRecorder)
     let customBrightnessDownRecorder = KeyboardShortcuts.RecorderCocoa(for: .brightnessDown)
-    customBrightnessDown.addSubview(customBrightnessDownRecorder)
+    self.customBrightnessDown.addSubview(customBrightnessDownRecorder)
     let customContrastUpRecorder = KeyboardShortcuts.RecorderCocoa(for: .contrastUp)
-    customContrastUp.addSubview(customContrastUpRecorder)
+    self.customContrastUp.addSubview(customContrastUpRecorder)
     let customContrastDownRecorder = KeyboardShortcuts.RecorderCocoa(for: .contrastDown)
-    customContrastDown.addSubview(customContrastDownRecorder)
+    self.customContrastDown.addSubview(customContrastDownRecorder)
     let customVolumeUpRecorder = KeyboardShortcuts.RecorderCocoa(for: .volumeUp)
-    customVolumeUp.addSubview(customVolumeUpRecorder)
+    self.customVolumeUp.addSubview(customVolumeUpRecorder)
     let customVolumeDownRecorder = KeyboardShortcuts.RecorderCocoa(for: .volumeDown)
-    customVolumeDown.addSubview(customVolumeDownRecorder)
+    self.customVolumeDown.addSubview(customVolumeDownRecorder)
     let customMuteRecorder = KeyboardShortcuts.RecorderCocoa(for: .mute)
-    customMute.addSubview(customMuteRecorder)
+    self.customMute.addSubview(customMuteRecorder)
     self.populateSettings()
   }
 
@@ -263,5 +263,4 @@ class KeyboardPrefsViewController: NSViewController, PreferencePane {
     app.updateMenusAndKeys()
     _ = self.showAdvanced()
   }
-
 }

@@ -1,9 +1,9 @@
 //  Copyright © MonitorControl. @JoniVR, @theOneyouseek, @waydabber and others
 
 import Cocoa
+import os.log
 import Preferences
 import ServiceManagement
-import os.log
 
 class MenuslidersPrefsViewController: NSViewController, PreferencePane {
   let preferencePaneIdentifier = Preferences.PaneIdentifier.menusliders
@@ -144,6 +144,7 @@ class MenuslidersPrefsViewController: NSViewController, PreferencePane {
     }
     return !hide
   }
+
   // swiftlint:enable cyclomatic_complexity
 
   override func viewDidLoad() {

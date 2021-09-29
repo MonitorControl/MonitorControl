@@ -80,9 +80,9 @@ class DisplayManager {
 
   func destroyAllShades() -> Bool {
     var ret = false
-    for displayID in shades.keys {
+    for displayID in self.shades.keys {
       os_log("Attempting to destory shade for display  %{public}@", type: .debug, String(displayID))
-      if destroyShade(displayID: displayID) {
+      if self.destroyShade(displayID: displayID) {
         ret = true
       }
     }
@@ -97,7 +97,7 @@ class DisplayManager {
   func destroyShade(displayID: CGDirectDisplayID) -> Bool {
     if let shade = shades[displayID] {
       os_log("Destroying shade for display %{public}@", type: .debug, String(displayID))
-      shadeGrave.append(shade)
+      self.shadeGrave.append(shade)
       self.shades.removeValue(forKey: displayID)
       shade.close()
       return true
@@ -342,7 +342,7 @@ class DisplayManager {
     }
   }
 
-  func getAffectedDisplays(isBrightness: Bool = false, isVolume: Bool = false, isContrast: Bool = false) -> [Display]? {
+  func getAffectedDisplays(isBrightness: Bool = false, isVolume: Bool = false, isContrast _: Bool = false) -> [Display]? {
     var affectedDisplays: [Display]
     let allDisplays = self.getAllDisplays()
     var currentDisplay: Display?

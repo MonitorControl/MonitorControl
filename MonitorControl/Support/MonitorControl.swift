@@ -78,7 +78,7 @@ class MonitorControl: NSObject, NSApplicationDelegate {
     CGDisplayRegisterReconfigurationCallback({ _, _, _ in app.displayReconfigured() }, nil)
     self.configure(firstrun: true)
     DisplayManager.shared.createGammaActivityEnforcer()
-    updaterController.startUpdater()
+    self.updaterController.startUpdater()
   }
 
   @objc func quitClicked(_: AnyObject) {
