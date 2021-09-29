@@ -46,20 +46,20 @@ Shows native brightness and volume OSDs as well!</b>
 
 </div>
 
-<!--<img src=".github/screenshot.png" width="840" alt="Screenshot"/><br/>-->
+<img src=".github/screenshot.png" width="840" alt="Screenshot"/><br/>
 
 <hr>
 
 ## Download
 
-There is no official pre-release build available for this version yet.
+Go to [Releases](https://github.com/MonitorControl/MonitorControl/releases) and download the latest `.dmg`
 
 ## Compatibility
 
 - macOS Big Sur (`macOS 11`) and newer are supported
-- Current version is compatible with macOS Catalina (`10.15`) as well (with some minor limitations).
+- Current version is compatible with macOS Catalina (`10.15`) as well (with some limitations).
 
-_(Note: you can download [version 2.1.0](https://github.com/MonitorControl/MonitorControl/releases/tag/v2.1.0) for Sierra `10.12` and [version 3.0.0](https://github.com/MonitorControl/MonitorControl/releases/tag/v3.0.0) for Mojave `10.14` support)_
+_(Note: you can download [version 2.1.0](https://github.com/MonitorControl/MonitorControl/releases/tag/v2.1.0) for Sierra `10.12` and [version 3.1.1](https://github.com/MonitorControl/MonitorControl/releases/tag/v3.1.1) for Mojave `10.14` support)_
 
 ## How to help
 
@@ -92,8 +92,9 @@ You're all set ! Now open the `MonitorControl.xcodeproj` with Xcode! The depende
 
 - [MediaKeyTap](https://github.com/MonitorControl/MediaKeyTap)
 - [Preferences](https://github.com/sindresorhus/Preferences)
-- [DDC.swift](https://github.com/reitermarkus/DDC.swift)
 - [SimplyCoreAudio](https://github.com/rnine/SimplyCoreAudio)
+- [KeyboardShortcuts](https://github.com/sindresorhus/KeyboardShortcuts)
+- [Sparkle](https://github.com/sparkle-project/Sparkle)
 
 ## Contributors
 
