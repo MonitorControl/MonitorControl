@@ -816,11 +816,11 @@
         <scene sceneID="VuM-5u-zkv">
             <objects>
                 <viewController storyboardIdentifier="KeyboardPrefsVC" id="eJ2-Cv-Vfp" customClass="KeyboardPrefsViewController" customModule="MonitorControl" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yCl-jO-kpd">
-                        <rect key="frame" x="0.0" y="0.0" width="691" height="843"/>
+                    <view key="view" translatesAutoresizingMaskIntoConstraints="NO" id="yCl-jO-kpd">
+                        <rect key="frame" x="0.0" y="0.0" width="691" height="848"/>
                         <subviews>
-                            <gridView misplaced="YES" xPlacement="leading" yPlacement="fill" rowAlignment="none" rowSpacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="bKX-vi-7gY">
-                                <rect key="frame" x="20" y="15" width="651" height="808"/>
+                            <gridView xPlacement="leading" yPlacement="fill" rowAlignment="none" rowSpacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="bKX-vi-7gY">
+                                <rect key="frame" x="20" y="20" width="651" height="808"/>
                                 <rows>
                                     <gridRow height="20" bottomPadding="-13" id="dwB-Ku-aql"/>
                                     <gridRow topPadding="-13" bottomPadding="-10" id="pf1-cW-4bf"/>
@@ -968,12 +968,12 @@
                                                                 </textField>
                                                             </gridCell>
                                                             <gridCell row="CrR-ah-GZK" column="kza-Ox-UgN" xPlacement="center" yPlacement="bottom" id="JRj-Ml-bRq">
-                                                                <customView key="contentView" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uJd-Dl-olj">
+                                                                <customView key="contentView" placeholderIntrinsicWidth="100" placeholderIntrinsicHeight="25" translatesAutoresizingMaskIntoConstraints="NO" id="uJd-Dl-olj">
                                                                     <rect key="frame" x="106" y="31" width="100" height="25"/>
                                                                 </customView>
                                                             </gridCell>
                                                             <gridCell row="CrR-ah-GZK" column="Nu7-d7-fu4" xPlacement="center" yPlacement="bottom" id="eCZ-RS-7gS">
-                                                                <customView key="contentView" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="C1Q-B9-TF4">
+                                                                <customView key="contentView" placeholderIntrinsicWidth="100" placeholderIntrinsicHeight="25" translatesAutoresizingMaskIntoConstraints="NO" id="C1Q-B9-TF4">
                                                                     <rect key="frame" x="252" y="31" width="100" height="25"/>
                                                                 </customView>
                                                             </gridCell>
@@ -988,12 +988,12 @@
                                                                 </textField>
                                                             </gridCell>
                                                             <gridCell row="BhM-93-wwI" column="kza-Ox-UgN" xPlacement="center" yPlacement="bottom" id="BhD-n3-0ve">
-                                                                <customView key="contentView" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ldh-IC-HUY">
+                                                                <customView key="contentView" placeholderIntrinsicWidth="100" placeholderIntrinsicHeight="25" translatesAutoresizingMaskIntoConstraints="NO" id="ldh-IC-HUY">
                                                                     <rect key="frame" x="106" y="0.0" width="100" height="25"/>
                                                                 </customView>
                                                             </gridCell>
                                                             <gridCell row="BhM-93-wwI" column="Nu7-d7-fu4" xPlacement="center" yPlacement="bottom" id="eKF-ZY-NnV">
-                                                                <customView key="contentView" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QpM-NB-Drp">
+                                                                <customView key="contentView" placeholderIntrinsicWidth="100" placeholderIntrinsicHeight="25" translatesAutoresizingMaskIntoConstraints="NO" id="QpM-NB-Drp">
                                                                     <rect key="frame" x="252" y="0.0" width="100" height="25"/>
                                                                 </customView>
                                                             </gridCell>
@@ -1193,7 +1193,7 @@
                                                                 </textField>
                                                             </gridCell>
                                                             <gridCell row="jWq-NI-VHe" column="1Pn-Qh-jNz" xPlacement="center" yPlacement="bottom" id="oKm-MV-s5R">
-                                                                <customView key="contentView" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rFx-DX-nFb">
+                                                                <customView key="contentView" placeholderIntrinsicWidth="100" placeholderIntrinsicHeight="25" translatesAutoresizingMaskIntoConstraints="NO" id="rFx-DX-nFb">
                                                                     <rect key="frame" x="106" y="62" width="100" height="25"/>
                                                                 </customView>
                                                             </gridCell>
@@ -1208,7 +1208,7 @@
                                                                 </textField>
                                                             </gridCell>
                                                             <gridCell row="xRS-PE-ePP" column="1Pn-Qh-jNz" xPlacement="center" yPlacement="bottom" id="76G-X8-38k">
-                                                                <customView key="contentView" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cag-2Q-I9P">
+                                                                <customView key="contentView" placeholderIntrinsicWidth="100" placeholderIntrinsicHeight="25" translatesAutoresizingMaskIntoConstraints="NO" id="cag-2Q-I9P">
                                                                     <rect key="frame" x="106" y="31" width="100" height="25"/>
                                                                 </customView>
                                                             </gridCell>
@@ -1223,7 +1223,7 @@
                                                                 </textField>
                                                             </gridCell>
                                                             <gridCell row="zvF-Ib-hzw" column="1Pn-Qh-jNz" xPlacement="center" yPlacement="bottom" id="LV4-jR-KKe">
-                                                                <customView key="contentView" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0l2-EO-6Ip">
+                                                                <customView key="contentView" placeholderIntrinsicWidth="100" placeholderIntrinsicHeight="25" translatesAutoresizingMaskIntoConstraints="NO" id="0l2-EO-6Ip">
                                                                     <rect key="frame" x="106" y="0.0" width="100" height="25"/>
                                                                 </customView>
                                                             </gridCell>
@@ -1350,7 +1350,7 @@
                 </viewController>
                 <customObject id="aU5-zc-suQ" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="300.5" y="1134.5"/>
+            <point key="canvasLocation" x="300.5" y="1053"/>
         </scene>
         <!--Displays Prefs View Controller-->
         <scene sceneID="lLH-hh-1EK">
@@ -2065,7 +2065,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="301" y="1876"/>
+            <point key="canvasLocation" x="301" y="1796"/>
         </scene>
         <!--About Prefs View Controller-->
         <scene sceneID="Ot2-lL-eIg">
@@ -2174,7 +2174,7 @@
                 </viewController>
                 <customObject id="5Vf-Rd-nyE" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="301" y="2335"/>
+            <point key="canvasLocation" x="295" y="2275"/>
         </scene>
     </scenes>
     <resources>

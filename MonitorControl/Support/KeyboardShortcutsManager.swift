@@ -6,8 +6,8 @@ import os.log
 
 class KeyboardShortcutsManager {
 
-  var initialKeyRepeat = 0.35 // This should come from UserDefaults instead, but it's ok for now.
-  var keyRepeat = 0.02 // This should come from UserDefaults instead, but it's ok for now.
+  var initialKeyRepeat = 0.24 // This should come from UserDefaults instead, but it's ok for now.
+  var keyRepeat = 0.032 // This should come from UserDefaults instead, but it's ok for now.
 
   var currentCommand: KeyboardShortcuts.Name = KeyboardShortcuts.Name.none
   var isFirstKeypress = false
@@ -15,6 +15,7 @@ class KeyboardShortcutsManager {
   var isHold = false
 
   init() {
+
     KeyboardShortcuts.onKeyDown(for: .brightnessUp) { [self] in
       self.engage(KeyboardShortcuts.Name.brightnessUp)
     }
@@ -57,6 +58,8 @@ class KeyboardShortcutsManager {
   }
 
   func engage(_ shortcut: KeyboardShortcuts.Name) {
+    self.initialKeyRepeat = UserDefaults.standard.double(forKey: "InitialKeyRepeat") * 0.016
+    self.keyRepeat = UserDefaults.standard.double(forKey: "KeyRepeat") * 0.016
     self.currentCommand = shortcut
     self.isFirstKeypress = true
     self.isHold = true
