@@ -65,7 +65,7 @@
 "afB-Xx-Lta.title" = "Szoftveres sötétítési opció letiltása";
 
 /* Class = "NSTextFieldCell"; title = "Use brightness, volume and other settings from last time or use defaults. Values will be applied to the display upon first change by the user."; ObjectID = "an7-Aj-3fZ"; */
-"an7-Aj-3fZ.title" = "Az utolsó ismert, vagy alapértelmezett fényerő, hangerő és egyéb beálltások használata. A megváltoztatott értékek első változtatáskor érvényesülnek.";
+"an7-Aj-3fZ.title" = "Utolsó ismert, vagy alapértelmezett fényerő, hangerő és egyéb beálltások használata. A megváltoztatott értékek első változtatáskor érvényesülnek.";
 
 /* Class = "NSTextFieldCell"; title = "Brightness:"; ObjectID = "Bhb-6l-uPQ"; */
 "Bhb-6l-uPQ.title" = "Fényerő:";
@@ -356,7 +356,7 @@
 "xLa-PN-rsq.title" = "Csak ha legalább egy vezérlő megjelenik";
 
 /* Class = "NSTextFieldCell"; title = "Works best with various syncing and 'control all' keyboard settings enabled."; ObjectID = "XU4-Bn-bwH"; */
-"XU4-Bn-bwH.title" = "A különféle szinkronizációs és mindent vezérlő beállításokkal működik a legjobban.";
+"XU4-Bn-bwH.title" = "A szinkronizációs és mindent vezérlő beállításokkal működik a legjobban.";
 
 /* Class = "NSTextFieldCell"; title = "Available"; ObjectID = "yBJ-5d-I7e"; */
 "yBJ-5d-I7e.title" = "Elérhető";
