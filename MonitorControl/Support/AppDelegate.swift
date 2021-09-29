@@ -9,7 +9,7 @@ import ServiceManagement
 import SimplyCoreAudio
 import Sparkle
 
-class MonitorControl: NSObject, NSApplicationDelegate {
+class AppDelegate: NSObject, NSApplicationDelegate {
   let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
   var mediaKeyTap = MediaKeyTapManager()
   var keyboardShortcuts = KeyboardShortcutsManager()

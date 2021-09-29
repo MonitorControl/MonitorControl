@@ -10,7 +10,7 @@ let DEBUG_GAMMA_ENFORCER = false
 
 let MIN_PREVIOUS_BUILD_NUMBER = 6200
 
-var app: MonitorControl!
+var app: AppDelegate!
 var menu: MenuHandler!
 
 let prefs = UserDefaults.standard
@@ -23,7 +23,7 @@ let aboutPrefsVc = storyboard.instantiateController(withIdentifier: "AboutPrefsV
 
 autoreleasepool { () -> Void in
   let mc = NSApplication.shared
-  let mcDelegate = MonitorControl()
+  let mcDelegate = AppDelegate()
   mc.delegate = mcDelegate
   mc.run()
 }
