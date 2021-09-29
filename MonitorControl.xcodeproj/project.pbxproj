@@ -90,6 +90,8 @@
 		AA99521826FE49A300612E07 /* MenuHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuHandler.swift; sourceTree = "<group>"; };
 		AA9AE86E26B5BF3D00B6CA65 /* OSD.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OSD.framework; path = ../../../../../System/Library/PrivateFrameworks/OSD.framework; sourceTree = "<group>"; };
 		AA9AE87026B5BFB700B6CA65 /* CoreDisplay.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreDisplay.framework; path = ../../../../../System/Library/Frameworks/CoreDisplay.framework; sourceTree = "<group>"; };
+		AA9CB6252704BB440086DC0E /* hu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hu; path = hu.lproj/Main.strings; sourceTree = "<group>"; };
+		AA9CB6262704BB440086DC0E /* hu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hu; path = hu.lproj/Localizable.strings; sourceTree = "<group>"; };
 		AADB625926BC196900DFFAA5 /* DisplayServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DisplayServices.framework; path = ../../../../../System/Library/PrivateFrameworks/DisplayServices.framework; sourceTree = "<group>"; };
 		F01B0682228221B6008E64DB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F01B0685228221B6008E64DB /* Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
@@ -334,6 +336,7 @@
 			knownRegions = (
 				en,
 				Base,
+				hu,
 			);
 			mainGroup = 56754EA21D9A4016007BCDC5;
 			packageReferences = (
@@ -512,6 +515,7 @@
 			children = (
 				6CDA0FCE26485A8300F52125 /* Base */,
 				6CDA0FD026485AA100F52125 /* en */,
+				AA9CB6252704BB440086DC0E /* hu */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -520,6 +524,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				F01B0682228221B6008E64DB /* en */,
+				AA9CB6262704BB440086DC0E /* hu */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
