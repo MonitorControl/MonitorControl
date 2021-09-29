@@ -70,10 +70,10 @@ class MediaKeyTapManager: MediaKeyTapDelegate {
 
   private func showOSDLock(_ mediaKey: MediaKey) {
     if [.brightnessUp, .brightnessDown].contains(mediaKey) {
-      OSDUtils.showOSDLockOnAllDisplays(osdImage: 1)
+      OSDUtils.showOSDLockOnAllDisplays(osdImage: OSDUtils.OSDImage.brightness.rawValue)
     }
     if [.volumeUp, .volumeDown, .mute].contains(mediaKey) {
-      OSDUtils.showOSDLockOnAllDisplays(osdImage: 3)
+      OSDUtils.showOSDLockOnAllDisplays(osdImage: OSDUtils.OSDImage.audioSpeaker.rawValue)
     }
   }
 
