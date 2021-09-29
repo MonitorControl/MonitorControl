@@ -6,8 +6,9 @@ import Foundation
 let DEBUG_SW = false
 let DEBUG_VIRTUAL = false
 let DEBUG_MACOS10 = false
-let MIN_PREVIOUS_BUILD_NUMBER = 5744
 let DEBUG_GAMMA_ENFORCER = false
+
+let MIN_PREVIOUS_BUILD_NUMBER = 6200
 
 var app: MonitorControl!
 var menu: MenuHandler!
