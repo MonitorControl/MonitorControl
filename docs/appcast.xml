@@ -11,7 +11,12 @@
             <sparkle:version>6293</sparkle:version>
             <sparkle:shortVersionString>4.0.0-beta1</sparkle:shortVersionString>
             <sparkle:minimumSystemVersion>10.15</sparkle:minimumSystemVersion>
-            <enclosure url="https://github.com/MonitorControl/MonitorControl/releases/download/v4.0.0/MonitorControl.4.0.0.dmg" type="application/octet-stream" sparkle:edSignature="5dLmd501WPdq0c542Iv0g/++zSwQGlDmrxkwMWKmrCMxGs2xE/MGh4XtawZOIQmUIRjzZjEr09X57lbJQEkICg==" length="4127131"/>
+            <enclosure 
+               url="https://github.com/MonitorControl/MonitorControl/releases/download/v4.0.0-beta1/MonitorControl.4.0.0-beta1.dmg" 
+               type="application/octet-stream"
+               sparkle:edSignature="vb1yP7PHUbfKXARe3oHw+2y7V79fW/lsOAj8zlr03K1vXWq0l/LfBnjmJySCRnJjtkfn6TbkEwNVi0Q64pwJDA=="
+               length="4127428"
+            />
         </item>
     </channel>
 </rss>
