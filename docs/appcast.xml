@@ -7,6 +7,9 @@
             <title>v4.0.0-beta1</title>
             <!-- TODO: Use correct channels once setting is present. (after 4.0.0 release) -->
             <!-- <sparkle:channel>beta</sparkle:channel> -->
+            <sparkle:releaseNotesLink>
+                https://github.com/MonitorControl/MonitorControl/releases/tag/v4.0.0-beta1
+            </sparkle:releaseNotesLink>
             <pubDate>Thu, 30 Sep 2021 21:43:20 +0200</pubDate>
             <sparkle:version>6293</sparkle:version>
             <sparkle:shortVersionString>4.0.0-beta1</sparkle:shortVersionString>
