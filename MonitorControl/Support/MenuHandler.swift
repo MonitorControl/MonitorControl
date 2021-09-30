@@ -104,7 +104,7 @@ class MenuHandler: NSMenu, NSMenuDelegate {
             NSColor.systemGray.withAlphaComponent(0.3).setStroke()
             blockPath.stroke()
           }
-          if !([NSAppearance.Name.darkAqua, NSAppearance.Name.vibrantDark].contains(effectiveAppearance.name)) {
+          if ![NSAppearance.Name.darkAqua, NSAppearance.Name.vibrantDark].contains(effectiveAppearance.name) {
             NSColor.white.withAlphaComponent(0.5).setFill()
             blockPath.fill()
           }

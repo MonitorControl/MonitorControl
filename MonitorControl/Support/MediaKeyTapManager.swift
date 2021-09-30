@@ -87,7 +87,7 @@ class MediaKeyTapManager: MediaKeyTapDelegate {
       return
     }
     var wasNotIsPressedVolumeSentAlready = false
-    for display in affectedDisplays where !(display.readPrefAsBool(key: .isDisabled)) {
+    for display in affectedDisplays where !display.readPrefAsBool(key: .isDisabled) {
       switch mediaKey {
       case .mute:
         // The mute key should not respond to press + hold or keyup
@@ -117,7 +117,7 @@ class MediaKeyTapManager: MediaKeyTapDelegate {
     guard [.brightnessUp, .brightnessDown].contains(mediaKey), app.sleepID == 0, app.reconfigureID == 0, isPressed, let affectedDisplays = DisplayManager.shared.getAffectedDisplays(isBrightness: true, isVolume: false) else {
       return
     }
-    for display in affectedDisplays where !(display.readPrefAsBool(key: .isDisabled)) {
+    for display in affectedDisplays where !display.readPrefAsBool(key: .isDisabled) {
       switch mediaKey {
       case .brightnessUp:
         if isContrast, let otherDisplay = display as? OtherDisplay {

@@ -108,7 +108,7 @@ class KeyboardShortcutsManager {
       self.disengage()
       return
     }
-    for display in affectedDisplays where !(display.readPrefAsBool(key: .isDisabled)) {
+    for display in affectedDisplays where !display.readPrefAsBool(key: .isDisabled) {
       var isAnyDisplayInSwAfterBrightnessMode: Bool = false
       for display in affectedDisplays where ((display as? OtherDisplay)?.isSwBrightnessNotDefault() ?? false) && !((display as? OtherDisplay)?.isSw() ?? false) && prefs.bool(forKey: PrefKey.separateCombinedScale.rawValue) {
         isAnyDisplayInSwAfterBrightnessMode = true
@@ -124,7 +124,7 @@ class KeyboardShortcutsManager {
       self.disengage()
       return
     }
-    for display in affectedDisplays where !(display.readPrefAsBool(key: .isDisabled)) {
+    for display in affectedDisplays where !display.readPrefAsBool(key: .isDisabled) {
       if let otherDisplay = display as? OtherDisplay {
         otherDisplay.stepContrast(isUp: isUp, isSmallIncrement: prefs.bool(forKey: PrefKey.useFineScaleBrightness.rawValue))
       }
@@ -137,7 +137,7 @@ class KeyboardShortcutsManager {
       return
     }
     var wasNotIsPressedVolumeSentAlready = false
-    for display in affectedDisplays where !(display.readPrefAsBool(key: .isDisabled)) {
+    for display in affectedDisplays where !display.readPrefAsBool(key: .isDisabled) {
       if let display = display as? OtherDisplay {
         if isPressed {
           display.stepVolume(isUp: isUp, isSmallIncrement: prefs.bool(forKey: PrefKey.useFineScaleVolume.rawValue))
@@ -154,7 +154,7 @@ class KeyboardShortcutsManager {
       return
     }
     var wasNotIsPressedVolumeSentAlready = false
-    for display in affectedDisplays where !(display.readPrefAsBool(key: .isDisabled)) {
+    for display in affectedDisplays where !display.readPrefAsBool(key: .isDisabled) {
       if let display = display as? OtherDisplay {
         display.toggleMute()
         if !wasNotIsPressedVolumeSentAlready, display.readPrefAsInt(for: .audioMuteScreenBlank) != 1, !display.readPrefAsBool(key: .unavailableDDC, for: .audioSpeakerVolume) {

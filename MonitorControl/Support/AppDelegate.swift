@@ -58,7 +58,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     let currentBuildNumber = Int(Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String ?? "1") ?? 1
     let previousBuildNumber: Int = (Int(prefs.string(forKey: PrefKey.buildNumber.rawValue) ?? "0") ?? 0)
     if self.safeMode || ((previousBuildNumber < MIN_PREVIOUS_BUILD_NUMBER) && previousBuildNumber > 0) || (previousBuildNumber > currentBuildNumber), let bundleID = Bundle.main.bundleIdentifier {
-      if !(self.safeMode) {
+      if !self.safeMode {
         let alert = NSAlert()
         alert.messageText = NSLocalizedString("Incompatible previous version", comment: "Shown in the alert dialog")
         alert.informativeText = NSLocalizedString("Preferences for an incompatible previous app version detected. Default preferences are reloaded.", comment: "Shown in the alert dialog")
