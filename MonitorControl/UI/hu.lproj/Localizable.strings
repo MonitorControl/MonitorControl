@@ -1,0 +1,136 @@
+/* Shown in the main prefs window */
+"About" = "Névjegy";
+
+/* Shown in the main prefs window */
+"App menu" = "Menü";
+
+/* Apple Silicon designation (shown after the version number in Preferences) */
+"Apple Silicon" = "Apple Silicon";
+
+/* Shown in the alert dialog */
+"Are you sure you want to enable a longer delay? Doing so may freeze your system and require a restart. Start at login will be disabled as a safety measure." = "Biztos benne, hogy engedélyezni kívánja a hosszabb várakozást? Ez bizonyos esetekben a rendszer lefagyását eredményezheti, akár újraindítás is szükségessé válhat. A bejelentkezéskori automatikus indítást letiltjuk a biztonság kedvéért.";
+
+/* Shown in the alert dialog */
+"Are you sure you want to reset all preferences?" = "Biztos benne, hogy vissza kívánja állítani az alapértelmezett beállításokat?";
+
+/* Sown in menu */
+"Brightness" = "Fényerő";
+
+/* Build */
+"Build" = "Build";
+
+/* Shown in the Display Preferences */
+"Built-in Display" = "Beépített";
+
+/* Shown in menu */
+"Check for updates..." = "Frissítések ellenőrzése...";
+
+/* Shown in menu */
+"Contrast" = "Kontraszt";
+
+/* Version */
+"Copyright Ⓒ MonitorControl, " = "Copyright Ⓒ MonitorControl, ";
+
+/* Shown in the main prefs window */
+"Displays" = "Kijelzők";
+
+/* Shown in the alert dialog */
+"Enable Longer Delay?" = "Hosszabb várakozás engedélyezése?";
+
+/* Shown in the Display Preferences */
+"External Display" = "Külső kijelző";
+
+/* Shown in the main prefs window */
+"General" = "Általános";
+
+/* Shown in the Display Preferences */
+"Hardware (Apple)" = "Hardver (Apple)";
+
+/* Shown in the Display Preferences */
+"Hardware (DDC)" = "Hardver (DDC)";
+
+/* Shown in the alert dialog */
+"Incompatible previous version" = "Inkompatibilis előző verzió";
+
+/* Intel designation (shown after the version number in Preferences) */
+"Intel" = "Intel";
+
+/* Shown in the main prefs window */
+"Keyboard" = "Billentyűzet";
+
+/* Shown in the alert dialog */
+"No" = "Nem";
+
+/* Shown in the Display Preferences */
+"No Control" = "Nem vezérelt";
+
+/* Shown in the Display Preferences */
+"Other Display" = "Egyéb kijelző";
+
+/* Shown in the alert dialog */
+"Preferences for an incompatible previous app version detected. Default preferences are reloaded." = "Az előző alkalmazásverzió beállításai nem kompatibilisek ezzel a verzióval. Visszaállítottuk az alapértelmezett beállításokat.";
+
+/* Shown in menu */
+"Preferences..." = "Beállítások...";
+
+/* Shown in menu */
+"Quit" = "Kilépés";
+
+/* Shown in the alert dialog */
+"Reset Preferences?" = "Alapértelmezett beállítások";
+
+/* Shown in the alert dialog */
+"Safe Mode Activated" = "Biztonsági mód engedélyezve";
+
+/* Shown in the alert dialog */
+"Shift was pressed during launch. MonitorControl started in safe mode. Default preferences are reloaded, DDC read is blocked." = "A Shift gomb le lett nyomva indítás közben, az alkalmazás biztonsági módban indult el. Az alapértelmezett beállításokat visszaállítottuk, a DDC olvasás letiltásra került.";
+
+/* Shown in the alert dialog */
+"Shortcuts not available" = "Gyorsbillentyűk nem elérhetők";
+
+/* Shown in the Display Preferences */
+"Software (Gamma)" = "Szoftver (gamma)";
+
+/* Shown in the Display Preferences */
+"Software (Gamma, Forced)" = "Szoftver (erőltetett)";
+
+/* Shown in the Display Preferences */
+"Software (Shade)" = "Szoftver (árnyékolás)";
+
+/* Shown in the Display Preferences */
+"This display allows for software brightness control via gammatable manipulation as it does not support hardware control. Reasons for this might be using the HDMI port of a Mac mini (which blocks hardware DDC control) or having a blacklisted display." = "Ez a kijelző nem támogatja a hardveres vezérlést, hanem szoftveres fényerővezérlést tesz lehetővé gamma táblázat manipulálás segítségével. Ennek okai lehetnek a nem támogatott kimenet (pl. Mac mini HDMI kimenet) vagy feketelistára helyezett kijelző használata.";
+
+/* Shown in the Display Preferences */
+"This display has an unspecified control status." = "A kijelzőnek nem meghatározott a vezérlési státusza.";
+
+/* Shown in the Display Preferences */
+"This display is reported to support hardware DDC control but the current settings allow for software control only." = "Ez a kijelző támogatja a hardveres vezérlést, azonban az aktuális beállítások csak szoftveres vezérlést tesznek lehetővé.";
+
+/* Shown in the Display Preferences */
+"This display is reported to support hardware DDC control. If you encounter issues, you can disable hardware DDC control to force software control." = "Ez a kijelző támogatja a hardveres vezérlést. Amennyiben problémákat tapasztal, kapcsolja ki a hardveres DDC vezérlést a szoftveres alternatíva érdekében!";
+
+/* Shown in the Display Preferences */
+"This display supports native Apple brightness protocol. This allows macOS to control this display without MonitorControl as well." = "Ez a kijelző az Apple saját fényerőkezelő protokolját támogatja. Ez lehetővé teszi a macOS számára is a fényerő vezérlését, MonitorControl nélkül is.";
+
+/* Shown in the Display Preferences */
+"This is a virtual display (examples: AirPlay, Sidecar, display connected via a DisplayLink Dock or similar) which does not allow hardware or software gammatable control. Shading is used as a substitute but only in non-mirror scenarios. Mouse cursor will be unaffected and artifacts may appear when entering/leaving full screen mode." = "Ez egy virtuális kijelző (AirPlay, Sidecar, DisplayLink állomás vagy hasonló), amely nem támogatja sem a hardveres, sem a szoftveres gamma táblázat alapú fényerőkezelést. Emiatt a program árnyékolást alkalmaz, amennyiben a kijelző nincs tükrözve. Az egérkurzorra az árnyékolás nincs hatással, valamint képernyőhibák jelentkezhetnek, amikor teljes képernyős ablakváltás történik.";
+
+/* Unknown display name
+ Unknown model
+ Unknown vendor */
+"Unknown" = "Ismeretlen";
+
+/* Version */
+"Version" = "Verzió";
+
+/* Shown in the Display Preferences */
+"Virtual Display" = "Virtuális kijelző";
+
+/* Shown in menu */
+"Volume" = "Hangerő";
+
+/* Shown in the alert dialog */
+"Yes" = "Igen";
+
+/* Shown in the alert dialog */
+"You need to enable MonitorControl in System Preferences > Security and Privacy > Accessibility for the keyboard shortcuts to work" = "Engedélyeznie kell a MonitorControlt a Rendszerbeállítások > Biztonság és adatvédelem > Kisegítő lehetőségek alatt a gyorsbillentyűk használatához!";

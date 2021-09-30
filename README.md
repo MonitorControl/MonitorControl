@@ -48,13 +48,15 @@ Go to [Releases](https://github.com/MonitorControl/MonitorControl/releases) and 
 
 ## Compatibility
 
-- macOS Mojave (`10.14`) and up _(note: you can download [version 2.1.0](https://github.com/MonitorControl/MonitorControl/releases/tag/v2.1.0) for macOS Sierra `10.12` support)_
-- Works with monitors controllable via [DDC](https://en.wikipedia.org/wiki/Display_Data_Channel) (or any other display via software dimming)
+- macOS Big Sur (`macOS 11`) and newer are supported
+- Current version is compatible with macOS Catalina (`10.15`) as well (with some limitations).
+
+_(Note: you can download [version 2.1.0](https://github.com/MonitorControl/MonitorControl/releases/tag/v2.1.0) for Sierra `10.12` and [version 3.1.1](https://github.com/MonitorControl/MonitorControl/releases/tag/v3.1.1) for Mojave `10.14` support)_
 
 ## How to help
 
 Open [issues](https://github.com/MonitorControl/MonitorControl/issues) if you have a question, an enhancement to suggest or a bug you've found. If you want you can fork the code yourself and submit a pull request to improve the app.
-
+        
 ## How to build
 
 ### Required
@@ -82,8 +84,9 @@ You're all set ! Now open the `MonitorControl.xcodeproj` with Xcode! The depende
 
 - [MediaKeyTap](https://github.com/MonitorControl/MediaKeyTap)
 - [Preferences](https://github.com/sindresorhus/Preferences)
-- [DDC.swift](https://github.com/reitermarkus/DDC.swift)
 - [SimplyCoreAudio](https://github.com/rnine/SimplyCoreAudio)
+- [KeyboardShortcuts](https://github.com/sindresorhus/KeyboardShortcuts)
+- [Sparkle](https://github.com/sparkle-project/Sparkle)
 
 ## Contributors
 

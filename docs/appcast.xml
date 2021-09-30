@@ -1,0 +1,17 @@
+<?xml version="1.0" standalone="yes"?>
+<rss xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle" version="2.0">
+    <channel>
+        <title>MonitorControl</title>
+        <link>https://monitorcontrol.app</link>
+        <item>
+            <title>v4.0.0-beta1</title>
+            <!-- TODO: Use correct channels once setting is present. (after 4.0.0 release) -->
+            <!-- <sparkle:channel>beta</sparkle:channel> -->
+            <pubDate>Thu, 30 Sep 2021 21:43:20 +0200</pubDate>
+            <sparkle:version>6293</sparkle:version>
+            <sparkle:shortVersionString>4.0.0-beta1</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>10.15</sparkle:minimumSystemVersion>
+            <enclosure url="https://github.com/MonitorControl/MonitorControl/releases/download/v4.0.0/MonitorControl.4.0.0.dmg" type="application/octet-stream" sparkle:edSignature="5dLmd501WPdq0c542Iv0g/++zSwQGlDmrxkwMWKmrCMxGs2xE/MGh4XtawZOIQmUIRjzZjEr09X57lbJQEkICg==" length="4127131"/>
+        </item>
+    </channel>
+</rss>

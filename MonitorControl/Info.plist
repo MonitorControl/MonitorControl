@@ -19,7 +19,7 @@
 	<key>CFBundleShortVersionString</key>
 	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleVersion</key>
-	<string>3103</string>
+	<string>6293</string>
 	<key>LSApplicationCategoryType</key>
 	<string>public.app-category.utilities</string>
 	<key>LSMinimumSystemVersion</key>
@@ -28,9 +28,11 @@
 	<true/>
 	<key>NSHumanReadableCopyright</key>
 	<string>MIT Licensed. 2017.</string>
-	<key>NSMainNibFile</key>
-	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
+	<key>SUFeedURL</key>
+	<string>https://monitorcontrol.app/appcast.xml</string>
+	<key>SUPublicEDKey</key>
+	<string>KuISgz+2n2/qnP/Rom5nWYAp+Pru+U3UtnAlnUjj6Pw=</string>
 </dict>
 </plist>

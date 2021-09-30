@@ -1,0 +1,136 @@
+/* Shown in the main prefs window */
+"About" = "À Propos";
+
+/* Shown in the main prefs window */
+"App menu" = "App menu";
+
+/* Apple Silicon designation (shown after the version number in Preferences) */
+"Apple Silicon" = "Apple Silicon";
+
+/* Shown in the alert dialog */
+"Are you sure you want to enable a longer delay? Doing so may freeze your system and require a restart. Start at login will be disabled as a safety measure." = "Êtes-vous sûr de vouloir augmenter cette durée? Cela peut entrainer un gêle du système et nécessiter un redémarrage. Par sécurité, cette option sera désactivée au démarrage.";
+
+/* Shown in the alert dialog */
+"Are you sure you want to reset all preferences?" = "Êtes-vous sûr de vouloir réinitialiser toutes les préférences?";
+
+/* Sown in menu */
+"Brightness" = "Luminosité";
+
+/* Build */
+"Build" = "Build";
+
+/* Shown in the Display Preferences */
+"Built-in Display" = "Écran intégré";
+
+/* Shown in menu */
+"Check for updates..." = "Check for updates...";
+
+/* Shown in menu */
+"Contrast" = "Contraste";
+
+/* Version */
+"Copyright Ⓒ MonitorControl, " = "Copyright Ⓒ MonitorControl, ";
+
+/* Shown in the main prefs window */
+"Displays" = "Écrans";
+
+/* Shown in the alert dialog */
+"Enable Longer Delay?" = "Activer une plus longue durée ?";
+
+/* Shown in the Display Preferences */
+"External Display" = "Écran externe";
+
+/* Shown in the main prefs window */
+"General" = "Général";
+
+/* Shown in the Display Preferences */
+"Hardware (Apple)" = "Hardware (Apple)";
+
+/* Shown in the Display Preferences */
+"Hardware (DDC)" = "Matériel (DDC)";
+
+/* Shown in the alert dialog */
+"Incompatible previous version" = "Incompatible previous version";
+
+/* Intel designation (shown after the version number in Preferences) */
+"Intel" = "Intel";
+
+/* Shown in the main prefs window */
+"Keyboard" = "Keyboard";
+
+/* Shown in the alert dialog */
+"No" = "Non";
+
+/* Shown in the Display Preferences */
+"No Control" = "No Control";
+
+/* Shown in the Display Preferences */
+"Other Display" = "Autre écran";
+
+/* Shown in the alert dialog */
+"Preferences for an incompatible previous app version detected. Default preferences are reloaded." = "Preferences for an incompatible previous app version detected. Default preferences are reloaded.";
+
+/* Shown in menu */
+"Preferences..." = "Preferences...";
+
+/* Shown in menu */
+"Quit" = "Quit";
+
+/* Shown in the alert dialog */
+"Reset Preferences?" = "Réinitialiser les préférences ?";
+
+/* Shown in the alert dialog */
+"Safe Mode Activated" = "Mode sans échec activé";
+
+/* Shown in the alert dialog */
+"Shift was pressed during launch. MonitorControl started in safe mode. Default preferences are reloaded, DDC read is blocked." = "Maj. appuyée pendant le démarrage. MonitorControl démarré en mode sans échec. Les préférences par défaut sont utilisées, la communication via DDC est bloquée.";
+
+/* Shown in the alert dialog */
+"Shortcuts not available" = "Raccourcis non disponible";
+
+/* Shown in the Display Preferences */
+"Software (Gamma)" = "Software (Gamma)";
+
+/* Shown in the Display Preferences */
+"Software (Gamma, Forced)" = "Software (Gamma, Forced)";
+
+/* Shown in the Display Preferences */
+"Software (Shade)" = "Software (Shade)";
+
+/* Shown in the Display Preferences */
+"This display allows for software brightness control via gammatable manipulation as it does not support hardware control. Reasons for this might be using the HDMI port of a Mac mini (which blocks hardware DDC control) or having a blacklisted display." = "This display allows for software brightness control via gammatable manipulation as it does not support hardware control. Reasons for this might be using the HDMI port of a Mac mini (which blocks hardware DDC control) or having a blacklisted display.";
+
+/* Shown in the Display Preferences */
+"This display has an unspecified control status." = "This display has an unspecified control status.";
+
+/* Shown in the Display Preferences */
+"This display is reported to support hardware DDC control but the current settings allow for software control only." = "This display is reported to support hardware DDC control but the current settings allow for software control only.";
+
+/* Shown in the Display Preferences */
+"This display is reported to support hardware DDC control. If you encounter issues, you can disable hardware DDC control to force software control." = "This display is reported to support hardware DDC control. If you encounter issues, you can disable hardware DDC control to force software control.";
+
+/* Shown in the Display Preferences */
+"This display supports native Apple brightness protocol. This allows macOS to control this display without MonitorControl as well." = "This display supports native Apple brightness protocol. This allows macOS to control this display without MonitorControl as well.";
+
+/* Shown in the Display Preferences */
+"This is a virtual display (examples: AirPlay, Sidecar, display connected via a DisplayLink Dock or similar) which does not allow hardware or software gammatable control. Shading is used as a substitute but only in non-mirror scenarios. Mouse cursor will be unaffected and artifacts may appear when entering/leaving full screen mode." = "This is a virtual display (examples: AirPlay, Sidecar, display connected via a DisplayLink Dock or similar) which does not allow hardware or software gammatable control. Shading is used as a substitute but only in non-mirror scenarios. Mouse cursor will be unaffected and artifacts may appear when entering/leaving full screen mode.";
+
+/* Unknown display name
+ Unknown model
+ Unknown vendor */
+"Unknown" = "Inconnu";
+
+/* Version */
+"Version" = "Version";
+
+/* Shown in the Display Preferences */
+"Virtual Display" = "Écran virtuel";
+
+/* Shown in menu */
+"Volume" = "Volume";
+
+/* Shown in the alert dialog */
+"Yes" = "Oui";
+
+/* Shown in the alert dialog */
+"You need to enable MonitorControl in System Preferences > Security and Privacy > Accessibility for the keyboard shortcuts to work" = "Vous devez activer MonitorControl dans Préférences Système > Sécurité et confidentialité  > Accessibilité pour que les raccourcis clavier fonctionnent";

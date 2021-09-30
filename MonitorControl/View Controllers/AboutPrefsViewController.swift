@@ -1,3 +1,5 @@
+//  Copyright © MonitorControl. @JoniVR, @theOneyouseek, @waydabber and others
+
 import Cocoa
 import Preferences
 import ServiceManagement
@@ -7,10 +9,9 @@ class AboutPrefsViewController: NSViewController, PreferencePane {
   let preferencePaneTitle: String = NSLocalizedString("About", comment: "Shown in the main prefs window")
 
   var toolbarItemIcon: NSImage {
-    if #available(macOS 11.0, *) {
+    if !DEBUG_MACOS10, #available(macOS 11.0, *) {
       return NSImage(systemSymbolName: "info.circle", accessibilityDescription: "About")!
     } else {
-      // Fallback on earlier versions
       return NSImage(named: NSImage.infoName)!
     }
   }
@@ -25,7 +26,6 @@ class AboutPrefsViewController: NSViewController, PreferencePane {
     self.setCopyrightInfo()
   }
 
-  @available(macOS, deprecated: 10.10)
   override func viewWillAppear() {
     super.viewWillAppear()
   }

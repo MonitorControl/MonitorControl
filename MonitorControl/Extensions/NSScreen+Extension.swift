@@ -1,3 +1,5 @@
+//  Copyright © MonitorControl. @JoniVR, @theOneyouseek, @waydabber and others
+
 import Cocoa
 
 public extension NSScreen {
@@ -6,7 +8,7 @@ public extension NSScreen {
   }
 
   var vendorNumber: UInt32? {
-    switch self.displayID.vendorNumber {
+    switch CGDisplayVendorNumber(self.displayID) {
     case 0xFFFF_FFFF:
       return nil
     case let vendorNumber:
@@ -15,7 +17,7 @@ public extension NSScreen {
   }
 
   var modelNumber: UInt32? {
-    switch self.displayID.modelNumber {
+    switch CGDisplayModelNumber(self.displayID) {
     case 0xFFFF_FFFF:
       return nil
     case let modelNumber:
@@ -24,7 +26,7 @@ public extension NSScreen {
   }
 
   var serialNumber: UInt32? {
-    switch self.displayID.serialNumber {
+    switch CGDisplaySerialNumber(self.displayID) {
     case 0x0000_0000:
       return nil
     case let serialNumber:
@@ -55,13 +57,5 @@ public extension NSScreen {
     }
 
     return nil
-  }
-
-  var isBuiltin: Bool {
-    return CGDisplayIsBuiltin(self.displayID) != 0
-  }
-
-  static func getByDisplayID(displayID: CGDirectDisplayID) -> NSScreen? {
-    return NSScreen.screens.first { $0.displayID == displayID }
   }
 }
