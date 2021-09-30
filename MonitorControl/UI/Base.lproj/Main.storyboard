@@ -11,12 +11,13 @@
             <objects>
                 <viewController storyboardIdentifier="MainPrefsVC" id="BGD-tY-Myx" customClass="MainPrefsViewController" customModule="MonitorControl" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" horizontalHuggingPriority="1" translatesAutoresizingMaskIntoConstraints="NO" id="COE-Oc-gZs">
-                        <rect key="frame" x="0.0" y="0.0" width="691" height="575"/>
+                        <rect key="frame" x="0.0" y="0.0" width="691" height="605"/>
                         <subviews>
                             <gridView xPlacement="leading" yPlacement="fill" rowAlignment="none" rowSpacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="noT-gJ-0yS">
-                                <rect key="frame" x="20" y="20" width="651" height="535"/>
+                                <rect key="frame" x="20" y="20" width="651" height="565"/>
                                 <rows>
-                                    <gridRow bottomPadding="-10" id="d70-FX-dma"/>
+                                    <gridRow bottomPadding="-6" id="d70-FX-dma"/>
+                                    <gridRow bottomPadding="-10" id="hdq-3y-aue"/>
                                     <gridRow bottomPadding="-10" id="CrM-x5-re7"/>
                                     <gridRow bottomPadding="-13" id="DnA-aR-kcy"/>
                                     <gridRow bottomPadding="-10" id="xlB-05-nd7"/>
@@ -46,7 +47,7 @@
                                 <gridCells>
                                     <gridCell row="d70-FX-dma" column="eHC-Ur-UsS" xPlacement="trailing" id="ixb-6N-RsC">
                                         <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="HkH-iv-GLz">
-                                            <rect key="frame" x="152" y="519" width="76" height="16"/>
+                                            <rect key="frame" x="152" y="549" width="76" height="16"/>
                                             <textFieldCell key="cell" lineBreakMode="truncatingTail" baseWritingDirection="leftToRight" alignment="right" title="Application:" id="okD-DG-pYa">
                                                 <font key="font" usesAppearanceFont="YES"/>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -56,13 +57,26 @@
                                     </gridCell>
                                     <gridCell row="d70-FX-dma" column="64O-72-10l" xPlacement="leading" id="v0S-4P-60y">
                                         <button key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="9Gu-aU-Td2">
-                                            <rect key="frame" x="235" y="518" width="108" height="18"/>
+                                            <rect key="frame" x="235" y="548" width="108" height="18"/>
                                             <buttonCell key="cell" type="check" title="Start at Login" bezelStyle="regularSquare" imagePosition="left" inset="2" id="j72-NF-zsW">
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                 <font key="font" metaFont="system"/>
                                             </buttonCell>
                                             <connections>
                                                 <action selector="startAtLoginClicked:" target="BGD-tY-Myx" id="QvH-5O-Lck"/>
+                                            </connections>
+                                        </button>
+                                    </gridCell>
+                                    <gridCell row="hdq-3y-aue" column="eHC-Ur-UsS" id="gY2-G1-Lxs"/>
+                                    <gridCell row="hdq-3y-aue" column="64O-72-10l" id="q9Q-Sd-a4F">
+                                        <button key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="79h-9d-Iwx">
+                                            <rect key="frame" x="235" y="518" width="416" height="18"/>
+                                            <buttonCell key="cell" type="check" title="Automatically check for updates" bezelStyle="regularSquare" imagePosition="left" inset="2" id="Faf-9L-TXx">
+                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="automaticUpdateCheck:" target="BGD-tY-Myx" id="tq9-KW-isC"/>
                                             </connections>
                                         </button>
                                     </gridCell>
@@ -343,6 +357,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="automaticUpdateCheck" destination="79h-9d-Iwx" id="qjo-gL-f1w"/>
                         <outlet property="combinedBrightness" destination="HqE-17-9wg" id="jyF-r9-cDY"/>
                         <outlet property="disableSoftwareFallback" destination="Rdj-ft-rJg" id="NIr-fA-br4"/>
                         <outlet property="enableBrightnessSync" destination="DW6-ez-A8y" id="2ay-8g-h1v"/>
@@ -361,13 +376,13 @@
                         <outlet property="rowWriteStartupCheck" destination="3et-Li-HBw" id="fzv-mY-dba"/>
                         <outlet property="rowWriteStartupText" destination="zBq-qo-TWc" id="nwU-SI-gMB"/>
                         <outlet property="showAdvancedDisplays" destination="1Jz-FP-0Vl" id="odX-rp-oVY"/>
-                        <outlet property="startAtLogin" destination="9Gu-aU-Td2" id="Tyx-Ub-Cyf"/>
+                        <outlet property="startAtLogin" destination="9Gu-aU-Td2" id="ygg-Uc-1JE"/>
                         <outlet property="writeDDCOnStartup" destination="AjD-Oy-S0f" id="CAB-ZN-zMt"/>
                     </connections>
                 </viewController>
                 <customObject id="JDw-du-OST" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="300.5" y="-462.5"/>
+            <point key="canvasLocation" x="300.5" y="-500.5"/>
         </scene>
         <!--Menusliders Prefs View Controller-->
         <scene sceneID="YU5-7I-f0n">
@@ -1378,7 +1393,7 @@
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="none" tableStyle="inset" selectionHighlightStyle="none" columnReordering="NO" columnResizing="NO" multipleSelection="NO" emptySelection="NO" autosaveColumns="NO" typeSelect="NO" rowHeight="490" rowSizeStyle="automatic" viewBased="YES" id="zC9-dS-Tr3">
-                                            <rect key="frame" x="0.0" y="0.0" width="691" height="488"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="691" height="490"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <size key="intercellSpacing" width="17" height="0.0"/>
                                             <color key="backgroundColor" name="windowBackgroundColor" catalog="System" colorSpace="catalog"/>

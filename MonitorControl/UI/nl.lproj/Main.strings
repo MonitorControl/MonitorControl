@@ -136,6 +136,9 @@
 /* Class = "NSButtonCell"; title = "Reset Name"; ObjectID = "f9g-8s-gdd"; */
 "f9g-8s-gdd.title" = "Reset Naam";
 
+/* Class = "NSButtonCell"; title = "Automatically check for updates"; ObjectID = "Faf-9L-TXx"; */
+"Faf-9L-TXx.title" = "Automatically check for updates";
+
 /* Class = "NSTextFieldCell"; title = "Brightness control:"; ObjectID = "fe9-Ia-t9m"; */
 "fe9-Ia-t9m.title" = "Brightness control:";
 

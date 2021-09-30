@@ -4,6 +4,9 @@ enum PrefKey: String {
   // Enable mute DDC for display
   case enableMuteUnmute
 
+  // Sparkle automatic checks
+  case SUEnableAutomaticChecks
+
   // Hide OSD for display
   case hideOsd
 
