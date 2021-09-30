@@ -172,11 +172,13 @@ enum MenuItemStyle: Int {
 enum KeyboardBrightness: Int {
   case media = 0
   case custom = 1
-  case disabled = 2
+  case both = 2
+  case disabled = 3
 }
 
 enum KeyboardVolume: Int {
   case media = 0
   case custom = 1
-  case disabled = 2
+  case both = 2
+  case disabled = 3
 }

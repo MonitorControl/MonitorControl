@@ -56,8 +56,8 @@ class KeyboardPrefsViewController: NSViewController, PreferencePane {
     let hide = !prefs.bool(forKey: PrefKey.showAdvancedSettings.rawValue)
 
     if self.keyboardBrightness.selectedTag() == KeyboardBrightness.media.rawValue {
-      self.rowKeyboardBrightnessPopUp.bottomPadding = -13
-      self.rowKeyboardBrightnessText.isHidden = false
+      self.rowKeyboardBrightnessPopUp.bottomPadding = hide ? -6 : -13
+      self.rowKeyboardBrightnessText.isHidden = hide
       if self.disableAltBrightnessKeys.state == .on {
         self.rowDisableAltBrightnessKeysCheck.isHidden = false
         self.rowDisableAltBrightnessKeysText.isHidden = false
@@ -72,6 +72,17 @@ class KeyboardPrefsViewController: NSViewController, PreferencePane {
       self.rowDisableAltBrightnessKeysCheck.isHidden = true
       self.rowDisableAltBrightnessKeysText.isHidden = true
       self.rowCustomBrightnessShortcuts.isHidden = false
+    } else if self.keyboardBrightness.selectedTag() == KeyboardBrightness.both.rawValue {
+      self.rowKeyboardBrightnessPopUp.bottomPadding = hide ? -6 : -13
+      self.rowKeyboardBrightnessText.isHidden = hide
+      if self.disableAltBrightnessKeys.state == .on {
+        self.rowDisableAltBrightnessKeysCheck.isHidden = false
+        self.rowDisableAltBrightnessKeysText.isHidden = false
+      } else {
+        self.rowDisableAltBrightnessKeysCheck.isHidden = hide
+        self.rowDisableAltBrightnessKeysText.isHidden = hide
+      }
+      self.rowCustomBrightnessShortcuts.isHidden = false
     } else {
       self.rowKeyboardBrightnessPopUp.bottomPadding = -6
       self.rowKeyboardBrightnessText.isHidden = true
@@ -80,7 +91,7 @@ class KeyboardPrefsViewController: NSViewController, PreferencePane {
       self.rowCustomBrightnessShortcuts.isHidden = true
     }
 
-    if self.keyboardVolume.selectedTag() == KeyboardVolume.custom.rawValue {
+    if [KeyboardVolume.custom.rawValue, KeyboardVolume.both.rawValue].contains(self.keyboardVolume.selectedTag()) {
       self.rowCustomAudioShortcuts.isHidden = false
     } else {
       self.rowCustomAudioShortcuts.isHidden = true

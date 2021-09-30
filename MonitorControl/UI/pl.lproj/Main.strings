@@ -160,9 +160,6 @@
 /* Class = "NSTextFieldCell"; title = "Brightness slider for hardware or software controlled displays or TVs."; ObjectID = "gXH-HL-ZOL"; */
 "gXH-HL-ZOL.title" = "Brightness slider for hardware or software controlled displays or TVs.";
 
-/* Class = "NSTextFieldCell"; title = "Note: with standard keys you can use Ctrl+Brightness to control internal display and Ctrl+Command+Brightness to control external displays."; ObjectID = "Gy9-Of-tpz"; */
-"Gy9-Of-tpz.title" = "Note: with standard keys you can use Ctrl+Brightness to control internal display and Ctrl+Command+Brightness to control external displays.";
-
 /* Class = "NSTextFieldCell"; title = "Override audio device name:"; ObjectID = "H9X-it-sXs"; */
 "H9X-it-sXs.title" = "Override audio device name:";
 
@@ -171,6 +168,9 @@
 
 /* Class = "NSButtonCell"; title = "Get current"; ObjectID = "hkC-vq-IcD"; */
 "hkC-vq-IcD.title" = "Get current";
+
+/* Class = "NSTextFieldCell"; title = "Record shortcuts:"; ObjectID = "HLE-Vp-kcS"; */
+"HLE-Vp-kcS.title" = "Record shortcuts:";
 
 /* Class = "NSMenuItem"; title = "Hide"; ObjectID = "HUT-Qc-kuu"; */
 "HUT-Qc-kuu.title" = "Hide";
@@ -204,6 +204,9 @@
 
 /* Class = "NSTextFieldCell"; title = "Don't use software dimming as fallback if no hardware control is available."; ObjectID = "kgh-b4-gmO"; */
 "kgh-b4-gmO.title" = "Don't use software dimming as fallback if no hardware control is available.";
+
+/* Class = "NSTextFieldCell"; title = "Record shortcuts:"; ObjectID = "kqJ-jQ-b7U"; */
+"kqJ-jQ-b7U.title" = "Record shortcuts:";
 
 /* Class = "NSTextFieldCell"; title = "Brightness and contrast control:"; ObjectID = "LO4-4k-gxY"; */
 "LO4-4k-gxY.title" = "Brightness and contrast control:";
@@ -273,6 +276,9 @@
 
 /* Class = "NSTextFieldCell"; title = "Use software dimming after the display reached zero hardware brightness for extended range. Works for DDC controlled displays only."; ObjectID = "PyY-p9-3NP"; */
 "PyY-p9-3NP.title" = "Use software dimming after the display reached zero hardware brightness for extended range. Works for DDC controlled displays only.";
+
+/* Class = "NSMenuItem"; title = "Both standard and custom shortcuts"; ObjectID = "QDG-SA-mRX"; */
+"QDG-SA-mRX.title" = "Both standard and custom shortcuts";
 
 /* Class = "NSButtonCell"; title = "Quit appliation"; ObjectID = "qlb-wH-qr4"; */
 "qlb-wH-qr4.title" = "Quit appliation";
@@ -354,6 +360,9 @@
 
 /* Class = "NSMenuItem"; title = "Only if at least one slider is present"; ObjectID = "xLa-PN-rsq"; */
 "xLa-PN-rsq.title" = "Only if at least one slider is present";
+
+/* Class = "NSMenuItem"; title = "Both standard and custom shortcuts"; ObjectID = "xQJ-aJ-VhH"; */
+"xQJ-aJ-VhH.title" = "Both standard and custom shortcuts";
 
 /* Class = "NSTextFieldCell"; title = "Works best with various syncing and 'control all' keyboard settings enabled."; ObjectID = "XU4-Bn-bwH"; */
 "XU4-Bn-bwH.title" = "Works best with various syncing and 'control all' keyboard settings enabled.";

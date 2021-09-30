@@ -157,10 +157,10 @@ class MediaKeyTapManager: MediaKeyTapDelegate {
 
   func updateMediaKeyTap() {
     var keys: [MediaKey] = []
-    if prefs.integer(forKey: PrefKey.keyboardBrightness.rawValue) == KeyboardBrightness.media.rawValue {
+    if [KeyboardBrightness.media.rawValue, KeyboardBrightness.both.rawValue].contains(prefs.integer(forKey: PrefKey.keyboardBrightness.rawValue)) {
       keys.append(contentsOf: [.brightnessUp, .brightnessDown])
     }
-    if prefs.integer(forKey: PrefKey.keyboardVolume.rawValue) == 0 {
+    if [KeyboardVolume.media.rawValue, KeyboardVolume.both.rawValue].contains(prefs.integer(forKey: PrefKey.keyboardVolume.rawValue)) {
       keys.append(contentsOf: [.mute, .volumeUp, .volumeDown])
     }
     // Remove keys if no external displays are connected

@@ -8,7 +8,7 @@ let DEBUG_VIRTUAL = false
 let DEBUG_MACOS10 = false
 let DEBUG_GAMMA_ENFORCER = false
 
-let MIN_PREVIOUS_BUILD_NUMBER = 6200
+let MIN_PREVIOUS_BUILD_NUMBER = 6262
 
 var app: AppDelegate!
 var menu: MenuHandler!
