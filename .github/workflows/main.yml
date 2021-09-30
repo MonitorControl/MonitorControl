@@ -19,7 +19,6 @@ jobs:
           scheme: MonitorControl
           destination: platform=macOS
           action: build
-          build-settings: CODE_SIGN_IDENTITY="-" DEVELOPMENT_TEAM=""
   lint:
     runs-on: ubuntu-latest
     steps:
