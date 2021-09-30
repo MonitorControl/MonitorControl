@@ -19,7 +19,7 @@ jobs:
           scheme: MonitorControl
           destination: platform=macOS
           action: build
-          build-settings: CODE_SIGN_IDENTITY="Apple Development" CODE_SIGNING_REQUIRED=NO DEVELOPMENT_TEAM=XYZ123456
+          build-settings: CODE_SIGN_IDENTITY="Apple\ Development" CODE_SIGNING_REQUIRED=NO DEVELOPMENT_TEAM=XYZ123456
   lint:
     runs-on: ubuntu-latest
     steps:
