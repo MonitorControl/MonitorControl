@@ -106,6 +106,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     if !prefs.bool(forKey: PrefKey.appAlreadyLaunched.rawValue) {
       // Only preferences that are not false, 0 or "" by default are set here. Assumes pre-wiped database.
       prefs.set(true, forKey: PrefKey.appAlreadyLaunched.rawValue)
+      prefs.set(true, forKey: PrefKey.SUEnableAutomaticChecks.rawValue)
     }
   }
 
