@@ -1,8 +1,8 @@
 /* General application description */
-"ApplicationDescription" = "MonitorControl allows you to control external displays brightness and volume";
+"ApplicationDescription" = "A MonitorControl a külső kijelző fényerejének és hangerejének beállítását teszi lehetővé";
 
 /* Software update purpose */
-"SoftwareUpdatePurpose" = "MonitorControl checks for new versions and security updates.";
+"SoftwareUpdatePurpose" = "A MonitorControl ellenőrzi új verziók és biztonsági frissítések meglétét.";
 
 /* Sofware update deny consequences */
-"SoftwareUpdateDenyConsequences" = "If you deny these connections, you will not be notified about new versions and security updates. Security updates are important in order to defend against malware attacks.";
+"SoftwareUpdateDenyConsequences" = "Ha elutasítja ezeket a kapcsolatokat, nem értesül új verziókról és biztonsági frissítésekről. A biztonsági frissítések fontosak a rosszindulatú támadások elhárítása érdekében.";
