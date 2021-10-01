@@ -35,16 +35,16 @@
 "6mo-7S-oOO.title" = "Immer ausblenden";
 
 /* Class = "NSTextFieldCell"; title = "Slider behavior:"; ObjectID = "75n-7M-1mS"; */
-"75n-7M-1mS.title" = "Verhalten des Schiebereglers:";
+"75n-7M-1mS.title" = "Verhalten des Regler:";
 
 /* Class = "NSButtonCell"; title = "Use combined slider for all displays"; ObjectID = "7rn-Lu-fcl"; */
-"7rn-Lu-fcl.title" = "Kombinierten Schieberegler für alle Monitore verwenden";
+"7rn-Lu-fcl.title" = "Kombinierten Regler für alle Monitore verwenden";
 
 /* Class = "NSButtonCell"; title = "Show slider tick marks"; ObjectID = "7zf-m1-gJO"; */
-"7zf-m1-gJO.title" = "Markierungen für Schieberegler anzeigen";
+"7zf-m1-gJO.title" = "Markierungen für Regler anzeigen";
 
 /* Class = "NSTextFieldCell"; title = "Slider knob will snap to 0%, 25%, 50%, 75% and 100% when in proximity making setting these values easier. Disable for finer control."; ObjectID = "8Gx-Ya-zhp"; */
-"8Gx-Ya-zhp.title" = "Der Schieberegler rastet bei Annäherung auf 0 %, 25 %, 50 %, 75 % und 100 % ein, was die Einstellung dieser Werte erleichtert. Deaktivieren für genauere Kontrolle.";
+"8Gx-Ya-zhp.title" = "Der Regler rastet bei Annäherung auf 0 %, 25 %, 50 %, 75 % und 100 % ein, was die Einstellung dieser Werte erleichtert. Deaktivieren für genauere Kontrolle.";
 
 /* Class = "NSButtonCell"; title = "Use fine OSD scale"; ObjectID = "8Q8-57-xnT"; */
 "8Q8-57-xnT.title" = "Feine OSD-Skalierung verwenden";
@@ -92,7 +92,7 @@
 "Bzq-Co-fex.title" = "Verringern:";
 
 /* Class = "NSButtonCell"; title = "Show volume slider in menu"; ObjectID = "c9D-MB-lma"; */
-"c9D-MB-lma.title" = "Schieberegler für die Lautstärke im Menü anzeigen";
+"c9D-MB-lma.title" = "Regler für die Lautstärke im Menü anzeigen";
 
 /* Class = "NSMenuItem"; title = "Custom"; ObjectID = "Cle-DD-vR7"; */
 "Cle-DD-vR7.title" = "Benutzerdefiniert";
@@ -221,7 +221,7 @@
 "ltL-gR-K3Z.title" = "Monitor für Steuerung:";
 
 /* Class = "NSButtonCell"; title = "Enable slider snapping"; ObjectID = "MlU-hl-d46"; */
-"MlU-hl-d46.title" = "Schieberegler einrasten lassen";
+"MlU-hl-d46.title" = "Regler einrasten lassen";
 
 /* Class = "NSMenuItem"; title = "Always show in the menu bar"; ObjectID = "MM0-Lf-VgF"; */
 "MM0-Lf-VgF.title" = "Immer in der Menüleiste anzeigen";
@@ -386,7 +386,7 @@
 "YqZ-LS-YvR.title" = "Bezeichnung:";
 
 /* Class = "NSButtonCell"; title = "Use hardware DDC control"; ObjectID = "ZdU-gV-V05"; */
-"ZdU-gV-V05.title" = "Hardware DDC Regelung verwenden";
+"ZdU-gV-V05.title" = "Hardware DDC Steuerung verwenden";
 
 /* Class = "NSMenuItem"; title = "Disable keyboard"; ObjectID = "zHa-xo-XPW"; */
 "zHa-xo-XPW.title" = "Tastatur deaktivieren";
