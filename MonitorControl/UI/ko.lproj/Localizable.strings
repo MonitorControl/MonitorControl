@@ -2,16 +2,16 @@
 "About" = "정보";
 
 /* Shown in the main prefs window */
-"App menu" = "App menu";
+"App menu" = "앱 메뉴";
 
 /* Apple Silicon designation (shown after the version number in Preferences) */
 "Apple Silicon" = "Apple Silicon";
 
 /* Shown in the alert dialog */
-"Are you sure you want to enable a longer delay? Doing so may freeze your system and require a restart. Start at login will be disabled as a safety measure." = "응답지연 시간을 연장하시겠습니까? 시스템이 멈추거나 재시작이 필요할 수 있습니다. 로그인 시 자동 실행 옵션은 안전을 위해 비활성화됩니다.";
+"Are you sure you want to enable a longer delay? Doing so may freeze your system and require a restart. Start at login will be disabled as a safety measure." = "응답 지연 시간을 연장하시겠습니까? 시스템이 멈추거나 재시작이 필요할 수 있습니다. 로그인 시 자동 실행 옵션은 안전을 위해 비활성화됩니다.";
 
 /* Shown in the alert dialog */
-"Are you sure you want to reset all preferences?" = "모든 설정을 초기화하시겠습니까?";
+"Are you sure you want to reset all preferences?" = "모든 설정을 초기화 하시겠습니까?";
 
 /* Shown in menu */
 "Brightness" = "밝기";
@@ -23,7 +23,7 @@
 "Built-in Display" = "내장 디스플레이";
 
 /* Shown in menu */
-"Check for updates..." = "Check for updates...";
+"Check for updates..." = "업데이트 확인...";
 
 /* Shown in menu */
 "Contrast" = "대비";
@@ -44,19 +44,19 @@
 "General" = "일반";
 
 /* Shown in the Display Preferences */
-"Hardware (Apple)" = "Hardware (Apple)";
+"Hardware (Apple)" = "하드웨어 (Apple)";
 
 /* Shown in the Display Preferences */
 "Hardware (DDC)" = "하드웨어 (DDC)";
 
 /* Shown in the alert dialog */
-"Incompatible previous version" = "Incompatible previous version";
+"Incompatible previous version" = "호환되지 않는 이전 버전";
 
 /* Intel designation (shown after the version number in Preferences) */
 "Intel" = "Intel";
 
 /* Shown in the main prefs window */
-"Keyboard" = "Keyboard";
+"Keyboard" = "키보드";
 
 /* Shown in the alert dialog */
 "No" = "아니오";
@@ -68,13 +68,13 @@
 "Other Display" = "그 외 디스플레이";
 
 /* Shown in the alert dialog */
-"Preferences for an incompatible previous app version detected. Default preferences are reloaded." = "Preferences for an incompatible previous app version detected. Default preferences are reloaded.";
+"Preferences for an incompatible previous app version detected. Default preferences are reloaded." = "호환되지 않는 이전 앱 버전에 대한 기본 설정이 감지되었습니다. 기본 환경 설정을 다시 불러옵니다.";
 
 /* Shown in menu */
-"Preferences..." = "Preferences...";
+"Preferences..." = "환경 설정...";
 
 /* Shown in menu */
-"Quit" = "Quit";
+"Quit" = "종료";
 
 /* Shown in the alert dialog */
 "Reset Preferences?" = "설정 초기화";
@@ -83,37 +83,37 @@
 "Safe Mode Activated" = "안전모드 활성화 됨";
 
 /* Shown in the alert dialog */
-"Shift was pressed during launch. MonitorControl started in safe mode. Default preferences are reloaded, DDC read is blocked." = "쉬프트가 눌린 채로 시작되었습니다. MonitorControl 이 안전모드로 시작되었습니다. 기본 설정으로 다시 로딩되었으며, DDC 읽기가 제한됩니다.";
+"Shift was pressed during launch. MonitorControl started in safe mode. Default preferences are reloaded, DDC read is blocked." = "Shift 키가 눌린 채로 시작되었습니다. MonitorControl이 안전모드로 시작되었습니다. 기본 설정을 다시 불러왔으며, DDC 읽기가 제한됩니다.";
 
 /* Shown in the alert dialog */
 "Shortcuts not available" = "단축키를 사용할 수 없음";
 
 /* Shown in the Display Preferences */
-"Software (Gamma)" = "Software (Gamma)";
+"Software (Gamma)" = "소프트웨어 (감마)";
 
 /* Shown in the Display Preferences */
-"Software (Gamma, Forced)" = "Software (Gamma, Forced)";
+"Software (Gamma, Forced)" = "소프트웨어 (감마, 강제 적용)";
 
 /* Shown in the Display Preferences */
-"Software (Shade)" = "Software (Shade)";
+"Software (Shade)" = "소프트웨어 (명암)";
 
 /* Shown in the Display Preferences */
-"This display allows for software brightness control via gammatable manipulation as it does not support hardware control. Reasons for this might be using the HDMI port of a Mac mini (which blocks hardware DDC control) or having a blacklisted display." = "This display allows for software brightness control via gammatable manipulation as it does not support hardware control. Reasons for this might be using the HDMI port of a Mac mini (which blocks hardware DDC control) or having a blacklisted display.";
+"This display allows for software brightness control via gammatable manipulation as it does not support hardware control. Reasons for this might be using the HDMI port of a Mac mini (which blocks hardware DDC control) or having a blacklisted display." = "이 디스플레이는 하드웨어 제어를 지원하지 않기 때문에 감마 설정을 통해 소프트웨어로 밝기를 제어합니다. 그 이유는 하드웨어 DDC 제어가 차단된 Mac mini의 HDMI 포트를 사용하였거나 블랙리스트에 포함된 디스플레이를 사용하고 있기 때문일 수 있습니다.";
 
 /* Shown in the Display Preferences */
-"This display has an unspecified control status." = "This display has an unspecified control status.";
+"This display has an unspecified control status." = "이 디스플레이에는 지정되지 않은 제어 상태가 있습니다.";
 
 /* Shown in the Display Preferences */
-"This display is reported to support hardware DDC control but the current settings allow for software control only." = "This display is reported to support hardware DDC control but the current settings allow for software control only.";
+"This display is reported to support hardware DDC control but the current settings allow for software control only." = "이 디스플레이는 하드웨어 DDC 제어를 지원하는 것으로 보고되었지만 현재 설정은 소프트웨어 제어만 허용합니다.";
 
 /* Shown in the Display Preferences */
-"This display is reported to support hardware DDC control. If you encounter issues, you can disable hardware DDC control to force software control." = "This display is reported to support hardware DDC control. If you encounter issues, you can disable hardware DDC control to force software control.";
+"This display is reported to support hardware DDC control. If you encounter issues, you can disable hardware DDC control to force software control." = "이 디스플레이는 하드웨어 DDC 제어를 지원하는 것으로 보고되었습니다. 문제가 발생하면 하드웨어 DDC 제어를 비활성화하여 소프트웨어 제어를 강제 실행할 수 있습니다.";
 
 /* Shown in the Display Preferences */
-"This display supports native Apple brightness protocol. This allows macOS to control this display without MonitorControl as well." = "This display supports native Apple brightness protocol. This allows macOS to control this display without MonitorControl as well.";
+"This display supports native Apple brightness protocol. This allows macOS to control this display without MonitorControl as well." = "이 디스플레이는 기본 Apple 밝기 프로토콜을 지원합니다. 이를 통해 macOS는 MonitorControl 없이도 이 디스플레이를 제어할 수 있습니다.";
 
 /* Shown in the Display Preferences */
-"This is a virtual display (examples: AirPlay, Sidecar, display connected via a DisplayLink Dock or similar) which does not allow hardware or software gammatable control. Shading is used as a substitute but only in non-mirror scenarios. Mouse cursor will be unaffected and artifacts may appear when entering/leaving full screen mode." = "This is a virtual display (examples: AirPlay, Sidecar, display connected via a DisplayLink Dock or similar) which does not allow hardware or software gammatable control. Shading is used as a substitute but only in non-mirror scenarios. Mouse cursor will be unaffected and artifacts may appear when entering/leaving full screen mode.";
+"This is a virtual display (examples: AirPlay, Sidecar, display connected via a DisplayLink Dock or similar) which does not allow hardware or software gammatable control. Shading is used as a substitute but only in non-mirror scenarios. Mouse cursor will be unaffected and artifacts may appear when entering/leaving full screen mode." = "하드웨어 또는 소프트웨어 감마 설정을 허용하지 않는 가상 디스플레이(예: AirPlay, Sidecar, DisplayLink Dock을 통해 연결된 디스플레이 등)입니다. 명암 조절이 대신 사용되지만 미러링이 아닌 경우에만 사용됩니다. 마우스 커서는 영향을 받지 않으며 전체 화면 모드에 들어가거나 나갈 때 아티팩트가 나타날 수 있습니다.";
 
 /* Unknown display name */
 "Unknown" = "알 수 없음";
