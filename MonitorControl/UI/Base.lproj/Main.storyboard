@@ -950,7 +950,7 @@
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <gridView focusRingType="none" fixedFrame="YES" xPlacement="leading" yPlacement="top" rowAlignment="none" translatesAutoresizingMaskIntoConstraints="NO" id="lAP-Wd-eZk">
-                                                        <rect key="frame" x="8" y="22" width="372" height="78"/>
+                                                        <rect key="frame" x="8" y="10" width="372" height="78"/>
                                                         <rows>
                                                             <gridRow height="16" id="UIg-RD-fDW"/>
                                                             <gridRow height="25" id="CrR-ah-GZK"/>
