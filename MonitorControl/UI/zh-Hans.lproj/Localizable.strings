@@ -1,17 +1,17 @@
 /* Shown in the main prefs window */
-"About" = "About";
+"About" = "关于";
 
 /* Shown in the main prefs window */
-"App menu" = "App menu";
+"App menu" = "应用菜单";
 
 /* Apple Silicon designation (shown after the version number in Preferences) */
 "Apple Silicon" = "Apple Silicon";
 
 /* Shown in the alert dialog */
-"Are you sure you want to enable a longer delay? Doing so may freeze your system and require a restart. Start at login will be disabled as a safety measure." = "Are you sure you want to enable a longer delay? Doing so may freeze your system and require a restart. Start at login will be disabled as a safety measure.";
+"Are you sure you want to enable a longer delay? Doing so may freeze your system and require a restart. Start at login will be disabled as a safety measure." = "您确定要启用更长的延迟吗？ 这样做可能会冻结您的系统并需要重新启动。 安全起见，软件的开机自启将被禁用。";
 
 /* Shown in the alert dialog */
-"Are you sure you want to reset all preferences?" = "Are you sure you want to reset all preferences?";
+"Are you sure you want to reset all preferences?" = "您确定要重置所有偏好设置吗？";
 
 /* Sown in menu */
 "Brightness" = "亮度";
@@ -20,10 +20,10 @@
 "Build" = "Build";
 
 /* Shown in the Display Preferences */
-"Built-in Display" = "Built-in Display";
+"Built-in Display" = "内建显示器";
 
 /* Shown in menu */
-"Check for updates..." = "Check for updates...";
+"Check for updates..." = "检查更新...";
 
 /* Shown in menu */
 "Contrast" = "对比度";
@@ -32,85 +32,85 @@
 "Copyright Ⓒ MonitorControl, " = "Copyright Ⓒ MonitorControl, ";
 
 /* Shown in the main prefs window */
-"Displays" = "Displays";
+"Displays" = "显示器";
 
 /* Shown in the alert dialog */
-"Enable Longer Delay?" = "Enable Longer Delay?";
+"Enable Longer Delay?" = "启用更长的延迟？";
 
 /* Shown in the Display Preferences */
-"External Display" = "External Display";
+"External Display" = "外接显示器";
 
 /* Shown in the main prefs window */
 "General" = "通用";
 
 /* Shown in the Display Preferences */
-"Hardware (Apple)" = "Hardware (Apple)";
+"Hardware (Apple)" = "硬件 (Apple)";
 
 /* Shown in the Display Preferences */
-"Hardware (DDC)" = "Hardware (DDC)";
+"Hardware (DDC)" = "硬件 (DDC)";
 
 /* Shown in the alert dialog */
-"Incompatible previous version" = "Incompatible previous version";
+"Incompatible previous version" = "不兼容以前的版本";
 
 /* Intel designation (shown after the version number in Preferences) */
 "Intel" = "Intel";
 
 /* Shown in the main prefs window */
-"Keyboard" = "Keyboard";
+"Keyboard" = "键盘";
 
 /* Shown in the alert dialog */
-"No" = "No";
+"No" = "否";
 
 /* Shown in the Display Preferences */
-"No Control" = "No Control";
+"No Control" = "没有控制";
 
 /* Shown in the Display Preferences */
-"Other Display" = "Other Display";
+"Other Display" = "其他显示器";
 
 /* Shown in the alert dialog */
-"Preferences for an incompatible previous app version detected. Default preferences are reloaded." = "Preferences for an incompatible previous app version detected. Default preferences are reloaded.";
+"Preferences for an incompatible previous app version detected. Default preferences are reloaded." = "检测到不兼容的先前应用程序版本的偏好设置。 重新加载默认设置。";
 
 /* Shown in menu */
-"Preferences..." = "Preferences...";
+"Preferences..." = "偏好设置...";
 
 /* Shown in menu */
-"Quit" = "Quit";
+"Quit" = "退出";
 
 /* Shown in the alert dialog */
-"Reset Preferences?" = "Reset Preferences?";
+"Reset Preferences?" = "重置偏好设置？";
 
 /* Shown in the alert dialog */
-"Safe Mode Activated" = "Safe Mode Activated";
+"Safe Mode Activated" = "已启用安全模式";
 
 /* Shown in the alert dialog */
-"Shift was pressed during launch. MonitorControl started in safe mode. Default preferences are reloaded, DDC read is blocked." = "Shift was pressed during launch. MonitorControl started in safe mode. Default preferences are reloaded, DDC read is blocked.";
+"Shift was pressed during launch. MonitorControl started in safe mode. Default preferences are reloaded, DDC read is blocked." = "启动过程中按下了 Shift 键。 MonitorControl 以安全模式启动。 重新加载默认偏好设置，已阻止 DDC 读取。";
 
 /* Shown in the alert dialog */
 "Shortcuts not available" = "快捷键不可用";
 
 /* Shown in the Display Preferences */
-"Software (Gamma)" = "Software (Gamma)";
+"Software (Gamma)" = "软件 (伽马)";
 
 /* Shown in the Display Preferences */
-"Software (Gamma, Forced)" = "Software (Gamma, Forced)";
+"Software (Gamma, Forced)" = "软件 (伽马, 强制)";
 
 /* Shown in the Display Preferences */
-"Software (Shade)" = "Software (Shade)";
+"Software (Shade)" = "软件 (Shade)";
 
 /* Shown in the Display Preferences */
-"This display allows for software brightness control via gammatable manipulation as it does not support hardware control. Reasons for this might be using the HDMI port of a Mac mini (which blocks hardware DDC control) or having a blacklisted display." = "This display allows for software brightness control via gammatable manipulation as it does not support hardware control. Reasons for this might be using the HDMI port of a Mac mini (which blocks hardware DDC control) or having a blacklisted display.";
+"This display allows for software brightness control via gammatable manipulation as it does not support hardware control. Reasons for this might be using the HDMI port of a Mac mini (which blocks hardware DDC control) or having a blacklisted display." = "因为该显示器不支持硬件控制，所以通过伽马操作进行软件亮度控制。 原因是可能您使用了 Mac mini 的 HDMI 端口（阻止硬件 DDC 控制）或连接了被列入黑名单的显示器。";
 
 /* Shown in the Display Preferences */
-"This display has an unspecified control status." = "This display has an unspecified control status.";
+"This display has an unspecified control status." = "该显示器具有未指定的控制状态。";
 
 /* Shown in the Display Preferences */
-"This display is reported to support hardware DDC control but the current settings allow for software control only." = "This display is reported to support hardware DDC control but the current settings allow for software control only.";
+"This display is reported to support hardware DDC control but the current settings allow for software control only." = "检测该显示器支持硬件 DDC 控制，但当前设置仅允许软件控制。";
 
 /* Shown in the Display Preferences */
-"This display is reported to support hardware DDC control. If you encounter issues, you can disable hardware DDC control to force software control." = "This display is reported to support hardware DDC control. If you encounter issues, you can disable hardware DDC control to force software control.";
+"This display is reported to support hardware DDC control. If you encounter issues, you can disable hardware DDC control to force software control." = "检测到此显示器支持硬件 DDC 控制。 如果遇到问题，可以禁用硬件 DDC 控制以强制软件控制";
 
 /* Shown in the Display Preferences */
-"This display supports native Apple brightness protocol. This allows macOS to control this display without MonitorControl as well." = "This display supports native Apple brightness protocol. This allows macOS to control this display without MonitorControl as well.";
+"This display supports native Apple brightness protocol. This allows macOS to control this display without MonitorControl as well." = "该显示器支持原生 Apple 亮度协议。 这允许 macOS 也可以在没有 MonitorControl 的情况下控制此显示。";
 
 /* Shown in the Display Preferences */
 "This is a virtual display (examples: AirPlay, Sidecar, display connected via a DisplayLink Dock or similar) which does not allow hardware or software gammatable control. Shading is used as a substitute but only in non-mirror scenarios. Mouse cursor will be unaffected and artifacts may appear when entering/leaving full screen mode." = "This is a virtual display (examples: AirPlay, Sidecar, display connected via a DisplayLink Dock or similar) which does not allow hardware or software gammatable control. Shading is used as a substitute but only in non-mirror scenarios. Mouse cursor will be unaffected and artifacts may appear when entering/leaving full screen mode.";
@@ -118,19 +118,19 @@
 /* Unknown display name
  Unknown model
  Unknown vendor */
-"Unknown" = "Unknown";
+"Unknown" = "未知";
 
 /* Version */
-"Version" = "Version";
+"Version" = "版本";
 
 /* Shown in the Display Preferences */
-"Virtual Display" = "Virtual Display";
+"Virtual Display" = "虚拟显示器";
 
 /* Shown in menu */
 "Volume" = "音量";
 
 /* Shown in the alert dialog */
-"Yes" = "Yes";
+"Yes" = "是";
 
 /* Shown in the alert dialog */
 "You need to enable MonitorControl in System Preferences > Security and Privacy > Accessibility for the keyboard shortcuts to work" = "您需要在「系统偏好设置」>「安全性与隐私」>「辅助功能」中开启 MonitorControl 以便使快捷键生效";
