@@ -74,6 +74,7 @@
 		6CC260F5256AD8F900613714 /* Preferences+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Preferences+Extension.swift"; sourceTree = "<group>"; };
 		6CDA0FCE26485A8300F52125 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		6CDA0FD026485AA100F52125 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
+		6CF93A782707981300BA219D /* MonitorControlDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MonitorControlDebug.entitlements; sourceTree = "<group>"; };
 		AA062E8926C9A039007E628C /* DisplaysPrefsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplaysPrefsViewController.swift; sourceTree = "<group>"; };
 		AA062E8D26CA7BE5007E628C /* DisplaysPrefsCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplaysPrefsCellView.swift; sourceTree = "<group>"; };
 		AA16139A26BE772E00DCF027 /* Arm64DDC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Arm64DDC.swift; sourceTree = "<group>"; };
@@ -205,6 +206,7 @@
 		56754EAD1D9A4016007BCDC5 /* MonitorControl */ = {
 			isa = PBXGroup;
 			children = (
+				6CF93A782707981300BA219D /* MonitorControlDebug.entitlements */,
 				F01B0686228221B6008E64DB /* Info.plist */,
 				56754EB01D9A4016007BCDC5 /* Assets.xcassets */,
 				56754EAE1D9A4016007BCDC5 /* main.swift */,
@@ -720,6 +722,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = MonitorControl/MonitorControlDebug.entitlements;
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;

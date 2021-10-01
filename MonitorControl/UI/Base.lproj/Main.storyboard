@@ -487,7 +487,7 @@
                                     <gridCell row="OpF-3Q-ZZp" column="V6M-Jv-Agj" xPlacement="leading" id="9Au-qH-WOr">
                                         <button key="contentView" verticalHuggingPriority="750" placeholderIntrinsicWidth="150" placeholderIntrinsicHeight="20" translatesAutoresizingMaskIntoConstraints="NO" id="dy4-nH-cIr">
                                             <rect key="frame" x="230" y="497" width="164" height="32"/>
-                                            <buttonCell key="cell" type="push" title="Quit appliation" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="qlb-wH-qr4">
+                                            <buttonCell key="cell" type="push" title="Quit application" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="qlb-wH-qr4">
                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" metaFont="system"/>
                                             </buttonCell>
