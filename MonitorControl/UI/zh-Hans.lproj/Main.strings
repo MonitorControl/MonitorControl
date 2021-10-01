@@ -1,62 +1,62 @@
 /* Class = "NSButtonCell"; title = "Sync brightness changes from Built-in and Apple displays"; ObjectID = "0ca-DG-AgB"; */
-"0ca-DG-AgB.title" = "Sync brightness changes from Built-in and Apple displays";
+"0ca-DG-AgB.title" = "从内建的和苹果屏幕同步亮度变化";
 
 /* Class = "NSButtonCell"; title = "Attempt to read display settings"; ObjectID = "0qp-fq-8MI"; */
-"0qp-fq-8MI.title" = "Attempt to read display settings";
+"0qp-fq-8MI.title" = "尝试读取显示器设置";
 
 /* Class = "NSTextFieldCell"; title = "MonitorControl"; ObjectID = "1PJ-14-Bvn"; */
 "1PJ-14-Bvn.title" = "MonitorControl";
 
 /* Class = "NSMenuItem"; title = "Standard keyboard volume and mute keys"; ObjectID = "1sy-Kd-WL5"; */
-"1sy-Kd-WL5.title" = "Standard keyboard volume and mute keys";
+"1sy-Kd-WL5.title" = "标准键盘音量和静音键";
 
 /* Class = "NSButtonCell"; title = "Change volume for all screens"; ObjectID = "1XT-3S-UuD"; */
-"1XT-3S-UuD.title" = "Change volume for all screens";
+"1XT-3S-UuD.title" = "修改所有屏幕的音量";
 
 /* Class = "NSTextFieldCell"; title = "DDC min"; ObjectID = "1zE-fg-xEm"; */
-"1zE-fg-xEm.title" = "DDC min";
+"1zE-fg-xEm.title" = "最小 DDC";
 
 /* Class = "NSMenuItem"; title = "Custom keyboard shortcuts"; ObjectID = "4CG-0I-anB"; */
-"4CG-0I-anB.title" = "Custom keyboard shortcuts";
+"4CG-0I-anB.title" = "自定义键盘快捷键";
 
 /* Class = "NSTextFieldCell"; title = "MonitorControl uses mouse position to determine which display to control. Using window focus instead might not work well with full screen apps."; ObjectID = "4dX-o1-xAc"; */
-"4dX-o1-xAc.title" = "MonitorControl uses mouse position to determine which display to control. Using window focus instead might not work well with full screen apps.";
+"4dX-o1-xAc.title" = "MonitorControl 使用鼠标位置来决定控制哪个显示器，使用窗口聚焦可能不适用于全屏应用程序。";
 
 /* Class = "NSButtonCell"; title = "Show separate controls for each display in menu"; ObjectID = "4t2-Rv-njr"; */
-"4t2-Rv-njr.title" = "Show separate controls for each display in menu";
+"4t2-Rv-njr.title" = "在菜单中对每个显示器分别显示控制";
 
 /* Class = "NSTextField"; ibExternalAccessibilityDescription = "Brightness"; ObjectID = "567-le-fLg"; */
-"567-le-fLg.ibExternalAccessibilityDescription" = "Brightness";
+"567-le-fLg.ibExternalAccessibilityDescription" = "亮度";
 
 /* Class = "NSButtonCell"; title = "Reset Preferences"; ObjectID = "5yT-5F-X5R"; */
-"5yT-5F-X5R.title" = "Reset Preferences";
+"5yT-5F-X5R.title" = "重置偏好设置";
 
 /* Class = "NSMenuItem"; title = "Always hide"; ObjectID = "6mo-7S-oOO"; */
-"6mo-7S-oOO.title" = "Always hide";
+"6mo-7S-oOO.title" = "始终隐藏";
 
 /* Class = "NSTextFieldCell"; title = "Slider behavior:"; ObjectID = "75n-7M-1mS"; */
-"75n-7M-1mS.title" = "Slider behavior:";
+"75n-7M-1mS.title" = "滑块行为：";
 
 /* Class = "NSButtonCell"; title = "Use combined slider for all displays"; ObjectID = "7rn-Lu-fcl"; */
-"7rn-Lu-fcl.title" = "Use combined slider for all displays";
+"7rn-Lu-fcl.title" = "对所有显示使用组合滑块";
 
 /* Class = "NSButtonCell"; title = "Show slider tick marks"; ObjectID = "7zf-m1-gJO"; */
-"7zf-m1-gJO.title" = "Show slider tick marks";
+"7zf-m1-gJO.title" = "显示滑块标记";
 
 /* Class = "NSTextFieldCell"; title = "Slider knob will snap to 0%, 25%, 50%, 75% and 100% when in proximity making setting these values easier. Disable for finer control."; ObjectID = "8Gx-Ya-zhp"; */
-"8Gx-Ya-zhp.title" = "Slider knob will snap to 0%, 25%, 50%, 75% and 100% when in proximity making setting these values easier. Disable for finer control.";
+"8Gx-Ya-zhp.title" = "当滑块靠近 0%、25%、50%、75%、100% 时，会自动到达。禁用以获得更好的控制。";
 
 /* Class = "NSButtonCell"; title = "Use fine OSD scale"; ObjectID = "8Q8-57-xnT"; */
-"8Q8-57-xnT.title" = "Use fine OSD scale";
+"8Q8-57-xnT.title" = "使用精细的 OSD 比例";
 
 /* Class = "NSButtonCell"; title = "Special thanks to our contributors!"; ObjectID = "95V-M4-2l5"; */
 "95V-M4-2l5.title" = "特别感谢我们的贡献者！";
 
 /* Class = "NSMenuItem"; title = "Custom keyboard shortcuts"; ObjectID = "9eC-PD-FHl"; */
-"9eC-PD-FHl.title" = "Custom keyboard shortcuts";
+"9eC-PD-FHl.title" = "自定义键盘快捷键";
 
 /* Class = "NSSlider"; ibExternalAccessibilityDescription = "Brightness"; ObjectID = "9H1-0z-xsx"; */
-"9H1-0z-xsx.ibExternalAccessibilityDescription" = "Brightness";
+"9H1-0z-xsx.ibExternalAccessibilityDescription" = "亮度";
 
 /* Class = "NSTextFieldCell"; title = "Show tick marks at 0%, 25%, 50%, 75% and 100% for accuracy."; ObjectID = "A8P-vn-DEJ"; */
 "A8P-vn-DEJ.title" = "Show tick marks at 0%, 25%, 50%, 75% and 100% for accuracy.";
