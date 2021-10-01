@@ -50,11 +50,11 @@ Go to [Releases](https://github.com/MonitorControl/MonitorControl/releases) and 
 
 | MonitorControl version | macOS version     |
 | ---------------------- | ----------------- |
-| v4.0.0                 | Big Sur 10.15[ˆ*] |
+| v4.0.0                 | Big Sur 10.15*     |
 | v3.1.1                 | Mojave 10.14      |
 | v2.1.0                 | Sierra 10.12      |
 
-[ˆ*]: With some limitations
+_*With some limitations_
 
 ## How to help
 
