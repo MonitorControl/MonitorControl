@@ -201,7 +201,7 @@
                                     <gridCell row="gGa-4U-s7D" column="64O-72-10l" headOfMergedCell="hH2-hj-VXr" id="dEl-GK-ctf"/>
                                     <gridCell row="g3B-cE-vmT" column="eHC-Ur-UsS" xPlacement="trailing" id="tAh-1B-VfM">
                                         <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fTf-gB-8JX">
-                                            <rect key="frame" x="89" y="253" width="139" height="16"/>
+                                            <rect key="frame" x="90" y="253" width="138" height="16"/>
                                             <textFieldCell key="cell" lineBreakMode="clipping" title="Upon startup or wake:" id="cNt-Cq-vK4">
                                                 <font key="font" usesAppearanceFont="YES"/>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -876,7 +876,7 @@
                                     </gridCell>
                                     <gridCell row="dwB-Ku-aql" column="EiG-65-CTv" xPlacement="leading" id="YBq-zd-TZe">
                                         <popUpButton key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="2NF-gh-JBU">
-                                            <rect key="frame" x="234" y="753" width="261" height="25"/>
+                                            <rect key="frame" x="234" y="753" width="260" height="25"/>
                                             <popUpButtonCell key="cell" type="push" title="Standard keyboard brightness keys" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="Oke-bW-cb1" id="h0R-Cc-cJa">
                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" metaFont="menu"/>
@@ -934,7 +934,7 @@
                                     </gridCell>
                                     <gridCell row="bd8-PJ-Cme" column="ZC2-Ja-sIb" xPlacement="trailing" id="ePJ-iR-Byw">
                                         <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="DC4-V4-qLD">
-                                            <rect key="frame" x="115" y="523" width="113" height="100"/>
+                                            <rect key="frame" x="116" y="523" width="112" height="100"/>
                                             <textFieldCell key="cell" lineBreakMode="clipping" title="Record shortcuts:" id="kqJ-jQ-b7U">
                                                 <font key="font" usesAppearanceFont="YES"/>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -1181,7 +1181,7 @@
                                     </gridCell>
                                     <gridCell row="TxS-hN-bkf" column="ZC2-Ja-sIb" xPlacement="trailing" id="Ifk-Yb-maM">
                                         <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="yTy-HS-HGa">
-                                            <rect key="frame" x="115" y="145" width="113" height="105"/>
+                                            <rect key="frame" x="116" y="145" width="112" height="105"/>
                                             <textFieldCell key="cell" lineBreakMode="clipping" title="Record shortcuts:" id="HLE-Vp-kcS">
                                                 <font key="font" usesAppearanceFont="YES"/>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -1416,7 +1416,7 @@
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <subviews>
                                                                 <imageView wantsLayer="YES" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="Bhw-JQ-dBx">
-                                                                    <rect key="frame" x="11" y="420.5" width="63.5" height="69"/>
+                                                                    <rect key="frame" x="11" y="420.5" width="64" height="69"/>
                                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageAlignment="top" imageScaling="proportionallyUpOrDown" image="NSTouchBarIconViewTemplate" id="DLq-uQ-NPf"/>
                                                                 </imageView>
@@ -2205,6 +2205,6 @@
     </scenes>
     <resources>
         <image name="NSApplicationIcon" width="32" height="32"/>
-        <image name="NSTouchBarIconViewTemplate" width="22" height="14"/>
+        <image name="NSTouchBarIconViewTemplate" width="15" height="14"/>
     </resources>
 </document>
