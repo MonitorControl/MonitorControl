@@ -283,7 +283,7 @@
 /* Class = "NSMenuItem"; title = "Both standard and custom shortcuts"; ObjectID = "QDG-SA-mRX"; */
 "QDG-SA-mRX.title" = "標準及自定義快捷鍵";
 
-/* Class = "NSButtonCell"; title = "Quit application"; ObjectID = "qlb-wH-qr4"; */
+/* Class = "NSButtonCell"; title = "Quit appliation"; ObjectID = "qlb-wH-qr4"; */
 "qlb-wH-qr4.title" = "關閉應用程式";
 
 /* Class = "NSButtonCell"; title = "Show contrast slider in menu"; ObjectID = "qO0-dB-yUs"; */
