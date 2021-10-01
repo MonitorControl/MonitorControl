@@ -2,28 +2,28 @@
 "About" = "關於";
 
 /* Shown in the main prefs window */
-"App menu" = "App menu";
+"App menu" = "App選單";
 
 /* Apple Silicon designation (shown after the version number in Preferences) */
-"Apple Silicon" = "Apple Silicon";
+"Apple Silicon" = "Apple晶片";
 
 /* Shown in the alert dialog */
-"Are you sure you want to enable a longer delay? Doing so may freeze your system and require a restart. Start at login will be disabled as a safety measure." = "您確定要啟用更長的延遲嗎？ 這樣做可能會使系統崩潰並需要重新啟動。 作為安全措施，登錄時啟動將被禁用。";
+"Are you sure you want to enable a longer delay? Doing so may freeze your system and require a restart. Start at login will be disabled as a safety measure." = "您確定要啟用更長的延遲嗎？這樣做可能會使系統崩潰並需要重新啟動。作為安全措施，登錄時啟動將被停用。";
 
 /* Shown in the alert dialog */
-"Are you sure you want to reset all preferences?" = "確定要重置嗎？";
+"Are you sure you want to reset all preferences?" = "確定要重置所有的設定嗎？";
 
 /* Sown in menu */
 "Brightness" = "亮度";
 
 /* Build */
-"Build" = "建構";
+"Build" = "版號";
 
 /* Shown in the Display Preferences */
-"Built-in Display" = "內置螢幕";
+"Built-in Display" = "內建螢幕";
 
 /* Shown in menu */
-"Check for updates..." = "Check for updates...";
+"Check for updates..." = "檢查更新...";
 
 /* Shown in menu */
 "Contrast" = "對比度";
@@ -44,76 +44,76 @@
 "General" = "通用";
 
 /* Shown in the Display Preferences */
-"Hardware (Apple)" = "Hardware (Apple)";
+"Hardware (Apple)" = "硬體（Apple）";
 
 /* Shown in the Display Preferences */
-"Hardware (DDC)" = "硬體(DDC)";
+"Hardware (DDC)" = "硬體（DDC）";
 
 /* Shown in the alert dialog */
-"Incompatible previous version" = "Incompatible previous version";
+"Incompatible previous version" = "與先前版本不相容";
 
 /* Intel designation (shown after the version number in Preferences) */
 "Intel" = "Intel";
 
 /* Shown in the main prefs window */
-"Keyboard" = "Keyboard";
+"Keyboard" = "鍵盤";
 
 /* Shown in the alert dialog */
 "No" = "否";
 
 /* Shown in the Display Preferences */
-"No Control" = "No Control";
+"No Control" = "沒有控制";
 
 /* Shown in the Display Preferences */
 "Other Display" = "其他螢幕";
 
 /* Shown in the alert dialog */
-"Preferences for an incompatible previous app version detected. Default preferences are reloaded." = "Preferences for an incompatible previous app version detected. Default preferences are reloaded.";
+"Preferences for an incompatible previous app version detected. Default preferences are reloaded." = "偵測到不相容的先前應用程式版本的設定。原始設定已套用。";
 
 /* Shown in menu */
-"Preferences..." = "Preferences...";
+"Preferences..." = "設定...";
 
 /* Shown in menu */
-"Quit" = "Quit";
+"Quit" = "離開";
 
 /* Shown in the alert dialog */
 "Reset Preferences?" = "重置偏好設定？";
 
 /* Shown in the alert dialog */
-"Safe Mode Activated" = "Safe Mode Activated";
+"Safe Mode Activated" = "安全模式已啟動";
 
 /* Shown in the alert dialog */
-"Shift was pressed during launch. MonitorControl started in safe mode. Default preferences are reloaded, DDC read is blocked." = "Shift was pressed during launch. MonitorControl started in safe mode. Default preferences are reloaded, DDC read is blocked.";
+"Shift was pressed during launch. MonitorControl started in safe mode. Default preferences are reloaded, DDC read is blocked." = "開啟時Shift鍵被按下。MonitorControl開啟時進入安全模式。已套用原始設定，DDC讀取被停用。";
 
 /* Shown in the alert dialog */
 "Shortcuts not available" = "快捷鍵不可使用";
 
 /* Shown in the Display Preferences */
-"Software (Gamma)" = "Software (Gamma)";
+"Software (Gamma)" = "軟體 (伽瑪)";
 
 /* Shown in the Display Preferences */
-"Software (Gamma, Forced)" = "Software (Gamma, Forced)";
+"Software (Gamma, Forced)" = "軟體 (伽瑪，強制)";
 
 /* Shown in the Display Preferences */
-"Software (Shade)" = "Software (Shade)";
+"Software (Shade)" = "軟體 (Shade)";
 
 /* Shown in the Display Preferences */
-"This display allows for software brightness control via gammatable manipulation as it does not support hardware control. Reasons for this might be using the HDMI port of a Mac mini (which blocks hardware DDC control) or having a blacklisted display." = "This display allows for software brightness control via gammatable manipulation as it does not support hardware control. Reasons for this might be using the HDMI port of a Mac mini (which blocks hardware DDC control) or having a blacklisted display.";
+"This display allows for software brightness control via gammatable manipulation as it does not support hardware control. Reasons for this might be using the HDMI port of a Mac mini (which blocks hardware DDC control) or having a blacklisted display." = "此螢幕不支援硬體控制，亮度調整將以軟體調整伽瑪值來實現。原因可能出於使用Mac mini的HDMI埠（硬體DDC無法使用）或是使用不支援的螢幕。";
 
 /* Shown in the Display Preferences */
-"This display has an unspecified control status." = "This display has an unspecified control status.";
+"This display has an unspecified control status." = "此螢幕有未指定的控制狀態";
 
 /* Shown in the Display Preferences */
-"This display is reported to support hardware DDC control but the current settings allow for software control only." = "This display is reported to support hardware DDC control but the current settings allow for software control only.";
+"This display is reported to support hardware DDC control but the current settings allow for software control only." = "此螢幕經回報支援硬體DDC控制，但目前的設定只允許軟體控制。";
 
 /* Shown in the Display Preferences */
-"This display is reported to support hardware DDC control. If you encounter issues, you can disable hardware DDC control to force software control." = "This display is reported to support hardware DDC control. If you encounter issues, you can disable hardware DDC control to force software control.";
+"This display is reported to support hardware DDC control. If you encounter issues, you can disable hardware DDC control to force software control." = "此螢幕經回報支援硬體DDC控制。若遭遇使用問題，您可停用硬體DDC控制以強制使用軟體控制。";
 
 /* Shown in the Display Preferences */
-"This display supports native Apple brightness protocol. This allows macOS to control this display without MonitorControl as well." = "This display supports native Apple brightness protocol. This allows macOS to control this display without MonitorControl as well.";
+"This display supports native Apple brightness protocol. This allows macOS to control this display without MonitorControl as well." = "此螢幕支援蘋果原生的亮度協定。macOS也可不透過MonitorControl控制此螢幕。";
 
 /* Shown in the Display Preferences */
-"This is a virtual display (examples: AirPlay, Sidecar, display connected via a DisplayLink Dock or similar) which does not allow hardware or software gammatable control. Shading is used as a substitute but only in non-mirror scenarios. Mouse cursor will be unaffected and artifacts may appear when entering/leaving full screen mode." = "This is a virtual display (examples: AirPlay, Sidecar, display connected via a DisplayLink Dock or similar) which does not allow hardware or software gammatable control. Shading is used as a substitute but only in non-mirror scenarios. Mouse cursor will be unaffected and artifacts may appear when entering/leaving full screen mode.";
+"This is a virtual display (examples: AirPlay, Sidecar, display connected via a DisplayLink Dock or similar) which does not allow hardware or software gammatable control. Shading is used as a substitute but only in non-mirror scenarios. Mouse cursor will be unaffected and artifacts may appear when entering/leaving full screen mode." = "此為虛擬螢幕（例如：AirPlay、Sidecar、透過DisplayLink Dock或類似硬體連接的螢幕），硬體或軟體伽碼值的控制不被允許。只能在非鏡像的情境下以遮光（Shading）作為替代方式。滑鼠游標將不受影響且在進入／離開全螢幕時可能會出現異常。";
 
 /* Unknown display name
  Unknown model
@@ -133,4 +133,4 @@
 "Yes" = "是";
 
 /* Shown in the alert dialog */
-"You need to enable MonitorControl in System Preferences > Security and Privacy > Accessibility for the keyboard shortcuts to work" = "您需要在「系統偏好設定」>「安全性與隱私權」>「輔助使用」中開啟 MonitorControl 使快捷鍵生效";
+"You need to enable MonitorControl in System Preferences > Security and Privacy > Accessibility for the keyboard shortcuts to work" = "您需要在「系統偏好設定」>「安全性與隱私權」>「輔助使用」中啟用MonitorControl使鍵盤快捷鍵生效";
