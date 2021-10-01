@@ -11,7 +11,7 @@
 "1sy-Kd-WL5.title" = "Standardtasten für Lautstärke und Stummschaltung";
 
 /* Class = "NSButtonCell"; title = "Change volume for all screens"; ObjectID = "1XT-3S-UuD"; */
-"1XT-3S-UuD.title" = "Lautstärke für alle Displays ändern";
+"1XT-3S-UuD.title" = "Lautstärke für alle Monitore ändern";
 
 /* Class = "NSTextFieldCell"; title = "DDC min"; ObjectID = "1zE-fg-xEm"; */
 "1zE-fg-xEm.title" = "DDC min";
