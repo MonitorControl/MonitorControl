@@ -284,7 +284,7 @@
 "QDG-SA-mRX.title" = "Both standard and custom shortcuts";
 
 /* Class = "NSButtonCell"; title = "Quit application"; ObjectID = "qlb-wH-qr4"; */
-"qlb-wH-qr4.title" = "Quit appliation";
+"qlb-wH-qr4.title" = "Quit application";
 
 /* Class = "NSButtonCell"; title = "Show contrast slider in menu"; ObjectID = "qO0-dB-yUs"; */
 "qO0-dB-yUs.title" = "Show contrast slider in menu";
