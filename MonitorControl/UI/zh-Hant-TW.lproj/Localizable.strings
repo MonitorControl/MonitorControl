@@ -2,10 +2,10 @@
 "About" = "關於";
 
 /* Shown in the main prefs window */
-"App menu" = "快捷選單";
+"App menu" = "App選單";
 
 /* Apple Silicon designation (shown after the version number in Preferences) */
-"Apple Silicon" = "Apple 晶片";
+"Apple Silicon" = "Apple晶片";
 
 /* Shown in the alert dialog */
 "Are you sure you want to enable a longer delay? Doing so may freeze your system and require a restart. Start at login will be disabled as a safety measure." = "您確定要啟用更長的延遲嗎？這樣做可能會使系統崩潰並需要重新啟動。作為安全措施，登錄時啟動將被停用。";
@@ -44,10 +44,10 @@
 "General" = "通用";
 
 /* Shown in the Display Preferences */
-"Hardware (Apple)" = "硬體 (Apple)";
+"Hardware (Apple)" = "硬體（Apple）";
 
 /* Shown in the Display Preferences */
-"Hardware (DDC)" = "硬體(DDC)";
+"Hardware (DDC)" = "硬體（DDC）";
 
 /* Shown in the alert dialog */
 "Incompatible previous version" = "與先前版本不相容";
@@ -62,13 +62,13 @@
 "No" = "否";
 
 /* Shown in the Display Preferences */
-"No Control" = "No Control";
+"No Control" = "沒有控制";
 
 /* Shown in the Display Preferences */
 "Other Display" = "其他螢幕";
 
 /* Shown in the alert dialog */
-"Preferences for an incompatible previous app version detected. Default preferences are reloaded." = "偵測到不相容的先前App版本的設定。原始設定已套用。";
+"Preferences for an incompatible previous app version detected. Default preferences are reloaded." = "偵測到不相容的先前應用程式版本的設定。原始設定已套用。";
 
 /* Shown in menu */
 "Preferences..." = "設定...";
@@ -92,7 +92,7 @@
 "Software (Gamma)" = "軟體 (伽瑪)";
 
 /* Shown in the Display Preferences */
-"Software (Gamma, Forced)" = "軟體 (伽瑪, 強制)";
+"Software (Gamma, Forced)" = "軟體 (伽瑪，強制)";
 
 /* Shown in the Display Preferences */
 "Software (Shade)" = "軟體 (Shade)";
@@ -113,7 +113,7 @@
 "This display supports native Apple brightness protocol. This allows macOS to control this display without MonitorControl as well." = "此螢幕支援蘋果原生的亮度協定。macOS也可不透過MonitorControl控制此螢幕。";
 
 /* Shown in the Display Preferences */
-"This is a virtual display (examples: AirPlay, Sidecar, display connected via a DisplayLink Dock or similar) which does not allow hardware or software gammatable control. Shading is used as a substitute but only in non-mirror scenarios. Mouse cursor will be unaffected and artifacts may appear when entering/leaving full screen mode." = "此為虛擬螢幕（例如：AirPlay、Sidecar、透過DisplayLink Dock或類似硬體連接的螢幕），硬體或軟體伽碼值的控制不被允許。只能在非鏡像的情境下以遮光（Shading）作為替代手段。滑鼠游標將不受影響且在進入／離開全螢幕時可能會出現異常。";
+"This is a virtual display (examples: AirPlay, Sidecar, display connected via a DisplayLink Dock or similar) which does not allow hardware or software gammatable control. Shading is used as a substitute but only in non-mirror scenarios. Mouse cursor will be unaffected and artifacts may appear when entering/leaving full screen mode." = "此為虛擬螢幕（例如：AirPlay、Sidecar、透過DisplayLink Dock或類似硬體連接的螢幕），硬體或軟體伽碼值的控制不被允許。只能在非鏡像的情境下以遮光（Shading）作為替代方式。滑鼠游標將不受影響且在進入／離開全螢幕時可能會出現異常。";
 
 /* Unknown display name
  Unknown model
@@ -133,4 +133,4 @@
 "Yes" = "是";
 
 /* Shown in the alert dialog */
-"You need to enable MonitorControl in System Preferences > Security and Privacy > Accessibility for the keyboard shortcuts to work" = "您需要在「系統偏好設定」>「安全性與隱私權」>「輔助使用」中允許 MonitorControl 使快捷鍵生效";
+"You need to enable MonitorControl in System Preferences > Security and Privacy > Accessibility for the keyboard shortcuts to work" = "您需要在「系統偏好設定」>「安全性與隱私權」>「輔助使用」中啟用MonitorControl使鍵盤快捷鍵生效";
