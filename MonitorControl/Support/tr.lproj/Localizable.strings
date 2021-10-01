@@ -47,4 +47,4 @@
 "Volume" = "Ses";
 
 /* Shown in the alert dialog */
-"You need to enable MonitorControl in System Preferences > Security and Privacy > Accessibility for the keyboard shortcuts to work" = "Klavye kısayolların çalışması için Sistem Tercihleri > Güvenlik ve Gizlilik > Erişilebilirlik bölümünde MonitorControlü etkinleştirmeniz gerekir.";
+"You need to enable MonitorControl in System Preferences > Security and Privacy > Accessibility for the keyboard shortcuts to work" = "Klavye kısayolların çalışması için Sistem Tercihleri > Güvenlik ve Gizlilik > Erişilebilirlik bölümündeki MonitorControl'ü etkinleştirmeniz gerekir.";
