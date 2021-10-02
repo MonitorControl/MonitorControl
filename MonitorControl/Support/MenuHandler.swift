@@ -211,7 +211,7 @@ class MenuHandler: NSMenu, NSMenuDelegate {
   func addDefaultMenuOptions() {
     if !DEBUG_MACOS10, #available(macOS 11.0, *), prefs.integer(forKey: PrefKey.menuItemStyle.rawValue) == MenuItemStyle.icon.rawValue {
       let iconSize = CGFloat(22)
-      let viewWidth = max(120, self.size.width)
+      let viewWidth = max(130, self.size.width)
       var compensateForBlock: CGFloat = 0
       if viewWidth > 230 { // if there are display blocks, we need to compensate a bit for the negative inset of the blocks
         compensateForBlock = 4
@@ -223,8 +223,13 @@ class MenuHandler: NSMenu, NSMenuDelegate {
       preferencesIcon.bezelStyle = .regularSquare
       preferencesIcon.isBordered = false
       preferencesIcon.setButtonType(.momentaryChange)
-      preferencesIcon.image = NSImage(systemSymbolName: "ellipsis.circle", accessibilityDescription: NSLocalizedString("Preferences...", comment: "Shown in menu"))
-      preferencesIcon.alternateImage = NSImage(systemSymbolName: "ellipsis.circle.fill", accessibilityDescription: NSLocalizedString("Preferences...", comment: "Shown in menu"))
+      if #available(macOS 12.0, *) {
+        preferencesIcon.image = NSImage(systemSymbolName: "gearshape.circle", accessibilityDescription: NSLocalizedString("Preferences...", comment: "Shown in menu"))
+        preferencesIcon.alternateImage = NSImage(systemSymbolName: "gearshape.circle.fill", accessibilityDescription: NSLocalizedString("Preferences...", comment: "Shown in menu"))
+      } else {
+        preferencesIcon.image = NSImage(systemSymbolName: "ellipsis.circle", accessibilityDescription: NSLocalizedString("Preferences...", comment: "Shown in menu"))
+        preferencesIcon.alternateImage = NSImage(systemSymbolName: "ellipsis.circle.fill", accessibilityDescription: NSLocalizedString("Preferences...", comment: "Shown in menu"))
+      }
       preferencesIcon.alphaValue = 0.3
       preferencesIcon.frame = NSRect(x: menuItemView.frame.maxX - iconSize - 16 + compensateForBlock, y: menuItemView.frame.origin.y + 5, width: iconSize, height: iconSize)
       preferencesIcon.imageScaling = .scaleProportionallyUpOrDown
@@ -237,7 +242,7 @@ class MenuHandler: NSMenu, NSMenuDelegate {
       updateIcon.image = NSImage(systemSymbolName: "arrow.triangle.2.circlepath.circle", accessibilityDescription: NSLocalizedString("Check for updates...", comment: "Shown in menu"))
       updateIcon.alternateImage = NSImage(systemSymbolName: "arrow.triangle.2.circlepath.circle.fill", accessibilityDescription: NSLocalizedString("Check for updates...", comment: "Shown in menu"))
       updateIcon.alphaValue = 0.3
-      updateIcon.frame = NSRect(x: menuItemView.frame.maxX - iconSize * 2 - 10 - 16 + compensateForBlock, y: menuItemView.frame.origin.y + 5, width: iconSize, height: iconSize)
+      updateIcon.frame = NSRect(x: menuItemView.frame.maxX - iconSize * 2 - 20 - 16 + compensateForBlock, y: menuItemView.frame.origin.y + 5, width: iconSize, height: iconSize)
       updateIcon.imageScaling = .scaleProportionallyUpOrDown
       updateIcon.action = #selector(app.updaterController.checkForUpdates(_:))
       updateIcon.target = app.updaterController
@@ -249,7 +254,7 @@ class MenuHandler: NSMenu, NSMenuDelegate {
       quitIcon.image = NSImage(systemSymbolName: "xmark.circle", accessibilityDescription: NSLocalizedString("Quit", comment: "Shown in menu"))
       quitIcon.alternateImage = NSImage(systemSymbolName: "xmark.circle.fill", accessibilityDescription: NSLocalizedString("Quit", comment: "Shown in menu"))
       quitIcon.alphaValue = 0.3
-      quitIcon.frame = NSRect(x: menuItemView.frame.maxX - iconSize * 3 - 20 - 16 + compensateForBlock, y: menuItemView.frame.origin.y + 5, width: iconSize, height: iconSize)
+      quitIcon.frame = NSRect(x: menuItemView.frame.maxX - iconSize * 3 - 30 - 16 + compensateForBlock, y: menuItemView.frame.origin.y + 5, width: iconSize, height: iconSize)
       quitIcon.imageScaling = .scaleProportionallyUpOrDown
       quitIcon.action = #selector(app.quitClicked)
 
