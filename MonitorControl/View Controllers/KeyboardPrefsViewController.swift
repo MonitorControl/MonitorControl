@@ -91,10 +91,32 @@ class KeyboardPrefsViewController: NSViewController, PreferencePane {
       self.rowCustomBrightnessShortcuts.isHidden = true
     }
 
+    if self.keyboardBrightness.selectedTag() == KeyboardBrightness.disabled.rawValue {
+      self.allScreens.isEnabled = false
+      self.useFocusInsteadOfMouse.isEnabled = false
+      self.useFineScale.isEnabled = false
+      self.separateCombinedScale.isEnabled = false
+    } else {
+      self.allScreens.isEnabled = true
+      self.useFocusInsteadOfMouse.isEnabled = self.allScreens.state == .off ? true : false
+      self.useFineScale.isEnabled = true
+      self.separateCombinedScale.isEnabled = true
+    }
+
     if [KeyboardVolume.custom.rawValue, KeyboardVolume.both.rawValue].contains(self.keyboardVolume.selectedTag()) {
       self.rowCustomAudioShortcuts.isHidden = false
     } else {
       self.rowCustomAudioShortcuts.isHidden = true
+    }
+
+    if self.keyboardVolume.selectedTag() == KeyboardVolume.disabled.rawValue {
+      self.allScreensVolume.isEnabled = false
+      self.useAudioDeviceNameMatching.isEnabled = false
+      self.useFineScaleVolume.isEnabled = false
+    } else {
+      self.allScreensVolume.isEnabled = true
+      self.useAudioDeviceNameMatching.isEnabled = self.allScreensVolume.state == .off ? true : false
+      self.useFineScaleVolume.isEnabled = true
     }
 
     if self.useFocusInsteadOfMouse.state == .on {
