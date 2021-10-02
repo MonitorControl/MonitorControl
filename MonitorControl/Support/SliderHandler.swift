@@ -29,7 +29,7 @@ class SliderHandler {
     let offsetY: CGFloat = -1.5
 
     let tickMarkKnobExtraInset: CGFloat = 4
-    let tickMarkKnobExtraRadiusMultiplier: CGFloat = 0.5
+    let tickMarkKnobExtraRadiusMultiplier: CGFloat = 0.25
 
     var numOfTickmarks: Int = 0
     var isHighlightDisplayItems: Bool = false
@@ -102,7 +102,7 @@ class SliderHandler {
         for i in 1 ... self.numOfTickmarks - 2 {
           let currentMarkLocation = CGFloat((Float(1) / Float(self.numOfTickmarks - 1)) * Float(i))
           let tickMarkBounds = NSRect(x: aRect.origin.x + aRect.height + self.tickMarkKnobExtraInset - knobRect.height + self.tickMarkKnobExtraInset * 2 + CGFloat(Float((aRect.width - self.tickMarkKnobExtraInset * 5) * currentMarkLocation)), y: aRect.origin.y + aRect.height * (1 / 3), width: 4, height: aRect.height / 3)
-          let tickmark = NSBezierPath(roundedRect: tickMarkBounds, xRadius: 2, yRadius: 2)
+          let tickmark = NSBezierPath(roundedRect: tickMarkBounds, xRadius: 1, yRadius: 1)
           self.tickMarkColor.setFill()
           tickmark.fill()
         }
