@@ -267,7 +267,7 @@ class MenuHandler: NSMenu, NSMenuDelegate {
       let updateItem = NSMenuItem(title: NSLocalizedString("Check for updates...", comment: "Shown in menu"), action: #selector(app.updaterController.checkForUpdates(_:)), keyEquivalent: "")
       updateItem.target = app.updaterController
       self.insertItem(updateItem, at: self.items.count)
-      self.insertItem(withTitle: NSLocalizedString("Quit", comment: "Shown in menu"), action: #selector(app.quitClicked), keyEquivalent: "", at: self.items.count)
+      self.insertItem(withTitle: NSLocalizedString("Quit", comment: "Shown in menu"), action: #selector(app.quitClicked), keyEquivalent: "q", at: self.items.count)
     }
   }
 }
