@@ -50,15 +50,19 @@ Go to [Releases](https://github.com/MonitorControl/MonitorControl/releases) and 
 
 | MonitorControl version | macOS version     |
 | ---------------------- | ----------------- |
-| v4.0.0                 | Big Sur 10.15*     |
+| v4.0.0                 | Catalina 10.15*   |
 | v3.1.1                 | Mojave 10.14      |
 | v2.1.0                 | Sierra 10.12      |
 
-_*With some limitations_
+_* With some limitations - full functionality available on macOS 11 Big Sur or newer._
 
 ## How to help
 
 Open [issues](https://github.com/MonitorControl/MonitorControl/issues) if you have a question, an enhancement to suggest or a bug you've found. If you want you can fork the code yourself and submit a pull request to improve the app.
+
+## Localizations
+
+MonitorControl supports localization. We gladly welcome your contribution with a new language! See the [opening post of the relevant discussion](https://github.com/MonitorControl/MonitorControl/discussions/637) on how to add your translation!
 
 ## How to build
 
