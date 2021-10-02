@@ -41,7 +41,7 @@
 "External Display" = "外接螢幕";
 
 /* Shown in the main prefs window */
-"General" = "通用";
+"General" = "一般";
 
 /* Shown in the Display Preferences */
 "Hardware (Apple)" = "硬體（Apple）";
@@ -113,7 +113,7 @@
 "This display supports native Apple brightness protocol. This allows macOS to control this display without MonitorControl as well." = "此螢幕支援蘋果原生的亮度協定。macOS也可不透過MonitorControl控制此螢幕。";
 
 /* Shown in the Display Preferences */
-"This is a virtual display (examples: AirPlay, Sidecar, display connected via a DisplayLink Dock or similar) which does not allow hardware or software gammatable control. Shading is used as a substitute but only in non-mirror scenarios. Mouse cursor will be unaffected and artifacts may appear when entering/leaving full screen mode." = "此為虛擬螢幕（例如：AirPlay、Sidecar、透過DisplayLink Dock或類似硬體連接的螢幕），硬體或軟體伽碼值的控制不被允許。只能在非鏡像的情境下以遮光（Shading）作為替代方式。滑鼠游標將不受影響且在進入／離開全螢幕時可能會出現異常。";
+"This is a virtual display (examples: AirPlay, Sidecar, display connected via a DisplayLink Dock or similar) which does not allow hardware or software gammatable control. Shading is used as a substitute but only in non-mirror scenarios. Mouse cursor will be unaffected and artifacts may appear when entering/leaving full screen mode." = "此為虛擬螢幕（例如：AirPlay、Sidecar、透過DisplayLink Dock或類似硬體連接的螢幕），硬體或軟體伽碼值的控制不被允許。只能在非鏡像的情境下以遮光（Shading）作為替代調整方式。進入／離開全螢幕模式時，鼠標將不受影響，並且可能出現殘影。";
 
 /* Unknown display name
  Unknown model
