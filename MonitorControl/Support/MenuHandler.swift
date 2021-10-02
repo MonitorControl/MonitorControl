@@ -91,7 +91,7 @@ class MenuHandler: NSMenu, NSMenuDelegate {
     if numOfDisplays > 1, !prefs.bool(forKey: PrefKey.slidersRelevant.rawValue), !DEBUG_MACOS10, #available(macOS 11.0, *) {
       class BlockView: NSView {
         override func draw(_: NSRect) {
-          let radius = CGFloat(11)
+          let radius = prefs.bool(forKey: PrefKey.showTickMarks.rawValue) ? CGFloat(6) : CGFloat(11)
           let outerMargin = CGFloat(15)
           let blockRect = self.frame.insetBy(dx: outerMargin, dy: outerMargin / 2 + 2).offsetBy(dx: 0, dy: outerMargin / 2 * -1 + 7)
           for i in 1 ... 5 {
