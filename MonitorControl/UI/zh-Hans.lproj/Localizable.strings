@@ -20,7 +20,7 @@
 "Build" = "Build";
 
 /* Shown in the Display Preferences */
-"Built-in Display" = "内建屏幕";
+"Built-in Display" = "内建显示器";
 
 /* Shown in menu */
 "Check for updates..." = "检查更新";
@@ -68,7 +68,7 @@
 "Other Display" = "其他显示";
 
 /* Shown in the alert dialog */
-"Preferences for an incompatible previous app version detected. Default preferences are reloaded." = "检测到先前不兼容的应用程序版本的偏好设置，默认偏好设置已被重新加载。";
+"Preferences for an incompatible previous app version detected. Default preferences are reloaded." = "检测到不兼容的旧版应用程序偏好设置，已重新加载默认偏好设置。";
 
 /* Shown in menu */
 "Preferences..." = "偏好设置";
@@ -98,7 +98,7 @@
 "Software (Shade)" = "软件 (Shade)";
 
 /* Shown in the Display Preferences */
-"This display allows for software brightness control via gammatable manipulation as it does not support hardware control. Reasons for this might be using the HDMI port of a Mac mini (which blocks hardware DDC control) or having a blacklisted display." = "因为它不支持硬件控制，该显示器允许通过伽马表操作进行软件亮度控制。原因可能是使用 Mac mini 的 HDMI 端口（阻止硬件 DDC 控制）或具有列入黑名单的显示器。";
+"This display allows for software brightness control via gammatable manipulation as it does not support hardware control. Reasons for this might be using the HDMI port of a Mac mini (which blocks hardware DDC control) or having a blacklisted display." = "此显示器只允许操作伽马表进行软件亮度控制，不支持硬件控制。可能因为连接了 Mac Mini 的 HDMI 端口（屏蔽硬件 DCC 控制），或此显示器已被列入黑名单。";
 
 /* Shown in the Display Preferences */
 "This display has an unspecified control status." = "该显示器具有未指定的控制状态。";
@@ -107,7 +107,7 @@
 "This display is reported to support hardware DDC control but the current settings allow for software control only." = "该显示器支持硬件 DDC 控制，但当前设置仅允许软件控制。";
 
 /* Shown in the Display Preferences */
-"This display is reported to support hardware DDC control. If you encounter issues, you can disable hardware DDC control to force software control." = "该显示器支持硬件 DDC 控制。如果你遇到问题，你可以关闭硬件 DDC 控制强制使用软件控制。";
+"This display is reported to support hardware DDC control. If you encounter issues, you can disable hardware DDC control to force software control." = "该显示器支持硬件 DDC 控制。如果遇到问题，你可以关闭硬件 DDC 控制，强制使用软件控制。";
 
 /* Shown in the Display Preferences */
 "This display supports native Apple brightness protocol. This allows macOS to control this display without MonitorControl as well." = "This display supports native Apple brightness protocol. This allows macOS to control this display without MonitorControl as well.";
@@ -133,4 +133,4 @@
 "Yes" = "是";
 
 /* Shown in the alert dialog */
-"You need to enable MonitorControl in System Preferences > Security and Privacy > Accessibility for the keyboard shortcuts to work" = "您需要在「系统偏好设置」>「安全性与隐私」>「辅助功能」中开启 MonitorControl 以便使快捷键生效";
+"You need to enable MonitorControl in System Preferences > Security and Privacy > Accessibility for the keyboard shortcuts to work" = "您需要在「系统偏好设置」>「安全性与隐私」>「辅助功能」中开启 MonitorControl 令快捷键生效。";
