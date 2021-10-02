@@ -60,6 +60,10 @@ _* With some limitations - full functionality available on macOS 11 Big Sur or n
 
 Open [issues](https://github.com/MonitorControl/MonitorControl/issues) if you have a question, an enhancement to suggest or a bug you've found. If you want you can fork the code yourself and submit a pull request to improve the app.
 
+## Localizations
+
+MonitorControl supports localization. We gladly welcome your contribution with a new language! See the [opening post of the relevant discussion](https://github.com/MonitorControl/MonitorControl/discussions/637) on how to add your tranlslation!
+
 ## How to build
 
 ### Required
