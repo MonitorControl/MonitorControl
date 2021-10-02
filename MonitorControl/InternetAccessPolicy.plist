@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>ApplicationDescription</key>
+	<string>ApplicationDescription</string>
+	<key>DeveloperName</key>
+	<string>MonitorControl</string>
+	<key>Website</key>
+	<string>https://monitorcontrol.app</string>
+	<key>Connections</key>
+	<array>
+		<dict>
+			<key>IsIncoming</key>
+			<false/>
+			<key>Host</key>
+			<string>monitorcontrol.app</string>
+			<key>NetworkProtocol</key>
+			<string>TCP</string>
+			<key>Port</key>
+			<string>443</string>
+			<key>Purpose</key>
+			<string>SoftwareUpdatePurpose</string>
+			<key>DenyConsequences</key>
+			<string>SoftwareUpdateDenyConsequences</string>
+		</dict>
+	</array>
+</dict>
+</plist>
