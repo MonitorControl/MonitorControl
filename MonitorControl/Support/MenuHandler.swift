@@ -223,13 +223,8 @@ class MenuHandler: NSMenu, NSMenuDelegate {
       preferencesIcon.bezelStyle = .regularSquare
       preferencesIcon.isBordered = false
       preferencesIcon.setButtonType(.momentaryChange)
-      if #available(macOS 12.0, *) {
-        preferencesIcon.image = NSImage(systemSymbolName: "gearshape.circle", accessibilityDescription: NSLocalizedString("Preferences...", comment: "Shown in menu"))
-        preferencesIcon.alternateImage = NSImage(systemSymbolName: "gearshape.circle.fill", accessibilityDescription: NSLocalizedString("Preferences...", comment: "Shown in menu"))
-      } else {
-        preferencesIcon.image = NSImage(systemSymbolName: "ellipsis.circle", accessibilityDescription: NSLocalizedString("Preferences...", comment: "Shown in menu"))
-        preferencesIcon.alternateImage = NSImage(systemSymbolName: "ellipsis.circle.fill", accessibilityDescription: NSLocalizedString("Preferences...", comment: "Shown in menu"))
-      }
+      preferencesIcon.image = NSImage(systemSymbolName: "gearshape", accessibilityDescription: NSLocalizedString("Preferences...", comment: "Shown in menu"))
+      preferencesIcon.alternateImage = NSImage(systemSymbolName: "gearshape.fill", accessibilityDescription: NSLocalizedString("Preferences...", comment: "Shown in menu"))
       preferencesIcon.alphaValue = 0.3
       preferencesIcon.frame = NSRect(x: menuItemView.frame.maxX - iconSize - 16 + compensateForBlock, y: menuItemView.frame.origin.y + 5, width: iconSize, height: iconSize)
       preferencesIcon.imageScaling = .scaleProportionallyUpOrDown
