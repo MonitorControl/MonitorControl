@@ -283,7 +283,7 @@
 /* Class = "NSMenuItem"; title = "Both standard and custom shortcuts"; ObjectID = "QDG-SA-mRX"; */
 "QDG-SA-mRX.title" = "Hagyományos és egyedi billentyűkombinációk";
 
-/* Class = "NSButtonCell"; title = "Quit appliation"; ObjectID = "qlb-wH-qr4"; */
+/* Class = "NSButtonCell"; title = "Quit application"; ObjectID = "qlb-wH-qr4"; */
 "qlb-wH-qr4.title" = "Kilépés";
 
 /* Class = "NSButtonCell"; title = "Show contrast slider in menu"; ObjectID = "qO0-dB-yUs"; */
