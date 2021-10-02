@@ -1,12 +1,12 @@
 <img src=".github/Icon-1024.png" width="175" alt="App icon" align="left"/>
 
-<h2>MonitorControl - Now with Apple Silicon support!</h2>
+<h2>MonitorControl - Now with Apple Silicon support</h2>
         
 <p>
-<b>Control your external display brightness and volume!<br>
-Use menulet sliders or the native Apple keyboard keys!<br>
-Shows native brightness and volume OSDs as well!</b>
-</p>            
+<b>Control your external display brightness and volume<br>
+Use menulet sliders or the native Apple keyboard keys<br>
+Behaves like native, with (optional) brightness & volume OSD</b>
+</p>
 
 <br/>
  
@@ -48,15 +48,18 @@ Go to [Releases](https://github.com/MonitorControl/MonitorControl/releases) and 
 
 ## Compatibility
 
-- macOS Big Sur (`macOS 11`) and newer are supported
-- Current version is compatible with macOS Catalina (`10.15`) as well (with some limitations).
+| MonitorControl version | macOS version     |
+| ---------------------- | ----------------- |
+| v4.0.0                 | Big Sur 10.15*     |
+| v3.1.1                 | Mojave 10.14      |
+| v2.1.0                 | Sierra 10.12      |
 
-_(Note: you can download [version 2.1.0](https://github.com/MonitorControl/MonitorControl/releases/tag/v2.1.0) for Sierra `10.12` and [version 3.1.1](https://github.com/MonitorControl/MonitorControl/releases/tag/v3.1.1) for Mojave `10.14` support)_
+_*With some limitations_
 
 ## How to help
 
 Open [issues](https://github.com/MonitorControl/MonitorControl/issues) if you have a question, an enhancement to suggest or a bug you've found. If you want you can fork the code yourself and submit a pull request to improve the app.
-        
+
 ## How to build
 
 ### Required
@@ -68,7 +71,7 @@ Open [issues](https://github.com/MonitorControl/MonitorControl/issues) if you ha
 
 Clone the project via this Terminal command:
 
-```
+```sh
 git clone https://github.com/MonitorControl/MonitorControl.git
 ```
 
@@ -78,8 +81,6 @@ You're all set ! Now open the `MonitorControl.xcodeproj` with Xcode! The depende
 
 `File > Packages > Resolve Package Versions`
 
-(In earlier XCode versions `Packages` menu is titled `Swift Packages`)
-
 ### Third party dependencies
 
 - [MediaKeyTap](https://github.com/MonitorControl/MediaKeyTap)
@@ -88,7 +89,7 @@ You're all set ! Now open the `MonitorControl.xcodeproj` with Xcode! The depende
 - [KeyboardShortcuts](https://github.com/sindresorhus/KeyboardShortcuts)
 - [Sparkle](https://github.com/sparkle-project/Sparkle)
 
-## Contributors
+## Maintainers
 
 - [@the0neyouseek](https://github.com/the0neyouseek)
 - [@JoniVR](https://github.com/JoniVR)
@@ -96,7 +97,7 @@ You're all set ! Now open the `MonitorControl.xcodeproj` with Xcode! The depende
 
 ## Thanks
 
-- [@bluejamesbond](https://github.com/bluejamesbond/) (original developer)
+- [@mathew-kurian](https://github.com/mathew-kurian/) (original developer)
 - [@Tyilo](https://github.com/Tyilo/) (fork)
 - [@Bensge](https://github.com/Bensge/) - (used some code from his project [NativeDisplayBrightness](https://github.com/Bensge/NativeDisplayBrightness))
 - [@nhurden](https://github.com/nhurden/) (for the original MediaKeyTap)
