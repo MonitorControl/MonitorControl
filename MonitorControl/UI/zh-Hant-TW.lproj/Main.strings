@@ -1,5 +1,5 @@
 /* Class = "NSButtonCell"; title = "Sync brightness changes from Built-in and Apple displays"; ObjectID = "0ca-DG-AgB"; */
-"0ca-DG-AgB.title" = "同步來自內建及蘋果螢幕的亮度改變";
+"0ca-DG-AgB.title" = "同步來自內建及蘋果螢幕的亮度調整";
 
 /* Class = "NSButtonCell"; title = "Attempt to read display settings"; ObjectID = "0qp-fq-8MI"; */
 "0qp-fq-8MI.title" = "嘗試讀取螢幕的設定";
@@ -20,10 +20,10 @@
 "4CG-0I-anB.title" = "自定義快捷鍵";
 
 /* Class = "NSTextFieldCell"; title = "MonitorControl uses mouse position to determine which display to control. Using window focus instead might not work well with full screen apps."; ObjectID = "4dX-o1-xAc"; */
-"4dX-o1-xAc.title" = "MonitorControl以鼠標的位置判斷控制哪個螢幕。當使用全螢幕App時以當前視窗判斷效果可能不佳。";
+"4dX-o1-xAc.title" = "預設以鼠標的位置判斷控制哪個螢幕。啟用後當使用全螢幕Apps時效果可能不佳。";
 
 /* Class = "NSButtonCell"; title = "Show separate controls for each display in menu"; ObjectID = "4t2-Rv-njr"; */
-"4t2-Rv-njr.title" = "在選單中顯示個別螢幕的控制介面";
+"4t2-Rv-njr.title" = "顯示各個螢幕的控制滑桿";
 
 /* Class = "NSTextField"; ibExternalAccessibilityDescription = "Brightness"; ObjectID = "567-le-fLg"; */
 "567-le-fLg.ibExternalAccessibilityDescription" = "亮度";
@@ -41,10 +41,10 @@
 "7rn-Lu-fcl.title" = "使用單一滑桿控制所有螢幕";
 
 /* Class = "NSButtonCell"; title = "Show slider tick marks"; ObjectID = "7zf-m1-gJO"; */
-"7zf-m1-gJO.title" = "顯示滑桿上的標記";
+"7zf-m1-gJO.title" = "顯示滑桿刻度";
 
 /* Class = "NSTextFieldCell"; title = "Slider knob will snap to 0%, 25%, 50%, 75% and 100% when in proximity making setting these values easier. Disable for finer control."; ObjectID = "8Gx-Ya-zhp"; */
-"8Gx-Ya-zhp.title" = "滑桿手把在接近刻度0%、25%、50%、75%及100%時定位於該值使設定該值更加容易。停用以允許更精確的控制。";
+"8Gx-Ya-zhp.title" = "滑桿手把在接近刻度0%、25%、50%、75%及100%時自動定位於該值。關閉以獲得更精細的控制。";
 
 /* Class = "NSButtonCell"; title = "Use fine OSD scale"; ObjectID = "8Q8-57-xnT"; */
 "8Q8-57-xnT.title" = "使用精細的OSD刻度";
@@ -59,13 +59,13 @@
 "9H1-0z-xsx.ibExternalAccessibilityDescription" = "亮度";
 
 /* Class = "NSTextFieldCell"; title = "Show tick marks at 0%, 25%, 50%, 75% and 100% for accuracy."; ObjectID = "A8P-vn-DEJ"; */
-"A8P-vn-DEJ.title" = "在0%、25%、50%、75%和100%處顯示刻度標記使調整更精確。";
+"A8P-vn-DEJ.title" = "在0%、25%、50%、75%和100%處顯示刻度使調整更精確。";
 
 /* Class = "NSButtonCell"; title = "Disable software dimming as fallback"; ObjectID = "afB-Xx-Lta"; */
-"afB-Xx-Lta.title" = "停用以軟體控制作為備案";
+"afB-Xx-Lta.title" = "停用軟體調光作為備用選項";
 
 /* Class = "NSTextFieldCell"; title = "Use brightness, volume and other settings from last time or use defaults. Values will be applied to the display upon first change by the user."; ObjectID = "an7-Aj-3fZ"; */
-"an7-Aj-3fZ.title" = "使用前次的亮度、音量及其他設定或原始設定。設定值將於使用者初次調整時套用。";
+"an7-Aj-3fZ.title" = "使用者初次調整時套用前次或原始的設定（亮度、音量及其他設定）。";
 
 /* Class = "NSTextFieldCell"; title = "Brightness:"; ObjectID = "Bhb-6l-uPQ"; */
 "Bhb-6l-uPQ.title" = "亮度：";
@@ -92,7 +92,7 @@
 "Bzq-Co-fex.title" = "降低：";
 
 /* Class = "NSButtonCell"; title = "Show volume slider in menu"; ObjectID = "c9D-MB-lma"; */
-"c9D-MB-lma.title" = "在選單顯示音量滑桿";
+"c9D-MB-lma.title" = "顯示音量滑桿";
 
 /* Class = "NSMenuItem"; title = "Custom"; ObjectID = "Cle-DD-vR7"; */
 "Cle-DD-vR7.title" = "自定義";
@@ -131,7 +131,7 @@
 "EvN-FT-vdZ.title" = "靜音：";
 
 /* Class = "NSTextFieldCell"; title = "Normally keyboard controls change one OSD chiclet worth of value and Shift+Option allows fine control. This makes fine control default."; ObjectID = "f6J-Ui-uMB"; */
-"f6J-Ui-uMB.title" = "鍵盤控制正常一次改變一個OSD方格量的值，搭配Shift+Option則允許精細的調整。啟用將使精細調整成為預設行為。";
+"f6J-Ui-uMB.title" = "通常鍵盤控制單次改變一個OSD刻度值，而Shift+Option允許精細控制。啟用後將預設使用精細控制。";
 
 /* Class = "NSButtonCell"; title = "Reset Name"; ObjectID = "f9g-8s-gdd"; */
 "f9g-8s-gdd.title" = "重設名稱";
@@ -146,7 +146,7 @@
 "FER-Ri-4UO.title" = "音量：";
 
 /* Class = "NSTextFieldCell"; title = "Apple and built-in displays already have a brightness slider in Control Center."; ObjectID = "fmZ-HI-Mdc"; */
-"fmZ-HI-Mdc.title" = "蘋果及內建螢幕在控制中心中已有亮度控制滑桿";
+"fmZ-HI-Mdc.title" = "控制中心中已有蘋果及內建螢幕的亮度控制滑桿。";
 
 /* Class = "NSMenuItem"; title = "None"; ObjectID = "FoA-yh-Yx3"; */
 "FoA-yh-Yx3.title" = "無";
@@ -161,13 +161,13 @@
 "G5A-y3-eZz.title" = "反轉";
 
 /* Class = "NSTextFieldCell"; title = "Brightness slider for hardware or software controlled displays or TVs."; ObjectID = "gXH-HL-ZOL"; */
-"gXH-HL-ZOL.title" = "以硬體或軟體控制螢幕或電視的亮度控制滑桿";
+"gXH-HL-ZOL.title" = "以硬體或軟體控制螢幕或電視的亮度控制滑桿。";
 
 /* Class = "NSTextFieldCell"; title = "Override audio device name:"; ObjectID = "H9X-it-sXs"; */
 "H9X-it-sXs.title" = "覆寫音訊裝置名稱：";
 
 /* Class = "NSTextFieldCell"; title = "Relaunch the app to access Preferences if the menu option is not accessible. Use the button below to quit the app."; ObjectID = "hF7-fM-aKr"; */
-"hF7-fM-aKr.title" = "若設定頁面因為快捷選單無法取用導致無法取用時重啟此App。使用下方的按鍵關閉此App。";
+"hF7-fM-aKr.title" = "當選單不可用時重新啟動App以開啟設定頁面。使用此按鍵關閉此App。";
 
 /* Class = "NSButtonCell"; title = "Get current"; ObjectID = "hkC-vq-IcD"; */
 "hkC-vq-IcD.title" = "取得目前的";
@@ -191,10 +191,10 @@
 "J3L-MW-iJL.title" = "音量控制使用精細的OSD刻度";
 
 /* Class = "NSButtonCell"; title = "Start at Login"; ObjectID = "j72-NF-zsW"; */
-"j72-NF-zsW.title" = "登入時啟動MonitorControl";
+"j72-NF-zsW.title" = "登入時啟動";
 
 /* Class = "NSButtonCell"; title = "Change for all screens"; ObjectID = "JC3-pb-XnR"; */
-"JC3-pb-XnR.title" = "控制所有螢幕";
+"JC3-pb-XnR.title" = "所有螢幕";
 
 /* Class = "NSTextFieldCell"; title = "Note: you can press Shift during startup for 'Safe mode' to restore defaults and avoid reading or setting anything."; ObjectID = "Jx2-gO-nq9"; */
 "Jx2-gO-nq9.title" = "註：啟動時按下Shift進入「安全模式」以恢復原始設定並避免讀取或更動任何設定。";
@@ -203,10 +203,10 @@
 "K0S-zN-M4k.title" = "套用上次儲存的設定值至螢幕";
 
 /* Class = "NSButtonCell"; title = "Enable for Apple branded and built-in displays as well"; ObjectID = "K6A-4z-1aQ"; */
-"K6A-4z-1aQ.title" = "在蘋果和內建的螢幕也啟用";
+"K6A-4z-1aQ.title" = "蘋果和內建的螢幕";
 
 /* Class = "NSTextFieldCell"; title = "Don't use software dimming as fallback if no hardware control is available."; ObjectID = "kgh-b4-gmO"; */
-"kgh-b4-gmO.title" = "當硬體控制不可用時不以軟體控制作為備案。";
+"kgh-b4-gmO.title" = "當硬體控制不可用時不以軟體控制作為備用選項。";
 
 /* Class = "NSTextFieldCell"; title = "Record shortcuts:"; ObjectID = "kqJ-jQ-b7U"; */
 "kqJ-jQ-b7U.title" = "記錄快捷鍵：";
@@ -227,7 +227,7 @@
 "MM0-Lf-VgF.title" = "永遠顯示於選單列";
 
 /* Class = "NSButtonCell"; title = "Use window focus to determine which display to control"; ObjectID = "mMG-Ac-gdB"; */
-"mMG-Ac-gdB.title" = "以當前視窗決定控制哪個螢幕";
+"mMG-Ac-gdB.title" = "以當前視窗決定";
 
 /* Class = "NSTextFieldCell"; title = "Contrast:"; ObjectID = "MMk-S2-yJN"; */
 "MMk-S2-yJN.title" = "對比度：";
@@ -236,13 +236,13 @@
 "mue-fa-8z6.title" = "增加：";
 
 /* Class = "NSButtonCell"; title = "Show brightness slider in menu"; ObjectID = "MWo-6I-s9L"; */
-"MWo-6I-s9L.title" = "在選單顯示亮度控制滑桿";
+"MWo-6I-s9L.title" = "顯示亮度控制滑桿";
 
 /* Class = "NSButtonCell"; title = "Separate scales for combined hardware & software dimming"; ObjectID = "O8o-hI-8eR"; */
-"O8o-hI-8eR.title" = "將軟硬體組合控制的刻度分開";
+"O8o-hI-8eR.title" = "使用硬體結合軟體調整時忽略軟體調整的範圍";
 
 /* Class = "NSButtonCell"; title = "Use audio device name to determine which display to control"; ObjectID = "OAa-B4-8r3"; */
-"OAa-B4-8r3.title" = "以音訊裝置名稱決定控制哪個螢幕";
+"OAa-B4-8r3.title" = "以音訊裝置名稱判斷控制哪個螢幕";
 
 /* Class = "NSSlider"; ibExternalAccessibilityDescription = "Brightness"; ObjectID = "OG9-iA-jK1"; */
 "OG9-iA-jK1.ibExternalAccessibilityDescription" = "亮度";
@@ -260,7 +260,7 @@
 "Orv-yj-Nad.title" = "數量：";
 
 /* Class = "NSTextFieldCell"; title = "Use the brightness keys of your Apple keyboard to control brightness. You can hold Control to adjust the built-in display, Control+Option to adjust external displays. Hold Shift+Option for fine control. Control+Option+Command adjusts contrast on DDC compatible displays."; ObjectID = "pa0-Hz-ace"; */
-"pa0-Hz-ace.title" = "使用蘋果鍵盤控制亮度。按住Control鍵控制內建螢幕，Control+Option調整外接螢幕。按住Shift+Option進行精細調整。Control+Option+Command調整DDC相容螢幕的對比度。";
+"pa0-Hz-ace.title" = "使用蘋果鍵盤上的亮度控制按鈕來調整亮度。搭配Control鍵調整內建螢幕、Control+Option調整外接螢幕、Shift+Option進行精細調整、Control+Option+Command調整DDC相容螢幕的對比度。";
 
 /* Class = "NSTextFieldCell"; title = "Control method:"; ObjectID = "PaK-1f-DsW"; */
 "PaK-1f-DsW.title" = "控制方式：";
@@ -275,10 +275,10 @@
 "psF-vX-AFB.title" = "DDC最大值";
 
 /* Class = "NSButtonCell"; title = "Show sliders only for the display currently showing the menu"; ObjectID = "PvP-TV-OmT"; */
-"PvP-TV-OmT.title" = "僅顯示當下顯示選單的螢幕的控制滑桿";
+"PvP-TV-OmT.title" = "僅顯示當前螢幕的滑桿介面";
 
 /* Class = "NSTextFieldCell"; title = "Use software dimming after the display reached zero hardware brightness for extended range. Works for DDC controlled displays only."; ObjectID = "PyY-p9-3NP"; */
-"PyY-p9-3NP.title" = "當螢幕的硬體設定亮度為０時以軟體進一步降低亮度。僅適用於以DDC控制的螢幕。";
+"PyY-p9-3NP.title" = "當螢幕的硬體設定亮度為０時以軟體進一步降低亮度（僅適用於以DDC控制的螢幕）。";
 
 /* Class = "NSMenuItem"; title = "Both standard and custom shortcuts"; ObjectID = "QDG-SA-mRX"; */
 "QDG-SA-mRX.title" = "標準及自定義快捷鍵";
@@ -287,13 +287,13 @@
 "qlb-wH-qr4.title" = "關閉應用程式";
 
 /* Class = "NSButtonCell"; title = "Show contrast slider in menu"; ObjectID = "qO0-dB-yUs"; */
-"qO0-dB-yUs.title" = "在選單顯示對比度控制滑桿";
+"qO0-dB-yUs.title" = "顯示對比度控制滑桿";
 
 /* Class = "NSTextFieldCell"; title = "Volume control (DDC only):"; ObjectID = "qoh-Gn-f11"; */
 "qoh-Gn-f11.title" = "音量控制（僅DDC）:";
 
 /* Class = "NSTextFieldCell"; title = "Show percentage next to slider for more precision."; ObjectID = "qXy-CL-Wf1"; */
-"qXy-CL-Wf1.title" = "在滑桿旁顯示百分比以提供更精確的控制。";
+"qXy-CL-Wf1.title" = "在滑桿旁顯示百分比以獲得更精確的控制。";
 
 /* Class = "NSButtonCell"; title = "Combine hardware and software dimming"; ObjectID = "r76-Zc-x09"; */
 "r76-Zc-x09.title" = "結合硬體與軟體的亮度控制";
@@ -368,16 +368,16 @@
 "xQJ-aJ-VhH.title" = "標準及自訂義快捷鍵";
 
 /* Class = "NSTextFieldCell"; title = "Works best with various syncing and 'control all' keyboard settings enabled."; ObjectID = "XU4-Bn-bwH"; */
-"XU4-Bn-bwH.title" = "當各種同步及「全控制」的鍵盤設定啟用時效果最佳。";
+"XU4-Bn-bwH.title" = "啟用各種同步和「控制全部」的鍵盤設置時效果最佳。";
 
 /* Class = "NSTextFieldCell"; title = "Available"; ObjectID = "yBJ-5d-I7e"; */
 "yBJ-5d-I7e.title" = "可用";
 
 /* Class = "NSTextFieldCell"; title = "Full OSD scale will be available for hardware brightness control and after reaching 0 brightness, further software dimming will be used."; ObjectID = "YHZ-VL-QJ3"; */
-"YHZ-VL-QJ3.title" = "OSD的全部刻度將涵蓋硬體及軟體的控制範圍。";
+"YHZ-VL-QJ3.title" = "完整的OSD刻度只涵蓋硬體的控制範圍，刻度在０以下時以軟體調整。";
 
 /* Class = "NSButtonCell"; title = "Assume last saved settings are valid (recommended)"; ObjectID = "yn8-Nd-o89"; */
-"yn8-Nd-o89.title" = "假設前次儲存的設定是可用的（建議）";
+"yn8-Nd-o89.title" = "假設前次的設定可用（建議）";
 
 /* Class = "NSTextFieldCell"; title = "Decrease:"; ObjectID = "yQh-Ve-WEE"; */
 "yQh-Ve-WEE.title" = "減少：";
