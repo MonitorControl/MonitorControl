@@ -62,7 +62,7 @@ Open [issues](https://github.com/MonitorControl/MonitorControl/issues) if you ha
 
 ## Localizations
 
-MonitorControl supports localization. We gladly welcome your contribution with a new language! See the [opening post of the relevant discussion](https://github.com/MonitorControl/MonitorControl/discussions/637) on how to add your tranlslation!
+MonitorControl supports localization. We gladly welcome your contribution with a new language! See the [opening post of the relevant discussion](https://github.com/MonitorControl/MonitorControl/discussions/637) on how to add your translation!
 
 ## How to build
 
