@@ -211,8 +211,8 @@
 /* Class = "NSTextFieldCell"; title = "Record shortcuts:"; ObjectID = "kqJ-jQ-b7U"; */
 "kqJ-jQ-b7U.title" = "Record shortcuts:";
 
-/* Class = "NSTextFieldCell"; title = "Brightness and contrast control:"; ObjectID = "LO4-4k-gxY"; */
-"LO4-4k-gxY.title" = "Brightness and contrast control:";
+/* Class = "NSTextFieldCell"; title = "Brightness and contrast:"; ObjectID = "LO4-4k-gxY"; */
+"LO4-4k-gxY.title" = "Brightness and contrast:";
 
 /* Class = "NSTextFieldCell"; title = "Display type:"; ObjectID = "lSJ-6w-KJ2"; */
 "lSJ-6w-KJ2.title" = "Tipo de pantalla:";

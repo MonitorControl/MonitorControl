@@ -89,13 +89,13 @@
 "Shortcuts not available" = "Abbreviazioni non disponibili";
 
 /* Shown in the Display Preferences */
-"Software (Gamma)" = "Software (Gamma)";
+"Software (gamma)" = "Software (gamma)";
 
 /* Shown in the Display Preferences */
-"Software (Gamma, Forced)" = "Software (Gamma, Forzata)";
+"Software (gamma, forced)" = "Software (Gamma, Forzata)";
 
 /* Shown in the Display Preferences */
-"Software (Shade)" = "Software (Sfumatura)";
+"Software (shade)" = "Software (Sfumatura)";
 
 /* Shown in the Display Preferences */
 "This display allows for software brightness control via gammatable manipulation as it does not support hardware control. Reasons for this might be using the HDMI port of a Mac mini (which blocks hardware DDC control) or having a blacklisted display." = "Questo monitor permette il controllo software della luminositò attraverso la manipolazione della gammatable e non supporta un controllo hardware. Un motivo potrebbe essere Reasons l'utilizzo della porta HDMI su un Mac Mini (che blocca il controllo hardware DCC) oppure avere un monitor non supportato.";

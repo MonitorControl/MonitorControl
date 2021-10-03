@@ -7,6 +7,9 @@ enum PrefKey: String {
   // Sparkle automatic checks
   case SUEnableAutomaticChecks
 
+  // Receive beta updates?
+  case isBetaChannel // This is not added to Preferences yet as it will be needed in the future only.
+
   // Hide OSD for display
   case hideOsd
 
