@@ -20,7 +20,7 @@
 "Build" = "Build";
 
 /* Shown in the Display Preferences */
-"Built-in Display" = "Ingebouwd Beeldscherm";
+"Built-in Display" = "Ingebouwd Scherm";
 
 /* Shown in menu */
 "Check for updates..." = "Controleren op updates...";
@@ -32,13 +32,13 @@
 "Copyright Ⓒ MonitorControl, " = "Copyright Ⓒ MonitorControl, ";
 
 /* Shown in the main prefs window */
-"Displays" = "Beeldschermen";
+"Displays" = "Schermen";
 
 /* Shown in the alert dialog */
 "Enable Longer Delay?" = "Langere vertraging inschakelen?";
 
 /* Shown in the Display Preferences */
-"External Display" = "Extern Beeldscherm";
+"External Display" = "Extern Scherm";
 
 /* Shown in the main prefs window */
 "General" = "Algemeen";
@@ -65,7 +65,7 @@
 "No Control" = "Geen controle";
 
 /* Shown in the Display Preferences */
-"Other Display" = "Ander Beeldscherm";
+"Other Display" = "Ander Scherm";
 
 /* Shown in the alert dialog */
 "Preferences for an incompatible previous app version detected. Default preferences are reloaded." = "Voorkeuren voor een incompatibele vorige app-versie gedetecteerd. Standaardvoorkeuren worden opnieuw geladen.";
@@ -98,22 +98,22 @@
 "Software (shade)" = "Software (shade)";
 
 /* Shown in the Display Preferences */
-"This display allows for software brightness control via gammatable manipulation as it does not support hardware control. Reasons for this might be using the HDMI port of a Mac mini (which blocks hardware DDC control) or having a blacklisted display." = "Dit scherm maakt softwarematige helderheidsregeling via gammatable-manipulatie mogelijk, aangezien het geen hardwarecontrole ondersteunt. Redenen hiervoor kunnen het gebruik van de HDMI-poort van een Mac mini zijn (die hardwarematige DDC-besturing blokkeert) of een niet-ondersteund beeldscherm.";
+"This display allows for software brightness control via gammatable manipulation as it does not support hardware control. Reasons for this might be using the HDMI port of a Mac mini (which blocks hardware DDC control) or having a blacklisted display." = "Dit scherm maakt softwarematige helderheidsregeling via gammatable-manipulatie mogelijk, aangezien het geen hardwarecontrole ondersteunt. Redenen hiervoor kunnen het gebruik van de HDMI-poort van een Mac mini zijn (die hardwarematige DDC-besturing blokkeert) of een niet-ondersteund scherm.";
 
 /* Shown in the Display Preferences */
-"This display has an unspecified control status." = "Dit beeldscherm heeft een niet-gespecificeerde controlestatus.";
+"This display has an unspecified control status." = "Dit scherm heeft een niet-gespecificeerde controlestatus.";
 
 /* Shown in the Display Preferences */
-"This display is reported to support hardware DDC control but the current settings allow for software control only." = "Dit beeldscherm ondersteunt hardwarematige DDC-besturing, maar de huidige instellingen laten alleen softwarebesturing toe.";
+"This display is reported to support hardware DDC control but the current settings allow for software control only." = "Dit scherm ondersteunt hardwarematige DDC-besturing, maar de huidige instellingen laten alleen softwarebesturing toe.";
 
 /* Shown in the Display Preferences */
-"This display is reported to support hardware DDC control. If you encounter issues, you can disable hardware DDC control to force software control." = "Het beeldscherm meld dat hardware DDC-besturing ondersteunt is. Als u problemen ondervindt, kunt u hardware DDC-besturing uitschakelen om softwarebesturing te forceren.";
+"This display is reported to support hardware DDC control. If you encounter issues, you can disable hardware DDC control to force software control." = "Dit scherm ondersteunt hardware DDC-besturing. Als u problemen ondervindt, kunt u de hardware DDC-besturing uitschakelen om softwarebesturing te forceren";
 
 /* Shown in the Display Preferences */
-"This display supports native Apple brightness protocol. This allows macOS to control this display without MonitorControl as well." = "Dit beeldscherm ondersteunt het native Apple-helderheidsprotocol. Hierdoor kan macOS dit scherm ook zonder MonitorControl bedienen.";
+"This display supports native Apple brightness protocol. This allows macOS to control this display without MonitorControl as well." = "Dit scherm ondersteunt het native Apple-helderheidsprotocol. Hierdoor kan macOS dit scherm ook zonder MonitorControl bedienen.";
 
 /* Shown in the Display Preferences */
-"This is a virtual display (examples: AirPlay, Sidecar, display connected via a DisplayLink Dock or similar) which does not allow hardware or software gammatable control. Shading is used as a substitute but only in non-mirror scenarios. Mouse cursor will be unaffected and artifacts may appear when entering/leaving full screen mode." = "Dit is een virtueel beeldscherm (voorbeelden: AirPlay, Sidecar, beeldscherm aangesloten via een DisplayLink Dock of gelijkaardig) dat geen hardware- of softwaregammabesturing toestaat. Shading wordt gebruikt als vervanging, maar alleen in scenario's zonder mirroring. De muiscursor wordt niet beïnvloed en er kunnen artefacten verschijnen bij het openen/verlaten van de fullscreen modus.";
+"This is a virtual display (examples: AirPlay, Sidecar, display connected via a DisplayLink Dock or similar) which does not allow hardware or software gammatable control. Shading is used as a substitute but only in non-mirror scenarios. Mouse cursor will be unaffected and artifacts may appear when entering/leaving full screen mode." = "Dit is een virtueel scherm (voorbeelden: AirPlay, Sidecar, scherm aangesloten via een DisplayLink Dock of gelijkaardig) dat geen hardware- of softwaregammabesturing toestaat. Shading wordt gebruikt als vervanging, maar alleen in scenario's zonder mirroring. De muiscursor wordt niet beïnvloed en er kunnen artefacten verschijnen bij het openen/verlaten van de fullscreen modus.";
 
 /* unknown display name
  unknown model
@@ -124,7 +124,7 @@
 "Version" = "Versie";
 
 /* Shown in the Display Preferences */
-"Virtual Display" = "Virtueel Beeldscherm";
+"Virtual Display" = "Virtueel Scherm";
 
 /* Shown in menu */
 "Volume" = "Volume";

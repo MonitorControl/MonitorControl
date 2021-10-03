@@ -1,14 +1,14 @@
 /* Class = "NSButtonCell"; title = "Sync brightness changes from Built-in and Apple displays"; ObjectID = "0ca-DG-AgB"; */
-"0ca-DG-AgB.title" = "Helderheidswijzigingen synchroniseren van ingebouwde -en Apple-schermen";
+"0ca-DG-AgB.title" = "Helderheid synchroniseren van Apple schermen";
 
 /* Class = "NSButtonCell"; title = "Attempt to read display settings"; ObjectID = "0qp-fq-8MI"; */
-"0qp-fq-8MI.title" = "Poging om beeldscherm-instellingen te lezen";
+"0qp-fq-8MI.title" = "Poging om scherminstellingen te lezen";
 
 /* Class = "NSTextFieldCell"; title = "MonitorControl"; ObjectID = "1PJ-14-Bvn"; */
 "1PJ-14-Bvn.title" = "MonitorControl";
 
 /* Class = "NSMenuItem"; title = "Standard keyboard volume and mute keys"; ObjectID = "1sy-Kd-WL5"; */
-"1sy-Kd-WL5.title" = "Standaard toetsenbordvolume en mute-toetsen";
+"1sy-Kd-WL5.title" = "Standaard toetsenbordvolume en demp-toetsen";
 
 /* Class = "NSButtonCell"; title = "Change volume for all screens"; ObjectID = "1XT-3S-UuD"; */
 "1XT-3S-UuD.title" = "Volume wijzigen voor alle schermen";
@@ -20,7 +20,7 @@
 "4CG-0I-anB.title" = "Aangepaste sneltoetsen";
 
 /* Class = "NSTextFieldCell"; title = "MonitorControl uses mouse position to determine which display to control. Using window focus instead might not work well with full screen apps."; ObjectID = "4dX-o1-xAc"; */
-"4dX-o1-xAc.title" = "MonitorControl gebruikt de muispositie om te bepalen welk scherm moet worden bediend. Het gebruik van vensterfocus als alternatief werkt mogelijk niet goed met fullscreen apps.";
+"4dX-o1-xAc.title" = "MonitorControl gebruikt de muispositie om te bepalen welk scherm moet worden bediend. Het gebruik van vensterfocus als alternatief werkt mogelijk niet goed bij fullscreen apps.";
 
 /* Class = "NSButtonCell"; title = "Show separate controls for each display in menu"; ObjectID = "4t2-Rv-njr"; */
 "4t2-Rv-njr.title" = "Toon afzonderlijke bedieningselementen voor elk scherm in het menu";
@@ -74,7 +74,7 @@
 "Bid-UL-blc.title" = "(Gamma->DDC)";
 
 /* Class = "NSTextFieldCell"; title = "For hardware (DDC) controlled displays only. Results may vary."; ObjectID = "bIe-6O-xEH"; */
-"bIe-6O-xEH.title" = "Alleen voor hardware (DDC) gestuurde beeldschermen. Resultaten kunnen verschillen.";
+"bIe-6O-xEH.title" = "Alleen voor hardware (DDC) gestuurde schermen. Resultaten kunnen verschillen.";
 
 /* Class = "NSButtonCell"; title = "Disable macOS volume OSD"; ObjectID = "bkM-Px-U3b"; */
 "bkM-Px-U3b.title" = "macOS volume OSD uitzetten";
@@ -83,7 +83,7 @@
 "bP4-GJ-vhJ.title" = "OSD schaal:";
 
 /* Class = "NSButtonCell"; title = "Reset settings"; ObjectID = "BYS-7Y-bRz"; */
-"BYS-7Y-bRz.title" = "Herstel instellingen";
+"BYS-7Y-bRz.title" = "Reset instellingen";
 
 /* Class = "NSButtonCell"; title = "Enable Mute DDC command"; ObjectID = "bZq-0d-lJa"; */
 "bZq-0d-lJa.title" = "Schakel DDC commando voor dempen in";
@@ -92,7 +92,7 @@
 "Bzq-Co-fex.title" = "Verminderen:";
 
 /* Class = "NSButtonCell"; title = "Show volume slider in menu"; ObjectID = "c9D-MB-lma"; */
-"c9D-MB-lma.title" = "Toon volumeschuifregelaar in menu";
+"c9D-MB-lma.title" = "Toon volumeregelaar in menu";
 
 /* Class = "NSMenuItem"; title = "Custom"; ObjectID = "Cle-DD-vR7"; */
 "Cle-DD-vR7.title" = "Aangepast";
@@ -104,19 +104,19 @@
 "cNt-Cq-vK4.title" = "Bij opstarten of ontwaken:";
 
 /* Class = "NSTextFieldCell"; title = "⚠️ Warning! Changing some of these settings may cause system freezes or unexpected behavior!"; ObjectID = "Cz1-Mh-llk"; */
-"Cz1-Mh-llk.title" = "⚠️ Waarschuwing! Het wijzigen van sommige instellingen kan er voor zorgen dat het systeem vastloopt of onverwacht gedrag vertoont!";
+"Cz1-Mh-llk.title" = "⚠️ Waarschuwing! Het wijzigen van sommige instellingen kan storingen of onverwacht gedrag veroorzaken!";
 
 /* Class = "NSTextFieldCell"; title = "Alternative keys are the F14/F15 (Scroll Lock and Pause on PC keyboards, brightness keys on some Logitech keyboards)."; ObjectID = "D4H-hU-FLn"; */
-"D4H-hU-FLn.title" = "Alternatieve toetsen zijn de F14/F15 (Scroll Lock en Pause op PC-toetsenborden, helderheidstoetsen op sommige Logitech-toetsenborden).";
+"D4H-hU-FLn.title" = "Alternatieve toetsen zijn de F14/F15 (Scroll Lock en Pause op PC toetsenborden, helderheidstoetsen op sommige Logitech toetsenborden).";
 
 /* Class = "NSTextFieldCell"; title = "VCP list"; ObjectID = "D9t-vT-gNJ"; */
 "D9t-vT-gNJ.title" = "VCP list";
 
 /* Class = "NSTextFieldCell"; title = "Without this the app uses mouse position to determine which display to control. You can override audio device name under Displays if needed."; ObjectID = "Dha-Tm-cDM"; */
-"Dha-Tm-cDM.title" = "Zonder dit gebruikt de app de muispositie om te bepalen welk scherm moet worden bediend. U kunt indien nodig de naam van het audioapparaat onder Beeldschermen overschrijven.";
+"Dha-Tm-cDM.title" = "Zonder dit gebruikt de app de muispositie om te bepalen welk scherm moet worden bediend. U kunt indien nodig de naam van het audioapparaat onder Schermen overschrijven.";
 
 /* Class = "NSTextFieldCell"; title = "You can disable smooth transitions for a more direct, immediate control."; ObjectID = "ENt-mP-0yH"; */
-"ENt-mP-0yH.title" = "U kunt vloeiende overgangen uitschakelen voor een meer directe, onmiddellijke controle.";
+"ENt-mP-0yH.title" = "U kunt vloeiende overgangen uitschakelen directere controle.";
 
 /* Class = "NSMenuItem"; title = "Minimal"; ObjectID = "Eq3-z9-yIo"; */
 "Eq3-z9-yIo.title" = "Minimaal";
@@ -146,7 +146,7 @@
 "FER-Ri-4UO.title" = "Volume:";
 
 /* Class = "NSTextFieldCell"; title = "Apple and built-in displays already have a brightness slider in Control Center."; ObjectID = "fmZ-HI-Mdc"; */
-"fmZ-HI-Mdc.title" = "Apple en ingebouwde beeldschermen hebben reeds een schuifregelaar voor helderheid in het Control Center.";
+"fmZ-HI-Mdc.title" = "Apple en ingebouwde schermen hebben reeds een schuifregelaar voor helderheid in het Control Center.";
 
 /* Class = "NSMenuItem"; title = "None"; ObjectID = "FoA-yh-Yx3"; */
 "FoA-yh-Yx3.title" = "Geen";
@@ -161,7 +161,7 @@
 "G5A-y3-eZz.title" = "Omkeren";
 
 /* Class = "NSTextFieldCell"; title = "Brightness slider for hardware or software controlled displays or TVs."; ObjectID = "gXH-HL-ZOL"; */
-"gXH-HL-ZOL.title" = "Helderheidsschuifregelaar voor hardware- of softwaregestuurde schermen of tv's.";
+"gXH-HL-ZOL.title" = "Helderheidsregelaar voor hardware- of softwaregestuurde schermen of TV's.";
 
 /* Class = "NSTextFieldCell"; title = "Override audio device name:"; ObjectID = "H9X-it-sXs"; */
 "H9X-it-sXs.title" = "Naam audioapparaat overschrijven:";
@@ -170,7 +170,7 @@
 "hF7-fM-aKr.title" = "Start de app opnieuw om toegang te krijgen tot Voorkeuren als de menuoptie niet toegankelijk is. Gebruik de onderstaande knop om de app af te sluiten.";
 
 /* Class = "NSButtonCell"; title = "Get current"; ObjectID = "hkC-vq-IcD"; */
-"hkC-vq-IcD.title" = "Actueel worden";
+"hkC-vq-IcD.title" = "Waarde ophalen";
 
 /* Class = "NSTextFieldCell"; title = "Record shortcuts:"; ObjectID = "HLE-Vp-kcS"; */
 "HLE-Vp-kcS.title" = "Snelkoppelingen opnemen:";
@@ -200,10 +200,10 @@
 "Jx2-gO-nq9.title" = "Opmerking: u kunt tijdens het opstarten op Shift drukken voor 'Veilige modus' om de standaardinstellingen te herstellen en niets te lezen of in te stellen.";
 
 /* Class = "NSButtonCell"; title = "Apply last saved values to the display"; ObjectID = "K0S-zN-M4k"; */
-"K0S-zN-M4k.title" = "Pas laatst opgeslagen waarden toe op het beeldscherm";
+"K0S-zN-M4k.title" = "Pas laatst opgeslagen waarden toe op het scherm";
 
 /* Class = "NSButtonCell"; title = "Enable for Apple branded and built-in displays as well"; ObjectID = "K6A-4z-1aQ"; */
-"K6A-4z-1aQ.title" = "Ook inschakelen voor Apple branded en ingebouwde beeldschermen";
+"K6A-4z-1aQ.title" = "Ook inschakelen voor Apple branded en ingebouwde schermen";
 
 /* Class = "NSTextFieldCell"; title = "Don't use software dimming as fallback if no hardware control is available."; ObjectID = "kgh-b4-gmO"; */
 "kgh-b4-gmO.title" = "Gebruik geen software dimming als fallback als er geen hardwarecontrole beschikbaar is.";
@@ -215,7 +215,7 @@
 "LO4-4k-gxY.title" = "Helderheid en contrastregeling:";
 
 /* Class = "NSTextFieldCell"; title = "Display type:"; ObjectID = "lSJ-6w-KJ2"; */
-"lSJ-6w-KJ2.title" = "Beeldscherm type:";
+"lSJ-6w-KJ2.title" = "Scherm type:";
 
 /* Class = "NSTextFieldCell"; title = "Screen to control:"; ObjectID = "ltL-gR-K3Z"; */
 "ltL-gR-K3Z.title" = "Scherm om te bedienen:";
@@ -236,13 +236,13 @@
 "mue-fa-8z6.title" = "Verhogen:";
 
 /* Class = "NSButtonCell"; title = "Show brightness slider in menu"; ObjectID = "MWo-6I-s9L"; */
-"MWo-6I-s9L.title" = "Helderheidsschuifregelaar in menu weergeven";
+"MWo-6I-s9L.title" = "Helderheidsregelaar in menu weergeven";
 
 /* Class = "NSButtonCell"; title = "Separate scales for combined hardware & software dimming"; ObjectID = "O8o-hI-8eR"; */
 "O8o-hI-8eR.title" = "Aparte schaal voor gecombineerd hardware & software dimmen";
 
 /* Class = "NSButtonCell"; title = "Use audio device name to determine which display to control"; ObjectID = "OAa-B4-8r3"; */
-"OAa-B4-8r3.title" = "Gebruik de naam van het audioapparaat om te bepalen welk scherm moet worden bediend";
+"OAa-B4-8r3.title" = "Gebruik Audioapparaat naam om te bepalen welk scherm u wilt bedienen";
 
 /* Class = "NSSlider"; ibExternalAccessibilityDescription = "Brightness"; ObjectID = "OG9-iA-jK1"; */
 "OG9-iA-jK1.ibExternalAccessibilityDescription" = "Helderheid";
@@ -260,7 +260,7 @@
 "Orv-yj-Nad.title" = "aantal:";
 
 /* Class = "NSTextFieldCell"; title = "Use the brightness keys of your Apple keyboard to control brightness. You can hold Control to adjust the built-in display, Control+Option to adjust external displays. Hold Shift+Option for fine control. Control+Option+Command adjusts contrast on DDC compatible displays."; ObjectID = "pa0-Hz-ace"; */
-"pa0-Hz-ace.title" = "Gebruik de helderheidstoetsen van uw Apple-toetsenbord om de helderheid te regelen. U kunt Control ingedrukt houden om het ingebouwde beeldscherm aan te passen, Control+Option om externe beeldschermen aan te passen. Houd Shift+Option ingedrukt voor fijne controle. Control+Option+Command past het contrast aan op DDC-compatibele beeldschermen.";
+"pa0-Hz-ace.title" = "Gebruik de helderheidstoetsen van uw Apple toetsenbord om de helderheid te regelen. U kunt Control ingedrukt houden om het ingebouwde scherm aan te passen, Control+Option om externe schermen aan te passen. Gebruik Shift+Option voor fijne controle. Control+Option+Command past het contrast aan op DDC-compatibele schermen.";
 
 /* Class = "NSTextFieldCell"; title = "Control method:"; ObjectID = "PaK-1f-DsW"; */
 "PaK-1f-DsW.title" = "Besturingsmethode:";
@@ -269,16 +269,16 @@
 "pF5-Sw-7BR.title" = "Langere vertraging tijdens DDC-leesbewerkingen";
 
 /* Class = "NSTextFieldCell"; title = "For hardware (DDC) controlled displays only."; ObjectID = "POy-35-bh0"; */
-"POy-35-bh0.title" = "Alleen voor hardwaregestuurde (DDC)-gestuurde displays.";
+"POy-35-bh0.title" = "Enkel voor hardware (DDC) gestuurde displays.";
 
 /* Class = "NSTextFieldCell"; title = "DDC max"; ObjectID = "psF-vX-AFB"; */
 "psF-vX-AFB.title" = "DDC max";
 
 /* Class = "NSButtonCell"; title = "Show sliders only for the display currently showing the menu"; ObjectID = "PvP-TV-OmT"; */
-"PvP-TV-OmT.title" = "Alleen schuifregelaars weergeven voor het scherm dat momenteel het menu toont";
+"PvP-TV-OmT.title" = "Enkel schuifregelaars tonen voor het scherm dat het menu toont";
 
 /* Class = "NSTextFieldCell"; title = "Use software dimming after the display reached zero hardware brightness for extended range. Works for DDC controlled displays only."; ObjectID = "PyY-p9-3NP"; */
-"PyY-p9-3NP.title" = "Gebruik software-dimmen nadat het scherm de hardwarehelderheid nul heeft bereikt voor een groter bereik. Werkt alleen voor DDC-gestuurde displays.";
+"PyY-p9-3NP.title" = "Gebruik software-dimmen nadat het scherm de hardwarehelderheid 0 heeft bereikt voor een groter bereik. Werkt alleen voor DDC-gestuurde displays.";
 
 /* Class = "NSMenuItem"; title = "Both standard and custom shortcuts"; ObjectID = "QDG-SA-mRX"; */
 "QDG-SA-mRX.title" = "Zowel standaard als aangepaste sneltoetsen";
@@ -287,7 +287,7 @@
 "qlb-wH-qr4.title" = "Applicatie afsluiten";
 
 /* Class = "NSButtonCell"; title = "Show contrast slider in menu"; ObjectID = "qO0-dB-yUs"; */
-"qO0-dB-yUs.title" = "Toon contrastschuif in menu";
+"qO0-dB-yUs.title" = "Toon contrastregelaar in menu";
 
 /* Class = "NSTextFieldCell"; title = "Volume control (DDC only):"; ObjectID = "qoh-Gn-f11"; */
 "qoh-Gn-f11.title" = "Volumeregeling (alleen DDC):";
@@ -326,7 +326,7 @@
 "uJS-s3-Zpi.ibExternalAccessibilityDescription" = "Helderheid";
 
 /* Class = "NSButtonCell"; title = "Enable keyboard control for display"; ObjectID = "UqR-WE-jHl"; */
-"UqR-WE-jHl.title" = "Toetsenbordbediening inschakelen voor beeldscherm";
+"UqR-WE-jHl.title" = "Schakel toetsenbordbediening in voor scherm";
 
 /* Class = "NSTextFieldCell"; title = "Contrast (DDC)"; ObjectID = "urd-Rh-aiL"; */
 "urd-Rh-aiL.title" = "Contrast";
@@ -368,16 +368,16 @@
 "xQJ-aJ-VhH.title" = "Zowel standaard als aangepaste sneltoetsen";
 
 /* Class = "NSTextFieldCell"; title = "Works best with various syncing and 'control all' keyboard settings enabled."; ObjectID = "XU4-Bn-bwH"; */
-"XU4-Bn-bwH.title" = "Werkt het beste met verschillende synchronisatie- en 'control all'-toetsenbordinstellingen ingeschakeld.";
+"XU4-Bn-bwH.title" = "Werkt het beste met verschillende synchronisatie- en 'control all' toetsenbordinstellingen ingeschakeld.";
 
 /* Class = "NSTextFieldCell"; title = "Available"; ObjectID = "yBJ-5d-I7e"; */
 "yBJ-5d-I7e.title" = "Beschikbaar";
 
 /* Class = "NSTextFieldCell"; title = "Full OSD scale will be available for hardware brightness control and after reaching 0 brightness, further software dimming will be used."; ObjectID = "YHZ-VL-QJ3"; */
-"YHZ-VL-QJ3.title" = "Volledige OSD-schaal zal beschikbaar zijn voor hardware-helderheidsregeling en na het bereiken van nul helderheid, zal verdere software-dimming worden gebruikt.";
+"YHZ-VL-QJ3.title" = "Volledige OSD-schaal zal beschikbaar zijn voor hardwarehelderheidsregeling en na het bereiken van 0 helderheid, zal softwarematig verder gedimd worden.";
 
 /* Class = "NSButtonCell"; title = "Assume last saved settings are valid (recommended)"; ObjectID = "yn8-Nd-o89"; */
-"yn8-Nd-o89.title" = "Ga ervan uit dat de laatst opgeslagen instellingen geldig zijn (aanbevolen)";
+"yn8-Nd-o89.title" = "Veronderstel dat de laatst bewaarde instellingen geldig zijn (aanbevolen)";
 
 /* Class = "NSTextFieldCell"; title = "Decrease:"; ObjectID = "yQh-Ve-WEE"; */
 "yQh-Ve-WEE.title" = "Verminderen:";
