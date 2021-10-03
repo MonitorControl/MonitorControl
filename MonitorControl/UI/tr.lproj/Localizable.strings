@@ -2,7 +2,7 @@
 "About" = "Hakkında";
 
 /* Shown in the main prefs window */
-"App menu" = "App menu";
+"App menu" = "Uygulama menüsü";
 
 /* Apple Silicon designation (shown after the version number in Preferences) */
 "Apple Silicon" = "Apple Silicon";
@@ -17,13 +17,13 @@
 "Brightness" = "Parlaklık";
 
 /* Build */
-"Build" = "Derleme";
+"Build" = "Sürüm";
 
 /* Shown in the Display Preferences */
 "Built-in Display" = "Dahili Ekran";
 
 /* Shown in menu */
-"Check for updates..." = "Check for updates...";
+"Check for updates..." = "Güncellemeleri kontrol et...";
 
 /* Shown in menu */
 "Contrast" = "Kontrast";
@@ -35,7 +35,7 @@
 "Displays" = "Ekranlar";
 
 /* Shown in the alert dialog */
-"Enable Longer Delay?" = "Daha Uzun Gecikmeyi Etkinleştir?";
+"Enable Longer Delay?" = "Daha Uzun Gecikme Etkinleştirilsin mi?";
 
 /* Shown in the Display Preferences */
 "External Display" = "Harici Ekran";
@@ -44,76 +44,76 @@
 "General" = "Genel";
 
 /* Shown in the Display Preferences */
-"Hardware (Apple)" = "Hardware (Apple)";
+"Hardware (Apple)" = "Donanım (Apple)";
 
 /* Shown in the Display Preferences */
 "Hardware (DDC)" = "Donanım (DDC)";
 
 /* Shown in the alert dialog */
-"Incompatible previous version" = "Incompatible previous version";
+"Incompatible previous version" = "Uyumsuz eski sürüm";
 
 /* Intel designation (shown after the version number in Preferences) */
 "Intel" = "Intel";
 
 /* Shown in the main prefs window */
-"Keyboard" = "Keyboard";
+"Keyboard" = "Klavye";
 
 /* Shown in the alert dialog */
 "No" = "Hayır";
 
 /* Shown in the Display Preferences */
-"No Control" = "No Control";
+"No Control" = "Kontrol yok";
 
 /* Shown in the Display Preferences */
 "Other Display" = "Diğer Ekran";
 
 /* Shown in the alert dialog */
-"Preferences for an incompatible previous app version detected. Default preferences are reloaded." = "Preferences for an incompatible previous app version detected. Default preferences are reloaded.";
+"Preferences for an incompatible previous app version detected. Default preferences are reloaded." = "Uygulamanın eski uyumsuz bir sürümüne ait tercihler algılandı. Varsayılan tercihler geri yüklendi.";
 
 /* Shown in menu */
-"Preferences..." = "Preferences...";
+"Preferences..." = "Tercihler...";
 
 /* Shown in menu */
-"Quit" = "Quit";
+"Quit" = "Çıkış";
 
 /* Shown in the alert dialog */
-"Reset Preferences?" = "Ayarları Sıfırla?";
+"Reset Preferences?" = "Ayarlar Sıfırlansın mı?";
 
 /* Shown in the alert dialog */
-"Safe Mode Activated" = "Safe Mode Activated";
+"Safe Mode Activated" = "Güvenli Mod Etkinleştirildi";
 
 /* Shown in the alert dialog */
-"Shift was pressed during launch. MonitorControl started in safe mode. Default preferences are reloaded, DDC read is blocked." = "Shift was pressed during launch. MonitorControl started in safe mode. Default preferences are reloaded, DDC read is blocked.";
+"Shift was pressed during launch. MonitorControl started in safe mode. Default preferences are reloaded, DDC read is blocked." = "Başlatma sırasında Shift tuşuna basıldı. MonitorControl güvenli modda başlatıldı. Varsayılan tercihler yeniden yüklendi, DDC okuması engellendi.";
 
 /* Shown in the alert dialog */
 "Shortcuts not available" = "Kısayollar bulunamadı";
 
 /* Shown in the Display Preferences */
-"Software (Gamma)" = "Software (Gamma)";
+"Software (Gamma)" = "Yazılım (Gamma)";
 
 /* Shown in the Display Preferences */
-"Software (Gamma, Forced)" = "Software (Gamma, Forced)";
+"Software (Gamma, Forced)" = "Yazılım (Gamma, Zorla)";
 
 /* Shown in the Display Preferences */
-"Software (Shade)" = "Software (Shade)";
+"Software (Shade)" = "Yazılım (Gölge)";
 
 /* Shown in the Display Preferences */
-"This display allows for software brightness control via gammatable manipulation as it does not support hardware control. Reasons for this might be using the HDMI port of a Mac mini (which blocks hardware DDC control) or having a blacklisted display." = "This display allows for software brightness control via gammatable manipulation as it does not support hardware control. Reasons for this might be using the HDMI port of a Mac mini (which blocks hardware DDC control) or having a blacklisted display.";
+"This display allows for software brightness control via gammatable manipulation as it does not support hardware control. Reasons for this might be using the HDMI port of a Mac mini (which blocks hardware DDC control) or having a blacklisted display." = "Bu ekran, donanım kontrolünü desteklemediği için ancak gamalanabilir manipülasyon yoluyla yazılım parlaklık kontrolüne izin verir. Bunun nedenleri, bir Mac mini'nin (donanım DDC kontrolünü engelleyen) HDMI bağlantı noktasını kullanmak veya kara listeye alınmış bir ekrana sahip olmak olabilir.";
 
 /* Shown in the Display Preferences */
-"This display has an unspecified control status." = "This display has an unspecified control status.";
+"This display has an unspecified control status." = "Bu ekranın belirtilmemiş bir kontrol durumu var.";
 
 /* Shown in the Display Preferences */
-"This display is reported to support hardware DDC control but the current settings allow for software control only." = "This display is reported to support hardware DDC control but the current settings allow for software control only.";
+"This display is reported to support hardware DDC control but the current settings allow for software control only." = "Bu ekranın donanım DDC kontrolünü desteklediği bildirildi ancak mevcut ayarlar yalnızca yazılım kontrolüne izin veriyor.";
 
 /* Shown in the Display Preferences */
-"This display is reported to support hardware DDC control. If you encounter issues, you can disable hardware DDC control to force software control." = "This display is reported to support hardware DDC control. If you encounter issues, you can disable hardware DDC control to force software control.";
+"This display is reported to support hardware DDC control. If you encounter issues, you can disable hardware DDC control to force software control." = "Bu ekranın donanım DDC kontrolünü desteklediği bildiriliyor. Sorunlarla karşılaşırsanız, yazılım kontrolüne zorlamak için donanım DDC kontrolünü devre dışı bırakabilirsiniz.";
 
 /* Shown in the Display Preferences */
-"This display supports native Apple brightness protocol. This allows macOS to control this display without MonitorControl as well." = "This display supports native Apple brightness protocol. This allows macOS to control this display without MonitorControl as well.";
+"This display supports native Apple brightness protocol. This allows macOS to control this display without MonitorControl as well." = "Bu ekran doğal Apple parlaklık protokolünü destekler. Bu, macOS'in bu ekranı MonitorControl olmadan da kontrol etmesine olanak tanır.";
 
 /* Shown in the Display Preferences */
-"This is a virtual display (examples: AirPlay, Sidecar, display connected via a DisplayLink Dock or similar) which does not allow hardware or software gammatable control. Shading is used as a substitute but only in non-mirror scenarios. Mouse cursor will be unaffected and artifacts may appear when entering/leaving full screen mode." = "This is a virtual display (examples: AirPlay, Sidecar, display connected via a DisplayLink Dock or similar) which does not allow hardware or software gammatable control. Shading is used as a substitute but only in non-mirror scenarios. Mouse cursor will be unaffected and artifacts may appear when entering/leaving full screen mode.";
+"This is a virtual display (examples: AirPlay, Sidecar, display connected via a DisplayLink Dock or similar) which does not allow hardware or software gammatable control. Shading is used as a substitute but only in non-mirror scenarios. Mouse cursor will be unaffected and artifacts may appear when entering/leaving full screen mode." = "Bu, donanım veya yazılımla değiştirelbilir gama kontrolüne izin vermeyen sanal bir ekrandır (Örneğin: AirPlay, Sidecar, DisplayLink Dock veya benzeri ile bağlanan ekran). Gölgeleme, bir yedek olarak kullanılır, ancak yalnızca ayna olmayan senaryolarda. Fare imleci etkilenmeyecektir ve tam ekran moduna girerken/çıkarken yapaylıklar görünebilir.";
 
 /* Unknown display name */
 "Unknown" = "Bilinmeyen";
