@@ -92,10 +92,10 @@
 "Software (gamma)" = "Yazılım (Gama)";
 
 /* Shown in the Display Preferences */
-"Software (gamma, Forced)" = "Yazılım (Gama, Zorunlu)";
+"Software (gamma, forced)" = "Software (gamma, forced)";
 
 /* Shown in the Display Preferences */
-"Software (Shade)" = "Yazılım (Gölge)";
+"Software (shade)" = "Software (shade)";
 
 /* Shown in the Display Preferences */
 "This display allows for software brightness control via gammatable manipulation as it does not support hardware control. Reasons for this might be using the HDMI port of a Mac mini (which blocks hardware DDC control) or having a blacklisted display." = "Bu ekran, donanım kontrolünü desteklemediği için gamlanabilir manipülasyon yoluyla yazılım parlaklık kontrolüne izin verir. Bunun nedenleri, bir Mac mini'nin (donanım DDC kontrolünü engelleyen) HDMI bağlantı noktasını kullanmak veya kara listeye alınmış bir ekrana sahip olmak olabilir.";
