@@ -19,7 +19,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   var sleepID: Int = 0 // sleep event ID
   var safeMode = false
   var jobRunning = false
-  let updaterController = SPUStandardUpdaterController(startingUpdater: false, updaterDelegate: nil, userDriverDelegate: nil)
+  let updaterController = SPUStandardUpdaterController(startingUpdater: false, updaterDelegate: UpdaterDelegate(), userDriverDelegate: nil)
 
   var preferencePaneStyle: Preferences.Style {
     if !DEBUG_MACOS10, #available(macOS 11.0, *) {

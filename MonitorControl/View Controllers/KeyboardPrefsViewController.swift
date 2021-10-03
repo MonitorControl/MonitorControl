@@ -52,6 +52,7 @@ class KeyboardPrefsViewController: NSViewController, PreferencePane {
   @IBOutlet var rowSeparateCombinedScaleCheck: NSGridRow!
   @IBOutlet var rowSeparateCombinedScaleText: NSGridRow!
 
+  // swiftlint:disable cyclomatic_complexity
   func showAdvanced() -> Bool {
     let hide = !prefs.bool(forKey: PrefKey.showAdvancedSettings.rawValue)
 
@@ -152,6 +153,8 @@ class KeyboardPrefsViewController: NSViewController, PreferencePane {
 
     return !hide
   }
+
+  // swiftlint:enable cyclomatic_complexity
 
   override func viewDidLoad() {
     super.viewDidLoad()
