@@ -127,6 +127,9 @@ enum PrefKey: String {
   // Change Brightness for all screens
   case allScreensBrightness
 
+  // Allow zero software brightness
+  case allowZeroSwBrightness
+
   // Use focus instead of mouse position to determine which display to control for brightness
   case useFocusInsteadOfMouse
 

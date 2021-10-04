@@ -145,6 +145,9 @@
 /* Class = "NSTextFieldCell"; title = "Volume:"; ObjectID = "FER-Ri-4UO"; */
 "FER-Ri-4UO.title" = "Ses:";
 
+/* Class = "NSButtonCell"; title = "Allow zero brightness via software or combined dimming"; ObjectID = "FjB-XL-fG5"; */
+"FjB-XL-fG5.title" = "Allow zero brightness via software or combined dimming";
+
 /* Class = "NSTextFieldCell"; title = "Apple and built-in displays already have a brightness slider in Control Center."; ObjectID = "fmZ-HI-Mdc"; */
 "fmZ-HI-Mdc.title" = "Apple ve yerleşik ekranların Denetim Merkezi'nde zaten bir parlaklık kaydırıcısı vardır.";
 
@@ -259,8 +262,8 @@
 /* Class = "NSTextFieldCell"; title = "count:"; ObjectID = "Orv-yj-Nad"; */
 "Orv-yj-Nad.title" = "Sayı:";
 
-/* Class = "NSTextFieldCell"; title = "Use the brightness keys of your Apple keyboard to control brightness. You can hold Control to adjust the built-in display, Control+Option to adjust external displays. Hold Shift+Option for fine control. Control+Option+Command adjusts contrast on DDC compatible displays."; ObjectID = "pa0-Hz-ace"; */
-"pa0-Hz-ace.title" = "Parlaklığı kontrol etmek için Apple klavyenizin parlaklık tuşlarını kullanın. Dahili ekranı ayarlamak için Control tuşunu, harici ekranları ayarlamak için Control+Option tuşunu basılı tutabilirsiniz. Hassas kontrol için Shift+Option tuşunu basılı tutun. Control+Option+Command, DDC uyumlu ekranlarda kontrastı ayarlar.";
+/* Class = "NSTextFieldCell"; title = "Use the brightness keys of your Apple keyboard to control brightness. You can hold Control to adjust the built-in display, Control+Command to adjust external displays. Hold Shift+Option for fine control. Control+Option+Command adjusts contrast on DDC compatible displays."; ObjectID = "pa0-Hz-ace"; */
+"pa0-Hz-ace.title" = "Parlaklığı kontrol etmek için Apple klavyenizin parlaklık tuşlarını kullanın. Dahili ekranı ayarlamak için Control tuşunu, harici ekranları ayarlamak için Control+Command tuşunu basılı tutabilirsiniz. Hassas kontrol için Shift+Option tuşunu basılı tutun. Control+Option+Command, DDC uyumlu ekranlarda kontrastı ayarlar.";
 
 /* Class = "NSTextFieldCell"; title = "Control method:"; ObjectID = "PaK-1f-DsW"; */
 "PaK-1f-DsW.title" = "Kontrol yöntemi:";
@@ -375,6 +378,9 @@
 
 /* Class = "NSTextFieldCell"; title = "Full OSD scale will be available for hardware brightness control and after reaching 0 brightness, further software dimming will be used."; ObjectID = "YHZ-VL-QJ3"; */
 "YHZ-VL-QJ3.title" = "Donanım parlaklık kontrolü için tam OSD ölçeği mevcut olacak ve 0 parlaklığa ulaştıktan sonra daha fazla yazılım karartması kullanılacak.";
+
+/* Class = "NSTextFieldCell"; title = "Warning! With this option enabled, you might find yourself in a position when you end up with a blank display. This, combined with disabled keyboard controls can be frustrating."; ObjectID = "yi3-e1-wsL"; */
+"yi3-e1-wsL.title" = "Warning! With this option enabled, you might find yourself in a position when you end up with a blank display. This, combined with disabled keyboard controls can be frustrating.";
 
 /* Class = "NSButtonCell"; title = "Assume last saved settings are valid (recommended)"; ObjectID = "yn8-Nd-o89"; */
 "yn8-Nd-o89.title" = "Son kaydedilen ayarların geçerli olduğunu varsayın (önerilir)";

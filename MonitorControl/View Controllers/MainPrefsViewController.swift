@@ -20,6 +20,7 @@ class MainPrefsViewController: NSViewController, PreferencePane {
   @IBOutlet var startAtLogin: NSButton!
   @IBOutlet var automaticUpdateCheck: NSButton!
   @IBOutlet var disableSoftwareFallback: NSButton!
+  @IBOutlet var allowZeroSwBrightness: NSButton!
   @IBOutlet var combinedBrightness: NSButton!
   @IBOutlet var enableSmooth: NSButton!
   @IBOutlet var enableBrightnessSync: NSButton!
@@ -38,6 +39,8 @@ class MainPrefsViewController: NSViewController, PreferencePane {
   @IBOutlet var rowResetButton: NSGridRow!
   @IBOutlet var rowDisableSoftwareFallbackCheck: NSGridRow!
   @IBOutlet var rowDisableSoftwareFallbackText: NSGridRow!
+  @IBOutlet var rowAllowZeroSwBrightnessCheck: NSGridRow!
+  @IBOutlet var rowAllowZeroSwBrightnessText: NSGridRow!
 
   func showAdvanced() -> Bool {
     let hide = !prefs.bool(forKey: PrefKey.showAdvancedSettings.rawValue)
@@ -74,6 +77,13 @@ class MainPrefsViewController: NSViewController, PreferencePane {
       self.rowDisableSoftwareFallbackCheck.isHidden = hide
       self.rowDisableSoftwareFallbackText.isHidden = hide
     }
+    if self.allowZeroSwBrightness.state == .on {
+      self.rowAllowZeroSwBrightnessCheck.isHidden = false
+      self.rowAllowZeroSwBrightnessText.isHidden = false
+    } else {
+      self.rowAllowZeroSwBrightnessCheck.isHidden = hide
+      self.rowAllowZeroSwBrightnessText.isHidden = hide
+    }
     self.rowResetButton.isHidden = hide
     return !hide
   }
@@ -92,6 +102,7 @@ class MainPrefsViewController: NSViewController, PreferencePane {
     self.automaticUpdateCheck.state = prefs.bool(forKey: PrefKey.SUEnableAutomaticChecks.rawValue) ? .on : .off
     self.combinedBrightness.state = prefs.bool(forKey: PrefKey.disableCombinedBrightness.rawValue) ? .off : .on
     self.disableSoftwareFallback.state = prefs.bool(forKey: PrefKey.disableSoftwareFallback.rawValue) ? .on : .off
+    self.allowZeroSwBrightness.state = prefs.bool(forKey: PrefKey.allowZeroSwBrightness.rawValue) ? .on : .off
     self.enableSmooth.state = prefs.bool(forKey: PrefKey.disableSmoothBrightness.rawValue) ? .off : .on
     self.enableBrightnessSync.state = prefs.bool(forKey: PrefKey.enableBrightnessSync.rawValue) ? .on : .off
     self.showAdvancedDisplays.state = prefs.bool(forKey: PrefKey.showAdvancedSettings.rawValue) ? .on : .off
@@ -145,13 +156,31 @@ class MainPrefsViewController: NSViewController, PreferencePane {
     switch sender.state {
     case .on:
       for display in DisplayManager.shared.getOtherDisplays() where display.isSw() {
-        _ = display.setBrightness(1)
+        _ = display.setDirectBrightness(1)
       }
       prefs.set(true, forKey: PrefKey.disableSoftwareFallback.rawValue)
     case .off:
       prefs.set(false, forKey: PrefKey.disableSoftwareFallback.rawValue)
       for display in DisplayManager.shared.getOtherDisplays() where display.isSw() {
-        _ = display.setBrightness(1)
+        _ = display.setDirectBrightness(1)
+      }
+    default: break
+    }
+    _ = self.showAdvanced()
+    app.configure()
+  }
+
+  @IBAction func allowZeroSwBrightness(_ sender: NSButton) {
+    switch sender.state {
+    case .on:
+      for display in DisplayManager.shared.getOtherDisplays() where display.isSw() {
+        _ = display.setDirectBrightness(1)
+      }
+      prefs.set(true, forKey: PrefKey.allowZeroSwBrightness.rawValue)
+    case .off:
+      prefs.set(false, forKey: PrefKey.allowZeroSwBrightness.rawValue)
+      for display in DisplayManager.shared.getOtherDisplays() where display.isSw() {
+        _ = display.setDirectBrightness(1)
       }
     default: break
     }

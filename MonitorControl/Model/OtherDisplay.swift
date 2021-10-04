@@ -76,7 +76,12 @@ class OtherDisplay: Display {
   func setupCurrentAndMaxValues(command: Command, firstrun: Bool = false) {
     var ddcValues: (UInt16, UInt16)?
     var maxDDCValue = UInt16(DDC_MAX_DETECT_LIMIT)
-    var currentDDCValue = UInt16(Float(DDC_MAX_DETECT_LIMIT) * 1)
+    var currentDDCValue: UInt16
+    switch command {
+    case .audioSpeakerVolume: currentDDCValue = UInt16(Float(self.DDC_MAX_DETECT_LIMIT) * 0.125)
+    case .contrast: currentDDCValue = UInt16(Float(self.DDC_MAX_DETECT_LIMIT) * 0.750)
+    default: currentDDCValue = UInt16(Float(self.DDC_MAX_DETECT_LIMIT) * 1.000)
+    }
     if command == .audioSpeakerVolume {
       currentDDCValue = UInt16(Float(self.DDC_MAX_DETECT_LIMIT) * 0.125) // lower default audio value as high volume might rattle the user.
     }
@@ -114,7 +119,7 @@ class OtherDisplay: Display {
         _ = self.writeDDCValues(command: command, value: currentDDCValue)
       }
     } else {
-      self.savePref(max(0.1, self.prefExists(for: command) ? self.readPrefAsFloat(for: command) : Float(1)), for: command)
+      self.savePref(self.prefExists(for: command) ? self.readPrefAsFloat(for: command) : Float(1), for: command)
       self.savePref(self.readPrefAsFloat(for: command), key: .SwBrightness)
       self.brightnessSyncSourceValue = self.readPrefAsFloat(for: command)
       self.smoothBrightnessTransient = self.readPrefAsFloat(for: command)

@@ -191,7 +191,7 @@ class Display: Equatable {
   }
 
   func swBrightnessTransform(value: Float, reverse: Bool = false) -> Float {
-    let lowTreshold: Float = 0.0 // If we don't want to allow zero brightness for safety reason, this value can be modified (for example to 0.1 for a 10% minimum)
+    let lowTreshold: Float = prefs.bool(forKey: PrefKey.allowZeroSwBrightness.rawValue) ? 0.0 : 0.15
     if !reverse {
       return value * (1 - lowTreshold) + lowTreshold
     } else {
@@ -228,7 +228,7 @@ class Display: Equatable {
       }
     } else {
       if self.isVirtual {
-        return DisplayManager.shared.setShadeAlpha(value: 1 - value, displayID: self.identifier)
+        return DisplayManager.shared.setShadeAlpha(value: 1 - newValue, displayID: self.identifier)
       } else {
         let gammaTableRed = self.defaultGammaTableRed.map { $0 * newValue }
         let gammaTableGreen = self.defaultGammaTableGreen.map { $0 * newValue }
@@ -243,7 +243,8 @@ class Display: Equatable {
 
   func getSwBrightness() -> Float {
     if self.isVirtual {
-      return 1 - (DisplayManager.shared.getShadeAlpha(displayID: self.identifier) ?? 1)
+      let rawBrightnessValue = 1 - (DisplayManager.shared.getShadeAlpha(displayID: self.identifier) ?? 1)
+      return self.swBrightnessTransform(value: rawBrightnessValue, reverse: true)
     }
     var gammaTableRed = [CGGammaValue](repeating: 0, count: 256)
     var gammaTableGreen = [CGGammaValue](repeating: 0, count: 256)

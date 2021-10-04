@@ -145,6 +145,9 @@
 /* Class = "NSTextFieldCell"; title = "Volume:"; ObjectID = "FER-Ri-4UO"; */
 "FER-Ri-4UO.title" = "Hangerő:";
 
+/* Class = "NSButtonCell"; title = "Allow zero brightness via software or combined dimming"; ObjectID = "FjB-XL-fG5"; */
+"FjB-XL-fG5.title" = "Teljes fekete engedélyezése szoftveres vagy kombinált sötétítéskor";
+
 /* Class = "NSTextFieldCell"; title = "Apple and built-in displays already have a brightness slider in Control Center."; ObjectID = "fmZ-HI-Mdc"; */
 "fmZ-HI-Mdc.title" = "Az Apple és beépített kijelzők már rendelkeznek csúszkával a Vezérlőközpontban";
 
@@ -259,8 +262,8 @@
 /* Class = "NSTextFieldCell"; title = "count:"; ObjectID = "Orv-yj-Nad"; */
 "Orv-yj-Nad.title" = "számosság:";
 
-/* Class = "NSTextFieldCell"; title = "Use the brightness keys of your Apple keyboard to control brightness. You can hold Control to adjust the built-in display, Control+Option to adjust external displays. Hold Shift+Option for fine control. Control+Option+Command adjusts contrast on DDC compatible displays."; ObjectID = "pa0-Hz-ace"; */
-"pa0-Hz-ace.title" = "Az Apple billentyűzet fényerőgombjainak használata. A Control lenyomásával a beépített kijelzőt, a Control+Option segítségével a külső kijelzőt vezérelheti. Shift+Option finom vezérlést tesz lehetővé. Control+Option+Command nyomvatartása a kontrasztot szabályozza. ";
+/* Class = "NSTextFieldCell"; title = "Use the brightness keys of your Apple keyboard to control brightness. You can hold Control to adjust the built-in display, Control+Command to adjust external displays. Hold Shift+Option for fine control. Control+Option+Command adjusts contrast on DDC compatible displays."; ObjectID = "pa0-Hz-ace"; */
+"pa0-Hz-ace.title" = "Az Apple billentyűzet fényerőgombjainak használata. A Control lenyomásával a beépített kijelzőt, a Control+Command segítségével a külső kijelzőt vezérelheti. Shift+Option finom vezérlést tesz lehetővé. Control+Option+Command nyomvatartása a kontrasztot szabályozza. ";
 
 /* Class = "NSTextFieldCell"; title = "Control method:"; ObjectID = "PaK-1f-DsW"; */
 "PaK-1f-DsW.title" = "Vezérlés:";
@@ -375,6 +378,9 @@
 
 /* Class = "NSTextFieldCell"; title = "Full OSD scale will be available for hardware brightness control and after reaching 0 brightness, further software dimming will be used."; ObjectID = "YHZ-VL-QJ3"; */
 "YHZ-VL-QJ3.title" = "A teljes OSD skála elérhető a hardveres fényerővezérlés számára, majd a minimum elérése után további szoftveres csökkentés történik.";
+
+/* Class = "NSTextFieldCell"; title = "Warning! With this option enabled, you might find yourself in a position when you end up with a blank display. This, combined with disabled keyboard controls can be frustrating."; ObjectID = "yi3-e1-wsL"; */
+"yi3-e1-wsL.title" = "Warning! With this option enabled, you might find yourself in a position when you end up with a blank display. This, combined with disabled keyboard controls can be frustrating.";
 
 /* Class = "NSButtonCell"; title = "Assume last saved settings are valid (recommended)"; ObjectID = "yn8-Nd-o89"; */
 "yn8-Nd-o89.title" = "Utolsó ismert beállítások feltételezése (javasolt)";
