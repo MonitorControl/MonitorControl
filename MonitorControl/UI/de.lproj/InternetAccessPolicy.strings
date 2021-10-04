@@ -1,8 +1,8 @@
 /* General application description */
-"ApplicationDescription" = "MonitorControl allows you to control external displays brightness and volume";
+"ApplicationDescription" = "MonitorControl ermöglicht die Steuerung von Helligkeit und Lautstärke externer Monitore";
 
 /* Sofware update deny consequences */
-"SoftwareUpdateDenyConsequences" = "If you deny these connections, you will not be notified about new versions and security updates. Security updates are important in order to defend against malware attacks.";
+"SoftwareUpdateDenyConsequences" = "Wenn Sie diese Verbindungen nicht zulassen, werden Sie nicht über neue Versionen und Sicherheitsaktualisierungen informiert. Sicherheitsaktualisierungen sind wichtig, um sich gegen Malware-Angriffe zu schützen.";
 
 /* Software update purpose */
-"SoftwareUpdatePurpose" = "MonitorControl checks for new versions and security updates.";
+"SoftwareUpdatePurpose" = "MonitorControl prüft auf neue Versionen und nach Sicherheitsupdates.";
