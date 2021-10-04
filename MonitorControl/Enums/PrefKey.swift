@@ -22,7 +22,7 @@ enum PrefKey: String {
   // DDC polling count for display
   case pollingCount
 
-  // Display should avoid gammatable manipulation and use shades instead (to coexist with other apps doing gamma manipulation)
+  // Display should avoid gamma table manipulation and use shades instead (to coexist with other apps doing gamma manipulation)
   case avoidGamma
 
   // Command value display

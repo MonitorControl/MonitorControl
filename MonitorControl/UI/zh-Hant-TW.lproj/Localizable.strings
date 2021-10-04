@@ -101,10 +101,7 @@
 "Software (shade, forced)" = "Software (shade, forced)";
 
 /* Shown in the Display Preferences */
-"This display allows for software brightness control via gammatable manipulation as it does not support hardware control. Reasons for this might be using the HDMI port of a Mac mini (which blocks hardware DDC control) or having a blacklisted display." = "此螢幕不支援硬體控制，亮度調整將以軟體調整伽瑪值來實現。原因可能出於使用Mac mini的HDMI埠（硬體DDC無法使用）或是使用不支援的螢幕。";
-
-/* Shown in the Display Preferences */
-"This display allows for software brightness control via gammatable manipulation or shade as it does not support hardware control. Reasons for this might be using the HDMI port of a Mac mini (which blocks hardware DDC control) or having a blacklisted display." = "This display allows for software brightness control via gammatable manipulation or shade as it does not support hardware control. Reasons for this might be using the HDMI port of a Mac mini (which blocks hardware DDC control) or having a blacklisted display.";
+"This display allows for software brightness control via gamma table manipulation or shade as it does not support hardware control. Reasons for this might be using the HDMI port of a Mac mini (which blocks hardware DDC control) or having a blacklisted display." = "此螢幕不支援硬體控制，亮度調整將以軟體調整伽瑪值來實現。原因可能出於使用Mac mini的HDMI埠（硬體DDC無法使用）或是使用不支援的螢幕。";
 
 /* Shown in the Display Preferences */
 "This display has an unspecified control status." = "此螢幕有未指定的控制狀態";

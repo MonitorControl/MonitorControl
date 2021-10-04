@@ -241,8 +241,8 @@
 /* Class = "NSButtonCell"; title = "Show brightness slider in menu"; ObjectID = "MWo-6I-s9L"; */
 "MWo-6I-s9L.title" = "Mostra lo slider della luminositò nel menu";
 
-/* Class = "NSButtonCell"; title = "Avoid gammatable manipulation"; ObjectID = "na6-mS-MPi"; */
-"na6-mS-MPi.title" = "Avoid gammatable manipulation";
+/* Class = "NSButtonCell"; title = "Avoid gamma table manipulation"; ObjectID = "na6-mS-MPi"; */
+"na6-mS-MPi.title" = "Avoid gamma table manipulation";
 
 /* Class = "NSButtonCell"; title = "Separate scales for combined hardware & software dimming"; ObjectID = "O8o-hI-8eR"; */
 "O8o-hI-8eR.title" = "Scale separate per controllo combinato della attenuazione hw/sw";

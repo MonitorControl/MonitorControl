@@ -89,7 +89,7 @@ class DisplaysPrefsViewController: NSViewController, PreferencePane, NSTableView
             controlMethod = NSLocalizedString("Software (gamma)", comment: "Shown in the Display Preferences") + "  ⚠️"
           }
           displayImage = "display.trianglebadge.exclamationmark"
-          controlStatus = NSLocalizedString("This display allows for software brightness control via gammatable manipulation or shade as it does not support hardware control. Reasons for this might be using the HDMI port of a Mac mini (which blocks hardware DDC control) or having a blacklisted display.", comment: "Shown in the Display Preferences")
+          controlStatus = NSLocalizedString("This display allows for software brightness control via gamma table manipulation or shade as it does not support hardware control. Reasons for this might be using the HDMI port of a Mac mini (which blocks hardware DDC control) or having a blacklisted display.", comment: "Shown in the Display Preferences")
         } else {
           if otherDisplay.isSw() {
             if otherDisplay.readPrefAsBool(key: .avoidGamma) {
