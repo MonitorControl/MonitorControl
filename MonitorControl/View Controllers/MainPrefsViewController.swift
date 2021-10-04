@@ -153,17 +153,14 @@ class MainPrefsViewController: NSViewController, PreferencePane {
   }
 
   @IBAction func disableSoftwareFallback(_ sender: NSButton) {
+    for display in DisplayManager.shared.getOtherDisplays() {
+      _ = display.setDirectBrightness(1)
+    }
     switch sender.state {
     case .on:
-      for display in DisplayManager.shared.getOtherDisplays() where display.isSw() {
-        _ = display.setDirectBrightness(1)
-      }
       prefs.set(true, forKey: PrefKey.disableSoftwareFallback.rawValue)
     case .off:
       prefs.set(false, forKey: PrefKey.disableSoftwareFallback.rawValue)
-      for display in DisplayManager.shared.getOtherDisplays() where display.isSw() {
-        _ = display.setDirectBrightness(1)
-      }
     default: break
     }
     _ = self.showAdvanced()
@@ -171,17 +168,14 @@ class MainPrefsViewController: NSViewController, PreferencePane {
   }
 
   @IBAction func allowZeroSwBrightness(_ sender: NSButton) {
+    for display in DisplayManager.shared.getOtherDisplays() {
+      _ = display.setDirectBrightness(1)
+    }
     switch sender.state {
     case .on:
-      for display in DisplayManager.shared.getOtherDisplays() where display.isSw() {
-        _ = display.setDirectBrightness(1)
-      }
       prefs.set(true, forKey: PrefKey.allowZeroSwBrightness.rawValue)
     case .off:
       prefs.set(false, forKey: PrefKey.allowZeroSwBrightness.rawValue)
-      for display in DisplayManager.shared.getOtherDisplays() where display.isSw() {
-        _ = display.setDirectBrightness(1)
-      }
     default: break
     }
     _ = self.showAdvanced()
