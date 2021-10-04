@@ -214,7 +214,7 @@ class Display: Equatable {
           guard app.reconfigureID == 0 else {
             return
           }
-          if self.isVirtual {
+          if self.isVirtual || self.readPrefAsBool(key: .avoidGamma) {
             _ = DisplayManager.shared.setShadeAlpha(value: 1 - transientValue, displayID: self.identifier)
           } else {
             let gammaTableRed = self.defaultGammaTableRed.map { $0 * transientValue }
@@ -227,7 +227,7 @@ class Display: Equatable {
         self.swBrightnessSemaphore.signal()
       }
     } else {
-      if self.isVirtual {
+      if self.isVirtual || self.readPrefAsBool(key: .avoidGamma) {
         return DisplayManager.shared.setShadeAlpha(value: 1 - newValue, displayID: self.identifier)
       } else {
         let gammaTableRed = self.defaultGammaTableRed.map { $0 * newValue }
@@ -242,7 +242,7 @@ class Display: Equatable {
   }
 
   func getSwBrightness() -> Float {
-    if self.isVirtual {
+    if self.isVirtual || self.readPrefAsBool(key: .avoidGamma) {
       let rawBrightnessValue = 1 - (DisplayManager.shared.getShadeAlpha(displayID: self.identifier) ?? 1)
       return self.swBrightnessTransform(value: rawBrightnessValue, reverse: true)
     }

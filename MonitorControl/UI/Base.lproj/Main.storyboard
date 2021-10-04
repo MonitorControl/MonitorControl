@@ -1414,16 +1414,16 @@
                 <customObject id="rw7-Po-Lxm" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="DisplaysPrefsVC" id="2Ei-9P-f0u" customClass="DisplaysPrefsViewController" customModule="MonitorControl" sceneMemberID="viewController">
                     <view key="view" translatesAutoresizingMaskIntoConstraints="NO" id="aj0-6l-QE2">
-                        <rect key="frame" x="0.0" y="0.0" width="730" height="489"/>
+                        <rect key="frame" x="0.0" y="0.0" width="730" height="533"/>
                         <subviews>
-                            <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="490" horizontalPageScroll="10" verticalLineScroll="490" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="none" translatesAutoresizingMaskIntoConstraints="NO" id="O0W-8R-9c8">
-                                <rect key="frame" x="0.0" y="0.0" width="730" height="488"/>
+                            <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="520" horizontalPageScroll="10" verticalLineScroll="520" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="none" translatesAutoresizingMaskIntoConstraints="NO" id="O0W-8R-9c8">
+                                <rect key="frame" x="0.0" y="0.0" width="730" height="532"/>
                                 <clipView key="contentView" drawsBackground="NO" id="yDV-Al-LQT">
-                                    <rect key="frame" x="0.0" y="0.0" width="730" height="488"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="730" height="532"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="none" tableStyle="inset" selectionHighlightStyle="none" columnReordering="NO" columnResizing="NO" multipleSelection="NO" emptySelection="NO" autosaveColumns="NO" typeSelect="NO" rowHeight="490" rowSizeStyle="automatic" viewBased="YES" id="zC9-dS-Tr3">
-                                            <rect key="frame" x="0.0" y="0.0" width="730" height="490"/>
+                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="none" tableStyle="inset" selectionHighlightStyle="none" columnReordering="NO" columnResizing="NO" multipleSelection="NO" emptySelection="NO" autosaveColumns="NO" typeSelect="NO" rowHeight="520" viewBased="YES" id="zC9-dS-Tr3">
+                                            <rect key="frame" x="0.0" y="0.0" width="730" height="532"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <size key="intercellSpacing" width="17" height="0.0"/>
                                             <color key="backgroundColor" name="windowBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -1442,16 +1442,16 @@
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
                                                         <tableCellView wantsLayer="YES" id="hCY-wr-B84" customClass="DisplaysPrefsCellView" customModule="MonitorControl">
-                                                            <rect key="frame" x="18" y="0.0" width="685" height="490"/>
+                                                            <rect key="frame" x="18" y="0.0" width="685" height="520"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <subviews>
                                                                 <imageView wantsLayer="YES" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="Bhw-JQ-dBx">
-                                                                    <rect key="frame" x="3" y="420.5" width="64" height="69"/>
+                                                                    <rect key="frame" x="3" y="450.5" width="64" height="69"/>
                                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageAlignment="top" imageScaling="proportionallyUpOrDown" image="NSTouchBarIconViewTemplate" id="DLq-uQ-NPf"/>
                                                                 </imageView>
                                                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="jz0-4Z-xVm">
-                                                                    <rect key="frame" x="210" y="419" width="166" height="16"/>
+                                                                    <rect key="frame" x="210" y="449" width="166" height="16"/>
                                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                                     <textFieldCell key="cell" lineBreakMode="clipping" title="#bc-ignore!" id="6GJ-6Q-gqz">
                                                                         <font key="font" metaFont="system"/>
@@ -1460,7 +1460,7 @@
                                                                     </textFieldCell>
                                                                 </textField>
                                                                 <button verticalHuggingPriority="750" id="hoM-Lm-YlP">
-                                                                    <rect key="frame" x="385" y="386" width="302" height="18"/>
+                                                                    <rect key="frame" x="385" y="416" width="302" height="18"/>
                                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                                     <buttonCell key="cell" type="check" title="Use hardware DDC control" bezelStyle="regularSquare" imagePosition="left" inset="2" id="ZdU-gV-V05">
                                                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -1471,7 +1471,7 @@
                                                                     </connections>
                                                                 </button>
                                                                 <button verticalHuggingPriority="750" id="Y93-eX-6aR">
-                                                                    <rect key="frame" x="385" y="418" width="302" height="18"/>
+                                                                    <rect key="frame" x="385" y="448" width="302" height="18"/>
                                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                                     <buttonCell key="cell" type="check" title="Enable keyboard control for display" bezelStyle="regularSquare" imagePosition="left" inset="2" id="UqR-WE-jHl">
                                                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -1482,7 +1482,7 @@
                                                                     </connections>
                                                                 </button>
                                                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="aUB-dZ-Kbz">
-                                                                    <rect key="frame" x="78" y="419" width="128" height="16"/>
+                                                                    <rect key="frame" x="78" y="449" width="128" height="16"/>
                                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                                     <textFieldCell key="cell" lineBreakMode="clipping" alignment="left" title="Identifier:" id="YqZ-LS-YvR">
                                                                         <font key="font" metaFont="system"/>
@@ -1491,11 +1491,11 @@
                                                                     </textFieldCell>
                                                                 </textField>
                                                                 <box verticalHuggingPriority="750" boxType="separator" id="VgS-82-jXG">
-                                                                    <rect key="frame" x="80" y="451" width="607" height="5"/>
+                                                                    <rect key="frame" x="80" y="481" width="607" height="5"/>
                                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                                 </box>
                                                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="vfj-lR-QtG">
-                                                                    <rect key="frame" x="78" y="386" width="128" height="16"/>
+                                                                    <rect key="frame" x="78" y="416" width="128" height="16"/>
                                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                                     <textFieldCell key="cell" lineBreakMode="clipping" alignment="left" title="Display type:" id="lSJ-6w-KJ2">
                                                                         <font key="font" metaFont="system"/>
@@ -1504,7 +1504,7 @@
                                                                     </textFieldCell>
                                                                 </textField>
                                                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="DmC-gj-anZ">
-                                                                    <rect key="frame" x="210" y="386" width="166" height="16"/>
+                                                                    <rect key="frame" x="210" y="416" width="166" height="16"/>
                                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                                     <textFieldCell key="cell" lineBreakMode="clipping" title="#bc-ignore!" id="Pqk-VW-JGY">
                                                                         <font key="font" metaFont="system"/>
@@ -1513,7 +1513,7 @@
                                                                     </textFieldCell>
                                                                 </textField>
                                                                 <textField verticalHuggingPriority="750" id="mIA-Wh-7aB">
-                                                                    <rect key="frame" x="78" y="462" width="285" height="21"/>
+                                                                    <rect key="frame" x="78" y="492" width="285" height="21"/>
                                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" title="#bc-ignore!" id="ibQ-4u-ClE">
                                                                         <font key="font" textStyle="title2" name=".SFNS-Regular"/>
@@ -1525,7 +1525,7 @@
                                                                     </textFieldCell>
                                                                 </textField>
                                                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsExpansionToolTips="YES" id="2Yf-2b-6A8">
-                                                                    <rect key="frame" x="210" y="355" width="166" height="16"/>
+                                                                    <rect key="frame" x="210" y="385" width="166" height="16"/>
                                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                                     <textFieldCell key="cell" lineBreakMode="clipping" title="#bc-ignore!" id="pIy-Lk-kkm">
                                                                         <font key="font" metaFont="system"/>
@@ -1534,7 +1534,7 @@
                                                                     </textFieldCell>
                                                                 </textField>
                                                                 <button verticalHuggingPriority="750" id="dw1-C8-5US">
-                                                                    <rect key="frame" x="10" y="490" width="640" height="32"/>
+                                                                    <rect key="frame" x="10" y="520" width="640" height="32"/>
                                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                                     <buttonCell key="cell" type="push" title="Reset Name" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="f9g-8s-gdd">
                                                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -1542,7 +1542,7 @@
                                                                     </buttonCell>
                                                                 </button>
                                                                 <button verticalHuggingPriority="750" id="ARW-va-sn0">
-                                                                    <rect key="frame" x="385" y="354" width="302" height="18"/>
+                                                                    <rect key="frame" x="385" y="352" width="302" height="18"/>
                                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                                     <buttonCell key="cell" type="check" title="Disable macOS volume OSD" bezelStyle="regularSquare" imagePosition="left" inset="2" id="bkM-Px-U3b">
                                                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -1553,7 +1553,7 @@
                                                                     </connections>
                                                                 </button>
                                                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="1PG-t6-jkR">
-                                                                    <rect key="frame" x="78" y="355" width="128" height="16"/>
+                                                                    <rect key="frame" x="78" y="385" width="128" height="16"/>
                                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                                     <textFieldCell key="cell" lineBreakMode="clipping" alignment="left" title="Control method:" id="PaK-1f-DsW">
                                                                         <font key="font" metaFont="system"/>
@@ -2032,7 +2032,7 @@
                                                                     <color key="fillColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                 </box>
                                                                 <button verticalHuggingPriority="750" id="uug-2q-b5U">
-                                                                    <rect key="frame" x="541" y="455" width="152" height="31"/>
+                                                                    <rect key="frame" x="541" y="485" width="152" height="31"/>
                                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                                     <buttonCell key="cell" type="push" title="Reset settings" bezelStyle="rounded" alignment="center" controlSize="small" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="BYS-7Y-bRz">
                                                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -2042,14 +2042,26 @@
                                                                         <action selector="resetSettings:" target="hCY-wr-B84" id="aV0-s1-EYI"/>
                                                                     </connections>
                                                                 </button>
+                                                                <button verticalHuggingPriority="750" id="Ehb-Kc-XcH">
+                                                                    <rect key="frame" x="385" y="384" width="302" height="18"/>
+                                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                                    <buttonCell key="cell" type="check" title="Avoid gammatable manipulation" bezelStyle="regularSquare" imagePosition="left" inset="2" id="na6-mS-MPi">
+                                                                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                                        <font key="font" metaFont="system"/>
+                                                                    </buttonCell>
+                                                                    <connections>
+                                                                        <action selector="avoidGamma:" target="hCY-wr-B84" id="MqP-tc-fMR"/>
+                                                                    </connections>
+                                                                </button>
                                                             </subviews>
                                                             <constraints>
-                                                                <constraint firstItem="ihQ-SK-x7Y" firstAttribute="top" secondItem="ARW-va-sn0" secondAttribute="bottom" constant="20" id="lYu-y9-iVv"/>
+                                                                <constraint firstItem="ihQ-SK-x7Y" firstAttribute="top" secondItem="1PG-t6-jkR" secondAttribute="bottom" constant="50" id="lYu-y9-iVv"/>
                                                                 <constraint firstItem="ihQ-SK-x7Y" firstAttribute="leading" secondItem="1PG-t6-jkR" secondAttribute="leading" id="mQA-eq-xde"/>
                                                             </constraints>
                                                             <connections>
                                                                 <outlet property="advancedSettings" destination="ihQ-SK-x7Y" id="V9e-z0-aUT"/>
                                                                 <outlet property="audioDeviceNameOverride" destination="zz1-Dn-410" id="rgI-FN-xsG"/>
+                                                                <outlet property="avoidGamma" destination="Ehb-Kc-XcH" id="qVY-VK-fV9"/>
                                                                 <outlet property="combinedBrightnessSwitchingPoint" destination="OG9-iA-jK1" id="kYg-7C-wBO"/>
                                                                 <outlet property="controlMethod" destination="pIy-Lk-kkm" id="Wwe-kC-Ryu"/>
                                                                 <outlet property="curveDDCBrightness" destination="9H1-0z-xsx" id="Oy3-vB-qfQ"/>
@@ -2108,7 +2120,7 @@
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="O0W-8R-9c8" secondAttribute="bottom" id="5tj-nE-mrI"/>
                             <constraint firstItem="O0W-8R-9c8" firstAttribute="leading" secondItem="aj0-6l-QE2" secondAttribute="leading" id="MNc-WK-uDZ"/>
-                            <constraint firstAttribute="height" constant="489" id="O7b-uo-bc2"/>
+                            <constraint firstAttribute="height" constant="533" id="O7b-uo-bc2"/>
                             <constraint firstItem="O0W-8R-9c8" firstAttribute="top" secondItem="aj0-6l-QE2" secondAttribute="top" constant="1" id="Rg2-d3-Mrg"/>
                             <constraint firstAttribute="width" constant="730" id="sZT-qe-hQV"/>
                             <constraint firstAttribute="trailing" secondItem="O0W-8R-9c8" secondAttribute="trailing" id="xUm-oc-lj8"/>
@@ -2121,7 +2133,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="298" y="1743.5"/>
+            <point key="canvasLocation" x="298" y="1755.5"/>
         </scene>
         <!--About Prefs View Controller-->
         <scene sceneID="Ot2-lL-eIg">
@@ -2230,7 +2242,7 @@
                 </viewController>
                 <customObject id="5Vf-Rd-nyE" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="298" y="2228"/>
+            <point key="canvasLocation" x="298" y="2293"/>
         </scene>
     </scenes>
     <resources>

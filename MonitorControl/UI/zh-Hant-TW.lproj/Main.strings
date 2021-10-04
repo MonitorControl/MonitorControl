@@ -241,6 +241,9 @@
 /* Class = "NSButtonCell"; title = "Show brightness slider in menu"; ObjectID = "MWo-6I-s9L"; */
 "MWo-6I-s9L.title" = "顯示亮度控制滑桿";
 
+/* Class = "NSButtonCell"; title = "Avoid gammatable manipulation"; ObjectID = "na6-mS-MPi"; */
+"na6-mS-MPi.title" = "Avoid gammatable manipulation";
+
 /* Class = "NSButtonCell"; title = "Separate scales for combined hardware & software dimming"; ObjectID = "O8o-hI-8eR"; */
 "O8o-hI-8eR.title" = "使用硬體結合軟體調整時忽略軟體調整的範圍";
 

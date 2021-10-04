@@ -241,6 +241,9 @@
 /* Class = "NSButtonCell"; title = "Show brightness slider in menu"; ObjectID = "MWo-6I-s9L"; */
 "MWo-6I-s9L.title" = "메뉴에 밝기 슬라이더 표시";
 
+/* Class = "NSButtonCell"; title = "Avoid gammatable manipulation"; ObjectID = "na6-mS-MPi"; */
+"na6-mS-MPi.title" = "Avoid gammatable manipulation";
+
 /* Class = "NSButtonCell"; title = "Separate scales for combined hardware & software dimming"; ObjectID = "O8o-hI-8eR"; */
 "O8o-hI-8eR.title" = "통합된 하드웨어 및 소프트웨어 밝기 조절을 위한 별도의 스케일";
 

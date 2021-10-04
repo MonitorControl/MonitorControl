@@ -98,7 +98,13 @@
 "Software (shade)" = "Szoftver (árnyékolás)";
 
 /* Shown in the Display Preferences */
+"Software (shade, forced)" = "Software (shade, forced)";
+
+/* Shown in the Display Preferences */
 "This display allows for software brightness control via gammatable manipulation as it does not support hardware control. Reasons for this might be using the HDMI port of a Mac mini (which blocks hardware DDC control) or having a blacklisted display." = "Ez a kijelző nem támogatja a hardveres vezérlést, hanem szoftveres fényerővezérlést tesz lehetővé gamma táblázat manipulálás segítségével. Ennek okai lehetnek a nem támogatott kimenet (pl. Mac mini HDMI kimenet) vagy feketelistára helyezett kijelző használata.";
+
+/* Shown in the Display Preferences */
+"This display allows for software brightness control via gammatable manipulation or shade as it does not support hardware control. Reasons for this might be using the HDMI port of a Mac mini (which blocks hardware DDC control) or having a blacklisted display." = "This display allows for software brightness control via gammatable manipulation or shade as it does not support hardware control. Reasons for this might be using the HDMI port of a Mac mini (which blocks hardware DDC control) or having a blacklisted display.";
 
 /* Shown in the Display Preferences */
 "This display has an unspecified control status." = "A kijelzőnek nem meghatározott a vezérlési státusza.";
