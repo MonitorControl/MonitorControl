@@ -56,8 +56,8 @@ class KeyboardShortcutsManager {
   }
 
   func engage(_ shortcut: KeyboardShortcuts.Name) {
-    self.initialKeyRepeat = UserDefaults.standard.double(forKey: "InitialKeyRepeat") * 0.014
-    self.keyRepeat = UserDefaults.standard.double(forKey: "KeyRepeat") * 0.014
+    self.initialKeyRepeat = max(15, UserDefaults.standard.double(forKey: "InitialKeyRepeat")) * 0.014
+    self.keyRepeat = max(2, UserDefaults.standard.double(forKey: "KeyRepeat")) * 0.014
     self.currentCommand = shortcut
     self.isFirstKeypress = true
     self.isHold = true

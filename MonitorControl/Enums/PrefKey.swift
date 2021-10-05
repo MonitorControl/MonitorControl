@@ -22,6 +22,9 @@ enum PrefKey: String {
   // DDC polling count for display
   case pollingCount
 
+  // Display should avoid gamma table manipulation and use shades instead (to coexist with other apps doing gamma manipulation)
+  case avoidGamma
+
   // Command value display
   case value
 
@@ -126,6 +129,9 @@ enum PrefKey: String {
 
   // Change Brightness for all screens
   case allScreensBrightness
+
+  // Allow zero software brightness
+  case allowZeroSwBrightness
 
   // Use focus instead of mouse position to determine which display to control for brightness
   case useFocusInsteadOfMouse
