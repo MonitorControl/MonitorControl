@@ -114,7 +114,8 @@ class OtherDisplay: Display {
       os_log("- Minimum DDC value: %{public}@ (overrides 0)", type: .info, String(self.readPrefAsInt(key: .minDDCOverride, for: command)))
       os_log("- Maximum DDC value: %{public}@ (overrides %{public}@)", type: .info, String(self.readPrefAsInt(key: .maxDDC, for: command)), String(maxDDCValue))
       os_log("- Current internal value: %{public}@", type: .info, String(self.readPrefAsFloat(for: command)))
-      if prefs.bool(forKey: PrefKey.enableDDCDuringStartup.rawValue), !prefs.bool(forKey: PrefKey.readDDCInsteadOfRestoreValues.rawValue), !app.safeMode {
+      os_log("- Command status: %{public}@", type: .info, self.readPrefAsBool(key: .isTouched, for: command) ? "Touched" : "Untouched")
+      if self.readPrefAsBool(key: .isTouched, for: command), prefs.bool(forKey: PrefKey.enableDDCDuringStartup.rawValue), !prefs.bool(forKey: PrefKey.readDDCInsteadOfRestoreValues.rawValue), !app.safeMode {
         os_log("- Writing last saved DDC values.", type: .info, self.name, String(reflecting: command))
         _ = self.writeDDCValues(command: command, value: currentDDCValue)
       }
@@ -390,6 +391,7 @@ class OtherDisplay: Display {
         } else {
           success = self.ddc?.write(command: command.rawValue, value: value, errorRecoveryWaitTime: 2000) ?? false
         }
+        self.savePref(true, key: PrefKey.isTouched, for: command) // We deliberatly consider the value tuched no matter if the call succeeded
       }
     }
     return success
