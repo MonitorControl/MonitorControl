@@ -146,7 +146,7 @@ class KeyboardShortcutsManager {
         if isPressed {
           display.stepVolume(isUp: isUp, isSmallIncrement: prefs.bool(forKey: PrefKey.useFineScaleVolume.rawValue))
         } else if !wasNotIsPressedVolumeSentAlready, !display.readPrefAsBool(key: .unavailableDDC, for: .audioSpeakerVolume) {
-          display.playVolumeChangedSound()
+          app.playVolumeChangedSound()
           wasNotIsPressedVolumeSentAlready = true
         }
       }
@@ -162,7 +162,7 @@ class KeyboardShortcutsManager {
       if let display = display as? OtherDisplay {
         display.toggleMute()
         if !wasNotIsPressedVolumeSentAlready, display.readPrefAsInt(for: .audioMuteScreenBlank) != 1, !display.readPrefAsBool(key: .unavailableDDC, for: .audioSpeakerVolume) {
-          display.playVolumeChangedSound()
+          app.playVolumeChangedSound()
           wasNotIsPressedVolumeSentAlready = true
         }
       }

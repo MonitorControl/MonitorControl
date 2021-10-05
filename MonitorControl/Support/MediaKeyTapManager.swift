@@ -94,7 +94,7 @@ class MediaKeyTapManager: MediaKeyTapDelegate {
         if !isRepeat, isPressed, let display = display as? OtherDisplay {
           display.toggleMute()
           if !wasNotIsPressedVolumeSentAlready, display.readPrefAsInt(for: .audioMuteScreenBlank) != 1, !display.readPrefAsBool(key: .unavailableDDC, for: .audioSpeakerVolume) {
-            display.playVolumeChangedSound()
+            app.playVolumeChangedSound()
             wasNotIsPressedVolumeSentAlready = true
           }
         }
@@ -104,7 +104,7 @@ class MediaKeyTapManager: MediaKeyTapDelegate {
           if isPressed {
             display.stepVolume(isUp: mediaKey == .volumeUp, isSmallIncrement: isSmallIncrement)
           } else if !wasNotIsPressedVolumeSentAlready, !display.readPrefAsBool(key: .unavailableDDC, for: .audioSpeakerVolume) {
-            display.playVolumeChangedSound()
+            app.playVolumeChangedSound()
             wasNotIsPressedVolumeSentAlready = true
           }
         }
