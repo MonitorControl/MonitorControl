@@ -5,8 +5,9 @@ import KeyboardShortcuts
 import os.log
 
 class KeyboardShortcutsManager {
-  var initialKeyRepeat = 0.24 // This should come from UserDefaults instead, but it's ok for now.
-  var keyRepeat = 0.032 // This should come from UserDefaults instead, but it's ok for now.
+  var initialKeyRepeat = 0.21
+  var keyRepeat = 0.028
+  var keyRepeatCount = 0
 
   var currentCommand = KeyboardShortcuts.Name.none
   var isFirstKeypress = false
@@ -62,6 +63,7 @@ class KeyboardShortcutsManager {
     self.isFirstKeypress = true
     self.isHold = true
     self.currentEventId += 1
+    self.keyRepeatCount = 0
     self.apply(shortcut, eventId: self.currentEventId)
   }
 
@@ -69,10 +71,11 @@ class KeyboardShortcutsManager {
     self.isHold = false
     self.isFirstKeypress = false
     self.currentCommand = KeyboardShortcuts.Name.none
+    self.keyRepeatCount = 0
   }
 
   func apply(_ shortcut: KeyboardShortcuts.Name, eventId: Int) {
-    guard app.sleepID == 0, app.reconfigureID == 0 else {
+    guard app.sleepID == 0, app.reconfigureID == 0, self.keyRepeatCount <= 100 else {
       self.disengage()
       return
     }
@@ -92,6 +95,7 @@ class KeyboardShortcutsManager {
         self.apply(shortcut, eventId: eventId)
       }
     }
+    self.keyRepeatCount += 1
     switch shortcut {
     case KeyboardShortcuts.Name.brightnessUp: self.brightness(isUp: true)
     case KeyboardShortcuts.Name.brightnessDown: self.brightness(isUp: false)
@@ -142,7 +146,7 @@ class KeyboardShortcutsManager {
         if isPressed {
           display.stepVolume(isUp: isUp, isSmallIncrement: prefs.bool(forKey: PrefKey.useFineScaleVolume.rawValue))
         } else if !wasNotIsPressedVolumeSentAlready, !display.readPrefAsBool(key: .unavailableDDC, for: .audioSpeakerVolume) {
-          display.playVolumeChangedSound()
+          app.playVolumeChangedSound()
           wasNotIsPressedVolumeSentAlready = true
         }
       }
@@ -158,7 +162,7 @@ class KeyboardShortcutsManager {
       if let display = display as? OtherDisplay {
         display.toggleMute()
         if !wasNotIsPressedVolumeSentAlready, display.readPrefAsInt(for: .audioMuteScreenBlank) != 1, !display.readPrefAsBool(key: .unavailableDDC, for: .audioSpeakerVolume) {
-          display.playVolumeChangedSound()
+          app.playVolumeChangedSound()
           wasNotIsPressedVolumeSentAlready = true
         }
       }

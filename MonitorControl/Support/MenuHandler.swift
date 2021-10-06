@@ -21,6 +21,7 @@ class MenuHandler: NSMenu, NSMenuDelegate {
 
   func menuWillOpen(_: NSMenu) {
     self.updateMenuRelevantDisplay()
+    app.keyboardShortcuts.disengage()
   }
 
   func updateMenus(dontClose: Bool = false) {

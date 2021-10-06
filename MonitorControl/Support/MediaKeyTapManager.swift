@@ -94,7 +94,7 @@ class MediaKeyTapManager: MediaKeyTapDelegate {
         if !isRepeat, isPressed, let display = display as? OtherDisplay {
           display.toggleMute()
           if !wasNotIsPressedVolumeSentAlready, display.readPrefAsInt(for: .audioMuteScreenBlank) != 1, !display.readPrefAsBool(key: .unavailableDDC, for: .audioSpeakerVolume) {
-            display.playVolumeChangedSound()
+            app.playVolumeChangedSound()
             wasNotIsPressedVolumeSentAlready = true
           }
         }
@@ -104,7 +104,7 @@ class MediaKeyTapManager: MediaKeyTapDelegate {
           if isPressed {
             display.stepVolume(isUp: mediaKey == .volumeUp, isSmallIncrement: isSmallIncrement)
           } else if !wasNotIsPressedVolumeSentAlready, !display.readPrefAsBool(key: .unavailableDDC, for: .audioSpeakerVolume) {
-            display.playVolumeChangedSound()
+            app.playVolumeChangedSound()
             wasNotIsPressedVolumeSentAlready = true
           }
         }
@@ -163,13 +163,13 @@ class MediaKeyTapManager: MediaKeyTapDelegate {
     if [KeyboardVolume.media.rawValue, KeyboardVolume.both.rawValue].contains(prefs.integer(forKey: PrefKey.keyboardVolume.rawValue)) {
       keys.append(contentsOf: [.mute, .volumeUp, .volumeDown])
     }
-    // Remove keys if no external displays are connected
+    // Remove brightness keys if no external displays are connected, but only if brightness fine control is not active
     var isInternalDisplayOnly = true
     for display in DisplayManager.shared.getAllDisplays() where !display.isBuiltIn() {
       isInternalDisplayOnly = false
     }
-    if isInternalDisplayOnly {
-      let keysToDelete: [MediaKey] = [.volumeUp, .volumeDown, .mute, .brightnessUp, .brightnessDown]
+    if isInternalDisplayOnly, !prefs.bool(forKey: PrefKey.useFineScaleBrightness.rawValue) {
+      let keysToDelete: [MediaKey] = [.brightnessUp, .brightnessDown]
       keys.removeAll { keysToDelete.contains($0) }
     }
     // Remove volume related keys if audio device is controllable
