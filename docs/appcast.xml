@@ -27,7 +27,7 @@
                 https://github.com/MonitorControl/MonitorControl/releases/tag/v4.0.0-beta2
             </sparkle:releaseNotesLink>
             <pubDate>Thu, 07 Oct 2021 20:31:20 +0200</pubDate>
-            <sparkle:version>6293</sparkle:version>
+            <sparkle:version>6443</sparkle:version>
             <sparkle:shortVersionString>4.0.0-beta2</sparkle:shortVersionString>
             <sparkle:minimumSystemVersion>10.15</sparkle:minimumSystemVersion>
             <!-- NOTE: TESTING -->
