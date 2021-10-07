@@ -19,24 +19,24 @@
                length="4127428"
             />
         </item>
-        <item>
-            <title>v4.0.0-beta2</title>
-            <!-- TODO: Use correct channels once setting is present. (after 4.0.0 release) -->
-            <!-- <sparkle:channel>beta</sparkle:channel> -->
-            <sparkle:releaseNotesLink>
-                https://github.com/MonitorControl/MonitorControl/releases/tag/v4.0.0-beta2
-            </sparkle:releaseNotesLink>
-            <pubDate>Thu, 07 Oct 2021 20:31:20 +0200</pubDate>
-            <sparkle:version>6443</sparkle:version>
-            <sparkle:shortVersionString>4.0.0-beta2</sparkle:shortVersionString>
-            <sparkle:minimumSystemVersion>10.15</sparkle:minimumSystemVersion>
-            <!-- NOTE: TESTING -->
-            <enclosure
-               url="https://github.com/MonitorControl/MonitorControl/blob/github-pages/docs/MonitorControl.4.0.0-beta2.dmg"
-               type="application/octet-stream"
-               sparkle:edSignature="D00vAphhkkQ/lo753WP0LIxXg0Ph8jhF+u5pQrF8ZXFBR1cJtP3kdqRtKR6OMG9P9om6xc4UmyZXz99vuUzzDQ=="
-               length="4135991"
-            />
-        </item>
+<!--        <item>-->
+<!--            <title>v4.0.0-beta2</title>-->
+<!--            <!-- TODO: Use correct channels once setting is present. (after 4.0.0 release) -->-->
+<!--            <!-- <sparkle:channel>beta</sparkle:channel> -->-->
+<!--            <sparkle:releaseNotesLink>-->
+<!--                https://github.com/MonitorControl/MonitorControl/releases/tag/v4.0.0-beta2-->
+<!--            </sparkle:releaseNotesLink>-->
+<!--            <pubDate>Thu, 07 Oct 2021 20:31:20 +0200</pubDate>-->
+<!--            <sparkle:version>6443</sparkle:version>-->
+<!--            <sparkle:shortVersionString>4.0.0-beta2</sparkle:shortVersionString>-->
+<!--            <sparkle:minimumSystemVersion>10.15</sparkle:minimumSystemVersion>-->
+<!--            <!-- NOTE: TESTING -->-->
+<!--            <enclosure-->
+<!--               url="https://github.com/MonitorControl/MonitorControl/blob/github-pages/docs/MonitorControl.4.0.0-beta2.dmg"-->
+<!--               type="application/octet-stream"-->
+<!--               sparkle:edSignature="D00vAphhkkQ/lo753WP0LIxXg0Ph8jhF+u5pQrF8ZXFBR1cJtP3kdqRtKR6OMG9P9om6xc4UmyZXz99vuUzzDQ=="-->
+<!--               length="4135991"-->
+<!--            />-->
+<!--        </item>-->
     </channel>
 </rss>
