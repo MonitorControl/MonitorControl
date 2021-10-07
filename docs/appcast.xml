@@ -1,4 +1,7 @@
 <?xml version="1.0" standalone="yes"?>
+<!-- TODO: Use correct channels once setting is present. (after 4.0.0 release) -->
+<!-- <sparkle:channel>beta</sparkle:channel> -->
+<!-- TODO: Use different changelog files for each release -->
 <rss xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle" version="2.0">
     <channel>
         <title>MonitorControl</title>
@@ -6,7 +9,7 @@
         <item>
             <title>v4.0.0-beta1</title>
             <sparkle:releaseNotesLink>
-                https://github.com/MonitorControl/MonitorControl/releases/tag/v4.0.0-beta1
+                https://monitorcontrol.app/Changelog.md
             </sparkle:releaseNotesLink>
             <pubDate>Thu, 30 Sep 2021 21:43:20 +0200</pubDate>
             <sparkle:version>6293</sparkle:version>
@@ -21,16 +24,13 @@
         </item>
         <item>
             <title>v4.0.0-beta2</title>
-            <!-- TODO: Use correct channels once setting is present. (after 4.0.0 release) -->
-            <!-- <sparkle:channel>beta</sparkle:channel> -->
             <sparkle:releaseNotesLink>
-                https://github.com/MonitorControl/MonitorControl/releases/tag/v4.0.0-beta2
+                https://monitorcontrol.app/Changelog.md
             </sparkle:releaseNotesLink>
             <pubDate>Thu, 07 Oct 2021 20:31:20 +0200</pubDate>
             <sparkle:version>6443</sparkle:version>
             <sparkle:shortVersionString>4.0.0-beta2</sparkle:shortVersionString>
             <sparkle:minimumSystemVersion>10.15</sparkle:minimumSystemVersion>
-            <!-- NOTE: TESTING -->
             <enclosure
                url="https://github.com/MonitorControl/MonitorControl/releases/download/v4.0.0-beta2/MonitorControl.4.0.0-beta2.dmg"
                type="application/octet-stream"
