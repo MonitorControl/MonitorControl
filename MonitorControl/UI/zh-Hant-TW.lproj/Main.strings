@@ -146,7 +146,7 @@
 "FER-Ri-4UO.title" = "音量：";
 
 /* Class = "NSButtonCell"; title = "Allow zero brightness via software or combined dimming"; ObjectID = "FjB-XL-fG5"; */
-"FjB-XL-fG5.title" = "Allow zero brightness via software or combined dimming";
+"FjB-XL-fG5.title" = "透過軟體或軟硬體結合調整時允許螢幕全暗";
 
 /* Class = "NSTextFieldCell"; title = "Apple and built-in displays already have a brightness slider in Control Center."; ObjectID = "fmZ-HI-Mdc"; */
 "fmZ-HI-Mdc.title" = "控制中心中已有蘋果及內建螢幕的亮度控制滑桿。";
@@ -215,7 +215,7 @@
 "kqJ-jQ-b7U.title" = "記錄快捷鍵：";
 
 /* Class = "NSTextFieldCell"; title = "Brightness and contrast:"; ObjectID = "LO4-4k-gxY"; */
-"LO4-4k-gxY.title" = "亮度及對比度控制：";
+"LO4-4k-gxY.title" = "亮度及對比度：";
 
 /* Class = "NSTextFieldCell"; title = "Display type:"; ObjectID = "lSJ-6w-KJ2"; */
 "lSJ-6w-KJ2.title" = "螢幕類型:";
@@ -242,7 +242,7 @@
 "MWo-6I-s9L.title" = "顯示亮度控制滑桿";
 
 /* Class = "NSButtonCell"; title = "Avoid gamma table manipulation"; ObjectID = "na6-mS-MPi"; */
-"na6-mS-MPi.title" = "Avoid gamma table manipulation";
+"na6-mS-MPi.title" = "避免調整伽瑪值";
 
 /* Class = "NSButtonCell"; title = "Separate scales for combined hardware & software dimming"; ObjectID = "O8o-hI-8eR"; */
 "O8o-hI-8eR.title" = "使用硬體結合軟體調整時忽略軟體調整的範圍";
@@ -383,7 +383,7 @@
 "YHZ-VL-QJ3.title" = "完整的OSD刻度只涵蓋硬體的控制範圍，刻度在０以下時以軟體調整。";
 
 /* Class = "NSTextFieldCell"; title = "Warning! With this option enabled, you might find yourself in a position when you end up with a blank display. This, combined with disabled keyboard controls can be frustrating."; ObjectID = "yi3-e1-wsL"; */
-"yi3-e1-wsL.title" = "Warning! With this option enabled, you might find yourself in a position when you end up with a blank display. This, combined with disabled keyboard controls can be frustrating.";
+"yi3-e1-wsL.title" = "警告！啟用後螢幕可被調整至全暗，若同時停用鍵盤控制可能會導致難以調整設定。";
 
 /* Class = "NSButtonCell"; title = "Assume last saved settings are valid (recommended)"; ObjectID = "yn8-Nd-o89"; */
 "yn8-Nd-o89.title" = "假設前次的設定可用（建議）";
