@@ -16,6 +16,9 @@
 /* Class = "NSTextFieldCell"; title = "DDC min"; ObjectID = "1zE-fg-xEm"; */
 "1zE-fg-xEm.title" = "Min DDC";
 
+/* Class = "NSMenuItem"; title = "Show separate controls for each display in menu"; ObjectID = "3eO-bN-ZRl"; */
+"3eO-bN-ZRl.title" = "Mostra slider separati per ciascun monitor nel menu";
+
 /* Class = "NSMenuItem"; title = "Apply last saved values to the display"; ObjectID = "3Jr-bW-YYq"; */
 "3Jr-bW-YYq.title" = "Applica al monitor gli ultimi valori salvati";
 
@@ -24,9 +27,6 @@
 
 /* Class = "NSTextFieldCell"; title = "MonitorControl uses mouse position to determine which display to control. Using window focus instead might not work well with full screen apps."; ObjectID = "4dX-o1-xAc"; */
 "4dX-o1-xAc.title" = "MonitorControl utilizza la posizione del mouse per determinare il monitor da controllare. L'utilizzo del focus sulla finestra potrebbe non funzionare sulle applicazioni a pieno schermo.";
-
-/* Class = "NSButtonCell"; title = "Show separate controls for each display in menu"; ObjectID = "4t2-Rv-njr"; */
-"4t2-Rv-njr.title" = "Mostra slider separati per ciascun monitor nel menu";
 
 /* Class = "NSTextField"; ibExternalAccessibilityDescription = "Brightness"; ObjectID = "567-le-fLg"; */
 "567-le-fLg.ibExternalAccessibilityDescription" = "Luminosità";
@@ -39,9 +39,6 @@
 
 /* Class = "NSTextFieldCell"; title = "Slider behavior:"; ObjectID = "75n-7M-1mS"; */
 "75n-7M-1mS.title" = "Comportamento slider:";
-
-/* Class = "NSButtonCell"; title = "Use combined slider for all displays"; ObjectID = "7rn-Lu-fcl"; */
-"7rn-Lu-fcl.title" = "Utlizza uno slider combinato per tutti i monitor";
 
 /* Class = "NSButtonCell"; title = "Show slider tick marks"; ObjectID = "7zf-m1-gJO"; */
 "7zf-m1-gJO.title" = "Mostra i marcatori nello slider";
@@ -72,6 +69,9 @@
 
 /* Class = "NSTextFieldCell"; title = "Use brightness, volume and other settings from last time or use defaults. Values will be applied to the display upon first change by the user."; ObjectID = "an7-Aj-3fZ"; */
 "an7-Aj-3fZ.title" = "Utilizza la luminisità, il volume ed altre impostazioni dell'ultima volta o utilizza il default. I valori saranno applicati al monitor alla prima modifica dell'utente.";
+
+/* Class = "NSMenuItem"; title = "Show sliders only for the display currently showing the menu"; ObjectID = "bbf-sS-uGv"; */
+"bbf-sS-uGv.title" = "Mostra gli slider solo per il monitor che sta mostrando il menu";
 
 /* Class = "NSTextFieldCell"; title = "Brightness:"; ObjectID = "Bhb-6l-uPQ"; */
 "Bhb-6l-uPQ.title" = "Luminosità:";
@@ -217,6 +217,9 @@
 /* Class = "NSTextFieldCell"; title = "Record shortcuts:"; ObjectID = "kqJ-jQ-b7U"; */
 "kqJ-jQ-b7U.title" = "Registra abbreviazioni:";
 
+/* Class = "NSMenuItem"; title = "Use combined slider for all displays"; ObjectID = "lA0-tv-qRs"; */
+"lA0-tv-qRs.title" = "Utlizza uno slider combinato per tutti i monitor";
+
 /* Class = "NSTextFieldCell"; title = "Brightness and contrast:"; ObjectID = "LO4-4k-gxY"; */
 "LO4-4k-gxY.title" = "Controllo luminosità e contrasto:";
 
@@ -282,9 +285,6 @@
 
 /* Class = "NSTextFieldCell"; title = "DDC max"; ObjectID = "psF-vX-AFB"; */
 "psF-vX-AFB.title" = "Max DDC";
-
-/* Class = "NSButtonCell"; title = "Show sliders only for the display currently showing the menu"; ObjectID = "PvP-TV-OmT"; */
-"PvP-TV-OmT.title" = "Mostra gli slider solo per il monitor che sta mostrando il menu";
 
 /* Class = "NSTextFieldCell"; title = "Use software dimming after the display reached zero hardware brightness for extended range. Works for DDC controlled displays only."; ObjectID = "PyY-p9-3NP"; */
 "PyY-p9-3NP.title" = "Utilizza l'attenuazione software quando il monitor ha raggiunto lo zero della luminosità hardware per estendere il range. Funziona solo per i monitor controllati via DDC.";

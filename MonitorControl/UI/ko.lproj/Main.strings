@@ -16,6 +16,9 @@
 /* Class = "NSTextFieldCell"; title = "DDC min"; ObjectID = "1zE-fg-xEm"; */
 "1zE-fg-xEm.title" = "DDC 최솟값";
 
+/* Class = "NSMenuItem"; title = "Show separate controls for each display in menu"; ObjectID = "3eO-bN-ZRl"; */
+"3eO-bN-ZRl.title" = "메뉴에서 각 디스플레이에 대해 각각의 컨트롤 표시";
+
 /* Class = "NSMenuItem"; title = "Apply last saved values to the display"; ObjectID = "3Jr-bW-YYq"; */
 "3Jr-bW-YYq.title" = "마지막으로 저장된 값을 디스플레이에 적용";
 
@@ -24,9 +27,6 @@
 
 /* Class = "NSTextFieldCell"; title = "MonitorControl uses mouse position to determine which display to control. Using window focus instead might not work well with full screen apps."; ObjectID = "4dX-o1-xAc"; */
 "4dX-o1-xAc.title" = "MonitorControl은 마우스 위치를 기준으로 제어할 디스플레이를 결정합니다. 활성화된 창을 기준으로 하면 전체 화면 앱에서 제대로 동작하지 않을 수 있습니다.";
-
-/* Class = "NSButtonCell"; title = "Show separate controls for each display in menu"; ObjectID = "4t2-Rv-njr"; */
-"4t2-Rv-njr.title" = "메뉴에서 각 디스플레이에 대해 각각의 컨트롤 표시";
 
 /* Class = "NSTextField"; ibExternalAccessibilityDescription = "Brightness"; ObjectID = "567-le-fLg"; */
 "567-le-fLg.ibExternalAccessibilityDescription" = "밝기";
@@ -39,9 +39,6 @@
 
 /* Class = "NSTextFieldCell"; title = "Slider behavior:"; ObjectID = "75n-7M-1mS"; */
 "75n-7M-1mS.title" = "슬라이더 동작:";
-
-/* Class = "NSButtonCell"; title = "Use combined slider for all displays"; ObjectID = "7rn-Lu-fcl"; */
-"7rn-Lu-fcl.title" = "모든 디스플레이에 대한 통합 슬라이더 사용";
 
 /* Class = "NSButtonCell"; title = "Show slider tick marks"; ObjectID = "7zf-m1-gJO"; */
 "7zf-m1-gJO.title" = "슬라이더 눈금 표시";
@@ -72,6 +69,9 @@
 
 /* Class = "NSTextFieldCell"; title = "Use brightness, volume and other settings from last time or use defaults. Values will be applied to the display upon first change by the user."; ObjectID = "an7-Aj-3fZ"; */
 "an7-Aj-3fZ.title" = "최근의 밝기, 볼륨 및 기타 설정을 사용하거나 기본값을 사용합니다. 값은 사용자가 처음 변경할 때 디스플레이에 적용됩니다.";
+
+/* Class = "NSMenuItem"; title = "Show sliders only for the display currently showing the menu"; ObjectID = "bbf-sS-uGv"; */
+"bbf-sS-uGv.title" = "현재 메뉴를 보여주는 디스플레이에 대한 슬라이더만 표시";
 
 /* Class = "NSTextFieldCell"; title = "Brightness:"; ObjectID = "Bhb-6l-uPQ"; */
 "Bhb-6l-uPQ.title" = "밝기:";
@@ -217,6 +217,9 @@
 /* Class = "NSTextFieldCell"; title = "Record shortcuts:"; ObjectID = "kqJ-jQ-b7U"; */
 "kqJ-jQ-b7U.title" = "단축키 기록:";
 
+/* Class = "NSMenuItem"; title = "Use combined slider for all displays"; ObjectID = "lA0-tv-qRs"; */
+"lA0-tv-qRs.title" = "모든 디스플레이에 대한 통합 슬라이더 사용";
+
 /* Class = "NSTextFieldCell"; title = "Brightness and contrast:"; ObjectID = "LO4-4k-gxY"; */
 "LO4-4k-gxY.title" = "밝기 및 대비 제어:";
 
@@ -282,9 +285,6 @@
 
 /* Class = "NSTextFieldCell"; title = "DDC max"; ObjectID = "psF-vX-AFB"; */
 "psF-vX-AFB.title" = "DDC 최댓값";
-
-/* Class = "NSButtonCell"; title = "Show sliders only for the display currently showing the menu"; ObjectID = "PvP-TV-OmT"; */
-"PvP-TV-OmT.title" = "현재 메뉴를 보여주는 디스플레이에 대한 슬라이더만 표시";
 
 /* Class = "NSTextFieldCell"; title = "Use software dimming after the display reached zero hardware brightness for extended range. Works for DDC controlled displays only."; ObjectID = "PyY-p9-3NP"; */
 "PyY-p9-3NP.title" = "디스플레이가 확장된 범위에 대해 하드웨어 밝기가 0에 도달한 후 소프트웨어 밝기 조절을 사용합니다. DDC 제어 디스플레이에서만 동작합니다.";

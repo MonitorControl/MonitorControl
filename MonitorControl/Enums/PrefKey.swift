@@ -93,11 +93,8 @@ enum PrefKey: String {
   // Synchronize brightness from sync source displays among all other displays
   case enableBrightnessSync
 
-  // Show only relevant slider for menu (depending on which display shows the menu)
-  case slidersRelevant
-
-  // Combine sliders for all displays
-  case slidersCombine
+  // Sliders for multiple displays
+  case multiSliders
 
   /* -- Display specific settings */
 
@@ -171,6 +168,12 @@ enum StartupAction: Int {
   case doNothing = 0
   case write = 1
   case read = 2
+}
+
+enum MultiSliders: Int {
+  case separate = 0
+  case relevant = 1
+  case combine = 2
 }
 
 enum PollingMode: Int {

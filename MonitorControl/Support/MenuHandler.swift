@@ -41,8 +41,8 @@ class MenuHandler: NSMenu, NSMenuDelegate {
     } else {
       displays.append(contentsOf: DisplayManager.shared.getDdcCapableDisplays())
     }
-    let relevant = prefs.bool(forKey: PrefKey.slidersRelevant.rawValue)
-    let combine = prefs.bool(forKey: PrefKey.slidersCombine.rawValue)
+    let relevant = prefs.integer(forKey: PrefKey.multiSliders.rawValue) == MultiSliders.relevant.rawValue
+    let combine = prefs.integer(forKey: PrefKey.multiSliders.rawValue) == MultiSliders.combine.rawValue
     let numOfDisplays = displays.count
     if numOfDisplays != 0 {
       let asSubMenu: Bool = (displays.count > 3 && !relevant && !combine && app.macOS10()) ? true : false
@@ -74,13 +74,13 @@ class MenuHandler: NSMenu, NSMenuDelegate {
   }
 
   func setupMenuSliderHandler(command: Command, display: Display, title: String) -> SliderHandler {
-    if prefs.bool(forKey: PrefKey.slidersCombine.rawValue), let combinedHandler = self.combinedSliderHandler[command] {
+    if prefs.integer(forKey: PrefKey.multiSliders.rawValue) == MultiSliders.combine.rawValue, let combinedHandler = self.combinedSliderHandler[command] {
       combinedHandler.addDisplay(display)
       display.sliderHandler[command] = combinedHandler
       return combinedHandler
     } else {
       let sliderHandler = SliderHandler(display: display, command: command, title: title)
-      if prefs.bool(forKey: PrefKey.slidersCombine.rawValue) {
+      if prefs.integer(forKey: PrefKey.multiSliders.rawValue) == MultiSliders.combine.rawValue {
         self.combinedSliderHandler[command] = sliderHandler
       }
       display.sliderHandler[command] = sliderHandler
@@ -89,7 +89,7 @@ class MenuHandler: NSMenu, NSMenuDelegate {
   }
 
   func addDisplayMenuBlock(addedSliderHandlers: [SliderHandler], blockName: String, monitorSubMenu: NSMenu, numOfDisplays: Int, asSubMenu: Bool) {
-    if numOfDisplays > 1, !prefs.bool(forKey: PrefKey.slidersRelevant.rawValue), !DEBUG_MACOS10, #available(macOS 11.0, *) {
+    if numOfDisplays > 1, prefs.integer(forKey: PrefKey.multiSliders.rawValue) != MultiSliders.relevant.rawValue, !DEBUG_MACOS10, #available(macOS 11.0, *) {
       class BlockView: NSView {
         override func draw(_: NSRect) {
           let radius = prefs.bool(forKey: PrefKey.showTickMarks.rawValue) ? CGFloat(4) : CGFloat(11)
@@ -178,7 +178,7 @@ class MenuHandler: NSMenu, NSMenuDelegate {
       let title = NSLocalizedString("Brightness", comment: "Shown in menu")
       addedSliderHandlers.append(self.setupMenuSliderHandler(command: .brightness, display: display, title: title))
     }
-    if !prefs.bool(forKey: PrefKey.slidersCombine.rawValue) {
+    if prefs.integer(forKey: PrefKey.multiSliders.rawValue) != MultiSliders.combine.rawValue {
       self.addDisplayMenuBlock(addedSliderHandlers: addedSliderHandlers, blockName: display.readPrefAsString(key: .friendlyName) != "" ? display.readPrefAsString(key: .friendlyName) : display.name, monitorSubMenu: monitorSubMenu, numOfDisplays: numOfDisplays, asSubMenu: asSubMenu)
     }
     if addedSliderHandlers.count > 0, prefs.integer(forKey: PrefKey.menuIcon.rawValue) == MenuIcon.sliderOnly.rawValue {
@@ -200,7 +200,7 @@ class MenuHandler: NSMenu, NSMenuDelegate {
   }
 
   func updateMenuRelevantDisplay() {
-    if prefs.bool(forKey: PrefKey.slidersRelevant.rawValue) {
+    if prefs.integer(forKey: PrefKey.multiSliders.rawValue) == MultiSliders.relevant.rawValue {
       if let display = DisplayManager.shared.getCurrentDisplay(), display.identifier != self.lastMenuRelevantDisplayId {
         os_log("Menu must be refreshed as relevant display changed since last time.")
         self.lastMenuRelevantDisplayId = display.identifier
