@@ -113,10 +113,10 @@
 "D9t-vT-gNJ.title" = "VCP Liste";
 
 /* Class = "NSTextFieldCell"; title = "Without this the app uses mouse position to determine which display to control. You can override audio device name under Displays if needed."; ObjectID = "Dha-Tm-cDM"; */
-"Dha-Tm-cDM.title" = "Ohne diese Einstellung verwendet die App die Mausposition, um den zu steuernden Monitor zu bestimmen. Bei Bedarf können Sie den Namen des Audiogeräts unter Monitore überschreiben.";
+"Dha-Tm-cDM.title" = "Ohne diese Einstellung verwendet die App die Mausposition, um den zu steuernden Monitor zu bestimmen. Bei Bedarf kannst du den Namen des Audiogeräts unter Monitore überschreiben.";
 
 /* Class = "NSTextFieldCell"; title = "You can disable smooth transitions for a more direct, immediate control."; ObjectID = "ENt-mP-0yH"; */
-"ENt-mP-0yH.title" = "Für eine direktere, unmittelbare Steuerung können Sie weiche Übergänge deaktivieren.";
+"ENt-mP-0yH.title" = "Für eine direktere, unmittelbare Steuerung kannst du weiche Übergänge deaktivieren.";
 
 /* Class = "NSMenuItem"; title = "Minimal"; ObjectID = "Eq3-z9-yIo"; */
 "Eq3-z9-yIo.title" = "Minimal";
@@ -170,7 +170,7 @@
 "H9X-it-sXs.title" = "Name des Audiogeräts überschreiben:";
 
 /* Class = "NSTextFieldCell"; title = "Relaunch the app to access Preferences if the menu option is not accessible. Use the button below to quit the app."; ObjectID = "hF7-fM-aKr"; */
-"hF7-fM-aKr.title" = "Starten Sie die App neu, um auf die Einstellungen zuzugreifen, wenn die Menüoption nicht verfügbar ist. Verwenden Sie die Schaltfläche unten, um die App zu beenden.";
+"hF7-fM-aKr.title" = "Starte die App neu, um auf die Einstellungen zuzugreifen, wenn die Menüoption nicht verfügbar ist. Verwende die Schaltfläche unten, um die App zu beenden.";
 
 /* Class = "NSButtonCell"; title = "Get current"; ObjectID = "hkC-vq-IcD"; */
 "hkC-vq-IcD.title" = "Aktuellen Wert abrufen";
@@ -200,7 +200,7 @@
 "JC3-pb-XnR.title" = "Änderung für alle Monitore";
 
 /* Class = "NSTextFieldCell"; title = "Note: you can press Shift during startup for 'Safe mode' to restore defaults and avoid reading or setting anything."; ObjectID = "Jx2-gO-nq9"; */
-"Jx2-gO-nq9.title" = "Hinweis: Sie können während des Starts die Umschalttaste drücken, um den 'Abgesicherten Modus' zu aktivieren, damit die Standardeinstellungen wiederhergestellt werden und nichts gelesen oder eingestellt wird.";
+"Jx2-gO-nq9.title" = "Hinweis: Du kannst während des Starts die Umschalttaste drücken, um den 'Abgesicherten Modus' zu aktivieren, damit die Standardeinstellungen wiederhergestellt werden und nichts gelesen oder eingestellt wird.";
 
 /* Class = "NSButtonCell"; title = "Apply last saved values to the display"; ObjectID = "K0S-zN-M4k"; */
 "K0S-zN-M4k.title" = "Zuletzt gespeicherte Werte auf den Monitor anwenden";
@@ -230,7 +230,7 @@
 "MM0-Lf-VgF.title" = "Immer in der Menüleiste anzeigen";
 
 /* Class = "NSButtonCell"; title = "Use window focus to determine which display to control"; ObjectID = "mMG-Ac-gdB"; */
-"mMG-Ac-gdB.title" = "Verwenden Sie den Fensterfokus, um den zu steuernden Monitor zu bestimmen";
+"mMG-Ac-gdB.title" = "Verwende den Fensterfokus, um den zu steuernden Monitor zu bestimmen";
 
 /* Class = "NSTextFieldCell"; title = "Contrast:"; ObjectID = "MMk-S2-yJN"; */
 "MMk-S2-yJN.title" = "Kontrast:";
@@ -242,13 +242,13 @@
 "MWo-6I-s9L.title" = "Helligkeitsregler im Menü anzeigen";
 
 /* Class = "NSButtonCell"; title = "Avoid gamma table manipulation"; ObjectID = "na6-mS-MPi"; */
-"na6-mS-MPi.title" = "Avoid gamma table manipulation";
+"na6-mS-MPi.title" = "Vermeidung der Manipulation der Gammatabelle";
 
 /* Class = "NSButtonCell"; title = "Separate scales for combined hardware & software dimming"; ObjectID = "O8o-hI-8eR"; */
 "O8o-hI-8eR.title" = "Getrennte Skalen für kombiniertes Dimmen von Hardware und Software";
 
 /* Class = "NSButtonCell"; title = "Use audio device name to determine which display to control"; ObjectID = "OAa-B4-8r3"; */
-"OAa-B4-8r3.title" = "Verwenden Sie den Namen des Audiogeräts, um zu bestimmen, welcher Monitor gesteuert werden soll";
+"OAa-B4-8r3.title" = "Verwenden des Namens des Audiogeräts, um zu bestimmen, welcher Monitor gesteuert werden soll";
 
 /* Class = "NSSlider"; ibExternalAccessibilityDescription = "Brightness"; ObjectID = "OG9-iA-jK1"; */
 "OG9-iA-jK1.ibExternalAccessibilityDescription" = "Helligkeit";
@@ -266,7 +266,7 @@
 "Orv-yj-Nad.title" = "zählen:";
 
 /* Class = "NSTextFieldCell"; title = "Use the brightness keys of your Apple keyboard to control brightness. You can hold Control to adjust the built-in display, Control+Command to adjust external displays. Hold Shift+Option for fine control. Control+Option+Command adjusts contrast on DDC compatible displays."; ObjectID = "pa0-Hz-ace"; */
-"pa0-Hz-ace.title" = "Verwenden Sie die Helligkeitstasten Ihrer Apple-Tastatur, um die Helligkeit zu steuern. Halten Sie die Steuerungstaste gedrückt, um den eingebauten Monitor zu steuern, und halten Sie die Tastenkombination Steuerung+Befehl gedrückt, um externe Monitore zu steuern. Halten Sie Shift+Option für die Feinsteuerung. Steuerung+Option+Befehl stellt den Kontrast auf DDC-kompatiblen Monitoren ein.";
+"pa0-Hz-ace.title" = "Verwenden der Helligkeitstasten der Apple-Tastatur, um die Helligkeit zu steuern. Halte die Steuerungstaste gedrückt, um den eingebauten Monitor zu steuern, und halte die Tastenkombination Steuerung+Befehl gedrückt, um externe Monitore zu steuern. Halte Shift+Option für die Feinsteuerung. Steuerung+Option+Befehl stellt den Kontrast auf DDC-kompatiblen Monitoren ein.";
 
 /* Class = "NSTextFieldCell"; title = "Control method:"; ObjectID = "PaK-1f-DsW"; */
 "PaK-1f-DsW.title" = "Steuerung:";
@@ -284,7 +284,7 @@
 "PvP-TV-OmT.title" = "Regler nur für den Monitor anzeigen, auf dem das Menü gerade angezeigt wird";
 
 /* Class = "NSTextFieldCell"; title = "Use software dimming after the display reached zero hardware brightness for extended range. Works for DDC controlled displays only."; ObjectID = "PyY-p9-3NP"; */
-"PyY-p9-3NP.title" = "Verwenden Sie die Software-Dimmung, nachdem der Monitor die Null-Hardware-Helligkeit erreicht hat, um die Bandbreite zu erweitern. Funktioniert nur bei DDC-gesteuerten Monitoren.";
+"PyY-p9-3NP.title" = "Verwende die Software-Dimmung, nachdem der Monitor die Null-Hardware-Helligkeit erreicht hat, um die Bandbreite zu erweitern. Funktioniert nur bei DDC-gesteuerten Monitoren.";
 
 /* Class = "NSMenuItem"; title = "Both standard and custom shortcuts"; ObjectID = "QDG-SA-mRX"; */
 "QDG-SA-mRX.title" = "Sowohl Standard- als auch benutzerdefinierte Tastenkombinationen";
@@ -299,7 +299,7 @@
 "qoh-Gn-f11.title" = "Lautstärkesteuerung (nur DDC):";
 
 /* Class = "NSTextFieldCell"; title = "Show percentage next to slider for more precision."; ObjectID = "qXy-CL-Wf1"; */
-"qXy-CL-Wf1.title" = "Zeigen Sie den Prozentsatz neben dem Regler an, um die Genauigkeit zu erhöhen.";
+"qXy-CL-Wf1.title" = "Zeige den Prozentsatz neben dem Regler an, um die Genauigkeit zu erhöhen.";
 
 /* Class = "NSButtonCell"; title = "Combine hardware and software dimming"; ObjectID = "r76-Zc-x09"; */
 "r76-Zc-x09.title" = "Kombiniere Hardware- und Software-Dimmung";
