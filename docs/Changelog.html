@@ -1,90 +1,320 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Changelog</title>
-    <style>
-      html,
-      body {
-        font-size: 90%;
-        margin: 10px;
-        line-height: 1.5;
-        font-family: -apple-system, system-ui, BlinkMacSystemFont, 'Segoe UI',
-          Roboto, 'Helvetica Neue', sans-serif;
-        text-rendering: optimizeLegibility;
-        color: #3b4351;
-      }
-      kbd {
-        font-family: Consolas, 'Lucida Console', monospace;
-        display: inline-block;
-        border-radius: 3px;
-        padding: 0px 4px;
-        box-shadow: 1px 1px 1px #777;
-        margin: 2px;
-        font-size: small;
-        vertical-align: text-bottom;
-        background: #eee;
-        font-weight: 500;
-        color: #555;
-        letter-spacing: 1px;
+<h2>MonitorControl v4.0.0-beta2 (Thu, 07 Oct 2021)</h2>
+<aside>
+  View full notes
+  <a
+    href="https://github.com/MonitorControl/MonitorControl/releases/tag/v4.0.0-beta2"
+    >on Github</a
+  >
+</aside>
 
-        /* Prevent selection */
-        -webkit-touch-callout: none;
-        -webkit-user-select: none;
-        -khtml-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-      }
-      ul li {
-        margin-top: 0.4rem;
-      }
-      ul {
-        margin: 0.8rem 0 0.8rem 0.8rem;
-        padding: 0;
-        list-style: disc inside;
-      }
-      a {
-        color: #6fa2fa !important;
-        outline: 0;
-        text-decoration: none;
-      }
-      a:hover {
-        text-decoration: underline;
-      }
-      h3 {
-        color: inherit;
-        font-size: 1.4rem;
-        font-weight: 500;
-        line-height: 1.2;
-        margin-bottom: 0.5em;
-        margin-top: 0;
-      }
-    </style>
-    <script>
-      const urlSearchParams = new URLSearchParams(window.location.search);
-      const params = Object.fromEntries(urlSearchParams.entries());
+<h3>Enhancements</h3>
 
-      if (params?.tag) {
-        const url = `https://github.com/MonitorControl/MonitorControl/releases/tag/${params.tag}`;
-        const proxy =
-          'https://api.allorigins.win/get?url=' + encodeURIComponent(url);
-        let request = new XMLHttpRequest();
-        request.open('GET', proxy, true);
-        request.onload = (event) => {
-          const el = document.createElement('html');
-          const page = JSON.parse(event.target.response);
-          el.innerHTML = page.contents;
-          const mk = el.getElementsByClassName('markdown-body')[0];
-          document.body.appendChild(mk);
-        };
-        request.send();
-      }
-    </script>
-  </head>
-  <body>
-    test
-  </body>
-</html>
+<ul>
+  <li>Added Internet Access Policy</li>
+  <li>
+    Don't relinquish control over brightness keys with no external display
+    connected if fine brightness OSD scale is active
+  </li>
+  <li>Changed icon order in menu (when icon mode is enabled)</li>
+  <li>
+    Gear shape icon is used for preferences + stands a little bit apart to help
+    user focus.
+  </li>
+  <li>
+    Changed default to a minimum software dimming of 15% for safety reasons.
+  </li>
+  <li>
+    Added advanced option to enable zero brightness with software dimming.
+  </li>
+  <li>
+    Added 'Avoid gamma table manipulation' option for coexistence with f.lux.
+  </li>
+  <li>Set relevant options to disabled when keyboard control is disabled.</li>
+  <li>
+    Added <kbd>Command</kbd> + <kbd>Q</kbd> shortcut in menu when it is in
+    standard text mode (not icon mode).
+  </li>
+  <li>Made preferences more spacious + more room for verbose languages</li>
+</ul>
+
+<h3>Updated translations:</h3>
+
+<ul>
+  <li>English - base language</li>
+  <li>Chinese (Traditional, Taiwan) - thanks to @stiiveo, @dororojames</li>
+  <li>Dutch - thanks to @JoniVR</li>
+  <li>French - thanks to @the0neyouseek</li>
+  <li>German - thanks to @jajoho</li>
+  <li>Hungarian - thanks to @waydabber</li>
+  <li>Italian - thanks to @picov</li>
+  <li>Korean - thanks to @zzulu</li>
+  <li>Turkish - thanks to @mennan</li>
+</ul>
+
+<h3>Under the hood changes & fixes</h3>
+
+<ul>
+  <li>
+    DDC command touched status. When write on startup enabled, apply only
+    touched command values.
+  </li>
+  <li>Reorganised PrefKey list to be less confusing.</li>
+  <li>
+    Disengage custom shortcut keyboard after 100 key repeat to prevent possibly
+    endless loop if keyUp event never arrives due to any circumstance.
+  </li>
+  <li>Fixed text for external display brightness control keyboard shortcut.</li>
+  <li>
+    Fix cumulative darkening bug upon toggling 'Disable dimming as fallback'.
+  </li>
+  <li>
+    Make sure that key repeat speed for custom shortcuts do not go below a
+    certain threshold.
+  </li>
+  <li>Fixes text clipping issues for various languages</li>
+  <li>Added beta channel update backend</li>
+  <li>Fixed layout issue at brightness custom shortcuts.</li>
+  <li>
+    Fixed custom key shortcuts going runaway when menu was opened during a key
+    repeat streak.
+  </li>
+</ul>
+
+<h2>MonitorControl v4.0.0-beta1 (Thu, 30 Sept 2021)</h2>
+<aside>
+  View full notes
+  <a
+    href="https://github.com/MonitorControl/MonitorControl/releases/tag/v4.0.0-beta1"
+    >on Github</a
+  >
+</aside>
+
+<h3>Enhancements</h3>
+
+<ul>
+  <li>
+    Automatic & manual updates through the app, no more manual downloads 🎉
+  </li>
+  <li>Added proper support for controlling Apple displays.</li>
+  <li>Added option to show/hide brightness slider.</li>
+  <li>
+    Added option to show brightness slider for internal display and apple
+    displays (enabled by default).
+  </li>
+  <li>
+    Replication of built-in and Apple display brightness to corresponding
+    brightness slider.
+  </li>
+  <li>Added suffix to similarly named displays for better differentiation.</li>
+  <li>
+    Option to disable slider snapping for finer control + disable slider
+    snapping by default.
+  </li>
+  <li>Added option to show slider tick marks for better accuracy.</li>
+  <li>
+    Added option to use window focus instead of mouse to determine which display
+    to control.
+  </li>
+  <li>
+    <kbd>control</kbd> + <kbd>command</kbd> + <kbd>brightness</kbd> now controls
+    external displays only (<kbd>control</kbd> + <kbd>Brightness</kbd> continues
+    to control internal display only)
+  </li>
+  <li>Added separate tab for menu options.</li>
+  <li>Added option to restore last saved values upon startup.</li>
+  <li>
+    Added option for audio device name matching for display volume control
+    selection.
+  </li>
+  <li>Separated option to change all screens for brightness and volume.</li>
+  <li>Added option for keyboard fine scale for brightness.</li>
+  <li>Added option for keyboard fine scale for volume.</li>
+  <li>
+    Added version check upon startup for mandatory preferences reset upon
+    downgrade or incompatible previous version + notification about this.
+  </li>
+  <li>
+    Added implementation for <kbd>command</kbd> + <kbd>f1</kbd> macOS shortcut
+    to enable/disable mirroring.
+  </li>
+  <li>
+    Added safer 'Assume last saved settings are valid' option as default instead
+    of startup DDC read (or restore).
+  </li>
+  <li>
+    Streamlined preference panes, 'Show advanced settings' now affect all tabs.
+    This leads to a better and safer first timer experience (especially because
+    of the influx of many new features).
+  </li>
+  <li>
+    Added a Quit button to Preferences if menu is hidden (it was not passible to
+    quit the application until this time in this mode only by re-enabling the
+    menu).
+  </li>
+  <li>
+    Lowered default first-run volume DDC default from 75% to 15% if read is not
+    possible or disabled to prevent unexpectedly loud sound.
+  </li>
+  <li>
+    Added slider skew setting on a per control basis to have the ability to
+    manipulate DDC slider balance and OSD scale if display control is not
+    linear.
+  </li>
+  <li>
+    Added the ability to set min. and max. DDC bounds on a per display, per
+    control basis.
+  </li>
+  <li>
+    Audio device name override option for a display (manually assign a specific
+    audio device to a display).
+  </li>
+  <li>
+    Advanced setting to invert DDC control range (some displays have the scale
+    reversed).
+  </li>
+  <li>
+    Advanced setting to remap DDC control code (some displays have contrast and
+    brightness mixed up).
+  </li>
+  <li>
+    Ability to mark a DDC control as available or unavailable in advanced
+    settings under Displays.
+  </li>
+  <li>
+    Ability to automatically hide menu icon if there is no slider present in the
+    menu.
+  </li>
+  <li>Option to show slider percentage for more precision.</li>
+  <li>
+    Option to set combined or separate OSD scale when combined hardware+software
+    brightness is used.
+  </li>
+  <li>
+    Apple like smooth brightness change (both for software, hardware, mixed and
+    DisplayServices).
+  </li>
+  <li>
+    Added support for DisplayLink, AirPlay, Sidecar, screen sharing etc. using
+    window shades (this is an inferior technique to the existing software
+    implementation - gamma control - but still better than nothing). Disabled
+    for any kind of mirroring setups. [^1]
+  </li>
+  <li>
+    Brightness change synchronisation from Built-In and Apple displays to other
+    displays. This makes Touch Bar, Ambient light sensor, Control Center and
+    System Preferences induced changes affect all displays. Synchronisation uses
+    a sophisticated indirect delta method + the user can intervene and adjust
+    individual screen brightness at any time to easily compensate mismatching
+    native brightness levels.
+  </li>
+  <li>Preferences pane tab selector has a simpler look on Catalina.</li>
+  <li>
+    All menu sliders are now scrollable using a magic mouse/trackpad swipes or
+    mouse wheel.
+  </li>
+  <li>
+    Added option for menu to show only items that are relevant to display which
+    shows the menu currently.
+  </li>
+  <li>
+    Added option to enable combined sliders (note: this option combined with
+    enabled Apple/built-in display syncing and enabled 'change all' keyboard
+    settings finally provides full synchronised control of all displays).
+  </li>
+  <li>
+    Combined sliders can now display multiple displays when keyboard and
+    brightness syncing is not enabled. [^1]
+  </li>
+  <li>
+    Redesigned sliders to look like Big Sur/Monterey Control Center's sliders.
+    [^1]
+  </li>
+  <li>Quit and Preferences... are now icons for a much cleaner look. [^1]</li>
+  <li>
+    Added option to change additional menu options style or hide them. [^1]
+  </li>
+  <li>
+    Multiple displays are now in nice Big Sur styled blocks - no more ugly
+    separators. [^1]
+  </li>
+  <li>
+    Added customisable gamma/ddc switchover point for combined brightness in the
+    advanced section of Displays.
+  </li>
+  <li>
+    Added comma separated list for control code override to enable edge cases
+    like controlling Brightness and Contrast at the same time (use VCP list
+    entry `10, 12` for that)
+  </li>
+  <li>
+    Contrast can now be controlled from keyboard via <kbd>control</kbd> +
+    <kbd>option</kbd> + <kbd>command</kbd> + <kbd>brightness up/down</kbd>.
+  </li>
+  <li>Custom keyboard shortcuts for brightness, contrast, volume and mute</li>
+</ul>
+
+<h3>Other under the hood changes and bug fixes</h3>
+
+<ul>
+  <li>
+    Standardised internal scale among various displays and DDC ranges for ranged
+    controls.
+  </li>
+  <li>
+    Uses the new internal scale for combined hardware-software brightness mode.
+  </li>
+  <li>
+    Migrated scales to internal float representation to prevent loss of fine
+    detail on transformations.
+  </li>
+  <li>
+    Fixed double sound when muting multiple external displays at the same time.
+  </li>
+  <li>
+    Fixed lack of initial volume configuration if slider is not shown in menu.
+  </li>
+  <li>
+    Fixed wrong settings being applied to a display when replaced on Apple
+    Silicon (UserDefaults preferences are now tied to specific display strings
+    instead of CGDirectDisplayID - which is no longer semi-unique on arm64).
+  </li>
+  <li>A lot of refactoring, streamlining and general optimisations.</li>
+</ul>
+
+<style>
+  h2 {
+    font-size: 1.3rem;
+    margin-bottom: 8px;
+  }
+  h3 {
+    margin-bottom: 8px;
+  }
+  kbd {
+    font-family: Consolas, 'Lucida Console', monospace;
+    display: inline-block;
+    border-radius: 3px;
+    padding: 0px 4px;
+    box-shadow: 1px 1px 1px #777;
+    margin: 2px;
+    font-size: small;
+    vertical-align: text-bottom;
+    background: #eee;
+    font-weight: 500;
+    color: #555;
+    letter-spacing: 1px;
+
+    /* Prevent selection */
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+  aside {
+    font-size: 0.8rem;
+  }
+  li {
+    font-size: 0.9rem;
+  }
+</style>
