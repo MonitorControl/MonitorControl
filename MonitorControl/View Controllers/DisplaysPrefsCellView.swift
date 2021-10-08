@@ -15,6 +15,7 @@ class DisplaysPrefsCellView: NSTableCellView {
   @IBOutlet var displayId: NSTextFieldCell!
   @IBOutlet var enabledButton: NSButton!
   @IBOutlet var ddcButton: NSButton!
+  @IBOutlet var avoidGamma: NSButton!
   @IBOutlet var controlMethod: NSTextFieldCell!
   @IBOutlet var displayType: NSTextFieldCell!
   @IBOutlet var disableVolumeOSDButton: NSButton!
@@ -54,12 +55,6 @@ class DisplaysPrefsCellView: NSTableCellView {
   @IBOutlet var remapDDCBrightness: NSTextField!
   @IBOutlet var remapDDCVolume: NSTextField!
   @IBOutlet var remapDDCContrast: NSTextField!
-
-  @IBAction func openAdvancedHelp(_: NSButton) {
-    if let url = URL(string: "https://github.com/the0neyouseek/MonitorControl/wiki/Advanced-Preferences") {
-      NSWorkspace.shared.open(url)
-    }
-  }
 
   @IBAction func pollingModeValueChanged(_ sender: NSPopUpButton) {
     if let display = display as? OtherDisplay {
@@ -195,6 +190,24 @@ class DisplaysPrefsCellView: NSTableCellView {
       default:
         break
       }
+    }
+  }
+
+  @IBAction func avoidGamma(_ sender: NSButton) {
+    if let display = display as? OtherDisplay {
+      _ = display.setSwBrightness(1)
+      _ = display.setDirectBrightness(1)
+      switch sender.state {
+      case .on:
+        display.savePref(true, key: .avoidGamma)
+      case .off:
+        display.savePref(false, key: .avoidGamma)
+      default:
+        break
+      }
+      let displayInfo = DisplaysPrefsViewController.getDisplayInfo(display: display)
+      self.controlMethod.stringValue = displayInfo.controlMethod
+      self.controlMethod.controlView?.toolTip = displayInfo.controlStatus
     }
   }
 
@@ -345,6 +358,8 @@ class DisplaysPrefsCellView: NSTableCellView {
       if self.ddcButton.isEnabled { // This signifies that the DDC block is enabled
         self.ddcButton.state = .on
         self.ddcButtonToggled(self.ddcButton)
+        self.avoidGamma.state = .off
+        self.ddcButtonToggled(self.avoidGamma)
         self.enabledButton.state = .on
         self.enabledButtonToggled(self.enabledButton)
         self.disableVolumeOSDButton.state = .off

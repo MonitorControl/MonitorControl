@@ -145,6 +145,9 @@
 /* Class = "NSTextFieldCell"; title = "Volume:"; ObjectID = "FER-Ri-4UO"; */
 "FER-Ri-4UO.title" = "Lautstärke:";
 
+/* Class = "NSButtonCell"; title = "Allow zero brightness via software or combined dimming"; ObjectID = "FjB-XL-fG5"; */
+"FjB-XL-fG5.title" = "Allow zero brightness via software or combined dimming";
+
 /* Class = "NSTextFieldCell"; title = "Apple and built-in displays already have a brightness slider in Control Center."; ObjectID = "fmZ-HI-Mdc"; */
 "fmZ-HI-Mdc.title" = "Apple und eingebaute Monitore verfügen bereits über einen Helligkeitsregler im Kontrollzentrum.";
 
@@ -211,7 +214,7 @@
 /* Class = "NSTextFieldCell"; title = "Record shortcuts:"; ObjectID = "kqJ-jQ-b7U"; */
 "kqJ-jQ-b7U.title" = "Kurzbefehle aufnehmen:";
 
-/* Class = "NSTextFieldCell"; title = "Brightness and contrast control:"; ObjectID = "LO4-4k-gxY"; */
+/* Class = "NSTextFieldCell"; title = "Brightness and contrast:"; ObjectID = "LO4-4k-gxY"; */
 "LO4-4k-gxY.title" = "Steuerung von Helligkeit und Kontrast:";
 
 /* Class = "NSTextFieldCell"; title = "Display type:"; ObjectID = "lSJ-6w-KJ2"; */
@@ -238,6 +241,9 @@
 /* Class = "NSButtonCell"; title = "Show brightness slider in menu"; ObjectID = "MWo-6I-s9L"; */
 "MWo-6I-s9L.title" = "Helligkeitsregler im Menü anzeigen";
 
+/* Class = "NSButtonCell"; title = "Avoid gamma table manipulation"; ObjectID = "na6-mS-MPi"; */
+"na6-mS-MPi.title" = "Avoid gamma table manipulation";
+
 /* Class = "NSButtonCell"; title = "Separate scales for combined hardware & software dimming"; ObjectID = "O8o-hI-8eR"; */
 "O8o-hI-8eR.title" = "Getrennte Skalen für kombiniertes Dimmen von Hardware und Software";
 
@@ -259,8 +265,8 @@
 /* Class = "NSTextFieldCell"; title = "count:"; ObjectID = "Orv-yj-Nad"; */
 "Orv-yj-Nad.title" = "zählen:";
 
-/* Class = "NSTextFieldCell"; title = "Use the brightness keys of your Apple keyboard to control brightness. You can hold Control to adjust the built-in display, Control+Option to adjust external displays. Hold Shift+Option for fine control. Control+Option+Command adjusts contrast on DDC compatible displays."; ObjectID = "pa0-Hz-ace"; */
-"pa0-Hz-ace.title" = "Verwenden Sie die Helligkeitstasten Ihrer Apple-Tastatur, um die Helligkeit zu steuern. Halten Sie die Steuerungstaste gedrückt, um den eingebauten Monitor zu steuern, und halten Sie die Tastenkombination Steuerung+Option gedrückt, um externe Monitore zu steuern. Halten Sie Shift+Option für die Feinsteuerung. Steuerung+Option+Befehl stellt den Kontrast auf DDC-kompatiblen Monitoren ein.";
+/* Class = "NSTextFieldCell"; title = "Use the brightness keys of your Apple keyboard to control brightness. You can hold Control to adjust the built-in display, Control+Command to adjust external displays. Hold Shift+Option for fine control. Control+Option+Command adjusts contrast on DDC compatible displays."; ObjectID = "pa0-Hz-ace"; */
+"pa0-Hz-ace.title" = "Verwenden Sie die Helligkeitstasten Ihrer Apple-Tastatur, um die Helligkeit zu steuern. Halten Sie die Steuerungstaste gedrückt, um den eingebauten Monitor zu steuern, und halten Sie die Tastenkombination Steuerung+Befehl gedrückt, um externe Monitore zu steuern. Halten Sie Shift+Option für die Feinsteuerung. Steuerung+Option+Befehl stellt den Kontrast auf DDC-kompatiblen Monitoren ein.";
 
 /* Class = "NSTextFieldCell"; title = "Control method:"; ObjectID = "PaK-1f-DsW"; */
 "PaK-1f-DsW.title" = "Steuerung:";
@@ -375,6 +381,9 @@
 
 /* Class = "NSTextFieldCell"; title = "Full OSD scale will be available for hardware brightness control and after reaching 0 brightness, further software dimming will be used."; ObjectID = "YHZ-VL-QJ3"; */
 "YHZ-VL-QJ3.title" = "Für die Steuerung der Hardware-Helligkeit steht die volle OSD-Skala zur Verfügung, und nach Erreichen der Helligkeit 0 erfolgt eine weitere Software-Dimmung.";
+
+/* Class = "NSTextFieldCell"; title = "Warning! With this option enabled, you might find yourself in a position when you end up with a blank display. This, combined with disabled keyboard controls can be frustrating."; ObjectID = "yi3-e1-wsL"; */
+"yi3-e1-wsL.title" = "Warning! With this option enabled, you might find yourself in a position when you end up with a blank display. This, combined with disabled keyboard controls can be frustrating.";
 
 /* Class = "NSButtonCell"; title = "Assume last saved settings are valid (recommended)"; ObjectID = "yn8-Nd-o89"; */
 "yn8-Nd-o89.title" = "Annehmen, dass die zuletzt gespeicherten Einstellungen gültig sind (empfohlen)";

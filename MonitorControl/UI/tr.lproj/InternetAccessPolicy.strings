@@ -1,0 +1,8 @@
+/* General application description */
+"ApplicationDescription" = "MonitorControl, harici ekranların parlaklığını ve ses seviyesini kontrol etmenizi sağlar";
+
+/* Sofware update deny consequences */
+"SoftwareUpdateDenyConsequences" = "Güvenlik güncellemelerini kontrol etmeyi reddederseniz, yeni sürümler ve güvenlik güncellemeleri hakkında bilgilendirilmeyeceksiniz. Kötü amaçlı yazılım saldırılarına karşı savunmak için güvenlik güncellemeleri önemlidir.";
+
+/* Software update purpose */
+"SoftwareUpdatePurpose" = "MonitorControl, yeni sürümleri ve güvenlik güncellemelerini kontrol eder.";

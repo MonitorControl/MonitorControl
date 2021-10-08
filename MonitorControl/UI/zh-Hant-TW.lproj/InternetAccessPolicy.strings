@@ -1,0 +1,8 @@
+/* General application description */
+"ApplicationDescription" = "MonitorControl讓您可以控制外接螢幕的亮度與音量";
+
+/* Sofware update deny consequences */
+"SoftwareUpdateDenyConsequences" = "若您拒絕這些連線，您將不會收到新版本以及安全性更新的通知。 安全性更新對於抵禦惡意軟體的攻擊是相當重要的。";
+
+/* Software update purpose */
+"SoftwareUpdatePurpose" = "MonitorControl會檢查新版本以及安全性更新。";

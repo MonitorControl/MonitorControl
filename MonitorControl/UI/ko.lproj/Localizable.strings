@@ -89,16 +89,19 @@
 "Shortcuts not available" = "단축키를 사용할 수 없음";
 
 /* Shown in the Display Preferences */
-"Software (Gamma)" = "소프트웨어 (감마)";
+"Software (gamma)" = "소프트웨어 (감마)";
 
 /* Shown in the Display Preferences */
-"Software (Gamma, Forced)" = "소프트웨어 (감마, 강제 적용)";
+"Software (gamma, forced)" = "소프트웨어 (감마, 강제 적용)";
 
 /* Shown in the Display Preferences */
-"Software (Shade)" = "소프트웨어 (명암)";
+"Software (shade)" = "소프트웨어 (명암)";
 
 /* Shown in the Display Preferences */
-"This display allows for software brightness control via gammatable manipulation as it does not support hardware control. Reasons for this might be using the HDMI port of a Mac mini (which blocks hardware DDC control) or having a blacklisted display." = "이 디스플레이는 하드웨어 제어를 지원하지 않기 때문에 감마 설정을 통해 소프트웨어로 밝기를 제어합니다. 그 이유는 하드웨어 DDC 제어가 차단된 Mac mini의 HDMI 포트를 사용하였거나 블랙리스트에 포함된 디스플레이를 사용하고 있기 때문일 수 있습니다.";
+"Software (shade, forced)" = "소프트웨어 (명암, 강제 적용)";
+
+/* Shown in the Display Preferences */
+"This display allows for software brightness control via gamma table manipulation or shade as it does not support hardware control. Reasons for this might be using the HDMI port of a Mac mini (which blocks hardware DDC control) or having a blacklisted display." = "이 디스플레이는 하드웨어 제어를 지원하지 않기 때문에 감마 테이블과 명암 조절을 통해 소프트웨어로 밝기를 제어합니다. 그 이유는 하드웨어 DDC 제어가 차단된 Mac mini의 HDMI 포트를 사용하였거나 블랙리스트에 포함된 디스플레이를 사용하고 있기 때문일 수 있습니다.";
 
 /* Shown in the Display Preferences */
 "This display has an unspecified control status." = "이 디스플레이에는 지정되지 않은 제어 상태가 있습니다.";

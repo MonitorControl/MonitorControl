@@ -1,0 +1,8 @@
+/* General application description */
+"ApplicationDescription" = "Met MonitorControl kunt u de helderheid en het volume van externe schermen regelen";
+
+/* Sofware update deny consequences */
+"SoftwareUpdateDenyConsequences" = "Als u deze verbindingen weigert, wordt u niet op de hoogte gebracht van nieuwe versies en beveiligingsupdates. Beveiligingsupdates zijn belangrijk ter bescherming tegen malware-aanvallen.";
+
+/* Software update purpose */
+"SoftwareUpdatePurpose" = "MonitorControl controleert op nieuwe versies en beveiligingsupdates.";

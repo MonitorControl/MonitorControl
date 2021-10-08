@@ -1,0 +1,8 @@
+/* General application description */
+"ApplicationDescription" = "MonitorControl ti permette di controllare la luminosità ed il volume del tuo monitor esterno";
+
+/* Sofware update deny consequences */
+"SoftwareUpdateDenyConsequences" = "Se blocchi queste connessioni, non sarai avvisato sulle nuove versioni e sugli aggiornamenti di sicurezza che sono importanti per difendersi dagli attacchi di malware.";
+
+/* Software update purpose */
+"SoftwareUpdatePurpose" = "MonitorControl verifica la presenza di nuove versioni ed aggiornamenti di sicurezza";

@@ -1,5 +1,6 @@
 //  Copyright © MonitorControl. @JoniVR, @theOneyouseek, @waydabber and others
 
+import AVFoundation
 import Cocoa
 import Foundation
 import MediaKeyTap
@@ -19,7 +20,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   var sleepID: Int = 0 // sleep event ID
   var safeMode = false
   var jobRunning = false
-  let updaterController = SPUStandardUpdaterController(startingUpdater: false, updaterDelegate: nil, userDriverDelegate: nil)
+  var audioPlayer: AVAudioPlayer?
+  let updaterController = SPUStandardUpdaterController(startingUpdater: false, updaterDelegate: UpdaterDelegate(), userDriverDelegate: nil)
 
   var preferencePaneStyle: Preferences.Style {
     if !DEBUG_MACOS10, #available(macOS 11.0, *) {
@@ -297,6 +299,19 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       return false
     } else {
       return true
+    }
+  }
+
+  func playVolumeChangedSound() {
+    guard let preferences = app.getSystemPreferences(), let hasSoundEnabled = preferences["com.apple.sound.beep.feedback"] as? Int, hasSoundEnabled == 1 else {
+      return
+    }
+    do {
+      self.audioPlayer = try AVAudioPlayer(contentsOf: URL(fileURLWithPath: "/System/Library/LoginPlugins/BezelServices.loginPlugin/Contents/Resources/volume.aiff"))
+      self.audioPlayer?.volume = 1
+      self.audioPlayer?.play()
+    } catch {
+      os_log("%{public}@", type: .error, error.localizedDescription)
     }
   }
 }
