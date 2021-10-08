@@ -83,12 +83,20 @@ class DisplaysPrefsViewController: NSViewController, PreferencePane, NSTableView
       displayImage = "display"
       if let otherDisplay: OtherDisplay = display as? OtherDisplay {
         if otherDisplay.isSwOnly() {
-          controlMethod = NSLocalizedString("Software (gamma)", comment: "Shown in the Display Preferences") + "  ⚠️"
+          if otherDisplay.readPrefAsBool(key: .avoidGamma) {
+            controlMethod = NSLocalizedString("Software (shade)", comment: "Shown in the Display Preferences") + "  ⚠️"
+          } else {
+            controlMethod = NSLocalizedString("Software (gamma)", comment: "Shown in the Display Preferences") + "  ⚠️"
+          }
           displayImage = "display.trianglebadge.exclamationmark"
-          controlStatus = NSLocalizedString("This display allows for software brightness control via gammatable manipulation as it does not support hardware control. Reasons for this might be using the HDMI port of a Mac mini (which blocks hardware DDC control) or having a blacklisted display.", comment: "Shown in the Display Preferences")
+          controlStatus = NSLocalizedString("This display allows for software brightness control via gamma table manipulation or shade as it does not support hardware control. Reasons for this might be using the HDMI port of a Mac mini (which blocks hardware DDC control) or having a blacklisted display.", comment: "Shown in the Display Preferences")
         } else {
           if otherDisplay.isSw() {
-            controlMethod = NSLocalizedString("Software (gamma, forced)", comment: "Shown in the Display Preferences") + "  ⚠️"
+            if otherDisplay.readPrefAsBool(key: .avoidGamma) {
+              controlMethod = NSLocalizedString("Software (shade, forced)", comment: "Shown in the Display Preferences")
+            } else {
+              controlMethod = NSLocalizedString("Software (gamma, forced)", comment: "Shown in the Display Preferences")
+            }
             controlStatus = NSLocalizedString("This display is reported to support hardware DDC control but the current settings allow for software control only.", comment: "Shown in the Display Preferences")
           } else {
             controlMethod = NSLocalizedString("Hardware (DDC)", comment: "Shown in the Display Preferences")
@@ -130,6 +138,13 @@ class DisplaysPrefsViewController: NSViewController, PreferencePane, NSTableView
       cell.friendlyName.isEditable = true
       // Enabled
       cell.enabledButton.state = display.readPrefAsBool(key: .isDisabled) ? .off : .on
+      // Enabled
+      cell.avoidGamma.state = display.readPrefAsBool(key: .avoidGamma) ? .on : .off
+      if (display as? OtherDisplay)?.isVirtual ?? true {
+        cell.avoidGamma.isEnabled = false
+      } else {
+        cell.avoidGamma.isEnabled = true
+      }
       // DDC
       cell.ddcButton.state = ((display as? OtherDisplay)?.isSw() ?? true) ? .off : .on
       if ((display as? OtherDisplay)?.isSwOnly() ?? true) || ((display as? OtherDisplay)?.isVirtual ?? true) {
@@ -289,10 +304,10 @@ class DisplaysPrefsViewController: NSViewController, PreferencePane, NSTableView
 
   func updateDisplayListRowHeight() {
     if prefs.bool(forKey: PrefKey.showAdvancedSettings.rawValue) {
-      self.displayList?.rowHeight = 500
+      self.displayList?.rowHeight = 520
       self.constraintHeight?.constant = self.displayList.rowHeight + 15
     } else {
-      self.displayList?.rowHeight = 165
+      self.displayList?.rowHeight = 185
       self.constraintHeight?.constant = self.displayList.rowHeight * 2 + 15
     }
   }

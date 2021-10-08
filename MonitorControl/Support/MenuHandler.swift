@@ -21,6 +21,7 @@ class MenuHandler: NSMenu, NSMenuDelegate {
 
   func menuWillOpen(_: NSMenu) {
     self.updateMenuRelevantDisplay()
+    app.keyboardShortcuts.disengage()
   }
 
   func updateMenus(dontClose: Bool = false) {
@@ -226,7 +227,7 @@ class MenuHandler: NSMenu, NSMenuDelegate {
       preferencesIcon.image = NSImage(systemSymbolName: "gearshape", accessibilityDescription: NSLocalizedString("Preferences...", comment: "Shown in menu"))
       preferencesIcon.alternateImage = NSImage(systemSymbolName: "gearshape.fill", accessibilityDescription: NSLocalizedString("Preferences...", comment: "Shown in menu"))
       preferencesIcon.alphaValue = 0.3
-      preferencesIcon.frame = NSRect(x: menuItemView.frame.maxX - iconSize - 16 + compensateForBlock, y: menuItemView.frame.origin.y + 5, width: iconSize, height: iconSize)
+      preferencesIcon.frame = NSRect(x: menuItemView.frame.maxX - iconSize * 3 - 30 - 16 + compensateForBlock, y: menuItemView.frame.origin.y + 5, width: iconSize, height: iconSize)
       preferencesIcon.imageScaling = .scaleProportionallyUpOrDown
       preferencesIcon.action = #selector(app.prefsClicked)
 
@@ -239,7 +240,7 @@ class MenuHandler: NSMenu, NSMenuDelegate {
       updateIcon.alternateImage = NSImage(systemSymbolName: symbolName + ".fill", accessibilityDescription: NSLocalizedString("Check for updates...", comment: "Shown in menu"))
 
       updateIcon.alphaValue = 0.3
-      updateIcon.frame = NSRect(x: menuItemView.frame.maxX - iconSize * 2 - 20 - 16 + compensateForBlock, y: menuItemView.frame.origin.y + 5, width: iconSize, height: iconSize)
+      updateIcon.frame = NSRect(x: menuItemView.frame.maxX - iconSize * 2 - 10 - 16 + compensateForBlock, y: menuItemView.frame.origin.y + 5, width: iconSize, height: iconSize)
       updateIcon.imageScaling = .scaleProportionallyUpOrDown
       updateIcon.action = #selector(app.updaterController.checkForUpdates(_:))
       updateIcon.target = app.updaterController
@@ -252,7 +253,7 @@ class MenuHandler: NSMenu, NSMenuDelegate {
       quitIcon.image = NSImage(systemSymbolName: symbolName, accessibilityDescription: NSLocalizedString("Quit", comment: "Shown in menu"))
       quitIcon.alternateImage = NSImage(systemSymbolName: symbolName + ".fill", accessibilityDescription: NSLocalizedString("Quit", comment: "Shown in menu"))
       quitIcon.alphaValue = 0.3
-      quitIcon.frame = NSRect(x: menuItemView.frame.maxX - iconSize * 3 - 30 - 16 + compensateForBlock, y: menuItemView.frame.origin.y + 5, width: iconSize, height: iconSize)
+      quitIcon.frame = NSRect(x: menuItemView.frame.maxX - iconSize - 16 + compensateForBlock, y: menuItemView.frame.origin.y + 5, width: iconSize, height: iconSize)
       quitIcon.imageScaling = .scaleProportionallyUpOrDown
       quitIcon.action = #selector(app.quitClicked)
 

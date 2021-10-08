@@ -98,7 +98,10 @@
 "Software (shade)" = "Software (shade)";
 
 /* Shown in the Display Preferences */
-"This display allows for software brightness control via gammatable manipulation as it does not support hardware control. Reasons for this might be using the HDMI port of a Mac mini (which blocks hardware DDC control) or having a blacklisted display." = "Bu ekran, donanım kontrolünü desteklemediği için gamlanabilir manipülasyon yoluyla yazılım parlaklık kontrolüne izin verir. Bunun nedenleri, bir Mac mini'nin (donanım DDC kontrolünü engelleyen) HDMI bağlantı noktasını kullanmak veya kara listeye alınmış bir ekrana sahip olmak olabilir.";
+"Software (shade, forced)" = "Software (shade, forced)";
+
+/* Shown in the Display Preferences */
+"This display allows for software brightness control via gamma table manipulation or shade as it does not support hardware control. Reasons for this might be using the HDMI port of a Mac mini (which blocks hardware DDC control) or having a blacklisted display." = "Bu ekran, donanım kontrolünü desteklemediği için gamlanabilir manipülasyon yoluyla yazılım parlaklık kontrolüne izin verir. Bunun nedenleri, bir Mac mini'nin (donanım DDC kontrolünü engelleyen) HDMI bağlantı noktasını kullanmak veya kara listeye alınmış bir ekrana sahip olmak olabilir.";
 
 /* Shown in the Display Preferences */
 "This display has an unspecified control status." = "Bu ekranın belirtilmemiş bir kontrol durumu var.";
