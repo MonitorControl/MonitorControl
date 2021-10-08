@@ -1,8 +1,8 @@
 /* Class = "NSButtonCell"; title = "Sync brightness changes from Built-in and Apple displays"; ObjectID = "0ca-DG-AgB"; */
 "0ca-DG-AgB.title" = "Synchronisez les changements de luminosité à partir des écrans intégrés et Apple";
 
-/* Class = "NSButtonCell"; title = "Attempt to read display settings"; ObjectID = "9yL-no-aWa"; */
-"9yL-no-aWa.title" = "Essayez de lire les paramètres de l'écran";
+/* Class = "NSMenuItem"; title = "Assume last saved settings are valid (recommended)"; ObjectID = "1in-79-6qm"; */
+"1in-79-6qm.title" = "Supposer que les derniers paramètres enregistrés sont valides (recommandé)";
 
 /* Class = "NSTextFieldCell"; title = "MonitorControl"; ObjectID = "1PJ-14-Bvn"; */
 "1PJ-14-Bvn.title" = "MonitorControl";
@@ -15,6 +15,9 @@
 
 /* Class = "NSTextFieldCell"; title = "DDC min"; ObjectID = "1zE-fg-xEm"; */
 "1zE-fg-xEm.title" = "min. DDC";
+
+/* Class = "NSMenuItem"; title = "Apply last saved values to the display"; ObjectID = "3Jr-bW-YYq"; */
+"3Jr-bW-YYq.title" = "Appliquer les dernières valeurs enregistrées à l'écran'";
 
 /* Class = "NSMenuItem"; title = "Custom keyboard shortcuts"; ObjectID = "4CG-0I-anB"; */
 "4CG-0I-anB.title" = "Raccourcis clavier personnalisés";
@@ -57,6 +60,9 @@
 
 /* Class = "NSSlider"; ibExternalAccessibilityDescription = "Brightness"; ObjectID = "9H1-0z-xsx"; */
 "9H1-0z-xsx.ibExternalAccessibilityDescription" = "Luminosité";
+
+/* Class = "NSMenuItem"; title = "Attempt to read display settings"; ObjectID = "9yL-no-aWa"; */
+"9yL-no-aWa.title" = "Essayez de lire les paramètres de l'écran";
 
 /* Class = "NSTextFieldCell"; title = "Show tick marks at 0%, 25%, 50%, 75% and 100% for accuracy."; ObjectID = "A8P-vn-DEJ"; */
 "A8P-vn-DEJ.title" = "Afficher les graduations à 0 %, 25 %, 50 %, 75 % et 100 % pour plus de précision.";
@@ -201,9 +207,6 @@
 
 /* Class = "NSTextFieldCell"; title = "Note: you can press Shift during startup for 'Safe mode' to restore defaults and avoid reading or setting anything."; ObjectID = "Jx2-gO-nq9"; */
 "Jx2-gO-nq9.title" = "Remarque : vous pouvez appuyer sur Maj pendant le démarrage pour démarrer en « Mode sans échec » ce qui restaure les paramètres par défaut et évite de lire ou de définir quoi que ce soit.";
-
-/* Class = "NSButtonCell"; title = "Apply last saved values to the display"; ObjectID = "3Jr-bW-YYq"; */
-"3Jr-bW-YYq.title" = "Appliquer les dernières valeurs enregistrées à l'écran'";
 
 /* Class = "NSButtonCell"; title = "Enable for Apple branded and built-in displays as well"; ObjectID = "K6A-4z-1aQ"; */
 "K6A-4z-1aQ.title" = "Activer également les écrans Apple et intégrés";
@@ -384,9 +387,6 @@
 
 /* Class = "NSTextFieldCell"; title = "Warning! With this option enabled, you might find yourself in a position when you end up with a blank display. This, combined with disabled keyboard controls can be frustrating."; ObjectID = "yi3-e1-wsL"; */
 "yi3-e1-wsL.title" = "Warning! With this option enabled, you might find yourself in a position when you end up with a blank display. This, combined with disabled keyboard controls can be frustrating.";
-
-/* Class = "NSButtonCell"; title = "Assume last saved settings are valid (recommended)"; ObjectID = "1in-79-6qm"; */
-"1in-79-6qm.title" = "Supposer que les derniers paramètres enregistrés sont valides (recommandé)";
 
 /* Class = "NSTextFieldCell"; title = "Decrease:"; ObjectID = "yQh-Ve-WEE"; */
 "yQh-Ve-WEE.title" = "Diminuer :";
