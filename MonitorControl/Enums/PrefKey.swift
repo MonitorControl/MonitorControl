@@ -61,10 +61,7 @@ enum PrefKey: String {
   case showTickMarks
 
   // Instead of assuming default values, enable read or write upon startup (according to readDDCInsteadOfRestoreValues)
-  case enableDDCDuringStartup
-
-  // Restore last saved values upon startup or wake
-  case readDDCInsteadOfRestoreValues
+  case startupAction
 
   // Show advanced options under Displays tab in Preferences
   case showAdvancedSettings
@@ -168,6 +165,12 @@ enum PrefKey: String {
 
   // Override DDC control command code
   case remapDDC
+}
+
+enum StartupAction: Int {
+  case doNothing = 0
+  case write = 1
+  case read = 2
 }
 
 enum PollingMode: Int {

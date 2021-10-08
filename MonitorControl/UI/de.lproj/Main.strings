@@ -1,8 +1,8 @@
 /* Class = "NSButtonCell"; title = "Sync brightness changes from Built-in and Apple displays"; ObjectID = "0ca-DG-AgB"; */
 "0ca-DG-AgB.title" = "Synchronisierung der Helligkeitsänderungen von internen und Apple Monitoren";
 
-/* Class = "NSButtonCell"; title = "Attempt to read display settings"; ObjectID = "0qp-fq-8MI"; */
-"0qp-fq-8MI.title" = "Versuch, die Monitor-Einstellungen zu lesen";
+/* Class = "NSButtonCell"; title = "Attempt to read display settings"; ObjectID = "9yL-no-aWa"; */
+"9yL-no-aWa.title" = "Versuch, die Monitor-Einstellungen zu lesen";
 
 /* Class = "NSTextFieldCell"; title = "MonitorControl"; ObjectID = "1PJ-14-Bvn"; */
 "1PJ-14-Bvn.title" = "MonitorControl";
@@ -202,8 +202,8 @@
 /* Class = "NSTextFieldCell"; title = "Note: you can press Shift during startup for 'Safe mode' to restore defaults and avoid reading or setting anything."; ObjectID = "Jx2-gO-nq9"; */
 "Jx2-gO-nq9.title" = "Hinweis: Du kannst während des Starts die Umschalttaste drücken, um den 'Abgesicherten Modus' zu aktivieren, damit die Standardeinstellungen wiederhergestellt werden und nichts gelesen oder eingestellt wird.";
 
-/* Class = "NSButtonCell"; title = "Apply last saved values to the display"; ObjectID = "K0S-zN-M4k"; */
-"K0S-zN-M4k.title" = "Zuletzt gespeicherte Werte auf den Monitor anwenden";
+/* Class = "NSButtonCell"; title = "Apply last saved values to the display"; ObjectID = "3Jr-bW-YYq"; */
+"3Jr-bW-YYq.title" = "Zuletzt gespeicherte Werte auf den Monitor anwenden";
 
 /* Class = "NSButtonCell"; title = "Enable for Apple branded and built-in displays as well"; ObjectID = "K6A-4z-1aQ"; */
 "K6A-4z-1aQ.title" = "Auch für Apple und eingebaute Monitore aktivieren";
@@ -385,8 +385,8 @@
 /* Class = "NSTextFieldCell"; title = "Warning! With this option enabled, you might find yourself in a position when you end up with a blank display. This, combined with disabled keyboard controls can be frustrating."; ObjectID = "yi3-e1-wsL"; */
 "yi3-e1-wsL.title" = "Warning! With this option enabled, you might find yourself in a position when you end up with a blank display. This, combined with disabled keyboard controls can be frustrating.";
 
-/* Class = "NSButtonCell"; title = "Assume last saved settings are valid (recommended)"; ObjectID = "yn8-Nd-o89"; */
-"yn8-Nd-o89.title" = "Annehmen, dass die zuletzt gespeicherten Einstellungen gültig sind (empfohlen)";
+/* Class = "NSButtonCell"; title = "Assume last saved settings are valid (recommended)"; ObjectID = "1in-79-6qm"; */
+"1in-79-6qm.title" = "Annehmen, dass die zuletzt gespeicherten Einstellungen gültig sind (empfohlen)";
 
 /* Class = "NSTextFieldCell"; title = "Decrease:"; ObjectID = "yQh-Ve-WEE"; */
 "yQh-Ve-WEE.title" = "Verringern:";
