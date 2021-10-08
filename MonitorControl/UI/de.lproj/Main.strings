@@ -146,7 +146,7 @@
 "FER-Ri-4UO.title" = "Lautstärke:";
 
 /* Class = "NSButtonCell"; title = "Allow zero brightness via software or combined dimming"; ObjectID = "FjB-XL-fG5"; */
-"FjB-XL-fG5.title" = "Allow zero brightness via software or combined dimming";
+"FjB-XL-fG5.title" = "Erlaubt Null-Helligkeit über Software oder kombiniertes Dimmen";
 
 /* Class = "NSTextFieldCell"; title = "Apple and built-in displays already have a brightness slider in Control Center."; ObjectID = "fmZ-HI-Mdc"; */
 "fmZ-HI-Mdc.title" = "Apple und eingebaute Monitore verfügen bereits über einen Helligkeitsregler im Kontrollzentrum.";
