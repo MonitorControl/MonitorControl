@@ -74,8 +74,8 @@ class KeyboardPrefsViewController: NSViewController, PreferencePane {
       self.rowDisableAltBrightnessKeysText.isHidden = true
       self.rowCustomBrightnessShortcuts.isHidden = false
     } else if self.keyboardBrightness.selectedTag() == KeyboardBrightness.both.rawValue {
-      self.rowKeyboardBrightnessPopUp.bottomPadding = hide ? -6 : -13
-      self.rowKeyboardBrightnessText.isHidden = hide
+      self.rowKeyboardBrightnessPopUp.bottomPadding = -6
+      self.rowKeyboardBrightnessText.isHidden = true
       if self.disableAltBrightnessKeys.state == .on {
         self.rowDisableAltBrightnessKeysCheck.isHidden = false
         self.rowDisableAltBrightnessKeysText.isHidden = false
@@ -160,19 +160,29 @@ class KeyboardPrefsViewController: NSViewController, PreferencePane {
     super.viewDidLoad()
 
     let customBrightnessUpRecorder = KeyboardShortcuts.RecorderCocoa(for: .brightnessUp)
-    self.customBrightnessUp.addSubview(customBrightnessUpRecorder)
     let customBrightnessDownRecorder = KeyboardShortcuts.RecorderCocoa(for: .brightnessDown)
-    self.customBrightnessDown.addSubview(customBrightnessDownRecorder)
     let customContrastUpRecorder = KeyboardShortcuts.RecorderCocoa(for: .contrastUp)
-    self.customContrastUp.addSubview(customContrastUpRecorder)
     let customContrastDownRecorder = KeyboardShortcuts.RecorderCocoa(for: .contrastDown)
-    self.customContrastDown.addSubview(customContrastDownRecorder)
     let customVolumeUpRecorder = KeyboardShortcuts.RecorderCocoa(for: .volumeUp)
-    self.customVolumeUp.addSubview(customVolumeUpRecorder)
     let customVolumeDownRecorder = KeyboardShortcuts.RecorderCocoa(for: .volumeDown)
-    self.customVolumeDown.addSubview(customVolumeDownRecorder)
     let customMuteRecorder = KeyboardShortcuts.RecorderCocoa(for: .mute)
+
+    customBrightnessUpRecorder.placeholderString = NSLocalizedString("Increase", comment: "Shown in record shortcut box")
+    customContrastUpRecorder.placeholderString = customBrightnessUpRecorder.placeholderString
+    customVolumeUpRecorder.placeholderString = customBrightnessUpRecorder.placeholderString
+    customBrightnessDownRecorder.placeholderString = NSLocalizedString("Decrease", comment: "Shown in record shortcut box")
+    customContrastDownRecorder.placeholderString = customBrightnessDownRecorder.placeholderString
+    customVolumeDownRecorder.placeholderString = customBrightnessDownRecorder.placeholderString
+    customMuteRecorder.placeholderString = NSLocalizedString("Mute", comment: "Shown in record shortcut box")
+
+    self.customBrightnessUp.addSubview(customBrightnessUpRecorder)
+    self.customBrightnessDown.addSubview(customBrightnessDownRecorder)
+    self.customContrastUp.addSubview(customContrastUpRecorder)
+    self.customContrastDown.addSubview(customContrastDownRecorder)
+    self.customVolumeUp.addSubview(customVolumeUpRecorder)
+    self.customVolumeDown.addSubview(customVolumeDownRecorder)
     self.customMute.addSubview(customMuteRecorder)
+
     self.populateSettings()
   }
 

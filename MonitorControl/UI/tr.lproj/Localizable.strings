@@ -31,6 +31,9 @@
 /* Version */
 "Copyright Ⓒ MonitorControl, " = "Telif Hakkı Ⓒ MonitorControl, ";
 
+/* Shown in record shortcut box */
+"Decrease" = "Azalt";
+
 /* Shown in the main prefs window */
 "Displays" = "Ekranlar";
 
@@ -52,11 +55,17 @@
 /* Shown in the alert dialog */
 "Incompatible previous version" = "Uyumsuz önceki versiyon";
 
+/* Shown in record shortcut box */
+"Increase" = "Artır";
+
 /* Intel designation (shown after the version number in Preferences) */
 "Intel" = "Intel";
 
 /* Shown in the main prefs window */
 "Keyboard" = "Klavye";
+
+/* Shown in record shortcut box */
+"Mute" = "Sesi kapat";
 
 /* Shown in the alert dialog */
 "No" = "Hayır";

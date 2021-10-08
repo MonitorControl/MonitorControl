@@ -94,9 +94,6 @@
 /* Class = "NSButtonCell"; title = "Enable Mute DDC command"; ObjectID = "bZq-0d-lJa"; */
 "bZq-0d-lJa.title" = "Enable Mute DDC command";
 
-/* Class = "NSTextFieldCell"; title = "Decrease:"; ObjectID = "Bzq-Co-fex"; */
-"Bzq-Co-fex.title" = "Decrease:";
-
 /* Class = "NSButtonCell"; title = "Show volume slider in menu"; ObjectID = "c9D-MB-lma"; */
 "c9D-MB-lma.title" = "Show volume slider in menu";
 
@@ -126,9 +123,6 @@
 
 /* Class = "NSMenuItem"; title = "Minimal"; ObjectID = "Eq3-z9-yIo"; */
 "Eq3-z9-yIo.title" = "Мінім.";
-
-/* Class = "NSTextFieldCell"; title = "Increase:"; ObjectID = "eue-as-VOR"; */
-"eue-as-VOR.title" = "Increase:";
 
 /* Class = "NSTextFieldCell"; title = "Scale mapping curve"; ObjectID = "Eui-5S-JR6"; */
 "Eui-5S-JR6.title" = "Scale mapping curve";
@@ -190,7 +184,7 @@
 /* Class = "NSTextFieldCell"; title = "Additional controls:"; ObjectID = "i5X-M5-Tf5"; */
 "i5X-M5-Tf5.title" = "Additional controls:";
 
-/* Class = "NSTextFieldCell"; title = "Brightness"; ObjectID = "IJB-mO-e8I"; */
+/* Class = "NSTextFieldCell"; title = "Brightness:"; ObjectID = "IJB-mO-e8I"; */
 "IJB-mO-e8I.title" = "Brightness";
 
 /* Class = "NSButtonCell"; title = "Enable smooth brightness transitions"; ObjectID = "IK4-u5-qjf"; */
@@ -241,7 +235,7 @@
 /* Class = "NSTextFieldCell"; title = "Contrast:"; ObjectID = "MMk-S2-yJN"; */
 "MMk-S2-yJN.title" = "Contrast:";
 
-/* Class = "NSTextFieldCell"; title = "Increase:"; ObjectID = "mue-fa-8z6"; */
+/* Class = "NSTextFieldCell"; title = "Volume:"; ObjectID = "mue-fa-8z6"; */
 "mue-fa-8z6.title" = "Increase:";
 
 /* Class = "NSButtonCell"; title = "Show brightness slider in menu"; ObjectID = "MWo-6I-s9L"; */
@@ -337,7 +331,7 @@
 /* Class = "NSButtonCell"; title = "Enable keyboard control for display"; ObjectID = "UqR-WE-jHl"; */
 "UqR-WE-jHl.title" = "Enable keyboard control for display";
 
-/* Class = "NSTextFieldCell"; title = "Contrast (DDC)"; ObjectID = "urd-Rh-aiL"; */
+/* Class = "NSTextFieldCell"; title = "Contrast (DDC):"; ObjectID = "urd-Rh-aiL"; */
 "urd-Rh-aiL.title" = "Contrast";
 
 /* Class = "NSButtonCell"; title = "Do not use alternative brightness keys"; ObjectID = "vd2-Lk-neX"; */
@@ -387,9 +381,6 @@
 
 /* Class = "NSTextFieldCell"; title = "Warning! With this option enabled, you might find yourself in a position when you end up with a blank display. This, combined with disabled keyboard controls can be frustrating."; ObjectID = "yi3-e1-wsL"; */
 "yi3-e1-wsL.title" = "Warning! With this option enabled, you might find yourself in a position when you end up with a blank display. This, combined with disabled keyboard controls can be frustrating.";
-
-/* Class = "NSTextFieldCell"; title = "Decrease:"; ObjectID = "yQh-Ve-WEE"; */
-"yQh-Ve-WEE.title" = "Decrease:";
 
 /* Class = "NSTextFieldCell"; title = "Identifier:"; ObjectID = "YqZ-LS-YvR"; */
 "YqZ-LS-YvR.title" = "Identifier:";

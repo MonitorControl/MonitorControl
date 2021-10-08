@@ -31,6 +31,9 @@
 /* Version */
 "Copyright Ⓒ MonitorControl, " = "Copyright Ⓒ MonitorControl, ";
 
+/* Shown in record shortcut box */
+"Decrease" = "減少";
+
 /* Shown in the main prefs window */
 "Displays" = "螢幕";
 
@@ -52,11 +55,17 @@
 /* Shown in the alert dialog */
 "Incompatible previous version" = "與先前版本不相容";
 
+/* Shown in record shortcut box */
+"Increase" = "增加";
+
 /* Intel designation (shown after the version number in Preferences) */
 "Intel" = "Intel";
 
 /* Shown in the main prefs window */
 "Keyboard" = "鍵盤";
+
+/* Shown in record shortcut box */
+"Mute" = "靜音";
 
 /* Shown in the alert dialog */
 "No" = "否";
