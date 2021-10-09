@@ -8,8 +8,8 @@ Use menulet sliders or the native Apple keyboard keys<br>
 Behaves like native, with (optional) brightness & volume OSD</b>
 </p>
 
-<br/>
- 
+<br>
+
 <div align="center">
 <!-- shields -->
 <!-- downloads -->
@@ -32,13 +32,13 @@ Behaves like native, with (optional) brightness & volume OSD</b>
 <a href="https://opencollective.com/monitorcontrol">
 <img src="https://opencollective.com/monitorcontrol/tiers/badge.svg" alt="backers"/>
 </a>
-    
-<br/>
-<br/>
-
 </div>
-
+    
+<div align="center">
+<h2><a href="https://github.com/MonitorControl/MonitorControl/releases">Click here to DOWNLOAD the latest version!</a></h2>
+<br/>
 <img src=".github/screenshot.png" width="840" alt="Screenshot"/><br/>
+</div>
 
 <hr>
 
