@@ -45,7 +45,7 @@
                                     <gridColumn xPlacement="fill" width="470" leadingPadding="4" id="64O-72-10l"/>
                                 </columns>
                                 <gridCells>
-                                    <gridCell row="d70-FX-dma" column="eHC-Ur-UsS" xPlacement="trailing" id="ixb-6N-RsC">
+                                    <gridCell row="d70-FX-dma" column="eHC-Ur-UsS" xPlacement="trailing" yPlacement="center" id="ixb-6N-RsC">
                                         <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="HkH-iv-GLz">
                                             <rect key="frame" x="136" y="562" width="76" height="16"/>
                                             <textFieldCell key="cell" lineBreakMode="truncatingTail" baseWritingDirection="leftToRight" alignment="right" title="Application:" id="okD-DG-pYa">
@@ -86,7 +86,7 @@
                                         </box>
                                     </gridCell>
                                     <gridCell row="CrM-x5-re7" column="64O-72-10l" headOfMergedCell="UBc-A2-Il4" id="s0l-Gz-1c0"/>
-                                    <gridCell row="DnA-aR-kcy" column="eHC-Ur-UsS" xPlacement="trailing" id="vO3-t1-Aqs">
+                                    <gridCell row="DnA-aR-kcy" column="eHC-Ur-UsS" xPlacement="trailing" yPlacement="center" id="vO3-t1-Aqs">
                                         <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="vsD-wo-GE1">
                                             <rect key="frame" x="108" y="494" width="104" height="16"/>
                                             <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="General options:" id="W58-ch-j69">
@@ -304,7 +304,7 @@
                                         </box>
                                     </gridCell>
                                     <gridCell row="ALY-LA-2OR" column="64O-72-10l" headOfMergedCell="cRV-TN-DdK" id="r3r-m7-Zcs"/>
-                                    <gridCell row="cOB-Hr-kYl" column="eHC-Ur-UsS" xPlacement="trailing" id="2ao-6c-6bc">
+                                    <gridCell row="cOB-Hr-kYl" column="eHC-Ur-UsS" xPlacement="trailing" yPlacement="center" id="2ao-6c-6bc">
                                         <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="GPV-cW-Jjc">
                                             <rect key="frame" x="144" y="51" width="68" height="16"/>
                                             <textFieldCell key="cell" lineBreakMode="clipping" title="Advanced:" id="r7i-oG-Ab6">
@@ -515,7 +515,7 @@
                                         </box>
                                     </gridCell>
                                     <gridCell row="Cor-61-8R5" column="V6M-Jv-Agj" headOfMergedCell="054-Ho-JWX" id="qgh-h4-pBB"/>
-                                    <gridCell row="x3R-eu-dsV" column="FRJ-Rb-RRh" xPlacement="trailing" id="ncF-aj-FmT">
+                                    <gridCell row="x3R-eu-dsV" column="FRJ-Rb-RRh" xPlacement="trailing" yPlacement="center" id="ncF-aj-FmT">
                                         <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="T3u-43-BPw">
                                             <rect key="frame" x="93" y="380" width="119" height="16"/>
                                             <textFieldCell key="cell" lineBreakMode="clipping" title="Brightness control:" id="fe9-Ia-t9m">
@@ -572,7 +572,7 @@
                                             </textFieldCell>
                                         </textField>
                                     </gridCell>
-                                    <gridCell row="d8s-SW-acK" column="FRJ-Rb-RRh" xPlacement="trailing" id="Gjt-20-GPt">
+                                    <gridCell row="d8s-SW-acK" column="FRJ-Rb-RRh" xPlacement="trailing" yPlacement="center" id="Gjt-20-GPt">
                                         <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="UOL-wV-9me">
                                             <rect key="frame" x="90" y="286" width="122" height="16"/>
                                             <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="Additional controls:" id="i5X-M5-Tf5">
@@ -675,7 +675,7 @@
                                         </box>
                                     </gridCell>
                                     <gridCell row="7kD-xD-py0" column="V6M-Jv-Agj" headOfMergedCell="zOL-GT-1cQ" id="ZJZ-t6-dPA"/>
-                                    <gridCell row="BmS-ju-SrX" column="FRJ-Rb-RRh" xPlacement="trailing" id="HyX-Ez-gvQ">
+                                    <gridCell row="BmS-ju-SrX" column="FRJ-Rb-RRh" xPlacement="trailing" yPlacement="center" id="HyX-Ez-gvQ">
                                         <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="yvP-ra-lvk">
                                             <rect key="frame" x="113" y="129" width="99" height="16"/>
                                             <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="Slider behavior:" id="75n-7M-1mS">
@@ -1015,7 +1015,7 @@
                                             </textFieldCell>
                                         </textField>
                                     </gridCell>
-                                    <gridCell row="jJT-as-drf" column="ZC2-Ja-sIb" xPlacement="trailing" id="nrK-Hc-7nO">
+                                    <gridCell row="jJT-as-drf" column="ZC2-Ja-sIb" xPlacement="trailing" yPlacement="center" id="nrK-Hc-7nO">
                                         <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="vWz-eO-w5x">
                                             <rect key="frame" x="141" y="329" width="71" height="16"/>
                                             <textFieldCell key="cell" lineBreakMode="clipping" title="OSD scale:" id="bP4-GJ-vhJ">
@@ -1233,7 +1233,7 @@
                                             </textFieldCell>
                                         </textField>
                                     </gridCell>
-                                    <gridCell row="fUL-yd-WWe" column="ZC2-Ja-sIb" xPlacement="trailing" id="Wh1-8h-lvf">
+                                    <gridCell row="fUL-yd-WWe" column="ZC2-Ja-sIb" xPlacement="trailing" yPlacement="center" id="Wh1-8h-lvf">
                                         <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="GO6-iW-7qg">
                                             <rect key="frame" x="141" y="0.0" width="71" height="16"/>
                                             <textFieldCell key="cell" lineBreakMode="clipping" title="OSD scale:" id="Bqc-s3-C0w">
@@ -1310,20 +1310,20 @@
                     <view key="view" translatesAutoresizingMaskIntoConstraints="NO" id="aj0-6l-QE2">
                         <rect key="frame" x="0.0" y="0.0" width="730" height="533"/>
                         <subviews>
-                            <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="520" horizontalPageScroll="10" verticalLineScroll="520" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="none" translatesAutoresizingMaskIntoConstraints="NO" id="O0W-8R-9c8">
+                            <scrollView focusRingType="none" borderType="none" horizontalLineScroll="520" horizontalPageScroll="10" verticalLineScroll="520" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="none" translatesAutoresizingMaskIntoConstraints="NO" id="O0W-8R-9c8">
                                 <rect key="frame" x="0.0" y="0.0" width="730" height="532"/>
                                 <clipView key="contentView" drawsBackground="NO" id="yDV-Al-LQT">
                                     <rect key="frame" x="0.0" y="0.0" width="730" height="532"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="none" tableStyle="inset" selectionHighlightStyle="none" columnReordering="NO" columnResizing="NO" multipleSelection="NO" emptySelection="NO" autosaveColumns="NO" typeSelect="NO" rowHeight="520" viewBased="YES" id="zC9-dS-Tr3">
-                                            <rect key="frame" x="0.0" y="0.0" width="730" height="532"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="740" height="532"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                            <size key="intercellSpacing" width="17" height="0.0"/>
+                                            <size key="intercellSpacing" width="14" height="0.0"/>
                                             <color key="backgroundColor" name="windowBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                             <tableColumns>
-                                                <tableColumn width="690" minWidth="40" maxWidth="690" id="3eK-hg-Tqu">
+                                                <tableColumn width="690" minWidth="690" maxWidth="690" id="3eK-hg-Tqu">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border">
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
@@ -1333,10 +1333,9 @@
                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     </textFieldCell>
-                                                    <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
                                                         <tableCellView wantsLayer="YES" id="hCY-wr-B84" customClass="DisplaysPrefsCellView" customModule="MonitorControl">
-                                                            <rect key="frame" x="18" y="0.0" width="685" height="520"/>
+                                                            <rect key="frame" x="17" y="0.0" width="690" height="520"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <subviews>
                                                                 <imageView wantsLayer="YES" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="Bhw-JQ-dBx">
@@ -1994,13 +1993,14 @@
                                         </tableView>
                                     </subviews>
                                     <nil key="backgroundColor"/>
+                                    <edgeInsets key="contentInsets" left="0.0" right="-10" top="0.0" bottom="0.0"/>
                                 </clipView>
                                 <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="24Y-Ol-HHE">
-                                    <rect key="frame" x="-100" y="-100" width="689" height="16"/>
+                                    <rect key="frame" x="-100" y="-100" width="730" height="16"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
-                                <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="zbU-d8-F8n">
-                                    <rect key="frame" x="224" y="17" width="15" height="102"/>
+                                <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" controlSize="small" horizontal="NO" id="zbU-d8-F8n">
+                                    <rect key="frame" x="716" y="0.0" width="14" height="532"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
@@ -2021,7 +2021,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="298" y="1569"/>
+            <point key="canvasLocation" x="298" y="1568.5"/>
         </scene>
         <!--About Prefs View Controller-->
         <scene sceneID="Ot2-lL-eIg">

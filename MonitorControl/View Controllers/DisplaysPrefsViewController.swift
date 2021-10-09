@@ -25,6 +25,7 @@ class DisplaysPrefsViewController: NSViewController, PreferencePane, NSTableView
   override func viewDidLoad() {
     super.viewDidLoad()
     self.loadDisplayList()
+    self.displayScrollView.scrollerStyle = .legacy
   }
 
   override func viewWillAppear() {
