@@ -44,7 +44,7 @@
 "8Gx-Ya-zhp.title" = "Schuifknop springt naar 0%, 25%, 50%, 75% en 100% wanneer deze in de buurt is, waardoor het instellen van deze waarden eenvoudiger wordt. Uitschakelen voor fijnere controle.";
 
 /* Class = "NSButtonCell"; title = "Use fine OSD scale for brightness and contrast"; ObjectID = "8Q8-57-xnT"; */
-"8Q8-57-xnT.title" = "Gebruik fijne OSD-schaal";
+"8Q8-57-xnT.title" = "Gebruik fijne OSD-schaal voor helderheid en contrast";
 
 /* Class = "NSButtonCell"; title = "Special thanks to our contributors!"; ObjectID = "95V-M4-2l5"; */
 "95V-M4-2l5.title" = "Speciale dank aan onze bijdragers!";
