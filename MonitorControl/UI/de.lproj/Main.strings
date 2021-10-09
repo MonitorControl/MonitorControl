@@ -89,7 +89,7 @@
 "bP4-GJ-vhJ.title" = "OSD Skala:";
 
 /* Class = "NSTextFieldCell"; title = "OSD scale:"; ObjectID = "Bqc-s3-C0w"; */
-"Bqc-s3-C0w.title" = "OSD scale:";
+"Bqc-s3-C0w.title" = "OSD Skala:";
 
 /* Class = "NSButtonCell"; title = "Reset settings"; ObjectID = "BYS-7Y-bRz"; */
 "BYS-7Y-bRz.title" = "Zurücksetzen";
@@ -209,7 +209,7 @@
 "K6A-4z-1aQ.title" = "Auch für Apple und eingebaute Monitore aktivieren";
 
 /* Class = "NSTextFieldCell"; title = "Screen to control:"; ObjectID = "Kfj-WK-aSL"; */
-"Kfj-WK-aSL.title" = Monitor für Steuerung:";
+"Kfj-WK-aSL.title" = "Screen to control:";
 
 /* Class = "NSTextFieldCell"; title = "Don't use software dimming as fallback if no hardware control is available."; ObjectID = "kgh-b4-gmO"; */
 "kgh-b4-gmO.title" = "Softwaredimmung nicht als Ausweichlösung verwendet werden, wenn keine Hardware-Steuerung verfügbar ist.";

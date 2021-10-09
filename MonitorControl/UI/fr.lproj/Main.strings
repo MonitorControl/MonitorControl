@@ -89,7 +89,7 @@
 "bP4-GJ-vhJ.title" = "Échelle de l'OSD:";
 
 /* Class = "NSTextFieldCell"; title = "OSD scale:"; ObjectID = "Bqc-s3-C0w"; */
-"Bqc-s3-C0w.title" = "OSD scale:";
+"Bqc-s3-C0w.title" = "Échelle de l'OSD:";
 
 /* Class = "NSButtonCell"; title = "Reset settings"; ObjectID = "BYS-7Y-bRz"; */
 "BYS-7Y-bRz.title" = "Réinitialiser les options";
