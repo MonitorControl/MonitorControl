@@ -66,20 +66,14 @@ enum PrefKey: String {
   // Show advanced options under Displays tab in Preferences
   case showAdvancedSettings
 
-  // Change Brightness for all screens
-  case allScreensBrightness
-
   // Allow zero software brightness
   case allowZeroSwBrightness
 
-  // Use focus instead of mouse position to determine which display to control for brightness
-  case useFocusInsteadOfMouse
+  // Keyboard brightness control for multiple displays
+  case multiKeyboardBrightness
 
-  // Change Volume for all screens
-  case allScreensVolume
-
-  // Use audio device name matching to determine display to control for volume
-  case useAudioDeviceNameMatching
+  // Keyboard volume control for multiple devices
+  case multiKeyboardVolume
 
   // Use fine OSD scale for brightness
   case useFineScaleBrightness
@@ -162,6 +156,18 @@ enum PrefKey: String {
 
   // Override DDC control command code
   case remapDDC
+}
+
+enum MultiKeyboardBrightness: Int {
+  case mouse = 0
+  case allScreens = 1
+  case focusInsteadOfMouse = 2
+}
+
+enum MultiKeyboardVolume: Int {
+  case mouse = 0
+  case allScreens = 1
+  case audioDeviceNameMatching = 2
 }
 
 enum StartupAction: Int {

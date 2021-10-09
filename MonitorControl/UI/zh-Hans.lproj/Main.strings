@@ -10,9 +10,6 @@
 /* Class = "NSMenuItem"; title = "Standard keyboard volume and mute keys"; ObjectID = "1sy-Kd-WL5"; */
 "1sy-Kd-WL5.title" = "标准的键盘音量和静音键";
 
-/* Class = "NSButtonCell"; title = "Change volume for all screens"; ObjectID = "1XT-3S-UuD"; */
-"1XT-3S-UuD.title" = "更改所有显示器的音量";
-
 /* Class = "NSTextFieldCell"; title = "DDC min"; ObjectID = "1zE-fg-xEm"; */
 "1zE-fg-xEm.title" = "DDC最小值";
 
@@ -25,8 +22,8 @@
 /* Class = "NSMenuItem"; title = "Custom keyboard shortcuts"; ObjectID = "4CG-0I-anB"; */
 "4CG-0I-anB.title" = "自定义快捷键";
 
-/* Class = "NSTextFieldCell"; title = "MonitorControl uses mouse position to determine which display to control. Using window focus instead might not work well with full screen apps."; ObjectID = "4dX-o1-xAc"; */
-"4dX-o1-xAc.title" = "预设使用鼠标的位置来判断控制哪个显示器。启用后软件全屏时效果可能不理想。";
+/* Class = "NSTextFieldCell"; title = "Using window focus might not work properly with full screen apps."; ObjectID = "4dX-o1-xAc"; */
+"4dX-o1-xAc.title" = "启用后软件全屏时效果可能不理想。";
 
 /* Class = "NSTextField"; ibExternalAccessibilityDescription = "Brightness"; ObjectID = "567-le-fLg"; */
 "567-le-fLg.ibExternalAccessibilityDescription" = "亮度";
@@ -46,7 +43,7 @@
 /* Class = "NSTextFieldCell"; title = "Slider knob will snap to 0%, 25%, 50%, 75% and 100% when in proximity making setting these values easier. Disable for finer control."; ObjectID = "8Gx-Ya-zhp"; */
 "8Gx-Ya-zhp.title" = "滑杆手把在接近刻度0%、25%、50%、75%和100%时将自动定位与该亮度值。关闭后可以设置更精细的亮度值。";
 
-/* Class = "NSButtonCell"; title = "Use fine OSD scale"; ObjectID = "8Q8-57-xnT"; */
+/* Class = "NSButtonCell"; title = "Use fine OSD scale for brightness and contrast"; ObjectID = "8Q8-57-xnT"; */
 "8Q8-57-xnT.title" = "使用精细的OSD刻度";
 
 /* Class = "NSButtonCell"; title = "Special thanks to our contributors!"; ObjectID = "95V-M4-2l5"; */
@@ -70,6 +67,9 @@
 /* Class = "NSTextFieldCell"; title = "Use brightness, volume and other settings from last time or use defaults. Values will be applied to the display upon first change by the user."; ObjectID = "an7-Aj-3fZ"; */
 "an7-Aj-3fZ.title" = "使用者初次设置时使用之前或原始设置（亮度、音量和其它设置）。";
 
+/* Class = "NSMenuItem"; title = "Use audio device name to determine which display to control"; ObjectID = "AqF-uD-KCY"; */
+"AqF-uD-KCY.title" = "以音频设备名称判断控制哪个显示器";
+
 /* Class = "NSMenuItem"; title = "Show sliders only for the display currently showing the menu"; ObjectID = "bbf-sS-uGv"; */
 "bbf-sS-uGv.title" = "仅显示当前显示器的滑杆介面";
 
@@ -87,6 +87,9 @@
 
 /* Class = "NSTextFieldCell"; title = "OSD scale:"; ObjectID = "bP4-GJ-vhJ"; */
 "bP4-GJ-vhJ.title" = "OSD刻度：";
+
+/* Class = "NSTextFieldCell"; title = "OSD scale:"; ObjectID = "Bqc-s3-C0w"; */
+"Bqc-s3-C0w.title" = "OSD scale:";
 
 /* Class = "NSButtonCell"; title = "Reset settings"; ObjectID = "BYS-7Y-bRz"; */
 "BYS-7Y-bRz.title" = "重置设置";
@@ -115,8 +118,8 @@
 /* Class = "NSTextFieldCell"; title = "VCP list"; ObjectID = "D9t-vT-gNJ"; */
 "D9t-vT-gNJ.title" = "VCP列表";
 
-/* Class = "NSTextFieldCell"; title = "Without this the app uses mouse position to determine which display to control. You can override audio device name under Displays if needed."; ObjectID = "Dha-Tm-cDM"; */
-"Dha-Tm-cDM.title" = "无勾选时App使用鼠标位置判断控制哪个显示器。您可以在「显示器」选择覆盖音频设备的名称。";
+/* Class = "NSTextFieldCell"; title = "You can override audio device name under Displays (advanced) if needed."; ObjectID = "Dha-Tm-cDM"; */
+"Dha-Tm-cDM.title" = "您可以在「显示器」选择覆盖音频设备的名称。";
 
 /* Class = "NSTextFieldCell"; title = "You can disable smooth transitions for a more direct, immediate control."; ObjectID = "ENt-mP-0yH"; */
 "ENt-mP-0yH.title" = "禁用流畅转换以获得更直接、立即的控制。";
@@ -163,6 +166,9 @@
 /* Class = "NSTextFieldCell"; title = "Invert"; ObjectID = "G5A-y3-eZz"; */
 "G5A-y3-eZz.title" = "反转";
 
+/* Class = "NSMenuItem"; title = "Use window focus to determine which display to control"; ObjectID = "gTR-FW-FHc"; */
+"gTR-FW-FHc.title" = "以当前窗口决定";
+
 /* Class = "NSTextFieldCell"; title = "Brightness slider for hardware or software controlled displays or TVs."; ObjectID = "gXH-HL-ZOL"; */
 "gXH-HL-ZOL.title" = "以硬件或软件控制显示器或电视的亮度控制滑杆。";
 
@@ -193,8 +199,8 @@
 /* Class = "NSButtonCell"; title = "Start at Login"; ObjectID = "j72-NF-zsW"; */
 "j72-NF-zsW.title" = "登录时启动";
 
-/* Class = "NSButtonCell"; title = "Change for all screens"; ObjectID = "JC3-pb-XnR"; */
-"JC3-pb-XnR.title" = "所有显示器";
+/* Class = "NSMenuItem"; title = "Change for all screens"; ObjectID = "jSj-HB-T2t"; */
+"jSj-HB-T2t.title" = "所有显示器";
 
 /* Class = "NSTextFieldCell"; title = "Note: you can press Shift during startup for 'Safe mode' to restore defaults and avoid reading or setting anything."; ObjectID = "Jx2-gO-nq9"; */
 "Jx2-gO-nq9.title" = "注：启动时按下Shift进入「安全模式」以恢复原始设置并避免读取或更动任何设置。";
@@ -202,8 +208,14 @@
 /* Class = "NSButtonCell"; title = "Enable for Apple branded and built-in displays as well"; ObjectID = "K6A-4z-1aQ"; */
 "K6A-4z-1aQ.title" = "苹果和内置的显示器";
 
+/* Class = "NSTextFieldCell"; title = "Screen to control:"; ObjectID = "Kfj-WK-aSL"; */
+"Kfj-WK-aSL.title" = "控制的显示器：";
+
 /* Class = "NSTextFieldCell"; title = "Don't use software dimming as fallback if no hardware control is available."; ObjectID = "kgh-b4-gmO"; */
 "kgh-b4-gmO.title" = "当硬件控制不可用时不以软件控制作为备用选项。";
+
+/* Class = "NSMenuItem"; title = "Depends on mouse pointer position"; ObjectID = "km4-hK-auM"; */
+"km4-hK-auM.title" = "取决于鼠标指针位置";
 
 /* Class = "NSMenuItem"; title = "Use combined slider for all displays"; ObjectID = "lA0-tv-qRs"; */
 "lA0-tv-qRs.title" = "使用一个滑杆控制所有显示器";
@@ -223,9 +235,6 @@
 /* Class = "NSMenuItem"; title = "Always show in the menu bar"; ObjectID = "MM0-Lf-VgF"; */
 "MM0-Lf-VgF.title" = "永久显示于选项列";
 
-/* Class = "NSButtonCell"; title = "Use window focus to determine which display to control"; ObjectID = "mMG-Ac-gdB"; */
-"mMG-Ac-gdB.title" = "以当前窗口决定";
-
 /* Class = "NSTextFieldCell"; title = "Contrast:"; ObjectID = "MMk-S2-yJN"; */
 "MMk-S2-yJN.title" = "对比度：";
 
@@ -240,9 +249,6 @@
 
 /* Class = "NSButtonCell"; title = "Separate scales for combined hardware & software dimming"; ObjectID = "O8o-hI-8eR"; */
 "O8o-hI-8eR.title" = "使用硬件结合软件调整时忽略软件调整的范围";
-
-/* Class = "NSButtonCell"; title = "Use audio device name to determine which display to control"; ObjectID = "OAa-B4-8r3"; */
-"OAa-B4-8r3.title" = "以音频设备名称判断控制哪个显示器";
 
 /* Class = "NSSlider"; ibExternalAccessibilityDescription = "Brightness"; ObjectID = "OG9-iA-jK1"; */
 "OG9-iA-jK1.ibExternalAccessibilityDescription" = "亮度";
@@ -355,6 +361,9 @@
 /* Class = "NSTextField"; ibExternalAccessibilityDescription = "Brightness"; ObjectID = "xDF-IA-bBh"; */
 "xDF-IA-bBh.ibExternalAccessibilityDescription" = "亮度";
 
+/* Class = "NSMenuItem"; title = "Change volume for all screens"; ObjectID = "Xih-P5-NyM"; */
+"Xih-P5-NyM.title" = "更改所有显示器的音量";
+
 /* Class = "NSTextFieldCell"; title = "Update settings from the display. May not work with some hardware."; ObjectID = "xjq-hs-wWB"; */
 "xjq-hs-wWB.title" = "更新来自显示器的设置。可能不兼容部分硬件。";
 
@@ -378,6 +387,9 @@
 
 /* Class = "NSTextFieldCell"; title = "Identifier:"; ObjectID = "YqZ-LS-YvR"; */
 "YqZ-LS-YvR.title" = "识别码：";
+
+/* Class = "NSMenuItem"; title = "Depends on mouse pointer position"; ObjectID = "Ytd-mg-N5E"; */
+"Ytd-mg-N5E.title" = "取决于鼠标指针位置";
 
 /* Class = "NSButtonCell"; title = "Use hardware DDC control"; ObjectID = "ZdU-gV-V05"; */
 "ZdU-gV-V05.title" = "使用硬件DDC控制";

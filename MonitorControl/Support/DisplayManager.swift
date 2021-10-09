@@ -347,17 +347,17 @@ class DisplayManager {
     let allDisplays = self.getAllDisplays()
     var currentDisplay: Display?
     if isBrightness {
-      if prefs.bool(forKey: PrefKey.allScreensBrightness.rawValue) {
+      if prefs.integer(forKey: PrefKey.multiKeyboardBrightness.rawValue) == MultiKeyboardBrightness.allScreens.rawValue {
         affectedDisplays = allDisplays
         return affectedDisplays
       }
-      currentDisplay = self.getCurrentDisplay(byFocus: prefs.bool(forKey: PrefKey.useFocusInsteadOfMouse.rawValue))
+      currentDisplay = self.getCurrentDisplay(byFocus: prefs.integer(forKey: PrefKey.multiKeyboardBrightness.rawValue) == MultiKeyboardBrightness.focusInsteadOfMouse.rawValue)
     }
     if isVolume {
-      if prefs.bool(forKey: PrefKey.allScreensVolume.rawValue) {
+      if prefs.integer(forKey: PrefKey.multiKeyboardVolume.rawValue) == MultiKeyboardVolume.allScreens.rawValue {
         affectedDisplays = allDisplays
         return affectedDisplays
-      } else if prefs.bool(forKey: PrefKey.useAudioDeviceNameMatching.rawValue) {
+      } else if prefs.integer(forKey: PrefKey.multiKeyboardVolume.rawValue) == MultiKeyboardVolume.audioDeviceNameMatching.rawValue {
         return self.audioControlTargetDisplays
       }
       currentDisplay = self.getCurrentDisplay(byFocus: false)

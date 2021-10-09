@@ -31,7 +31,7 @@ class DisplaysPrefsViewController: NSViewController, PreferencePane, NSTableView
     super.viewWillAppear()
   }
 
-  func showAdvanced() -> Bool {
+  func updateGridLayout() -> Bool {
     let hide = !prefs.bool(forKey: PrefKey.showAdvancedSettings.rawValue)
     self.loadDisplayList()
     return !hide
@@ -307,7 +307,7 @@ class DisplaysPrefsViewController: NSViewController, PreferencePane, NSTableView
       self.displayList?.rowHeight = 520
       self.constraintHeight?.constant = self.displayList.rowHeight + 15
     } else {
-      self.displayList?.rowHeight = 185
+      self.displayList?.rowHeight = 150
       self.constraintHeight?.constant = self.displayList.rowHeight * 2 + 15
     }
   }

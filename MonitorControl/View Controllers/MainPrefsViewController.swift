@@ -38,7 +38,7 @@ class MainPrefsViewController: NSViewController, PreferencePane {
   @IBOutlet var rowAllowZeroSwBrightnessCheck: NSGridRow!
   @IBOutlet var rowAllowZeroSwBrightnessText: NSGridRow!
 
-  func showAdvanced() -> Bool {
+  func updateGridLayout() -> Bool {
     let hide = !prefs.bool(forKey: PrefKey.showAdvancedSettings.rawValue)
     if self.startupAction.selectedTag() == StartupAction.doNothing.rawValue {
       self.rowStartupSeparator.isHidden = hide
@@ -104,7 +104,7 @@ class MainPrefsViewController: NSViewController, PreferencePane {
     keyboardPrefsVc?.view.layoutSubtreeIfNeeded()
     displaysPrefsVc?.view.layoutSubtreeIfNeeded()
     aboutPrefsVc?.view.layoutSubtreeIfNeeded()
-    _ = self.showAdvanced()
+    _ = self.updateGridLayout()
   }
 
   @IBAction func startAtLoginClicked(_ sender: NSButton) {
@@ -154,7 +154,7 @@ class MainPrefsViewController: NSViewController, PreferencePane {
       _ = display.setDirectBrightness(1)
       _ = display.setSwBrightness(1)
     }
-    _ = self.showAdvanced()
+    _ = self.updateGridLayout()
     app.configure()
   }
 
@@ -170,7 +170,7 @@ class MainPrefsViewController: NSViewController, PreferencePane {
       _ = display.setDirectBrightness(1)
       _ = display.setSwBrightness(1)
     }
-    _ = self.showAdvanced()
+    _ = self.updateGridLayout()
     app.configure()
   }
 
@@ -196,7 +196,7 @@ class MainPrefsViewController: NSViewController, PreferencePane {
 
   @IBAction func startupAction(_ sender: NSPopUpButton) {
     prefs.set(sender.selectedTag(), forKey: PrefKey.startupAction.rawValue)
-    _ = self.showAdvanced()
+    _ = self.updateGridLayout()
   }
 
   @IBAction func showAdvancedClicked(_ sender: NSButton) {
@@ -207,10 +207,10 @@ class MainPrefsViewController: NSViewController, PreferencePane {
       prefs.set(false, forKey: PrefKey.showAdvancedSettings.rawValue)
     default: break
     }
-    _ = self.showAdvanced()
-    _ = menuslidersPrefsVc?.showAdvanced()
-    _ = keyboardPrefsVc?.showAdvanced()
-    _ = displaysPrefsVc?.showAdvanced()
+    _ = self.updateGridLayout()
+    _ = menuslidersPrefsVc?.updateGridLayout()
+    _ = keyboardPrefsVc?.updateGridLayout()
+    _ = displaysPrefsVc?.updateGridLayout()
     menuslidersPrefsVc?.view.layoutSubtreeIfNeeded()
     keyboardPrefsVc?.view.layoutSubtreeIfNeeded()
     displaysPrefsVc?.view.layoutSubtreeIfNeeded()

@@ -50,7 +50,7 @@ class MenuslidersPrefsViewController: NSViewController, PreferencePane {
   @IBOutlet var rowPercentText: NSGridRow!
 
   // swiftlint:disable cyclomatic_complexity
-  func showAdvanced() -> Bool {
+  func updateGridLayout() -> Bool {
     let hide = !prefs.bool(forKey: PrefKey.showAdvancedSettings.rawValue)
 
     var doNotHideRowIconSeparator = false
@@ -157,19 +157,19 @@ class MenuslidersPrefsViewController: NSViewController, PreferencePane {
     self.enableSliderSnap.state = prefs.bool(forKey: PrefKey.enableSliderSnap.rawValue) ? .on : .off
     self.showTickMarks.state = prefs.bool(forKey: PrefKey.showTickMarks.rawValue) ? .on : .off
     self.enableSliderPercent.state = prefs.bool(forKey: PrefKey.enableSliderPercent.rawValue) ? .on : .off
-    _ = self.showAdvanced()
+    _ = self.updateGridLayout()
   }
 
   @IBAction func icon(_ sender: NSPopUpButton) {
     prefs.set(sender.selectedTag(), forKey: PrefKey.menuIcon.rawValue)
     app.updateMenusAndKeys()
-    _ = self.showAdvanced()
+    _ = self.updateGridLayout()
   }
 
   @IBAction func menuItemStyle(_ sender: NSPopUpButton) {
     prefs.set(sender.selectedTag(), forKey: PrefKey.menuItemStyle.rawValue)
     app.updateMenusAndKeys()
-    _ = self.showAdvanced()
+    _ = self.updateGridLayout()
   }
 
   @IBAction func quitApplicationClicked(_: NSButton) {
@@ -222,7 +222,7 @@ class MenuslidersPrefsViewController: NSViewController, PreferencePane {
     default: break
     }
     app.updateMenusAndKeys()
-    _ = self.showAdvanced()
+    _ = self.updateGridLayout()
   }
 
   @IBAction func enableSliderSnapClicked(_ sender: NSButton) {
@@ -234,13 +234,13 @@ class MenuslidersPrefsViewController: NSViewController, PreferencePane {
     default: break
     }
     app.updateMenusAndKeys()
-    _ = self.showAdvanced()
+    _ = self.updateGridLayout()
   }
 
   @IBAction func multiSliders(_ sender: NSPopUpButton) {
     prefs.set(sender.selectedTag(), forKey: PrefKey.multiSliders.rawValue)
     app.updateMenusAndKeys()
-    _ = self.showAdvanced()
+    _ = self.updateGridLayout()
   }
 
   @IBAction func showTickMarks(_ sender: NSButton) {
@@ -252,7 +252,7 @@ class MenuslidersPrefsViewController: NSViewController, PreferencePane {
     default: break
     }
     app.updateMenusAndKeys()
-    _ = self.showAdvanced()
+    _ = self.updateGridLayout()
   }
 
   @IBAction func enableSliderPercent(_ sender: NSButton) {
@@ -264,6 +264,6 @@ class MenuslidersPrefsViewController: NSViewController, PreferencePane {
     default: break
     }
     app.updateMenusAndKeys()
-    _ = self.showAdvanced()
+    _ = self.updateGridLayout()
   }
 }
