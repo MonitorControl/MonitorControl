@@ -98,12 +98,15 @@ class MenuslidersPrefsViewController: NSViewController, PreferencePane {
 
     if self.multiSliders.selectedTag() == MultiSliders.separate.rawValue {
       self.rowMultiSliders.isHidden = hide
+      self.rowMultiSliders.bottomPadding = -6
       self.rowSlidersCombineText.isHidden = true
     } else if self.multiSliders.selectedTag() == MultiSliders.relevant.rawValue {
       self.rowMultiSliders.isHidden = false
+      self.rowMultiSliders.bottomPadding = -6
       self.rowSlidersCombineText.isHidden = true
     } else if self.multiSliders.selectedTag() == MultiSliders.combine.rawValue {
       self.rowMultiSliders.isHidden = false
+      self.rowMultiSliders.bottomPadding = -10
       self.rowSlidersCombineText.isHidden = false
     }
 
