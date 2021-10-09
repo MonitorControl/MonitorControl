@@ -175,9 +175,6 @@
 /* Class = "NSButtonCell"; title = "Get current"; ObjectID = "hkC-vq-IcD"; */
 "hkC-vq-IcD.title" = "Waarde ophalen";
 
-/* Class = "NSTextFieldCell"; title = "Record shortcuts:"; ObjectID = "HLE-Vp-kcS"; */
-"HLE-Vp-kcS.title" = "Snelkoppelingen opnemen:";
-
 /* Class = "NSMenuItem"; title = "Hide"; ObjectID = "HUT-Qc-kuu"; */
 "HUT-Qc-kuu.title" = "Verbergen";
 
@@ -207,9 +204,6 @@
 
 /* Class = "NSTextFieldCell"; title = "Don't use software dimming as fallback if no hardware control is available."; ObjectID = "kgh-b4-gmO"; */
 "kgh-b4-gmO.title" = "Gebruik geen software dimming als fallback als er geen hardwarecontrole beschikbaar is.";
-
-/* Class = "NSTextFieldCell"; title = "Record shortcuts:"; ObjectID = "kqJ-jQ-b7U"; */
-"kqJ-jQ-b7U.title" = "Snelkoppelingen opnemen:";
 
 /* Class = "NSMenuItem"; title = "Use combined slider for all displays"; ObjectID = "lA0-tv-qRs"; */
 "lA0-tv-qRs.title" = "Gecombineerde schuifregelaar gebruiken voor alle schermen";

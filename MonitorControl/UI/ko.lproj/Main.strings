@@ -175,9 +175,6 @@
 /* Class = "NSButtonCell"; title = "Get current"; ObjectID = "hkC-vq-IcD"; */
 "hkC-vq-IcD.title" = "최신 정보 얻기";
 
-/* Class = "NSTextFieldCell"; title = "Record shortcuts:"; ObjectID = "HLE-Vp-kcS"; */
-"HLE-Vp-kcS.title" = "단축키 기록:";
-
 /* Class = "NSMenuItem"; title = "Hide"; ObjectID = "HUT-Qc-kuu"; */
 "HUT-Qc-kuu.title" = "숨김";
 
@@ -207,9 +204,6 @@
 
 /* Class = "NSTextFieldCell"; title = "Don't use software dimming as fallback if no hardware control is available."; ObjectID = "kgh-b4-gmO"; */
 "kgh-b4-gmO.title" = "하드웨어 제어를 사용할 수 없는 경우 소프트웨어 밝기 조절을 대체 수단으로 사용하지 않습니다.";
-
-/* Class = "NSTextFieldCell"; title = "Record shortcuts:"; ObjectID = "kqJ-jQ-b7U"; */
-"kqJ-jQ-b7U.title" = "단축키 기록:";
 
 /* Class = "NSMenuItem"; title = "Use combined slider for all displays"; ObjectID = "lA0-tv-qRs"; */
 "lA0-tv-qRs.title" = "모든 디스플레이에 대한 통합 슬라이더 사용";
