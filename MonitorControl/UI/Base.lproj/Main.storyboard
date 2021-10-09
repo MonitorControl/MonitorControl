@@ -945,7 +945,7 @@
                                                 </subviews>
                                             </view>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="440" id="Fon-gj-YlX"/>
+                                                <constraint firstAttribute="width" constant="470" id="Fon-gj-YlX"/>
                                                 <constraint firstAttribute="height" constant="72" id="z4Q-La-eC5"/>
                                             </constraints>
                                             <color key="borderColor" red="1" green="1" blue="1" alpha="0.14738301570628254" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1123,9 +1123,9 @@
                                     <gridCell row="TxS-hN-bkf" column="ZC2-Ja-sIb" xPlacement="trailing" id="Ifk-Yb-maM"/>
                                     <gridCell row="TxS-hN-bkf" column="EiG-65-CTv" xPlacement="leading" id="rL9-yD-7Tk">
                                         <box key="contentView" boxType="custom" borderType="line" cornerRadius="6" title="#bc-ignore!" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="9aX-gm-8TS">
-                                            <rect key="frame" x="220" y="145" width="440" height="72"/>
+                                            <rect key="frame" x="220" y="145" width="470" height="72"/>
                                             <view key="contentView" id="iJ6-Kh-tv6">
-                                                <rect key="frame" x="1" y="1" width="438" height="70"/>
+                                                <rect key="frame" x="1" y="1" width="468" height="70"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <gridView focusRingType="none" fixedFrame="YES" xPlacement="leading" yPlacement="top" rowAlignment="none" translatesAutoresizingMaskIntoConstraints="NO" id="YtM-JQ-l82">
@@ -1181,7 +1181,7 @@
                                                 </subviews>
                                             </view>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="440" id="GMj-Ti-YUh"/>
+                                                <constraint firstAttribute="width" constant="470" id="GMj-Ti-YUh"/>
                                                 <constraint firstAttribute="height" constant="72" id="r7A-vj-vfb"/>
                                             </constraints>
                                             <color key="borderColor" red="1" green="1" blue="1" alpha="0.14738301570000001" colorSpace="custom" customColorSpace="sRGB"/>
