@@ -122,7 +122,7 @@
 "Eq3-z9-yIo.title" = "Minimaal";
 
 /* Class = "NSTextFieldCell"; title = "Scale mapping curve"; ObjectID = "Eui-5S-JR6"; */
-"Eui-5S-JR6.title" = "Schaaltoewijzingscurve";
+"Eui-5S-JR6.title" = "Schaalcurve";
 
 /* Class = "NSTextFieldCell"; title = "Mute:"; ObjectID = "EvN-FT-vdZ"; */
 "EvN-FT-vdZ.title" = "Dempen:";
