@@ -49,9 +49,6 @@
 /* Class = "NSMenuItem"; title = "Custom keyboard shortcuts"; ObjectID = "9eC-PD-FHl"; */
 "9eC-PD-FHl.title" = "사용자 정의 키보드 단축키";
 
-/* Class = "NSSlider"; ibExternalAccessibilityDescription = "Brightness"; ObjectID = "9H1-0z-xsx"; */
-"9H1-0z-xsx.ibExternalAccessibilityDescription" = "밝기";
-
 /* Class = "NSMenuItem"; title = "Attempt to read display settings"; ObjectID = "9yL-no-aWa"; */
 "9yL-no-aWa.title" = "디스플레이 설정 읽기 시도";
 
@@ -247,9 +244,6 @@
 /* Class = "NSButtonCell"; title = "Separate scales for combined hardware & software dimming"; ObjectID = "O8o-hI-8eR"; */
 "O8o-hI-8eR.title" = "통합된 하드웨어 및 소프트웨어 밝기 조절을 위한 별도의 스케일";
 
-/* Class = "NSSlider"; ibExternalAccessibilityDescription = "Brightness"; ObjectID = "OG9-iA-jK1"; */
-"OG9-iA-jK1.ibExternalAccessibilityDescription" = "밝기";
-
 /* Class = "NSMenuItem"; title = "Disable keyboard"; ObjectID = "oHf-Gh-68c"; */
 "oHf-Gh-68c.title" = "키보드 비활성화";
 
@@ -304,9 +298,6 @@
 /* Class = "NSMenuItem"; title = "Normal"; ObjectID = "Riq-uM-bTs"; */
 "Riq-uM-bTs.title" = "보통";
 
-/* Class = "NSButton"; ibExternalAccessibilityDescription = "Brightness"; ObjectID = "RkH-7d-KvR"; */
-"RkH-7d-KvR.ibExternalAccessibilityDescription" = "밝기";
-
 /* Class = "NSButtonCell"; title = "Show advanced settings"; ObjectID = "sAR-sh-y8e"; */
 "sAR-sh-y8e.title" = "고급 설정 표시";
 
@@ -321,9 +312,6 @@
 
 /* Class = "NSTextFieldCell"; title = "Works if an audio device is selected with no native volume control."; ObjectID = "uF5-a9-Ngz"; */
 "uF5-a9-Ngz.title" = "기본 볼륨 컨트롤 없이 오디오 장치를 선택한 경우 동작합니다.";
-
-/* Class = "NSTextField"; ibExternalAccessibilityDescription = "Brightness"; ObjectID = "uJS-s3-Zpi"; */
-"uJS-s3-Zpi.ibExternalAccessibilityDescription" = "밝기";
 
 /* Class = "NSButtonCell"; title = "Enable keyboard control for display"; ObjectID = "UqR-WE-jHl"; */
 "UqR-WE-jHl.title" = "디스플레이 키보드 제어 활성화";
@@ -354,9 +342,6 @@
 
 /* Class = "NSTextFieldCell"; title = "Display advanced settings and additional information in Preferences."; ObjectID = "X6w-Ee-9Jq"; */
 "X6w-Ee-9Jq.title" = "기본 설정에서 고급 설정 및 추가 정보를 표시합니다.";
-
-/* Class = "NSTextField"; ibExternalAccessibilityDescription = "Brightness"; ObjectID = "xDF-IA-bBh"; */
-"xDF-IA-bBh.ibExternalAccessibilityDescription" = "밝기";
 
 /* Class = "NSMenuItem"; title = "Change volume for all screens"; ObjectID = "Xih-P5-NyM"; */
 "Xih-P5-NyM.title" = "모든 화면의 볼륨 변경";

@@ -1529,7 +1529,6 @@
                                                                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                                 </textFieldCell>
-                                                                                <accessibility description="Brightness"/>
                                                                                 <connections>
                                                                                     <action selector="maxDDCOverride:" target="hCY-wr-B84" id="Oca-mn-LFA"/>
                                                                                 </connections>
@@ -1700,7 +1699,6 @@
                                                                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                                                     <font key="font" metaFont="system"/>
                                                                                 </buttonCell>
-                                                                                <accessibility description="Brightness"/>
                                                                                 <connections>
                                                                                     <action selector="invertDDC:" target="hCY-wr-B84" id="Hjk-Ke-dq2"/>
                                                                                 </connections>
@@ -1771,7 +1769,6 @@
                                                                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                                 </textFieldCell>
-                                                                                <accessibility description="Brightness"/>
                                                                                 <connections>
                                                                                     <action selector="remapDDC:" target="hCY-wr-B84" id="TvV-wf-Pfc"/>
                                                                                 </connections>
@@ -1869,7 +1866,6 @@
                                                                                 <rect key="frame" x="339" y="56" width="110" height="28"/>
                                                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                                                 <sliderCell key="cell" state="on" alignment="left" minValue="1" maxValue="9" doubleValue="5" tickMarkPosition="above" numberOfTickMarks="9" allowsTickMarkValuesOnly="YES" sliderType="linear" id="HPs-Bd-Ymf"/>
-                                                                                <accessibility description="Brightness"/>
                                                                                 <connections>
                                                                                     <action selector="curveDDC:" target="hCY-wr-B84" id="LLn-ot-OHw"/>
                                                                                 </connections>
@@ -1878,7 +1874,6 @@
                                                                                 <rect key="frame" x="270" y="249" width="208" height="28"/>
                                                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                                                 <sliderCell key="cell" state="on" alignment="left" minValue="-8" maxValue="7" tickMarkPosition="above" numberOfTickMarks="16" allowsTickMarkValuesOnly="YES" sliderType="linear" id="c6i-bm-1LB"/>
-                                                                                <accessibility description="Brightness"/>
                                                                                 <connections>
                                                                                     <action selector="combinedBrightnessSwitchingPoint:" target="hCY-wr-B84" id="EBm-wm-0qz"/>
                                                                                 </connections>

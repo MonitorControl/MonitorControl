@@ -49,9 +49,6 @@
 /* Class = "NSMenuItem"; title = "Custom keyboard shortcuts"; ObjectID = "9eC-PD-FHl"; */
 "9eC-PD-FHl.title" = "Custom keyboard shortcuts";
 
-/* Class = "NSSlider"; ibExternalAccessibilityDescription = "Brightness"; ObjectID = "9H1-0z-xsx"; */
-"9H1-0z-xsx.ibExternalAccessibilityDescription" = "Brightness";
-
 /* Class = "NSMenuItem"; title = "Attempt to read display settings"; ObjectID = "9yL-no-aWa"; */
 "9yL-no-aWa.title" = "Attempt to read display settings";
 
@@ -247,9 +244,6 @@
 /* Class = "NSButtonCell"; title = "Separate scales for combined hardware & software dimming"; ObjectID = "O8o-hI-8eR"; */
 "O8o-hI-8eR.title" = "Separate scales for combined hardware & software dimming";
 
-/* Class = "NSSlider"; ibExternalAccessibilityDescription = "Brightness"; ObjectID = "OG9-iA-jK1"; */
-"OG9-iA-jK1.ibExternalAccessibilityDescription" = "Brightness";
-
 /* Class = "NSMenuItem"; title = "Disable keyboard"; ObjectID = "oHf-Gh-68c"; */
 "oHf-Gh-68c.title" = "Disable keyboard";
 
@@ -304,9 +298,6 @@
 /* Class = "NSMenuItem"; title = "Normal"; ObjectID = "Riq-uM-bTs"; */
 "Riq-uM-bTs.title" = "Normalny";
 
-/* Class = "NSButton"; ibExternalAccessibilityDescription = "Brightness"; ObjectID = "RkH-7d-KvR"; */
-"RkH-7d-KvR.ibExternalAccessibilityDescription" = "Brightness";
-
 /* Class = "NSButtonCell"; title = "Show advanced settings"; ObjectID = "sAR-sh-y8e"; */
 "sAR-sh-y8e.title" = "Show advanced settings";
 
@@ -321,9 +312,6 @@
 
 /* Class = "NSTextFieldCell"; title = "Works if an audio device is selected with no native volume control."; ObjectID = "uF5-a9-Ngz"; */
 "uF5-a9-Ngz.title" = "Works if an audio device is selected with no native volume control.";
-
-/* Class = "NSTextField"; ibExternalAccessibilityDescription = "Brightness"; ObjectID = "uJS-s3-Zpi"; */
-"uJS-s3-Zpi.ibExternalAccessibilityDescription" = "Brightness";
 
 /* Class = "NSButtonCell"; title = "Enable keyboard control for display"; ObjectID = "UqR-WE-jHl"; */
 "UqR-WE-jHl.title" = "Włącz sterowanie klawiaturą dla tego wyświetlacza";
@@ -354,9 +342,6 @@
 
 /* Class = "NSTextFieldCell"; title = "Display advanced settings and additional information in Preferences."; ObjectID = "X6w-Ee-9Jq"; */
 "X6w-Ee-9Jq.title" = "Display advanced settings and additional information in Preferences.";
-
-/* Class = "NSTextField"; ibExternalAccessibilityDescription = "Brightness"; ObjectID = "xDF-IA-bBh"; */
-"xDF-IA-bBh.ibExternalAccessibilityDescription" = "Brightness";
 
 /* Class = "NSMenuItem"; title = "Change volume for all screens"; ObjectID = "Xih-P5-NyM"; */
 "Xih-P5-NyM.title" = "Change volume for all screens";

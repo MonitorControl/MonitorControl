@@ -49,9 +49,6 @@
 /* Class = "NSMenuItem"; title = "Custom keyboard shortcuts"; ObjectID = "9eC-PD-FHl"; */
 "9eC-PD-FHl.title" = "自定义快捷键";
 
-/* Class = "NSSlider"; ibExternalAccessibilityDescription = "Brightness"; ObjectID = "9H1-0z-xsx"; */
-"9H1-0z-xsx.ibExternalAccessibilityDescription" = "亮度";
-
 /* Class = "NSMenuItem"; title = "Attempt to read display settings"; ObjectID = "9yL-no-aWa"; */
 "9yL-no-aWa.title" = "尝试获取显示器的设置";
 
@@ -247,9 +244,6 @@
 /* Class = "NSButtonCell"; title = "Separate scales for combined hardware & software dimming"; ObjectID = "O8o-hI-8eR"; */
 "O8o-hI-8eR.title" = "使用硬件结合软件调整时忽略软件调整的范围";
 
-/* Class = "NSSlider"; ibExternalAccessibilityDescription = "Brightness"; ObjectID = "OG9-iA-jK1"; */
-"OG9-iA-jK1.ibExternalAccessibilityDescription" = "亮度";
-
 /* Class = "NSMenuItem"; title = "Disable keyboard"; ObjectID = "oHf-Gh-68c"; */
 "oHf-Gh-68c.title" = "禁用键盘";
 
@@ -304,9 +298,6 @@
 /* Class = "NSMenuItem"; title = "Normal"; ObjectID = "Riq-uM-bTs"; */
 "Riq-uM-bTs.title" = "正常";
 
-/* Class = "NSButton"; ibExternalAccessibilityDescription = "Brightness"; ObjectID = "RkH-7d-KvR"; */
-"RkH-7d-KvR.ibExternalAccessibilityDescription" = "亮度";
-
 /* Class = "NSButtonCell"; title = "Show advanced settings"; ObjectID = "sAR-sh-y8e"; */
 "sAR-sh-y8e.title" = "显示高级选项";
 
@@ -321,9 +312,6 @@
 
 /* Class = "NSTextFieldCell"; title = "Works if an audio device is selected with no native volume control."; ObjectID = "uF5-a9-Ngz"; */
 "uF5-a9-Ngz.title" = "当一个没有原生音量控制的音频设备被选择时可用。";
-
-/* Class = "NSTextField"; ibExternalAccessibilityDescription = "Brightness"; ObjectID = "uJS-s3-Zpi"; */
-"uJS-s3-Zpi.ibExternalAccessibilityDescription" = "亮度";
 
 /* Class = "NSButtonCell"; title = "Enable keyboard control for display"; ObjectID = "UqR-WE-jHl"; */
 "UqR-WE-jHl.title" = "允许键盘控制显示器";
@@ -354,9 +342,6 @@
 
 /* Class = "NSTextFieldCell"; title = "Display advanced settings and additional information in Preferences."; ObjectID = "X6w-Ee-9Jq"; */
 "X6w-Ee-9Jq.title" = "在偏好选项中显示高级设置和额外信息。";
-
-/* Class = "NSTextField"; ibExternalAccessibilityDescription = "Brightness"; ObjectID = "xDF-IA-bBh"; */
-"xDF-IA-bBh.ibExternalAccessibilityDescription" = "亮度";
 
 /* Class = "NSMenuItem"; title = "Change volume for all screens"; ObjectID = "Xih-P5-NyM"; */
 "Xih-P5-NyM.title" = "更改所有显示器的音量";
