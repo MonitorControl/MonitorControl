@@ -239,7 +239,7 @@
 "MWo-6I-s9L.title" = "Helderheidsregelaar in menu weergeven";
 
 /* Class = "NSButtonCell"; title = "Avoid gamma table manipulation"; ObjectID = "na6-mS-MPi"; */
-"na6-mS-MPi.title" = "Avoid gamma table manipulation";
+"na6-mS-MPi.title" = "Voorkom gamma table manipulatie";
 
 /* Class = "NSButtonCell"; title = "Separate scales for combined hardware & software dimming"; ObjectID = "O8o-hI-8eR"; */
 "O8o-hI-8eR.title" = "Aparte schaal voor gecombineerd hardware & software dimmen";
