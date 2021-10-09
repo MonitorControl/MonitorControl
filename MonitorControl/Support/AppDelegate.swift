@@ -131,6 +131,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     os_log("Request for configuration with reconfigreID %{public}@", type: .info, String(dispatchedReconfigureID))
     self.reconfigureID = 0
+    DisplayManager.shared.gammaInterferenceCounter = 0
     DisplayManager.shared.configureDisplays()
     DisplayManager.shared.addDisplayCounterSuffixes()
     DisplayManager.shared.updateArm64AVServices()

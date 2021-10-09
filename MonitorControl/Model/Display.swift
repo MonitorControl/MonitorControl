@@ -13,6 +13,7 @@ class Display: Equatable {
   internal var smoothBrightnessTransient: Float = 1
   internal var smoothBrightnessRunning: Bool = false
   internal var smoothBrightnessSlow: Bool = false
+  let swBrightnessSemaphore = DispatchSemaphore(value: 1)
 
   static func == (lhs: Display, rhs: Display) -> Bool {
     return lhs.identifier == rhs.identifier
@@ -199,8 +200,8 @@ class Display: Equatable {
     }
   }
 
-  let swBrightnessSemaphore = DispatchSemaphore(value: 1)
   func setSwBrightness(_ value: Float, smooth: Bool = false) -> Bool {
+    self.swBrightnessSemaphore.wait()
     let brightnessValue = min(1, value)
     var currentValue = self.readPrefAsFloat(key: .SwBrightness)
     self.savePref(brightnessValue, key: .SwBrightness)
@@ -209,9 +210,9 @@ class Display: Equatable {
     newValue = self.swBrightnessTransform(value: newValue)
     if smooth {
       DispatchQueue.global(qos: .userInteractive).async {
-        self.swBrightnessSemaphore.wait()
         for transientValue in stride(from: currentValue, to: newValue, by: 0.005 * (currentValue > newValue ? -1 : 1)) {
           guard app.reconfigureID == 0 else {
+            self.swBrightnessSemaphore.signal()
             return
           }
           if self.isVirtual || self.readPrefAsBool(key: .avoidGamma) {
@@ -224,10 +225,10 @@ class Display: Equatable {
           }
           Thread.sleep(forTimeInterval: 0.001) // Let's make things quick if not performed in the background
         }
-        self.swBrightnessSemaphore.signal()
       }
     } else {
       if self.isVirtual || self.readPrefAsBool(key: .avoidGamma) {
+        self.swBrightnessSemaphore.signal()
         return DisplayManager.shared.setShadeAlpha(value: 1 - newValue, displayID: self.identifier)
       } else {
         let gammaTableRed = self.defaultGammaTableRed.map { $0 * newValue }
@@ -238,28 +239,64 @@ class Display: Equatable {
         DisplayManager.shared.enforceGammaActivity()
       }
     }
+    self.swBrightnessSemaphore.signal()
     return true
   }
 
   func getSwBrightness() -> Float {
+    self.swBrightnessSemaphore.wait()
     if self.isVirtual || self.readPrefAsBool(key: .avoidGamma) {
       let rawBrightnessValue = 1 - (DisplayManager.shared.getShadeAlpha(displayID: self.identifier) ?? 1)
+      self.swBrightnessSemaphore.signal()
       return self.swBrightnessTransform(value: rawBrightnessValue, reverse: true)
     }
     var gammaTableRed = [CGGammaValue](repeating: 0, count: 256)
     var gammaTableGreen = [CGGammaValue](repeating: 0, count: 256)
     var gammaTableBlue = [CGGammaValue](repeating: 0, count: 256)
     var gammaTableSampleCount: UInt32 = 0
+    var brightnessValue: Float = 1
     if CGGetDisplayTransferByTable(self.identifier, 256, &gammaTableRed, &gammaTableGreen, &gammaTableBlue, &gammaTableSampleCount) == CGError.success {
       let redPeak = gammaTableRed.max() ?? 0
       let greenPeak = gammaTableGreen.max() ?? 0
       let bluePeak = gammaTableBlue.max() ?? 0
       let gammaTablePeak = max(redPeak, greenPeak, bluePeak)
       let peakRatio = gammaTablePeak / self.defaultGammaTablePeak
-      let brightnessValue = round(self.swBrightnessTransform(value: peakRatio, reverse: true) * 256) / 256
-      return brightnessValue
+      brightnessValue = round(self.swBrightnessTransform(value: peakRatio, reverse: true) * 256) / 256
     }
-    return 1
+    self.swBrightnessSemaphore.signal()
+    return brightnessValue
+  }
+
+  func checkGammaInterference() {
+    let currentSwBrightness = self.getSwBrightness()
+    guard !DisplayManager.shared.gammaInterferenceWarningShown, !(prefs.bool(forKey: PrefKey.disableSoftwareFallback.rawValue) && prefs.bool(forKey: PrefKey.disableCombinedBrightness.rawValue)), !self.readPrefAsBool(key: .avoidGamma), !self.smoothBrightnessRunning, self.prefExists(key: .SwBrightness), abs(currentSwBrightness - self.readPrefAsFloat(key: .SwBrightness)) > 0.02 else {
+      return
+    }
+    DisplayManager.shared.gammaInterferenceCounter += 1
+    _ = self.setSwBrightness(1)
+    os_log("Gamma table interference detected, number of events: %{public}@", type: .debug, String(DisplayManager.shared.gammaInterferenceCounter))
+    if DisplayManager.shared.gammaInterferenceCounter >= 3 {
+      DisplayManager.shared.gammaInterferenceWarningShown = true
+      let alert = NSAlert()
+      alert.messageText = NSLocalizedString("Is f.lux or similar running?", comment: "Shown in the alert dialog")
+      alert.informativeText = NSLocalizedString("An other app seems to change the brightness or colors which causes issues.\n\nTo solve this, you need to quit the other app or disable gamma control for your displays in MonitorControl!", comment: "Shown in the alert dialog")
+      alert.addButton(withTitle: NSLocalizedString("I'll quit the other app", comment: "Shown in the alert dialog"))
+      alert.addButton(withTitle: NSLocalizedString("Disable gamma control for my displays", comment: "Shown in the alert dialog"))
+      alert.alertStyle = NSAlert.Style.critical
+      if alert.runModal() != .alertFirstButtonReturn {
+        for otherDisplay in DisplayManager.shared.getOtherDisplays() {
+          _ = otherDisplay.setSwBrightness(1)
+          _ = otherDisplay.setDirectBrightness(1)
+          otherDisplay.savePref(true, key: .avoidGamma)
+          _ = otherDisplay.setSwBrightness(1)
+          DisplayManager.shared.gammaInterferenceWarningShown = false
+          DisplayManager.shared.gammaInterferenceCounter = 0
+          displaysPrefsVc?.loadDisplayList()
+        }
+      } else {
+        os_log("We won't watch for gamma table interference anymore", type: .debug)
+      }
+    }
   }
 
   func resetSwBrightness() -> Bool {
