@@ -29,10 +29,8 @@ class KeyboardPrefsViewController: NSViewController, PreferencePane {
   @IBOutlet var keyboardVolume: NSPopUpButton!
   @IBOutlet var disableAltBrightnessKeys: NSButton!
 
-  @IBOutlet var allScreens: NSButton!
-  @IBOutlet var useFocusInsteadOfMouse: NSButton!
-  @IBOutlet var allScreensVolume: NSButton!
-  @IBOutlet var useAudioDeviceNameMatching: NSButton!
+  @IBOutlet var multiKeyboardBrightness: NSPopUpButton!
+  @IBOutlet var multiKeyboardVolume: NSPopUpButton!
   @IBOutlet var useFineScale: NSButton!
   @IBOutlet var useFineScaleVolume: NSButton!
   @IBOutlet var separateCombinedScale: NSButton!
@@ -42,10 +40,10 @@ class KeyboardPrefsViewController: NSViewController, PreferencePane {
   @IBOutlet var rowDisableAltBrightnessKeysCheck: NSGridRow!
   @IBOutlet var rowDisableAltBrightnessKeysText: NSGridRow!
   @IBOutlet var rowCustomBrightnessShortcuts: NSGridRow!
-  @IBOutlet var rowUseFocusCheck: NSGridRow!
+  @IBOutlet var rowMultiKeyboardBrightness: NSGridRow!
   @IBOutlet var rowUseFocusText: NSGridRow!
   @IBOutlet var rowCustomAudioShortcuts: NSGridRow!
-  @IBOutlet var rowUseAudioNameCheck: NSGridRow!
+  @IBOutlet var rowUseAudioMouseText: NSGridRow!
   @IBOutlet var rowUseAudioNameText: NSGridRow!
   @IBOutlet var rowUseFineScaleCheck: NSGridRow!
   @IBOutlet var rowUseFineScaleText: NSGridRow!
@@ -53,7 +51,7 @@ class KeyboardPrefsViewController: NSViewController, PreferencePane {
   @IBOutlet var rowSeparateCombinedScaleText: NSGridRow!
 
   // swiftlint:disable cyclomatic_complexity
-  func showAdvanced() -> Bool {
+  func updateGridLayout() -> Bool {
     let hide = !prefs.bool(forKey: PrefKey.showAdvancedSettings.rawValue)
 
     if self.keyboardBrightness.selectedTag() == KeyboardBrightness.media.rawValue {
@@ -93,13 +91,11 @@ class KeyboardPrefsViewController: NSViewController, PreferencePane {
     }
 
     if self.keyboardBrightness.selectedTag() == KeyboardBrightness.disabled.rawValue {
-      self.allScreens.isEnabled = false
-      self.useFocusInsteadOfMouse.isEnabled = false
+      self.multiKeyboardBrightness.isEnabled = false
       self.useFineScale.isEnabled = false
       self.separateCombinedScale.isEnabled = false
     } else {
-      self.allScreens.isEnabled = true
-      self.useFocusInsteadOfMouse.isEnabled = self.allScreens.state == .off ? true : false
+      self.multiKeyboardBrightness.isEnabled = true
       self.useFineScale.isEnabled = true
       self.separateCombinedScale.isEnabled = true
     }
@@ -111,28 +107,27 @@ class KeyboardPrefsViewController: NSViewController, PreferencePane {
     }
 
     if self.keyboardVolume.selectedTag() == KeyboardVolume.disabled.rawValue {
-      self.allScreensVolume.isEnabled = false
-      self.useAudioDeviceNameMatching.isEnabled = false
+      self.multiKeyboardVolume.isEnabled = false
       self.useFineScaleVolume.isEnabled = false
     } else {
-      self.allScreensVolume.isEnabled = true
-      self.useAudioDeviceNameMatching.isEnabled = self.allScreensVolume.state == .off ? true : false
+      self.multiKeyboardVolume.isEnabled = true
       self.useFineScaleVolume.isEnabled = true
     }
 
-    if self.useFocusInsteadOfMouse.state == .on {
-      self.rowUseFocusCheck.isHidden = false
+    if self.multiKeyboardBrightness.selectedTag() == MultiKeyboardBrightness.focusInsteadOfMouse.rawValue {
+      self.rowMultiKeyboardBrightness.bottomPadding = -10
       self.rowUseFocusText.isHidden = false
     } else {
-      self.rowUseFocusCheck.isHidden = hide
-      self.rowUseFocusText.isHidden = hide
+      self.rowMultiKeyboardBrightness.bottomPadding = -6
+      self.rowUseFocusText.isHidden = true
     }
-    if self.useAudioDeviceNameMatching.state == .on {
-      self.rowUseAudioNameCheck.isHidden = false
+
+    if self.multiKeyboardVolume.selectedTag() == MultiKeyboardVolume.audioDeviceNameMatching.rawValue {
       self.rowUseAudioNameText.isHidden = false
+      self.rowUseAudioMouseText.isHidden = true
     } else {
-      self.rowUseAudioNameCheck.isHidden = hide
-      self.rowUseAudioNameText.isHidden = hide
+      self.rowUseAudioNameText.isHidden = true
+      self.rowUseAudioMouseText.isHidden = false
     }
 
     if self.useFineScale.state == .on {
@@ -190,68 +185,24 @@ class KeyboardPrefsViewController: NSViewController, PreferencePane {
     self.keyboardBrightness.selectItem(withTag: prefs.integer(forKey: PrefKey.keyboardBrightness.rawValue))
     self.keyboardVolume.selectItem(withTag: prefs.integer(forKey: PrefKey.keyboardVolume.rawValue))
     self.disableAltBrightnessKeys.state = prefs.bool(forKey: PrefKey.disableAltBrightnessKeys.rawValue) ? .on : .off
-    self.allScreens.state = prefs.bool(forKey: PrefKey.allScreensBrightness.rawValue) ? .on : .off
-    self.useFocusInsteadOfMouse.state = prefs.bool(forKey: PrefKey.useFocusInsteadOfMouse.rawValue) ? .on : .off
-    self.allScreensVolume.state = prefs.bool(forKey: PrefKey.allScreensVolume.rawValue) ? .on : .off
-    self.useAudioDeviceNameMatching.state = prefs.bool(forKey: PrefKey.useAudioDeviceNameMatching.rawValue) ? .on : .off
+    self.multiKeyboardBrightness.selectItem(withTag: prefs.integer(forKey: PrefKey.multiKeyboardBrightness.rawValue))
+    self.multiKeyboardVolume.selectItem(withTag: prefs.integer(forKey: PrefKey.multiKeyboardVolume.rawValue))
     self.useFineScale.state = prefs.bool(forKey: PrefKey.useFineScaleBrightness.rawValue) ? .on : .off
     self.useFineScaleVolume.state = prefs.bool(forKey: PrefKey.useFineScaleVolume.rawValue) ? .on : .off
     self.separateCombinedScale.state = prefs.bool(forKey: PrefKey.separateCombinedScale.rawValue) ? .on : .off
-    self.allScreensClicked(self.allScreens)
-    self.allScreensVolumeClicked(self.allScreensVolume)
-    _ = self.showAdvanced()
+    _ = self.updateGridLayout()
   }
 
-  @IBAction func allScreensClicked(_ sender: NSButton) {
-    switch sender.state {
-    case .on:
-      prefs.set(true, forKey: PrefKey.allScreensBrightness.rawValue)
-      self.useFocusInsteadOfMouse.state = .off
-      self.useFocusInsteadOfMouse.isEnabled = false
-    case .off:
-      prefs.set(false, forKey: PrefKey.allScreensBrightness.rawValue)
-      self.useFocusInsteadOfMouse.isEnabled = true
-      self.useFocusInsteadOfMouse.state = prefs.bool(forKey: PrefKey.useFocusInsteadOfMouse.rawValue) ? .on : .off
-    default: break
-    }
-  }
-
-  @IBAction func useFocusInsteadOfMouseClicked(_ sender: NSButton) {
-    switch sender.state {
-    case .on:
-      prefs.set(true, forKey: PrefKey.useFocusInsteadOfMouse.rawValue)
-    case .off:
-      prefs.set(false, forKey: PrefKey.useFocusInsteadOfMouse.rawValue)
-    default: break
-    }
-    _ = self.showAdvanced()
-  }
-
-  @IBAction func allScreensVolumeClicked(_ sender: NSButton) {
-    switch sender.state {
-    case .on:
-      prefs.set(true, forKey: PrefKey.allScreensVolume.rawValue)
-      self.useAudioDeviceNameMatching.state = .off
-      self.useAudioDeviceNameMatching.isEnabled = false
-    case .off:
-      prefs.set(false, forKey: PrefKey.allScreensVolume.rawValue)
-      self.useAudioDeviceNameMatching.isEnabled = true
-      self.useAudioDeviceNameMatching.state = prefs.bool(forKey: PrefKey.useAudioDeviceNameMatching.rawValue) ? .on : .off
-    default: break
-    }
+  @IBAction func multiKeyboardBrightness(_ sender: NSPopUpButton) {
+    prefs.set(sender.selectedTag(), forKey: PrefKey.multiKeyboardBrightness.rawValue)
     app.updateMediaKeyTap()
+    _ = self.updateGridLayout()
   }
 
-  @IBAction func useAudioDeviceNameMatchingClicked(_ sender: NSButton) {
-    switch sender.state {
-    case .on:
-      prefs.set(true, forKey: PrefKey.useAudioDeviceNameMatching.rawValue)
-    case .off:
-      prefs.set(false, forKey: PrefKey.useAudioDeviceNameMatching.rawValue)
-    default: break
-    }
+  @IBAction func multiKeyboardVolume(_ sender: NSPopUpButton) {
+    prefs.set(sender.selectedTag(), forKey: PrefKey.multiKeyboardVolume.rawValue)
     app.updateMediaKeyTap()
-    _ = self.showAdvanced()
+    _ = self.updateGridLayout()
   }
 
   @IBAction func useFineScaleClicked(_ sender: NSButton) {
@@ -262,7 +213,7 @@ class KeyboardPrefsViewController: NSViewController, PreferencePane {
       prefs.set(false, forKey: PrefKey.useFineScaleBrightness.rawValue)
     default: break
     }
-    _ = self.showAdvanced()
+    _ = self.updateGridLayout()
   }
 
   @IBAction func useFineScaleVolumeClicked(_ sender: NSButton) {
@@ -283,7 +234,7 @@ class KeyboardPrefsViewController: NSViewController, PreferencePane {
       prefs.set(false, forKey: PrefKey.separateCombinedScale.rawValue)
     default: break
     }
-    _ = self.showAdvanced()
+    _ = self.updateGridLayout()
   }
 
   @IBAction func disableAltBrightnessKeys(_ sender: NSButton) {
@@ -294,19 +245,19 @@ class KeyboardPrefsViewController: NSViewController, PreferencePane {
       prefs.set(false, forKey: PrefKey.disableAltBrightnessKeys.rawValue)
     default: break
     }
-    _ = self.showAdvanced()
+    _ = self.updateGridLayout()
     app.updateMediaKeyTap()
   }
 
   @IBAction func keyboardBrightness(_ sender: NSPopUpButton) {
     prefs.set(sender.selectedTag(), forKey: PrefKey.keyboardBrightness.rawValue)
     app.updateMenusAndKeys()
-    _ = self.showAdvanced()
+    _ = self.updateGridLayout()
   }
 
   @IBAction func keyboardVolume(_ sender: NSPopUpButton) {
     prefs.set(sender.selectedTag(), forKey: PrefKey.keyboardVolume.rawValue)
     app.updateMenusAndKeys()
-    _ = self.showAdvanced()
+    _ = self.updateGridLayout()
   }
 }
