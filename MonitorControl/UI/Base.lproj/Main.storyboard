@@ -1493,7 +1493,6 @@
                                                                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                                 </textFieldCell>
-                                                                                <accessibility description="Brightness"/>
                                                                                 <connections>
                                                                                     <action selector="minDDCOverride:" target="hCY-wr-B84" id="bZo-pP-nqf"/>
                                                                                 </connections>
