@@ -1,8 +1,8 @@
 /* Class = "NSButtonCell"; title = "Sync brightness changes from Built-in and Apple displays"; ObjectID = "0ca-DG-AgB"; */
 "0ca-DG-AgB.title" = "同步苹果和内置显示器的亮度设置";
 
-/* Class = "NSButtonCell"; title = "Attempt to read display settings"; ObjectID = "0qp-fq-8MI"; */
-"0qp-fq-8MI.title" = "尝试获取显示器的设置";
+/* Class = "NSMenuItem"; title = "Assume last saved settings are valid (recommended)"; ObjectID = "1in-79-6qm"; */
+"1in-79-6qm.title" = "假设之前的设置可用（建议）";
 
 /* Class = "NSTextFieldCell"; title = "MonitorControl"; ObjectID = "1PJ-14-Bvn"; */
 "1PJ-14-Bvn.title" = "MonitorControl";
@@ -16,15 +16,17 @@
 /* Class = "NSTextFieldCell"; title = "DDC min"; ObjectID = "1zE-fg-xEm"; */
 "1zE-fg-xEm.title" = "DDC最小值";
 
+/* Class = "NSMenuItem"; title = "Show separate controls for each display in menu"; ObjectID = "3eO-bN-ZRl"; */
+"3eO-bN-ZRl.title" = "显示各个显示器的控制滑杆";
+
+/* Class = "NSMenuItem"; title = "Apply last saved values to the display"; ObjectID = "3Jr-bW-YYq"; */
+"3Jr-bW-YYq.title" = "使用上次储存的设置值至显示器";
+
 /* Class = "NSMenuItem"; title = "Custom keyboard shortcuts"; ObjectID = "4CG-0I-anB"; */
 "4CG-0I-anB.title" = "自定义快捷键";
 
 /* Class = "NSTextFieldCell"; title = "MonitorControl uses mouse position to determine which display to control. Using window focus instead might not work well with full screen apps."; ObjectID = "4dX-o1-xAc"; */
 "4dX-o1-xAc.title" = "预设使用鼠标的位置来判断控制哪个显示器。启用后软件全屏时效果可能不理想。";
-
-
-/* Class = "NSButtonCell"; title = "Show separate controls for each display in menu"; ObjectID = "4t2-Rv-njr"; */
-"4t2-Rv-njr.title" = "显示各个显示器的控制滑杆";
 
 /* Class = "NSTextField"; ibExternalAccessibilityDescription = "Brightness"; ObjectID = "567-le-fLg"; */
 "567-le-fLg.ibExternalAccessibilityDescription" = "亮度";
@@ -37,9 +39,6 @@
 
 /* Class = "NSTextFieldCell"; title = "Slider behavior:"; ObjectID = "75n-7M-1mS"; */
 "75n-7M-1mS.title" = "滑杆行为：";
-
-/* Class = "NSButtonCell"; title = "Use combined slider for all displays"; ObjectID = "7rn-Lu-fcl"; */
-"7rn-Lu-fcl.title" = "使用一个滑杆控制所有显示器";
 
 /* Class = "NSButtonCell"; title = "Show slider tick marks"; ObjectID = "7zf-m1-gJO"; */
 "7zf-m1-gJO.title" = "显示滑杆刻度";
@@ -59,6 +58,9 @@
 /* Class = "NSSlider"; ibExternalAccessibilityDescription = "Brightness"; ObjectID = "9H1-0z-xsx"; */
 "9H1-0z-xsx.ibExternalAccessibilityDescription" = "亮度";
 
+/* Class = "NSMenuItem"; title = "Attempt to read display settings"; ObjectID = "9yL-no-aWa"; */
+"9yL-no-aWa.title" = "尝试获取显示器的设置";
+
 /* Class = "NSTextFieldCell"; title = "Show tick marks at 0%, 25%, 50%, 75% and 100% for accuracy."; ObjectID = "A8P-vn-DEJ"; */
 "A8P-vn-DEJ.title" = "在0%、25%、50%、75%和100%处显示刻度使设置的亮度值更精准。";
 
@@ -67,6 +69,9 @@
 
 /* Class = "NSTextFieldCell"; title = "Use brightness, volume and other settings from last time or use defaults. Values will be applied to the display upon first change by the user."; ObjectID = "an7-Aj-3fZ"; */
 "an7-Aj-3fZ.title" = "使用者初次设置时使用之前或原始设置（亮度、音量和其它设置）。";
+
+/* Class = "NSMenuItem"; title = "Show sliders only for the display currently showing the menu"; ObjectID = "bbf-sS-uGv"; */
+"bbf-sS-uGv.title" = "仅显示当前显示器的滑杆介面";
 
 /* Class = "NSTextFieldCell"; title = "Brightness:"; ObjectID = "Bhb-6l-uPQ"; */
 "Bhb-6l-uPQ.title" = "亮度：";
@@ -88,9 +93,6 @@
 
 /* Class = "NSButtonCell"; title = "Enable Mute DDC command"; ObjectID = "bZq-0d-lJa"; */
 "bZq-0d-lJa.title" = "允许DDC静音指令";
-
-/* Class = "NSTextFieldCell"; title = "Decrease:"; ObjectID = "Bzq-Co-fex"; */
-"Bzq-Co-fex.title" = "降低：";
 
 /* Class = "NSButtonCell"; title = "Show volume slider in menu"; ObjectID = "c9D-MB-lma"; */
 "c9D-MB-lma.title" = "显示音量滑杆";
@@ -121,9 +123,6 @@
 
 /* Class = "NSMenuItem"; title = "Minimal"; ObjectID = "Eq3-z9-yIo"; */
 "Eq3-z9-yIo.title" = "少量";
-
-/* Class = "NSTextFieldCell"; title = "Increase:"; ObjectID = "eue-as-VOR"; */
-"eue-as-VOR.title" = "降低：";
 
 /* Class = "NSTextFieldCell"; title = "Scale mapping curve"; ObjectID = "Eui-5S-JR6"; */
 "Eui-5S-JR6.title" = "刻度控制曲线";
@@ -176,17 +175,14 @@
 /* Class = "NSButtonCell"; title = "Get current"; ObjectID = "hkC-vq-IcD"; */
 "hkC-vq-IcD.title" = "获取当前";
 
-/* Class = "NSTextFieldCell"; title = "Record shortcuts:"; ObjectID = "HLE-Vp-kcS"; */
-"HLE-Vp-kcS.title" = "记录快捷键：";
-
 /* Class = "NSMenuItem"; title = "Hide"; ObjectID = "HUT-Qc-kuu"; */
 "HUT-Qc-kuu.title" = "隐藏";
 
 /* Class = "NSTextFieldCell"; title = "Additional controls:"; ObjectID = "i5X-M5-Tf5"; */
 "i5X-M5-Tf5.title" = "额外的控制：";
 
-/* Class = "NSTextFieldCell"; title = "Brightness"; ObjectID = "IJB-mO-e8I"; */
-"IJB-mO-e8I.title" = "亮度";
+/* Class = "NSTextFieldCell"; title = "Brightness:"; ObjectID = "IJB-mO-e8I"; */
+"IJB-mO-e8I.title" = "亮度：";
 
 /* Class = "NSButtonCell"; title = "Enable smooth brightness transitions"; ObjectID = "IK4-u5-qjf"; */
 "IK4-u5-qjf.title" = "启用流畅亮度转换";
@@ -203,17 +199,14 @@
 /* Class = "NSTextFieldCell"; title = "Note: you can press Shift during startup for 'Safe mode' to restore defaults and avoid reading or setting anything."; ObjectID = "Jx2-gO-nq9"; */
 "Jx2-gO-nq9.title" = "注：启动时按下Shift进入「安全模式」以恢复原始设置并避免读取或更动任何设置。";
 
-/* Class = "NSButtonCell"; title = "Apply last saved values to the display"; ObjectID = "K0S-zN-M4k"; */
-"K0S-zN-M4k.title" = "使用上次储存的设置值至显示器";
-
 /* Class = "NSButtonCell"; title = "Enable for Apple branded and built-in displays as well"; ObjectID = "K6A-4z-1aQ"; */
 "K6A-4z-1aQ.title" = "苹果和内置的显示器";
 
 /* Class = "NSTextFieldCell"; title = "Don't use software dimming as fallback if no hardware control is available."; ObjectID = "kgh-b4-gmO"; */
 "kgh-b4-gmO.title" = "当硬件控制不可用时不以软件控制作为备用选项。";
 
-/* Class = "NSTextFieldCell"; title = "Record shortcuts:"; ObjectID = "kqJ-jQ-b7U"; */
-"kqJ-jQ-b7U.title" = "记录快捷键：";
+/* Class = "NSMenuItem"; title = "Use combined slider for all displays"; ObjectID = "lA0-tv-qRs"; */
+"lA0-tv-qRs.title" = "使用一个滑杆控制所有显示器";
 
 /* Class = "NSTextFieldCell"; title = "Brightness and contrast:"; ObjectID = "LO4-4k-gxY"; */
 "LO4-4k-gxY.title" = "亮度及对比度控制：";
@@ -236,8 +229,8 @@
 /* Class = "NSTextFieldCell"; title = "Contrast:"; ObjectID = "MMk-S2-yJN"; */
 "MMk-S2-yJN.title" = "对比度：";
 
-/* Class = "NSTextFieldCell"; title = "Increase:"; ObjectID = "mue-fa-8z6"; */
-"mue-fa-8z6.title" = "增加：";
+/* Class = "NSTextFieldCell"; title = "Volume:"; ObjectID = "mue-fa-8z6"; */
+"mue-fa-8z6.title" = "音量：";
 
 /* Class = "NSButtonCell"; title = "Show brightness slider in menu"; ObjectID = "MWo-6I-s9L"; */
 "MWo-6I-s9L.title" = "显示亮度控制滑杆";
@@ -280,9 +273,6 @@
 
 /* Class = "NSTextFieldCell"; title = "DDC max"; ObjectID = "psF-vX-AFB"; */
 "psF-vX-AFB.title" = "DDC最大值";
-
-/* Class = "NSButtonCell"; title = "Show sliders only for the display currently showing the menu"; ObjectID = "PvP-TV-OmT"; */
-"PvP-TV-OmT.title" = "仅显示当前显示器的滑杆介面";
 
 /* Class = "NSTextFieldCell"; title = "Use software dimming after the display reached zero hardware brightness for extended range. Works for DDC controlled displays only."; ObjectID = "PyY-p9-3NP"; */
 "PyY-p9-3NP.title" = "当显示器的硬件设置亮度为０时以软件进一步降低亮度（仅适用于以DDC控制的显示器）。";
@@ -335,8 +325,8 @@
 /* Class = "NSButtonCell"; title = "Enable keyboard control for display"; ObjectID = "UqR-WE-jHl"; */
 "UqR-WE-jHl.title" = "允许键盘控制显示器";
 
-/* Class = "NSTextFieldCell"; title = "Contrast (DDC)"; ObjectID = "urd-Rh-aiL"; */
-"urd-Rh-aiL.title" = "对比度";
+/* Class = "NSTextFieldCell"; title = "Contrast (DDC):"; ObjectID = "urd-Rh-aiL"; */
+"urd-Rh-aiL.title" = "对比度：";
 
 /* Class = "NSButtonCell"; title = "Do not use alternative brightness keys"; ObjectID = "vd2-Lk-neX"; */
 "vd2-Lk-neX.title" = "禁用替代按键";
@@ -385,12 +375,6 @@
 
 /* Class = "NSTextFieldCell"; title = "Warning! With this option enabled, you might find yourself in a position when you end up with a blank display. This, combined with disabled keyboard controls can be frustrating."; ObjectID = "yi3-e1-wsL"; */
 "yi3-e1-wsL.title" = "警告！启用显示器可以被设置成完全黑屏，如果同时禁用键盘控制可能会导致难以调整设置。";
-
-/* Class = "NSButtonCell"; title = "Assume last saved settings are valid (recommended)"; ObjectID = "yn8-Nd-o89"; */
-"yn8-Nd-o89.title" = "假设之前的设置可用（建议）";
-
-/* Class = "NSTextFieldCell"; title = "Decrease:"; ObjectID = "yQh-Ve-WEE"; */
-"yQh-Ve-WEE.title" = "减少：";
 
 /* Class = "NSTextFieldCell"; title = "Identifier:"; ObjectID = "YqZ-LS-YvR"; */
 "YqZ-LS-YvR.title" = "识别码：";

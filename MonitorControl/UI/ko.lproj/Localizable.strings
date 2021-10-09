@@ -31,6 +31,9 @@
 /* Version */
 "Copyright Ⓒ MonitorControl, " = "Copyright Ⓒ MonitorControl, ";
 
+/* Shown in record shortcut box */
+"Decrease" = "감소";
+
 /* Shown in the main prefs window */
 "Displays" = "디스플레이";
 
@@ -52,11 +55,17 @@
 /* Shown in the alert dialog */
 "Incompatible previous version" = "호환되지 않는 이전 버전";
 
+/* Shown in record shortcut box */
+"Increase" = "증가";
+
 /* Intel designation (shown after the version number in Preferences) */
 "Intel" = "Intel";
 
 /* Shown in the main prefs window */
 "Keyboard" = "키보드";
+
+/* Shown in record shortcut box */
+"Mute" = "음소거";
 
 /* Shown in the alert dialog */
 "No" = "아니오";

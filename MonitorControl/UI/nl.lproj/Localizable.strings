@@ -31,6 +31,9 @@
 /* Version */
 "Copyright Ⓒ MonitorControl, " = "Copyright Ⓒ MonitorControl, ";
 
+/* Shown in record shortcut box */
+"Decrease" = "Verminderen";
+
 /* Shown in the main prefs window */
 "Displays" = "Schermen";
 
@@ -52,11 +55,17 @@
 /* Shown in the alert dialog */
 "Incompatible previous version" = "Incompatibele vorige versie";
 
+/* Shown in record shortcut box */
+"Increase" = "Verhogen";
+
 /* Intel designation (shown after the version number in Preferences) */
 "Intel" = "Intel";
 
 /* Shown in the main prefs window */
 "Keyboard" = "Toetsenbord";
+
+/* Shown in record shortcut box */
+"Mute" = "Dempen";
 
 /* Shown in the alert dialog */
 "No" = "Nee";

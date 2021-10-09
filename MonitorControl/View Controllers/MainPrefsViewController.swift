@@ -25,15 +25,11 @@ class MainPrefsViewController: NSViewController, PreferencePane {
   @IBOutlet var enableSmooth: NSButton!
   @IBOutlet var enableBrightnessSync: NSButton!
   @IBOutlet var showAdvancedDisplays: NSButton!
-  @IBOutlet var notEnableDDCDuringStartup: NSButton!
-  @IBOutlet var writeDDCOnStartup: NSButton!
-  @IBOutlet var readDDCOnStartup: NSButton!
+  @IBOutlet var startupAction: NSPopUpButton!
   @IBOutlet var rowStartupSeparator: NSGridRow!
-  @IBOutlet var rowDoNothingStartupCheck: NSGridRow!
+  @IBOutlet var rowStartupAction: NSGridRow!
   @IBOutlet var rowDoNothingStartupText: NSGridRow!
-  @IBOutlet var rowWriteStartupCheck: NSGridRow!
   @IBOutlet var rowWriteStartupText: NSGridRow!
-  @IBOutlet var rowReadStartupCheck: NSGridRow!
   @IBOutlet var rowReadStartupText: NSGridRow!
   @IBOutlet var rowSafeModeText: NSGridRow!
   @IBOutlet var rowResetButton: NSGridRow!
@@ -44,30 +40,26 @@ class MainPrefsViewController: NSViewController, PreferencePane {
 
   func showAdvanced() -> Bool {
     let hide = !prefs.bool(forKey: PrefKey.showAdvancedSettings.rawValue)
-    if self.notEnableDDCDuringStartup.state == .on {
+    if self.startupAction.selectedTag() == StartupAction.doNothing.rawValue {
       self.rowStartupSeparator.isHidden = hide
-      self.rowDoNothingStartupCheck.isHidden = hide
+      self.rowStartupAction.isHidden = hide
       self.rowDoNothingStartupText.isHidden = hide
-      self.rowWriteStartupCheck.isHidden = hide
-      self.rowWriteStartupText.isHidden = hide
-      self.rowReadStartupCheck.isHidden = hide
-      self.rowReadStartupText.isHidden = hide
+      self.rowWriteStartupText.isHidden = true
+      self.rowReadStartupText.isHidden = true
       self.rowSafeModeText.isHidden = hide
+    } else if self.startupAction.selectedTag() == StartupAction.write.rawValue {
+      self.rowStartupSeparator.isHidden = false
+      self.rowStartupAction.isHidden = false
+      self.rowDoNothingStartupText.isHidden = true
+      self.rowWriteStartupText.isHidden = false
+      self.rowReadStartupText.isHidden = true
+      self.rowSafeModeText.isHidden = false
     } else {
       self.rowStartupSeparator.isHidden = false
-      self.rowDoNothingStartupCheck.isHidden = false
-      self.rowDoNothingStartupText.isHidden = false
-      if self.writeDDCOnStartup.state == .on {
-        self.rowWriteStartupCheck.isHidden = false
-        self.rowWriteStartupText.isHidden = false
-        self.rowReadStartupCheck.isHidden = hide
-        self.rowReadStartupText.isHidden = hide
-      } else {
-        self.rowWriteStartupCheck.isHidden = hide
-        self.rowWriteStartupText.isHidden = hide
-        self.rowReadStartupCheck.isHidden = false
-        self.rowReadStartupText.isHidden = false
-      }
+      self.rowStartupAction.isHidden = false
+      self.rowDoNothingStartupText.isHidden = true
+      self.rowWriteStartupText.isHidden = true
+      self.rowReadStartupText.isHidden = false
       self.rowSafeModeText.isHidden = false
     }
     if self.disableSoftwareFallback.state == .on {
@@ -106,9 +98,7 @@ class MainPrefsViewController: NSViewController, PreferencePane {
     self.enableSmooth.state = prefs.bool(forKey: PrefKey.disableSmoothBrightness.rawValue) ? .off : .on
     self.enableBrightnessSync.state = prefs.bool(forKey: PrefKey.enableBrightnessSync.rawValue) ? .on : .off
     self.showAdvancedDisplays.state = prefs.bool(forKey: PrefKey.showAdvancedSettings.rawValue) ? .on : .off
-    self.notEnableDDCDuringStartup.state = !prefs.bool(forKey: PrefKey.enableDDCDuringStartup.rawValue) ? .on : .off
-    self.writeDDCOnStartup.state = !prefs.bool(forKey: PrefKey.readDDCInsteadOfRestoreValues.rawValue) && prefs.bool(forKey: PrefKey.enableDDCDuringStartup.rawValue) ? .on : .off
-    self.readDDCOnStartup.state = prefs.bool(forKey: PrefKey.readDDCInsteadOfRestoreValues.rawValue) && prefs.bool(forKey: PrefKey.enableDDCDuringStartup.rawValue) ? .on : .off
+    self.startupAction.selectItem(withTag: prefs.integer(forKey: PrefKey.startupAction.rawValue))
     // Preload Display preferences to some extent to properly set up size in orther that animation won't fail
     menuslidersPrefsVc?.view.layoutSubtreeIfNeeded()
     keyboardPrefsVc?.view.layoutSubtreeIfNeeded()
@@ -204,39 +194,8 @@ class MainPrefsViewController: NSViewController, PreferencePane {
     }
   }
 
-  @IBAction func notEnableDDCDuringStartupClicked(_ sender: NSButton) {
-    switch sender.state {
-    case .on:
-      prefs.set(false, forKey: PrefKey.enableDDCDuringStartup.rawValue)
-      prefs.set(false, forKey: PrefKey.readDDCInsteadOfRestoreValues.rawValue)
-      self.writeDDCOnStartup.state = .off
-      self.readDDCOnStartup.state = .off
-    default: break
-    }
-    _ = self.showAdvanced()
-  }
-
-  @IBAction func writeDDCOnStartupClicked(_ sender: NSButton) {
-    switch sender.state {
-    case .on:
-      prefs.set(false, forKey: PrefKey.readDDCInsteadOfRestoreValues.rawValue)
-      prefs.set(true, forKey: PrefKey.enableDDCDuringStartup.rawValue)
-      self.notEnableDDCDuringStartup.state = .off
-      self.readDDCOnStartup.state = .off
-    default: break
-    }
-    _ = self.showAdvanced()
-  }
-
-  @IBAction func readDDCOnStartupClicked(_ sender: NSButton) {
-    switch sender.state {
-    case .on:
-      prefs.set(true, forKey: PrefKey.readDDCInsteadOfRestoreValues.rawValue)
-      prefs.set(true, forKey: PrefKey.enableDDCDuringStartup.rawValue)
-      self.notEnableDDCDuringStartup.state = .off
-      self.writeDDCOnStartup.state = .off
-    default: break
-    }
+  @IBAction func startupAction(_ sender: NSPopUpButton) {
+    prefs.set(sender.selectedTag(), forKey: PrefKey.startupAction.rawValue)
     _ = self.showAdvanced()
   }
 

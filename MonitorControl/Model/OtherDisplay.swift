@@ -85,7 +85,7 @@ class OtherDisplay: Display {
     }
     os_log("Setting up display %{public}@ for %{public}@", type: .info, String(self.identifier), String(reflecting: command))
     if !self.isSw() {
-      if prefs.bool(forKey: PrefKey.enableDDCDuringStartup.rawValue), prefs.bool(forKey: PrefKey.readDDCInsteadOfRestoreValues.rawValue), self.pollingCount != 0, !app.safeMode {
+      if prefs.integer(forKey: PrefKey.startupAction.rawValue) == StartupAction.read.rawValue, self.pollingCount != 0, !app.safeMode {
         os_log("- Reading DDC from display %{public}@ times", type: .info, String(self.pollingCount))
         let delay = self.readPrefAsBool(key: .longerDelay) ? UInt64(40 * kMillisecondScale) : nil
         ddcValues = self.readDDCValues(for: command, tries: UInt(self.pollingCount), minReplyDelay: delay)
@@ -113,7 +113,7 @@ class OtherDisplay: Display {
       os_log("- Maximum DDC value: %{public}@ (overrides %{public}@)", type: .info, String(self.readPrefAsInt(key: .maxDDC, for: command)), String(maxDDCValue))
       os_log("- Current internal value: %{public}@", type: .info, String(self.readPrefAsFloat(for: command)))
       os_log("- Command status: %{public}@", type: .info, self.readPrefAsBool(key: .isTouched, for: command) ? "Touched" : "Untouched")
-      if self.readPrefAsBool(key: .isTouched, for: command), prefs.bool(forKey: PrefKey.enableDDCDuringStartup.rawValue), !prefs.bool(forKey: PrefKey.readDDCInsteadOfRestoreValues.rawValue), !app.safeMode {
+      if self.readPrefAsBool(key: .isTouched, for: command), prefs.integer(forKey: PrefKey.startupAction.rawValue) == StartupAction.write.rawValue, !app.safeMode {
         os_log("- Writing last saved DDC values.", type: .info, self.name, String(reflecting: command))
         _ = self.writeDDCValues(command: command, value: currentDDCValue)
       }
@@ -137,7 +137,7 @@ class OtherDisplay: Display {
     currentMuteValue = currentMuteValue == 0 ? 2 : currentMuteValue
     var muteValues: (current: UInt16, max: UInt16)?
     if self.readPrefAsBool(key: .enableMuteUnmute) {
-      if self.pollingCount != 0, !app.safeMode, prefs.bool(forKey: PrefKey.enableDDCDuringStartup.rawValue), prefs.bool(forKey: PrefKey.readDDCInsteadOfRestoreValues.rawValue) {
+      if self.pollingCount != 0, !app.safeMode, prefs.integer(forKey: PrefKey.startupAction.rawValue) == StartupAction.read.rawValue {
         os_log("Reading DDC from display %{public}@ times for Mute", type: .info, String(self.pollingCount))
         let delay = self.readPrefAsBool(key: .longerDelay) ? UInt64(40 * kMillisecondScale) : nil
         muteValues = self.readDDCValues(for: .audioMuteScreenBlank, tries: UInt(self.pollingCount), minReplyDelay: delay)
@@ -148,7 +148,7 @@ class OtherDisplay: Display {
           os_log("Mute read failed", type: .info)
         }
       }
-      if prefs.bool(forKey: PrefKey.enableDDCDuringStartup.rawValue), !prefs.bool(forKey: PrefKey.readDDCInsteadOfRestoreValues.rawValue), !app.safeMode {
+      if self.readPrefAsBool(key: .isTouched, for: .audioSpeakerVolume), prefs.integer(forKey: PrefKey.startupAction.rawValue) == StartupAction.write.rawValue, !app.safeMode {
         os_log("Writing last saved DDC value for Mute: %{public}@", type: .info, String(currentMuteValue))
         _ = self.writeDDCValues(command: .audioMuteScreenBlank, value: UInt16(currentMuteValue))
       }
