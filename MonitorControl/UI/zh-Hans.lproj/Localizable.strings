@@ -8,7 +8,7 @@
 "Apple Silicon" = "Apple芯片";
 
 /* Shown in the alert dialog */
-"Are you sure you want to enable a longer delay? Doing so may freeze your system and require a restart. Start at login will be disabled as a safety measure." = "您确定要启用更长的延迟吗？这样做可能会使其他奔溃并需要重新启动。作为安全措施，登录时启动将被禁用。";
+"Are you sure you want to enable a longer delay? Doing so may freeze your system and require a restart. Start at login will be disabled as a safety measure." = "您确定要启用更长的延迟吗？这样做可能会使系统奔溃并需要重新启动。作为安全措施，登录时启动将被禁用。";
 
 /* Shown in the alert dialog */
 "Are you sure you want to reset all preferences?" = "确定要重置所有的设置吗？";
@@ -31,6 +31,9 @@
 /* Version */
 "Copyright Ⓒ MonitorControl, " = "Copyright Ⓒ MonitorControl, ";
 
+/* Shown in record shortcut box */
+"Decrease" = "降低";
+
 /* Shown in the main prefs window */
 "Displays" = "显示器";
 
@@ -52,11 +55,17 @@
 /* Shown in the alert dialog */
 "Incompatible previous version" = "不兼容旧版本";
 
+/* Shown in record shortcut box */
+"Increase" = "增加";
+
 /* Intel designation (shown after the version number in Preferences) */
 "Intel" = "Intel";
 
 /* Shown in the main prefs window */
 "Keyboard" = "键盘";
+
+/* Shown in record shortcut box */
+"Mute" = "静音";
 
 /* Shown in the alert dialog */
 "No" = "否";
@@ -85,7 +94,6 @@
 /* Shown in the alert dialog */
 "Shift was pressed during launch. MonitorControl started in safe mode. Default preferences are reloaded, DDC read is blocked." = "启动时按下Shift键。MonitorControl启动时进入安全模式。已还原初始设置，停止DDC读取。";
 
-
 /* Shown in the alert dialog */
 "Shortcuts not available" = "快捷键无法使用";
 
@@ -110,13 +118,11 @@
 /* Shown in the Display Preferences */
 "This display is reported to support hardware DDC control but the current settings allow for software control only." = "这个显示器报告支持DDC控制，但目前的设置只允许软件控制。";
 
-
 /* Shown in the Display Preferences */
 "This display is reported to support hardware DDC control. If you encounter issues, you can disable hardware DDC control to force software control." = "这个显示器报告支持DDC控制。如果使用遇到问题，您可以禁用硬件DDC控制以强制软件控制。";
 
-
 /* Shown in the Display Preferences */
-"This display supports native Apple brightness protocol. This allows macOS to control this display without MonitorControl as well." = "这个显示器支持苹果原生的亮度设置。MacOS也可以不通过MonitorControl控制此屏幕。";
+"This display supports native Apple brightness protocol. This allows macOS to control this display without MonitorControl as well." = "这个显示器支持苹果原生的亮度设置。macOS也可以不通过MonitorControl控制此屏幕。";
 
 /* Shown in the Display Preferences */
 "This is a virtual display (examples: AirPlay, Sidecar, display connected via a DisplayLink Dock or similar) which does not allow hardware or software gammatable control. Shading is used as a substitute but only in non-mirror scenarios. Mouse cursor will be unaffected and artifacts may appear when entering/leaving full screen mode." = "这个是虚拟显示器（例如：AirPlay、Sidecar、通过DisplayLink Dock或类似软件连接的屏幕），不允许硬件或软件伽马值控制。只能在非镜像的情况下以遮光（Shading）作为代替设置方案。进入/离开全屏幕模式时，鼠标将不受影响，并且可能会出现残影。";
