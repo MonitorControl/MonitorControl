@@ -143,7 +143,7 @@
 "FER-Ri-4UO.title" = "Volume:";
 
 /* Class = "NSButtonCell"; title = "Allow zero brightness via software or combined dimming"; ObjectID = "FjB-XL-fG5"; */
-"FjB-XL-fG5.title" = "Allow zero brightness via software or combined dimming";
+"FjB-XL-fG5.title" = "Sta nul helderheid toe via software of gecombineerde dimming.";
 
 /* Class = "NSTextFieldCell"; title = "Apple and built-in displays already have a brightness slider in Control Center."; ObjectID = "fmZ-HI-Mdc"; */
 "fmZ-HI-Mdc.title" = "Apple en ingebouwde schermen hebben reeds een schuifregelaar voor helderheid in het Control Center.";
@@ -365,7 +365,7 @@
 "YHZ-VL-QJ3.title" = "Volledige OSD-schaal zal beschikbaar zijn voor hardwarehelderheidsregeling en na het bereiken van 0 helderheid, zal softwarematig verder gedimd worden.";
 
 /* Class = "NSTextFieldCell"; title = "Warning! With this option enabled, you might find yourself in a position when you end up with a blank display. This, combined with disabled keyboard controls can be frustrating."; ObjectID = "yi3-e1-wsL"; */
-"yi3-e1-wsL.title" = "Warning! With this option enabled, you might find yourself in a position when you end up with a blank display. This, combined with disabled keyboard controls can be frustrating.";
+"yi3-e1-wsL.title" = "Waarschuwing! Met deze optie kom je mogelijk in een situatie waarbij je een zwart scherm hebt. In combinatie met uitgeschakelde sneltoetsen kan dit problematisch zijn.";
 
 /* Class = "NSTextFieldCell"; title = "Identifier:"; ObjectID = "YqZ-LS-YvR"; */
 "YqZ-LS-YvR.title" = "Identificatie:";
