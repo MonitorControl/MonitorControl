@@ -11,6 +11,8 @@ class DisplayManager {
   var audioControlTargetDisplays: [OtherDisplay] = []
   let ddcQueue = DispatchQueue(label: "DDC queue")
   let gammaActivityEnforcer = NSWindow(contentRect: .init(origin: NSPoint(x: 0, y: 0), size: .init(width: DEBUG_GAMMA_ENFORCER ? 15 : 1, height: DEBUG_GAMMA_ENFORCER ? 15 : 1)), styleMask: [], backing: .buffered, defer: false)
+  var gammaInterferenceCounter = 0
+  var gammaInterferenceWarningShown = false
 
   func createGammaActivityEnforcer() {
     self.gammaActivityEnforcer.title = "Monior Control Gamma Activity Enforcer"

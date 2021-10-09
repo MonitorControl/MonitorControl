@@ -327,6 +327,11 @@ class OtherDisplay: Display {
     }
   }
 
+  override func setBrightness(_ to: Float = -1, slow: Bool = false) -> Bool {
+    self.checkGammaInterference()
+    return super.setBrightness(to, slow: slow)
+  }
+
   override func setDirectBrightness(_ to: Float, transient: Bool = false) -> Bool {
     let value = max(min(to, 1), 0)
     if !self.isSw() {
@@ -341,7 +346,9 @@ class OtherDisplay: Display {
           brightnessSwValue = (value / self.combinedBrightnessSwitchingValue())
         }
         _ = self.writeDDCValues(command: .brightness, value: self.convValueToDDC(for: .brightness, from: brightnessValue))
-        _ = self.setSwBrightness(brightnessSwValue)
+        if self.readPrefAsFloat(key: .SwBrightness) != brightnessSwValue {
+          _ = self.setSwBrightness(brightnessSwValue)
+        }
       } else {
         _ = self.writeDDCValues(command: .brightness, value: self.convValueToDDC(for: .brightness, from: value))
       }

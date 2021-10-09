@@ -1,6 +1,9 @@
 /* Shown in the main prefs window */
 "About" = "Über";
 
+/* Shown in the alert dialog */
+"An other app seems to change the brightness or colors which causes issues.\n\nTo solve this, you need to quit the other app or disable gamma control for your displays in MonitorControl!" = "An other app seems to change the brightness or colors which causes issues.\n\nTo solve this, you need to quit the other app or disable gamma control for your displays in MonitorControl!";
+
 /* Shown in the main prefs window */
 "App menu" = "App Menü";
 
@@ -34,6 +37,9 @@
 /* Shown in record shortcut box */
 "Decrease" = "Verringern";
 
+/* Shown in the alert dialog */
+"Disable gamma control for my displays" = "Disable gamma control for my displays";
+
 /* Shown in the main prefs window */
 "Displays" = "Monitore";
 
@@ -53,6 +59,9 @@
 "Hardware (DDC)" = "Hardware (DDC)";
 
 /* Shown in the alert dialog */
+"I'll quit the other app" = "I'll quit the other app";
+
+/* Shown in the alert dialog */
 "Incompatible previous version" = "Inkompatible Vorgängerversion";
 
 /* Shown in record shortcut box */
@@ -60,6 +69,9 @@
 
 /* Intel designation (shown after the version number in Preferences) */
 "Intel" = "Intel";
+
+/* Shown in the alert dialog */
+"Is f.lux or similar running?" = "Is f.lux or similar running?";
 
 /* Shown in the main prefs window */
 "Keyboard" = "Tastatur";
