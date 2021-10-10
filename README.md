@@ -62,7 +62,7 @@ Go to [Releases](https://github.com/MonitorControl/MonitorControl/releases) and 
 - Supports automatic updates for a hassle-free expereince.
 - <b>The best app of its kind, completely FREE (donations accepted) with the source code transparently available!</b>
 
-## How to use?
+## How to install and use the app
 
 1. [Download the app](https://github.com/MonitorControl/MonitorControl/releases)
 2. Copy the MonitorControl app file from the .DMG to your Applications folder
