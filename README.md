@@ -105,7 +105,7 @@ You're all set ! Now open the `MonitorControl.xcodeproj` with Xcode! The depende
 - [@Bensge](https://github.com/Bensge/) - (used some code from his project [NativeDisplayBrightness](https://github.com/Bensge/NativeDisplayBrightness))
 - [@nhurden](https://github.com/nhurden/) (for the original MediaKeyTap)
 - [@kfix](https://github.com/kfix/ddcctl) (for ddcctl)
-- [@reitermarkus](https://github.com/reitermarkus) (for DDC.Swift)
+- [@reitermarkus](https://github.com/reitermarkus) (for Intel DDC support)
 - [@zhuowei](https://github.com/zhuowei) (figured out M1 I²C communication)
 - [@tao-j](https://github.com/tao-j) (figured out M1 I²C write)
 - [@alin23](https://github.com/alin23) (generally spearheaded M1 DDC support and figured out a many of the caveats)
