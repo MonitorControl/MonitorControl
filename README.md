@@ -106,7 +106,5 @@ You're all set ! Now open the `MonitorControl.xcodeproj` with Xcode! The depende
 - [@nhurden](https://github.com/nhurden/) (for the original MediaKeyTap)
 - [@kfix](https://github.com/kfix/ddcctl) (for ddcctl)
 - [@reitermarkus](https://github.com/reitermarkus) (for Intel DDC support)
-- [@zhuowei](https://github.com/zhuowei) (figured out M1 I²C communication)
-- [@tao-j](https://github.com/tao-j) (figured out M1 I²C write)
 - [@alin23](https://github.com/alin23) (generally spearheaded M1 DDC support and figured out a many of the caveats)
 - [javierocasio](https://www.deviantart.com/javierocasio) (app icon background)
