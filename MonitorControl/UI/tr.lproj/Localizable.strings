@@ -2,7 +2,7 @@
 "About" = "Hakkında";
 
 /* Shown in the alert dialog */
-"An other app seems to change the brightness or colors which causes issues.\n\nTo solve this, you need to quit the other app or disable gamma control for your displays in MonitorControl!" = "An other app seems to change the brightness or colors which causes issues.\n\nTo solve this, you need to quit the other app or disable gamma control for your displays in MonitorControl!";
+"An other app seems to change the brightness or colors which causes issues.\n\nTo solve this, you need to quit the other app or disable gamma control for your displays in MonitorControl!" = "Başka bir uygulama, parlaklığı veya renkleri değiştirdiği için sorunlara neden oluyor gibi görünüyor.\n\nBunu çözmek için diğer uygulamadan çıkmanız veya MonitorControl'deki ekranlarınız için gama kontrolünü devre dışı bırakmanız gerekiyor!";
 
 /* Shown in the main prefs window */
 "App menu" = "Uygulama Menüsü";
@@ -20,7 +20,7 @@
 "Brightness" = "Parlaklık";
 
 /* Build */
-"Build" = "Derleme";
+"Build" = "Sürüm";
 
 /* Shown in the Display Preferences */
 "Built-in Display" = "Dahili Ekran";
@@ -38,7 +38,7 @@
 "Decrease" = "Azalt";
 
 /* Shown in the alert dialog */
-"Disable gamma control for my displays" = "Disable gamma control for my displays";
+"Disable gamma control for my displays" = "Ekranlarım için gama kontrolünü devre dışı bırak";
 
 /* Shown in the main prefs window */
 "Displays" = "Ekranlar";
@@ -59,7 +59,7 @@
 "Hardware (DDC)" = "Donanım (DDC)";
 
 /* Shown in the alert dialog */
-"I'll quit the other app" = "I'll quit the other app";
+"I'll quit the other app" = "Diğer uygulamayı kapatacağım";
 
 /* Shown in the alert dialog */
 "Incompatible previous version" = "Uyumsuz önceki versiyon";
@@ -71,7 +71,7 @@
 "Intel" = "Intel";
 
 /* Shown in the alert dialog */
-"Is f.lux or similar running?" = "Is f.lux or similar running?";
+"Is f.lux or similar running?" = "f.lux veya benzeri bir uygulama mı çalışıyor?";
 
 /* Shown in the main prefs window */
 "Keyboard" = "Klavye";
@@ -113,13 +113,13 @@
 "Software (gamma)" = "Yazılım (Gama)";
 
 /* Shown in the Display Preferences */
-"Software (gamma, forced)" = "Software (gamma, forced)";
+"Software (gamma, forced)" = "Yazılım (gamma, zorla)";
 
 /* Shown in the Display Preferences */
-"Software (shade)" = "Software (shade)";
+"Software (shade)" = "Yazılım (shade)";
 
 /* Shown in the Display Preferences */
-"Software (shade, forced)" = "Software (shade, forced)";
+"Software (shade, forced)" = "Yazılım (shade, zorla)";
 
 /* Shown in the Display Preferences */
 "This display allows for software brightness control via gamma table manipulation or shade as it does not support hardware control. Reasons for this might be using the HDMI port of a Mac mini (which blocks hardware DDC control) or having a blacklisted display." = "Bu ekran, donanım kontrolünü desteklemediği için gamlanabilir manipülasyon yoluyla yazılım parlaklık kontrolüne izin verir. Bunun nedenleri, bir Mac mini'nin (donanım DDC kontrolünü engelleyen) HDMI bağlantı noktasını kullanmak veya kara listeye alınmış bir ekrana sahip olmak olabilir.";

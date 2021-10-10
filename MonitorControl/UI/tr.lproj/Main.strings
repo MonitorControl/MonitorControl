@@ -113,7 +113,7 @@
 "D9t-vT-gNJ.title" = "VCP listesi";
 
 /* Class = "NSTextFieldCell"; title = "You can override audio device name under Displays (advanced) if needed."; ObjectID = "Dha-Tm-cDM"; */
-"Dha-Tm-cDM.title" = "Gerekirse, Ekranlar altında ses cihazı adını geçersiz kılabilirsiniz.";
+"Dha-Tm-cDM.title" = "Gerekirse, ekranlar altında ses cihazı adını geçersiz kılabilirsiniz.";
 
 /* Class = "NSTextFieldCell"; title = "You can disable smooth transitions for a more direct, immediate control."; ObjectID = "ENt-mP-0yH"; */
 "ENt-mP-0yH.title" = "Daha doğrudan ve anında kontrol için yumuşak geçişleri devre dışı bırakabilirsiniz.";
@@ -143,7 +143,7 @@
 "FER-Ri-4UO.title" = "Ses:";
 
 /* Class = "NSButtonCell"; title = "Allow zero brightness via software or combined dimming"; ObjectID = "FjB-XL-fG5"; */
-"FjB-XL-fG5.title" = "Allow zero brightness via software or combined dimming";
+"FjB-XL-fG5.title" = "Yazılım veya birleşik karartma yoluyla sıfır parlaklığa izin verin";
 
 /* Class = "NSTextFieldCell"; title = "Apple and built-in displays already have a brightness slider in Control Center."; ObjectID = "fmZ-HI-Mdc"; */
 "fmZ-HI-Mdc.title" = "Apple ve yerleşik ekranların Denetim Merkezi'nde zaten bir parlaklık kaydırıcısı vardır.";
@@ -269,7 +269,7 @@
 "POy-35-bh0.title" = "Yalnızca donanım (DDC) kontrollü ekranlar için.";
 
 /* Class = "NSTextFieldCell"; title = "DDC max"; ObjectID = "psF-vX-AFB"; */
-"psF-vX-AFB.title" = "DDC maks.";
+"psF-vX-AFB.title" = "En yüksek DDC";
 
 /* Class = "NSTextFieldCell"; title = "Use software dimming after the display reached zero hardware brightness for extended range. Works for DDC controlled displays only."; ObjectID = "PyY-p9-3NP"; */
 "PyY-p9-3NP.title" = "Genişletilmiş aralık için ekran sıfır donanım parlaklığına ulaştıktan sonra yazılım karartmasını kullanın. Yalnızca DDC kontrollü ekranlar için çalışır.";
@@ -365,7 +365,7 @@
 "YHZ-VL-QJ3.title" = "Donanım parlaklık kontrolü için tam OSD ölçeği mevcut olacak ve 0 parlaklığa ulaştıktan sonra daha fazla yazılım karartması kullanılacak.";
 
 /* Class = "NSTextFieldCell"; title = "Warning! With this option enabled, you might find yourself in a position when you end up with a blank display. This, combined with disabled keyboard controls can be frustrating."; ObjectID = "yi3-e1-wsL"; */
-"yi3-e1-wsL.title" = "Warning! With this option enabled, you might find yourself in a position when you end up with a blank display. This, combined with disabled keyboard controls can be frustrating.";
+"yi3-e1-wsL.title" = "Uyarı! Bu seçenek etkinleştirildiğinde, kendinizi boş bir ekranda bulabilirsiniz. Bu, devre dışı bırakılmış klavye kontrolleriyle birleştiğinde sinir bozucu olabilir.";
 
 /* Class = "NSTextFieldCell"; title = "Identifier:"; ObjectID = "YqZ-LS-YvR"; */
 "YqZ-LS-YvR.title" = "Tanımlayıcı:";
