@@ -37,7 +37,7 @@ Uses menulet sliders or the keyboard, including native Apple keys.<br>
 <br/>
 <br/>
 
-<img src=".github/screenshot.png" width="840" alt="Screenshot"/><br/>
+<img src=".github/screenshot.png" width="825" alt="Screenshot"/><br/>
 
 </div>
 
