@@ -45,6 +45,34 @@ Use menulet sliders or the keyboard, including native Apple keys!</p>
 
 Go to [Releases](https://github.com/MonitorControl/MonitorControl/releases) and download the latest `.dmg`
 
+## Major features
+
+- Control your display's brightness, volume and contrast!
+- Shows native OSD for brightness and volume.
+- Supports multiple protocols to adjust brightness: DDC for external displays (brightness, contrast, volume), native Apple porotocol for Apple and built-in displays, Gamma table control for software adjustment (recommended for OLED), shade control for AirPlay, Sidecar and Display Link devices.
+- Supports smooth brightness transitions.
+- Seamlessly combined hardware and software dimming extends dimming beyond the minimum brightness available on your display.
+- Synchronize brightness from built-in and Apple screens - replicate Ambient light sensor and touch bar induced changes to a non-Apple external display!
+- Sync up all your displays using a single slider or keyboard shortcuts.
+- Allows dimming to full black (advanced feature).
+- Support for custom keyboard shortcuts as well as standard brightness and media keys on Apple keyboards.
+- Dozens of customization options to tweak the inner workings of the app to suit Your hardware and needs (don't forget to enable `Show advanced settings` in app Preferences).
+- Modern, stylish and highgly customizable menulet reflecting the design of Control Control introduced in Big Sur.
+- Simple, unobstrusive UI to blend in to the general aesthetics of macOS (even the menu icon can be hidden).
+- Supports automatic updates for a hassle-free expereince.
+- <b>The best app of its kind, completely FREE (donations accepted) with the source code transparently available!</b>
+
+## How to use?
+
+1. [Download the app](https://github.com/MonitorControl/MonitorControl/releases)
+2. Copy the MonitorControl app file from the .DMG to your Applications folder
+3. Click on the `MonitorControl` app file
+4. Add the app to `Accessibility` under `System Preferences` » `Security & Privacy` » `Privacy` as prompted (this is required only if you wish to use the native Apple keyboard brightness and media keys - if this is not the case, you can safely skip this step).
+5. Use your keyboard or the sliders in the app menu (a brightness symbol in the macOS menubar as shown on the screenshot above) to control your displays.
+6. Open `Preferences...` for customization options (enable `Show advanced settings` for even more options).
+7. You can set up custom keyboard shortcuts under the `Keyboard` in Preferences (the app uses Apple media keys by default).
+8. If you have any questions, go to [Discussions](https://github.com/MonitorControl/MonitorControl/discussions)!
+
 ## Compatibility
 
 | MonitorControl version | macOS version     |
@@ -72,17 +100,16 @@ MonitorControl supports localization. We gladly welcome your contribution with a
 - [SwiftFormat](https://github.com/nicklockwood/SwiftFormat)
 - [BartyCrouch](https://github.com/Flinesoft/BartyCrouch) (for updating localizations)
 
-Clone the project via this Terminal command:
+### Build steps
+
+- Clone the project via this Terminal command:
 
 ```sh
 git clone https://github.com/MonitorControl/MonitorControl.git
 ```
 
-If you want to clone one of the branches, add `--single-branch --branch [branchname]` after the `clone` option.
-
-You're all set ! Now open the `MonitorControl.xcodeproj` with Xcode! The dependencies will automatically get downloaded once you open the project. If they don't:
-
-`File > Packages > Resolve Package Versions`
+- If you want to clone one of the branches, add `--single-branch --branch [branchname]` after the `clone` option.
+- You're all set ! Now open the `MonitorControl.xcodeproj` with Xcode! The dependencies will automatically get downloaded once you open the project. If they don't: `File > Packages > Resolve Package Versions`
 
 ### Third party dependencies
 
