@@ -1,15 +1,13 @@
 <img src=".github/Icon-cropped.png" width="220" alt="App icon" align="left"/>
 
+<div>
 <h2>MonitorControl - for Apple Silicon and Intel</h2>
-        
-<p>
-Controls your external display brightness and volume and show native OSD.<br>
-Uses menulet sliders or the keyboard, including native Apple keys.<br>
-        
+<p>Controls your external display brightness and volume and show native OSD.<br/>
+Uses menulet sliders or the keyboard, including native Apple keys.</p>
 <a href="https://github.com/MonitorControl/MonitorControl/releases"><img src=".github/macos_badge_noborder.png" width="175" alt="Download for macOS"/></a>
-</p>
+</div>
 
-<br/>
+<br/><br/>
  
 <div align="center">
 <!-- shields -->
