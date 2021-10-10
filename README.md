@@ -1,11 +1,12 @@
-<img src=".github/Icon-1024.png" width="175" alt="App icon" align="left"/>
+<img src=".github/Icon-cropped.png" width="220" alt="App icon" align="left"/>
 
-<h2>MonitorControl - Now with Apple Silicon support</h2>
+<h2>MonitorControl - for Apple Silicon and Intel</h2>
         
 <p>
-<b>Control your external display brightness and volume<br>
-Use menulet sliders or the native Apple keyboard keys<br>
-Behaves like native, with (optional) brightness & volume OSD</b>
+Controls your external display brightness and volume and show native OSD.<br>
+Uses menulet sliders or the keyboard, including native Apple keys.<br>
+        
+<a href="https://github.com/MonitorControl/MonitorControl/releases"><img src=".github/macos_badge_noborder.png" width="175" alt="Download for macOS"/></a>
 </p>
 
 <br/>
@@ -36,9 +37,9 @@ Behaves like native, with (optional) brightness & volume OSD</b>
 <br/>
 <br/>
 
-</div>
-
 <img src=".github/screenshot.png" width="840" alt="Screenshot"/><br/>
+
+</div>
 
 <hr>
 
