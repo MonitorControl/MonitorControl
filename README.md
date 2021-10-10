@@ -73,7 +73,7 @@ Go to [Releases](https://github.com/MonitorControl/MonitorControl/releases) and 
 7. You can set up custom keyboard shortcuts under the `Keyboard` in Preferences (the app uses Apple media keys by default).
 8. If you have any questions, go to [Discussions](https://github.com/MonitorControl/MonitorControl/discussions)!
 
-## Screenshots
+## Screenshots (app Preferences)
 
 <div align="center">
 <img src=".github/pref_1.png" width="410" alt="Screenshot"/>
