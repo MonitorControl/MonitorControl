@@ -5,4 +5,4 @@
 "SoftwareUpdateDenyConsequences" = "若您拒绝这些连线，您将不会收到新版本以及安全性更新的通知。安全性更新对于防止恶意软件的攻击是相当重要的。";
 
 /* Software update purpose */
-"SoftwareUpdatePurpose" = "会检查新版本以及安全性更新。";
+"SoftwareUpdatePurpose" = "MonitorControl会检查新版本以及安全性更新。";
