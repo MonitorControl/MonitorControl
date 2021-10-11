@@ -2,7 +2,7 @@
 "About" = "关于";
 
 /* Shown in the alert dialog */
-"An other app seems to change the brightness or colors which causes issues.\n\nTo solve this, you need to quit the other app or disable gamma control for your displays in MonitorControl!" = "An other app seems to change the brightness or colors which causes issues.\n\nTo solve this, you need to quit the other app or disable gamma control for your displays in MonitorControl!";
+"An other app seems to change the brightness or colors which causes issues.\n\nTo solve this, you need to quit the other app or disable gamma control for your displays in MonitorControl!" = "另一个应用程序可能修改了亮度或者颜色所以导致了问题。\n\n如果要解决这个问题，您需要退出另一个应用程序或在MonitorControl中为您的显示器禁用伽马值控制!";
 
 /* Shown in the main prefs window */
 "App menu" = "App选项";
@@ -11,7 +11,7 @@
 "Apple Silicon" = "Apple芯片";
 
 /* Shown in the alert dialog */
-"Are you sure you want to enable a longer delay? Doing so may freeze your system and require a restart. Start at login will be disabled as a safety measure." = "您确定要启用更长的延迟吗？这样做可能会使其他奔溃并需要重新启动。作为安全措施，登录时启动将被禁用。";
+"Are you sure you want to enable a longer delay? Doing so may freeze your system and require a restart. Start at login will be disabled as a safety measure." = "您确定要启用更长的延迟吗？这样做可能会使其它奔溃并需要重新启动。作为安全措施，登录时启动将被禁用。";
 
 /* Shown in the alert dialog */
 "Are you sure you want to reset all preferences?" = "确定要重置所有的设置吗？";
@@ -38,7 +38,7 @@
 "Decrease" = "降低";
 
 /* Shown in the alert dialog */
-"Disable gamma control for my displays" = "Disable gamma control for my displays";
+"Disable gamma control for my displays" = "禁用我显示器的伽马值控制";
 
 /* Shown in the main prefs window */
 "Displays" = "显示器";
@@ -59,25 +59,25 @@
 "Hardware (DDC)" = "硬件（DDC）";
 
 /* Shown in the alert dialog */
-"I'll quit the other app" = "I'll quit the other app";
+"I'll quit the other app" = "我会退出其它的应用程序";
 
 /* Shown in the alert dialog */
 "Incompatible previous version" = "不兼容旧版本";
 
 /* Shown in record shortcut box */
-"Increase" = "降低";
+"Increase" = "增加";
 
 /* Intel designation (shown after the version number in Preferences) */
 "Intel" = "Intel";
 
 /* Shown in the alert dialog */
-"Is f.lux or similar running?" = "Is f.lux or similar running?";
+"Is f.lux or similar running?" = "是f.lux或类似的应用程序在运行吗？";
 
 /* Shown in the main prefs window */
 "Keyboard" = "键盘";
 
 /* Shown in record shortcut box */
-"Mute" = "音";
+"Mute" = "静音";
 
 /* Shown in the alert dialog */
 "No" = "否";
