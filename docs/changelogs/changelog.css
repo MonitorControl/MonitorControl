@@ -6,7 +6,6 @@ body {
   font-family: -apple-system, system-ui, BlinkMacSystemFont, 'Segoe UI', Roboto,
     'Helvetica Neue', sans-serif;
   text-rendering: optimizeLegibility;
-  color: #3b4351;
 }
 kbd {
   font-family: Consolas, 'Lucida Console', monospace;
@@ -52,12 +51,4 @@ h3 {
   line-height: 1.2;
   margin-bottom: 0.5em;
   margin-top: 0.4em;
-}
-
-@media (prefers-color-scheme: dark) {
-  html,
-  body {
-    color: white;
-    background-color: #3b4351;
-  }
 }
