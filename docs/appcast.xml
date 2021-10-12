@@ -9,7 +9,7 @@
         <item>
             <title>v4.0.0-beta1</title>
             <sparkle:releaseNotesLink>
-                https://monitorcontrol.app/Changelog.html
+                https://monitorcontrol.app/changelogs/v4.0.0-beta1.html
             </sparkle:releaseNotesLink>
             <pubDate>Thu, 30 Sep 2021 21:43:20 +0200</pubDate>
             <sparkle:version>6293</sparkle:version>
@@ -25,7 +25,7 @@
         <item>
             <title>v4.0.0-beta2</title>
             <sparkle:releaseNotesLink>
-                https://monitorcontrol.app/Changelog.html
+                https://monitorcontrol.app/changelogs/v4.0.0-beta2.html
             </sparkle:releaseNotesLink>
             <pubDate>Thu, 07 Oct 2021 20:31:20 +0200</pubDate>
             <sparkle:version>6443</sparkle:version>
@@ -36,6 +36,22 @@
                type="application/octet-stream"
                sparkle:edSignature="D00vAphhkkQ/lo753WP0LIxXg0Ph8jhF+u5pQrF8ZXFBR1cJtP3kdqRtKR6OMG9P9om6xc4UmyZXz99vuUzzDQ=="
                length="4135991"
+            />
+        </item>
+        <item>
+            <title>v4.0.0-rc1</title>
+            <sparkle:releaseNotesLink>
+                https://monitorcontrol.app/changelogs/v4.0.0-rc1.html
+            </sparkle:releaseNotesLink>
+            <pubDate>Thu, 12 Oct 2021 19:13:00 +0200</pubDate>
+            <sparkle:version>6632</sparkle:version>
+            <sparkle:shortVersionString>4.0.0-rc1</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>10.15</sparkle:minimumSystemVersion>
+            <enclosure
+               url="https://github.com/MonitorControl/MonitorControl/releases/download/v4.0.0-rc1/MonitorControl.4.0.0-rc1.dmg"
+               type="application/octet-stream"
+               sparkle:edSignature="S8KTrjt00Q9DkQWHleyfxhESqy4MmMKNcne0ebwB/wY1aMH5swhEy0pld8nEmPGy32lccw4feRe9nUWOIvAXCg==" 
+               length="4158362"
             />
         </item>
     </channel>
