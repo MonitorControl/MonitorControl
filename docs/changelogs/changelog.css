@@ -53,3 +53,11 @@ h3 {
   margin-bottom: 0.5em;
   margin-top: 0.4em;
 }
+
+@media (prefers-color-scheme: dark) {
+  html,
+  body {
+    color: white;
+    background-color: #3b4351;
+  }
+}
