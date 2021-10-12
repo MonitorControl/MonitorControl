@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Note: Make sure to only run this script after posting release notes in Github with a release!
-# Could be expanded to also do appcast.xml updates
+# Could be expanded to also do appcast.xml updates?
 
 exists() {
   type "$1" &>/dev/null && return 0 || return 1
@@ -23,7 +23,6 @@ show_warning() {
   echo -e "\033[0;33m${msg}\033[0m"
 }
 
-# show a green `Success!`, or arg `1` message
 show_success() {
   local msg="Success!"
   if [ ! -z "$1" ]; then
@@ -42,10 +41,10 @@ if ! exists pandoc; then
         exit 127
 fi
 
-# Note: Could expand to check last x (per_page) releases
+# TODO: Expand to check last x (per_page) releases (input parameter or fallback)
 URL="https://api.github.com/repos/MonitorControl/MonitorControl/releases?per_page=1"
 
-# store the whole response with the status at the and
+# store the whole response
 HTTP_RESPONSE=$(curl --fail -s $URL)
 
 if [ $? != 0 ]; then
