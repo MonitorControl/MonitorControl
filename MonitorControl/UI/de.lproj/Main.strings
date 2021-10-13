@@ -50,7 +50,7 @@
 "9eC-PD-FHl.title" = "Benutzerdefinierte Tastaturkürzel";
 
 /* Class = "NSMenuItem"; title = "Attempt to read display settings"; ObjectID = "9yL-no-aWa"; */
-"9yL-no-aWa.title" = "Versuch, die Monitor-Einstellungen zu lesen";
+"9yL-no-aWa.title" = "Versuch die Monitor-Einstellungen zu lesen";
 
 /* Class = "NSTextFieldCell"; title = "Show tick marks at 0%, 25%, 50%, 75% and 100% for accuracy."; ObjectID = "A8P-vn-DEJ"; */
 "A8P-vn-DEJ.title" = "Striche bei 0 %, 25 %, 50 %, 75 % und 100 % für Genauigkeit anzeigen.";
@@ -173,7 +173,7 @@
 "hF7-fM-aKr.title" = "Starte die App neu, um auf die Einstellungen zuzugreifen, wenn die Menüoption nicht verfügbar ist. Verwende die Schaltfläche unten, um die App zu beenden.";
 
 /* Class = "NSButtonCell"; title = "Get current"; ObjectID = "hkC-vq-IcD"; */
-"hkC-vq-IcD.title" = "Aktuellen Wert abrufen";
+"hkC-vq-IcD.title" = "Wert abrufen";
 
 /* Class = "NSMenuItem"; title = "Hide"; ObjectID = "HUT-Qc-kuu"; */
 "HUT-Qc-kuu.title" = "Ausblenden";
@@ -185,7 +185,7 @@
 "IJB-mO-e8I.title" = "Helligkeit";
 
 /* Class = "NSButtonCell"; title = "Enable smooth brightness transitions"; ObjectID = "IK4-u5-qjf"; */
-"IK4-u5-qjf.title" = "Sanfte Helligkeitsveränderungen aktivieren";
+"IK4-u5-qjf.title" = "Sanfte Helligkeitsänderungen aktivieren";
 
 /* Class = "NSButtonCell"; title = "Use fine OSD scale for volume"; ObjectID = "J3L-MW-iJL"; */
 "J3L-MW-iJL.title" = "Feine OSD-Skala für Lautstärke verwenden";
@@ -239,7 +239,7 @@
 "MWo-6I-s9L.title" = "Helligkeitsregler im Menü anzeigen";
 
 /* Class = "NSButtonCell"; title = "Avoid gamma table manipulation"; ObjectID = "na6-mS-MPi"; */
-"na6-mS-MPi.title" = "Vermeiden der Manipulation der Gammatabelle.";
+"na6-mS-MPi.title" = "Manipulation der Gammatabelle vermeiden";
 
 /* Class = "NSButtonCell"; title = "Separate scales for combined hardware & software dimming"; ObjectID = "O8o-hI-8eR"; */
 "O8o-hI-8eR.title" = "Getrennte Skalen für kombiniertes Dimmen von Hardware und Software";
