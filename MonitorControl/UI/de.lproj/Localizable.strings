@@ -2,7 +2,7 @@
 "About" = "Über";
 
 /* Shown in the alert dialog */
-"An other app seems to change the brightness or colors which causes issues.\n\nTo solve this, you need to quit the other app or disable gamma control for your displays in MonitorControl!" = "An other app seems to change the brightness or colors which causes issues.\n\nTo solve this, you need to quit the other app or disable gamma control for your displays in MonitorControl!";
+"An other app seems to change the brightness or colors which causes issues.\n\nTo solve this, you need to quit the other app or disable gamma control for your displays in MonitorControl!" = "Eine andere App scheint die Helligkeit oder die Farben zu verändern, was zu Problemen führt.\n\nUm dieses Problem zu lösen, musst du die andere App beenden oder die Gamma-Steuerung für Deine Monitore in MonitorControl deaktivieren!";
 
 /* Shown in the main prefs window */
 "App menu" = "App Menü";
@@ -38,13 +38,13 @@
 "Decrease" = "Verringern";
 
 /* Shown in the alert dialog */
-"Disable gamma control for my displays" = "Disable gamma control for my displays";
+"Disable gamma control for my displays" = "Gamma-Steuerung für meine Monitore deaktivieren";
 
 /* Shown in the main prefs window */
 "Displays" = "Monitore";
 
 /* Shown in the alert dialog */
-"Enable Longer Delay?" = "Längere Verzögerung einschalten?";
+"Enable Longer Delay?" = "Größere Verzögerung einschalten?";
 
 /* Shown in the Display Preferences */
 "External Display" = "Externer Monitor";
@@ -59,7 +59,7 @@
 "Hardware (DDC)" = "Hardware (DDC)";
 
 /* Shown in the alert dialog */
-"I'll quit the other app" = "I'll quit the other app";
+"I'll quit the other app" = "Ich beende die andere App";
 
 /* Shown in the alert dialog */
 "Incompatible previous version" = "Inkompatible Vorgängerversion";
@@ -71,7 +71,7 @@
 "Intel" = "Intel";
 
 /* Shown in the alert dialog */
-"Is f.lux or similar running?" = "Is f.lux or similar running?";
+"Is f.lux or similar running?" = "Läuft f.lux oder ähnliches?";
 
 /* Shown in the main prefs window */
 "Keyboard" = "Tastatur";
