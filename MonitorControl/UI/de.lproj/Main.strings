@@ -194,7 +194,7 @@
 "j72-NF-zsW.title" = "Bei Anmeldung starten";
 
 /* Class = "NSMenuItem"; title = "Change for all screens"; ObjectID = "jSj-HB-T2t"; */
-"jSj-HB-T2t.title" = "Ändern aller Monitore";
+"jSj-HB-T2t.title" = Ändern für alle Monitore";
 
 /* Class = "NSTextFieldCell"; title = "Note: you can press Shift during startup for 'Safe mode' to restore defaults and avoid reading or setting anything."; ObjectID = "Jx2-gO-nq9"; */
 "Jx2-gO-nq9.title" = "Hinweis: Du kannst während des Starts die Umschalttaste drücken, um den 'Abgesicherten Modus' zu aktivieren, damit die Standardeinstellungen wiederhergestellt werden und nichts gelesen oder eingestellt wird.";
