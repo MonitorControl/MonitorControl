@@ -32,80 +32,38 @@ class MenuslidersPrefsViewController: NSViewController, PreferencePane {
   @IBOutlet var showTickMarks: NSButton!
   @IBOutlet var enableSliderPercent: NSButton!
 
-  @IBOutlet var rowIconShow: NSGridRow!
   @IBOutlet var rowMenuItemStyle: NSGridRow!
   @IBOutlet var rowQuitButton: NSGridRow!
   @IBOutlet var rowQuitButtonText: NSGridRow!
-  @IBOutlet var rowHideIconSpearator: NSGridRow!
-
-  @IBOutlet var rowShowContrastCheck: NSGridRow!
-  @IBOutlet var rowShowContrastText: NSGridRow!
 
   @IBOutlet var rowMultiSliders: NSGridRow!
   @IBOutlet var rowSlidersCombineText: NSGridRow!
 
   @IBOutlet var rowTickCheck: NSGridRow!
   @IBOutlet var rowTickText: NSGridRow!
-  @IBOutlet var rowPercentCheck: NSGridRow!
-  @IBOutlet var rowPercentText: NSGridRow!
 
-  // swiftlint:disable cyclomatic_complexity
-  func updateGridLayout() -> Bool {
-    let hide = !prefs.bool(forKey: PrefKey.showAdvancedSettings.rawValue)
-
-    var doNotHideRowIconSeparator = false
-
-    if self.iconShow.selectedTag() != MenuIcon.show.rawValue {
-      self.rowIconShow.isHidden = false
-      doNotHideRowIconSeparator = true
-    } else {
-      self.rowIconShow.isHidden = hide
-    }
-
+  func updateGridLayout() {
     if app.macOS10() {
       self.rowMenuItemStyle.isHidden = true
-    } else if self.menuItemStyle.selectedTag() != MenuItemStyle.text.rawValue {
-      self.rowMenuItemStyle.isHidden = false
-      doNotHideRowIconSeparator = true
     } else {
-      self.rowMenuItemStyle.isHidden = hide
+      self.rowMenuItemStyle.isHidden = false
     }
 
     if self.iconShow.selectedTag() != MenuIcon.show.rawValue || self.menuItemStyle.selectedTag() == MenuItemStyle.hide.rawValue {
       self.rowQuitButton.isHidden = false
       self.rowQuitButtonText.isHidden = false
-      doNotHideRowIconSeparator = true
     } else {
       self.rowQuitButton.isHidden = true
       self.rowQuitButtonText.isHidden = true
     }
 
-    if doNotHideRowIconSeparator {
-      self.rowHideIconSpearator.isHidden = false
-      self.rowHideIconSpearator.isHidden = false
-    } else {
-      self.rowHideIconSpearator.isHidden = hide
-      self.rowHideIconSpearator.isHidden = hide
-    }
-
-    if self.showContrastSlider.state == .on {
-      self.rowShowContrastCheck.isHidden = false
-      self.rowShowContrastText.isHidden = false
-    } else {
-      self.rowShowContrastCheck.isHidden = hide
-      self.rowShowContrastText.isHidden = hide
-    }
-
     if self.multiSliders.selectedTag() == MultiSliders.separate.rawValue {
-      self.rowMultiSliders.isHidden = hide
       self.rowMultiSliders.bottomPadding = -6
       self.rowSlidersCombineText.isHidden = true
     } else if self.multiSliders.selectedTag() == MultiSliders.relevant.rawValue {
-      self.rowMultiSliders.isHidden = false
       self.rowMultiSliders.bottomPadding = -6
       self.rowSlidersCombineText.isHidden = true
     } else if self.multiSliders.selectedTag() == MultiSliders.combine.rawValue {
-      self.rowMultiSliders.isHidden = false
       self.rowMultiSliders.bottomPadding = -10
       self.rowSlidersCombineText.isHidden = false
     }
@@ -113,25 +71,11 @@ class MenuslidersPrefsViewController: NSViewController, PreferencePane {
     if app.macOS10() {
       self.rowTickCheck.isHidden = true
       self.rowTickText.isHidden = true
-    } else if self.showTickMarks.state == .on {
+    } else {
       self.rowTickCheck.isHidden = false
       self.rowTickText.isHidden = false
-    } else {
-      self.rowTickCheck.isHidden = hide
-      self.rowTickText.isHidden = hide
     }
-
-    if self.enableSliderPercent.state == .on {
-      self.rowPercentCheck.isHidden = false
-      self.rowPercentText.isHidden = false
-    } else {
-      self.rowPercentCheck.isHidden = hide
-      self.rowPercentText.isHidden = hide
-    }
-    return !hide
   }
-
-  // swiftlint:enable cyclomatic_complexity
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -157,19 +101,19 @@ class MenuslidersPrefsViewController: NSViewController, PreferencePane {
     self.enableSliderSnap.state = prefs.bool(forKey: PrefKey.enableSliderSnap.rawValue) ? .on : .off
     self.showTickMarks.state = prefs.bool(forKey: PrefKey.showTickMarks.rawValue) ? .on : .off
     self.enableSliderPercent.state = prefs.bool(forKey: PrefKey.enableSliderPercent.rawValue) ? .on : .off
-    _ = self.updateGridLayout()
+    self.updateGridLayout()
   }
 
   @IBAction func icon(_ sender: NSPopUpButton) {
     prefs.set(sender.selectedTag(), forKey: PrefKey.menuIcon.rawValue)
     app.updateMenusAndKeys()
-    _ = self.updateGridLayout()
+    self.updateGridLayout()
   }
 
   @IBAction func menuItemStyle(_ sender: NSPopUpButton) {
     prefs.set(sender.selectedTag(), forKey: PrefKey.menuItemStyle.rawValue)
     app.updateMenusAndKeys()
-    _ = self.updateGridLayout()
+    self.updateGridLayout()
   }
 
   @IBAction func quitApplicationClicked(_: NSButton) {
@@ -222,7 +166,7 @@ class MenuslidersPrefsViewController: NSViewController, PreferencePane {
     default: break
     }
     app.updateMenusAndKeys()
-    _ = self.updateGridLayout()
+    self.updateGridLayout()
   }
 
   @IBAction func enableSliderSnapClicked(_ sender: NSButton) {
@@ -234,13 +178,13 @@ class MenuslidersPrefsViewController: NSViewController, PreferencePane {
     default: break
     }
     app.updateMenusAndKeys()
-    _ = self.updateGridLayout()
+    self.updateGridLayout()
   }
 
   @IBAction func multiSliders(_ sender: NSPopUpButton) {
     prefs.set(sender.selectedTag(), forKey: PrefKey.multiSliders.rawValue)
     app.updateMenusAndKeys()
-    _ = self.updateGridLayout()
+    self.updateGridLayout()
   }
 
   @IBAction func showTickMarks(_ sender: NSButton) {
@@ -252,7 +196,7 @@ class MenuslidersPrefsViewController: NSViewController, PreferencePane {
     default: break
     }
     app.updateMenusAndKeys()
-    _ = self.updateGridLayout()
+    self.updateGridLayout()
   }
 
   @IBAction func enableSliderPercent(_ sender: NSButton) {
@@ -264,6 +208,6 @@ class MenuslidersPrefsViewController: NSViewController, PreferencePane {
     default: break
     }
     app.updateMenusAndKeys()
-    _ = self.updateGridLayout()
+    self.updateGridLayout()
   }
 }
