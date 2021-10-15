@@ -262,9 +262,6 @@
 /* Class = "NSButtonCell"; title = "Longer delay during DDC read operations"; ObjectID = "pF5-Sw-7BR"; */
 "pF5-Sw-7BR.title" = "延長DDC讀取操作的延遲時間";
 
-/* Class = "NSTextFieldCell"; title = "For hardware (DDC) controlled displays only."; ObjectID = "POy-35-bh0"; */
-"POy-35-bh0.title" = "僅適用硬體（DDC）控制的螢幕。";
-
 /* Class = "NSTextFieldCell"; title = "DDC max"; ObjectID = "psF-vX-AFB"; */
 "psF-vX-AFB.title" = "DDC最大值";
 

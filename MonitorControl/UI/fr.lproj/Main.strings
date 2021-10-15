@@ -262,9 +262,6 @@
 /* Class = "NSButtonCell"; title = "Longer delay during DDC read operations"; ObjectID = "pF5-Sw-7BR"; */
 "pF5-Sw-7BR.title" = "Délais plus long pendant les opérations de lecture DDC";
 
-/* Class = "NSTextFieldCell"; title = "For hardware (DDC) controlled displays only."; ObjectID = "POy-35-bh0"; */
-"POy-35-bh0.title" = "Pour les écrans contrôlés par matériel (DDC) uniquement.";
-
 /* Class = "NSTextFieldCell"; title = "DDC max"; ObjectID = "psF-vX-AFB"; */
 "psF-vX-AFB.title" = "max. DDC";
 
