@@ -21,9 +21,11 @@ class DisplaysPrefsViewController: NSViewController, PreferencePane, NSTableView
   @IBOutlet var displayList: NSTableView!
   @IBOutlet var displayScrollView: NSScrollView!
   @IBOutlet var constraintHeight: NSLayoutConstraint!
+  @IBOutlet var showAdvancedDisplays: NSButton!
 
   override func viewDidLoad() {
     super.viewDidLoad()
+    self.showAdvancedDisplays.state = prefs.bool(forKey: PrefKey.showAdvancedSettings.rawValue) ? .on : .off
     self.loadDisplayList()
     self.displayScrollView.scrollerStyle = .legacy
   }
@@ -47,6 +49,18 @@ class DisplaysPrefsViewController: NSViewController, PreferencePane, NSTableView
     self.displays = DisplayManager.shared.getAllDisplays()
     self.displayList?.reloadData()
     self.updateDisplayListRowHeight()
+  }
+
+  @IBAction func showAdvancedClicked(_ sender: NSButton) {
+    switch sender.state {
+    case .on:
+      prefs.set(true, forKey: PrefKey.showAdvancedSettings.rawValue)
+    case .off:
+      prefs.set(false, forKey: PrefKey.showAdvancedSettings.rawValue)
+    default: break
+    }
+    _ = self.updateGridLayout()
+    displaysPrefsVc?.view.layoutSubtreeIfNeeded()
   }
 
   func numberOfRows(in _: NSTableView) -> Int {
@@ -306,10 +320,10 @@ class DisplaysPrefsViewController: NSViewController, PreferencePane, NSTableView
   func updateDisplayListRowHeight() {
     if prefs.bool(forKey: PrefKey.showAdvancedSettings.rawValue) {
       self.displayList?.rowHeight = 520
-      self.constraintHeight?.constant = self.displayList.rowHeight + 15
+      self.constraintHeight?.constant = self.displayList.rowHeight + 15 + 30
     } else {
-      self.displayList?.rowHeight = 150
-      self.constraintHeight?.constant = self.displayList.rowHeight * 2 + 15
+      self.displayList?.rowHeight = 180
+      self.constraintHeight?.constant = self.displayList.rowHeight * 2 + 15 + 30
     }
   }
 }

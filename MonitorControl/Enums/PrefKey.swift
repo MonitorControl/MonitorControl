@@ -45,9 +45,6 @@ enum PrefKey: String {
   // Use separated OSD scale for combined brightness
   case separateCombinedScale
 
-  // Fallback to software control for other displays with no DDC
-  case disableSoftwareFallback
-
   // Do not show sliders for Apple displays (including built-in display) in menu
   case hideAppleFromMenu
 

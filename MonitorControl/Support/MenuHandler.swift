@@ -36,11 +36,7 @@ class MenuHandler: NSMenu, NSMenuDelegate {
     if !prefs.bool(forKey: PrefKey.hideAppleFromMenu.rawValue) {
       displays.append(contentsOf: DisplayManager.shared.getAppleDisplays())
     }
-    if !prefs.bool(forKey: PrefKey.disableSoftwareFallback.rawValue) {
-      displays.append(contentsOf: DisplayManager.shared.getOtherDisplays())
-    } else {
-      displays.append(contentsOf: DisplayManager.shared.getDdcCapableDisplays())
-    }
+    displays.append(contentsOf: DisplayManager.shared.getOtherDisplays())
     let relevant = prefs.integer(forKey: PrefKey.multiSliders.rawValue) == MultiSliders.relevant.rawValue
     let combine = prefs.integer(forKey: PrefKey.multiSliders.rawValue) == MultiSliders.combine.rawValue
     let numOfDisplays = displays.count

@@ -141,7 +141,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     DisplayManager.shared.setupOtherDisplays(firstrun: firstrun)
     self.updateMenusAndKeys()
     if !firstrun {
-      if !prefs.bool(forKey: PrefKey.disableSoftwareFallback.rawValue) || !prefs.bool(forKey: PrefKey.disableCombinedBrightness.rawValue) {
+      if !prefs.bool(forKey: PrefKey.disableCombinedBrightness.rawValue) {
         DisplayManager.shared.restoreSwBrightnessForAllDisplays(async: !prefs.bool(forKey: PrefKey.disableSmoothBrightness.rawValue))
       }
     }
@@ -250,7 +250,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
   func preferenceReset() {
     os_log("Resetting all preferences.")
-    if !prefs.bool(forKey: PrefKey.disableSoftwareFallback.rawValue) || !prefs.bool(forKey: PrefKey.disableCombinedBrightness.rawValue) {
+    if !prefs.bool(forKey: PrefKey.disableCombinedBrightness.rawValue) {
       DisplayManager.shared.resetSwBrightnessForAllDisplays(async: false)
     }
     if let bundleID = Bundle.main.bundleIdentifier {

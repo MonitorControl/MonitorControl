@@ -45,25 +45,13 @@ class KeyboardPrefsViewController: NSViewController, PreferencePane {
   @IBOutlet var rowCustomAudioShortcuts: NSGridRow!
   @IBOutlet var rowUseAudioMouseText: NSGridRow!
   @IBOutlet var rowUseAudioNameText: NSGridRow!
-  @IBOutlet var rowUseFineScaleCheck: NSGridRow!
-  @IBOutlet var rowUseFineScaleText: NSGridRow!
-  @IBOutlet var rowSeparateCombinedScaleCheck: NSGridRow!
-  @IBOutlet var rowSeparateCombinedScaleText: NSGridRow!
 
-  // swiftlint:disable cyclomatic_complexity
-  func updateGridLayout() -> Bool {
-    let hide = !prefs.bool(forKey: PrefKey.showAdvancedSettings.rawValue)
-
+  func updateGridLayout() {
     if self.keyboardBrightness.selectedTag() == KeyboardBrightness.media.rawValue {
-      self.rowKeyboardBrightnessPopUp.bottomPadding = hide ? -6 : -13
-      self.rowKeyboardBrightnessText.isHidden = hide
-      if self.disableAltBrightnessKeys.state == .on {
-        self.rowDisableAltBrightnessKeysCheck.isHidden = false
-        self.rowDisableAltBrightnessKeysText.isHidden = false
-      } else {
-        self.rowDisableAltBrightnessKeysCheck.isHidden = hide
-        self.rowDisableAltBrightnessKeysText.isHidden = hide
-      }
+      self.rowKeyboardBrightnessPopUp.bottomPadding = -13
+      self.rowKeyboardBrightnessText.isHidden = false
+      self.rowDisableAltBrightnessKeysCheck.isHidden = false
+      self.rowDisableAltBrightnessKeysText.isHidden = false
       self.rowCustomBrightnessShortcuts.isHidden = true
     } else if self.keyboardBrightness.selectedTag() == KeyboardBrightness.custom.rawValue {
       self.rowKeyboardBrightnessPopUp.bottomPadding = -6
@@ -74,13 +62,8 @@ class KeyboardPrefsViewController: NSViewController, PreferencePane {
     } else if self.keyboardBrightness.selectedTag() == KeyboardBrightness.both.rawValue {
       self.rowKeyboardBrightnessPopUp.bottomPadding = -6
       self.rowKeyboardBrightnessText.isHidden = true
-      if self.disableAltBrightnessKeys.state == .on {
-        self.rowDisableAltBrightnessKeysCheck.isHidden = false
-        self.rowDisableAltBrightnessKeysText.isHidden = false
-      } else {
-        self.rowDisableAltBrightnessKeysCheck.isHidden = hide
-        self.rowDisableAltBrightnessKeysText.isHidden = hide
-      }
+      self.rowDisableAltBrightnessKeysCheck.isHidden = false
+      self.rowDisableAltBrightnessKeysText.isHidden = false
       self.rowCustomBrightnessShortcuts.isHidden = false
     } else {
       self.rowKeyboardBrightnessPopUp.bottomPadding = -6
@@ -129,27 +112,7 @@ class KeyboardPrefsViewController: NSViewController, PreferencePane {
       self.rowUseAudioNameText.isHidden = true
       self.rowUseAudioMouseText.isHidden = false
     }
-
-    if self.useFineScale.state == .on {
-      self.rowUseFineScaleCheck.isHidden = false
-      self.rowUseFineScaleText.isHidden = false
-    } else {
-      self.rowUseFineScaleCheck.isHidden = hide
-      self.rowUseFineScaleText.isHidden = hide
-    }
-
-    if self.separateCombinedScale.state == .on {
-      self.rowSeparateCombinedScaleCheck.isHidden = false
-      self.rowSeparateCombinedScaleText.isHidden = false
-    } else {
-      self.rowSeparateCombinedScaleCheck.isHidden = hide
-      self.rowSeparateCombinedScaleText.isHidden = hide
-    }
-
-    return !hide
   }
-
-  // swiftlint:enable cyclomatic_complexity
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -190,19 +153,19 @@ class KeyboardPrefsViewController: NSViewController, PreferencePane {
     self.useFineScale.state = prefs.bool(forKey: PrefKey.useFineScaleBrightness.rawValue) ? .on : .off
     self.useFineScaleVolume.state = prefs.bool(forKey: PrefKey.useFineScaleVolume.rawValue) ? .on : .off
     self.separateCombinedScale.state = prefs.bool(forKey: PrefKey.separateCombinedScale.rawValue) ? .on : .off
-    _ = self.updateGridLayout()
+    self.updateGridLayout()
   }
 
   @IBAction func multiKeyboardBrightness(_ sender: NSPopUpButton) {
     prefs.set(sender.selectedTag(), forKey: PrefKey.multiKeyboardBrightness.rawValue)
     app.updateMediaKeyTap()
-    _ = self.updateGridLayout()
+    self.updateGridLayout()
   }
 
   @IBAction func multiKeyboardVolume(_ sender: NSPopUpButton) {
     prefs.set(sender.selectedTag(), forKey: PrefKey.multiKeyboardVolume.rawValue)
     app.updateMediaKeyTap()
-    _ = self.updateGridLayout()
+    self.updateGridLayout()
   }
 
   @IBAction func useFineScaleClicked(_ sender: NSButton) {
@@ -213,7 +176,7 @@ class KeyboardPrefsViewController: NSViewController, PreferencePane {
       prefs.set(false, forKey: PrefKey.useFineScaleBrightness.rawValue)
     default: break
     }
-    _ = self.updateGridLayout()
+    self.updateGridLayout()
   }
 
   @IBAction func useFineScaleVolumeClicked(_ sender: NSButton) {
@@ -234,7 +197,7 @@ class KeyboardPrefsViewController: NSViewController, PreferencePane {
       prefs.set(false, forKey: PrefKey.separateCombinedScale.rawValue)
     default: break
     }
-    _ = self.updateGridLayout()
+    self.updateGridLayout()
   }
 
   @IBAction func disableAltBrightnessKeys(_ sender: NSButton) {
@@ -245,19 +208,19 @@ class KeyboardPrefsViewController: NSViewController, PreferencePane {
       prefs.set(false, forKey: PrefKey.disableAltBrightnessKeys.rawValue)
     default: break
     }
-    _ = self.updateGridLayout()
+    self.updateGridLayout()
     app.updateMediaKeyTap()
   }
 
   @IBAction func keyboardBrightness(_ sender: NSPopUpButton) {
     prefs.set(sender.selectedTag(), forKey: PrefKey.keyboardBrightness.rawValue)
     app.updateMenusAndKeys()
-    _ = self.updateGridLayout()
+    self.updateGridLayout()
   }
 
   @IBAction func keyboardVolume(_ sender: NSPopUpButton) {
     prefs.set(sender.selectedTag(), forKey: PrefKey.keyboardVolume.rawValue)
     app.updateMenusAndKeys()
-    _ = self.updateGridLayout()
+    self.updateGridLayout()
   }
 }
