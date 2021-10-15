@@ -7,9 +7,6 @@
 /* Shown in the main prefs window */
 "App menu" = "Menu de l'app";
 
-/* Apple Silicon designation (shown after the version number in Preferences) */
-"Apple Silicon" = "Puce Apple";
-
 /* Shown in the alert dialog */
 "Are you sure you want to enable a longer delay? Doing so may freeze your system and require a restart. Start at login will be disabled as a safety measure." = "Êtes-vous sûr de vouloir augmenter cette durée? Cela peut entrainer un gêle du système et nécessiter un redémarrage. Par sécurité, cette option sera désactivée au démarrage.";
 
@@ -66,9 +63,6 @@
 
 /* Shown in record shortcut box */
 "Increase" = "Augmenter";
-
-/* Intel designation (shown after the version number in Preferences) */
-"Intel" = "Intel";
 
 /* Shown in the alert dialog */
 "Is f.lux or similar running?" = "Is f.lux or similar running?";

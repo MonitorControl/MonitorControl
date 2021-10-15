@@ -7,9 +7,6 @@
 /* Shown in the main prefs window */
 "App menu" = "App选项";
 
-/* Apple Silicon designation (shown after the version number in Preferences) */
-"Apple Silicon" = "Apple芯片";
-
 /* Shown in the alert dialog */
 "Are you sure you want to enable a longer delay? Doing so may freeze your system and require a restart. Start at login will be disabled as a safety measure." = "您确定要启用更长的延迟吗？这样做可能会使其它奔溃并需要重新启动。作为安全措施，登录时启动将被禁用。";
 
@@ -66,9 +63,6 @@
 
 /* Shown in record shortcut box */
 "Increase" = "增加";
-
-/* Intel designation (shown after the version number in Preferences) */
-"Intel" = "Intel";
 
 /* Shown in the alert dialog */
 "Is f.lux or similar running?" = "是f.lux或类似的应用程序在运行吗？";
