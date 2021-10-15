@@ -77,9 +77,9 @@ Go to [Releases](https://github.com/MonitorControl/MonitorControl/releases) and 
 
 <div align="center">
 <img src=".github/pref_1.png" width="412" alt="Screenshot"/>
-<img src=".github/pref_3.png" width="412" alt="Screenshot"/><br/>
-<img src=".github/pref_4.png" width="412" alt="Screenshot"/>
 <img src=".github/pref_2.png" width="412" alt="Screenshot"/><br/>
+<img src=".github/pref_3.png" width="412" alt="Screenshot"/>
+<img src=".github/pref_4.png" width="412" alt="Screenshot"/><br/>
 </div>
  
 ## Compatibility
