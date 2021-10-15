@@ -51,7 +51,7 @@ class AppleDisplay: Display {
     let oldValue = self.brightnessSyncSourceValue
     self.savePref(brightness, for: .brightness)
     if brightness != oldValue {
-      os_log("Pushing slider and reporting delta for Apple display %{public}@", type: .debug, String(self.identifier))
+      os_log("Pushing slider and reporting delta for Apple display %{public}@", type: .info, String(self.identifier))
       var newValue: Float
 
       if abs(brightness - oldValue) < 0.01 {

@@ -84,12 +84,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   }
 
   @objc func quitClicked(_: AnyObject) {
-    os_log("Quit clicked", type: .debug)
+    os_log("Quit clicked", type: .info)
     NSApplication.shared.terminate(self)
   }
 
   @objc func prefsClicked(_: AnyObject) {
-    os_log("Preferences clicked", type: .debug)
+    os_log("Preferences clicked", type: .info)
     self.preferencesWindowController.show()
   }
 
@@ -208,7 +208,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     if self.sleepID == 0, self.reconfigureID == 0 {
       if !self.jobRunning {
-        os_log("MonitorControl job started.", type: .debug)
+        os_log("MonitorControl job started.", type: .info)
         self.jobRunning = true
       }
       var refreshedSomething = false
@@ -218,7 +218,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
           refreshedSomething = true
           if prefs.bool(forKey: PrefKey.enableBrightnessSync.rawValue) {
             for targetDisplay in DisplayManager.shared.displays where targetDisplay != display {
-              os_log("Updating delta from display %{public}@ to display %{public}@", type: .debug, String(display.identifier), String(targetDisplay.identifier))
+              os_log("Updating delta from display %{public}@ to display %{public}@", type: .info, String(display.identifier), String(targetDisplay.identifier))
               let newValue = max(0, min(1, targetDisplay.getBrightness() + delta))
               _ = targetDisplay.setBrightness(newValue)
               if let slider = targetDisplay.sliderHandler[.brightness] {
@@ -265,8 +265,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
   @objc func audioDeviceChanged() {
     if let defaultDevice = self.coreAudio.defaultOutputDevice {
-      os_log("Default output device changed to “%{public}@”.", type: .debug, defaultDevice.name)
-      os_log("Can device set its own volume? %{public}@", type: .debug, defaultDevice.canSetVirtualMasterVolume(scope: .output).description)
+      os_log("Default output device changed to “%{public}@”.", type: .info, defaultDevice.name)
+      os_log("Can device set its own volume? %{public}@", type: .info, defaultDevice.canSetVirtualMasterVolume(scope: .output).description)
     }
     self.updateMediaKeyTap()
   }
