@@ -72,10 +72,10 @@ class Display: Equatable {
     self.swUpdateDefaultGammaTable()
     self.smoothBrightnessTransient = self.getBrightness()
     if self.isVirtual {
-      os_log("Creating or updating shade for virtual display %{public}@", type: .debug, String(self.identifier))
+      os_log("Creating or updating shade for virtual display %{public}@", type: .info, String(self.identifier))
       _ = DisplayManager.shared.updateShade(displayID: self.identifier)
     } else {
-      os_log("Destroying shade (if exists) for real display %{public}@", type: .debug, String(self.identifier))
+      os_log("Destroying shade (if exists) for real display %{public}@", type: .info, String(self.identifier))
       _ = DisplayManager.shared.destroyShade(displayID: self.identifier)
     }
     self.brightnessSyncSourceValue = self.getBrightness()
@@ -113,7 +113,7 @@ class Display: Equatable {
     guard app.sleepID == 0, app.reconfigureID == 0 else {
       self.savePref(self.smoothBrightnessTransient, for: .brightness)
       self.smoothBrightnessRunning = false
-      os_log("Pushing brightness stopped for Display %{public}@ because of sleep or reconfiguration", type: .debug, String(self.identifier))
+      os_log("Pushing brightness stopped for Display %{public}@ because of sleep or reconfiguration", type: .info, String(self.identifier))
       return false
     }
     if slow {
@@ -125,7 +125,7 @@ class Display: Equatable {
     }
     var dontPushAgain = false
     if to != -1 {
-      os_log("Pushing brightness towards goal of %{public}@ for Display  %{public}@", type: .debug, String(to), String(self.identifier))
+      os_log("Pushing brightness towards goal of %{public}@ for Display  %{public}@", type: .info, String(to), String(self.identifier))
       let value = max(min(to, 1), 0)
       self.savePref(value, for: .brightness)
       self.brightnessSyncSourceValue = value
@@ -138,7 +138,7 @@ class Display: Equatable {
     if brightness != self.smoothBrightnessTransient {
       if abs(brightness - self.smoothBrightnessTransient) < 0.01 {
         self.smoothBrightnessTransient = brightness
-        os_log("Pushing brightness finished for Display  %{public}@", type: .debug, String(self.identifier))
+        os_log("Pushing brightness finished for Display  %{public}@", type: .info, String(self.identifier))
         dontPushAgain = true
         self.smoothBrightnessRunning = false
       } else if brightness > self.smoothBrightnessTransient {
@@ -154,7 +154,7 @@ class Display: Equatable {
         }
       }
     } else {
-      os_log("No more need to push brightness for Display  %{public}@ (setting one final time)", type: .debug, String(self.identifier))
+      os_log("No more need to push brightness for Display  %{public}@ (setting one final time)", type: .info, String(self.identifier))
       _ = self.setDirectBrightness(self.smoothBrightnessTransient, transient: true)
       self.smoothBrightnessRunning = false
     }
@@ -274,7 +274,7 @@ class Display: Equatable {
     }
     DisplayManager.shared.gammaInterferenceCounter += 1
     _ = self.setSwBrightness(1)
-    os_log("Gamma table interference detected, number of events: %{public}@", type: .debug, String(DisplayManager.shared.gammaInterferenceCounter))
+    os_log("Gamma table interference detected, number of events: %{public}@", type: .info, String(DisplayManager.shared.gammaInterferenceCounter))
     if DisplayManager.shared.gammaInterferenceCounter >= 3 {
       DisplayManager.shared.gammaInterferenceWarningShown = true
       let alert = NSAlert()
@@ -294,7 +294,7 @@ class Display: Equatable {
           displaysPrefsVc?.loadDisplayList()
         }
       } else {
-        os_log("We won't watch for gamma table interference anymore", type: .debug)
+        os_log("We won't watch for gamma table interference anymore", type: .info)
       }
     }
   }

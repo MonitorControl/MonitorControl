@@ -22,7 +22,7 @@ class DisplayManager {
     self.gammaActivityEnforcer.level = .screenSaver
     self.gammaActivityEnforcer.orderFrontRegardless()
     self.gammaActivityEnforcer.collectionBehavior = [.stationary, .canJoinAllSpaces]
-    os_log("Gamma activity enforcer created.", type: .debug)
+    os_log("Gamma activity enforcer created.", type: .info)
   }
 
   func enforceGammaActivity() {
@@ -59,7 +59,7 @@ class DisplayManager {
       shade.orderFrontRegardless()
       shade.collectionBehavior = [.stationary, .canJoinAllSpaces, .ignoresCycle]
       shade.setFrame(screen.frame, display: true)
-      os_log("Window shade created for display %{public}@", type: .debug, String(displayID))
+      os_log("Window shade created for display %{public}@", type: .info, String(displayID))
       return shade
     }
     return nil
@@ -83,22 +83,22 @@ class DisplayManager {
   func destroyAllShades() -> Bool {
     var ret = false
     for displayID in self.shades.keys {
-      os_log("Attempting to destory shade for display  %{public}@", type: .debug, String(displayID))
+      os_log("Attempting to destory shade for display  %{public}@", type: .info, String(displayID))
       if self.destroyShade(displayID: displayID) {
         ret = true
       }
     }
     if ret {
-      os_log("Destroyed all shades.", type: .debug)
+      os_log("Destroyed all shades.", type: .info)
     } else {
-      os_log("No shades were found to be destroyed.", type: .debug)
+      os_log("No shades were found to be destroyed.", type: .info)
     }
     return ret
   }
 
   func destroyShade(displayID: CGDirectDisplayID) -> Bool {
     if let shade = shades[displayID] {
-      os_log("Destroying shade for display %{public}@", type: .debug, String(displayID))
+      os_log("Destroying shade for display %{public}@", type: .info, String(displayID))
       self.shadeGrave.append(shade)
       self.shades.removeValue(forKey: displayID)
       shade.close()
@@ -204,7 +204,7 @@ class DisplayManager {
 
   func updateAudioControlTargetDisplays(deviceName: String) -> Int {
     self.audioControlTargetDisplays.removeAll()
-    os_log("Detecting displays for audio control via audio device name matching...", type: .debug)
+    os_log("Detecting displays for audio control via audio device name matching...", type: .info)
     var numOfAddedDisplays: Int = 0
     for ddcCapableDisplay in self.getDdcCapableDisplays() {
       var displayAudioDeviceName = ddcCapableDisplay.readPrefAsString(key: .audioDeviceNameOverride)
@@ -214,7 +214,7 @@ class DisplayManager {
       if self.normalizedName(displayAudioDeviceName) == self.normalizedName(deviceName) {
         self.audioControlTargetDisplays.append(ddcCapableDisplay)
         numOfAddedDisplays += 1
-        os_log("Added display for audio control - %{public}@", type: .debug, ddcCapableDisplay.name)
+        os_log("Added display for audio control - %{public}@", type: .info, ddcCapableDisplay.name)
       }
     }
     return numOfAddedDisplays
@@ -332,10 +332,10 @@ class DisplayManager {
           OSDUtils.popEmptyOsd(displayID: otherDisplay.identifier, command: Command.brightness) // This will give the user a hint why is the brightness suddenly changes and also give screen activity to counter the 'no gamma change when there is no screen activity' issue on some macs
         }
         otherDisplay.savePref(otherDisplay.getSwBrightness(), key: .SwBrightness)
-        os_log("Restoring sw brightness to %{public}@ on other display %{public}@", type: .debug, String(savedPrefValue), String(otherDisplay.identifier))
+        os_log("Restoring sw brightness to %{public}@ on other display %{public}@", type: .info, String(savedPrefValue), String(otherDisplay.identifier))
         _ = otherDisplay.setSwBrightness(savedPrefValue, smooth: async)
         if otherDisplay.isSw(), let slider = otherDisplay.sliderHandler[.brightness] {
-          os_log("Restoring sw slider to %{public}@ for other display %{public}@", type: .debug, String(savedPrefValue), String(otherDisplay.identifier))
+          os_log("Restoring sw slider to %{public}@ for other display %{public}@", type: .info, String(savedPrefValue), String(otherDisplay.identifier))
           slider.setValue(savedPrefValue, displayID: otherDisplay.identifier)
         }
       } else {

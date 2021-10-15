@@ -25,7 +25,7 @@ class MenuHandler: NSMenu, NSMenuDelegate {
   }
 
   func updateMenus(dontClose: Bool = false) {
-    os_log("Menu update initiated", type: .debug)
+    os_log("Menu update initiated", type: .info)
     if !dontClose {
       self.cancelTrackingWithoutAnimation()
     }
