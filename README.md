@@ -35,7 +35,7 @@ Use menulet sliders or the keyboard, including native Apple keys!</p>
 <br/>
 <br/>
 
-<img src=".github/screenshot.png" width="825" alt="Screenshot"/><br/>
+<img src=".github/screenshot.png" width="824" alt="Screenshot"/><br/>
 
 </div>
 
@@ -76,10 +76,10 @@ Go to [Releases](https://github.com/MonitorControl/MonitorControl/releases) and 
 ## Screenshots (Preferences)
 
 <div align="center">
-<img src=".github/pref_1.png" width="410" alt="Screenshot"/>
-<img src=".github/pref_3.png" width="410" alt="Screenshot"/><br/>
-<img src=".github/pref_4.png" width="410" alt="Screenshot"/>
-<img src=".github/pref_2.png" width="410" alt="Screenshot"/><br/>
+<img src=".github/pref_1.png" width="412" alt="Screenshot"/>
+<img src=".github/pref_3.png" width="412" alt="Screenshot"/><br/>
+<img src=".github/pref_4.png" width="412" alt="Screenshot"/>
+<img src=".github/pref_2.png" width="412" alt="Screenshot"/><br/>
 </div>
  
 ## Compatibility
