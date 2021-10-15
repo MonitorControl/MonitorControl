@@ -92,7 +92,7 @@ Go to [Releases](https://github.com/MonitorControl/MonitorControl/releases) and 
 
 _* With some limitations - full functionality available on macOS 11 Big Sur or newer._
 
-Note to f.lux users: the app is now compatible with [f.lux](https://justgetflux.com) as well - please activate `Avoid gamma table manipulation` under `Preferences` » `Displays` (this option is accessible if advanced settings are enabled)! This is not needed if you use Night Shift.
+Note to f.lux users: the app is now compatible with [f.lux](https://justgetflux.com) as well - please activate `Avoid gamma table manipulation` under `Preferences` » `Displays`! This step is not needed if you use Night Shift.
 
 ## Supported hardware
 
