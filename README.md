@@ -94,6 +94,20 @@ _* With some limitations - full functionality available on macOS 11 Big Sur or n
 
 Note to f.lux users: the app is now compatible with [f.lux](https://justgetflux.com) as well - please activate `Avoid gamma table manipulation` under `Preferences` » `Displays` (this option is accessible if advanced settings are enabled)! This is not needed if you use Night Shift.
 
+## Supported hardware
+
+* Most modern LCD displays from all major manufacturers supported implemented DDC/CI protocol via DisplayPort, HDMI, USB-C or VGA to allow for hardware backlight control.
+* Apple (and LG-Apple) displays and built-in displays are supported using native protocol.
+* LCD and LED Televisions usually do not implement DDC, these are supported using software alternatives to dim the image (some higher-end sets are able to translate this into hardware backlight dimming).
+* OLED or mini/micro-LED displays and televisions are fully supported using gamma table manipulation (this is a no-compromise solution for this class of displays).
+* DisplayLink, Airplay and Sidecar is supported using shade (dark overlay) control.
+
+Notable exceptions for hardware control:
+
+* Some displays (notably EIZO) use MCCS over USB or an entirely custom protocol for control. These displays are supported with software dimming only.
+* The HDMI port of the 2018 Intel Mac mini and 2020 M1 Mac mini prohibit DDC communication. Software control is still available. We recommend connecting the display via the USB-C port (USB-C to HDMI dongles usually work).
+* DisplayLink docks and dongles do not allow for DDC control on Macs, only software dimming is available for these connections.
+
 ## How to help
 
 Open [issues](https://github.com/MonitorControl/MonitorControl/issues) if you have a question, an enhancement to suggest or a bug you've found. If you want you can fork the code yourself and submit a pull request to improve the app.
