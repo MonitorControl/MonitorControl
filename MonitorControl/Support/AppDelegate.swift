@@ -100,7 +100,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
   func applicationWillTerminate(_: Notification) {
     os_log("Goodbye!", type: .info)
-    DisplayManager.shared.resetSwBrightnessForAllDisplays()
+    DisplayManager.shared.resetSwBrightnessForAllDisplays(noPrefSave: true)
     self.statusItem.isVisible = true
   }
 

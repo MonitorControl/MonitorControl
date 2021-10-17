@@ -3,7 +3,7 @@
 import Cocoa
 import Foundation
 
-let DEBUG_SW = false
+let DEBUG_SW = true
 let DEBUG_VIRTUAL = false
 let DEBUG_MACOS10 = false
 let DEBUG_GAMMA_ENFORCER = false
