@@ -114,6 +114,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
   func displayReconfigured() {
     self.reconfigureID += 1
+    DisplayManager.shared.resetSwBrightnessForAllDisplays(noPrefSave: true) // This is needed as on some rare occasions gamma table change is not actually carried out by the OS during display configuration reset - to make sure we have a good baseline, we do one anyway.
     os_log("Bumping reconfigureID to %{public}@", type: .info, String(self.reconfigureID))
     _ = DisplayManager.shared.destroyAllShades()
     if self.sleepID == 0 {
@@ -135,12 +136,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     DisplayManager.shared.configureDisplays()
     DisplayManager.shared.addDisplayCounterSuffixes()
     DisplayManager.shared.updateArm64AVServices()
-    if firstrun {
-      DisplayManager.shared.resetSwBrightnessForAllDisplays(settingsOnly: true)
+    if firstrun && prefs.integer(forKey: PrefKey.startupAction.rawValue) != StartupAction.write.rawValue {
+      DisplayManager.shared.resetSwBrightnessForAllDisplays(prefsOnly: true)
     }
     DisplayManager.shared.setupOtherDisplays(firstrun: firstrun)
     self.updateMenusAndKeys()
-    if !firstrun {
+    if !firstrun || prefs.integer(forKey: PrefKey.startupAction.rawValue) == StartupAction.write.rawValue {
       if !prefs.bool(forKey: PrefKey.disableCombinedBrightness.rawValue) {
         DisplayManager.shared.restoreSwBrightnessForAllDisplays(async: !prefs.bool(forKey: PrefKey.disableSmoothBrightness.rawValue))
       }
@@ -192,7 +193,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       self.sleepID = 0
       if self.reconfigureID != 0 {
         let dispatchedReconfigureID = self.reconfigureID
-        os_log("Display needs reconfig after sober with reconfigureID %{public}@", type: .info, String(dispatchedReconfigureID))
+        os_log("Displays needs reconfig after sober with reconfigureID %{public}@", type: .info, String(dispatchedReconfigureID))
         self.configure(dispatchedReconfigureID: dispatchedReconfigureID)
       } else if Arm64DDC.isArm64 {
         os_log("Displays don't need reconfig after sober but might need AVServices update", type: .info)

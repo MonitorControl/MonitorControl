@@ -200,11 +200,13 @@ class Display: Equatable {
     }
   }
 
-  func setSwBrightness(_ value: Float, smooth: Bool = false) -> Bool {
+  func setSwBrightness(_ value: Float, smooth: Bool = false, noPrefSave: Bool = false) -> Bool {
     self.swBrightnessSemaphore.wait()
     let brightnessValue = min(1, value)
     var currentValue = self.readPrefAsFloat(key: .SwBrightness)
-    self.savePref(brightnessValue, key: .SwBrightness)
+    if !noPrefSave {
+      self.savePref(brightnessValue, key: .SwBrightness)
+    }
     var newValue = brightnessValue
     currentValue = self.swBrightnessTransform(value: currentValue)
     newValue = self.swBrightnessTransform(value: newValue)
