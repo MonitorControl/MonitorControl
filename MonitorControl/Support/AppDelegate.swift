@@ -112,7 +112,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
   }
 
-  func displayReconfigured() {
+  @objc func displayReconfigured() {
     DisplayManager.shared.resetSwBrightnessForAllDisplays(noPrefSave: true)
     CGDisplayRestoreColorSyncSettings()
     self.reconfigureID += 1
@@ -165,7 +165,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
   private func subscribeEventListeners() {
     NotificationCenter.default.addObserver(self, selector: #selector(self.audioDeviceChanged), name: Notification.Name.defaultOutputDeviceChanged, object: nil) // subscribe Audio output detector (SimplyCoreAudio)
-    DistributedNotificationCenter.default.addObserver(self, selector: #selector(self.colorSyncSettingsChanged), name: NSNotification.Name(rawValue: kColorSyncDisplayDeviceProfilesNotification.takeRetainedValue() as String), object: nil) // ColorSync change
+    DistributedNotificationCenter.default.addObserver(self, selector: #selector(self.displayReconfigured), name: NSNotification.Name(rawValue: kColorSyncDisplayDeviceProfilesNotification.takeRetainedValue() as String), object: nil) // ColorSync change
     NSWorkspace.shared.notificationCenter.addObserver(self, selector: #selector(self.sleepNotification), name: NSWorkspace.screensDidSleepNotification, object: nil) // sleep and wake listeners
     NSWorkspace.shared.notificationCenter.addObserver(self, selector: #selector(self.wakeNotofication), name: NSWorkspace.screensDidWakeNotification, object: nil)
     NSWorkspace.shared.notificationCenter.addObserver(self, selector: #selector(self.sleepNotification), name: NSWorkspace.willSleepNotification, object: nil)
@@ -238,10 +238,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       self.jobRunning = false
       os_log("MonitorControl job died because of sleep or reconfiguration.", type: .info)
     }
-  }
-
-  @objc private func colorSyncSettingsChanged() {
-    self.displayReconfigured()
   }
 
   func handleListenForChanged() {
