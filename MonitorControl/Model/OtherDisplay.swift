@@ -40,7 +40,7 @@ class OtherDisplay: Display {
         os_log("- Combined brightness mapping on DDC data.", type: .info)
         if currentValue > 0 {
           currentValue = self.combinedBrightnessSwitchingValue() + currentValue * (1 - self.combinedBrightnessSwitchingValue())
-        } else if currentValue == 0, firstrun {
+        } else if currentValue == 0, firstrun, prefs.integer(forKey: PrefKey.startupAction.rawValue) != StartupAction.write.rawValue {
           currentValue = self.combinedBrightnessSwitchingValue()
         } else if self.prefExists(for: command), self.readPrefAsFloat(for: command) <= self.combinedBrightnessSwitchingValue() {
           currentValue = self.readPrefAsFloat(for: command)
@@ -58,7 +58,7 @@ class OtherDisplay: Display {
         os_log("- Combined brightness mapping on saved data.", type: .info)
         if !self.prefExists(for: command) {
           currentValue = self.combinedBrightnessSwitchingValue() + self.convDDCToValue(for: command, from: currentDDCValue) * (1 - self.combinedBrightnessSwitchingValue())
-        } else if firstrun, currentValue < self.combinedBrightnessSwitchingValue() {
+        } else if firstrun, currentValue < self.combinedBrightnessSwitchingValue(), prefs.integer(forKey: PrefKey.startupAction.rawValue) != StartupAction.write.rawValue {
           currentValue = self.combinedBrightnessSwitchingValue()
         }
       } else {

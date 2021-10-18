@@ -295,8 +295,8 @@
 /* Class = "NSTextFieldCell"; title = "General menu items style:"; ObjectID = "thh-DG-ecH"; */
 "thh-DG-ecH.title" = "Stil der Menüpunkte:";
 
-/* Class = "NSTextFieldCell"; title = "@the0neyouseek (Guillaume B.)\n@JoniVR (Joni Van Roost)\n@waydabber (Istvan T.)"; ObjectID = "TKd-J8-Iyk"; */
-"TKd-J8-Iyk.title" = "@the0neyouseek (Guillaume B.)\n@JoniVR (Joni Van Roost)\n@waydabber (Istvan T.)";
+/* Class = "NSTextFieldCell"; title = "@the0neyouseek (Guillaume B.)\n@JoniVR (Joni Van Roost)\n@waydabber (István T.)"; ObjectID = "TKd-J8-Iyk"; */
+"TKd-J8-Iyk.title" = "@the0neyouseek (Guillaume B.)\n@JoniVR (Joni Van Roost)\n@waydabber (István T.)";
 
 /* Class = "NSTextFieldCell"; title = "Menu Icon:"; ObjectID = "u6s-Pb-BCG"; */
 "u6s-Pb-BCG.title" = "Menü-Symbol:";

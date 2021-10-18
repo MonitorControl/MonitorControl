@@ -309,16 +309,18 @@ class DisplayManager {
     }
   }
 
-  func resetSwBrightnessForAllDisplays(settingsOnly: Bool = false, async: Bool = false) {
+  func resetSwBrightnessForAllDisplays(prefsOnly: Bool = false, noPrefSave: Bool = false, async: Bool = false) {
     for otherDisplay in self.getOtherDisplays() {
-      if !settingsOnly {
-        _ = otherDisplay.setSwBrightness(1, smooth: async)
-        otherDisplay.smoothBrightnessTransient = 1
-      } else {
+      if !prefsOnly {
+        _ = otherDisplay.setSwBrightness(1, smooth: async, noPrefSave: noPrefSave)
+        if !noPrefSave {
+          otherDisplay.smoothBrightnessTransient = 1
+        }
+      } else if !noPrefSave {
         otherDisplay.savePref(1, key: .SwBrightness)
         otherDisplay.smoothBrightnessTransient = 1
       }
-      if otherDisplay.isSw() {
+      if otherDisplay.isSw(), !noPrefSave {
         otherDisplay.savePref(1, for: .brightness)
       }
     }
@@ -329,7 +331,7 @@ class DisplayManager {
       if (otherDisplay.readPrefAsFloat(for: .brightness) == 0 && !prefs.bool(forKey: PrefKey.disableCombinedBrightness.rawValue)) || (otherDisplay.readPrefAsFloat(for: .brightness) < otherDisplay.combinedBrightnessSwitchingValue() && !prefs.bool(forKey: PrefKey.separateCombinedScale.rawValue) && !prefs.bool(forKey: PrefKey.disableCombinedBrightness.rawValue)) || otherDisplay.isSw() {
         let savedPrefValue = otherDisplay.readPrefAsFloat(key: .SwBrightness)
         if otherDisplay.getSwBrightness() != savedPrefValue {
-          OSDUtils.popEmptyOsd(displayID: otherDisplay.identifier, command: Command.brightness) // This will give the user a hint why is the brightness suddenly changes and also give screen activity to counter the 'no gamma change when there is no screen activity' issue on some macs
+          OSDUtils.popEmptyOsd(displayID: otherDisplay.identifier, command: Command.brightness) // This will give the user a hint why is the brightness suddenly changes.
         }
         otherDisplay.savePref(otherDisplay.getSwBrightness(), key: .SwBrightness)
         os_log("Restoring sw brightness to %{public}@ on other display %{public}@", type: .info, String(savedPrefValue), String(otherDisplay.identifier))
