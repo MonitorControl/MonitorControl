@@ -113,7 +113,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   }
 
   func displayReconfigured() {
-    CGDisplayRestoreColorSyncSettings() // This is needed as on some rare occasions gamma table reseet is not actually carried out by the OS during display configuration update.
+    DisplayManager.shared.resetSwBrightnessForAllDisplays(noPrefSave: true)
+    CGDisplayRestoreColorSyncSettings()
     self.reconfigureID += 1
     os_log("Bumping reconfigureID to %{public}@", type: .info, String(self.reconfigureID))
     _ = DisplayManager.shared.destroyAllShades()
