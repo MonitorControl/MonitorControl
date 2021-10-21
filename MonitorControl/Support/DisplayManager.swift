@@ -179,15 +179,20 @@ class DisplayManager {
 
   func setupOtherDisplays(firstrun: Bool = false) {
     for otherDisplay in self.getOtherDisplays() {
-      if !otherDisplay.isSw(), !otherDisplay.readPrefAsBool(key: .unavailableDDC, for: .audioSpeakerVolume) {
-        otherDisplay.setupCurrentAndMaxValues(command: .audioSpeakerVolume, firstrun: firstrun)
-      }
-      if !otherDisplay.isSw(), !otherDisplay.readPrefAsBool(key: .unavailableDDC, for: .contrast) {
-        otherDisplay.setupCurrentAndMaxValues(command: .contrast, firstrun: firstrun)
+      for command in [Command.audioSpeakerVolume, Command.contrast] where !otherDisplay.readPrefAsBool(key: .unavailableDDC, for: command) && !otherDisplay.isSw() {
+        otherDisplay.setupCurrentAndMaxValues(command: command, firstrun: firstrun)
       }
       if (!otherDisplay.isSw() && !otherDisplay.readPrefAsBool(key: .unavailableDDC, for: .brightness)) || otherDisplay.isSw() {
         otherDisplay.setupCurrentAndMaxValues(command: .brightness, firstrun: firstrun)
         otherDisplay.brightnessSyncSourceValue = otherDisplay.readPrefAsFloat(for: .brightness)
+      }
+    }
+  }
+
+  func restoreOtherDisplays() {
+    for otherDisplay in self.getDdcCapableDisplays() {
+      for command in [Command.contrast, Command.brightness] where !otherDisplay.readPrefAsBool(key: .unavailableDDC, for: command) {
+        otherDisplay.restoreDDCSettingsToDisplay(command: command)
       }
     }
   }
