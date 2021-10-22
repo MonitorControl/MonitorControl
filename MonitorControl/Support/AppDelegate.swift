@@ -20,6 +20,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   var sleepID: Int = 0 // sleep event ID
   var safeMode = false
   var jobRunning = false
+  var startupActionWriteCounter: Int = 0
   var audioPlayer: AVAudioPlayer?
   let updaterController = SPUStandardUpdaterController(startingUpdater: false, updaterDelegate: UpdaterDelegate(), userDriverDelegate: nil)
 
@@ -200,6 +201,23 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         os_log("Displays don't need reconfig after sober but might need AVServices update", type: .info)
         DisplayManager.shared.updateArm64AVServices()
         self.job(start: true)
+      }
+      self.startupActionWriteRepeatAfterSober()
+    }
+  }
+
+  private func startupActionWriteRepeatAfterSober(dispatchedCounter: Int = 0) {
+    let counter = dispatchedCounter == 0 ? 10 : dispatchedCounter
+    self.startupActionWriteCounter = dispatchedCounter == 0 ? counter : self.startupActionWriteCounter
+    guard prefs.integer(forKey: PrefKey.startupAction.rawValue) == StartupAction.write.rawValue, self.startupActionWriteCounter == counter else {
+        return
+    }
+    os_log("Sober write action repeat for DDC - %{public}@", type: .info, String(counter))
+    DisplayManager.shared.restoreOtherDisplays()
+    self.startupActionWriteCounter = counter - 1
+    if counter > 1 {
+      DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+        self.startupActionWriteRepeatAfterSober(dispatchedCounter: counter - 1)
       }
     }
   }
