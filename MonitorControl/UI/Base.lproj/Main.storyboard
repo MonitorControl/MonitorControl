@@ -684,16 +684,10 @@
                         <outlet property="menuItemStyle" destination="6td-Zq-3e7" id="yMt-fU-PZX"/>
                         <outlet property="multiSliders" destination="78Q-P6-b97" id="uJP-0H-YuL"/>
                         <outlet property="quitApplication" destination="dy4-nH-cIr" id="aXV-0Q-H4L"/>
-                        <outlet property="rowHideIconSpearator" destination="Cor-61-8R5" id="Gvs-er-qj3"/>
-                        <outlet property="rowIconShow" destination="jyr-gk-BEN" id="Fuj-5x-UI7"/>
                         <outlet property="rowMenuItemStyle" destination="ZS3-Gy-pfA" id="tVN-WD-eoa"/>
                         <outlet property="rowMultiSliders" destination="CuW-77-ls4" id="XPi-6a-J58"/>
-                        <outlet property="rowPercentCheck" destination="rhT-kW-PmZ" id="NMJ-KF-PSN"/>
-                        <outlet property="rowPercentText" destination="fDY-kq-bjz" id="BFa-2b-iQZ"/>
                         <outlet property="rowQuitButton" destination="OpF-3Q-ZZp" id="0vU-Ls-hJj"/>
                         <outlet property="rowQuitButtonText" destination="HAl-L8-LPI" id="6CN-Wq-CBJ"/>
-                        <outlet property="rowShowContrastCheck" destination="xbz-Tf-py0" id="JRd-Xz-Sz8"/>
-                        <outlet property="rowShowContrastText" destination="KPA-bi-7h3" id="vqt-0f-Qbv"/>
                         <outlet property="rowSlidersCombineText" destination="MaK-MK-gRQ" id="OPU-QW-LEv"/>
                         <outlet property="rowTickCheck" destination="Ojm-8A-t1d" id="0Aq-FJ-wGD"/>
                         <outlet property="rowTickText" destination="JCM-Me-DIg" id="iZR-F3-x4s"/>
@@ -1195,12 +1189,8 @@
                         <outlet property="rowKeyboardBrightnessPopUp" destination="dwB-Ku-aql" id="bM0-Ms-24E"/>
                         <outlet property="rowKeyboardBrightnessText" destination="pf1-cW-4bf" id="Fxg-Uy-UHE"/>
                         <outlet property="rowMultiKeyboardBrightness" destination="I9B-dr-BOu" id="yDW-15-8xH"/>
-                        <outlet property="rowSeparateCombinedScaleCheck" destination="4hU-dS-J9a" id="6Zr-4J-FsI"/>
-                        <outlet property="rowSeparateCombinedScaleText" destination="ON8-Vi-iMV" id="lRE-Ad-h8L"/>
                         <outlet property="rowUseAudioMouseText" destination="ypS-k5-pR7" id="yr6-jO-zTY"/>
                         <outlet property="rowUseAudioNameText" destination="73k-Ho-qxa" id="yHm-CV-4aa"/>
-                        <outlet property="rowUseFineScaleCheck" destination="jJT-as-drf" id="2fT-4t-kAg"/>
-                        <outlet property="rowUseFineScaleText" destination="4Ie-T6-Ifw" id="faU-z6-bgQ"/>
                         <outlet property="rowUseFocusText" destination="UIH-jA-Cfi" id="NAn-5h-Shx"/>
                         <outlet property="separateCombinedScale" destination="f8L-OE-kAQ" id="Pgg-cY-eTx"/>
                         <outlet property="useFineScale" destination="M5g-VZ-qiM" id="5ZM-Nh-97j"/>
@@ -1259,7 +1249,7 @@
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="none" tableStyle="inset" selectionHighlightStyle="none" columnReordering="NO" columnResizing="NO" multipleSelection="NO" emptySelection="NO" autosaveColumns="NO" typeSelect="NO" rowHeight="520" viewBased="YES" id="zC9-dS-Tr3">
-                                            <rect key="frame" x="0.0" y="0.0" width="740" height="502"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="740" height="520"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <size key="intercellSpacing" width="14" height="0.0"/>
                                             <color key="backgroundColor" name="windowBackgroundColor" catalog="System" colorSpace="catalog"/>

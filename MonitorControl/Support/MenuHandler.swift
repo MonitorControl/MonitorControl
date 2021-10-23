@@ -113,14 +113,15 @@ class MenuHandler: NSMenu, NSMenuDelegate {
         contentWidth = max(addedSliderHandler.view!.frame.width, contentWidth)
         contentHeight += addedSliderHandler.view!.frame.height
       }
+      let margin = CGFloat(13)
       var blockNameView: NSTextField?
       if blockName != "" {
         contentHeight += 21
         let attrs: [NSAttributedString.Key: Any] = [.foregroundColor: NSColor.textColor, .font: NSFont.boldSystemFont(ofSize: 12)]
         blockNameView = NSTextField(labelWithAttributedString: NSAttributedString(string: blockName, attributes: attrs))
+        blockNameView?.frame.size.width = contentWidth - margin * 2
         blockNameView?.alphaValue = 0.5
       }
-      let margin = CGFloat(13)
       let itemView = BlockView(frame: NSRect(x: 0, y: 0, width: contentWidth + margin * 2, height: contentHeight + margin * 2))
       var sliderPosition = CGFloat(margin * -1 + 1)
       for addedSliderHandler in addedSliderHandlers {

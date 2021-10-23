@@ -360,18 +360,12 @@ class DisplaysPrefsCellView: NSTableCellView {
         self.ddcButtonToggled(self.ddcButton)
         self.avoidGamma.state = .off
         self.ddcButtonToggled(self.avoidGamma)
-        self.enabledButton.state = .on
-        self.enabledButtonToggled(self.enabledButton)
         self.disableVolumeOSDButton.state = .off
         self.disableVolumeOSDButton(self.disableVolumeOSDButton)
         self.pollingModeMenu.selectItem(withTag: 2)
         self.pollingModeValueChanged(self.pollingModeMenu)
         self.longerDelayButton.state = .off
         self.longerDelayButtonToggled(self.longerDelayButton)
-        self.enableMuteButton.state = .off
-        self.enableMuteButtonToggled(self.enableMuteButton)
-        self.friendlyName.stringValue = disp.name
-        self.friendlyNameValueChanged(self.friendlyName)
         self.combinedBrightnessSwitchingPoint.intValue = 0
         self.combinedBrightnessSwitchingPoint(self.combinedBrightnessSwitchingPoint)
         self.audioDeviceNameOverride.stringValue = ""
@@ -427,6 +421,10 @@ class DisplaysPrefsCellView: NSTableCellView {
         self.remapDDC(self.remapDDCVolume)
         self.remapDDC(self.remapDDCContrast)
       }
+      self.friendlyName.stringValue = disp.name
+      self.friendlyNameValueChanged(self.friendlyName)
+      self.enabledButton.state = .on
+      self.enabledButtonToggled(self.enabledButton)
     }
   }
 }
