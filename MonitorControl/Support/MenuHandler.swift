@@ -135,7 +135,9 @@ class MenuHandler: NSMenu, NSMenuDelegate {
       }
       let item = NSMenuItem()
       item.view = itemView
-      monitorSubMenu.insertItem(item, at: 0)
+      if addedSliderHandlers.count != 0 {
+        monitorSubMenu.insertItem(item, at: 0)
+      }
     } else {
       for addedSliderHandler in addedSliderHandlers {
         self.addSliderItem(monitorSubMenu: monitorSubMenu, sliderHandler: addedSliderHandler)
