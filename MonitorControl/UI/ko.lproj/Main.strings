@@ -73,8 +73,8 @@
 /* Class = "NSTextFieldCell"; title = "Brightness:"; ObjectID = "Bhb-6l-uPQ"; */
 "Bhb-6l-uPQ.title" = "밝기:";
 
-/* Class = "NSTextFieldCell"; title = "(Gamma->DDC)"; ObjectID = "Bid-UL-blc"; */
-"Bid-UL-blc.title" = "(감마->DDC)";
+/* Class = "NSTextFieldCell"; title = "(Software->DDC)"; ObjectID = "Bid-UL-blc"; */
+"Bid-UL-blc.title" = "(소프트웨어->DDC)";
 
 /* Class = "NSTextFieldCell"; title = "For hardware (DDC) controlled displays only. Results may vary."; ObjectID = "bIe-6O-xEH"; */
 "bIe-6O-xEH.title" = "하드웨어 (DDC) 제어 디스플레이 전용. 결과는 다를 수 있습니다.";

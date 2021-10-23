@@ -1842,7 +1842,7 @@
                                                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="1ct-qM-zrz">
                                                                                 <rect key="frame" x="483" y="259" width="106" height="14"/>
                                                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                                                <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="(Gamma-&gt;DDC)" id="Bid-UL-blc">
+                                                                                <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="(Software-&gt;DDC)" id="Bid-UL-blc">
                                                                                     <font key="font" metaFont="smallSystem"/>
                                                                                     <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>

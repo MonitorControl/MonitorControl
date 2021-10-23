@@ -73,8 +73,8 @@
 /* Class = "NSTextFieldCell"; title = "Brightness:"; ObjectID = "Bhb-6l-uPQ"; */
 "Bhb-6l-uPQ.title" = "亮度：";
 
-/* Class = "NSTextFieldCell"; title = "(Gamma->DDC)"; ObjectID = "Bid-UL-blc"; */
-"Bid-UL-blc.title" = "(伽碼值->DDC)";
+/* Class = "NSTextFieldCell"; title = "(Software->DDC)"; ObjectID = "Bid-UL-blc"; */
+"Bid-UL-blc.title" = "(軟體->DDC)";
 
 /* Class = "NSTextFieldCell"; title = "For hardware (DDC) controlled displays only. Results may vary."; ObjectID = "bIe-6O-xEH"; */
 "bIe-6O-xEH.title" = "僅適用於以硬體（DDC）控制的螢幕。結果可能會有異。";

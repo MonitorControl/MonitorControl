@@ -73,8 +73,8 @@
 /* Class = "NSTextFieldCell"; title = "Brightness:"; ObjectID = "Bhb-6l-uPQ"; */
 "Bhb-6l-uPQ.title" = "Brightness:";
 
-/* Class = "NSTextFieldCell"; title = "(Gamma->DDC)"; ObjectID = "Bid-UL-blc"; */
-"Bid-UL-blc.title" = "(Gamma->DDC)";
+/* Class = "NSTextFieldCell"; title = "(Software->DDC)"; ObjectID = "Bid-UL-blc"; */
+"Bid-UL-blc.title" = "(Software->DDC)";
 
 /* Class = "NSTextFieldCell"; title = "For hardware (DDC) controlled displays only. Results may vary."; ObjectID = "bIe-6O-xEH"; */
 "bIe-6O-xEH.title" = "For hardware (DDC) controlled displays only. Results may vary.";

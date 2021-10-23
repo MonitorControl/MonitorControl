@@ -210,7 +210,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     let counter = dispatchedCounter == 0 ? 10 : dispatchedCounter
     self.startupActionWriteCounter = dispatchedCounter == 0 ? counter : self.startupActionWriteCounter
     guard prefs.integer(forKey: PrefKey.startupAction.rawValue) == StartupAction.write.rawValue, self.startupActionWriteCounter == counter else {
-        return
+      return
     }
     os_log("Sober write action repeat for DDC - %{public}@", type: .info, String(counter))
     DisplayManager.shared.restoreOtherDisplays()
