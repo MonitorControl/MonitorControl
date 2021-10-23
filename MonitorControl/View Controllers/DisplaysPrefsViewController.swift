@@ -186,6 +186,7 @@ class DisplaysPrefsViewController: NSViewController, PreferencePane, NSTableView
         cell.disableVolumeOSDButton.isEnabled = false
       }
       // Advanced settings
+      cell.unavailableDDCBrightness.state = !display.readPrefAsBool(key: .unavailableDDC, for: .brightness) ? .on : .off
       if let otherDisplay = display as? OtherDisplay, !otherDisplay.isSwOnly() {
         cell.pollingModeMenu.isEnabled = true
         cell.pollingModeMenu.selectItem(withTag: otherDisplay.readPrefAsInt(key: .pollingMode))
@@ -207,10 +208,8 @@ class DisplaysPrefsViewController: NSViewController, PreferencePane, NSTableView
         cell.audioDeviceNameOverride.stringValue = otherDisplay.readPrefAsString(key: .audioDeviceNameOverride)
         cell.updateWithCurrentAudioName.isEnabled = true
 
-        cell.unavailableDDCBrightness.isEnabled = true
         cell.unavailableDDCVolume.isEnabled = true
         cell.unavailableDDCContrast.isEnabled = true
-        cell.unavailableDDCBrightness.state = !otherDisplay.readPrefAsBool(key: .unavailableDDC, for: .brightness) ? .on : .off
         cell.unavailableDDCVolume.state = !otherDisplay.readPrefAsBool(key: .unavailableDDC, for: .audioSpeakerVolume) ? .on : .off
         cell.unavailableDDCContrast.state = !otherDisplay.readPrefAsBool(key: .unavailableDDC, for: .contrast) ? .on : .off
 
@@ -265,10 +264,8 @@ class DisplaysPrefsViewController: NSViewController, PreferencePane, NSTableView
         cell.audioDeviceNameOverride.stringValue = ""
         cell.updateWithCurrentAudioName.isEnabled = false
 
-        cell.unavailableDDCBrightness.state = .off
         cell.unavailableDDCVolume.state = .off
         cell.unavailableDDCContrast.state = .off
-        cell.unavailableDDCBrightness.isEnabled = false
         cell.unavailableDDCVolume.isEnabled = false
         cell.unavailableDDCContrast.isEnabled = false
 

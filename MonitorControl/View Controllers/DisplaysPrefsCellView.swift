@@ -244,7 +244,7 @@ class DisplaysPrefsCellView: NSTableCellView {
   @IBAction func unavailableDDC(_ sender: NSButton) {
     let command = self.tagCommand(sender.tag)
     let prefKey = PrefKey.unavailableDDC
-    if let display = display as? OtherDisplay {
+    if let display = display {
       switch sender.state {
       case .on:
         display.savePref(false, key: prefKey, for: command)
@@ -255,8 +255,8 @@ class DisplaysPrefsCellView: NSTableCellView {
       }
       _ = display.setDirectBrightness(1)
       _ = display.setSwBrightness(1)
-      app.configure()
     }
+    app.configure()
   }
 
   @IBAction func minDDCOverride(_ sender: NSTextField) {
@@ -371,7 +371,6 @@ class DisplaysPrefsCellView: NSTableCellView {
         self.audioDeviceNameOverride.stringValue = ""
         self.audioDeviceNameOverride(self.audioDeviceNameOverride)
 
-        self.unavailableDDCBrightness.state = .on
         self.unavailableDDCVolume.state = .on
         self.unavailableDDCContrast.state = .on
 
@@ -395,9 +394,6 @@ class DisplaysPrefsCellView: NSTableCellView {
         self.remapDDCVolume.stringValue = ""
         self.remapDDCContrast.stringValue = ""
 
-        self.unavailableDDC(self.unavailableDDCBrightness)
-
-        self.unavailableDDC(self.unavailableDDCBrightness)
         self.unavailableDDC(self.unavailableDDCVolume)
         self.unavailableDDC(self.unavailableDDCContrast)
 
@@ -421,6 +417,8 @@ class DisplaysPrefsCellView: NSTableCellView {
         self.remapDDC(self.remapDDCVolume)
         self.remapDDC(self.remapDDCContrast)
       }
+      self.unavailableDDCBrightness.state = .on
+      self.unavailableDDC(self.unavailableDDCBrightness)
       self.friendlyName.stringValue = disp.name
       self.friendlyNameValueChanged(self.friendlyName)
       self.enabledButton.state = .on

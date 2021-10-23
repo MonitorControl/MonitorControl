@@ -91,6 +91,9 @@ class Display: Equatable {
   }
 
   func stepBrightness(isUp: Bool, isSmallIncrement: Bool) {
+    guard !self.readPrefAsBool(key: .unavailableDDC, for: .brightness) else {
+      return
+    }
     let value = self.calcNewBrightness(isUp: isUp, isSmallIncrement: isSmallIncrement)
     if self.setBrightness(value) {
       OSDUtils.showOsd(displayID: self.identifier, command: .brightness, value: value * 64, maxValue: 64)
