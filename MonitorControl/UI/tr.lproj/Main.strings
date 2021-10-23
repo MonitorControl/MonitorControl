@@ -239,7 +239,7 @@
 "MWo-6I-s9L.title" = "Menüde parlaklık kaydırıcısını göster";
 
 /* Class = "NSButtonCell"; title = "Avoid gamma table manipulation"; ObjectID = "na6-mS-MPi"; */
-"na6-mS-MPi.title" = "Avoid gamma table manipulation";
+"na6-mS-MPi.title" = "Gama tablosu manipülasyonundan kaçının";
 
 /* Class = "NSButtonCell"; title = "Separate scales for combined hardware & software dimming"; ObjectID = "O8o-hI-8eR"; */
 "O8o-hI-8eR.title" = "Birleşik donanım ve yazılım karartması için ayrı dengeler";
