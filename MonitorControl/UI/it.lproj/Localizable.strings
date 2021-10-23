@@ -23,7 +23,7 @@
 "Built-in Display" = "Monitor Integrato";
 
 /* Shown in menu */
-"Check for updates..." = "Controlla aggiornamneti...";
+"Check for updates..." = "Controlla aggiornamenti...";
 
 /* Shown in menu */
 "Contrast" = "Contrasto";
@@ -35,7 +35,7 @@
 "Decrease" = "Diminiusci";
 
 /* Shown in the alert dialog */
-"Disable gamma control for my displays" = "Disable gamma control for my displays";
+"Disable gamma control for my displays" = "Disabilita controllo gamma per i miei monitor";
 
 /* Shown in the main prefs window */
 "Displays" = "Monitor";
@@ -56,7 +56,7 @@
 "Hardware (DDC)" = "Hardware (DDC)";
 
 /* Shown in the alert dialog */
-"I'll quit the other app" = "I'll quit the other app";
+"I'll quit the other app" = "Chiuderò le altre applicazioni";
 
 /* Shown in the alert dialog */
 "Incompatible previous version" = "Versione precedente incompatibile";
@@ -65,7 +65,7 @@
 "Increase" = "Aumenta";
 
 /* Shown in the alert dialog */
-"Is f.lux or similar running?" = "Is f.lux or similar running?";
+"Is f.lux or similar running?" = "E' attivo f.lux or simile?";
 
 /* Shown in the main prefs window */
 "Keyboard" = "Tastiera";
@@ -107,13 +107,13 @@
 "Software (gamma)" = "Software (gamma)";
 
 /* Shown in the Display Preferences */
-"Software (gamma, forced)" = "Software (Gamma, Forzata)";
+"Software (gamma, forced)" = "Software (gamma, forzata)";
 
 /* Shown in the Display Preferences */
-"Software (shade)" = "Software (Sfumatura)";
+"Software (shade)" = "Software (attenuazione)";
 
 /* Shown in the Display Preferences */
-"Software (shade, forced)" = "Software (shade, forced)";
+"Software (shade, forced)" = "Software (attenuazione, forzata)";
 
 /* Shown in the Display Preferences */
 "This display allows for software brightness control via gamma table manipulation or shade as it does not support hardware control. Reasons for this might be using the HDMI port of a Mac mini (which blocks hardware DDC control) or having a blacklisted display." = "Questo monitor permette il controllo software della luminositò attraverso la manipolazione della gammatable e non supporta un controllo hardware. Un motivo potrebbe essere Reasons l'utilizzo della porta HDMI su un Mac Mini (che blocca il controllo hardware DCC) oppure avere un monitor non supportato.";
