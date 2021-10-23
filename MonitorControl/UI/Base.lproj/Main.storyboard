@@ -1219,7 +1219,7 @@
                     <view key="view" translatesAutoresizingMaskIntoConstraints="NO" id="aj0-6l-QE2">
                         <rect key="frame" x="0.0" y="0.0" width="730" height="533"/>
                         <subviews>
-                            <box boxType="custom" borderType="none" borderWidth="0.0" title="Box" translatesAutoresizingMaskIntoConstraints="NO" id="3a3-In-jeQ">
+                            <box boxType="custom" borderType="none" borderWidth="0.0" title="#bc-ignore!" translatesAutoresizingMaskIntoConstraints="NO" id="3a3-In-jeQ">
                                 <rect key="frame" x="0.0" y="0.0" width="730" height="30"/>
                                 <view key="contentView" id="M21-aG-h0Y">
                                     <rect key="frame" x="0.0" y="0.0" width="730" height="30"/>
