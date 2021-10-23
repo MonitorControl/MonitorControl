@@ -2,7 +2,7 @@
 "About" = "Informazioni";
 
 /* Shown in the alert dialog */
-"An other app seems to change the brightness or colors which causes issues.\n\nTo solve this, you need to quit the other app or disable gamma control for your displays in MonitorControl!" = Un'altra app sembra che stia cambiando la luminosità o i colori causando problemi.\n\nPer risolvere, è necessario uscire da quella applicazione o disabilitare il controllo della gamma per i tuoi monitor in MonitorControl!";
+"An other app seems to change the brightness or colors which causes issues.\n\nTo solve this, you need to quit the other app or disable gamma control for your displays in MonitorControl!" = "An other app seems to change the brightness or colors which causes issues.\n\nTo solve this, you need to quit the other app or disable gamma control for your displays in MonitorControl!";
 
 /* Shown in the main prefs window */
 "App menu" = "App menu";
