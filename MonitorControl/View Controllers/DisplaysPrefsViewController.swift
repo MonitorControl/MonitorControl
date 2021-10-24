@@ -25,9 +25,13 @@ class DisplaysPrefsViewController: NSViewController, PreferencePane, NSTableView
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    self.showAdvancedDisplays.state = prefs.bool(forKey: PrefKey.showAdvancedSettings.rawValue) ? .on : .off
-    self.loadDisplayList()
     self.displayScrollView.scrollerStyle = .legacy
+    self.populateSettings()
+    self.loadDisplayList()
+  }
+
+  func populateSettings() {
+    self.showAdvancedDisplays.state = prefs.bool(forKey: PrefKey.showAdvancedSettings.rawValue) ? .on : .off
   }
 
   override func viewWillAppear() {
