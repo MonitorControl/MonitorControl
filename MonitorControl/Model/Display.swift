@@ -216,6 +216,7 @@ class Display: Equatable {
       self.savePref(brightnessValue, key: .SwBrightness)
     }
     guard !self.isDummy else {
+      self.swBrightnessSemaphore.signal()
       return true
     }
     var newValue = brightnessValue
