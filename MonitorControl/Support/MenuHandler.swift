@@ -160,6 +160,10 @@ class MenuHandler: NSMenu, NSMenuDelegate {
 
   func updateDisplayMenu(display: Display, asSubMenu: Bool, numOfDisplays: Int) {
     os_log("Addig menu items for display %{public}@", type: .info, "\(display.identifier)")
+    guard !display.isDummy else {
+      os_log("- Display is a dummy, skipping menu", type: .info)
+      return
+    }
     let monitorSubMenu: NSMenu = asSubMenu ? NSMenu() : self
     var addedSliderHandlers: [SliderHandler] = []
     display.sliderHandler[.audioSpeakerVolume] = nil

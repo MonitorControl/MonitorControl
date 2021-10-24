@@ -151,27 +151,34 @@ class DisplayManager {
       return
     }
     for onlineDisplayID in onlineDisplayIDs where onlineDisplayID != 0 {
+      let rawName = DisplayManager.getDisplayRawNameByID(displayID: onlineDisplayID)
       let name = DisplayManager.getDisplayNameByID(displayID: onlineDisplayID)
       let id = onlineDisplayID
       let vendorNumber = CGDisplayVendorNumber(onlineDisplayID)
       let modelNumber = CGDisplayModelNumber(onlineDisplayID)
+      var isDummy: Bool = false
       var isVirtual: Bool = false
+      if rawName == "28E850" || rawName.lowercased().contains("dummy") {
+        os_log("NOTE: Display is a dummy!", type: .info)
+        isDummy = true
+      }
       if !DEBUG_MACOS10, #available(macOS 11.0, *) {
         if let dictionary = ((CoreDisplay_DisplayCreateInfoDictionary(onlineDisplayID))?.takeRetainedValue() as NSDictionary?) {
           let isVirtualDevice = dictionary["kCGDisplayIsVirtualDevice"] as? Bool
           let displayIsAirplay = dictionary["kCGDisplayIsAirPlay"] as? Bool
           if isVirtualDevice ?? displayIsAirplay ?? false {
+            os_log("NOTE: Display is virtual!", type: .info)
             isVirtual = true
           }
         }
       }
       if !DEBUG_SW, DisplayManager.isAppleDisplay(displayID: onlineDisplayID) { // MARK: (point of interest for testing)
-        let appleDisplay = AppleDisplay(id, name: name, vendorNumber: vendorNumber, modelNumber: modelNumber, isVirtual: isVirtual)
-        os_log("Apple display found - %{public}@", type: .info, "ID: \(appleDisplay.identifier) Name: \(appleDisplay.name) (Vendor: \(appleDisplay.vendorNumber ?? 0), Model: \(appleDisplay.modelNumber ?? 0))")
+        let appleDisplay = AppleDisplay(id, name: name, vendorNumber: vendorNumber, modelNumber: modelNumber, isVirtual: isVirtual, isDummy: isDummy)
+        os_log("Apple display found - %{public}@", type: .info, "ID: \(appleDisplay.identifier), Name: \(appleDisplay.name) (Vendor: \(appleDisplay.vendorNumber ?? 0), Model: \(appleDisplay.modelNumber ?? 0))")
         self.addDisplay(display: appleDisplay)
       } else {
-        let otherDisplay = OtherDisplay(id, name: name, vendorNumber: vendorNumber, modelNumber: modelNumber, isVirtual: isVirtual)
-        os_log("Other display found - %{public}@", type: .info, "ID: \(otherDisplay.identifier) Name: \(otherDisplay.name) (Vendor: \(otherDisplay.vendorNumber ?? 0), Model: \(otherDisplay.modelNumber ?? 0))")
+        let otherDisplay = OtherDisplay(id, name: name, vendorNumber: vendorNumber, modelNumber: modelNumber, isVirtual: isVirtual, isDummy: isDummy)
+        os_log("Other display found - %{public}@", type: .info, "ID: \(otherDisplay.identifier), Name: \(otherDisplay.name) (Vendor: \(otherDisplay.vendorNumber ?? 0), Model: \(otherDisplay.modelNumber ?? 0))")
         self.addDisplay(display: otherDisplay)
       }
     }
