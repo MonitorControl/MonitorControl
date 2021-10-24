@@ -23,7 +23,7 @@
 "Built-in Display" = "내장 디스플레이";
 
 /* Shown in menu */
-"Check for updates..." = "업데이트 확인...";
+"Check for updates…" = "업데이트 확인…";
 
 /* Shown in menu */
 "Contrast" = "대비";
@@ -86,7 +86,7 @@
 "Preferences for an incompatible previous app version detected. Default preferences are reloaded." = "호환되지 않는 이전 앱 버전에 대한 기본 설정이 감지되었습니다. 기본 환경 설정을 다시 불러옵니다.";
 
 /* Shown in menu */
-"Preferences..." = "환경 설정...";
+"Preferences…" = "환경 설정…";
 
 /* Shown in menu */
 "Quit" = "종료";

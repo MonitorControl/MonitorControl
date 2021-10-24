@@ -23,7 +23,7 @@
 "Built-in Display" = "Beépített";
 
 /* Shown in menu */
-"Check for updates..." = "Frissítések ellenőrzése...";
+"Check for updates…" = "Frissítések ellenőrzése…";
 
 /* Shown in menu */
 "Contrast" = "Kontraszt";
@@ -86,7 +86,7 @@
 "Preferences for an incompatible previous app version detected. Default preferences are reloaded." = "Az előző alkalmazásverzió beállításai nem kompatibilisek ezzel a verzióval. Visszaállítottuk az alapértelmezett beállításokat.";
 
 /* Shown in menu */
-"Preferences..." = "Beállítások...";
+"Preferences…" = "Beállítások…";
 
 /* Shown in menu */
 "Quit" = "Kilépés";

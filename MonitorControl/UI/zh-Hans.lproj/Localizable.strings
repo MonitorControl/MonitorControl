@@ -23,7 +23,7 @@
 "Built-in Display" = "内置显示器";
 
 /* Shown in menu */
-"Check for updates..." = "检查更新...";
+"Check for updates…" = "检查更新…";
 
 /* Shown in menu */
 "Contrast" = "对比度";
@@ -86,7 +86,7 @@
 "Preferences for an incompatible previous app version detected. Default preferences are reloaded." = "监测到不兼容的旧版本设置。已重新加载默认设置。";
 
 /* Shown in menu */
-"Preferences..." = "设置...";
+"Preferences…" = "设置…";
 
 /* Shown in menu */
 "Quit" = "关闭";

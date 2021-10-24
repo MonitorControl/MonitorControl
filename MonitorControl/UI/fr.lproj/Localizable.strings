@@ -23,7 +23,7 @@
 "Built-in Display" = "Écran intégré";
 
 /* Shown in menu */
-"Check for updates..." = "Vérifier les mises à jour…";
+"Check for updates…" = "Vérifier les mises à jour…";
 
 /* Shown in menu */
 "Contrast" = "Contraste";
@@ -86,7 +86,7 @@
 "Preferences for an incompatible previous app version detected. Default preferences are reloaded." = "Préférences pour une version précédente incompatible détéctés. Les préférences par défaut seront rechargées.";
 
 /* Shown in menu */
-"Preferences..." = "Préférences...";
+"Preferences…" = "Préférences…";
 
 /* Shown in menu */
 "Quit" = "Quitter";

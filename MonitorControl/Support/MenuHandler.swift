@@ -223,8 +223,8 @@ class MenuHandler: NSMenu, NSMenuDelegate {
       preferencesIcon.bezelStyle = .regularSquare
       preferencesIcon.isBordered = false
       preferencesIcon.setButtonType(.momentaryChange)
-      preferencesIcon.image = NSImage(systemSymbolName: "gearshape", accessibilityDescription: NSLocalizedString("Preferences...", comment: "Shown in menu"))
-      preferencesIcon.alternateImage = NSImage(systemSymbolName: "gearshape.fill", accessibilityDescription: NSLocalizedString("Preferences...", comment: "Shown in menu"))
+      preferencesIcon.image = NSImage(systemSymbolName: "gearshape", accessibilityDescription: NSLocalizedString("Preferences…", comment: "Shown in menu"))
+      preferencesIcon.alternateImage = NSImage(systemSymbolName: "gearshape.fill", accessibilityDescription: NSLocalizedString("Preferences…", comment: "Shown in menu"))
       preferencesIcon.alphaValue = 0.3
       preferencesIcon.frame = NSRect(x: menuItemView.frame.maxX - iconSize * 3 - 30 - 16 + compensateForBlock, y: menuItemView.frame.origin.y + 5, width: iconSize, height: iconSize)
       preferencesIcon.imageScaling = .scaleProportionallyUpOrDown
@@ -235,8 +235,8 @@ class MenuHandler: NSMenu, NSMenuDelegate {
       updateIcon.isBordered = false
       updateIcon.setButtonType(.momentaryChange)
       var symbolName = prefs.bool(forKey: PrefKey.showTickMarks.rawValue) ? "arrow.left.arrow.right.square" : "arrow.triangle.2.circlepath.circle"
-      updateIcon.image = NSImage(systemSymbolName: symbolName, accessibilityDescription: NSLocalizedString("Check for updates...", comment: "Shown in menu"))
-      updateIcon.alternateImage = NSImage(systemSymbolName: symbolName + ".fill", accessibilityDescription: NSLocalizedString("Check for updates...", comment: "Shown in menu"))
+      updateIcon.image = NSImage(systemSymbolName: symbolName, accessibilityDescription: NSLocalizedString("Check for updates…", comment: "Shown in menu"))
+      updateIcon.alternateImage = NSImage(systemSymbolName: symbolName + ".fill", accessibilityDescription: NSLocalizedString("Check for updates…", comment: "Shown in menu"))
 
       updateIcon.alphaValue = 0.3
       updateIcon.frame = NSRect(x: menuItemView.frame.maxX - iconSize * 2 - 10 - 16 + compensateForBlock, y: menuItemView.frame.origin.y + 5, width: iconSize, height: iconSize)
@@ -266,8 +266,8 @@ class MenuHandler: NSMenu, NSMenuDelegate {
       if app.macOS10() {
         self.insertItem(NSMenuItem.separator(), at: self.items.count)
       }
-      self.insertItem(withTitle: NSLocalizedString("Preferences...", comment: "Shown in menu"), action: #selector(app.prefsClicked), keyEquivalent: "", at: self.items.count)
-      let updateItem = NSMenuItem(title: NSLocalizedString("Check for updates...", comment: "Shown in menu"), action: #selector(app.updaterController.checkForUpdates(_:)), keyEquivalent: "")
+      self.insertItem(withTitle: NSLocalizedString("Preferences…", comment: "Shown in menu"), action: #selector(app.prefsClicked), keyEquivalent: "", at: self.items.count)
+      let updateItem = NSMenuItem(title: NSLocalizedString("Check for updates…", comment: "Shown in menu"), action: #selector(app.updaterController.checkForUpdates(_:)), keyEquivalent: "")
       updateItem.target = app.updaterController
       self.insertItem(updateItem, at: self.items.count)
       self.insertItem(withTitle: NSLocalizedString("Quit", comment: "Shown in menu"), action: #selector(app.quitClicked), keyEquivalent: "q", at: self.items.count)
