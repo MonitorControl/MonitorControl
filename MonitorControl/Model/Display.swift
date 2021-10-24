@@ -91,6 +91,9 @@ class Display: Equatable {
   }
 
   func stepBrightness(isUp: Bool, isSmallIncrement: Bool) {
+    guard !self.readPrefAsBool(key: .unavailableDDC, for: .brightness) else {
+      return
+    }
     let value = self.calcNewBrightness(isUp: isUp, isSmallIncrement: isSmallIncrement)
     if self.setBrightness(value) {
       OSDUtils.showOsd(displayID: self.identifier, command: .brightness, value: value * 64, maxValue: 64)
@@ -271,7 +274,7 @@ class Display: Equatable {
 
   func checkGammaInterference() {
     let currentSwBrightness = self.getSwBrightness()
-    guard !DisplayManager.shared.gammaInterferenceWarningShown, !(prefs.bool(forKey: PrefKey.disableCombinedBrightness.rawValue)), !self.readPrefAsBool(key: .avoidGamma), !self.smoothBrightnessRunning, self.prefExists(key: .SwBrightness), abs(currentSwBrightness - self.readPrefAsFloat(key: .SwBrightness)) > 0.02 else {
+    guard !DisplayManager.shared.gammaInterferenceWarningShown, !(prefs.bool(forKey: PrefKey.disableCombinedBrightness.rawValue)), !self.readPrefAsBool(key: .avoidGamma), !self.isVirtual, !self.smoothBrightnessRunning, self.prefExists(key: .SwBrightness), abs(currentSwBrightness - self.readPrefAsFloat(key: .SwBrightness)) > 0.02 else {
       return
     }
     DisplayManager.shared.gammaInterferenceCounter += 1

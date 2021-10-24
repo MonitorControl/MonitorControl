@@ -13,17 +13,11 @@
 /* Class = "NSTextFieldCell"; title = "DDC min"; ObjectID = "1zE-fg-xEm"; */
 "1zE-fg-xEm.title" = "DDC 최솟값";
 
-/* Class = "NSBox"; title = "Box"; ObjectID = "3a3-In-jeQ"; */
-"3a3-In-jeQ.title" = "Box";
-
 /* Class = "NSMenuItem"; title = "Show separate controls for each display in menu"; ObjectID = "3eO-bN-ZRl"; */
 "3eO-bN-ZRl.title" = "메뉴에서 각 디스플레이에 대해 각각의 컨트롤 표시";
 
 /* Class = "NSMenuItem"; title = "Apply last saved values to the display"; ObjectID = "3Jr-bW-YYq"; */
 "3Jr-bW-YYq.title" = "마지막으로 저장된 값을 디스플레이에 적용";
-
-/* Class = "NSButtonCell"; title = "https://monitorcontrol.app"; ObjectID = "42n-Zy-AqF"; */
-"42n-Zy-AqF.title" = "https://monitorcontrol.app";
 
 /* Class = "NSMenuItem"; title = "Custom keyboard shortcuts"; ObjectID = "4CG-0I-anB"; */
 "4CG-0I-anB.title" = "사용자 정의 키보드 단축키";
@@ -73,8 +67,8 @@
 /* Class = "NSTextFieldCell"; title = "Brightness:"; ObjectID = "Bhb-6l-uPQ"; */
 "Bhb-6l-uPQ.title" = "밝기:";
 
-/* Class = "NSTextFieldCell"; title = "(Gamma->DDC)"; ObjectID = "Bid-UL-blc"; */
-"Bid-UL-blc.title" = "(감마->DDC)";
+/* Class = "NSTextFieldCell"; title = "(Software->DDC)"; ObjectID = "Bid-UL-blc"; */
+"Bid-UL-blc.title" = "(소프트웨어->DDC)";
 
 /* Class = "NSTextFieldCell"; title = "For hardware (DDC) controlled displays only. Results may vary."; ObjectID = "bIe-6O-xEH"; */
 "bIe-6O-xEH.title" = "하드웨어 (DDC) 제어 디스플레이 전용. 결과는 다를 수 있습니다.";

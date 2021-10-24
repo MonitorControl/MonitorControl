@@ -13,17 +13,11 @@
 /* Class = "NSTextFieldCell"; title = "DDC min"; ObjectID = "1zE-fg-xEm"; */
 "1zE-fg-xEm.title" = "DDC最小值";
 
-/* Class = "NSBox"; title = "Box"; ObjectID = "3a3-In-jeQ"; */
-"3a3-In-jeQ.title" = "Box";
-
 /* Class = "NSMenuItem"; title = "Show separate controls for each display in menu"; ObjectID = "3eO-bN-ZRl"; */
 "3eO-bN-ZRl.title" = "顯示各個螢幕的控制滑桿";
 
 /* Class = "NSMenuItem"; title = "Apply last saved values to the display"; ObjectID = "3Jr-bW-YYq"; */
 "3Jr-bW-YYq.title" = "套用上次儲存的設定值至螢幕";
-
-/* Class = "NSButtonCell"; title = "https://monitorcontrol.app"; ObjectID = "42n-Zy-AqF"; */
-"42n-Zy-AqF.title" = "https://monitorcontrol.app";
 
 /* Class = "NSMenuItem"; title = "Custom keyboard shortcuts"; ObjectID = "4CG-0I-anB"; */
 "4CG-0I-anB.title" = "自定義快捷鍵";
@@ -73,8 +67,8 @@
 /* Class = "NSTextFieldCell"; title = "Brightness:"; ObjectID = "Bhb-6l-uPQ"; */
 "Bhb-6l-uPQ.title" = "亮度：";
 
-/* Class = "NSTextFieldCell"; title = "(Gamma->DDC)"; ObjectID = "Bid-UL-blc"; */
-"Bid-UL-blc.title" = "(伽碼值->DDC)";
+/* Class = "NSTextFieldCell"; title = "(Software->DDC)"; ObjectID = "Bid-UL-blc"; */
+"Bid-UL-blc.title" = "(軟體->DDC)";
 
 /* Class = "NSTextFieldCell"; title = "For hardware (DDC) controlled displays only. Results may vary."; ObjectID = "bIe-6O-xEH"; */
 "bIe-6O-xEH.title" = "僅適用於以硬體（DDC）控制的螢幕。結果可能會有異。";

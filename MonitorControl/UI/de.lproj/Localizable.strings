@@ -23,7 +23,7 @@
 "Built-in Display" = "Integrierter Monitor";
 
 /* Shown in menu */
-"Check for updates..." = "Nach Updates suchen...";
+"Check for updates…" = "Nach Updates suchen…";
 
 /* Shown in menu */
 "Contrast" = "Kontrast";
@@ -86,7 +86,7 @@
 "Preferences for an incompatible previous app version detected. Default preferences are reloaded." = "Einstellungen für eine inkompatible Vorgängerversion des Programms erkannt. Die Standardeinstellungen werden neu geladen.";
 
 /* Shown in menu */
-"Preferences..." = "Einstellungen...";
+"Preferences…" = "Einstellungen…";
 
 /* Shown in menu */
 "Quit" = "Beenden";

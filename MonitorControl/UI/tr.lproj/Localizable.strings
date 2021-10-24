@@ -23,7 +23,7 @@
 "Built-in Display" = "Dahili Ekran";
 
 /* Shown in menu */
-"Check for updates..." = "Güncellemeleri denetle...";
+"Check for updates…" = "Güncellemeleri denetle…";
 
 /* Shown in menu */
 "Contrast" = "Kontrast";
@@ -86,7 +86,7 @@
 "Preferences for an incompatible previous app version detected. Default preferences are reloaded." = "Uyumsuz bir önceki uygulama sürümü için tercihler algılandı. Varsayılan tercihler yeniden yüklenir.";
 
 /* Shown in menu */
-"Preferences..." = "Tercihler...";
+"Preferences…" = "Tercihler…";
 
 /* Shown in menu */
 "Quit" = "Çıkış";

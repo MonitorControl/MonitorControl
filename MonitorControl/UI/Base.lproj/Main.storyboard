@@ -684,16 +684,10 @@
                         <outlet property="menuItemStyle" destination="6td-Zq-3e7" id="yMt-fU-PZX"/>
                         <outlet property="multiSliders" destination="78Q-P6-b97" id="uJP-0H-YuL"/>
                         <outlet property="quitApplication" destination="dy4-nH-cIr" id="aXV-0Q-H4L"/>
-                        <outlet property="rowHideIconSpearator" destination="Cor-61-8R5" id="Gvs-er-qj3"/>
-                        <outlet property="rowIconShow" destination="jyr-gk-BEN" id="Fuj-5x-UI7"/>
                         <outlet property="rowMenuItemStyle" destination="ZS3-Gy-pfA" id="tVN-WD-eoa"/>
                         <outlet property="rowMultiSliders" destination="CuW-77-ls4" id="XPi-6a-J58"/>
-                        <outlet property="rowPercentCheck" destination="rhT-kW-PmZ" id="NMJ-KF-PSN"/>
-                        <outlet property="rowPercentText" destination="fDY-kq-bjz" id="BFa-2b-iQZ"/>
                         <outlet property="rowQuitButton" destination="OpF-3Q-ZZp" id="0vU-Ls-hJj"/>
                         <outlet property="rowQuitButtonText" destination="HAl-L8-LPI" id="6CN-Wq-CBJ"/>
-                        <outlet property="rowShowContrastCheck" destination="xbz-Tf-py0" id="JRd-Xz-Sz8"/>
-                        <outlet property="rowShowContrastText" destination="KPA-bi-7h3" id="vqt-0f-Qbv"/>
                         <outlet property="rowSlidersCombineText" destination="MaK-MK-gRQ" id="OPU-QW-LEv"/>
                         <outlet property="rowTickCheck" destination="Ojm-8A-t1d" id="0Aq-FJ-wGD"/>
                         <outlet property="rowTickText" destination="JCM-Me-DIg" id="iZR-F3-x4s"/>
@@ -1195,12 +1189,8 @@
                         <outlet property="rowKeyboardBrightnessPopUp" destination="dwB-Ku-aql" id="bM0-Ms-24E"/>
                         <outlet property="rowKeyboardBrightnessText" destination="pf1-cW-4bf" id="Fxg-Uy-UHE"/>
                         <outlet property="rowMultiKeyboardBrightness" destination="I9B-dr-BOu" id="yDW-15-8xH"/>
-                        <outlet property="rowSeparateCombinedScaleCheck" destination="4hU-dS-J9a" id="6Zr-4J-FsI"/>
-                        <outlet property="rowSeparateCombinedScaleText" destination="ON8-Vi-iMV" id="lRE-Ad-h8L"/>
                         <outlet property="rowUseAudioMouseText" destination="ypS-k5-pR7" id="yr6-jO-zTY"/>
                         <outlet property="rowUseAudioNameText" destination="73k-Ho-qxa" id="yHm-CV-4aa"/>
-                        <outlet property="rowUseFineScaleCheck" destination="jJT-as-drf" id="2fT-4t-kAg"/>
-                        <outlet property="rowUseFineScaleText" destination="4Ie-T6-Ifw" id="faU-z6-bgQ"/>
                         <outlet property="rowUseFocusText" destination="UIH-jA-Cfi" id="NAn-5h-Shx"/>
                         <outlet property="separateCombinedScale" destination="f8L-OE-kAQ" id="Pgg-cY-eTx"/>
                         <outlet property="useFineScale" destination="M5g-VZ-qiM" id="5ZM-Nh-97j"/>
@@ -1219,7 +1209,7 @@
                     <view key="view" translatesAutoresizingMaskIntoConstraints="NO" id="aj0-6l-QE2">
                         <rect key="frame" x="0.0" y="0.0" width="730" height="533"/>
                         <subviews>
-                            <box boxType="custom" borderType="none" borderWidth="0.0" title="Box" translatesAutoresizingMaskIntoConstraints="NO" id="3a3-In-jeQ">
+                            <box boxType="custom" borderType="none" borderWidth="0.0" title="#bc-ignore!" translatesAutoresizingMaskIntoConstraints="NO" id="3a3-In-jeQ">
                                 <rect key="frame" x="0.0" y="0.0" width="730" height="30"/>
                                 <view key="contentView" id="M21-aG-h0Y">
                                     <rect key="frame" x="0.0" y="0.0" width="730" height="30"/>
@@ -1348,7 +1338,7 @@
                                                                     </textFieldCell>
                                                                 </textField>
                                                                 <textField verticalHuggingPriority="750" id="mIA-Wh-7aB">
-                                                                    <rect key="frame" x="78" y="492" width="285" height="21"/>
+                                                                    <rect key="frame" x="78" y="492" width="463" height="21"/>
                                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" title="#bc-ignore!" id="ibQ-4u-ClE">
                                                                         <font key="font" textStyle="title2" name=".SFNS-Regular"/>
@@ -1842,7 +1832,7 @@
                                                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="1ct-qM-zrz">
                                                                                 <rect key="frame" x="483" y="259" width="106" height="14"/>
                                                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                                                <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="(Gamma-&gt;DDC)" id="Bid-UL-blc">
+                                                                                <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="(Software-&gt;DDC)" id="Bid-UL-blc">
                                                                                     <font key="font" metaFont="smallSystem"/>
                                                                                     <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -2068,6 +2058,9 @@
                                 <buttonCell key="cell" type="bevel" title="https://monitorcontrol.app" bezelStyle="rounded" alignment="left" imageScaling="proportionallyDown" inset="2" id="42n-Zy-AqF">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
+                                    <attributedString key="userComments">
+                                        <fragment content="#bc-ignore!"/>
+                                    </attributedString>
                                 </buttonCell>
                                 <color key="contentTintColor" name="linkColor" catalog="System" colorSpace="catalog"/>
                                 <connections>
