@@ -2058,6 +2058,9 @@
                                 <buttonCell key="cell" type="bevel" title="https://monitorcontrol.app" bezelStyle="rounded" alignment="left" imageScaling="proportionallyDown" inset="2" id="42n-Zy-AqF">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
+                                    <attributedString key="userComments">
+                                        <fragment content="#bc-ignore!"/>
+                                    </attributedString>
                                 </buttonCell>
                                 <color key="contentTintColor" name="linkColor" catalog="System" colorSpace="catalog"/>
                                 <connections>

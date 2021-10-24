@@ -19,9 +19,6 @@
 /* Class = "NSMenuItem"; title = "Apply last saved values to the display"; ObjectID = "3Jr-bW-YYq"; */
 "3Jr-bW-YYq.title" = "마지막으로 저장된 값을 디스플레이에 적용";
 
-/* Class = "NSButtonCell"; title = "https://monitorcontrol.app"; ObjectID = "42n-Zy-AqF"; */
-"42n-Zy-AqF.title" = "https://monitorcontrol.app";
-
 /* Class = "NSMenuItem"; title = "Custom keyboard shortcuts"; ObjectID = "4CG-0I-anB"; */
 "4CG-0I-anB.title" = "사용자 정의 키보드 단축키";
 
