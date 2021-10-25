@@ -23,8 +23,8 @@ class OtherDisplay: Display {
     set { prefs.set(newValue, forKey: PrefKey.pollingCount.rawValue + self.prefsId) }
   }
 
-  override init(_ identifier: CGDirectDisplayID, name: String, vendorNumber: UInt32?, modelNumber: UInt32?, isVirtual: Bool = false) {
-    super.init(identifier, name: name, vendorNumber: vendorNumber, modelNumber: modelNumber, isVirtual: isVirtual)
+  override init(_ identifier: CGDirectDisplayID, name: String, vendorNumber: UInt32?, modelNumber: UInt32?, isVirtual: Bool = false, isDummy: Bool = false) {
+    super.init(identifier, name: name, vendorNumber: vendorNumber, modelNumber: modelNumber, isVirtual: isVirtual, isDummy: isDummy)
     if !isVirtual, !Arm64DDC.isArm64 {
       self.ddc = IntelDDC(for: identifier)
     }
@@ -256,7 +256,7 @@ class OtherDisplay: Display {
   }
 
   func isSwOnly() -> Bool {
-    return (!self.arm64ddc && self.ddc == nil) || self.isVirtual
+    return (!self.arm64ddc && self.ddc == nil) || self.isVirtual || self.isDummy
   }
 
   func isSw() -> Bool {

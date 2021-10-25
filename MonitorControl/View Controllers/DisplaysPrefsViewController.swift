@@ -25,9 +25,13 @@ class DisplaysPrefsViewController: NSViewController, PreferencePane, NSTableView
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    self.showAdvancedDisplays.state = prefs.bool(forKey: PrefKey.showAdvancedSettings.rawValue) ? .on : .off
-    self.loadDisplayList()
     self.displayScrollView.scrollerStyle = .legacy
+    self.populateSettings()
+    self.loadDisplayList()
+  }
+
+  func populateSettings() {
+    self.showAdvancedDisplays.state = prefs.bool(forKey: PrefKey.showAdvancedSettings.rawValue) ? .on : .off
   }
 
   override func viewWillAppear() {
@@ -88,12 +92,12 @@ class DisplaysPrefsViewController: NSViewController, PreferencePane, NSTableView
     var displayImage = "display.trianglebadge.exclamationmark"
     var controlMethod = NSLocalizedString("No Control", comment: "Shown in the Display Preferences") + "  ⚠️"
     var controlStatus = NSLocalizedString("This display has an unspecified control status.", comment: "Shown in the Display Preferences")
-    if display.isVirtual {
+    if display.isVirtual, !display.isDummy {
       displayType = NSLocalizedString("Virtual Display", comment: "Shown in the Display Preferences")
       displayImage = "tv.and.mediabox"
       controlMethod = NSLocalizedString("Software (shade)", comment: "Shown in the Display Preferences") + "  ⚠️"
       controlStatus = NSLocalizedString("This is a virtual display (examples: AirPlay, Sidecar, display connected via a DisplayLink Dock or similar) which does not allow hardware or software gammatable control. Shading is used as a substitute but only in non-mirror scenarios. Mouse cursor will be unaffected and artifacts may appear when entering/leaving full screen mode.", comment: "Shown in the Display Preferences")
-    } else if display is OtherDisplay {
+    } else if display is OtherDisplay, !display.isDummy {
       displayType = NSLocalizedString("External Display", comment: "Shown in the Display Preferences")
       displayImage = "display"
       if let otherDisplay: OtherDisplay = display as? OtherDisplay {
@@ -119,7 +123,7 @@ class DisplaysPrefsViewController: NSViewController, PreferencePane, NSTableView
           }
         }
       }
-    } else if let appleDisplay: AppleDisplay = display as? AppleDisplay {
+    } else if !display.isDummy, let appleDisplay: AppleDisplay = display as? AppleDisplay {
       if appleDisplay.isBuiltIn() {
         displayType = NSLocalizedString("Built-in Display", comment: "Shown in the Display Preferences")
         if self.isImac() {
