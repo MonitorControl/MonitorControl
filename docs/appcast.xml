@@ -9,7 +9,7 @@
         <item>
             <title>v4.0.0-beta1</title>
             <sparkle:releaseNotesLink>
-                https://monitorcontrol.app/changelogs/v4.0.0-beta1.html
+                https://monitorcontrol.app/changelog.html?tag=v4.0.0-beta1
             </sparkle:releaseNotesLink>
             <pubDate>Thu, 30 Sep 2021 21:43:20 +0200</pubDate>
             <sparkle:version>6293</sparkle:version>
@@ -25,7 +25,7 @@
         <item>
             <title>v4.0.0-beta2</title>
             <sparkle:releaseNotesLink>
-                https://monitorcontrol.app/changelogs/v4.0.0-beta2.html
+                https://monitorcontrol.app/changelog.html?tag=v4.0.0-beta2
             </sparkle:releaseNotesLink>
             <pubDate>Thu, 07 Oct 2021 20:31:20 +0200</pubDate>
             <sparkle:version>6443</sparkle:version>
@@ -41,7 +41,7 @@
         <item>
             <title>v4.0.0-rc1</title>
             <sparkle:releaseNotesLink>
-                https://monitorcontrol.app/changelogs/v4.0.0-rc1.html
+                https://monitorcontrol.app/changelog.html?tag=v4.0.0-rc1
             </sparkle:releaseNotesLink>
             <pubDate>Thu, 12 Oct 2021 19:13:00 +0200</pubDate>
             <sparkle:version>6632</sparkle:version>
