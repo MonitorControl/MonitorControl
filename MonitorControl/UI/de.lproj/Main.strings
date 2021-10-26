@@ -187,7 +187,7 @@
 /* Class = "NSButtonCell"; title = "Start at Login"; ObjectID = "j72-NF-zsW"; */
 "j72-NF-zsW.title" = "Bei Anmeldung starten";
 
-/* Class = "NSMenuItem"; title = "+ all screens"; ObjectID = "jSj-HB-T2t"; */
+/* Class = "NSMenuItem"; title = "Change for all screens"; ObjectID = "jSj-HB-T2t"; */
 "jSj-HB-T2t.title" = "Für alle Monitore ändern";
 
 /* Class = "NSButtonCell"; title = "Check for updates"; ObjectID = "jVH-oc-rUi"; */
