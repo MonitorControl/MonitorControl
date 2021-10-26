@@ -3,25 +3,24 @@
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <link rel="stylesheet" href="changelog.css" />
+    <link rel="stylesheet" href="./styles/changelog.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Changelog</title>
+    <script src="./scripts/marked.min.js"></script>
+    <script src="./scripts/marked-footnotes.min.js"></script>
     <script>
       const urlSearchParams = new URLSearchParams(window.location.search);
       const params = Object.fromEntries(urlSearchParams.entries());
 
       if (params?.tag) {
-        const url = `https://github.com/MonitorControl/MonitorControl/releases/tag/${params.tag}`;
-        const proxy =
-          'https://api.allorigins.win/get?url=' + encodeURIComponent(url);
+        const url = `https://api.github.com/repos/MonitorControl/MonitorControl/releases/tags/${params.tag}`;
         let request = new XMLHttpRequest();
-        request.open('GET', proxy, true);
+        request.open('GET', url, true);
         request.onload = (event) => {
-          const el = document.createElement('html');
-          const page = JSON.parse(event.target.response);
-          el.innerHTML = page.contents;
-          const mk = el.getElementsByClassName('markdown-body')[0];
-          document.body.appendChild(mk);
+          const response = JSON.parse(event.target.response);
+          const el = document.createElement('div');
+          el.innerHTML = marked(response.body);
+          document.body.appendChild(el);
           document.title = `Changelog ${params.tag}`;
         };
         request.send();
