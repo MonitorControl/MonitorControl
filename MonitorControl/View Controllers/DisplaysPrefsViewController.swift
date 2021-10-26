@@ -21,11 +21,17 @@ class DisplaysPrefsViewController: NSViewController, PreferencePane, NSTableView
   @IBOutlet var displayList: NSTableView!
   @IBOutlet var displayScrollView: NSScrollView!
   @IBOutlet var constraintHeight: NSLayoutConstraint!
+  @IBOutlet var showAdvancedDisplays: NSButton!
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    self.loadDisplayList()
     self.displayScrollView.scrollerStyle = .legacy
+    self.populateSettings()
+    self.loadDisplayList()
+  }
+
+  func populateSettings() {
+    self.showAdvancedDisplays.state = prefs.bool(forKey: PrefKey.showAdvancedSettings.rawValue) ? .on : .off
   }
 
   override func viewWillAppear() {
@@ -47,6 +53,18 @@ class DisplaysPrefsViewController: NSViewController, PreferencePane, NSTableView
     self.displays = DisplayManager.shared.getAllDisplays()
     self.displayList?.reloadData()
     self.updateDisplayListRowHeight()
+  }
+
+  @IBAction func showAdvancedClicked(_ sender: NSButton) {
+    switch sender.state {
+    case .on:
+      prefs.set(true, forKey: PrefKey.showAdvancedSettings.rawValue)
+    case .off:
+      prefs.set(false, forKey: PrefKey.showAdvancedSettings.rawValue)
+    default: break
+    }
+    _ = self.updateGridLayout()
+    displaysPrefsVc?.view.layoutSubtreeIfNeeded()
   }
 
   func numberOfRows(in _: NSTableView) -> Int {
@@ -74,12 +92,12 @@ class DisplaysPrefsViewController: NSViewController, PreferencePane, NSTableView
     var displayImage = "display.trianglebadge.exclamationmark"
     var controlMethod = NSLocalizedString("No Control", comment: "Shown in the Display Preferences") + "  ⚠️"
     var controlStatus = NSLocalizedString("This display has an unspecified control status.", comment: "Shown in the Display Preferences")
-    if display.isVirtual {
+    if display.isVirtual, !display.isDummy {
       displayType = NSLocalizedString("Virtual Display", comment: "Shown in the Display Preferences")
       displayImage = "tv.and.mediabox"
       controlMethod = NSLocalizedString("Software (shade)", comment: "Shown in the Display Preferences") + "  ⚠️"
       controlStatus = NSLocalizedString("This is a virtual display (examples: AirPlay, Sidecar, display connected via a DisplayLink Dock or similar) which does not allow hardware or software gammatable control. Shading is used as a substitute but only in non-mirror scenarios. Mouse cursor will be unaffected and artifacts may appear when entering/leaving full screen mode.", comment: "Shown in the Display Preferences")
-    } else if display is OtherDisplay {
+    } else if display is OtherDisplay, !display.isDummy {
       displayType = NSLocalizedString("External Display", comment: "Shown in the Display Preferences")
       displayImage = "display"
       if let otherDisplay: OtherDisplay = display as? OtherDisplay {
@@ -105,7 +123,7 @@ class DisplaysPrefsViewController: NSViewController, PreferencePane, NSTableView
           }
         }
       }
-    } else if let appleDisplay: AppleDisplay = display as? AppleDisplay {
+    } else if !display.isDummy, let appleDisplay: AppleDisplay = display as? AppleDisplay {
       if appleDisplay.isBuiltIn() {
         displayType = NSLocalizedString("Built-in Display", comment: "Shown in the Display Preferences")
         if self.isImac() {
@@ -172,6 +190,7 @@ class DisplaysPrefsViewController: NSViewController, PreferencePane, NSTableView
         cell.disableVolumeOSDButton.isEnabled = false
       }
       // Advanced settings
+      cell.unavailableDDCBrightness.state = !display.readPrefAsBool(key: .unavailableDDC, for: .brightness) ? .on : .off
       if let otherDisplay = display as? OtherDisplay, !otherDisplay.isSwOnly() {
         cell.pollingModeMenu.isEnabled = true
         cell.pollingModeMenu.selectItem(withTag: otherDisplay.readPrefAsInt(key: .pollingMode))
@@ -193,10 +212,8 @@ class DisplaysPrefsViewController: NSViewController, PreferencePane, NSTableView
         cell.audioDeviceNameOverride.stringValue = otherDisplay.readPrefAsString(key: .audioDeviceNameOverride)
         cell.updateWithCurrentAudioName.isEnabled = true
 
-        cell.unavailableDDCBrightness.isEnabled = true
         cell.unavailableDDCVolume.isEnabled = true
         cell.unavailableDDCContrast.isEnabled = true
-        cell.unavailableDDCBrightness.state = !otherDisplay.readPrefAsBool(key: .unavailableDDC, for: .brightness) ? .on : .off
         cell.unavailableDDCVolume.state = !otherDisplay.readPrefAsBool(key: .unavailableDDC, for: .audioSpeakerVolume) ? .on : .off
         cell.unavailableDDCContrast.state = !otherDisplay.readPrefAsBool(key: .unavailableDDC, for: .contrast) ? .on : .off
 
@@ -251,10 +268,8 @@ class DisplaysPrefsViewController: NSViewController, PreferencePane, NSTableView
         cell.audioDeviceNameOverride.stringValue = ""
         cell.updateWithCurrentAudioName.isEnabled = false
 
-        cell.unavailableDDCBrightness.state = .off
         cell.unavailableDDCVolume.state = .off
         cell.unavailableDDCContrast.state = .off
-        cell.unavailableDDCBrightness.isEnabled = false
         cell.unavailableDDCVolume.isEnabled = false
         cell.unavailableDDCContrast.isEnabled = false
 
@@ -306,10 +321,10 @@ class DisplaysPrefsViewController: NSViewController, PreferencePane, NSTableView
   func updateDisplayListRowHeight() {
     if prefs.bool(forKey: PrefKey.showAdvancedSettings.rawValue) {
       self.displayList?.rowHeight = 520
-      self.constraintHeight?.constant = self.displayList.rowHeight + 15
+      self.constraintHeight?.constant = self.displayList.rowHeight + 15 + 30
     } else {
-      self.displayList?.rowHeight = 150
-      self.constraintHeight?.constant = self.displayList.rowHeight * 2 + 15
+      self.displayList?.rowHeight = 180
+      self.constraintHeight?.constant = self.displayList.rowHeight * 2 + 15 + 30
     }
   }
 }

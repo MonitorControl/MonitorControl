@@ -18,7 +18,6 @@ class AboutPrefsViewController: NSViewController, PreferencePane {
 
   @IBOutlet var versionLabel: NSTextField!
   @IBOutlet var copyrightLabel: NSTextField!
-  @IBOutlet var openContributorsButton: NSButton!
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -28,6 +27,10 @@ class AboutPrefsViewController: NSViewController, PreferencePane {
 
   override func viewWillAppear() {
     super.viewWillAppear()
+  }
+
+  @IBAction func checkForUpdates(sender: NSButton) {
+    app.updaterController.checkForUpdates(sender)
   }
 
   @IBAction func openDonate(_: NSButton) {
@@ -54,13 +57,7 @@ class AboutPrefsViewController: NSViewController, PreferencePane {
     let versionNumber = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") ?? "error"
     let buildNumber = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") ?? "error"
 
-    #if arch(arm64)
-      let arch: String = NSLocalizedString("Apple Silicon", comment: "Apple Silicon designation (shown after the version number in Preferences)")
-    #else
-      let arch: String = NSLocalizedString("Intel", comment: "Intel designation (shown after the version number in Preferences)")
-    #endif
-
-    self.versionLabel.stringValue = "\(versionName) \(versionNumber) \(buildName) \(buildNumber) - \(arch)"
+    self.versionLabel.stringValue = "\(versionName) \(versionNumber) \(buildName) \(buildNumber)"
   }
 
   func setCopyrightInfo() {

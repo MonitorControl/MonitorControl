@@ -19,65 +19,29 @@ class MainPrefsViewController: NSViewController, PreferencePane {
 
   @IBOutlet var startAtLogin: NSButton!
   @IBOutlet var automaticUpdateCheck: NSButton!
-  @IBOutlet var disableSoftwareFallback: NSButton!
   @IBOutlet var allowZeroSwBrightness: NSButton!
   @IBOutlet var combinedBrightness: NSButton!
   @IBOutlet var enableSmooth: NSButton!
   @IBOutlet var enableBrightnessSync: NSButton!
-  @IBOutlet var showAdvancedDisplays: NSButton!
   @IBOutlet var startupAction: NSPopUpButton!
-  @IBOutlet var rowStartupSeparator: NSGridRow!
-  @IBOutlet var rowStartupAction: NSGridRow!
   @IBOutlet var rowDoNothingStartupText: NSGridRow!
   @IBOutlet var rowWriteStartupText: NSGridRow!
   @IBOutlet var rowReadStartupText: NSGridRow!
-  @IBOutlet var rowSafeModeText: NSGridRow!
-  @IBOutlet var rowResetButton: NSGridRow!
-  @IBOutlet var rowDisableSoftwareFallbackCheck: NSGridRow!
-  @IBOutlet var rowDisableSoftwareFallbackText: NSGridRow!
-  @IBOutlet var rowAllowZeroSwBrightnessCheck: NSGridRow!
-  @IBOutlet var rowAllowZeroSwBrightnessText: NSGridRow!
 
-  func updateGridLayout() -> Bool {
-    let hide = !prefs.bool(forKey: PrefKey.showAdvancedSettings.rawValue)
+  func updateGridLayout() {
     if self.startupAction.selectedTag() == StartupAction.doNothing.rawValue {
-      self.rowStartupSeparator.isHidden = hide
-      self.rowStartupAction.isHidden = hide
-      self.rowDoNothingStartupText.isHidden = hide
+      self.rowDoNothingStartupText.isHidden = false
       self.rowWriteStartupText.isHidden = true
       self.rowReadStartupText.isHidden = true
-      self.rowSafeModeText.isHidden = hide
     } else if self.startupAction.selectedTag() == StartupAction.write.rawValue {
-      self.rowStartupSeparator.isHidden = false
-      self.rowStartupAction.isHidden = false
       self.rowDoNothingStartupText.isHidden = true
       self.rowWriteStartupText.isHidden = false
       self.rowReadStartupText.isHidden = true
-      self.rowSafeModeText.isHidden = false
     } else {
-      self.rowStartupSeparator.isHidden = false
-      self.rowStartupAction.isHidden = false
       self.rowDoNothingStartupText.isHidden = true
       self.rowWriteStartupText.isHidden = true
       self.rowReadStartupText.isHidden = false
-      self.rowSafeModeText.isHidden = false
     }
-    if self.disableSoftwareFallback.state == .on {
-      self.rowDisableSoftwareFallbackCheck.isHidden = false
-      self.rowDisableSoftwareFallbackText.isHidden = false
-    } else {
-      self.rowDisableSoftwareFallbackCheck.isHidden = hide
-      self.rowDisableSoftwareFallbackText.isHidden = hide
-    }
-    if self.allowZeroSwBrightness.state == .on {
-      self.rowAllowZeroSwBrightnessCheck.isHidden = false
-      self.rowAllowZeroSwBrightnessText.isHidden = false
-    } else {
-      self.rowAllowZeroSwBrightnessCheck.isHidden = hide
-      self.rowAllowZeroSwBrightnessText.isHidden = hide
-    }
-    self.rowResetButton.isHidden = hide
-    return !hide
   }
 
   @available(macOS, deprecated: 10.10)
@@ -93,18 +57,16 @@ class MainPrefsViewController: NSViewController, PreferencePane {
     self.startAtLogin.state = startAtLogin ? .on : .off
     self.automaticUpdateCheck.state = prefs.bool(forKey: PrefKey.SUEnableAutomaticChecks.rawValue) ? .on : .off
     self.combinedBrightness.state = prefs.bool(forKey: PrefKey.disableCombinedBrightness.rawValue) ? .off : .on
-    self.disableSoftwareFallback.state = prefs.bool(forKey: PrefKey.disableSoftwareFallback.rawValue) ? .on : .off
     self.allowZeroSwBrightness.state = prefs.bool(forKey: PrefKey.allowZeroSwBrightness.rawValue) ? .on : .off
     self.enableSmooth.state = prefs.bool(forKey: PrefKey.disableSmoothBrightness.rawValue) ? .off : .on
     self.enableBrightnessSync.state = prefs.bool(forKey: PrefKey.enableBrightnessSync.rawValue) ? .on : .off
-    self.showAdvancedDisplays.state = prefs.bool(forKey: PrefKey.showAdvancedSettings.rawValue) ? .on : .off
     self.startupAction.selectItem(withTag: prefs.integer(forKey: PrefKey.startupAction.rawValue))
     // Preload Display preferences to some extent to properly set up size in orther that animation won't fail
     menuslidersPrefsVc?.view.layoutSubtreeIfNeeded()
     keyboardPrefsVc?.view.layoutSubtreeIfNeeded()
     displaysPrefsVc?.view.layoutSubtreeIfNeeded()
     aboutPrefsVc?.view.layoutSubtreeIfNeeded()
-    _ = self.updateGridLayout()
+    self.updateGridLayout()
   }
 
   @IBAction func startAtLoginClicked(_ sender: NSButton) {
@@ -142,22 +104,6 @@ class MainPrefsViewController: NSViewController, PreferencePane {
     app.configure()
   }
 
-  @IBAction func disableSoftwareFallback(_ sender: NSButton) {
-    switch sender.state {
-    case .on:
-      prefs.set(true, forKey: PrefKey.disableSoftwareFallback.rawValue)
-    case .off:
-      prefs.set(false, forKey: PrefKey.disableSoftwareFallback.rawValue)
-    default: break
-    }
-    for display in DisplayManager.shared.getOtherDisplays() {
-      _ = display.setDirectBrightness(1)
-      _ = display.setSwBrightness(1)
-    }
-    _ = self.updateGridLayout()
-    app.configure()
-  }
-
   @IBAction func allowZeroSwBrightness(_ sender: NSButton) {
     switch sender.state {
     case .on:
@@ -170,7 +116,7 @@ class MainPrefsViewController: NSViewController, PreferencePane {
       _ = display.setDirectBrightness(1)
       _ = display.setSwBrightness(1)
     }
-    _ = self.updateGridLayout()
+    self.updateGridLayout()
     app.configure()
   }
 
@@ -196,25 +142,7 @@ class MainPrefsViewController: NSViewController, PreferencePane {
 
   @IBAction func startupAction(_ sender: NSPopUpButton) {
     prefs.set(sender.selectedTag(), forKey: PrefKey.startupAction.rawValue)
-    _ = self.updateGridLayout()
-  }
-
-  @IBAction func showAdvancedClicked(_ sender: NSButton) {
-    switch sender.state {
-    case .on:
-      prefs.set(true, forKey: PrefKey.showAdvancedSettings.rawValue)
-    case .off:
-      prefs.set(false, forKey: PrefKey.showAdvancedSettings.rawValue)
-    default: break
-    }
-    _ = self.updateGridLayout()
-    _ = menuslidersPrefsVc?.updateGridLayout()
-    _ = keyboardPrefsVc?.updateGridLayout()
-    _ = displaysPrefsVc?.updateGridLayout()
-    menuslidersPrefsVc?.view.layoutSubtreeIfNeeded()
-    keyboardPrefsVc?.view.layoutSubtreeIfNeeded()
-    displaysPrefsVc?.view.layoutSubtreeIfNeeded()
-    aboutPrefsVc?.view.layoutSubtreeIfNeeded()
+    self.updateGridLayout()
   }
 
   @available(macOS, deprecated: 10.10)
@@ -224,7 +152,7 @@ class MainPrefsViewController: NSViewController, PreferencePane {
       self.populateSettings()
       menuslidersPrefsVc?.populateSettings()
       keyboardPrefsVc?.populateSettings()
-      self.showAdvancedClicked(self.showAdvancedDisplays)
+      displaysPrefsVc?.populateSettings()
     }
   }
 

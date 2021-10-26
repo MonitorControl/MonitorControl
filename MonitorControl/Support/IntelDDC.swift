@@ -94,22 +94,22 @@ public class IntelDDC {
             calculated ^= replyData[i]
           }
           guard checksum == calculated else {
-            os_log("Checksum of reply does not match. Expected %u, got %u.", type: .debug, checksum, calculated)
-            os_log("Response was: %{public}@", type: .debug, replyData.map { String(format: "%02X", $0) }.joined(separator: " "))
+            os_log("Checksum of reply does not match. Expected %u, got %u.", type: .info, checksum, calculated)
+            os_log("Response was: %{public}@", type: .info, replyData.map { String(format: "%02X", $0) }.joined(separator: " "))
             continue
           }
         }
         guard replyData[2] == 0x02 else {
-          os_log("Got wrong response type for %{public}@. Expected %u, got %u.", type: .debug, String(reflecting: command), 0x02, replyData[2])
-          os_log("Response was: %{public}@", type: .debug, replyData.map { String(format: "%02X", $0) }.joined(separator: " "))
+          os_log("Got wrong response type for %{public}@. Expected %u, got %u.", type: .info, String(reflecting: command), 0x02, replyData[2])
+          os_log("Response was: %{public}@", type: .info, replyData.map { String(format: "%02X", $0) }.joined(separator: " "))
           continue
         }
         guard replyData[3] == 0x00 else {
-          os_log("Reading %{public}@ is not supported.", type: .debug, String(reflecting: command))
+          os_log("Reading %{public}@ is not supported.", type: .info, String(reflecting: command))
           return nil
         }
         if i > 1 {
-          os_log("Reading %{public}@ took %u tries.", type: .debug, String(reflecting: command), i)
+          os_log("Reading %{public}@ took %u tries.", type: .info, String(reflecting: command), i)
         }
         let (mh, ml, sh, sl) = (replyData[6], replyData[7], replyData[8], replyData[9])
         let maxValue = UInt16(mh << 8) + UInt16(ml)
@@ -136,11 +136,11 @@ public class IntelDDC {
       let dict = serviceProperties!.takeRetainedValue() as NSDictionary
       if let types = dict[kIOI2CTransactionTypesKey] as? UInt64 {
         if (1 << kIOI2CDDCciReplyTransactionType) & types != 0 {
-          os_log("kIOI2CDDCciReplyTransactionType is supported.", type: .debug)
+          os_log("kIOI2CDDCciReplyTransactionType is supported.", type: .info)
           return IOOptionBits(kIOI2CDDCciReplyTransactionType)
         }
         if (1 << kIOI2CSimpleTransactionType) & types != 0 {
-          os_log("kIOI2CSimpleTransactionType is supported.", type: .debug)
+          os_log("kIOI2CSimpleTransactionType is supported.", type: .info)
           return IOOptionBits(kIOI2CSimpleTransactionType)
         }
       }
@@ -200,21 +200,21 @@ public class IntelDDC {
       let portVendorId = valueForKey(kDisplayVendorID)
       let displayVendorId = CGDisplayVendorNumber(displayId)
       guard portVendorId == displayVendorId else {
-        os_log("Service port vendor ID %u differs from display product ID %u.", type: .debug,
+        os_log("Service port vendor ID %u differs from display product ID %u.", type: .info,
                portVendorId, displayVendorId)
         continue
       }
       let portProductId = valueForKey(kDisplayProductID)
       let displayProductId = CGDisplayModelNumber(displayId)
       guard portProductId == displayProductId else {
-        os_log("Service port product ID %u differs from display product ID %u.", type: .debug,
+        os_log("Service port product ID %u differs from display product ID %u.", type: .info,
                portProductId, displayProductId)
         continue
       }
       let portSerialNumber = valueForKey(kDisplaySerialNumber)
       let displaySerialNumber = CGDisplaySerialNumber(displayId)
       guard portSerialNumber == displaySerialNumber else {
-        os_log("Service port serial number %u differs from display serial number %u.", type: .debug, portSerialNumber, displaySerialNumber)
+        os_log("Service port serial number %u differs from display serial number %u.", type: .info, portSerialNumber, displaySerialNumber)
         continue
       }
       if let displayLocation = dict[kIODisplayLocationKey] as? NSString {
@@ -228,9 +228,9 @@ public class IntelDDC {
           }
         }
       }
-      os_log("Vendor ID: %u, Product ID: %u, Serial Number: %u", type: .debug, portVendorId, portProductId, portSerialNumber)
-      os_log("Unit Number: %u", type: .debug, CGDisplayUnitNumber(displayId))
-      os_log("Service Port: %u", type: .debug, port)
+      os_log("Vendor ID: %u, Product ID: %u, Serial Number: %u", type: .info, portVendorId, portProductId, portSerialNumber)
+      os_log("Unit Number: %u", type: .info, CGDisplayUnitNumber(displayId))
+      os_log("Service Port: %u", type: .info, port)
       return port
     }
     os_log("No service port found for display with ID %u.", type: .error, displayId)
@@ -244,7 +244,7 @@ public class IntelDDC {
     var servicePortUsingCGSServiceForDisplayNumber: io_service_t = 0
     CGSServiceForDisplayNumber(displayId, &servicePortUsingCGSServiceForDisplayNumber)
     if servicePortUsingCGSServiceForDisplayNumber != 0 {
-      os_log("Using CGSServiceForDisplayNumber to acquire framebuffer port for %u.", type: .debug, displayId)
+      os_log("Using CGSServiceForDisplayNumber to acquire framebuffer port for %u.", type: .info, displayId)
       return servicePortUsingCGSServiceForDisplayNumber
     }
     guard let servicePort = self.servicePortUsingDisplayPropertiesMatching(from: displayId) else {

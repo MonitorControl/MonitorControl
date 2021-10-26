@@ -24,6 +24,34 @@
 			<key>DenyConsequences</key>
 			<string>SoftwareUpdateDenyConsequences</string>
 		</dict>
+		<dict>
+			<key>IsIncoming</key>
+			<false/>
+			<key>Host</key>
+			<string>github.com</string>
+			<key>NetworkProtocol</key>
+			<string>TCP</string>
+			<key>Port</key>
+			<string>443</string>
+			<key>Purpose</key>
+			<string>SoftwareUpdatePurpose</string>
+			<key>DenyConsequences</key>
+			<string>SoftwareUpdateDenyConsequences</string>
+		</dict>
+		<dict>
+			<key>IsIncoming</key>
+			<false/>
+			<key>Host</key>
+			<string>githubusercontent.com</string>
+			<key>NetworkProtocol</key>
+			<string>TCP</string>
+			<key>Port</key>
+			<string>443</string>
+			<key>Purpose</key>
+			<string>SoftwareUpdatePurpose</string>
+			<key>DenyConsequences</key>
+			<string>SoftwareUpdateDenyConsequences</string>
+		</dict>
 	</array>
 </dict>
 </plist>

@@ -22,7 +22,7 @@ class DisplayManager {
     self.gammaActivityEnforcer.level = .screenSaver
     self.gammaActivityEnforcer.orderFrontRegardless()
     self.gammaActivityEnforcer.collectionBehavior = [.stationary, .canJoinAllSpaces]
-    os_log("Gamma activity enforcer created.", type: .debug)
+    os_log("Gamma activity enforcer created.", type: .info)
   }
 
   func enforceGammaActivity() {
@@ -59,7 +59,7 @@ class DisplayManager {
       shade.orderFrontRegardless()
       shade.collectionBehavior = [.stationary, .canJoinAllSpaces, .ignoresCycle]
       shade.setFrame(screen.frame, display: true)
-      os_log("Window shade created for display %{public}@", type: .debug, String(displayID))
+      os_log("Window shade created for display %{public}@", type: .info, String(displayID))
       return shade
     }
     return nil
@@ -83,22 +83,22 @@ class DisplayManager {
   func destroyAllShades() -> Bool {
     var ret = false
     for displayID in self.shades.keys {
-      os_log("Attempting to destory shade for display  %{public}@", type: .debug, String(displayID))
+      os_log("Attempting to destory shade for display  %{public}@", type: .info, String(displayID))
       if self.destroyShade(displayID: displayID) {
         ret = true
       }
     }
     if ret {
-      os_log("Destroyed all shades.", type: .debug)
+      os_log("Destroyed all shades.", type: .info)
     } else {
-      os_log("No shades were found to be destroyed.", type: .debug)
+      os_log("No shades were found to be destroyed.", type: .info)
     }
     return ret
   }
 
   func destroyShade(displayID: CGDirectDisplayID) -> Bool {
     if let shade = shades[displayID] {
-      os_log("Destroying shade for display %{public}@", type: .debug, String(displayID))
+      os_log("Destroying shade for display %{public}@", type: .info, String(displayID))
       self.shadeGrave.append(shade)
       self.shades.removeValue(forKey: displayID)
       shade.close()
@@ -151,27 +151,34 @@ class DisplayManager {
       return
     }
     for onlineDisplayID in onlineDisplayIDs where onlineDisplayID != 0 {
+      let rawName = DisplayManager.getDisplayRawNameByID(displayID: onlineDisplayID)
       let name = DisplayManager.getDisplayNameByID(displayID: onlineDisplayID)
       let id = onlineDisplayID
       let vendorNumber = CGDisplayVendorNumber(onlineDisplayID)
       let modelNumber = CGDisplayModelNumber(onlineDisplayID)
+      var isDummy: Bool = false
       var isVirtual: Bool = false
+      if rawName == "28E850" || rawName.lowercased().contains("dummy") {
+        os_log("NOTE: Display is a dummy!", type: .info)
+        isDummy = true
+      }
       if !DEBUG_MACOS10, #available(macOS 11.0, *) {
         if let dictionary = ((CoreDisplay_DisplayCreateInfoDictionary(onlineDisplayID))?.takeRetainedValue() as NSDictionary?) {
           let isVirtualDevice = dictionary["kCGDisplayIsVirtualDevice"] as? Bool
           let displayIsAirplay = dictionary["kCGDisplayIsAirPlay"] as? Bool
           if isVirtualDevice ?? displayIsAirplay ?? false {
+            os_log("NOTE: Display is virtual!", type: .info)
             isVirtual = true
           }
         }
       }
       if !DEBUG_SW, DisplayManager.isAppleDisplay(displayID: onlineDisplayID) { // MARK: (point of interest for testing)
-        let appleDisplay = AppleDisplay(id, name: name, vendorNumber: vendorNumber, modelNumber: modelNumber, isVirtual: isVirtual)
-        os_log("Apple display found - %{public}@", type: .info, "ID: \(appleDisplay.identifier) Name: \(appleDisplay.name) (Vendor: \(appleDisplay.vendorNumber ?? 0), Model: \(appleDisplay.modelNumber ?? 0))")
+        let appleDisplay = AppleDisplay(id, name: name, vendorNumber: vendorNumber, modelNumber: modelNumber, isVirtual: isVirtual, isDummy: isDummy)
+        os_log("Apple display found - %{public}@", type: .info, "ID: \(appleDisplay.identifier), Name: \(appleDisplay.name) (Vendor: \(appleDisplay.vendorNumber ?? 0), Model: \(appleDisplay.modelNumber ?? 0))")
         self.addDisplay(display: appleDisplay)
       } else {
-        let otherDisplay = OtherDisplay(id, name: name, vendorNumber: vendorNumber, modelNumber: modelNumber, isVirtual: isVirtual)
-        os_log("Other display found - %{public}@", type: .info, "ID: \(otherDisplay.identifier) Name: \(otherDisplay.name) (Vendor: \(otherDisplay.vendorNumber ?? 0), Model: \(otherDisplay.modelNumber ?? 0))")
+        let otherDisplay = OtherDisplay(id, name: name, vendorNumber: vendorNumber, modelNumber: modelNumber, isVirtual: isVirtual, isDummy: isDummy)
+        os_log("Other display found - %{public}@", type: .info, "ID: \(otherDisplay.identifier), Name: \(otherDisplay.name) (Vendor: \(otherDisplay.vendorNumber ?? 0), Model: \(otherDisplay.modelNumber ?? 0))")
         self.addDisplay(display: otherDisplay)
       }
     }
@@ -179,15 +186,20 @@ class DisplayManager {
 
   func setupOtherDisplays(firstrun: Bool = false) {
     for otherDisplay in self.getOtherDisplays() {
-      if !otherDisplay.isSw(), !otherDisplay.readPrefAsBool(key: .unavailableDDC, for: .audioSpeakerVolume) {
-        otherDisplay.setupCurrentAndMaxValues(command: .audioSpeakerVolume, firstrun: firstrun)
-      }
-      if !otherDisplay.isSw(), !otherDisplay.readPrefAsBool(key: .unavailableDDC, for: .contrast) {
-        otherDisplay.setupCurrentAndMaxValues(command: .contrast, firstrun: firstrun)
+      for command in [Command.audioSpeakerVolume, Command.contrast] where !otherDisplay.readPrefAsBool(key: .unavailableDDC, for: command) && !otherDisplay.isSw() {
+        otherDisplay.setupCurrentAndMaxValues(command: command, firstrun: firstrun)
       }
       if (!otherDisplay.isSw() && !otherDisplay.readPrefAsBool(key: .unavailableDDC, for: .brightness)) || otherDisplay.isSw() {
         otherDisplay.setupCurrentAndMaxValues(command: .brightness, firstrun: firstrun)
         otherDisplay.brightnessSyncSourceValue = otherDisplay.readPrefAsFloat(for: .brightness)
+      }
+    }
+  }
+
+  func restoreOtherDisplays() {
+    for otherDisplay in self.getDdcCapableDisplays() {
+      for command in [Command.contrast, Command.brightness] where !otherDisplay.readPrefAsBool(key: .unavailableDDC, for: command) {
+        otherDisplay.restoreDDCSettingsToDisplay(command: command)
       }
     }
   }
@@ -204,7 +216,7 @@ class DisplayManager {
 
   func updateAudioControlTargetDisplays(deviceName: String) -> Int {
     self.audioControlTargetDisplays.removeAll()
-    os_log("Detecting displays for audio control via audio device name matching...", type: .debug)
+    os_log("Detecting displays for audio control via audio device name matching...", type: .info)
     var numOfAddedDisplays: Int = 0
     for ddcCapableDisplay in self.getDdcCapableDisplays() {
       var displayAudioDeviceName = ddcCapableDisplay.readPrefAsString(key: .audioDeviceNameOverride)
@@ -214,7 +226,7 @@ class DisplayManager {
       if self.normalizedName(displayAudioDeviceName) == self.normalizedName(deviceName) {
         self.audioControlTargetDisplays.append(ddcCapableDisplay)
         numOfAddedDisplays += 1
-        os_log("Added display for audio control - %{public}@", type: .debug, ddcCapableDisplay.name)
+        os_log("Added display for audio control - %{public}@", type: .info, ddcCapableDisplay.name)
       }
     }
     return numOfAddedDisplays
@@ -309,16 +321,18 @@ class DisplayManager {
     }
   }
 
-  func resetSwBrightnessForAllDisplays(settingsOnly: Bool = false, async: Bool = false) {
+  func resetSwBrightnessForAllDisplays(prefsOnly: Bool = false, noPrefSave: Bool = false, async: Bool = false) {
     for otherDisplay in self.getOtherDisplays() {
-      if !settingsOnly {
-        _ = otherDisplay.setSwBrightness(1, smooth: async)
-        otherDisplay.smoothBrightnessTransient = 1
-      } else {
+      if !prefsOnly {
+        _ = otherDisplay.setSwBrightness(1, smooth: async, noPrefSave: noPrefSave)
+        if !noPrefSave {
+          otherDisplay.smoothBrightnessTransient = 1
+        }
+      } else if !noPrefSave {
         otherDisplay.savePref(1, key: .SwBrightness)
         otherDisplay.smoothBrightnessTransient = 1
       }
-      if otherDisplay.isSw() {
+      if otherDisplay.isSw(), !noPrefSave {
         otherDisplay.savePref(1, for: .brightness)
       }
     }
@@ -329,13 +343,13 @@ class DisplayManager {
       if (otherDisplay.readPrefAsFloat(for: .brightness) == 0 && !prefs.bool(forKey: PrefKey.disableCombinedBrightness.rawValue)) || (otherDisplay.readPrefAsFloat(for: .brightness) < otherDisplay.combinedBrightnessSwitchingValue() && !prefs.bool(forKey: PrefKey.separateCombinedScale.rawValue) && !prefs.bool(forKey: PrefKey.disableCombinedBrightness.rawValue)) || otherDisplay.isSw() {
         let savedPrefValue = otherDisplay.readPrefAsFloat(key: .SwBrightness)
         if otherDisplay.getSwBrightness() != savedPrefValue {
-          OSDUtils.popEmptyOsd(displayID: otherDisplay.identifier, command: Command.brightness) // This will give the user a hint why is the brightness suddenly changes and also give screen activity to counter the 'no gamma change when there is no screen activity' issue on some macs
+          OSDUtils.popEmptyOsd(displayID: otherDisplay.identifier, command: Command.brightness) // This will give the user a hint why is the brightness suddenly changes.
         }
         otherDisplay.savePref(otherDisplay.getSwBrightness(), key: .SwBrightness)
-        os_log("Restoring sw brightness to %{public}@ on other display %{public}@", type: .debug, String(savedPrefValue), String(otherDisplay.identifier))
+        os_log("Restoring sw brightness to %{public}@ on other display %{public}@", type: .info, String(savedPrefValue), String(otherDisplay.identifier))
         _ = otherDisplay.setSwBrightness(savedPrefValue, smooth: async)
         if otherDisplay.isSw(), let slider = otherDisplay.sliderHandler[.brightness] {
-          os_log("Restoring sw slider to %{public}@ for other display %{public}@", type: .debug, String(savedPrefValue), String(otherDisplay.identifier))
+          os_log("Restoring sw slider to %{public}@ for other display %{public}@", type: .info, String(savedPrefValue), String(otherDisplay.identifier))
           slider.setValue(savedPrefValue, displayID: otherDisplay.identifier)
         }
       } else {
@@ -344,7 +358,7 @@ class DisplayManager {
     }
   }
 
-  func getAffectedDisplays(isBrightness: Bool = false, isVolume: Bool = false, isContrast _: Bool = false) -> [Display]? {
+  func getAffectedDisplays(isBrightness: Bool = false, isVolume: Bool = false) -> [Display]? {
     var affectedDisplays: [Display]
     let allDisplays = self.getAllDisplays()
     var currentDisplay: Display?

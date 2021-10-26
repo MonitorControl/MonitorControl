@@ -22,6 +22,7 @@ class Display: Equatable {
   var sliderHandler: [Command: SliderHandler] = [:]
   var brightnessSyncSourceValue: Float = 1
   var isVirtual: Bool = false
+  var isDummy: Bool = false
 
   var defaultGammaTableRed = [CGGammaValue](repeating: 0, count: 256)
   var defaultGammaTableGreen = [CGGammaValue](repeating: 0, count: 256)
@@ -61,7 +62,7 @@ class Display: Equatable {
     return (key ?? PrefKey.value).rawValue + (command != nil ? String((command ?? Command.none).rawValue) : "") + self.prefsId
   }
 
-  internal init(_ identifier: CGDirectDisplayID, name: String, vendorNumber: UInt32?, modelNumber: UInt32?, isVirtual: Bool = false) {
+  internal init(_ identifier: CGDirectDisplayID, name: String, vendorNumber: UInt32?, modelNumber: UInt32?, isVirtual: Bool = false, isDummy: Bool = false) {
     self.identifier = identifier
     self.name = name
     self.vendorNumber = vendorNumber
@@ -69,13 +70,14 @@ class Display: Equatable {
     self.prefsId = "(" + String(name.filter { !$0.isWhitespace }) + String(vendorNumber ?? 0) + String(modelNumber ?? 0) + "@" + String(identifier) + ")"
     os_log("Display init with prefsIdentifier %{public}@", type: .info, self.prefsId)
     self.isVirtual = DEBUG_VIRTUAL ? true : isVirtual
+    self.isDummy = isDummy
     self.swUpdateDefaultGammaTable()
     self.smoothBrightnessTransient = self.getBrightness()
-    if self.isVirtual {
-      os_log("Creating or updating shade for virtual display %{public}@", type: .debug, String(self.identifier))
+    if self.isVirtual || self.readPrefAsBool(key: PrefKey.avoidGamma), !self.isDummy {
+      os_log("Creating or updating shade for display %{public}@", type: .info, String(self.identifier))
       _ = DisplayManager.shared.updateShade(displayID: self.identifier)
     } else {
-      os_log("Destroying shade (if exists) for real display %{public}@", type: .debug, String(self.identifier))
+      os_log("Destroying shade (if exists) for display %{public}@", type: .info, String(self.identifier))
       _ = DisplayManager.shared.destroyShade(displayID: self.identifier)
     }
     self.brightnessSyncSourceValue = self.getBrightness()
@@ -91,6 +93,9 @@ class Display: Equatable {
   }
 
   func stepBrightness(isUp: Bool, isSmallIncrement: Bool) {
+    guard !self.readPrefAsBool(key: .unavailableDDC, for: .brightness) else {
+      return
+    }
     let value = self.calcNewBrightness(isUp: isUp, isSmallIncrement: isSmallIncrement)
     if self.setBrightness(value) {
       OSDUtils.showOsd(displayID: self.identifier, command: .brightness, value: value * 64, maxValue: 64)
@@ -113,7 +118,7 @@ class Display: Equatable {
     guard app.sleepID == 0, app.reconfigureID == 0 else {
       self.savePref(self.smoothBrightnessTransient, for: .brightness)
       self.smoothBrightnessRunning = false
-      os_log("Pushing brightness stopped for Display %{public}@ because of sleep or reconfiguration", type: .debug, String(self.identifier))
+      os_log("Pushing brightness stopped for Display %{public}@ because of sleep or reconfiguration", type: .info, String(self.identifier))
       return false
     }
     if slow {
@@ -125,7 +130,7 @@ class Display: Equatable {
     }
     var dontPushAgain = false
     if to != -1 {
-      os_log("Pushing brightness towards goal of %{public}@ for Display  %{public}@", type: .debug, String(to), String(self.identifier))
+      os_log("Pushing brightness towards goal of %{public}@ for Display  %{public}@", type: .info, String(to), String(self.identifier))
       let value = max(min(to, 1), 0)
       self.savePref(value, for: .brightness)
       self.brightnessSyncSourceValue = value
@@ -138,7 +143,7 @@ class Display: Equatable {
     if brightness != self.smoothBrightnessTransient {
       if abs(brightness - self.smoothBrightnessTransient) < 0.01 {
         self.smoothBrightnessTransient = brightness
-        os_log("Pushing brightness finished for Display  %{public}@", type: .debug, String(self.identifier))
+        os_log("Pushing brightness finished for Display  %{public}@", type: .info, String(self.identifier))
         dontPushAgain = true
         self.smoothBrightnessRunning = false
       } else if brightness > self.smoothBrightnessTransient {
@@ -154,7 +159,7 @@ class Display: Equatable {
         }
       }
     } else {
-      os_log("No more need to push brightness for Display  %{public}@ (setting one final time)", type: .debug, String(self.identifier))
+      os_log("No more need to push brightness for Display  %{public}@ (setting one final time)", type: .info, String(self.identifier))
       _ = self.setDirectBrightness(self.smoothBrightnessTransient, transient: true)
       self.smoothBrightnessRunning = false
     }
@@ -184,6 +189,9 @@ class Display: Equatable {
   }
 
   func swUpdateDefaultGammaTable() {
+    guard !self.isDummy else {
+      return
+    }
     CGGetDisplayTransferByTable(self.identifier, 256, &self.defaultGammaTableRed, &self.defaultGammaTableGreen, &self.defaultGammaTableBlue, &self.defaultGammaTableSampleCount)
     let redPeak = self.defaultGammaTableRed.max() ?? 0
     let greenPeak = self.defaultGammaTableGreen.max() ?? 0
@@ -200,11 +208,17 @@ class Display: Equatable {
     }
   }
 
-  func setSwBrightness(_ value: Float, smooth: Bool = false) -> Bool {
+  func setSwBrightness(_ value: Float, smooth: Bool = false, noPrefSave: Bool = false) -> Bool {
     self.swBrightnessSemaphore.wait()
     let brightnessValue = min(1, value)
     var currentValue = self.readPrefAsFloat(key: .SwBrightness)
-    self.savePref(brightnessValue, key: .SwBrightness)
+    if !noPrefSave {
+      self.savePref(brightnessValue, key: .SwBrightness)
+    }
+    guard !self.isDummy else {
+      self.swBrightnessSemaphore.signal()
+      return true
+    }
     var newValue = brightnessValue
     currentValue = self.swBrightnessTransform(value: currentValue)
     newValue = self.swBrightnessTransform(value: newValue)
@@ -244,6 +258,13 @@ class Display: Equatable {
   }
 
   func getSwBrightness() -> Float {
+    guard !self.isDummy else {
+      if self.prefExists(key: .SwBrightness) {
+        return self.readPrefAsFloat(key: .SwBrightness)
+      } else {
+        return 1
+      }
+    }
     self.swBrightnessSemaphore.wait()
     if self.isVirtual || self.readPrefAsBool(key: .avoidGamma) {
       let rawBrightnessValue = 1 - (DisplayManager.shared.getShadeAlpha(displayID: self.identifier) ?? 1)
@@ -269,12 +290,12 @@ class Display: Equatable {
 
   func checkGammaInterference() {
     let currentSwBrightness = self.getSwBrightness()
-    guard !DisplayManager.shared.gammaInterferenceWarningShown, !(prefs.bool(forKey: PrefKey.disableSoftwareFallback.rawValue) && prefs.bool(forKey: PrefKey.disableCombinedBrightness.rawValue)), !self.readPrefAsBool(key: .avoidGamma), !self.smoothBrightnessRunning, self.prefExists(key: .SwBrightness), abs(currentSwBrightness - self.readPrefAsFloat(key: .SwBrightness)) > 0.02 else {
+    guard !self.isDummy, !DisplayManager.shared.gammaInterferenceWarningShown, !(prefs.bool(forKey: PrefKey.disableCombinedBrightness.rawValue)), !self.readPrefAsBool(key: .avoidGamma), !self.isVirtual, !self.smoothBrightnessRunning, self.prefExists(key: .SwBrightness), abs(currentSwBrightness - self.readPrefAsFloat(key: .SwBrightness)) > 0.02 else {
       return
     }
     DisplayManager.shared.gammaInterferenceCounter += 1
     _ = self.setSwBrightness(1)
-    os_log("Gamma table interference detected, number of events: %{public}@", type: .debug, String(DisplayManager.shared.gammaInterferenceCounter))
+    os_log("Gamma table interference detected, number of events: %{public}@", type: .info, String(DisplayManager.shared.gammaInterferenceCounter))
     if DisplayManager.shared.gammaInterferenceCounter >= 3 {
       DisplayManager.shared.gammaInterferenceWarningShown = true
       let alert = NSAlert()
@@ -294,7 +315,7 @@ class Display: Equatable {
           displaysPrefsVc?.loadDisplayList()
         }
       } else {
-        os_log("We won't watch for gamma table interference anymore", type: .debug)
+        os_log("We won't watch for gamma table interference anymore", type: .info)
       }
     }
   }
@@ -304,7 +325,7 @@ class Display: Equatable {
   }
 
   func isSwBrightnessNotDefault() -> Bool {
-    guard !self.isVirtual else {
+    guard !self.isVirtual, !self.isDummy else {
       return false
     }
     if self.getSwBrightness() < 1 {

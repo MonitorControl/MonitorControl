@@ -55,9 +55,6 @@
 /* Class = "NSTextFieldCell"; title = "Show tick marks at 0%, 25%, 50%, 75% and 100% for accuracy."; ObjectID = "A8P-vn-DEJ"; */
 "A8P-vn-DEJ.title" = "Doğruluk için onay işaretlerini %0, %25, %50, %75 ve %100 olarak gösterin.";
 
-/* Class = "NSButtonCell"; title = "Disable software dimming as fallback"; ObjectID = "afB-Xx-Lta"; */
-"afB-Xx-Lta.title" = "Yazılım karartmasını devre dışı bırakın";
-
 /* Class = "NSTextFieldCell"; title = "Use brightness, volume and other settings from last time or use defaults. Values will be applied to the display upon first change by the user."; ObjectID = "an7-Aj-3fZ"; */
 "an7-Aj-3fZ.title" = "Bir önceki parlaklık, ses seviyesi ve diğer ayarları kullanın veya varsayılanları kullanın. Değerler, kullanıcı tarafından ilk değişiklik yapıldığında ekrana uygulanacaktır.";
 
@@ -70,8 +67,8 @@
 /* Class = "NSTextFieldCell"; title = "Brightness:"; ObjectID = "Bhb-6l-uPQ"; */
 "Bhb-6l-uPQ.title" = "Parlaklık:";
 
-/* Class = "NSTextFieldCell"; title = "(Gamma->DDC)"; ObjectID = "Bid-UL-blc"; */
-"Bid-UL-blc.title" = "(Gama->DDC)";
+/* Class = "NSTextFieldCell"; title = "(Software->DDC)"; ObjectID = "Bid-UL-blc"; */
+"Bid-UL-blc.title" = "(Yazılım->DDC)";
 
 /* Class = "NSTextFieldCell"; title = "For hardware (DDC) controlled displays only. Results may vary."; ObjectID = "bIe-6O-xEH"; */
 "bIe-6O-xEH.title" = "Yalnızca donanım (DDC) kontrollü ekranlar için. Sonuçlar değişebilir.";
@@ -96,9 +93,6 @@
 
 /* Class = "NSMenuItem"; title = "Custom"; ObjectID = "Cle-DD-vR7"; */
 "Cle-DD-vR7.title" = "Özel";
-
-/* Class = "NSButtonCell"; title = "Website"; ObjectID = "Cln-uW-2dd"; */
-"Cln-uW-2dd.title" = "Web Sitesi";
 
 /* Class = "NSTextFieldCell"; title = "Upon startup or wake:"; ObjectID = "cNt-Cq-vK4"; */
 "cNt-Cq-vK4.title" = "Başlatma veya uyanma sırasında:";
@@ -196,6 +190,9 @@
 /* Class = "NSMenuItem"; title = "Change for all screens"; ObjectID = "jSj-HB-T2t"; */
 "jSj-HB-T2t.title" = "Tüm ekranlarda değiştir";
 
+/* Class = "NSButtonCell"; title = "Check for updates"; ObjectID = "jVH-oc-rUi"; */
+"jVH-oc-rUi.title" = "Güncellemeleri denetle";
+
 /* Class = "NSTextFieldCell"; title = "Note: you can press Shift during startup for 'Safe mode' to restore defaults and avoid reading or setting anything."; ObjectID = "Jx2-gO-nq9"; */
 "Jx2-gO-nq9.title" = "Not: Varsayılanları geri yüklemek ve herhangi bir şeyi okumaktan veya ayarlamaktan kaçınmak için 'Güvenli mod' için başlatma sırasında Shift tuşuna basabilirsiniz.";
 
@@ -204,9 +201,6 @@
 
 /* Class = "NSTextFieldCell"; title = "Screen to control:"; ObjectID = "Kfj-WK-aSL"; */
 "Kfj-WK-aSL.title" = "Kontrol edilecek ekran:";
-
-/* Class = "NSTextFieldCell"; title = "Don't use software dimming as fallback if no hardware control is available."; ObjectID = "kgh-b4-gmO"; */
-"kgh-b4-gmO.title" = "Donanım denetimi yoksa, yazılım karartmasını kullanmayın.";
 
 /* Class = "NSMenuItem"; title = "Depends on mouse pointer position"; ObjectID = "km4-hK-auM"; */
 "km4-hK-auM.title" = "Fare işaretçisinin konumuna bağlıdır";
@@ -239,7 +233,7 @@
 "MWo-6I-s9L.title" = "Menüde parlaklık kaydırıcısını göster";
 
 /* Class = "NSButtonCell"; title = "Avoid gamma table manipulation"; ObjectID = "na6-mS-MPi"; */
-"na6-mS-MPi.title" = "Avoid gamma table manipulation";
+"na6-mS-MPi.title" = "Gama tablosu manipülasyonundan kaçının";
 
 /* Class = "NSButtonCell"; title = "Separate scales for combined hardware & software dimming"; ObjectID = "O8o-hI-8eR"; */
 "O8o-hI-8eR.title" = "Birleşik donanım ve yazılım karartması için ayrı dengeler";
@@ -265,9 +259,6 @@
 /* Class = "NSButtonCell"; title = "Longer delay during DDC read operations"; ObjectID = "pF5-Sw-7BR"; */
 "pF5-Sw-7BR.title" = "DDC okuma işlemleri sırasında daha uzun gecikme";
 
-/* Class = "NSTextFieldCell"; title = "For hardware (DDC) controlled displays only."; ObjectID = "POy-35-bh0"; */
-"POy-35-bh0.title" = "Yalnızca donanım (DDC) kontrollü ekranlar için.";
-
 /* Class = "NSTextFieldCell"; title = "DDC max"; ObjectID = "psF-vX-AFB"; */
 "psF-vX-AFB.title" = "En yüksek DDC";
 
@@ -292,23 +283,20 @@
 /* Class = "NSButtonCell"; title = "Combine hardware and software dimming"; ObjectID = "r76-Zc-x09"; */
 "r76-Zc-x09.title" = "Donanım ve yazılım karartmasını birleştirin";
 
-/* Class = "NSTextFieldCell"; title = "Advanced:"; ObjectID = "r7i-oG-Ab6"; */
-"r7i-oG-Ab6.title" = "Gelişmiş:";
-
 /* Class = "NSMenuItem"; title = "Normal"; ObjectID = "Riq-uM-bTs"; */
 "Riq-uM-bTs.title" = "Normal";
-
-/* Class = "NSButtonCell"; title = "Show advanced settings"; ObjectID = "sAR-sh-y8e"; */
-"sAR-sh-y8e.title" = "Gelişmiş ayarları göster";
 
 /* Class = "NSTextFieldCell"; title = "General menu items style:"; ObjectID = "thh-DG-ecH"; */
 "thh-DG-ecH.title" = "Genel menü öğeleri stili:";
 
-/* Class = "NSTextFieldCell"; title = "@the0neyouseek\n@JoniVR\n@waydabber"; ObjectID = "TKd-J8-Iyk"; */
-"TKd-J8-Iyk.title" = "@the0neyouseek\n@JoniVR\n@waydabber";
+/* Class = "NSTextFieldCell"; title = "@the0neyouseek (Guillaume B.)\n@JoniVR (Joni Van Roost)\n@waydabber (István T.)"; ObjectID = "TKd-J8-Iyk"; */
+"TKd-J8-Iyk.title" = "@the0neyouseek (Guillaume B.)\n@JoniVR (Joni Van Roost)\n@waydabber (István T.)";
 
 /* Class = "NSTextFieldCell"; title = "Menu Icon:"; ObjectID = "u6s-Pb-BCG"; */
 "u6s-Pb-BCG.title" = "Menü ikonu:";
+
+/* Class = "NSButtonCell"; title = "Show advanced settings"; ObjectID = "UBq-Od-SIB"; */
+"UBq-Od-SIB.title" = "Gelişmiş ayarları göster";
 
 /* Class = "NSTextFieldCell"; title = "Works if an audio device is selected with no native volume control."; ObjectID = "uF5-a9-Ngz"; */
 "uF5-a9-Ngz.title" = "Yerel ses düzeyi denetimi olmayan bir ses aygıtı seçilirse çalışır.";
@@ -339,9 +327,6 @@
 
 /* Class = "NSTextFieldCell"; title = "Changes that are caused by the Ambient light sensor or made using Touch Bar, Control Center, System Preferences will be replicated to all displays."; ObjectID = "wjv-tq-iUx"; */
 "wjv-tq-iUx.title" = "Ortam ışığı sensöründen kaynaklanan veya Dokunmatik Çubuk, Kontrol Merkezi, Sistem Tercihleri kullanılarak yapılan değişiklikler tüm ekranlara yansıtılacaktır..";
-
-/* Class = "NSTextFieldCell"; title = "Display advanced settings and additional information in Preferences."; ObjectID = "X6w-Ee-9Jq"; */
-"X6w-Ee-9Jq.title" = "Gelişmiş ayarları ve ek bilgileri Tercihler'de görüntüleyin.";
 
 /* Class = "NSMenuItem"; title = "Change volume for all screens"; ObjectID = "Xih-P5-NyM"; */
 "Xih-P5-NyM.title" = "Tüm ekranlar için ses seviyesini değiştir";

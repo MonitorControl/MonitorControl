@@ -7,9 +7,6 @@
 /* Shown in the main prefs window */
 "App menu" = "Menu de l'app";
 
-/* Apple Silicon designation (shown after the version number in Preferences) */
-"Apple Silicon" = "Puce Apple";
-
 /* Shown in the alert dialog */
 "Are you sure you want to enable a longer delay? Doing so may freeze your system and require a restart. Start at login will be disabled as a safety measure." = "Êtes-vous sûr de vouloir augmenter cette durée? Cela peut entrainer un gêle du système et nécessiter un redémarrage. Par sécurité, cette option sera désactivée au démarrage.";
 
@@ -26,7 +23,7 @@
 "Built-in Display" = "Écran intégré";
 
 /* Shown in menu */
-"Check for updates..." = "Vérifier les mises à jour…";
+"Check for updates…" = "Vérifier les mises à jour…";
 
 /* Shown in menu */
 "Contrast" = "Contraste";
@@ -38,7 +35,7 @@
 "Decrease" = "Diminuer";
 
 /* Shown in the alert dialog */
-"Disable gamma control for my displays" = "Disable gamma control for my displays";
+"Disable gamma control for my displays" = "Désactiver le contrôle gamma pour mes écrans";
 
 /* Shown in the main prefs window */
 "Displays" = "Écrans";
@@ -53,13 +50,13 @@
 "General" = "Général";
 
 /* Shown in the Display Preferences */
-"Hardware (Apple)" = "Hardware (Apple)";
+"Hardware (Apple)" = "Matériel (Apple)";
 
 /* Shown in the Display Preferences */
 "Hardware (DDC)" = "Matériel (DDC)";
 
 /* Shown in the alert dialog */
-"I'll quit the other app" = "I'll quit the other app";
+"I'll quit the other app" = "Je vais quitter l'autre application";
 
 /* Shown in the alert dialog */
 "Incompatible previous version" = "Version précédente incompatible";
@@ -67,11 +64,8 @@
 /* Shown in record shortcut box */
 "Increase" = "Augmenter";
 
-/* Intel designation (shown after the version number in Preferences) */
-"Intel" = "Intel";
-
 /* Shown in the alert dialog */
-"Is f.lux or similar running?" = "Is f.lux or similar running?";
+"Is f.lux or similar running?" = "Est-ce que f.lux ou similaire est lancé ?";
 
 /* Shown in the main prefs window */
 "Keyboard" = "Clavier";
@@ -83,7 +77,7 @@
 "No" = "Non";
 
 /* Shown in the Display Preferences */
-"No Control" = "Aucun control";
+"No Control" = "Aucun contrôle";
 
 /* Shown in the Display Preferences */
 "Other Display" = "Autre écran";
@@ -92,7 +86,7 @@
 "Preferences for an incompatible previous app version detected. Default preferences are reloaded." = "Préférences pour une version précédente incompatible détéctés. Les préférences par défaut seront rechargées.";
 
 /* Shown in menu */
-"Preferences..." = "Préférences...";
+"Preferences…" = "Préférences…";
 
 /* Shown in menu */
 "Quit" = "Quitter";
@@ -110,7 +104,7 @@
 "Shortcuts not available" = "Raccourcis non disponible";
 
 /* Shown in the Display Preferences */
-"Software (gamma)" = "Logiciel (gamma)";
+"Software (gamma)" = "Logiciel (Gamma)";
 
 /* Shown in the Display Preferences */
 "Software (gamma, forced)" = "Logiciel (Gamma, Forcé)";
@@ -119,7 +113,7 @@
 "Software (shade)" = "Logiciel (Voile)";
 
 /* Shown in the Display Preferences */
-"Software (shade, forced)" = "Software (shade, forced)";
+"Software (shade, forced)" = "Logiciel (Voile, Forcé)";
 
 /* Shown in the Display Preferences */
 "This display allows for software brightness control via gamma table manipulation or shade as it does not support hardware control. Reasons for this might be using the HDMI port of a Mac mini (which blocks hardware DDC control) or having a blacklisted display." = "Cet écran permet un contrôle de la luminosité logiciel via une manipulation des tables gamma car il ne prend pas en charge le contrôle matériel. Cela peut être dû à l'utilisation du port HDMI d'un Mac mini (qui bloque le contrôle DDC matériel) ou à un écran sur liste noire.";

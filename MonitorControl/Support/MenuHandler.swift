@@ -25,7 +25,7 @@ class MenuHandler: NSMenu, NSMenuDelegate {
   }
 
   func updateMenus(dontClose: Bool = false) {
-    os_log("Menu update initiated", type: .debug)
+    os_log("Menu update initiated", type: .info)
     if !dontClose {
       self.cancelTrackingWithoutAnimation()
     }
@@ -36,11 +36,7 @@ class MenuHandler: NSMenu, NSMenuDelegate {
     if !prefs.bool(forKey: PrefKey.hideAppleFromMenu.rawValue) {
       displays.append(contentsOf: DisplayManager.shared.getAppleDisplays())
     }
-    if !prefs.bool(forKey: PrefKey.disableSoftwareFallback.rawValue) {
-      displays.append(contentsOf: DisplayManager.shared.getOtherDisplays())
-    } else {
-      displays.append(contentsOf: DisplayManager.shared.getDdcCapableDisplays())
-    }
+    displays.append(contentsOf: DisplayManager.shared.getOtherDisplays())
     let relevant = prefs.integer(forKey: PrefKey.multiSliders.rawValue) == MultiSliders.relevant.rawValue
     let combine = prefs.integer(forKey: PrefKey.multiSliders.rawValue) == MultiSliders.combine.rawValue
     let numOfDisplays = displays.count
@@ -117,14 +113,15 @@ class MenuHandler: NSMenu, NSMenuDelegate {
         contentWidth = max(addedSliderHandler.view!.frame.width, contentWidth)
         contentHeight += addedSliderHandler.view!.frame.height
       }
+      let margin = CGFloat(13)
       var blockNameView: NSTextField?
       if blockName != "" {
         contentHeight += 21
         let attrs: [NSAttributedString.Key: Any] = [.foregroundColor: NSColor.textColor, .font: NSFont.boldSystemFont(ofSize: 12)]
         blockNameView = NSTextField(labelWithAttributedString: NSAttributedString(string: blockName, attributes: attrs))
+        blockNameView?.frame.size.width = contentWidth - margin * 2
         blockNameView?.alphaValue = 0.5
       }
-      let margin = CGFloat(13)
       let itemView = BlockView(frame: NSRect(x: 0, y: 0, width: contentWidth + margin * 2, height: contentHeight + margin * 2))
       var sliderPosition = CGFloat(margin * -1 + 1)
       for addedSliderHandler in addedSliderHandlers {
@@ -138,7 +135,9 @@ class MenuHandler: NSMenu, NSMenuDelegate {
       }
       let item = NSMenuItem()
       item.view = itemView
-      monitorSubMenu.insertItem(item, at: 0)
+      if addedSliderHandlers.count != 0 {
+        monitorSubMenu.insertItem(item, at: 0)
+      }
     } else {
       for addedSliderHandler in addedSliderHandlers {
         self.addSliderItem(monitorSubMenu: monitorSubMenu, sliderHandler: addedSliderHandler)
@@ -224,8 +223,8 @@ class MenuHandler: NSMenu, NSMenuDelegate {
       preferencesIcon.bezelStyle = .regularSquare
       preferencesIcon.isBordered = false
       preferencesIcon.setButtonType(.momentaryChange)
-      preferencesIcon.image = NSImage(systemSymbolName: "gearshape", accessibilityDescription: NSLocalizedString("Preferences...", comment: "Shown in menu"))
-      preferencesIcon.alternateImage = NSImage(systemSymbolName: "gearshape.fill", accessibilityDescription: NSLocalizedString("Preferences...", comment: "Shown in menu"))
+      preferencesIcon.image = NSImage(systemSymbolName: "gearshape", accessibilityDescription: NSLocalizedString("Preferences…", comment: "Shown in menu"))
+      preferencesIcon.alternateImage = NSImage(systemSymbolName: "gearshape.fill", accessibilityDescription: NSLocalizedString("Preferences…", comment: "Shown in menu"))
       preferencesIcon.alphaValue = 0.3
       preferencesIcon.frame = NSRect(x: menuItemView.frame.maxX - iconSize * 3 - 30 - 16 + compensateForBlock, y: menuItemView.frame.origin.y + 5, width: iconSize, height: iconSize)
       preferencesIcon.imageScaling = .scaleProportionallyUpOrDown
@@ -236,8 +235,8 @@ class MenuHandler: NSMenu, NSMenuDelegate {
       updateIcon.isBordered = false
       updateIcon.setButtonType(.momentaryChange)
       var symbolName = prefs.bool(forKey: PrefKey.showTickMarks.rawValue) ? "arrow.left.arrow.right.square" : "arrow.triangle.2.circlepath.circle"
-      updateIcon.image = NSImage(systemSymbolName: symbolName, accessibilityDescription: NSLocalizedString("Check for updates...", comment: "Shown in menu"))
-      updateIcon.alternateImage = NSImage(systemSymbolName: symbolName + ".fill", accessibilityDescription: NSLocalizedString("Check for updates...", comment: "Shown in menu"))
+      updateIcon.image = NSImage(systemSymbolName: symbolName, accessibilityDescription: NSLocalizedString("Check for updates…", comment: "Shown in menu"))
+      updateIcon.alternateImage = NSImage(systemSymbolName: symbolName + ".fill", accessibilityDescription: NSLocalizedString("Check for updates…", comment: "Shown in menu"))
 
       updateIcon.alphaValue = 0.3
       updateIcon.frame = NSRect(x: menuItemView.frame.maxX - iconSize * 2 - 10 - 16 + compensateForBlock, y: menuItemView.frame.origin.y + 5, width: iconSize, height: iconSize)
@@ -267,8 +266,8 @@ class MenuHandler: NSMenu, NSMenuDelegate {
       if app.macOS10() {
         self.insertItem(NSMenuItem.separator(), at: self.items.count)
       }
-      self.insertItem(withTitle: NSLocalizedString("Preferences...", comment: "Shown in menu"), action: #selector(app.prefsClicked), keyEquivalent: "", at: self.items.count)
-      let updateItem = NSMenuItem(title: NSLocalizedString("Check for updates...", comment: "Shown in menu"), action: #selector(app.updaterController.checkForUpdates(_:)), keyEquivalent: "")
+      self.insertItem(withTitle: NSLocalizedString("Preferences…", comment: "Shown in menu"), action: #selector(app.prefsClicked), keyEquivalent: "", at: self.items.count)
+      let updateItem = NSMenuItem(title: NSLocalizedString("Check for updates…", comment: "Shown in menu"), action: #selector(app.updaterController.checkForUpdates(_:)), keyEquivalent: "")
       updateItem.target = app.updaterController
       self.insertItem(updateItem, at: self.items.count)
       self.insertItem(withTitle: NSLocalizedString("Quit", comment: "Shown in menu"), action: #selector(app.quitClicked), keyEquivalent: "q", at: self.items.count)

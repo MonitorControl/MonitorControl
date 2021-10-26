@@ -20,6 +20,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   var sleepID: Int = 0 // sleep event ID
   var safeMode = false
   var jobRunning = false
+  var startupActionWriteCounter: Int = 0
   var audioPlayer: AVAudioPlayer?
   let updaterController = SPUStandardUpdaterController(startingUpdater: false, updaterDelegate: UpdaterDelegate(), userDriverDelegate: nil)
 
@@ -84,12 +85,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   }
 
   @objc func quitClicked(_: AnyObject) {
-    os_log("Quit clicked", type: .debug)
+    os_log("Quit clicked", type: .info)
     NSApplication.shared.terminate(self)
   }
 
   @objc func prefsClicked(_: AnyObject) {
-    os_log("Preferences clicked", type: .debug)
+    os_log("Preferences clicked", type: .info)
     self.preferencesWindowController.show()
   }
 
@@ -100,7 +101,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
   func applicationWillTerminate(_: Notification) {
     os_log("Goodbye!", type: .info)
-    DisplayManager.shared.resetSwBrightnessForAllDisplays()
+    DisplayManager.shared.resetSwBrightnessForAllDisplays(noPrefSave: true)
     self.statusItem.isVisible = true
   }
 
@@ -112,7 +113,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
   }
 
-  func displayReconfigured() {
+  @objc func displayReconfigured() {
+    DisplayManager.shared.resetSwBrightnessForAllDisplays(noPrefSave: true)
+    CGDisplayRestoreColorSyncSettings()
     self.reconfigureID += 1
     os_log("Bumping reconfigureID to %{public}@", type: .info, String(self.reconfigureID))
     _ = DisplayManager.shared.destroyAllShades()
@@ -135,13 +138,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     DisplayManager.shared.configureDisplays()
     DisplayManager.shared.addDisplayCounterSuffixes()
     DisplayManager.shared.updateArm64AVServices()
-    if firstrun {
-      DisplayManager.shared.resetSwBrightnessForAllDisplays(settingsOnly: true)
+    if firstrun && prefs.integer(forKey: PrefKey.startupAction.rawValue) != StartupAction.write.rawValue {
+      DisplayManager.shared.resetSwBrightnessForAllDisplays(prefsOnly: true)
     }
     DisplayManager.shared.setupOtherDisplays(firstrun: firstrun)
     self.updateMenusAndKeys()
-    if !firstrun {
-      if !prefs.bool(forKey: PrefKey.disableSoftwareFallback.rawValue) || !prefs.bool(forKey: PrefKey.disableCombinedBrightness.rawValue) {
+    if !firstrun || prefs.integer(forKey: PrefKey.startupAction.rawValue) == StartupAction.write.rawValue {
+      if !prefs.bool(forKey: PrefKey.disableCombinedBrightness.rawValue) {
         DisplayManager.shared.restoreSwBrightnessForAllDisplays(async: !prefs.bool(forKey: PrefKey.disableSmoothBrightness.rawValue))
       }
     }
@@ -163,11 +166,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
   private func subscribeEventListeners() {
     NotificationCenter.default.addObserver(self, selector: #selector(self.audioDeviceChanged), name: Notification.Name.defaultOutputDeviceChanged, object: nil) // subscribe Audio output detector (SimplyCoreAudio)
-    DistributedNotificationCenter.default.addObserver(self, selector: #selector(self.colorSyncSettingsChanged), name: NSNotification.Name(rawValue: kColorSyncDisplayDeviceProfilesNotification.takeRetainedValue() as String), object: nil) // ColorSync change
+    DistributedNotificationCenter.default.addObserver(self, selector: #selector(self.displayReconfigured), name: NSNotification.Name(rawValue: kColorSyncDisplayDeviceProfilesNotification.takeRetainedValue() as String), object: nil) // ColorSync change
     NSWorkspace.shared.notificationCenter.addObserver(self, selector: #selector(self.sleepNotification), name: NSWorkspace.screensDidSleepNotification, object: nil) // sleep and wake listeners
-    NSWorkspace.shared.notificationCenter.addObserver(self, selector: #selector(self.wakeNotofication), name: NSWorkspace.screensDidWakeNotification, object: nil)
+    NSWorkspace.shared.notificationCenter.addObserver(self, selector: #selector(self.wakeNotification), name: NSWorkspace.screensDidWakeNotification, object: nil)
     NSWorkspace.shared.notificationCenter.addObserver(self, selector: #selector(self.sleepNotification), name: NSWorkspace.willSleepNotification, object: nil)
-    NSWorkspace.shared.notificationCenter.addObserver(self, selector: #selector(self.wakeNotofication), name: NSWorkspace.didWakeNotification, object: nil)
+    NSWorkspace.shared.notificationCenter.addObserver(self, selector: #selector(self.wakeNotification), name: NSWorkspace.didWakeNotification, object: nil)
     _ = DistributedNotificationCenter.default().addObserver(forName: NSNotification.Name(rawValue: NSNotification.Name.accessibilityApi.rawValue), object: nil, queue: nil) { _ in DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { self.updateMediaKeyTap() } } // listen for accessibility status changes
   }
 
@@ -176,7 +179,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     os_log("Sleeping with sleep %{public}@", type: .info, String(self.sleepID))
   }
 
-  @objc private func wakeNotofication() {
+  @objc private func wakeNotification() {
     if self.sleepID != 0 {
       os_log("Waking up from sleep %{public}@", type: .info, String(self.sleepID))
       let dispatchedSleepID = self.sleepID
@@ -192,12 +195,29 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       self.sleepID = 0
       if self.reconfigureID != 0 {
         let dispatchedReconfigureID = self.reconfigureID
-        os_log("Display needs reconfig after sober with reconfigureID %{public}@", type: .info, String(dispatchedReconfigureID))
+        os_log("Displays need reconfig after sober with reconfigureID %{public}@", type: .info, String(dispatchedReconfigureID))
         self.configure(dispatchedReconfigureID: dispatchedReconfigureID)
       } else if Arm64DDC.isArm64 {
         os_log("Displays don't need reconfig after sober but might need AVServices update", type: .info)
         DisplayManager.shared.updateArm64AVServices()
         self.job(start: true)
+      }
+      self.startupActionWriteRepeatAfterSober()
+    }
+  }
+
+  private func startupActionWriteRepeatAfterSober(dispatchedCounter: Int = 0) {
+    let counter = dispatchedCounter == 0 ? 10 : dispatchedCounter
+    self.startupActionWriteCounter = dispatchedCounter == 0 ? counter : self.startupActionWriteCounter
+    guard prefs.integer(forKey: PrefKey.startupAction.rawValue) == StartupAction.write.rawValue, self.startupActionWriteCounter == counter else {
+      return
+    }
+    os_log("Sober write action repeat for DDC - %{public}@", type: .info, String(counter))
+    DisplayManager.shared.restoreOtherDisplays()
+    self.startupActionWriteCounter = counter - 1
+    if counter > 1 {
+      DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+        self.startupActionWriteRepeatAfterSober(dispatchedCounter: counter - 1)
       }
     }
   }
@@ -208,7 +228,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     if self.sleepID == 0, self.reconfigureID == 0 {
       if !self.jobRunning {
-        os_log("MonitorControl job started.", type: .debug)
+        os_log("MonitorControl job started.", type: .info)
         self.jobRunning = true
       }
       var refreshedSomething = false
@@ -218,7 +238,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
           refreshedSomething = true
           if prefs.bool(forKey: PrefKey.enableBrightnessSync.rawValue) {
             for targetDisplay in DisplayManager.shared.displays where targetDisplay != display {
-              os_log("Updating delta from display %{public}@ to display %{public}@", type: .debug, String(display.identifier), String(targetDisplay.identifier))
+              os_log("Updating delta from display %{public}@ to display %{public}@", type: .info, String(display.identifier), String(targetDisplay.identifier))
               let newValue = max(0, min(1, targetDisplay.getBrightness() + delta))
               _ = targetDisplay.setBrightness(newValue)
               if let slider = targetDisplay.sliderHandler[.brightness] {
@@ -238,11 +258,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
   }
 
-  @objc private func colorSyncSettingsChanged() {
-    CGDisplayRestoreColorSyncSettings()
-    self.displayReconfigured()
-  }
-
   func handleListenForChanged() {
     self.checkPermissions()
     self.updateMediaKeyTap()
@@ -250,7 +265,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
   func preferenceReset() {
     os_log("Resetting all preferences.")
-    if !prefs.bool(forKey: PrefKey.disableSoftwareFallback.rawValue) || !prefs.bool(forKey: PrefKey.disableCombinedBrightness.rawValue) {
+    if !prefs.bool(forKey: PrefKey.disableCombinedBrightness.rawValue) {
       DisplayManager.shared.resetSwBrightnessForAllDisplays(async: false)
     }
     if let bundleID = Bundle.main.bundleIdentifier {
@@ -265,8 +280,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
   @objc func audioDeviceChanged() {
     if let defaultDevice = self.coreAudio.defaultOutputDevice {
-      os_log("Default output device changed to “%{public}@”.", type: .debug, defaultDevice.name)
-      os_log("Can device set its own volume? %{public}@", type: .debug, defaultDevice.canSetVirtualMasterVolume(scope: .output).description)
+      os_log("Default output device changed to “%{public}@”.", type: .info, defaultDevice.name)
+      os_log("Can device set its own volume? %{public}@", type: .info, defaultDevice.canSetVirtualMasterVolume(scope: .output).description)
     }
     self.updateMediaKeyTap()
   }

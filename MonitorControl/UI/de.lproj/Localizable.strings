@@ -7,9 +7,6 @@
 /* Shown in the main prefs window */
 "App menu" = "App Menü";
 
-/* Apple Silicon designation (shown after the version number in Preferences) */
-"Apple Silicon" = "Apple Silicon";
-
 /* Shown in the alert dialog */
 "Are you sure you want to enable a longer delay? Doing so may freeze your system and require a restart. Start at login will be disabled as a safety measure." = "Bist du sicher, dass du eine längere Verzögerung aktivieren willst? Wenn du dies tust, kann dein System einfrieren und einen Neustart erfordern. Der Start bei der Anmeldung wird als Sicherheitsmassnahme deaktiviert.";
 
@@ -26,7 +23,7 @@
 "Built-in Display" = "Integrierter Monitor";
 
 /* Shown in menu */
-"Check for updates..." = "Nach Updates suchen...";
+"Check for updates…" = "Nach Updates suchen…";
 
 /* Shown in menu */
 "Contrast" = "Kontrast";
@@ -67,9 +64,6 @@
 /* Shown in record shortcut box */
 "Increase" = "Erhöhen";
 
-/* Intel designation (shown after the version number in Preferences) */
-"Intel" = "Intel";
-
 /* Shown in the alert dialog */
 "Is f.lux or similar running?" = "Läuft f.lux oder ähnliches?";
 
@@ -92,7 +86,7 @@
 "Preferences for an incompatible previous app version detected. Default preferences are reloaded." = "Einstellungen für eine inkompatible Vorgängerversion des Programms erkannt. Die Standardeinstellungen werden neu geladen.";
 
 /* Shown in menu */
-"Preferences..." = "Einstellungen...";
+"Preferences…" = "Einstellungen…";
 
 /* Shown in menu */
 "Quit" = "Beenden";

@@ -7,9 +7,6 @@
 /* Shown in the main prefs window */
 "App menu" = "앱 메뉴";
 
-/* Apple Silicon designation (shown after the version number in Preferences) */
-"Apple Silicon" = "Apple Silicon";
-
 /* Shown in the alert dialog */
 "Are you sure you want to enable a longer delay? Doing so may freeze your system and require a restart. Start at login will be disabled as a safety measure." = "응답 지연 시간을 연장하시겠습니까? 시스템이 멈추거나 재시작이 필요할 수 있습니다. 로그인 시 자동 실행 옵션은 안전을 위해 비활성화됩니다.";
 
@@ -26,7 +23,7 @@
 "Built-in Display" = "내장 디스플레이";
 
 /* Shown in menu */
-"Check for updates..." = "업데이트 확인...";
+"Check for updates…" = "업데이트 확인…";
 
 /* Shown in menu */
 "Contrast" = "대비";
@@ -67,9 +64,6 @@
 /* Shown in record shortcut box */
 "Increase" = "증가";
 
-/* Intel designation (shown after the version number in Preferences) */
-"Intel" = "Intel";
-
 /* Shown in the alert dialog */
 "Is f.lux or similar running?" = "Is f.lux or similar running?";
 
@@ -92,7 +86,7 @@
 "Preferences for an incompatible previous app version detected. Default preferences are reloaded." = "호환되지 않는 이전 앱 버전에 대한 기본 설정이 감지되었습니다. 기본 환경 설정을 다시 불러옵니다.";
 
 /* Shown in menu */
-"Preferences..." = "환경 설정...";
+"Preferences…" = "환경 설정…";
 
 /* Shown in menu */
 "Quit" = "종료";

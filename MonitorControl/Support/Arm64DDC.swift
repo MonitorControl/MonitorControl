@@ -271,6 +271,10 @@ class Arm64DDC: NSObject {
     if ioregService.manufacturerID == "AOC", ioregService.productName == "28E850" {
       return true
     }
+    // If the display contains the string "Dummy", then it is highly suspicious
+    if ioregService.productName.contains("Dummy") || ioregService.productName.contains("dummy") {
+      return true
+    }
     // First service location of Mac Mini HDMI is broken for DDC communication
     if ioregService.transportDownstream == "HDMI", ioregService.serviceLocation == 1, modelIdentifier == "Macmini9,1" {
       return true

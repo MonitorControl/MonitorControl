@@ -7,9 +7,6 @@
 /* Shown in the main prefs window */
 "App menu" = "App menu";
 
-/* Apple Silicon designation (shown after the version number in Preferences) */
-"Apple Silicon" = "Apple Silicon";
-
 /* Shown in the alert dialog */
 "Are you sure you want to enable a longer delay? Doing so may freeze your system and require a restart. Start at login will be disabled as a safety measure." = "Weet u zeker dat u een langere vertraging wilt inschakelen? Als u dit doet kan uw systeem vastlopen en een herstart nodig hebben. Start bij het inloggen wordt uitgeschakeld als veiligheidsmaatregel.";
 
@@ -26,7 +23,7 @@
 "Built-in Display" = "Ingebouwd Scherm";
 
 /* Shown in menu */
-"Check for updates..." = "Controleren op updates...";
+"Check for updates…" = "Controleren op updates…";
 
 /* Shown in menu */
 "Contrast" = "Contrast";
@@ -67,9 +64,6 @@
 /* Shown in record shortcut box */
 "Increase" = "Verhogen";
 
-/* Intel designation (shown after the version number in Preferences) */
-"Intel" = "Intel";
-
 /* Shown in the alert dialog */
 "Is f.lux or similar running?" = "Is f.lux or similar running?";
 
@@ -92,7 +86,7 @@
 "Preferences for an incompatible previous app version detected. Default preferences are reloaded." = "Voorkeuren voor een incompatibele vorige app-versie gedetecteerd. Standaardvoorkeuren worden opnieuw geladen.";
 
 /* Shown in menu */
-"Preferences..." = "Voorkeuren...";
+"Preferences…" = "Voorkeuren…";
 
 /* Shown in menu */
 "Quit" = "Afsluiten";
