@@ -1,7 +1,6 @@
 <?xml version="1.0" standalone="yes"?>
 <!-- TODO: Use correct channels once setting is present. (after 4.0.0 release) -->
 <!-- <sparkle:channel>beta</sparkle:channel> -->
-<!-- TODO: Use different changelog files for each release -->
 <rss xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle" version="2.0">
     <channel>
         <title>MonitorControl</title>
@@ -52,6 +51,22 @@
                type="application/octet-stream"
                sparkle:edSignature="S8KTrjt00Q9DkQWHleyfxhESqy4MmMKNcne0ebwB/wY1aMH5swhEy0pld8nEmPGy32lccw4feRe9nUWOIvAXCg==" 
                length="4158362"
+            />
+        </item>
+        <item>
+            <title>v4.0.0</title>
+            <sparkle:releaseNotesLink>
+                https://monitorcontrol.app/changelog.html?tag=v4.0.0
+            </sparkle:releaseNotesLink>
+            <pubDate>Thu, 26 Oct 2021 19:32:00 +0200</pubDate>
+            <sparkle:version>6851</sparkle:version>
+            <sparkle:shortVersionString>4.0.0</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>10.15</sparkle:minimumSystemVersion>
+            <enclosure
+               url="https://github.com/MonitorControl/MonitorControl/releases/download/v4.0.0/MonitorControl.4.0.0.dmg"
+               type="application/octet-stream"
+               sparkle:edSignature="5hyW24GNTZKMY/SsIpQ5kItDbgwN0aXQ2WadV0nFpoY0340Ol3dcheGbTt5F8LOZopfJDZvqDbXkvuHgjCKKCA=="
+               length="4271343"
             />
         </item>
     </channel>
