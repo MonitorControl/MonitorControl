@@ -188,7 +188,7 @@
 "j72-NF-zsW.title" = "Bei Anmeldung starten";
 
 /* Class = "NSMenuItem"; title = "Change for all screens"; ObjectID = "jSj-HB-T2t"; */
-"jSj-HB-T2t.title" = "Change for all screens";
+"jSj-HB-T2t.title" = "Für alle Monitore ändern";
 
 /* Class = "NSButtonCell"; title = "Check for updates"; ObjectID = "jVH-oc-rUi"; */
 "jVH-oc-rUi.title" = "Nach Updates suchen";
@@ -341,7 +341,7 @@
 "xQJ-aJ-VhH.title" = "Sowohl Standard- als auch benutzerdefinierte Tastenkombinationen";
 
 /* Class = "NSTextFieldCell"; title = "Works best with various syncing and 'control all' keyboard settings enabled."; ObjectID = "XU4-Bn-bwH"; */
-"XU4-Bn-bwH.title" = "Funktioniert am bestenm mit variabler Synchronisierung und 'Steuerung aller' Tastatureinstellung aktiviert. ";
+"XU4-Bn-bwH.title" = "Funktioniert mit variabler Synchronisierung und 'Steuerung aller'-Tastatureinstellung am besten.";
 
 /* Class = "NSTextFieldCell"; title = "Available"; ObjectID = "yBJ-5d-I7e"; */
 "yBJ-5d-I7e.title" = "Verfügbar";
