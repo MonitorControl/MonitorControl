@@ -137,7 +137,7 @@
 "FER-Ri-4UO.title" = "Volume:";
 
 /* Class = "NSButtonCell"; title = "Allow zero brightness via software or combined dimming"; ObjectID = "FjB-XL-fG5"; */
-"FjB-XL-fG5.title" = "Permetti la luminosità zero cia software o attenuazione combinata";
+"FjB-XL-fG5.title" = "Permetti la luminosità zero via software o attenuazione combinata";
 
 /* Class = "NSTextFieldCell"; title = "Apple and built-in displays already have a brightness slider in Control Center."; ObjectID = "fmZ-HI-Mdc"; */
 "fmZ-HI-Mdc.title" = "I Monitor Apple ed incorporati hanno già lo slider della luminosità nel Centro di Controllo.";
