@@ -29,6 +29,13 @@ class MenuHandler: NSMenu, NSMenuDelegate {
     if !dontClose {
       self.cancelTrackingWithoutAnimation()
     }
+    if prefs.integer(forKey: PrefKey.menuIconStyle.rawValue) == MenuIconStyle.appIcon.rawValue {
+      app.statusItem.button?.image = NSImage(named: "statusAppIcon")
+    } else if !DEBUG_MACOS10, #available(macOS 11.0, *) {
+      app.statusItem.button?.image = NSImage(systemSymbolName: "sun.max", accessibilityDescription: "MonitorControl")
+    } else {
+      app.statusItem.button?.image = NSImage(named: "status")
+    }
     app.statusItem.isVisible = prefs.integer(forKey: PrefKey.menuIcon.rawValue) == MenuIcon.show.rawValue ? true : false
     self.clearMenu()
     let currentDisplay = DisplayManager.shared.getCurrentDisplay()

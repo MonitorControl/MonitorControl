@@ -18,6 +18,7 @@ class MenuslidersPrefsViewController: NSViewController, PreferencePane {
   }
 
   @IBOutlet var iconShow: NSPopUpButton!
+  @IBOutlet var iconStyle: NSPopUpButton!
   @IBOutlet var menuItemStyle: NSPopUpButton!
   @IBOutlet var quitApplication: NSButton!
 
@@ -84,6 +85,7 @@ class MenuslidersPrefsViewController: NSViewController, PreferencePane {
 
   func populateSettings() {
     self.iconShow.selectItem(withTag: prefs.integer(forKey: PrefKey.menuIcon.rawValue))
+    self.iconStyle.selectItem(withTag: prefs.integer(forKey: PrefKey.menuIconStyle.rawValue))
     self.menuItemStyle.selectItem(withTag: prefs.integer(forKey: PrefKey.menuItemStyle.rawValue))
     self.showBrightnessSlider.state = !prefs.bool(forKey: PrefKey.hideBrightness.rawValue) ? .on : .off
     if !prefs.bool(forKey: PrefKey.hideBrightness.rawValue) {
@@ -106,6 +108,12 @@ class MenuslidersPrefsViewController: NSViewController, PreferencePane {
 
   @IBAction func icon(_ sender: NSPopUpButton) {
     prefs.set(sender.selectedTag(), forKey: PrefKey.menuIcon.rawValue)
+    app.updateMenusAndKeys()
+    self.updateGridLayout()
+  }
+
+  @IBAction func iconStyle(_ sender: NSPopUpButton) {
+    prefs.set(sender.selectedTag(), forKey: PrefKey.menuIconStyle.rawValue)
     app.updateMenusAndKeys()
     self.updateGridLayout()
   }

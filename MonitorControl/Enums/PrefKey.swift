@@ -18,6 +18,9 @@ enum PrefKey: String {
   // Hide menu icon
   case menuIcon
 
+  // Menu icon style
+  case menuIconStyle
+
   // Menu item style
   case menuItemStyle
 
@@ -191,6 +194,11 @@ enum MenuIcon: Int {
   case show = 0
   case sliderOnly = 1
   case hide = 2
+}
+
+enum MenuIconStyle: Int {
+  case sun = 0
+  case appIcon = 1
 }
 
 enum MenuItemStyle: Int {
