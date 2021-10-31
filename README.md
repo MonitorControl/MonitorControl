@@ -57,9 +57,9 @@ Go to [Releases](https://github.com/MonitorControl/MonitorControl/releases) and 
 - Allows dimming to full black (advanced feature).
 - Support for custom keyboard shortcuts as well as standard brightness and media keys on Apple keyboards.
 - Dozens of customization options to tweak the inner workings of the app to suit your hardware and needs (don't forget to enable `Show advanced settings` in app Preferences).
-- Modern, stylish and highgly customizable menulet reflecting the design of Control Control introduced in Big Sur.
+- Modern, stylish and highly customizable menulet reflecting the design of Control Control introduced in Big Sur.
 - Simple, unobstrusive UI to blend in to the general aesthetics of macOS (even the menu icon can be hidden).
-- Supports automatic updates for a hassle-free expereince.
+- Supports automatic updates for a hassle-free experience.
 - <b>The best app of its kind, completely FREE (donations accepted) with the source code transparently available!</b>
 
 ## How to install and use the app
