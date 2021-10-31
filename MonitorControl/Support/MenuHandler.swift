@@ -266,7 +266,7 @@ class MenuHandler: NSMenu, NSMenuDelegate {
       if app.macOS10() {
         self.insertItem(NSMenuItem.separator(), at: self.items.count)
       }
-      self.insertItem(withTitle: NSLocalizedString("Preferences…", comment: "Shown in menu"), action: #selector(app.prefsClicked), keyEquivalent: "", at: self.items.count)
+      self.insertItem(withTitle: NSLocalizedString("Preferences…", comment: "Shown in menu"), action: #selector(app.prefsClicked), keyEquivalent: ",", at: self.items.count)
       let updateItem = NSMenuItem(title: NSLocalizedString("Check for updates…", comment: "Shown in menu"), action: #selector(app.updaterController.checkForUpdates(_:)), keyEquivalent: "")
       updateItem.target = app.updaterController
       self.insertItem(updateItem, at: self.items.count)
