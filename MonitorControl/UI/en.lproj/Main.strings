@@ -226,6 +226,9 @@
 /* Class = "NSTextFieldCell"; title = "Contrast:"; ObjectID = "MMk-S2-yJN"; */
 "MMk-S2-yJN.title" = "Contrast:";
 
+/* Class = "NSMenuItem"; title = "Sun"; ObjectID = "Mnv-aN-Aq0"; */
+"Mnv-aN-Aq0.title" = "Sun";
+
 /* Class = "NSTextFieldCell"; title = "Volume:"; ObjectID = "mue-fa-8z6"; */
 "mue-fa-8z6.title" = "Volume:";
 
@@ -286,6 +289,9 @@
 /* Class = "NSMenuItem"; title = "Normal"; ObjectID = "Riq-uM-bTs"; */
 "Riq-uM-bTs.title" = "Normal";
 
+/* Class = "NSTextFieldCell"; title = "Menu Icon Style:"; ObjectID = "s0l-ns-PLE"; */
+"s0l-ns-PLE.title" = "Menu Icon Style:";
+
 /* Class = "NSTextFieldCell"; title = "General menu items style:"; ObjectID = "thh-DG-ecH"; */
 "thh-DG-ecH.title" = "General menu items style:";
 
@@ -321,6 +327,9 @@
 
 /* Class = "NSTextFieldCell"; title = "General options:"; ObjectID = "W58-ch-j69"; */
 "W58-ch-j69.title" = "General options:";
+
+/* Class = "NSMenuItem"; title = "App Icon"; ObjectID = "W74-N1-ptg"; */
+"W74-N1-ptg.title" = "App Icon";
 
 /* Class = "NSTextFieldCell"; title = "Useful when a display tends to reset its settings during sleep."; ObjectID = "w8B-x6-sq5"; */
 "w8B-x6-sq5.title" = "Useful when a display tends to reset its settings during sleep.";
