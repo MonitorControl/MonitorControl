@@ -314,14 +314,14 @@
         <scene sceneID="YU5-7I-f0n">
             <objects>
                 <viewController storyboardIdentifier="MenuslidersPrefsVC" id="tLm-u5-aZ2" customClass="MenuslidersPrefsViewController" customModule="MonitorControl" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" translatesAutoresizingMaskIntoConstraints="NO" id="5un-m0-FM4">
-                        <rect key="frame" x="0.0" y="0.0" width="730" height="601"/>
+                    <view key="view" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5un-m0-FM4">
+                        <rect key="frame" x="0.0" y="0.0" width="730" height="583"/>
                         <subviews>
                             <gridView xPlacement="leading" yPlacement="fill" rowAlignment="none" rowSpacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="ZrF-7t-BP5">
-                                <rect key="frame" x="20" y="20" width="690" height="561"/>
+                                <rect key="frame" x="20" y="20" width="690" height="555"/>
                                 <rows>
                                     <gridRow height="20" bottomPadding="-6" id="jyr-gk-BEN"/>
-                                    <gridRow id="aOv-fY-WgH" userLabel="Row Menu Icon Style"/>
+                                    <gridRow height="20" bottomPadding="-6" id="aOv-fY-WgH" userLabel="Row Menu Icon Style"/>
                                     <gridRow height="20" bottomPadding="-6" id="ZS3-Gy-pfA"/>
                                     <gridRow bottomPadding="-13" id="OpF-3Q-ZZp"/>
                                     <gridRow bottomPadding="-13" id="HAl-L8-LPI"/>
@@ -350,7 +350,7 @@
                                 <gridCells>
                                     <gridCell row="jyr-gk-BEN" column="FRJ-Rb-RRh" xPlacement="trailing" yPlacement="center" id="vn6-rs-m8R">
                                         <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ELU-jk-ITc">
-                                            <rect key="frame" x="141" y="543" width="71" height="16"/>
+                                            <rect key="frame" x="141" y="537" width="71" height="16"/>
                                             <textFieldCell key="cell" lineBreakMode="truncatingTail" baseWritingDirection="leftToRight" alignment="right" title="Menu Icon:" id="u6s-Pb-BCG">
                                                 <font key="font" usesAppearanceFont="YES"/>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -360,7 +360,7 @@
                                     </gridCell>
                                     <gridCell row="jyr-gk-BEN" column="V6M-Jv-Agj" xPlacement="leading" id="wUb-Z3-UWb">
                                         <popUpButton key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="TFy-Wt-ZJK">
-                                            <rect key="frame" x="217" y="537" width="252" height="25"/>
+                                            <rect key="frame" x="217" y="531" width="252" height="25"/>
                                             <popUpButtonCell key="cell" type="push" title="Always show in the menu bar" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="MM0-Lf-VgF" id="p9E-Ck-YKe">
                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" metaFont="menu"/>
@@ -379,7 +379,7 @@
                                     </gridCell>
                                     <gridCell row="aOv-fY-WgH" column="FRJ-Rb-RRh" xPlacement="trailing" yPlacement="center" id="8ws-du-DpN">
                                         <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="LLv-GQ-Kkk">
-                                            <rect key="frame" x="107" y="509" width="105" height="16"/>
+                                            <rect key="frame" x="107" y="503" width="105" height="16"/>
                                             <textFieldCell key="cell" lineBreakMode="truncatingTail" baseWritingDirection="leftToRight" alignment="right" title="Menu Icon Style:" id="s0l-ns-PLE">
                                                 <font key="font" usesAppearanceFont="YES"/>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -389,7 +389,7 @@
                                     </gridCell>
                                     <gridCell row="aOv-fY-WgH" column="V6M-Jv-Agj" xPlacement="leading" id="nXi-D3-ksi">
                                         <popUpButton key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="of7-gI-AjY" userLabel="Menu icon style">
-                                            <rect key="frame" x="217" y="503" width="93" height="25"/>
+                                            <rect key="frame" x="217" y="497" width="93" height="25"/>
                                             <popUpButtonCell key="cell" type="push" title="Sun" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="Mnv-aN-Aq0" id="0FI-t8-vXT">
                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" metaFont="menu"/>
