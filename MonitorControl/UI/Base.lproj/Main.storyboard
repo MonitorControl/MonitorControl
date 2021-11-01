@@ -321,7 +321,7 @@
                                 <rect key="frame" x="20" y="20" width="690" height="561"/>
                                 <rows>
                                     <gridRow height="20" bottomPadding="-6" id="jyr-gk-BEN"/>
-                                    <gridRow id="aOv-fY-WgH"/>
+                                    <gridRow id="aOv-fY-WgH" userLabel="Row Menu Icon Style"/>
                                     <gridRow height="20" bottomPadding="-6" id="ZS3-Gy-pfA"/>
                                     <gridRow bottomPadding="-13" id="OpF-3Q-ZZp"/>
                                     <gridRow bottomPadding="-13" id="HAl-L8-LPI"/>
