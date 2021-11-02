@@ -485,7 +485,11 @@ class DisplayManager {
       }
     }
     if let screen = getByDisplayID(displayID: displayID) { // MARK: This, and NSScreen+Extension.swift will not be needed when we drop MacOS 10 support.
-      return screen.localizedName
+      if #available(macOS 10.15, *) {
+        return screen.localizedName
+      } else {
+        return screen.displayName ?? defaultName
+      }
     }
     return defaultName
   }
