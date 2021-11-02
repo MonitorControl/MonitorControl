@@ -82,7 +82,7 @@ Go to [Releases](https://github.com/MonitorControl/MonitorControl/releases) and 
 <img src=".github/pref_4.png" width="412" alt="Screenshot"/><br/>
 </div>
 
-## Compatibility
+## macOS compatibility
 
 | MonitorControl version | macOS version     |
 | ---------------------- | ----------------- |
@@ -92,9 +92,7 @@ Go to [Releases](https://github.com/MonitorControl/MonitorControl/releases) and 
 
 _* With some limitations - full functionality available on macOS 11 Big Sur or newer._
 
-Note to f.lux users: the app is now compatible with [f.lux](https://justgetflux.com) as well - please activate `Avoid gamma table manipulation` under `Preferences` » `Displays`! This step is not needed if you use Night Shift.
-
-## Supported hardware
+## Supported displays
 
 - Most modern LCD displays from all major manufacturers supported implemented DDC/CI protocol via DisplayPort, HDMI, USB-C or VGA to allow for hardware backlight control.
 - Apple (and LG-Apple) displays and built-in displays are supported using native protocol.
@@ -107,11 +105,13 @@ Dummy compatibility:
 - The app is compatible with [BetterDummy](https://github.com/waydabber/BetterDummy) mirrored sets.
 - The app is compatible with mirrored sets that include a dummy dongle identifying as `28E850`
 
-Notable exceptions for hardware control:
+Notable exceptions for hardware control compatibility:
 
 - Some displays (notably EIZO) use MCCS over USB or an entirely custom protocol for control. These displays are supported with software dimming only.
 - The HDMI port of the 2018 Intel Mac mini and 2020 M1 Mac mini prohibit DDC communication. Software control is still available. We recommend connecting the display via the USB-C port (USB-C to HDMI dongles usually work).
 - DisplayLink docks and dongles do not allow for DDC control on Macs, only software dimming is available for these connections.
+
+Note to f.lux users - please activate `Avoid gamma table manipulation` under `Preferences` » `Displays`! This step is not needed if you use Night Shift.
 
 ## How to help
 
