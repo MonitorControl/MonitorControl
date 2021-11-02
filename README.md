@@ -2,7 +2,7 @@
 
 <div>
 <h2>MonitorControl - for Apple Silicon and Intel</h2>
-<p>Controls your external display brightness and volume and shows native OSD.<br/>
+<p>Controls your external display brightness and volume and shows native OSD.
 Use menulet sliders or the keyboard, including native Apple keys!</p>
 <a href="https://github.com/MonitorControl/MonitorControl/releases"><img src=".github/macos_badge_noborder.png" width="175" alt="Download for macOS"/></a>
 </div>
@@ -96,17 +96,22 @@ Note to f.lux users: the app is now compatible with [f.lux](https://justgetflux.
 
 ## Supported hardware
 
-* Most modern LCD displays from all major manufacturers supported implemented DDC/CI protocol via DisplayPort, HDMI, USB-C or VGA to allow for hardware backlight control.
-* Apple (and LG-Apple) displays and built-in displays are supported using native protocol.
-* LCD and LED Televisions usually do not implement DDC, these are supported using software alternatives to dim the image (some higher-end sets are able to translate this into hardware backlight dimming).
-* OLED or mini/micro-LED displays and televisions are fully supported using gamma table manipulation (this is a no-compromise solution for this class of displays).
-* DisplayLink, Airplay and Sidecar are supported using shade (dark overlay) control.
+- Most modern LCD displays from all major manufacturers supported implemented DDC/CI protocol via DisplayPort, HDMI, USB-C or VGA to allow for hardware backlight control.
+- Apple (and LG-Apple) displays and built-in displays are supported using native protocol.
+- LCD and LED Televisions usually do not implement DDC, these are supported using software alternatives to dim the image (some higher-end sets are able to translate this into hardware backlight dimming).
+- OLED or mini/micro-LED displays and televisions are fully supported using gamma table manipulation (this is a no-compromise solution for this class of displays).
+- DisplayLink, Airplay and Sidecar are supported using shade (dark overlay) control.
+
+Dummy compatibility:
+
+- The app is compatible with [BetterDummy](https://github.com/waydabber/BetterDummy) mirrored sets.
+- The app is compatible with mirrored sets that include a dummy dongle identifying as `28E850`
 
 Notable exceptions for hardware control:
 
-* Some displays (notably EIZO) use MCCS over USB or an entirely custom protocol for control. These displays are supported with software dimming only.
-* The HDMI port of the 2018 Intel Mac mini and 2020 M1 Mac mini prohibit DDC communication. Software control is still available. We recommend connecting the display via the USB-C port (USB-C to HDMI dongles usually work).
-* DisplayLink docks and dongles do not allow for DDC control on Macs, only software dimming is available for these connections.
+- Some displays (notably EIZO) use MCCS over USB or an entirely custom protocol for control. These displays are supported with software dimming only.
+- The HDMI port of the 2018 Intel Mac mini and 2020 M1 Mac mini prohibit DDC communication. Software control is still available. We recommend connecting the display via the USB-C port (USB-C to HDMI dongles usually work).
+- DisplayLink docks and dongles do not allow for DDC control on Macs, only software dimming is available for these connections.
 
 ## How to help
 
