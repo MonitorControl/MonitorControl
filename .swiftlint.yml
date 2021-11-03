@@ -4,7 +4,7 @@ disabled_rules:
   - identifier_name
   - trailing_comma
 type_body_length: 500
-file_length: 500
+file_length: 750
 cyclomatic_complexity:
   ignores_case_statements: true
 opening_brace:
