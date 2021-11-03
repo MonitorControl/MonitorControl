@@ -142,6 +142,15 @@ class DisplayManager {
     return false
   }
 
+  func isTreatedAsDummy(displayID: CGDirectDisplayID) -> Bool {
+    let rawName = DisplayManager.getDisplayRawNameByID(displayID: displayID)
+    if rawName == "28E850" || rawName.lowercased().contains("dummy") {
+      os_log("NOTE: Display is a dummy!", type: .info)
+      return true
+    }
+    return false
+  }
+
   func configureDisplays() {
     self.clearDisplays()
     var onlineDisplayIDs = [CGDirectDisplayID](repeating: 0, count: 16)
@@ -151,17 +160,12 @@ class DisplayManager {
       return
     }
     for onlineDisplayID in onlineDisplayIDs where onlineDisplayID != 0 {
-      let rawName = DisplayManager.getDisplayRawNameByID(displayID: onlineDisplayID)
       let name = DisplayManager.getDisplayNameByID(displayID: onlineDisplayID)
       let id = onlineDisplayID
       let vendorNumber = CGDisplayVendorNumber(onlineDisplayID)
       let modelNumber = CGDisplayModelNumber(onlineDisplayID)
-      var isDummy: Bool = false
+      let isDummy: Bool = isTreatedAsDummy(displayID: onlineDisplayID)
       var isVirtual: Bool = false
-      if rawName == "28E850" || rawName.lowercased().contains("dummy") {
-        os_log("NOTE: Display is a dummy!", type: .info)
-        isDummy = true
-      }
       if !DEBUG_MACOS10, #available(macOS 11.0, *) {
         if let dictionary = ((CoreDisplay_DisplayCreateInfoDictionary(onlineDisplayID))?.takeRetainedValue() as NSDictionary?) {
           let isVirtualDevice = dictionary["kCGDisplayIsVirtualDevice"] as? Bool
