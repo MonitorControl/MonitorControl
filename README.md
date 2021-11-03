@@ -76,10 +76,10 @@ Go to [Releases](https://github.com/MonitorControl/MonitorControl/releases) and 
 ## Screenshots (Preferences)
 
 <div align="center">
-<img src=".github/pref_1.png" width="380" alt="Screenshot"/>
-<img src=".github/pref_2.png" width="380" alt="Screenshot"/>
-<img src=".github/pref_3.png" width="380" alt="Screenshot"/>
-<img src=".github/pref_4.png" width="380" alt="Screenshot"/>
+<img src=".github/pref_1.png" width="392" alt="Screenshot"/>
+<img src=".github/pref_2.png" width="392" alt="Screenshot"/>
+<img src=".github/pref_3.png" width="392" alt="Screenshot"/>
+<img src=".github/pref_4.png" width="392" alt="Screenshot"/>
 </div>
 
 ## macOS compatibility
