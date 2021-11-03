@@ -44,6 +44,7 @@ class DisplayManager {
   internal var shadeGrave: [NSWindow] = []
 
   func isDisqualifiedFromShade(_ displayID: CGDirectDisplayID) -> Bool { // We ban mirror members from shade control as it might lead to double control
+    // TODO: Fix scenario of virtual->virtual mirrors to support BetterDummy
     return (CGDisplayIsInHWMirrorSet(displayID) != 0 || CGDisplayIsInMirrorSet(displayID) != 0) ? true : false
   }
 
@@ -142,15 +143,6 @@ class DisplayManager {
     return false
   }
 
-  func isTreatedAsDummy(displayID: CGDirectDisplayID) -> Bool {
-    let rawName = DisplayManager.getDisplayRawNameByID(displayID: displayID)
-    if rawName == "28E850" || rawName.lowercased().contains("dummy") {
-      os_log("NOTE: Display is a dummy!", type: .info)
-      return true
-    }
-    return false
-  }
-
   func configureDisplays() {
     self.clearDisplays()
     var onlineDisplayIDs = [CGDirectDisplayID](repeating: 0, count: 16)
@@ -164,7 +156,7 @@ class DisplayManager {
       let id = onlineDisplayID
       let vendorNumber = CGDisplayVendorNumber(onlineDisplayID)
       let modelNumber = CGDisplayModelNumber(onlineDisplayID)
-      let isDummy: Bool = isTreatedAsDummy(displayID: onlineDisplayID)
+      let isDummy: Bool = DisplayManager.isTreatedAsDummy(displayID: onlineDisplayID)
       var isVirtual: Bool = false
       if !DEBUG_MACOS10, #available(macOS 11.0, *) {
         if let dictionary = ((CoreDisplay_DisplayCreateInfoDictionary(onlineDisplayID))?.takeRetainedValue() as NSDictionary?) {
@@ -393,6 +385,17 @@ class DisplayManager {
       affectedDisplays = []
     }
     return affectedDisplays
+  }
+
+  static func isTreatedAsDummy(displayID: CGDirectDisplayID) -> Bool {
+    let rawName = DisplayManager.getDisplayRawNameByID(displayID: displayID)
+    var isDummy: Bool = false
+    if rawName == "28E850" || rawName.lowercased().contains("dummy") {
+      os_log("NOTE: Display is a dummy!", type: .info)
+      isDummy = false
+    }
+    // TODO: Fix scenario of virtual->virtual mirrors to support BetterDummy
+    return isDummy
   }
 
   static func engageMirror() -> Bool {

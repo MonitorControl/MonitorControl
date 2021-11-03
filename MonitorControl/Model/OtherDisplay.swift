@@ -22,6 +22,7 @@ class OtherDisplay: Display {
     }
     set { prefs.set(newValue, forKey: PrefKey.pollingCount.rawValue + self.prefsId) }
   }
+
   let writeDDCQueue = DispatchQueue(label: "thread-safe-obj", attributes: .concurrent)
   var writeDDCNextValue: [Command: UInt16] = [:]
   var writeDDCLastSavedValue: [Command: UInt16] = [:]
