@@ -359,7 +359,7 @@ class DisplaysPrefsCellView: NSTableCellView {
         self.ddcButton.state = .on
         self.ddcButtonToggled(self.ddcButton)
         self.avoidGamma.state = .off
-        self.ddcButtonToggled(self.avoidGamma)
+        self.avoidGamma(self.avoidGamma)
         self.disableVolumeOSDButton.state = .off
         self.disableVolumeOSDButton(self.disableVolumeOSDButton)
         self.pollingModeMenu.selectItem(withTag: 2)
