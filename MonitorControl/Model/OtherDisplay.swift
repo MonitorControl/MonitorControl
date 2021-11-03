@@ -22,6 +22,9 @@ class OtherDisplay: Display {
     }
     set { prefs.set(newValue, forKey: PrefKey.pollingCount.rawValue + self.prefsId) }
   }
+  let writeDDCQueue = DispatchQueue(label: "thread-safe-obj", attributes: .concurrent)
+  var writeDDCNextValue: [Command: UInt16] = [:]
+  var writeDDCLastSavedValue: [Command: UInt16] = [:]
 
   override init(_ identifier: CGDirectDisplayID, name: String, vendorNumber: UInt32?, modelNumber: UInt32?, isVirtual: Bool = false, isDummy: Bool = false) {
     super.init(identifier, name: name, vendorNumber: vendorNumber, modelNumber: modelNumber, isVirtual: isVirtual, isDummy: isDummy)
@@ -374,26 +377,32 @@ class OtherDisplay: Display {
     return intCodes
   }
 
-  var writeDDCNextValue: [Command: UInt16] = [:]
-  var writeDDCLastSavedValue: [Command: UInt16] = [:]
-
   public func writeDDCValues(command: Command, value: UInt16) {
     guard app.sleepID == 0, app.reconfigureID == 0, !self.readPrefAsBool(key: .forceSw), !self.readPrefAsBool(key: .unavailableDDC, for: command) else {
       return
     }
-    self.writeDDCNextValue[command] = value
+    self.writeDDCQueue.async(flags: .barrier) {
+      self.writeDDCNextValue[command] = value
+    }
     DisplayManager.shared.ddcQueue.async {
       self.asyncPerformWriteDDCValues(command: command)
     }
   }
 
   func asyncPerformWriteDDCValues(command: Command) {
-    let value = self.writeDDCNextValue[command] ?? 100
-    guard value != self.writeDDCLastSavedValue[command] else {
+    var value = UInt16.max
+    var lastValue = UInt16.max
+    self.writeDDCQueue.sync {
+      value = self.writeDDCNextValue[command] ?? UInt16.max
+      lastValue = self.writeDDCLastSavedValue[command] ?? UInt16.max
+    }
+    guard value != UInt16.max, value != lastValue else {
       return
     }
-    self.writeDDCLastSavedValue[command] = value
-    self.savePref(true, key: PrefKey.isTouched, for: command)
+    self.writeDDCQueue.async(flags: .barrier) {
+      self.writeDDCLastSavedValue[command] = value
+      self.savePref(true, key: PrefKey.isTouched, for: command)
+    }
     var controlCodes = self.getRemapControlCodes(command: command)
     if controlCodes.count == 0 {
       controlCodes.append(command.rawValue)
