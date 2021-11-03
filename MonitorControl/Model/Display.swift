@@ -230,7 +230,7 @@ class Display: Equatable {
             return
           }
           if self.isVirtual || self.readPrefAsBool(key: .avoidGamma) {
-            _ = DisplayManager.shared.setShadeAlpha(value: 1 - transientValue, displayID: self.identifier)
+            _ = DisplayManager.shared.setShadeAlpha(value: 1 - transientValue, displayID: DisplayManager.resolveEffectiveDisplayID(self.identifier))
           } else {
             let gammaTableRed = self.defaultGammaTableRed.map { $0 * transientValue }
             let gammaTableGreen = self.defaultGammaTableGreen.map { $0 * transientValue }
@@ -243,7 +243,7 @@ class Display: Equatable {
     } else {
       if self.isVirtual || self.readPrefAsBool(key: .avoidGamma) {
         self.swBrightnessSemaphore.signal()
-        return DisplayManager.shared.setShadeAlpha(value: 1 - newValue, displayID: self.identifier)
+        return DisplayManager.shared.setShadeAlpha(value: 1 - newValue, displayID: DisplayManager.resolveEffectiveDisplayID(self.identifier))
       } else {
         let gammaTableRed = self.defaultGammaTableRed.map { $0 * newValue }
         let gammaTableGreen = self.defaultGammaTableGreen.map { $0 * newValue }
@@ -267,7 +267,7 @@ class Display: Equatable {
     }
     self.swBrightnessSemaphore.wait()
     if self.isVirtual || self.readPrefAsBool(key: .avoidGamma) {
-      let rawBrightnessValue = 1 - (DisplayManager.shared.getShadeAlpha(displayID: self.identifier) ?? 1)
+      let rawBrightnessValue = 1 - (DisplayManager.shared.getShadeAlpha(displayID: DisplayManager.resolveEffectiveDisplayID(self.identifier)) ?? 1)
       self.swBrightnessSemaphore.signal()
       return self.swBrightnessTransform(value: rawBrightnessValue, reverse: true)
     }

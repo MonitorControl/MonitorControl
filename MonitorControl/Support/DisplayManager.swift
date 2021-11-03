@@ -43,9 +43,22 @@ class DisplayManager {
   internal var shades: [CGDirectDisplayID: NSWindow] = [:]
   internal var shadeGrave: [NSWindow] = []
 
-  func isDisqualifiedFromShade(_ displayID: CGDirectDisplayID) -> Bool { // We ban mirror members from shade control as it might lead to double control
-    // TODO: Fix scenario of virtual->virtual mirrors to support BetterDummy
-    return (CGDisplayIsInHWMirrorSet(displayID) != 0 || CGDisplayIsInMirrorSet(displayID) != 0) ? true : false
+  func isDisqualifiedFromShade(_ displayID: CGDirectDisplayID) -> Bool {
+    if CGDisplayIsInHWMirrorSet(displayID) != 0 || CGDisplayIsInMirrorSet(displayID) != 0 {
+      if displayID == DisplayManager.resolveEffectiveDisplayID(displayID), DisplayManager.isVirtual(displayID: displayID) || DisplayManager.isDummy(displayID: displayID) {
+        var displayIDs = [CGDirectDisplayID](repeating: 0, count: 16)
+        var displayCount: UInt32 = 0
+        guard CGGetOnlineDisplayList(16, &displayIDs, &displayCount) == .success else {
+          return true
+        }
+        for displayId in displayIDs where CGDisplayMirrorsDisplay(displayId) == displayID && !DisplayManager.isVirtual(displayID: displayID) {
+          return true
+        }
+        return false
+      }
+      return true
+    }
+    return false
   }
 
   internal func createShadeOnDisplay(displayID: CGDirectDisplayID) -> NSWindow? {
@@ -156,18 +169,8 @@ class DisplayManager {
       let id = onlineDisplayID
       let vendorNumber = CGDisplayVendorNumber(onlineDisplayID)
       let modelNumber = CGDisplayModelNumber(onlineDisplayID)
-      let isDummy: Bool = DisplayManager.isTreatedAsDummy(displayID: onlineDisplayID)
-      var isVirtual: Bool = false
-      if !DEBUG_MACOS10, #available(macOS 11.0, *) {
-        if let dictionary = ((CoreDisplay_DisplayCreateInfoDictionary(onlineDisplayID))?.takeRetainedValue() as NSDictionary?) {
-          let isVirtualDevice = dictionary["kCGDisplayIsVirtualDevice"] as? Bool
-          let displayIsAirplay = dictionary["kCGDisplayIsAirPlay"] as? Bool
-          if isVirtualDevice ?? displayIsAirplay ?? false {
-            os_log("NOTE: Display is virtual!", type: .info)
-            isVirtual = true
-          }
-        }
-      }
+      let isDummy: Bool = DisplayManager.isDummy(displayID: onlineDisplayID)
+      let isVirtual: Bool = DisplayManager.isVirtual(displayID: onlineDisplayID)
       if !DEBUG_SW, DisplayManager.isAppleDisplay(displayID: onlineDisplayID) { // MARK: (point of interest for testing)
         let appleDisplay = AppleDisplay(id, name: name, vendorNumber: vendorNumber, modelNumber: modelNumber, isVirtual: isVirtual, isDummy: isDummy)
         os_log("Apple display found - %{public}@", type: .info, "ID: \(appleDisplay.identifier), Name: \(appleDisplay.name) (Vendor: \(appleDisplay.vendorNumber ?? 0), Model: \(appleDisplay.modelNumber ?? 0))")
@@ -387,15 +390,28 @@ class DisplayManager {
     return affectedDisplays
   }
 
-  static func isTreatedAsDummy(displayID: CGDirectDisplayID) -> Bool {
+  static func isDummy(displayID: CGDirectDisplayID) -> Bool {
     let rawName = DisplayManager.getDisplayRawNameByID(displayID: displayID)
     var isDummy: Bool = false
     if rawName == "28E850" || rawName.lowercased().contains("dummy") {
       os_log("NOTE: Display is a dummy!", type: .info)
       isDummy = false
     }
-    // TODO: Fix scenario of virtual->virtual mirrors to support BetterDummy
     return isDummy
+  }
+
+  static func isVirtual(displayID: CGDirectDisplayID) -> Bool {
+    var isVirtual: Bool = false
+    if !DEBUG_MACOS10, #available(macOS 11.0, *) {
+      if let dictionary = ((CoreDisplay_DisplayCreateInfoDictionary(displayID))?.takeRetainedValue() as NSDictionary?) {
+        let isVirtualDevice = dictionary["kCGDisplayIsVirtualDevice"] as? Bool
+        let displayIsAirplay = dictionary["kCGDisplayIsAirPlay"] as? Bool
+        if isVirtualDevice ?? displayIsAirplay ?? false {
+          isVirtual = true
+        }
+      }
+    }
+    return isVirtual
   }
 
   static func engageMirror() -> Bool {
