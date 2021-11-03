@@ -295,10 +295,10 @@ class SliderHandler {
     } else if !otherDisplay.isSw() {
       if self.command == Command.audioSpeakerVolume {
         if !otherDisplay.readPrefAsBool(key: .enableMuteUnmute) || value != 0 {
-          _ = otherDisplay.writeDDCValues(command: self.command, value: otherDisplay.convValueToDDC(for: self.command, from: value))
+          otherDisplay.writeDDCValues(command: self.command, value: otherDisplay.convValueToDDC(for: self.command, from: value))
         }
       } else {
-        _ = otherDisplay.writeDDCValues(command: self.command, value: otherDisplay.convValueToDDC(for: self.command, from: value))
+        otherDisplay.writeDDCValues(command: self.command, value: otherDisplay.convValueToDDC(for: self.command, from: value))
       }
       otherDisplay.savePref(value, for: self.command)
     }
