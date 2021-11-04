@@ -414,7 +414,7 @@ class OtherDisplay: Display {
           _ = Arm64DDC.write(service: self.arm64avService, command: controlCode, value: value)
         }
       } else {
-        _ = self.ddc?.write(command: command.rawValue, value: value, errorRecoveryWaitTime: 2000) ?? false
+        _ = self.ddc?.write(command: controlCode, value: value, errorRecoveryWaitTime: 2000) ?? false
       }
     }
   }
