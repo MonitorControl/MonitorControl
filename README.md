@@ -60,7 +60,7 @@ Go to [Releases](https://github.com/MonitorControl/MonitorControl/releases) and 
 - Modern, stylish and highly customizable menulet reflecting the design of Control Control introduced in Big Sur.
 - Simple, unobstrusive UI to blend in to the general aesthetics of macOS (even the menu icon can be hidden).
 - Supports automatic updates for a hassle-free experience.
-- <b>The best app of its kind, completely FREE (donations accepted) with the source code transparently available!</b>
+- <b>The best app of its kind, completely FREE ([donations welcome](https://opencollective.com/monitorcontrol)) with the source code transparently available!</b>
 
 ## How to install and use the app
 
@@ -115,7 +115,9 @@ Note to f.lux users - please activate `Avoid gamma table manipulation` under `Pr
 
 ## How to help
 
-Open [issues](https://github.com/MonitorControl/MonitorControl/issues) if you have a question, an enhancement to suggest or a bug you've found. If you want, you can fork the code yourself and submit a pull request to improve the app.
+- You can greatly help out [by financing the project with your donation or by being a Sponsor](https://opencollective.com/monitorcontrol)!
+- Open [issues](https://github.com/MonitorControl/MonitorControl/issues) if you have a question, an enhancement to suggest or a bug you've found.
+- If you want, you can fork the code yourself and submit a pull request to improve the app (Note: accepting a PR is solely in the collective hands of the maintainers).
 
 ## Localizations
 
