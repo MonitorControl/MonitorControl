@@ -39,10 +39,7 @@ class MenuHandler: NSMenu, NSMenuDelegate {
     displays.append(contentsOf: DisplayManager.shared.getOtherDisplays())
     let relevant = prefs.integer(forKey: PrefKey.multiSliders.rawValue) == MultiSliders.relevant.rawValue
     let combine = prefs.integer(forKey: PrefKey.multiSliders.rawValue) == MultiSliders.combine.rawValue
-    var numOfDisplays = 0
-    for display in displays {
-      numOfDisplays += display.isDummy ? 0 : 1
-    }
+    let numOfDisplays = displays.filter { !$0.isDummy }.count
     if numOfDisplays != 0 {
       let asSubMenu: Bool = (displays.count > 3 && !relevant && !combine && app.macOS10()) ? true : false
       var iterator = 0
