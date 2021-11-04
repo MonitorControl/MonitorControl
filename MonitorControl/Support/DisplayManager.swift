@@ -66,13 +66,16 @@ class DisplayManager {
       let shade = NSWindow(contentRect: .init(origin: NSPoint(x: 0, y: 0), size: .init(width: 10, height: 1)), styleMask: [], backing: .buffered, defer: false)
       shade.title = "Monitor Control Window Shade for Display " + String(displayID)
       shade.isMovableByWindowBackground = false
-      shade.backgroundColor = .black
+      shade.backgroundColor = .clear
       shade.ignoresMouseEvents = true
       shade.level = NSWindow.Level(rawValue: Int(CGShieldingWindowLevel()))
-      shade.alphaValue = 0
       shade.orderFrontRegardless()
       shade.collectionBehavior = [.stationary, .canJoinAllSpaces, .ignoresCycle]
       shade.setFrame(screen.frame, display: true)
+      shade.contentView?.wantsLayer = true
+      shade.contentView?.alphaValue = 0.0
+      shade.contentView?.layer?.backgroundColor = .black
+      shade.contentView?.setNeedsDisplay(shade.frame)
       os_log("Window shade created for display %{public}@", type: .info, String(displayID))
       return shade
     }
@@ -139,7 +142,7 @@ class DisplayManager {
       return 1
     }
     if let shade = getShade(displayID: displayID) {
-      return Float(shade.alphaValue)
+      return Float(shade.contentView?.alphaValue ?? 1)
     } else {
       return 1
     }
@@ -150,7 +153,7 @@ class DisplayManager {
       return false
     }
     if let shade = getShade(displayID: displayID) {
-      shade.alphaValue = CGFloat(value)
+      shade.contentView?.alphaValue = CGFloat(value)
       return true
     }
     return false
