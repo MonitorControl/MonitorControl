@@ -9,6 +9,9 @@ class OtherDisplay: Display {
   var arm64ddc: Bool = false
   var arm64avService: IOAVService?
   var isDiscouraged: Bool = false
+  let writeDDCQueue = DispatchQueue(label: "Local write DDC queue")
+  var writeDDCNextValue: [Command: UInt16] = [:]
+  var writeDDCLastSavedValue: [Command: UInt16] = [:]
   var pollingCount: Int {
     get {
       switch self.readPrefAsInt(key: .pollingMode) {
@@ -22,10 +25,6 @@ class OtherDisplay: Display {
     }
     set { prefs.set(newValue, forKey: PrefKey.pollingCount.rawValue + self.prefsId) }
   }
-
-  let writeDDCQueue = DispatchQueue(label: "thread-safe-obj", attributes: .concurrent)
-  var writeDDCNextValue: [Command: UInt16] = [:]
-  var writeDDCLastSavedValue: [Command: UInt16] = [:]
 
   override init(_ identifier: CGDirectDisplayID, name: String, vendorNumber: UInt32?, modelNumber: UInt32?, isVirtual: Bool = false, isDummy: Bool = false) {
     super.init(identifier, name: name, vendorNumber: vendorNumber, modelNumber: modelNumber, isVirtual: isVirtual, isDummy: isDummy)
@@ -385,7 +384,7 @@ class OtherDisplay: Display {
     self.writeDDCQueue.async(flags: .barrier) {
       self.writeDDCNextValue[command] = value
     }
-    DisplayManager.shared.ddcQueue.async {
+    DisplayManager.shared.globalDDCQueue.async(flags: .barrier) {
       self.asyncPerformWriteDDCValues(command: command)
     }
   }
@@ -430,7 +429,7 @@ class OtherDisplay: Display {
       guard self.arm64ddc else {
         return nil
       }
-      DisplayManager.shared.ddcQueue.sync {
+      DisplayManager.shared.globalDDCQueue.sync {
         if let unwrappedDelay = delay {
           values = Arm64DDC.read(service: self.arm64avService, command: controlCode, tries: UInt8(min(tries, 255)), minReplyDelay: UInt32(unwrappedDelay / 1000))
         } else {
@@ -438,7 +437,7 @@ class OtherDisplay: Display {
         }
       }
     } else {
-      DisplayManager.shared.ddcQueue.sync {
+      DisplayManager.shared.globalDDCQueue.sync {
         values = self.ddc?.read(command: controlCode, tries: tries, minReplyDelay: delay)
       }
     }
