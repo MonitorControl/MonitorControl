@@ -9,7 +9,7 @@ class DisplayManager {
 
   var displays: [Display] = []
   var audioControlTargetDisplays: [OtherDisplay] = []
-  let ddcQueue = DispatchQueue(label: "DDC queue")
+  let globalDDCQueue = DispatchQueue(label: "Global DDC queue")
   let gammaActivityEnforcer = NSWindow(contentRect: .init(origin: NSPoint(x: 0, y: 0), size: .init(width: DEBUG_GAMMA_ENFORCER ? 15 : 1, height: DEBUG_GAMMA_ENFORCER ? 15 : 1)), styleMask: [], backing: .buffered, defer: false)
   var gammaInterferenceCounter = 0
   var gammaInterferenceWarningShown = false
@@ -43,8 +43,22 @@ class DisplayManager {
   internal var shades: [CGDirectDisplayID: NSWindow] = [:]
   internal var shadeGrave: [NSWindow] = []
 
-  func isDisqualifiedFromShade(_ displayID: CGDirectDisplayID) -> Bool { // We ban mirror members from shade control as it might lead to double control
-    return (CGDisplayIsInHWMirrorSet(displayID) != 0 || CGDisplayIsInMirrorSet(displayID) != 0) ? true : false
+  func isDisqualifiedFromShade(_ displayID: CGDirectDisplayID) -> Bool {
+    if CGDisplayIsInHWMirrorSet(displayID) != 0 || CGDisplayIsInMirrorSet(displayID) != 0 {
+      if displayID == DisplayManager.resolveEffectiveDisplayID(displayID), DisplayManager.isVirtual(displayID: displayID) || DisplayManager.isDummy(displayID: displayID) {
+        var displayIDs = [CGDirectDisplayID](repeating: 0, count: 16)
+        var displayCount: UInt32 = 0
+        guard CGGetOnlineDisplayList(16, &displayIDs, &displayCount) == .success else {
+          return true
+        }
+        for displayId in displayIDs where CGDisplayMirrorsDisplay(displayId) == displayID && !DisplayManager.isVirtual(displayID: displayID) {
+          return true
+        }
+        return false
+      }
+      return true
+    }
+    return false
   }
 
   internal func createShadeOnDisplay(displayID: CGDirectDisplayID) -> NSWindow? {
@@ -52,13 +66,16 @@ class DisplayManager {
       let shade = NSWindow(contentRect: .init(origin: NSPoint(x: 0, y: 0), size: .init(width: 10, height: 1)), styleMask: [], backing: .buffered, defer: false)
       shade.title = "Monitor Control Window Shade for Display " + String(displayID)
       shade.isMovableByWindowBackground = false
-      shade.backgroundColor = .black
+      shade.backgroundColor = .clear
       shade.ignoresMouseEvents = true
       shade.level = NSWindow.Level(rawValue: Int(CGShieldingWindowLevel()))
-      shade.alphaValue = 0
       shade.orderFrontRegardless()
       shade.collectionBehavior = [.stationary, .canJoinAllSpaces, .ignoresCycle]
       shade.setFrame(screen.frame, display: true)
+      shade.contentView?.wantsLayer = true
+      shade.contentView?.alphaValue = 0.0
+      shade.contentView?.layer?.backgroundColor = .black
+      shade.contentView?.setNeedsDisplay(shade.frame)
       os_log("Window shade created for display %{public}@", type: .info, String(displayID))
       return shade
     }
@@ -125,7 +142,7 @@ class DisplayManager {
       return 1
     }
     if let shade = getShade(displayID: displayID) {
-      return Float(shade.alphaValue)
+      return Float(shade.contentView?.alphaValue ?? 1)
     } else {
       return 1
     }
@@ -136,7 +153,7 @@ class DisplayManager {
       return false
     }
     if let shade = getShade(displayID: displayID) {
-      shade.alphaValue = CGFloat(value)
+      shade.contentView?.alphaValue = CGFloat(value)
       return true
     }
     return false
@@ -151,27 +168,12 @@ class DisplayManager {
       return
     }
     for onlineDisplayID in onlineDisplayIDs where onlineDisplayID != 0 {
-      let rawName = DisplayManager.getDisplayRawNameByID(displayID: onlineDisplayID)
       let name = DisplayManager.getDisplayNameByID(displayID: onlineDisplayID)
       let id = onlineDisplayID
       let vendorNumber = CGDisplayVendorNumber(onlineDisplayID)
       let modelNumber = CGDisplayModelNumber(onlineDisplayID)
-      var isDummy: Bool = false
-      var isVirtual: Bool = false
-      if rawName == "28E850" || rawName.lowercased().contains("dummy") {
-        os_log("NOTE: Display is a dummy!", type: .info)
-        isDummy = true
-      }
-      if !DEBUG_MACOS10, #available(macOS 11.0, *) {
-        if let dictionary = ((CoreDisplay_DisplayCreateInfoDictionary(onlineDisplayID))?.takeRetainedValue() as NSDictionary?) {
-          let isVirtualDevice = dictionary["kCGDisplayIsVirtualDevice"] as? Bool
-          let displayIsAirplay = dictionary["kCGDisplayIsAirPlay"] as? Bool
-          if isVirtualDevice ?? displayIsAirplay ?? false {
-            os_log("NOTE: Display is virtual!", type: .info)
-            isVirtual = true
-          }
-        }
-      }
+      let isDummy: Bool = DisplayManager.isDummy(displayID: onlineDisplayID)
+      let isVirtual: Bool = DisplayManager.isVirtual(displayID: onlineDisplayID)
       if !DEBUG_SW, DisplayManager.isAppleDisplay(displayID: onlineDisplayID) { // MARK: (point of interest for testing)
         let appleDisplay = AppleDisplay(id, name: name, vendorNumber: vendorNumber, modelNumber: modelNumber, isVirtual: isVirtual, isDummy: isDummy)
         os_log("Apple display found - %{public}@", type: .info, "ID: \(appleDisplay.identifier), Name: \(appleDisplay.name) (Vendor: \(appleDisplay.vendorNumber ?? 0), Model: \(appleDisplay.modelNumber ?? 0))")
@@ -391,6 +393,30 @@ class DisplayManager {
     return affectedDisplays
   }
 
+  static func isDummy(displayID: CGDirectDisplayID) -> Bool {
+    let rawName = DisplayManager.getDisplayRawNameByID(displayID: displayID)
+    var isDummy: Bool = false
+    if rawName == "28E850" || rawName.lowercased().contains("dummy") {
+      os_log("NOTE: Display is a dummy!", type: .info)
+      isDummy = true
+    }
+    return isDummy
+  }
+
+  static func isVirtual(displayID: CGDirectDisplayID) -> Bool {
+    var isVirtual: Bool = false
+    if !DEBUG_MACOS10, #available(macOS 11.0, *) {
+      if let dictionary = ((CoreDisplay_DisplayCreateInfoDictionary(displayID))?.takeRetainedValue() as NSDictionary?) {
+        let isVirtualDevice = dictionary["kCGDisplayIsVirtualDevice"] as? Bool
+        let displayIsAirplay = dictionary["kCGDisplayIsAirPlay"] as? Bool
+        if isVirtualDevice ?? displayIsAirplay ?? false {
+          isVirtual = true
+        }
+      }
+    }
+    return isVirtual
+  }
+
   static func engageMirror() -> Bool {
     var onlineDisplayIDs = [CGDirectDisplayID](repeating: 0, count: 16)
     var displayCount: UInt32 = 0
@@ -478,14 +504,18 @@ class DisplayManager {
         if CGDisplayIsInHWMirrorSet(displayID) != 0 || CGDisplayIsInMirrorSet(displayID) != 0 {
           let mirroredDisplayID = CGDisplayMirrorsDisplay(displayID)
           if mirroredDisplayID != 0, let dictionary = ((CoreDisplay_DisplayCreateInfoDictionary(mirroredDisplayID))?.takeRetainedValue() as NSDictionary?), let nameList = dictionary["DisplayProductName"] as? [String: String], let mirroredName = nameList[Locale.current.identifier] ?? nameList["en_US"] ?? nameList.first?.value {
-            name.append("~" + mirroredName)
+            name.append(" | " + mirroredName)
           }
         }
         return name
       }
     }
     if let screen = getByDisplayID(displayID: displayID) { // MARK: This, and NSScreen+Extension.swift will not be needed when we drop MacOS 10 support.
-      return screen.localizedName
+      if #available(macOS 10.15, *) {
+        return screen.localizedName
+      } else {
+        return screen.displayName ?? defaultName
+      }
     }
     return defaultName
   }

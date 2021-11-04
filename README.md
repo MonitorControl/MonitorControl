@@ -2,7 +2,7 @@
 
 <div>
 <h2>MonitorControl - for Apple Silicon and Intel</h2>
-<p>Controls your external display brightness and volume and shows native OSD.<br/>
+<p>Controls your external display brightness and volume and shows native OSD.
 Use menulet sliders or the keyboard, including native Apple keys!</p>
 <a href="https://github.com/MonitorControl/MonitorControl/releases"><img src=".github/macos_badge_noborder.png" width="175" alt="Download for macOS"/></a>
 </div>
@@ -60,7 +60,7 @@ Go to [Releases](https://github.com/MonitorControl/MonitorControl/releases) and 
 - Modern, stylish and highly customizable menulet reflecting the design of Control Control introduced in Big Sur.
 - Simple, unobstrusive UI to blend in to the general aesthetics of macOS (even the menu icon can be hidden).
 - Supports automatic updates for a hassle-free experience.
-- <b>The best app of its kind, completely FREE (donations accepted) with the source code transparently available!</b>
+- <b>The best app of its kind, completely FREE ([donations welcome](https://opencollective.com/monitorcontrol)) with the source code transparently available!</b>
 
 ## How to install and use the app
 
@@ -76,13 +76,13 @@ Go to [Releases](https://github.com/MonitorControl/MonitorControl/releases) and 
 ## Screenshots (Preferences)
 
 <div align="center">
-<img src=".github/pref_1.png" width="412" alt="Screenshot"/>
-<img src=".github/pref_2.png" width="412" alt="Screenshot"/><br/>
-<img src=".github/pref_3.png" width="412" alt="Screenshot"/>
-<img src=".github/pref_4.png" width="412" alt="Screenshot"/><br/>
+<img src=".github/pref_1.png" width="392" alt="Screenshot"/>
+<img src=".github/pref_2.png" width="392" alt="Screenshot"/>
+<img src=".github/pref_3.png" width="392" alt="Screenshot"/>
+<img src=".github/pref_4.png" width="392" alt="Screenshot"/>
 </div>
 
-## Compatibility
+## macOS compatibility
 
 | MonitorControl version | macOS version     |
 | ---------------------- | ----------------- |
@@ -92,25 +92,32 @@ Go to [Releases](https://github.com/MonitorControl/MonitorControl/releases) and 
 
 _* With some limitations - full functionality available on macOS 11 Big Sur or newer._
 
-Note to f.lux users: the app is now compatible with [f.lux](https://justgetflux.com) as well - please activate `Avoid gamma table manipulation` under `Preferences` » `Displays`! This step is not needed if you use Night Shift.
+## Supported displays
 
-## Supported hardware
+- Most modern LCD displays from all major manufacturers supported implemented DDC/CI protocol via DisplayPort, HDMI, USB-C or VGA to allow for hardware backlight control.
+- Apple (and LG-Apple) displays and built-in displays are supported using native protocol.
+- LCD and LED Televisions usually do not implement DDC, these are supported using software alternatives to dim the image (some higher-end sets are able to translate this into hardware backlight dimming).
+- OLED or mini/micro-LED displays and televisions are fully supported using gamma table manipulation (this is a no-compromise solution for this class of displays).
+- DisplayLink, Airplay and Sidecar are supported using shade (dark overlay) control.
 
-* Most modern LCD displays from all major manufacturers supported implemented DDC/CI protocol via DisplayPort, HDMI, USB-C or VGA to allow for hardware backlight control.
-* Apple (and LG-Apple) displays and built-in displays are supported using native protocol.
-* LCD and LED Televisions usually do not implement DDC, these are supported using software alternatives to dim the image (some higher-end sets are able to translate this into hardware backlight dimming).
-* OLED or mini/micro-LED displays and televisions are fully supported using gamma table manipulation (this is a no-compromise solution for this class of displays).
-* DisplayLink, Airplay and Sidecar are supported using shade (dark overlay) control.
+Dummy compatibility:
 
-Notable exceptions for hardware control:
+- The app is compatible with [BetterDummy](https://github.com/waydabber/BetterDummy) mirrored sets.
+- The app is compatible with mirrored sets that include a dummy dongle identifying as `28E850`
 
-* Some displays (notably EIZO) use MCCS over USB or an entirely custom protocol for control. These displays are supported with software dimming only.
-* The HDMI port of the 2018 Intel Mac mini and 2020 M1 Mac mini prohibit DDC communication. Software control is still available. We recommend connecting the display via the USB-C port (USB-C to HDMI dongles usually work).
-* DisplayLink docks and dongles do not allow for DDC control on Macs, only software dimming is available for these connections.
+Notable exceptions for hardware control compatibility:
+
+- Some displays (notably EIZO) use MCCS over USB or an entirely custom protocol for control. These displays are supported with software dimming only.
+- The HDMI port of the 2018 Intel Mac mini and 2020 M1 Mac mini prohibit DDC communication. Software control is still available. We recommend connecting the display via the USB-C port (USB-C to HDMI dongles usually work).
+- DisplayLink docks and dongles do not allow for DDC control on Macs, only software dimming is available for these connections.
+
+Note to f.lux users - please activate `Avoid gamma table manipulation` under `Preferences` » `Displays`! This step is not needed if you use Night Shift.
 
 ## How to help
 
-Open [issues](https://github.com/MonitorControl/MonitorControl/issues) if you have a question, an enhancement to suggest or a bug you've found. If you want, you can fork the code yourself and submit a pull request to improve the app.
+- You can greatly help out [by financing the project with your donation or by being a Sponsor](https://opencollective.com/monitorcontrol)!
+- Open [issues](https://github.com/MonitorControl/MonitorControl/issues) if you have a question, an enhancement to suggest or a bug you've found.
+- If you want, you can fork the code yourself and submit a pull request to improve the app (Note: accepting a PR is solely in the collective hands of the maintainers).
 
 ## Localizations
 

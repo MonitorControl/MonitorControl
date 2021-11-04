@@ -9,6 +9,9 @@ class OtherDisplay: Display {
   var arm64ddc: Bool = false
   var arm64avService: IOAVService?
   var isDiscouraged: Bool = false
+  let writeDDCQueue = DispatchQueue(label: "Local write DDC queue")
+  var writeDDCNextValue: [Command: UInt16] = [:]
+  var writeDDCLastSavedValue: [Command: UInt16] = [:]
   var pollingCount: Int {
     get {
       switch self.readPrefAsInt(key: .pollingMode) {
@@ -76,11 +79,11 @@ class OtherDisplay: Display {
     if !self.smoothBrightnessRunning, !self.isSw(), !self.readPrefAsBool(key: .unavailableDDC, for: command), self.readPrefAsBool(key: .isTouched, for: command), prefs.integer(forKey: PrefKey.startupAction.rawValue) == StartupAction.write.rawValue, !app.safeMode {
       let restoreValue = self.getDDCValueFromPrefs(command)
       os_log("Restoring %{public}@ DDC value %{public}@ for %{public}@", type: .info, String(reflecting: command), String(restoreValue), self.name)
-      _ = self.writeDDCValues(command: command, value: restoreValue)
+      self.writeDDCValues(command: command, value: restoreValue)
       if command == .audioSpeakerVolume, self.readPrefAsBool(key: .enableMuteUnmute) {
         let currentMuteValue = self.readPrefAsInt(for: .audioMuteScreenBlank) == 0 ? 2 : self.readPrefAsInt(for: .audioMuteScreenBlank)
         os_log("- Writing last saved DDC value for Mute: %{public}@", type: .info, String(currentMuteValue))
-        _ = self.writeDDCValues(command: .audioMuteScreenBlank, value: UInt16(currentMuteValue))
+        self.writeDDCValues(command: .audioMuteScreenBlank, value: UInt16(currentMuteValue))
       }
     }
   }
@@ -178,13 +181,11 @@ class OtherDisplay: Display {
     let isAlreadySet = volumeOSDValue == self.readPrefAsFloat(for: .audioSpeakerVolume)
     if !isAlreadySet {
       if let muteValue = muteValue, self.readPrefAsBool(key: .enableMuteUnmute) {
-        guard self.writeDDCValues(command: .audioMuteScreenBlank, value: UInt16(muteValue)) == true else {
-          return
-        }
+        self.writeDDCValues(command: .audioMuteScreenBlank, value: UInt16(muteValue))
         self.savePref(muteValue, for: .audioMuteScreenBlank)
       }
       if !self.readPrefAsBool(key: .enableMuteUnmute) || volumeOSDValue != 0 {
-        _ = self.writeDDCValues(command: .audioSpeakerVolume, value: self.convValueToDDC(for: .audioSpeakerVolume, from: volumeOSDValue))
+        self.writeDDCValues(command: .audioSpeakerVolume, value: self.convValueToDDC(for: .audioSpeakerVolume, from: volumeOSDValue))
       }
     }
     if !self.readPrefAsBool(key: .hideOsd) {
@@ -206,7 +207,7 @@ class OtherDisplay: Display {
     let contrastOSDValue = self.calcNewValue(currentValue: currentValue, isUp: isUp, isSmallIncrement: isSmallIncrement)
     let isAlreadySet = contrastOSDValue == self.readPrefAsFloat(for: .contrast)
     if !isAlreadySet {
-      _ = self.writeDDCValues(command: .contrast, value: self.convValueToDDC(for: .contrast, from: contrastOSDValue))
+      self.writeDDCValues(command: .contrast, value: self.convValueToDDC(for: .contrast, from: contrastOSDValue))
     }
     OSDUtils.showOsd(displayID: self.identifier, command: .contrast, value: contrastOSDValue, roundChiclet: !isSmallIncrement)
     if !isAlreadySet {
@@ -237,13 +238,11 @@ class OtherDisplay: Display {
       }
     }
     if self.readPrefAsBool(key: .enableMuteUnmute) {
-      guard self.writeDDCValues(command: .audioMuteScreenBlank, value: UInt16(muteValue)) == true else {
-        return
-      }
+      self.writeDDCValues(command: .audioMuteScreenBlank, value: UInt16(muteValue))
     }
     self.savePref(muteValue, for: .audioMuteScreenBlank)
     if !self.readPrefAsBool(key: .enableMuteUnmute) || volumeOSDValue > 0 {
-      _ = self.writeDDCValues(command: .audioSpeakerVolume, value: self.convValueToDDC(for: .audioSpeakerVolume, from: volumeOSDValue))
+      self.writeDDCValues(command: .audioSpeakerVolume, value: self.convValueToDDC(for: .audioSpeakerVolume, from: volumeOSDValue))
     }
     if !fromVolumeSlider {
       if !self.readPrefAsBool(key: .hideOsd) {
@@ -345,12 +344,12 @@ class OtherDisplay: Display {
           brightnessValue = 0
           brightnessSwValue = (value / self.combinedBrightnessSwitchingValue())
         }
-        _ = self.writeDDCValues(command: .brightness, value: self.convValueToDDC(for: .brightness, from: brightnessValue))
+        self.writeDDCValues(command: .brightness, value: self.convValueToDDC(for: .brightness, from: brightnessValue))
         if self.readPrefAsFloat(key: .SwBrightness) != brightnessSwValue {
           _ = self.setSwBrightness(brightnessSwValue)
         }
       } else {
-        _ = self.writeDDCValues(command: .brightness, value: self.convValueToDDC(for: .brightness, from: value))
+        self.writeDDCValues(command: .brightness, value: self.convValueToDDC(for: .brightness, from: value))
       }
       if !transient {
         self.savePref(value, for: .brightness)
@@ -378,28 +377,45 @@ class OtherDisplay: Display {
     return intCodes
   }
 
-  public func writeDDCValues(command: Command, value: UInt16, errorRecoveryWaitTime _: UInt32? = nil) -> Bool? {
+  public func writeDDCValues(command: Command, value: UInt16) {
     guard app.sleepID == 0, app.reconfigureID == 0, !self.readPrefAsBool(key: .forceSw), !self.readPrefAsBool(key: .unavailableDDC, for: command) else {
-      return false
+      return
     }
-    var success: Bool = false
+    self.writeDDCQueue.async(flags: .barrier) {
+      self.writeDDCNextValue[command] = value
+    }
+    DisplayManager.shared.globalDDCQueue.async(flags: .barrier) {
+      self.asyncPerformWriteDDCValues(command: command)
+    }
+  }
+
+  func asyncPerformWriteDDCValues(command: Command) {
+    var value = UInt16.max
+    var lastValue = UInt16.max
+    self.writeDDCQueue.sync {
+      value = self.writeDDCNextValue[command] ?? UInt16.max
+      lastValue = self.writeDDCLastSavedValue[command] ?? UInt16.max
+    }
+    guard value != UInt16.max, value != lastValue else {
+      return
+    }
+    self.writeDDCQueue.async(flags: .barrier) {
+      self.writeDDCLastSavedValue[command] = value
+      self.savePref(true, key: PrefKey.isTouched, for: command)
+    }
     var controlCodes = self.getRemapControlCodes(command: command)
     if controlCodes.count == 0 {
       controlCodes.append(command.rawValue)
     }
     for controlCode in controlCodes {
-      DisplayManager.shared.ddcQueue.sync {
-        if Arm64DDC.isArm64 {
-          if self.arm64ddc {
-            success = Arm64DDC.write(service: self.arm64avService, command: controlCode, value: value)
-          }
-        } else {
-          success = self.ddc?.write(command: command.rawValue, value: value, errorRecoveryWaitTime: 2000) ?? false
+      if Arm64DDC.isArm64 {
+        if self.arm64ddc {
+          _ = Arm64DDC.write(service: self.arm64avService, command: controlCode, value: value)
         }
-        self.savePref(true, key: PrefKey.isTouched, for: command) // We deliberatly consider the value tuched no matter if the call succeeded
+      } else {
+        _ = self.ddc?.write(command: controlCode, value: value, errorRecoveryWaitTime: 2000) ?? false
       }
     }
-    return success
   }
 
   func readDDCValues(for command: Command, tries: UInt, minReplyDelay delay: UInt64?) -> (current: UInt16, max: UInt16)? {
@@ -413,7 +429,7 @@ class OtherDisplay: Display {
       guard self.arm64ddc else {
         return nil
       }
-      DisplayManager.shared.ddcQueue.sync {
+      DisplayManager.shared.globalDDCQueue.sync {
         if let unwrappedDelay = delay {
           values = Arm64DDC.read(service: self.arm64avService, command: controlCode, tries: UInt8(min(tries, 255)), minReplyDelay: UInt32(unwrappedDelay / 1000))
         } else {
@@ -421,7 +437,7 @@ class OtherDisplay: Display {
         }
       }
     } else {
-      DisplayManager.shared.ddcQueue.sync {
+      DisplayManager.shared.globalDDCQueue.sync {
         values = self.ddc?.read(command: controlCode, tries: tries, minReplyDelay: delay)
       }
     }
