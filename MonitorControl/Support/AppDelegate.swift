@@ -117,6 +117,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     DisplayManager.shared.resetSwBrightnessForAllDisplays(noPrefSave: true)
     CGDisplayRestoreColorSyncSettings()
     self.reconfigureID += 1
+    self.updateMediaKeyTap()
     os_log("Bumping reconfigureID to %{public}@", type: .info, String(self.reconfigureID))
     _ = DisplayManager.shared.destroyAllShades()
     if self.sleepID == 0 {
