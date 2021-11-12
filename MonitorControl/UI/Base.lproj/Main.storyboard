@@ -315,15 +315,15 @@
             <objects>
                 <viewController storyboardIdentifier="MenuslidersPrefsVC" id="tLm-u5-aZ2" customClass="MenuslidersPrefsViewController" customModule="MonitorControl" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" translatesAutoresizingMaskIntoConstraints="NO" id="5un-m0-FM4">
-                        <rect key="frame" x="0.0" y="0.0" width="730" height="561"/>
+                        <rect key="frame" x="0.0" y="0.0" width="730" height="560"/>
                         <subviews>
                             <gridView xPlacement="leading" yPlacement="fill" rowAlignment="none" rowSpacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="ZrF-7t-BP5">
-                                <rect key="frame" x="20" y="20" width="690" height="521"/>
+                                <rect key="frame" x="20" y="20" width="690" height="520"/>
                                 <rows>
                                     <gridRow height="20" bottomPadding="-6" id="jyr-gk-BEN"/>
-                                    <gridRow height="20" bottomPadding="-6" id="ZS3-Gy-pfA"/>
-                                    <gridRow bottomPadding="-13" id="OpF-3Q-ZZp"/>
-                                    <gridRow bottomPadding="-13" id="HAl-L8-LPI"/>
+                                    <gridRow height="20" bottomPadding="-13" id="ZS3-Gy-pfA"/>
+                                    <gridRow bottomPadding="-10" id="HAl-L8-LPI"/>
+                                    <gridRow bottomPadding="-10" id="AKq-Nb-ugC"/>
                                     <gridRow bottomPadding="-10" id="Cor-61-8R5"/>
                                     <gridRow bottomPadding="-13" id="x3R-eu-dsV"/>
                                     <gridRow bottomPadding="-10" id="dyb-Ub-uU5"/>
@@ -349,7 +349,7 @@
                                 <gridCells>
                                     <gridCell row="jyr-gk-BEN" column="FRJ-Rb-RRh" xPlacement="trailing" yPlacement="center" id="vn6-rs-m8R">
                                         <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ELU-jk-ITc">
-                                            <rect key="frame" x="141" y="503" width="71" height="16"/>
+                                            <rect key="frame" x="141" y="502" width="71" height="16"/>
                                             <textFieldCell key="cell" lineBreakMode="truncatingTail" baseWritingDirection="leftToRight" alignment="right" title="Menu Icon:" id="u6s-Pb-BCG">
                                                 <font key="font" usesAppearanceFont="YES"/>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -359,7 +359,7 @@
                                     </gridCell>
                                     <gridCell row="jyr-gk-BEN" column="V6M-Jv-Agj" xPlacement="leading" id="wUb-Z3-UWb">
                                         <popUpButton key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="TFy-Wt-ZJK">
-                                            <rect key="frame" x="217" y="497" width="252" height="25"/>
+                                            <rect key="frame" x="217" y="496" width="252" height="25"/>
                                             <popUpButtonCell key="cell" type="push" title="Always show in the menu bar" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="MM0-Lf-VgF" id="p9E-Ck-YKe">
                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" metaFont="menu"/>
@@ -378,7 +378,7 @@
                                     </gridCell>
                                     <gridCell row="ZS3-Gy-pfA" column="FRJ-Rb-RRh" xPlacement="trailing" yPlacement="center" id="6xd-Be-tsQ">
                                         <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="phO-ae-q58">
-                                            <rect key="frame" x="50" y="469" width="162" height="16"/>
+                                            <rect key="frame" x="50" y="468" width="162" height="16"/>
                                             <textFieldCell key="cell" lineBreakMode="truncatingTail" baseWritingDirection="leftToRight" alignment="right" title="General menu items style:" id="thh-DG-ecH">
                                                 <font key="font" usesAppearanceFont="YES"/>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -388,7 +388,7 @@
                                     </gridCell>
                                     <gridCell row="ZS3-Gy-pfA" column="V6M-Jv-Agj" xPlacement="leading" id="QXg-i0-lVT">
                                         <popUpButton key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6td-Zq-3e7">
-                                            <rect key="frame" x="217" y="463" width="126" height="25"/>
+                                            <rect key="frame" x="217" y="462" width="126" height="25"/>
                                             <popUpButtonCell key="cell" type="push" title="Show as text" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="fWd-Es-zsy" id="2lO-tb-DFv">
                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" metaFont="menu"/>
@@ -405,10 +405,21 @@
                                             </connections>
                                         </popUpButton>
                                     </gridCell>
-                                    <gridCell row="OpF-3Q-ZZp" column="FRJ-Rb-RRh" xPlacement="trailing" id="nsg-IK-UoL"/>
-                                    <gridCell row="OpF-3Q-ZZp" column="V6M-Jv-Agj" xPlacement="leading" id="9Au-qH-WOr">
+                                    <gridCell row="HAl-L8-LPI" column="FRJ-Rb-RRh" id="ulS-1p-gHw"/>
+                                    <gridCell row="HAl-L8-LPI" column="V6M-Jv-Agj" xPlacement="leading" id="tw2-81-sd0">
+                                        <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="OmW-TV-zvg">
+                                            <rect key="frame" x="218" y="431" width="474" height="28"/>
+                                            <textFieldCell key="cell" controlSize="small" title="Relaunch the app to access Preferences if the menu option is not accessible. Use the button below to quit the app." id="hF7-fM-aKr">
+                                                <font key="font" metaFont="smallSystem"/>
+                                                <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            </textFieldCell>
+                                        </textField>
+                                    </gridCell>
+                                    <gridCell row="AKq-Nb-ugC" column="FRJ-Rb-RRh" id="d0X-Ge-aRg"/>
+                                    <gridCell row="AKq-Nb-ugC" column="V6M-Jv-Agj" xPlacement="leading" id="Aow-M0-BhQ">
                                         <button key="contentView" verticalHuggingPriority="750" placeholderIntrinsicWidth="150" placeholderIntrinsicHeight="20" translatesAutoresizingMaskIntoConstraints="NO" id="dy4-nH-cIr">
-                                            <rect key="frame" x="213" y="426" width="164" height="32"/>
+                                            <rect key="frame" x="213" y="394" width="164" height="32"/>
                                             <buttonCell key="cell" type="push" title="Quit application" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="qlb-wH-qr4">
                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" metaFont="system"/>
@@ -417,17 +428,6 @@
                                                 <action selector="quitApplicationClicked:" target="tLm-u5-aZ2" id="hl9-wG-im0"/>
                                             </connections>
                                         </button>
-                                    </gridCell>
-                                    <gridCell row="HAl-L8-LPI" column="FRJ-Rb-RRh" id="ulS-1p-gHw"/>
-                                    <gridCell row="HAl-L8-LPI" column="V6M-Jv-Agj" xPlacement="leading" id="tw2-81-sd0">
-                                        <textField key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="OmW-TV-zvg">
-                                            <rect key="frame" x="218" y="398" width="474" height="28"/>
-                                            <textFieldCell key="cell" controlSize="small" title="Relaunch the app to access Preferences if the menu option is not accessible. Use the button below to quit the app." id="hF7-fM-aKr">
-                                                <font key="font" metaFont="smallSystem"/>
-                                                <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
-                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                            </textFieldCell>
-                                        </textField>
                                     </gridCell>
                                     <gridCell row="Cor-61-8R5" column="FRJ-Rb-RRh" headOfMergedCell="054-Ho-JWX" id="054-Ho-JWX">
                                         <box key="contentView" autoresizesSubviews="NO" horizontalHuggingPriority="1" verticalHuggingPriority="750" horizontalCompressionResistancePriority="1000" placeholderIntrinsicWidth="690" placeholderIntrinsicHeight="2" verifyAmbiguity="off" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="jt4-ec-HMg">
@@ -686,7 +686,7 @@
                         <outlet property="quitApplication" destination="dy4-nH-cIr" id="aXV-0Q-H4L"/>
                         <outlet property="rowMenuItemStyle" destination="ZS3-Gy-pfA" id="tVN-WD-eoa"/>
                         <outlet property="rowMultiSliders" destination="CuW-77-ls4" id="XPi-6a-J58"/>
-                        <outlet property="rowQuitButton" destination="OpF-3Q-ZZp" id="0vU-Ls-hJj"/>
+                        <outlet property="rowQuitButton" destination="AKq-Nb-ugC" id="yym-xx-O9Z"/>
                         <outlet property="rowQuitButtonText" destination="HAl-L8-LPI" id="6CN-Wq-CBJ"/>
                         <outlet property="rowSlidersCombineText" destination="MaK-MK-gRQ" id="OPU-QW-LEv"/>
                         <outlet property="rowTickCheck" destination="Ojm-8A-t1d" id="0Aq-FJ-wGD"/>
@@ -700,7 +700,7 @@
                 </viewController>
                 <customObject id="oB1-KW-86Y" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="298" y="185.5"/>
+            <point key="canvasLocation" x="298" y="178"/>
         </scene>
         <!--Keyboard Prefs View Controller-->
         <scene sceneID="VuM-5u-zkv">

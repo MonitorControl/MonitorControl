@@ -159,7 +159,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
   func checkPermissions() {
     let permissionsRequired: Bool = [KeyboardVolume.media.rawValue, KeyboardVolume.both.rawValue].contains(prefs.integer(forKey: PrefKey.keyboardVolume.rawValue)) || [KeyboardBrightness.media.rawValue, KeyboardBrightness.both.rawValue].contains(prefs.integer(forKey: PrefKey.keyboardBrightness.rawValue))
-    if !MediaKeyTapManager.readPrivileges(prompt: false) && permissionsRequired {
+    if !MediaKeyTapManager.readPrivileges(prompt: false), permissionsRequired {
       MediaKeyTapManager.acquirePrivileges()
     }
   }

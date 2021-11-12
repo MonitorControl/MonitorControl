@@ -4,7 +4,7 @@ import Cocoa
 
 public extension NSScreen {
   var displayID: CGDirectDisplayID {
-    return (self.deviceDescription[NSDeviceDescriptionKey("NSScreenNumber")] as? CGDirectDisplayID)!
+    (self.deviceDescription[NSDeviceDescriptionKey("NSScreenNumber")] as? CGDirectDisplayID)!
   }
 
   var vendorNumber: UInt32? {

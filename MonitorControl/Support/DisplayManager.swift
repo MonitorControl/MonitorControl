@@ -235,15 +235,15 @@ class DisplayManager {
   }
 
   func getOtherDisplays() -> [OtherDisplay] {
-    return self.displays.compactMap { $0 as? OtherDisplay }
+    self.displays.compactMap { $0 as? OtherDisplay }
   }
 
   func getAllDisplays() -> [Display] {
-    return self.displays
+    self.displays
   }
 
   func getDdcCapableDisplays() -> [OtherDisplay] {
-    return self.displays.compactMap { display -> OtherDisplay? in
+    self.displays.compactMap { display -> OtherDisplay? in
       if let otherDisplay = display as? OtherDisplay, !otherDisplay.isSw() {
         return otherDisplay
       } else { return nil }
@@ -251,11 +251,11 @@ class DisplayManager {
   }
 
   func getAppleDisplays() -> [AppleDisplay] {
-    return self.displays.compactMap { $0 as? AppleDisplay }
+    self.displays.compactMap { $0 as? AppleDisplay }
   }
 
   func getBuiltInDisplay() -> Display? {
-    return self.displays.first { CGDisplayIsBuiltin($0.identifier) != 0 }
+    self.displays.first { CGDisplayIsBuiltin($0.identifier) != 0 }
   }
 
   func getCurrentDisplay(byFocus: Bool = false) -> Display? {
@@ -481,7 +481,7 @@ class DisplayManager {
   }
 
   static func getByDisplayID(displayID: CGDirectDisplayID) -> NSScreen? {
-    return NSScreen.screens.first { $0.displayID == displayID }
+    NSScreen.screens.first { $0.displayID == displayID }
   }
 
   static func getDisplayRawNameByID(displayID: CGDirectDisplayID) -> String {

@@ -4,14 +4,14 @@ import Cocoa
 
 public extension CGDirectDisplayID {
   var vendorNumber: UInt32? {
-    return CGDisplayVendorNumber(self)
+    CGDisplayVendorNumber(self)
   }
 
   var modelNumber: UInt32? {
-    return CGDisplayModelNumber(self)
+    CGDisplayModelNumber(self)
   }
 
   var serialNumber: UInt32? {
-    return CGDisplaySerialNumber(self)
+    CGDisplaySerialNumber(self)
   }
 }
