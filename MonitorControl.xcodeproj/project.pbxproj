@@ -67,6 +67,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		17DE48C4273E9DC500A1779F /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Main.strings; sourceTree = "<group>"; };
+		17DE48C5273E9DC500A1779F /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/InternetAccessPolicy.strings; sourceTree = "<group>"; };
+		17DE48C6273E9DC500A1779F /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		28D1DDF1227FBE71004CB494 /* NSScreen+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSScreen+Extension.swift"; sourceTree = "<group>"; };
 		56754EAB1D9A4016007BCDC5 /* MonitorControl.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MonitorControl.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		56754EAE1D9A4016007BCDC5 /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = main.swift; sourceTree = "<group>"; };
@@ -384,6 +387,7 @@
 				tr,
 				"zh-Hans",
 				"zh-Hant-TW",
+				es,
 			);
 			mainGroup = 56754EA21D9A4016007BCDC5;
 			packageReferences = (
@@ -575,6 +579,7 @@
 				AA9CB63B2704C1900086DC0E /* tr */,
 				AA9CB63F2704C1A40086DC0E /* zh-Hans */,
 				AA9CB6412704C1B80086DC0E /* zh-Hant-TW */,
+				17DE48C4273E9DC500A1779F /* es */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -592,6 +597,7 @@
 				8C1741912707B92900E88D53 /* it */,
 				8C1741932707B92A00E88D53 /* ko */,
 				8C1741972707B92E00E88D53 /* tr */,
+				17DE48C5273E9DC500A1779F /* es */,
 			);
 			name = InternetAccessPolicy.strings;
 			sourceTree = "<group>";
@@ -609,6 +615,7 @@
 				AA9CB63C2704C1900086DC0E /* tr */,
 				AA9CB6402704C1A40086DC0E /* zh-Hans */,
 				AA9CB6422704C1B80086DC0E /* zh-Hant-TW */,
+				17DE48C6273E9DC500A1779F /* es */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
