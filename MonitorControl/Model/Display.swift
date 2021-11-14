@@ -16,7 +16,7 @@ class Display: Equatable {
   let swBrightnessSemaphore = DispatchSemaphore(value: 1)
 
   static func == (lhs: Display, rhs: Display) -> Bool {
-    return lhs.identifier == rhs.identifier
+    lhs.identifier == rhs.identifier
   }
 
   var sliderHandler: [Command: SliderHandler] = [:]
@@ -31,7 +31,7 @@ class Display: Equatable {
   var defaultGammaTablePeak: Float = 1
 
   func prefExists(key: PrefKey? = nil, for command: Command? = nil) -> Bool {
-    return prefs.object(forKey: self.getKey(key: key, for: command)) != nil
+    prefs.object(forKey: self.getKey(key: key, for: command)) != nil
   }
 
   func removePref(key: PrefKey, for command: Command? = nil) {
@@ -43,23 +43,23 @@ class Display: Equatable {
   }
 
   func readPrefAsFloat(key: PrefKey? = nil, for command: Command? = nil) -> Float {
-    return prefs.float(forKey: self.getKey(key: key, for: command))
+    prefs.float(forKey: self.getKey(key: key, for: command))
   }
 
   func readPrefAsInt(key: PrefKey? = nil, for command: Command? = nil) -> Int {
-    return prefs.integer(forKey: self.getKey(key: key, for: command))
+    prefs.integer(forKey: self.getKey(key: key, for: command))
   }
 
   func readPrefAsBool(key: PrefKey? = nil, for command: Command? = nil) -> Bool {
-    return prefs.bool(forKey: self.getKey(key: key, for: command))
+    prefs.bool(forKey: self.getKey(key: key, for: command))
   }
 
   func readPrefAsString(key: PrefKey? = nil, for command: Command? = nil) -> String {
-    return prefs.string(forKey: self.getKey(key: key, for: command)) ?? ""
+    prefs.string(forKey: self.getKey(key: key, for: command)) ?? ""
   }
 
   private func getKey(key: PrefKey? = nil, for command: Command? = nil) -> String {
-    return (key ?? PrefKey.value).rawValue + (command != nil ? String((command ?? Command.none).rawValue) : "") + self.prefsId
+    (key ?? PrefKey.value).rawValue + (command != nil ? String((command ?? Command.none).rawValue) : "") + self.prefsId
   }
 
   internal init(_ identifier: CGDirectDisplayID, name: String, vendorNumber: UInt32?, modelNumber: UInt32?, isVirtual: Bool = false, isDummy: Bool = false) {
@@ -321,7 +321,7 @@ class Display: Equatable {
   }
 
   func resetSwBrightness() -> Bool {
-    return self.setSwBrightness(1)
+    self.setSwBrightness(1)
   }
 
   func isSwBrightnessNotDefault() -> Bool {
@@ -335,7 +335,7 @@ class Display: Equatable {
   }
 
   func refreshBrightness() -> Float {
-    return 0
+    0
   }
 
   func isBuiltIn() -> Bool {

@@ -64,15 +64,15 @@ class OSDUtils: NSObject {
   static let chicletCount: Float = 16
 
   static func chiclet(fromValue value: Float, maxValue: Float, half: Bool = false) -> Float {
-    return (value * self.chicletCount * (half ? 2 : 1)) / maxValue
+    (value * self.chicletCount * (half ? 2 : 1)) / maxValue
   }
 
   static func value(fromChiclet chiclet: Float, maxValue: Float, half: Bool = false) -> Float {
-    return (chiclet * maxValue) / (self.chicletCount * (half ? 2 : 1))
+    (chiclet * maxValue) / (self.chicletCount * (half ? 2 : 1))
   }
 
   static func getDistance(fromNearestChiclet chiclet: Float) -> Float {
-    return abs(chiclet.rounded(.towardZero) - chiclet)
+    abs(chiclet.rounded(.towardZero) - chiclet)
   }
 
   static func showOSDLockOnAllDisplays(osdImage: Int64) {

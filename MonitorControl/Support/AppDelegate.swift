@@ -117,12 +117,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     DisplayManager.shared.resetSwBrightnessForAllDisplays(noPrefSave: true)
     CGDisplayRestoreColorSyncSettings()
     self.reconfigureID += 1
+    self.updateMediaKeyTap()
     os_log("Bumping reconfigureID to %{public}@", type: .info, String(self.reconfigureID))
     _ = DisplayManager.shared.destroyAllShades()
     if self.sleepID == 0 {
       let dispatchedReconfigureID = self.reconfigureID
       os_log("Display to be reconfigured with reconfigureID %{public}@", type: .info, String(dispatchedReconfigureID))
-      DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+      DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
         self.configure(dispatchedReconfigureID: dispatchedReconfigureID)
       }
     }
@@ -159,7 +160,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
   func checkPermissions() {
     let permissionsRequired: Bool = [KeyboardVolume.media.rawValue, KeyboardVolume.both.rawValue].contains(prefs.integer(forKey: PrefKey.keyboardVolume.rawValue)) || [KeyboardBrightness.media.rawValue, KeyboardBrightness.both.rawValue].contains(prefs.integer(forKey: PrefKey.keyboardBrightness.rawValue))
-    if !MediaKeyTapManager.readPrivileges(prompt: false) && permissionsRequired {
+    if !MediaKeyTapManager.readPrivileges(prompt: false), permissionsRequired {
       MediaKeyTapManager.acquirePrivileges()
     }
   }
@@ -177,13 +178,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   @objc private func sleepNotification() {
     self.sleepID += 1
     os_log("Sleeping with sleep %{public}@", type: .info, String(self.sleepID))
+    self.updateMediaKeyTap()
   }
 
   @objc private func wakeNotification() {
     if self.sleepID != 0 {
       os_log("Waking up from sleep %{public}@", type: .info, String(self.sleepID))
       let dispatchedSleepID = self.sleepID
-      DispatchQueue.main.asyncAfter(deadline: .now() + 6.0) { // Some displays take time to recover...
+      DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) { // Some displays take time to recover...
         self.soberNow(dispatchedSleepID: dispatchedSleepID)
       }
     }
@@ -203,6 +205,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         self.job(start: true)
       }
       self.startupActionWriteRepeatAfterSober()
+      self.updateMediaKeyTap()
     }
   }
 

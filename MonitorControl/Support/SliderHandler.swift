@@ -204,7 +204,7 @@ class SliderHandler {
 
   class ClickThroughImageView: NSImageView {
     override func hitTest(_ point: NSPoint) -> NSView? {
-      return subviews.first { subview in subview.hitTest(point) != nil
+      subviews.first { subview in subview.hitTest(point) != nil
       }
     }
   }

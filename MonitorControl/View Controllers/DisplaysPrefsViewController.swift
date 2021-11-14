@@ -68,7 +68,7 @@ class DisplaysPrefsViewController: NSViewController, PreferencePane, NSTableView
   }
 
   func numberOfRows(in _: NSTableView) -> Int {
-    return self.displays.count
+    self.displays.count
   }
 
   public static func isImac() -> Bool {

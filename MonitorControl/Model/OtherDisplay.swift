@@ -72,7 +72,7 @@ class OtherDisplay: Display {
   }
 
   func getDDCValueFromPrefs(_ command: Command) -> UInt16 {
-    return self.convValueToDDC(for: command, from: (!prefs.bool(forKey: PrefKey.disableCombinedBrightness.rawValue) && command == .brightness) ? max(0, self.readPrefAsFloat(for: command) - self.combinedBrightnessSwitchingValue()) * (1 / (1 - self.combinedBrightnessSwitchingValue())) : self.readPrefAsFloat(for: command))
+    self.convValueToDDC(for: command, from: (!prefs.bool(forKey: PrefKey.disableCombinedBrightness.rawValue) && command == .brightness) ? max(0, self.readPrefAsFloat(for: command) - self.combinedBrightnessSwitchingValue()) * (1 / (1 - self.combinedBrightnessSwitchingValue())) : self.readPrefAsFloat(for: command))
   }
 
   func restoreDDCSettingsToDisplay(command: Command) {
@@ -162,7 +162,7 @@ class OtherDisplay: Display {
   }
 
   func setupSliderCurrentValue(command: Command) -> Float {
-    return (command == .audioSpeakerVolume && self.readPrefAsBool(key: .enableMuteUnmute) && self.readPrefAsInt(for: .audioMuteScreenBlank) == 1) ? 0 : self.readPrefAsFloat(for: command)
+    (command == .audioSpeakerVolume && self.readPrefAsBool(key: .enableMuteUnmute) && self.readPrefAsInt(for: .audioMuteScreenBlank) == 1) ? 0 : self.readPrefAsFloat(for: command)
   }
 
   func stepVolume(isUp: Bool, isSmallIncrement: Bool) {
@@ -255,7 +255,7 @@ class OtherDisplay: Display {
   }
 
   func isSwOnly() -> Bool {
-    return (!self.arm64ddc && self.ddc == nil) || self.isVirtual || self.isDummy
+    (!self.arm64ddc && self.ddc == nil) || self.isVirtual || self.isDummy
   }
 
   func isSw() -> Bool {
@@ -362,7 +362,7 @@ class OtherDisplay: Display {
   }
 
   override func getBrightness() -> Float {
-    return self.prefExists(for: .brightness) ? self.readPrefAsFloat(for: .brightness) : 1
+    self.prefExists(for: .brightness) ? self.readPrefAsFloat(for: .brightness) : 1
   }
 
   func getRemapControlCodes(command: Command) -> [UInt8] {
@@ -510,6 +510,6 @@ class OtherDisplay: Display {
   }
 
   func combinedBrightnessSwitchingValue() -> Float {
-    return Float(self.readPrefAsInt(key: .combinedBrightnessSwitchingPoint) + 8) / 16
+    Float(self.readPrefAsInt(key: .combinedBrightnessSwitchingPoint) + 8) / 16
   }
 }
