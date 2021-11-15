@@ -99,11 +99,7 @@ _* With some limitations - full functionality available on macOS 11 Big Sur or n
 - LCD and LED Televisions usually do not implement DDC, these are supported using software alternatives to dim the image (some higher-end sets are able to translate this into hardware backlight dimming).
 - OLED or mini/micro-LED displays and televisions are fully supported using gamma table manipulation (this is a no-compromise solution for this class of displays).
 - DisplayLink, Airplay and Sidecar are supported using shade (dark overlay) control.
-
-Dummy compatibility:
-
 - The app is compatible with [BetterDummy](https://github.com/waydabber/BetterDummy) mirrored sets.
-- The app is compatible with mirrored sets that include a dummy dongle identifying as `28E850`
 
 Notable exceptions for hardware control compatibility:
 

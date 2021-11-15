@@ -9,6 +9,7 @@ class Arm64DDC: NSObject {
     var service: IOAVService?
     var serviceLocation: Int = 0
     var isDiscouraged: Bool = false
+    var isDummy: Bool = false
   }
 
   #if arch(arm64)
@@ -26,7 +27,8 @@ class Arm64DDC: NSObject {
       for ioregServiceForMatching in ioregServicesForMatching {
         let score = self.ioregMatchScore(displayID: displayID, ioregEdidUUID: ioregServiceForMatching.edidUUID, ioregProductName: ioregServiceForMatching.productName, ioregSerialNumber: ioregServiceForMatching.serialNumber, serviceLocation: ioregServiceForMatching.serviceLocation)
         let isDiscouraged = self.checkIfDiscouraged(ioregService: ioregServiceForMatching)
-        let displayService = DisplayService(displayID: displayID, service: ioregServiceForMatching.service, serviceLocation: ioregServiceForMatching.serviceLocation, isDiscouraged: isDiscouraged)
+        let isDummy = self.checkIfDummy(ioregService: ioregServiceForMatching)
+        let displayService = DisplayService(displayID: displayID, service: ioregServiceForMatching.service, serviceLocation: ioregServiceForMatching.serviceLocation, isDiscouraged: isDiscouraged, isDummy: isDummy)
         if scoredCandidateDisplayServices[score] == nil {
           scoredCandidateDisplayServices[score] = []
         }
@@ -260,20 +262,21 @@ class Arm64DDC: NSObject {
     return ioregServicesForMatching
   }
 
+  // Check if display is a dummy
+  private static func checkIfDummy(ioregService: IOregService) -> Bool {
+    // This is a well known dummy plug
+    if ioregService.manufacturerID == "AOC", ioregService.productName == "28E850" {
+      return true
+    }
+    return false
+  }
+
   // Check if it is problematic to enable DDC on the display
   private static func checkIfDiscouraged(ioregService: IOregService) -> Bool {
     var modelIdentifier: String = ""
     let platformExpertDevice = IOServiceGetMatchingService(kIOMasterPortDefault, IOServiceMatching("IOPlatformExpertDevice"))
     if let modelData = IORegistryEntryCreateCFProperty(platformExpertDevice, "model" as CFString, kCFAllocatorDefault, 0).takeRetainedValue() as? Data, let modelIdentifierCString = String(data: modelData, encoding: .utf8)?.cString(using: .utf8) {
       modelIdentifier = String(cString: modelIdentifierCString)
-    }
-    // This is a well known dummy plug (not a real display) but it breaks DDC communication on M1
-    if ioregService.manufacturerID == "AOC", ioregService.productName == "28E850" {
-      return true
-    }
-    // If the display contains the string "Dummy", then it is highly suspicious
-    if ioregService.productName.contains("Dummy") || ioregService.productName.contains("dummy") {
-      return true
     }
     // First service location of Mac Mini HDMI is broken for DDC communication
     if ioregService.transportDownstream == "HDMI", ioregService.serviceLocation == 1, modelIdentifier == "Macmini9,1" {

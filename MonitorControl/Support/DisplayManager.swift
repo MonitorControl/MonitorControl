@@ -313,7 +313,11 @@ class DisplayManager {
           os_log("Display service match successful for display %{public}@", type: .info, String(serviceMatch.displayID))
           if serviceMatch.isDiscouraged {
             os_log("Display %{public}@ is flagged as discouraged by Arm64DDC.", type: .info, String(serviceMatch.displayID))
-            otherDisplay.isDiscouraged = serviceMatch.isDiscouraged
+            otherDisplay.isDiscouraged = true
+          } else if serviceMatch.isDummy {
+            os_log("Display %{public}@ is flagged as dummy by Arm64DDC.", type: .info, String(serviceMatch.displayID))
+            otherDisplay.isDiscouraged = true
+            otherDisplay.isDummy = true
           } else {
             otherDisplay.arm64ddc = DEBUG_SW ? false : true // MARK: (point of interest when testing)
           }
@@ -396,7 +400,7 @@ class DisplayManager {
   static func isDummy(displayID: CGDirectDisplayID) -> Bool {
     let rawName = DisplayManager.getDisplayRawNameByID(displayID: displayID)
     var isDummy: Bool = false
-    if rawName == "28E850" || rawName.lowercased().contains("dummy") {
+    if rawName.lowercased().contains("dummy") {
       os_log("NOTE: Display is a dummy!", type: .info)
       isDummy = true
     }
