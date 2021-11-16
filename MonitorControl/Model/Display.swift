@@ -5,14 +5,15 @@ import Foundation
 import os.log
 
 class Display: Equatable {
-  internal let identifier: CGDirectDisplayID
-  internal let prefsId: String
-  internal var name: String
-  internal var vendorNumber: UInt32?
-  internal var modelNumber: UInt32?
-  internal var smoothBrightnessTransient: Float = 1
-  internal var smoothBrightnessRunning: Bool = false
-  internal var smoothBrightnessSlow: Bool = false
+  let identifier: CGDirectDisplayID
+  let prefsId: String
+  var name: String
+  var vendorNumber: UInt32?
+  var modelNumber: UInt32?
+  var serialNumber: UInt32?
+  var smoothBrightnessTransient: Float = 1
+  var smoothBrightnessRunning: Bool = false
+  var smoothBrightnessSlow: Bool = false
   let swBrightnessSemaphore = DispatchSemaphore(value: 1)
 
   static func == (lhs: Display, rhs: Display) -> Bool {
@@ -62,15 +63,16 @@ class Display: Equatable {
     (key ?? PrefKey.value).rawValue + (command != nil ? String((command ?? Command.none).rawValue) : "") + self.prefsId
   }
 
-  internal init(_ identifier: CGDirectDisplayID, name: String, vendorNumber: UInt32?, modelNumber: UInt32?, isVirtual: Bool = false, isDummy: Bool = false) {
+  init(_ identifier: CGDirectDisplayID, name: String, vendorNumber: UInt32?, modelNumber: UInt32?, serialNumber: UInt32?, isVirtual: Bool = false, isDummy: Bool = false) {
     self.identifier = identifier
     self.name = name
     self.vendorNumber = vendorNumber
     self.modelNumber = modelNumber
-    self.prefsId = "(" + String(name.filter { !$0.isWhitespace }) + String(vendorNumber ?? 0) + String(modelNumber ?? 0) + "@" + String(identifier) + ")"
-    os_log("Display init with prefsIdentifier %{public}@", type: .info, self.prefsId)
+    self.serialNumber = serialNumber
     self.isVirtual = DEBUG_VIRTUAL ? true : isVirtual
     self.isDummy = isDummy
+    self.prefsId = "(" + String(name.filter { !$0.isWhitespace }) + String(vendorNumber ?? 0) + String(modelNumber ?? 0) + "@" + (self.isVirtual ? String(self.serialNumber ?? 9999) : String(identifier)) + ")"
+    os_log("Display init with prefsIdentifier %{public}@", type: .info, self.prefsId)
     self.swUpdateDefaultGammaTable()
     self.smoothBrightnessTransient = self.getBrightness()
     if self.isVirtual || self.readPrefAsBool(key: PrefKey.avoidGamma), !self.isDummy {
