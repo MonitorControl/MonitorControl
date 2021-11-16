@@ -21,7 +21,6 @@ class MediaKeyTapManager: MediaKeyTapDelegate {
       return
     }
     guard app.sleepID == 0, app.reconfigureID == 0 else {
-      self.showOSDLock(mediaKey)
       return
     }
     if isPressed, self.handleOpenPrefPane(mediaKey: mediaKey, event: event, modifiers: modifiers) {
@@ -65,15 +64,6 @@ class MediaKeyTapManager: MediaKeyTapDelegate {
     } else if let internalDisplay = DisplayManager.shared.getBuiltInDisplay() as? AppleDisplay {
       internalDisplay.stepBrightness(isUp: isUp, isSmallIncrement: isSmallIncrement)
       return
-    }
-  }
-
-  private func showOSDLock(_ mediaKey: MediaKey) {
-    if [.brightnessUp, .brightnessDown].contains(mediaKey) {
-      OSDUtils.showOSDLockOnAllDisplays(osdImage: OSDUtils.OSDImage.brightness.rawValue)
-    }
-    if [.volumeUp, .volumeDown, .mute].contains(mediaKey) {
-      OSDUtils.showOSDLockOnAllDisplays(osdImage: OSDUtils.OSDImage.audioSpeaker.rawValue)
     }
   }
 
