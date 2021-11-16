@@ -71,7 +71,7 @@ class Display: Equatable {
     self.serialNumber = serialNumber
     self.isVirtual = DEBUG_VIRTUAL ? true : isVirtual
     self.isDummy = isDummy
-    self.prefsId = "(" + String(name.filter { !$0.isWhitespace }) + String(vendorNumber ?? 0) + String(modelNumber ?? 0) + "@" + (self.isVirtual ? String(self.serialNumber ?? 9999) : String(identifier)) + ")"
+    self.prefsId = "(\(name.filter { !$0.isWhitespace })\(vendorNumber ?? 0)\(modelNumber ?? 0)@\(self.isVirtual ? (self.serialNumber ?? 9999) : identifier))"
     os_log("Display init with prefsIdentifier %{public}@", type: .info, self.prefsId)
     self.swUpdateDefaultGammaTable()
     self.smoothBrightnessTransient = self.getBrightness()
