@@ -6,9 +6,9 @@ import os.log
 class AppleDisplay: Display {
   private var displayQueue: DispatchQueue
 
-  override init(_ identifier: CGDirectDisplayID, name: String, vendorNumber: UInt32?, modelNumber: UInt32?, isVirtual: Bool = false, isDummy: Bool = false) {
+  override init(_ identifier: CGDirectDisplayID, name: String, vendorNumber: UInt32?, modelNumber: UInt32?, serialNumber: UInt32?, isVirtual: Bool = false, isDummy: Bool = false) {
     self.displayQueue = DispatchQueue(label: String("displayQueue-\(identifier)"))
-    super.init(identifier, name: name, vendorNumber: vendorNumber, modelNumber: modelNumber, isVirtual: isVirtual, isDummy: isDummy)
+    super.init(identifier, name: name, vendorNumber: vendorNumber, modelNumber: modelNumber, serialNumber: serialNumber, isVirtual: isVirtual, isDummy: isDummy)
   }
 
   public func getAppleBrightness() -> Float {
