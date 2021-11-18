@@ -88,5 +88,21 @@ https://monitorcontrol.app/changelog.html?tag=v4.0.0
                length="11023343"
             />
        </item>
+        <item>
+            <title>v4.0.2</title>
+            <sparkle:releaseNotesLink>
+                https://monitorcontrol.app/changelog.html?tag=v4.0.2
+            </sparkle:releaseNotesLink>
+            <pubDate>Fri, 18 Nov 2021 20:10:00 +0200</pubDate>
+            <sparkle:version>6965</sparkle:version>
+            <sparkle:shortVersionString>4.0.2</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>10.14</sparkle:minimumSystemVersion>
+            <enclosure
+               url="https://github.com/MonitorControl/MonitorControl/releases/download/v4.0.2/MonitorControl.4.0.2.dmg"
+               type="application/octet-stream"
+               sparkle:edSignature="Hj/A/33u8715otbPJ2zYHYeX0Bu0eCCoWOH9tdFepQCxY/4VdnXF617X1s6FzrqFYtUm4OwK/vzkJJBU8m9jCg=="
+               length="18233149"
+            />
+       </item>
     </channel>
 </rss>
