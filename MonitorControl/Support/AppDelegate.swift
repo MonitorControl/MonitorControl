@@ -284,7 +284,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   @objc func audioDeviceChanged() {
     if let defaultDevice = self.coreAudio.defaultOutputDevice {
       os_log("Default output device changed to “%{public}@”.", type: .info, defaultDevice.name)
-      os_log("Can device set its own volume? %{public}@", type: .info, defaultDevice.canSetVirtualMasterVolume(scope: .output).description)
+      os_log("Can device set its own volume? %{public}@", type: .info, defaultDevice.canSetVirtualMainVolume(scope: .output).description)
     }
     self.updateMediaKeyTap()
   }
