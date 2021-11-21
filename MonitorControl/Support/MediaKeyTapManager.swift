@@ -173,7 +173,7 @@ class MediaKeyTapManager: MediaKeyTapDelegate {
         if DisplayManager.shared.updateAudioControlTargetDisplays(deviceName: defaultAudioDevice.name) == 0 {
           keys.removeAll { keysToDelete.contains($0) }
         }
-      } else if defaultAudioDevice.canSetVirtualMasterVolume(scope: .output) == true {
+      } else if defaultAudioDevice.canSetVirtualMainVolume(scope: .output) == true {
         keys.removeAll { keysToDelete.contains($0) }
       }
     }

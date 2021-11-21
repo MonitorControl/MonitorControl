@@ -939,8 +939,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/rnine/SimplyCoreAudio";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 4.0.1;
+				kind = revision;
+				revision = 75970285e2470f12a569cdff68ef5a75498a4646;
 			};
 		};
 		6CD35F5426500008001F1344 /* XCRemoteSwiftPackageReference "MediaKeyTap" */ = {
