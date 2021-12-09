@@ -116,8 +116,7 @@
 "Software (shade, forced)" = "Software (shade, forçado)";
 
 /* Shown in the Display Preferences */
-"This display allows for software brightness control via gamma table manipulation or shade as it does not support hardware control. Reasons for this might be using the HDMI port of a Mac mini (which blocks hardware DDC control) or having a blacklisted display." =
-"Este monitor permite controle de brilho via manipulação da tabela gamma ou shade. Não suporta controle por hardware. Motivos pode ser o uso da porta HDMI de um  Mac mini (bloqueia controle DDC) ou o monitor está na blacklist.";
+"This display allows for software brightness control via gamma table manipulation or shade as it does not support hardware control. Reasons for this might be using the HDMI port of a Mac mini (which blocks hardware DDC control) or having a blacklisted display." = "Este monitor permite controle de brilho via manipulação da tabela gamma ou shade. Não suporta controle por hardware. Motivos pode ser o uso da porta HDMI de um  Mac mini (bloqueia controle DDC) ou o monitor está na blacklist.";
 
 /* Shown in the Display Preferences */
 "This display has an unspecified control status." = "Este monitor tem o estado do controle não especificado.";
