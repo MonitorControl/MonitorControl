@@ -115,6 +115,9 @@
 		AA78BDBC2709FE7B00CA8DF7 /* UpdaterDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdaterDelegate.swift; sourceTree = "<group>"; };
 		AA99521626FE25AB00612E07 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AA99521826FE49A300612E07 /* MenuHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuHandler.swift; sourceTree = "<group>"; };
+		AA99E81527622EBE00413316 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Main.strings"; sourceTree = "<group>"; };
+		AA99E81627622EBE00413316 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/InternetAccessPolicy.strings"; sourceTree = "<group>"; };
+		AA99E81727622EBE00413316 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		AA9AE86E26B5BF3D00B6CA65 /* OSD.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OSD.framework; path = ../../../../../System/Library/PrivateFrameworks/OSD.framework; sourceTree = "<group>"; };
 		AA9AE87026B5BFB700B6CA65 /* CoreDisplay.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreDisplay.framework; path = ../../../../../System/Library/Frameworks/CoreDisplay.framework; sourceTree = "<group>"; };
 		AA9CB6252704BB440086DC0E /* hu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hu; path = hu.lproj/Main.strings; sourceTree = "<group>"; };
@@ -417,6 +420,7 @@
 				"zh-Hans",
 				"zh-Hant-TW",
 				es,
+				"pt-BR",
 			);
 			mainGroup = 56754EA21D9A4016007BCDC5;
 			packageReferences = (
@@ -616,6 +620,7 @@
 				AA9CB63F2704C1A40086DC0E /* zh-Hans */,
 				AA9CB6412704C1B80086DC0E /* zh-Hant-TW */,
 				17DE48C4273E9DC500A1779F /* es */,
+				AA99E81527622EBE00413316 /* pt-BR */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -634,6 +639,7 @@
 				8C1741932707B92A00E88D53 /* ko */,
 				8C1741972707B92E00E88D53 /* tr */,
 				17DE48C5273E9DC500A1779F /* es */,
+				AA99E81627622EBE00413316 /* pt-BR */,
 			);
 			name = InternetAccessPolicy.strings;
 			sourceTree = "<group>";
@@ -652,6 +658,7 @@
 				AA9CB6402704C1A40086DC0E /* zh-Hans */,
 				AA9CB6422704C1B80086DC0E /* zh-Hant-TW */,
 				17DE48C6273E9DC500A1779F /* es */,
+				AA99E81727622EBE00413316 /* pt-BR */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
