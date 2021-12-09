@@ -1,0 +1,8 @@
+/* General application description */
+"ApplicationDescription" = "MonitorControl permite controlar o brilho e o volume de monitores externos";
+
+/* Sofware update deny consequences */
+"SoftwareUpdateDenyConsequences" = "Se negar as conexões, você não será alertado sobre novas versões e atualizações de segurança. Atualizações de segurança são importantes.";
+
+/* Software update purpose */
+"SoftwareUpdatePurpose" = "MonitorControl verifica novas versões e atualizações de segurança.";
