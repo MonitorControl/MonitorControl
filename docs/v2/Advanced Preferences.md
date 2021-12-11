@@ -1,3 +1,7 @@
+---
+title: Advanced Preferences
+---
+
 To enable Advanced Preferences for monitors, toggle the "Show advanced settings under Displays" checkbox in the General Preferences and go to the Displays tab, where you'll now see advanced preferences for each display.
 
 Inside the advanced preferences you can experiment and modify some more advanced settings.
@@ -12,7 +16,7 @@ Polling is used for reading current display volume and brightness values, which 
 coming out of sleep mode.  
 Because we try to read the values multiple times (for example, 10 tries for volume and 10 tries for brightness on `Normal` mode), it can cause some slowdown on your system. The different polling modes indicate a different amount of times we try to poll the display for information.
 
-### Polling Modes:
+### Polling Modes
 
 - None: 0 tries
 - Minimal: 5 tries

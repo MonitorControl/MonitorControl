@@ -16,6 +16,10 @@ so here are some troubleshooting steps and general information to try and help y
 
 ## I can't control volume/brightness
 
+### Known incompatibilities
+
+Mac Minis made after 2018 (including the M1 Mini) have trouble supporting DDC via the built-in HDMI port. Use the USB-C/Thunderbolt port instead!
+
 ### Check if your monitor OSD has a setting for DDC
 
 Some monitors have a ddc settings that can be enabled/disabled, make sure you check if your specific monitor has this setting and if it does, you should ensure DDC is enabled.
@@ -63,9 +67,16 @@ If these commands change your brightness or volume, you know that your display s
 
 Generally, people seem to have the highest success rates with DisplayPort and the lowest with HDMI.
 
-### Known incompatibilities
+## Mute does not actually mute the speakers
 
-Mac Minis made after 2018 (including the M1 Mini) have trouble supporting DDC via the built-in HDMI port. Use the USB-C/Thunderbolt port instead!
+By default, we mute by lowering the volume all the way to 0, we do this because it's the approach that works with most displays.
+
+If you are having issues with this, try:
+
+1. Preferences > Displays > Toggle `Show advanced settings` at the bottom
+2. Toggle `Enable Mute DDC command` for the display.
+
+This approach uses the actuall DDC Mute command, which might work/behave better.
 
 ## I can't get accurate read values from the monitor
 
