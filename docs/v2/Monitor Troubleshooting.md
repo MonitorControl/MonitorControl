@@ -1,3 +1,7 @@
+---
+title: Monitor Troubleshooting
+---
+
 We often get issues like:
 _"MonitorControl doesn't work with my monitor"_,  
 so here are some troubleshooting steps and general information to try and help you.
