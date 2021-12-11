@@ -1,6 +1,5 @@
 defaults:
   - scope:
       path: 'wiki'
-      type: 'posts'
     values:
       layout: 'wiki'
