@@ -1,5 +1,6 @@
 ---
 title: Advanced Preferences
+layout: wiki
 ---
 
 ## How to enable

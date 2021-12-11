@@ -1,0 +1,6 @@
+defaults:
+  - scope:
+      path: 'wiki'
+      type: 'pages'
+    values:
+      layout: 'wiki'

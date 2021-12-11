@@ -1,5 +1,6 @@
 ---
 title: Monitor Troubleshooting
+layout: wiki
 ---
 
 We often get issues like:
