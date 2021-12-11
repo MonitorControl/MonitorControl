@@ -3,3 +3,6 @@ defaults:
       path: 'wiki'
     values:
       layout: 'wiki'
+
+repository: MonitorControl/MonitorControl
+theme: jekyll-theme-primer
