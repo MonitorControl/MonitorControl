@@ -25,6 +25,9 @@
 /* Class = "NSTextFieldCell"; title = "Using window focus might not work properly with full screen apps."; ObjectID = "4dX-o1-xAc"; */
 "4dX-o1-xAc.title" = "L'utilisation du \"focus de la fenêtre\" à la place peut ne pas fonctionner correctement avec les applications en plein écran.";
 
+/* Class = "NSTextFieldCell"; title = "Welcome to MonitorControl"; ObjectID = "5J0-BD-top"; */
+"5J0-BD-top.title" = "Bienvenue sur MonitorControl";
+
 /* Class = "NSButtonCell"; title = "Reset Preferences"; ObjectID = "5yT-5F-X5R"; */
 "5yT-5F-X5R.title" = "Réinitialiser les préférences";
 
@@ -43,6 +46,9 @@
 /* Class = "NSButtonCell"; title = "Use fine OSD scale for brightness and contrast"; ObjectID = "8Q8-57-xnT"; */
 "8Q8-57-xnT.title" = "Utiliser une échelle fine sur l'OSD";
 
+/* Class = "NSButtonCell"; title = "Start using MonitorControl"; ObjectID = "8WE-da-OZC"; */
+"8WE-da-OZC.title" = "Commencer à utiliser MonitorControl";
+
 /* Class = "NSButtonCell"; title = "Special thanks to our contributors!"; ObjectID = "95V-M4-2l5"; */
 "95V-M4-2l5.title" = "Remerciements particuliers à nos contributeurs !";
 
@@ -60,6 +66,9 @@
 
 /* Class = "NSMenuItem"; title = "Use audio device name to determine which display to control"; ObjectID = "AqF-uD-KCY"; */
 "AqF-uD-KCY.title" = "Utiliser le nom du périphérique audio pour déterminer quel écran contrôler";
+
+/* Class = "NSTextFieldCell"; title = "Start at Login ?"; ObjectID = "bA1-GF-Y2n"; */
+"bA1-GF-Y2n.title" = "Lancer au démarrage ?";
 
 /* Class = "NSMenuItem"; title = "Show sliders only for the display currently showing the menu"; ObjectID = "bbf-sS-uGv"; */
 "bbf-sS-uGv.title" = "Afficher les curseurs uniquement pour l'écran affichant actuellement le menu";
@@ -108,6 +117,9 @@
 
 /* Class = "NSTextFieldCell"; title = "You can override audio device name under Displays (advanced) if needed."; ObjectID = "Dha-Tm-cDM"; */
 "Dha-Tm-cDM.title" = "Vous pouvez remplacer le nom du périphérique audio sous Écrans si nécessaire.";
+
+/* Class = "NSTextFieldCell"; title = "Ensure MonitorControl is always running when you need it by launching the app at startup."; ObjectID = "Eij-3b-7I3"; */
+"Eij-3b-7I3.title" = "Assurez-vous que MonitorControl est toujours en cours d'exécution lorsque vous en avez besoin en lançant l'application au démarrage.";
 
 /* Class = "NSTextFieldCell"; title = "You can disable smooth transitions for a more direct, immediate control."; ObjectID = "ENt-mP-0yH"; */
 "ENt-mP-0yH.title" = "Vous pouvez désactiver les transitions en douceur pour un contrôle plus direct et immédiat.";
@@ -193,11 +205,17 @@
 /* Class = "NSButtonCell"; title = "Check for updates"; ObjectID = "jVH-oc-rUi"; */
 "jVH-oc-rUi.title" = "Vérifier les mises à jour";
 
+/* Class = "NSButtonCell"; title = "Start MonitorControl at Login"; ObjectID = "JWJ-OY-VtE"; */
+"JWJ-OY-VtE.title" = "Lancer MonitorControl au démarrage";
+
 /* Class = "NSTextFieldCell"; title = "Note: you can press Shift during startup for 'Safe mode' to restore defaults and avoid reading or setting anything."; ObjectID = "Jx2-gO-nq9"; */
 "Jx2-gO-nq9.title" = "Remarque : vous pouvez appuyer sur Maj pendant le démarrage pour démarrer en « Mode sans échec » ce qui restaure les paramètres par défaut et évite de lire ou de définir quoi que ce soit.";
 
 /* Class = "NSButtonCell"; title = "Enable for Apple branded and built-in displays as well"; ObjectID = "K6A-4z-1aQ"; */
 "K6A-4z-1aQ.title" = "Activer également les écrans Apple et intégrés";
+
+/* Class = "NSTextFieldCell"; title = "MonitorControl needs access to \"accessibility\" to use macOS native keys to control your display.\nYou can enable it by adding MonitorControl in System Preferences > Security and Privacy > Accessibility."; ObjectID = "kBJ-Zf-1k2"; */
+"kBJ-Zf-1k2.title" = "MonitorControl a besoin d'accéder à \"l'accessibilité\" pour utiliser les touches natives macOS afin de contrôler votre écran.\nVous pouvez l'activer en ajoutant MonitorControl dans Préférences Système > Sécurité et confidentialité > Accessibilité.";
 
 /* Class = "NSTextFieldCell"; title = "Screen to control:"; ObjectID = "Kfj-WK-aSL"; */
 "Kfj-WK-aSL.title" = "Écran à contrôler :";
@@ -216,6 +234,9 @@
 
 /* Class = "NSTextFieldCell"; title = "Screen to control:"; ObjectID = "ltL-gR-K3Z"; */
 "ltL-gR-K3Z.title" = "Écran à contrôler :";
+
+/* Class = "NSTextFieldCell"; title = "Control your external displays brightness, contrast and volume directly from your mac, using menulet sliders or the keyboard, including native Apple keys."; ObjectID = "Mh5-1A-apq"; */
+"Mh5-1A-apq.title" = "Contrôlez la luminosité, le contraste et le volume de vos écrans externes directement depuis votre Mac, à l'aide des curseurs du menu ou du clavier, y compris avec les touches Apple natives.";
 
 /* Class = "NSButtonCell"; title = "Enable slider snapping"; ObjectID = "MlU-hl-d46"; */
 "MlU-hl-d46.title" = "Activer l'accrochage du curseur";
@@ -262,6 +283,9 @@
 /* Class = "NSTextFieldCell"; title = "DDC max"; ObjectID = "psF-vX-AFB"; */
 "psF-vX-AFB.title" = "max. DDC";
 
+/* Class = "NSButtonCell"; title = "Open System Preferences…"; ObjectID = "pVc-wG-Bdh"; */
+"pVc-wG-Bdh.title" = "Ouvrir les Préférences Système…";
+
 /* Class = "NSTextFieldCell"; title = "Use software dimming after the display reached zero hardware brightness for extended range. Works for DDC controlled displays only."; ObjectID = "PyY-p9-3NP"; */
 "PyY-p9-3NP.title" = "Utilisez le contrôle logiciel une fois que l'écran a atteint une luminosité matérielle de zéro pour une portée étendue. Fonctionne pour les écrans contrôlés par matériel (DDC) uniquement.";
 
@@ -282,6 +306,9 @@
 
 /* Class = "NSButtonCell"; title = "Combine hardware and software dimming"; ObjectID = "r76-Zc-x09"; */
 "r76-Zc-x09.title" = "Combiner le contrôle matériel et logiciel";
+
+/* Class = "NSTextFieldCell"; title = "Enable Apple keyboard native key access"; ObjectID = "RBj-pU-aen"; */
+"RBj-pU-aen.title" = "Activer l'accès aux touches natives Apple du clavier";
 
 /* Class = "NSMenuItem"; title = "Normal"; ObjectID = "Riq-uM-bTs"; */
 "Riq-uM-bTs.title" = "Normal";

@@ -48,36 +48,16 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
   func applicationDidFinishLaunching(_: Notification) {
     app = self
-    menu = MenuHandler()
-    menu.delegate = menu
     self.subscribeEventListeners()
-    if NSEvent.modifierFlags.contains(NSEvent.ModifierFlags.shift) {
-      self.safeMode = true
-      let alert = NSAlert()
-      alert.messageText = NSLocalizedString("Safe Mode Activated", comment: "Shown in the alert dialog")
-      alert.informativeText = NSLocalizedString("Shift was pressed during launch. MonitorControl started in safe mode. Default preferences are reloaded, DDC read is blocked.", comment: "Shown in the alert dialog")
-      alert.runModal()
-    }
-    let currentBuildNumber = Int(Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String ?? "1") ?? 1
-    let previousBuildNumber: Int = (Int(prefs.string(forKey: PrefKey.buildNumber.rawValue) ?? "0") ?? 0)
-    if self.safeMode || ((previousBuildNumber < MIN_PREVIOUS_BUILD_NUMBER) && previousBuildNumber > 0) || (previousBuildNumber > currentBuildNumber), let bundleID = Bundle.main.bundleIdentifier {
-      if !self.safeMode {
-        let alert = NSAlert()
-        alert.messageText = NSLocalizedString("Incompatible previous version", comment: "Shown in the alert dialog")
-        alert.informativeText = NSLocalizedString("Preferences for an incompatible previous app version detected. Default preferences are reloaded.", comment: "Shown in the alert dialog")
-        alert.runModal()
-      }
-      prefs.removePersistentDomain(forName: bundleID)
-    }
-    prefs.set(currentBuildNumber, forKey: PrefKey.buildNumber.rawValue)
-    self.setDefaultPrefs()
-    if !DEBUG_MACOS10, #available(macOS 11.0, *) {
-      self.statusItem.button?.image = NSImage(systemSymbolName: "sun.max", accessibilityDescription: "MonitorControl")
+    self.showSafeModeAlertIfNeeded()
+    if !prefs.bool(forKey: PrefKey.appAlreadyLaunched.rawValue) {
+      self.showOnboardingWindow()
     } else {
-      self.statusItem.button?.image = NSImage(named: "status")
+      self.checkPermissions()
     }
-    self.statusItem.menu = menu
-    self.checkPermissions()
+    self.setPrefsBuildNumber()
+    self.setDefaultPrefs()
+    self.setMenu()
     CGDisplayRegisterReconfigurationCallback({ _, _, _ in app.displayReconfigured() }, nil)
     self.configure(firstrun: true)
     DisplayManager.shared.createGammaActivityEnforcer()
@@ -103,6 +83,21 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     os_log("Goodbye!", type: .info)
     DisplayManager.shared.resetSwBrightnessForAllDisplays(noPrefSave: true)
     self.statusItem.isVisible = true
+  }
+
+  private func setPrefsBuildNumber() {
+    let currentBuildNumber = Int(Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String ?? "1") ?? 1
+    let previousBuildNumber: Int = (Int(prefs.string(forKey: PrefKey.buildNumber.rawValue) ?? "0") ?? 0)
+    if self.safeMode || ((previousBuildNumber < MIN_PREVIOUS_BUILD_NUMBER) && previousBuildNumber > 0) || (previousBuildNumber > currentBuildNumber), let bundleID = Bundle.main.bundleIdentifier {
+      if !self.safeMode {
+        let alert = NSAlert()
+        alert.messageText = NSLocalizedString("Incompatible previous version", comment: "Shown in the alert dialog")
+        alert.informativeText = NSLocalizedString("Preferences for an incompatible previous app version detected. Default preferences are reloaded.", comment: "Shown in the alert dialog")
+        alert.runModal()
+      }
+      prefs.removePersistentDomain(forName: bundleID)
+    }
+    prefs.set(currentBuildNumber, forKey: PrefKey.buildNumber.rawValue)
   }
 
   func setDefaultPrefs() {
@@ -158,10 +153,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     self.updateMediaKeyTap()
   }
 
-  func checkPermissions() {
+  func checkPermissions(firstAsk: Bool = false) {
     let permissionsRequired: Bool = [KeyboardVolume.media.rawValue, KeyboardVolume.both.rawValue].contains(prefs.integer(forKey: PrefKey.keyboardVolume.rawValue)) || [KeyboardBrightness.media.rawValue, KeyboardBrightness.both.rawValue].contains(prefs.integer(forKey: PrefKey.keyboardBrightness.rawValue))
     if !MediaKeyTapManager.readPrivileges(prompt: false), permissionsRequired {
-      MediaKeyTapManager.acquirePrivileges()
+      MediaKeyTapManager.acquirePrivileges(firstAsk: firstAsk)
     }
   }
 
@@ -332,5 +327,32 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     } catch {
       os_log("%{public}@", type: .error, error.localizedDescription)
     }
+  }
+
+  private func setMenu() {
+    menu = MenuHandler()
+    menu.delegate = menu
+    if !DEBUG_MACOS10, #available(macOS 11.0, *) {
+      self.statusItem.button?.image = NSImage(systemSymbolName: "sun.max", accessibilityDescription: "MonitorControl")
+    } else {
+      self.statusItem.button?.image = NSImage(named: "status")
+    }
+    self.statusItem.menu = menu
+  }
+
+  private func showSafeModeAlertIfNeeded() {
+    if NSEvent.modifierFlags.contains(NSEvent.ModifierFlags.shift) {
+      self.safeMode = true
+      let alert = NSAlert()
+      alert.messageText = NSLocalizedString("Safe Mode Activated", comment: "Shown in the alert dialog")
+      alert.informativeText = NSLocalizedString("Shift was pressed during launch. MonitorControl started in safe mode. Default preferences are reloaded, DDC read is blocked.", comment: "Shown in the alert dialog")
+      alert.runModal()
+    }
+  }
+
+  private func showOnboardingWindow() {
+    onboardingVc?.showWindow(self)
+    onboardingVc?.window?.center()
+    NSApp.activate(ignoringOtherApps: true)
   }
 }
