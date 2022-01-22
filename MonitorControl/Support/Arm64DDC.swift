@@ -278,8 +278,13 @@ class Arm64DDC: NSObject {
     if let modelData = IORegistryEntryCreateCFProperty(platformExpertDevice, "model" as CFString, kCFAllocatorDefault, 0).takeRetainedValue() as? Data, let modelIdentifierCString = String(data: modelData, encoding: .utf8)?.cString(using: .utf8) {
       modelIdentifier = String(cString: modelIdentifierCString)
     }
-    // First service location of Mac Mini HDMI is broken for DDC communication
-    if ioregService.transportDownstream == "HDMI", ioregService.serviceLocation == 1, modelIdentifier == "Macmini9,1" {
+    // First service location of M1 Mac Mini & Macbook Pro HDMI is broken for DDC communication
+    let ddcBlockedModels = [
+      "Macmini9", // Mac mini M1 2020
+      "MacBookPro18", // Macbook Pro M1 Pro/Max 2021 (14", 16")
+    ]
+    let isBlockedModel = ddcBlockedModels.contains { $0.starts(with: modelIdentifier) }
+    if ioregService.transportDownstream == "HDMI", ioregService.serviceLocation == 1, isBlockedModel {
       return true
     }
     return false
