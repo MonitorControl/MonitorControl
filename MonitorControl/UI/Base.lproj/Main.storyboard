@@ -368,6 +368,7 @@
                                                     <items>
                                                         <menuItem title="Always show in the menu bar" state="on" id="MM0-Lf-VgF"/>
                                                         <menuItem title="Only if at least one slider is present" tag="1" id="xLa-PN-rsq"/>
+                                                        <menuItem title="Only if has an external monitor" tag="2" id="nZH-ma-he4"/>
                                                         <menuItem title="Always hide" tag="2" id="6mo-7S-oOO"/>
                                                     </items>
                                                 </menu>

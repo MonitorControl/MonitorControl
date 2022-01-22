@@ -183,6 +183,19 @@ class MenuHandler: NSMenu, NSMenuDelegate {
     if addedSliderHandlers.count > 0, prefs.integer(forKey: PrefKey.menuIcon.rawValue) == MenuIcon.sliderOnly.rawValue {
       app.statusItem.isVisible = true
     }
+    if prefs.integer(forKey: PrefKey.menuIcon.rawValue) == MenuIcon.externalMonitorOnly.rawValue {
+      var hasExternalMonitor = false
+      for slider in addedSliderHandlers {
+        for dis in slider.displays where dis is MonitorControl.OtherDisplay {
+          hasExternalMonitor = true
+          break
+        }
+        if hasExternalMonitor {
+          app.statusItem.isVisible = true;
+          break
+        }
+      }
+    }
   }
 
   private func appendMenuHeader(friendlyName: String, monitorSubMenu: NSMenu, asSubMenu: Bool, numOfDisplays: Int) {

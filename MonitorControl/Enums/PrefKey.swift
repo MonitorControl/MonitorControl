@@ -190,7 +190,8 @@ enum PollingMode: Int {
 enum MenuIcon: Int {
   case show = 0
   case sliderOnly = 1
-  case hide = 2
+  case externalMonitorOnly = 2
+  case hide = 3
 }
 
 enum MenuItemStyle: Int {
