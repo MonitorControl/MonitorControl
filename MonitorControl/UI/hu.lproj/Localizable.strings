@@ -2,7 +2,7 @@
 "About" = "Névjegy";
 
 /* Shown in the alert dialog */
-"An other app seems to change the brightness or colors which causes issues.\n\nTo solve this, you need to quit the other app or disable gamma control for your displays in MonitorControl!" = "An other app seems to change the brightness or colors which causes issues.\n\nTo solve this, you need to quit the other app or disable gamma control for your displays in MonitorControl!";
+"An other app seems to change the brightness or colors which causes issues.\n\nTo solve this, you need to quit the other app or disable gamma control for your displays in MonitorControl!" = "Úgy tűnik Egy másik alkalmazás módosítja a fényerőt vagy a színeket ami problémát okoz.\n\nEz megoldható a másik alkalmazás bezárásával vagy a MonitorControl-ban a kijelzők gamma vezérlésének letiltásával!";
 
 /* Shown in the main prefs window */
 "App menu" = "Menü";
@@ -35,7 +35,7 @@
 "Decrease" = "Csökkentés";
 
 /* Shown in the alert dialog */
-"Disable gamma control for my displays" = "Disable gamma control for my displays";
+"Disable gamma control for my displays" = "Kijelzők gamma vezérlésének letiltása";
 
 /* Shown in the main prefs window */
 "Displays" = "Kijelzők";
@@ -56,7 +56,7 @@
 "Hardware (DDC)" = "Hardver (DDC)";
 
 /* Shown in the alert dialog */
-"I'll quit the other app" = "I'll quit the other app";
+"I'll quit the other app" = "Bezárom a másik alkalmazást";
 
 /* Shown in the alert dialog */
 "Incompatible previous version" = "Inkompatibilis előző verzió";
@@ -65,7 +65,7 @@
 "Increase" = "Növelés";
 
 /* Shown in the alert dialog */
-"Is f.lux or similar running?" = "Is f.lux or similar running?";
+"Is f.lux or similar running?" = "Fut f.lux vagy hasonló alkalmazás?";
 
 /* Shown in the main prefs window */
 "Keyboard" = "Billentyűzet";

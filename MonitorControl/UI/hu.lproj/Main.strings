@@ -101,7 +101,7 @@
 "Cz1-Mh-llk.title" = "⚠️ Figyelem! Ezen beállítások változtatása veszélyeztetheti a rendszer stabilitását!";
 
 /* Class = "NSTextFieldCell"; title = "Alternative keys are the F14/F15 (Scroll Lock and Pause on PC keyboards, brightness keys on some Logitech keyboards)."; ObjectID = "D4H-hU-FLn"; */
-"D4H-hU-FLn.title" = "Az alternatív gombok az F14/F15 (Scroll Lock vagy Pause PC-k esetén ill. fényerő gombok egyes Logitech billentyűn).";
+"D4H-hU-FLn.title" = "Az alternatív gombok az F14/F15 (Scroll Lock vagy Pause PC-k esetén ill. fényerő gombok egyes Logitech billentyűzeteken).";
 
 /* Class = "NSTextFieldCell"; title = "VCP list"; ObjectID = "D9t-vT-gNJ"; */
 "D9t-vT-gNJ.title" = "VCP lista";
