@@ -71,11 +71,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     prefs.set(currentBuildNumber, forKey: PrefKey.buildNumber.rawValue)
     self.setDefaultPrefs()
-    if !DEBUG_MACOS10, #available(macOS 11.0, *) {
-      self.statusItem.button?.image = NSImage(systemSymbolName: "sun.max", accessibilityDescription: "MonitorControl")
-    } else {
-      self.statusItem.button?.image = NSImage(named: "status")
-    }
+    self.statusItem.button?.image = NSImage(named: "status")
     self.statusItem.menu = menu
     self.checkPermissions()
     CGDisplayRegisterReconfigurationCallback({ _, _, _ in app.displayReconfigured() }, nil)
