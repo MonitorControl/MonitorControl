@@ -19,5 +19,8 @@ class OnboardingViewController: NSViewController {
 
   @IBAction func closeButtonTouched(_: NSButton) {
     self.view.window?.close()
+    DispatchQueue.main.async {
+      app.statusItem.button?.performClick(self)
+    }
   }
 }
