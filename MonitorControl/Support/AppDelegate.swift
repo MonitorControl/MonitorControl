@@ -49,29 +49,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   func applicationDidFinishLaunching(_: Notification) {
     app = self
     self.subscribeEventListeners()
-    if NSEvent.modifierFlags.contains(NSEvent.ModifierFlags.shift) {
-      self.safeMode = true
-      let alert = NSAlert()
-      alert.messageText = NSLocalizedString("Safe Mode Activated", comment: "Shown in the alert dialog")
-      alert.informativeText = NSLocalizedString("Shift was pressed during launch. MonitorControl started in safe mode. Default preferences are reloaded, DDC read is blocked.", comment: "Shown in the alert dialog")
-      alert.runModal()
+    self.showSafeModeAlertIfNeeded()
+    if !prefs.bool(forKey: PrefKey.appAlreadyLaunched.rawValue) {
+      self.showOnboardingWindow()
+    } else {
+      self.checkPermissions()
     }
-    let currentBuildNumber = Int(Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String ?? "1") ?? 1
-    let previousBuildNumber: Int = (Int(prefs.string(forKey: PrefKey.buildNumber.rawValue) ?? "0") ?? 0)
-    if self.safeMode || ((previousBuildNumber < MIN_PREVIOUS_BUILD_NUMBER) && previousBuildNumber > 0) || (previousBuildNumber > currentBuildNumber), let bundleID = Bundle.main.bundleIdentifier {
-      if !self.safeMode {
-        let alert = NSAlert()
-        alert.messageText = NSLocalizedString("Incompatible previous version", comment: "Shown in the alert dialog")
-        alert.informativeText = NSLocalizedString("Preferences for an incompatible previous app version detected. Default preferences are reloaded.", comment: "Shown in the alert dialog")
-        alert.runModal()
-      }
-      prefs.removePersistentDomain(forName: bundleID)
-    }
-    prefs.set(currentBuildNumber, forKey: PrefKey.buildNumber.rawValue)
+    self.setPrefsBuildNumber()
     self.setDefaultPrefs()
-    self.statusItem.button?.image = NSImage(named: "status")
-    self.statusItem.menu = menu
-    self.checkPermissions()
+    self.setMenu()
     CGDisplayRegisterReconfigurationCallback({ _, _, _ in app.displayReconfigured() }, nil)
     self.configure(firstrun: true)
     DisplayManager.shared.createGammaActivityEnforcer()
