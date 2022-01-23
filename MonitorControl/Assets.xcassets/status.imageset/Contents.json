@@ -1,13 +1,13 @@
 {
   "images" : [
     {
+      "filename" : "status.pdf",
       "idiom" : "universal",
-      "filename" : "status.png",
       "scale" : "1x"
     },
     {
+      "filename" : "status@2x.pdf",
       "idiom" : "universal",
-      "filename" : "status@2x.png",
       "scale" : "2x"
     },
     {
@@ -16,8 +16,8 @@
     }
   ],
   "info" : {
-    "version" : 1,
-    "author" : "xcode"
+    "author" : "xcode",
+    "version" : 1
   },
   "properties" : {
     "template-rendering-intent" : "template"
