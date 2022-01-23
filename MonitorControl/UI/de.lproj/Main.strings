@@ -13,6 +13,9 @@
 /* Class = "NSTextFieldCell"; title = "DDC min"; ObjectID = "1zE-fg-xEm"; */
 "1zE-fg-xEm.title" = "DDC min";
 
+/* Class = "NSTextFieldCell"; title = "Volume down"; ObjectID = "21s-bv-GTK"; */
+"21s-bv-GTK.title" = "Volume down";
+
 /* Class = "NSMenuItem"; title = "Show separate controls for each display in menu"; ObjectID = "3eO-bN-ZRl"; */
 "3eO-bN-ZRl.title" = "Separate Steuerung für jeden Monitor im Menü anzeigen";
 
@@ -118,9 +121,6 @@
 /* Class = "NSTextFieldCell"; title = "You can override audio device name under Displays (advanced) if needed."; ObjectID = "Dha-Tm-cDM"; */
 "Dha-Tm-cDM.title" = "Bei Bedarf kannst du den Namen des Audiogeräts unter Monitore überschreiben.";
 
-/* Class = "NSTextFieldCell"; title = "Ensure MonitorControl is always running when you need it by launching the app at startup."; ObjectID = "Eij-3b-7I3"; */
-"Eij-3b-7I3.title" = "Ensure MonitorControl is always running when you need it by launching the app at startup.";
-
 /* Class = "NSTextFieldCell"; title = "You can disable smooth transitions for a more direct, immediate control."; ObjectID = "ENt-mP-0yH"; */
 "ENt-mP-0yH.title" = "Für eine direktere, unmittelbare Steuerung kannst du weiche Übergänge deaktivieren.";
 
@@ -199,6 +199,9 @@
 /* Class = "NSButtonCell"; title = "Start at Login"; ObjectID = "j72-NF-zsW"; */
 "j72-NF-zsW.title" = "Bei Anmeldung starten";
 
+/* Class = "NSTextFieldCell"; title = "Toggle Mute"; ObjectID = "jK7-7w-uib"; */
+"jK7-7w-uib.title" = "Toggle Mute";
+
 /* Class = "NSMenuItem"; title = "Change for all screens"; ObjectID = "jSj-HB-T2t"; */
 "jSj-HB-T2t.title" = "Für alle Monitore ändern";
 
@@ -256,6 +259,12 @@
 /* Class = "NSButtonCell"; title = "Avoid gamma table manipulation"; ObjectID = "na6-mS-MPi"; */
 "na6-mS-MPi.title" = "Manipulation der Gammatabelle vermeiden";
 
+/* Class = "NSTextFieldCell"; title = "Ensure MonitorControl is always running when you need it by launching the app at startup."; ObjectID = "nk6-Gh-Mfs"; */
+"nk6-Gh-Mfs.title" = "Ensure MonitorControl is always running when you need it by launching the app at startup.";
+
+/* Class = "NSTextFieldCell"; title = "Brightness up"; ObjectID = "nty-g6-Sde"; */
+"nty-g6-Sde.title" = "Brightness up";
+
 /* Class = "NSButtonCell"; title = "Separate scales for combined hardware & software dimming"; ObjectID = "O8o-hI-8eR"; */
 "O8o-hI-8eR.title" = "Getrennte Skalen für kombiniertes Dimmen von Hardware und Software";
 
@@ -288,6 +297,9 @@
 
 /* Class = "NSTextFieldCell"; title = "Use software dimming after the display reached zero hardware brightness for extended range. Works for DDC controlled displays only."; ObjectID = "PyY-p9-3NP"; */
 "PyY-p9-3NP.title" = "Verwende die Software-Dimmung, nachdem der Monitor die Null-Hardware-Helligkeit erreicht hat, um die Bandbreite zu erweitern. Funktioniert nur bei DDC-gesteuerten Monitoren.";
+
+/* Class = "NSTextFieldCell"; title = "Brightness down"; ObjectID = "q5a-Ix-Hjs"; */
+"q5a-Ix-Hjs.title" = "Brightness down";
 
 /* Class = "NSMenuItem"; title = "Both standard and custom shortcuts"; ObjectID = "QDG-SA-mRX"; */
 "QDG-SA-mRX.title" = "Sowohl Standard- als auch benutzerdefinierte Tastenkombinationen";
@@ -384,6 +396,9 @@
 
 /* Class = "NSMenuItem"; title = "Depends on mouse pointer position"; ObjectID = "Ytd-mg-N5E"; */
 "Ytd-mg-N5E.title" = "Abhängig von der Mauszeigerposition";
+
+/* Class = "NSTextFieldCell"; title = "Volume up"; ObjectID = "Z3w-eR-qDF"; */
+"Z3w-eR-qDF.title" = "Volume up";
 
 /* Class = "NSButtonCell"; title = "Use hardware DDC control"; ObjectID = "ZdU-gV-V05"; */
 "ZdU-gV-V05.title" = "Hardware DDC Steuerung verwenden";

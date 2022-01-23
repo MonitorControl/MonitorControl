@@ -13,6 +13,9 @@
 /* Class = "NSTextFieldCell"; title = "DDC min"; ObjectID = "1zE-fg-xEm"; */
 "1zE-fg-xEm.title" = "DDC 최솟값";
 
+/* Class = "NSTextFieldCell"; title = "Volume down"; ObjectID = "21s-bv-GTK"; */
+"21s-bv-GTK.title" = "Volume down";
+
 /* Class = "NSMenuItem"; title = "Show separate controls for each display in menu"; ObjectID = "3eO-bN-ZRl"; */
 "3eO-bN-ZRl.title" = "메뉴에서 각 디스플레이에 대해 각각의 컨트롤 표시";
 
@@ -118,9 +121,6 @@
 /* Class = "NSTextFieldCell"; title = "You can override audio device name under Displays (advanced) if needed."; ObjectID = "Dha-Tm-cDM"; */
 "Dha-Tm-cDM.title" = "필요한 경우 디스플레이에서 오디오 장치 이름을 재정의할 수 있습니다.";
 
-/* Class = "NSTextFieldCell"; title = "Ensure MonitorControl is always running when you need it by launching the app at startup."; ObjectID = "Eij-3b-7I3"; */
-"Eij-3b-7I3.title" = "Ensure MonitorControl is always running when you need it by launching the app at startup.";
-
 /* Class = "NSTextFieldCell"; title = "You can disable smooth transitions for a more direct, immediate control."; ObjectID = "ENt-mP-0yH"; */
 "ENt-mP-0yH.title" = "보다 직접적이고 즉각적인 제어를 위해 부드러운 전환을 비활성화할 수 있습니다.";
 
@@ -199,6 +199,9 @@
 /* Class = "NSButtonCell"; title = "Start at Login"; ObjectID = "j72-NF-zsW"; */
 "j72-NF-zsW.title" = "로그인 시 시작";
 
+/* Class = "NSTextFieldCell"; title = "Toggle Mute"; ObjectID = "jK7-7w-uib"; */
+"jK7-7w-uib.title" = "Toggle Mute";
+
 /* Class = "NSMenuItem"; title = "Change for all screens"; ObjectID = "jSj-HB-T2t"; */
 "jSj-HB-T2t.title" = "모든 화면에 대해 변경";
 
@@ -256,6 +259,12 @@
 /* Class = "NSButtonCell"; title = "Avoid gamma table manipulation"; ObjectID = "na6-mS-MPi"; */
 "na6-mS-MPi.title" = "감마 테이블 조절 방지";
 
+/* Class = "NSTextFieldCell"; title = "Ensure MonitorControl is always running when you need it by launching the app at startup."; ObjectID = "nk6-Gh-Mfs"; */
+"nk6-Gh-Mfs.title" = "Ensure MonitorControl is always running when you need it by launching the app at startup.";
+
+/* Class = "NSTextFieldCell"; title = "Brightness up"; ObjectID = "nty-g6-Sde"; */
+"nty-g6-Sde.title" = "Brightness up";
+
 /* Class = "NSButtonCell"; title = "Separate scales for combined hardware & software dimming"; ObjectID = "O8o-hI-8eR"; */
 "O8o-hI-8eR.title" = "통합된 하드웨어 및 소프트웨어 밝기 조절을 위한 별도의 스케일";
 
@@ -288,6 +297,9 @@
 
 /* Class = "NSTextFieldCell"; title = "Use software dimming after the display reached zero hardware brightness for extended range. Works for DDC controlled displays only."; ObjectID = "PyY-p9-3NP"; */
 "PyY-p9-3NP.title" = "디스플레이가 확장된 범위에 대해 하드웨어 밝기가 0에 도달한 후 소프트웨어 밝기 조절을 사용합니다. DDC 제어 디스플레이에서만 동작합니다.";
+
+/* Class = "NSTextFieldCell"; title = "Brightness down"; ObjectID = "q5a-Ix-Hjs"; */
+"q5a-Ix-Hjs.title" = "Brightness down";
 
 /* Class = "NSMenuItem"; title = "Both standard and custom shortcuts"; ObjectID = "QDG-SA-mRX"; */
 "QDG-SA-mRX.title" = "표준 및 사용자 정의 단축키 둘 다";
@@ -384,6 +396,9 @@
 
 /* Class = "NSMenuItem"; title = "Depends on mouse pointer position"; ObjectID = "Ytd-mg-N5E"; */
 "Ytd-mg-N5E.title" = "마우스 포인터 위치에 따라 다름";
+
+/* Class = "NSTextFieldCell"; title = "Volume up"; ObjectID = "Z3w-eR-qDF"; */
+"Z3w-eR-qDF.title" = "Volume up";
 
 /* Class = "NSButtonCell"; title = "Use hardware DDC control"; ObjectID = "ZdU-gV-V05"; */
 "ZdU-gV-V05.title" = "하드웨어 DDC 제어 사용";
