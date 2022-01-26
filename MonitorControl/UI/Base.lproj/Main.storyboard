@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="19455"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="19529"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -1249,7 +1250,7 @@
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="none" tableStyle="inset" selectionHighlightStyle="none" columnReordering="NO" columnResizing="NO" multipleSelection="NO" emptySelection="NO" autosaveColumns="NO" typeSelect="NO" rowHeight="520" viewBased="YES" id="zC9-dS-Tr3">
-                                            <rect key="frame" x="0.0" y="0.0" width="740" height="520"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="740" height="502"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <size key="intercellSpacing" width="14" height="0.0"/>
                                             <color key="backgroundColor" name="windowBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -2082,9 +2083,259 @@
             </objects>
             <point key="canvasLocation" x="298" y="2090"/>
         </scene>
+        <!--Window Controller-->
+        <scene sceneID="pu1-gh-TAl">
+            <objects>
+                <windowController storyboardIdentifier="onboardingViewController" id="DtE-dT-6ee" sceneMemberID="viewController">
+                    <window key="window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" titlebarAppearsTransparent="YES" titleVisibility="hidden" id="fQY-sI-jda">
+                        <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
+                        <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+                        <rect key="contentRect" x="211" y="267" width="729" height="439"/>
+                        <rect key="screenRect" x="0.0" y="0.0" width="1512" height="944"/>
+                        <view key="contentView" id="Hyx-n1-5qF">
+                            <rect key="frame" x="0.0" y="0.0" width="729" height="439"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                        </view>
+                        <connections>
+                            <outlet property="delegate" destination="DtE-dT-6ee" id="RXS-J2-zDf"/>
+                        </connections>
+                    </window>
+                    <connections>
+                        <segue destination="WCR-Sv-JAA" kind="relationship" relationship="window.shadowedContentViewController" id="bJV-bN-ewW"/>
+                    </connections>
+                </windowController>
+                <customObject id="3Q8-52-CQO" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="299" y="2587"/>
+        </scene>
+        <!--Onboarding View Controller-->
+        <scene sceneID="T2v-ah-vo5">
+            <objects>
+                <viewController id="WCR-Sv-JAA" customClass="OnboardingViewController" customModule="MonitorControl" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="7ij-vC-Tcj">
+                        <rect key="frame" x="0.0" y="0.0" width="730" height="655"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <imageView wantsLayer="YES" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="6zp-VJ-fGb">
+                                <rect key="frame" x="273" y="470" width="185" height="185"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="axesIndependently" image="NSApplicationIcon" id="ftw-y4-OLS"/>
+                            </imageView>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="zz2-ed-nlQ">
+                                <rect key="frame" x="22" y="439" width="686" height="31"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="Welcome to MonitorControl" id="5J0-BD-top">
+                                    <font key="font" textStyle="largeTitle" name=".SFNS-Regular"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="i4H-Xi-qQ9">
+                                <rect key="frame" x="22" y="397" width="686" height="32"/>
+                                <textFieldCell key="cell" selectable="YES" alignment="center" id="Mh5-1A-apq">
+                                    <font key="font" textStyle="body" name=".SFNS-Regular"/>
+                                    <string key="title">Control your external displays brightness, contrast and volume directly from your mac, using menulet sliders or the keyboard, including native Apple keys.</string>
+                                    <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cRo-Y4-wGw">
+                                <rect key="frame" x="24" y="337" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="B24-Kq-eYp"/>
+                                    <constraint firstAttribute="width" constant="40" id="uoQ-As-avq"/>
+                                </constraints>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="onboarding_icon_person" id="wMe-M0-S74"/>
+                                <color key="contentTintColor" name="AccentColor"/>
+                            </imageView>
+                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="XOg-4t-Y46">
+                                <rect key="frame" x="70" y="356" width="119" height="21"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="Start at Login ?" id="bA1-GF-Y2n">
+                                    <font key="font" textStyle="title2" name=".SFNS-Regular"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="2Mx-eg-r9b">
+                                <rect key="frame" x="70" y="330" width="550" height="16"/>
+                                <textFieldCell key="cell" selectable="YES" title="Ensure MonitorControl is always running when you need it by launching the app at startup." id="nk6-Gh-Mfs">
+                                    <font key="font" textStyle="body" name=".SFNS-Regular"/>
+                                    <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="XWw-qf-xqA">
+                                <rect key="frame" x="70" y="303" width="203" height="18"/>
+                                <buttonCell key="cell" type="check" title="Start MonitorControl at Login" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="JWJ-OY-VtE">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" textStyle="body" name=".SFNS-Regular"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="toggleStartAtLoginTouched:" target="WCR-Sv-JAA" id="aTn-eP-WhM"/>
+                                </connections>
+                            </button>
+                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="smN-BX-6Bx">
+                                <rect key="frame" x="25" y="190" width="680" height="94"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="94" id="zbt-AP-TbB"/>
+                                </constraints>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="onboarding_keyboard" id="msN-VA-JCl"/>
+                            </imageView>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="2CX-gU-Z8v">
+                                <rect key="frame" x="78" y="261" width="85" height="13"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="Brightness down" id="q5a-Ix-Hjs">
+                                    <font key="font" textStyle="caption1" name=".SFNS-Regular"/>
+                                    <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Ow8-dR-Fgo">
+                                <rect key="frame" x="165" y="261" width="71" height="13"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="Brightness up" id="nty-g6-Sde">
+                                    <font key="font" textStyle="caption1" name=".SFNS-Regular"/>
+                                    <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Vcj-wy-xpT">
+                                <rect key="frame" x="467" y="261" width="64" height="13"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="Toggle Mute" id="jK7-7w-uib">
+                                    <font key="font" textStyle="caption1" name=".SFNS-Regular"/>
+                                    <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="C46-iS-x7A">
+                                <rect key="frame" x="531" y="261" width="69" height="13"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="Volume down" id="21s-bv-GTK">
+                                    <font key="font" textStyle="caption1" name=".SFNS-Regular"/>
+                                    <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="9HD-qV-iYX">
+                                <rect key="frame" x="602" y="261" width="55" height="13"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="Volume up" id="Z3w-eR-qDF">
+                                    <font key="font" textStyle="caption1" name=".SFNS-Regular"/>
+                                    <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="VAj-Uw-KLP">
+                                <rect key="frame" x="24" y="134" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="XUV-vo-BpM"/>
+                                    <constraint firstAttribute="width" constant="40" id="k0E-63-grt"/>
+                                </constraints>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="onboarding_icon_keyboard" id="edl-2K-5Sx"/>
+                                <color key="contentTintColor" name="AccentColor"/>
+                            </imageView>
+                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ex9-0r-ZMv">
+                                <rect key="frame" x="70" y="153" width="317" height="21"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="Enable Apple keyboard native key access" id="RBj-pU-aen">
+                                    <font key="font" textStyle="title2" name=".SFNS-Regular"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="GSh-nh-adY">
+                                <rect key="frame" x="70" y="111" width="637" height="32"/>
+                                <textFieldCell key="cell" selectable="YES" id="kBJ-Zf-1k2">
+                                    <font key="font" textStyle="body" name=".SFNS-Regular"/>
+                                    <string key="title">MonitorControl needs access to "accessibility" to use macOS native keys to control your display.
+You can enable it by adding MonitorControl in System Preferences &gt; Security and Privacy &gt; Accessibility.</string>
+                                    <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="j2w-H2-9zU">
+                                <rect key="frame" x="65" y="74" width="202" height="32"/>
+                                <buttonCell key="cell" type="push" title="Open System Preferences…" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="pVc-wG-Bdh">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="askForPermissionsButtonTouched:" target="WCR-Sv-JAA" id="fDp-Uz-QVy"/>
+                                </connections>
+                            </button>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="BWF-bm-wMQ">
+                                <rect key="frame" x="518" y="17" width="195" height="32"/>
+                                <buttonCell key="cell" type="push" title="Start using MonitorControl" bezelStyle="rounded" alignment="center" borderStyle="border" inset="2" id="8WE-da-OZC">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                    <string key="keyEquivalent" base64-UTF8="YES">
+DQ
+</string>
+                                </buttonCell>
+                                <color key="bezelColor" name="AccentColor"/>
+                                <connections>
+                                    <action selector="closeButtonTouched:" target="WCR-Sv-JAA" id="dBP-Sn-zWC"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="XOg-4t-Y46" firstAttribute="leading" secondItem="cRo-Y4-wGw" secondAttribute="trailing" constant="8" id="1Zr-2j-k5G"/>
+                            <constraint firstItem="cRo-Y4-wGw" firstAttribute="top" secondItem="XOg-4t-Y46" secondAttribute="top" id="1nN-xw-rC4"/>
+                            <constraint firstItem="ex9-0r-ZMv" firstAttribute="top" secondItem="smN-BX-6Bx" secondAttribute="bottom" constant="16" id="1ya-2H-jqq"/>
+                            <constraint firstItem="XWw-qf-xqA" firstAttribute="top" secondItem="2Mx-eg-r9b" secondAttribute="bottom" constant="10" id="2XK-Ub-sqI"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="smN-BX-6Bx" secondAttribute="trailing" constant="24" id="3WW-v1-dam"/>
+                            <constraint firstItem="C46-iS-x7A" firstAttribute="top" secondItem="2CX-gU-Z8v" secondAttribute="top" id="4Fq-fq-ipS"/>
+                            <constraint firstItem="GSh-nh-adY" firstAttribute="top" secondItem="ex9-0r-ZMv" secondAttribute="bottom" constant="10" id="5Rm-Fe-1pJ"/>
+                            <constraint firstItem="9HD-qV-iYX" firstAttribute="top" secondItem="2CX-gU-Z8v" secondAttribute="top" id="5a0-7h-fMV"/>
+                            <constraint firstItem="zz2-ed-nlQ" firstAttribute="top" secondItem="6zp-VJ-fGb" secondAttribute="bottom" id="9Dl-OK-quK"/>
+                            <constraint firstAttribute="bottom" secondItem="BWF-bm-wMQ" secondAttribute="bottom" constant="24" id="A6m-Pa-if6"/>
+                            <constraint firstItem="VAj-Uw-KLP" firstAttribute="leading" secondItem="7ij-vC-Tcj" secondAttribute="leading" constant="24" id="Ay5-Ez-GRr"/>
+                            <constraint firstItem="2Mx-eg-r9b" firstAttribute="top" secondItem="XOg-4t-Y46" secondAttribute="bottom" constant="10" id="Bid-p9-h2L"/>
+                            <constraint firstItem="j2w-H2-9zU" firstAttribute="top" secondItem="GSh-nh-adY" secondAttribute="bottom" constant="10" id="Bw9-oG-DT8"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="XOg-4t-Y46" secondAttribute="trailing" constant="24" id="CsI-fS-Vby"/>
+                            <constraint firstItem="smN-BX-6Bx" firstAttribute="centerX" secondItem="7ij-vC-Tcj" secondAttribute="centerX" id="HW3-nt-zMB"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="j2w-H2-9zU" secondAttribute="trailing" constant="24" id="KRH-dm-Mpb"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="ex9-0r-ZMv" secondAttribute="trailing" constant="24" id="OAV-hT-QhX"/>
+                            <constraint firstItem="2Mx-eg-r9b" firstAttribute="leading" secondItem="XOg-4t-Y46" secondAttribute="leading" id="QHF-rg-XDA"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="GSh-nh-adY" secondAttribute="trailing" constant="24" id="TPB-jR-qla"/>
+                            <constraint firstItem="Ow8-dR-Fgo" firstAttribute="leading" secondItem="2CX-gU-Z8v" secondAttribute="trailing" constant="6" id="Tgw-bR-6kh"/>
+                            <constraint firstItem="i4H-Xi-qQ9" firstAttribute="leading" secondItem="7ij-vC-Tcj" secondAttribute="leading" constant="24" id="UMm-Pu-v4s"/>
+                            <constraint firstItem="smN-BX-6Bx" firstAttribute="leading" secondItem="2CX-gU-Z8v" secondAttribute="leading" constant="-55" id="Und-Nj-Iij"/>
+                            <constraint firstItem="Vcj-wy-xpT" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Ow8-dR-Fgo" secondAttribute="trailing" constant="24" id="WHe-5P-mOl"/>
+                            <constraint firstItem="VAj-Uw-KLP" firstAttribute="top" secondItem="ex9-0r-ZMv" secondAttribute="top" id="X8b-Jo-u7d"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="XWw-qf-xqA" secondAttribute="trailing" constant="24" id="Yeb-Lh-CGu"/>
+                            <constraint firstItem="XOg-4t-Y46" firstAttribute="top" secondItem="i4H-Xi-qQ9" secondAttribute="bottom" constant="20" id="a0p-OP-6Qg"/>
+                            <constraint firstAttribute="trailing" secondItem="BWF-bm-wMQ" secondAttribute="trailing" constant="24" id="a1p-AH-G3U"/>
+                            <constraint firstAttribute="trailing" secondItem="i4H-Xi-qQ9" secondAttribute="trailing" constant="24" id="b4F-Fd-O7j"/>
+                            <constraint firstItem="C46-iS-x7A" firstAttribute="leading" secondItem="Vcj-wy-xpT" secondAttribute="trailing" constant="4" id="bKb-fY-IDK"/>
+                            <constraint firstItem="BWF-bm-wMQ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="7ij-vC-Tcj" secondAttribute="leading" constant="24" id="c0F-jc-E3x"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="2Mx-eg-r9b" secondAttribute="trailing" constant="24" id="eMf-RB-Lvo"/>
+                            <constraint firstItem="cRo-Y4-wGw" firstAttribute="leading" secondItem="7ij-vC-Tcj" secondAttribute="leading" constant="24" id="ehr-yr-MPb"/>
+                            <constraint firstItem="GSh-nh-adY" firstAttribute="leading" secondItem="ex9-0r-ZMv" secondAttribute="leading" id="erH-0V-2ME"/>
+                            <constraint firstItem="9HD-qV-iYX" firstAttribute="leading" secondItem="C46-iS-x7A" secondAttribute="trailing" constant="6" id="gQy-v8-0NS"/>
+                            <constraint firstItem="Ow8-dR-Fgo" firstAttribute="top" secondItem="2CX-gU-Z8v" secondAttribute="top" id="gs9-iM-1YJ"/>
+                            <constraint firstItem="smN-BX-6Bx" firstAttribute="top" secondItem="XWw-qf-xqA" secondAttribute="bottom" constant="20" id="hId-hF-5Ee"/>
+                            <constraint firstItem="zz2-ed-nlQ" firstAttribute="leading" secondItem="7ij-vC-Tcj" secondAttribute="leading" constant="24" id="iO5-uO-LV1"/>
+                            <constraint firstItem="Vcj-wy-xpT" firstAttribute="top" secondItem="2CX-gU-Z8v" secondAttribute="top" id="iec-vV-Jer"/>
+                            <constraint firstItem="BWF-bm-wMQ" firstAttribute="top" relation="greaterThanOrEqual" secondItem="j2w-H2-9zU" secondAttribute="bottom" constant="10" id="ihW-Cv-bmg"/>
+                            <constraint firstItem="smN-BX-6Bx" firstAttribute="top" secondItem="2CX-gU-Z8v" secondAttribute="top" constant="-10" id="jZh-BM-6MO"/>
+                            <constraint firstItem="ex9-0r-ZMv" firstAttribute="leading" secondItem="VAj-Uw-KLP" secondAttribute="trailing" constant="8" id="njA-w2-rjc"/>
+                            <constraint firstAttribute="trailing" secondItem="zz2-ed-nlQ" secondAttribute="trailing" constant="24" id="sm4-A0-9tY"/>
+                            <constraint firstItem="XWw-qf-xqA" firstAttribute="leading" secondItem="2Mx-eg-r9b" secondAttribute="leading" id="uyw-Jn-PDg"/>
+                            <constraint firstItem="9HD-qV-iYX" firstAttribute="trailing" secondItem="smN-BX-6Bx" secondAttribute="trailing" constant="-50" id="vQI-f4-dmt"/>
+                            <constraint firstItem="i4H-Xi-qQ9" firstAttribute="top" secondItem="zz2-ed-nlQ" secondAttribute="bottom" constant="10" id="xKz-c3-bbt"/>
+                            <constraint firstItem="j2w-H2-9zU" firstAttribute="leading" secondItem="ex9-0r-ZMv" secondAttribute="leading" id="yEg-aj-96S"/>
+                            <constraint firstItem="smN-BX-6Bx" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="7ij-vC-Tcj" secondAttribute="leading" constant="24" id="zyv-XU-eAi"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <customObject id="YML-6F-4Tw" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="298" y="3256.5"/>
+        </scene>
     </scenes>
     <resources>
         <image name="NSApplicationIcon" width="32" height="32"/>
         <image name="NSTouchBarIconViewTemplate" width="15" height="14"/>
+        <image name="onboarding_icon_keyboard" width="40" height="40"/>
+        <image name="onboarding_icon_person" width="40" height="40"/>
+        <image name="onboarding_keyboard" width="680" height="94"/>
+        <namedColor name="AccentColor">
+            <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>

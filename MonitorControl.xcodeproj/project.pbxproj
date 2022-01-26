@@ -56,6 +56,7 @@
 		F0445D3820023E710025AE82 /* MainPrefsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0445D3720023E710025AE82 /* MainPrefsViewController.swift */; };
 		F06792EA200A73460066C438 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = F06792E9200A73460066C438 /* main.swift */; };
 		F06792F6200A745F0066C438 /* MonitorControlHelper.app in [Login] Copy Helper to start at Login */ = {isa = PBXBuildFile; fileRef = F06792E7200A73460066C438 /* MonitorControlHelper.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		F0A489C4279C71B200BEDFD6 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A489C3279C71B200BEDFD6 /* OnboardingViewController.swift */; };
 		FE4E0896249D584C003A50BB /* OSDUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE4E0895249D584C003A50BB /* OSDUtils.swift */; };
 /* End PBXBuildFile section */
 
@@ -157,6 +158,7 @@
 		F06792E9200A73460066C438 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		F06792F0200A73470066C438 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F06792F1200A73470066C438 /* MonitorControlHelper.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MonitorControlHelper.entitlements; sourceTree = "<group>"; };
+		F0A489C3279C71B200BEDFD6 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		FE4E0895249D584C003A50BB /* OSDUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OSDUtils.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -311,12 +313,8 @@
 		F0445D3620023D5B0025AE82 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				F0445D3720023E710025AE82 /* MainPrefsViewController.swift */,
-				AA25F6CE26E680510087F3A2 /* MenuslidersPrefsViewController.swift */,
-				AA25F6D026E681D30087F3A2 /* KeyboardPrefsViewController.swift */,
-				AA062E8926C9A039007E628C /* DisplaysPrefsViewController.swift */,
-				AA062E8D26CA7BE5007E628C /* DisplaysPrefsCellView.swift */,
-				AA665A5C26C5892800FEF2C1 /* AboutPrefsViewController.swift */,
+				F0A489C2279C719200BEDFD6 /* Onboarding */,
+				F0A489C1279C718400BEDFD6 /* Preferences */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -329,6 +327,27 @@
 				F06792F1200A73470066C438 /* MonitorControlHelper.entitlements */,
 			);
 			path = MonitorControlHelper;
+			sourceTree = "<group>";
+		};
+		F0A489C1279C718400BEDFD6 /* Preferences */ = {
+			isa = PBXGroup;
+			children = (
+				F0445D3720023E710025AE82 /* MainPrefsViewController.swift */,
+				AA25F6CE26E680510087F3A2 /* MenuslidersPrefsViewController.swift */,
+				AA25F6D026E681D30087F3A2 /* KeyboardPrefsViewController.swift */,
+				AA062E8926C9A039007E628C /* DisplaysPrefsViewController.swift */,
+				AA062E8D26CA7BE5007E628C /* DisplaysPrefsCellView.swift */,
+				AA665A5C26C5892800FEF2C1 /* AboutPrefsViewController.swift */,
+			);
+			path = Preferences;
+			sourceTree = "<group>";
+		};
+		F0A489C2279C719200BEDFD6 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				F0A489C3279C71B200BEDFD6 /* OnboardingViewController.swift */,
+			);
+			path = Onboarding;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -581,6 +600,7 @@
 				F03A8DF21FFBAA6F0034DC27 /* OtherDisplay.swift in Sources */,
 				AA78BDBD2709FE7B00CA8DF7 /* UpdaterDelegate.swift in Sources */,
 				AA44E7052703790100E06865 /* KeyboardShortcuts+Extension.swift in Sources */,
+				F0A489C4279C71B200BEDFD6 /* OnboardingViewController.swift in Sources */,
 				AA16139B26BE772E00DCF027 /* Arm64DDC.swift in Sources */,
 				F0445D3820023E710025AE82 /* MainPrefsViewController.swift in Sources */,
 				28D1DDF2227FBE71004CB494 /* NSScreen+Extension.swift in Sources */,
