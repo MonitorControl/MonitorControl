@@ -2,7 +2,7 @@
 "About" = "Névjegy";
 
 /* Shown in the alert dialog */
-"An other app seems to change the brightness or colors which causes issues.\n\nTo solve this, you need to quit the other app or disable gamma control for your displays in MonitorControl!" = "Úgy tűnik Egy másik alkalmazás módosítja a fényerőt vagy a színeket ami problémát okoz.\n\nEz megoldható a másik alkalmazás bezárásával vagy a MonitorControl-ban a kijelzők gamma vezérlésének letiltásával!";
+"An other app seems to change the brightness or colors which causes issues.\n\nTo solve this, you need to quit the other app or disable gamma control for your displays in MonitorControl!" = "Úgy tűnik, egy másik alkalmazás is módosítja a fényerőt vagy a színeket ami problémát okoz.\n\nEz megoldható a másik alkalmazás bezárásával vagy a MonitorControl-ban a kijelzők gamma vezérlésének letiltásával!";
 
 /* Shown in the main prefs window */
 "App menu" = "Menü";

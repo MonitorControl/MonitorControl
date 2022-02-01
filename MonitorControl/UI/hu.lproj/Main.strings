@@ -14,7 +14,7 @@
 "1zE-fg-xEm.title" = "DDC min";
 
 /* Class = "NSTextFieldCell"; title = "Volume down"; ObjectID = "21s-bv-GTK"; */
-"21s-bv-GTK.title" = "Volume down";
+"21s-bv-GTK.title" = "Hangerő le";
 
 /* Class = "NSMenuItem"; title = "Show separate controls for each display in menu"; ObjectID = "3eO-bN-ZRl"; */
 "3eO-bN-ZRl.title" = "Külön vezérlő minden képernyő számára";
@@ -41,7 +41,7 @@
 "75n-7M-1mS.title" = "Csúszka viselkedés:";
 
 /* Class = "NSButtonCell"; title = "Show slider tick marks"; ObjectID = "7zf-m1-gJO"; */
-"7zf-m1-gJO.title" = "Mértékjelek mutatása mutatása";
+"7zf-m1-gJO.title" = "Mértékjelek mutatása";
 
 /* Class = "NSTextFieldCell"; title = "Slider knob will snap to 0%, 25%, 50%, 75% and 100% when in proximity making setting these values easier. Disable for finer control."; ObjectID = "8Gx-Ya-zhp"; */
 "8Gx-Ya-zhp.title" = "A csúszka fogantyú 0%, 25%, 50%, 75% és 100% pontokhoz ugrik, hogy ezek könnyebben beállíthatók legyenek.";
@@ -65,13 +65,13 @@
 "A8P-vn-DEJ.title" = "Mértékjelek mutatása 0%, 25%, 50%, 75% és 100% pontokon.";
 
 /* Class = "NSTextFieldCell"; title = "Use brightness, volume and other settings from last time or use defaults. Values will be applied to the display upon first change by the user."; ObjectID = "an7-Aj-3fZ"; */
-"an7-Aj-3fZ.title" = "Utolsó ismert, vagy alapértelmezett fényerő, hangerő és egyéb beálltások használata. A megváltoztatott értékek első változtatáskor érvényesülnek.";
+"an7-Aj-3fZ.title" = "Korábban beállított vagy alapértelmezett fényerő, hangerő beálltások használata. A megváltoztatott értékek első változtatáskor érvényesülnek.";
 
 /* Class = "NSMenuItem"; title = "Use audio device name to determine which display to control"; ObjectID = "AqF-uD-KCY"; */
 "AqF-uD-KCY.title" = "Hangeszköz nevének megfelelő kijelző vezérlése";
 
-/* Class = "NSTextFieldCell"; title = "Start at Login ?"; ObjectID = "bA1-GF-Y2n"; */
-"bA1-GF-Y2n.title" = "Start at Login ?";
+/* Class = "NSTextFieldCell"; title = "Start at Login?"; ObjectID = "bA1-GF-Y2n"; */
+"bA1-GF-Y2n.title" = "Automatikus indítás";
 
 /* Class = "NSMenuItem"; title = "Show sliders only for the display currently showing the menu"; ObjectID = "bbf-sS-uGv"; */
 "bbf-sS-uGv.title" = "Az aktuális kijelző csúszkáinak mutatása";
@@ -200,7 +200,7 @@
 "j72-NF-zsW.title" = "Automatikus indítás bejelentkezéskor";
 
 /* Class = "NSTextFieldCell"; title = "Toggle Mute"; ObjectID = "jK7-7w-uib"; */
-"jK7-7w-uib.title" = "Toggle Mute";
+"jK7-7w-uib.title" = "Némítás";
 
 /* Class = "NSMenuItem"; title = "Change for all screens"; ObjectID = "jSj-HB-T2t"; */
 "jSj-HB-T2t.title" = "Minden képernyő módosítása";
@@ -218,7 +218,7 @@
 "K6A-4z-1aQ.title" = "Engedélyezés Apple és beépített kijelzők esetén is";
 
 /* Class = "NSTextFieldCell"; title = "MonitorControl needs access to \"accessibility\" to use macOS native keys to control your display.\nYou can enable it by adding MonitorControl in System Preferences > Security and Privacy > Accessibility."; ObjectID = "kBJ-Zf-1k2"; */
-"kBJ-Zf-1k2.title" = "MonitorControl needs access to \"accessibility\" to use macOS native keys to control your display.\nYou can enable it by adding MonitorControl in System Preferences > Security and Privacy > Accessibility.";
+"kBJ-Zf-1k2.title" = "A MonitorControlnak engedélyre van szüksége ahhoz, hogy a fényerő és hangerő gombokra reagálhasson. Ehhez hozzá kell adni a MonitorControl alkalmazást a Rendszerbeállítások > Biztonság és adatvédelem > Kisegítő lehetőségek alatt.";
 
 /* Class = "NSTextFieldCell"; title = "Screen to control:"; ObjectID = "Kfj-WK-aSL"; */
 "Kfj-WK-aSL.title" = "Vezérelt képernyő:";
@@ -238,8 +238,8 @@
 /* Class = "NSTextFieldCell"; title = "Screen to control:"; ObjectID = "ltL-gR-K3Z"; */
 "ltL-gR-K3Z.title" = "Vezérelt képernyő:";
 
-/* Class = "NSTextFieldCell"; title = "Control your external displays brightness, contrast and volume directly from your mac, using menulet sliders or the keyboard, including native Apple keys."; ObjectID = "Mh5-1A-apq"; */
-"Mh5-1A-apq.title" = "Control your external displays brightness, contrast and volume directly from your mac, using menulet sliders or the keyboard, including native Apple keys.";
+/* Class = "NSTextFieldCell"; title = "Control your external displays brightness, contrast and volume directly from your Mac, using menulet sliders or the keyboard, including native Apple keys."; ObjectID = "Mh5-1A-apq"; */
+"Mh5-1A-apq.title" = "Vezérleje külső kijelzője fényerejét, kontrasztját és hangerejét a Mac-ról - a menü csúszkákkal vagy billentyűk segítségével, beleértve a gyári Apple billentyűket is!";
 
 /* Class = "NSButtonCell"; title = "Enable slider snapping"; ObjectID = "MlU-hl-d46"; */
 "MlU-hl-d46.title" = "Csúszka igazítás engedélyezése";
@@ -260,10 +260,10 @@
 "na6-mS-MPi.title" = "Gamma tábla módosítás kerülése";
 
 /* Class = "NSTextFieldCell"; title = "Ensure MonitorControl is always running when you need it by launching the app at startup."; ObjectID = "nk6-Gh-Mfs"; */
-"nk6-Gh-Mfs.title" = "Ensure MonitorControl is always running when you need it by launching the app at startup.";
+"nk6-Gh-Mfs.title" = "Biztosítsa, hogy a MonitorControl mindig fut amikor szüksége van rá, az automatikus indítás segítségével!";
 
 /* Class = "NSTextFieldCell"; title = "Brightness up"; ObjectID = "nty-g6-Sde"; */
-"nty-g6-Sde.title" = "Brightness up";
+"nty-g6-Sde.title" = "Több fényerő";
 
 /* Class = "NSButtonCell"; title = "Separate scales for combined hardware & software dimming"; ObjectID = "O8o-hI-8eR"; */
 "O8o-hI-8eR.title" = "Külön skála kombinált hardver/szoftver sötétítésnál";
@@ -293,13 +293,13 @@
 "psF-vX-AFB.title" = "DDC max";
 
 /* Class = "NSButtonCell"; title = "Open System Preferences…"; ObjectID = "pVc-wG-Bdh"; */
-"pVc-wG-Bdh.title" = "Open System Preferences…";
+"pVc-wG-Bdh.title" = "Rendszerbeállítások megnyitása…";
 
 /* Class = "NSTextFieldCell"; title = "Use software dimming after the display reached zero hardware brightness for extended range. Works for DDC controlled displays only."; ObjectID = "PyY-p9-3NP"; */
 "PyY-p9-3NP.title" = "Szoftveres sötétítés alkalmazása, miután a kijelző elérte a minimális hardveres fényerőt. Csak hardveres (DDC) kijelzők esetén.";
 
 /* Class = "NSTextFieldCell"; title = "Brightness down"; ObjectID = "q5a-Ix-Hjs"; */
-"q5a-Ix-Hjs.title" = "Brightness down";
+"q5a-Ix-Hjs.title" = "Kevesebb fényerő";
 
 /* Class = "NSMenuItem"; title = "Both standard and custom shortcuts"; ObjectID = "QDG-SA-mRX"; */
 "QDG-SA-mRX.title" = "Hagyományos és egyedi billentyűkombinációk";
@@ -320,7 +320,7 @@
 "r76-Zc-x09.title" = "Hardveres és szoftveres fényerővezérlés kombinálása";
 
 /* Class = "NSTextFieldCell"; title = "Enable Apple keyboard native key access"; ObjectID = "RBj-pU-aen"; */
-"RBj-pU-aen.title" = "Enable Apple keyboard native key access";
+"RBj-pU-aen.title" = "Gyári Apple billentyűzet elérése";
 
 /* Class = "NSMenuItem"; title = "Normal"; ObjectID = "Riq-uM-bTs"; */
 "Riq-uM-bTs.title" = "Normál";
@@ -389,7 +389,7 @@
 "YHZ-VL-QJ3.title" = "A teljes OSD skála elérhető a hardveres fényerővezérlés számára, majd a minimum elérése után további szoftveres csökkentés történik.";
 
 /* Class = "NSTextFieldCell"; title = "Warning! With this option enabled, you might find yourself in a position when you end up with a blank display. This, combined with disabled keyboard controls can be frustrating."; ObjectID = "yi3-e1-wsL"; */
-"yi3-e1-wsL.title" = "Warning! With this option enabled, you might find yourself in a position when you end up with a blank display. This, combined with disabled keyboard controls can be frustrating.";
+"yi3-e1-wsL.title" = "Figyelem! Az opció engedélyezésével előfordulhat, hogy a kijelző teljesen sötétítésre kerül. Letiltott billentyűzet vezérlés mellett ez kellemetlen helyzetet eredményezhet.";
 
 /* Class = "NSTextFieldCell"; title = "Identifier:"; ObjectID = "YqZ-LS-YvR"; */
 "YqZ-LS-YvR.title" = "Azonosító:";
@@ -398,7 +398,7 @@
 "Ytd-mg-N5E.title" = "Az egérmutató helyzetétől függ";
 
 /* Class = "NSTextFieldCell"; title = "Volume up"; ObjectID = "Z3w-eR-qDF"; */
-"Z3w-eR-qDF.title" = "Volume up";
+"Z3w-eR-qDF.title" = "Hangerő fel";
 
 /* Class = "NSButtonCell"; title = "Use hardware DDC control"; ObjectID = "ZdU-gV-V05"; */
 "ZdU-gV-V05.title" = "Hardveres DDC vezérlés";

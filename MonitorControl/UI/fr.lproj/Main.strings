@@ -70,7 +70,7 @@
 /* Class = "NSMenuItem"; title = "Use audio device name to determine which display to control"; ObjectID = "AqF-uD-KCY"; */
 "AqF-uD-KCY.title" = "Utiliser le nom du périphérique audio pour déterminer quel écran contrôler";
 
-/* Class = "NSTextFieldCell"; title = "Start at Login ?"; ObjectID = "bA1-GF-Y2n"; */
+/* Class = "NSTextFieldCell"; title = "Start at Login?"; ObjectID = "bA1-GF-Y2n"; */
 "bA1-GF-Y2n.title" = "Lancer au démarrage ?";
 
 /* Class = "NSMenuItem"; title = "Show sliders only for the display currently showing the menu"; ObjectID = "bbf-sS-uGv"; */
@@ -238,7 +238,7 @@
 /* Class = "NSTextFieldCell"; title = "Screen to control:"; ObjectID = "ltL-gR-K3Z"; */
 "ltL-gR-K3Z.title" = "Écran à contrôler :";
 
-/* Class = "NSTextFieldCell"; title = "Control your external displays brightness, contrast and volume directly from your mac, using menulet sliders or the keyboard, including native Apple keys."; ObjectID = "Mh5-1A-apq"; */
+/* Class = "NSTextFieldCell"; title = "Control your external displays brightness, contrast and volume directly from your Mac, using menulet sliders or the keyboard, including native Apple keys."; ObjectID = "Mh5-1A-apq"; */
 "Mh5-1A-apq.title" = "Contrôlez la luminosité, le contraste et le volume de vos écrans externes directement depuis votre Mac, à l'aide des curseurs du menu ou du clavier, y compris avec les touches Apple natives.";
 
 /* Class = "NSButtonCell"; title = "Enable slider snapping"; ObjectID = "MlU-hl-d46"; */

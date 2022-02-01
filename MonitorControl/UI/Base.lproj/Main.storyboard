@@ -1250,7 +1250,7 @@
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="none" tableStyle="inset" selectionHighlightStyle="none" columnReordering="NO" columnResizing="NO" multipleSelection="NO" emptySelection="NO" autosaveColumns="NO" typeSelect="NO" rowHeight="520" viewBased="YES" id="zC9-dS-Tr3">
-                                            <rect key="frame" x="0.0" y="0.0" width="740" height="502"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="740" height="520"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <size key="intercellSpacing" width="14" height="0.0"/>
                                             <color key="backgroundColor" name="windowBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -2133,13 +2133,13 @@
                                 <rect key="frame" x="22" y="397" width="686" height="32"/>
                                 <textFieldCell key="cell" selectable="YES" alignment="center" id="Mh5-1A-apq">
                                     <font key="font" textStyle="body" name=".SFNS-Regular"/>
-                                    <string key="title">Control your external displays brightness, contrast and volume directly from your mac, using menulet sliders or the keyboard, including native Apple keys.</string>
+                                    <string key="title">Control your external displays brightness, contrast and volume directly from your Mac, using menulet sliders or the keyboard, including native Apple keys.</string>
                                     <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
                             <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cRo-Y4-wGw">
-                                <rect key="frame" x="24" y="337" width="40" height="40"/>
+                                <rect key="frame" x="24" y="343" width="40" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="B24-Kq-eYp"/>
                                     <constraint firstAttribute="width" constant="40" id="uoQ-As-avq"/>
@@ -2148,8 +2148,8 @@
                                 <color key="contentTintColor" name="AccentColor"/>
                             </imageView>
                             <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="XOg-4t-Y46">
-                                <rect key="frame" x="70" y="356" width="119" height="21"/>
-                                <textFieldCell key="cell" lineBreakMode="clipping" title="Start at Login ?" id="bA1-GF-Y2n">
+                                <rect key="frame" x="70" y="356" width="115" height="21"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="Start at Login?" id="bA1-GF-Y2n">
                                     <font key="font" textStyle="title2" name=".SFNS-Regular"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -2221,7 +2221,7 @@
                                 </textFieldCell>
                             </textField>
                             <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="VAj-Uw-KLP">
-                                <rect key="frame" x="24" y="134" width="40" height="40"/>
+                                <rect key="frame" x="24" y="140" width="40" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="XUV-vo-BpM"/>
                                     <constraint firstAttribute="width" constant="40" id="k0E-63-grt"/>
@@ -2274,7 +2274,7 @@ DQ
                         </subviews>
                         <constraints>
                             <constraint firstItem="XOg-4t-Y46" firstAttribute="leading" secondItem="cRo-Y4-wGw" secondAttribute="trailing" constant="8" id="1Zr-2j-k5G"/>
-                            <constraint firstItem="cRo-Y4-wGw" firstAttribute="top" secondItem="XOg-4t-Y46" secondAttribute="top" id="1nN-xw-rC4"/>
+                            <constraint firstItem="cRo-Y4-wGw" firstAttribute="top" secondItem="XOg-4t-Y46" secondAttribute="top" constant="-6" id="1nN-xw-rC4"/>
                             <constraint firstItem="ex9-0r-ZMv" firstAttribute="top" secondItem="smN-BX-6Bx" secondAttribute="bottom" constant="16" id="1ya-2H-jqq"/>
                             <constraint firstItem="XWw-qf-xqA" firstAttribute="top" secondItem="2Mx-eg-r9b" secondAttribute="bottom" constant="10" id="2XK-Ub-sqI"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="smN-BX-6Bx" secondAttribute="trailing" constant="24" id="3WW-v1-dam"/>
@@ -2296,7 +2296,7 @@ DQ
                             <constraint firstItem="i4H-Xi-qQ9" firstAttribute="leading" secondItem="7ij-vC-Tcj" secondAttribute="leading" constant="24" id="UMm-Pu-v4s"/>
                             <constraint firstItem="smN-BX-6Bx" firstAttribute="leading" secondItem="2CX-gU-Z8v" secondAttribute="leading" constant="-55" id="Und-Nj-Iij"/>
                             <constraint firstItem="Vcj-wy-xpT" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Ow8-dR-Fgo" secondAttribute="trailing" constant="24" id="WHe-5P-mOl"/>
-                            <constraint firstItem="VAj-Uw-KLP" firstAttribute="top" secondItem="ex9-0r-ZMv" secondAttribute="top" id="X8b-Jo-u7d"/>
+                            <constraint firstItem="VAj-Uw-KLP" firstAttribute="top" secondItem="ex9-0r-ZMv" secondAttribute="top" constant="-6" id="X8b-Jo-u7d"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="XWw-qf-xqA" secondAttribute="trailing" constant="24" id="Yeb-Lh-CGu"/>
                             <constraint firstItem="XOg-4t-Y46" firstAttribute="top" secondItem="i4H-Xi-qQ9" secondAttribute="bottom" constant="20" id="a0p-OP-6Qg"/>
                             <constraint firstAttribute="trailing" secondItem="BWF-bm-wMQ" secondAttribute="trailing" constant="24" id="a1p-AH-G3U"/>
