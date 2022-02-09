@@ -41,7 +41,7 @@
 "Displays" = "Monitore";
 
 /* Shown in the alert dialog */
-"Enable Longer Delay?" = "Größere Verzögerung einschalten?";
+"Enable Longer Delay?" = "Längere Verzögerung einschalten?";
 
 /* Shown in the Display Preferences */
 "External Display" = "Externer Monitor";
