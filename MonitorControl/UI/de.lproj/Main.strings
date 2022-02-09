@@ -176,7 +176,7 @@
 "H9X-it-sXs.title" = "Name des Audiogeräts überschreiben:";
 
 /* Class = "NSTextFieldCell"; title = "Relaunch the app to access Preferences if the menu option is not accessible. Use the button below to quit the app."; ObjectID = "hF7-fM-aKr"; */
-"hF7-fM-aKr.title" = "Starte die App neu, um auf die Einstellungen zuzugreifen, wenn die Menüoption nicht verfügbar ist. Verwende die Schaltfläche unten, um die App zu beenden.";
+"hF7-fM-aKr.title" = "Starte die App neu, um auf die Einstellungen zuzugreifen, wenn die Menüoption nicht auswählbar ist. Benutze die Schaltfläche unten, um die App zu beenden.";
 
 /* Class = "NSButtonCell"; title = "Get current"; ObjectID = "hkC-vq-IcD"; */
 "hkC-vq-IcD.title" = "Wert abrufen";
