@@ -260,7 +260,7 @@
 "na6-mS-MPi.title" = "Manipulation der Gammatabelle vermeiden";
 
 /* Class = "NSTextFieldCell"; title = "Ensure MonitorControl is always running when you need it by launching the app at startup."; ObjectID = "nk6-Gh-Mfs"; */
-"nk6-Gh-Mfs.title" = "Stelle sicher, dass MonitorControl immer läuft, wenn du es brauchst, indem es beim Anmelden startet.";
+"nk6-Gh-Mfs.title" = "Stelle sicher, dass MonitorControl immer läuft, wenn du es brauchst, indem du die App beim Anmelden startest.";
 
 /* Class = "NSTextFieldCell"; title = "Brightness up"; ObjectID = "nty-g6-Sde"; */
 "nty-g6-Sde.title" = "Helligkeit erhöhen";
