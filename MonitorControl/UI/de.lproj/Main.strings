@@ -14,7 +14,7 @@
 "1zE-fg-xEm.title" = "DDC min";
 
 /* Class = "NSTextFieldCell"; title = "Volume down"; ObjectID = "21s-bv-GTK"; */
-"21s-bv-GTK.title" = "Lautstärke verringern";
+"21s-bv-GTK.title" = "Leiser";
 
 /* Class = "NSMenuItem"; title = "Show separate controls for each display in menu"; ObjectID = "3eO-bN-ZRl"; */
 "3eO-bN-ZRl.title" = "Separate Steuerung für jeden Monitor im Menü anzeigen";
@@ -200,7 +200,7 @@
 "j72-NF-zsW.title" = "Bei Anmeldung starten";
 
 /* Class = "NSTextFieldCell"; title = "Toggle Mute"; ObjectID = "jK7-7w-uib"; */
-"jK7-7w-uib.title" = "Umschalten der Stummschaltung";
+"jK7-7w-uib.title" = "Stummschalten";
 
 /* Class = "NSMenuItem"; title = "Change for all screens"; ObjectID = "jSj-HB-T2t"; */
 "jSj-HB-T2t.title" = "Für alle Monitore ändern";
@@ -218,7 +218,7 @@
 "K6A-4z-1aQ.title" = "Auch für Apple und eingebaute Monitore aktivieren";
 
 /* Class = "NSTextFieldCell"; title = "MonitorControl needs access to \"accessibility\" to use macOS native keys to control your display.\nYou can enable it by adding MonitorControl in System Preferences > Security and Privacy > Accessibility."; ObjectID = "kBJ-Zf-1k2"; */
-"kBJ-Zf-1k2.title" = "MonitorControl benötigt Zugriff auf \"Bedienungshilfen\", um die Tasten deines Macs zur Steuerung deines Bildschirms zu verwenden.\n Du kannst das aktivieren, indem du MonitorControl in Systemeinstellungen > Sicherheit und Datenschutz > Bedienungshilfen hinzufügst.";
+"kBJ-Zf-1k2.title" = "MonitorControl benötigt Zugriff auf \"Bedienungshilfen\", um die Tasten deines Macs zur Steuerung deines Bildschirms zu verwenden.\nDu kannst die Steuerung akivieren, indem du MonitorControl in Systemeinstellungen > Sicherheit und Datenschutz > Bedienungshilfen hinzufügst.";
 
 /* Class = "NSTextFieldCell"; title = "Screen to control:"; ObjectID = "Kfj-WK-aSL"; */
 "Kfj-WK-aSL.title" = "Monitor für Steuerung:";
@@ -260,7 +260,7 @@
 "na6-mS-MPi.title" = "Manipulation der Gammatabelle vermeiden";
 
 /* Class = "NSTextFieldCell"; title = "Ensure MonitorControl is always running when you need it by launching the app at startup."; ObjectID = "nk6-Gh-Mfs"; */
-"nk6-Gh-Mfs.title" = "Stelle sicher, dass MonitorControl immer läuft, wenn du es brauchst, indem sie beim Anmelden startet.";
+"nk6-Gh-Mfs.title" = "Stelle sicher, dass MonitorControl immer läuft, wenn du es brauchst, indem du die App beim Anmelden startest.";
 
 /* Class = "NSTextFieldCell"; title = "Brightness up"; ObjectID = "nty-g6-Sde"; */
 "nty-g6-Sde.title" = "Helligkeit erhöhen";
