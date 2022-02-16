@@ -15,7 +15,7 @@ class DisplayManager {
   var gammaInterferenceWarningShown = false
 
   func createGammaActivityEnforcer() {
-    self.gammaActivityEnforcer.title = "Monior Control Gamma Activity Enforcer"
+    self.gammaActivityEnforcer.title = "Monitor Control Gamma Activity Enforcer"
     self.gammaActivityEnforcer.isMovableByWindowBackground = false
     self.gammaActivityEnforcer.backgroundColor = DEBUG_GAMMA_ENFORCER ? .red : .black
     self.gammaActivityEnforcer.ignoresMouseEvents = true
