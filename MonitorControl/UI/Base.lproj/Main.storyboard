@@ -2249,7 +2249,7 @@ You can enable it by adding MonitorControl in System Preferences &gt; Security a
                             </textField>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="j2w-H2-9zU">
                                 <rect key="frame" x="65" y="74" width="202" height="32"/>
-                                <buttonCell key="cell" type="push" title="Open System Preferences…" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="pVc-wG-Bdh">
+                                <buttonCell key="cell" type="push" title="Open System Preferences…" bezelStyle="rounded" imagePosition="trailing" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="pVc-wG-Bdh">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
@@ -2322,6 +2322,9 @@ DQ
                             <constraint firstItem="smN-BX-6Bx" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="7ij-vC-Tcj" secondAttribute="leading" constant="24" id="zyv-XU-eAi"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="permissionsButton" destination="j2w-H2-9zU" id="4Eb-J5-znC"/>
+                    </connections>
                 </viewController>
                 <customObject id="YML-6F-4Tw" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
