@@ -114,6 +114,9 @@
 		AA5314C326EBF5170041D178 /* PrefKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrefKey.swift; sourceTree = "<group>"; };
 		AA665A5C26C5892800FEF2C1 /* AboutPrefsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutPrefsViewController.swift; sourceTree = "<group>"; };
 		AA78BDBC2709FE7B00CA8DF7 /* UpdaterDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdaterDelegate.swift; sourceTree = "<group>"; };
+		AA90101E27C56A0E00CC1DF7 /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/Main.strings; sourceTree = "<group>"; };
+		AA90101F27C56A0E00CC1DF7 /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/InternetAccessPolicy.strings; sourceTree = "<group>"; };
+		AA90102027C56A0E00CC1DF7 /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/Localizable.strings; sourceTree = "<group>"; };
 		AA99521626FE25AB00612E07 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AA99521826FE49A300612E07 /* MenuHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuHandler.swift; sourceTree = "<group>"; };
 		AA99E81527622EBE00413316 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Main.strings"; sourceTree = "<group>"; };
@@ -440,6 +443,7 @@
 				"zh-Hant-TW",
 				es,
 				"pt-BR",
+				cs,
 			);
 			mainGroup = 56754EA21D9A4016007BCDC5;
 			packageReferences = (
@@ -641,6 +645,7 @@
 				AA9CB6412704C1B80086DC0E /* zh-Hant-TW */,
 				17DE48C4273E9DC500A1779F /* es */,
 				AA99E81527622EBE00413316 /* pt-BR */,
+				AA90101E27C56A0E00CC1DF7 /* cs */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -660,6 +665,7 @@
 				8C1741972707B92E00E88D53 /* tr */,
 				17DE48C5273E9DC500A1779F /* es */,
 				AA99E81627622EBE00413316 /* pt-BR */,
+				AA90101F27C56A0E00CC1DF7 /* cs */,
 			);
 			name = InternetAccessPolicy.strings;
 			sourceTree = "<group>";
@@ -679,6 +685,7 @@
 				AA9CB6422704C1B80086DC0E /* zh-Hant-TW */,
 				17DE48C6273E9DC500A1779F /* es */,
 				AA99E81727622EBE00413316 /* pt-BR */,
+				AA90102027C56A0E00CC1DF7 /* cs */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
