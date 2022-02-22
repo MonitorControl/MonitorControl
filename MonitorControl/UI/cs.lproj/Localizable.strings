@@ -1,0 +1,152 @@
+﻿/* Shown in the main prefs window */
+"About" = "O aplikaci";
+
+/* Shown in the alert dialog */
+"An other app seems to change the brightness or colors which causes issues.\n\nTo solve this, you need to quit the other app or disable gamma control for your displays in MonitorControl!" = "Zdá se, že jas a barvy ovládá ještě nějaká další aplikace, což způsobuje problémy.\n\nBuďto jinou aplikaci ukončete, nebo v MonitorControl vypněte ovládání gamy pro vaše displeje!";
+
+/* Shown in the main prefs window */
+"App menu" = "Nabídka";
+
+/* Shown in the alert dialog */
+"Are you sure you want to enable a longer delay? Doing so may freeze your system and require a restart. Start at login will be disabled as a safety measure." = "Určitě chcete zapnout delší prodlevu? Může dojít k zamrznutí systému, což by vyžadovalo restart. Možnost \„Spustit po přihlášení\“ se z bezpečnostních důvodů vypne.";
+
+/* Shown in the alert dialog */
+"Are you sure you want to reset all preferences?" = "Určitě chcete obnovit všechny předvolby?";
+
+/* Shown in menu */
+"Brightness" = "Jas";
+
+/* Build */
+"Build" = "Build";
+
+/* Shown in the Display Preferences */
+"Built-in Display" = "Vestavěný displej";
+
+/* Shown in menu */
+"Check for updates…" = "Vyhledat aktualizace…";
+
+/* Shown in menu */
+"Contrast" = "Kontrast";
+
+/* Version */
+"Copyright Ⓒ MonitorControl, " = "Copyright Ⓒ MonitorControl, ";
+
+/* Shown in record shortcut box */
+"Decrease" = "Snížit";
+
+/* Shown in the alert dialog */
+"Disable gamma control for my displays" = "Vypnout u mých displejů ovládání gamy";
+
+/* Shown in the main prefs window */
+"Displays" = "Displeje";
+
+/* Shown in the alert dialog */
+"Enable Longer Delay?" = "Povolit delší prodlevu?";
+
+/* Shown in the Display Preferences */
+"External Display" = "Externí displej";
+
+/* Shown in the main prefs window */
+"General" = "Obecné";
+
+/* Shown in the Display Preferences */
+"Hardware (Apple)" = "Hardwarové (Apple)";
+
+/* Shown in the Display Preferences */
+"Hardware (DDC)" = "Hardwarové (DDC)";
+
+/* Shown in the alert dialog */
+"I'll quit the other app" = "Ukončím jinou aplikaci";
+
+/* Shown in the alert dialog */
+"Incompatible previous version" = "Nekompatibilní předchozí verze";
+
+/* Shown in record shortcut box */
+"Increase" = "Zvýšit";
+
+/* Shown in the alert dialog */
+"Is f.lux or similar running?" = "Běží f.lux nebo něco podobného?";
+
+/* Shown in the main prefs window */
+"Keyboard" = "Klávesnice";
+
+/* Shown in record shortcut box */
+"Mute" = "Ztlumit";
+
+/* Shown in the alert dialog */
+"No" = "Ne";
+
+/* Shown in the Display Preferences */
+"No Control" = "Bez ovládání";
+
+/* Shown in the Display Preferences */
+"Other Display" = "Jiný displej";
+
+/* Shown in the alert dialog */
+"Preferences for an incompatible previous app version detected. Default preferences are reloaded." = "Nalezeny předvolby pro předchozí, nekompatibilní verzi aplikace. Načetly se výchozí hodnoty.";
+
+/* Shown in menu */
+"Preferences…" = "Předvolby…";
+
+/* Shown in menu */
+"Quit" = "Ukončit";
+
+/* Shown in the alert dialog */
+"Reset Preferences?" = "Obnovit předvolby?";
+
+/* Shown in the alert dialog */
+"Safe Mode Activated" = "Bezpečný režim aktivní";
+
+/* Shown in the alert dialog */
+"Shift was pressed during launch. MonitorControl started in safe mode. Default preferences are reloaded, DDC read is blocked." = "Běhěm spuštění byl zmáčknutý Shift. MonitorControl běží v bezpečném režimu. Byly načteny výchozí předvolby, čtení DDC je zablokováno.";
+
+/* Shown in the alert dialog */
+"Shortcuts not available" = "Zkratky nejsou k dispozici";
+
+/* Shown in the Display Preferences */
+"Software (gamma)" = "Softwarové (gama)";
+
+/* Shown in the Display Preferences */
+"Software (gamma, forced)" = "Softwarové (gama, nucené)";
+
+/* Shown in the Display Preferences */
+"Software (shade)" = "Softwarové (stínování)";
+
+/* Shown in the Display Preferences */
+"Software (shade, forced)" = "Software (stínování, nucené)";
+
+/* Shown in the Display Preferences */
+"This display allows for software brightness control via gamma table manipulation or shade as it does not support hardware control. Reasons for this might be using the HDMI port of a Mac mini (which blocks hardware DDC control) or having a blacklisted display." = "Jas tohoto displeje lze ovládat softwarově – manipulací gamy nebo stínování, protože hardwarové ovládání nepodporuje. Důvodem může být připojení přes HDMI port na Macu mini (který blokuje hardwarové ovládání DDC) nebo to, že displej patří na seznam nepodporovaných.";
+
+/* Shown in the Display Preferences */
+"This display has an unspecified control status." = "Tento displej má nespecifikovaný kontrolní stav.";
+
+/* Shown in the Display Preferences */
+"This display is reported to support hardware DDC control but the current settings allow for software control only." = "Tento displej by měl podporovat hardwarové DDC ovládání, ale současná nastavení umožňují ovládání jen přes software.";
+
+/* Shown in the Display Preferences */
+"This display is reported to support hardware DDC control. If you encounter issues, you can disable hardware DDC control to force software control." = "Tento displej by měl podporovat hardwarové DDC ovládání. Pokud narazíte na problém, můžete hardwarové ovládání DDC vypnout a použít vynucené ovládání přes software.";
+
+/* Shown in the Display Preferences */
+"This display supports native Apple brightness protocol. This allows macOS to control this display without MonitorControl as well." = "Tento displej podporuje nativní jasový protokol Apple. Díky tomu ho může macOS ovládat i bez MonitorControl.";
+
+/* Shown in the Display Preferences */
+"This is a virtual display (examples: AirPlay, Sidecar, display connected via a DisplayLink Dock or similar) which does not allow hardware or software gammatable control. Shading is used as a substitute but only in non-mirror scenarios. Mouse cursor will be unaffected and artifacts may appear when entering/leaving full screen mode." = "Toto je virtuální displej (např. AirPlay, Sidecar, DisplayLink a podobně), což neumožňuje ovládání gamy přes software ani hardware. Jako náhrada slouží stínování, ale jen za předpokladu, že displej není nastaven na zrcadlení. Změny se neprojeví na ukazateli myši a můžou se objevit vizuální artefakty při přepínání režimu na celou obrazovku.";
+
+/* Unknown display name */
+"Unknown" = "Neznámý";
+
+/* Version */
+"Version" = "Verze";
+
+/* Shown in the Display Preferences */
+"Virtual Display" = "Virtuální displej";
+
+/* Shown in menu */
+"Volume" = "Hlasitost";
+
+/* Shown in the alert dialog */
+"Yes" = "Ano";
+
+/* Shown in the alert dialog */
+"You need to enable MonitorControl in System Preferences > Security and Privacy > Accessibility for the keyboard shortcuts to work" = "Abyste mohli používat klávesové zkratky, jděte do Předvoleb systému > Zabezpečení a soukromí > Zpřístupnění a tam zaškrtněte MonitorControl";
