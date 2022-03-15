@@ -399,13 +399,13 @@ class DisplayManager {
   }
 
   static func isDummy(displayID: CGDirectDisplayID) -> Bool {
+    let vendorNumber = CGDisplayVendorNumber(displayID)
     let rawName = DisplayManager.getDisplayRawNameByID(displayID: displayID)
-    var isDummy: Bool = false
-    if rawName.lowercased().contains("dummy") {
+    if rawName.lowercased().contains("dummy") || (self.isVirtual(displayID: displayID) && vendorNumber == UInt32(0xF0F0)) {
       os_log("NOTE: Display is a dummy!", type: .info)
-      isDummy = true
+      return true
     }
-    return isDummy
+    return false
   }
 
   static func isVirtual(displayID: CGDirectDisplayID) -> Bool {
