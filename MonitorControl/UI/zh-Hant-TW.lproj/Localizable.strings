@@ -2,7 +2,7 @@
 "About" = "關於";
 
 /* Shown in the alert dialog */
-"An other app seems to change the brightness or colors which causes issues.\n\nTo solve this, you need to quit the other app or disable gamma control for your displays in MonitorControl!" = "An other app seems to change the brightness or colors which causes issues.\n\nTo solve this, you need to quit the other app or disable gamma control for your displays in MonitorControl!";
+"An other app seems to change the brightness or colors which causes issues.\n\nTo solve this, you need to quit the other app or disable gamma control for your displays in MonitorControl!" = "因其他螢幕控制程式對亮度或顏色進行變更而導致錯誤。\n\n退出其他螢幕控制程式或停用 MonitorControl 中的伽瑪控制以解決此問題!";
 
 /* Shown in the main prefs window */
 "App menu" = "App選單";
@@ -29,13 +29,13 @@
 "Contrast" = "對比度";
 
 /* Version */
-"Copyright Ⓒ MonitorControl, " = "Copyright Ⓒ MonitorControl, ";
+"Copyright Ⓒ MonitorControl, " = "版權Copyright Ⓒ MonitorControl, ";
 
 /* Shown in record shortcut box */
 "Decrease" = "減少";
 
 /* Shown in the alert dialog */
-"Disable gamma control for my displays" = "Disable gamma control for my displays";
+"Disable gamma control for my displays" = "停用伽瑪控制";
 
 /* Shown in the main prefs window */
 "Displays" = "螢幕";
@@ -56,7 +56,7 @@
 "Hardware (DDC)" = "硬體（DDC）";
 
 /* Shown in the alert dialog */
-"I'll quit the other app" = "I'll quit the other app";
+"I'll quit the other app" = "請手動關閉其他螢幕控制程式";
 
 /* Shown in the alert dialog */
 "Incompatible previous version" = "與先前版本不相容";
@@ -65,7 +65,7 @@
 "Increase" = "增加";
 
 /* Shown in the alert dialog */
-"Is f.lux or similar running?" = "Is f.lux or similar running?";
+"Is f.lux or similar running?" = "f.lux 或其他螢幕控制程式是否執行中?";
 
 /* Shown in the main prefs window */
 "Keyboard" = "鍵盤";
@@ -113,7 +113,7 @@
 "Software (shade)" = "軟體 (shade)";
 
 /* Shown in the Display Preferences */
-"Software (shade, forced)" = "Software (shade, forced)";
+"Software (shade, forced)" = "軟體 (shade, forced)";
 
 /* Shown in the Display Preferences */
 "This display allows for software brightness control via gamma table manipulation or shade as it does not support hardware control. Reasons for this might be using the HDMI port of a Mac mini (which blocks hardware DDC control) or having a blacklisted display." = "此螢幕不支援硬體控制，亮度調整將以軟體調整伽瑪值來實現。原因可能出於使用Mac mini的HDMI埠（硬體DDC無法使用）或是使用不支援的螢幕。";
