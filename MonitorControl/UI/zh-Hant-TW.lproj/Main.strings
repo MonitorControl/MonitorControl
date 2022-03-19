@@ -29,7 +29,7 @@
 "4dX-o1-xAc.title" = "啟用後當使用全螢幕Apps時效果可能不佳。";
 
 /* Class = "NSTextFieldCell"; title = "Welcome to MonitorControl"; ObjectID = "5J0-BD-top"; */
-"5J0-BD-top.title" = "Welcome to MonitorControl";
+"5J0-BD-top.title" = "歡迎使用 MonitorControl";
 
 /* Class = "NSButtonCell"; title = "Reset Preferences"; ObjectID = "5yT-5F-X5R"; */
 "5yT-5F-X5R.title" = "重置設定";
@@ -50,7 +50,7 @@
 "8Q8-57-xnT.title" = "使用精細的OSD刻度";
 
 /* Class = "NSButtonCell"; title = "Start using MonitorControl"; ObjectID = "8WE-da-OZC"; */
-"8WE-da-OZC.title" = "Start using MonitorControl";
+"8WE-da-OZC.title" = "開始使用 MonitorControl";
 
 /* Class = "NSButtonCell"; title = "Special thanks to our contributors!"; ObjectID = "95V-M4-2l5"; */
 "95V-M4-2l5.title" = "特別感謝我們的貢獻者們！";
@@ -71,7 +71,7 @@
 "AqF-uD-KCY.title" = "以音訊裝置名稱判斷控制哪個螢幕";
 
 /* Class = "NSTextFieldCell"; title = "Start at Login?"; ObjectID = "bA1-GF-Y2n"; */
-"bA1-GF-Y2n.title" = "Start at Login?";
+"bA1-GF-Y2n.title" = "登入後自動啟動?";
 
 /* Class = "NSMenuItem"; title = "Show sliders only for the display currently showing the menu"; ObjectID = "bbf-sS-uGv"; */
 "bbf-sS-uGv.title" = "僅顯示當前螢幕的滑桿介面";
@@ -209,7 +209,7 @@
 "jVH-oc-rUi.title" = "檢查更新";
 
 /* Class = "NSButtonCell"; title = "Start MonitorControl at Login"; ObjectID = "JWJ-OY-VtE"; */
-"JWJ-OY-VtE.title" = "Start MonitorControl at Login";
+"JWJ-OY-VtE.title" = "登入後自動啟動 MonitorControl";
 
 /* Class = "NSTextFieldCell"; title = "Note: you can press Shift during startup for 'Safe mode' to restore defaults and avoid reading or setting anything."; ObjectID = "Jx2-gO-nq9"; */
 "Jx2-gO-nq9.title" = "註：啟動時按下Shift進入「安全模式」以恢復原始設定並避免讀取或更動任何設定。";
@@ -260,10 +260,10 @@
 "na6-mS-MPi.title" = "避免調整伽瑪值";
 
 /* Class = "NSTextFieldCell"; title = "Ensure MonitorControl is always running when you need it by launching the app at startup."; ObjectID = "nk6-Gh-Mfs"; */
-"nk6-Gh-Mfs.title" = "Ensure MonitorControl is always running when you need it by launching the app at startup.";
+"nk6-Gh-Mfs.title" = "如需要 MonitorControl 隨時為您服務，可啟用 登入後自動啟動 MonitorControl。";
 
 /* Class = "NSTextFieldCell"; title = "Brightness up"; ObjectID = "nty-g6-Sde"; */
-"nty-g6-Sde.title" = "Brightness up";
+"nty-g6-Sde.title" = "亮度上調";
 
 /* Class = "NSButtonCell"; title = "Separate scales for combined hardware & software dimming"; ObjectID = "O8o-hI-8eR"; */
 "O8o-hI-8eR.title" = "使用硬體結合軟體調整時忽略軟體調整的範圍";
@@ -299,7 +299,7 @@
 "PyY-p9-3NP.title" = "當螢幕的硬體設定亮度為０時以軟體進一步降低亮度（僅適用於以DDC控制的螢幕）。";
 
 /* Class = "NSTextFieldCell"; title = "Brightness down"; ObjectID = "q5a-Ix-Hjs"; */
-"q5a-Ix-Hjs.title" = "Brightness down";
+"q5a-Ix-Hjs.title" = "亮度下調";
 
 /* Class = "NSMenuItem"; title = "Both standard and custom shortcuts"; ObjectID = "QDG-SA-mRX"; */
 "QDG-SA-mRX.title" = "標準及自定義快捷鍵";
