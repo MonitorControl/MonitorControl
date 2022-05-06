@@ -1,0 +1,8 @@
+/* General application description */
+"ApplicationDescription" = "MonitorControl umożliwia sterowanie jasnością i głośnością wyświetlaczy zewnętrznych";
+
+/* Sofware update deny consequences */
+"SoftwareUpdateDenyConsequences" = "Jeśli zblokujesz te połączenia, nie będziesz otrzymywać powiadomień o nowych wersjach i aktualizacjach zabezpieczeń. Aktualizacje zabezpieczeń są ważne, aby chronić przed atakami złośliwego oprogramowania.";
+
+/* Software update purpose */
+"SoftwareUpdatePurpose" = "Program MonitorControl sprawdza dostępność nowych wersji i aktualizacji zabezpieczeń.";
