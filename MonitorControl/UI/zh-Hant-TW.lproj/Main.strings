@@ -1,5 +1,5 @@
 /* Class = "NSButtonCell"; title = "Sync brightness changes from Built-in and Apple displays"; ObjectID = "0ca-DG-AgB"; */
-"0ca-DG-AgB.title" = "同步來自內建及蘋果螢幕的亮度調整";
+"0ca-DG-AgB.title" = "同步來自內建及Apple顯示器的亮度調整";
 
 /* Class = "NSMenuItem"; title = "Assume last saved settings are valid (recommended)"; ObjectID = "1in-79-6qm"; */
 "1in-79-6qm.title" = "假設前次的設定可用（建議）";
@@ -14,7 +14,7 @@
 "1zE-fg-xEm.title" = "DDC最小值";
 
 /* Class = "NSTextFieldCell"; title = "Volume down"; ObjectID = "21s-bv-GTK"; */
-"21s-bv-GTK.title" = "Volume down";
+"21s-bv-GTK.title" = "調低音量";
 
 /* Class = "NSMenuItem"; title = "Show separate controls for each display in menu"; ObjectID = "3eO-bN-ZRl"; */
 "3eO-bN-ZRl.title" = "顯示各個螢幕的控制滑桿";
@@ -23,13 +23,13 @@
 "3Jr-bW-YYq.title" = "套用上次儲存的設定值至螢幕";
 
 /* Class = "NSMenuItem"; title = "Custom keyboard shortcuts"; ObjectID = "4CG-0I-anB"; */
-"4CG-0I-anB.title" = "自定義快捷鍵";
+"4CG-0I-anB.title" = "自定快速鍵";
 
 /* Class = "NSTextFieldCell"; title = "Using window focus might not work properly with full screen apps."; ObjectID = "4dX-o1-xAc"; */
 "4dX-o1-xAc.title" = "啟用後當使用全螢幕Apps時效果可能不佳。";
 
 /* Class = "NSTextFieldCell"; title = "Welcome to MonitorControl"; ObjectID = "5J0-BD-top"; */
-"5J0-BD-top.title" = "歡迎使用 MonitorControl";
+"5J0-BD-top.title" = "歡迎使用MonitorControl";
 
 /* Class = "NSButtonCell"; title = "Reset Preferences"; ObjectID = "5yT-5F-X5R"; */
 "5yT-5F-X5R.title" = "重置設定";
@@ -44,19 +44,19 @@
 "7zf-m1-gJO.title" = "顯示滑桿刻度";
 
 /* Class = "NSTextFieldCell"; title = "Slider knob will snap to 0%, 25%, 50%, 75% and 100% when in proximity making setting these values easier. Disable for finer control."; ObjectID = "8Gx-Ya-zhp"; */
-"8Gx-Ya-zhp.title" = "滑桿手把在接近刻度0%、25%、50%、75%及100%時自動定位於該值。關閉以獲得更精細的控制。";
+"8Gx-Ya-zhp.title" = "滑桿手把在接近刻度0%、25%、50%、75%及100%時自動定位於該值。關閉以取得更精細的控制。";
 
 /* Class = "NSButtonCell"; title = "Use fine OSD scale for brightness and contrast"; ObjectID = "8Q8-57-xnT"; */
 "8Q8-57-xnT.title" = "使用精細的OSD刻度";
 
 /* Class = "NSButtonCell"; title = "Start using MonitorControl"; ObjectID = "8WE-da-OZC"; */
-"8WE-da-OZC.title" = "開始使用 MonitorControl";
+"8WE-da-OZC.title" = "開始使用MonitorControl";
 
 /* Class = "NSButtonCell"; title = "Special thanks to our contributors!"; ObjectID = "95V-M4-2l5"; */
 "95V-M4-2l5.title" = "特別感謝我們的貢獻者們！";
 
 /* Class = "NSMenuItem"; title = "Custom keyboard shortcuts"; ObjectID = "9eC-PD-FHl"; */
-"9eC-PD-FHl.title" = "自定義快捷鍵";
+"9eC-PD-FHl.title" = "自定快速鍵";
 
 /* Class = "NSMenuItem"; title = "Attempt to read display settings"; ObjectID = "9yL-no-aWa"; */
 "9yL-no-aWa.title" = "嘗試讀取螢幕的設定";
@@ -68,13 +68,13 @@
 "an7-Aj-3fZ.title" = "使用者初次調整時套用前次或原始的設定（亮度、音量及其他設定）。";
 
 /* Class = "NSMenuItem"; title = "Use audio device name to determine which display to control"; ObjectID = "AqF-uD-KCY"; */
-"AqF-uD-KCY.title" = "以音訊裝置名稱判斷控制哪個螢幕";
+"AqF-uD-KCY.title" = "使用音訊裝置名稱判斷控制哪個螢幕";
 
 /* Class = "NSTextFieldCell"; title = "Start at Login?"; ObjectID = "bA1-GF-Y2n"; */
 "bA1-GF-Y2n.title" = "登入後自動啟動?";
 
 /* Class = "NSMenuItem"; title = "Show sliders only for the display currently showing the menu"; ObjectID = "bbf-sS-uGv"; */
-"bbf-sS-uGv.title" = "僅顯示當前螢幕的滑桿介面";
+"bbf-sS-uGv.title" = "僅顯示目前螢幕的滑桿介面";
 
 /* Class = "NSTextFieldCell"; title = "Brightness:"; ObjectID = "Bhb-6l-uPQ"; */
 "Bhb-6l-uPQ.title" = "亮度：";
@@ -104,13 +104,13 @@
 "c9D-MB-lma.title" = "顯示音量滑桿";
 
 /* Class = "NSMenuItem"; title = "Custom"; ObjectID = "Cle-DD-vR7"; */
-"Cle-DD-vR7.title" = "自定義";
+"Cle-DD-vR7.title" = "自定";
 
 /* Class = "NSTextFieldCell"; title = "Upon startup or wake:"; ObjectID = "cNt-Cq-vK4"; */
 "cNt-Cq-vK4.title" = "啟動或喚醒後：";
 
 /* Class = "NSTextFieldCell"; title = "⚠️ Warning! Changing some of these settings may cause system freezes or unexpected behavior!"; ObjectID = "Cz1-Mh-llk"; */
-"Cz1-Mh-llk.title" = "⚠️ 警告！更改這些設定可能導致系統崩潰或不可預期的結果！";
+"Cz1-Mh-llk.title" = "⚠️ 警告！更改這些設定可能導致系統當機或不可預期的結果！";
 
 /* Class = "NSTextFieldCell"; title = "Alternative keys are the F14/F15 (Scroll Lock and Pause on PC keyboards, brightness keys on some Logitech keyboards)."; ObjectID = "D4H-hU-FLn"; */
 "D4H-hU-FLn.title" = "替代按鍵為F14／F15（PC鍵盤的Scroll Lock及Pause鍵，部分羅技鍵盤的亮度鍵）。";
@@ -137,7 +137,7 @@
 "f6J-Ui-uMB.title" = "通常鍵盤控制單次改變一個OSD刻度值，而Shift+Option允許精細控制。啟用後將預設使用精細控制。";
 
 /* Class = "NSButtonCell"; title = "Reset Name"; ObjectID = "f9g-8s-gdd"; */
-"f9g-8s-gdd.title" = "重設名稱";
+"f9g-8s-gdd.title" = "重置名稱";
 
 /* Class = "NSButtonCell"; title = "Automatically check for updates"; ObjectID = "Faf-9L-TXx"; */
 "Faf-9L-TXx.title" = "自動檢查更新";
@@ -149,10 +149,10 @@
 "FER-Ri-4UO.title" = "音量：";
 
 /* Class = "NSButtonCell"; title = "Allow zero brightness via software or combined dimming"; ObjectID = "FjB-XL-fG5"; */
-"FjB-XL-fG5.title" = "透過軟體或軟硬體結合調整時允許螢幕全暗";
+"FjB-XL-fG5.title" = "當使用軟體或軟硬體結合調整時允許螢幕全暗";
 
 /* Class = "NSTextFieldCell"; title = "Apple and built-in displays already have a brightness slider in Control Center."; ObjectID = "fmZ-HI-Mdc"; */
-"fmZ-HI-Mdc.title" = "控制中心中已有蘋果及內建螢幕的亮度控制滑桿。";
+"fmZ-HI-Mdc.title" = "控制中心中已有Apple及內建顯示器的亮度控制滑桿。";
 
 /* Class = "NSMenuItem"; title = "None"; ObjectID = "FoA-yh-Yx3"; */
 "FoA-yh-Yx3.title" = "無";
@@ -167,7 +167,7 @@
 "G5A-y3-eZz.title" = "反轉";
 
 /* Class = "NSMenuItem"; title = "Use window focus to determine which display to control"; ObjectID = "gTR-FW-FHc"; */
-"gTR-FW-FHc.title" = "以當前視窗決定";
+"gTR-FW-FHc.title" = "以目前視窗決定";
 
 /* Class = "NSTextFieldCell"; title = "Brightness slider for hardware or software controlled displays or TVs."; ObjectID = "gXH-HL-ZOL"; */
 "gXH-HL-ZOL.title" = "以硬體或軟體控制螢幕或電視的亮度控制滑桿。";
@@ -176,7 +176,7 @@
 "H9X-it-sXs.title" = "覆寫音訊裝置名稱：";
 
 /* Class = "NSTextFieldCell"; title = "Relaunch the app to access Preferences if the menu option is not accessible. Use the button below to quit the app."; ObjectID = "hF7-fM-aKr"; */
-"hF7-fM-aKr.title" = "當選單不可用時重新啟動App以開啟設定頁面。使用此按鍵關閉此App。";
+"hF7-fM-aKr.title" = "當選單不可用時重新啟動App以開啟設定頁面。使用此按鍵來結束App。";
 
 /* Class = "NSButtonCell"; title = "Get current"; ObjectID = "hkC-vq-IcD"; */
 "hkC-vq-IcD.title" = "取得目前的";
@@ -200,7 +200,7 @@
 "j72-NF-zsW.title" = "登入時啟動";
 
 /* Class = "NSTextFieldCell"; title = "Toggle Mute"; ObjectID = "jK7-7w-uib"; */
-"jK7-7w-uib.title" = "Toggle Mute";
+"jK7-7w-uib.title" = "切換靜音";
 
 /* Class = "NSMenuItem"; title = "Change for all screens"; ObjectID = "jSj-HB-T2t"; */
 "jSj-HB-T2t.title" = "所有螢幕";
@@ -215,16 +215,16 @@
 "Jx2-gO-nq9.title" = "註：啟動時按下Shift進入「安全模式」以恢復原始設定並避免讀取或更動任何設定。";
 
 /* Class = "NSButtonCell"; title = "Enable for Apple branded and built-in displays as well"; ObjectID = "K6A-4z-1aQ"; */
-"K6A-4z-1aQ.title" = "蘋果和內建的螢幕";
+"K6A-4z-1aQ.title" = "Apple和內建的螢幕";
 
 /* Class = "NSTextFieldCell"; title = "MonitorControl needs access to \"accessibility\" to use macOS native keys to control your display.\nYou can enable it by adding MonitorControl in System Preferences > Security and Privacy > Accessibility."; ObjectID = "kBJ-Zf-1k2"; */
-"kBJ-Zf-1k2.title" = "MonitorControl needs access to \"accessibility\" to use macOS native keys to control your display.\nYou can enable it by adding MonitorControl in System Preferences > Security and Privacy > Accessibility.";
+"kBJ-Zf-1k2.title" = "MonitorControl需要取用「輔助使用」來使用macOS的按鍵組合進而控制您的顯示器。\n您可以前往系統偏好設定 > 安全性和隱私權 > 輔助使用，新增MonitorControl來啟用。";
 
 /* Class = "NSTextFieldCell"; title = "Screen to control:"; ObjectID = "Kfj-WK-aSL"; */
 "Kfj-WK-aSL.title" = "控制的螢幕：";
 
 /* Class = "NSMenuItem"; title = "Depends on mouse pointer position"; ObjectID = "km4-hK-auM"; */
-"km4-hK-auM.title" = "取決於鼠標指針位置";
+"km4-hK-auM.title" = "取決於滑鼠游標位置";
 
 /* Class = "NSMenuItem"; title = "Use combined slider for all displays"; ObjectID = "lA0-tv-qRs"; */
 "lA0-tv-qRs.title" = "使用單一滑桿控制所有螢幕";
@@ -260,7 +260,7 @@
 "na6-mS-MPi.title" = "避免調整伽瑪值";
 
 /* Class = "NSTextFieldCell"; title = "Ensure MonitorControl is always running when you need it by launching the app at startup."; ObjectID = "nk6-Gh-Mfs"; */
-"nk6-Gh-Mfs.title" = "如需要 MonitorControl 隨時為您服務，可啟用 登入後自動啟動 MonitorControl。";
+"nk6-Gh-Mfs.title" = "如需要 MonitorControl 隨時為您服務，可啟用「登入後自動啟動MonitorControl」。";
 
 /* Class = "NSTextFieldCell"; title = "Brightness up"; ObjectID = "nty-g6-Sde"; */
 "nty-g6-Sde.title" = "亮度上調";
@@ -293,7 +293,7 @@
 "psF-vX-AFB.title" = "DDC最大值";
 
 /* Class = "NSButtonCell"; title = "Open System Preferences…"; ObjectID = "pVc-wG-Bdh"; */
-"pVc-wG-Bdh.title" = "Open System Preferences…";
+"pVc-wG-Bdh.title" = "打開系統偏好設定…";
 
 /* Class = "NSTextFieldCell"; title = "Use software dimming after the display reached zero hardware brightness for extended range. Works for DDC controlled displays only."; ObjectID = "PyY-p9-3NP"; */
 "PyY-p9-3NP.title" = "當螢幕的硬體設定亮度為０時以軟體進一步降低亮度（僅適用於以DDC控制的螢幕）。";
@@ -302,7 +302,7 @@
 "q5a-Ix-Hjs.title" = "亮度下調";
 
 /* Class = "NSMenuItem"; title = "Both standard and custom shortcuts"; ObjectID = "QDG-SA-mRX"; */
-"QDG-SA-mRX.title" = "標準及自定義快捷鍵";
+"QDG-SA-mRX.title" = "標準及自定快速鍵";
 
 /* Class = "NSButtonCell"; title = "Quit application"; ObjectID = "qlb-wH-qr4"; */
 "qlb-wH-qr4.title" = "關閉應用程式";
@@ -347,7 +347,7 @@
 "urd-Rh-aiL.title" = "對比度:";
 
 /* Class = "NSButtonCell"; title = "Do not use alternative brightness keys"; ObjectID = "vd2-Lk-neX"; */
-"vd2-Lk-neX.title" = "禁用替代按鍵";
+"vd2-Lk-neX.title" = "停用替代按鍵";
 
 /* Class = "NSMenuItem"; title = "Heavy"; ObjectID = "vik-vN-bJe"; */
 "vik-vN-bJe.title" = "多次";
@@ -377,7 +377,7 @@
 "xLa-PN-rsq.title" = "只有當至少一個滑桿可用時";
 
 /* Class = "NSMenuItem"; title = "Both standard and custom shortcuts"; ObjectID = "xQJ-aJ-VhH"; */
-"xQJ-aJ-VhH.title" = "標準及自訂義快捷鍵";
+"xQJ-aJ-VhH.title" = "標準及自定快速鍵";
 
 /* Class = "NSTextFieldCell"; title = "Works best with various syncing and 'control all' keyboard settings enabled."; ObjectID = "XU4-Bn-bwH"; */
 "XU4-Bn-bwH.title" = "啟用各種同步和「控制全部」的鍵盤設置時效果最佳。";
@@ -395,10 +395,10 @@
 "YqZ-LS-YvR.title" = "識別碼：";
 
 /* Class = "NSMenuItem"; title = "Depends on mouse pointer position"; ObjectID = "Ytd-mg-N5E"; */
-"Ytd-mg-N5E.title" = "取決於鼠標指針位置";
+"Ytd-mg-N5E.title" = "取決於滑鼠游標位置";
 
 /* Class = "NSTextFieldCell"; title = "Volume up"; ObjectID = "Z3w-eR-qDF"; */
-"Z3w-eR-qDF.title" = "Volume up";
+"Z3w-eR-qDF.title" = "調高音量";
 
 /* Class = "NSButtonCell"; title = "Use hardware DDC control"; ObjectID = "ZdU-gV-V05"; */
 "ZdU-gV-V05.title" = "使用硬體DDC控制";
