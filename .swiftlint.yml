@@ -9,3 +9,5 @@ cyclomatic_complexity:
   ignores_case_statements: true
 opening_brace:
   allow_multiline_func: true
+excluded:
+  - .build
