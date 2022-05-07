@@ -8,12 +8,12 @@ on:
 
 jobs:
   build:
-    runs-on: macos-11
+    runs-on: macos-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: xcodebuild
-        uses: sersoft-gmbh/xcodebuild-action@v1.4
+        uses: sersoft-gmbh/xcodebuild-action@v1
         with:
           project: MonitorControl.xcodeproj
           scheme: MonitorControl
@@ -23,7 +23,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: SwiftLint
         uses: norio-nomura/action-swiftlint@3.2.1
@@ -31,4 +31,3 @@ jobs:
           DIFF_BASE: ${{ github.base_ref }}
         with:
           args: --strict
-
