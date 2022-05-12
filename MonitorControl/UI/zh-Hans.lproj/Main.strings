@@ -200,7 +200,7 @@
 "j72-NF-zsW.title" = "登录时启动";
 
 /* Class = "NSTextFieldCell"; title = "Toggle Mute"; ObjectID = "jK7-7w-uib"; */
-"jK7-7w-uib.title" = "Toggle Mute";
+"jK7-7w-uib.title" = "切换静音";
 
 /* Class = "NSMenuItem"; title = "Change for all screens"; ObjectID = "jSj-HB-T2t"; */
 "jSj-HB-T2t.title" = "所有显示器";
