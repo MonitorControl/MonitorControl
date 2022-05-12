@@ -14,7 +14,7 @@
 "1zE-fg-xEm.title" = "DDC最小值";
 
 /* Class = "NSTextFieldCell"; title = "Volume down"; ObjectID = "21s-bv-GTK"; */
-"21s-bv-GTK.title" = "降低音量";
+"21s-bv-GTK.title" = "调低音量";
 
 /* Class = "NSMenuItem"; title = "Show separate controls for each display in menu"; ObjectID = "3eO-bN-ZRl"; */
 "3eO-bN-ZRl.title" = "显示各个显示器的控制滑杆";
@@ -263,7 +263,7 @@
 "nk6-Gh-Mfs.title" = "在启动时启动MonitorControl，确保其在需要时始终运行。";
 
 /* Class = "NSTextFieldCell"; title = "Brightness up"; ObjectID = "nty-g6-Sde"; */
-"nty-g6-Sde.title" = "提高亮度";
+"nty-g6-Sde.title" = "调高亮度";
 
 /* Class = "NSButtonCell"; title = "Separate scales for combined hardware & software dimming"; ObjectID = "O8o-hI-8eR"; */
 "O8o-hI-8eR.title" = "使用硬件结合软件调整时忽略软件调整的范围";
@@ -299,7 +299,7 @@
 "PyY-p9-3NP.title" = "当显示器的硬件设置亮度为０时以软件进一步降低亮度（仅适用于以DDC控制的显示器）。";
 
 /* Class = "NSTextFieldCell"; title = "Brightness down"; ObjectID = "q5a-Ix-Hjs"; */
-"q5a-Ix-Hjs.title" = "降低亮度";
+"q5a-Ix-Hjs.title" = "调低亮度";
 
 /* Class = "NSMenuItem"; title = "Both standard and custom shortcuts"; ObjectID = "QDG-SA-mRX"; */
 "QDG-SA-mRX.title" = "标准及自定义快捷键";
@@ -398,7 +398,7 @@
 "Ytd-mg-N5E.title" = "取决于鼠标指针位置";
 
 /* Class = "NSTextFieldCell"; title = "Volume up"; ObjectID = "Z3w-eR-qDF"; */
-"Z3w-eR-qDF.title" = "提高音量";
+"Z3w-eR-qDF.title" = "调高音量";
 
 /* Class = "NSButtonCell"; title = "Use hardware DDC control"; ObjectID = "ZdU-gV-V05"; */
 "ZdU-gV-V05.title" = "使用硬件DDC控制";
