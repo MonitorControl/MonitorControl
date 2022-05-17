@@ -220,7 +220,7 @@ class DisplayManager {
   func updateAudioControlTargetDisplays(deviceName: String) -> Int {
     self.audioControlTargetDisplays.removeAll()
     os_log("Detecting displays for audio control via audio device name matching...", type: .info)
-    var numOfAddedDisplays: Int = 0
+    var numOfAddedDisplays = 0
     for ddcCapableDisplay in self.getDdcCapableDisplays() {
       var displayAudioDeviceName = ddcCapableDisplay.readPrefAsString(key: .audioDeviceNameOverride)
       if displayAudioDeviceName == "" {
@@ -409,9 +409,9 @@ class DisplayManager {
   }
 
   static func isVirtual(displayID: CGDirectDisplayID) -> Bool {
-    var isVirtual: Bool = false
+    var isVirtual = false
     if !DEBUG_MACOS10, #available(macOS 11.0, *) {
-      if let dictionary = ((CoreDisplay_DisplayCreateInfoDictionary(displayID))?.takeRetainedValue() as NSDictionary?) {
+      if let dictionary = (CoreDisplay_DisplayCreateInfoDictionary(displayID)?.takeRetainedValue() as NSDictionary?) {
         let isVirtualDevice = dictionary["kCGDisplayIsVirtualDevice"] as? Bool
         let displayIsAirplay = dictionary["kCGDisplayIsAirPlay"] as? Bool
         if isVirtualDevice ?? displayIsAirplay ?? false {
@@ -490,9 +490,9 @@ class DisplayManager {
   }
 
   static func getDisplayRawNameByID(displayID: CGDirectDisplayID) -> String {
-    let defaultName: String = ""
+    let defaultName = ""
     if !DEBUG_MACOS10, #available(macOS 11.0, *) {
-      if let dictionary = ((CoreDisplay_DisplayCreateInfoDictionary(displayID))?.takeRetainedValue() as NSDictionary?), let nameList = dictionary["DisplayProductName"] as? [String: String], let name = nameList["en_US"] ?? nameList.first?.value {
+      if let dictionary = (CoreDisplay_DisplayCreateInfoDictionary(displayID)?.takeRetainedValue() as NSDictionary?), let nameList = dictionary["DisplayProductName"] as? [String: String], let name = nameList["en_US"] ?? nameList.first?.value {
         return name
       }
     }
@@ -505,10 +505,10 @@ class DisplayManager {
   static func getDisplayNameByID(displayID: CGDirectDisplayID) -> String {
     let defaultName: String = NSLocalizedString("Unknown", comment: "Unknown display name")
     if !DEBUG_MACOS10, #available(macOS 11.0, *) {
-      if let dictionary = ((CoreDisplay_DisplayCreateInfoDictionary(displayID))?.takeRetainedValue() as NSDictionary?), let nameList = dictionary["DisplayProductName"] as? [String: String], var name = nameList[Locale.current.identifier] ?? nameList["en_US"] ?? nameList.first?.value {
+      if let dictionary = (CoreDisplay_DisplayCreateInfoDictionary(displayID)?.takeRetainedValue() as NSDictionary?), let nameList = dictionary["DisplayProductName"] as? [String: String], var name = nameList[Locale.current.identifier] ?? nameList["en_US"] ?? nameList.first?.value {
         if CGDisplayIsInHWMirrorSet(displayID) != 0 || CGDisplayIsInMirrorSet(displayID) != 0 {
           let mirroredDisplayID = CGDisplayMirrorsDisplay(displayID)
-          if mirroredDisplayID != 0, let dictionary = ((CoreDisplay_DisplayCreateInfoDictionary(mirroredDisplayID))?.takeRetainedValue() as NSDictionary?), let nameList = dictionary["DisplayProductName"] as? [String: String], let mirroredName = nameList[Locale.current.identifier] ?? nameList["en_US"] ?? nameList.first?.value {
+          if mirroredDisplayID != 0, let dictionary = (CoreDisplay_DisplayCreateInfoDictionary(mirroredDisplayID)?.takeRetainedValue() as NSDictionary?), let nameList = dictionary["DisplayProductName"] as? [String: String], let mirroredName = nameList[Locale.current.identifier] ?? nameList["en_US"] ?? nameList.first?.value {
             name.append(" | " + mirroredName)
           }
         }

@@ -32,7 +32,7 @@ public class IntelDDC {
   }
 
   public func write(command: UInt8, value: UInt16, errorRecoveryWaitTime: UInt32? = nil, writeSleepTime: UInt32 = 10000, numofWriteCycles: UInt8 = 2) -> Bool {
-    var success: Bool = false
+    var success = false
     var data: [UInt8] = Array(repeating: 0, count: 7)
 
     data[0] = 0x51

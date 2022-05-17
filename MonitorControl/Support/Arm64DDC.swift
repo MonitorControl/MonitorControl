@@ -75,7 +75,7 @@ class Arm64DDC: NSObject {
 
   // Performs DDC read or write
   public static func performDDCCommunication(service: IOAVService?, send: inout [UInt8], reply: inout [UInt8], writeSleepTime: UInt32 = 10000, numofWriteCycles: UInt8 = 2, readSleepTime: UInt32 = 10000, numOfRetryAttemps: UInt8 = 3, retrySleepTime: UInt32 = 20000) -> Bool {
-    var success: Bool = false
+    var success = false
     guard service != nil else {
       return success
     }
@@ -133,8 +133,8 @@ class Arm64DDC: NSObject {
 
   // Scores the likelihood of a display match based on EDID UUID, ProductName and SerialNumber from in ioreg, compared to DisplayCreateInfoDictionary.
   private static func ioregMatchScore(displayID: CGDirectDisplayID, ioregEdidUUID: String, ioregProductName: String = "", ioregSerialNumber: Int64 = 0, serviceLocation: Int = 0) -> Int {
-    var matchScore: Int = 0
-    if let dictionary = (CoreDisplay_DisplayCreateInfoDictionary(displayID))?.takeRetainedValue() as NSDictionary? {
+    var matchScore = 0
+    if let dictionary = CoreDisplay_DisplayCreateInfoDictionary(displayID)?.takeRetainedValue() as NSDictionary? {
       if let kDisplayYearOfManufacture = dictionary[kDisplayYearOfManufacture] as? Int64, let kDisplayWeekOfManufacture = dictionary[kDisplayWeekOfManufacture] as? Int64, let kDisplayVendorID = dictionary[kDisplayVendorID] as? Int64, let kDisplayProductID = dictionary[kDisplayProductID] as? Int64, let kDisplayVerticalImageSize = dictionary[kDisplayVerticalImageSize] as? Int64, let kDisplayHorizontalImageSize = dictionary[kDisplayHorizontalImageSize] as? Int64 {
         struct KeyLoc {
           var key: String
@@ -172,7 +172,7 @@ class Arm64DDC: NSObject {
 
   // Iterate to the next AppleCLCD2 or DCPAVServiceProxy item in the ioreg tree and return the name and corresponding service
   private static func ioregIterateToNextObjectOfInterest(interests _: [String], iterator: inout io_iterator_t) -> (name: String, service: io_service_t)? {
-    var objectName: String = ""
+    var objectName = ""
     var service: io_service_t = IO_OBJECT_NULL
     let name = UnsafeMutablePointer<CChar>.allocate(capacity: MemoryLayout<io_name_t>.size)
     defer {
@@ -236,7 +236,7 @@ class Arm64DDC: NSObject {
 
   // Returns IOAVSerivces with associated display properties for matching logic
   private static func getIoregServicesForMatching() -> [IOregService] {
-    var serviceLocation: Int = 0
+    var serviceLocation = 0
     var ioregServicesForMatching: [IOregService] = []
     let ioregRoot: io_registry_entry_t = IORegistryGetRootEntry(kIOMasterPortDefault)
     var iterator = io_iterator_t()
@@ -273,7 +273,7 @@ class Arm64DDC: NSObject {
 
   // Check if it is problematic to enable DDC on the display
   private static func checkIfDiscouraged(ioregService: IOregService) -> Bool {
-    var modelIdentifier: String = ""
+    var modelIdentifier = ""
     let platformExpertDevice = IOServiceGetMatchingService(kIOMasterPortDefault, IOServiceMatching("IOPlatformExpertDevice"))
     if let modelData = IORegistryEntryCreateCFProperty(platformExpertDevice, "model" as CFString, kCFAllocatorDefault, 0).takeRetainedValue() as? Data, let modelIdentifierCString = String(data: modelData, encoding: .utf8)?.cString(using: .utf8) {
       modelIdentifier = String(cString: modelIdentifierCString)
