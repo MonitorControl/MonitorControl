@@ -28,7 +28,7 @@ let keyboardPrefsVc = storyboard.instantiateController(withIdentifier: "Keyboard
 let aboutPrefsVc = storyboard.instantiateController(withIdentifier: "AboutPrefsVC") as? AboutPrefsViewController
 let onboardingVc = storyboard.instantiateController(withIdentifier: "onboardingViewController") as? NSWindowController
 
-autoreleasepool { () -> Void in
+autoreleasepool { () in
   let mc = NSApplication.shared
   let mcDelegate = AppDelegate()
   mc.delegate = mcDelegate

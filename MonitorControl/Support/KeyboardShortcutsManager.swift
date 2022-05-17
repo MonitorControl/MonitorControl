@@ -113,7 +113,7 @@ class KeyboardShortcutsManager {
       return
     }
     for display in affectedDisplays where !display.readPrefAsBool(key: .isDisabled) {
-      var isAnyDisplayInSwAfterBrightnessMode: Bool = false
+      var isAnyDisplayInSwAfterBrightnessMode = false
       for display in affectedDisplays where ((display as? OtherDisplay)?.isSwBrightnessNotDefault() ?? false) && !((display as? OtherDisplay)?.isSw() ?? false) && prefs.bool(forKey: PrefKey.separateCombinedScale.rawValue) {
         isAnyDisplayInSwAfterBrightnessMode = true
       }

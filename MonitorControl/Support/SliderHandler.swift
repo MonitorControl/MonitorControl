@@ -222,7 +222,7 @@ class SliderHandler {
       slider.frame.origin = NSPoint(x: 15, y: 5)
       let view = NSView(frame: NSRect(x: 0, y: 0, width: slider.frame.width + 30 + (showPercent ? 38 : 0), height: slider.frame.height + 14))
       view.frame.origin = NSPoint(x: 12, y: 0)
-      var iconName: String = "circle.dashed"
+      var iconName = "circle.dashed"
       switch command {
       case .audioSpeakerVolume: iconName = "speaker.wave.2.fill"
       case .brightness: iconName = "sun.max.fill"
@@ -361,7 +361,7 @@ class SliderHandler {
       var sumVal: Float = 0
       var maxVal: Float = 0
       var minVal: Float = 1
-      var num: Int = 0
+      var num = 0
       for key in self.values.keys {
         if let val = values[key] {
           sumVal += val

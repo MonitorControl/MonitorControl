@@ -332,7 +332,7 @@ class DisplaysPrefsCellView: NSTableCellView {
     let value = sender.stringValue
     let values = value.components(separatedBy: ",")
     var normalizedValues: [String] = []
-    var normalizedString: String = ""
+    var normalizedString = ""
     for value in values {
       let trimmedValue = value.trimmingCharacters(in: CharacterSet(charactersIn: " "))
       if !trimmedValue.isEmpty, let intValue = UInt8(trimmedValue, radix: 16), intValue != 0 {
