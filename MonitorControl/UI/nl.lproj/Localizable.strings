@@ -2,7 +2,7 @@
 "About" = "Over";
 
 /* Shown in the alert dialog */
-"An other app seems to change the brightness or colors which causes issues.\n\nTo solve this, you need to quit the other app or disable gamma control for your displays in MonitorControl!" = "An other app seems to change the brightness or colors which causes issues.\n\nTo solve this, you need to quit the other app or disable gamma control for your displays in MonitorControl!";
+"An other app seems to change the brightness or colors which causes issues.\n\nTo solve this, you need to quit the other app or disable gamma control for your displays in MonitorControl!" = "Een andere app lijkt de helderheid of kleuren te veranderen, wat problemen veroorzaakt. Om dit op te lossen, moet u de andere app afsluiten of de gammaregeling voor uw beeldschermen uitschakelen in MonitorControl!";
 
 /* Shown in the main prefs window */
 "App menu" = "App menu";
@@ -35,7 +35,7 @@
 "Decrease" = "Verminderen";
 
 /* Shown in the alert dialog */
-"Disable gamma control for my displays" = "Disable gamma control for my displays";
+"Disable gamma control for my displays" = "Gammaregeling uitschakelen voor mijn beeldschermen";
 
 /* Shown in the main prefs window */
 "Displays" = "Schermen";
@@ -56,7 +56,7 @@
 "Hardware (DDC)" = "Hardware (DDC)";
 
 /* Shown in the alert dialog */
-"I'll quit the other app" = "I'll quit the other app";
+"I'll quit the other app" = "Ik zal de andere app sluiten";
 
 /* Shown in the alert dialog */
 "Incompatible previous version" = "Incompatibele vorige versie";
@@ -65,7 +65,7 @@
 "Increase" = "Verhogen";
 
 /* Shown in the alert dialog */
-"Is f.lux or similar running?" = "Is f.lux or similar running?";
+"Is f.lux or similar running?" = "Is f.lux of iets gelijkaardigs actief?";
 
 /* Shown in the main prefs window */
 "Keyboard" = "Toetsenbord";
@@ -110,10 +110,10 @@
 "Software (gamma, forced)" = "Software (Gamma, Gedwongen)";
 
 /* Shown in the Display Preferences */
-"Software (shade)" = "Software (shade)";
+"Software (shade)" = "Software (tint)";
 
 /* Shown in the Display Preferences */
-"Software (shade, forced)" = "Software (shade, forced)";
+"Software (shade, forced)" = "Software (tint, Gedwongen)";
 
 /* Shown in the Display Preferences */
 "This display allows for software brightness control via gamma table manipulation or shade as it does not support hardware control. Reasons for this might be using the HDMI port of a Mac mini (which blocks hardware DDC control) or having a blacklisted display." = "Dit scherm maakt softwarematige helderheidsregeling via gammatable-manipulatie mogelijk, aangezien het geen hardwarecontrole ondersteunt. Redenen hiervoor kunnen het gebruik van de HDMI-poort van een Mac mini zijn (die hardwarematige DDC-besturing blokkeert) of een niet-ondersteund scherm.";
