@@ -88,7 +88,7 @@ https://monitorcontrol.app/changelog.html?tag=v4.0.0
                length="11023343"
             />
        </item>
-        <item>
+       <item>
             <title>v4.0.2</title>
             <sparkle:releaseNotesLink>
                 https://monitorcontrol.app/changelog.html?tag=v4.0.2
@@ -102,6 +102,22 @@ https://monitorcontrol.app/changelog.html?tag=v4.0.0
                type="application/octet-stream"
                sparkle:edSignature="Hj/A/33u8715otbPJ2zYHYeX0Bu0eCCoWOH9tdFepQCxY/4VdnXF617X1s6FzrqFYtUm4OwK/vzkJJBU8m9jCg=="
                length="18233149"
+            />
+       </item>
+       <item>
+            <title>v4.1.0</title>
+            <sparkle:releaseNotesLink>
+                https://monitorcontrol.app/changelog.html?tag=v4.1.0
+            </sparkle:releaseNotesLink>
+            <pubDate>Fri, 20 May 2022 21:52:00 +0200</pubDate>
+            <sparkle:version>7034</sparkle:version>
+            <sparkle:shortVersionString>4.1.0</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>10.14</sparkle:minimumSystemVersion>
+            <enclosure
+               url="https://github.com/MonitorControl/MonitorControl/releases/download/v4.1.0/MonitorControl.4.1.0.dmg"
+               type="application/octet-stream"
+               sparkle:edSignature="OTWbBPQOVN6iacaNVw9vUm/QM1fm75OsseJzO7QhoCGxW3+Tlbfw+0CCaqglbU5Qg/VFBtHflgkbnpqpRgvXBg=="
+               length="19400794"
             />
        </item>
     </channel>
