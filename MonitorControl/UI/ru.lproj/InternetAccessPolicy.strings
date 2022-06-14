@@ -1,0 +1,8 @@
+/* General application description */
+"ApplicationDescription" = "MonitorControl позволяет управлять яркостью и громкостью внешних дисплеев";
+
+/* Sofware update deny consequences */
+"SoftwareUpdateDenyConsequences" = "Если вы откажетесь, то не будете получать уведомления о новых версиях и обновлениях системы безопасности. Обновления системы безопасности важны для защиты от вредоносных атак.";
+
+/* Software update purpose */
+"SoftwareUpdatePurpose" = "MonitorControl проверяет наличие новых версий и обновлений безопасности.";
