@@ -35,7 +35,7 @@
 "Decrease" = "降低";
 
 /* Shown in the alert dialog */
-"Disable gamma control for my displays" = "禁用我显示器的伽马值控制";
+"Disable gamma control for my displays" = "禁用显示器的伽马值控制";
 
 /* Shown in the main prefs window */
 "Displays" = "显示器";
@@ -89,7 +89,7 @@
 "Preferences…" = "设置…";
 
 /* Shown in menu */
-"Quit" = "关闭";
+"Quit" = "退出";
 
 /* Shown in the alert dialog */
 "Reset Preferences?" = "重置所有设置？";
@@ -128,7 +128,7 @@
 "This display is reported to support hardware DDC control. If you encounter issues, you can disable hardware DDC control to force software control." = "这个显示器报告支持DDC控制。如果使用遇到问题，您可以禁用硬件DDC控制以强制软件控制。";
 
 /* Shown in the Display Preferences */
-"This display supports native Apple brightness protocol. This allows macOS to control this display without MonitorControl as well." = "这个显示器支持苹果原生的亮度设置。MacOS也可以不通过MonitorControl控制此屏幕。";
+"This display supports native Apple brightness protocol. This allows macOS to control this display without MonitorControl as well." = "这个显示器支持苹果原生的亮度设置，macOS无需通过MonitorControl控制此屏幕。";
 
 /* Shown in the Display Preferences */
 "This is a virtual display (examples: AirPlay, Sidecar, display connected via a DisplayLink Dock or similar) which does not allow hardware or software gammatable control. Shading is used as a substitute but only in non-mirror scenarios. Mouse cursor will be unaffected and artifacts may appear when entering/leaving full screen mode." = "这个是虚拟显示器（例如：AirPlay、Sidecar、通过DisplayLink Dock或类似软件连接的屏幕），不允许硬件或软件伽马值控制。只能在非镜像的情况下以遮光（Shading）作为代替设置方案。进入/离开全屏幕模式时，鼠标将不受影响，并且可能会出现残影。";
