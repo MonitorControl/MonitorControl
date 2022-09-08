@@ -1,0 +1,152 @@
+/* Shown in the main prefs window */
+"About" = "Про";
+
+/* Shown in the alert dialog */
+"An other app seems to change the brightness or colors which causes issues.\n\nTo solve this, you need to quit the other app or disable gamma control for your displays in MonitorControl!" = "Схоже що інша програма змінює яскравість або кольори, що спричиняють проблеми.\n\nЩоб вирішити цю проблему, необхідно вийти з іншого додатку або вимкнути керування гаммою для дисплеїв в режимі моніторингу моніторингу!";
+
+/* Shown in the main prefs window */
+"App menu" = "Меню програми";
+
+/* Shown in the alert dialog */
+"Are you sure you want to enable a longer delay? Doing so may freeze your system and require a restart. Start at login will be disabled as a safety measure." = "Ви впевнені, що хочете увімкнути довшу затримку? Виконання цієї системи може заморозити вашу систему і перевантажити. Запуск при вході до системи буде вимкнений.";
+
+/* Shown in the alert dialog */
+"Are you sure you want to reset all preferences?" = "Ви дійсно бажаєте скинути всі налаштування?";
+
+/* Shown in menu */
+"Brightness" = "Brightness";
+
+/* Build */
+"Build" = "Збірка";
+
+/* Shown in the Display Preferences */
+"Built-in Display" = "Вбудований дисплей";
+
+/* Shown in menu */
+"Check for updates…" = "Перевірка оновлень…";
+
+/* Shown in menu */
+"Contrast" = "Contrast";
+
+/* Version */
+"Copyright Ⓒ MonitorControl, " = "Захист авторських прав C, ";
+
+/* Shown in record shortcut box */
+"Decrease" = "Зменшити";
+
+/* Shown in the alert dialog */
+"Disable gamma control for my displays" = "Вимкнути ігровий пульт для моїх дисплеїв";
+
+/* Shown in the main prefs window */
+"Displays" = "Показує";
+
+/* Shown in the alert dialog */
+"Enable Longer Delay?" = "Увімкнути більш довгу затримку?";
+
+/* Shown in the Display Preferences */
+"External Display" = "Зовнішній дисплей";
+
+/* Shown in the main prefs window */
+"General" = "General";
+
+/* Shown in the Display Preferences */
+"Hardware (Apple)" = "Апаратний (Apple)";
+
+/* Shown in the Display Preferences */
+"Hardware (DDC)" = "Апаратний (DC)";
+
+/* Shown in the alert dialog */
+"I'll quit the other app" = "Я закрию інший додаток";
+
+/* Shown in the alert dialog */
+"Incompatible previous version" = "Несумісна попередня версія";
+
+/* Shown in record shortcut box */
+"Increase" = "Збільшити";
+
+/* Shown in the alert dialog */
+"Is f.lux or similar running?" = "Це f.lux чи схожа біга?";
+
+/* Shown in the main prefs window */
+"Keyboard" = "Keyboard";
+
+/* Shown in record shortcut box */
+"Mute" = "Вимкнути звук";
+
+/* Shown in the alert dialog */
+"No" = "No";
+
+/* Shown in the Display Preferences */
+"No Control" = "Немає управління";
+
+/* Shown in the Display Preferences */
+"Other Display" = "Інший дисплей";
+
+/* Shown in the alert dialog */
+"Preferences for an incompatible previous app version detected. Default preferences are reloaded." = "Параметри для несумісної попередньої версії застосунку. Перезавантажуються налаштування за умовчанням.";
+
+/* Shown in menu */
+"Preferences…" = "Налаштування…";
+
+/* Shown in menu */
+"Quit" = "Quit";
+
+/* Shown in the alert dialog */
+"Reset Preferences?" = "Скинути налаштування?";
+
+/* Shown in the alert dialog */
+"Safe Mode Activated" = "Безпечний режим активовано";
+
+/* Shown in the alert dialog */
+"Shift was pressed during launch. MonitorControl started in safe mode. Default preferences are reloaded, DDC read is blocked." = "Shift було натиснуто під час запуску. Контроль моніторингу запущено в безпечному режимі. Налаштування за замовчуванням перезавантажуються, прочитання DDC заблоковано.";
+
+/* Shown in the alert dialog */
+"Shortcuts not available" = "Ярлики не доступні";
+
+/* Shown in the Display Preferences */
+"Software (gamma)" = "Програмне забезпечення (гамма)";
+
+/* Shown in the Display Preferences */
+"Software (gamma, forced)" = "Програмне забезпечення (гамма, примусово)";
+
+/* Shown in the Display Preferences */
+"Software (shade)" = "Програмне забезпечення (тіння)";
+
+/* Shown in the Display Preferences */
+"Software (shade, forced)" = "Програмне забезпечення (тінь, примусове)";
+
+/* Shown in the Display Preferences */
+"This display allows for software brightness control via gamma table manipulation or shade as it does not support hardware control. Reasons for this might be using the HDMI port of a Mac mini (which blocks hardware DDC control) or having a blacklisted display." = "Цей дисплей дозволяє керувати яскравістю програмного забезпечення через маніпулювання таблицею Gma або тінь, так як він не підтримує апаратний контроль. Причини цього можуть використовувати HDMI порт Mac mini (який блокує керування апаратним DDC або чорний список.";
+
+/* Shown in the Display Preferences */
+"This display has an unspecified control status." = "Цей дисплей має невизначений статус контролю.";
+
+/* Shown in the Display Preferences */
+"This display is reported to support hardware DDC control but the current settings allow for software control only." = "Цей дисплей повідомляє про підтримку апаратного DDC контролю, але поточні параметри дозволяють лише для керування програмним забезпеченням.";
+
+/* Shown in the Display Preferences */
+"This display is reported to support hardware DDC control. If you encounter issues, you can disable hardware DDC control to force software control." = "Даний дисплей повідомляє про підтримку апаратного DDC контролю. Якщо у вас виникли проблеми, ви можете вимкнути апаратний DDC для примусового керування програмою.";
+
+/* Shown in the Display Preferences */
+"This display supports native Apple brightness protocol. This allows macOS to control this display without MonitorControl as well." = "Цей показ підтримує вбудований протокол яскравості Apple. Це дозволяє macOS контролювати цей дисплей без контролю моніторів.";
+
+/* Shown in the Display Preferences */
+"This is a virtual display (examples: AirPlay, Sidecar, display connected via a DisplayLink Dock or similar) which does not allow hardware or software gammatable control. Shading is used as a substitute but only in non-mirror scenarios. Mouse cursor will be unaffected and artifacts may appear when entering/leaving full screen mode." = "Це віртуальний дисплей (приклади: AirPlay, Sidecar, дисплей під'єднано за допомогою Dock DisplayLink або схожої), які не дозволяють апаратне або програмне адаптоване керування. Затінення застосовується як заміна, але тільки в не дзеркальних сценаріях. Курсор миші може бути не постраждалий, і артефакти можуть з'являтися під час входу/виходу з повноекранного режиму.";
+
+/* Unknown display name */
+"Unknown" = "Unknown";
+
+/* Version */
+"Version" = "Version";
+
+/* Shown in the Display Preferences */
+"Virtual Display" = "Віртуальний дисплей";
+
+/* Shown in menu */
+"Volume" = "Volume";
+
+/* Shown in the alert dialog */
+"Yes" = "Yes";
+
+/* Shown in the alert dialog */
+"You need to enable MonitorControl in System Preferences > Security and Privacy > Accessibility for the keyboard shortcuts to work" = "Для роботи потрібно ввімкнути MonitorControl в системних параметрах > Безпека та Конфіденційність> Спеціальні можливості для відображення ярликів клавіатури";
