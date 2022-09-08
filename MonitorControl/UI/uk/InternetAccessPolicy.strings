@@ -1,0 +1,8 @@
+/* General application description */
+"ApplicationDescription" = "Керування монітором дозволяє керувати яскравістю і гучністю зовнішнього дисплея";
+
+/* Sofware update deny consequences */
+"SoftwareUpdateDenyConsequences" = "Якщо заборонити ці підключення, ви не будете повідомлені про нові версії і оновлення безпеки. Оновлення безпеки важливі для захисту від шкідливих атак.";
+
+/* Software update purpose */
+"SoftwareUpdatePurpose" = "MonitorControl перевірки нових версій і оновлень безпеки.";
