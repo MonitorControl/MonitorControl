@@ -1,0 +1,152 @@
+/* Shown in the main prefs window */
+"About" = "À propos de";
+
+/* Shown in the alert dialog */
+"An other app seems to change the brightness or colors which causes issues.\n\nTo solve this, you need to quit the other app or disable gamma control for your displays in MonitorControl!" = "Une autre application semble modifier la luminosité ou les couleurs qui causent des problèmes.\n\nPour résoudre ceci, vous devez quitter l'autre application ou désactiver le contrôle gamma pour vos affichages dans MonitorControl!";
+
+/* Shown in the main prefs window */
+"App menu" = "Menu de l'application";
+
+/* Shown in the alert dialog */
+"Are you sure you want to enable a longer delay? Doing so may freeze your system and require a restart. Start at login will be disabled as a safety measure." = "Êtes-vous sûr de vouloir activer un délai plus long ? Cela peut geler votre système et nécessiter un redémarrage. Commencer à la connexion sera désactivé par mesure de sécurité.";
+
+/* Shown in the alert dialog */
+"Are you sure you want to reset all preferences?" = "Êtes-vous sûr de vouloir réinitialiser toutes les préférences ?";
+
+/* Shown in menu */
+"Brightness" = "Luminosité";
+
+/* Build */
+"Build" = "Construire";
+
+/* Shown in the Display Preferences */
+"Built-in Display" = "Affichage intégré";
+
+/* Shown in menu */
+"Check for updates…" = "Vérifier les mises à jour…";
+
+/* Shown in menu */
+"Contrast" = "Contrast";
+
+/* Version */
+"Copyright Ⓒ MonitorControl, " = "Copyright C MonitorControl, ";
+
+/* Shown in record shortcut box */
+"Decrease" = "Diminuer";
+
+/* Shown in the alert dialog */
+"Disable gamma control for my displays" = "Désactiver le contrôle gamma pour mes écrans";
+
+/* Shown in the main prefs window */
+"Displays" = "Affichages";
+
+/* Shown in the alert dialog */
+"Enable Longer Delay?" = "Activer le délai plus long ?";
+
+/* Shown in the Display Preferences */
+"External Display" = "Affichage externe";
+
+/* Shown in the main prefs window */
+"General" = "Généraux";
+
+/* Shown in the Display Preferences */
+"Hardware (Apple)" = "Matériel (Apple)";
+
+/* Shown in the Display Preferences */
+"Hardware (DDC)" = "Matériel (DDC)";
+
+/* Shown in the alert dialog */
+"I'll quit the other app" = "Je vais quitter l'autre application";
+
+/* Shown in the alert dialog */
+"Incompatible previous version" = "Version précédente incompatible";
+
+/* Shown in record shortcut box */
+"Increase" = "Agrandir";
+
+/* Shown in the alert dialog */
+"Is f.lux or similar running?" = "Est-ce que f.lux ou similaire est en cours d'exécution ?";
+
+/* Shown in the main prefs window */
+"Keyboard" = "Keyboard";
+
+/* Shown in record shortcut box */
+"Mute" = "Couper le son";
+
+/* Shown in the alert dialog */
+"No" = "Non";
+
+/* Shown in the Display Preferences */
+"No Control" = "Pas de contrôle";
+
+/* Shown in the Display Preferences */
+"Other Display" = "Autre affichage";
+
+/* Shown in the alert dialog */
+"Preferences for an incompatible previous app version detected. Default preferences are reloaded." = "Préférences pour une version incompatible de l'application détectée. Les préférences par défaut sont rechargées.";
+
+/* Shown in menu */
+"Preferences…" = "Préférences…";
+
+/* Shown in menu */
+"Quit" = "Quitter";
+
+/* Shown in the alert dialog */
+"Reset Preferences?" = "Réinitialiser les préférences ?";
+
+/* Shown in the alert dialog */
+"Safe Mode Activated" = "Mode sans échec activé";
+
+/* Shown in the alert dialog */
+"Shift was pressed during launch. MonitorControl started in safe mode. Default preferences are reloaded, DDC read is blocked." = "Maj a été pressé pendant le lancement. MonitorControl a démarré en mode sans échec. Les préférences par défaut sont rechargées, la lecture DDC est bloquée.";
+
+/* Shown in the alert dialog */
+"Shortcuts not available" = "Raccourcis non disponibles";
+
+/* Shown in the Display Preferences */
+"Software (gamma)" = "Logiciel (gamma)";
+
+/* Shown in the Display Preferences */
+"Software (gamma, forced)" = "Logiciel (gamma, forcé)";
+
+/* Shown in the Display Preferences */
+"Software (shade)" = "Logiciel (ombre)";
+
+/* Shown in the Display Preferences */
+"Software (shade, forced)" = "Logiciel (ombragé, forcé)";
+
+/* Shown in the Display Preferences */
+"This display allows for software brightness control via gamma table manipulation or shade as it does not support hardware control. Reasons for this might be using the HDMI port of a Mac mini (which blocks hardware DDC control) or having a blacklisted display." = "Cet écran permet de contrôler la luminosité du logiciel par le biais de la manipulation de table gamma ou de l'ombre, car il ne prend pas en charge le contrôle matériel. Les raisons pour cela peuvent être d'utiliser le port HDMI d'un Mac mini (qui bloque le contrôle DDC du matériel) ou d'avoir un affichage sur liste noire.";
+
+/* Shown in the Display Preferences */
+"This display has an unspecified control status." = "Cet affichage a un statut de contrôle non spécifié.";
+
+/* Shown in the Display Preferences */
+"This display is reported to support hardware DDC control but the current settings allow for software control only." = "Cet affichage prend en charge le contrôle matériel de la DDC mais les paramètres actuels ne permettent que le contrôle logiciel.";
+
+/* Shown in the Display Preferences */
+"This display is reported to support hardware DDC control. If you encounter issues, you can disable hardware DDC control to force software control." = "Cet affichage prend en charge le contrôle DDC matériel. Si vous rencontrez des problèmes, vous pouvez désactiver le contrôle DDC matériel pour forcer le contrôle logiciel.";
+
+/* Shown in the Display Preferences */
+"This display supports native Apple brightness protocol. This allows macOS to control this display without MonitorControl as well." = "Cet écran prend en charge le protocole natif de luminosité Apple. Cela permet à macOS de contrôler cet écran sans MonitorControl également.";
+
+/* Shown in the Display Preferences */
+"This is a virtual display (examples: AirPlay, Sidecar, display connected via a DisplayLink Dock or similar) which does not allow hardware or software gammatable control. Shading is used as a substitute but only in non-mirror scenarios. Mouse cursor will be unaffected and artifacts may appear when entering/leaving full screen mode." = "Il s'agit d'un affichage virtuel (exemple : AirPlay, Sidecar, affichage connecté via un Dock DisplayLink ou similaire) qui n'autorise pas le contrôle matériel ou logiciel. L'ombrage est utilisé comme substitut, mais uniquement dans les scénarios non-miroirs. Le curseur de la souris ne sera pas affecté et les artefacts peuvent apparaître en entrant ou en quittant le mode plein écran.";
+
+/* Unknown display name */
+"Unknown" = "Inconnu";
+
+/* Version */
+"Version" = "Version";
+
+/* Shown in the Display Preferences */
+"Virtual Display" = "Affichage virtuel";
+
+/* Shown in menu */
+"Volume" = "Volume";
+
+/* Shown in the alert dialog */
+"Yes" = "Oui";
+
+/* Shown in the alert dialog */
+"You need to enable MonitorControl in System Preferences > Security and Privacy > Accessibility for the keyboard shortcuts to work" = "Vous devez activer MonitorControl dans Préférences Système > Sécurité et Confidentialité > Accessibilité pour que les raccourcis clavier fonctionnent";
