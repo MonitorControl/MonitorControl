@@ -1,0 +1,3 @@
+files:
+  - source: /**/en.lproj/*.strings
+    translation: /**/%osx_locale%/%original_file_name%
