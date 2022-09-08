@@ -1,0 +1,152 @@
+/* Shown in the main prefs window */
+"About" = "crwdns1855323:0crwdne1855323:0";
+
+/* Shown in the alert dialog */
+"An other app seems to change the brightness or colors which causes issues.\n\nTo solve this, you need to quit the other app or disable gamma control for your displays in MonitorControl!" = "crwdns1855325:0crwdne1855325:0";
+
+/* Shown in the main prefs window */
+"App menu" = "crwdns1855327:0crwdne1855327:0";
+
+/* Shown in the alert dialog */
+"Are you sure you want to enable a longer delay? Doing so may freeze your system and require a restart. Start at login will be disabled as a safety measure." = "crwdns1855329:0crwdne1855329:0";
+
+/* Shown in the alert dialog */
+"Are you sure you want to reset all preferences?" = "crwdns1855331:0crwdne1855331:0";
+
+/* Shown in menu */
+"Brightness" = "crwdns1855333:0crwdne1855333:0";
+
+/* Build */
+"Build" = "crwdns1855335:0crwdne1855335:0";
+
+/* Shown in the Display Preferences */
+"Built-in Display" = "crwdns1855337:0crwdne1855337:0";
+
+/* Shown in menu */
+"Check for updates…" = "crwdns1855339:0crwdne1855339:0";
+
+/* Shown in menu */
+"Contrast" = "crwdns1855341:0crwdne1855341:0";
+
+/* Version */
+"Copyright Ⓒ MonitorControl, " = "crwdns1855343:0crwdne1855343:0";
+
+/* Shown in record shortcut box */
+"Decrease" = "crwdns1855345:0crwdne1855345:0";
+
+/* Shown in the alert dialog */
+"Disable gamma control for my displays" = "crwdns1855347:0crwdne1855347:0";
+
+/* Shown in the main prefs window */
+"Displays" = "crwdns1855349:0crwdne1855349:0";
+
+/* Shown in the alert dialog */
+"Enable Longer Delay?" = "crwdns1855351:0crwdne1855351:0";
+
+/* Shown in the Display Preferences */
+"External Display" = "crwdns1855353:0crwdne1855353:0";
+
+/* Shown in the main prefs window */
+"General" = "crwdns1855355:0crwdne1855355:0";
+
+/* Shown in the Display Preferences */
+"Hardware (Apple)" = "crwdns1855357:0crwdne1855357:0";
+
+/* Shown in the Display Preferences */
+"Hardware (DDC)" = "crwdns1855359:0crwdne1855359:0";
+
+/* Shown in the alert dialog */
+"I'll quit the other app" = "crwdns1855361:0crwdne1855361:0";
+
+/* Shown in the alert dialog */
+"Incompatible previous version" = "crwdns1855363:0crwdne1855363:0";
+
+/* Shown in record shortcut box */
+"Increase" = "crwdns1855365:0crwdne1855365:0";
+
+/* Shown in the alert dialog */
+"Is f.lux or similar running?" = "crwdns1855367:0crwdne1855367:0";
+
+/* Shown in the main prefs window */
+"Keyboard" = "crwdns1855369:0crwdne1855369:0";
+
+/* Shown in record shortcut box */
+"Mute" = "crwdns1855371:0crwdne1855371:0";
+
+/* Shown in the alert dialog */
+"No" = "crwdns1855373:0crwdne1855373:0";
+
+/* Shown in the Display Preferences */
+"No Control" = "crwdns1855375:0crwdne1855375:0";
+
+/* Shown in the Display Preferences */
+"Other Display" = "crwdns1855377:0crwdne1855377:0";
+
+/* Shown in the alert dialog */
+"Preferences for an incompatible previous app version detected. Default preferences are reloaded." = "crwdns1855379:0crwdne1855379:0";
+
+/* Shown in menu */
+"Preferences…" = "crwdns1855381:0crwdne1855381:0";
+
+/* Shown in menu */
+"Quit" = "crwdns1855383:0crwdne1855383:0";
+
+/* Shown in the alert dialog */
+"Reset Preferences?" = "crwdns1855385:0crwdne1855385:0";
+
+/* Shown in the alert dialog */
+"Safe Mode Activated" = "crwdns1855387:0crwdne1855387:0";
+
+/* Shown in the alert dialog */
+"Shift was pressed during launch. MonitorControl started in safe mode. Default preferences are reloaded, DDC read is blocked." = "crwdns1855389:0crwdne1855389:0";
+
+/* Shown in the alert dialog */
+"Shortcuts not available" = "crwdns1855391:0crwdne1855391:0";
+
+/* Shown in the Display Preferences */
+"Software (gamma)" = "crwdns1855393:0crwdne1855393:0";
+
+/* Shown in the Display Preferences */
+"Software (gamma, forced)" = "crwdns1855395:0crwdne1855395:0";
+
+/* Shown in the Display Preferences */
+"Software (shade)" = "crwdns1855397:0crwdne1855397:0";
+
+/* Shown in the Display Preferences */
+"Software (shade, forced)" = "crwdns1855399:0crwdne1855399:0";
+
+/* Shown in the Display Preferences */
+"This display allows for software brightness control via gamma table manipulation or shade as it does not support hardware control. Reasons for this might be using the HDMI port of a Mac mini (which blocks hardware DDC control) or having a blacklisted display." = "crwdns1855401:0crwdne1855401:0";
+
+/* Shown in the Display Preferences */
+"This display has an unspecified control status." = "crwdns1855403:0crwdne1855403:0";
+
+/* Shown in the Display Preferences */
+"This display is reported to support hardware DDC control but the current settings allow for software control only." = "crwdns1855405:0crwdne1855405:0";
+
+/* Shown in the Display Preferences */
+"This display is reported to support hardware DDC control. If you encounter issues, you can disable hardware DDC control to force software control." = "crwdns1855407:0crwdne1855407:0";
+
+/* Shown in the Display Preferences */
+"This display supports native Apple brightness protocol. This allows macOS to control this display without MonitorControl as well." = "crwdns1855409:0crwdne1855409:0";
+
+/* Shown in the Display Preferences */
+"This is a virtual display (examples: AirPlay, Sidecar, display connected via a DisplayLink Dock or similar) which does not allow hardware or software gammatable control. Shading is used as a substitute but only in non-mirror scenarios. Mouse cursor will be unaffected and artifacts may appear when entering/leaving full screen mode." = "crwdns1855411:0crwdne1855411:0";
+
+/* Unknown display name */
+"Unknown" = "crwdns1855413:0crwdne1855413:0";
+
+/* Version */
+"Version" = "crwdns1855415:0crwdne1855415:0";
+
+/* Shown in the Display Preferences */
+"Virtual Display" = "crwdns1855417:0crwdne1855417:0";
+
+/* Shown in menu */
+"Volume" = "crwdns1855419:0crwdne1855419:0";
+
+/* Shown in the alert dialog */
+"Yes" = "crwdns1855421:0crwdne1855421:0";
+
+/* Shown in the alert dialog */
+"You need to enable MonitorControl in System Preferences > Security and Privacy > Accessibility for the keyboard shortcuts to work" = "crwdns1855423:0crwdne1855423:0";
