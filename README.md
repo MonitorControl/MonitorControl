@@ -139,6 +139,22 @@ git clone https://github.com/MonitorControl/MonitorControl.git
 - If you want to clone one of the branches, add `--single-branch --branch [branchname]` after the `clone` option.
 - You're all set! Now open the `MonitorControl.xcodeproj` with Xcode! The dependencies will automatically get downloaded once you open the project. If they don't: `File > Packages > Resolve Package Versions`
 
+
+### Making Changes
+
+- Changes to front end/views in terms of logic can be made under MonitorControl/ViewControllers
+  - Onboarding contains the initial UI upon setup
+  - Preferences contains the main UI
+- Icons for the UI can be changed from MonitorControl/Assets.xcassets
+  - Menubar icon can be changed by changing the status.pdf, and status@2x.pdf file under status.imageset/
+  - Onboarding icons are marked with onboarding on the folders
+  - App Icons are under AppIcon.appiconset folder
+  - Icons can be changed by changing the files
+- Translations
+  - Language Translations for the app can be made under MonitorControl/UI
+  - Create a folder with desired language and follow the other translation structures
+
+
 ### Third party dependencies
 
 - [MediaKeyTap](https://github.com/MonitorControl/MediaKeyTap)
