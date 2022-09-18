@@ -239,13 +239,16 @@ class Arm64DDC: NSObject {
     var serviceLocation = 0
     var ioregServicesForMatching: [IOregService] = []
     let ioregRoot: io_registry_entry_t = IORegistryGetRootEntry(kIOMasterPortDefault)
+    defer {
+      IOObjectRelease(ioregRoot)
+    }
     var iterator = io_iterator_t()
+    defer {
+      IOObjectRelease(iterator)
+    }
     var ioregService = IOregService()
     guard IORegistryEntryCreateIterator(ioregRoot, "IOService", IOOptionBits(kIORegistryIterateRecursively), &iterator) == KERN_SUCCESS else {
       return ioregServicesForMatching
-    }
-    defer {
-      IOObjectRelease(ioregRoot)
     }
     while true {
       if let objectOfInterest = ioregIterateToNextObjectOfInterest(interests: ["AppleCLCD2", "DCPAVServiceProxy"], iterator: &iterator) {
