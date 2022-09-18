@@ -199,10 +199,10 @@ class Arm64DDC: NSObject {
   // Returns EDID UUDI, Product Name and Serial Number in an IOregService if it is found using the provided io_service_t pointing to a AppleCDC2 item in the ioreg tree
   private static func getIORegServiceAppleCDC2Properties(service: io_service_t) -> IOregService {
     var ioregService = IOregService()
-    if let unmanagedEdidUUID = IORegistryEntryCreateCFProperty(service, CFStringCreateWithCString(kCFAllocatorDefault, "EDID UUID", kCFStringEncodingASCII), kCFAllocatorDefault, IOOptionBits(kIORegistryIterateRecursively)), let edidUUID = unmanagedEdidUUID.takeRetainedValue() as? String {
+    if let unmanagedEdidUUID = IORegistryEntryCreateCFProperty(service, "EDID UUID" as CFString, kCFAllocatorDefault, IOOptionBits(kIORegistryIterateRecursively)), let edidUUID = unmanagedEdidUUID.takeRetainedValue() as? String {
       ioregService.edidUUID = edidUUID
     }
-    if let unmanagedDisplayAttrs = IORegistryEntryCreateCFProperty(service, CFStringCreateWithCString(kCFAllocatorDefault, "DisplayAttributes", kCFStringEncodingASCII), kCFAllocatorDefault, IOOptionBits(kIORegistryIterateRecursively)), let displayAttrs = unmanagedDisplayAttrs.takeRetainedValue() as? NSDictionary, let productAttrs = displayAttrs.value(forKey: "ProductAttributes") as? NSDictionary {
+    if let unmanagedDisplayAttrs = IORegistryEntryCreateCFProperty(service, "DisplayAttributes" as CFString, kCFAllocatorDefault, IOOptionBits(kIORegistryIterateRecursively)), let displayAttrs = unmanagedDisplayAttrs.takeRetainedValue() as? NSDictionary, let productAttrs = displayAttrs.value(forKey: "ProductAttributes") as? NSDictionary {
       if let manufacturerID = productAttrs.value(forKey: "ManufacturerID") as? String {
         ioregService.manufacturerID = manufacturerID
       }
@@ -213,7 +213,7 @@ class Arm64DDC: NSObject {
         ioregService.serialNumber = serialNumber
       }
     }
-    if let unmanagedTransport = IORegistryEntryCreateCFProperty(service, CFStringCreateWithCString(kCFAllocatorDefault, "Transport", kCFStringEncodingASCII), kCFAllocatorDefault, IOOptionBits(kIORegistryIterateRecursively)), let transport = unmanagedTransport.takeRetainedValue() as? NSDictionary {
+    if let unmanagedTransport = IORegistryEntryCreateCFProperty(service, "Transport" as CFString, kCFAllocatorDefault, IOOptionBits(kIORegistryIterateRecursively)), let transport = unmanagedTransport.takeRetainedValue() as? NSDictionary {
       if let upstream = transport.value(forKey: "Upstream") as? String {
         ioregService.transportUpstream = upstream
       }
@@ -226,7 +226,7 @@ class Arm64DDC: NSObject {
 
   // Sets up the service in an IOregService if it is found using the provided io_service_t pointing to a DCPAVServiceProxy item in the ioreg tree
   private static func setIORegServiceDCPAVServiceProxy(service: io_service_t, ioregService: inout IOregService) {
-    if let unmanagedLocation = IORegistryEntryCreateCFProperty(service, CFStringCreateWithCString(kCFAllocatorDefault, "Location", kCFStringEncodingASCII), kCFAllocatorDefault, IOOptionBits(kIORegistryIterateRecursively)), let location = unmanagedLocation.takeRetainedValue() as? String {
+    if let unmanagedLocation = IORegistryEntryCreateCFProperty(service, "Location" as CFString, kCFAllocatorDefault, IOOptionBits(kIORegistryIterateRecursively)), let location = unmanagedLocation.takeRetainedValue() as? String {
       ioregService.location = location
       if location == "External" {
         ioregService.service = IOAVServiceCreateWithService(kCFAllocatorDefault, service)?.takeRetainedValue() as IOAVService
@@ -243,6 +243,9 @@ class Arm64DDC: NSObject {
     var ioregService = IOregService()
     guard IORegistryEntryCreateIterator(ioregRoot, "IOService", IOOptionBits(kIORegistryIterateRecursively), &iterator) == KERN_SUCCESS else {
       return ioregServicesForMatching
+    }
+    defer {
+      IOObjectRelease(ioregRoot)
     }
     while true {
       if let objectOfInterest = ioregIterateToNextObjectOfInterest(interests: ["AppleCLCD2", "DCPAVServiceProxy"], iterator: &iterator) {
