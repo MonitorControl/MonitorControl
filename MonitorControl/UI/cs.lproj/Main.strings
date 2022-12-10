@@ -26,7 +26,7 @@
 "4CG-0I-anB.title" = "Vlastní klávesové zkratky";
 
 /* Class = "NSTextFieldCell"; title = "Using window focus might not work properly with full screen apps."; ObjectID = "4dX-o1-xAc"; */
-"4dX-o1-xAc.title" = "¨Možnost s aktivním oknem nemusí fungovat správně u aplikací celou obrazovku";
+"4dX-o1-xAc.title" = "Možnost s aktivním oknem nemusí fungovat správně u aplikací na celou obrazovku";
 
 /* Class = "NSTextFieldCell"; title = "Welcome to MonitorControl"; ObjectID = "5J0-BD-top"; */
 "5J0-BD-top.title" = "Vítá vás MonitorControl";
