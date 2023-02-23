@@ -245,7 +245,7 @@
 "MlU-hl-d46.title" = "启用滑杆定位";
 
 /* Class = "NSMenuItem"; title = "Always show in the menu bar"; ObjectID = "MM0-Lf-VgF"; */
-"MM0-Lf-VgF.title" = "永久显示于选项列";
+"MM0-Lf-VgF.title" = "永久置于菜单栏";
 
 /* Class = "NSTextFieldCell"; title = "Contrast:"; ObjectID = "MMk-S2-yJN"; */
 "MMk-S2-yJN.title" = "对比度：";
@@ -326,13 +326,13 @@
 "Riq-uM-bTs.title" = "正常";
 
 /* Class = "NSTextFieldCell"; title = "General menu items style:"; ObjectID = "thh-DG-ecH"; */
-"thh-DG-ecH.title" = "通用选项的风格";
+"thh-DG-ecH.title" = "菜单栏选项样式";
 
 /* Class = "NSTextFieldCell"; title = "@the0neyouseek (Guillaume B.)\n@JoniVR (Joni Van Roost)\n@waydabber (István T.)"; ObjectID = "TKd-J8-Iyk"; */
 "TKd-J8-Iyk.title" = "@the0neyouseek (Guillaume B.)\n@JoniVR (Joni Van Roost)\n@waydabber (István T.)";
 
 /* Class = "NSTextFieldCell"; title = "Menu Icon:"; ObjectID = "u6s-Pb-BCG"; */
-"u6s-Pb-BCG.title" = "选项图标：";
+"u6s-Pb-BCG.title" = "菜单栏图标：";
 
 /* Class = "NSButtonCell"; title = "Show advanced settings"; ObjectID = "UBq-Od-SIB"; */
 "UBq-Od-SIB.title" = "显示高级选项";
