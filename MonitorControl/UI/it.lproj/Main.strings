@@ -374,7 +374,7 @@
 "xjq-hs-wWB.title" = "Aggiorna le impostazioni leggendole dal monitor. Potrebbe non funzionare con alcuni hardware.";
 
 /* Class = "NSMenuItem"; title = "Only if at least one slider is present"; ObjectID = "xLa-PN-rsq"; */
-"xLa-PN-rsq.title" = "Solo e è presente almeno uno slider";
+"xLa-PN-rsq.title" = "Solo se è presente almeno uno slider";
 
 /* Class = "NSMenuItem"; title = "Both standard and custom shortcuts"; ObjectID = "xQJ-aJ-VhH"; */
 "xQJ-aJ-VhH.title" = "Entrambe le abbreviazioni standard e personalizzate";
