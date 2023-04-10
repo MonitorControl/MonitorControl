@@ -8,13 +8,13 @@
 "1PJ-14-Bvn.title" = "MonitorControl";
 
 /* Class = "NSMenuItem"; title = "Standard keyboard volume and mute keys"; ObjectID = "1sy-Kd-WL5"; */
-"1sy-Kd-WL5.title" = "표준 키보드 볼륨 및 음소거 키";
+"1sy-Kd-WL5.title" = "표준 키보드 음량 및 음소거 키";
 
 /* Class = "NSTextFieldCell"; title = "DDC min"; ObjectID = "1zE-fg-xEm"; */
 "1zE-fg-xEm.title" = "DDC 최솟값";
 
 /* Class = "NSTextFieldCell"; title = "Volume down"; ObjectID = "21s-bv-GTK"; */
-"21s-bv-GTK.title" = "Volume down";
+"21s-bv-GTK.title" = "음량 줄이기";
 
 /* Class = "NSMenuItem"; title = "Show separate controls for each display in menu"; ObjectID = "3eO-bN-ZRl"; */
 "3eO-bN-ZRl.title" = "메뉴에서 각 디스플레이에 대해 각각의 컨트롤 표시";
@@ -29,10 +29,10 @@
 "4dX-o1-xAc.title" = "활성화된 창을 기준으로 하면 전체 화면 앱에서 제대로 동작하지 않을 수 있습니다.";
 
 /* Class = "NSTextFieldCell"; title = "Welcome to MonitorControl"; ObjectID = "5J0-BD-top"; */
-"5J0-BD-top.title" = "Welcome to MonitorControl";
+"5J0-BD-top.title" = "MonitorControl에 오신 것을 환영합니다";
 
 /* Class = "NSButtonCell"; title = "Reset Preferences"; ObjectID = "5yT-5F-X5R"; */
-"5yT-5F-X5R.title" = "환경 설정 초기화";
+"5yT-5F-X5R.title" = "환경설정 초기화";
 
 /* Class = "NSMenuItem"; title = "Always hide"; ObjectID = "6mo-7S-oOO"; */
 "6mo-7S-oOO.title" = "항상 숨김";
@@ -50,7 +50,7 @@
 "8Q8-57-xnT.title" = "미세한 OSD 스케일 사용";
 
 /* Class = "NSButtonCell"; title = "Start using MonitorControl"; ObjectID = "8WE-da-OZC"; */
-"8WE-da-OZC.title" = "Start using MonitorControl";
+"8WE-da-OZC.title" = "MonitorControl 시작하기";
 
 /* Class = "NSButtonCell"; title = "Special thanks to our contributors!"; ObjectID = "95V-M4-2l5"; */
 "95V-M4-2l5.title" = "기여자에게 특별한 감사를 드립니다!";
@@ -65,13 +65,13 @@
 "A8P-vn-DEJ.title" = "정확도를 위해 0%, 25%, 50%, 75% 및 100%에 눈금을 표시합니다.";
 
 /* Class = "NSTextFieldCell"; title = "Use brightness, volume and other settings from last time or use defaults. Values will be applied to the display upon first change by the user."; ObjectID = "an7-Aj-3fZ"; */
-"an7-Aj-3fZ.title" = "최근의 밝기, 볼륨 및 기타 설정을 사용하거나 기본값을 사용합니다. 값은 사용자가 처음 변경할 때 디스플레이에 적용됩니다.";
+"an7-Aj-3fZ.title" = "최근의 밝기, 음량 및 기타 설정을 사용하거나 기본값을 사용합니다. 값은 사용자가 처음 변경할 때 디스플레이에 적용됩니다.";
 
 /* Class = "NSMenuItem"; title = "Use audio device name to determine which display to control"; ObjectID = "AqF-uD-KCY"; */
 "AqF-uD-KCY.title" = "오디오 장치 이름을 사용하여 제어할 디스플레이 결정";
 
 /* Class = "NSTextFieldCell"; title = "Start at Login?"; ObjectID = "bA1-GF-Y2n"; */
-"bA1-GF-Y2n.title" = "Start at Login?";
+"bA1-GF-Y2n.title" = "로그인 시 실행";
 
 /* Class = "NSMenuItem"; title = "Show sliders only for the display currently showing the menu"; ObjectID = "bbf-sS-uGv"; */
 "bbf-sS-uGv.title" = "현재 메뉴를 보여주는 디스플레이에 대한 슬라이더만 표시";
@@ -86,7 +86,7 @@
 "bIe-6O-xEH.title" = "하드웨어 (DDC) 제어 디스플레이 전용. 결과는 다를 수 있습니다.";
 
 /* Class = "NSButtonCell"; title = "Disable macOS volume OSD"; ObjectID = "bkM-Px-U3b"; */
-"bkM-Px-U3b.title" = "macOS 볼륨 OSD 비활성화";
+"bkM-Px-U3b.title" = "macOS 음량 OSD 비활성화";
 
 /* Class = "NSTextFieldCell"; title = "OSD scale:"; ObjectID = "bP4-GJ-vhJ"; */
 "bP4-GJ-vhJ.title" = "OSD 스케일:";
@@ -101,7 +101,7 @@
 "bZq-0d-lJa.title" = "음소거 DDC 커맨드 활성화";
 
 /* Class = "NSButtonCell"; title = "Show volume slider in menu"; ObjectID = "c9D-MB-lma"; */
-"c9D-MB-lma.title" = "메뉴에서 볼륨 슬라이더 표시";
+"c9D-MB-lma.title" = "메뉴에서 음량 슬라이더 표시";
 
 /* Class = "NSMenuItem"; title = "Custom"; ObjectID = "Cle-DD-vR7"; */
 "Cle-DD-vR7.title" = "사용자 설정";
@@ -146,7 +146,7 @@
 "fe9-Ia-t9m.title" = "밝기 조절:";
 
 /* Class = "NSTextFieldCell"; title = "Volume:"; ObjectID = "FER-Ri-4UO"; */
-"FER-Ri-4UO.title" = "볼륨:";
+"FER-Ri-4UO.title" = "음량:";
 
 /* Class = "NSButtonCell"; title = "Allow zero brightness via software or combined dimming"; ObjectID = "FjB-XL-fG5"; */
 "FjB-XL-fG5.title" = "소프트웨어 또는 통합된 밝기 조절을 통해 밝기 0 허용";
@@ -194,13 +194,13 @@
 "IK4-u5-qjf.title" = "부드러운 밝기 전환 활성화";
 
 /* Class = "NSButtonCell"; title = "Use fine OSD scale for volume"; ObjectID = "J3L-MW-iJL"; */
-"J3L-MW-iJL.title" = "볼륨에 미세한 OSD 스케일 사용";
+"J3L-MW-iJL.title" = "음량에 미세한 OSD 스케일 사용";
 
 /* Class = "NSButtonCell"; title = "Start at Login"; ObjectID = "j72-NF-zsW"; */
-"j72-NF-zsW.title" = "로그인 시 시작";
+"j72-NF-zsW.title" = "로그인 시 실행";
 
 /* Class = "NSTextFieldCell"; title = "Toggle Mute"; ObjectID = "jK7-7w-uib"; */
-"jK7-7w-uib.title" = "Toggle Mute";
+"jK7-7w-uib.title" = "음소거 토글";
 
 /* Class = "NSMenuItem"; title = "Change for all screens"; ObjectID = "jSj-HB-T2t"; */
 "jSj-HB-T2t.title" = "모든 화면에 대해 변경";
@@ -209,7 +209,7 @@
 "jVH-oc-rUi.title" = "업데이트 확인";
 
 /* Class = "NSButtonCell"; title = "Start MonitorControl at Login"; ObjectID = "JWJ-OY-VtE"; */
-"JWJ-OY-VtE.title" = "Start MonitorControl at Login";
+"JWJ-OY-VtE.title" = "로그인 시 MonitorControl 실행";
 
 /* Class = "NSTextFieldCell"; title = "Note: you can press Shift during startup for 'Safe mode' to restore defaults and avoid reading or setting anything."; ObjectID = "Jx2-gO-nq9"; */
 "Jx2-gO-nq9.title" = "참고: 시작하는 동안 Shift 키를 눌러 '안전 모드'를 실행할 수 있으며, 이는 기본값을 복원하고 어떠한 것이든 읽거나 설정하지 않도록 할 수 있습니다.";
@@ -218,7 +218,7 @@
 "K6A-4z-1aQ.title" = "Apple 전용 및 내장 디스플레이에도 활성화";
 
 /* Class = "NSTextFieldCell"; title = "MonitorControl needs access to \"accessibility\" to use macOS native keys to control your display.\nYou can enable it by adding MonitorControl in System Preferences > Security and Privacy > Accessibility."; ObjectID = "kBJ-Zf-1k2"; */
-"kBJ-Zf-1k2.title" = "MonitorControl needs access to \"accessibility\" to use macOS native keys to control your display.\nYou can enable it by adding MonitorControl in System Preferences > Security and Privacy > Accessibility.";
+"kBJ-Zf-1k2.title" = "MonitorControl이 macOS 기본 키를 사용하여 디스플레이를 제어하려면 \"손쉬운 사용\"에 접근할 수 있어야 합니다.\n시스템 환경설정 > 개인정보 보호 및 보안 > 손쉬운 사용에서 MonitorControl을 추가하여 이 기능을 활성화할 수 있습니다.";
 
 /* Class = "NSTextFieldCell"; title = "Screen to control:"; ObjectID = "Kfj-WK-aSL"; */
 "Kfj-WK-aSL.title" = "제어할 화면:";
@@ -239,7 +239,7 @@
 "ltL-gR-K3Z.title" = "제어할 화면:";
 
 /* Class = "NSTextFieldCell"; title = "Control your external displays brightness, contrast and volume directly from your Mac, using menulet sliders or the keyboard, including native Apple keys."; ObjectID = "Mh5-1A-apq"; */
-"Mh5-1A-apq.title" = "Control your external displays brightness, contrast and volume directly from your Mac, using menulet sliders or the keyboard, including native Apple keys.";
+"Mh5-1A-apq.title" = "메뉴 막대 슬라이더 또는 기본 Apple 키를 포함한 키보드를 사용하여 Mac에서 직접 외부 디스플레이의 밝기, 대비 및 음량을 제어합니다.";
 
 /* Class = "NSButtonCell"; title = "Enable slider snapping"; ObjectID = "MlU-hl-d46"; */
 "MlU-hl-d46.title" = "슬라이더 정렬 활성화";
@@ -251,7 +251,7 @@
 "MMk-S2-yJN.title" = "대비:";
 
 /* Class = "NSTextFieldCell"; title = "Volume:"; ObjectID = "mue-fa-8z6"; */
-"mue-fa-8z6.title" = "볼륨:";
+"mue-fa-8z6.title" = "음량:";
 
 /* Class = "NSButtonCell"; title = "Show brightness slider in menu"; ObjectID = "MWo-6I-s9L"; */
 "MWo-6I-s9L.title" = "메뉴에 밝기 슬라이더 표시";
@@ -260,10 +260,10 @@
 "na6-mS-MPi.title" = "감마 테이블 조절 방지";
 
 /* Class = "NSTextFieldCell"; title = "Ensure MonitorControl is always running when you need it by launching the app at startup."; ObjectID = "nk6-Gh-Mfs"; */
-"nk6-Gh-Mfs.title" = "Ensure MonitorControl is always running when you need it by launching the app at startup.";
+"nk6-Gh-Mfs.title" = "로그인 시 앱을 실행하여 필요할 때 MonitorControl을 사용할 수 있도록 항상 실행된 상태를 유지합니다.";
 
 /* Class = "NSTextFieldCell"; title = "Brightness up"; ObjectID = "nty-g6-Sde"; */
-"nty-g6-Sde.title" = "Brightness up";
+"nty-g6-Sde.title" = "밝기 높이기";
 
 /* Class = "NSButtonCell"; title = "Separate scales for combined hardware & software dimming"; ObjectID = "O8o-hI-8eR"; */
 "O8o-hI-8eR.title" = "통합된 하드웨어 및 소프트웨어 밝기 조절을 위한 별도의 스케일";
@@ -293,13 +293,13 @@
 "psF-vX-AFB.title" = "DDC 최댓값";
 
 /* Class = "NSButtonCell"; title = "Open System Preferences…"; ObjectID = "pVc-wG-Bdh"; */
-"pVc-wG-Bdh.title" = "Open System Preferences…";
+"pVc-wG-Bdh.title" = "시스템 환경설정 열기…";
 
 /* Class = "NSTextFieldCell"; title = "Use software dimming after the display reached zero hardware brightness for extended range. Works for DDC controlled displays only."; ObjectID = "PyY-p9-3NP"; */
 "PyY-p9-3NP.title" = "디스플레이가 확장된 범위에 대해 하드웨어 밝기가 0에 도달한 후 소프트웨어 밝기 조절을 사용합니다. DDC 제어 디스플레이에서만 동작합니다.";
 
 /* Class = "NSTextFieldCell"; title = "Brightness down"; ObjectID = "q5a-Ix-Hjs"; */
-"q5a-Ix-Hjs.title" = "Brightness down";
+"q5a-Ix-Hjs.title" = "밝기 낮추기";
 
 /* Class = "NSMenuItem"; title = "Both standard and custom shortcuts"; ObjectID = "QDG-SA-mRX"; */
 "QDG-SA-mRX.title" = "표준 및 사용자 정의 단축키 둘 다";
@@ -311,7 +311,7 @@
 "qO0-dB-yUs.title" = "메뉴에 대비 슬라이더 표시";
 
 /* Class = "NSTextFieldCell"; title = "Volume control (DDC only):"; ObjectID = "qoh-Gn-f11"; */
-"qoh-Gn-f11.title" = "볼륨 조절 (DDC 전용):";
+"qoh-Gn-f11.title" = "음량 조절 (DDC 전용):";
 
 /* Class = "NSTextFieldCell"; title = "Show percentage next to slider for more precision."; ObjectID = "qXy-CL-Wf1"; */
 "qXy-CL-Wf1.title" = "정확도를 높이기 위해 슬라이더 옆에 백분율을 표시합니다.";
@@ -320,7 +320,7 @@
 "r76-Zc-x09.title" = "하드웨어 및 소프트웨어 밝기 조절 통합";
 
 /* Class = "NSTextFieldCell"; title = "Enable Apple keyboard native key access"; ObjectID = "RBj-pU-aen"; */
-"RBj-pU-aen.title" = "Enable Apple keyboard native key access";
+"RBj-pU-aen.title" = "Apple 키보드의 기본 키 접근 활성화";
 
 /* Class = "NSMenuItem"; title = "Normal"; ObjectID = "Riq-uM-bTs"; */
 "Riq-uM-bTs.title" = "보통";
@@ -338,7 +338,7 @@
 "UBq-Od-SIB.title" = "고급 설정 표시";
 
 /* Class = "NSTextFieldCell"; title = "Works if an audio device is selected with no native volume control."; ObjectID = "uF5-a9-Ngz"; */
-"uF5-a9-Ngz.title" = "기본 볼륨 컨트롤 없이 오디오 장치를 선택한 경우 동작합니다.";
+"uF5-a9-Ngz.title" = "기본 음량 컨트롤 없이 오디오 장치를 선택한 경우 동작합니다.";
 
 /* Class = "NSButtonCell"; title = "Enable keyboard control for display"; ObjectID = "UqR-WE-jHl"; */
 "UqR-WE-jHl.title" = "디스플레이 키보드 제어 활성화";
@@ -368,7 +368,7 @@
 "wjv-tq-iUx.title" = "조도 센서로 인해 변경되었거나 Touch Bar, 제어 센터, 시스템 환경설정을 사용하여 변경한 사항은 모든 디스플레이에 적용됩니다.";
 
 /* Class = "NSMenuItem"; title = "Change volume for all screens"; ObjectID = "Xih-P5-NyM"; */
-"Xih-P5-NyM.title" = "모든 화면의 볼륨 변경";
+"Xih-P5-NyM.title" = "모든 화면의 음량 변경";
 
 /* Class = "NSTextFieldCell"; title = "Update settings from the display. May not work with some hardware."; ObjectID = "xjq-hs-wWB"; */
 "xjq-hs-wWB.title" = "디스플레이에서 설정을 업데이트합니다. 일부 하드웨어에서는 동작하지 않을 수 있습니다.";
@@ -398,7 +398,7 @@
 "Ytd-mg-N5E.title" = "마우스 포인터 위치에 따라 다름";
 
 /* Class = "NSTextFieldCell"; title = "Volume up"; ObjectID = "Z3w-eR-qDF"; */
-"Z3w-eR-qDF.title" = "Volume up";
+"Z3w-eR-qDF.title" = "음량 높이기";
 
 /* Class = "NSButtonCell"; title = "Use hardware DDC control"; ObjectID = "ZdU-gV-V05"; */
 "ZdU-gV-V05.title" = "하드웨어 DDC 제어 사용";

@@ -2,7 +2,7 @@
 "About" = "정보";
 
 /* Shown in the alert dialog */
-"An other app seems to change the brightness or colors which causes issues.\n\nTo solve this, you need to quit the other app or disable gamma control for your displays in MonitorControl!" = "An other app seems to change the brightness or colors which causes issues.\n\nTo solve this, you need to quit the other app or disable gamma control for your displays in MonitorControl!";
+"An other app seems to change the brightness or colors which causes issues.\n\nTo solve this, you need to quit the other app or disable gamma control for your displays in MonitorControl!" = "다른 앱이 밝기 또는 색상을 변경하여 문제를 일으키는 것 같습니다.\n\n이 문제를 해결하려면 다른 앱을 종료하거나 MonitorControl에서 디스플레이에 대한 감마 제어를 비활성화해야 합니다!";
 
 /* Shown in the main prefs window */
 "App menu" = "앱 메뉴";
@@ -56,7 +56,7 @@
 "Hardware (DDC)" = "하드웨어 (DDC)";
 
 /* Shown in the alert dialog */
-"I'll quit the other app" = "I'll quit the other app";
+"I'll quit the other app" = "다른 앱을 종료합니다.";
 
 /* Shown in the alert dialog */
 "Incompatible previous version" = "호환되지 않는 이전 버전";
@@ -65,7 +65,7 @@
 "Increase" = "증가";
 
 /* Shown in the alert dialog */
-"Is f.lux or similar running?" = "Is f.lux or similar running?";
+"Is f.lux or similar running?" = "f.lux 또는 이와 유사한 기능이 실행되고 있습니까?";
 
 /* Shown in the main prefs window */
 "Keyboard" = "키보드";
@@ -83,10 +83,10 @@
 "Other Display" = "그 외 디스플레이";
 
 /* Shown in the alert dialog */
-"Preferences for an incompatible previous app version detected. Default preferences are reloaded." = "호환되지 않는 이전 앱 버전에 대한 기본 설정이 감지되었습니다. 기본 환경 설정을 다시 불러옵니다.";
+"Preferences for an incompatible previous app version detected. Default preferences are reloaded." = "호환되지 않는 이전 앱 버전에 대한 기본 설정이 감지되었습니다. 기본 환경설정을 다시 불러옵니다.";
 
 /* Shown in menu */
-"Preferences…" = "환경 설정…";
+"Preferences…" = "환경설정…";
 
 /* Shown in menu */
 "Quit" = "종료";
@@ -143,10 +143,10 @@
 "Virtual Display" = "가상 디스플레이";
 
 /* Shown in menu */
-"Volume" = "볼륨";
+"Volume" = "음량";
 
 /* Shown in the alert dialog */
 "Yes" = "예";
 
 /* Shown in the alert dialog */
-"You need to enable MonitorControl in System Preferences > Security and Privacy > Accessibility for the keyboard shortcuts to work" = "단축키가 동작하기 위해서는 시스템 환경설정 > 보안 및 개인 정보 보호 > 손쉬운 사용에서 MonitorControl 항목을 체크해야 합니다.";
+"You need to enable MonitorControl in System Preferences > Security and Privacy > Accessibility for the keyboard shortcuts to work" = "단축키가 동작하기 위해서는 시스템 환경설정 > 개인정보 보호 및 보안 > 손쉬운 사용에서 MonitorControl을 활성화해야 합니다.";
