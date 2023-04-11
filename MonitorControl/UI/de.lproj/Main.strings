@@ -218,7 +218,7 @@
 "K6A-4z-1aQ.title" = "Auch für Apple und eingebaute Monitore aktivieren";
 
 /* Class = "NSTextFieldCell"; title = "MonitorControl needs access to \"accessibility\" to use macOS native keys to control your display.\nYou can enable it by adding MonitorControl in System Preferences > Security and Privacy > Accessibility."; ObjectID = "kBJ-Zf-1k2"; */
-"kBJ-Zf-1k2.title" = "MonitorControl benötigt Zugriff auf \"Bedienungshilfen\", um die Tasten deines Macs zur Steuerung deines Bildschirms zu verwenden.\nDu kannst die Steuerung akivieren, indem du MonitorControl in Systemeinstellungen > Sicherheit und Datenschutz > Bedienungshilfen hinzufügst.";
+"kBJ-Zf-1k2.title" = "MonitorControl benötigt Zugriff auf \"Bedienungshilfen\", um die Tasten deines Macs zur Steuerung deines Bildschirms zu verwenden.\nDu kannst die Steuerung akivieren, indem du MonitorControl in Systemeinstellungen > Datenschutz und Sicherheit > Bedienungshilfen hinzufügst.";
 
 /* Class = "NSTextFieldCell"; title = "Screen to control:"; ObjectID = "Kfj-WK-aSL"; */
 "Kfj-WK-aSL.title" = "Monitor für Steuerung:";
