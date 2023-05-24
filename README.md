@@ -70,7 +70,7 @@ brew install MonitorControl
 1. [Download the app](https://github.com/MonitorControl/MonitorControl/releases)
 2. Copy the MonitorControl app file from the .DMG to your Applications folder
 3. Click on the `MonitorControl` app file
-4. Add the app to `Accessibility` under `System Preferences` » `Security & Privacy` » `Privacy` as prompted (this is required only if you wish to use the native Apple keyboard brightness and media keys - if this is not the case, you can safely skip this step).
+4. Add the app to `Accessibility` under `System Preferences` » `Privacy & Security` » `Privacy` as prompted (this is required only if you wish to use the native Apple keyboard brightness and media keys - if this is not the case, you can safely skip this step).
 5. Use your keyboard or the sliders in the app menu (a brightness symbol in the macOS menubar as shown on the screenshot above) to control your displays.
 6. Open `Preferences...` for customization options (enable `Show advanced settings` for even more options).
 7. You can set up custom keyboard shortcuts under the `Keyboard` in Preferences (the app uses Apple media keys by default).
