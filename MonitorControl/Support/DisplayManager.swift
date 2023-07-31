@@ -312,10 +312,10 @@ class DisplayManager {
         for otherDisplay in self.getOtherDisplays() where otherDisplay.identifier == serviceMatch.displayID && serviceMatch.service != nil {
           otherDisplay.arm64avService = serviceMatch.service
           os_log("Display service match successful for display %{public}@", type: .info, String(serviceMatch.displayID))
-          if serviceMatch.isDiscouraged {
+          if serviceMatch.discouraged {
             os_log("Display %{public}@ is flagged as discouraged by Arm64DDC.", type: .info, String(serviceMatch.displayID))
             otherDisplay.isDiscouraged = true
-          } else if serviceMatch.isDummy {
+          } else if serviceMatch.dummy {
             os_log("Display %{public}@ is flagged as dummy by Arm64DDC.", type: .info, String(serviceMatch.displayID))
             otherDisplay.isDiscouraged = true
             otherDisplay.isDummy = true

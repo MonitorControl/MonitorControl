@@ -431,9 +431,9 @@ class OtherDisplay: Display {
       }
       DisplayManager.shared.globalDDCQueue.sync {
         if let unwrappedDelay = delay {
-          values = Arm64DDC.read(service: self.arm64avService, command: controlCode, tries: UInt8(min(tries, 255)), minReplyDelay: UInt32(unwrappedDelay / 1000))
+          values = Arm64DDC.read(service: self.arm64avService, command: controlCode, readSleepTime: UInt32(unwrappedDelay / 1000), numOfRetryAttemps: UInt8(min(tries, 255)))
         } else {
-          values = Arm64DDC.read(service: self.arm64avService, command: controlCode, tries: UInt8(min(tries, 255)))
+          values = Arm64DDC.read(service: self.arm64avService, command: controlCode, numOfRetryAttemps: UInt8(min(tries, 255)))
         }
       }
     } else {
