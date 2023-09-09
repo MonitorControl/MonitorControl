@@ -37,22 +37,22 @@ class KeyboardShortcutsManager {
       self.mute()
     }
     KeyboardShortcuts.onKeyUp(for: .brightnessUp) { [self] in
-      disengage()
+      self.disengage()
     }
     KeyboardShortcuts.onKeyUp(for: .brightnessDown) { [self] in
-      disengage()
+      self.disengage()
     }
     KeyboardShortcuts.onKeyUp(for: .contrastUp) { [self] in
-      disengage()
+      self.disengage()
     }
     KeyboardShortcuts.onKeyUp(for: .contrastDown) { [self] in
-      disengage()
+      self.disengage()
     }
     KeyboardShortcuts.onKeyUp(for: .volumeUp) { [self] in
-      disengage()
+      self.disengage()
     }
     KeyboardShortcuts.onKeyUp(for: .volumeDown) { [self] in
-      disengage()
+      self.disengage()
     }
   }
 

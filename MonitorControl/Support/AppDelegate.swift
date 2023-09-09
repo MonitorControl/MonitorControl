@@ -41,7 +41,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         displaysPrefsVc!,
         aboutPrefsVc!,
       ],
-      style: preferencePaneStyle,
+      style: self.preferencePaneStyle,
       animated: true
     )
   }()
