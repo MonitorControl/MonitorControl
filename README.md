@@ -50,7 +50,6 @@ brew install MonitorControl
 
 ## Major features
 
-- Now updated with full DDC support for M2 Pro/Max/Ultra thanks to the improved DDC library taken directly from [BetterDisplay](https://betterdisplay.pro/)!
 - Control your display's brightness, volume and contrast!
 - Shows native OSD for brightness and volume.
 - Supports multiple protocols to adjust brightness: DDC for external displays (brightness, contrast, volume), native Apple protocol for Apple and built-in displays, Gamma table control for software dimming, shade control for AirPlay, Sidecar and Display Link devices and other virtual screens.
@@ -99,7 +98,7 @@ _* With some limitations - full functionality available on macOS 11 Big Sur or n
 - Most modern LCD displays from all major manufacturers supported implemented DDC/CI protocol via USB-C, DisplayPort, HDMI, DVI or VGA to allow for hardware backlight and volume control.
 - Apple displays and built-in displays are supported using native protocols.
 - LCD and LED Televisions usually do not implement DDC, these are supported using software alternatives to dim the image.
-- DisplayLink, Airplay, Sidecar and [BetterDisplay](https://betterdisplay.pro/) or other virtual screens are supported via shade (overlay) control.
+- DisplayLink, Airplay, Sidecar and other virtual screens are supported via shade (overlay) control.
 
 Notable exceptions for hardware control compatibility:
 
