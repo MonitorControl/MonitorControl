@@ -3,7 +3,7 @@
 <div>
 <h2>MonitorControl - for Apple Silicon and Intel</h2>
 <p>Controls your external display brightness and volume and shows native OSD.
-Use menulet sliders or the keyboard, including native Apple keys!</p>
+Use menubar extra sliders or the keyboard, including native Apple keys!</p>
 <a href="https://github.com/MonitorControl/MonitorControl/releases"><img src=".github/macos_badge_noborder.png" width="175" alt="Download for macOS"/></a>
 </div>
 
@@ -52,18 +52,16 @@ brew install MonitorControl
 
 - Control your display's brightness, volume and contrast!
 - Shows native OSD for brightness and volume.
-- Supports multiple protocols to adjust brightness: DDC for external displays (brightness, contrast, volume), native Apple protocol for Apple and built-in displays, Gamma table control for software adjustment (recommended for OLED), shade control for AirPlay, Sidecar and Display Link devices.
+- Supports multiple protocols to adjust brightness: DDC for external displays (brightness, contrast, volume), native Apple protocol for Apple and built-in displays, Gamma table control for software dimming, shade control for AirPlay, Sidecar and Display Link devices and other virtual screens.
 - Supports smooth brightness transitions.
 - Seamlessly combined hardware and software dimming extends dimming beyond the minimum brightness available on your display.
 - Synchronize brightness from built-in and Apple screens - replicate Ambient light sensor and touch bar induced changes to a non-Apple external display!
 - Sync up all your displays using a single slider or keyboard shortcuts.
-- Allows dimming to full black (advanced feature).
+- Allows dimming to full black.
 - Support for custom keyboard shortcuts as well as standard brightness and media keys on Apple keyboards.
 - Dozens of customization options to tweak the inner workings of the app to suit your hardware and needs (don't forget to enable `Show advanced settings` in app Preferences).
-- Modern, stylish and highly customizable menulet reflecting the design of Control Center introduced in Big Sur.
-- Simple, unobtrusive UI to blend in to the general aesthetics of macOS (even the menu icon can be hidden).
-- Supports automatic updates for a hassle-free experience.
-- **The best app of its kind, completely FREE ([donations welcome](https://opencollective.com/monitorcontrol)) with the source code transparently available!**
+- Simple, unobtrusive UI to blend in to the general aesthetics of macOS.
+- **One of the best app of its kind, completely FREE ([donations welcome](https://opencollective.com/monitorcontrol)) with the source code transparently available!**
 
 ## How to install and use the app
 
@@ -97,20 +95,21 @@ _* With some limitations - full functionality available on macOS 11 Big Sur or n
 
 ## Supported displays
 
-- Most modern LCD displays from all major manufacturers supported implemented DDC/CI protocol via DisplayPort, HDMI, USB-C or VGA to allow for hardware backlight control.
-- Apple (and LG-Apple) displays and built-in displays are supported using native protocol.
-- LCD and LED Televisions usually do not implement DDC, these are supported using software alternatives to dim the image (some higher-end sets are able to translate this into hardware backlight dimming).
-- OLED or mini/micro-LED displays and televisions are fully supported using gamma table manipulation (this is a no-compromise solution for this class of displays).
-- DisplayLink, Airplay and Sidecar are supported using shade (dark overlay) control.
-- The app is compatible with [BetterDummy](https://github.com/waydabber/BetterDummy) mirrored sets.
+- Most modern LCD displays from all major manufacturers supported implemented DDC/CI protocol via USB-C, DisplayPort, HDMI, DVI or VGA to allow for hardware backlight and volume control.
+- Apple displays and built-in displays are supported using native protocols.
+- LCD and LED Televisions usually do not implement DDC, these are supported using software alternatives to dim the image.
+- DisplayLink, Airplay, Sidecar and other virtual screens are supported via shade (overlay) control.
 
 Notable exceptions for hardware control compatibility:
 
+- DDC control using the built-in HDMI port of the 2018 Intel Mac mini, the built-in HDMI port of all M1 Macs (MacBook Pro 14" and 16", Mac Mini, Mac Studio) and the built-in HDMI port of the entry level M2 Mac mini are not supported. Use USB-C instead or get [BetterDisplay](https://betterdisplay.pro) for full DDC control over HDMI with these Macs as well for free. Software-only dimming is still available for these connections.
 - Some displays (notably EIZO) use MCCS over USB or an entirely custom protocol for control. These displays are supported with software dimming only.
-- The HDMI port of the 2018 Intel Mac mini and 2020 M1 Mac mini prohibit DDC communication. Software control is still available. We recommend connecting the display via the USB-C port (USB-C to HDMI dongles usually work).
 - DisplayLink docks and dongles do not allow for DDC control on Macs, only software dimming is available for these connections.
 
-Note to f.lux users - please activate `Avoid gamma table manipulation` under `Preferences` » `Displays`! This step is not needed if you use Night Shift.
+Compatibility with 
+
+- f.lux users: please activate `Avoid gamma table manipulation` under `Preferences` » `Displays`! This step is not needed if you use Night Shift.
+- [BetterDisplay](https://betterdisplay.pro/) users: either activate `Avoid gamma table manipulation` in MonitorControl or turn off `Allow color adjustments` in BetterDisplay (under Settings/Displays/Overview). You might want to disable native keyboard control either in MonitorControl or BetterDisplay, depending on which app you want to use for brightness control and dimming.
 
 ## How to help
 
