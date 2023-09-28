@@ -157,6 +157,9 @@
 		AAB2F643273ED0E9004AB5A4 /* License.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = License.txt; sourceTree = "<group>"; };
 		AACE5E2227050C63006C2A48 /* NSNotification+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSNotification+Extension.swift"; sourceTree = "<group>"; };
 		AADB625926BC196900DFFAA5 /* DisplayServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DisplayServices.framework; path = /System/Library/PrivateFrameworks/DisplayServices.framework; sourceTree = "<absolute>"; };
+		B7FA437E2AC5857A00A94C01 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Main.strings; sourceTree = "<group>"; };
+		B7FA437F2AC5857A00A94C01 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InternetAccessPolicy.strings; sourceTree = "<group>"; };
+		B7FA43802AC5857A00A94C01 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F01B0682228221B6008E64DB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F01B0685228221B6008E64DB /* Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
 		F01B0686228221B6008E64DB /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -452,6 +455,7 @@
 				cs,
 				pl,
 				ru,
+				ja,
 			);
 			mainGroup = 56754EA21D9A4016007BCDC5;
 			packageReferences = (
@@ -656,6 +660,7 @@
 				AA90101E27C56A0E00CC1DF7 /* cs */,
 				AAA4BEAA2825662C004781C3 /* pl */,
 				2FBCCED52853930200C06A13 /* ru */,
+				B7FA437E2AC5857A00A94C01 /* ja */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -678,6 +683,7 @@
 				AA90101F27C56A0E00CC1DF7 /* cs */,
 				AAA4BEAB2825662C004781C3 /* pl */,
 				2FBCCED62853930200C06A13 /* ru */,
+				B7FA437F2AC5857A00A94C01 /* ja */,
 			);
 			name = InternetAccessPolicy.strings;
 			sourceTree = "<group>";
@@ -700,6 +706,7 @@
 				AA90102027C56A0E00CC1DF7 /* cs */,
 				AAA4BEAC2825662C004781C3 /* pl */,
 				2FBCCED72853930200C06A13 /* ru */,
+				B7FA43802AC5857A00A94C01 /* ja */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
