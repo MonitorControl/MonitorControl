@@ -1,0 +1,152 @@
+/* Shown in the main prefs window */
+"About" = "アプリについて";
+
+/* Shown in the alert dialog */
+"An other app seems to change the brightness or colors which causes issues.\n\nTo solve this, you need to quit the other app or disable gamma control for your displays in MonitorControl!" = "他のアプリが明るさや色を変更して問題を引き起こしているようです。\n\nこれを解決するには、他のアプリを終了するか、MonitorControlでディスプレイのガンマ制御を無効にする必要があります！";
+
+/* Shown in the main prefs window */
+"App menu" = "アプリメニュー";
+
+/* Shown in the alert dialog */
+"Are you sure you want to enable a longer delay? Doing so may freeze your system and require a restart. Start at login will be disabled as a safety measure." = "より長い遅延を有効にしますか？場合によってはシステムがフリーズし、再起動が必要になる場合があります。安全対策として、ログイン時の起動は無効になります。";
+
+/* Shown in the alert dialog */
+"Are you sure you want to reset all preferences?" = "すべての設定をリセットしてよろしいですか？";
+
+/* Shown in menu */
+"Brightness" = "輝度";
+
+/* Build */
+"Build" = "ビルド";
+
+/* Shown in the Display Preferences */
+"Built-in Display" = "内蔵ディスプレイ";
+
+/* Shown in menu */
+"Check for updates…" = "アップデートを確認する…";
+
+/* Shown in menu */
+"Contrast" = "コントラスト";
+
+/* Version */
+"Copyright Ⓒ MonitorControl, " = "Copyright Ⓒ MonitorControl, ";
+
+/* Shown in record shortcut box */
+"Decrease" = "下げる";
+
+/* Shown in the alert dialog */
+"Disable gamma control for my displays" = "全てののディスプレイでガンマ操作を無効にします。";
+
+/* Shown in the main prefs window */
+"Displays" = "ディスプレイ";
+
+/* Shown in the alert dialog */
+"Enable Longer Delay?" = "長い遅延を有効にしますか？";
+
+/* Shown in the Display Preferences */
+"External Display" = "外部ディスプレイ";
+
+/* Shown in the main prefs window */
+"General" = "一般";
+
+/* Shown in the Display Preferences */
+"Hardware (Apple)" = "ハードウェア (Apple)";
+
+/* Shown in the Display Preferences */
+"Hardware (DDC)" = "ハードウェア (DDC)";
+
+/* Shown in the alert dialog */
+"I'll quit the other app" = "他のアプリを終了します";
+
+/* Shown in the alert dialog */
+"Incompatible previous version" = "互換性のない以前のバージョン";
+
+/* Shown in record shortcut box */
+"Increase" = "上げる";
+
+/* Shown in the alert dialog */
+"Is f.lux or similar running?" = "f.luxなどを実行中ではありませんか？";
+
+/* Shown in the main prefs window */
+"Keyboard" = "キーボード";
+
+/* Shown in record shortcut box */
+"Mute" = "ミュート";
+
+/* Shown in the alert dialog */
+"No" = "いいえ";
+
+/* Shown in the Display Preferences */
+"No Control" = "コントロールなし";
+
+/* Shown in the Display Preferences */
+"Other Display" = "外部ディスプレイ";
+
+/* Shown in the alert dialog */
+"Preferences for an incompatible previous app version detected. Default preferences are reloaded." = "互換性のない以前のアプリ バージョンの設定が検出されました。デフォルトの環境設定が再ロードされます。";
+
+/* Shown in menu */
+"Preferences…" = "設定を開く…";
+
+/* Shown in menu */
+"Quit" = "終了";
+
+/* Shown in the alert dialog */
+"Reset Preferences?" = "設定をリセットしますか？";
+
+/* Shown in the alert dialog */
+"Safe Mode Activated" = "セーフモードが有効になりました";
+
+/* Shown in the alert dialog */
+"Shift was pressed during launch. MonitorControl started in safe mode. Default preferences are reloaded, DDC read is blocked." = "起動中にShiftキーが押されたため、MonitorControlはセーフモードで開始されました。デフォルトの設定が再びロードされ、DDCの読み取りはブロックされます。";
+
+/* Shown in the alert dialog */
+"Shortcuts not available" = "ショートカットは利用できません";
+
+/* Shown in the Display Preferences */
+"Software (gamma)" = "ソフトウェア (ガンマ)";
+
+/* Shown in the Display Preferences */
+"Software (gamma, forced)" = "ソフトウェア (ガンマ, 強制)";
+
+/* Shown in the Display Preferences */
+"Software (shade)" = "ソフトウェア (シェード)";
+
+/* Shown in the Display Preferences */
+"Software (shade, forced)" = "ソフトウェア (シェード, 強制)";
+
+/* Shown in the Display Preferences */
+"This display allows for software brightness control via gamma table manipulation or shade as it does not support hardware control. Reasons for this might be using the HDMI port of a Mac mini (which blocks hardware DDC control) or having a blacklisted display." = "このディスプレイはハードウェア制御をサポートしていないため、ガンマ テーブル操作またはシェードを介してソフトウェアの明るさを制御できます。この理由としては、Mac miniのHDMIポート(ハードウェアDDC 制御がブロックされている) を使用しているか、ブラックリストに登録されているディスプレイが使用されていることが考えられます。";
+
+/* Shown in the Display Preferences */
+"This display has an unspecified control status." = "このディスプレイの制御ステータスは特定されていません。";
+
+/* Shown in the Display Preferences */
+"This display is reported to support hardware DDC control but the current settings allow for software control only." = "このディスプレイはハードウェアDDC制御をサポートしていると報告されていますが、現在の設定ではソフトウェア制御のみが可能です。";
+
+/* Shown in the Display Preferences */
+"This display is reported to support hardware DDC control. If you encounter issues, you can disable hardware DDC control to force software control." = "このディスプレイはハードウェアDDC制御をサポートしていると報告されています。問題が発生した場合は、ハードウェアDDC制御を無効にしてソフトウェア制御を強制することができます。";
+
+/* Shown in the Display Preferences */
+"This display supports native Apple brightness protocol. This allows macOS to control this display without MonitorControl as well." = "このディスプレイは、ネイティブのApple輝度プロトコルをサポートしています。これにより、macOSはMonitorControl なしでもこのディスプレイを制御できるようになります。";
+
+/* Shown in the Display Preferences */
+"This is a virtual display (examples: AirPlay, Sidecar, display connected via a DisplayLink Dock or similar) which does not allow hardware or software gammatable control. Shading is used as a substitute but only in non-mirror scenarios. Mouse cursor will be unaffected and artifacts may appear when entering/leaving full screen mode." = "これは仮想ディスプレイ (例: AirPlay、Sidecar、DisplayLink Dock などを介して接続されたディスプレイ) であり、ハードウェアまたはソフトウェアのガンマテーブル制御を許可しません。代わりにシェーディングが使用されますが、ミラー以外のシナリオでのみ使用されます。マウスカーソルは影響を受けませんが、全画面モードを切り替える際にアーティファクトが表示される場合があります。";
+
+/* Unknown display name */
+"Unknown" = "不明";
+
+/* Version */
+"Version" = "バージョン";
+
+/* Shown in the Display Preferences */
+"Virtual Display" = "仮想ディスプレイ";
+
+/* Shown in menu */
+"Volume" = "ボリューム";
+
+/* Shown in the alert dialog */
+"Yes" = "はい";
+
+/* Shown in the alert dialog */
+"You need to enable MonitorControl in System Preferences > Security and Privacy > Accessibility for the keyboard shortcuts to work" = "キーボードショートカットを機能させるには、システム環境設定 > セキュリティとプライバシー > アクセシビリティ で MonitorControl を有効にする必要があります。";
