@@ -1,0 +1,419 @@
+/* Class = "NSButtonCell"; title = "Sync brightness changes from Built-in and Apple displays"; ObjectID = "0ca-DG-AgB"; */
+"0ca-DG-AgB.title" = "Sincronizar as mudança de brilho entre o monitor interno e o da Apple";
+
+/* Class = "NSMenuItem"; title = "Assume last saved settings are valid (recommended)"; ObjectID = "1in-79-6qm"; */
+"1in-79-6qm.title" = "Considerar que as últimas configurações salvas são válidas (recomendado)";
+
+/* Class = "NSTextFieldCell"; title = "MonitorControl"; ObjectID = "1PJ-14-Bvn"; */
+"1PJ-14-Bvn.title" = "MonitorControl";
+
+/* Class = "NSMenuItem"; title = "Standard keyboard volume and mute keys"; ObjectID = "1sy-Kd-WL5"; */
+"1sy-Kd-WL5.title" = "Teclas de volume e modo silencioso padrão";
+
+/* Class = "NSTextFieldCell"; title = "DDC min"; ObjectID = "1zE-fg-xEm"; */
+"1zE-fg-xEm.title" = "DDC min";
+
+/* Class = "NSTextFieldCell"; title = "Volume down"; ObjectID = "21s-bv-GTK"; */
+"21s-bv-GTK.title" = "Volume down";
+
+/* Class = "NSMenuItem"; title = "Show separate controls for each display in menu"; ObjectID = "3eO-bN-ZRl"; */
+"3eO-bN-ZRl.title" = "Mostrar controlos separados para cada monitor no menu";
+
+/* Class = "NSMenuItem"; title = "Apply last saved values to the display"; ObjectID = "3Jr-bW-YYq"; */
+"3Jr-bW-YYq.title" = "Aplicar últimos valores guardados ao monitor";
+
+/* Class = "NSMenuItem"; title = "Custom keyboard shortcuts"; ObjectID = "4CG-0I-anB"; */
+"4CG-0I-anB.title" = "Atalhos de teclado personalizados";
+
+/* Class = "NSTextFieldCell"; title = "Using window focus might not work properly with full screen apps."; ObjectID = "4dX-o1-xAc"; */
+"4dX-o1-xAc.title" = "Usar o foco da janela pode não funcionar com aplicativos em tela cheia.";
+
+/* Class = "NSTextFieldCell"; title = "Welcome to MonitorControl"; ObjectID = "5J0-BD-top"; */
+"5J0-BD-top.title" = "Welcome to MonitorControl";
+
+/* Class = "NSButtonCell"; title = "Reset Preferences"; ObjectID = "5yT-5F-X5R"; */
+"5yT-5F-X5R.title" = "Redefinir preferências";
+
+/* Class = "NSMenuItem"; title = "Always hide"; ObjectID = "6mo-7S-oOO"; */
+"6mo-7S-oOO.title" = "Esconder sempre";
+
+/* Class = "NSTextFieldCell"; title = "Slider behavior:"; ObjectID = "75n-7M-1mS"; */
+"75n-7M-1mS.title" = "Comportamento do controlo em modo deslizante:";
+
+/* Class = "NSButtonCell"; title = "Show slider tick marks"; ObjectID = "7zf-m1-gJO"; */
+"7zf-m1-gJO.title" = "Mostrar marcas de seleção do controlo deslizante";
+
+/* Class = "NSTextFieldCell"; title = "Slider knob will snap to 0%, 25%, 50%, 75% and 100% when in proximity making setting these values easier. Disable for finer control."; ObjectID = "8Gx-Ya-zhp"; */
+"8Gx-Ya-zhp.title" = "O botão deslizante vai ajustar-se em 0%, 25%, 50%, 75% e 100% quando estiver próximo, tornando mais fácil definir esses valores. Desativa para um controlo mais preciso.";
+
+/* Class = "NSButtonCell"; title = "Use fine OSD scale for brightness and contrast"; ObjectID = "8Q8-57-xnT"; */
+"8Q8-57-xnT.title" = "Usa escala fina de OSD para brilho e contraste";
+
+/* Class = "NSButtonCell"; title = "Start using MonitorControl"; ObjectID = "8WE-da-OZC"; */
+"8WE-da-OZC.title" = "Começar a usar o MonitorControl";
+
+/* Class = "NSButtonCell"; title = "Special thanks to our contributors!"; ObjectID = "95V-M4-2l5"; */
+"95V-M4-2l5.title" = "Agradecimento especial para nossos colaboradores!";
+
+/* Class = "NSMenuItem"; title = "Custom keyboard shortcuts"; ObjectID = "9eC-PD-FHl"; */
+"9eC-PD-FHl.title" = "Atalhos de teclado personalizados";
+
+/* Class = "NSMenuItem"; title = "Attempt to read display settings"; ObjectID = "9yL-no-aWa"; */
+"9yL-no-aWa.title" = "Tentar ler as configurações do monitor";
+
+/* Class = "NSTextFieldCell"; title = "Show tick marks at 0%, 25%, 50%, 75% and 100% for accuracy."; ObjectID = "A8P-vn-DEJ"; */
+"A8P-vn-DEJ.title" = "Mostrar marcas da escala em 0%, 25%, 50%, 75% e 100% para precisão.";
+
+/* Class = "NSTextFieldCell"; title = "Use brightness, volume and other settings from last time or use defaults. Values will be applied to the display upon first change by the user."; ObjectID = "an7-Aj-3fZ"; */
+"an7-Aj-3fZ.title" = "Usar brilho, volume e outras configurações anteriores ou usar padrão. Valores serão aplicados para o primeiro monitor alterado pelo usuário.";
+
+/* Class = "NSMenuItem"; title = "Use audio device name to determine which display to control"; ObjectID = "AqF-uD-KCY"; */
+"AqF-uD-KCY.title" = "Usar nome do dispositivo de áudio para determinar que monitor controlar";
+
+/* Class = "NSTextFieldCell"; title = "Start at Login?"; ObjectID = "bA1-GF-Y2n"; */
+"bA1-GF-Y2n.title" = "Inicializar no login?";
+
+/* Class = "NSMenuItem"; title = "Show sliders only for the display currently showing the menu"; ObjectID = "bbf-sS-uGv"; */
+"bbf-sS-uGv.title" = "Mostrar os controlos deslizantes apenas para o monitor apresentado no menu";
+
+/* Class = "NSTextFieldCell"; title = "Brightness:"; ObjectID = "Bhb-6l-uPQ"; */
+"Bhb-6l-uPQ.title" = "Brilho:";
+
+/* Class = "NSTextFieldCell"; title = "(Software->DDC)"; ObjectID = "Bid-UL-blc"; */
+"Bid-UL-blc.title" = "(Software->DDC)";
+
+/* Class = "NSTextFieldCell"; title = "For hardware (DDC) controlled displays only. Results may vary."; ObjectID = "bIe-6O-xEH"; */
+"bIe-6O-xEH.title" = "Apenas para monitores controlados por hardware (DDC). Resultados podem variar.";
+
+/* Class = "NSButtonCell"; title = "Disable macOS volume OSD"; ObjectID = "bkM-Px-U3b"; */
+"bkM-Px-U3b.title" = "Desativar o volume OSD do macOS";
+
+/* Class = "NSTextFieldCell"; title = "OSD scale:"; ObjectID = "bP4-GJ-vhJ"; */
+"bP4-GJ-vhJ.title" = "Escala OSD:";
+
+/* Class = "NSTextFieldCell"; title = "OSD scale:"; ObjectID = "Bqc-s3-C0w"; */
+"Bqc-s3-C0w.title" = "Escala OSD:";
+
+/* Class = "NSButtonCell"; title = "Reset settings"; ObjectID = "BYS-7Y-bRz"; */
+"BYS-7Y-bRz.title" = "Redefinir as configurações";
+
+/* Class = "NSButtonCell"; title = "Enable Mute DDC command"; ObjectID = "bZq-0d-lJa"; */
+"bZq-0d-lJa.title" = "Habilitar o comando Silencioso DDC";
+
+/* Class = "NSButtonCell"; title = "Show volume slider in menu"; ObjectID = "c9D-MB-lma"; */
+"c9D-MB-lma.title" = "Mostrar controlo deslizante de volume no menu";
+
+/* Class = "NSMenuItem"; title = "Custom"; ObjectID = "Cle-DD-vR7"; */
+"Cle-DD-vR7.title" = "Personalizado";
+
+/* Class = "NSTextFieldCell"; title = "Upon startup or wake:"; ObjectID = "cNt-Cq-vK4"; */
+"cNt-Cq-vK4.title" = "Na inicialização do computador:";
+
+/* Class = "NSTextFieldCell"; title = "⚠️ Warning! Changing some of these settings may cause system freezes or unexpected behavior!"; ObjectID = "Cz1-Mh-llk"; */
+"Cz1-Mh-llk.title" = "⚠️ Aviso! Alterar algumas destas configurações pode causar congelamentos do sistema ou comportamentos inesperados!";
+
+/* Class = "NSTextFieldCell"; title = "Alternative keys are the F14/F15 (Scroll Lock and Pause on PC keyboards, brightness keys on some Logitech keyboards)."; ObjectID = "D4H-hU-FLn"; */
+"D4H-hU-FLn.title" = "As teclas alternativas são F14 / F15 (Scroll Lock e Pause em teclados de PC, teclas de brilho em alguns teclados Logitech).";
+
+/* Class = "NSTextFieldCell"; title = "VCP list"; ObjectID = "D9t-vT-gNJ"; */
+"D9t-vT-gNJ.title" = "Lista VCP";
+
+/* Class = "NSTextFieldCell"; title = "You can override audio device name under Displays (advanced) if needed."; ObjectID = "Dha-Tm-cDM"; */
+"Dha-Tm-cDM.title" = "Podes substituir o nome do dispositivo de áudio em Monitores (avançado), se necessário.";
+
+/* Class = "NSTextFieldCell"; title = "You can disable smooth transitions for a more direct, immediate control."; ObjectID = "ENt-mP-0yH"; */
+"ENt-mP-0yH.title" = "Podes desativar as transições suaves para um controlo mais direto e imediato.";
+
+/* Class = "NSMenuItem"; title = "Minimal"; ObjectID = "Eq3-z9-yIo"; */
+"Eq3-z9-yIo.title" = "Mínimo";
+
+/* Class = "NSTextFieldCell"; title = "Scale mapping curve"; ObjectID = "Eui-5S-JR6"; */
+"Eui-5S-JR6.title" = "Curva de mapeamento de escala";
+
+/* Class = "NSTextFieldCell"; title = "Mute:"; ObjectID = "EvN-FT-vdZ"; */
+"EvN-FT-vdZ.title" = "Silencioso:";
+
+/* Class = "NSTextFieldCell"; title = "Normally keyboard controls change one OSD chiclet worth of value and Shift+Option allows fine control. This makes fine control default."; ObjectID = "f6J-Ui-uMB"; */
+"f6J-Ui-uMB.title" = "Normalmente, os controlos do teclado mudam uma faixa OSD de valor e Shift + Option permite um controlo preciso. Isso torna padrão o controle fino.";
+
+/* Class = "NSButtonCell"; title = "Reset Name"; ObjectID = "f9g-8s-gdd"; */
+"f9g-8s-gdd.title" = "Redefinir o nome";
+
+/* Class = "NSButtonCell"; title = "Automatically check for updates"; ObjectID = "Faf-9L-TXx"; */
+"Faf-9L-TXx.title" = "Verificar automaticamente se há atualizações";
+
+/* Class = "NSTextFieldCell"; title = "Brightness control:"; ObjectID = "fe9-Ia-t9m"; */
+"fe9-Ia-t9m.title" = "Controlo de Brilho:";
+
+/* Class = "NSTextFieldCell"; title = "Volume:"; ObjectID = "FER-Ri-4UO"; */
+"FER-Ri-4UO.title" = "Volume:";
+
+/* Class = "NSButtonCell"; title = "Allow zero brightness via software or combined dimming"; ObjectID = "FjB-XL-fG5"; */
+"FjB-XL-fG5.title" = "Permitir zero brilho via software";
+
+/* Class = "NSTextFieldCell"; title = "Apple and built-in displays already have a brightness slider in Control Center."; ObjectID = "fmZ-HI-Mdc"; */
+"fmZ-HI-Mdc.title" = "A Apple e os monitores integrados já possuem um controlo deslizante de brilho no Centro de controle.";
+
+/* Class = "NSMenuItem"; title = "None"; ObjectID = "FoA-yh-Yx3"; */
+"FoA-yh-Yx3.title" = "Nenhum";
+
+/* Class = "NSMenuItem"; title = "Show as icons"; ObjectID = "fR3-kq-cps"; */
+"fR3-kq-cps.title" = "Mostrar como ícones";
+
+/* Class = "NSMenuItem"; title = "Show as text"; ObjectID = "fWd-Es-zsy"; */
+"fWd-Es-zsy.title" = "Mostrar como texto";
+
+/* Class = "NSTextFieldCell"; title = "Invert"; ObjectID = "G5A-y3-eZz"; */
+"G5A-y3-eZz.title" = "Inverter";
+
+/* Class = "NSMenuItem"; title = "Use window focus to determine which display to control"; ObjectID = "gTR-FW-FHc"; */
+"gTR-FW-FHc.title" = "Usa o foco da janela para determinar que monitor controlar";
+
+/* Class = "NSTextFieldCell"; title = "Brightness slider for hardware or software controlled displays or TVs."; ObjectID = "gXH-HL-ZOL"; */
+"gXH-HL-ZOL.title" = "Controlo deslizante de brilho para monitores ou TVs controlados por hardware ou software.";
+
+/* Class = "NSTextFieldCell"; title = "Override audio device name:"; ObjectID = "H9X-it-sXs"; */
+"H9X-it-sXs.title" = "Substituir o nome do dispositivo de áudio:";
+
+/* Class = "NSTextFieldCell"; title = "Relaunch the app to access Preferences if the menu option is not accessible. Use the button below to quit the app."; ObjectID = "hF7-fM-aKr"; */
+"hF7-fM-aKr.title" = "Reinicia o aplicativo para acessar as Preferências se a opção do menu não estiver acessível. Usa o botão abaixo para sair da aplicação.";
+
+/* Class = "NSButtonCell"; title = "Get current"; ObjectID = "hkC-vq-IcD"; */
+"hkC-vq-IcD.title" = "Seleciona o atual";
+
+/* Class = "NSMenuItem"; title = "Hide"; ObjectID = "HUT-Qc-kuu"; */
+"HUT-Qc-kuu.title" = "Esconder";
+
+/* Class = "NSTextFieldCell"; title = "Additional controls:"; ObjectID = "i5X-M5-Tf5"; */
+"i5X-M5-Tf5.title" = "Comandos adicionais:";
+
+/* Class = "NSTextFieldCell"; title = "Brightness:"; ObjectID = "IJB-mO-e8I"; */
+"IJB-mO-e8I.title" = "Brilho:";
+
+/* Class = "NSButtonCell"; title = "Enable smooth brightness transitions"; ObjectID = "IK4-u5-qjf"; */
+"IK4-u5-qjf.title" = "Ativar transições suaves de brilho";
+
+/* Class = "NSButtonCell"; title = "Use fine OSD scale for volume"; ObjectID = "J3L-MW-iJL"; */
+"J3L-MW-iJL.title" = "Usa a escala OSD fina para o volume";
+
+/* Class = "NSButtonCell"; title = "Start at Login"; ObjectID = "j72-NF-zsW"; */
+"j72-NF-zsW.title" = "Iniciar ao entrar";
+
+/* Class = "NSTextFieldCell"; title = "Toggle Mute"; ObjectID = "jK7-7w-uib"; */
+"jK7-7w-uib.title" = "Ativar modo Silencioso";
+
+/* Class = "NSMenuItem"; title = "Change for all screens"; ObjectID = "jSj-HB-T2t"; */
+"jSj-HB-T2t.title" = "Alterar para todos os monitores";
+
+/* Class = "NSButtonCell"; title = "Check for updates"; ObjectID = "jVH-oc-rUi"; */
+"jVH-oc-rUi.title" = "Verificar atualizações";
+
+/* Class = "NSButtonCell"; title = "Start MonitorControl at Login"; ObjectID = "JWJ-OY-VtE"; */
+"JWJ-OY-VtE.title" = "Começar MonitorControl ao inicializar computador";
+
+/* Class = "NSTextFieldCell"; title = "Note: you can press Shift during startup for 'Safe mode' to restore defaults and avoid reading or setting anything."; ObjectID = "Jx2-gO-nq9"; */
+"Jx2-gO-nq9.title" = "Nota: podes pressionar Shift durante a inicialização para 'Modo de segurança' para restaurar os padrões e evitar carregar as configurações.";
+
+/* Class = "NSButtonCell"; title = "Enable for Apple branded and built-in displays as well"; ObjectID = "K6A-4z-1aQ"; */
+"K6A-4z-1aQ.title" = "Habilita para monitores integrados e da Apple";
+
+/* Class = "NSTextFieldCell"; title = "MonitorControl needs access to \"accessibility\" to use macOS native keys to control your display.\nYou can enable it by adding MonitorControl in System Preferences > Security and Privacy > Accessibility."; ObjectID = "kBJ-Zf-1k2"; */
+"kBJ-Zf-1k2.title" = "MonitorControl precisa de aceder à \"acessibilidade\" para usar as teclas nativas do macOS no controlo do teu monitor.\nPodes ativar adicionando o MonitorControl em Preferências do Sistema > Segurança e Privacidade > Acessibilidade.";
+
+/* Class = "NSTextFieldCell"; title = "Screen to control:"; ObjectID = "Kfj-WK-aSL"; */
+"Kfj-WK-aSL.title" = "Monitor para controlar:";
+
+/* Class = "NSMenuItem"; title = "Depends on mouse pointer position"; ObjectID = "km4-hK-auM"; */
+"km4-hK-auM.title" = "Depende da posição do ponteiro do rato";
+
+/* Class = "NSMenuItem"; title = "Use combined slider for all displays"; ObjectID = "lA0-tv-qRs"; */
+"lA0-tv-qRs.title" = "Usa o controlo deslizante combinado para todos os monitores";
+
+/* Class = "NSTextFieldCell"; title = "Brightness and contrast:"; ObjectID = "LO4-4k-gxY"; */
+"LO4-4k-gxY.title" = "Brilho e contraste:";
+
+/* Class = "NSTextFieldCell"; title = "Display type:"; ObjectID = "lSJ-6w-KJ2"; */
+"lSJ-6w-KJ2.title" = "Tipo do monitor:";
+
+/* Class = "NSTextFieldCell"; title = "Screen to control:"; ObjectID = "ltL-gR-K3Z"; */
+"ltL-gR-K3Z.title" = "Monitor para controlar:";
+
+/* Class = "NSTextFieldCell"; title = "Control your external displays brightness, contrast and volume directly from your Mac, using menulet sliders or the keyboard, including native Apple keys."; ObjectID = "Mh5-1A-apq"; */
+"Mh5-1A-apq.title" = "Controla o brilho, o contraste e o volume dos seus monitores externos diretamente do teu Mac, usando controles deslizantes de menu ou o teclado, incluindo teclas nativas da Apple.";
+
+/* Class = "NSButtonCell"; title = "Enable slider snapping"; ObjectID = "MlU-hl-d46"; */
+"MlU-hl-d46.title" = "Ativar ajuste de controle deslizante";
+
+/* Class = "NSMenuItem"; title = "Always show in the menu bar"; ObjectID = "MM0-Lf-VgF"; */
+"MM0-Lf-VgF.title" = "Mostrar sempre na barra de menu";
+
+/* Class = "NSTextFieldCell"; title = "Contrast:"; ObjectID = "MMk-S2-yJN"; */
+"MMk-S2-yJN.title" = "Contraste:";
+
+/* Class = "NSTextFieldCell"; title = "Volume:"; ObjectID = "mue-fa-8z6"; */
+"mue-fa-8z6.title" = "Volume:";
+
+/* Class = "NSButtonCell"; title = "Show brightness slider in menu"; ObjectID = "MWo-6I-s9L"; */
+"MWo-6I-s9L.title" = "Mostrar o controle deslizante de brilho no menu";
+
+/* Class = "NSButtonCell"; title = "Avoid gamma table manipulation"; ObjectID = "na6-mS-MPi"; */
+"na6-mS-MPi.title" = "Evita a manipulação da tabela gama";
+
+/* Class = "NSTextFieldCell"; title = "Ensure MonitorControl is always running when you need it by launching the app at startup."; ObjectID = "nk6-Gh-Mfs"; */
+"nk6-Gh-Mfs.title" = "Garante que o MonitorControl esteja sempre em execução quando precisares, iniciando a aplicação na inicialização.";
+
+/* Class = "NSTextFieldCell"; title = "Brightness up"; ObjectID = "nty-g6-Sde"; */
+"nty-g6-Sde.title" = "Subir brilho";
+
+/* Class = "NSButtonCell"; title = "Separate scales for combined hardware & software dimming"; ObjectID = "O8o-hI-8eR"; */
+"O8o-hI-8eR.title" = "Escalas separadas para escurecimento combinado de hardware e software";
+
+/* Class = "NSMenuItem"; title = "Disable keyboard"; ObjectID = "oHf-Gh-68c"; */
+"oHf-Gh-68c.title" = "Desativar teclado";
+
+/* Class = "NSTextFieldCell"; title = "Application:"; ObjectID = "okD-DG-pYa"; */
+"okD-DG-pYa.title" = "Aplicação:";
+
+/* Class = "NSMenuItem"; title = "Standard keyboard brightness keys"; ObjectID = "Oke-bW-cb1"; */
+"Oke-bW-cb1.title" = "Teclas de brilho padrão do teclado";
+
+/* Class = "NSTextFieldCell"; title = "count:"; ObjectID = "Orv-yj-Nad"; */
+"Orv-yj-Nad.title" = "contagem:";
+
+/* Class = "NSTextFieldCell"; title = "Use the brightness keys of your Apple keyboard to control brightness. You can hold Control to adjust the built-in display, Control+Command to adjust external displays. Hold Shift+Option for fine control. Control+Option+Command adjusts contrast on DDC compatible displays."; ObjectID = "pa0-Hz-ace"; */
+"pa0-Hz-ace.title" = "Usa as teclas de brilho do teclado Apple para controlar o brilho. Podes premir Control para ajustar a tela embutida, Control + Command para ajustar os monitores externos. Segura Shift + Option para um controlo preciso. Control + Option + Command ajusta o contraste em monitores compatíveis com DDC.";
+
+/* Class = "NSTextFieldCell"; title = "Control method:"; ObjectID = "PaK-1f-DsW"; */
+"PaK-1f-DsW.title" = "Método de controlo:";
+
+/* Class = "NSButtonCell"; title = "Longer delay during DDC read operations"; ObjectID = "pF5-Sw-7BR"; */
+"pF5-Sw-7BR.title" = "Atraso maior durante as operações de leitura DDC";
+
+/* Class = "NSTextFieldCell"; title = "DDC max"; ObjectID = "psF-vX-AFB"; */
+"psF-vX-AFB.title" = "DCC máximo";
+
+/* Class = "NSButtonCell"; title = "Open System Preferences…"; ObjectID = "pVc-wG-Bdh"; */
+"pVc-wG-Bdh.title" = "Abrir as Preferências de Sistema…";
+
+/* Class = "NSTextFieldCell"; title = "Use software dimming after the display reached zero hardware brightness for extended range. Works for DDC controlled displays only."; ObjectID = "PyY-p9-3NP"; */
+"PyY-p9-3NP.title" = "Usa o escurecimento do software depois da tela atingir zero brilho do hardware para uma faixa estendida. Funciona apenas para monitores controlados por DDC."
+
+/* Class = "NSMenuItem"; title = "Both standard and custom shortcuts"; ObjectID = "QDG-SA-mRX"; */
+"QDG-SA-mRX.title" = "Atalhos padrão e personalizados";
+
+/* Class = "NSTextFieldCell"; title = "Brightness down"; ObjectID = "q5a-Ix-Hjs"; */
+"q5a-Ix-Hjs.title" = "Diminuir Brilho";
+
+/* Class = "NSMenuItem"; title = "Both standard and custom shortcuts"; ObjectID = "QDG-SA-mRX"; */
+"QDG-SA-mRX.title" = "Atalhos standard e personalizados";
+
+/* Class = "NSButtonCell"; title = "Quit application"; ObjectID = "qlb-wH-qr4"; */
+"qlb-wH-qr4.title" = "Sair da aplicação";
+
+/* Class = "NSButtonCell"; title = "Show contrast slider in menu"; ObjectID = "qO0-dB-yUs"; */
+"qO0-dB-yUs.title" = "Mostrar controlo deslizante de contraste no menu";
+
+/* Class = "NSTextFieldCell"; title = "Volume control (DDC only):"; ObjectID = "qoh-Gn-f11"; */
+"qoh-Gn-f11.title" = "Controlo de volume (apenas DDC):";
+
+/* Class = "NSTextFieldCell"; title = "Show percentage next to slider for more precision."; ObjectID = "qXy-CL-Wf1"; */
+"qXy-CL-Wf1.title" = "Mostra a percentagem ao lado do controlo deslizante para mais precisão.";
+
+/* Class = "NSButtonCell"; title = "Combine hardware and software dimming"; ObjectID = "r76-Zc-x09"; */
+"r76-Zc-x09.title" = "Combina escurecimento de hardware e software";
+
+/* Class = "NSTextFieldCell"; title = "Enable Apple keyboard native key access"; ObjectID = "RBj-pU-aen"; */
+"RBj-pU-aen.title" = "Habilita o acesso à tecla nativa do teclado Apple";
+
+/* Class = "NSMenuItem"; title = "Normal"; ObjectID = "Riq-uM-bTs"; */
+"Riq-uM-bTs.title" = "Normal";
+
+/* Class = "NSTextFieldCell"; title = "General menu items style:"; ObjectID = "thh-DG-ecH"; */
+"thh-DG-ecH.title" = "Estilo de itens do menu geral:";
+
+/* Class = "NSTextFieldCell"; title = "@the0neyouseek (Guillaume B.)\n@JoniVR (Joni Van Roost)\n@waydabber (István T.)"; ObjectID = "TKd-J8-Iyk"; */
+"TKd-J8-Iyk.title" = "@the0neyouseek (Guillaume B.)\n@JoniVR (Joni Van Roost)\n@waydabber (István T.)";
+
+/* Class = "NSTextFieldCell"; title = "Menu Icon:"; ObjectID = "u6s-Pb-BCG"; */
+"u6s-Pb-BCG.title" = "Ícone do Menu:";
+
+/* Class = "NSButtonCell"; title = "Show advanced settings"; ObjectID = "UBq-Od-SIB"; */
+"UBq-Od-SIB.title" = "Mostrar configurações avançadas";
+
+/* Class = "NSTextFieldCell"; title = "Works if an audio device is selected with no native volume control."; ObjectID = "uF5-a9-Ngz"; */
+"uF5-a9-Ngz.title" = "Funciona se um dispositivo de áudio for selecionado sem controlo de volume nativo.";
+
+/* Class = "NSButtonCell"; title = "Enable keyboard control for display"; ObjectID = "UqR-WE-jHl"; */
+"UqR-WE-jHl.title" = "Habilitar controlo de teclado para exibição";
+
+/* Class = "NSTextFieldCell"; title = "Contrast (DDC):"; ObjectID = "urd-Rh-aiL"; */
+"urd-Rh-aiL.title" = "Contraste (DDC):";
+
+/* Class = "NSButtonCell"; title = "Do not use alternative brightness keys"; ObjectID = "vd2-Lk-neX"; */
+"vd2-Lk-neX.title" = "Não usar teclas de brilho alternativas";
+
+/* Class = "NSMenuItem"; title = "Heavy"; ObjectID = "vik-vN-bJe"; */
+"vik-vN-bJe.title" = "Pesado";
+
+/* Class = "NSTextFieldCell"; title = "Multiple displays:"; ObjectID = "vri-pv-tJ4"; */
+"vri-pv-tJ4.title" = "Múltiplos monitores:";
+
+/* Class = "NSTextFieldCell"; title = "DDC read polling mode:"; ObjectID = "vwm-hY-on5"; */
+"vwm-hY-on5.title" = "Modo de pesquisa de leitura DDC:";
+
+/* Class = "NSTextFieldCell"; title = "General options:"; ObjectID = "W58-ch-j69"; */
+"W58-ch-j69.title" = "Opções gerais:";
+
+/* Class = "NSTextFieldCell"; title = "Useful when a display tends to reset its settings during sleep."; ObjectID = "w8B-x6-sq5"; */
+"w8B-x6-sq5.title" = "Útil quando um monitor tende a redefinir suas configurações ao hibernar.";
+
+/* Class = "NSTextFieldCell"; title = "Changes that are caused by the Ambient light sensor or made using Touch Bar, Control Center, System Preferences will be replicated to all displays."; ObjectID = "wjv-tq-iUx"; */
+"wjv-tq-iUx.title" = "As alterações causadas pelo sensor de luz ambiente ou feitas usando a Barra de toque, Centro de Controle, Preferências do Sistema serão replicadas para todos os monitores.";
+
+/* Class = "NSMenuItem"; title = "Change volume for all screens"; ObjectID = "Xih-P5-NyM"; */
+"Xih-P5-NyM.title" = "Alterar o volume para todos os minitores";
+
+/* Class = "NSTextFieldCell"; title = "Update settings from the display. May not work with some hardware."; ObjectID = "xjq-hs-wWB"; */
+"xjq-hs-wWB.title" = "Atualizar as configurações do monitor. Pode não funcionar com algum hardware.";
+
+/* Class = "NSMenuItem"; title = "Only if at least one slider is present"; ObjectID = "xLa-PN-rsq"; */
+"xLa-PN-rsq.title" = "Apenas se pelo menos um controle deslizante estiver presente";
+
+/* Class = "NSMenuItem"; title = "Both standard and custom shortcuts"; ObjectID = "xQJ-aJ-VhH"; */
+"xQJ-aJ-VhH.title" = "Atalhos padrão e personalizados";
+
+/* Class = "NSTextFieldCell"; title = "Works best with various syncing and 'control all' keyboard settings enabled."; ObjectID = "XU4-Bn-bwH"; */
+"XU4-Bn-bwH.title" = "Funciona melhor com várias configurações de sincronização e 'controle total' do teclado ativadas.";
+
+/* Class = "NSTextFieldCell"; title = "Available"; ObjectID = "yBJ-5d-I7e"; */
+"yBJ-5d-I7e.title" = "Disponível";
+
+/* Class = "NSTextFieldCell"; title = "Full OSD scale will be available for hardware brightness control and after reaching 0 brightness, further software dimming will be used."; ObjectID = "YHZ-VL-QJ3"; */
+"YHZ-VL-QJ3.title" = "A escala OSD completa estará disponível para o controle de brilho do hardware e depois de atingir zero brilho, mais escurecimento do software será usado.";
+
+/* Class = "NSTextFieldCell"; title = "Warning! With this option enabled, you might find yourself in a position when you end up with a blank display. This, combined with disabled keyboard controls can be frustrating."; ObjectID = "yi3-e1-wsL"; */
+"yi3-e1-wsL.title" = "Aviso! Com esta opção ativada, podes ter o monitor com uma tela preta. Isso, combinado com os controles do teclado desativados, pode ser frustrante.";
+
+/* Class = "NSTextFieldCell"; title = "Identifier:"; ObjectID = "YqZ-LS-YvR"; */
+"YqZ-LS-YvR.title" = "Identificador:";
+
+/* Class = "NSMenuItem"; title = "Depends on mouse pointer position"; ObjectID = "Ytd-mg-N5E"; */
+"Ytd-mg-N5E.title" = "Depende da posição do ponteiro do rato";
+
+/* Class = "NSTextFieldCell"; title = "Volume up"; ObjectID = "Z3w-eR-qDF"; */
+"Z3w-eR-qDF.title" = "Subir volume";
+
+/* Class = "NSButtonCell"; title = "Use hardware DDC control"; ObjectID = "ZdU-gV-V05"; */
+"ZdU-gV-V05.title" = "Use o controle de hardware DDC";
+
+/* Class = "NSMenuItem"; title = "Disable keyboard"; ObjectID = "zHa-xo-XPW"; */
+"zHa-xo-XPW.title" = "Desativar teclado";
+
+/* Class = "NSButtonCell"; title = "Donate"; ObjectID = "ZKk-ve-rS4"; */
+"ZKk-ve-rS4.title" = "Doar";
+
+/* Class = "NSButtonCell"; title = "Show percentages"; ObjectID = "ZUu-MR-XwA"; */
+"ZUu-MR-XwA.title" = "Mostrar percentagens";
+
+/* Class = "NSTextFieldCell"; title = "Combined dimming switchover point:"; ObjectID = "zv8-pZ-OPy"; */
+"zv8-pZ-OPy.title" = "Ponto de transição de escurecimento combinado:";
