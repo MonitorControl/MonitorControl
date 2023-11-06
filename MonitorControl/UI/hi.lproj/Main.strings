@@ -1,447 +1,447 @@
 
 /* Class = "NSButtonCell"; title = "Sync brightness changes from Built-in and Apple displays"; ObjectID = "0ca-DG-AgB"; */
-"0ca-DG-AgB.title" = "Sync brightness changes from Built-in and Apple displays";
+"0ca-DG-AgB.title" = "अंतर्निर्मित और ऐपल प्रदर्शनों से चमक परिवर्तनों को सिंक करें";
 
 /* Class = "NSTextFieldCell"; title = "MonitorControl"; ObjectID = "1PJ-14-Bvn"; */
-"1PJ-14-Bvn.title" = "MonitorControl";
+"1PJ-14-Bvn.title" = "मॉनिटर कंट्रोल";
 
 /* Class = "NSMenuItem"; title = "Assume last saved settings are valid (recommended)"; ObjectID = "1in-79-6qm"; */
-"1in-79-6qm.title" = "Assume last saved settings are valid (recommended)";
+"1in-79-6qm.title" = "मान लीजिए कि अंतिम सहेजी गई सेटिंग्स मान्य हैं  (सिफारिश की गई)";
 
 /* Class = "NSMenuItem"; title = "Standard keyboard volume and mute keys"; ObjectID = "1sy-Kd-WL5"; */
-"1sy-Kd-WL5.title" = "Standard keyboard volume and mute keys";
+"1sy-Kd-WL5.title" = "मानक कीबोर्ड मात्रा और मूक कुंजी";
 
 /* Class = "NSTextFieldCell"; title = "DDC min"; ObjectID = "1zE-fg-xEm"; */
-"1zE-fg-xEm.title" = "DDC min";
+"1zE-fg-xEm.title" = "डीडीसी न्यूनतम";
 
 /* Class = "NSTextFieldCell"; title = "Volume down"; ObjectID = "21s-bv-GTK"; */
-"21s-bv-GTK.title" = "Volume down";
+"21s-bv-GTK.title" = "वॉल्यूम कम करें";
 
 /* Class = "NSMenuItem"; title = "Apply last saved values to the display"; ObjectID = "3Jr-bW-YYq"; */
-"3Jr-bW-YYq.title" = "Apply last saved values to the display";
+"3Jr-bW-YYq.title" = "प्रदर्शन पर अंतिम सहेजे गए मानों को लागू करें";
 
 /* Class = "NSBox"; title = "#bc-ignore!"; ObjectID = "3a3-In-jeQ"; */
-"3a3-In-jeQ.title" = "#bc-ignore!";
+"3a3-In-jeQ.title" = "#बीसी-इग्नोर!";
 
 /* Class = "NSMenuItem"; title = "Show separate controls for each display in menu"; ObjectID = "3eO-bN-ZRl"; */
-"3eO-bN-ZRl.title" = "Show separate controls for each display in menu";
+"3eO-bN-ZRl.title" = "सूची में प्रत्येक प्रदर्शन के लिए अलग-अलग नियंत्रण दिखाएँ";
 
 /* Class = "NSButtonCell"; title = "https://monitorcontrol.app"; ObjectID = "42n-Zy-AqF"; Note = "#bc-ignore!"; */
 "42n-Zy-AqF.title" = "https://monitorcontrol.app";
 
 /* Class = "NSMenuItem"; title = "Custom keyboard shortcuts"; ObjectID = "4CG-0I-anB"; */
-"4CG-0I-anB.title" = "Custom keyboard shortcuts";
+"4CG-0I-anB.title" = "अनुकूलित कीबोर्ड शॉर्टकट";
 
 /* Class = "NSTextFieldCell"; title = "Using window focus might not work properly with full screen apps."; ObjectID = "4dX-o1-xAc"; */
-"4dX-o1-xAc.title" = "Using window focus might not work properly with full screen apps.";
+"4dX-o1-xAc.title" = "विंडो फोकस का उपयोग करना पूर्ण स्क्रीन ऐप्स के साथ ठीक से काम नहीं कर सकता है।";
 
 /* Class = "NSBox"; title = "#bc-ignore!"; ObjectID = "4wn-2u-KRo"; */
-"4wn-2u-KRo.title" = "#bc-ignore!";
+"4wn-2u-KRo.title" = "#बीसी-इग्नोर!";
 
 /* Class = "NSTextFieldCell"; title = "Welcome to MonitorControl"; ObjectID = "5J0-BD-top"; */
-"5J0-BD-top.title" = "Welcome to MonitorControl";
+"5J0-BD-top.title" = "मॉनिटर कंट्रोल में आपका स्वागत है";
 
 /* Class = "NSButtonCell"; title = "Reset Preferences"; ObjectID = "5yT-5F-X5R"; */
-"5yT-5F-X5R.title" = "Reset Preferences";
+"5yT-5F-X5R.title" = "वरीयताएँ रीसेट करें";
 
 /* Class = "NSTextFieldCell"; title = "#bc-ignore!"; ObjectID = "6GJ-6Q-gqz"; */
-"6GJ-6Q-gqz.title" = "#bc-ignore!";
+"6GJ-6Q-gqz.title" = "#बीसी-इग्नोर!";
 
 /* Class = "NSMenuItem"; title = "Always hide"; ObjectID = "6mo-7S-oOO"; */
-"6mo-7S-oOO.title" = "Always hide";
+"6mo-7S-oOO.title" = "हमेशा छुपाएँ";
 
 /* Class = "NSTextFieldCell"; title = "Slider behavior:"; ObjectID = "75n-7M-1mS"; */
-"75n-7M-1mS.title" = "Slider behavior:";
+"75n-7M-1mS.title" = "स्लाइडर व्यवहारः";
 
 /* Class = "NSButtonCell"; title = "Show slider tick marks"; ObjectID = "7zf-m1-gJO"; */
-"7zf-m1-gJO.title" = "Show slider tick marks";
+"7zf-m1-gJO.title" = "स्लाइडर टिक चिह्न दिखाएँ";
 
 /* Class = "NSTextFieldCell"; title = "Slider knob will snap to 0%, 25%, 50%, 75% and 100% when in proximity making setting these values easier. Disable for finer control."; ObjectID = "8Gx-Ya-zhp"; */
-"8Gx-Ya-zhp.title" = "Slider knob will snap to 0%, 25%, 50%, 75% and 100% when in proximity making setting these values easier. Disable for finer control.";
+"8Gx-Ya-zhp.title" = "स्लाइडर नॉब 0%, 25%, 50%, 75% और 100% पर स्नैप करेगा जब निकटता में इन मूल्यों को सेट करना आसान बनाता है। सूक्ष्म नियंत्रण के लिए निष्क्रिय करें।";
 
 /* Class = "NSButtonCell"; title = "Use fine OSD scale for brightness and contrast"; ObjectID = "8Q8-57-xnT"; */
-"8Q8-57-xnT.title" = "Use fine OSD scale for brightness and contrast";
+"8Q8-57-xnT.title" = "ब्राइटनेस और कंट्रास्ट के लिए ठीक ओ. एस. डी. स्केल का उपयोग करें";
 
 /* Class = "NSButtonCell"; title = "Start using MonitorControl"; ObjectID = "8WE-da-OZC"; */
-"8WE-da-OZC.title" = "Start using MonitorControl";
+"8WE-da-OZC.title" = "मॉनिटर कंट्रोल का उपयोग शुरू करें";
 
 /* Class = "NSButtonCell"; title = "Special thanks to our contributors!"; ObjectID = "95V-M4-2l5"; */
-"95V-M4-2l5.title" = "Special thanks to our contributors!";
+"95V-M4-2l5.title" = "हमारे योगदानकर्ताओं को विशेष धन्यवाद!";
 
 /* Class = "NSBox"; title = "#bc-ignore!"; ObjectID = "9aX-gm-8TS"; */
-"9aX-gm-8TS.title" = "#bc-ignore!";
+"9aX-gm-8TS.title" = "#बीसी-इग्नोर!";
 
 /* Class = "NSMenuItem"; title = "Custom keyboard shortcuts"; ObjectID = "9eC-PD-FHl"; */
-"9eC-PD-FHl.title" = "Custom keyboard shortcuts";
+"9eC-PD-FHl.title" = "अनुकूलित कीबोर्ड शॉर्टकट";
 
 /* Class = "NSMenuItem"; title = "Attempt to read display settings"; ObjectID = "9yL-no-aWa"; */
-"9yL-no-aWa.title" = "Attempt to read display settings";
+"9yL-no-aWa.title" = "प्रदर्शन विन्यास को पढ़ने का प्रयास करें";
 
 /* Class = "NSTextFieldCell"; title = "Show tick marks at 0%, 25%, 50%, 75% and 100% for accuracy."; ObjectID = "A8P-vn-DEJ"; */
-"A8P-vn-DEJ.title" = "Show tick marks at 0%, 25%, 50%, 75% and 100% for accuracy.";
+"A8P-vn-DEJ.title" = "सटीकता के लिए 0%, 25%, 50%, 75% और 100% पर टिक चिह्न दिखाएं।";
 
 /* Class = "NSMenuItem"; title = "Use audio device name to determine which display to control"; ObjectID = "AqF-uD-KCY"; */
-"AqF-uD-KCY.title" = "Use audio device name to determine which display to control";
+"AqF-uD-KCY.title" = "ऑडियो उपकरण के नाम का उपयोग यह निर्धारित करने के लिए करें कि किस प्रदर्शन को नियंत्रित करना है";
 
 /* Class = "NSButtonCell"; title = "Reset settings"; ObjectID = "BYS-7Y-bRz"; */
-"BYS-7Y-bRz.title" = "Reset settings";
+"BYS-7Y-bRz.title" = "सेटिंग्स रीसेट करें";
 
 /* Class = "NSTextFieldCell"; title = "Brightness:"; ObjectID = "Bhb-6l-uPQ"; */
-"Bhb-6l-uPQ.title" = "Brightness:";
+"Bhb-6l-uPQ.title" = "चमकः";
 
 /* Class = "NSTextFieldCell"; title = "(Software->DDC)"; ObjectID = "Bid-UL-blc"; */
-"Bid-UL-blc.title" = "(Software->DDC)";
+"Bid-UL-blc.title" = "(सॉफ्टवेयर-> डीडीसी)";
 
 /* Class = "NSTextFieldCell"; title = "OSD scale:"; ObjectID = "Bqc-s3-C0w"; */
-"Bqc-s3-C0w.title" = "OSD scale:";
+"Bqc-s3-C0w.title" = "ओ. एस. डी. स्केलः";
 
 /* Class = "NSMenuItem"; title = "Custom"; ObjectID = "Cle-DD-vR7"; */
-"Cle-DD-vR7.title" = "Custom";
+"Cle-DD-vR7.title" = "कस्टम";
 
 /* Class = "NSTextFieldCell"; title = "⚠️ Warning! Changing some of these settings may cause system freezes or unexpected behavior!"; ObjectID = "Cz1-Mh-llk"; */
-"Cz1-Mh-llk.title" = "⚠️ Warning! Changing some of these settings may cause system freezes or unexpected behavior!";
+"Cz1-Mh-llk.title" = "⚠️ चेतावनी! इनमें से कुछ सेटिंग्स को बदलने से सिस्टम जम सकता है या अप्रत्याशित व्यवहार हो सकता है!";
 
 /* Class = "NSTextFieldCell"; title = "Alternative keys are the F14/F15 (Scroll Lock and Pause on PC keyboards, brightness keys on some Logitech keyboards)."; ObjectID = "D4H-hU-FLn"; */
-"D4H-hU-FLn.title" = "Alternative keys are the F14/F15 (Scroll Lock and Pause on PC keyboards, brightness keys on some Logitech keyboards).";
+"D4H-hU-FLn.title" = "वैकल्पिक कुंजी F14/F15 हैं (पीसी कीबोर्ड पर लॉक और ठहराव स्क्रॉल करें, कुछ लॉजिटेक कीबोर्ड पर चमक कुंजी).";
 
 /* Class = "NSTextFieldCell"; title = "VCP list"; ObjectID = "D9t-vT-gNJ"; */
-"D9t-vT-gNJ.title" = "VCP list";
+"D9t-vT-gNJ.title" = "वीसीपी सूची";
 
 /* Class = "NSTextFieldCell"; title = "You can override audio device name under Displays (advanced) if needed."; ObjectID = "Dha-Tm-cDM"; */
-"Dha-Tm-cDM.title" = "You can override audio device name under Displays (advanced) if needed.";
+"Dha-Tm-cDM.title" = "यदि आवश्यक हो तो आप डिस्प्ले (एडवांस्ड) के तहत ऑडियो डिवाइस के नाम को ओवरराइड कर सकते हैं।";
 
 /* Class = "NSTextFieldCell"; title = "You can disable smooth transitions for a more direct, immediate control."; ObjectID = "ENt-mP-0yH"; */
-"ENt-mP-0yH.title" = "You can disable smooth transitions for a more direct, immediate control.";
+"ENt-mP-0yH.title" = "आप अधिक प्रत्यक्ष, तत्काल नियंत्रण के लिए सुचारू संक्रमणों को अक्षम कर सकते हैं।";
 
 /* Class = "NSMenuItem"; title = "Minimal"; ObjectID = "Eq3-z9-yIo"; */
-"Eq3-z9-yIo.title" = "Minimal";
+"Eq3-z9-yIo.title" = "न्यूनतम";
 
 /* Class = "NSTextFieldCell"; title = "Scale mapping curve"; ObjectID = "Eui-5S-JR6"; */
-"Eui-5S-JR6.title" = "Scale mapping curve";
+"Eui-5S-JR6.title" = "स्केल मैपिंग वक्र";
 
 /* Class = "NSTextFieldCell"; title = "Mute:"; ObjectID = "EvN-FT-vdZ"; */
-"EvN-FT-vdZ.title" = "Mute:";
+"EvN-FT-vdZ.title" = "म्यूट करें:";
 
 /* Class = "NSTextFieldCell"; title = "Volume:"; ObjectID = "FER-Ri-4UO"; */
-"FER-Ri-4UO.title" = "Volume:";
+"FER-Ri-4UO.title" = "आयतन:";
 
 /* Class = "NSButtonCell"; title = "Automatically check for updates"; ObjectID = "Faf-9L-TXx"; */
-"Faf-9L-TXx.title" = "Automatically check for updates";
+"Faf-9L-TXx.title" = "अद्यतन के लिए स्वचालित रूप से जाँच करें";
 
 /* Class = "NSButtonCell"; title = "Allow zero brightness via software or combined dimming"; ObjectID = "FjB-XL-fG5"; */
-"FjB-XL-fG5.title" = "Allow zero brightness via software or combined dimming";
+"FjB-XL-fG5.title" = "सॉफ्टवेयर या संयुक्त डिमिंग के माध्यम से शून्य चमक की अनुमति दें";
 
 /* Class = "NSMenuItem"; title = "None"; ObjectID = "FoA-yh-Yx3"; */
-"FoA-yh-Yx3.title" = "None";
+"FoA-yh-Yx3.title" = "कोई नहीं।";
 
 /* Class = "NSTextFieldCell"; title = "Invert"; ObjectID = "G5A-y3-eZz"; */
-"G5A-y3-eZz.title" = "Invert";
+"G5A-y3-eZz.title" = "उल्टा करें";
 
 /* Class = "NSTextFieldCell"; title = "Override audio device name:"; ObjectID = "H9X-it-sXs"; */
-"H9X-it-sXs.title" = "Override audio device name:";
+"H9X-it-sXs.title" = "ऑडियो युक्ति नाम को ओवरराइड करेंः";
 
 /* Class = "NSMenuItem"; title = "Hide"; ObjectID = "HUT-Qc-kuu"; */
-"HUT-Qc-kuu.title" = "Hide";
+"HUT-Qc-kuu.title" = "छुपाएँ।";
 
 /* Class = "NSTextFieldCell"; title = "Brightness:"; ObjectID = "IJB-mO-e8I"; */
-"IJB-mO-e8I.title" = "Brightness:";
+"IJB-mO-e8I.title" = "चमक।:";
 
 /* Class = "NSButtonCell"; title = "Enable smooth brightness transitions"; ObjectID = "IK4-u5-qjf"; */
-"IK4-u5-qjf.title" = "Enable smooth brightness transitions";
+"IK4-u5-qjf.title" = "चिकनी चमक परिवर्तन सक्षम करें";
 
 /* Class = "NSButtonCell"; title = "Use fine OSD scale for volume"; ObjectID = "J3L-MW-iJL"; */
-"J3L-MW-iJL.title" = "Use fine OSD scale for volume";
+"J3L-MW-iJL.title" = "आयतन के लिए ठीक ओ. एस. डी. स्केल का उपयोग करें";
 
 /* Class = "NSButtonCell"; title = "Start MonitorControl at Login"; ObjectID = "JWJ-OY-VtE"; */
-"JWJ-OY-VtE.title" = "Start MonitorControl at Login";
+"JWJ-OY-VtE.title" = "लॉगिन पर मॉनिटरकंट्रोल प्रारंभ करें";
 
 /* Class = "NSTextFieldCell"; title = "Note: you can press Shift during startup for 'Safe mode' to restore defaults and avoid reading or setting anything."; ObjectID = "Jx2-gO-nq9"; */
-"Jx2-gO-nq9.title" = "Note: you can press Shift during startup for 'Safe mode' to restore defaults and avoid reading or setting anything.";
+"Jx2-gO-nq9.title" = "नोटः आप डिफ़ॉल्ट को पुनर्स्थापित करने और कुछ भी पढ़ने या सेट करने से बचने के लिए 'सुरक्षित मोड' के लिए स्टार्टअप के दौरान शिफ्ट दबा सकते हैं।";
 
 /* Class = "NSButtonCell"; title = "Enable for Apple branded and built-in displays as well"; ObjectID = "K6A-4z-1aQ"; */
-"K6A-4z-1aQ.title" = "Enable for Apple branded and built-in displays as well";
+"K6A-4z-1aQ.title" = "एप्पल ब्रांडेड और बिल्ट-इन डिस्प्ले के लिए भी सक्षम करें";
 
 /* Class = "NSTextFieldCell"; title = "Screen to control:"; ObjectID = "Kfj-WK-aSL"; */
-"Kfj-WK-aSL.title" = "Screen to control:";
+"Kfj-WK-aSL.title" = "नियंत्रित करने के लिए स्क्रीनः";
 
 /* Class = "NSTextFieldCell"; title = "Brightness and contrast:"; ObjectID = "LO4-4k-gxY"; */
-"LO4-4k-gxY.title" = "Brightness and contrast:";
+"LO4-4k-gxY.title" = "चमक और कंट्रास्टः";
 
 /* Class = "NSMenuItem"; title = "Always show in the menu bar"; ObjectID = "MM0-Lf-VgF"; */
-"MM0-Lf-VgF.title" = "Always show in the menu bar";
+"MM0-Lf-VgF.title" = "हमेशा मेन्यू बार में दिखाएँ";
 
 /* Class = "NSTextFieldCell"; title = "Contrast:"; ObjectID = "MMk-S2-yJN"; */
-"MMk-S2-yJN.title" = "Contrast:";
+"MMk-S2-yJN.title" = "विरोधाभासः";
 
 /* Class = "NSButtonCell"; title = "Show brightness slider in menu"; ObjectID = "MWo-6I-s9L"; */
-"MWo-6I-s9L.title" = "Show brightness slider in menu";
+"MWo-6I-s9L.title" = "मेन्यू में चमक स्लाइडर दिखाएँ";
 
 /* Class = "NSTextFieldCell"; title = "Control your external displays brightness, contrast and volume directly from your Mac, using menulet sliders or the keyboard, including native Apple keys."; ObjectID = "Mh5-1A-apq"; */
-"Mh5-1A-apq.title" = "Control your external displays brightness, contrast and volume directly from your Mac, using menulet sliders or the keyboard, including native Apple keys.";
+"Mh5-1A-apq.title" = "मेन्यूलेट स्लाइडर या कीबोर्ड का उपयोग करके अपने मैक से सीधे अपने बाहरी डिस्प्ले की चमक, कंट्रास्ट और वॉल्यूम को नियंत्रित करें, जिसमें देशी ऐप्पल कुंजी भी शामिल हैं।";
 
 /* Class = "NSButtonCell"; title = "Enable slider snapping"; ObjectID = "MlU-hl-d46"; */
-"MlU-hl-d46.title" = "Enable slider snapping";
+"MlU-hl-d46.title" = "स्लाइडर स्नैपिंग सक्षम करें";
 
 /* Class = "NSButtonCell"; title = "Separate scales for combined hardware & software dimming"; ObjectID = "O8o-hI-8eR"; */
-"O8o-hI-8eR.title" = "Separate scales for combined hardware & software dimming";
+"O8o-hI-8eR.title" = "संयुक्त हार्डवेयर और सॉफ्टवेयर डिमिंग के लिए अलग पैमाने";
 
 /* Class = "NSMenuItem"; title = "Standard keyboard brightness keys"; ObjectID = "Oke-bW-cb1"; */
-"Oke-bW-cb1.title" = "Standard keyboard brightness keys";
+"Oke-bW-cb1.title" = "मानक कीबोर्ड चमक कुंजी";
 
 /* Class = "NSTextFieldCell"; title = "count:"; ObjectID = "Orv-yj-Nad"; */
-"Orv-yj-Nad.title" = "count:";
+"Orv-yj-Nad.title" = "गिनती:";
 
 /* Class = "NSTextFieldCell"; title = "Control method:"; ObjectID = "PaK-1f-DsW"; */
-"PaK-1f-DsW.title" = "Control method:";
+"PaK-1f-DsW.title" = "नियंत्रण विधि:";
 
 /* Class = "NSTextFieldCell"; title = "#bc-ignore!"; ObjectID = "Pqk-VW-JGY"; */
-"Pqk-VW-JGY.title" = "#bc-ignore!";
+"Pqk-VW-JGY.title" = "#बीसी-इग्नोर!";
 
 /* Class = "NSTextFieldCell"; title = "Use software dimming after the display reached zero hardware brightness for extended range. Works for DDC controlled displays only."; ObjectID = "PyY-p9-3NP"; */
-"PyY-p9-3NP.title" = "Use software dimming after the display reached zero hardware brightness for extended range. Works for DDC controlled displays only.";
+"PyY-p9-3NP.title" = "विस्तारित सीमा के लिए प्रदर्शन के शून्य हार्डवेयर चमक तक पहुँचने के बाद सॉफ्टवेयर डिमिंग का उपयोग करें। केवल डीडीसी नियंत्रित प्रदर्शनों के लिए काम करता है।";
 
 /* Class = "NSMenuItem"; title = "Both standard and custom shortcuts"; ObjectID = "QDG-SA-mRX"; */
-"QDG-SA-mRX.title" = "Both standard and custom shortcuts";
+"QDG-SA-mRX.title" = "मानक और कस्टम दोनों शॉर्टकट";
 
 /* Class = "NSTextFieldCell"; title = "Enable Apple keyboard native key access"; ObjectID = "RBj-pU-aen"; */
-"RBj-pU-aen.title" = "Enable Apple keyboard native key access";
+"RBj-pU-aen.title" = "एप्पल कीबोर्ड नेटिव कुंजी अभिगम सक्षम करें";
 
 /* Class = "NSMenuItem"; title = "Normal"; ObjectID = "Riq-uM-bTs"; */
-"Riq-uM-bTs.title" = "Normal";
+"Riq-uM-bTs.title" = "सामान्य";
 
 /* Class = "NSTextFieldCell"; title = "@the0neyouseek (Guillaume B.)\n@JoniVR (Joni Van Roost)\n@waydabber (István T.)"; ObjectID = "TKd-J8-Iyk"; */
 "TKd-J8-Iyk.title" = "@the0neyouseek (Guillaume B.)\n@JoniVR (Joni Van Roost)\n@waydabber (István T.)";
 
 /* Class = "NSButtonCell"; title = "Show advanced settings"; ObjectID = "UBq-Od-SIB"; */
-"UBq-Od-SIB.title" = "Show advanced settings";
+"UBq-Od-SIB.title" = "उन्नत विन्यास दिखाएँ";
 
 /* Class = "NSButtonCell"; title = "Enable keyboard control for display"; ObjectID = "UqR-WE-jHl"; */
-"UqR-WE-jHl.title" = "Enable keyboard control for display";
+"UqR-WE-jHl.title" = "प्रदर्शन के लिए कुंजीपटल नियंत्रण सक्षम करें";
 
 /* Class = "NSTextFieldCell"; title = "General options:"; ObjectID = "W58-ch-j69"; */
-"W58-ch-j69.title" = "General options:";
+"W58-ch-j69.title" = "सामान्य विकल्पः";
 
 /* Class = "NSTextFieldCell"; title = "Works best with various syncing and 'control all' keyboard settings enabled."; ObjectID = "XU4-Bn-bwH"; */
-"XU4-Bn-bwH.title" = "Works best with various syncing and 'control all' keyboard settings enabled.";
+"XU4-Bn-bwH.title" = "विभिन्न सिंकिंग के साथ सबसे अच्छा काम करता है और 'सभी' कीबोर्ड सेटिंग्स को सक्षम करता है।";
 
 /* Class = "NSMenuItem"; title = "Change volume for all screens"; ObjectID = "Xih-P5-NyM"; */
-"Xih-P5-NyM.title" = "Change volume for all screens";
+"Xih-P5-NyM.title" = "सभी स्क्रीनों के लिए मात्रा बदलें";
 
 /* Class = "NSTextFieldCell"; title = "Full OSD scale will be available for hardware brightness control and after reaching 0 brightness, further software dimming will be used."; ObjectID = "YHZ-VL-QJ3"; */
-"YHZ-VL-QJ3.title" = "Full OSD scale will be available for hardware brightness control and after reaching 0 brightness, further software dimming will be used.";
+"YHZ-VL-QJ3.title" = "हार्डवेयर ब्राइटनेस कंट्रोल के लिए फुल ओएसडी स्केल उपलब्ध होगा और 0 ब्राइटनेस तक पहुंचने के बाद आगे सॉफ्टवेयर डिमिंग का उपयोग किया जाएगा";
 
 /* Class = "NSTextFieldCell"; title = "Identifier:"; ObjectID = "YqZ-LS-YvR"; */
-"YqZ-LS-YvR.title" = "Identifier:";
+"YqZ-LS-YvR.title" = "पहचानकर्ता:";
 
 /* Class = "NSMenuItem"; title = "Depends on mouse pointer position"; ObjectID = "Ytd-mg-N5E"; */
-"Ytd-mg-N5E.title" = "Depends on mouse pointer position";
+"Ytd-mg-N5E.title" = "माउस सूचक की स्थिति पर निर्भर करता है";
 
 /* Class = "NSTextFieldCell"; title = "Volume up"; ObjectID = "Z3w-eR-qDF"; */
-"Z3w-eR-qDF.title" = "Volume up";
+"Z3w-eR-qDF.title" = "वॉल्यूम बढ़ाएँ";
 
 /* Class = "NSButtonCell"; title = "Donate"; ObjectID = "ZKk-ve-rS4"; */
-"ZKk-ve-rS4.title" = "Donate";
+"ZKk-ve-rS4.title" = "दान करें।";
 
 /* Class = "NSButtonCell"; title = "Show percentages"; ObjectID = "ZUu-MR-XwA"; */
-"ZUu-MR-XwA.title" = "Show percentages";
+"ZUu-MR-XwA.title" = "प्रतिशत दिखाएँ";
 
 /* Class = "NSButtonCell"; title = "Use hardware DDC control"; ObjectID = "ZdU-gV-V05"; */
-"ZdU-gV-V05.title" = "Use hardware DDC control";
+"ZdU-gV-V05.title" = "हार्डवेयर डीडीसी नियंत्रण का उपयोग करें";
 
 /* Class = "NSTextFieldCell"; title = "Use brightness, volume and other settings from last time or use defaults. Values will be applied to the display upon first change by the user."; ObjectID = "an7-Aj-3fZ"; */
-"an7-Aj-3fZ.title" = "Use brightness, volume and other settings from last time or use defaults. Values will be applied to the display upon first change by the user.";
+"an7-Aj-3fZ.title" = "पिछली बार की चमक, मात्रा और अन्य सेटिंग्स का उपयोग करें या डिफ़ॉल्ट का उपयोग करें। उपयोगकर्ता द्वारा पहले परिवर्तन पर प्रदर्शन पर मान लागू किए जाएंगे।";
 
 /* Class = "NSTextFieldCell"; title = "Start at Login?"; ObjectID = "bA1-GF-Y2n"; */
-"bA1-GF-Y2n.title" = "Start at Login?";
+"bA1-GF-Y2n.title" = "लॉगिन से शुरू करें?";
 
 /* Class = "NSTextFieldCell"; title = "For hardware (DDC) controlled displays only. Results may vary."; ObjectID = "bIe-6O-xEH"; */
-"bIe-6O-xEH.title" = "For hardware (DDC) controlled displays only. Results may vary.";
+"bIe-6O-xEH.title" = "केवल हार्डवेयर (डीडीसी) नियंत्रित प्रदर्शनों के लिए। परिणाम अलग-अलग हो सकते हैं।";
 
 /* Class = "NSTextFieldCell"; title = "OSD scale:"; ObjectID = "bP4-GJ-vhJ"; */
-"bP4-GJ-vhJ.title" = "OSD scale:";
+"bP4-GJ-vhJ.title" = "ओएसडी स्केलः";
 
 /* Class = "NSButtonCell"; title = "Enable Mute DDC command"; ObjectID = "bZq-0d-lJa"; */
-"bZq-0d-lJa.title" = "Enable Mute DDC command";
+"bZq-0d-lJa.title" = "म्यूट डीडीसी कमांड सक्षम करें";
 
 /* Class = "NSMenuItem"; title = "Show sliders only for the display currently showing the menu"; ObjectID = "bbf-sS-uGv"; */
-"bbf-sS-uGv.title" = "Show sliders only for the display currently showing the menu";
+"bbf-sS-uGv.title" = "स्लाइडर्स को केवल उस प्रदर्शन के लिए दिखाएँ जो वर्तमान में मेनू दिखा रहा है";
 
 /* Class = "NSButtonCell"; title = "Disable macOS volume OSD"; ObjectID = "bkM-Px-U3b"; */
-"bkM-Px-U3b.title" = "Disable macOS volume OSD";
+"bkM-Px-U3b.title" = "मैक ओएस वॉल्यूम ओएसडी निष्क्रिय करें";
 
 /* Class = "NSButtonCell"; title = "Show volume slider in menu"; ObjectID = "c9D-MB-lma"; */
-"c9D-MB-lma.title" = "Show volume slider in menu";
+"c9D-MB-lma.title" = "मेन्यू में वॉल्यूम स्लाइडर दिखाएँ";
 
 /* Class = "NSTextFieldCell"; title = "Upon startup or wake:"; ObjectID = "cNt-Cq-vK4"; */
-"cNt-Cq-vK4.title" = "Upon startup or wake:";
+"cNt-Cq-vK4.title" = "शुरू करने या जागने के बादः";
 
 /* Class = "NSTextFieldCell"; title = "#bc-ignore!"; ObjectID = "e0q-fb-k7R"; */
-"e0q-fb-k7R.title" = "#bc-ignore!";
+"e0q-fb-k7R.title" = "#बी. सी.-अज्ञानी!";
 
 /* Class = "NSTextFieldCell"; title = "Normally keyboard controls change one OSD chiclet worth of value and Shift+Option allows fine control. This makes fine control default."; ObjectID = "f6J-Ui-uMB"; */
-"f6J-Ui-uMB.title" = "Normally keyboard controls change one OSD chiclet worth of value and Shift+Option allows fine control. This makes fine control default.";
+"f6J-Ui-uMB.title" = "आम तौर पर कीबोर्ड नियंत्रण एक ओएसडी चिकलेट के मूल्य को बदलते हैं और शिफ्ट + ऑप्शन ठीक नियंत्रण की अनुमति देता है। यह ठीक नियंत्रण डिफ़ॉल्ट बनाता है।";
 
 /* Class = "NSButtonCell"; title = "Reset Name"; ObjectID = "f9g-8s-gdd"; */
-"f9g-8s-gdd.title" = "Reset Name";
+"f9g-8s-gdd.title" = "नाम रीसेट करें";
 
 /* Class = "NSMenuItem"; title = "Show as icons"; ObjectID = "fR3-kq-cps"; */
-"fR3-kq-cps.title" = "Show as icons";
+"fR3-kq-cps.title" = "आइकन के रूप में दिखाएँ";
 
 /* Class = "NSMenuItem"; title = "Show as text"; ObjectID = "fWd-Es-zsy"; */
-"fWd-Es-zsy.title" = "Show as text";
+"fWd-Es-zsy.title" = "पाठ के रूप में दिखाएँ";
 
 /* Class = "NSTextFieldCell"; title = "Brightness control:"; ObjectID = "fe9-Ia-t9m"; */
-"fe9-Ia-t9m.title" = "Brightness control:";
+"fe9-Ia-t9m.title" = "ब्राइटनेस कंट्रोल:";
 
 /* Class = "NSTextFieldCell"; title = "Apple and built-in displays already have a brightness slider in Control Center."; ObjectID = "fmZ-HI-Mdc"; */
-"fmZ-HI-Mdc.title" = "Apple and built-in displays already have a brightness slider in Control Center.";
+"fmZ-HI-Mdc.title" = "एप्पल और अंतर्निर्मित डिस्प्ले में पहले से ही कंट्रोल सेंटर में एक ब्राइटनेस स्लाइडर है।";
 
 /* Class = "NSMenuItem"; title = "Use window focus to determine which display to control"; ObjectID = "gTR-FW-FHc"; */
-"gTR-FW-FHc.title" = "Use window focus to determine which display to control";
+"gTR-FW-FHc.title" = "किस प्रदर्शन को नियंत्रित करना है यह निर्धारित करने के लिए विंडो फोकस का उपयोग करें";
 
 /* Class = "NSTextFieldCell"; title = "Brightness slider for hardware or software controlled displays or TVs."; ObjectID = "gXH-HL-ZOL"; */
-"gXH-HL-ZOL.title" = "Brightness slider for hardware or software controlled displays or TVs.";
+"gXH-HL-ZOL.title" = "हार्डवेयर या सॉफ्टवेयर नियंत्रित प्रदर्शन या टीवी के लिए चमक स्लाइडर।";
 
 /* Class = "NSTextFieldCell"; title = "Relaunch the app to access Preferences if the menu option is not accessible. Use the button below to quit the app."; ObjectID = "hF7-fM-aKr"; */
-"hF7-fM-aKr.title" = "Relaunch the app to access Preferences if the menu option is not accessible. Use the button below to quit the app.";
+"hF7-fM-aKr.title" = "यदि मेनू विकल्प सुलभ नहीं है तो प्राथमिकताओं तक पहुँचने के लिए ऐप को फिर से लॉन्च करें। ऐप को छोड़ने के लिए नीचे दिए गए बटन का उपयोग करें।";
 
 /* Class = "NSButtonCell"; title = "Get current"; ObjectID = "hkC-vq-IcD"; */
-"hkC-vq-IcD.title" = "Get current";
+"hkC-vq-IcD.title" = "वर्तमान प्राप्त करें";
 
 /* Class = "NSTextFieldCell"; title = "Additional controls:"; ObjectID = "i5X-M5-Tf5"; */
-"i5X-M5-Tf5.title" = "Additional controls:";
+"i5X-M5-Tf5.title" = "अतिरिक्त नियंत्रणः";
 
 /* Class = "NSTextFieldCell"; title = "#bc-ignore!"; ObjectID = "ibQ-4u-ClE"; */
-"ibQ-4u-ClE.title" = "#bc-ignore!";
+"ibQ-4u-ClE.title" = "#बीसी-इग्नोर!";
 
 /* Class = "NSButtonCell"; title = "Start at Login"; ObjectID = "j72-NF-zsW"; */
-"j72-NF-zsW.title" = "Start at Login";
+"j72-NF-zsW.title" = "लॉग-इन शुरू करें";
 
 /* Class = "NSTextFieldCell"; title = "Toggle Mute"; ObjectID = "jK7-7w-uib"; */
-"jK7-7w-uib.title" = "Toggle Mute";
+"jK7-7w-uib.title" = "म्यूट टॉगल करें";
 
 /* Class = "NSMenuItem"; title = "Change for all screens"; ObjectID = "jSj-HB-T2t"; */
-"jSj-HB-T2t.title" = "Change for all screens";
+"jSj-HB-T2t.title" = "सभी स्क्रीनों के लिए परिवर्तन";
 
 /* Class = "NSButtonCell"; title = "Check for updates"; ObjectID = "jVH-oc-rUi"; */
-"jVH-oc-rUi.title" = "Check for updates";
+"jVH-oc-rUi.title" = "अपडेट के लिए देखें";
 
 /* Class = "NSTextFieldCell"; title = "MonitorControl needs access to \"accessibility\" to use macOS native keys to control your display.\nYou can enable it by adding MonitorControl in System Preferences > Security and Privacy > Accessibility."; ObjectID = "kBJ-Zf-1k2"; */
-"kBJ-Zf-1k2.title" = "MonitorControl needs access to \"accessibility\" to use macOS native keys to control your display.\nYou can enable it by adding MonitorControl in System Preferences > Security and Privacy > Accessibility.";
+"kBJ-Zf-1k2.title" = "मॉनिटर कंट्रोल को आपके प्रदर्शन को नियंत्रित करने के लिए macOS मूल कुंजी का उपयोग करने के लिए \"एक्सेसिबिलिटी\" तक पहुंच की आवश्यकता है।\n आप इसे सिस्टम वरीयताएँ> सुरक्षा और गोपनीयता> अभिगम्यता में मॉनिटरकंट्रोल जोड़कर सक्षम कर सकते हैं।";
 
 /* Class = "NSMenuItem"; title = "Depends on mouse pointer position"; ObjectID = "km4-hK-auM"; */
-"km4-hK-auM.title" = "Depends on mouse pointer position";
+"km4-hK-auM.title" = "माउस सूचक की स्थिति पर निर्भर करता है";
 
 /* Class = "NSMenuItem"; title = "Use combined slider for all displays"; ObjectID = "lA0-tv-qRs"; */
-"lA0-tv-qRs.title" = "Use combined slider for all displays";
+"lA0-tv-qRs.title" = "सभी प्रदर्शनों के लिए संयुक्त स्लाइडर का उपयोग करें";
 
 /* Class = "NSTextFieldCell"; title = "Display type:"; ObjectID = "lSJ-6w-KJ2"; */
-"lSJ-6w-KJ2.title" = "Display type:";
+"lSJ-6w-KJ2.title" = "प्रदर्शन प्रकारः";
 
 /* Class = "NSTextFieldCell"; title = "Screen to control:"; ObjectID = "ltL-gR-K3Z"; */
-"ltL-gR-K3Z.title" = "Screen to control:";
+"ltL-gR-K3Z.title" = "नियंत्रित करने के लिए स्क्रीनः";
 
 /* Class = "NSTextFieldCell"; title = "#bc-ignore!"; ObjectID = "mBs-6m-13Q"; */
-"mBs-6m-13Q.title" = "#bc-ignore!";
+"mBs-6m-13Q.title" = "#बीसी-इग्नोर!";
 
 /* Class = "NSTextFieldCell"; title = "Volume:"; ObjectID = "mue-fa-8z6"; */
-"mue-fa-8z6.title" = "Volume:";
+"mue-fa-8z6.title" = "आयतनः";
 
 /* Class = "NSButtonCell"; title = "Avoid gamma table manipulation"; ObjectID = "na6-mS-MPi"; */
-"na6-mS-MPi.title" = "Avoid gamma table manipulation";
+"na6-mS-MPi.title" = "गामा टेबल हेरफेर से बचें";
 
 /* Class = "NSTextFieldCell"; title = "Ensure MonitorControl is always running when you need it by launching the app at startup."; ObjectID = "nk6-Gh-Mfs"; */
-"nk6-Gh-Mfs.title" = "Ensure MonitorControl is always running when you need it by launching the app at startup.";
+"nk6-Gh-Mfs.title" = "सुनिश्चित करें कि मॉनिटरकंट्रोल हमेशा चालू रहे जब आपको इसकी आवश्यकता हो ऐप को स्टार्टअप पर लॉन्च करके।";
 
 /* Class = "NSTextFieldCell"; title = "Brightness up"; ObjectID = "nty-g6-Sde"; */
-"nty-g6-Sde.title" = "Brightness up";
+"nty-g6-Sde.title" = "चमक बढ़ें।";
 
 /* Class = "NSMenuItem"; title = "Disable keyboard"; ObjectID = "oHf-Gh-68c"; */
-"oHf-Gh-68c.title" = "Disable keyboard";
+"oHf-Gh-68c.title" = "कुंजीपटल निष्क्रिय करें";
 
 /* Class = "NSTextFieldCell"; title = "Application:"; ObjectID = "okD-DG-pYa"; */
-"okD-DG-pYa.title" = "Application:";
+"okD-DG-pYa.title" = "आवेदन:";
 
 /* Class = "NSButtonCell"; title = "Longer delay during DDC read operations"; ObjectID = "pF5-Sw-7BR"; */
-"pF5-Sw-7BR.title" = "Longer delay during DDC read operations";
+"pF5-Sw-7BR.title" = "डी. डी. सी. के पठन संचालन के दौरान लंबी देरी";
 
 /* Class = "NSTextFieldCell"; title = "#bc-ignore!"; ObjectID = "pIy-Lk-kkm"; */
-"pIy-Lk-kkm.title" = "#bc-ignore!";
+"pIy-Lk-kkm.title" = "#बीसी-इग्नोर!";
 
 /* Class = "NSButtonCell"; title = "Open System Preferences…"; ObjectID = "pVc-wG-Bdh"; */
-"pVc-wG-Bdh.title" = "Open System Preferences…";
+"pVc-wG-Bdh.title" = "सिस्टम वरीयताएँ खोलें…";
 
 /* Class = "NSTextFieldCell"; title = "Use the brightness keys of your Apple keyboard to control brightness. You can hold Control to adjust the built-in display, Control+Command to adjust external displays. Hold Shift+Option for fine control. Control+Option+Command adjusts contrast on DDC compatible displays."; ObjectID = "pa0-Hz-ace"; */
-"pa0-Hz-ace.title" = "Use the brightness keys of your Apple keyboard to control brightness. You can hold Control to adjust the built-in display, Control+Command to adjust external displays. Hold Shift+Option for fine control. Control+Option+Command adjusts contrast on DDC compatible displays.";
+"pa0-Hz-ace.title" = "चमक को नियंत्रित करने के लिए अपने एप्पल कीबोर्ड की चमक कुंजी का उपयोग करें। आप अंतर्निर्मित प्रदर्शन को समायोजित करने के लिए कंट्रोल, बाहरी प्रदर्शन को समायोजित करने के लिए कंट्रोल + कमांड पकड़ सकते हैं। ठीक नियंत्रण के लिए Shift + Option दबाएँ। कंट्रोल + ऑप्शन + कमांड डी. डी. सी. संगत डिस्प्ले पर कंट्रास्ट समायोजित करता है।";
 
 /* Class = "NSTextFieldCell"; title = "DDC max"; ObjectID = "psF-vX-AFB"; */
-"psF-vX-AFB.title" = "DDC max";
+"psF-vX-AFB.title" = "डीडीसी मैक्स";
 
 /* Class = "NSTextFieldCell"; title = "Brightness down"; ObjectID = "q5a-Ix-Hjs"; */
-"q5a-Ix-Hjs.title" = "Brightness down";
+"q5a-Ix-Hjs.title" = "चमक कम हो।";
 
 /* Class = "NSButtonCell"; title = "Show contrast slider in menu"; ObjectID = "qO0-dB-yUs"; */
-"qO0-dB-yUs.title" = "Show contrast slider in menu";
+"qO0-dB-yUs.title" = "मेन्यू में कंट्रास्ट स्लाइडर दिखाएँ";
 
 /* Class = "NSTextFieldCell"; title = "Show percentage next to slider for more precision."; ObjectID = "qXy-CL-Wf1"; */
-"qXy-CL-Wf1.title" = "Show percentage next to slider for more precision.";
+"qXy-CL-Wf1.title" = "अधिक परिशुद्धता के लिए स्लाइडर के बगल में प्रतिशत दिखाएँ।";
 
 /* Class = "NSButtonCell"; title = "Quit application"; ObjectID = "qlb-wH-qr4"; */
-"qlb-wH-qr4.title" = "Quit application";
+"qlb-wH-qr4.title" = "आवेदन छोड़ें";
 
 /* Class = "NSTextFieldCell"; title = "Volume control (DDC only):"; ObjectID = "qoh-Gn-f11"; */
-"qoh-Gn-f11.title" = "Volume control (DDC only):";
+"qoh-Gn-f11.title" = "मात्रा नियंत्रण (केवल डीडीसी)";
 
 /* Class = "NSButtonCell"; title = "Combine hardware and software dimming"; ObjectID = "r76-Zc-x09"; */
-"r76-Zc-x09.title" = "Combine hardware and software dimming";
+"r76-Zc-x09.title" = "हार्डवेयर और सॉफ्टवेयर डिमिंग को मिलाएँ";
 
 /* Class = "NSTextFieldCell"; title = "General menu items style:"; ObjectID = "thh-DG-ecH"; */
-"thh-DG-ecH.title" = "General menu items style:";
+"thh-DG-ecH.title" = "सामान्य मेन्यू आइटम शैलीः";
 
 /* Class = "NSTextFieldCell"; title = "Menu Icon:"; ObjectID = "u6s-Pb-BCG"; */
-"u6s-Pb-BCG.title" = "Menu Icon:";
+"u6s-Pb-BCG.title" = "मेन्यू आइकनः";
 
 /* Class = "NSTextFieldCell"; title = "Works if an audio device is selected with no native volume control."; ObjectID = "uF5-a9-Ngz"; */
-"uF5-a9-Ngz.title" = "Works if an audio device is selected with no native volume control.";
+"uF5-a9-Ngz.title" = "काम करता है यदि कोई ऑडियो डिवाइस बिना किसी मूल मात्रा नियंत्रण के चुना जाता है।";
 
 /* Class = "NSTextFieldCell"; title = "Contrast (DDC):"; ObjectID = "urd-Rh-aiL"; */
-"urd-Rh-aiL.title" = "Contrast (DDC):";
+"urd-Rh-aiL.title" = "कंट्रास्ट (डीडीसी)";
 
 /* Class = "NSButtonCell"; title = "Do not use alternative brightness keys"; ObjectID = "vd2-Lk-neX"; */
-"vd2-Lk-neX.title" = "Do not use alternative brightness keys";
+"vd2-Lk-neX.title" = "वैकल्पिक चमक कुंजी का उपयोग न करें";
 
 /* Class = "NSMenuItem"; title = "Heavy"; ObjectID = "vik-vN-bJe"; */
-"vik-vN-bJe.title" = "Heavy";
+"vik-vN-bJe.title" = "भारी।";
 
 /* Class = "NSTextFieldCell"; title = "Multiple displays:"; ObjectID = "vri-pv-tJ4"; */
-"vri-pv-tJ4.title" = "Multiple displays:";
+"vri-pv-tJ4.title" = "अनेक प्रदर्शनः";
 
 /* Class = "NSTextFieldCell"; title = "DDC read polling mode:"; ObjectID = "vwm-hY-on5"; */
-"vwm-hY-on5.title" = "DDC read polling mode:";
+"vwm-hY-on5.title" = "डी. डी. सी. मतदान मोड पढ़ता हैः";
 
 /* Class = "NSTextFieldCell"; title = "Useful when a display tends to reset its settings during sleep."; ObjectID = "w8B-x6-sq5"; */
-"w8B-x6-sq5.title" = "Useful when a display tends to reset its settings during sleep.";
+"w8B-x6-sq5.title" = "उपयोगी है जब एक प्रदर्शन नींद के दौरान अपनी सेटिंग्स को रीसेट करने की प्रवृत्ति रखता है।";
 
 /* Class = "NSTextFieldCell"; title = "Changes that are caused by the Ambient light sensor or made using Touch Bar, Control Center, System Preferences will be replicated to all displays."; ObjectID = "wjv-tq-iUx"; */
-"wjv-tq-iUx.title" = "Changes that are caused by the Ambient light sensor or made using Touch Bar, Control Center, System Preferences will be replicated to all displays.";
+"wjv-tq-iUx.title" = "एम्बिएंट लाइट सेंसर के कारण या टच बार, कंट्रोल सेंटर, सिस्टम वरीयताओं का उपयोग करके किए गए परिवर्तनों को सभी प्रदर्शनों में दोहराया जाएगा।";
 
 /* Class = "NSMenuItem"; title = "Only if at least one slider is present"; ObjectID = "xLa-PN-rsq"; */
-"xLa-PN-rsq.title" = "Only if at least one slider is present";
+"xLa-PN-rsq.title" = "केवल तभी जब कम से कम एक स्लाइडर मौजूद हो";
 
 /* Class = "NSMenuItem"; title = "Both standard and custom shortcuts"; ObjectID = "xQJ-aJ-VhH"; */
-"xQJ-aJ-VhH.title" = "Both standard and custom shortcuts";
+"xQJ-aJ-VhH.title" = "मानक और कस्टम दोनों शॉर्टकट";
 
 /* Class = "NSTextFieldCell"; title = "Update settings from the display. May not work with some hardware."; ObjectID = "xjq-hs-wWB"; */
-"xjq-hs-wWB.title" = "Update settings from the display. May not work with some hardware.";
+"xjq-hs-wWB.title" = "प्रदर्शन से सेटिंग अद्यतन करें। कुछ हार्डवेयर के साथ काम नहीं कर सकता है।";
 
 /* Class = "NSTextFieldCell"; title = "Available"; ObjectID = "yBJ-5d-I7e"; */
-"yBJ-5d-I7e.title" = "Available";
+"yBJ-5d-I7e.title" = "उपलब्ध है।";
 
 /* Class = "NSTextFieldCell"; title = "Warning! With this option enabled, you might find yourself in a position when you end up with a blank display. This, combined with disabled keyboard controls can be frustrating."; ObjectID = "yi3-e1-wsL"; */
-"yi3-e1-wsL.title" = "Warning! With this option enabled, you might find yourself in a position when you end up with a blank display. This, combined with disabled keyboard controls can be frustrating.";
+"yi3-e1-wsL.title" = "चेतावनी! इस विकल्प को सक्षम करने के साथ, आप खुद को उस स्थिति में पा सकते हैं जब आप एक खाली प्रदर्शन के साथ समाप्त हो जाते हैं। यह, अक्षम कीबोर्ड नियंत्रणों के साथ मिलकर निराशाजनक हो सकता है।";
 
 /* Class = "NSMenuItem"; title = "Disable keyboard"; ObjectID = "zHa-xo-XPW"; */
-"zHa-xo-XPW.title" = "Disable keyboard";
+"zHa-xo-XPW.title" = "कुंजीपटल निष्क्रिय करें";
 
 /* Class = "NSTextFieldCell"; title = "Combined dimming switchover point:"; ObjectID = "zv8-pZ-OPy"; */
-"zv8-pZ-OPy.title" = "Combined dimming switchover point:";
+"zv8-pZ-OPy.title" = "कम्बाइंड डिमिंग स्विचओवर प्वाइंटः";
