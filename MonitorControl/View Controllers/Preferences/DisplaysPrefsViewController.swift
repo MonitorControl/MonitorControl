@@ -204,6 +204,8 @@ class DisplaysPrefsViewController: NSViewController, PreferencePane, NSTableView
         cell.longerDelayButton.state = otherDisplay.readPrefAsBool(key: .longerDelay) ? .on : .off
         cell.enableMuteButton.isEnabled = true
         cell.enableMuteButton.state = otherDisplay.readPrefAsBool(key: .enableMuteUnmute) ? .on : .off
+        cell.sendUnmuteOnVolumeChangeButton.isEnabled = true
+        cell.sendUnmuteOnVolumeChangeButton.state = otherDisplay.readPrefAsBool(key: .sendUnmuteOnVolumeChange) ? .on : .off
 
         cell.combinedBrightnessSwitchingPoint.isEnabled = true
         cell.combinedBrightnessSwitchingPoint.intValue = Int32(otherDisplay.readPrefAsInt(key: .combinedBrightnessSwitchingPoint))
@@ -260,6 +262,8 @@ class DisplaysPrefsViewController: NSViewController, PreferencePane, NSTableView
         cell.longerDelayButton.isEnabled = false
         cell.enableMuteButton.state = .off
         cell.enableMuteButton.isEnabled = false
+        cell.sendUnmuteOnVolumeChangeButton.state = .off
+        cell.sendUnmuteOnVolumeChangeButton.isEnabled = false
 
         cell.combinedBrightnessSwitchingPoint.intValue = 0
         cell.combinedBrightnessSwitchingPoint.isEnabled = false

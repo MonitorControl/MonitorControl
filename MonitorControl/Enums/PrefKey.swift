@@ -125,6 +125,9 @@ enum PrefKey: String {
   // Friendly name
   case friendlyName
 
+  // Send unmute on volume change
+  case sendUnmuteOnVolumeChange
+
   /* -- Display+Command specific settings -- */
 
   // Command value display

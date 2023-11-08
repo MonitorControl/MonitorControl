@@ -296,8 +296,10 @@ class SliderHandler {
       if self.command == Command.audioSpeakerVolume {
         if !otherDisplay.readPrefAsBool(key: .enableMuteUnmute) || value != 0 {
           otherDisplay.writeDDCValues(command: self.command, value: otherDisplay.convValueToDDC(for: self.command, from: value))
-          otherDisplay.writeDDCLastSavedValue[.audioMuteScreenBlank] = 1
-          otherDisplay.writeDDCValues(command: .audioMuteScreenBlank, value: 2)
+          if otherDisplay.readPrefAsBool(key: .sendUnmuteOnVolumeChange) {
+            otherDisplay.writeDDCLastSavedValue[.audioMuteScreenBlank] = 1
+            otherDisplay.writeDDCValues(command: .audioMuteScreenBlank, value: 2)
+          }
         }
       } else {
         otherDisplay.writeDDCValues(command: self.command, value: otherDisplay.convValueToDDC(for: self.command, from: value))

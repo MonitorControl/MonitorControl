@@ -26,6 +26,7 @@ class DisplaysPrefsCellView: NSTableCellView {
   @IBOutlet var longerDelayButton: NSButton!
   @IBOutlet var pollingCount: NSTextFieldCell!
   @IBOutlet var enableMuteButton: NSButton!
+  @IBOutlet var sendUnmuteOnVolumeChangeButton: NSButton!
 
   @IBOutlet var combinedBrightnessSwitchingPoint: NSSlider!
 
@@ -102,6 +103,19 @@ class DisplaysPrefsCellView: NSTableCellView {
           display.toggleMute()
         }
         display.savePref(false, key: .enableMuteUnmute)
+      default:
+        break
+      }
+    }
+  }
+
+  @IBAction func sendUnmuteOnVolumeChangeButtonToggled(_ sender: NSButton) {
+    if let display = display as? OtherDisplay {
+      switch sender.state {
+      case .on:
+        display.savePref(true, key: .sendUnmuteOnVolumeChange)
+      case .off:
+        display.savePref(false, key: .sendUnmuteOnVolumeChange)
       default:
         break
       }
