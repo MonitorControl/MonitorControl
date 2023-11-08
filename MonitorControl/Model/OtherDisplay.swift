@@ -186,6 +186,8 @@ class OtherDisplay: Display {
       }
       if !self.readPrefAsBool(key: .enableMuteUnmute) || volumeOSDValue != 0 {
         self.writeDDCValues(command: .audioSpeakerVolume, value: self.convValueToDDC(for: .audioSpeakerVolume, from: volumeOSDValue))
+        self.writeDDCLastSavedValue[.audioMuteScreenBlank] = 1
+        self.writeDDCValues(command: .audioMuteScreenBlank, value: 2)
       }
     }
     if !self.readPrefAsBool(key: .hideOsd) {
