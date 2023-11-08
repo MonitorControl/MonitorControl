@@ -414,3 +414,6 @@
 
 /* Class = "NSTextFieldCell"; title = "Combined dimming switchover point:"; ObjectID = "zv8-pZ-OPy"; */
 "zv8-pZ-OPy.title" = "Mezní bod pro kombinované ztmívání:";
+
+/* Class = "NSButtonCell"; title = "Send "Unmute" on Volume Change"; ObjectID = "Q73-lX-TVg"; */
+"Q73-lX-TVg.title" = "Poslat \"Unmute\" při změně hlasitosti";
