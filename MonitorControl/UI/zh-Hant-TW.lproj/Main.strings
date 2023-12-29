@@ -110,7 +110,7 @@
 "cNt-Cq-vK4.title" = "啟動或喚醒後：";
 
 /* Class = "NSTextFieldCell"; title = "⚠️ Warning! Changing some of these settings may cause system freezes or unexpected behavior!"; ObjectID = "Cz1-Mh-llk"; */
-"Cz1-Mh-llk.title" = "⚠️ 警告！更改這些設定可能導致系統當機或不可預期的結果！";
+"Cz1-Mh-llk.title" = "⚠️警告！更改這些設定可能導致系統當機或不可預期的結果！";
 
 /* Class = "NSTextFieldCell"; title = "Alternative keys are the F14/F15 (Scroll Lock and Pause on PC keyboards, brightness keys on some Logitech keyboards)."; ObjectID = "D4H-hU-FLn"; */
 "D4H-hU-FLn.title" = "替代按鍵為F14／F15（PC鍵盤的Scroll Lock及Pause鍵，部分羅技鍵盤的亮度鍵）。";
@@ -188,7 +188,7 @@
 "i5X-M5-Tf5.title" = "額外的控制：";
 
 /* Class = "NSTextFieldCell"; title = "Brightness:"; ObjectID = "IJB-mO-e8I"; */
-"IJB-mO-e8I.title" = "亮度:";
+"IJB-mO-e8I.title" = "亮度：";
 
 /* Class = "NSButtonCell"; title = "Enable smooth brightness transitions"; ObjectID = "IK4-u5-qjf"; */
 "IK4-u5-qjf.title" = "啟用流暢亮度轉換";
@@ -320,7 +320,7 @@
 "r76-Zc-x09.title" = "結合硬體與軟體的亮度控制";
 
 /* Class = "NSTextFieldCell"; title = "Enable Apple keyboard native key access"; ObjectID = "RBj-pU-aen"; */
-"RBj-pU-aen.title" = "Enable Apple keyboard native key access";
+"RBj-pU-aen.title" = "啟用蘋果原生鍵盤的使用權限";
 
 /* Class = "NSMenuItem"; title = "Normal"; ObjectID = "Riq-uM-bTs"; */
 "Riq-uM-bTs.title" = "正常";
