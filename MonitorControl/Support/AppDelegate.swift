@@ -32,19 +32,17 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
   }
 
-  lazy var preferencesWindowController: PreferencesWindowController = {
-    PreferencesWindowController(
-      preferencePanes: [
-        mainPrefsVc!,
-        menuslidersPrefsVc!,
-        keyboardPrefsVc!,
-        displaysPrefsVc!,
-        aboutPrefsVc!,
-      ],
-      style: self.preferencePaneStyle,
-      animated: true
-    )
-  }()
+  lazy var preferencesWindowController: PreferencesWindowController = .init(
+    preferencePanes: [
+      mainPrefsVc!,
+      menuslidersPrefsVc!,
+      keyboardPrefsVc!,
+      displaysPrefsVc!,
+      aboutPrefsVc!,
+    ],
+    style: self.preferencePaneStyle,
+    animated: true
+  )
 
   func applicationDidFinishLaunching(_: Notification) {
     app = self

@@ -1,0 +1,11 @@
+/* General application description */
+"ApplicationDescription" = "MonitorControl umožňuje ovládať jas a hlasitosť externých displejov";
+
+/* Sofware update deny consequences */
+"SoftwareUpdateDenyConsequences" = "Ak tieto pripojenia zakážete, nebudete informovaný o nových verziách a aktualizáciách zabezpečenia. Aktualizácie zabezpečenia sú dôležité na ochranu pred útokmi škodlivého softvéru.";
+
+/* Software update purpose */
+"SoftwareUpdatePurpose" = "MonitorControl kontroluje nové verzie a aktualizácie zabezpečenia.";
+
+/* Class = "NSButtonCell"; title = "Check for updates"; ObjectID = "jVH-oc-rUi"; */
+"jVH-oc-rUi.title" = "Skontrolovať aktualizácie";
