@@ -122,7 +122,8 @@
 "This display has an unspecified control status." = "Esta pantalla tiene un estado para su control desconocido.";
 
 /* Shown in the Display Preferences */
-"This display is reported to support hardware DDC control but the current settings allow for software control only." = "Esta pantalla soporta el control DDC por hardware pero la configuración actual solo permite el control por software.";
+"This display is reported to support hardware DDC control but the current settings allow for software control only." = "Esta pantalla soporta el control DDC por hardware, pero la configuración actual solo permite el control por software.";
+
 
 /* Shown in the Display Preferences */
 "This display is reported to support hardware DDC control. If you encounter issues, you can disable hardware DDC control to force software control." = "Esta pantalla soporta el control DDC por hardware. Si encuentras algún problema, puedes deshabilitar el control DDC por hardware para forzar el control por software.";
@@ -131,7 +132,7 @@
 "This display supports native Apple brightness protocol. This allows macOS to control this display without MonitorControl as well." = "Esta pantalla soporta el protocolo de brillo nativo de Apple. Esto le permite también a macOS controlar la pantalla sin MonitorControl.";
 
 /* Shown in the Display Preferences */
-"This is a virtual display (examples: AirPlay, Sidecar, display connected via a DisplayLink Dock or similar) which does not allow hardware or software gammatable control. Shading is used as a substitute but only in non-mirror scenarios. Mouse cursor will be unaffected and artifacts may appear when entering/leaving full screen mode." = "Esto es una pantalla virtual (ejemplos: AirPlay, Sidecar, pantalla conectada a través del dock DisplayLink o similar) el cual no permite el control a través de gamma ni por hardware ni por software. El sombreado es usado como sustituto pero solo en escenarios sin espejo. El cursor del ratón no verá afectado pero pueden aparecer objetos extraños cuando se entra/sale del modo pantalla completa.";
+"This is a virtual display (examples: AirPlay, Sidecar, display connected via a DisplayLink Dock or similar) which does not allow hardware or software gammatable control. Shading is used as a substitute but only in non-mirror scenarios. Mouse cursor will be unaffected and artifacts may appear when entering/leaving full screen mode." = "Esto es una pantalla virtual (ejemplos: AirPlay, Sidecar, pantalla conectada a través del dock DisplayLink o similar) el cual no permite el control a través de gamma ni por hardware ni por software. El sombreado es usado como sustituto, pero solo en escenarios sin espejo. El cursor del ratón no verá afectado pero pueden aparecer objetos extraños cuando se entra/sale del modo pantalla completa.";
 
 /* Unknown display name */
 "Unknown" = "Desconocido";
