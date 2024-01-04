@@ -158,6 +158,9 @@
 		AAB2F63F273ED0B8004AB5A4 /* .bartycrouch.toml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .bartycrouch.toml; sourceTree = "<group>"; };
 		AAB2F641273ED0C7004AB5A4 /* .github */ = {isa = PBXFileReference; lastKnownFileType = folder; path = .github; sourceTree = "<group>"; };
 		AAB2F643273ED0E9004AB5A4 /* License.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = License.txt; sourceTree = "<group>"; };
+		AABCFABB2B47247200344F55 /* sk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sk; path = sk.lproj/Main.strings; sourceTree = "<group>"; };
+		AABCFABC2B47247200344F55 /* sk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sk; path = sk.lproj/InternetAccessPolicy.strings; sourceTree = "<group>"; };
+		AABCFABD2B47247200344F55 /* sk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sk; path = sk.lproj/Localizable.strings; sourceTree = "<group>"; };
 		AACE5E2227050C63006C2A48 /* NSNotification+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSNotification+Extension.swift"; sourceTree = "<group>"; };
 		AADB625926BC196900DFFAA5 /* DisplayServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DisplayServices.framework; path = /System/Library/PrivateFrameworks/DisplayServices.framework; sourceTree = "<absolute>"; };
 		B7FA437E2AC5857A00A94C01 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Main.strings; sourceTree = "<group>"; };
@@ -464,6 +467,7 @@
 				ja,
 				"pt-PT",
 				hi,
+				sk,
 			);
 			mainGroup = 56754EA21D9A4016007BCDC5;
 			packageReferences = (
@@ -671,6 +675,7 @@
 				B7FA437E2AC5857A00A94C01 /* ja */,
 				FB5DB28E2AD54C4600306223 /* pt-PT */,
 				01D6471D2AF916A800321FFB /* hi */,
+				AABCFABB2B47247200344F55 /* sk */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -696,6 +701,7 @@
 				B7FA437F2AC5857A00A94C01 /* ja */,
 				FB5DB28F2AD54C4600306223 /* pt-PT */,
 				01D6471E2AF916A800321FFB /* hi */,
+				AABCFABC2B47247200344F55 /* sk */,
 			);
 			name = InternetAccessPolicy.strings;
 			sourceTree = "<group>";
@@ -721,6 +727,7 @@
 				B7FA43802AC5857A00A94C01 /* ja */,
 				FB5DB2902AD54C4600306223 /* pt-PT */,
 				01D6471F2AF916A800321FFB /* hi */,
+				AABCFABD2B47247200344F55 /* sk */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -864,7 +871,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
-				MARKETING_VERSION = 4.2.0;
+				MARKETING_VERSION = 4.2.1;
 				PRODUCT_BUNDLE_IDENTIFIER = me.guillaumeb.MonitorControl;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -899,7 +906,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
-				MARKETING_VERSION = 4.2.0;
+				MARKETING_VERSION = 4.2.1;
 				PRODUCT_BUNDLE_IDENTIFIER = me.guillaumeb.MonitorControl;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
