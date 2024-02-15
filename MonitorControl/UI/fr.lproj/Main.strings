@@ -1,5 +1,5 @@
 /* Class = "NSButtonCell"; title = "Sync brightness changes from Built-in and Apple displays"; ObjectID = "0ca-DG-AgB"; */
-"0ca-DG-AgB.title" = "Synchronisez la luminosité à partir des écrans intégrés et Apple";
+"0ca-DG-AgB.title" = "Synchronisez la luminosité à partir des écrans Apple et intégrés";
 
 /* Class = "NSMenuItem"; title = "Assume last saved settings are valid (recommended)"; ObjectID = "1in-79-6qm"; */
 "1in-79-6qm.title" = "Supposer que les derniers paramètres enregistrés sont valides (recommandé)";
@@ -29,7 +29,7 @@
 "4dX-o1-xAc.title" = "L'utilisation du \"focus de la fenêtre\" à la place peut ne pas fonctionner correctement avec les applications en plein écran.";
 
 /* Class = "NSTextFieldCell"; title = "Welcome to MonitorControl"; ObjectID = "5J0-BD-top"; */
-"5J0-BD-top.title" = "Bienvenue sur MonitorControl";
+"5J0-BD-top.title" = "Bienvenue dans MonitorControl";
 
 /* Class = "NSButtonCell"; title = "Reset Preferences"; ObjectID = "5yT-5F-X5R"; */
 "5yT-5F-X5R.title" = "Réinitialiser les préférences";
@@ -65,7 +65,7 @@
 "A8P-vn-DEJ.title" = "Afficher les graduations à 0 %, 25 %, 50 %, 75 % et 100 % pour plus de précision.";
 
 /* Class = "NSTextFieldCell"; title = "Use brightness, volume and other settings from last time or use defaults. Values will be applied to the display upon first change by the user."; ObjectID = "an7-Aj-3fZ"; */
-"an7-Aj-3fZ.title" = "Utilisez la luminosité, le volume et d'autres paramètres de la dernière utilisation ou utilisez les valeurs par défaut. Les valeurs seront appliquées sur l'écran lors de la première modification par l'utilisateur.";
+"an7-Aj-3fZ.title" = "Utilisez la luminosité, le volume et d'autres paramètres de la dernière utilisation ou utilisez les valeurs par défaut. Les valeurs seront appliquées à l'écran lors de la première modification par l'utilisateur.";
 
 /* Class = "NSMenuItem"; title = "Use audio device name to determine which display to control"; ObjectID = "AqF-uD-KCY"; */
 "AqF-uD-KCY.title" = "Utiliser le nom du périphérique audio pour déterminer quel écran contrôler";
@@ -77,7 +77,7 @@
 "bbf-sS-uGv.title" = "Afficher les curseurs uniquement pour l'écran affichant actuellement le menu";
 
 /* Class = "NSTextFieldCell"; title = "Brightness:"; ObjectID = "Bhb-6l-uPQ"; */
-"Bhb-6l-uPQ.title" = "Luminosité:";
+"Bhb-6l-uPQ.title" = "Luminosité :";
 
 /* Class = "NSTextFieldCell"; title = "(Software->DDC)"; ObjectID = "Bid-UL-blc"; */
 "Bid-UL-blc.title" = "(Logiciel → DDC)";
@@ -110,7 +110,7 @@
 "cNt-Cq-vK4.title" = "Au démarrage ou au réveil :";
 
 /* Class = "NSTextFieldCell"; title = "⚠️ Warning! Changing some of these settings may cause system freezes or unexpected behavior!"; ObjectID = "Cz1-Mh-llk"; */
-"Cz1-Mh-llk.title" = "⚠️ Attention ! La modification de certains de ces paramètres peut entraîner des blocages du système ou des comportements inattendus !";
+"Cz1-Mh-llk.title" = "⚠️ Attention ! La modification de certains paramètres peut entraîner des blocages du système ou un comportement inattendu !";
 
 /* Class = "NSTextFieldCell"; title = "Alternative keys are the F14/F15 (Scroll Lock and Pause on PC keyboards, brightness keys on some Logitech keyboards)."; ObjectID = "D4H-hU-FLn"; */
 "D4H-hU-FLn.title" = "Les touches alternatives sont les touches F14/F15 (Verrouillage du défilement et Pause sur les claviers PC, touches de luminosité sur certains claviers Logitech).";
@@ -119,7 +119,7 @@
 "D9t-vT-gNJ.title" = "Liste VCP";
 
 /* Class = "NSTextFieldCell"; title = "You can override audio device name under Displays (advanced) if needed."; ObjectID = "Dha-Tm-cDM"; */
-"Dha-Tm-cDM.title" = "Vous pouvez remplacer le nom du périphérique audio sous Écrans si nécessaire.";
+"Dha-Tm-cDM.title" = "Vous pouvez remplacer si nécessaire le nom du périphérique audio dans Écrans (avancé).";
 
 /* Class = "NSTextFieldCell"; title = "You can disable smooth transitions for a more direct, immediate control."; ObjectID = "ENt-mP-0yH"; */
 "ENt-mP-0yH.title" = "Vous pouvez désactiver les transitions en douceur pour un contrôle plus direct et immédiat.";
@@ -170,7 +170,7 @@
 "gTR-FW-FHc.title" = "Utiliser le focus de la fenêtre pour déterminer quel écran contrôler";
 
 /* Class = "NSTextFieldCell"; title = "Brightness slider for hardware or software controlled displays or TVs."; ObjectID = "gXH-HL-ZOL"; */
-"gXH-HL-ZOL.title" = "Curseur de luminosité pour les écrans ou les télévisions contrôlés par matériel ou logiciel.";
+"gXH-HL-ZOL.title" = "Curseur de luminosité pour les écrans ou télévisions contrôlés par matériel ou logiciel.";
 
 /* Class = "NSTextFieldCell"; title = "Override audio device name:"; ObjectID = "H9X-it-sXs"; */
 "H9X-it-sXs.title" = "Remplacer le nom du périphérique audio :";
@@ -188,7 +188,7 @@
 "i5X-M5-Tf5.title" = "Contrôles supplémentaires :";
 
 /* Class = "NSTextFieldCell"; title = "Brightness:"; ObjectID = "IJB-mO-e8I"; */
-"IJB-mO-e8I.title" = "Luminosité:";
+"IJB-mO-e8I.title" = "Luminosité :";
 
 /* Class = "NSButtonCell"; title = "Enable smooth brightness transitions"; ObjectID = "IK4-u5-qjf"; */
 "IK4-u5-qjf.title" = "Activer les transitions de luminosité fluides";
@@ -212,7 +212,7 @@
 "JWJ-OY-VtE.title" = "Lancer MonitorControl au démarrage";
 
 /* Class = "NSTextFieldCell"; title = "Note: you can press Shift during startup for 'Safe mode' to restore defaults and avoid reading or setting anything."; ObjectID = "Jx2-gO-nq9"; */
-"Jx2-gO-nq9.title" = "Remarque : vous pouvez appuyer sur Maj pendant le démarrage pour démarrer en « Mode sans échec » ce qui restaure les paramètres par défaut et évite de lire ou de définir quoi que ce soit.";
+"Jx2-gO-nq9.title" = "Remarque : vous pouvez appuyer sur Maj au lancement pour démarrer en « Mode sans échec » ce qui restaure les paramètres par défaut et évite de lire ou de définir quoi que ce soit.";
 
 /* Class = "NSButtonCell"; title = "Enable for Apple branded and built-in displays as well"; ObjectID = "K6A-4z-1aQ"; */
 "K6A-4z-1aQ.title" = "Activer également les écrans Apple et intégrés";
@@ -281,7 +281,7 @@
 "Orv-yj-Nad.title" = "nb. de tentative :";
 
 /* Class = "NSTextFieldCell"; title = "Use the brightness keys of your Apple keyboard to control brightness. You can hold Control to adjust the built-in display, Control+Command to adjust external displays. Hold Shift+Option for fine control. Control+Option+Command adjusts contrast on DDC compatible displays."; ObjectID = "pa0-Hz-ace"; */
-"pa0-Hz-ace.title" = "Utilisez les touches de luminosité de votre clavier Apple pour contrôler la luminosité. Vous pouvez maintenir Control pour ajuster l'affichage intégré, Control+Command pour ajuster les affichages externes. Maintenez Maj+Option pour un contrôle précis. Contrôle+Option+Command ajuste le contraste sur les écrans compatibles DDC.";
+"pa0-Hz-ace.title" = "Utilisez les touches de luminosité de votre clavier Apple pour contrôler la luminosité. Vous pouvez maintenir Control pour ajuster l'affichage intégré, Control+Command pour ajuster les écrans externes. Maintenez Maj+Option pour un contrôle précis. Contrôle+Option+Command ajuste le contraste sur les écrans compatibles DDC.";
 
 /* Class = "NSTextFieldCell"; title = "Control method:"; ObjectID = "PaK-1f-DsW"; */
 "PaK-1f-DsW.title" = "Méthode de contrôle :";
@@ -296,7 +296,7 @@
 "pVc-wG-Bdh.title" = "Ouvrir les Préférences Système…";
 
 /* Class = "NSTextFieldCell"; title = "Use software dimming after the display reached zero hardware brightness for extended range. Works for DDC controlled displays only."; ObjectID = "PyY-p9-3NP"; */
-"PyY-p9-3NP.title" = "Utilisez le contrôle logiciel une fois que l'écran a atteint une luminosité matérielle de zéro pour une portée étendue. Fonctionne pour les écrans contrôlés par matériel (DDC) uniquement.";
+"PyY-p9-3NP.title" = "Utilisez le contrôle logiciel une fois que l'écran a atteint une luminosité matérielle de zéro pour une portée étendue. Fonctionne uniquement pour les écrans contrôlés par matériel (DDC).";
 
 /* Class = "NSTextFieldCell"; title = "Brightness down"; ObjectID = "q5a-Ix-Hjs"; */
 "q5a-Ix-Hjs.title" = "Luminosité moins";
@@ -320,7 +320,7 @@
 "r76-Zc-x09.title" = "Combiner le contrôle matériel et logiciel";
 
 /* Class = "NSTextFieldCell"; title = "Enable Apple keyboard native key access"; ObjectID = "RBj-pU-aen"; */
-"RBj-pU-aen.title" = "Activer l'accès aux touches natives Apple du clavier";
+"RBj-pU-aen.title" = "Activer l'accès aux touches natives du clavier Apple";
 
 /* Class = "NSMenuItem"; title = "Normal"; ObjectID = "Riq-uM-bTs"; */
 "Riq-uM-bTs.title" = "Normal";
@@ -380,7 +380,7 @@
 "xQJ-aJ-VhH.title" = "Raccourcis standard et personnalisés";
 
 /* Class = "NSTextFieldCell"; title = "Works best with various syncing and 'control all' keyboard settings enabled."; ObjectID = "XU4-Bn-bwH"; */
-"XU4-Bn-bwH.title" = "Fonctionne mieux avec divers paramètres de synchronisation et les réglage « tout contrôler » du clavier activés.";
+"XU4-Bn-bwH.title" = "Fonctionne mieux avec divers paramètres de synchronisation et le réglage « tout contrôler » du clavier activés.";
 
 /* Class = "NSTextFieldCell"; title = "Available"; ObjectID = "yBJ-5d-I7e"; */
 "yBJ-5d-I7e.title" = "Disponible";
