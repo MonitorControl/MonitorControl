@@ -1,8 +1,8 @@
 /* Shown in the main prefs window */
-"About" = "Информация";
+"About" = "О программе";
 
 /* Shown in the alert dialog */
-"An other app seems to change the brightness or colors which causes issues.\n\nTo solve this, you need to quit the other app or disable gamma control for your displays in MonitorControl!" = "Похоже другое приложение изменяет яркость или цвета, что вызывает проблемы.\n\nЧтобы это решить, вам нужно выйти из другого приложения или отключить управление гаммой для ваших дисплеев в MonitorControl!";
+"An other app seems to change the brightness or colors which causes issues.\n\nTo solve this, you need to quit the other app or disable gamma control for your displays in MonitorControl!" = "Похоже другое приложение изменяет яркость или цвета, что вызывает проблемы.\n\nДля решения этой проблемы вам нужно закрыть другое приложение или отключить управление гаммой для ваших дисплеев в MonitorControl!";
 
 /* Shown in the main prefs window */
 "App menu" = "Меню";
@@ -35,7 +35,7 @@
 "Decrease" = "Уменьшить";
 
 /* Shown in the alert dialog */
-"Disable gamma control for my displays" = "Отключите управление гаммой для своих дисплеев";
+"Disable gamma control for my displays" = "Отключить управление гаммой для моих дисплеев";
 
 /* Shown in the main prefs window */
 "Displays" = "Дисплеи";
@@ -50,10 +50,10 @@
 "General" = "Основные";
 
 /* Shown in the Display Preferences */
-"Hardware (Apple)" = "Оборудование (Apple)";
+"Hardware (Apple)" = "Аппаратный (Apple)";
 
 /* Shown in the Display Preferences */
-"Hardware (DDC)" = "Оборудование (DDC)";
+"Hardware (DDC)" = "Аппаратный (DDC)";
 
 /* Shown in the alert dialog */
 "I'll quit the other app" = "Я выйду из другого приложения";
@@ -65,13 +65,13 @@
 "Increase" = "Увеличить";
 
 /* Shown in the alert dialog */
-"Is f.lux or similar running?" = "Работает ли f.lux или аналогичный?";
+"Is f.lux or similar running?" = "Запущен f.lux или что-то похожее?";
 
 /* Shown in the main prefs window */
 "Keyboard" = "Клавиатура";
 
 /* Shown in record shortcut box */
-"Mute" = "Беззвучный";
+"Mute" = "Откл. звук";
 
 /* Shown in the alert dialog */
 "No" = "Нет";
@@ -83,10 +83,10 @@
 "Other Display" = "Другой дисплей";
 
 /* Shown in the alert dialog */
-"Preferences for an incompatible previous app version detected. Default preferences are reloaded." = "Обнаружены настройки для несовместимой предыдущей версии приложения. Настройки по умолчанию будут перезагружены.";
+"Preferences for an incompatible previous app version detected. Default preferences are reloaded." = "Обнаружены настройки от несовместимой предыдущей версии приложения. Будут загружены настройки по умолчанию.";
 
 /* Shown in menu */
-"Preferences…" = "Персональные настройки…";
+"Preferences…" = "Настройки…";
 
 /* Shown in menu */
 "Quit" = "Выйти";
@@ -98,43 +98,43 @@
 "Safe Mode Activated" = "Активирован безопасный режим";
 
 /* Shown in the alert dialog */
-"Shift was pressed during launch. MonitorControl started in safe mode. Default preferences are reloaded, DDC read is blocked." = "Shift был нажат во время запуска. MonitorControl запущен в безопасном режиме. Настройки по умолчанию перезагружены, чтение DDC заблокировано.";
+"Shift was pressed during launch. MonitorControl started in safe mode. Default preferences are reloaded, DDC read is blocked." = "Shift был нажат во время запуска. MonitorControl запущен в безопасном режиме. Загружены настройки по умолчанию, чтение DDC заблокировано.";
 
 /* Shown in the alert dialog */
-"Shortcuts not available" = "Быстрые команды недоступны";
+"Shortcuts not available" = "Сочетания клавиш недоступны";
 
 /* Shown in the Display Preferences */
-"Software (gamma)" = "Программное обеспечение (гамма)";
+"Software (gamma)" = "Программное (гамма)";
 
 /* Shown in the Display Preferences */
-"Software (gamma, forced)" = "Программное обеспечение (гамма, принудительно)";
+"Software (gamma, forced)" = "Программное (гамма, принудительно)";
 
 /* Shown in the Display Preferences */
-"Software (shade)" = "Программное обеспечение (тень)";
+"Software (shade)" = "Программное (затенение)";
 
 /* Shown in the Display Preferences */
-"Software (shade, forced)" = "Программное обеспечение (тень, принудительно)";
+"Software (shade, forced)" = "Программное (затенение, принудительно)";
 
 /* Shown in the Display Preferences */
-"This display allows for software brightness control via gamma table manipulation or shade as it does not support hardware control. Reasons for this might be using the HDMI port of a Mac mini (which blocks hardware DDC control) or having a blacklisted display." = "Этот дисплей позволяет программно регулировать яркость с помощью манипуляций с таблицей гаммы или оттенков, поскольку он не поддерживает аппаратное управление. Причинами этого может быть использование порта HDMI Mac mini (который блокирует аппаратное управление DDC) или наличие дисплея, занесенного в черный список.";
+"This display allows for software brightness control via gamma table manipulation or shade as it does not support hardware control. Reasons for this might be using the HDMI port of a Mac mini (which blocks hardware DDC control) or having a blacklisted display." = "Этот дисплей позволяет программно регулировать яркость с помощью манипуляций с таблицей гаммы или оттенков, поскольку он не поддерживает аппаратное управление. Причинами этого может быть использование HDMI порта на Mac mini (который блокирует аппаратное управление DDC) или наличие дисплея, занесенного в черный список.";
 
 /* Shown in the Display Preferences */
 "This display has an unspecified control status." = "Этот дисплей имеет неопределенный статус управления.";
 
 /* Shown in the Display Preferences */
-"This display is reported to support hardware DDC control but the current settings allow for software control only." = "Сообщается, что этот дисплей поддерживает аппаратное управление DDC, но текущие настройки допускают только программное управление.";
+"This display is reported to support hardware DDC control but the current settings allow for software control only." = "Этот дисплей сообщает, что поддерживает аппаратное управление через DDC, но текущие настройки позволяют только программное управление.";
 
 /* Shown in the Display Preferences */
-"This display is reported to support hardware DDC control. If you encounter issues, you can disable hardware DDC control to force software control." = "Сообщается, что этот дисплей поддерживает аппаратное управление DDC. Если у вас возникнут проблемы, вы можете отключить аппаратное управление DDC, чтобы принудительно управлять программным обеспечением.";
+"This display is reported to support hardware DDC control. If you encounter issues, you can disable hardware DDC control to force software control." = "Этот дисплей сообщает, что поддерживает аппаратное управление через DDC. В случае проблем, вы можете отключить аппаратное управление через DDC, чтобы принудительно использовать программное управление.";
 
 /* Shown in the Display Preferences */
-"This display supports native Apple brightness protocol. This allows macOS to control this display without MonitorControl as well." = "Этот дисплей поддерживает собственный протокол Apple brightness protocol. Это позволяет macOS также управлять этим дисплеем без MonitorControl.";
+"This display supports native Apple brightness protocol. This allows macOS to control this display without MonitorControl as well." = "Этот дисплей поддерживает нативный протокол яркости Apple. Это позволяет macOS управлять этим дисплеем без использования MonitorControl.";
 
 /* Shown in the Display Preferences */
-"This is a virtual display (examples: AirPlay, Sidecar, display connected via a DisplayLink Dock or similar) which does not allow hardware or software gammatable control. Shading is used as a substitute but only in non-mirror scenarios. Mouse cursor will be unaffected and artifacts may appear when entering/leaving full screen mode." = "Это виртуальный дисплей (примеры: AirPlay, Sidecar, дисплей, подключенный через док-станцию DisplayLink или аналогичный), который не допускает аппаратного или программного управления с возможностью воспроизведения. Затенение используется в качестве замены, но только в незеркальных сценариях. Курсор мыши не будет затронут, и при входе/выходе из полноэкранного режима могут появляться артефакты..";
+"This is a virtual display (examples: AirPlay, Sidecar, display connected via a DisplayLink Dock or similar) which does not allow hardware or software gammatable control. Shading is used as a substitute but only in non-mirror scenarios. Mouse cursor will be unaffected and artifacts may appear when entering/leaving full screen mode." = "Это виртуальный дисплей (например: AirPlay, Sidecar, дисплей подключенный через док-станцию DisplayLink или аналогичное устройство), который не поддерживает аппаратное или программное управление гаммой. Затенение используется в качестве замены, но только в режимах без видео-повтора. При этом курсор мыши останется неизменным и могут возникнуть артефакты при входе/выходе из полноэкранного режима.";
 
 /* Unknown display name */
-"Unknown" = "Неизвестно";
+"Unknown" = "Неизвестный";
 
 /* Version */
 "Version" = "Версия";
@@ -149,4 +149,4 @@
 "Yes" = "Да";
 
 /* Shown in the alert dialog */
-"You need to enable MonitorControl in System Preferences > Security and Privacy > Accessibility for the keyboard shortcuts to work" = "Вам необходимо включить MonitorControl в разделе Системные настройки > Безопасность и конфиденциальность > Специальные возможности, чтобы сочетания клавиш работали";
+"You need to enable MonitorControl in System Preferences > Security and Privacy > Accessibility for the keyboard shortcuts to work" = "Вам необходимо включить MonitorControl, перейдите в Системные настройки > Конфиденциальность и безопасность > Универсальный доступ, чтобы сочетания клавиш работали";
