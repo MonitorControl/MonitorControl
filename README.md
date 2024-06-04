@@ -1,7 +1,7 @@
-<img src=".github/Icon-cropped.png" width="220" alt="App icon" align="left"/>
+<img src=".github/Icon-cropped.png" width="200" alt="App icon" align="left"/>
 
 <div>
-<h2>MonitorControl - for Apple Silicon and Intel</h2>
+<h3>MonitorControl - for Apple Silicon and Intel</h3>
 <p>Controls your external display brightness and volume and shows native OSD.
 Use menubar extra sliders or the keyboard, including native Apple keys!</p>
 <a href="https://github.com/MonitorControl/MonitorControl/releases"><img src=".github/macos_badge_noborder.png" width="175" alt="Download for macOS"/></a>
@@ -61,16 +61,16 @@ brew install MonitorControl
 - Support for custom keyboard shortcuts as well as standard brightness and media keys on Apple keyboards.
 - Dozens of customization options to tweak the inner workings of the app to suit your hardware and needs (don't forget to enable `Show advanced settings` in app Preferences).
 - Simple, unobtrusive UI to blend in to the general aesthetics of macOS.
-- **One of the best app of its kind, completely FREE ([donations welcome](https://opencollective.com/monitorcontrol)) with the source code transparently available!**
+- **One of the best app of its kind, completely FREE.**
 
 ## How to install and use the app
 
 1. [Download the app](https://github.com/MonitorControl/MonitorControl/releases)
 2. Copy the MonitorControl app file from the .DMG to your Applications folder
 3. Click on the `MonitorControl` app file
-4. Add the app to `Accessibility` under `System Preferences` » `Privacy & Security` » `Privacy` as prompted (this is required only if you wish to use the native Apple keyboard brightness and media keys - if this is not the case, you can safely skip this step).
+4. Add the app to `Accessibility` under `System Settings` » `Privacy & Security` as prompted (this is required only if you wish to use the native Apple keyboard brightness and media keys - if this is not the case, you can safely skip this step).
 5. Use your keyboard or the sliders in the app menu (a brightness symbol in the macOS menubar as shown on the screenshot above) to control your displays.
-6. Open `Preferences...` for customization options (enable `Show advanced settings` for even more options).
+6. Open `Preferences…` for customization options (enable `Show advanced settings` for even more options).
 7. You can set up custom keyboard shortcuts under the `Keyboard` in Preferences (the app uses Apple media keys by default).
 8. If you have any questions, go to [Discussions](https://github.com/MonitorControl/MonitorControl/discussions)!
 
