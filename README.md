@@ -111,16 +111,6 @@ Compatibility with
 - f.lux users: please activate `Avoid gamma table manipulation` under `Preferences` » `Displays`! This step is not needed if you use Night Shift.
 - [BetterDisplay](https://betterdisplay.pro/) users: either activate `Avoid gamma table manipulation` in MonitorControl or turn off `Allow color adjustments` in BetterDisplay (under Settings/Displays/Overview). You might want to disable native keyboard control either in MonitorControl or BetterDisplay, depending on which app you want to use for brightness control and dimming.
 
-## How to help
-
-- You can greatly help out [by financing the project with your donation or by being a Sponsor](https://opencollective.com/monitorcontrol)!
-- Open [issues](https://github.com/MonitorControl/MonitorControl/issues) if you have a question, an enhancement to suggest or a bug you've found.
-- If you want, you can fork the code yourself and submit a pull request to improve the app (Note: accepting a PR is solely in the collective hands of the maintainers).
-
-## Localizations
-
-MonitorControl supports localization. We gladly welcome your contribution with a new language! See the [opening post of the relevant discussion](https://github.com/MonitorControl/MonitorControl/discussions/637) on how to add your translation!
-
 ## How to build
 
 ### Required
