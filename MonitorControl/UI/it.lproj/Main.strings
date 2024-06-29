@@ -86,7 +86,7 @@
 "bIe-6O-xEH.title" = "Solo per i monitor con controllo hardware (DDC). I risultati possono variare.";
 
 /* Class = "NSButtonCell"; title = "Disable macOS volume OSD"; ObjectID = "bkM-Px-U3b"; */
-"bkM-Px-U3b.title" = "Disabilita l'OSD del volumme del macOS";
+"bkM-Px-U3b.title" = "Disabilita l'OSD del volume del macOS";
 
 /* Class = "NSTextFieldCell"; title = "OSD scale:"; ObjectID = "bP4-GJ-vhJ"; */
 "bP4-GJ-vhJ.title" = "Scala OSD:";
