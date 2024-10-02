@@ -48,7 +48,7 @@ brew install MonitorControl
 
 For additional features, more advanced brightness control with XDR/HDR brightness upscaling and support for more Mac models and displays, check out [BetterDisplay](https://github.com/waydabber/BetterDisplay#readme)!
 
-### Screenshots (Preferences)
+### Screenshots (Settings)
 
 <div align="center">
 <img src=".github/pref_1.png" width="392" alt="Screenshot"/>
