@@ -59,6 +59,11 @@ For additional features, more advanced brightness control with XDR/HDR brightnes
 7. You can set up custom keyboard shortcuts under the `Keyboard` in Preferences (the app uses Apple media keys by default).
 8. If you have any questions, go to [Discussions](https://github.com/MonitorControl/MonitorControl/discussions)!
 
+## Contributing to the project
+
+- You can help out [by contributiong to the project with your one-time donation or by being a regular Sponsor](https://opencollective.com/monitorcontrol)!
+- If you want, you can fork the code, make improvements and submit a pull request to improve the app. Accepting a PR is solely in the hands of the maintainer - before making fundamental changes expecting it to be accepted, please consult the maintainer of the project!
+
 ## Screenshots (Preferences)
 
 <div align="center">
