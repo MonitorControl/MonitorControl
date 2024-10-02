@@ -194,8 +194,8 @@ enum MenuIcon: Int {
 }
 
 enum MenuItemStyle: Int {
-  case text = 0
-  case icon = 1
+  case icon = 0
+  case text = 1
   case hide = 2
 }
 
