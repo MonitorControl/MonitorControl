@@ -1,0 +1,17 @@
+<?xml version="1.0" standalone="yes"?>
+<rss xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle" version="2.0">
+    <channel>
+        <title>MonitorControl</title>
+        <item>
+            <title>4.3.2</title>
+            <pubDate>Wed, 02 Oct 2024 15:26:15 +0200</pubDate>
+            <sparkle:releaseNotesLink>
+                https://monitorcontrol.app/changelog.html?tag=v4.3.2
+            </sparkle:releaseNotesLink>
+            <sparkle:version>7105</sparkle:version>
+            <sparkle:shortVersionString>4.3.2</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>10.14</sparkle:minimumSystemVersion>
+            <enclosure url="https://github.com/MonitorControl/MonitorControl/releases/download/v4.3.2/MonitorControl.4.3.2.dmg" length="20768847" type="application/octet-stream" sparkle:edSignature="aDOB6ZksClpLaMtprTI2qc8LijlPpYdhkYmJjtEPjmCdxlG9hhSxy1wbhFMG2lxB8juNhMWod9rb+hK0ktjUDQ=="/>
+        </item>
+    </channel>
+</rss>
