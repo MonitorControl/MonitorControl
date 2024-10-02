@@ -48,6 +48,15 @@ brew install MonitorControl
 
 For additional features, more advanced brightness control with XDR/HDR brightness upscaling and support for more Mac models and displays, check out [BetterDisplay](https://github.com/waydabber/BetterDisplay#readme)!
 
+### Screenshots (Preferences)
+
+<div align="center">
+<img src=".github/pref_1.png" width="392" alt="Screenshot"/>
+<img src=".github/pref_2.png" width="392" alt="Screenshot"/>
+<img src=".github/pref_3.png" width="392" alt="Screenshot"/>
+<img src=".github/pref_4.png" width="392" alt="Screenshot"/>
+</div>
+
 ## How to install and use the app
 
 1. [Download the app](https://github.com/MonitorControl/MonitorControl/releases)
@@ -59,21 +68,7 @@ For additional features, more advanced brightness control with XDR/HDR brightnes
 7. You can set up custom keyboard shortcuts under the `Keyboard` in Preferences (the app uses Apple media keys by default).
 8. If you have any questions, go to [Discussions](https://github.com/MonitorControl/MonitorControl/discussions)!
 
-## Contributing to the project
-
-- You can help out [by contributiong to the project with your one-time donation or by being a regular Sponsor](https://opencollective.com/monitorcontrol)!
-- If you want, you can fork the code, make improvements and submit a pull request to improve the app. Accepting a PR is solely in the hands of the maintainer - before making fundamental changes expecting it to be accepted, please consult the maintainer of the project!
-
-## Screenshots (Preferences)
-
-<div align="center">
-<img src=".github/pref_1.png" width="392" alt="Screenshot"/>
-<img src=".github/pref_2.png" width="392" alt="Screenshot"/>
-<img src=".github/pref_3.png" width="392" alt="Screenshot"/>
-<img src=".github/pref_4.png" width="392" alt="Screenshot"/>
-</div>
-
-## macOS compatibility
+### macOS compatibility
 
 | MonitorControl version | macOS version     |
 | ---------------------- | ----------------- |
@@ -85,7 +80,7 @@ _* With some limitations - full functionality available on macOS 11 Big Sur or n
 
 For macOS Sequoia compatibility [v4.3.2 or newer](https://github.com/MonitorControl/MonitorControl/releases) is required!
 
-## Supported displays
+### Supported displays
 
 - Most modern LCD displays from all major manufacturers supported implemented DDC/CI protocol via USB-C, DisplayPort, HDMI, DVI or VGA to allow for hardware backlight and volume control.
 - Apple displays and built-in displays are supported using native protocols.
@@ -102,6 +97,12 @@ Compatibility with
 
 - f.lux users: please activate `Avoid gamma table manipulation` under `Preferences` » `Displays`! This step is not needed if you use Night Shift.
 - [BetterDisplay](https://betterdisplay.pro/) users: either activate `Avoid gamma table manipulation` in MonitorControl or turn off `Allow color table adjustments` in BetterDisplay (under Settings/Displays/Overview). You might want to disable native keyboard control either in MonitorControl or BetterDisplay, depending on which app you want to use for brightness control and dimming.
+
+## Contributing to the project
+
+- You can help out [by contributiong to the project with your one-time donation or by being a regular Sponsor](https://opencollective.com/monitorcontrol)!
+- If you want, you can fork the code, make improvements and submit a pull request to improve the app. Accepting a PR is solely in the hands of the maintainer - before making fundamental changes expecting it to be accepted, please consult the maintainer of the project!
+
 
 ## How to build
 
@@ -131,11 +132,13 @@ git clone https://github.com/MonitorControl/MonitorControl.git
 - [KeyboardShortcuts](https://github.com/sindresorhus/KeyboardShortcuts)
 - [Sparkle](https://github.com/sparkle-project/Sparkle)
 
-## Maintainer
+## Hall of Honor
+
+### Current maintainer of the project
 
 - [@waydabber](https://github.com/waydabber), developer of [BetterDisplay](https://github.com/waydabber/BetterDisplay#readme).
 
-## Thanks
+### Former maintainers, special contributors
 
 - [@the0neyouseek](https://github.com/the0neyouseek) - previous (now honorary) maintainer
 - [@JoniVR](https://github.com/JoniVR) - previous (now honorary) maintainer
