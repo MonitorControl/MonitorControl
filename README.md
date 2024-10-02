@@ -1,7 +1,7 @@
 <img src=".github/Icon-cropped.png" width="200" alt="App icon" align="left"/>
 
 <div>
-<h3>MonitorControl - for Apple Silicon and Intel</h3>
+<h3>MonitorControl - now compatible with macOS Sequoia</h3>
 <p>Controls your external display brightness and volume and shows native OSD.
 Use menubar extra sliders or the keyboard, including native Apple keys!</p>
 <a href="https://github.com/MonitorControl/MonitorControl/releases"><img src=".github/macos_badge_noborder.png" width="175" alt="Download for macOS"/></a>
@@ -10,14 +10,9 @@ Use menubar extra sliders or the keyboard, including native Apple keys!</p>
 <br/><br/>
 
 <div align="center">
-<!-- shields -->
-<!-- downloads -->
 <a href="https://github.com/MonitorControl/MonitorControl/releases"><img src="https://img.shields.io/github/downloads/MonitorControl/MonitorControl/total.svg?style=flat" alt="downloads"/></a>
-<!-- version -->
 <a href="https://github.com/MonitorControl/MonitorControl/releases"><img src="https://img.shields.io/github/release-pre/MonitorControl/MonitorControl.svg?style=flat" alt="latest version"/></a>
-<!-- license -->
 <a href="https://github.com/MonitorControl/MonitorControl/blob/master/License.txt"><img src="https://img.shields.io/github/license/MonitorControl/MonitorControl.svg?style=flat" alt="license"/></a>
-<!-- platform -->
 <a href="https://github.com/MonitorControl/MonitorControl"><img src="https://img.shields.io/badge/platform-macOS-lightgrey.svg?style=flat" alt="platform"/></a>
 
 <br/>
@@ -51,14 +46,16 @@ brew install MonitorControl
 - Simple, unobtrusive UI to blend in to the general aesthetics of macOS.
 - **One of the best app of its kind, completely FREE.**
 
+For additional features, more advanced brightness control with XDR/HDR brightness upscaling and support for more Mac models and displays, check out [BetterDisplay](https://github.com/waydabber/BetterDisplay#readme)!
+
 ## How to install and use the app
 
 1. [Download the app](https://github.com/MonitorControl/MonitorControl/releases)
-2. Copy the MonitorControl app file from the .DMG to your Applications folder
-3. Click on the `MonitorControl` app file
+2. Copy the MonitorControl app file from the .dmg file to your Applications folder
+3. Click on the `MonitorControl` app
 4. Add the app to `Accessibility` under `System Settings` » `Privacy & Security` as prompted (this is required only if you wish to use the native Apple keyboard brightness and media keys - if this is not the case, you can safely skip this step).
 5. Use your keyboard or the sliders in the app menu (a brightness symbol in the macOS menubar as shown on the screenshot above) to control your displays.
-6. Open `Preferences…` for customization options (enable `Show advanced settings` for even more options).
+6. Open `Settings…` for customization options (enable `Show advanced settings` for even more options).
 7. You can set up custom keyboard shortcuts under the `Keyboard` in Preferences (the app uses Apple media keys by default).
 8. If you have any questions, go to [Discussions](https://github.com/MonitorControl/MonitorControl/discussions)!
 
@@ -99,7 +96,7 @@ Notable exceptions for hardware control compatibility:
 Compatibility with 
 
 - f.lux users: please activate `Avoid gamma table manipulation` under `Preferences` » `Displays`! This step is not needed if you use Night Shift.
-- [BetterDisplay](https://betterdisplay.pro/) users: either activate `Avoid gamma table manipulation` in MonitorControl or turn off `Allow color adjustments` in BetterDisplay (under Settings/Displays/Overview). You might want to disable native keyboard control either in MonitorControl or BetterDisplay, depending on which app you want to use for brightness control and dimming.
+- [BetterDisplay](https://betterdisplay.pro/) users: either activate `Avoid gamma table manipulation` in MonitorControl or turn off `Allow color table adjustments` in BetterDisplay (under Settings/Displays/Overview). You might want to disable native keyboard control either in MonitorControl or BetterDisplay, depending on which app you want to use for brightness control and dimming.
 
 ## How to build
 
@@ -137,11 +134,11 @@ git clone https://github.com/MonitorControl/MonitorControl.git
 
 - [@the0neyouseek](https://github.com/the0neyouseek) - previous (now honorary) maintainer
 - [@JoniVR](https://github.com/JoniVR) - previous (now honorary) maintainer
+- [@alin23](https://github.com/alin23) (generally spearheaded M1 DDC support and figured out a many of the caveats)
 - [@mathew-kurian](https://github.com/mathew-kurian/) (original developer)
 - [@Tyilo](https://github.com/Tyilo/) (fork)
 - [@Bensge](https://github.com/Bensge/) - (used some code from his project [NativeDisplayBrightness](https://github.com/Bensge/NativeDisplayBrightness))
 - [@nhurden](https://github.com/nhurden/) (for the original MediaKeyTap)
 - [@kfix](https://github.com/kfix/ddcctl) (for ddcctl)
 - [@reitermarkus](https://github.com/reitermarkus) (for Intel DDC support)
-- [@alin23](https://github.com/alin23) (generally spearheaded M1 DDC support and figured out a many of the caveats)
 - [javierocasio](https://www.deviantart.com/javierocasio) (app icon background)
