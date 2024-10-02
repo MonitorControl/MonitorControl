@@ -12,25 +12,13 @@ Use menubar extra sliders or the keyboard, including native Apple keys!</p>
 <div align="center">
 <!-- shields -->
 <!-- downloads -->
-<a href="https://github.com/MonitorControl/MonitorControl/releases">
-<img src="https://img.shields.io/github/downloads/MonitorControl/MonitorControl/total.svg?style=flat" alt="downloads"/>
-</a>
+<a href="https://github.com/MonitorControl/MonitorControl/releases"><img src="https://img.shields.io/github/downloads/MonitorControl/MonitorControl/total.svg?style=flat" alt="downloads"/></a>
 <!-- version -->
-<a href="https://github.com/MonitorControl/MonitorControl/releases">
-<img src="https://img.shields.io/github/release-pre/MonitorControl/MonitorControl.svg?style=flat" alt="latest version"/>
-</a>
+<a href="https://github.com/MonitorControl/MonitorControl/releases"><img src="https://img.shields.io/github/release-pre/MonitorControl/MonitorControl.svg?style=flat" alt="latest version"/></a>
 <!-- license -->
-<a href="https://github.com/MonitorControl/MonitorControl/blob/master/License.txt">
-<img src="https://img.shields.io/github/license/MonitorControl/MonitorControl.svg?style=flat" alt="license"/>
-</a>
+<a href="https://github.com/MonitorControl/MonitorControl/blob/master/License.txt"><img src="https://img.shields.io/github/license/MonitorControl/MonitorControl.svg?style=flat" alt="license"/></a>
 <!-- platform -->
-<a href="https://github.com/MonitorControl/MonitorControl">
-<img src="https://img.shields.io/badge/platform-macOS-lightgrey.svg?style=flat" alt="platform"/>
-</a>
-<!-- backers -->
-<a href="https://opencollective.com/monitorcontrol">
-<img src="https://opencollective.com/monitorcontrol/tiers/badge.svg" alt="backers"/>
-</a>
+<a href="https://github.com/MonitorControl/MonitorControl"><img src="https://img.shields.io/badge/platform-macOS-lightgrey.svg?style=flat" alt="platform"/></a>
 
 <br/>
 <br/>
@@ -93,6 +81,8 @@ brew install MonitorControl
 
 _* With some limitations - full functionality available on macOS 11 Big Sur or newer._
 
+For macOS Sequoia compatibility [v4.3.2 or newer](https://github.com/MonitorControl/MonitorControl/releases) is required!
+
 ## Supported displays
 
 - Most modern LCD displays from all major manufacturers supported implemented DDC/CI protocol via USB-C, DisplayPort, HDMI, DVI or VGA to allow for hardware backlight and volume control.
@@ -139,14 +129,14 @@ git clone https://github.com/MonitorControl/MonitorControl.git
 - [KeyboardShortcuts](https://github.com/sindresorhus/KeyboardShortcuts)
 - [Sparkle](https://github.com/sparkle-project/Sparkle)
 
-## Maintainers
+## Maintainer
 
-- [@the0neyouseek](https://github.com/the0neyouseek)
-- [@JoniVR](https://github.com/JoniVR)
-- [@waydabber](https://github.com/waydabber)
+- [@waydabber](https://github.com/waydabber), developer of [BetterDisplay](https://github.com/waydabber/BetterDisplay#readme).
 
 ## Thanks
 
+- [@the0neyouseek](https://github.com/the0neyouseek) - previous (now honorary) maintainer
+- [@JoniVR](https://github.com/JoniVR) - previous (now honorary) maintainer
 - [@mathew-kurian](https://github.com/mathew-kurian/) (original developer)
 - [@Tyilo](https://github.com/Tyilo/) (fork)
 - [@Bensge](https://github.com/Bensge/) - (used some code from his project [NativeDisplayBrightness](https://github.com/Bensge/NativeDisplayBrightness))
