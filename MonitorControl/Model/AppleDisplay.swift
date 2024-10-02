@@ -24,9 +24,8 @@ class AppleDisplay: Display {
     guard !self.isDummy else {
       return
     }
-    self.displayQueue.sync {
+    _ = self.displayQueue.sync {
       DisplayServicesSetBrightness(self.identifier, value)
-      DisplayServicesBrightnessChanged(self.identifier, Double(value))
     }
   }
 

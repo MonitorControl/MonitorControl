@@ -474,15 +474,17 @@ class DisplayManager {
   }
 
   static func isAppleDisplay(displayID: CGDirectDisplayID) -> Bool {
+    if #available(macOS 15.0, *) {
+      if CGDisplayVendorNumber(displayID) != 1552, CGSIsHDRSupported(displayID), CGSIsHDREnabled(displayID) {
+        return CGDisplayIsBuiltin(displayID) != 0
+      }
+    }
     var brightness: Float = -1
     let ret = DisplayServicesGetBrightness(displayID, &brightness)
     if ret == 0, brightness >= 0 { // If brightness read appears to be successful using DisplayServices then it should be an Apple display
       return true
     }
-    if CGDisplayIsBuiltin(displayID) != 0 { // If built-in display then it should be Apple (except for hackintosh notebooks...)
-      return true
-    }
-    return false
+    return CGDisplayIsBuiltin(displayID) != 0 // If built-in display, it should be Apple
   }
 
   static func getByDisplayID(displayID: CGDirectDisplayID) -> NSScreen? {

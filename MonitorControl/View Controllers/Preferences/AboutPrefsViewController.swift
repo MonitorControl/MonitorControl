@@ -25,10 +25,6 @@ class AboutPrefsViewController: NSViewController, PreferencePane {
     self.setCopyrightInfo()
   }
 
-  override func viewWillAppear() {
-    super.viewWillAppear()
-  }
-
   @IBAction func checkForUpdates(sender: NSButton) {
     app.updaterController.checkForUpdates(sender)
   }

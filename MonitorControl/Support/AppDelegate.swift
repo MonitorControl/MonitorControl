@@ -64,7 +64,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
   @objc func quitClicked(_: AnyObject) {
     os_log("Quit clicked", type: .info)
-    NSApplication.shared.terminate(self)
+    menu.closeMenu()
+    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+      NSApplication.shared.terminate(self)
+    }
   }
 
   @objc func prefsClicked(_: AnyObject) {

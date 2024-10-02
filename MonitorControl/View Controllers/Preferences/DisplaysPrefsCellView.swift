@@ -6,10 +6,6 @@ import os.log
 class DisplaysPrefsCellView: NSTableCellView {
   var display: Display?
 
-  override func draw(_ dirtyRect: NSRect) {
-    super.draw(dirtyRect)
-  }
-
   @IBOutlet var displayImage: NSImageCell!
   @IBOutlet var friendlyName: NSTextFieldCell!
   @IBOutlet var displayId: NSTextFieldCell!

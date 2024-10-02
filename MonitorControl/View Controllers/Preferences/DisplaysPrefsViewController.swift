@@ -34,10 +34,6 @@ class DisplaysPrefsViewController: NSViewController, PreferencePane, NSTableView
     self.showAdvancedDisplays.state = prefs.bool(forKey: PrefKey.showAdvancedSettings.rawValue) ? .on : .off
   }
 
-  override func viewWillAppear() {
-    super.viewWillAppear()
-  }
-
   func updateGridLayout() -> Bool {
     let hide = !prefs.bool(forKey: PrefKey.showAdvancedSettings.rawValue)
     self.loadDisplayList()
@@ -73,8 +69,7 @@ class DisplaysPrefsViewController: NSViewController, PreferencePane, NSTableView
 
   public static func isImac() -> Bool {
     let platformExpertDevice = IOServiceGetMatchingService(kIOMasterPortDefault, IOServiceMatching("IOPlatformExpertDevice"))
-    if let modelData = IORegistryEntryCreateCFProperty(platformExpertDevice, "model" as CFString, kCFAllocatorDefault, 0).takeRetainedValue() as? Data, let modelIdentifierCString = String(data: modelData, encoding: .utf8)?.cString(using: .utf8) {
-      let modelIdentifier = String(cString: modelIdentifierCString)
+    if let modelIdentifier = IORegistryEntryCreateCFProperty(platformExpertDevice, "model" as CFString, kCFAllocatorDefault, 0).takeRetainedValue() as? String {
       return modelIdentifier.contains("iMac")
     }
     return false
