@@ -390,13 +390,13 @@
                                     <gridCell row="ZS3-Gy-pfA" column="V6M-Jv-Agj" xPlacement="leading" id="QXg-i0-lVT">
                                         <popUpButton key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6td-Zq-3e7">
                                             <rect key="frame" x="217" y="462" width="126" height="25"/>
-                                            <popUpButtonCell key="cell" type="push" title="Show as text" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="fWd-Es-zsy" id="2lO-tb-DFv">
+                                            <popUpButtonCell key="cell" type="push" title="Show as icons" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="fR3-kq-cps" id="2lO-tb-DFv">
                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" metaFont="message"/>
                                                 <menu key="menu" id="rOp-pe-iEq">
                                                     <items>
-                                                        <menuItem title="Show as text" state="on" id="fWd-Es-zsy"/>
-                                                        <menuItem title="Show as icons" tag="1" id="fR3-kq-cps"/>
+                                                        <menuItem title="Show as icons" id="fR3-kq-cps"/>
+                                                        <menuItem title="Show as text" state="on" tag="1" id="fWd-Es-zsy"/>
                                                         <menuItem title="Hide" tag="2" id="HUT-Qc-kuu"/>
                                                     </items>
                                                 </menu>

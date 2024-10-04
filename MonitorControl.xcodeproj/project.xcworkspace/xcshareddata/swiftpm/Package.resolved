@@ -1,4 +1,5 @@
 {
+  "originHash" : "84fa266e40e059306e085f65a46dd4d8e4eac94006fae6e400cd4f6b8302705b",
   "pins" : [
     {
       "identity" : "keyboardshortcuts",
@@ -23,8 +24,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/sindresorhus/Preferences",
       "state" : {
-        "revision" : "ffeaaad1def45d0625720dc1adae3789cd9c167d",
-        "version" : "2.5.0"
+        "revision" : "2651cd144615009242c994b087508fef99e9275c",
+        "version" : "2.6.0"
       }
     },
     {
@@ -54,5 +55,5 @@
       }
     }
   ],
-  "version" : 2
+  "version" : 3
 }
