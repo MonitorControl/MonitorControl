@@ -3,6 +3,17 @@
     <channel>
         <title>MonitorControl</title>
         <item>
+            <title>4.3.3</title>
+            <pubDate>Fri, 04 Oct 2024 12:47:49 +0200</pubDate>
+            <sparkle:releaseNotesLink>
+                https://monitorcontrol.app/changelog.html?tag=v4.3.3
+            </sparkle:releaseNotesLink>
+            <sparkle:version>7123</sparkle:version>
+            <sparkle:shortVersionString>4.3.3</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>10.14</sparkle:minimumSystemVersion>
+            <enclosure url="https://github.com/MonitorControl/MonitorControl/releases/download/v4.3.3/MonitorControl.4.3.3.dmg" length="20788084" type="application/octet-stream" sparkle:edSignature="jifeG4u//AiZoDY+zobnNjUhb7bBzyGuIdiN//auoCOIWUoSXYbHREesA5DOmRB392me5w9TmVVN8yTAIYQ/AQ=="/>
+        </item>
+        <item>
             <title>4.3.2</title>
             <pubDate>Wed, 02 Oct 2024 15:26:15 +0200</pubDate>
             <sparkle:releaseNotesLink>
