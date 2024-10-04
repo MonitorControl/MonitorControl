@@ -42,7 +42,7 @@ brew install MonitorControl
 - Sync up all your displays using a single slider or keyboard shortcuts.
 - Allows dimming to full black.
 - Support for custom keyboard shortcuts as well as standard brightness and media keys on Apple keyboards.
-- Dozens of customization options to tweak the inner workings of the app to suit your hardware and needs (don't forget to enable `Show advanced settings` in app Preferences).
+- Dozens of customization options to tweak the inner workings of the app to suit your hardware and needs (don't forget to enable `Show advanced settings` in app Settings).
 - Simple, unobtrusive UI to blend in to the general aesthetics of macOS.
 - **One of the best app of its kind, completely FREE.**
 
@@ -65,7 +65,7 @@ For additional features, more advanced brightness control with XDR/HDR brightnes
 4. Add the app to `Accessibility` under `System Settings` » `Privacy & Security` as prompted (this is required only if you wish to use the native Apple keyboard brightness and media keys - if this is not the case, you can safely skip this step).
 5. Use your keyboard or the sliders in the app menu (a brightness symbol in the macOS menubar as shown on the screenshot above) to control your displays.
 6. Open `Settings…` for customization options (enable `Show advanced settings` for even more options).
-7. You can set up custom keyboard shortcuts under the `Keyboard` in Preferences (the app uses Apple media keys by default).
+7. You can set up custom keyboard shortcuts under the `Keyboard` in Settings (the app uses Apple media keys by default).
 8. If you have any questions, go to [Discussions](https://github.com/MonitorControl/MonitorControl/discussions)!
 
 ### macOS compatibility
@@ -95,7 +95,7 @@ Notable exceptions for hardware control compatibility:
 
 Compatibility with 
 
-- f.lux users: please activate `Avoid gamma table manipulation` under `Preferences` » `Displays`! This step is not needed if you use Night Shift.
+- f.lux users: please activate `Avoid gamma table manipulation` under `Settings` » `Displays`! This step is not needed if you use Night Shift.
 - [BetterDisplay](https://betterdisplay.pro/) users: either activate `Avoid gamma table manipulation` in MonitorControl or turn off `Allow color table adjustments` in BetterDisplay (under Settings/Displays/Overview). You might want to disable native keyboard control either in MonitorControl or BetterDisplay, depending on which app you want to use for brightness control and dimming.
 
 ## Contributing to the project
@@ -127,7 +127,7 @@ git clone https://github.com/MonitorControl/MonitorControl.git
 ### Third party dependencies
 
 - [MediaKeyTap](https://github.com/MonitorControl/MediaKeyTap)
-- [Preferences](https://github.com/sindresorhus/Preferences)
+- [Settings](https://github.com/sindresorhus/Settings)
 - [SimplyCoreAudio](https://github.com/rnine/SimplyCoreAudio)
 - [KeyboardShortcuts](https://github.com/sindresorhus/KeyboardShortcuts)
 - [Sparkle](https://github.com/sparkle-project/Sparkle)

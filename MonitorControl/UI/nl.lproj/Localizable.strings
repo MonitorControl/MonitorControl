@@ -11,7 +11,7 @@
 "Are you sure you want to enable a longer delay? Doing so may freeze your system and require a restart. Start at login will be disabled as a safety measure." = "Weet u zeker dat u een langere vertraging wilt inschakelen? Als u dit doet kan uw systeem vastlopen en een herstart nodig hebben. Start bij het inloggen wordt uitgeschakeld als veiligheidsmaatregel.";
 
 /* Shown in the alert dialog */
-"Are you sure you want to reset all preferences?" = "Weet u zeker dat u alle voorkeuren wilt herstellen?";
+"Are you sure you want to reset all settings?" = "Weet u zeker dat u alle voorkeuren wilt herstellen?";
 
 /* Shown in menu */
 "Brightness" = "Helderheid";
@@ -19,7 +19,7 @@
 /* Build */
 "Build" = "Build";
 
-/* Shown in the Display Preferences */
+/* Shown in the Display Settings */
 "Built-in Display" = "Ingebouwd Scherm";
 
 /* Shown in menu */
@@ -43,16 +43,16 @@
 /* Shown in the alert dialog */
 "Enable Longer Delay?" = "Langere vertraging inschakelen?";
 
-/* Shown in the Display Preferences */
+/* Shown in the Display Settings */
 "External Display" = "Extern Scherm";
 
 /* Shown in the main prefs window */
 "General" = "Algemeen";
 
-/* Shown in the Display Preferences */
+/* Shown in the Display Settings */
 "Hardware (Apple)" = "Hardware (Apple)";
 
-/* Shown in the Display Preferences */
+/* Shown in the Display Settings */
 "Hardware (DDC)" = "Hardware (DDC)";
 
 /* Shown in the alert dialog */
@@ -76,61 +76,61 @@
 /* Shown in the alert dialog */
 "No" = "Nee";
 
-/* Shown in the Display Preferences */
+/* Shown in the Display Settings */
 "No Control" = "Geen controle";
 
-/* Shown in the Display Preferences */
+/* Shown in the Display Settings */
 "Other Display" = "Ander Scherm";
 
 /* Shown in the alert dialog */
-"Preferences for an incompatible previous app version detected. Default preferences are reloaded." = "Voorkeuren voor een incompatibele vorige app-versie gedetecteerd. Standaardvoorkeuren worden opnieuw geladen.";
+"Settings for an incompatible previous app version detected. Default settings are reloaded." = "Voorkeuren voor een incompatibele vorige app-versie gedetecteerd. Standaardvoorkeuren worden opnieuw geladen.";
 
 /* Shown in menu */
-"Preferences…" = "Voorkeuren…";
+"Settings…" = "Voorkeuren…";
 
 /* Shown in menu */
 "Quit" = "Afsluiten";
 
 /* Shown in the alert dialog */
-"Reset Preferences?" = "Reset Voorkeuren?";
+"Reset Settings?" = "Reset Voorkeuren?";
 
 /* Shown in the alert dialog */
 "Safe Mode Activated" = "Veilige Modus Geactiveerd";
 
 /* Shown in the alert dialog */
-"Shift was pressed during launch. MonitorControl started in safe mode. Default preferences are reloaded, DDC read is blocked." = "Shift werd ingedrukt tijdens het opstarten. MonitorControl is gestart in veilige modus. Standaardinstellingen zijn herladen, DDC uitlezen is geblokkeerd.";
+"Shift was pressed during launch. MonitorControl started in safe mode. Default settings are reloaded, DDC read is blocked." = "Shift werd ingedrukt tijdens het opstarten. MonitorControl is gestart in veilige modus. Standaardinstellingen zijn herladen, DDC uitlezen is geblokkeerd.";
 
 /* Shown in the alert dialog */
 "Shortcuts not available" = "Sneltoetsen niet beschikbaar";
 
-/* Shown in the Display Preferences */
+/* Shown in the Display Settings */
 "Software (gamma)" = "Software (gamma)";
 
-/* Shown in the Display Preferences */
+/* Shown in the Display Settings */
 "Software (gamma, forced)" = "Software (Gamma, Gedwongen)";
 
-/* Shown in the Display Preferences */
+/* Shown in the Display Settings */
 "Software (shade)" = "Software (tint)";
 
-/* Shown in the Display Preferences */
+/* Shown in the Display Settings */
 "Software (shade, forced)" = "Software (tint, Gedwongen)";
 
-/* Shown in the Display Preferences */
+/* Shown in the Display Settings */
 "This display allows for software brightness control via gamma table manipulation or shade as it does not support hardware control. Reasons for this might be using the HDMI port of a Mac mini (which blocks hardware DDC control) or having a blacklisted display." = "Dit scherm maakt softwarematige helderheidsregeling via gammatable-manipulatie mogelijk, aangezien het geen hardwarecontrole ondersteunt. Redenen hiervoor kunnen het gebruik van de HDMI-poort van een Mac mini zijn (die hardwarematige DDC-besturing blokkeert) of een niet-ondersteund scherm.";
 
-/* Shown in the Display Preferences */
+/* Shown in the Display Settings */
 "This display has an unspecified control status." = "Dit scherm heeft een niet-gespecificeerde controlestatus.";
 
-/* Shown in the Display Preferences */
+/* Shown in the Display Settings */
 "This display is reported to support hardware DDC control but the current settings allow for software control only." = "Dit scherm ondersteunt hardwarematige DDC-besturing, maar de huidige instellingen laten alleen softwarebesturing toe.";
 
-/* Shown in the Display Preferences */
+/* Shown in the Display Settings */
 "This display is reported to support hardware DDC control. If you encounter issues, you can disable hardware DDC control to force software control." = "Dit scherm ondersteunt hardware DDC-besturing. Als u problemen ondervindt, kunt u de hardware DDC-besturing uitschakelen om softwarebesturing te forceren";
 
-/* Shown in the Display Preferences */
+/* Shown in the Display Settings */
 "This display supports native Apple brightness protocol. This allows macOS to control this display without MonitorControl as well." = "Dit scherm ondersteunt het native Apple-helderheidsprotocol. Hierdoor kan macOS dit scherm ook zonder MonitorControl bedienen.";
 
-/* Shown in the Display Preferences */
+/* Shown in the Display Settings */
 "This is a virtual display (examples: AirPlay, Sidecar, display connected via a DisplayLink Dock or similar) which does not allow hardware or software gammatable control. Shading is used as a substitute but only in non-mirror scenarios. Mouse cursor will be unaffected and artifacts may appear when entering/leaving full screen mode." = "Dit is een virtueel scherm (voorbeelden: AirPlay, Sidecar, scherm aangesloten via een DisplayLink Dock of gelijkaardig) dat geen hardware- of softwaregammabesturing toestaat. Shading wordt gebruikt als vervanging, maar alleen in scenario's zonder mirroring. De muiscursor wordt niet beïnvloed en er kunnen artefacten verschijnen bij het openen/verlaten van de fullscreen modus.";
 
 /* unknown display name
@@ -141,7 +141,7 @@
 /* Version */
 "Version" = "Versie";
 
-/* Shown in the Display Preferences */
+/* Shown in the Display Settings */
 "Virtual Display" = "Virtueel Scherm";
 
 /* Shown in menu */
@@ -151,4 +151,4 @@
 "Yes" = "Ja";
 
 /* Shown in the alert dialog */
-"You need to enable MonitorControl in System Preferences > Security and Privacy > Accessibility for the keyboard shortcuts to work" = "U moet MonitorControl inschakelen in Systeemvoorkeuren > Beveiliging en Privacy > Privacy > Toegankelijkheid inschakelen, zodat de sneltoetsen werken.";
+"You need to enable MonitorControl in System Settings > Security and Privacy > Accessibility for the keyboard shortcuts to work" = "U moet MonitorControl inschakelen in Systeemvoorkeuren > Beveiliging en Privacy > Privacy > Toegankelijkheid inschakelen, zodat de sneltoetsen werken.";

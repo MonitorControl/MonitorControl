@@ -2,9 +2,9 @@
 
 import Cocoa
 
-import Preferences
+import Settings
 
-extension Preferences.PaneIdentifier {
+extension Settings.PaneIdentifier {
   static let main = Self("Main")
   static let menusliders = Self("Menu & Sliders")
   static let keyboard = Self("Keyboard")
@@ -12,7 +12,7 @@ extension Preferences.PaneIdentifier {
   static let about = Self("About")
 }
 
-public extension PreferencesWindowController {
+public extension SettingsWindowController {
   override func keyDown(with event: NSEvent) {
     if event.modifierFlags.intersection(.deviceIndependentFlagsMask) == .command, let key = event.charactersIgnoringModifiers {
       if key == "w" {

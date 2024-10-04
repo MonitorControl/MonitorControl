@@ -11,7 +11,7 @@
 "Are you sure you want to enable a longer delay? Doing so may freeze your system and require a restart. Start at login will be disabled as a safety measure." = "Naozaj chcete povoliť dlhšie oneskorenie? Ak tak urobíte, môže dôjsť k zamrznutiu systému a potrebe jeho reštartovania. Spustenie pri štarte bude z bezpečnostných dôvodov vypnuté.";
 
 /* Shown in the alert dialog */
-"Are you sure you want to reset all preferences?" = "Naozaj chcete obnoviť všetky predvoľby?";
+"Are you sure you want to reset all settings?" = "Naozaj chcete obnoviť všetky predvoľby?";
 
 /* Shown in menu */
 "Brightness" = "Jas";
@@ -19,7 +19,7 @@
 /* Build */
 "Build" = "Zostava";
 
-/* Shown in the Display Preferences */
+/* Shown in the Display Settings */
 "Built-in Display" = "Vstavaný displej";
 
 /* Shown in menu */
@@ -43,16 +43,16 @@
 /* Shown in the alert dialog */
 "Enable Longer Delay?" = "Povoliť dlhšie oneskorenie?";
 
-/* Shown in the Display Preferences */
+/* Shown in the Display Settings */
 "External Display" = "Externý displej";
 
 /* Shown in the main prefs window */
 "General" = "Všeobecné";
 
-/* Shown in the Display Preferences */
+/* Shown in the Display Settings */
 "Hardware (Apple)" = "Hardvér (Apple)";
 
-/* Shown in the Display Preferences */
+/* Shown in the Display Settings */
 "Hardware (DDC)" = "Hardvér (DDC)";
 
 /* Shown in the alert dialog */
@@ -76,64 +76,64 @@
 /* Shown in the alert dialog */
 "No" = "Nie";
 
-/* Shown in the Display Preferences */
+/* Shown in the Display Settings */
 "No Control" = "Bez ovládania";
 
-/* Shown in the Display Preferences */
+/* Shown in the Display Settings */
 "Other Display" = "Iný displej";
 
 /* Shown in the alert dialog */
-"Preferences for an incompatible previous app version detected. Default preferences are reloaded." = "Zistené predvoľby pre nekompatibilnú predošlú verziu aplikácie. Predvolené nastavenia sa načítajú znova.";
+"Settings for an incompatible previous app version detected. Default settings are reloaded." = "Zistené predvoľby pre nekompatibilnú predošlú verziu aplikácie. Predvolené nastavenia sa načítajú znova.";
 
 /* Shown in menu */
-"Preferences…" = "Predvoľby…";
+"Settings…" = "Predvoľby…";
 
 /* Shown in menu */
 "Quit" = "Ukončiť";
 
 /* Shown in the alert dialog */
-"Reset Preferences?" = "Obnoviť predvoľby?";
+"Reset Settings?" = "Obnoviť predvoľby?";
 
 /* Shown in the alert dialog */
 "Safe Mode Activated" = "Aktivovaný núdzový režim";
 
 /* Shown in the alert dialog */
-"Shift was pressed during launch. MonitorControl started in safe mode. Default preferences are reloaded, DDC read is blocked." = "Počas spustenia bol stlačený Shift. MonitorControl sa spustil v núdzovom režime. Predvolené nastavenia sa znova načítajú, čítanie DDC sa zablokuje.";
+"Shift was pressed during launch. MonitorControl started in safe mode. Default settings are reloaded, DDC read is blocked." = "Počas spustenia bol stlačený Shift. MonitorControl sa spustil v núdzovom režime. Predvolené nastavenia sa znova načítajú, čítanie DDC sa zablokuje.";
 
 /* Shown in the alert dialog */
 "Shortcuts not available" = "Skratky nie sú k dispozícii";
 
-/* Shown in the Display Preferences */
+/* Shown in the Display Settings */
 "Software (gamma)" = "Softvér (gama)";
 
-/* Shown in the Display Preferences */
+/* Shown in the Display Settings */
 "Software (gamma, forced)" = "Softvér (gama, vynútené)";
 
-/* Shown in the Display Preferences */
+/* Shown in the Display Settings */
 "Software (shade)" = "Softvér (tienenie)";
 
-/* Shown in the Display Preferences */
+/* Shown in the Display Settings */
 "Software (shade, forced)" = "Softvér (tienenie, vynútené)";
 
 /* Sofware update deny consequences */
 "SoftwareUpdateDenyConsequences" = "Ak tieto pripojenia zakážete, nebudete informovaný o nových verziách a aktualizáciách zabezpečenia. Aktualizácie zabezpečenia sú dôležité na ochranu pred útokmi škodlivého softvéru.";
 
-/* Shown in the Display Preferences */
+/* Shown in the Display Settings */
 "This display allows for software brightness control via gamma table manipulation or shade as it does not support hardware control. Reasons for this might be using the HDMI port of a Mac mini (which blocks hardware DDC control) or having a blacklisted display." = "Tento displej umožňuje softvérové ovládanie jasu pomocou manipulácie s gama tabuľkami alebo tienením, pretože nepodporuje hardvérové ovládanie. Dôvodom môže byť použitie HDMI portu Mac mini (ktorý blokuje hardvérové ovládanie DDC) alebo použitie displeja z čiernej listiny.";
 
-/* Shown in the Display Preferences */
+/* Shown in the Display Settings */
 "This display has an unspecified control status." = "Tento displej má nešpecifikovaný stav ovládania.";
 
-/* Shown in the Display Preferences */
+/* Shown in the Display Settings */
 "This display is reported to support hardware DDC control but the current settings allow for software control only." = "Tento displej údajne podporuje hardvérové ovládanie DDC, ale súčasné nastavenia umožňujú len softvérové ovládanie.";
 
-/* Shown in the Display Preferences */
+/* Shown in the Display Settings */
 "This display is reported to support hardware DDC control. If you encounter issues, you can disable hardware DDC control to force software control." = "Tento displej údajne podporuje hardvérové ovládanie DDC. Ak sa vyskytnú problémy, môžete vypnúť hardvérové ovládanie DDC a vynútiť si softvérové ovládanie.";
 
-/* Shown in the Display Preferences */
+/* Shown in the Display Settings */
 "This display supports native Apple brightness protocol. This allows macOS to control this display without MonitorControl as well." = "Tento displej podporuje natívny protokol jasu Apple. To umožňuje systému macOS ovládať tento displej aj bez MonitorControl.";
 
-/* Shown in the Display Preferences */
+/* Shown in the Display Settings */
 "This is a virtual display (examples: AirPlay, Sidecar, display connected via a DisplayLink Dock or similar) which does not allow hardware or software gammatable control. Shading is used as a substitute but only in non-mirror scenarios. Mouse cursor will be unaffected and artifacts may appear when entering/leaving full screen mode." = "Ide o virtuálny displej (napr.: AirPlay, Sidecar, displej pripojený cez DisplayLink Dock alebo podobné), ktorý neumožňuje hardvérové alebo softvérové ovládanie. Tieňovanie sa používa ako náhrada, ale iba okrem zrkadlenia. Kurzor myši nebude ovplyvnený a pri vstupe/opustení režimu celej obrazovky sa môžu objaviť artefakty.";
 
 /* Unknown display name */
@@ -142,7 +142,7 @@
 /* Version */
 "Version" = "Verzia";
 
-/* Shown in the Display Preferences */
+/* Shown in the Display Settings */
 "Virtual Display" = "Virtuálny displej";
 
 /* Shown in menu */
@@ -152,4 +152,4 @@
 "Yes" = "Áno";
 
 /* Shown in the alert dialog */
-"You need to enable MonitorControl in System Preferences > Security and Privacy > Accessibility for the keyboard shortcuts to work" = "Pre fungovanie klávesových skratiek musíte zapnúť MonitorControl v Systémové nastavenia > Súkromie a bezpečnosť > Prístupnosť";
+"You need to enable MonitorControl in System Settings > Security and Privacy > Accessibility for the keyboard shortcuts to work" = "Pre fungovanie klávesových skratiek musíte zapnúť MonitorControl v Systémové nastavenia > Súkromie a bezpečnosť > Prístupnosť";

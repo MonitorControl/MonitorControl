@@ -11,7 +11,7 @@
 "Are you sure you want to enable a longer delay? Doing so may freeze your system and require a restart. Start at login will be disabled as a safety measure." = "Вы уверены, что хотите включить более длительную задержку? Это может привести к зависанию вашей системы и потребовать перезагрузки. Эта функция будет отключена при входе в систему в качестве меры безопасности.";
 
 /* Shown in the alert dialog */
-"Are you sure you want to reset all preferences?" = "Вы уверены, что хотите сбросить все настройки?";
+"Are you sure you want to reset all settings?" = "Вы уверены, что хотите сбросить все настройки?";
 
 /* Shown in menu */
 "Brightness" = "Яркость";
@@ -19,7 +19,7 @@
 /* Build */
 "Build" = "Релиз";
 
-/* Shown in the Display Preferences */
+/* Shown in the Display Settings */
 "Built-in Display" = "Встроенный дисплей";
 
 /* Shown in menu */
@@ -43,16 +43,16 @@
 /* Shown in the alert dialog */
 "Enable Longer Delay?" = "Включить более длительную задержку?";
 
-/* Shown in the Display Preferences */
+/* Shown in the Display Settings */
 "External Display" = "Внешний дисплей";
 
 /* Shown in the main prefs window */
 "General" = "Основные";
 
-/* Shown in the Display Preferences */
+/* Shown in the Display Settings */
 "Hardware (Apple)" = "Аппаратный (Apple)";
 
-/* Shown in the Display Preferences */
+/* Shown in the Display Settings */
 "Hardware (DDC)" = "Аппаратный (DDC)";
 
 /* Shown in the alert dialog */
@@ -76,61 +76,61 @@
 /* Shown in the alert dialog */
 "No" = "Нет";
 
-/* Shown in the Display Preferences */
+/* Shown in the Display Settings */
 "No Control" = "Не контролируемый";
 
-/* Shown in the Display Preferences */
+/* Shown in the Display Settings */
 "Other Display" = "Другой дисплей";
 
 /* Shown in the alert dialog */
-"Preferences for an incompatible previous app version detected. Default preferences are reloaded." = "Обнаружены настройки от несовместимой предыдущей версии приложения. Будут загружены настройки по умолчанию.";
+"Settings for an incompatible previous app version detected. Default settings are reloaded." = "Обнаружены настройки от несовместимой предыдущей версии приложения. Будут загружены настройки по умолчанию.";
 
 /* Shown in menu */
-"Preferences…" = "Настройки…";
+"Settings…" = "Настройки…";
 
 /* Shown in menu */
 "Quit" = "Выйти";
 
 /* Shown in the alert dialog */
-"Reset Preferences?" = "Сбросить настройки?";
+"Reset Settings?" = "Сбросить настройки?";
 
 /* Shown in the alert dialog */
 "Safe Mode Activated" = "Активирован безопасный режим";
 
 /* Shown in the alert dialog */
-"Shift was pressed during launch. MonitorControl started in safe mode. Default preferences are reloaded, DDC read is blocked." = "Shift был нажат во время запуска. MonitorControl запущен в безопасном режиме. Загружены настройки по умолчанию, чтение DDC заблокировано.";
+"Shift was pressed during launch. MonitorControl started in safe mode. Default settings are reloaded, DDC read is blocked." = "Shift был нажат во время запуска. MonitorControl запущен в безопасном режиме. Загружены настройки по умолчанию, чтение DDC заблокировано.";
 
 /* Shown in the alert dialog */
 "Shortcuts not available" = "Сочетания клавиш недоступны";
 
-/* Shown in the Display Preferences */
+/* Shown in the Display Settings */
 "Software (gamma)" = "Программное (гамма)";
 
-/* Shown in the Display Preferences */
+/* Shown in the Display Settings */
 "Software (gamma, forced)" = "Программное (гамма, принудительно)";
 
-/* Shown in the Display Preferences */
+/* Shown in the Display Settings */
 "Software (shade)" = "Программное (затенение)";
 
-/* Shown in the Display Preferences */
+/* Shown in the Display Settings */
 "Software (shade, forced)" = "Программное (затенение, принудительно)";
 
-/* Shown in the Display Preferences */
+/* Shown in the Display Settings */
 "This display allows for software brightness control via gamma table manipulation or shade as it does not support hardware control. Reasons for this might be using the HDMI port of a Mac mini (which blocks hardware DDC control) or having a blacklisted display." = "Этот дисплей позволяет программно регулировать яркость с помощью манипуляций с таблицей гаммы или оттенков, поскольку он не поддерживает аппаратное управление. Причинами этого может быть использование HDMI порта на Mac mini (который блокирует аппаратное управление DDC) или наличие дисплея, занесенного в черный список.";
 
-/* Shown in the Display Preferences */
+/* Shown in the Display Settings */
 "This display has an unspecified control status." = "Этот дисплей имеет неопределенный статус управления.";
 
-/* Shown in the Display Preferences */
+/* Shown in the Display Settings */
 "This display is reported to support hardware DDC control but the current settings allow for software control only." = "Этот дисплей сообщает, что поддерживает аппаратное управление через DDC, но текущие настройки позволяют только программное управление.";
 
-/* Shown in the Display Preferences */
+/* Shown in the Display Settings */
 "This display is reported to support hardware DDC control. If you encounter issues, you can disable hardware DDC control to force software control." = "Этот дисплей сообщает, что поддерживает аппаратное управление через DDC. В случае проблем, вы можете отключить аппаратное управление через DDC, чтобы принудительно использовать программное управление.";
 
-/* Shown in the Display Preferences */
+/* Shown in the Display Settings */
 "This display supports native Apple brightness protocol. This allows macOS to control this display without MonitorControl as well." = "Этот дисплей поддерживает нативный протокол яркости Apple. Это позволяет macOS управлять этим дисплеем без использования MonitorControl.";
 
-/* Shown in the Display Preferences */
+/* Shown in the Display Settings */
 "This is a virtual display (examples: AirPlay, Sidecar, display connected via a DisplayLink Dock or similar) which does not allow hardware or software gammatable control. Shading is used as a substitute but only in non-mirror scenarios. Mouse cursor will be unaffected and artifacts may appear when entering/leaving full screen mode." = "Это виртуальный дисплей (например: AirPlay, Sidecar, дисплей подключенный через док-станцию DisplayLink или аналогичное устройство), который не поддерживает аппаратное или программное управление гаммой. Затенение используется в качестве замены, но только в режимах без видео-повтора. При этом курсор мыши останется неизменным и могут возникнуть артефакты при входе/выходе из полноэкранного режима.";
 
 /* Unknown display name */
@@ -139,7 +139,7 @@
 /* Version */
 "Version" = "Версия";
 
-/* Shown in the Display Preferences */
+/* Shown in the Display Settings */
 "Virtual Display" = "Виртуальный дисплей";
 
 /* Shown in menu */
@@ -149,4 +149,4 @@
 "Yes" = "Да";
 
 /* Shown in the alert dialog */
-"You need to enable MonitorControl in System Preferences > Security and Privacy > Accessibility for the keyboard shortcuts to work" = "Вам необходимо включить MonitorControl, перейдите в Системные настройки > Конфиденциальность и безопасность > Универсальный доступ, чтобы сочетания клавиш работали";
+"You need to enable MonitorControl in System Settings > Security and Privacy > Accessibility for the keyboard shortcuts to work" = "Вам необходимо включить MonitorControl, перейдите в Системные настройки > Конфиденциальность и безопасность > Универсальный доступ, чтобы сочетания клавиш работали";

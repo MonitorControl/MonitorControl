@@ -5,8 +5,8 @@ import Cocoa
 import Foundation
 import MediaKeyTap
 import os.log
-import Preferences
 import ServiceManagement
+import Settings
 import SimplyCoreAudio
 import Sparkle
 
@@ -24,23 +24,23 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   var audioPlayer: AVAudioPlayer?
   let updaterController = SPUStandardUpdaterController(startingUpdater: false, updaterDelegate: UpdaterDelegate(), userDriverDelegate: nil)
 
-  var preferencePaneStyle: Preferences.Style {
+  var settingsPaneStyle: Settings.Style {
     if !DEBUG_MACOS10, #available(macOS 11.0, *) {
-      return Preferences.Style.toolbarItems
+      return Settings.Style.toolbarItems
     } else {
-      return Preferences.Style.segmentedControl
+      return Settings.Style.segmentedControl
     }
   }
 
-  lazy var preferencesWindowController: PreferencesWindowController = .init(
-    preferencePanes: [
+  lazy var settingsWindowController: SettingsWindowController = .init(
+    panes: [
       mainPrefsVc!,
       menuslidersPrefsVc!,
       keyboardPrefsVc!,
       displaysPrefsVc!,
       aboutPrefsVc!,
     ],
-    style: self.preferencePaneStyle,
+    style: self.settingsPaneStyle,
     animated: true
   )
 
@@ -71,8 +71,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   }
 
   @objc func prefsClicked(_: AnyObject) {
-    os_log("Preferences clicked", type: .info)
-    self.preferencesWindowController.show()
+    os_log("Settings clicked", type: .info)
+    self.settingsWindowController.show()
   }
 
   func applicationShouldHandleReopen(_: NSApplication, hasVisibleWindows _: Bool) -> Bool {
@@ -93,7 +93,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       if !self.safeMode {
         let alert = NSAlert()
         alert.messageText = NSLocalizedString("Incompatible previous version", comment: "Shown in the alert dialog")
-        alert.informativeText = NSLocalizedString("Preferences for an incompatible previous app version detected. Default preferences are reloaded.", comment: "Shown in the alert dialog")
+        alert.informativeText = NSLocalizedString("Settings for an incompatible previous app version detected. Default settings are reloaded.", comment: "Shown in the alert dialog")
         alert.runModal()
       }
       prefs.removePersistentDomain(forName: bundleID)
@@ -103,7 +103,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
   func setDefaultPrefs() {
     if !prefs.bool(forKey: PrefKey.appAlreadyLaunched.rawValue) {
-      // Only preferences that are not false, 0 or "" by default are set here. Assumes pre-wiped database.
+      // Only settings that are not false, 0 or "" by default are set here. Assumes pre-wiped database.
       prefs.set(true, forKey: PrefKey.appAlreadyLaunched.rawValue)
       prefs.set(true, forKey: PrefKey.SUEnableAutomaticChecks.rawValue)
     }
@@ -262,8 +262,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     self.updateMediaKeyTap()
   }
 
-  func preferenceReset() {
-    os_log("Resetting all preferences.")
+  func settingsReset() {
+    os_log("Resetting all settings.")
     if !prefs.bool(forKey: PrefKey.disableCombinedBrightness.rawValue) {
       DisplayManager.shared.resetSwBrightnessForAllDisplays(async: false)
     }
@@ -295,7 +295,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     SMLoginItemSetEnabled(identifier, enabled)
   }
 
-  func getSystemPreferences() -> [String: AnyObject]? {
+  func getSystemSettings() -> [String: AnyObject]? {
     var propertyListFormat = PropertyListSerialization.PropertyListFormat.xml
     let plistPath = NSString(string: "~/Library/Preferences/.GlobalPreferences.plist").expandingTildeInPath
     guard let plistXML = FileManager.default.contents(atPath: plistPath) else {
@@ -318,7 +318,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   }
 
   func playVolumeChangedSound() {
-    guard let preferences = app.getSystemPreferences(), let hasSoundEnabled = preferences["com.apple.sound.beep.feedback"] as? Int, hasSoundEnabled == 1 else {
+    guard let settings = app.getSystemSettings(), let hasSoundEnabled = settings["com.apple.sound.beep.feedback"] as? Int, hasSoundEnabled == 1 else {
       return
     }
     do {
@@ -342,7 +342,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       self.safeMode = true
       let alert = NSAlert()
       alert.messageText = NSLocalizedString("Safe Mode Activated", comment: "Shown in the alert dialog")
-      alert.informativeText = NSLocalizedString("Shift was pressed during launch. MonitorControl started in safe mode. Default preferences are reloaded, DDC read is blocked.", comment: "Shown in the alert dialog")
+      alert.informativeText = NSLocalizedString("Shift was pressed during launch. MonitorControl started in safe mode. Default settings are reloaded, DDC read is blocked.", comment: "Shown in the alert dialog")
       alert.runModal()
     }
   }

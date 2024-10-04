@@ -11,7 +11,7 @@
 "Are you sure you want to enable a longer delay? Doing so may freeze your system and require a restart. Start at login will be disabled as a safety measure." = "Sei sicuro di voler attivare un ritardo più lungo? Facendolo potresti bloccare il sistema e dover riavviare. L'avvio automatico al login verrà disabilitaco come misura di sicurezza.";
 
 /* Shown in the alert dialog */
-"Are you sure you want to reset all preferences?" = "Sei sicuro di voler resettare tutte le preferenze?";
+"Are you sure you want to reset all settings?" = "Sei sicuro di voler resettare tutte le preferenze?";
 
 /* Shown in menu */
 "Brightness" = "Luminosità";
@@ -19,7 +19,7 @@
 /* Build */
 "Build" = "Build";
 
-/* Shown in the Display Preferences */
+/* Shown in the Display Settings */
 "Built-in Display" = "Monitor Integrato";
 
 /* Shown in menu */
@@ -43,16 +43,16 @@
 /* Shown in the alert dialog */
 "Enable Longer Delay?" = "Abilito un ritardo più lungo?";
 
-/* Shown in the Display Preferences */
+/* Shown in the Display Settings */
 "External Display" = "Monitor Esterno";
 
 /* Shown in the main prefs window */
 "General" = "Generale";
 
-/* Shown in the Display Preferences */
+/* Shown in the Display Settings */
 "Hardware (Apple)" = "Hardware (Apple)";
 
-/* Shown in the Display Preferences */
+/* Shown in the Display Settings */
 "Hardware (DDC)" = "Hardware (DDC)";
 
 /* Shown in the alert dialog */
@@ -76,61 +76,61 @@
 /* Shown in the alert dialog */
 "No" = "No";
 
-/* Shown in the Display Preferences */
+/* Shown in the Display Settings */
 "No Control" = "Nessun Controllo";
 
-/* Shown in the Display Preferences */
+/* Shown in the Display Settings */
 "Other Display" = "Altri Monitor";
 
 /* Shown in the alert dialog */
-"Preferences for an incompatible previous app version detected. Default preferences are reloaded." = "Le impostazioni di una versione precedente incompatibile sono state trovate. Verranno caricate le impostazioni di default.";
+"Settings for an incompatible previous app version detected. Default settings are reloaded." = "Le impostazioni di una versione precedente incompatibile sono state trovate. Verranno caricate le impostazioni di default.";
 
 /* Shown in menu */
-"Preferences…" = "Preferenze…";
+"Settings…" = "Preferenze…";
 
 /* Shown in menu */
 "Quit" = "Esci";
 
 /* Shown in the alert dialog */
-"Reset Preferences?" = "Resetto le preferenze?";
+"Reset Settings?" = "Resetto le preferenze?";
 
 /* Shown in the alert dialog */
 "Safe Mode Activated" = "Safe Mode Attivato";
 
 /* Shown in the alert dialog */
-"Shift was pressed during launch. MonitorControl started in safe mode. Default preferences are reloaded, DDC read is blocked." = "Il tasto Maiuscole è stato premuto all'avvio. MonitorControl è stato avviato in modalità sicura. Preferenze di default, lettura DDC bloccata.";
+"Shift was pressed during launch. MonitorControl started in safe mode. Default settings are reloaded, DDC read is blocked." = "Il tasto Maiuscole è stato premuto all'avvio. MonitorControl è stato avviato in modalità sicura. Preferenze di default, lettura DDC bloccata.";
 
 /* Shown in the alert dialog */
 "Shortcuts not available" = "Abbreviazioni non disponibili";
 
-/* Shown in the Display Preferences */
+/* Shown in the Display Settings */
 "Software (gamma)" = "Software (gamma)";
 
-/* Shown in the Display Preferences */
+/* Shown in the Display Settings */
 "Software (gamma, forced)" = "Software (gamma, forzata)";
 
-/* Shown in the Display Preferences */
+/* Shown in the Display Settings */
 "Software (shade)" = "Software (attenuazione)";
 
-/* Shown in the Display Preferences */
+/* Shown in the Display Settings */
 "Software (shade, forced)" = "Software (attenuazione, forzata)";
 
-/* Shown in the Display Preferences */
+/* Shown in the Display Settings */
 "This display allows for software brightness control via gamma table manipulation or shade as it does not support hardware control. Reasons for this might be using the HDMI port of a Mac mini (which blocks hardware DDC control) or having a blacklisted display." = "Questo monitor permette il controllo software della luminositò attraverso la manipolazione della gammatable e non supporta un controllo hardware. Un motivo potrebbe essere Reasons l'utilizzo della porta HDMI su un Mac Mini (che blocca il controllo hardware DCC) oppure avere un monitor non supportato.";
 
-/* Shown in the Display Preferences */
+/* Shown in the Display Settings */
 "This display has an unspecified control status." = "Questo monitor ha uno stato di controllo non specificato.";
 
-/* Shown in the Display Preferences */
+/* Shown in the Display Settings */
 "This display is reported to support hardware DDC control but the current settings allow for software control only." = "Questo monitor supporta il controllo DDC hardware ma le impostazioni correnti consentono solo quello software.";
 
-/* Shown in the Display Preferences */
+/* Shown in the Display Settings */
 "This display is reported to support hardware DDC control. If you encounter issues, you can disable hardware DDC control to force software control." = "Questo monitor supporta il controllo DDC hardware. Se rilevi dei problemi, puoi disabilitarlo e forzare il controllo software.";
 
-/* Shown in the Display Preferences */
+/* Shown in the Display Settings */
 "This display supports native Apple brightness protocol. This allows macOS to control this display without MonitorControl as well." = "Questo monitor supporta il protocollo nativo Apple della luminosità. Questo permette al macOS di controllare il monitor anhe senza l'utilizzo di MonitorControl.";
 
-/* Shown in the Display Preferences */
+/* Shown in the Display Settings */
 "This is a virtual display (examples: AirPlay, Sidecar, display connected via a DisplayLink Dock or similar) which does not allow hardware or software gammatable control. Shading is used as a substitute but only in non-mirror scenarios. Mouse cursor will be unaffected and artifacts may appear when entering/leaving full screen mode." = "Questo monitor è un di tipo virtuale (esempio: AirPlay, Sidecar, connessione via via DisplayLink Dock o simili) e non consente il controllo hardware o software della gammatable. La sfumatura è utilizzata in sostituzione ma solo in modalità non duplicazione. Il cursore del mouse non rimane invariato e si potrebbero verificare artefatti entrando/uscendo dalla modalità a pieno schermo.";
 
 /* Unknown display name */
@@ -139,7 +139,7 @@
 /* Version */
 "Version" = "Versione";
 
-/* Shown in the Display Preferences */
+/* Shown in the Display Settings */
 "Virtual Display" = "Monitor Virtuale";
 
 /* Shown in menu */
@@ -149,4 +149,4 @@
 "Yes" = "Si";
 
 /* Shown in the alert dialog */
-"You need to enable MonitorControl in System Preferences > Security and Privacy > Accessibility for the keyboard shortcuts to work" = "Devi abilitare MonitorControl nelle Preferenze di Sistema > Sicurezza e Privacy > Accessibilità affinchè le abbreviazioni da tastiera funzionino";
+"You need to enable MonitorControl in System Settings > Security and Privacy > Accessibility for the keyboard shortcuts to work" = "Devi abilitare MonitorControl nelle Preferenze di Sistema > Sicurezza e Privacy > Accessibilità affinchè le abbreviazioni da tastiera funzionino";

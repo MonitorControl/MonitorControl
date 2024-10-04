@@ -1,4 +1,5 @@
 {
+  "originHash" : "df195b12c1f6bd471af1cacb709842cb7eb355cce32fee1413f0f7d7aa5c4eb2",
   "pins" : [
     {
       "identity" : "keyboardshortcuts",
@@ -19,12 +20,12 @@
       }
     },
     {
-      "identity" : "preferences",
+      "identity" : "settings",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/sindresorhus/Preferences",
+      "location" : "https://github.com/sindresorhus/Settings",
       "state" : {
-        "revision" : "ffeaaad1def45d0625720dc1adae3789cd9c167d",
-        "version" : "2.5.0"
+        "branch" : "main",
+        "revision" : "879ea83a7bbc6dbebf62bed8c547f090146372a6"
       }
     },
     {
@@ -54,5 +55,5 @@
       }
     }
   ],
-  "version" : 2
+  "version" : 3
 }

@@ -2,12 +2,12 @@
 
 import Cocoa
 import KeyboardShortcuts
-import Preferences
 import ServiceManagement
+import Settings
 
-class KeyboardPrefsViewController: NSViewController, PreferencePane {
-  let preferencePaneIdentifier = Preferences.PaneIdentifier.keyboard
-  let preferencePaneTitle: String = NSLocalizedString("Keyboard", comment: "Shown in the main prefs window")
+class KeyboardPrefsViewController: NSViewController, SettingsPane {
+  let paneIdentifier = Settings.PaneIdentifier.keyboard
+  let paneTitle: String = NSLocalizedString("Keyboard", comment: "Shown in the main prefs window")
 
   var toolbarItemIcon: NSImage {
     if !DEBUG_MACOS10, #available(macOS 11.0, *) {

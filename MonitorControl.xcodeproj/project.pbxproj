@@ -17,7 +17,6 @@
 		6CC260F6256AD8F900613714 /* Preferences+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CC260F5256AD8F900613714 /* Preferences+Extension.swift */; };
 		6CD35F53264FFFC6001F1344 /* SimplyCoreAudio in Frameworks */ = {isa = PBXBuildFile; productRef = 6CD35F52264FFFC6001F1344 /* SimplyCoreAudio */; };
 		6CD35F5626500008001F1344 /* MediaKeyTap in Frameworks */ = {isa = PBXBuildFile; productRef = 6CD35F5526500008001F1344 /* MediaKeyTap */; };
-		6CD35F5C2650003F001F1344 /* Preferences in Frameworks */ = {isa = PBXBuildFile; productRef = 6CD35F5B2650003F001F1344 /* Preferences */; };
 		6CDA0FCF26485A8300F52125 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6CDA0FCD26485A8300F52125 /* Main.storyboard */; };
 		8C1741852707B91100E88D53 /* InternetAccessPolicy.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8C1741842707B91100E88D53 /* InternetAccessPolicy.plist */; };
 		8C1741882707B91F00E88D53 /* InternetAccessPolicy.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8C17418A2707B91F00E88D53 /* InternetAccessPolicy.strings */; };
@@ -49,6 +48,7 @@
 		AAB2F642273ED0C7004AB5A4 /* .github in Resources */ = {isa = PBXBuildFile; fileRef = AAB2F641273ED0C7004AB5A4 /* .github */; };
 		AAB2F644273ED0E9004AB5A4 /* License.txt in Resources */ = {isa = PBXBuildFile; fileRef = AAB2F643273ED0E9004AB5A4 /* License.txt */; };
 		AACE5E2327050C63006C2A48 /* NSNotification+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACE5E2227050C63006C2A48 /* NSNotification+Extension.swift */; };
+		AAD7DD342CAFF3D90062822F /* Settings in Frameworks */ = {isa = PBXBuildFile; productRef = AAD7DD332CAFF3D90062822F /* Settings */; };
 		AADB625A26BC196900DFFAA5 /* DisplayServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AADB625926BC196900DFFAA5 /* DisplayServices.framework */; };
 		F01B0699228221B7008E64DB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F01B0680228221B6008E64DB /* Localizable.strings */; };
 		F01B069F228221B7008E64DB /* SliderHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01B068F228221B7008E64DB /* SliderHandler.swift */; };
@@ -194,7 +194,7 @@
 				6CD35F53264FFFC6001F1344 /* SimplyCoreAudio in Frameworks */,
 				6CD35F5626500008001F1344 /* MediaKeyTap in Frameworks */,
 				AA9AE86F26B5BF3D00B6CA65 /* OSD.framework in Frameworks */,
-				6CD35F5C2650003F001F1344 /* Preferences in Frameworks */,
+				AAD7DD342CAFF3D90062822F /* Settings in Frameworks */,
 				AADB625A26BC196900DFFAA5 /* DisplayServices.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -394,9 +394,9 @@
 			packageProductDependencies = (
 				6CD35F52264FFFC6001F1344 /* SimplyCoreAudio */,
 				6CD35F5526500008001F1344 /* MediaKeyTap */,
-				6CD35F5B2650003F001F1344 /* Preferences */,
 				AA44E702270377C200E06865 /* KeyboardShortcuts */,
 				AA70817B27046B9800CC5625 /* Sparkle */,
+				AAD7DD332CAFF3D90062822F /* Settings */,
 			);
 			productName = MonitorControl.OSX;
 			productReference = 56754EAB1D9A4016007BCDC5 /* MonitorControl.app */;
@@ -474,7 +474,7 @@
 			packageReferences = (
 				6CD35F51264FFFC6001F1344 /* XCRemoteSwiftPackageReference "SimplyCoreAudio" */,
 				6CD35F5426500008001F1344 /* XCRemoteSwiftPackageReference "MediaKeyTap" */,
-				6CD35F5A2650003F001F1344 /* XCRemoteSwiftPackageReference "Preferences" */,
+				6CD35F5A2650003F001F1344 /* XCRemoteSwiftPackageReference "Settings" */,
 				AA44E701270377C200E06865 /* XCRemoteSwiftPackageReference "KeyboardShortcuts" */,
 				AA70817A27046B9800CC5625 /* XCRemoteSwiftPackageReference "Sparkle" */,
 			);
@@ -1043,12 +1043,12 @@
 				kind = branch;
 			};
 		};
-		6CD35F5A2650003F001F1344 /* XCRemoteSwiftPackageReference "Preferences" */ = {
+		6CD35F5A2650003F001F1344 /* XCRemoteSwiftPackageReference "Settings" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/sindresorhus/Preferences";
+			repositoryURL = "https://github.com/sindresorhus/Settings";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.3.0;
+				branch = main;
+				kind = branch;
 			};
 		};
 		AA44E701270377C200E06865 /* XCRemoteSwiftPackageReference "KeyboardShortcuts" */ = {
@@ -1080,11 +1080,6 @@
 			package = 6CD35F5426500008001F1344 /* XCRemoteSwiftPackageReference "MediaKeyTap" */;
 			productName = MediaKeyTap;
 		};
-		6CD35F5B2650003F001F1344 /* Preferences */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 6CD35F5A2650003F001F1344 /* XCRemoteSwiftPackageReference "Preferences" */;
-			productName = Preferences;
-		};
 		AA44E702270377C200E06865 /* KeyboardShortcuts */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = AA44E701270377C200E06865 /* XCRemoteSwiftPackageReference "KeyboardShortcuts" */;
@@ -1094,6 +1089,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = AA70817A27046B9800CC5625 /* XCRemoteSwiftPackageReference "Sparkle" */;
 			productName = Sparkle;
+		};
+		AAD7DD332CAFF3D90062822F /* Settings */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6CD35F5A2650003F001F1344 /* XCRemoteSwiftPackageReference "Settings" */;
+			productName = Settings;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

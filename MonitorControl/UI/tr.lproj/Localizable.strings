@@ -11,7 +11,7 @@
 "Are you sure you want to enable a longer delay? Doing so may freeze your system and require a restart. Start at login will be disabled as a safety measure." = "Daha uzun bir gecikmeyi etkinleştirmek istediğinizden emin misiniz? Bunu yapmak sisteminizi dondurabilir ve yeniden başlatılabilir. Başlangıçta güvenlik önlemi olarak devre dışı bırakılır.";
 
 /* Shown in the alert dialog */
-"Are you sure you want to reset all preferences?" = "Tüm ayarları sıfırlamak istediğinize emin misiniz?";
+"Are you sure you want to reset all settings?" = "Tüm ayarları sıfırlamak istediğinize emin misiniz?";
 
 /* Shown in menu */
 "Brightness" = "Parlaklık";
@@ -19,7 +19,7 @@
 /* Build */
 "Build" = "Sürüm";
 
-/* Shown in the Display Preferences */
+/* Shown in the Display Settings */
 "Built-in Display" = "Dahili Ekran";
 
 /* Shown in menu */
@@ -43,16 +43,16 @@
 /* Shown in the alert dialog */
 "Enable Longer Delay?" = "Daha Uzun Gecikmeyi Etkinleştir?";
 
-/* Shown in the Display Preferences */
+/* Shown in the Display Settings */
 "External Display" = "Harici Ekran";
 
 /* Shown in the main prefs window */
 "General" = "Genel";
 
-/* Shown in the Display Preferences */
+/* Shown in the Display Settings */
 "Hardware (Apple)" = "Donanım (Apple)";
 
-/* Shown in the Display Preferences */
+/* Shown in the Display Settings */
 "Hardware (DDC)" = "Donanım (DDC)";
 
 /* Shown in the alert dialog */
@@ -76,61 +76,61 @@
 /* Shown in the alert dialog */
 "No" = "Hayır";
 
-/* Shown in the Display Preferences */
+/* Shown in the Display Settings */
 "No Control" = "Kontrol Etme";
 
-/* Shown in the Display Preferences */
+/* Shown in the Display Settings */
 "Other Display" = "Diğer Ekran";
 
 /* Shown in the alert dialog */
-"Preferences for an incompatible previous app version detected. Default preferences are reloaded." = "Uyumsuz bir önceki uygulama sürümü için tercihler algılandı. Varsayılan tercihler yeniden yüklenir.";
+"Settings for an incompatible previous app version detected. Default settings are reloaded." = "Uyumsuz bir önceki uygulama sürümü için tercihler algılandı. Varsayılan tercihler yeniden yüklenir.";
 
 /* Shown in menu */
-"Preferences…" = "Tercihler…";
+"Settings…" = "Tercihler…";
 
 /* Shown in menu */
 "Quit" = "Çıkış";
 
 /* Shown in the alert dialog */
-"Reset Preferences?" = "Ayarları Sıfırla?";
+"Reset Settings?" = "Ayarları Sıfırla?";
 
 /* Shown in the alert dialog */
 "Safe Mode Activated" = "Güvenli Mod Etkinleştirildi";
 
 /* Shown in the alert dialog */
-"Shift was pressed during launch. MonitorControl started in safe mode. Default preferences are reloaded, DDC read is blocked." = "Başlatma sırasında Shift tuşuna basıldı. MonitorControl güvenli modda başlatıldı. Varsayılan tercihler yeniden yüklenir, DDC okuması engellenir.";
+"Shift was pressed during launch. MonitorControl started in safe mode. Default settings are reloaded, DDC read is blocked." = "Başlatma sırasında Shift tuşuna basıldı. MonitorControl güvenli modda başlatıldı. Varsayılan tercihler yeniden yüklenir, DDC okuması engellenir.";
 
 /* Shown in the alert dialog */
 "Shortcuts not available" = "Kısayollar bulunamadı";
 
-/* Shown in the Display Preferences */
+/* Shown in the Display Settings */
 "Software (gamma)" = "Yazılım (Gama)";
 
-/* Shown in the Display Preferences */
+/* Shown in the Display Settings */
 "Software (gamma, forced)" = "Yazılım (gamma, zorla)";
 
-/* Shown in the Display Preferences */
+/* Shown in the Display Settings */
 "Software (shade)" = "Yazılım (shade)";
 
-/* Shown in the Display Preferences */
+/* Shown in the Display Settings */
 "Software (shade, forced)" = "Yazılım (shade, zorla)";
 
-/* Shown in the Display Preferences */
+/* Shown in the Display Settings */
 "This display allows for software brightness control via gamma table manipulation or shade as it does not support hardware control. Reasons for this might be using the HDMI port of a Mac mini (which blocks hardware DDC control) or having a blacklisted display." = "Bu ekran, donanım kontrolünü desteklemediği için gamlanabilir manipülasyon yoluyla yazılım parlaklık kontrolüne izin verir. Bunun nedenleri, bir Mac mini'nin (donanım DDC kontrolünü engelleyen) HDMI bağlantı noktasını kullanmak veya kara listeye alınmış bir ekrana sahip olmak olabilir.";
 
-/* Shown in the Display Preferences */
+/* Shown in the Display Settings */
 "This display has an unspecified control status." = "Bu ekranın belirtilmemiş bir kontrol durumu var.";
 
-/* Shown in the Display Preferences */
+/* Shown in the Display Settings */
 "This display is reported to support hardware DDC control but the current settings allow for software control only." = "Bu ekranın donanım DDC kontrolünü desteklediği bildiriliyor ancak mevcut ayarlar yalnızca yazılım kontrolüne izin veriyor.";
 
-/* Shown in the Display Preferences */
+/* Shown in the Display Settings */
 "This display is reported to support hardware DDC control. If you encounter issues, you can disable hardware DDC control to force software control." = "Bu ekranın donanım DDC kontrolünü desteklediği bildiriliyor. Sorunlarla karşılaşırsanız, yazılım kontrolünü zorlamak için donanım DDC kontrolünü devre dışı bırakabilirsiniz.";
 
-/* Shown in the Display Preferences */
+/* Shown in the Display Settings */
 "This display supports native Apple brightness protocol. This allows macOS to control this display without MonitorControl as well." = "Bu ekran, yerel Apple parlaklık protokolünü destekler. Bu, macOS'un bu ekranı MonitorControl olmadan da kontrol etmesini sağlar.";
 
-/* Shown in the Display Preferences */
+/* Shown in the Display Settings */
 "This is a virtual display (examples: AirPlay, Sidecar, display connected via a DisplayLink Dock or similar) which does not allow hardware or software gammatable control. Shading is used as a substitute but only in non-mirror scenarios. Mouse cursor will be unaffected and artifacts may appear when entering/leaving full screen mode." = "Bu sanal bir ekrandır (örnekler: AirPlay, Sidecar, DisplayLink Dock veya benzeri aracılığıyla bağlanan ekran), donanım veya yazılımla oynanabilir kontrole izin vermez. Gölgeleme, bir yedek olarak kullanılır, ancak yalnızca ayna olmayan senaryolarda. Fare imleci etkilenmeyecektir ve tam ekran moduna girerken/çıkılırken eserler görünebilir.";
 
 /* Unknown display name */
@@ -139,7 +139,7 @@
 /* Version */
 "Version" = "Versiyon";
 
-/* Shown in the Display Preferences */
+/* Shown in the Display Settings */
 "Virtual Display" = "Sanal Ekran";
 
 /* Shown in menu */
@@ -149,4 +149,4 @@
 "Yes" = "Evet";
 
 /* Shown in the alert dialog */
-"You need to enable MonitorControl in System Preferences > Security and Privacy > Accessibility for the keyboard shortcuts to work" = "MonitorControl klavye kısayollarını aktif hale getirmek için Sistem Tercihleri > Güvenlik ve Gizlilik > Erişebilirlik altından izin vermeniz gerekmektedir";
+"You need to enable MonitorControl in System Settings > Security and Privacy > Accessibility for the keyboard shortcuts to work" = "MonitorControl klavye kısayollarını aktif hale getirmek için Sistem Tercihleri > Güvenlik ve Gizlilik > Erişebilirlik altından izin vermeniz gerekmektedir";
