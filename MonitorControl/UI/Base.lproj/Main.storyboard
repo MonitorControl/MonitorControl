@@ -118,7 +118,7 @@
                                             <rect key="frame" x="218" y="317" width="474" height="28"/>
                                             <textFieldCell key="cell" controlSize="small" id="wjv-tq-iUx">
                                                 <font key="font" metaFont="smallSystem"/>
-                                                <string key="title">Changes that are caused by the Ambient light sensor or made using Touch Bar, Control Center, System Preferences will be replicated to all displays.</string>
+                                                <string key="title">Changes that are caused by the Ambient light sensor or made using Touch Bar, Control Center, System Settings will be replicated to all displays.</string>
                                                 <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
@@ -274,7 +274,7 @@
                                     <gridCell row="1zL-Fy-6VV" column="64O-72-10l" xPlacement="leading" id="LYo-2f-Lll">
                                         <button key="contentView" verticalHuggingPriority="750" placeholderIntrinsicWidth="200" placeholderIntrinsicHeight="20" translatesAutoresizingMaskIntoConstraints="NO" id="s9H-FF-JCT">
                                             <rect key="frame" x="213" y="-7" width="214" height="32"/>
-                                            <buttonCell key="cell" type="push" title="Reset Preferences" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="5yT-5F-X5R">
+                                            <buttonCell key="cell" type="push" title="Reset Settings" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="5yT-5F-X5R">
                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" metaFont="system"/>
                                             </buttonCell>
@@ -390,13 +390,13 @@
                                     <gridCell row="ZS3-Gy-pfA" column="V6M-Jv-Agj" xPlacement="leading" id="QXg-i0-lVT">
                                         <popUpButton key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6td-Zq-3e7">
                                             <rect key="frame" x="217" y="462" width="126" height="25"/>
-                                            <popUpButtonCell key="cell" type="push" title="Show as icons" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="fR3-kq-cps" id="2lO-tb-DFv">
+                                            <popUpButtonCell key="cell" type="push" title="Show as icons" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="fR3-kq-cps" id="2lO-tb-DFv">
                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" metaFont="message"/>
                                                 <menu key="menu" id="rOp-pe-iEq">
                                                     <items>
-                                                        <menuItem title="Show as icons" id="fR3-kq-cps"/>
-                                                        <menuItem title="Show as text" state="on" tag="1" id="fWd-Es-zsy"/>
+                                                        <menuItem title="Show as icons" state="on" id="fR3-kq-cps"/>
+                                                        <menuItem title="Show as text" tag="1" id="fWd-Es-zsy"/>
                                                         <menuItem title="Hide" tag="2" id="HUT-Qc-kuu"/>
                                                     </items>
                                                 </menu>
@@ -410,7 +410,7 @@
                                     <gridCell row="HAl-L8-LPI" column="V6M-Jv-Agj" xPlacement="leading" id="tw2-81-sd0">
                                         <textField key="contentView" focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="OmW-TV-zvg">
                                             <rect key="frame" x="218" y="431" width="474" height="28"/>
-                                            <textFieldCell key="cell" controlSize="small" title="Relaunch the app to access Preferences if the menu option is not accessible. Use the button below to quit the app." id="hF7-fM-aKr">
+                                            <textFieldCell key="cell" controlSize="small" title="Relaunch the app to access Settings if the menu option is not accessible. Use the button below to quit the app." id="hF7-fM-aKr">
                                                 <font key="font" metaFont="smallSystem"/>
                                                 <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -1250,7 +1250,7 @@
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="none" tableStyle="inset" selectionHighlightStyle="none" columnReordering="NO" columnResizing="NO" multipleSelection="NO" emptySelection="NO" autosaveColumns="NO" typeSelect="NO" rowHeight="520" viewBased="YES" id="zC9-dS-Tr3">
-                                            <rect key="frame" x="0.0" y="0.0" width="740" height="520"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="740" height="502"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <size key="intercellSpacing" width="14" height="0.0"/>
                                             <color key="backgroundColor" name="windowBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -2226,18 +2226,18 @@
                                 </textFieldCell>
                             </textField>
                             <textField focusRingType="none" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="GSh-nh-adY">
-                                <rect key="frame" x="70" y="111" width="637" height="32"/>
+                                <rect key="frame" x="70" y="111" width="615" height="32"/>
                                 <textFieldCell key="cell" selectable="YES" id="kBJ-Zf-1k2">
                                     <font key="font" textStyle="body" name=".SFNS-Regular"/>
                                     <string key="title">MonitorControl needs access to "accessibility" to use macOS native keys to control your display.
-You can enable it by adding MonitorControl in System Preferences &gt; Security and Privacy &gt; Accessibility.</string>
+You can enable it by adding MonitorControl in System Settings &gt; Security and Privacy &gt; Accessibility.</string>
                                     <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="j2w-H2-9zU">
-                                <rect key="frame" x="65" y="74" width="202" height="32"/>
-                                <buttonCell key="cell" type="push" title="Open System Preferences…" bezelStyle="rounded" imagePosition="trailing" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="pVc-wG-Bdh">
+                                <rect key="frame" x="65" y="74" width="180" height="32"/>
+                                <buttonCell key="cell" type="push" title="Open System Settings…" bezelStyle="rounded" imagePosition="trailing" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="pVc-wG-Bdh">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>

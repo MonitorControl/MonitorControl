@@ -11,7 +11,7 @@
 "Are you sure you want to enable a longer delay? Doing so may freeze your system and require a restart. Start at login will be disabled as a safety measure." = "क्या आप निश्चित हैं कि आप एक लंबी देरी को सक्षम करना चाहते हैं? ऐसा करने से आपका सिस्टम फ्रीज हो सकता है और इसे फिर से शुरू करने की आवश्यकता हो सकती है। स्टार्ट एट लॉगिन सुरक्षा उपाय के रूप में अक्षम हो जाएगा।";
 
 /* Shown in the alert dialog */
-"Are you sure you want to reset all preferences?" = "क्या आप सुनिश्चित हैं कि आप सभी प्राथमिकताओं को रीसेट करना चाहते हैं?";
+"Are you sure you want to reset all settings?" = "क्या आप सुनिश्चित हैं कि आप सभी प्राथमिकताओं को रीसेट करना चाहते हैं?";
 
 /* Shown in menu */
 "Brightness" = "चमक।";
@@ -19,7 +19,7 @@
 /* Build */
 "Build" = "निर्माण करें";
 
-/* Shown in the Display Preferences */
+/* Shown in the Display Settings */
 "Built-in Display" = "अंतर्निर्मित प्रदर्शन";
 
 /* Shown in menu */
@@ -43,16 +43,16 @@
 /* Shown in the alert dialog */
 "Enable Longer Delay?" = "Enable Longer Delay?";
 
-/* Shown in the Display Preferences */
+/* Shown in the Display Settings */
 "External Display" = "बाहरी प्रदर्शन";
 
 /* Shown in the main prefs window */
 "General" = "जनरल";
 
-/* Shown in the Display Preferences */
+/* Shown in the Display Settings */
 "Hardware (Apple)" = "हार्डवेयर (एप्पल)";
 
-/* Shown in the Display Preferences */
+/* Shown in the Display Settings */
 "Hardware (DDC)" = "हार्डवेयर (डीडीसी)";
 
 /* Shown in the alert dialog */
@@ -76,61 +76,61 @@
 /* Shown in the alert dialog */
 "No" = "ना";
 
-/* Shown in the Display Preferences */
+/* Shown in the Display Settings */
 "No Control" = "कोई नियंत्रण नहीं";
 
-/* Shown in the Display Preferences */
+/* Shown in the Display Settings */
 "Other Display" = "अन्य प्रदर्शन";
 
 /* Shown in the alert dialog */
-"Preferences for an incompatible previous app version detected. Default preferences are reloaded." = "एक असंगत पिछले ऐप संस्करण के लिए वरीयताएँ पाई गईं। डिफ़ॉल्ट वरीयताएँ फिर से लोड की जाती हैं।";
+"Settings for an incompatible previous app version detected. Default settings are reloaded." = "एक असंगत पिछले ऐप संस्करण के लिए वरीयताएँ पाई गईं। डिफ़ॉल्ट वरीयताएँ फिर से लोड की जाती हैं।";
 
 /* Shown in menu */
-"Preferences…" = "वरीयताएँ…";
+"Settings…" = "वरीयताएँ…";
 
 /* Shown in menu */
 "Quit" = "बाहर निकलें";
 
 /* Shown in the alert dialog */
-"Reset Preferences?" = "वरीयताएँ पुनर्निर्धारित करें?";
+"Reset Settings?" = "वरीयताएँ पुनर्निर्धारित करें?";
 
 /* Shown in the alert dialog */
 "Safe Mode Activated" = "सुरक्षित मोड सक्रिय किया गया";
 
 /* Shown in the alert dialog */
-"Shift was pressed during launch. MonitorControl started in safe mode. Default preferences are reloaded, DDC read is blocked." = "प्रक्षेपण के दौरान शिफ्ट को दबाया गया था। मॉनिटर कंट्रोल सुरक्षित मोड में शुरू हुआ। डिफ़ॉल्ट वरीयताएँ फिर से लोड की जाती हैं, डीडीसी पढ़ने को अवरुद्ध किया जाता है.";
+"Shift was pressed during launch. MonitorControl started in safe mode. Default settings are reloaded, DDC read is blocked." = "प्रक्षेपण के दौरान शिफ्ट को दबाया गया था। मॉनिटर कंट्रोल सुरक्षित मोड में शुरू हुआ। डिफ़ॉल्ट वरीयताएँ फिर से लोड की जाती हैं, डीडीसी पढ़ने को अवरुद्ध किया जाता है.";
 
 /* Shown in the alert dialog */
 "Shortcuts not available" = "शॉर्टकट उपलब्ध नहीं है";
 
-/* Shown in the Display Preferences */
+/* Shown in the Display Settings */
 "Software (gamma)" = "सॉफ्टवेयर (गामा)";
 
-/* Shown in the Display Preferences */
+/* Shown in the Display Settings */
 "Software (gamma, forced)" = "सॉफ्टवेयर (गामा, मजबूर किया)";
 
-/* Shown in the Display Preferences */
+/* Shown in the Display Settings */
 "Software (shade)" = "सॉफ्टवेयर (छाया)";
 
-/* Shown in the Display Preferences */
+/* Shown in the Display Settings */
 "Software (shade, forced)" = "सॉफ्टवेयर (छाया, मजबूर किया)";
 
-/* Shown in the Display Preferences */
+/* Shown in the Display Settings */
 "This display allows for software brightness control via gamma table manipulation or shade as it does not support hardware control. Reasons for this might be using the HDMI port of a Mac mini (which blocks hardware DDC control) or having a blacklisted display." = "यह प्रदर्शन गामा टेबल हेरफेर या छाया के माध्यम से सॉफ्टवेयर चमक नियंत्रण की अनुमति देता है क्योंकि यह हार्डवेयर नियंत्रण का समर्थन नहीं करता है। इसके कारण मैक मिनी के एचडीएमआई पोर्ट (जो हार्डवेयर डीडीसी नियंत्रण को अवरुद्ध करता है) का उपयोग करना या ब्लैकलिस्टेड डिस्प्ले होना हो सकता है।";
 
-/* Shown in the Display Preferences */
+/* Shown in the Display Settings */
 "This display has an unspecified control status." = "इस प्रदर्शन में एक अनिर्दिष्ट नियंत्रण स्थिति है।";
 
-/* Shown in the Display Preferences */
+/* Shown in the Display Settings */
 "This display is reported to support hardware DDC control but the current settings allow for software control only." = "यह प्रदर्शन हार्डवेयर डीडीसी नियंत्रण का समर्थन करता है लेकिन वर्तमान सेटिंग्स केवल सॉफ्टवेयर नियंत्रण की अनुमति देती हैं।";
 
-/* Shown in the Display Preferences */
+/* Shown in the Display Settings */
 "This display is reported to support hardware DDC control. If you encounter issues, you can disable hardware DDC control to force software control." = "यह प्रदर्शन हार्डवेयर डीडीसी नियंत्रण का समर्थन करता है। यदि आपको समस्याओं का सामना करना पड़ता है, तो आप सॉफ्टवेयर नियंत्रण को मजबूर करने के लिए हार्डवेयर डीडीसी नियंत्रण को अक्षम कर सकते हैं।";
 
-/* Shown in the Display Preferences */
+/* Shown in the Display Settings */
 "This display supports native Apple brightness protocol. This allows macOS to control this display without MonitorControl as well." = "यह डिस्प्ले नेटिव ऐप्पल ब्राइटनेस प्रोटोकॉल का समर्थन करता है। यह मैकोस को मॉनिटर कंट्रोल के बिना भी इस प्रदर्शन को नियंत्रित करने की अनुमति देता है।";
 
-/* Shown in the Display Preferences */
+/* Shown in the Display Settings */
 "This is a virtual display (examples: AirPlay, Sidecar, display connected via a DisplayLink Dock or similar) which does not allow hardware or software gammatable control. Shading is used as a substitute but only in non-mirror scenarios. Mouse cursor will be unaffected and artifacts may appear when entering/leaving full screen mode." = "यह एक आभासी प्रदर्शन है (उदाहरणः एयरप्ले, साइडकार, डिस्प्ले लिंक डॉक या इसी तरह के माध्यम से जुड़ा हुआ प्रदर्शन) जो हार्डवेयर या सॉफ़्टवेयर गैमेटेबल नियंत्रण की अनुमति नहीं देता है। छायांकन का उपयोग एक विकल्प के रूप में किया जाता है लेकिन केवल गैर-दर्पण परिदृश्यों में। माउस कर्सर अप्रभावित रहेगा और पूर्ण स्क्रीन मोड में प्रवेश करते/छोड़ते समय कलाकृतियाँ दिखाई दे सकती हैं।";
 
 /* Unknown display name */
@@ -139,7 +139,7 @@
 /* Version */
 "Version" = "संस्करण";
 
-/* Shown in the Display Preferences */
+/* Shown in the Display Settings */
 "Virtual Display" = "आभासी प्रदर्शन";
 
 /* Shown in menu */
@@ -149,4 +149,4 @@
 "Yes" = "हाँ";
 
 /* Shown in the alert dialog */
-"You need to enable MonitorControl in System Preferences > Security and Privacy > Accessibility for the keyboard shortcuts to work" = "आपको सिस्टम प्राथमिकताओं> सुरक्षा और गोपनीयता> में मॉनिटरकंट्रोल को सक्षम करने की आवश्यकता है कीबोर्ड शॉर्टकट के काम करने के लिए सुलभता";
+"You need to enable MonitorControl in System Settings > Security and Privacy > Accessibility for the keyboard shortcuts to work" = "आपको सिस्टम प्राथमिकताओं> सुरक्षा और गोपनीयता> में मॉनिटरकंट्रोल को सक्षम करने की आवश्यकता है कीबोर्ड शॉर्टकट के काम करने के लिए सुलभता";

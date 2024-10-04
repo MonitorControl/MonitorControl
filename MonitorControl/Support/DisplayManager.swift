@@ -18,6 +18,7 @@ class DisplayManager {
     self.gammaActivityEnforcer.title = "Monitor Control Gamma Activity Enforcer"
     self.gammaActivityEnforcer.isMovableByWindowBackground = false
     self.gammaActivityEnforcer.backgroundColor = DEBUG_GAMMA_ENFORCER ? .red : .black
+    self.gammaActivityEnforcer.alphaValue = 1 * (DEBUG_GAMMA_ENFORCER ? 0.5 : 0.01)
     self.gammaActivityEnforcer.ignoresMouseEvents = true
     self.gammaActivityEnforcer.level = .screenSaver
     self.gammaActivityEnforcer.orderFrontRegardless()

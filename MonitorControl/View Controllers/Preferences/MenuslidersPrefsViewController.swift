@@ -2,12 +2,12 @@
 
 import Cocoa
 import os.log
-import Preferences
 import ServiceManagement
+import Settings
 
-class MenuslidersPrefsViewController: NSViewController, PreferencePane {
-  let preferencePaneIdentifier = Preferences.PaneIdentifier.menusliders
-  let preferencePaneTitle: String = NSLocalizedString("App menu", comment: "Shown in the main prefs window")
+class MenuslidersPrefsViewController: NSViewController, SettingsPane {
+  let paneIdentifier = Settings.PaneIdentifier.menusliders
+  let paneTitle: String = NSLocalizedString("App menu", comment: "Shown in the main prefs window")
 
   var toolbarItemIcon: NSImage {
     if !DEBUG_MACOS10, #available(macOS 11.0, *) {

@@ -7,7 +7,7 @@ enum PrefKey: String {
   case SUEnableAutomaticChecks
 
   // Receive beta updates?
-  case isBetaChannel // This is not added to Preferences yet as it will be needed in the future only.
+  case isBetaChannel // This is not added to Settings yet as it will be needed in the future only.
 
   // Build number
   case buildNumber
@@ -60,7 +60,7 @@ enum PrefKey: String {
   // Instead of assuming default values, enable read or write upon startup (according to readDDCInsteadOfRestoreValues)
   case startupAction
 
-  // Show advanced options under Displays tab in Preferences
+  // Show advanced options under Displays tab in Settings
   case showAdvancedSettings
 
   // Allow zero software brightness

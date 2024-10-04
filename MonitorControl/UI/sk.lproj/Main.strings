@@ -32,7 +32,7 @@
 /* Class = "NSTextFieldCell"; title = "Welcome to MonitorControl"; ObjectID = "5J0-BD-top"; */
 "5J0-BD-top.title" = "Vitajte v MonitorControl";
 
-/* Class = "NSButtonCell"; title = "Reset Preferences"; ObjectID = "5yT-5F-X5R"; */
+/* Class = "NSButtonCell"; title = "Reset Settings"; ObjectID = "5yT-5F-X5R"; */
 "5yT-5F-X5R.title" = "Obnoviť predvoľby";
 
 /* Class = "NSMenuItem"; title = "Always hide"; ObjectID = "6mo-7S-oOO"; */
@@ -284,7 +284,7 @@
 /* Class = "NSTextFieldCell"; title = "Brightness slider for hardware or software controlled displays or TVs."; ObjectID = "gXH-HL-ZOL"; */
 "gXH-HL-ZOL.title" = "Posuvník jasu pre hardvérovo alebo softvérovo ovládané displeje alebo televízory.";
 
-/* Class = "NSTextFieldCell"; title = "Relaunch the app to access Preferences if the menu option is not accessible. Use the button below to quit the app."; ObjectID = "hF7-fM-aKr"; */
+/* Class = "NSTextFieldCell"; title = "Relaunch the app to access Settings if the menu option is not accessible. Use the button below to quit the app."; ObjectID = "hF7-fM-aKr"; */
 "hF7-fM-aKr.title" = "Ak nie je dostupné menu, znovu spustite aplikáciu a získajte prístup k položke Predvoľby. Na ukončenie aplikácie použite tlačidlo nižšie.";
 
 /* Class = "NSButtonCell"; title = "Get current"; ObjectID = "hkC-vq-IcD"; */
@@ -305,7 +305,7 @@
 /* Class = "NSButtonCell"; title = "Check for updates"; ObjectID = "jVH-oc-rUi"; */
 "jVH-oc-rUi.title" = "Skontrolovať aktualizácie";
 
-/* Class = "NSTextFieldCell"; title = "MonitorControl needs access to \"accessibility\" to use macOS native keys to control your display.\nYou can enable it by adding MonitorControl in System Preferences > Security and Privacy > Accessibility."; ObjectID = "kBJ-Zf-1k2"; */
+/* Class = "NSTextFieldCell"; title = "MonitorControl needs access to \"accessibility\" to use macOS native keys to control your display.\nYou can enable it by adding MonitorControl in System Settings > Security and Privacy > Accessibility."; ObjectID = "kBJ-Zf-1k2"; */
 "kBJ-Zf-1k2.title" = "MonitorControl potrebuje prístup k \"Prístupnosti\" pre ovládanie displeja natívne macOS klávesy.\nMôžete ho povoliť pridaním MonitorControl v Systémové nastavenia > Súkromie a bezpečnosť > Prístupnosť.";
 
 /* Class = "NSMenuItem"; title = "Depends on mouse pointer position"; ObjectID = "km4-hK-auM"; */
@@ -341,7 +341,7 @@
 /* Class = "NSButtonCell"; title = "Longer delay during DDC read operations"; ObjectID = "pF5-Sw-7BR"; */
 "pF5-Sw-7BR.title" = "Dlhšie oneskorenie počas operácií čítania DDC";
 
-/* Class = "NSButtonCell"; title = "Open System Preferences…"; ObjectID = "pVc-wG-Bdh"; */
+/* Class = "NSButtonCell"; title = "Open System Settings…"; ObjectID = "pVc-wG-Bdh"; */
 "pVc-wG-Bdh.title" = "Otvoriť Systémové nastavenia...";
 
 /* Class = "NSTextFieldCell"; title = "Use the brightness keys of your Apple keyboard to control brightness. You can hold Control to adjust the built-in display, Control+Command to adjust external displays. Hold Shift+Option for fine control. Control+Option+Command adjusts contrast on DDC compatible displays."; ObjectID = "pa0-Hz-ace"; */
@@ -395,7 +395,7 @@
 /* Class = "NSTextFieldCell"; title = "Useful when a display tends to reset its settings during sleep."; ObjectID = "w8B-x6-sq5"; */
 "w8B-x6-sq5.title" = "Užitočné, keď má displej tendenciu obnoviť svoje nastavenia počas spánku.";
 
-/* Class = "NSTextFieldCell"; title = "Changes that are caused by the Ambient light sensor or made using Touch Bar, Control Center, System Preferences will be replicated to all displays."; ObjectID = "wjv-tq-iUx"; */
+/* Class = "NSTextFieldCell"; title = "Changes that are caused by the Ambient light sensor or made using Touch Bar, Control Center, System Settings will be replicated to all displays."; ObjectID = "wjv-tq-iUx"; */
 "wjv-tq-iUx.title" = "Zmeny spôsobené snímačom okolitého svetla alebo vykonané pomocou Touch Baru, Ovládacieho centra a Systémových nastavení sa prenesú na všetky displeje.";
 
 /* Class = "NSMenuItem"; title = "Only if at least one slider is present"; ObjectID = "xLa-PN-rsq"; */

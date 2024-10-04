@@ -2,12 +2,12 @@
 
 import Cocoa
 import os.log
-import Preferences
 import ServiceManagement
+import Settings
 
-class MainPrefsViewController: NSViewController, PreferencePane {
-  let preferencePaneIdentifier = Preferences.PaneIdentifier.main
-  let preferencePaneTitle: String = NSLocalizedString("General", comment: "Shown in the main prefs window")
+class MainPrefsViewController: NSViewController, SettingsPane {
+  let paneIdentifier = Settings.PaneIdentifier.main
+  let paneTitle: String = NSLocalizedString("General", comment: "Shown in the main prefs window")
 
   var toolbarItemIcon: NSImage {
     if !DEBUG_MACOS10, #available(macOS 11.0, *) {
@@ -61,7 +61,7 @@ class MainPrefsViewController: NSViewController, PreferencePane {
     self.enableSmooth.state = prefs.bool(forKey: PrefKey.disableSmoothBrightness.rawValue) ? .off : .on
     self.enableBrightnessSync.state = prefs.bool(forKey: PrefKey.enableBrightnessSync.rawValue) ? .on : .off
     self.startupAction.selectItem(withTag: prefs.integer(forKey: PrefKey.startupAction.rawValue))
-    // Preload Display preferences to some extent to properly set up size in orther that animation won't fail
+    // Preload Display settings to some extent to properly set up size in orther that animation won't fail
     menuslidersPrefsVc?.view.layoutSubtreeIfNeeded()
     keyboardPrefsVc?.view.layoutSubtreeIfNeeded()
     displaysPrefsVc?.view.layoutSubtreeIfNeeded()
@@ -148,7 +148,7 @@ class MainPrefsViewController: NSViewController, PreferencePane {
   @available(macOS, deprecated: 10.10)
   func resetSheetModalHander(modalResponse: NSApplication.ModalResponse) {
     if modalResponse == NSApplication.ModalResponse.alertFirstButtonReturn {
-      app.preferenceReset()
+      app.settingsReset()
       self.populateSettings()
       menuslidersPrefsVc?.populateSettings()
       keyboardPrefsVc?.populateSettings()
@@ -159,8 +159,8 @@ class MainPrefsViewController: NSViewController, PreferencePane {
   @available(macOS, deprecated: 10.10)
   @IBAction func resetPrefsClicked(_: NSButton) {
     let alert = NSAlert()
-    alert.messageText = NSLocalizedString("Reset Preferences?", comment: "Shown in the alert dialog")
-    alert.informativeText = NSLocalizedString("Are you sure you want to reset all preferences?", comment: "Shown in the alert dialog")
+    alert.messageText = NSLocalizedString("Reset Settings?", comment: "Shown in the alert dialog")
+    alert.informativeText = NSLocalizedString("Are you sure you want to reset all settings?", comment: "Shown in the alert dialog")
     alert.addButton(withTitle: NSLocalizedString("Yes", comment: "Shown in the alert dialog"))
     alert.addButton(withTitle: NSLocalizedString("No", comment: "Shown in the alert dialog"))
     alert.alertStyle = NSAlert.Style.warning

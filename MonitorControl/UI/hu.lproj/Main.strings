@@ -31,7 +31,7 @@
 /* Class = "NSTextFieldCell"; title = "Welcome to MonitorControl"; ObjectID = "5J0-BD-top"; */
 "5J0-BD-top.title" = "Welcome to MonitorControl";
 
-/* Class = "NSButtonCell"; title = "Reset Preferences"; ObjectID = "5yT-5F-X5R"; */
+/* Class = "NSButtonCell"; title = "Reset Settings"; ObjectID = "5yT-5F-X5R"; */
 "5yT-5F-X5R.title" = "Beállítások visszaállítása";
 
 /* Class = "NSMenuItem"; title = "Always hide"; ObjectID = "6mo-7S-oOO"; */
@@ -175,7 +175,7 @@
 /* Class = "NSTextFieldCell"; title = "Override audio device name:"; ObjectID = "H9X-it-sXs"; */
 "H9X-it-sXs.title" = "Hangeszköz nevének felülírása:";
 
-/* Class = "NSTextFieldCell"; title = "Relaunch the app to access Preferences if the menu option is not accessible. Use the button below to quit the app."; ObjectID = "hF7-fM-aKr"; */
+/* Class = "NSTextFieldCell"; title = "Relaunch the app to access Settings if the menu option is not accessible. Use the button below to quit the app."; ObjectID = "hF7-fM-aKr"; */
 "hF7-fM-aKr.title" = "Indítsa újra az alkalmazást a Beállítások eléréséhez, ha az opció rejtett. Az alábbi gombbal kiléphet az alkalmazásból.";
 
 /* Class = "NSButtonCell"; title = "Get current"; ObjectID = "hkC-vq-IcD"; */
@@ -217,7 +217,7 @@
 /* Class = "NSButtonCell"; title = "Enable for Apple branded and built-in displays as well"; ObjectID = "K6A-4z-1aQ"; */
 "K6A-4z-1aQ.title" = "Engedélyezés Apple és beépített kijelzők esetén is";
 
-/* Class = "NSTextFieldCell"; title = "MonitorControl needs access to \"accessibility\" to use macOS native keys to control your display.\nYou can enable it by adding MonitorControl in System Preferences > Security and Privacy > Accessibility."; ObjectID = "kBJ-Zf-1k2"; */
+/* Class = "NSTextFieldCell"; title = "MonitorControl needs access to \"accessibility\" to use macOS native keys to control your display.\nYou can enable it by adding MonitorControl in System Settings > Security and Privacy > Accessibility."; ObjectID = "kBJ-Zf-1k2"; */
 "kBJ-Zf-1k2.title" = "A MonitorControlnak engedélyre van szüksége ahhoz, hogy a fényerő és hangerő gombokra reagálhasson. Ehhez hozzá kell adni a MonitorControl alkalmazást a Rendszerbeállítások > Biztonság és adatvédelem > Kisegítő lehetőségek alatt.";
 
 /* Class = "NSTextFieldCell"; title = "Screen to control:"; ObjectID = "Kfj-WK-aSL"; */
@@ -292,7 +292,7 @@
 /* Class = "NSTextFieldCell"; title = "DDC max"; ObjectID = "psF-vX-AFB"; */
 "psF-vX-AFB.title" = "DDC max";
 
-/* Class = "NSButtonCell"; title = "Open System Preferences…"; ObjectID = "pVc-wG-Bdh"; */
+/* Class = "NSButtonCell"; title = "Open System Settings…"; ObjectID = "pVc-wG-Bdh"; */
 "pVc-wG-Bdh.title" = "Rendszerbeállítások megnyitása…";
 
 /* Class = "NSTextFieldCell"; title = "Use software dimming after the display reached zero hardware brightness for extended range. Works for DDC controlled displays only."; ObjectID = "PyY-p9-3NP"; */
@@ -364,7 +364,7 @@
 /* Class = "NSTextFieldCell"; title = "Useful when a display tends to reset its settings during sleep."; ObjectID = "w8B-x6-sq5"; */
 "w8B-x6-sq5.title" = "Hasznos, amikor a kijelző hajlamos visszaállni alvás után.";
 
-/* Class = "NSTextFieldCell"; title = "Changes that are caused by the Ambient light sensor or made using Touch Bar, Control Center, System Preferences will be replicated to all displays."; ObjectID = "wjv-tq-iUx"; */
+/* Class = "NSTextFieldCell"; title = "Changes that are caused by the Ambient light sensor or made using Touch Bar, Control Center, System Settings will be replicated to all displays."; ObjectID = "wjv-tq-iUx"; */
 "wjv-tq-iUx.title" = "A környezetifény-érzékelő, Touch Bar, Vezérlőközpont módosításai minden kijelzőre hatással vannak.";
 
 /* Class = "NSMenuItem"; title = "Change volume for all screens"; ObjectID = "Xih-P5-NyM"; */

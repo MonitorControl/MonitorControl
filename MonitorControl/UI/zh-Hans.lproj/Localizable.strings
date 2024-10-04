@@ -11,7 +11,7 @@
 "Are you sure you want to enable a longer delay? Doing so may freeze your system and require a restart. Start at login will be disabled as a safety measure." = "您确定要启用更长的延迟吗？这样做可能会使其它奔溃并需要重新启动。作为安全措施，登录时启动将被禁用。";
 
 /* Shown in the alert dialog */
-"Are you sure you want to reset all preferences?" = "确定要重置所有的设置吗？";
+"Are you sure you want to reset all settings?" = "确定要重置所有的设置吗？";
 
 /* Sown in menu */
 "Brightness" = "亮度";
@@ -19,7 +19,7 @@
 /* Build */
 "Build" = "版本";
 
-/* Shown in the Display Preferences */
+/* Shown in the Display Settings */
 "Built-in Display" = "内置显示器";
 
 /* Shown in menu */
@@ -43,16 +43,16 @@
 /* Shown in the alert dialog */
 "Enable Longer Delay?" = "启用更长的延迟吗？";
 
-/* Shown in the Display Preferences */
+/* Shown in the Display Settings */
 "External Display" = "外接显示器";
 
 /* Shown in the main prefs window */
 "General" = "通用";
 
-/* Shown in the Display Preferences */
+/* Shown in the Display Settings */
 "Hardware (Apple)" = "硬件（Apple）";
 
-/* Shown in the Display Preferences */
+/* Shown in the Display Settings */
 "Hardware (DDC)" = "硬件（DDC）";
 
 /* Shown in the alert dialog */
@@ -76,61 +76,61 @@
 /* Shown in the alert dialog */
 "No" = "否";
 
-/* Shown in the Display Preferences */
+/* Shown in the Display Settings */
 "No Control" = "没有控制";
 
-/* Shown in the Display Preferences */
+/* Shown in the Display Settings */
 "Other Display" = "其它屏幕";
 
 /* Shown in the alert dialog */
-"Preferences for an incompatible previous app version detected. Default preferences are reloaded." = "监测到不兼容的旧版本设置。已重新加载默认设置。";
+"Settings for an incompatible previous app version detected. Default settings are reloaded." = "监测到不兼容的旧版本设置。已重新加载默认设置。";
 
 /* Shown in menu */
-"Preferences…" = "设置…";
+"Settings…" = "设置…";
 
 /* Shown in menu */
 "Quit" = "退出";
 
 /* Shown in the alert dialog */
-"Reset Preferences?" = "重置所有设置？";
+"Reset Settings?" = "重置所有设置？";
 
 /* Shown in the alert dialog */
 "Safe Mode Activated" = "安全模式已经启动";
 
 /* Shown in the alert dialog */
-"Shift was pressed during launch. MonitorControl started in safe mode. Default preferences are reloaded, DDC read is blocked." = "启动时按下Shift键。MonitorControl启动时进入安全模式。已还原初始设置，停止DDC读取。";
+"Shift was pressed during launch. MonitorControl started in safe mode. Default settings are reloaded, DDC read is blocked." = "启动时按下Shift键。MonitorControl启动时进入安全模式。已还原初始设置，停止DDC读取。";
 
 /* Shown in the alert dialog */
 "Shortcuts not available" = "快捷键无法使用";
 
-/* Shown in the Display Preferences */
+/* Shown in the Display Settings */
 "Software (gamma)" = "软件 (伽玛)";
 
-/* Shown in the Display Preferences */
+/* Shown in the Display Settings */
 "Software (gamma, forced)" = "软件 (伽玛，强制)";
 
-/* Shown in the Display Preferences */
+/* Shown in the Display Settings */
 "Software (shade)" = "软件 (遮光)";
 
-/* Shown in the Display Preferences */
+/* Shown in the Display Settings */
 "Software (shade, forced)" = "软件 (遮光, 强制)";
 
-/* Shown in the Display Preferences */
+/* Shown in the Display Settings */
 "This display allows for software brightness control via gamma table manipulation or shade as it does not support hardware control. Reasons for this might be using the HDMI port of a Mac mini (which blocks hardware DDC control) or having a blacklisted display." = "这个显示器不支持硬件控制，亮度将通过伽马值或阴影来调整。原因可能是使用了Mac mini的HDMI端口（硬件DDC无法使用）或是使用不兼容的显示器。";
 
-/* Shown in the Display Preferences */
+/* Shown in the Display Settings */
 "This display has an unspecified control status." = "此显示器有未指定的控制状态。";
 
-/* Shown in the Display Preferences */
+/* Shown in the Display Settings */
 "This display is reported to support hardware DDC control but the current settings allow for software control only." = "这个显示器报告支持DDC控制，但目前的设置只允许软件控制。";
 
-/* Shown in the Display Preferences */
+/* Shown in the Display Settings */
 "This display is reported to support hardware DDC control. If you encounter issues, you can disable hardware DDC control to force software control." = "这个显示器报告支持DDC控制。如果使用遇到问题，您可以禁用硬件DDC控制以强制软件控制。";
 
-/* Shown in the Display Preferences */
+/* Shown in the Display Settings */
 "This display supports native Apple brightness protocol. This allows macOS to control this display without MonitorControl as well." = "这个显示器支持苹果原生的亮度设置，macOS无需通过MonitorControl控制此屏幕。";
 
-/* Shown in the Display Preferences */
+/* Shown in the Display Settings */
 "This is a virtual display (examples: AirPlay, Sidecar, display connected via a DisplayLink Dock or similar) which does not allow hardware or software gammatable control. Shading is used as a substitute but only in non-mirror scenarios. Mouse cursor will be unaffected and artifacts may appear when entering/leaving full screen mode." = "这个是虚拟显示器（例如：AirPlay、Sidecar、通过DisplayLink Dock或类似软件连接的屏幕），不允许硬件或软件伽马值控制。只能在非镜像的情况下以遮光（Shading）作为代替设置方案。进入/离开全屏幕模式时，鼠标将不受影响，并且可能会出现残影。";
 
 /* Unknown display name
@@ -141,7 +141,7 @@
 /* Version */
 "Version" = "版本";
 
-/* Shown in the Display Preferences */
+/* Shown in the Display Settings */
 "Virtual Display" = "虚拟屏幕";
 
 /* Shown in menu */
@@ -151,4 +151,4 @@
 "Yes" = "是";
 
 /* Shown in the alert dialog */
-"You need to enable MonitorControl in System Preferences > Security and Privacy > Accessibility for the keyboard shortcuts to work" = "您需要在「系统偏好设置」>「安全性与隐私」>「辅助功能」中启用MonitorControl让键盘快捷键生效";
+"You need to enable MonitorControl in System Settings > Security and Privacy > Accessibility for the keyboard shortcuts to work" = "您需要在「系统偏好设置」>「安全性与隐私」>「辅助功能」中启用MonitorControl让键盘快捷键生效";
