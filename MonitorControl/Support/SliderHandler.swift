@@ -379,7 +379,7 @@ class SliderHandler {
         slider.setDisplayHighlightItems(false)
       }
       if self.percentageBox == self.percentageBox {
-        self.percentageBox?.stringValue = "" + String(Int(value * 100)) + "%"
+        self.percentageBox?.stringValue = "\(String(format: "%.0f%%", Double(value) * 100))"
       }
     }
   }
