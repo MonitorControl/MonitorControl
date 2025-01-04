@@ -33,7 +33,7 @@ class MenuHandler: NSMenu, NSMenuDelegate {
     if !dontClose {
       self.cancelTrackingWithoutAnimation()
     }
-    app.statusItem.isVisible = prefs.integer(forKey: PrefKey.menuIcon.rawValue) == MenuIcon.show.rawValue ? true : false
+    app.updateStatusItemVisibility(prefs.integer(forKey: PrefKey.menuIcon.rawValue) == MenuIcon.show.rawValue ? true : false)
     self.clearMenu()
     let currentDisplay = DisplayManager.shared.getCurrentDisplay()
     var displays: [Display] = []
@@ -185,7 +185,7 @@ class MenuHandler: NSMenu, NSMenuDelegate {
       self.addDisplayMenuBlock(addedSliderHandlers: addedSliderHandlers, blockName: display.readPrefAsString(key: .friendlyName) != "" ? display.readPrefAsString(key: .friendlyName) : display.name, monitorSubMenu: monitorSubMenu, numOfDisplays: numOfDisplays, asSubMenu: asSubMenu)
     }
     if addedSliderHandlers.count > 0, prefs.integer(forKey: PrefKey.menuIcon.rawValue) == MenuIcon.sliderOnly.rawValue {
-      app.statusItem.isVisible = true
+      app.updateStatusItemVisibility(true)
     }
   }
 
