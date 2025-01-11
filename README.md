@@ -1,7 +1,7 @@
 <img src=".github/Icon-cropped.png" width="200" alt="App icon" align="left"/>
 
 <div>
-<h3>MonitorControl - now compatible with macOS Sequoia</h3>
+<h3>MonitorControl</h3>
 <p>Controls your external display brightness and volume and shows native OSD.
 Use menubar extra sliders or the keyboard, including native Apple keys!</p>
 <a href="https://github.com/MonitorControl/MonitorControl/releases"><img src=".github/macos_badge_noborder.png" width="175" alt="Download for macOS"/></a>
@@ -23,6 +23,12 @@ Use menubar extra sliders or the keyboard, including native Apple keys!</p>
 </div>
 
 <hr>
+
+> [!WARNING]
+> **v4.2.0 [crashes](https://github.com/MonitorControl/MonitorControl/issues/1663)** on macOS 15.1.x and cannot auto-update; please reinstall to v4.3.3, for example with:
+> ```
+> brew reinstall monitorcontrol
+> ```
 
 ## Download
 
