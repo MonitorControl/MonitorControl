@@ -25,10 +25,7 @@ Use menubar extra sliders or the keyboard, including native Apple keys!</p>
 <hr>
 
 > [!WARNING]
-> **v4.2.0 [crashes](https://github.com/MonitorControl/MonitorControl/issues/1663)** on macOS 15.1.x and cannot auto-update; please reinstall to v4.3.3, for example with:
-> ```
-> brew reinstall monitorcontrol
-> ```
+> MonitorControl v4.2.0 [may crash](https://github.com/MonitorControl/MonitorControl/issues/1663) on macOS 15 Sequoia on certain configurations. Additionally, the v4.2.0 version will not auto update to the [latest app version](https://github.com/MonitorControl/MonitorControl/releases). Please upgrade manually to fix the issue and to receive future updates.
 
 ## Download
 
