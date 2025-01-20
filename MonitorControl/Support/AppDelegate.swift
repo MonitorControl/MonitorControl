@@ -11,11 +11,17 @@ import SimplyCoreAudio
 import Sparkle
 
 class AppDelegate: NSObject, NSApplicationDelegate {
-  let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
+  let statusItem: NSStatusItem = {
+    let item = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
+    item.behavior = .removalAllowed
+    return item
+  }()
   var mediaKeyTap = MediaKeyTapManager()
   var keyboardShortcuts = KeyboardShortcutsManager()
   let coreAudio = SimplyCoreAudio()
   var accessibilityObserver: NSObjectProtocol!
+  var statusItemObserver: NSObjectProtocol!
+  var statusItemVisibilityChangedByUser = true
   var reconfigureID: Int = 0 // dispatched reconfigure command ID
   var sleepID: Int = 0 // sleep event ID
   var safeMode = false
@@ -83,7 +89,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   func applicationWillTerminate(_: Notification) {
     os_log("Goodbye!", type: .info)
     DisplayManager.shared.resetSwBrightnessForAllDisplays(noPrefSave: true)
-    self.statusItem.isVisible = true
+    self.updateStatusItemVisibility(true)
   }
 
   private func setPrefsBuildNumber() {
@@ -169,6 +175,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     NSWorkspace.shared.notificationCenter.addObserver(self, selector: #selector(self.sleepNotification), name: NSWorkspace.willSleepNotification, object: nil)
     NSWorkspace.shared.notificationCenter.addObserver(self, selector: #selector(self.wakeNotification), name: NSWorkspace.didWakeNotification, object: nil)
     _ = DistributedNotificationCenter.default().addObserver(forName: NSNotification.Name(rawValue: NSNotification.Name.accessibilityApi.rawValue), object: nil, queue: nil) { _ in DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { self.updateMediaKeyTap() } } // listen for accessibility status changes
+    self.statusItemObserver = statusItem.observe(\.isVisible, options: [.old, .new]) { _, _ in self.statusItemVisibilityChanged() }
   }
 
   @objc private func sleepNotification() {
@@ -270,7 +277,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     if let bundleID = Bundle.main.bundleIdentifier {
       prefs.removePersistentDomain(forName: bundleID)
     }
-    app.statusItem.isVisible = true
+    app.updateStatusItemVisibility(true)
     self.setDefaultPrefs()
     self.checkPermissions()
     self.updateMediaKeyTap()
@@ -351,5 +358,17 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     onboardingVc?.showWindow(self)
     onboardingVc?.window?.center()
     NSApp.activate(ignoringOtherApps: true)
+  }
+  
+  private func statusItemVisibilityChanged() {
+    if !self.statusItem.isVisible, self.statusItemVisibilityChangedByUser {
+      prefs.set(MenuIcon.hide.rawValue, forKey: PrefKey.menuIcon.rawValue)
+    }
+  }
+  
+  func updateStatusItemVisibility(_ visible: Bool) {
+    statusItemVisibilityChangedByUser = false
+    statusItem.isVisible = visible
+    statusItemVisibilityChangedByUser = true
   }
 }
