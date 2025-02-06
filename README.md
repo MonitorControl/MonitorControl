@@ -31,7 +31,7 @@ Use menubar extra sliders or the keyboard, including native Apple keys!</p>
 
 Go to [Releases](https://github.com/MonitorControl/MonitorControl/releases) and download the latest `.dmg`, or you can install via Homebrew:
 ```shell
-brew install MonitorControl
+brew install --cask monitorcontrol
 ```
 
 ## Major features
