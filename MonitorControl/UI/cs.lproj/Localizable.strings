@@ -2,16 +2,16 @@
 "About" = "O aplikaci";
 
 /* Shown in the alert dialog */
-"An other app seems to change the brightness or colors which causes issues.\n\nTo solve this, you need to quit the other app or disable gamma control for your displays in MonitorControl!" = "Zdá se, že jas a barvy ovládá ještě nějaká další aplikace, což způsobuje problémy.\n\nBuďto jinou aplikaci ukončete, nebo v MonitorControl vypněte ovládání gamy pro vaše displeje!";
+"An other app seems to change the brightness or colors which causes issues.\n\nTo solve this, you need to quit the other app or disable gamma control for your displays in MonitorControl!" = "Zdá se, že jas a barvy ovládá ještě nějaká další aplikace, což způsobuje problémy.\n\nBuďto jinou aplikaci ukončete, nebo v MonitorControl vypněte ovládání gamy pro Vaše displeje!";
 
 /* Shown in the main prefs window */
 "App menu" = "Nabídka";
 
 /* Shown in the alert dialog */
-"Are you sure you want to enable a longer delay? Doing so may freeze your system and require a restart. Start at login will be disabled as a safety measure." = "Určitě chcete zapnout delší prodlevu? Může dojít k zamrznutí systému, což by vyžadovalo restart. Možnost \„Spustit po přihlášení\“ se z bezpečnostních důvodů vypne.";
+"Are you sure you want to enable a longer delay? Doing so may freeze your system and require a restart. Start at login will be disabled as a safety measure." = "Opravdu chcete zapnout delší prodlevu? Může dojít k zamrznutí systému, což by vyžadovalo restart. Volba "Spustit po přihlášení" se z bezpečnostních důvodů vypne.";
 
 /* Shown in the alert dialog */
-"Are you sure you want to reset all settings?" = "Určitě chcete obnovit všechny předvolby?";
+"Are you sure you want to reset all settings?" = "Opravdu chcete obnovit všechna nastavení?";
 
 /* Shown in menu */
 "Brightness" = "Jas";
@@ -23,7 +23,7 @@
 "Built-in Display" = "Vestavěný displej";
 
 /* Shown in menu */
-"Check for updates…" = "Vyhledat aktualizace…";
+"Check for updates…" = "Zkontrolovat aktualizace...";
 
 /* Shown in menu */
 "Contrast" = "Kontrast";
@@ -65,7 +65,7 @@
 "Increase" = "Zvýšit";
 
 /* Shown in the alert dialog */
-"Is f.lux or similar running?" = "Běží f.lux nebo něco podobného?";
+"Is f.lux or similar running?" = "Neběží f.lux nebo něco podobného?";
 
 /* Shown in the main prefs window */
 "Keyboard" = "Klávesnice";
@@ -83,22 +83,22 @@
 "Other Display" = "Jiný displej";
 
 /* Shown in the alert dialog */
-"Settings for an incompatible previous app version detected. Default settings are reloaded." = "Nalezeny předvolby pro předchozí, nekompatibilní verzi aplikace. Načetly se výchozí hodnoty.";
+"Settings for an incompatible previous app version detected. Default settings are reloaded." = "Nalezena nastavení pro předchozí, nekompatibilní verzi aplikace. Načetla se výchozí nastavení.";
 
 /* Shown in menu */
-"Settings…" = "Předvolby…";
+"Settings…" = "Nastavení...";
 
 /* Shown in menu */
 "Quit" = "Ukončit";
 
 /* Shown in the alert dialog */
-"Reset Settings?" = "Obnovit předvolby?";
+"Reset Settings?" = "Obnovit nastavení?";
 
 /* Shown in the alert dialog */
-"Safe Mode Activated" = "Bezpečný režim aktivní";
+"Safe Mode Activated" = "Bezpečný režim aktivován";
 
 /* Shown in the alert dialog */
-"Shift was pressed during launch. MonitorControl started in safe mode. Default settings are reloaded, DDC read is blocked." = "Běhěm spuštění byl zmáčknutý Shift. MonitorControl běží v bezpečném režimu. Byly načteny výchozí předvolby, čtení DDC je zablokováno.";
+"Shift was pressed during launch. MonitorControl started in safe mode. Default settings are reloaded, DDC read is blocked." = "Běhěm spuštění byl stisknutý Shift. MonitorControl běží v bezpečném režimu. Byla načtena výchozí nastavení; čtení DDC je zablokováno.";
 
 /* Shown in the alert dialog */
 "Shortcuts not available" = "Zkratky nejsou k dispozici";
@@ -107,31 +107,31 @@
 "Software (gamma)" = "Softwarové (gama)";
 
 /* Shown in the Display Settings */
-"Software (gamma, forced)" = "Softwarové (gama, nucené)";
+"Software (gamma, forced)" = "Softwarové (gama, vynucené)";
 
 /* Shown in the Display Settings */
 "Software (shade)" = "Softwarové (stínování)";
 
 /* Shown in the Display Settings */
-"Software (shade, forced)" = "Software (stínování, nucené)";
+"Software (shade, forced)" = "Software (stínování, vynucené)";
 
 /* Shown in the Display Settings */
-"This display allows for software brightness control via gamma table manipulation or shade as it does not support hardware control. Reasons for this might be using the HDMI port of a Mac mini (which blocks hardware DDC control) or having a blacklisted display." = "Jas tohoto displeje lze ovládat softwarově – manipulací gamy nebo stínování, protože hardwarové ovládání nepodporuje. Důvodem může být připojení přes HDMI port na Macu mini (který blokuje hardwarové ovládání DDC) nebo to, že displej patří na seznam nepodporovaných.";
+"This display allows for software brightness control via gamma table manipulation or shade as it does not support hardware control. Reasons for this might be using the HDMI port of a Mac mini (which blocks hardware DDC control) or having a blacklisted display." = "Jas tohoto displeje lze ovládat softwarově – manipulací gamy nebo stínování, protože hardwarové ovládání nepodporuje. Důvodem může být připojení přes HDMI port na Macu Mini (který blokuje hardwarové ovládání DDC) nebo to, že displej patří na seznam nepodporovaných.";
 
 /* Shown in the Display Settings */
-"This display has an unspecified control status." = "Tento displej má nespecifikovaný kontrolní stav.";
+"This display has an unspecified control status." = "Tento displej má nespecifikovaný stav ovládání.";
 
 /* Shown in the Display Settings */
-"This display is reported to support hardware DDC control but the current settings allow for software control only." = "Tento displej by měl podporovat hardwarové DDC ovládání, ale současná nastavení umožňují ovládání jen přes software.";
+"This display is reported to support hardware DDC control but the current settings allow for software control only." = "Tento displej by měl podporovat hardwarové DDC ovládání, ale současná nastavení umožňují ovládání jen softwarové ovládání.";
 
 /* Shown in the Display Settings */
-"This display is reported to support hardware DDC control. If you encounter issues, you can disable hardware DDC control to force software control." = "Tento displej by měl podporovat hardwarové DDC ovládání. Pokud narazíte na problém, můžete hardwarové ovládání DDC vypnout a použít vynucené ovládání přes software.";
+"This display is reported to support hardware DDC control. If you encounter issues, you can disable hardware DDC control to force software control." = "Tento displej by měl podporovat hardwarové DDC ovládání. Pokud narazíte na problém, můžete hardwarové ovládání DDC vypnout a použít vynucené softwarové ovládání.";
 
 /* Shown in the Display Settings */
 "This display supports native Apple brightness protocol. This allows macOS to control this display without MonitorControl as well." = "Tento displej podporuje nativní jasový protokol Apple. Díky tomu ho může macOS ovládat i bez MonitorControl.";
 
 /* Shown in the Display Settings */
-"This is a virtual display (examples: AirPlay, Sidecar, display connected via a DisplayLink Dock or similar) which does not allow hardware or software gammatable control. Shading is used as a substitute but only in non-mirror scenarios. Mouse cursor will be unaffected and artifacts may appear when entering/leaving full screen mode." = "Toto je virtuální displej (např. AirPlay, Sidecar, DisplayLink a podobně), což neumožňuje ovládání gamy přes software ani hardware. Jako náhrada slouží stínování, ale jen za předpokladu, že displej není nastaven na zrcadlení. Změny se neprojeví na ukazateli myši a můžou se objevit vizuální artefakty při přepínání režimu na celou obrazovku.";
+"This is a virtual display (examples: AirPlay, Sidecar, display connected via a DisplayLink Dock or similar) which does not allow hardware or software gammatable control. Shading is used as a substitute but only in non-mirror scenarios. Mouse cursor will be unaffected and artifacts may appear when entering/leaving full screen mode." = "Toto je virtuální displej (např. AirPlay, Sidecar, DisplayLink a podobně), který neumožňuje hardwarové, ani softwarové ovládání gamy. Jako náhrada slouží stínování, ale jen za předpokladu, že displej není nastaven na zrcadlení. Změny se neprojeví na ukazateli myši a můžou se objevit vizuální artefakty při přepínání režimu na celou obrazovku.";
 
 /* Unknown display name */
 "Unknown" = "Neznámý";
