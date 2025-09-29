@@ -98,7 +98,7 @@
 "Safe Mode Activated" = "Modo Seguro Activado";
 
 /* Shown in the alert dialog */
-"Shift was pressed during launch. MonitorControl started in safe mode. Default settings are reloaded, DDC read is blocked." = "La techa Shift fue presionada durante el lanzamiento. MonitorControl se inició en modo seguro. Se han cargado las preferencias por defecto, la lectura DDC está bloqueada.";
+"Shift was pressed during launch. MonitorControl started in safe mode. Default settings are reloaded, DDC read is blocked." = "La tecla Shift fue presionada durante el lanzamiento. MonitorControl se inició en modo seguro. Se han cargado las preferencias por defecto, la lectura DDC está bloqueada.";
 
 /* Shown in the alert dialog */
 "Shortcuts not available" = "Atajos no disponibles";
@@ -132,7 +132,7 @@
 "This display supports native Apple brightness protocol. This allows macOS to control this display without MonitorControl as well." = "Esta pantalla soporta el protocolo de brillo nativo de Apple. Esto le permite también a macOS controlar la pantalla sin MonitorControl.";
 
 /* Shown in the Display Settings */
-"This is a virtual display (examples: AirPlay, Sidecar, display connected via a DisplayLink Dock or similar) which does not allow hardware or software gammatable control. Shading is used as a substitute but only in non-mirror scenarios. Mouse cursor will be unaffected and artifacts may appear when entering/leaving full screen mode." = "Esto es una pantalla virtual (ejemplos: AirPlay, Sidecar, pantalla conectada a través del dock DisplayLink o similar) el cual no permite el control a través de gamma ni por hardware ni por software. El sombreado es usado como sustituto, pero solo en escenarios sin espejo. El cursor del ratón no verá afectado pero pueden aparecer objetos extraños cuando se entra/sale del modo pantalla completa.";
+"This is a virtual display (examples: AirPlay, Sidecar, display connected via a DisplayLink Dock or similar) which does not allow hardware or software gammatable control. Shading is used as a substitute but only in non-mirror scenarios. Mouse cursor will be unaffected and artifacts may appear when entering/leaving full screen mode." = "Esto es una pantalla virtual (ejemplos: AirPlay, Sidecar, pantalla conectada a través del dock DisplayLink o similar) el cual no permite el control a través de gamma ni por hardware ni por software. El sombreado es usado como sustituto, pero solo en escenarios sin espejo. El cursor del ratón no se verá afectado pero pueden aparecer objetos extraños cuando se entra/sale del modo pantalla completa.";
 
 /* Unknown display name */
 "Unknown" = "Desconocido";
