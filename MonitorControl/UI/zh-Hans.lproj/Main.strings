@@ -376,6 +376,9 @@
 /* Class = "NSMenuItem"; title = "Only if at least one slider is present"; ObjectID = "xLa-PN-rsq"; */
 "xLa-PN-rsq.title" = "只有当至少一个滑杆可用时";
 
+/* Class = "NSMenuItem"; title = "Only when external display is present"; ObjectID = "Tb1-6s-qOo"; */
+"Tb1-6s-qOo.title" = "仅当存在外置显示器时";
+
 /* Class = "NSMenuItem"; title = "Both standard and custom shortcuts"; ObjectID = "xQJ-aJ-VhH"; */
 "xQJ-aJ-VhH.title" = "标准及自定义快捷键";
 
