@@ -33,7 +33,19 @@ class MenuHandler: NSMenu, NSMenuDelegate {
     if !dontClose {
       self.cancelTrackingWithoutAnimation()
     }
-    app.updateStatusItemVisibility(prefs.integer(forKey: PrefKey.menuIcon.rawValue) == MenuIcon.show.rawValue ? true : false)
+    let menuIconPref = prefs.integer(forKey: PrefKey.menuIcon.rawValue)
+    var showIcon = false
+    if menuIconPref == MenuIcon.show.rawValue {
+      showIcon = true
+    } else if menuIconPref == MenuIcon.externalOnly.rawValue {
+      let externalDisplays = DisplayManager.shared.displays.filter {
+        CGDisplayIsBuiltin($0.identifier) == 0
+      }
+      if externalDisplays.count > 0 {
+        showIcon = true
+      }
+    }
+    app.updateStatusItemVisibility(showIcon)
     self.clearMenu()
     let currentDisplay = DisplayManager.shared.getCurrentDisplay()
     var displays: [Display] = []

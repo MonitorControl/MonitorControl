@@ -376,6 +376,9 @@
 /* Class = "NSMenuItem"; title = "Only if at least one slider is present"; ObjectID = "xLa-PN-rsq"; */
 "xLa-PN-rsq.title" = "Uniquement si au moins un curseur est présent";
 
+/* Class = "NSMenuItem"; title = "Only when external display is present"; ObjectID = "Tb1-6s-qOo"; */
+"Tb1-6s-qOo.title" = "Seulement lorsqu'un écran externe est présent";
+
 /* Class = "NSMenuItem"; title = "Both standard and custom shortcuts"; ObjectID = "xQJ-aJ-VhH"; */
 "xQJ-aJ-VhH.title" = "Raccourcis standard et personnalisés";
 

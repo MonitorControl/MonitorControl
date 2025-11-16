@@ -191,6 +191,7 @@ enum MenuIcon: Int {
   case show = 0
   case sliderOnly = 1
   case hide = 2
+  case externalOnly = 3
 }
 
 enum MenuItemStyle: Int {
