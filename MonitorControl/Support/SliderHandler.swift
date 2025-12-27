@@ -219,8 +219,8 @@ class SliderHandler {
     self.slider = slider
     if !DEBUG_MACOS10, #available(macOS 11.0, *) {
       slider.frame.size.width = 180
-      slider.frame.origin = NSPoint(x: 15, y: 5)
-      let view = NSView(frame: NSRect(x: 0, y: 0, width: slider.frame.width + 30 + (showPercent ? 38 : 0), height: slider.frame.height + 14))
+      slider.frame.origin = NSPoint(x: 15, y: 8)
+      let view = NSView(frame: NSRect(x: 0, y: 0, width: slider.frame.width + 30 + (showPercent ? 38 : 0), height: slider.frame.height + 42))
       view.frame.origin = NSPoint(x: 12, y: 0)
       var iconName = "circle.dashed"
       switch command {
@@ -232,13 +232,15 @@ class SliderHandler {
       let icon = SliderHandler.ClickThroughImageView()
       icon.image = NSImage(systemSymbolName: iconName, accessibilityDescription: title)
       icon.contentTintColor = NSColor.black.withAlphaComponent(0.6)
-      icon.frame = NSRect(x: view.frame.origin.x + 6.5, y: view.frame.origin.y + 13, width: 15, height: 15)
+      // Position icon at horizontal left (start), 8px above slider
+      let iconSize: CGFloat = 18
+      icon.frame = NSRect(x: slider.frame.origin.x, y: slider.frame.origin.y + slider.frame.height + 8, width: iconSize, height: iconSize)
       icon.imageAlignment = .alignCenter
       view.addSubview(slider)
       view.addSubview(icon)
       self.icon = icon
       if showPercent {
-        let percentageBox = NSTextField(frame: NSRect(x: 15 + slider.frame.size.width - 2, y: 17, width: 40, height: 12))
+        let percentageBox = NSTextField(frame: NSRect(x: 15 + slider.frame.size.width - 2, y: slider.frame.origin.y + (slider.frame.height - 12) / 2, width: 40, height: 12))
         self.setupPercentageBox(percentageBox)
         self.percentageBox = percentageBox
         view.addSubview(percentageBox)
