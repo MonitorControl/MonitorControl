@@ -5,7 +5,7 @@ import CoreGraphics
 import os.log
 
 class DisplayManager {
-  public static let shared = DisplayManager()
+  static let shared = DisplayManager()
 
   var displays: [Display] = []
   var audioControlTargetDisplays: [OtherDisplay] = []
@@ -177,6 +177,7 @@ class DisplayManager {
       let isDummy: Bool = DisplayManager.isDummy(displayID: onlineDisplayID)
       let isVirtual: Bool = DisplayManager.isVirtual(displayID: onlineDisplayID)
       if !DEBUG_SW, DisplayManager.isAppleDisplay(displayID: onlineDisplayID) { // MARK: (point of interest for testing)
+
         let appleDisplay = AppleDisplay(id, name: name, vendorNumber: vendorNumber, modelNumber: modelNumber, serialNumber: serialNumber, isVirtual: isVirtual, isDummy: isDummy)
         os_log("Apple display found - %{public}@", type: .info, "ID: \(appleDisplay.identifier), Name: \(appleDisplay.name) (Vendor: \(appleDisplay.vendorNumber ?? 0), Model: \(appleDisplay.modelNumber ?? 0))")
         self.addDisplay(display: appleDisplay)
@@ -190,7 +191,7 @@ class DisplayManager {
 
   func setupOtherDisplays(firstrun: Bool = false) {
     for otherDisplay in self.getOtherDisplays() {
-      for command in [Command.audioSpeakerVolume, Command.contrast] where !otherDisplay.readPrefAsBool(key: .unavailableDDC, for: command) && !otherDisplay.isSw() {
+      for command in [Command.audioSpeakerVolume, Command.contrast, Command.colorTemperatureRequest] where !otherDisplay.readPrefAsBool(key: .unavailableDDC, for: command) && !otherDisplay.isSw() {
         otherDisplay.setupCurrentAndMaxValues(command: command, firstrun: firstrun)
       }
       if (!otherDisplay.isSw() && !otherDisplay.readPrefAsBool(key: .unavailableDDC, for: .brightness)) || otherDisplay.isSw() {
@@ -242,36 +243,34 @@ class DisplayManager {
 
   func sortDisplays() {
     // Opsiyonel: sıralamadan önce log al
-    let before = displays.map { $0.name }
+    let before = self.displays.map(\.name)
     os_log("Displays before sorting: %{public}@", before)
-    
+
     // In‑place sıralama
-    displays.sort { lhs, rhs in
+    self.displays.sort { lhs, rhs in
       lhs.name.localizedStandardCompare(rhs.name) == .orderedAscending
     }
-    
+
     // Opsiyonel: sıralamadan sonra log al
-    let after = displays.map { $0.name }
+    let after = self.displays.map(\.name)
     os_log("Displays after sorting: %{public}@", after)
   }
-  
+
   func sortDisplaysByFriendlyName() -> [Display] {
-      return displays.sorted { lhs, rhs in
-          let lhsTitle = lhs.readPrefAsString(key: .friendlyName).isEmpty
-              ? lhs.name
-              : lhs.readPrefAsString(key: .friendlyName)
-          let rhsTitle = rhs.readPrefAsString(key: .friendlyName).isEmpty
-              ? rhs.name
-              : rhs.readPrefAsString(key: .friendlyName)
-          return lhsTitle.localizedStandardCompare(rhsTitle) == .orderedDescending
-      }
+    self.displays.sorted { lhs, rhs in
+      let lhsTitle = lhs.readPrefAsString(key: .friendlyName).isEmpty
+        ? lhs.name
+        : lhs.readPrefAsString(key: .friendlyName)
+      let rhsTitle = rhs.readPrefAsString(key: .friendlyName).isEmpty
+        ? rhs.name
+        : rhs.readPrefAsString(key: .friendlyName)
+      return lhsTitle.localizedStandardCompare(rhsTitle) == .orderedDescending
+    }
   }
-
-
 
   /// displays dizisini sıralar ve döner
   func getAllDisplays() -> [Display] {
-    return displays
+    self.displays
   }
 
   func getDdcCapableDisplays() -> [OtherDisplay] {
@@ -313,7 +312,7 @@ class DisplayManager {
   func clearDisplays() {
     self.displays = []
   }
-  
+
   func addDisplayCounterSuffixes() {
     var nameDisplays: [String: [Display]] = [:]
     for display in self.displays {
@@ -549,6 +548,7 @@ class DisplayManager {
       }
     }
     if let screen = getByDisplayID(displayID: displayID) { // MARK: This, and NSScreen+Extension.swift will not be needed when we drop MacOS 10 support.
+
       if #available(macOS 10.15, *) {
         return screen.localizedName
       } else {

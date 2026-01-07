@@ -25,6 +25,7 @@ class MenuslidersPrefsViewController: NSViewController, SettingsPane {
   @IBOutlet var showAppleFromMenu: NSButton!
   @IBOutlet var showVolumeSlider: NSButton!
   @IBOutlet var showContrastSlider: NSButton!
+  @IBOutlet var showColorTemperatureSlider: NSButton!
 
   @IBOutlet var multiSliders: NSPopUpButton!
 
@@ -95,6 +96,7 @@ class MenuslidersPrefsViewController: NSViewController, SettingsPane {
       self.showAppleFromMenu.isEnabled = false
     }
     self.showContrastSlider.state = prefs.bool(forKey: PrefKey.showContrast.rawValue) ? .on : .off
+    self.showColorTemperatureSlider.state = prefs.bool(forKey: PrefKey.showColorTemperature.rawValue) ? .on : .off
 
     self.multiSliders.selectItem(withTag: prefs.integer(forKey: PrefKey.multiSliders.rawValue))
 
@@ -170,6 +172,17 @@ class MenuslidersPrefsViewController: NSViewController, SettingsPane {
     self.updateGridLayout()
   }
 
+  @IBAction func showColorTemperatureSliderClicked(_ sender: NSButton) {
+    switch sender.state {
+    case .on:
+      prefs.set(true, forKey: PrefKey.showColorTemperature.rawValue)
+    case .off:
+      prefs.set(false, forKey: PrefKey.showColorTemperature.rawValue)
+    default: break
+    }
+    app.updateMenusAndKeys()
+  }
+
   @IBAction func enableSliderSnapClicked(_ sender: NSButton) {
     switch sender.state {
     case .on:
@@ -211,8 +224,8 @@ class MenuslidersPrefsViewController: NSViewController, SettingsPane {
     app.updateMenusAndKeys()
     self.updateGridLayout()
   }
-  
-  override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+
+  override func observeValue(forKeyPath keyPath: String?, of object: Any?, change _: [NSKeyValueChangeKey: Any]?, context _: UnsafeMutableRawPointer?) {
     guard let object = object as? AnyObject else { return }
     if object === prefs, keyPath == PrefKey.menuIcon.rawValue {
       self.populateSettings()
