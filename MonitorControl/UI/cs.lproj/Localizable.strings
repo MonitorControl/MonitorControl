@@ -8,7 +8,7 @@
 "App menu" = "Nabídka";
 
 /* Shown in the alert dialog */
-"Are you sure you want to enable a longer delay? Doing so may freeze your system and require a restart. Start at login will be disabled as a safety measure." = "Opravdu chcete zapnout delší prodlevu? Může dojít k zamrznutí systému, což by vyžadovalo restart. Volba "Spustit po přihlášení" se z bezpečnostních důvodů vypne.";
+"Are you sure you want to enable a longer delay? Doing so may freeze your system and require a restart. Start at login will be disabled as a safety measure." = "Opravdu chcete zapnout delší prodlevu? Může dojít k zamrznutí systému, což by vyžadovalo restart. Volba \"Spustit po přihlášení\" se z bezpečnostních důvodů vypne.";
 
 /* Shown in the alert dialog */
 "Are you sure you want to reset all settings?" = "Opravdu chcete obnovit všechna nastavení?";
