@@ -33,10 +33,13 @@ enum PrefKey: String {
   // Hide brightness sliders
   case hideBrightness
 
-  // Show volume sliders
+  // Show contrast sliders
   case showContrast
 
-  // Show volume sliders
+  // Show color temperature sliders
+  case showColorTemperature
+
+  // Hide volume sliders
   case hideVolume
 
   // Lower via software after brightness

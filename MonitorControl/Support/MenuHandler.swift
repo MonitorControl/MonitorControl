@@ -167,6 +167,9 @@ class MenuHandler: NSMenu, NSMenuDelegate {
     if let sliderHandler = self.combinedSliderHandler[.audioSpeakerVolume] {
       self.addSliderItem(monitorSubMenu: self, sliderHandler: sliderHandler)
     }
+    if let sliderHandler = self.combinedSliderHandler[.colorTemperatureRequest] {
+      self.addSliderItem(monitorSubMenu: self, sliderHandler: sliderHandler)
+    }
     if let sliderHandler = self.combinedSliderHandler[.contrast] {
       self.addSliderItem(monitorSubMenu: self, sliderHandler: sliderHandler)
     }
@@ -188,6 +191,11 @@ class MenuHandler: NSMenu, NSMenuDelegate {
     if let otherDisplay = display as? OtherDisplay, !otherDisplay.isSw(), !display.readPrefAsBool(key: .unavailableDDC, for: .contrast), prefs.bool(forKey: PrefKey.showContrast.rawValue) {
       let title = NSLocalizedString("Contrast", comment: "Shown in menu")
       addedSliderHandlers.append(self.setupMenuSliderHandler(command: .contrast, display: display, title: title))
+    }
+    display.sliderHandler[.colorTemperatureRequest] = nil
+    if let otherDisplay = display as? OtherDisplay, !otherDisplay.isSw(), !display.readPrefAsBool(key: .unavailableDDC, for: .colorTemperatureRequest), prefs.bool(forKey: PrefKey.showColorTemperature.rawValue) {
+      let title = NSLocalizedString("Color Temperature", comment: "Shown in menu")
+      addedSliderHandlers.append(self.setupMenuSliderHandler(command: .colorTemperatureRequest, display: display, title: title))
     }
     display.sliderHandler[.brightness] = nil
     if !display.readPrefAsBool(key: .unavailableDDC, for: .brightness), !prefs.bool(forKey: PrefKey.hideBrightness.rawValue) {

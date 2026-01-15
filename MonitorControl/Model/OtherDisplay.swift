@@ -377,7 +377,7 @@ class OtherDisplay: Display {
     return intCodes
   }
 
-  public func writeDDCValues(command: Command, value: UInt16) {
+  func writeDDCValues(command: Command, value: UInt16) {
     guard app.sleepID == 0, app.reconfigureID == 0, !self.readPrefAsBool(key: .forceSw), !self.readPrefAsBool(key: .unavailableDDC, for: command) else {
       return
     }
@@ -486,7 +486,10 @@ class OtherDisplay: Display {
     }
     let curveMultiplier = self.getCurveMultiplier(self.readPrefAsInt(key: .curveDDC, for: command))
     let minDDCValue = Float(self.readPrefAsInt(key: .minDDCOverride, for: command))
-    let maxDDCValue = Float(self.readPrefAsInt(key: .maxDDC, for: command))
+    var maxDDCValue = Float(self.readPrefAsInt(key: .maxDDC, for: command))
+    if maxDDCValue <= minDDCValue {
+      maxDDCValue = Float(DDC_MAX_DETECT_LIMIT)
+    }
     let curvedValue = pow(max(min(value, 1), 0), curveMultiplier)
     let deNormalizedValue = (maxDDCValue - minDDCValue) * curvedValue + minDDCValue
     var intDDCValue = UInt16(min(max(deNormalizedValue, minDDCValue), maxDDCValue))
@@ -499,7 +502,10 @@ class OtherDisplay: Display {
   func convDDCToValue(for command: Command, from: UInt16) -> Float {
     let curveMultiplier = self.getCurveMultiplier(self.readPrefAsInt(key: .curveDDC, for: command))
     let minDDCValue = Float(self.readPrefAsInt(key: .minDDCOverride, for: command))
-    let maxDDCValue = Float(self.readPrefAsInt(key: .maxDDC, for: command))
+    var maxDDCValue = Float(self.readPrefAsInt(key: .maxDDC, for: command))
+    if maxDDCValue <= minDDCValue {
+      maxDDCValue = Float(DDC_MAX_DETECT_LIMIT)
+    }
     let normalizedValue = ((min(max(Float(from), minDDCValue), maxDDCValue) - minDDCValue) / (maxDDCValue - minDDCValue))
     let deCurvedValue = pow(normalizedValue, 1.0 / curveMultiplier)
     var value = deCurvedValue
