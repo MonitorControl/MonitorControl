@@ -25,7 +25,7 @@ Use menubar extra sliders or the keyboard, including native Apple keys!</p>
 <hr>
 
 > [!WARNING]
-> MonitorControl v4.2.0 [may crash](https://github.com/MonitorControl/MonitorControl/issues/1663) on certain configurations running macOS 15 Sequoia. Additionally, this version will not automatically update to the [latest app version](https://github.com/MonitorControl/MonitorControl/releases). To resolve the issue and ensure future updates, please upgrade manually.
+> MonitorControl v4.2.0 [may crash](https://github.com/MonitorControl/MonitorControl/issues/1663) on certain configurations running macOS 15 Sequoia or Tahoe. Additionally, this version will not automatically update to the [latest app version](https://github.com/MonitorControl/MonitorControl/releases). To resolve the issue and ensure future updates, please upgrade manually.
 
 ## Download
 
@@ -47,7 +47,7 @@ brew install --cask monitorcontrol
 - Support for custom keyboard shortcuts as well as standard brightness and media keys on Apple keyboards.
 - Dozens of customization options to tweak the inner workings of the app to suit your hardware and needs (don't forget to enable `Show advanced settings` in app Settings).
 - Simple, unobtrusive UI to blend in to the general aesthetics of macOS.
-- **One of the best app of its kind, completely FREE.**
+- Completely FREE.
 
 For additional features, more advanced brightness control with XDR/HDR brightness upscaling and support for more Mac models and displays, check out [BetterDisplay](https://github.com/waydabber/BetterDisplay#readme)!
 
@@ -81,7 +81,9 @@ For additional features, more advanced brightness control with XDR/HDR brightnes
 
 _* With some limitations - full functionality available on macOS 11 Big Sur or newer._
 
-For macOS Sequoia compatibility [v4.3.2 or newer](https://github.com/MonitorControl/MonitorControl/releases) is required!
+For macOS Sequoia and Tahoe 26 compatibility [v4.3.3 or newer](https://github.com/MonitorControl/MonitorControl/releases) is required!
+
+Please note that current versions have limited native macOS OSD support on macOS Tahoe - although the Control Center brightness or volume OSD appears, the OSD percentage value will not show or update.
 
 ### Supported displays
 
@@ -96,16 +98,9 @@ Notable exceptions for hardware control compatibility:
 - Some displays (notably EIZO) use MCCS over USB or an entirely custom protocol for control. These displays are supported with software dimming only.
 - DisplayLink docks and dongles do not allow for DDC control on Macs, only software dimming is available for these connections.
 
-Compatibility with 
-
-- f.lux users: please activate `Avoid gamma table manipulation` under `Settings` » `Displays`! This step is not needed if you use Night Shift.
-- [BetterDisplay](https://betterdisplay.pro/) users: either activate `Avoid gamma table manipulation` in MonitorControl or turn off `Allow color table adjustments` in BetterDisplay (under Settings/Displays/Overview). You might want to disable native keyboard control either in MonitorControl or BetterDisplay, depending on which app you want to use for brightness control and dimming.
-
 ## Contributing to the project
 
-- You can help out [by contributiong to the project with your one-time donation or by being a regular Sponsor](https://opencollective.com/monitorcontrol)!
 - If you want, you can fork the code, make improvements and submit a pull request to improve the app. Accepting a PR is solely in the hands of the maintainer - before making fundamental changes expecting it to be accepted, please consult the maintainer of the project!
-
 
 ## How to build
 
@@ -135,17 +130,12 @@ git clone https://github.com/MonitorControl/MonitorControl.git
 - [KeyboardShortcuts](https://github.com/sindresorhus/KeyboardShortcuts)
 - [Sparkle](https://github.com/sparkle-project/Sparkle)
 
-## Hall of Honor
+## Credits
 
-### Current maintainer of the project
-
-- [@waydabber](https://github.com/waydabber), developer of [BetterDisplay](https://github.com/waydabber/BetterDisplay#readme).
-
-### Former maintainers, special contributors
-
-- [@the0neyouseek](https://github.com/the0neyouseek) - previous (now honorary) maintainer
-- [@JoniVR](https://github.com/JoniVR) - previous (now honorary) maintainer
-- [@alin23](https://github.com/alin23) (generally spearheaded M1 DDC support and figured out a many of the caveats)
+- [@waydabber](https://github.com/waydabber), maintainer, developer of [BetterDisplay](https://github.com/waydabber/BetterDisplay#readme).
+- [@the0neyouseek](https://github.com/the0neyouseek) - honorary maintainer
+- [@JoniVR](https://github.com/JoniVR) - honorary maintainer
+- [@alin23](https://github.com/alin23) - spearheaded M1 DDC support, developer of [Lunar](https://lunar.fyi)
 - [@mathew-kurian](https://github.com/mathew-kurian/) (original developer)
 - [@Tyilo](https://github.com/Tyilo/) (fork)
 - [@Bensge](https://github.com/Bensge/) - (used some code from his project [NativeDisplayBrightness](https://github.com/Bensge/NativeDisplayBrightness))
