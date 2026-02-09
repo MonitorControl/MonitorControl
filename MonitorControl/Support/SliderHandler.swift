@@ -209,7 +209,7 @@ class SliderHandler {
     }
   }
 
-  public init(display: Display?, command: Command, title: String = "", position _: Int = 0) {
+  init(display: Display?, command: Command, title: String = "", position _: Int = 0) {
     self.command = command
     self.title = title
     let slider = SliderHandler.MCSlider(value: 0, minValue: 0, maxValue: 1, target: self, action: #selector(SliderHandler.valueChanged))
@@ -227,6 +227,7 @@ class SliderHandler {
       case .audioSpeakerVolume: iconName = "speaker.wave.2.fill"
       case .brightness: iconName = "sun.max.fill"
       case .contrast: iconName = "circle.lefthalf.fill"
+      case .colorTemperatureRequest: iconName = "thermometer.medium"
       default: break
       }
       let icon = SliderHandler.ClickThroughImageView()
@@ -297,6 +298,17 @@ class SliderHandler {
         if !otherDisplay.readPrefAsBool(key: .enableMuteUnmute) || value != 0 {
           otherDisplay.writeDDCValues(command: self.command, value: otherDisplay.convValueToDDC(for: self.command, from: value))
         }
+      } else if self.command == Command.colorTemperatureRequest {
+        // Color temperature: adjust red and blue gains
+        // Based on Kelvin to RGB conversion (Tanner Helland algorithm)
+        // Blue changes more than red (asymmetric like real color temp)
+        // value 0 = cool (~9300K), value 0.5 = neutral (~6500K), value 1 = warm (~2700K)
+        // Red range: 40-60 (±10 from neutral 50)
+        // Blue range: 30-70 (±20 from neutral 50)
+        let redValue = UInt16(40 + value * 20) // 40 at cool, 50 at neutral, 60 at warm
+        let blueValue = UInt16(70 - value * 40) // 70 at cool, 50 at neutral, 30 at warm
+        otherDisplay.writeDDCValues(command: .videoGainRed, value: redValue)
+        otherDisplay.writeDDCValues(command: .videoGainBlue, value: blueValue)
       } else {
         otherDisplay.writeDDCValues(command: self.command, value: otherDisplay.convValueToDDC(for: self.command, from: value))
       }
