@@ -486,7 +486,14 @@ class OtherDisplay: Display {
     }
     let curveMultiplier = self.getCurveMultiplier(self.readPrefAsInt(key: .curveDDC, for: command))
     let minDDCValue = Float(self.readPrefAsInt(key: .minDDCOverride, for: command))
-    let maxDDCValue = Float(self.readPrefAsInt(key: .maxDDC, for: command))
+    let maxDDCValue = max(Float(self.readPrefAsInt(key: .maxDDC, for: command)), minDDCValue)
+    guard maxDDCValue > minDDCValue else {
+      var intDDCValue = UInt16(minDDCValue)
+      if from > 0, command == Command.audioSpeakerVolume {
+        intDDCValue = max(1, intDDCValue)
+      }
+      return intDDCValue
+    }
     let curvedValue = pow(max(min(value, 1), 0), curveMultiplier)
     let deNormalizedValue = (maxDDCValue - minDDCValue) * curvedValue + minDDCValue
     var intDDCValue = UInt16(min(max(deNormalizedValue, minDDCValue), maxDDCValue))
@@ -499,7 +506,14 @@ class OtherDisplay: Display {
   func convDDCToValue(for command: Command, from: UInt16) -> Float {
     let curveMultiplier = self.getCurveMultiplier(self.readPrefAsInt(key: .curveDDC, for: command))
     let minDDCValue = Float(self.readPrefAsInt(key: .minDDCOverride, for: command))
-    let maxDDCValue = Float(self.readPrefAsInt(key: .maxDDC, for: command))
+    let maxDDCValue = max(Float(self.readPrefAsInt(key: .maxDDC, for: command)), minDDCValue)
+    guard maxDDCValue > minDDCValue else {
+      var value: Float = 0
+      if self.readPrefAsBool(key: .invertDDC, for: command) {
+        value = 1 - value
+      }
+      return max(min(value, 1), 0)
+    }
     let normalizedValue = ((min(max(Float(from), minDDCValue), maxDDCValue) - minDDCValue) / (maxDDCValue - minDDCValue))
     let deCurvedValue = pow(normalizedValue, 1.0 / curveMultiplier)
     var value = deCurvedValue
