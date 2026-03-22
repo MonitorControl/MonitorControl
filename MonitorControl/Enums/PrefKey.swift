@@ -78,9 +78,6 @@ enum PrefKey: String {
   // Use fine OSD scale for volume
   case useFineScaleVolume
 
-  // Always capture standard volume media keys even when macOS output volume is controllable
-  case forceStandardVolumeMediaKeys
-
   // Use smoothBrightness
   case disableSmoothBrightness
 
@@ -215,4 +212,5 @@ enum KeyboardVolume: Int {
   case custom = 1
   case both = 2
   case disabled = 3
+  case mediaForce = 4
 }

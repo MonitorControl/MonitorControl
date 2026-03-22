@@ -150,7 +150,7 @@ class MediaKeyTapManager: MediaKeyTapDelegate {
     if [KeyboardBrightness.media.rawValue, KeyboardBrightness.both.rawValue].contains(prefs.integer(forKey: PrefKey.keyboardBrightness.rawValue)) {
       keys.append(contentsOf: [.brightnessUp, .brightnessDown])
     }
-    if [KeyboardVolume.media.rawValue, KeyboardVolume.both.rawValue].contains(prefs.integer(forKey: PrefKey.keyboardVolume.rawValue)) {
+    if [KeyboardVolume.media.rawValue, KeyboardVolume.both.rawValue, KeyboardVolume.mediaForce.rawValue].contains(prefs.integer(forKey: PrefKey.keyboardVolume.rawValue)) {
       keys.append(contentsOf: [.mute, .volumeUp, .volumeDown])
     }
     // Remove brightness keys if no external displays are connected, but only if brightness fine control is not active
@@ -166,8 +166,8 @@ class MediaKeyTapManager: MediaKeyTapDelegate {
       let keysToDelete: [MediaKey] = [.brightnessUp, .brightnessDown]
       keys.removeAll { keysToDelete.contains($0) }
     }
-    // Remove volume related keys if audio device is controllable unless the user opted into force-capturing them.
-    if !prefs.bool(forKey: PrefKey.forceStandardVolumeMediaKeys.rawValue), let defaultAudioDevice = app.coreAudio.defaultOutputDevice {
+    // Remove volume related keys if audio device is controllable (skip when user chose force-capture mode)
+    if prefs.integer(forKey: PrefKey.keyboardVolume.rawValue) != KeyboardVolume.mediaForce.rawValue, let defaultAudioDevice = app.coreAudio.defaultOutputDevice {
       let keysToDelete: [MediaKey] = [.volumeUp, .volumeDown, .mute]
       if prefs.integer(forKey: PrefKey.multiKeyboardVolume.rawValue) == MultiKeyboardVolume.audioDeviceNameMatching.rawValue {
         if DisplayManager.shared.updateAudioControlTargetDisplays(deviceName: defaultAudioDevice.name) == 0 {

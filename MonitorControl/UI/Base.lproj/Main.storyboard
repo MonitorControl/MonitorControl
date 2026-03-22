@@ -1004,6 +1004,7 @@
                                                 <menu key="menu" id="LhY-cM-Msq">
                                                     <items>
                                                         <menuItem title="Standard keyboard volume and mute keys" state="on" id="1sy-Kd-WL5"/>
+                                                        <menuItem title="Standard keys (force capture)" tag="4" id="fVk-mR-9Xp"/>
                                                         <menuItem title="Custom keyboard shortcuts" tag="1" id="4CG-0I-anB"/>
                                                         <menuItem title="Both standard and custom shortcuts" tag="2" id="QDG-SA-mRX">
                                                             <modifierMask key="keyEquivalentModifierMask"/>
@@ -1129,16 +1130,14 @@
                                     </gridCell>
                                     <gridCell row="73k-Ho-qxa" column="ZC2-Ja-sIb" id="auW-Op-Sd7"/>
                                     <gridCell row="73k-Ho-qxa" column="EiG-65-CTv" id="zDs-rB-tfY">
-                                        <button key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="5mr-B4-1IW">
-                                            <rect key="frame" x="218" y="24" width="472" height="18"/>
-                                            <buttonCell key="cell" type="check" title="Force capture standard volume and mute keys" bezelStyle="regularSquare" imagePosition="left" inset="2" id="5V3-gQ-jWm">
-                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                                <font key="font" metaFont="system"/>
-                                            </buttonCell>
-                                            <connections>
-                                                <action selector="forceStandardVolumeMediaKeysClicked:" target="eJ2-Cv-Vfp" id="w6y-tu-CZn"/>
-                                            </connections>
-                                        </button>
+                                        <textField key="contentView" focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" preferredMaxLayoutWidth="400" translatesAutoresizingMaskIntoConstraints="NO" id="1lU-Y6-hCU">
+                                            <rect key="frame" x="218" y="26" width="474" height="14"/>
+                                            <textFieldCell key="cell" controlSize="small" title="You can override audio device name under Displays (advanced) if needed." id="Dha-Tm-cDM">
+                                                <font key="font" metaFont="smallSystem"/>
+                                                <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            </textFieldCell>
+                                        </textField>
                                     </gridCell>
                                     <gridCell row="fUL-yd-WWe" column="ZC2-Ja-sIb" xPlacement="trailing" yPlacement="center" id="Wh1-8h-lvf">
                                         <textField key="contentView" focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="GO6-iW-7qg">
@@ -1182,7 +1181,6 @@
                         <outlet property="customVolumeDown" destination="cag-2Q-I9P" id="AuB-3g-Pwa"/>
                         <outlet property="customVolumeUp" destination="rFx-DX-nFb" id="DpG-Xm-lRB"/>
                         <outlet property="disableAltBrightnessKeys" destination="EJp-ld-K4l" id="WzJ-1Q-YT4"/>
-                        <outlet property="forceStandardVolumeMediaKeys" destination="5mr-B4-1IW" id="dbq-cm-WVC"/>
                         <outlet property="keyboardBrightness" destination="2NF-gh-JBU" id="3Cw-ob-T06"/>
                         <outlet property="keyboardVolume" destination="9oZ-JM-bxD" id="IJ6-6m-q0x"/>
                         <outlet property="multiKeyboardBrightness" destination="led-AW-u5j" id="14B-uk-v7Z"/>

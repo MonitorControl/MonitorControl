@@ -33,7 +33,6 @@ class KeyboardPrefsViewController: NSViewController, SettingsPane {
   @IBOutlet var multiKeyboardVolume: NSPopUpButton!
   @IBOutlet var useFineScale: NSButton!
   @IBOutlet var useFineScaleVolume: NSButton!
-  @IBOutlet var forceStandardVolumeMediaKeys: NSButton!
   @IBOutlet var separateCombinedScale: NSButton!
 
   @IBOutlet var rowKeyboardBrightnessPopUp: NSGridRow!
@@ -93,11 +92,9 @@ class KeyboardPrefsViewController: NSViewController, SettingsPane {
     if self.keyboardVolume.selectedTag() == KeyboardVolume.disabled.rawValue {
       self.multiKeyboardVolume.isEnabled = false
       self.useFineScaleVolume.isEnabled = false
-      self.forceStandardVolumeMediaKeys.isEnabled = false
     } else {
       self.multiKeyboardVolume.isEnabled = true
       self.useFineScaleVolume.isEnabled = true
-      self.forceStandardVolumeMediaKeys.isEnabled = true
     }
 
     if self.multiKeyboardBrightness.selectedTag() == MultiKeyboardBrightness.focusInsteadOfMouse.rawValue {
@@ -112,7 +109,7 @@ class KeyboardPrefsViewController: NSViewController, SettingsPane {
       self.rowUseAudioNameText.isHidden = false
       self.rowUseAudioMouseText.isHidden = true
     } else {
-      self.rowUseAudioNameText.isHidden = false
+      self.rowUseAudioNameText.isHidden = true
       self.rowUseAudioMouseText.isHidden = false
     }
   }
@@ -155,7 +152,6 @@ class KeyboardPrefsViewController: NSViewController, SettingsPane {
     self.multiKeyboardVolume.selectItem(withTag: prefs.integer(forKey: PrefKey.multiKeyboardVolume.rawValue))
     self.useFineScale.state = prefs.bool(forKey: PrefKey.useFineScaleBrightness.rawValue) ? .on : .off
     self.useFineScaleVolume.state = prefs.bool(forKey: PrefKey.useFineScaleVolume.rawValue) ? .on : .off
-    self.forceStandardVolumeMediaKeys.state = prefs.bool(forKey: PrefKey.forceStandardVolumeMediaKeys.rawValue) ? .on : .off
     self.separateCombinedScale.state = prefs.bool(forKey: PrefKey.separateCombinedScale.rawValue) ? .on : .off
     self.updateGridLayout()
   }
@@ -191,17 +187,6 @@ class KeyboardPrefsViewController: NSViewController, SettingsPane {
       prefs.set(false, forKey: PrefKey.useFineScaleVolume.rawValue)
     default: break
     }
-  }
-
-  @IBAction func forceStandardVolumeMediaKeysClicked(_ sender: NSButton) {
-    switch sender.state {
-    case .on:
-      prefs.set(true, forKey: PrefKey.forceStandardVolumeMediaKeys.rawValue)
-    case .off:
-      prefs.set(false, forKey: PrefKey.forceStandardVolumeMediaKeys.rawValue)
-    default: break
-    }
-    app.updateMediaKeyTap()
   }
 
   @IBAction func separateCombinedScale(_ sender: NSButton) {
