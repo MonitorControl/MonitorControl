@@ -78,6 +78,9 @@ enum PrefKey: String {
   // Use fine OSD scale for volume
   case useFineScaleVolume
 
+  // Always capture standard volume media keys even when macOS output volume is controllable
+  case forceStandardVolumeMediaKeys
+
   // Use smoothBrightness
   case disableSmoothBrightness
 

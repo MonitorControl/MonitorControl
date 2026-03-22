@@ -166,8 +166,8 @@ class MediaKeyTapManager: MediaKeyTapDelegate {
       let keysToDelete: [MediaKey] = [.brightnessUp, .brightnessDown]
       keys.removeAll { keysToDelete.contains($0) }
     }
-    // Remove volume related keys if audio device is controllable
-    if let defaultAudioDevice = app.coreAudio.defaultOutputDevice {
+    // Remove volume related keys if audio device is controllable unless the user opted into force-capturing them.
+    if !prefs.bool(forKey: PrefKey.forceStandardVolumeMediaKeys.rawValue), let defaultAudioDevice = app.coreAudio.defaultOutputDevice {
       let keysToDelete: [MediaKey] = [.volumeUp, .volumeDown, .mute]
       if prefs.integer(forKey: PrefKey.multiKeyboardVolume.rawValue) == MultiKeyboardVolume.audioDeviceNameMatching.rawValue {
         if DisplayManager.shared.updateAudioControlTargetDisplays(deviceName: defaultAudioDevice.name) == 0 {
