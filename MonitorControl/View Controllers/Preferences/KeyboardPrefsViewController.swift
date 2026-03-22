@@ -112,7 +112,7 @@ class KeyboardPrefsViewController: NSViewController, SettingsPane {
       self.rowUseAudioNameText.isHidden = false
       self.rowUseAudioMouseText.isHidden = true
     } else {
-      self.rowUseAudioNameText.isHidden = true
+      self.rowUseAudioNameText.isHidden = false
       self.rowUseAudioMouseText.isHidden = false
     }
   }

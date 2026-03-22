@@ -731,7 +731,6 @@
                                     <gridRow height="20" bottomPadding="-13" id="LHa-CM-c46"/>
                                     <gridRow bottomPadding="-10" id="ypS-k5-pR7"/>
                                     <gridRow bottomPadding="-10" id="73k-Ho-qxa"/>
-                                    <gridRow bottomPadding="-10" id="hQm-r8-g2v"/>
                                     <gridRow bottomPadding="-13" id="fUL-yd-WWe"/>
                                 </rows>
                                 <columns>
@@ -1130,19 +1129,8 @@
                                     </gridCell>
                                     <gridCell row="73k-Ho-qxa" column="ZC2-Ja-sIb" id="auW-Op-Sd7"/>
                                     <gridCell row="73k-Ho-qxa" column="EiG-65-CTv" id="zDs-rB-tfY">
-                                        <textField key="contentView" focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" preferredMaxLayoutWidth="400" translatesAutoresizingMaskIntoConstraints="NO" id="1lU-Y6-hCU">
-                                            <rect key="frame" x="218" y="26" width="474" height="14"/>
-                                            <textFieldCell key="cell" controlSize="small" title="You can override audio device name under Displays (advanced) if needed." id="Dha-Tm-cDM">
-                                                <font key="font" metaFont="smallSystem"/>
-                                                <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
-                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                            </textFieldCell>
-                                        </textField>
-                                    </gridCell>
-                                    <gridCell row="hQm-r8-g2v" column="ZC2-Ja-sIb" id="w0h-VC-Htp"/>
-                                    <gridCell row="hQm-r8-g2v" column="EiG-65-CTv" id="VSW-2J-r2M">
                                         <button key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="5mr-B4-1IW">
-                                            <rect key="frame" x="218" y="3" width="472" height="18"/>
+                                            <rect key="frame" x="218" y="24" width="472" height="18"/>
                                             <buttonCell key="cell" type="check" title="Force capture standard volume and mute keys" bezelStyle="regularSquare" imagePosition="left" inset="2" id="5V3-gQ-jWm">
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                 <font key="font" metaFont="system"/>
