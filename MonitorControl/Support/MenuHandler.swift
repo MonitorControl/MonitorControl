@@ -103,25 +103,24 @@ class MenuHandler: NSMenu, NSMenuDelegate {
 
   func addDisplayMenuBlock(addedSliderHandlers: [SliderHandler], blockName: String, monitorSubMenu: NSMenu, numOfDisplays: Int, asSubMenu: Bool) {
     if numOfDisplays > 1, prefs.integer(forKey: PrefKey.multiSliders.rawValue) != MultiSliders.relevant.rawValue, !DEBUG_MACOS10, #available(macOS 11.0, *) {
-      class BlockView: NSView {
-        override func draw(_: NSRect) {
-          let radius = prefs.bool(forKey: PrefKey.showTickMarks.rawValue) ? CGFloat(4) : CGFloat(11)
-          let outerMargin = CGFloat(15)
-          let blockRect = self.frame.insetBy(dx: outerMargin, dy: outerMargin / 2 + 2).offsetBy(dx: 0, dy: outerMargin / 2 * -1 + 7)
-          for i in 1 ... 5 {
-            let blockPath = NSBezierPath(roundedRect: blockRect.insetBy(dx: CGFloat(i) * -1, dy: CGFloat(i) * -1), xRadius: radius + CGFloat(i) * 0.5, yRadius: radius + CGFloat(i) * 0.5)
-            NSColor.black.withAlphaComponent(0.1 / CGFloat(i)).setStroke()
-            blockPath.stroke()
-          }
-          let blockPath = NSBezierPath(roundedRect: blockRect, xRadius: radius, yRadius: radius)
-          if [NSAppearance.Name.darkAqua, NSAppearance.Name.vibrantDark].contains(effectiveAppearance.name) {
-            NSColor.systemGray.withAlphaComponent(0.3).setStroke()
-            blockPath.stroke()
-          }
-          if ![NSAppearance.Name.darkAqua, NSAppearance.Name.vibrantDark].contains(effectiveAppearance.name) {
-            NSColor.white.withAlphaComponent(0.5).setFill()
-            blockPath.fill()
-          }
+      class BlockView: NSVisualEffectView {
+        override init(frame frameRect: NSRect) {
+          super.init(frame: frameRect)
+          self.material = .popover
+          self.blendingMode = .behindWindow
+          self.state = .active
+          self.isEmphasized = false
+          self.wantsLayer = true
+          let tickMarks = prefs.bool(forKey: PrefKey.showTickMarks.rawValue)
+          self.layer?.cornerRadius = tickMarks ? CGFloat(10) : CGFloat(14)
+          self.layer?.masksToBounds = true
+          self.layer?.borderWidth = 0.5
+          self.layer?.borderColor = NSColor.separatorColor.withAlphaComponent(0.45).cgColor
+        }
+
+        @available(*, unavailable)
+        required init?(coder _: NSCoder) {
+          fatalError("init(coder:) has not been implemented")
         }
       }
       var contentWidth: CGFloat = 0

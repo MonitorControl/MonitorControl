@@ -34,6 +34,8 @@ class SliderHandler {
     var numOfTickmarks: Int = 0
     var isHighlightDisplayItems: Bool = false
     var displayHighlightItems: [CGDirectDisplayID: Float] = [:]
+    /// Matches Control Center–style volume (accent) vs. brightness (neutral fill).
+    var useAccentFill: Bool = false
 
     var isTracking: Bool = false
 
@@ -90,7 +92,7 @@ class SliderHandler {
       let barFilledWidth = (aRect.width - aRect.height) * CGFloat(maxValue) + aRect.height
       let barFilledRect = NSRect(x: aRect.origin.x, y: aRect.origin.y, width: barFilledWidth, height: aRect.height)
       let barFilled = NSBezierPath(roundedRect: barFilledRect, xRadius: barRadius, yRadius: barRadius)
-      self.barFilledFillColor.setFill()
+      (self.useAccentFill ? NSColor.controlAccentColor : self.barFilledFillColor).setFill()
       barFilled.fill()
 
       let knobMinX = aRect.origin.x + (aRect.width - aRect.height) * CGFloat(minValue)
@@ -207,6 +209,30 @@ class SliderHandler {
       subviews.first { subview in subview.hitTest(point) != nil
       }
     }
+
+    func configureForMenuSymbol() {
+      self.wantsLayer = true
+      self.layer?.isOpaque = false
+      self.layer?.backgroundColor = NSColor.clear.cgColor
+    }
+  }
+
+  /// Renders menu SF Symbols without multicolor white “matting” around fills (e.g. sun.max.fill).
+  @available(macOS 11.0, *)
+  private static func menuSymbolImage(named name: String, pointSize: CGFloat, command: Command) -> NSImage? {
+    guard let base = NSImage(systemSymbolName: name, accessibilityDescription: nil) else { return nil }
+    let weight: NSFont.Weight = .medium
+    let baseConfig = NSImage.SymbolConfiguration(pointSize: pointSize, weight: weight)
+    if #available(macOS 12.0, *) {
+      let paletteColor: NSColor
+      switch command {
+      case .brightness: paletteColor = .systemYellow
+      default: paletteColor = .labelColor.withAlphaComponent(0.72)
+      }
+      let palette = NSImage.SymbolConfiguration(paletteColors: [paletteColor])
+      return base.withSymbolConfiguration(baseConfig.applying(palette))
+    }
+    return base.withSymbolConfiguration(baseConfig)
   }
 
   public init(display: Display?, command: Command, title: String = "", position _: Int = 0) {
@@ -216,9 +242,15 @@ class SliderHandler {
     let showPercent = prefs.bool(forKey: PrefKey.enableSliderPercent.rawValue)
     slider.isEnabled = true
     slider.setNumOfCustomTickmarks(prefs.bool(forKey: PrefKey.showTickMarks.rawValue) ? 5 : 0)
+    if let cell = slider.cell as? MCSliderCell {
+      cell.useAccentFill = command == .audioSpeakerVolume
+    }
     self.slider = slider
     if !DEBUG_MACOS10, #available(macOS 11.0, *) {
-      slider.frame.size.width = 180
+      slider.frame.size.width = 196
+      var sliderFrame = slider.frame
+      sliderFrame.size.height = max(sliderFrame.size.height, 22)
+      slider.frame = sliderFrame
       slider.frame.origin = NSPoint(x: 15, y: 8)
       let view = NSView(frame: NSRect(x: 0, y: 0, width: slider.frame.width + 30 + (showPercent ? 38 : 0), height: slider.frame.height + 42))
       view.frame.origin = NSPoint(x: 12, y: 0)
@@ -230,12 +262,18 @@ class SliderHandler {
       default: break
       }
       let icon = SliderHandler.ClickThroughImageView()
-      icon.image = NSImage(systemSymbolName: iconName, accessibilityDescription: title)
-      icon.contentTintColor = NSColor.black.withAlphaComponent(0.6)
-      // Position icon at horizontal left (start), 8px above slider
       let iconSize: CGFloat = 18
+      icon.image = SliderHandler.menuSymbolImage(named: iconName, pointSize: iconSize, command: command)
+      icon.imageScaling = .scaleProportionallyDown
+      if #available(macOS 12.0, *) {
+        icon.contentTintColor = nil
+      } else {
+        icon.contentTintColor = command == .brightness ? NSColor.systemYellow : NSColor.labelColor.withAlphaComponent(0.72)
+      }
+      // Position icon at horizontal left (start), 8px above slider
       icon.frame = NSRect(x: slider.frame.origin.x, y: slider.frame.origin.y + slider.frame.height + 8, width: iconSize, height: iconSize)
       icon.imageAlignment = .alignCenter
+      icon.configureForMenuSymbol()
       view.addSubview(slider)
       view.addSubview(icon)
       self.icon = icon
