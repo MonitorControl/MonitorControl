@@ -311,6 +311,9 @@ class DisplayManager {
   }
 
   func clearDisplays() {
+    for display in self.displays {
+      CustomHUDManager.shared.cleanupDisplay(display.identifier)
+    }
     self.displays = []
   }
   

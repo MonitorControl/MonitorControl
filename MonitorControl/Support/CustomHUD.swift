@@ -3,10 +3,6 @@
 
 import Cocoa
 
-#if swift(>=5.3)
-import SwiftUI
-#endif
-
 // MARK: - Custom HUD Manager
 
 /// Manages custom HUD windows for brightness/volume display on macOS 26+
@@ -181,11 +177,13 @@ class CustomHUDManager {
         window.alphaValue = 1.0
         window.orderFrontRegardless()
         
-        // Schedule fade out after 1.5 seconds
-        fadeTimers[displayID] = Timer.scheduledTimer(withTimeInterval: 1.5, repeats: false) { [weak self, weak window] _ in
+        // Schedule fade out after 1.5 seconds (common mode so it still fires during nested run-loop work)
+        let timer = Timer(timeInterval: 1.5, repeats: false) { [weak self, weak window] _ in
             guard let window = window else { return }
             self?.fadeOut(window: window)
         }
+        fadeTimers[displayID] = timer
+        RunLoop.main.add(timer, forMode: .common)
     }
     
     private func fadeOut(window: NSWindow) {

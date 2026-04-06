@@ -27,7 +27,7 @@ class OnboardingViewController: NSViewController {
   // MARK: - Style
 
   private func setPermissionsButtonState() {
-    let volumePermissions: Bool = [KeyboardVolume.media.rawValue, KeyboardVolume.both.rawValue].contains(prefs.integer(forKey: PrefKey.keyboardVolume.rawValue))
+    let volumePermissions: Bool = [KeyboardVolume.media.rawValue, KeyboardVolume.both.rawValue, KeyboardVolume.mediaForce.rawValue].contains(prefs.integer(forKey: PrefKey.keyboardVolume.rawValue))
     let brigthnessPermissions: Bool = [KeyboardBrightness.media.rawValue, KeyboardBrightness.both.rawValue].contains(prefs.integer(forKey: PrefKey.keyboardBrightness.rawValue))
     let permissionsRequired: Bool = volumePermissions || brigthnessPermissions
     let enabled: Bool = !MediaKeyTapManager.readPrivileges(prompt: false) && permissionsRequired

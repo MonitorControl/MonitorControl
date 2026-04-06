@@ -997,13 +997,14 @@
                                     </gridCell>
                                     <gridCell row="6od-Ek-qTW" column="EiG-65-CTv" xPlacement="leading" id="pCd-dP-Y62">
                                         <popUpButton key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="9oZ-JM-bxD">
-                                            <rect key="frame" x="217" y="187" width="293" height="25"/>
+                                            <rect key="frame" x="217" y="187" width="360" height="25"/>
                                             <popUpButtonCell key="cell" type="push" title="Standard keyboard volume and mute keys" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="1sy-Kd-WL5" id="gTf-PQ-2fA">
                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" metaFont="message"/>
                                                 <menu key="menu" id="LhY-cM-Msq">
                                                     <items>
                                                         <menuItem title="Standard keyboard volume and mute keys" state="on" id="1sy-Kd-WL5"/>
+                                                        <menuItem title="Standard keys (force capture)" tag="4" id="fVk-mR-9Xp"/>
                                                         <menuItem title="Custom keyboard shortcuts" tag="1" id="4CG-0I-anB"/>
                                                         <menuItem title="Both standard and custom shortcuts" tag="2" id="QDG-SA-mRX">
                                                             <modifierMask key="keyEquivalentModifierMask"/>
