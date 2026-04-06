@@ -6,3 +6,15 @@ Carthage
 
 ### Xcode ###
 xcuserdata/
+*.xcuserstate
+*.xccheckout
+*.xcscmblueprint
+
+### Xcode / SwiftPM (local build outputs beside the project) ###
+.build/
+.derivedData/
+build/
+DerivedData/
+
+### SwiftPM — user-specific; keep Package.resolved tracked ###
+.swiftpm/xcode/xcuserdata/
