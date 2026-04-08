@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "56754EAA1D9A4016007BCDC5"
-               BuildableName = "MonitorControl.app"
+               BuildableName = "XDRMonitorControl.app"
                BlueprintName = "MonitorControl"
                ReferencedContainer = "container:MonitorControl.xcodeproj">
             </BuildableReference>
@@ -31,7 +31,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "56754EAA1D9A4016007BCDC5"
-            BuildableName = "MonitorControl.app"
+            BuildableName = "XDRMonitorControl.app"
             BlueprintName = "MonitorControl"
             ReferencedContainer = "container:MonitorControl.xcodeproj">
          </BuildableReference>
@@ -54,7 +54,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "56754EAA1D9A4016007BCDC5"
-            BuildableName = "MonitorControl.app"
+            BuildableName = "XDRMonitorControl.app"
             BlueprintName = "MonitorControl"
             ReferencedContainer = "container:MonitorControl.xcodeproj">
          </BuildableReference>
@@ -71,7 +71,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "56754EAA1D9A4016007BCDC5"
-            BuildableName = "MonitorControl.app"
+            BuildableName = "XDRMonitorControl.app"
             BlueprintName = "MonitorControl"
             ReferencedContainer = "container:MonitorControl.xcodeproj">
          </BuildableReference>

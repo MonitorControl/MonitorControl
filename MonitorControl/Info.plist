@@ -27,7 +27,7 @@
 	<key>LSUIElement</key>
 	<true/>
 	<key>NSHumanReadableCopyright</key>
-	<string>MIT Licensed. 2017.</string>
+	<string>MIT Licensed. Fork by @shay2000. Original © MonitorControl contributors.</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
 	<key>SUEnableJavaScript</key>

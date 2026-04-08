@@ -58,6 +58,6 @@ class AboutPrefsViewController: NSViewController, SettingsPane {
 
   func setCopyrightInfo() {
     let year = Calendar.current.component(.year, from: Date())
-    self.copyrightLabel.stringValue = "XDRMonitorBrightness — fork by @shayprasad. Original © MonitorControl contributors \(year). MIT License."
+    self.copyrightLabel.stringValue = "XDRMonitorControl — fork by @shay2000. Original © MonitorControl contributors \(year). MIT License."
   }
 }

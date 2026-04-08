@@ -1,8 +1,8 @@
 <img src=".github/Icon-cropped.png" width="200" alt="App icon" align="left"/>
 
 <div>
-<h3>XDRMonitorBrightness</h3>
-<p>A fork of <a href="https://github.com/MonitorControl/MonitorControl">MonitorControl</a> by <a href="https://github.com/shayprasad">@shayprasad</a> with XDR extended brightness support for MacBook Pro Liquid Retina XDR and Pro Display XDR.</p>
+<h3>XDRMonitorControl</h3>
+<p>A fork of <a href="https://github.com/MonitorControl/MonitorControl">MonitorControl</a> by <a href="https://github.com/shay2000">@shay2000</a> with XDR extended brightness support for MacBook Pro Liquid Retina XDR and Pro Display XDR.</p>
 </div>
 
 <br/><br/>
@@ -22,7 +22,7 @@
 <hr>
 
 > [!NOTE]
-> **XDRMonitorBrightness** is a personal fork of MonitorControl, maintained by [@shayprasad](https://github.com/shayprasad). It is not affiliated with or endorsed by the original MonitorControl project. For the official app, see [MonitorControl](https://github.com/MonitorControl/MonitorControl).
+> **XDRMonitorControl** is a personal fork of MonitorControl, maintained by [@shay2000](https://github.com/shay2000). It is not affiliated with or endorsed by the original MonitorControl project. For the official app, see [MonitorControl](https://github.com/MonitorControl/MonitorControl).
 
 > [!WARNING]
 > This fork adds XDR extended brightness control, which drives your display above its standard maximum brightness. This may increase heat output and reduce battery life. Use responsibly.
@@ -58,7 +58,7 @@
 ### Build steps
 
 ```sh
-git clone https://github.com/shayprasad/MonitorControlXDR.git
+git clone https://github.com/shay2000/XDRMonitorControl.git
 ```
 
 Open `MonitorControl.xcodeproj` with Xcode. Dependencies download automatically on first open. If they don't: `File > Packages > Resolve Package Versions`.
@@ -87,7 +87,7 @@ This project is a fork of [MonitorControl](https://github.com/MonitorControl/Mon
 - [@reitermarkus](https://github.com/reitermarkus) — Intel DDC support
 - [javierocasio](https://www.deviantart.com/javierocasio) — app icon background
 
-XDR extended brightness additions by [@shayprasad](https://github.com/shayprasad).
+XDR extended brightness additions by [@shay2000](https://github.com/shay2000).
 
 ## License
 

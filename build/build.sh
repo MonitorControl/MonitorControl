@@ -1,12 +1,12 @@
 #!/bin/bash
-# Build script for XDRMonitorBrightness
+# Build script for XDRMonitorControl
 # Builds the app and copies the result to this build/ directory
 
 set -e
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_DIR="$(dirname "$SCRIPT_DIR")"
-APP_NAME="XDRMonitorBrightness"
+APP_NAME="XDRMonitorControl"
 OUTPUT_DIR="$SCRIPT_DIR"
 
 echo "Building $APP_NAME..."
