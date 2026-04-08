@@ -31,6 +31,8 @@ class Display: Equatable {
   var defaultGammaTableSampleCount: UInt32 = 0
   var defaultGammaTablePeak: Float = 1
 
+  var brightnessMaxValue: Float { 1.0 }
+
   func prefExists(key: PrefKey? = nil, for command: Command? = nil) -> Bool {
     prefs.object(forKey: self.getKey(key: key, for: command)) != nil
   }
@@ -91,7 +93,7 @@ class Display: Equatable {
     if isSmallIncrement {
       step = delta
     }
-    return min(max(0, ceil((self.getBrightness() + delta) / step) * step), 1)
+    return min(max(0, ceil((self.getBrightness() + delta) / step) * step), self.brightnessMaxValue)
   }
 
   func stepBrightness(isUp: Bool, isSmallIncrement: Bool) {
@@ -100,7 +102,7 @@ class Display: Equatable {
     }
     let value = self.calcNewBrightness(isUp: isUp, isSmallIncrement: isSmallIncrement)
     if self.setBrightness(value) {
-      OSDUtils.showOsd(displayID: self.identifier, command: .brightness, value: value * 64, maxValue: 64)
+      OSDUtils.showOsd(displayID: self.identifier, command: .brightness, value: value / self.brightnessMaxValue * 64, maxValue: 64)
       if let slider = self.sliderHandler[.brightness] {
         slider.setValue(value, displayID: self.identifier)
         self.brightnessSyncSourceValue = value
@@ -133,7 +135,7 @@ class Display: Equatable {
     var dontPushAgain = false
     if to != -1 {
       os_log("Pushing brightness towards goal of %{public}@ for Display  %{public}@", type: .info, String(to), String(self.identifier))
-      let value = max(min(to, 1), 0)
+      let value = max(min(to, self.brightnessMaxValue), 0)
       self.savePref(value, for: .brightness)
       self.brightnessSyncSourceValue = value
       self.smoothBrightnessSlow = slow

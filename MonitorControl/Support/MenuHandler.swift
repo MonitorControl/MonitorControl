@@ -195,6 +195,16 @@ class MenuHandler: NSMenu, NSMenuDelegate {
       addedSliderHandlers.append(self.setupMenuSliderHandler(command: .brightness, display: display, title: title))
     }
     if prefs.integer(forKey: PrefKey.multiSliders.rawValue) != MultiSliders.combine.rawValue {
+      if let appleDisplay = display as? AppleDisplay, appleDisplay.isXDRCapable, appleDisplay.readPrefAsBool(key: .xdrEnabled) {
+        let disableItem = NSMenuItem(title: NSLocalizedString("Disable XDR Extended Brightness", comment: "Shown in menu"), action: #selector(MenuHandler.xdrDisableBrightness(_:)), keyEquivalent: "")
+        disableItem.representedObject = appleDisplay
+        disableItem.target = self
+        monitorSubMenu.insertItem(disableItem, at: 0)
+        let resetItem = NSMenuItem(title: NSLocalizedString("Reset to Standard Brightness", comment: "Shown in menu"), action: #selector(MenuHandler.xdrResetBrightness(_:)), keyEquivalent: "")
+        resetItem.representedObject = appleDisplay
+        resetItem.target = self
+        monitorSubMenu.insertItem(resetItem, at: 0)
+      }
       self.addDisplayMenuBlock(addedSliderHandlers: addedSliderHandlers, blockName: display.readPrefAsString(key: .friendlyName) != "" ? display.readPrefAsString(key: .friendlyName) : display.name, monitorSubMenu: monitorSubMenu, numOfDisplays: numOfDisplays, asSubMenu: asSubMenu)
     }
     if addedSliderHandlers.count > 0, prefs.integer(forKey: PrefKey.menuIcon.rawValue) == MenuIcon.sliderOnly.rawValue {
@@ -213,6 +223,16 @@ class MenuHandler: NSMenu, NSMenuDelegate {
       monitorMenuItem.attributedTitle = NSAttributedString(string: "\(friendlyName)", attributes: attrs)
       self.insertItem(monitorMenuItem, at: 0)
     }
+  }
+
+  @objc func xdrResetBrightness(_ sender: NSMenuItem) {
+    guard let appleDisplay = sender.representedObject as? AppleDisplay else { return }
+    appleDisplay.resetToNormalBrightness()
+  }
+
+  @objc func xdrDisableBrightness(_ sender: NSMenuItem) {
+    guard let appleDisplay = sender.representedObject as? AppleDisplay else { return }
+    appleDisplay.disableXDR()
   }
 
   func updateMenuRelevantDisplay() {

@@ -1,4 +1,4 @@
-<img src=".github/Icon-cropped.png" width="200" alt="App icon" align="left"/>
+<img src="MonitorControl/Assets.xcassets/AppIcon.appiconset/Icon-512.png" width="200" alt="XDRMonitorControl app icon" align="left"/>
 
 <div>
 <h3>XDRMonitorControl</h3>

@@ -385,6 +385,7 @@
 				56754EA81D9A4016007BCDC5 /* Frameworks */,
 				56754EA91D9A4016007BCDC5 /* Resources */,
 				F06792F5200A73FA0066C438 /* [Login] Copy Helper to start at Login */,
+				AAC9F0FE2D00000100A11ABC /* [Build] Strip Bundle Xattrs */,
 			);
 			buildRules = (
 			);
@@ -411,6 +412,7 @@
 				F06792E5200A73460066C438 /* Resources */,
 				28F6A5802283515F00A4ADCD /* Increase Build Number */,
 				28F6A5822283548F00A4ADCD /* Sync Version Numbers */,
+				AAC9F0FF2D00000200A11ABC /* [Build] Strip Bundle Xattrs */,
 			);
 			buildRules = (
 			);
@@ -493,19 +495,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AAB2F642273ED0C7004AB5A4 /* .github in Resources */,
-				AAB2F63E273ED0AD004AB5A4 /* .swiftformat in Resources */,
 				56754EB11D9A4016007BCDC5 /* Assets.xcassets in Resources */,
 				6CDA0FCF26485A8300F52125 /* Main.storyboard in Resources */,
-				AAB2F640273ED0B8004AB5A4 /* .bartycrouch.toml in Resources */,
 				8C1741852707B91100E88D53 /* InternetAccessPolicy.plist in Resources */,
-				AAB2F638273ED099004AB5A4 /* .swiftlint.yml in Resources */,
-				AAB2F63C273ED0AD004AB5A4 /* .swift-version in Resources */,
-				AA3B4A2826AE103C00B74CD2 /* README.md in Resources */,
 				F01B0699228221B7008E64DB /* Localizable.strings in Resources */,
-				AAB2F63D273ED0AD004AB5A4 /* .gitignore in Resources */,
 				8C1741882707B91F00E88D53 /* InternetAccessPolicy.strings in Resources */,
-				AAB2F644273ED0E9004AB5A4 /* License.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -610,6 +604,44 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\nif which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\" >&2\nfi\n";
+		};
+		AAC9F0FE2D00000100A11ABC /* [Build] Strip Bundle Xattrs */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "[Build] Strip Bundle Xattrs";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [ -d \"$TARGET_BUILD_DIR/$FULL_PRODUCT_NAME\" ]; then\n  xattr -cr \"$TARGET_BUILD_DIR/$FULL_PRODUCT_NAME\" || true\n  xattr -rd com.apple.FinderInfo \"$TARGET_BUILD_DIR/$FULL_PRODUCT_NAME\" || true\n  xattr -rd 'com.apple.fileprovider.fpfs#P' \"$TARGET_BUILD_DIR/$FULL_PRODUCT_NAME\" || true\nfi\n";
+		};
+		AAC9F0FF2D00000200A11ABC /* [Build] Strip Bundle Xattrs */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "[Build] Strip Bundle Xattrs";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [ -d \"$TARGET_BUILD_DIR/$FULL_PRODUCT_NAME\" ]; then\n  xattr -cr \"$TARGET_BUILD_DIR/$FULL_PRODUCT_NAME\" || true\n  xattr -rd com.apple.FinderInfo \"$TARGET_BUILD_DIR/$FULL_PRODUCT_NAME\" || true\n  xattr -rd 'com.apple.fileprovider.fpfs#P' \"$TARGET_BUILD_DIR/$FULL_PRODUCT_NAME\" || true\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -882,7 +914,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				MARKETING_VERSION = 4.3.2;
-				PRODUCT_BUNDLE_IDENTIFIER = app.monitorcontrol.MonitorControl;
+				PRODUCT_BUNDLE_IDENTIFIER = com.shay2000.XDRMonitorControl;
 				PRODUCT_NAME = XDRMonitorControl;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "MonitorControl/Support/Bridging-Header.h";
@@ -900,6 +932,7 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = MonitorControl/MonitorControlDebug.entitlements;
 				CODE_SIGN_IDENTITY = "-";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
@@ -919,7 +952,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				MARKETING_VERSION = 4.3.2;
-				PRODUCT_BUNDLE_IDENTIFIER = app.monitorcontrol.MonitorControl;
+				PRODUCT_BUNDLE_IDENTIFIER = com.shay2000.XDRMonitorControl;
 				PRODUCT_NAME = XDRMonitorControl;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "MonitorControl/Support/Bridging-Header.h";
@@ -956,7 +989,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				MARKETING_VERSION = 4.1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = app.monitorcontrol.MonitorControlHelper;
+				PRODUCT_BUNDLE_IDENTIFIER = com.shay2000.XDRMonitorControlHelper;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.5;
@@ -987,7 +1020,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				MARKETING_VERSION = 4.1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = app.monitorcontrol.MonitorControlHelper;
+				PRODUCT_BUNDLE_IDENTIFIER = com.shay2000.XDRMonitorControlHelper;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.5;

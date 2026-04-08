@@ -21,8 +21,10 @@ class SliderHandler {
     let barFillColor = NSColor.systemGray.withAlphaComponent(0.2)
     let barStrokeColor = NSColor.systemGray.withAlphaComponent(0.5)
     let barFilledFillColor = NSColor(white: 1, alpha: 1)
+    let barXDRFillColor = NSColor.systemRed.withAlphaComponent(0.7)
     let highlightDisplayIndicatorColor = NSColor(white: 0.85, alpha: 1) // This is visible if there is more the 2 displays
     let tickMarkColor = NSColor.systemGray.withAlphaComponent(0.5)
+    var isXDRSlider: Bool = false
 
     let inset: CGFloat = 3.5
     let offsetX: CGFloat = -1.5
@@ -74,12 +76,14 @@ class SliderHandler {
         super.drawBar(inside: aRect, flipped: flipped)
         return
       }
-      var maxValue: Float = self.floatValue
-      var minValue: Float = self.floatValue
+      // Normalize raw slider values to 0-1 drawing space so XDR sliders (maxValue > 1) render correctly
+      let sliderMax = Float(self.maxValue)
+      var maxNorm = self.floatValue / sliderMax
+      var minNorm = self.floatValue / sliderMax
 
       if self.isHighlightDisplayItems {
-        maxValue = max(self.displayHighlightItems.values.max() ?? 0, maxValue)
-        minValue = min(self.displayHighlightItems.values.min() ?? 1, minValue)
+        maxNorm = max((self.displayHighlightItems.values.max() ?? 0) / sliderMax, maxNorm)
+        minNorm = min((self.displayHighlightItems.values.min() ?? sliderMax) / sliderMax, minNorm)
       }
 
       let barRadius = aRect.height * 0.5 * (self.numOfTickmarks == 0 ? 1 : self.tickMarkKnobExtraRadiusMultiplier)
@@ -87,14 +91,26 @@ class SliderHandler {
       self.barFillColor.setFill()
       bar.fill()
 
-      let barFilledWidth = (aRect.width - aRect.height) * CGFloat(maxValue) + aRect.height
+      let barFilledWidth = (aRect.width - aRect.height) * CGFloat(maxNorm) + aRect.height
       let barFilledRect = NSRect(x: aRect.origin.x, y: aRect.origin.y, width: barFilledWidth, height: aRect.height)
       let barFilled = NSBezierPath(roundedRect: barFilledRect, xRadius: barRadius, yRadius: barRadius)
       self.barFilledFillColor.setFill()
       barFilled.fill()
 
-      let knobMinX = aRect.origin.x + (aRect.width - aRect.height) * CGFloat(minValue)
-      let knobMaxX = aRect.origin.x + (aRect.width - aRect.height) * CGFloat(maxValue)
+      // XDR red zone: overdraw the portion above normal max (1.0) in red
+      if self.isXDRSlider, sliderMax > 1.0, maxNorm > 1.0 / sliderMax {
+        let xdrThresholdNorm = CGFloat(1.0 / sliderMax)
+        let xdrStartX = aRect.origin.x + (aRect.width - aRect.height) * xdrThresholdNorm
+        NSGraphicsContext.saveGraphicsState()
+        barFilled.addClip()
+        let xdrOverlay = NSBezierPath(rect: NSRect(x: xdrStartX, y: aRect.origin.y - 1, width: aRect.width, height: aRect.height + 2))
+        self.barXDRFillColor.setFill()
+        xdrOverlay.fill()
+        NSGraphicsContext.restoreGraphicsState()
+      }
+
+      let knobMinX = aRect.origin.x + (aRect.width - aRect.height) * CGFloat(minNorm)
+      let knobMaxX = aRect.origin.x + (aRect.width - aRect.height) * CGFloat(maxNorm)
       let knobRect = NSRect(x: knobMinX + (self.numOfTickmarks == 0 ? CGFloat(0) : self.tickMarkKnobExtraInset), y: aRect.origin.y, width: aRect.height + CGFloat(knobMaxX - knobMinX), height: aRect.height).insetBy(dx: self.numOfTickmarks == 0 ? CGFloat(0) : self.tickMarkKnobExtraInset, dy: 0)
       let knobRadius = knobRect.height * 0.5 * (self.numOfTickmarks == 0 ? 1 : self.tickMarkKnobExtraRadiusMultiplier)
 
@@ -108,7 +124,7 @@ class SliderHandler {
         }
       }
 
-      let knobAlpha = CGFloat(max(0, min(1, (minValue - 0.08) * 5)))
+      let knobAlpha = CGFloat(max(0, min(1, (minNorm - 0.08) * 5)))
       for i in 1 ... 3 {
         let knobShadow = NSBezierPath(roundedRect: knobRect.offsetBy(dx: CGFloat(-1 * 2 * i), dy: 0), xRadius: knobRadius, yRadius: knobRadius)
         self.knobShadowColor.withAlphaComponent(self.knobShadowColor.alphaComponent * knobAlpha).setFill()
@@ -120,7 +136,8 @@ class SliderHandler {
       knob.fill()
 
       if self.isHighlightDisplayItems, self.displayHighlightItems.count > 2 {
-        for currentMarkLocation in self.displayHighlightItems.values {
+        for currentMarkLocationRaw in self.displayHighlightItems.values {
+          let currentMarkLocation = currentMarkLocationRaw / sliderMax
           let highlightKnobX = aRect.origin.x + (aRect.width - aRect.height) * CGFloat(currentMarkLocation)
           let highlightKnobRect = NSRect(x: highlightKnobX + (self.numOfTickmarks == 0 ? CGFloat(0) : self.tickMarkKnobExtraInset), y: aRect.origin.y, width: aRect.height, height: aRect.height).insetBy(dx: (self.numOfTickmarks == 0 ? CGFloat(0) : self.tickMarkKnobExtraInset) + CGFloat(self.numOfTickmarks == 0 ? 6 : 3), dy: CGFloat(self.numOfTickmarks == 0 ? 6 : 6))
           let highlightKnobRadius = highlightKnobRect.height * 0.5 * (self.numOfTickmarks == 0 ? 1 : self.tickMarkKnobExtraRadiusMultiplier)
@@ -259,6 +276,12 @@ class SliderHandler {
     }
     slider.maxValue = 1
     if let displayToAppend = display {
+      if command == .brightness, let appleDisplay = displayToAppend as? AppleDisplay, appleDisplay.isXDRCapable, appleDisplay.readPrefAsBool(key: .xdrEnabled) {
+        slider.maxValue = Double(appleDisplay.xdrMaxValue)
+        if let cell = slider.cell as? MCSliderCell {
+          cell.isXDRSlider = true
+        }
+      }
       self.addDisplay(displayToAppend)
     }
   }
@@ -326,6 +349,27 @@ class SliderHandler {
     for display in self.displays {
       slider.setHighlightItem(display.identifier, value: value)
       if self.command == .brightness, let appleDisplay = display as? AppleDisplay {
+        if appleDisplay.isXDRCapable, value >= 0.99, !appleDisplay.readPrefAsBool(key: .xdrEnabled) {
+          let alert = NSAlert()
+          alert.messageText = NSLocalizedString("Enable XDR Extended Brightness?", comment: "Shown in the alert dialog")
+          alert.informativeText = NSLocalizedString("XDR mode allows brightness above the standard maximum. This may increase heat and reduce battery life, and the display may auto-dim in some conditions.\n\nAfter enabling, drag the slider to the right to set extended brightness.", comment: "Shown in the alert dialog")
+          alert.addButton(withTitle: NSLocalizedString("Enable XDR Brightness", comment: "Shown in the alert dialog"))
+          alert.addButton(withTitle: NSLocalizedString("Cancel", comment: "Shown in the alert dialog"))
+          alert.alertStyle = .warning
+          if alert.runModal() == .alertFirstButtonReturn {
+            appleDisplay.savePref(true, key: .xdrEnabled)
+            appleDisplay.savePref(true, key: .xdrWarningAcknowledged)
+            slider.maxValue = Double(appleDisplay.xdrMaxValue)
+            if let cell = slider.cell as? MCSliderCell {
+              cell.isXDRSlider = true
+            }
+          } else {
+            slider.floatValue = 1.0
+            self.percentageBox?.stringValue = "100%"
+            _ = appleDisplay.setBrightness(1.0)
+            continue
+          }
+        }
         _ = appleDisplay.setBrightness(value)
       } else if let otherDisplay = display as? OtherDisplay {
         self.valueChangedOtherDisplay(otherDisplay: otherDisplay, value: value)

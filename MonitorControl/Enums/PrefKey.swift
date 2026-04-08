@@ -125,6 +125,15 @@ enum PrefKey: String {
   // Friendly name
   case friendlyName
 
+  // XDR extended brightness enabled for display
+  case xdrEnabled
+
+  // XDR extended brightness warning acknowledged for display
+  case xdrWarningAcknowledged
+
+  // XDR maximum brightness value for display
+  case xdrMaxBrightness
+
   /* -- Display+Command specific settings -- */
 
   // Command value display
