@@ -22,6 +22,10 @@ class OSDUtils: NSObject {
   }
 
   static func showOsd(displayID: CGDirectDisplayID, command: Command, value: Float, maxValue: Float = 1, roundChiclet: Bool = false, lock: Bool = false) {
+    if command == .brightness, ProcessInfo.processInfo.operatingSystemVersion.majorVersion >= 26 {
+      BrightnessHUDController.shared.show(displayID: displayID, value: value, maxValue: maxValue)
+      return
+    }
     guard let manager = OSDManager.sharedManager() as? OSDManager else {
       return
     }
