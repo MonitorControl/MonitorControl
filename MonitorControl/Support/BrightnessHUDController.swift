@@ -54,6 +54,7 @@ class BrightnessHUDController {
         window.animator().alphaValue = 0
       }, completionHandler: {
         window.orderOut(nil)
+        guard self?.windows[displayID] === window else { return }
         self?.windows.removeValue(forKey: displayID)
         self?.fadeTimers.removeValue(forKey: displayID)
       })
@@ -116,5 +117,6 @@ private class BrightnessHUDView: NSVisualEffectView {
     self.percentage = percentage
     progressBar.frame.size.width = CGFloat(percentage) * 108
     percentLabel.stringValue = "\(Int(round(percentage * 100)))%"
+    percentLabel.sizeToFit()
   }
 }
