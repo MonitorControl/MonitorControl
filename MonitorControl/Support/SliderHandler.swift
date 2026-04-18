@@ -3,7 +3,7 @@
 import Cocoa
 import os.log
 
-class SliderHandler {
+class SliderHandler: NSObject, NSTextFieldDelegate {
   var slider: MCSlider?
   var view: NSView?
   var percentageBox: NSTextField?
@@ -212,6 +212,7 @@ class SliderHandler {
   public init(display: Display?, command: Command, title: String = "", position _: Int = 0) {
     self.command = command
     self.title = title
+    super.init()
     let slider = SliderHandler.MCSlider(value: 0, minValue: 0, maxValue: 1, target: self, action: #selector(SliderHandler.valueChanged))
     let showPercent = prefs.bool(forKey: PrefKey.enableSliderPercent.rawValue)
     slider.isEnabled = true
@@ -277,11 +278,12 @@ class SliderHandler {
 
   func setupPercentageBox(_ percentageBox: NSTextField) {
     percentageBox.font = NSFont.systemFont(ofSize: 12)
-    percentageBox.isEditable = false
+    percentageBox.isEditable = true
     percentageBox.isBordered = false
     percentageBox.drawsBackground = false
     percentageBox.alignment = .right
     percentageBox.alphaValue = 0.7
+    percentageBox.delegate = self
   }
 
   func valueChangedOtherDisplay(otherDisplay: OtherDisplay, value: Float) {
@@ -382,5 +384,48 @@ class SliderHandler {
         self.percentageBox?.stringValue = "" + String(Int(value * 100)) + "%"
       }
     }
+  }
+
+  // MARK: - NSTextFieldDelegate
+
+  func controlTextDidBeginEditing(_: Notification) {
+    self.percentageBox?.isBordered = true
+    self.percentageBox?.alphaValue = 1.0
+  }
+
+  func controlTextDidEndEditing(_ obj: Notification) {
+    self.percentageBox?.isBordered = false
+    self.percentageBox?.alphaValue = 0.7
+    guard let textField = obj.object as? NSTextField else { return }
+    
+    let stringValue = textField.stringValue.replacingOccurrences(of: "%", with: "").trimmingCharacters(in: .whitespaces)
+    if let value = Float(stringValue), let slider = self.slider {
+      slider.floatValue = max(0, min(100, value)) / 100
+      self.valueChanged(slider: slider)
+    } else if let slider = self.slider {
+      self.setValue(slider.floatValue)
+    }
+  }
+
+  func control(_ control: NSControl, textView: NSTextView, doCommandBy commandSelector: Selector) -> Bool {
+    guard commandSelector == #selector(NSResponder.moveUp(_:)) || commandSelector == #selector(NSResponder.moveDown(_:)) else {
+      return false
+    }
+
+    let stringValue = textView.string.replacingOccurrences(of: "%", with: "").trimmingCharacters(in: .whitespaces)
+    var currentValue = Float(stringValue) ?? (self.slider?.floatValue ?? 0) * 100
+    let step: Float = NSEvent.modifierFlags.contains(.shift) ? 10 : 1
+    
+    currentValue += commandSelector == #selector(NSResponder.moveUp(_:)) ? step : -step
+    
+    let normalizedValue = max(0, min(100, currentValue))
+    textView.string = "\(Int(normalizedValue))%"
+
+    if let slider = self.slider {
+      slider.floatValue = normalizedValue / 100
+      self.valueChanged(slider: slider)
+    }
+
+    return true
   }
 }
