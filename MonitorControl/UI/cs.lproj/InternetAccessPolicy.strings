@@ -5,4 +5,4 @@
 "SoftwareUpdateDenyConsequences" = "Pokud nepovolíte tato připojení, nebudete moct dostávat oznámení o nových verzích ani bezpečnostních aktualizacích. Bezpečnostní aktualizace jsou důležité na ochranu proti malwaru.";
 
 /* Software update purpose */
-"SoftwareUpdatePurpose" = "MonitorControl kontroluje, jestli nejsou k dispozici nové verze nebo bezpečnostní aktualizace.";
+"SoftwareUpdatePurpose" = "MonitorControl kontroluje, zda nejsou k dispozici nové verze nebo bezpečnostní aktualizace.";

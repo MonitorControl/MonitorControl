@@ -33,7 +33,19 @@ class MenuHandler: NSMenu, NSMenuDelegate {
     if !dontClose {
       self.cancelTrackingWithoutAnimation()
     }
-    app.statusItem.isVisible = prefs.integer(forKey: PrefKey.menuIcon.rawValue) == MenuIcon.show.rawValue ? true : false
+    let menuIconPref = prefs.integer(forKey: PrefKey.menuIcon.rawValue)
+    var showIcon = false
+    if menuIconPref == MenuIcon.show.rawValue {
+      showIcon = true
+    } else if menuIconPref == MenuIcon.externalOnly.rawValue {
+      let externalDisplays = DisplayManager.shared.displays.filter {
+        CGDisplayIsBuiltin($0.identifier) == 0
+      }
+      if externalDisplays.count > 0 {
+        showIcon = true
+      }
+    }
+    app.updateStatusItemVisibility(showIcon)
     self.clearMenu()
     let currentDisplay = DisplayManager.shared.getCurrentDisplay()
     var displays: [Display] = []
@@ -41,6 +53,7 @@ class MenuHandler: NSMenu, NSMenuDelegate {
       displays.append(contentsOf: DisplayManager.shared.getAppleDisplays())
     }
     displays.append(contentsOf: DisplayManager.shared.getOtherDisplays())
+    displays = DisplayManager.shared.sortDisplaysByFriendlyName()
     let relevant = prefs.integer(forKey: PrefKey.multiSliders.rawValue) == MultiSliders.relevant.rawValue
     let combine = prefs.integer(forKey: PrefKey.multiSliders.rawValue) == MultiSliders.combine.rawValue
     let numOfDisplays = displays.filter { !$0.isDummy }.count
@@ -185,7 +198,7 @@ class MenuHandler: NSMenu, NSMenuDelegate {
       self.addDisplayMenuBlock(addedSliderHandlers: addedSliderHandlers, blockName: display.readPrefAsString(key: .friendlyName) != "" ? display.readPrefAsString(key: .friendlyName) : display.name, monitorSubMenu: monitorSubMenu, numOfDisplays: numOfDisplays, asSubMenu: asSubMenu)
     }
     if addedSliderHandlers.count > 0, prefs.integer(forKey: PrefKey.menuIcon.rawValue) == MenuIcon.sliderOnly.rawValue {
-      app.statusItem.isVisible = true
+      app.updateStatusItemVisibility(true)
     }
   }
 

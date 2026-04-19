@@ -401,6 +401,9 @@
 /* Class = "NSMenuItem"; title = "Only if at least one slider is present"; ObjectID = "xLa-PN-rsq"; */
 "xLa-PN-rsq.title" = "Iba ak je prítomný aspoň jeden posuvník";
 
+/* Class = "NSMenuItem"; title = "Only when external display is present"; ObjectID = "Tb1-6s-qOo"; */
+"Tb1-6s-qOo.title" = "Iba keď je prítomný externý displej";
+
 /* Class = "NSMenuItem"; title = "Both standard and custom shortcuts"; ObjectID = "xQJ-aJ-VhH"; */
 "xQJ-aJ-VhH.title" = "Štandardné aj vlastné skratky";
 

@@ -379,6 +379,9 @@
 /* Class = "NSMenuItem"; title = "Only if at least one slider is present"; ObjectID = "xLa-PN-rsq"; */
 "xLa-PN-rsq.title" = "Apenas se pelo menos um controle deslizante estiver presente";
 
+/* Class = "NSMenuItem"; title = "Only when external display is present"; ObjectID = "Tb1-6s-qOo"; */
+"Tb1-6s-qOo.title" = "Somente quando o monitor externo estiver presente";
+
 /* Class = "NSMenuItem"; title = "Both standard and custom shortcuts"; ObjectID = "xQJ-aJ-VhH"; */
 "xQJ-aJ-VhH.title" = "Atalhos padrão e personalizados";
 

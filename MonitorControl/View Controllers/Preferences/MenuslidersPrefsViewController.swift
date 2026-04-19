@@ -80,6 +80,7 @@ class MenuslidersPrefsViewController: NSViewController, SettingsPane {
   override func viewDidLoad() {
     super.viewDidLoad()
     self.populateSettings()
+    prefs.addObserver(self, forKeyPath: PrefKey.menuIcon.rawValue, context: nil)
   }
 
   func populateSettings() {
@@ -209,5 +210,13 @@ class MenuslidersPrefsViewController: NSViewController, SettingsPane {
     }
     app.updateMenusAndKeys()
     self.updateGridLayout()
+  }
+  
+  override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+    guard let object = object as? AnyObject else { return }
+    if object === prefs, keyPath == PrefKey.menuIcon.rawValue {
+      self.populateSettings()
+      self.updateGridLayout()
+    }
   }
 }
