@@ -209,7 +209,7 @@ class SliderHandler {
     }
   }
 
-  public init(display: Display?, command: Command, title: String = "", position _: Int = 0) {
+  init(display: Display?, command: Command, title: String = "", position _: Int = 0) {
     self.command = command
     self.title = title
     let slider = SliderHandler.MCSlider(value: 0, minValue: 0, maxValue: 1, target: self, action: #selector(SliderHandler.valueChanged))
@@ -379,7 +379,7 @@ class SliderHandler {
         slider.setDisplayHighlightItems(false)
       }
       if self.percentageBox == self.percentageBox {
-        self.percentageBox?.stringValue = "" + String(Int(value * 100)) + "%"
+        self.percentageBox?.stringValue = "\(String(format: "%.0f%%", Double(value) * 100))"
       }
     }
   }

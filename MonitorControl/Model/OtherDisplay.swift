@@ -377,7 +377,7 @@ class OtherDisplay: Display {
     return intCodes
   }
 
-  public func writeDDCValues(command: Command, value: UInt16) {
+  func writeDDCValues(command: Command, value: UInt16) {
     guard app.sleepID == 0, app.reconfigureID == 0, !self.readPrefAsBool(key: .forceSw), !self.readPrefAsBool(key: .unavailableDDC, for: command) else {
       return
     }
