@@ -29,7 +29,7 @@ class SliderHandler {
     let offsetY: CGFloat = -1.5
 
     let tickMarkKnobExtraInset: CGFloat = 4
-    let tickMarkKnobExtraRadiusMultiplier: CGFloat = 0.25
+    let tickMarkKnobExtraRadiusMultiplier: CGFloat = 0.75
 
     var numOfTickmarks: Int = 0
     var isHighlightDisplayItems: Bool = false
@@ -226,7 +226,7 @@ class SliderHandler {
     if #available(macOS 12.0, *) {
       let paletteColor: NSColor
       switch command {
-      case .brightness: paletteColor = .systemYellow
+      case .brightness: paletteColor = .labelColor.withAlphaComponent(0.85)
       default: paletteColor = .labelColor.withAlphaComponent(0.72)
       }
       let palette = NSImage.SymbolConfiguration(paletteColors: [paletteColor])
@@ -247,13 +247,23 @@ class SliderHandler {
     }
     self.slider = slider
     if !DEBUG_MACOS10, #available(macOS 11.0, *) {
-      slider.frame.size.width = 196
+      let iconSize: CGFloat = 18
+      let iconPadding: CGFloat = 10
+      slider.frame.size.width = 180
       var sliderFrame = slider.frame
       sliderFrame.size.height = max(sliderFrame.size.height, 22)
       slider.frame = sliderFrame
-      slider.frame.origin = NSPoint(x: 15, y: 8)
-      let view = NSView(frame: NSRect(x: 0, y: 0, width: slider.frame.width + 30 + (showPercent ? 38 : 0), height: slider.frame.height + 42))
+      
+      // Horizontal layout: Icon then Slider
+      let iconX: CGFloat = 15
+      let sliderX = iconX + iconSize + iconPadding
+      slider.frame.origin = NSPoint(x: sliderX, y: 8)
+      
+      let viewWidth = sliderX + slider.frame.width + 15 + (showPercent ? 38 : 0)
+      let viewHeight = slider.frame.height + 16
+      let view = NSView(frame: NSRect(x: 0, y: 0, width: viewWidth, height: viewHeight))
       view.frame.origin = NSPoint(x: 12, y: 0)
+      
       var iconName = "circle.dashed"
       switch command {
       case .audioSpeakerVolume: iconName = "speaker.wave.2.fill"
@@ -262,23 +272,23 @@ class SliderHandler {
       default: break
       }
       let icon = SliderHandler.ClickThroughImageView()
-      let iconSize: CGFloat = 18
       icon.image = SliderHandler.menuSymbolImage(named: iconName, pointSize: iconSize, command: command)
       icon.imageScaling = .scaleProportionallyDown
       if #available(macOS 12.0, *) {
         icon.contentTintColor = nil
       } else {
-        icon.contentTintColor = command == .brightness ? NSColor.systemYellow : NSColor.labelColor.withAlphaComponent(0.72)
+        icon.contentTintColor = .labelColor.withAlphaComponent(0.72)
       }
-      // Position icon at horizontal left (start), 8px above slider
-      icon.frame = NSRect(x: slider.frame.origin.x, y: slider.frame.origin.y + slider.frame.height + 8, width: iconSize, height: iconSize)
+      
+      // Position icon to the left of the slider, vertically centered
+      icon.frame = NSRect(x: iconX, y: slider.frame.origin.y + (slider.frame.height - iconSize) / 2, width: iconSize, height: iconSize)
       icon.imageAlignment = .alignCenter
       icon.configureForMenuSymbol()
       view.addSubview(slider)
       view.addSubview(icon)
       self.icon = icon
       if showPercent {
-        let percentageBox = NSTextField(frame: NSRect(x: 15 + slider.frame.size.width - 2, y: slider.frame.origin.y + (slider.frame.height - 12) / 2, width: 40, height: 12))
+        let percentageBox = NSTextField(frame: NSRect(x: sliderX + slider.frame.size.width + 2, y: slider.frame.origin.y + (slider.frame.height - 12) / 2, width: 40, height: 12))
         self.setupPercentageBox(percentageBox)
         self.percentageBox = percentageBox
         view.addSubview(percentageBox)

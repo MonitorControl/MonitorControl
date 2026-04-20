@@ -41,7 +41,7 @@ class CustomHUDManager {
     private func createHUDWindow(displayID: CGDirectDisplayID) -> NSWindow {
         let window = NSPanel(
             contentRect: NSRect(x: 0, y: 0, width: 260, height: 56),
-            styleMask: [.nonactivatingPanel, .hudWindow],
+            styleMask: [.nonactivatingPanel],
             backing: .buffered,
             defer: false
         )
@@ -96,6 +96,13 @@ class CustomHUDManager {
     private func createHUDContentView(type: HUDType, value: Float, maxValue: Float) -> NSView {
         let w: CGFloat = 260
         let h: CGFloat = 56
+        
+        // Wrap the visual effect view in a transparent root view.
+        // This ensures the NSWindow doesn't force a square opaque background on the corners.
+        let rootView = NSView(frame: NSRect(x: 0, y: 0, width: w, height: h))
+        rootView.wantsLayer = true
+        rootView.layer?.backgroundColor = NSColor.clear.cgColor
+        
         let containerView = NSVisualEffectView(frame: NSRect(x: 0, y: 0, width: w, height: h))
         containerView.material = .hudWindow
         containerView.blendingMode = .behindWindow
@@ -103,6 +110,8 @@ class CustomHUDManager {
         containerView.wantsLayer = true
         containerView.layer?.cornerRadius = h / 2
         containerView.layer?.masksToBounds = true
+        
+        rootView.addSubview(containerView)
 
         let iconSize: CGFloat = 26
         let iconView = NSImageView(frame: NSRect(x: 18, y: (h - iconSize) / 2, width: iconSize, height: iconSize))
@@ -149,7 +158,7 @@ class CustomHUDManager {
         let normalizedValue = CGFloat(min(max(value / maxValue, 0), 1))
         let progressFill = NSView(frame: NSRect(x: barX, y: barY, width: max(barH, barW * normalizedValue), height: barH))
         progressFill.wantsLayer = true
-        progressFill.layer?.backgroundColor = NSColor.white.cgColor
+        progressFill.layer?.backgroundColor = NSColor.white.withAlphaComponent(0.9).cgColor
         progressFill.layer?.cornerRadius = barH / 2
         containerView.addSubview(progressFill)
 
@@ -161,7 +170,7 @@ class CustomHUDManager {
         label.alignment = .right
         containerView.addSubview(label)
 
-        return containerView
+        return rootView
     }
     
     private var fadeTimers: [CGDirectDisplayID: Timer] = [:]
@@ -229,9 +238,9 @@ enum HUDType {
     
     var iconNSColor: NSColor {
         switch self {
-        case .brightness: return .systemYellow
-        case .volume, .volumeMuted: return .systemBlue
-        case .contrast: return .systemGray
+        case .brightness: return .white.withAlphaComponent(0.9)
+        case .volume, .volumeMuted: return .white.withAlphaComponent(0.9)
+        case .contrast: return .white.withAlphaComponent(0.8)
         }
     }
 }
