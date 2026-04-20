@@ -158,7 +158,7 @@ class CustomHUDManager {
         let normalizedValue = CGFloat(min(max(value / maxValue, 0), 1))
         let progressFill = NSView(frame: NSRect(x: barX, y: barY, width: max(barH, barW * normalizedValue), height: barH))
         progressFill.wantsLayer = true
-        progressFill.layer?.backgroundColor = NSColor.white.withAlphaComponent(0.9).cgColor
+        progressFill.layer?.backgroundColor = NSColor.white.withAlphaComponent(0.85).cgColor
         progressFill.layer?.cornerRadius = barH / 2
         containerView.addSubview(progressFill)
 

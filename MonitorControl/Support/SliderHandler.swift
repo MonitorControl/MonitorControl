@@ -14,15 +14,15 @@ class SliderHandler {
   var icon: ClickThroughImageView?
 
   class MCSliderCell: NSSliderCell {
-    let knobFillColor = NSColor(white: 1, alpha: 1)
-    let knobFillColorTracking = NSColor(white: 0.8, alpha: 1)
-    let knobStrokeColor = NSColor.systemGray.withAlphaComponent(0.5)
-    let knobShadowColor = NSColor(white: 0, alpha: 0.03)
-    let barFillColor = NSColor.systemGray.withAlphaComponent(0.2)
-    let barStrokeColor = NSColor.systemGray.withAlphaComponent(0.5)
-    let barFilledFillColor = NSColor(white: 1, alpha: 1)
-    let highlightDisplayIndicatorColor = NSColor(white: 0.85, alpha: 1) // This is visible if there is more the 2 displays
-    let tickMarkColor = NSColor.systemGray.withAlphaComponent(0.5)
+    let knobFillColor = NSColor.white.withAlphaComponent(0.9)
+    let knobFillColorTracking = NSColor.white.withAlphaComponent(0.75)
+    let knobStrokeColor = NSColor.systemGray.withAlphaComponent(0.4)
+    let knobShadowColor = NSColor(white: 0, alpha: 0.05)
+    let barFillColor = NSColor.systemGray.withAlphaComponent(0.25)
+    let barStrokeColor = NSColor.systemGray.withAlphaComponent(0.4)
+    let barFilledFillColor = NSColor.white.withAlphaComponent(0.85)
+    let highlightDisplayIndicatorColor = NSColor.white.withAlphaComponent(0.85) // This is visible if there is more the 2 displays
+    let tickMarkColor = NSColor.systemGray.withAlphaComponent(0.4)
 
     let inset: CGFloat = 3.5
     let offsetX: CGFloat = -1.5
@@ -118,7 +118,7 @@ class SliderHandler {
       }
 
       let knob = NSBezierPath(roundedRect: knobRect, xRadius: knobRadius, yRadius: knobRadius)
-      (self.isTracking ? self.knobFillColorTracking : self.knobFillColor).withAlphaComponent(knobAlpha).setFill()
+      (self.isTracking ? self.knobFillColorTracking : self.knobFillColor).withAlphaComponent(self.knobFillColor.alphaComponent * knobAlpha).setFill()
       knob.fill()
 
       if self.isHighlightDisplayItems, self.displayHighlightItems.count > 2 {
@@ -135,7 +135,8 @@ class SliderHandler {
 
       self.knobStrokeColor.withAlphaComponent(self.knobStrokeColor.alphaComponent * knobAlpha).setStroke()
       knob.stroke()
-      self.barStrokeColor.setStroke()
+      // Use a subtle stroke for the bar as well
+      self.barStrokeColor.withAlphaComponent(self.barStrokeColor.alphaComponent * (1 - knobAlpha * 0.5)).setStroke()
       bar.stroke()
     }
   }
@@ -383,21 +384,21 @@ class SliderHandler {
   }
 
   func updateIcon() {
-    // This looks hideous so I disable it for now. Maybe after a bit of tinkering it will look better
-    /*
-     if self.command == .audioSpeakerVolume {
-       let value = self.slider?.floatValue ?? 0.5
-       if value > 2/3 {
-         self.icon?.image = NSImage(systemSymbolName: "speaker.wave.3.fill", accessibilityDescription: "")
-       } else if value > 1/3 {
-         self.icon?.image = NSImage(systemSymbolName: "speaker.wave.2.fill", accessibilityDescription: "")
-       } else if value != 0 {
-         self.icon?.image = NSImage(systemSymbolName: "speaker.wave.1.fill", accessibilityDescription: "")
-       } else {
-         self.icon?.image = NSImage(systemSymbolName: "speaker.slash.fill", accessibilityDescription: "")
-       }
-     }
-     */
+    if #available(macOS 11.0, *), self.command == .audioSpeakerVolume {
+      let value = self.slider?.floatValue ?? 0.5
+      let iconName: String
+      if value > 2/3 {
+        iconName = "speaker.wave.3.fill"
+      } else if value > 1/3 {
+        iconName = "speaker.wave.2.fill"
+      } else if value > 0 {
+        iconName = "speaker.wave.1.fill"
+      } else {
+        iconName = "speaker.slash.fill"
+      }
+      let iconSize: CGFloat = 18
+      self.icon?.image = SliderHandler.menuSymbolImage(named: iconName, pointSize: iconSize, command: self.command)
+    }
   }
 
   func setValue(_ value: Float, displayID: CGDirectDisplayID = 0) {
