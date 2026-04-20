@@ -212,4 +212,6 @@ enum KeyboardVolume: Int {
   case custom = 1
   case both = 2
   case disabled = 3
+  /// Like `media`, but always captures volume/mute keys even when macOS can control the default output device.
+  case mediaForce = 4
 }

@@ -58,6 +58,7 @@
 		F06792F6200A745F0066C438 /* MonitorControlHelper.app in [Login] Copy Helper to start at Login */ = {isa = PBXBuildFile; fileRef = F06792E7200A73460066C438 /* MonitorControlHelper.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		F0A489C4279C71B200BEDFD6 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A489C3279C71B200BEDFD6 /* OnboardingViewController.swift */; };
 		FE4E0896249D584C003A50BB /* OSDUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE4E0895249D584C003A50BB /* OSDUtils.swift */; };
+		CE12345678901234003A50BB /* CustomHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE12345678901234003A50BC /* CustomHUD.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -181,6 +182,7 @@
 		FB5DB28F2AD54C4600306223 /* pt-PT */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-PT"; path = "pt-PT.lproj/InternetAccessPolicy.strings"; sourceTree = "<group>"; };
 		FB5DB2902AD54C4600306223 /* pt-PT */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-PT"; path = "pt-PT.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		FE4E0895249D584C003A50BB /* OSDUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OSDUtils.swift; sourceTree = "<group>"; };
+		CE12345678901234003A50BC /* CustomHUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomHUD.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -317,6 +319,7 @@
 				AA16139A26BE772E00DCF027 /* Arm64DDC.swift */,
 				AA4398A826DD55DA00943F16 /* IntelDDC.swift */,
 				FE4E0895249D584C003A50BB /* OSDUtils.swift */,
+				CE12345678901234003A50BC /* CustomHUD.swift */,
 			);
 			path = Support;
 			sourceTree = "<group>";
@@ -629,6 +632,7 @@
 				AA062E8E26CA7BE5007E628C /* DisplaysPrefsCellView.swift in Sources */,
 				AA25F6D726E68C160087F3A2 /* MediaKeyTapManager.swift in Sources */,
 				FE4E0896249D584C003A50BB /* OSDUtils.swift in Sources */,
+				CE12345678901234003A50BB /* CustomHUD.swift in Sources */,
 				6CBFE27A23DB266000D1BC41 /* Display.swift in Sources */,
 				AA44E70727038F7F00E06865 /* KeyboardShortcutsManager.swift in Sources */,
 				F03A8DF21FFBAA6F0034DC27 /* OtherDisplay.swift in Sources */,

@@ -14,26 +14,28 @@ class SliderHandler {
   var icon: ClickThroughImageView?
 
   class MCSliderCell: NSSliderCell {
-    let knobFillColor = NSColor(white: 1, alpha: 1)
-    let knobFillColorTracking = NSColor(white: 0.8, alpha: 1)
-    let knobStrokeColor = NSColor.systemGray.withAlphaComponent(0.5)
-    let knobShadowColor = NSColor(white: 0, alpha: 0.03)
-    let barFillColor = NSColor.systemGray.withAlphaComponent(0.2)
-    let barStrokeColor = NSColor.systemGray.withAlphaComponent(0.5)
-    let barFilledFillColor = NSColor(white: 1, alpha: 1)
-    let highlightDisplayIndicatorColor = NSColor(white: 0.85, alpha: 1) // This is visible if there is more the 2 displays
-    let tickMarkColor = NSColor.systemGray.withAlphaComponent(0.5)
+    let knobFillColor = NSColor.white.withAlphaComponent(0.9)
+    let knobFillColorTracking = NSColor.white.withAlphaComponent(0.75)
+    let knobStrokeColor = NSColor.systemGray.withAlphaComponent(0.4)
+    let knobShadowColor = NSColor(white: 0, alpha: 0.05)
+    let barFillColor = NSColor.systemGray.withAlphaComponent(0.25)
+    let barStrokeColor = NSColor.systemGray.withAlphaComponent(0.4)
+    let barFilledFillColor = NSColor.white.withAlphaComponent(0.85)
+    let highlightDisplayIndicatorColor = NSColor.white.withAlphaComponent(0.85) // This is visible if there is more the 2 displays
+    let tickMarkColor = NSColor.systemGray.withAlphaComponent(0.4)
 
     let inset: CGFloat = 3.5
     let offsetX: CGFloat = -1.5
     let offsetY: CGFloat = -1.5
 
     let tickMarkKnobExtraInset: CGFloat = 4
-    let tickMarkKnobExtraRadiusMultiplier: CGFloat = 0.25
+    let tickMarkKnobExtraRadiusMultiplier: CGFloat = 0.75
 
     var numOfTickmarks: Int = 0
     var isHighlightDisplayItems: Bool = false
     var displayHighlightItems: [CGDirectDisplayID: Float] = [:]
+    /// Matches Control Center–style volume (accent) vs. brightness (neutral fill).
+    var useAccentFill: Bool = false
 
     var isTracking: Bool = false
 
@@ -90,7 +92,7 @@ class SliderHandler {
       let barFilledWidth = (aRect.width - aRect.height) * CGFloat(maxValue) + aRect.height
       let barFilledRect = NSRect(x: aRect.origin.x, y: aRect.origin.y, width: barFilledWidth, height: aRect.height)
       let barFilled = NSBezierPath(roundedRect: barFilledRect, xRadius: barRadius, yRadius: barRadius)
-      self.barFilledFillColor.setFill()
+      (self.useAccentFill ? NSColor.controlAccentColor : self.barFilledFillColor).setFill()
       barFilled.fill()
 
       let knobMinX = aRect.origin.x + (aRect.width - aRect.height) * CGFloat(minValue)
@@ -116,7 +118,7 @@ class SliderHandler {
       }
 
       let knob = NSBezierPath(roundedRect: knobRect, xRadius: knobRadius, yRadius: knobRadius)
-      (self.isTracking ? self.knobFillColorTracking : self.knobFillColor).withAlphaComponent(knobAlpha).setFill()
+      (self.isTracking ? self.knobFillColorTracking : self.knobFillColor).withAlphaComponent(self.knobFillColor.alphaComponent * knobAlpha).setFill()
       knob.fill()
 
       if self.isHighlightDisplayItems, self.displayHighlightItems.count > 2 {
@@ -133,7 +135,8 @@ class SliderHandler {
 
       self.knobStrokeColor.withAlphaComponent(self.knobStrokeColor.alphaComponent * knobAlpha).setStroke()
       knob.stroke()
-      self.barStrokeColor.setStroke()
+      // Use a subtle stroke for the bar as well
+      self.barStrokeColor.withAlphaComponent(self.barStrokeColor.alphaComponent * (1 - knobAlpha * 0.5)).setStroke()
       bar.stroke()
     }
   }
@@ -207,6 +210,30 @@ class SliderHandler {
       subviews.first { subview in subview.hitTest(point) != nil
       }
     }
+
+    func configureForMenuSymbol() {
+      self.wantsLayer = true
+      self.layer?.isOpaque = false
+      self.layer?.backgroundColor = NSColor.clear.cgColor
+    }
+  }
+
+  /// Renders menu SF Symbols without multicolor white “matting” around fills (e.g. sun.max.fill).
+  @available(macOS 11.0, *)
+  private static func menuSymbolImage(named name: String, pointSize: CGFloat, command: Command) -> NSImage? {
+    guard let base = NSImage(systemSymbolName: name, accessibilityDescription: nil) else { return nil }
+    let weight: NSFont.Weight = .medium
+    let baseConfig = NSImage.SymbolConfiguration(pointSize: pointSize, weight: weight)
+    if #available(macOS 12.0, *) {
+      let paletteColor: NSColor
+      switch command {
+      case .brightness: paletteColor = .labelColor.withAlphaComponent(0.85)
+      default: paletteColor = .labelColor.withAlphaComponent(0.72)
+      }
+      let palette = NSImage.SymbolConfiguration(paletteColors: [paletteColor])
+      return base.withSymbolConfiguration(baseConfig.applying(palette))
+    }
+    return base.withSymbolConfiguration(baseConfig)
   }
 
   init(display: Display?, command: Command, title: String = "", position _: Int = 0) {
@@ -216,12 +243,28 @@ class SliderHandler {
     let showPercent = prefs.bool(forKey: PrefKey.enableSliderPercent.rawValue)
     slider.isEnabled = true
     slider.setNumOfCustomTickmarks(prefs.bool(forKey: PrefKey.showTickMarks.rawValue) ? 5 : 0)
+    if let cell = slider.cell as? MCSliderCell {
+      cell.useAccentFill = command == .audioSpeakerVolume
+    }
     self.slider = slider
     if !DEBUG_MACOS10, #available(macOS 11.0, *) {
+      let iconSize: CGFloat = 18
+      let iconPadding: CGFloat = 10
       slider.frame.size.width = 180
-      slider.frame.origin = NSPoint(x: 15, y: 5)
-      let view = NSView(frame: NSRect(x: 0, y: 0, width: slider.frame.width + 30 + (showPercent ? 38 : 0), height: slider.frame.height + 14))
+      var sliderFrame = slider.frame
+      sliderFrame.size.height = max(sliderFrame.size.height, 22)
+      slider.frame = sliderFrame
+      
+      // Horizontal layout: Icon then Slider
+      let iconX: CGFloat = 15
+      let sliderX = iconX + iconSize + iconPadding
+      slider.frame.origin = NSPoint(x: sliderX, y: 8)
+      
+      let viewWidth = sliderX + slider.frame.width + 15 + (showPercent ? 38 : 0)
+      let viewHeight = slider.frame.height + 16
+      let view = NSView(frame: NSRect(x: 0, y: 0, width: viewWidth, height: viewHeight))
       view.frame.origin = NSPoint(x: 12, y: 0)
+      
       var iconName = "circle.dashed"
       switch command {
       case .audioSpeakerVolume: iconName = "speaker.wave.2.fill"
@@ -230,15 +273,23 @@ class SliderHandler {
       default: break
       }
       let icon = SliderHandler.ClickThroughImageView()
-      icon.image = NSImage(systemSymbolName: iconName, accessibilityDescription: title)
-      icon.contentTintColor = NSColor.black.withAlphaComponent(0.6)
-      icon.frame = NSRect(x: view.frame.origin.x + 6.5, y: view.frame.origin.y + 13, width: 15, height: 15)
+      icon.image = SliderHandler.menuSymbolImage(named: iconName, pointSize: iconSize, command: command)
+      icon.imageScaling = .scaleProportionallyDown
+      if #available(macOS 12.0, *) {
+        icon.contentTintColor = nil
+      } else {
+        icon.contentTintColor = .labelColor.withAlphaComponent(0.72)
+      }
+      
+      // Position icon to the left of the slider, vertically centered
+      icon.frame = NSRect(x: iconX, y: slider.frame.origin.y + (slider.frame.height - iconSize) / 2, width: iconSize, height: iconSize)
       icon.imageAlignment = .alignCenter
+      icon.configureForMenuSymbol()
       view.addSubview(slider)
       view.addSubview(icon)
       self.icon = icon
       if showPercent {
-        let percentageBox = NSTextField(frame: NSRect(x: 15 + slider.frame.size.width - 2, y: 17, width: 40, height: 12))
+        let percentageBox = NSTextField(frame: NSRect(x: sliderX + slider.frame.size.width + 2, y: slider.frame.origin.y + (slider.frame.height - 12) / 2, width: 40, height: 12))
         self.setupPercentageBox(percentageBox)
         self.percentageBox = percentageBox
         view.addSubview(percentageBox)
@@ -320,9 +371,7 @@ class SliderHandler {
         slider.floatValue = value
       }
     }
-    if self.percentageBox == self.percentageBox {
-      self.percentageBox?.stringValue = "" + String(Int(value * 100)) + "%"
-    }
+    self.percentageBox?.stringValue = String(format: "%.0f%%", Double(value) * 100)
     for display in self.displays {
       slider.setHighlightItem(display.identifier, value: value)
       if self.command == .brightness, let appleDisplay = display as? AppleDisplay {
@@ -335,21 +384,21 @@ class SliderHandler {
   }
 
   func updateIcon() {
-    // This looks hideous so I disable it for now. Maybe after a bit of tinkering it will look better
-    /*
-     if self.command == .audioSpeakerVolume {
-       let value = self.slider?.floatValue ?? 0.5
-       if value > 2/3 {
-         self.icon?.image = NSImage(systemSymbolName: "speaker.wave.3.fill", accessibilityDescription: "")
-       } else if value > 1/3 {
-         self.icon?.image = NSImage(systemSymbolName: "speaker.wave.2.fill", accessibilityDescription: "")
-       } else if value != 0 {
-         self.icon?.image = NSImage(systemSymbolName: "speaker.wave.1.fill", accessibilityDescription: "")
-       } else {
-         self.icon?.image = NSImage(systemSymbolName: "speaker.slash.fill", accessibilityDescription: "")
-       }
-     }
-     */
+    if #available(macOS 11.0, *), self.command == .audioSpeakerVolume {
+      let value = self.slider?.floatValue ?? 0.5
+      let iconName: String
+      if value > 2/3 {
+        iconName = "speaker.wave.3.fill"
+      } else if value > 1/3 {
+        iconName = "speaker.wave.2.fill"
+      } else if value > 0 {
+        iconName = "speaker.wave.1.fill"
+      } else {
+        iconName = "speaker.slash.fill"
+      }
+      let iconSize: CGFloat = 18
+      self.icon?.image = SliderHandler.menuSymbolImage(named: iconName, pointSize: iconSize, command: self.command)
+    }
   }
 
   func setValue(_ value: Float, displayID: CGDirectDisplayID = 0) {
@@ -378,9 +427,7 @@ class SliderHandler {
       } else {
         slider.setDisplayHighlightItems(false)
       }
-      if self.percentageBox == self.percentageBox {
-        self.percentageBox?.stringValue = "\(String(format: "%.0f%%", Double(value) * 100))"
-      }
+      self.percentageBox?.stringValue = String(format: "%.0f%%", Double(value) * 100)
     }
   }
 }
