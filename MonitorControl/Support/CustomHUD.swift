@@ -104,12 +104,17 @@ class CustomHUDManager {
         rootView.layer?.backgroundColor = NSColor.clear.cgColor
         
         let containerView = NSVisualEffectView(frame: NSRect(x: 0, y: 0, width: w, height: h))
-        containerView.material = .hudWindow
+        containerView.material = .popover
         containerView.blendingMode = .behindWindow
         containerView.state = .active
+        containerView.appearance = NSAppearance(named: .vibrantDark)
         containerView.wantsLayer = true
         containerView.layer?.cornerRadius = h / 2
         containerView.layer?.masksToBounds = true
+        
+        // Add liquid glass edge highlight
+        containerView.layer?.borderWidth = 1.0
+        containerView.layer?.borderColor = NSColor.white.withAlphaComponent(0.15).cgColor
         
         rootView.addSubview(containerView)
 
@@ -145,26 +150,28 @@ class CustomHUDManager {
         containerView.addSubview(iconView)
 
         let barX: CGFloat = 18 + iconSize + 12
-        let barW: CGFloat = w - barX - 56
+        let barW: CGFloat = w - barX - 74
         let barH: CGFloat = 10
         let barY = (h - barH) / 2
 
-        let progressBg = NSView(frame: NSRect(x: barX, y: barY, width: barW, height: barH))
-        progressBg.wantsLayer = true
-        progressBg.layer?.backgroundColor = NSColor.white.withAlphaComponent(0.22).cgColor
-        progressBg.layer?.cornerRadius = barH / 2
+        let progressBg = NSBox(frame: NSRect(x: barX, y: barY, width: barW, height: barH))
+        progressBg.boxType = .custom
+        progressBg.borderType = .noBorder
+        progressBg.fillColor = NSColor.white.withAlphaComponent(0.22)
+        progressBg.cornerRadius = barH / 2
         containerView.addSubview(progressBg)
 
         let normalizedValue = CGFloat(min(max(value / maxValue, 0), 1))
-        let progressFill = NSView(frame: NSRect(x: barX, y: barY, width: max(barH, barW * normalizedValue), height: barH))
-        progressFill.wantsLayer = true
-        progressFill.layer?.backgroundColor = NSColor.white.withAlphaComponent(0.85).cgColor
-        progressFill.layer?.cornerRadius = barH / 2
+        let progressFill = NSBox(frame: NSRect(x: barX, y: barY, width: max(barH, barW * normalizedValue), height: barH))
+        progressFill.boxType = .custom
+        progressFill.borderType = .noBorder
+        progressFill.fillColor = NSColor.white.withAlphaComponent(0.85)
+        progressFill.cornerRadius = barH / 2
         containerView.addSubview(progressFill)
 
         let percentage = Int(normalizedValue * 100)
         let label = NSTextField(labelWithString: "\(percentage)%")
-        label.frame = NSRect(x: barX + barW + 8, y: (h - 22) / 2, width: 44, height: 22)
+        label.frame = NSRect(x: barX + barW + 12, y: (h - 22) / 2, width: 44, height: 22)
         label.font = NSFont.monospacedDigitSystemFont(ofSize: 15, weight: .semibold)
         label.textColor = .white
         label.alignment = .right
