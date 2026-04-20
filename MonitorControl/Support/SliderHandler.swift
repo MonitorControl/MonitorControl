@@ -231,7 +231,7 @@ class SliderHandler {
       }
       let icon = SliderHandler.ClickThroughImageView()
       icon.image = NSImage(systemSymbolName: iconName, accessibilityDescription: title)
-      icon.contentTintColor = NSColor.black.withAlphaComponent(0.6)
+      icon.contentTintColor = NSColor.labelColor.withAlphaComponent(0.72)
       // Position icon at horizontal left (start), 8px above slider
       let iconSize: CGFloat = 18
       icon.frame = NSRect(x: slider.frame.origin.x, y: slider.frame.origin.y + slider.frame.height + 8, width: iconSize, height: iconSize)
