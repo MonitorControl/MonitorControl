@@ -209,7 +209,7 @@ class SliderHandler: NSObject, NSTextFieldDelegate {
     }
   }
 
-  public init(display: Display?, command: Command, title: String = "", position _: Int = 0) {
+  init(display: Display?, command: Command, title: String = "", position _: Int = 0) {
     self.command = command
     self.title = title
     super.init()
@@ -381,7 +381,7 @@ class SliderHandler: NSObject, NSTextFieldDelegate {
         slider.setDisplayHighlightItems(false)
       }
       if self.percentageBox == self.percentageBox {
-        self.percentageBox?.stringValue = "" + String(Int(value * 100)) + "%"
+        self.percentageBox?.stringValue = "\(String(format: "%.0f%%", Double(value) * 100))"
       }
     }
   }
