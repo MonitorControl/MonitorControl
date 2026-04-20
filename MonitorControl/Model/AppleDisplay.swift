@@ -11,7 +11,7 @@ class AppleDisplay: Display {
     super.init(identifier, name: name, vendorNumber: vendorNumber, modelNumber: modelNumber, serialNumber: serialNumber, isVirtual: isVirtual, isDummy: isDummy)
   }
 
-  public func getAppleBrightness() -> Float {
+  func getAppleBrightness() -> Float {
     guard !self.isDummy else {
       return 1
     }
@@ -20,7 +20,7 @@ class AppleDisplay: Display {
     return brightness
   }
 
-  public func setAppleBrightness(value: Float) {
+  func setAppleBrightness(value: Float) {
     guard !self.isDummy else {
       return
     }

@@ -36,5 +36,7 @@
 	<string>https://monitorcontrol.app/appcast2.xml</string>
 	<key>SUPublicEDKey</key>
 	<string>ITSTMp8AypsLawojJ+UR3tm2mN18AFoNMvXf1G3t62s=</string>
+	<key>UIDesignRequiresCompatibility</key>
+	<true/>
 </dict>
 </plist>

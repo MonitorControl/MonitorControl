@@ -67,7 +67,7 @@ class DisplaysPrefsViewController: NSViewController, SettingsPane, NSTableViewDa
     self.displays.count
   }
 
-  public static func isImac() -> Bool {
+  static func isImac() -> Bool {
     let platformExpertDevice = IOServiceGetMatchingService(kIOMasterPortDefault, IOServiceMatching("IOPlatformExpertDevice"))
     if let modelIdentifier = IORegistryEntryCreateCFProperty(platformExpertDevice, "model" as CFString, kCFAllocatorDefault, 0).takeRetainedValue() as? String {
       return modelIdentifier.contains("iMac")
@@ -75,14 +75,14 @@ class DisplaysPrefsViewController: NSViewController, SettingsPane, NSTableViewDa
     return false
   }
 
-  public struct DisplayInfo {
+  struct DisplayInfo {
     var displayType = ""
     var displayImage = ""
     var controlMethod = ""
     var controlStatus = ""
   }
 
-  public static func getDisplayInfo(display: Display) -> DisplayInfo {
+  static func getDisplayInfo(display: Display) -> DisplayInfo {
     var displayType = NSLocalizedString("Other Display", comment: "Shown in the Display Settings")
     var displayImage = "display.trianglebadge.exclamationmark"
     var controlMethod = NSLocalizedString("No Control", comment: "Shown in the Display Settings") + "  ⚠️"
