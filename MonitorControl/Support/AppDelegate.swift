@@ -29,6 +29,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   var startupActionWriteCounter: Int = 0
   var audioPlayer: AVAudioPlayer?
   let updaterController = SPUStandardUpdaterController(startingUpdater: false, updaterDelegate: UpdaterDelegate(), userDriverDelegate: nil)
+  let brightnessAutomationManager = BrightnessAutomationManager()
+  var brightnessAutomationWindowController: BrightnessAutomationWindowController?
 
   var settingsPaneStyle: Settings.Style {
     if !DEBUG_MACOS10, #available(macOS 11.0, *) {
@@ -65,6 +67,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     CGDisplayRegisterReconfigurationCallback({ _, _, _ in app.displayReconfigured() }, nil)
     self.configure(firstrun: true)
     DisplayManager.shared.createGammaActivityEnforcer()
+    self.brightnessAutomationManager.start()
     self.updaterController.startUpdater()
   }
 
@@ -79,6 +82,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   @objc func prefsClicked(_: AnyObject) {
     os_log("Settings clicked", type: .info)
     self.settingsWindowController.show()
+  }
+
+  @objc func brightnessAutomationsClicked(_: AnyObject) {
+    os_log("Brightness Automations clicked", type: .info)
+    menu.closeMenu()
+    if self.brightnessAutomationWindowController == nil {
+      self.brightnessAutomationWindowController = BrightnessAutomationWindowController(manager: self.brightnessAutomationManager)
+    }
+    self.brightnessAutomationWindowController?.showWindow(self)
   }
 
   func applicationShouldHandleReopen(_: NSApplication, hasVisibleWindows _: Bool) -> Bool {
@@ -152,6 +164,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       }
     }
     displaysPrefsVc?.loadDisplayList()
+    self.brightnessAutomationWindowController?.reloadData()
+    self.brightnessAutomationManager.handleWakeOrDisplayChange()
     self.job(start: true)
   }
 
@@ -208,6 +222,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         self.job(start: true)
       }
       self.startupActionWriteRepeatAfterSober()
+      self.brightnessAutomationManager.handleWakeOrDisplayChange()
       self.updateMediaKeyTap()
     }
   }

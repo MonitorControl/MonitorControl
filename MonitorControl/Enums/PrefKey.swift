@@ -87,6 +87,9 @@ enum PrefKey: String {
   // Sliders for multiple displays
   case multiSliders
 
+  // Daily brightness automations
+  case brightnessAutomations
+
   /* -- Display specific settings */
 
   // Enable mute DDC for display
