@@ -40,8 +40,8 @@ class CustomHUDManager {
     
     private func createHUDWindow(displayID: CGDirectDisplayID) -> NSWindow {
         let window = NSPanel(
-            contentRect: NSRect(x: 0, y: 0, width: 260, height: 56),
-            styleMask: [.nonactivatingPanel],
+            contentRect: NSRect(x: 0, y: 0, width: 280, height: 64),
+            styleMask: [.nonactivatingPanel, .fullSizeContentView],
             backing: .buffered,
             defer: false
         )
@@ -56,6 +56,8 @@ class CustomHUDManager {
         window.isMovable = false
         window.isMovableByWindowBackground = false
         window.ignoresMouseEvents = true
+        window.titleVisibility = .hidden
+        window.titlebarAppearsTransparent = true
         
         positionWindow(window, onDisplay: displayID)
         
@@ -70,7 +72,7 @@ class CustomHUDManager {
         
         // Position at center-bottom of screen, above the dock
         let x = screenFrame.origin.x + (screenFrame.width - windowSize.width) / 2
-        let y = screenFrame.origin.y + 100 // 100 points from bottom
+        let y = screenFrame.origin.y + 80 // 80 points from bottom for better visibility
         
         window.setFrameOrigin(NSPoint(x: x, y: y))
     }
@@ -94,17 +96,16 @@ class CustomHUDManager {
     }
     
     private func createHUDContentView(type: HUDType, value: Float, maxValue: Float) -> NSView {
-        let w: CGFloat = 260
-        let h: CGFloat = 56
+        let w: CGFloat = 280
+        let h: CGFloat = 64
         
         // Wrap the visual effect view in a transparent root view.
-        // This ensures the NSWindow doesn't force a square opaque background on the corners.
         let rootView = NSView(frame: NSRect(x: 0, y: 0, width: w, height: h))
         rootView.wantsLayer = true
         rootView.layer?.backgroundColor = NSColor.clear.cgColor
         
         let containerView = NSVisualEffectView(frame: NSRect(x: 0, y: 0, width: w, height: h))
-        containerView.material = .popover
+        containerView.material = .hudWindow
         containerView.blendingMode = .behindWindow
         containerView.state = .active
         containerView.appearance = NSAppearance(named: .vibrantDark)
@@ -112,29 +113,24 @@ class CustomHUDManager {
         containerView.layer?.cornerRadius = h / 2
         containerView.layer?.masksToBounds = true
         
-        // Add liquid glass edge highlight
-        containerView.layer?.borderWidth = 1.0
-        containerView.layer?.borderColor = NSColor.white.withAlphaComponent(0.15).cgColor
+        // Add premium liquid glass edge highlight
+        containerView.layer?.borderWidth = 0.5
+        containerView.layer?.borderColor = NSColor.white.withAlphaComponent(0.25).cgColor
         
         rootView.addSubview(containerView)
 
-        let iconSize: CGFloat = 26
-        let iconView = NSImageView(frame: NSRect(x: 18, y: (h - iconSize) / 2, width: iconSize, height: iconSize))
+        let iconSize: CGFloat = 24
+        let iconView = NSImageView(frame: NSRect(x: 20, y: (h - iconSize) / 2, width: iconSize, height: iconSize))
         iconView.imageScaling = .scaleProportionallyDown
         iconView.wantsLayer = true
         iconView.layer?.isOpaque = false
         iconView.layer?.backgroundColor = NSColor.clear.cgColor
+        
         if #available(macOS 11.0, *) {
             if let icon = NSImage(systemSymbolName: type.iconSystemName, accessibilityDescription: nil) {
-                if #available(macOS 12.0, *) {
-                    let base = NSImage.SymbolConfiguration(pointSize: iconSize * 0.85, weight: .semibold)
-                    let palette = NSImage.SymbolConfiguration(paletteColors: [type.iconNSColor])
-                    iconView.image = icon.withSymbolConfiguration(base.applying(palette))
-                    iconView.contentTintColor = nil
-                } else {
-                    iconView.image = icon
-                    iconView.contentTintColor = type.iconNSColor
-                }
+                let config = NSImage.SymbolConfiguration(pointSize: iconSize * 0.9, weight: .bold)
+                iconView.image = icon.withSymbolConfiguration(config)
+                iconView.contentTintColor = .white
             }
         } else {
             let fallbackIcon: String
@@ -145,37 +141,31 @@ class CustomHUDManager {
             case .contrast: fallbackIcon = NSImage.touchBarColorPickerFillName
             }
             iconView.image = NSImage(named: fallbackIcon)
-            iconView.contentTintColor = type.iconNSColor
+            iconView.contentTintColor = .white
         }
         containerView.addSubview(iconView)
 
-        let barX: CGFloat = 18 + iconSize + 12
-        let barW: CGFloat = w - barX - 74
-        let barH: CGFloat = 10
+        // Thick Liquid Slider
+        let barX: CGFloat = 20 + iconSize + 16
+        let barW: CGFloat = w - barX - 24 // More compact, no trailing percentage label by default
+        let barH: CGFloat = 32 // Thicker, liquid-style bar
         let barY = (h - barH) / 2
 
         let progressBg = NSBox(frame: NSRect(x: barX, y: barY, width: barW, height: barH))
         progressBg.boxType = .custom
         progressBg.borderType = .noBorder
-        progressBg.fillColor = NSColor.white.withAlphaComponent(0.22)
+        progressBg.fillColor = NSColor.white.withAlphaComponent(0.15)
         progressBg.cornerRadius = barH / 2
         containerView.addSubview(progressBg)
 
         let normalizedValue = CGFloat(min(max(value / maxValue, 0), 1))
-        let progressFill = NSBox(frame: NSRect(x: barX, y: barY, width: max(barH, barW * normalizedValue), height: barH))
+        let fillWidth = max(barH, barW * normalizedValue)
+        let progressFill = NSBox(frame: NSRect(x: barX, y: barY, width: fillWidth, height: barH))
         progressFill.boxType = .custom
         progressFill.borderType = .noBorder
-        progressFill.fillColor = NSColor.white.withAlphaComponent(0.85)
+        progressFill.fillColor = NSColor.white.withAlphaComponent(0.9)
         progressFill.cornerRadius = barH / 2
         containerView.addSubview(progressFill)
-
-        let percentage = Int(normalizedValue * 100)
-        let label = NSTextField(labelWithString: "\(percentage)%")
-        label.frame = NSRect(x: barX + barW + 12, y: (h - 22) / 2, width: 44, height: 22)
-        label.font = NSFont.monospacedDigitSystemFont(ofSize: 15, weight: .semibold)
-        label.textColor = .white
-        label.alignment = .right
-        containerView.addSubview(label)
 
         return rootView
     }
