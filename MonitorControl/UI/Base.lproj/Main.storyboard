@@ -709,7 +709,7 @@
             <objects>
                 <viewController storyboardIdentifier="KeyboardPrefsVC" id="eJ2-Cv-Vfp" customClass="KeyboardPrefsViewController" customModule="MonitorControl" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" translatesAutoresizingMaskIntoConstraints="NO" id="yCl-jO-kpd">
-                        <rect key="frame" x="0.0" y="0.0" width="730" height="676"/>
+                        <rect key="frame" x="0.0" y="0.0" width="730" height="726"/>
                         <subviews>
                             <gridView xPlacement="leading" yPlacement="fill" rowAlignment="none" rowSpacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="bKX-vi-7gY">
                                 <rect key="frame" x="20" y="20" width="690" height="636"/>
@@ -997,13 +997,14 @@
                                     </gridCell>
                                     <gridCell row="6od-Ek-qTW" column="EiG-65-CTv" xPlacement="leading" id="pCd-dP-Y62">
                                         <popUpButton key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="9oZ-JM-bxD">
-                                            <rect key="frame" x="217" y="187" width="293" height="25"/>
+                                            <rect key="frame" x="217" y="187" width="360" height="25"/>
                                             <popUpButtonCell key="cell" type="push" title="Standard keyboard volume and mute keys" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="1sy-Kd-WL5" id="gTf-PQ-2fA">
                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" metaFont="message"/>
                                                 <menu key="menu" id="LhY-cM-Msq">
                                                     <items>
                                                         <menuItem title="Standard keyboard volume and mute keys" state="on" id="1sy-Kd-WL5"/>
+                                                        <menuItem title="Standard keys (force capture)" tag="4" id="fVk-mR-9Xp"/>
                                                         <menuItem title="Custom keyboard shortcuts" tag="1" id="4CG-0I-anB"/>
                                                         <menuItem title="Both standard and custom shortcuts" tag="2" id="QDG-SA-mRX">
                                                             <modifierMask key="keyEquivalentModifierMask"/>
@@ -1164,7 +1165,7 @@
                             </gridView>
                         </subviews>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="bKX-vi-7gY" secondAttribute="bottom" constant="20" id="BWt-5s-vf7"/>
+                            <constraint firstAttribute="bottom" secondItem="bKX-vi-7gY" secondAttribute="bottom" constant="55" id="BWt-5s-vf7"/>
                             <constraint firstItem="bKX-vi-7gY" firstAttribute="leading" secondItem="yCl-jO-kpd" secondAttribute="leading" constant="20" id="Pdh-1U-kqr"/>
                             <constraint firstItem="bKX-vi-7gY" firstAttribute="top" secondItem="yCl-jO-kpd" secondAttribute="top" constant="20" id="fmV-It-Xaq"/>
                             <constraint firstAttribute="trailing" secondItem="bKX-vi-7gY" secondAttribute="trailing" constant="20" id="ssM-r3-qK0"/>
@@ -1280,7 +1281,7 @@
                                                                 <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" id="jz0-4Z-xVm">
                                                                     <rect key="frame" x="210" y="449" width="166" height="16"/>
                                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                                    <textFieldCell key="cell" lineBreakMode="clipping" title="#bc-ignore!" id="6GJ-6Q-gqz">
+                                                                    <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="#bc-ignore!" id="6GJ-6Q-gqz">
                                                                         <font key="font" metaFont="system"/>
                                                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -1340,7 +1341,7 @@
                                                                     </textFieldCell>
                                                                 </textField>
                                                                 <textField focusRingType="none" verticalHuggingPriority="750" id="mIA-Wh-7aB">
-                                                                    <rect key="frame" x="78" y="492" width="463" height="21"/>
+                                                                    <rect key="frame" x="78" y="490" width="463" height="28"/>
                                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" title="#bc-ignore!" id="ibQ-4u-ClE">
                                                                         <font key="font" textStyle="title2" name=".SFNS-Regular"/>
@@ -1987,7 +1988,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField identifier="softwareNameLabel" focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" id="dtg-g7-hZb">
-                                <rect key="frame" x="247" y="258" width="147" height="26"/>
+                                <rect key="frame" x="247" y="254" width="200" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" alignment="left" title="MonitorControl" id="1PJ-14-Bvn">
                                     <font key="font" textStyle="title1" name=".SFNS-Regular"/>
