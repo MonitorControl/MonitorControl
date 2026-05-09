@@ -145,8 +145,41 @@
 /* Shown in menu */
 "Volume" = "Volume";
 
+/* Shown in Mouse Settings */
+"Volume feedback sound" = "Volume feedback sound";
+
 /* Shown in the alert dialog */
 "Yes" = "Yes";
 
 /* Shown in the alert dialog */
 "You need to enable MonitorControl in System Settings > Security and Privacy > Accessibility for the keyboard shortcuts to work" = "You need to enable MonitorControl in System Settings > Security and Privacy > Accessibility for the keyboard shortcuts to work";
+
+/* Shown in Mouse Settings */
+"Coarse (5%)" = "Coarse (5%)";
+
+/* Shown in Mouse Settings */
+"Disabled" = "Disabled";
+
+/* Shown in Mouse Settings */
+"Fine (1%)" = "Fine (1%)";
+
+/* Shown in Mouse Settings */
+"Left screen edge" = "Left screen edge";
+
+/* Shown in the main prefs window */
+"Mouse" = "Mouse";
+
+/* Shown in Mouse Settings */
+"Move the pointer to a screen edge and use the scroll wheel to control the selected value on that screen." = "Move the pointer to a screen edge and use the scroll wheel to control the selected value on that screen.";
+
+/* Shown in Mouse Settings */
+"Right screen edge" = "Right screen edge";
+
+/* Shown in Mouse Settings */
+"Scroll wheel precision" = "Scroll wheel precision";
+
+/* Shown in Mouse Settings */
+"Standard (2%)" = "Standard (2%)";
+
+/* Shown in Mouse Settings */
+"Very fine (0.5%)" = "Very fine (0.5%)";

@@ -18,6 +18,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   }()
   var mediaKeyTap = MediaKeyTapManager()
   var keyboardShortcuts = KeyboardShortcutsManager()
+  var edgeScrollManager = EdgeScrollManager()
   let coreAudio = SimplyCoreAudio()
   var accessibilityObserver: NSObjectProtocol!
   var statusItemObserver: NSObjectProtocol!
@@ -43,6 +44,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       mainPrefsVc!,
       menuslidersPrefsVc!,
       keyboardPrefsVc!,
+      mousePrefsVc,
       displaysPrefsVc!,
       aboutPrefsVc!,
     ],
@@ -62,6 +64,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     self.setPrefsBuildNumber()
     self.setDefaultPrefs()
     self.setMenu()
+    self.edgeScrollManager.update()
     CGDisplayRegisterReconfigurationCallback({ _, _, _ in app.displayReconfigured() }, nil)
     self.configure(firstrun: true)
     DisplayManager.shared.createGammaActivityEnforcer()
@@ -112,6 +115,22 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       // Only settings that are not false, 0 or "" by default are set here. Assumes pre-wiped database.
       prefs.set(true, forKey: PrefKey.appAlreadyLaunched.rawValue)
       prefs.set(true, forKey: PrefKey.SUEnableAutomaticChecks.rawValue)
+      prefs.set(EdgeScrollAction.brightness.rawValue, forKey: PrefKey.edgeScrollLeftAction.rawValue)
+      prefs.set(EdgeScrollAction.volume.rawValue, forKey: PrefKey.edgeScrollRightAction.rawValue)
+      prefs.set(EdgeScrollPrecision.standard.rawValue, forKey: PrefKey.edgeScrollPrecision.rawValue)
+      prefs.set(true, forKey: PrefKey.edgeScrollVolumeSoundFeedback.rawValue)
+    }
+    if prefs.object(forKey: PrefKey.edgeScrollLeftAction.rawValue) == nil {
+      prefs.set(EdgeScrollAction.brightness.rawValue, forKey: PrefKey.edgeScrollLeftAction.rawValue)
+    }
+    if prefs.object(forKey: PrefKey.edgeScrollRightAction.rawValue) == nil {
+      prefs.set(EdgeScrollAction.volume.rawValue, forKey: PrefKey.edgeScrollRightAction.rawValue)
+    }
+    if prefs.object(forKey: PrefKey.edgeScrollPrecision.rawValue) == nil {
+      prefs.set(EdgeScrollPrecision.standard.rawValue, forKey: PrefKey.edgeScrollPrecision.rawValue)
+    }
+    if prefs.object(forKey: PrefKey.edgeScrollVolumeSoundFeedback.rawValue) == nil {
+      prefs.set(true, forKey: PrefKey.edgeScrollVolumeSoundFeedback.rawValue)
     }
   }
 
@@ -161,7 +180,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   }
 
   func checkPermissions(firstAsk: Bool = false) {
-    let permissionsRequired: Bool = [KeyboardVolume.media.rawValue, KeyboardVolume.both.rawValue].contains(prefs.integer(forKey: PrefKey.keyboardVolume.rawValue)) || [KeyboardBrightness.media.rawValue, KeyboardBrightness.both.rawValue].contains(prefs.integer(forKey: PrefKey.keyboardBrightness.rawValue))
+    let edgeScrollPermissionsRequired = EdgeScrollAction(rawValue: prefs.integer(forKey: PrefKey.edgeScrollLeftAction.rawValue)) != .disabled || EdgeScrollAction(rawValue: prefs.integer(forKey: PrefKey.edgeScrollRightAction.rawValue)) != .disabled
+    let permissionsRequired: Bool = [KeyboardVolume.media.rawValue, KeyboardVolume.both.rawValue].contains(prefs.integer(forKey: PrefKey.keyboardVolume.rawValue)) || [KeyboardBrightness.media.rawValue, KeyboardBrightness.both.rawValue].contains(prefs.integer(forKey: PrefKey.keyboardBrightness.rawValue)) || edgeScrollPermissionsRequired
     if !MediaKeyTapManager.readPrivileges(prompt: false), permissionsRequired {
       MediaKeyTapManager.acquirePrivileges(firstAsk: firstAsk)
     }
@@ -174,7 +194,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     NSWorkspace.shared.notificationCenter.addObserver(self, selector: #selector(self.wakeNotification), name: NSWorkspace.screensDidWakeNotification, object: nil)
     NSWorkspace.shared.notificationCenter.addObserver(self, selector: #selector(self.sleepNotification), name: NSWorkspace.willSleepNotification, object: nil)
     NSWorkspace.shared.notificationCenter.addObserver(self, selector: #selector(self.wakeNotification), name: NSWorkspace.didWakeNotification, object: nil)
-    _ = DistributedNotificationCenter.default().addObserver(forName: NSNotification.Name(rawValue: NSNotification.Name.accessibilityApi.rawValue), object: nil, queue: nil) { _ in DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { self.updateMediaKeyTap() } } // listen for accessibility status changes
+    _ = DistributedNotificationCenter.default().addObserver(forName: NSNotification.Name(rawValue: NSNotification.Name.accessibilityApi.rawValue), object: nil, queue: nil) { _ in DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { self.updateMediaKeyTap(); self.edgeScrollManager.update() } } // listen for accessibility status changes
     self.statusItemObserver = statusItem.observe(\.isVisible, options: [.old, .new]) { _, _ in self.statusItemVisibilityChanged() }
   }
 
@@ -281,6 +301,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     self.setDefaultPrefs()
     self.checkPermissions()
     self.updateMediaKeyTap()
+    self.edgeScrollManager.update()
     self.configure(firstrun: true)
   }
 

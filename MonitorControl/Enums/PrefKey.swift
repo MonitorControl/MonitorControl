@@ -87,6 +87,18 @@ enum PrefKey: String {
   // Sliders for multiple displays
   case multiSliders
 
+  // Mouse wheel action on the left screen edge
+  case edgeScrollLeftAction
+
+  // Mouse wheel action on the right screen edge
+  case edgeScrollRightAction
+
+  // Mouse wheel edge control precision
+  case edgeScrollPrecision
+
+  // Play feedback sound when controlling volume from the screen edge
+  case edgeScrollVolumeSoundFeedback
+
   /* -- Display specific settings */
 
   // Enable mute DDC for display
@@ -212,4 +224,26 @@ enum KeyboardVolume: Int {
   case custom = 1
   case both = 2
   case disabled = 3
+}
+
+enum EdgeScrollAction: Int, CaseIterable {
+  case disabled = 0
+  case brightness = 1
+  case volume = 2
+}
+
+enum EdgeScrollPrecision: Int, CaseIterable {
+  case standard = 0
+  case fine = 1
+  case veryFine = 2
+  case coarse = 3
+
+  var step: Float {
+    switch self {
+    case .standard: return 0.02
+    case .fine: return 0.01
+    case .veryFine: return 0.005
+    case .coarse: return 0.05
+    }
+  }
 }

@@ -147,8 +147,41 @@
 /* Shown in menu */
 "Volume" = "音量";
 
+/* Shown in Mouse Settings */
+"Volume feedback sound" = "音量反馈声音";
+
 /* Shown in the alert dialog */
 "Yes" = "是";
 
 /* Shown in the alert dialog */
 "You need to enable MonitorControl in System Settings > Security and Privacy > Accessibility for the keyboard shortcuts to work" = "您需要在「系统偏好设置」>「安全性与隐私」>「辅助功能」中启用MonitorControl让键盘快捷键生效";
+
+/* Shown in Mouse Settings */
+"Coarse (5%)" = "粗略 (5%)";
+
+/* Shown in Mouse Settings */
+"Disabled" = "关闭";
+
+/* Shown in Mouse Settings */
+"Fine (1%)" = "精细 (1%)";
+
+/* Shown in Mouse Settings */
+"Left screen edge" = "屏幕左边缘";
+
+/* Shown in the main prefs window */
+"Mouse" = "鼠标";
+
+/* Shown in Mouse Settings */
+"Move the pointer to a screen edge and use the scroll wheel to control the selected value on that screen." = "将指针移到屏幕边缘，然后使用滚轮控制该屏幕上的选定项目。";
+
+/* Shown in Mouse Settings */
+"Right screen edge" = "屏幕右边缘";
+
+/* Shown in Mouse Settings */
+"Scroll wheel precision" = "滚轮调节精度";
+
+/* Shown in Mouse Settings */
+"Standard (2%)" = "标准 (2%)";
+
+/* Shown in Mouse Settings */
+"Very fine (0.5%)" = "非常精细 (0.5%)";
