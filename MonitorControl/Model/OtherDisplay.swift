@@ -165,14 +165,32 @@ class OtherDisplay: Display {
     (command == .audioSpeakerVolume && self.readPrefAsBool(key: .enableMuteUnmute) && self.readPrefAsInt(for: .audioMuteScreenBlank) == 1) ? 0 : self.readPrefAsFloat(for: command)
   }
 
+  func canAdjustVolume() -> Bool {
+    !self.isSw() && !self.readPrefAsBool(key: .unavailableDDC, for: .audioSpeakerVolume)
+  }
+
   func stepVolume(isUp: Bool, isSmallIncrement: Bool) {
-    guard !self.readPrefAsBool(key: .unavailableDDC, for: .audioSpeakerVolume) else {
+    guard self.canAdjustVolume() else {
       OSDUtils.showOsdVolumeDisabled(displayID: self.identifier)
       return
     }
     let currentValue = self.readPrefAsFloat(for: .audioSpeakerVolume)
-    var muteValue: Int?
     let volumeOSDValue = self.calcNewValue(currentValue: currentValue, isUp: isUp, isSmallIncrement: isSmallIncrement)
+    self.setVolume(volumeOSDValue, roundChiclet: !isSmallIncrement)
+  }
+
+  func adjustVolume(by delta: Float, forceOsd: Bool = false) {
+    guard self.canAdjustVolume() else {
+      OSDUtils.showOsdVolumeDisabled(displayID: self.identifier)
+      return
+    }
+    let currentValue = self.readPrefAsFloat(for: .audioSpeakerVolume)
+    let volumeOSDValue = max(0, min(1, currentValue + delta))
+    self.setVolume(volumeOSDValue, roundChiclet: false, forceOsd: forceOsd)
+  }
+
+  private func setVolume(_ volumeOSDValue: Float, roundChiclet: Bool, forceOsd: Bool = false) {
+    var muteValue: Int?
     if self.readPrefAsInt(for: .audioMuteScreenBlank) == 1, volumeOSDValue > 0 {
       muteValue = 2
     } else if self.readPrefAsInt(for: .audioMuteScreenBlank) != 1, volumeOSDValue == 0 {
@@ -188,8 +206,12 @@ class OtherDisplay: Display {
         self.writeDDCValues(command: .audioSpeakerVolume, value: self.convValueToDDC(for: .audioSpeakerVolume, from: volumeOSDValue))
       }
     }
-    if !self.readPrefAsBool(key: .hideOsd) {
-      OSDUtils.showOsd(displayID: self.identifier, command: .audioSpeakerVolume, value: volumeOSDValue, roundChiclet: !isSmallIncrement)
+    if forceOsd || !self.readPrefAsBool(key: .hideOsd) {
+      if roundChiclet {
+        OSDUtils.showOsd(displayID: self.identifier, command: .audioSpeakerVolume, value: volumeOSDValue, roundChiclet: true)
+      } else {
+        OSDUtils.showOsdProgress(displayID: self.identifier, command: .audioSpeakerVolume, value: volumeOSDValue)
+      }
     }
     if !isAlreadySet {
       self.savePref(volumeOSDValue, for: .audioSpeakerVolume)

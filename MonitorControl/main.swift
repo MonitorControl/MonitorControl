@@ -25,6 +25,7 @@ let mainPrefsVc = storyboard.instantiateController(withIdentifier: "MainPrefsVC"
 let displaysPrefsVc = storyboard.instantiateController(withIdentifier: "DisplaysPrefsVC") as? DisplaysPrefsViewController
 let menuslidersPrefsVc = storyboard.instantiateController(withIdentifier: "MenuslidersPrefsVC") as? MenuslidersPrefsViewController
 let keyboardPrefsVc = storyboard.instantiateController(withIdentifier: "KeyboardPrefsVC") as? KeyboardPrefsViewController
+let mousePrefsVc = MousePrefsViewController()
 let aboutPrefsVc = storyboard.instantiateController(withIdentifier: "AboutPrefsVC") as? AboutPrefsViewController
 let onboardingVc = storyboard.instantiateController(withIdentifier: "onboardingViewController") as? NSWindowController
 

@@ -108,6 +108,20 @@ class Display: Equatable {
     }
   }
 
+  func adjustBrightness(by delta: Float) {
+    guard !self.readPrefAsBool(key: .unavailableDDC, for: .brightness) else {
+      return
+    }
+    let value = max(0, min(1, self.getBrightness() + delta))
+    if self.setBrightness(value) {
+      OSDUtils.showOsdProgress(displayID: self.identifier, command: .brightness, value: value)
+      if let slider = self.sliderHandler[.brightness] {
+        slider.setValue(value, displayID: self.identifier)
+        self.brightnessSyncSourceValue = value
+      }
+    }
+  }
+
   func setBrightness(_ to: Float = -1, slow: Bool = false) -> Bool {
     if !prefs.bool(forKey: PrefKey.disableSmoothBrightness.rawValue) {
       return self.setSmoothBrightness(to, slow: slow)

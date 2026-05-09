@@ -5,4 +5,4 @@ Carthage
 .DS_Store
 
 ### Xcode ###
-xcuserdata/
+xcuserdata/build/
