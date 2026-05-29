@@ -42,7 +42,6 @@ class DisplayManager {
   }
 
   var shades: [CGDirectDisplayID: NSWindow] = [:]
-  var shadeGrave: [NSWindow] = []
 
   func isDisqualifiedFromShade(_ displayID: CGDirectDisplayID) -> Bool {
     if CGDisplayIsInHWMirrorSet(displayID) != 0 || CGDisplayIsInMirrorSet(displayID) != 0 {
@@ -117,7 +116,6 @@ class DisplayManager {
   func destroyShade(displayID: CGDirectDisplayID) -> Bool {
     if let shade = shades[displayID] {
       os_log("Destroying shade for display %{public}@", type: .info, String(displayID))
-      self.shadeGrave.append(shade)
       self.shades.removeValue(forKey: displayID)
       shade.close()
       return true
@@ -241,21 +239,6 @@ class DisplayManager {
     self.displays.compactMap { $0 as? OtherDisplay }
   }
 
-  func sortDisplays() {
-    // Opsiyonel: sıralamadan önce log al
-    let before = displays.map { $0.name }
-    os_log("Displays before sorting: %{public}@", before)
-    
-    // In‑place sıralama
-    displays.sort { lhs, rhs in
-      lhs.name.localizedStandardCompare(rhs.name) == .orderedAscending
-    }
-    
-    // Opsiyonel: sıralamadan sonra log al
-    let after = displays.map { $0.name }
-    os_log("Displays after sorting: %{public}@", after)
-  }
-  
   func sortDisplaysByFriendlyName() -> [Display] {
       return displays.sorted { lhs, rhs in
           let lhsTitle = lhs.readPrefAsString(key: .friendlyName).isEmpty
@@ -337,11 +320,14 @@ class DisplayManager {
     if Arm64DDC.isArm64 {
       os_log("arm64 AVService update requested", type: .info)
       var displayIDs: [CGDirectDisplayID] = []
-      for otherDisplay in self.getOtherDisplays() {
+      let otherDisplays = self.getOtherDisplays()
+      for otherDisplay in otherDisplays {
+        otherDisplay.arm64avService = nil
+        otherDisplay.arm64ddc = false
         displayIDs.append(otherDisplay.identifier)
       }
       for serviceMatch in Arm64DDC.getServiceMatches(displayIDs: displayIDs) {
-        for otherDisplay in self.getOtherDisplays() where otherDisplay.identifier == serviceMatch.displayID && serviceMatch.service != nil {
+        for otherDisplay in otherDisplays where otherDisplay.identifier == serviceMatch.displayID && serviceMatch.service != nil {
           otherDisplay.arm64avService = serviceMatch.service
           os_log("Display service match successful for display %{public}@", type: .info, String(serviceMatch.displayID))
           if serviceMatch.discouraged {

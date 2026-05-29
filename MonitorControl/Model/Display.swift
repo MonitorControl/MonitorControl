@@ -165,7 +165,6 @@ class Display: Equatable {
       _ = self.setDirectBrightness(self.smoothBrightnessTransient, transient: true)
       self.smoothBrightnessRunning = false
     }
-    self.swBrightnessSemaphore.signal()
     return true
   }
 
@@ -194,7 +193,10 @@ class Display: Equatable {
     guard !self.isDummy else {
       return
     }
-    CGGetDisplayTransferByTable(self.identifier, 256, &self.defaultGammaTableRed, &self.defaultGammaTableGreen, &self.defaultGammaTableBlue, &self.defaultGammaTableSampleCount)
+    guard CGGetDisplayTransferByTable(self.identifier, 256, &self.defaultGammaTableRed, &self.defaultGammaTableGreen, &self.defaultGammaTableBlue, &self.defaultGammaTableSampleCount) == CGError.success else {
+      self.defaultGammaTablePeak = 1.0
+      return
+    }
     let redPeak = self.defaultGammaTableRed.max() ?? 0
     let greenPeak = self.defaultGammaTableGreen.max() ?? 0
     let bluePeak = self.defaultGammaTableBlue.max() ?? 0
@@ -225,23 +227,28 @@ class Display: Equatable {
     currentValue = self.swBrightnessTransform(value: currentValue)
     newValue = self.swBrightnessTransform(value: newValue)
     if smooth {
+      self.swBrightnessSemaphore.signal()
       DispatchQueue.global(qos: .userInteractive).async {
         for transientValue in stride(from: currentValue, to: newValue, by: 0.005 * (currentValue > newValue ? -1 : 1)) {
           guard app.reconfigureID == 0 else {
-            self.swBrightnessSemaphore.signal()
             return
           }
           if self.isVirtual || self.readPrefAsBool(key: .avoidGamma) {
-            _ = DisplayManager.shared.setShadeAlpha(value: 1 - transientValue, displayID: DisplayManager.resolveEffectiveDisplayID(self.identifier))
+            DispatchQueue.main.async {
+              _ = DisplayManager.shared.setShadeAlpha(value: 1 - transientValue, displayID: DisplayManager.resolveEffectiveDisplayID(self.identifier))
+            }
           } else {
             let gammaTableRed = self.defaultGammaTableRed.map { $0 * transientValue }
             let gammaTableGreen = self.defaultGammaTableGreen.map { $0 * transientValue }
             let gammaTableBlue = self.defaultGammaTableBlue.map { $0 * transientValue }
-            CGSetDisplayTransferByTable(self.identifier, self.defaultGammaTableSampleCount, gammaTableRed, gammaTableGreen, gammaTableBlue)
+            DispatchQueue.main.sync {
+              CGSetDisplayTransferByTable(self.identifier, self.defaultGammaTableSampleCount, gammaTableRed, gammaTableGreen, gammaTableBlue)
+            }
           }
           Thread.sleep(forTimeInterval: 0.001) // Let's make things quick if not performed in the background
         }
       }
+      return true
     } else {
       if self.isVirtual || self.readPrefAsBool(key: .avoidGamma) {
         self.swBrightnessSemaphore.signal()
@@ -273,6 +280,10 @@ class Display: Equatable {
       self.swBrightnessSemaphore.signal()
       return self.swBrightnessTransform(value: rawBrightnessValue, reverse: true)
     }
+    guard self.defaultGammaTablePeak != 0 else {
+      self.swBrightnessSemaphore.signal()
+      return 1.0
+    }
     var gammaTableRed = [CGGammaValue](repeating: 0, count: 256)
     var gammaTableGreen = [CGGammaValue](repeating: 0, count: 256)
     var gammaTableBlue = [CGGammaValue](repeating: 0, count: 256)
@@ -300,24 +311,26 @@ class Display: Equatable {
     os_log("Gamma table interference detected, number of events: %{public}@", type: .info, String(DisplayManager.shared.gammaInterferenceCounter))
     if DisplayManager.shared.gammaInterferenceCounter >= 3 {
       DisplayManager.shared.gammaInterferenceWarningShown = true
-      let alert = NSAlert()
-      alert.messageText = NSLocalizedString("Is f.lux or similar running?", comment: "Shown in the alert dialog")
-      alert.informativeText = NSLocalizedString("An other app seems to change the brightness or colors which causes issues.\n\nTo solve this, you need to quit the other app or disable gamma control for your displays in MonitorControl!", comment: "Shown in the alert dialog")
-      alert.addButton(withTitle: NSLocalizedString("I'll quit the other app", comment: "Shown in the alert dialog"))
-      alert.addButton(withTitle: NSLocalizedString("Disable gamma control for my displays", comment: "Shown in the alert dialog"))
-      alert.alertStyle = NSAlert.Style.critical
-      if alert.runModal() != .alertFirstButtonReturn {
-        for otherDisplay in DisplayManager.shared.getOtherDisplays() {
-          _ = otherDisplay.setSwBrightness(1)
-          _ = otherDisplay.setDirectBrightness(1)
-          otherDisplay.savePref(true, key: .avoidGamma)
-          _ = otherDisplay.setSwBrightness(1)
-          DisplayManager.shared.gammaInterferenceWarningShown = false
-          DisplayManager.shared.gammaInterferenceCounter = 0
-          displaysPrefsVc?.loadDisplayList()
+      DispatchQueue.main.async {
+        let alert = NSAlert()
+        alert.messageText = NSLocalizedString("Is f.lux or similar running?", comment: "Shown in the alert dialog")
+        alert.informativeText = NSLocalizedString("An other app seems to change the brightness or colors which causes issues.\n\nTo solve this, you need to quit the other app or disable gamma control for your displays in MonitorControl!", comment: "Shown in the alert dialog")
+        alert.addButton(withTitle: NSLocalizedString("I'll quit the other app", comment: "Shown in the alert dialog"))
+        alert.addButton(withTitle: NSLocalizedString("Disable gamma control for my displays", comment: "Shown in the alert dialog"))
+        alert.alertStyle = NSAlert.Style.critical
+        if alert.runModal() != .alertFirstButtonReturn {
+          for otherDisplay in DisplayManager.shared.getOtherDisplays() {
+            _ = otherDisplay.setSwBrightness(1)
+            _ = otherDisplay.setDirectBrightness(1)
+            otherDisplay.savePref(true, key: .avoidGamma)
+            _ = otherDisplay.setSwBrightness(1)
+            DisplayManager.shared.gammaInterferenceWarningShown = false
+            DisplayManager.shared.gammaInterferenceCounter = 0
+            displaysPrefsVc?.loadDisplayList()
+          }
+        } else {
+          os_log("We won't watch for gamma table interference anymore", type: .info)
         }
-      } else {
-        os_log("We won't watch for gamma table interference anymore", type: .info)
       }
     }
   }
