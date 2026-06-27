@@ -21,6 +21,7 @@ class DisplayManager {
     self.gammaActivityEnforcer.alphaValue = 1 * (DEBUG_GAMMA_ENFORCER ? 0.5 : 0.01)
     self.gammaActivityEnforcer.ignoresMouseEvents = true
     self.gammaActivityEnforcer.level = .screenSaver
+    self.gammaActivityEnforcer.sharingType = .none // exclude helper overlay from screen capture/recording
     self.gammaActivityEnforcer.orderFrontRegardless()
     self.gammaActivityEnforcer.collectionBehavior = [.stationary, .canJoinAllSpaces]
     os_log("Gamma activity enforcer created.", type: .info)
@@ -70,6 +71,7 @@ class DisplayManager {
       shade.backgroundColor = .clear
       shade.ignoresMouseEvents = true
       shade.level = NSWindow.Level(rawValue: Int(CGShieldingWindowLevel()))
+      shade.sharingType = .none // dimming overlay must not appear in screenshots / screen recordings
       shade.orderFrontRegardless()
       shade.collectionBehavior = [.stationary, .canJoinAllSpaces, .ignoresCycle]
       shade.setFrame(screen.frame, display: true)
