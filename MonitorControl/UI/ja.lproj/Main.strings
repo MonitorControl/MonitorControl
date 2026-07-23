@@ -332,6 +332,9 @@
 /* Class = "NSMenuItem"; title = "Depends on mouse pointer position"; ObjectID = "km4-hK-auM"; */
 "km4-hK-auM.title" = "マウスポインタの位置に依存";
 
+/* Class = "NSButtonCell"; title = "Ignore built-in display"; ObjectID = "bN3-zK-9fD"; */
+"bN3-zK-9fD.title" = "内蔵ディスプレイを無視する";
+
 /* Class = "NSMenuItem"; title = "Use combined slider for all displays"; ObjectID = "lA0-tv-qRs"; */
 "lA0-tv-qRs.title" = "すべてのディスプレイが結合されたスライダーを使用";
 

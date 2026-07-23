@@ -87,6 +87,9 @@ enum PrefKey: String {
   // Sliders for multiple displays
   case multiSliders
 
+  // Exclude built-in display from the combined slider
+  case combineExcludeBuiltin
+
   /* -- Display specific settings */
 
   // Enable mute DDC for display

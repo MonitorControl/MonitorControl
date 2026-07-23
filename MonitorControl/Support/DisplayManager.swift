@@ -291,6 +291,10 @@ class DisplayManager {
     self.displays.first { CGDisplayIsBuiltin($0.identifier) != 0 }
   }
 
+  func isBuiltinExcludedFromCombinedSlider() -> Bool {
+    prefs.integer(forKey: PrefKey.multiSliders.rawValue) == MultiSliders.combine.rawValue && prefs.bool(forKey: PrefKey.combineExcludeBuiltin.rawValue)
+  }
+
   func getCurrentDisplay(byFocus: Bool = false) -> Display? {
     if byFocus {
       guard let mainDisplayID = NSScreen.main?.displayID else {
@@ -403,7 +407,11 @@ class DisplayManager {
     var currentDisplay: Display?
     if isBrightness {
       if prefs.integer(forKey: PrefKey.multiKeyboardBrightness.rawValue) == MultiKeyboardBrightness.allScreens.rawValue {
-        affectedDisplays = allDisplays
+        if self.isBuiltinExcludedFromCombinedSlider() {
+          affectedDisplays = allDisplays.filter { CGDisplayIsBuiltin($0.identifier) == 0 }
+        } else {
+          affectedDisplays = allDisplays
+        }
         return affectedDisplays
       }
       currentDisplay = self.getCurrentDisplay(byFocus: prefs.integer(forKey: PrefKey.multiKeyboardBrightness.rawValue) == MultiKeyboardBrightness.focusInsteadOfMouse.rawValue)
