@@ -236,6 +236,18 @@ class MenuHandler: NSMenu, NSMenuDelegate {
 
       let menuItemView = NSView(frame: NSRect(x: 0, y: 0, width: viewWidth, height: iconSize + 10))
 
+      let automationsIcon = NSButton()
+      automationsIcon.bezelStyle = .regularSquare
+      automationsIcon.isBordered = false
+      automationsIcon.setButtonType(.momentaryChange)
+      automationsIcon.image = NSImage(systemSymbolName: "clock", accessibilityDescription: NSLocalizedString("Brightness Automations…", comment: "Shown in menu"))
+      automationsIcon.alternateImage = NSImage(systemSymbolName: "clock.fill", accessibilityDescription: NSLocalizedString("Brightness Automations…", comment: "Shown in menu"))
+      automationsIcon.alphaValue = 0.3
+      automationsIcon.frame = NSRect(x: 17 + compensateForBlock, y: menuItemView.frame.origin.y + 5, width: iconSize, height: iconSize)
+      automationsIcon.imageScaling = .scaleProportionallyUpOrDown
+      automationsIcon.target = app
+      automationsIcon.action = #selector(app.brightnessAutomationsClicked)
+
       let settingsIcon = NSButton()
       settingsIcon.bezelStyle = .regularSquare
       settingsIcon.isBordered = false
@@ -273,6 +285,7 @@ class MenuHandler: NSMenu, NSMenuDelegate {
       quitIcon.imageScaling = .scaleProportionallyUpOrDown
       quitIcon.action = #selector(app.quitClicked)
 
+      menuItemView.addSubview(automationsIcon)
       menuItemView.addSubview(settingsIcon)
       menuItemView.addSubview(updateIcon)
       menuItemView.addSubview(quitIcon)
@@ -283,6 +296,9 @@ class MenuHandler: NSMenu, NSMenuDelegate {
       if app.macOS10() {
         self.insertItem(NSMenuItem.separator(), at: self.items.count)
       }
+      let automationsItem = NSMenuItem(title: NSLocalizedString("Brightness Automations…", comment: "Shown in menu"), action: #selector(app.brightnessAutomationsClicked), keyEquivalent: "")
+      automationsItem.target = app
+      self.insertItem(automationsItem, at: self.items.count)
       self.insertItem(withTitle: NSLocalizedString("Settings…", comment: "Shown in menu"), action: #selector(app.prefsClicked), keyEquivalent: ",", at: self.items.count)
       let updateItem = NSMenuItem(title: NSLocalizedString("Check for updates…", comment: "Shown in menu"), action: #selector(app.updaterController.checkForUpdates(_:)), keyEquivalent: "")
       updateItem.target = app.updaterController
