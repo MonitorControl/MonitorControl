@@ -97,9 +97,6 @@ class OtherDisplay: Display {
     case .contrast: currentDDCValue = UInt16(Float(DDC_MAX_DETECT_LIMIT) * 0.750)
     default: currentDDCValue = UInt16(Float(DDC_MAX_DETECT_LIMIT) * 1.000)
     }
-    if command == .audioSpeakerVolume {
-      currentDDCValue = UInt16(Float(DDC_MAX_DETECT_LIMIT) * 0.125) // lower default audio value as high volume might rattle the user.
-    }
     os_log("Setting up display %{public}@ for %{public}@", type: .info, String(self.identifier), String(reflecting: command))
     if !self.isSw() {
       if prefs.integer(forKey: PrefKey.startupAction.rawValue) == StartupAction.read.rawValue, self.pollingCount != 0, !app.safeMode {
@@ -399,21 +396,32 @@ class OtherDisplay: Display {
     guard value != UInt16.max, value != lastValue else {
       return
     }
-    self.writeDDCQueue.async(flags: .barrier) {
-      self.writeDDCLastSavedValue[command] = value
-      self.savePref(true, key: PrefKey.isTouched, for: command)
-    }
     var controlCodes = self.getRemapControlCodes(command: command)
     if controlCodes.count == 0 {
       controlCodes.append(command.rawValue)
     }
+    var writeAttempted = false
+    var writeSucceeded = true
     for controlCode in controlCodes {
       if Arm64DDC.isArm64 {
         if self.arm64ddc {
-          _ = Arm64DDC.write(service: self.arm64avService, command: controlCode, value: value)
+          writeAttempted = true
+          writeSucceeded = Arm64DDC.write(service: self.arm64avService, command: controlCode, value: value)
         }
       } else {
-        _ = self.ddc?.write(command: controlCode, value: value, errorRecoveryWaitTime: 2000) ?? false
+        if self.ddc != nil {
+          writeAttempted = true
+          writeSucceeded = self.ddc?.write(command: controlCode, value: value, errorRecoveryWaitTime: 2000) ?? false
+        }
+      }
+      if writeAttempted, !writeSucceeded {
+        break
+      }
+    }
+    if writeAttempted, writeSucceeded {
+      self.writeDDCQueue.async(flags: .barrier) {
+        self.writeDDCLastSavedValue[command] = value
+        self.savePref(true, key: PrefKey.isTouched, for: command)
       }
     }
   }
@@ -487,6 +495,9 @@ class OtherDisplay: Display {
     let curveMultiplier = self.getCurveMultiplier(self.readPrefAsInt(key: .curveDDC, for: command))
     let minDDCValue = Float(self.readPrefAsInt(key: .minDDCOverride, for: command))
     let maxDDCValue = Float(self.readPrefAsInt(key: .maxDDC, for: command))
+    guard maxDDCValue != minDDCValue else {
+      return UInt16(minDDCValue)
+    }
     let curvedValue = pow(max(min(value, 1), 0), curveMultiplier)
     let deNormalizedValue = (maxDDCValue - minDDCValue) * curvedValue + minDDCValue
     var intDDCValue = UInt16(min(max(deNormalizedValue, minDDCValue), maxDDCValue))
@@ -500,6 +511,9 @@ class OtherDisplay: Display {
     let curveMultiplier = self.getCurveMultiplier(self.readPrefAsInt(key: .curveDDC, for: command))
     let minDDCValue = Float(self.readPrefAsInt(key: .minDDCOverride, for: command))
     let maxDDCValue = Float(self.readPrefAsInt(key: .maxDDC, for: command))
+    guard maxDDCValue != minDDCValue else {
+      return 0
+    }
     let normalizedValue = ((min(max(Float(from), minDDCValue), maxDDCValue) - minDDCValue) / (maxDDCValue - minDDCValue))
     let deCurvedValue = pow(normalizedValue, 1.0 / curveMultiplier)
     var value = deCurvedValue

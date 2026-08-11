@@ -74,6 +74,9 @@ class Arm64DDC: NSObject {
     var send: [UInt8] = [command]
     var reply = [UInt8](repeating: 0, count: 11)
     if Self.performDDCCommunication(service: service, send: &send, reply: &reply, writeSleepTime: writeSleepTime, numOfWriteCycles: numOfWriteCycles, readSleepTime: readSleepTime, numOfRetryAttemps: numOfRetryAttemps, retrySleepTime: retrySleepTime) {
+      guard reply.count > 9, reply[0] == ARM64_DDC_7BIT_ADDRESS << 1, reply[2] == 0x02, reply[4] == command else {
+        return nil
+      }
       let max = UInt16(reply[6]) * 256 + UInt16(reply[7])
       let current = UInt16(reply[8]) * 256 + UInt16(reply[9])
       values = (current, max)
@@ -97,7 +100,8 @@ class Arm64DDC: NSObject {
     }
     var packet: [UInt8] = [UInt8(0x80 | (send.count + 1)), UInt8(send.count)] + send + [0] // Note: the last byte is the place of the checksum, see next line!
     packet[packet.count - 1] = self.checksum(chk: send.count == 1 ? ARM64_DDC_7BIT_ADDRESS << 1 : ARM64_DDC_7BIT_ADDRESS << 1 ^ dataAddress, data: &packet, start: 0, end: packet.count - 2)
-    for _ in 1 ... (numOfRetryAttemps ?? 4) + 1 {
+    let attempts = max(1, Int(min(numOfRetryAttemps ?? 4, UInt8(30))))
+    for _ in 0 ..< attempts {
       for _ in 1 ... max((numOfWriteCycles ?? 2) + 0, 1) {
         usleep(writeSleepTime ?? 10000)
         success = IOAVServiceWriteI2C(service, UInt32(ARM64_DDC_7BIT_ADDRESS), UInt32(dataAddress), &packet, UInt32(packet.count)) == 0
@@ -232,7 +236,13 @@ class Arm64DDC: NSObject {
   static func getIoregServicesForMatching() -> [IOregService] {
     var serviceLocation = 0
     var ioregServicesForMatching: [IOregService] = []
-    let ioregRoot: io_registry_entry_t = IORegistryGetRootEntry(kIOMasterPortDefault)
+    let masterPort: mach_port_t
+    if #available(macOS 12.0, *) {
+      masterPort = kIOMainPortDefault
+    } else {
+      masterPort = kIOMasterPortDefault
+    }
+    let ioregRoot: io_registry_entry_t = IORegistryGetRootEntry(masterPort)
     defer {
       IOObjectRelease(ioregRoot)
     }

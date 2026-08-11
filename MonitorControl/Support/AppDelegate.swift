@@ -22,6 +22,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   var accessibilityObserver: NSObjectProtocol!
   var statusItemObserver: NSObjectProtocol!
   var statusItemVisibilityChangedByUser = true
+  var configureID: Int = 0 // dispatched configure command ID
   var reconfigureID: Int = 0 // dispatched reconfigure command ID
   var sleepID: Int = 0 // sleep event ID
   var safeMode = false
@@ -137,6 +138,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     os_log("Request for configuration with reconfigreID %{public}@", type: .info, String(dispatchedReconfigureID))
     self.reconfigureID = 0
+    self.configureID += 1
+    let dispatchedConfigureID = self.configureID
     DisplayManager.shared.gammaInterferenceCounter = 0
     DisplayManager.shared.configureDisplays()
     DisplayManager.shared.addDisplayCounterSuffixes()
@@ -144,15 +147,36 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     if firstrun && prefs.integer(forKey: PrefKey.startupAction.rawValue) != StartupAction.write.rawValue {
       DisplayManager.shared.resetSwBrightnessForAllDisplays(prefsOnly: true)
     }
-    DisplayManager.shared.setupOtherDisplays(firstrun: firstrun)
-    self.updateMenusAndKeys()
-    if !firstrun || prefs.integer(forKey: PrefKey.startupAction.rawValue) == StartupAction.write.rawValue {
-      if !prefs.bool(forKey: PrefKey.disableCombinedBrightness.rawValue) {
-        DisplayManager.shared.restoreSwBrightnessForAllDisplays(async: !prefs.bool(forKey: PrefKey.disableSmoothBrightness.rawValue))
+    DispatchQueue.global(qos: .userInitiated).async {
+      guard self.sleepID == 0, self.reconfigureID == 0, dispatchedConfigureID == self.configureID else {
+        return
+      }
+      DisplayManager.shared.setupOtherDisplays(firstrun: firstrun)
+      guard self.sleepID == 0, self.reconfigureID == 0, dispatchedConfigureID == self.configureID else {
+        return
+      }
+      DispatchQueue.main.async {
+        guard self.sleepID == 0, self.reconfigureID == 0, dispatchedConfigureID == self.configureID else {
+          return
+        }
+        self.updateMenusAndKeys()
+      }
+      guard self.sleepID == 0, self.reconfigureID == 0, dispatchedConfigureID == self.configureID else {
+        return
+      }
+      if !firstrun || prefs.integer(forKey: PrefKey.startupAction.rawValue) == StartupAction.write.rawValue {
+        if !prefs.bool(forKey: PrefKey.disableCombinedBrightness.rawValue) {
+          DisplayManager.shared.restoreSwBrightnessForAllDisplays(async: !prefs.bool(forKey: PrefKey.disableSmoothBrightness.rawValue))
+        }
+      }
+      DispatchQueue.main.async {
+        guard self.sleepID == 0, self.reconfigureID == 0, dispatchedConfigureID == self.configureID else {
+          return
+        }
+        displaysPrefsVc?.loadDisplayList()
+        self.job(start: true)
       }
     }
-    displaysPrefsVc?.loadDisplayList()
-    self.job(start: true)
   }
 
   func updateMenusAndKeys() {
@@ -299,22 +323,25 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   }
 
   func setStartAtLogin(enabled: Bool) {
-    let identifier = "\(Bundle.main.bundleIdentifier!)Helper" as CFString
-    SMLoginItemSetEnabled(identifier, enabled)
+    let identifier = "\(Bundle.main.bundleIdentifier!)Helper"
+    if #available(macOS 13.0, *) {
+      let service = SMAppService.loginItem(identifier: identifier)
+      do {
+        if enabled {
+          try service.register()
+        } else {
+          try service.unregister()
+        }
+      } catch {
+        os_log("Unable to update login item registration: %{public}@", type: .error, error.localizedDescription)
+      }
+    } else {
+      SMLoginItemSetEnabled(identifier as CFString, enabled)
+    }
   }
 
-  func getSystemSettings() -> [String: AnyObject]? {
-    var propertyListFormat = PropertyListSerialization.PropertyListFormat.xml
-    let plistPath = NSString(string: "~/Library/Preferences/.GlobalPreferences.plist").expandingTildeInPath
-    guard let plistXML = FileManager.default.contents(atPath: plistPath) else {
-      return nil
-    }
-    do {
-      return try PropertyListSerialization.propertyList(from: plistXML, options: .mutableContainersAndLeaves, format: &propertyListFormat) as? [String: AnyObject]
-    } catch {
-      os_log("Error reading system prefs plist: %{public}@", type: .info, error.localizedDescription)
-      return nil
-    }
+  func getSystemSettings() -> [String: Any]? {
+    UserDefaults.standard.persistentDomain(forName: ".GlobalPreferences")
   }
 
   func macOS10() -> Bool {
