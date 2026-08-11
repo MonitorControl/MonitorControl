@@ -332,6 +332,9 @@
 /* Class = "NSMenuItem"; title = "Depends on mouse pointer position"; ObjectID = "km4-hK-auM"; */
 "km4-hK-auM.title" = "माउस सूचक की स्थिति पर निर्भर करता है";
 
+/* Class = "NSButtonCell"; title = "Ignore built-in display"; ObjectID = "bN3-zK-9fD"; */
+"bN3-zK-9fD.title" = "बिल्ट-इन डिस्प्ले को अनदेखा करें";
+
 /* Class = "NSMenuItem"; title = "Use combined slider for all displays"; ObjectID = "lA0-tv-qRs"; */
 "lA0-tv-qRs.title" = "सभी प्रदर्शनों के लिए संयुक्त स्लाइडर का उपयोग करें";
 
