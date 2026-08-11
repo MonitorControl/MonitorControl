@@ -21,7 +21,37 @@ class OSDUtils: NSObject {
     return osdImage
   }
 
+  /// Check if we're running on macOS 26 (Tahoe) or later where native OSD is broken
+  private static var shouldUseCustomHUD: Bool {
+    if #available(macOS 26, *) {
+      return true
+    }
+    return false
+  }
+
+  /// Convert Command to HUDType for custom HUD
+  private static func getHUDType(command: Command, value: Float) -> HUDType {
+    switch command {
+    case .audioSpeakerVolume:
+      return value > 0 ? .volume : .volumeMuted
+    case .audioMuteScreenBlank:
+      return .volumeMuted
+    case .contrast:
+      return .contrast
+    default:
+      return .brightness
+    }
+  }
+
   static func showOsd(displayID: CGDirectDisplayID, command: Command, value: Float, maxValue: Float = 1, roundChiclet: Bool = false, lock: Bool = false) {
+    // Use custom HUD on macOS 26+ where native OSD is broken
+    if shouldUseCustomHUD {
+      let hudType = getHUDType(command: command, value: value)
+      CustomHUDManager.shared.showHUD(displayID: displayID, type: hudType, value: value, maxValue: maxValue)
+      return
+    }
+    
+    // Fallback to native OSD for older macOS versions
     guard let manager = OSDManager.sharedManager() as? OSDManager else {
       return
     }
@@ -40,6 +70,11 @@ class OSDUtils: NSObject {
   }
 
   static func showOsdVolumeDisabled(displayID: CGDirectDisplayID) {
+    if shouldUseCustomHUD {
+      CustomHUDManager.shared.showHUD(displayID: displayID, type: .volumeMuted, value: 0, maxValue: 1)
+      return
+    }
+    
     guard let manager = OSDManager.sharedManager() as? OSDManager else {
       return
     }
@@ -47,6 +82,11 @@ class OSDUtils: NSObject {
   }
 
   static func showOsdMuteDisabled(displayID: CGDirectDisplayID) {
+    if shouldUseCustomHUD {
+      CustomHUDManager.shared.showHUD(displayID: displayID, type: .volumeMuted, value: 0, maxValue: 1)
+      return
+    }
+    
     guard let manager = OSDManager.sharedManager() as? OSDManager else {
       return
     }
@@ -54,6 +94,12 @@ class OSDUtils: NSObject {
   }
 
   static func popEmptyOsd(displayID: CGDirectDisplayID, command: Command) {
+    if shouldUseCustomHUD {
+      let hudType = getHUDType(command: command, value: 0)
+      CustomHUDManager.shared.showHUD(displayID: displayID, type: hudType, value: 0, maxValue: 1)
+      return
+    }
+    
     guard let manager = OSDManager.sharedManager() as? OSDManager else {
       return
     }
@@ -75,3 +121,4 @@ class OSDUtils: NSObject {
     abs(chiclet.rounded(.towardZero) - chiclet)
   }
 }
+

@@ -103,25 +103,59 @@ class MenuHandler: NSMenu, NSMenuDelegate {
 
   func addDisplayMenuBlock(addedSliderHandlers: [SliderHandler], blockName: String, monitorSubMenu: NSMenu, numOfDisplays: Int, asSubMenu: Bool) {
     if numOfDisplays > 1, prefs.integer(forKey: PrefKey.multiSliders.rawValue) != MultiSliders.relevant.rawValue, !DEBUG_MACOS10, #available(macOS 11.0, *) {
-      class BlockView: NSView {
-        override func draw(_: NSRect) {
+      /// Draws the original soft outer rings + inner edge; layered on top of `NSVisualEffectView` (which does not reliably call `draw(_:)`).
+      class BlockBorderOverlayView: NSView {
+        override var isOpaque: Bool { false }
+
+        override func viewDidChangeEffectiveAppearance() {
+          super.viewDidChangeEffectiveAppearance()
+          self.needsDisplay = true
+        }
+
+        override func draw(_ dirtyRect: NSRect) {
           let radius = prefs.bool(forKey: PrefKey.showTickMarks.rawValue) ? CGFloat(4) : CGFloat(11)
           let outerMargin = CGFloat(15)
-          let blockRect = self.frame.insetBy(dx: outerMargin, dy: outerMargin / 2 + 2).offsetBy(dx: 0, dy: outerMargin / 2 * -1 + 7)
+          let blockRect = self.bounds.insetBy(dx: outerMargin, dy: outerMargin / 2 + 2).offsetBy(dx: 0, dy: outerMargin / 2 * -1 + 7)
           for i in 1 ... 5 {
             let blockPath = NSBezierPath(roundedRect: blockRect.insetBy(dx: CGFloat(i) * -1, dy: CGFloat(i) * -1), xRadius: radius + CGFloat(i) * 0.5, yRadius: radius + CGFloat(i) * 0.5)
             NSColor.black.withAlphaComponent(0.1 / CGFloat(i)).setStroke()
+            blockPath.lineWidth = 1
             blockPath.stroke()
           }
           let blockPath = NSBezierPath(roundedRect: blockRect, xRadius: radius, yRadius: radius)
-          if [NSAppearance.Name.darkAqua, NSAppearance.Name.vibrantDark].contains(effectiveAppearance.name) {
+          if [NSAppearance.Name.darkAqua, NSAppearance.Name.vibrantDark].contains(self.effectiveAppearance.name) {
             NSColor.systemGray.withAlphaComponent(0.3).setStroke()
+            blockPath.lineWidth = 1
+            blockPath.stroke()
+          } else {
+            // With `NSVisualEffectView` behind, skip the old semi-opaque white fill so the material shows; keep a clear inner edge.
+            NSColor.separatorColor.withAlphaComponent(0.45).setStroke()
+            blockPath.lineWidth = 1
             blockPath.stroke()
           }
-          if ![NSAppearance.Name.darkAqua, NSAppearance.Name.vibrantDark].contains(effectiveAppearance.name) {
-            NSColor.white.withAlphaComponent(0.5).setFill()
-            blockPath.fill()
-          }
+        }
+      }
+
+      class BlockView: NSVisualEffectView {
+        override init(frame frameRect: NSRect) {
+          super.init(frame: frameRect)
+          // Match the surrounding NSMenu chrome (display name row above, etc.); `.popover` reads as a different panel.
+          self.material = .menu
+          self.blendingMode = .withinWindow
+          self.state = .active
+          self.isEmphasized = false
+          self.wantsLayer = true
+          let tickMarks = prefs.bool(forKey: PrefKey.showTickMarks.rawValue)
+          self.layer?.cornerRadius = tickMarks ? CGFloat(10) : CGFloat(14)
+          self.layer?.masksToBounds = true
+          let borderOverlay = BlockBorderOverlayView(frame: self.bounds)
+          borderOverlay.autoresizingMask = [.width, .height]
+          self.addSubview(borderOverlay)
+        }
+
+        @available(*, unavailable)
+        required init?(coder _: NSCoder) {
+          fatalError("init(coder:) has not been implemented")
         }
       }
       var contentWidth: CGFloat = 0
