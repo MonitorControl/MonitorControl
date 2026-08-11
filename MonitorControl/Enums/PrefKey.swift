@@ -212,4 +212,5 @@ enum KeyboardVolume: Int {
   case custom = 1
   case both = 2
   case disabled = 3
+  case mediaForce = 4
 }
