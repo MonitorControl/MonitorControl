@@ -292,6 +292,9 @@ class SliderHandler {
     if self.command == Command.brightness {
       _ = otherDisplay.setBrightness(value)
       return
+    } else if self.command == Command.contrast, otherDisplay.hasDisplayLinkContrastControl() {
+      _ = otherDisplay.setDisplayLinkContrast(value)
+      return
     } else if !otherDisplay.isSw() {
       if self.command == Command.audioSpeakerVolume {
         if !otherDisplay.readPrefAsBool(key: .enableMuteUnmute) || value != 0 {

@@ -13,6 +13,13 @@ class DisplayManager {
   let gammaActivityEnforcer = NSWindow(contentRect: .init(origin: NSPoint(x: 0, y: 0), size: .init(width: DEBUG_GAMMA_ENFORCER ? 15 : 1, height: DEBUG_GAMMA_ENFORCER ? 15 : 1)), styleMask: [], backing: .buffered, defer: false)
   var gammaInterferenceCounter = 0
   var gammaInterferenceWarningShown = false
+  private var displayLinkUpdateObserver: NSObjectProtocol?
+
+  private init() {
+    self.displayLinkUpdateObserver = NotificationCenter.default.addObserver(forName: DisplayLinkControl.displayDidUpdateNotification, object: nil, queue: .main) { [weak self] note in
+      self?.displayLinkDisplayDidUpdate(note)
+    }
+  }
 
   func createGammaActivityEnforcer() {
     self.gammaActivityEnforcer.title = "Monitor Control Gamma Activity Enforcer"
@@ -160,8 +167,35 @@ class DisplayManager {
     return false
   }
 
+  private func displayLinkDisplayDidUpdate(_ note: Notification) {
+    guard app != nil, app.sleepID == 0, app.reconfigureID == 0,
+          let displayID = self.displayLinkDisplayID(from: note.userInfo),
+          let displayLinkDisplay = DisplayLinkControl.shared.display(for: displayID),
+          let otherDisplay = self.getOtherDisplays().first(where: { $0.identifier == displayID }) else {
+      return
+    }
+    otherDisplay.applyDisplayLinkDisplay(displayLinkDisplay)
+  }
+
+  private func displayLinkDisplayID(from userInfo: [AnyHashable: Any]?) -> CGDirectDisplayID? {
+    guard let rawDisplayID = userInfo?[DisplayLinkControl.userInfoDisplayIDKey] else {
+      return nil
+    }
+    if let displayID = rawDisplayID as? CGDirectDisplayID {
+      return displayID
+    }
+    if let displayID = rawDisplayID as? UInt32 {
+      return CGDirectDisplayID(displayID)
+    }
+    if let displayID = rawDisplayID as? NSNumber {
+      return CGDirectDisplayID(displayID.uint32Value)
+    }
+    return nil
+  }
+
   func configureDisplays() {
     self.clearDisplays()
+    DisplayLinkControl.shared.refreshDisplays()
     var onlineDisplayIDs = [CGDirectDisplayID](repeating: 0, count: 16)
     var displayCount: UInt32 = 0
     guard CGGetOnlineDisplayList(16, &onlineDisplayIDs, &displayCount) == .success else {
@@ -183,6 +217,10 @@ class DisplayManager {
         self.addDisplay(display: appleDisplay)
       } else {
         let otherDisplay = OtherDisplay(id, name: name, vendorNumber: vendorNumber, modelNumber: modelNumber, serialNumber: serialNumber, isVirtual: isVirtual, isDummy: isDummy)
+        if let displayLinkDisplay = DisplayLinkControl.shared.display(for: id) {
+          otherDisplay.bindDisplayLinkDisplay(displayLinkDisplay)
+          os_log("DisplayLink display matched - %{public}@", type: .info, "ID: \(otherDisplay.identifier), Persistent ID: \(displayLinkDisplay.persistentDisplayId)")
+        }
         os_log("Other display found - %{public}@", type: .info, "ID: \(otherDisplay.identifier), Name: \(otherDisplay.name) (Vendor: \(otherDisplay.vendorNumber ?? 0), Model: \(otherDisplay.modelNumber ?? 0))")
         self.addDisplay(display: otherDisplay)
       }
@@ -191,6 +229,21 @@ class DisplayManager {
 
   func setupOtherDisplays(firstrun: Bool = false) {
     for otherDisplay in self.getOtherDisplays() {
+      if otherDisplay.hasDisplayLinkBrightnessControl() {
+        if !otherDisplay.readPrefAsBool(key: .unavailableDDC, for: .brightness) {
+          let brightness = otherDisplay.displayLinkDisplay?.brightness ?? otherDisplay.readPrefAsFloat(for: .brightness)
+          otherDisplay.savePref(brightness, for: .brightness)
+          otherDisplay.savePref(1, key: .SwBrightness)
+          otherDisplay.brightnessSyncSourceValue = brightness
+          otherDisplay.smoothBrightnessTransient = brightness
+          _ = DisplayManager.shared.destroyShade(displayID: DisplayManager.resolveEffectiveDisplayID(otherDisplay.identifier))
+        }
+        if otherDisplay.hasDisplayLinkContrastControl(), !otherDisplay.readPrefAsBool(key: .unavailableDDC, for: .contrast), let contrast = otherDisplay.displayLinkDisplay?.contrast {
+          otherDisplay.savePref(contrast, for: .contrast)
+          otherDisplay.savePref(DDC_MAX_DETECT_LIMIT, key: .maxDDC, for: .contrast)
+        }
+        continue
+      }
       for command in [Command.audioSpeakerVolume, Command.contrast] where !otherDisplay.readPrefAsBool(key: .unavailableDDC, for: command) && !otherDisplay.isSw() {
         otherDisplay.setupCurrentAndMaxValues(command: command, firstrun: firstrun)
       }
@@ -379,6 +432,14 @@ class DisplayManager {
 
   func restoreSwBrightnessForAllDisplays(async: Bool = false) {
     for otherDisplay in self.getOtherDisplays() {
+      if otherDisplay.hasDisplayLinkBrightnessControl() {
+        _ = otherDisplay.setSwBrightness(1, smooth: async)
+        _ = DisplayManager.shared.destroyShade(displayID: DisplayManager.resolveEffectiveDisplayID(otherDisplay.identifier))
+        if let slider = otherDisplay.sliderHandler[.brightness] {
+          slider.setValue(otherDisplay.readPrefAsFloat(for: .brightness), displayID: otherDisplay.identifier)
+        }
+        continue
+      }
       if (otherDisplay.readPrefAsFloat(for: .brightness) == 0 && !prefs.bool(forKey: PrefKey.disableCombinedBrightness.rawValue)) || (otherDisplay.readPrefAsFloat(for: .brightness) < otherDisplay.combinedBrightnessSwitchingValue() && !prefs.bool(forKey: PrefKey.separateCombinedScale.rawValue) && !prefs.bool(forKey: PrefKey.disableCombinedBrightness.rawValue)) || otherDisplay.isSw() {
         let savedPrefValue = otherDisplay.readPrefAsFloat(key: .SwBrightness)
         if otherDisplay.getSwBrightness() != savedPrefValue {

@@ -185,7 +185,7 @@ class MenuHandler: NSMenu, NSMenuDelegate {
       addedSliderHandlers.append(self.setupMenuSliderHandler(command: .audioSpeakerVolume, display: display, title: title))
     }
     display.sliderHandler[.contrast] = nil
-    if let otherDisplay = display as? OtherDisplay, !otherDisplay.isSw(), !display.readPrefAsBool(key: .unavailableDDC, for: .contrast), prefs.bool(forKey: PrefKey.showContrast.rawValue) {
+    if let otherDisplay = display as? OtherDisplay, (!otherDisplay.isSw() || otherDisplay.hasDisplayLinkContrastControl()), !display.readPrefAsBool(key: .unavailableDDC, for: .contrast), prefs.bool(forKey: PrefKey.showContrast.rawValue) {
       let title = NSLocalizedString("Contrast", comment: "Shown in menu")
       addedSliderHandlers.append(self.setupMenuSliderHandler(command: .contrast, display: display, title: title))
     }

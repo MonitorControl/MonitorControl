@@ -87,7 +87,12 @@ class DisplaysPrefsViewController: NSViewController, SettingsPane, NSTableViewDa
     var displayImage = "display.trianglebadge.exclamationmark"
     var controlMethod = NSLocalizedString("No Control", comment: "Shown in the Display Settings") + "  ⚠️"
     var controlStatus = NSLocalizedString("This display has an unspecified control status.", comment: "Shown in the Display Settings")
-    if display.isVirtual, !display.isDummy {
+    if let otherDisplay = display as? OtherDisplay, otherDisplay.hasDisplayLinkBrightnessControl(), !display.isDummy {
+      displayType = NSLocalizedString("Virtual Display", comment: "Shown in the Display Settings")
+      displayImage = "tv.and.mediabox"
+      controlMethod = NSLocalizedString("Hardware (DisplayLink)", comment: "Shown in the Display Settings")
+      controlStatus = NSLocalizedString("This display supports native DisplayLink brightness and contrast control.", comment: "Shown in the Display Settings")
+    } else if display.isVirtual, !display.isDummy {
       displayType = NSLocalizedString("Virtual Display", comment: "Shown in the Display Settings")
       displayImage = "tv.and.mediabox"
       controlMethod = NSLocalizedString("Software (shade)", comment: "Shown in the Display Settings") + "  ⚠️"

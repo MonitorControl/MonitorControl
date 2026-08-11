@@ -8,6 +8,7 @@ class OtherDisplay: Display {
   var ddc: IntelDDC?
   var arm64ddc: Bool = false
   var arm64avService: IOAVService?
+  var displayLinkDisplay: DisplayLinkDisplay?
   var isDiscouraged: Bool = false
   let writeDDCQueue = DispatchQueue(label: "Local write DDC queue")
   var writeDDCNextValue: [Command: UInt16] = [:]
@@ -200,14 +201,20 @@ class OtherDisplay: Display {
   }
 
   func stepContrast(isUp: Bool, isSmallIncrement: Bool) {
-    guard !self.readPrefAsBool(key: .unavailableDDC, for: .contrast), !self.isSw() else {
+    guard !self.readPrefAsBool(key: .unavailableDDC, for: .contrast), !self.isSw() || self.hasDisplayLinkContrastControl() else {
       return
     }
     let currentValue = self.readPrefAsFloat(for: .contrast)
     let contrastOSDValue = self.calcNewValue(currentValue: currentValue, isUp: isUp, isSmallIncrement: isSmallIncrement)
     let isAlreadySet = contrastOSDValue == self.readPrefAsFloat(for: .contrast)
     if !isAlreadySet {
-      self.writeDDCValues(command: .contrast, value: self.convValueToDDC(for: .contrast, from: contrastOSDValue))
+      if self.hasDisplayLinkContrastControl() {
+        if !self.setDisplayLinkContrast(contrastOSDValue) {
+          return
+        }
+      } else {
+        self.writeDDCValues(command: .contrast, value: self.convValueToDDC(for: .contrast, from: contrastOSDValue))
+      }
     }
     OSDUtils.showOsd(displayID: self.identifier, command: .contrast, value: contrastOSDValue, roundChiclet: !isSmallIncrement)
     if !isAlreadySet {
@@ -328,11 +335,34 @@ class OtherDisplay: Display {
 
   override func setBrightness(_ to: Float = -1, slow: Bool = false) -> Bool {
     self.checkGammaInterference()
+    if self.hasDisplayLinkBrightnessControl() {
+      let value = to == -1 ? self.readPrefAsFloat(for: .brightness) : to
+      return self.setDirectBrightness(value)
+    }
     return super.setBrightness(to, slow: slow)
   }
 
   override func setDirectBrightness(_ to: Float, transient: Bool = false) -> Bool {
     let value = max(min(to, 1), 0)
+    if self.hasDisplayLinkBrightnessControl() {
+      if DisplayLinkControl.shared.setBrightness(for: self.identifier, value: value) {
+        if self.readPrefAsFloat(key: .SwBrightness) != 1 {
+          _ = self.setSwBrightness(1)
+        } else {
+          self.savePref(1, key: .SwBrightness)
+        }
+        _ = DisplayManager.shared.destroyShade(displayID: DisplayManager.resolveEffectiveDisplayID(self.identifier))
+        if !transient {
+          self.savePref(value, for: .brightness)
+          self.brightnessSyncSourceValue = value
+          self.smoothBrightnessTransient = value
+        }
+        return true
+      }
+      os_log("DisplayLink brightness write failed for display %{public}@. Falling back to software brightness.", type: .info, String(self.identifier))
+      _ = super.setDirectBrightness(to, transient: transient)
+      return true
+    }
     if !self.isSw() {
       if !prefs.bool(forKey: PrefKey.disableCombinedBrightness.rawValue) {
         var brightnessValue: Float = 0
@@ -362,7 +392,58 @@ class OtherDisplay: Display {
   }
 
   override func getBrightness() -> Float {
-    self.prefExists(for: .brightness) ? self.readPrefAsFloat(for: .brightness) : 1
+    if let displayLinkDisplay = self.displayLinkDisplay, !self.prefExists(for: .brightness) {
+      return displayLinkDisplay.brightness
+    }
+    return self.prefExists(for: .brightness) ? self.readPrefAsFloat(for: .brightness) : 1
+  }
+
+  func bindDisplayLinkDisplay(_ display: DisplayLinkDisplay) {
+    self.applyDisplayLinkDisplay(display, updateSliders: false)
+  }
+
+  func applyDisplayLinkDisplay(_ display: DisplayLinkDisplay, updateSliders: Bool = true) {
+    self.displayLinkDisplay = display
+    guard display.isEnabled else {
+      return
+    }
+    self.savePref(display.brightness, for: .brightness)
+    self.savePref(1, key: .SwBrightness)
+    self.brightnessSyncSourceValue = display.brightness
+    self.smoothBrightnessTransient = display.brightness
+    if updateSliders, let slider = self.sliderHandler[.brightness] {
+      slider.setValue(display.brightness, displayID: self.identifier)
+    }
+    if let contrast = display.contrast {
+      self.savePref(contrast, for: .contrast)
+      self.savePref(DDC_MAX_DETECT_LIMIT, key: .maxDDC, for: .contrast)
+      if updateSliders, let slider = self.sliderHandler[.contrast] {
+        slider.setValue(contrast, displayID: self.identifier)
+      }
+    }
+    self.savePref(DDC_MAX_DETECT_LIMIT, key: .maxDDC, for: .brightness)
+    _ = DisplayManager.shared.destroyShade(displayID: DisplayManager.resolveEffectiveDisplayID(self.identifier))
+  }
+
+  func hasDisplayLinkBrightnessControl() -> Bool {
+    self.displayLinkDisplay?.isEnabled ?? false
+  }
+
+  func hasDisplayLinkContrastControl() -> Bool {
+    (self.displayLinkDisplay?.isEnabled ?? false) && self.displayLinkDisplay?.contrast != nil
+  }
+
+  @discardableResult
+  func setDisplayLinkContrast(_ value: Float) -> Bool {
+    guard self.hasDisplayLinkContrastControl() else {
+      return false
+    }
+    if DisplayLinkControl.shared.setContrast(for: self.identifier, value: value) {
+      self.savePref(value, for: .contrast)
+      return true
+    }
+    os_log("DisplayLink contrast write failed for display %{public}@.", type: .info, String(self.identifier))
+    return false
   }
 
   func getRemapControlCodes(command: Command) -> [UInt8] {
