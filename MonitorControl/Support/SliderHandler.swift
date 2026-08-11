@@ -3,7 +3,7 @@
 import Cocoa
 import os.log
 
-class SliderHandler {
+class SliderHandler: NSObject, NSTextFieldDelegate {
   var slider: MCSlider?
   var view: NSView?
   var percentageBox: NSTextField?
@@ -209,9 +209,17 @@ class SliderHandler {
     }
   }
 
+  class PercentageTextField: NSTextField {
+    override func mouseDown(with event: NSEvent) {
+      self.isEditable = true
+      self.window?.makeFirstResponder(self)
+    }
+  }
+
   init(display: Display?, command: Command, title: String = "", position _: Int = 0) {
     self.command = command
     self.title = title
+    super.init()
     let slider = SliderHandler.MCSlider(value: 0, minValue: 0, maxValue: 1, target: self, action: #selector(SliderHandler.valueChanged))
     let showPercent = prefs.bool(forKey: PrefKey.enableSliderPercent.rawValue)
     slider.isEnabled = true
@@ -238,7 +246,7 @@ class SliderHandler {
       view.addSubview(icon)
       self.icon = icon
       if showPercent {
-        let percentageBox = NSTextField(frame: NSRect(x: 15 + slider.frame.size.width - 2, y: 17, width: 40, height: 12))
+        let percentageBox = PercentageTextField(frame: NSRect(x: 15 + slider.frame.size.width - 2, y: 17, width: 40, height: 12))
         self.setupPercentageBox(percentageBox)
         self.percentageBox = percentageBox
         view.addSubview(percentageBox)
@@ -250,7 +258,7 @@ class SliderHandler {
       let view = NSView(frame: NSRect(x: 0, y: 0, width: slider.frame.width + 30 + (showPercent ? 38 : 0), height: slider.frame.height + 10))
       view.addSubview(slider)
       if showPercent {
-        let percentageBox = NSTextField(frame: NSRect(x: 15 + slider.frame.size.width - 2, y: 18, width: 40, height: 12))
+        let percentageBox = PercentageTextField(frame: NSRect(x: 15 + slider.frame.size.width - 2, y: 18, width: 40, height: 12))
         self.setupPercentageBox(percentageBox)
         self.percentageBox = percentageBox
         view.addSubview(percentageBox)
@@ -282,6 +290,7 @@ class SliderHandler {
     percentageBox.drawsBackground = false
     percentageBox.alignment = .right
     percentageBox.alphaValue = 0.7
+    percentageBox.delegate = self
   }
 
   func valueChangedOtherDisplay(otherDisplay: OtherDisplay, value: Float) {
@@ -321,7 +330,9 @@ class SliderHandler {
       }
     }
     if self.percentageBox == self.percentageBox {
-      self.percentageBox?.stringValue = "" + String(Int(value * 100)) + "%"
+      if self.percentageBox?.currentEditor() == nil {
+        self.percentageBox?.stringValue = "" + String(Int(value * 100)) + "%"
+      }
     }
     for display in self.displays {
       slider.setHighlightItem(display.identifier, value: value)
@@ -379,8 +390,64 @@ class SliderHandler {
         slider.setDisplayHighlightItems(false)
       }
       if self.percentageBox == self.percentageBox {
-        self.percentageBox?.stringValue = "\(String(format: "%.0f%%", Double(value) * 100))"
+        if self.percentageBox?.currentEditor() == nil {
+          self.percentageBox?.stringValue = "\(String(format: "%.0f%%", Double(value) * 100))"
+        }
       }
     }
+  }
+
+  // MARK: - NSTextFieldDelegate
+
+  func controlTextDidBeginEditing(_: Notification) {
+    self.percentageBox?.isBezeled = true
+    self.percentageBox?.bezelStyle = .roundedBezel
+    self.percentageBox?.drawsBackground = true
+    self.percentageBox?.alphaValue = 1.0
+  }
+
+  func controlTextDidEndEditing(_ obj: Notification) {
+    self.percentageBox?.isEditable = false
+    self.percentageBox?.isBezeled = false
+    self.percentageBox?.drawsBackground = false
+    self.percentageBox?.alphaValue = 0.7
+    guard let textField = obj.object as? NSTextField else { return }
+    
+    let stringValue = textField.stringValue.replacingOccurrences(of: "%", with: "").trimmingCharacters(in: .whitespaces)
+    if let value = Float(stringValue), let slider = self.slider {
+      let normalizedValue = max(0, min(100, value))
+      slider.floatValue = normalizedValue / 100
+      self.valueChanged(slider: slider)
+      textField.stringValue = "\(Int(normalizedValue))%"
+    } else if let slider = self.slider {
+      self.setValue(slider.floatValue)
+    }
+  }
+
+  func control(_ control: NSControl, textView: NSTextView, doCommandBy commandSelector: Selector) -> Bool {
+    let isUp = commandSelector == #selector(NSResponder.moveUp(_:)) || commandSelector == #selector(NSResponder.moveUpAndModifySelection(_:))
+    let isDown = commandSelector == #selector(NSResponder.moveDown(_:)) || commandSelector == #selector(NSResponder.moveDownAndModifySelection(_:))
+    
+    if isUp || isDown {
+      let stringValue = textView.string.replacingOccurrences(of: "%", with: "").trimmingCharacters(in: .whitespaces)
+      var currentValue = Float(stringValue) ?? (self.slider?.floatValue ?? 0) * 100
+      let step: Float = NSEvent.modifierFlags.contains(.shift) ? 10 : 1
+      
+      currentValue += isUp ? step : -step
+      
+      let normalizedValue = max(0, min(100, currentValue))
+      textView.string = "\(Int(normalizedValue))%"
+
+      if let slider = self.slider {
+        slider.floatValue = normalizedValue / 100
+        self.valueChanged(slider: slider)
+      }
+      return true
+    } else if commandSelector == #selector(NSResponder.cancelOperation(_:)) || commandSelector == #selector(NSResponder.insertNewline(_:)) {
+      self.percentageBox?.window?.makeFirstResponder(nil)
+      return true
+    }
+
+    return false
   }
 }
