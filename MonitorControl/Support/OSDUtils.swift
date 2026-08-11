@@ -39,6 +39,10 @@ class OSDUtils: NSObject {
     manager.showImage(osdImage.rawValue, onDisplayID: displayID, priority: 0x1F4, msecUntilFade: 1000, filledChiclets: UInt32(filledChiclets), totalChiclets: UInt32(totalChiclets), locked: lock)
   }
 
+  static func showOsdProgress(displayID: CGDirectDisplayID, command: Command, value: Float, maxValue: Float = 1, lock: Bool = false) {
+    self.showOsd(displayID: displayID, command: command, value: value * 64, maxValue: maxValue * 64, roundChiclet: false, lock: lock)
+  }
+
   static func showOsdVolumeDisabled(displayID: CGDirectDisplayID) {
     guard let manager = OSDManager.sharedManager() as? OSDManager else {
       return

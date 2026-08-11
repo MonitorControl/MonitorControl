@@ -64,6 +64,7 @@ class MainPrefsViewController: NSViewController, SettingsPane {
     // Preload Display settings to some extent to properly set up size in orther that animation won't fail
     menuslidersPrefsVc?.view.layoutSubtreeIfNeeded()
     keyboardPrefsVc?.view.layoutSubtreeIfNeeded()
+    mousePrefsVc.view.layoutSubtreeIfNeeded()
     displaysPrefsVc?.view.layoutSubtreeIfNeeded()
     aboutPrefsVc?.view.layoutSubtreeIfNeeded()
     self.updateGridLayout()
@@ -152,6 +153,7 @@ class MainPrefsViewController: NSViewController, SettingsPane {
       self.populateSettings()
       menuslidersPrefsVc?.populateSettings()
       keyboardPrefsVc?.populateSettings()
+      mousePrefsVc.populateSettings()
       displaysPrefsVc?.populateSettings()
     }
   }
