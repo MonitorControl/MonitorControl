@@ -86,6 +86,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     return true
   }
 
+  func application(_: NSApplication, open urls: [URL]) {
+    URLSchemeHandler.handle(urls)
+  }
+
   func applicationWillTerminate(_: Notification) {
     os_log("Goodbye!", type: .info)
     DisplayManager.shared.resetSwBrightnessForAllDisplays(noPrefSave: true)

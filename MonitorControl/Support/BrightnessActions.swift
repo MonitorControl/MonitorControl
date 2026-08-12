@@ -20,9 +20,11 @@ enum BrightnessActions {
   ///     clamped.
   ///   - allDisplays: Set this to true to change every display. If it is false,
   ///     the app uses the display selection from the settings.
+  ///   - minimum: The lowest level to allow. Outside callers use this to keep a
+  ///     screen from going fully black.
   /// - Returns: The number of displays that changed.
-  @discardableResult static func setLevel(_ value: Float, allDisplays: Bool = false) -> Int {
-    let target = max(0, min(1, value))
+  @discardableResult static func setLevel(_ value: Float, allDisplays: Bool = false, minimum: Float = 0) -> Int {
+    let target = max(minimum, min(1, value))
     var changed = 0
     for display in self.targetDisplays(allDisplays: allDisplays) where self.apply(target, to: display) {
       changed += 1
@@ -39,11 +41,12 @@ enum BrightnessActions {
   /// - Parameters:
   ///   - delta: The amount to add, from -1 to 1.
   ///   - allDisplays: Set this to true to change every display.
+  ///   - minimum: The lowest level to allow.
   /// - Returns: The number of displays that changed.
-  @discardableResult static func changeLevel(by delta: Float, allDisplays: Bool = false) -> Int {
+  @discardableResult static func changeLevel(by delta: Float, allDisplays: Bool = false, minimum: Float = 0) -> Int {
     var changed = 0
     for display in self.targetDisplays(allDisplays: allDisplays) {
-      let target = max(0, min(1, display.getBrightness() + delta))
+      let target = max(minimum, min(1, display.getBrightness() + delta))
       if self.apply(target, to: display) {
         changed += 1
       }

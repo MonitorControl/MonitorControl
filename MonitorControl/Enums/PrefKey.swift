@@ -87,6 +87,9 @@ enum PrefKey: String {
   // Sliders for multiple displays
   case multiSliders
 
+  // Ignore the monitorcontrol:// URL scheme
+  case disableExternalControl
+
   /* -- Display specific settings */
 
   // Enable mute DDC for display
