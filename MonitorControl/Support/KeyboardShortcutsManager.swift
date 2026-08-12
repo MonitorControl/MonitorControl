@@ -7,6 +7,9 @@ import os.log
 class KeyboardShortcutsManager {
   private let brightnessShortcuts: [KeyboardShortcuts.Name] = [.brightnessUp, .brightnessDown, .contrastUp, .contrastDown]
   private let volumeShortcuts: [KeyboardShortcuts.Name] = [.volumeUp, .volumeDown, .mute]
+  // The preset shortcuts stay on whichever way the brightness keys are set.
+  // Most users keep the media keys, and a preset must still work for them.
+  private let presetShortcuts: [KeyboardShortcuts.Name] = BrightnessPreset.allCases.map(\.shortcutName)
 
   var initialKeyRepeat = 0.21
   var keyRepeat = 0.028
@@ -39,6 +42,13 @@ class KeyboardShortcutsManager {
     KeyboardShortcuts.onKeyDown(for: .mute) { [self] in
       self.mute()
     }
+    // A preset sets one level, so it uses no key repeat. This follows the mute
+    // shortcut, not the brightness ones.
+    for preset in BrightnessPreset.allCases {
+      KeyboardShortcuts.onKeyDown(for: preset.shortcutName) {
+        preset.apply()
+      }
+    }
     KeyboardShortcuts.onKeyUp(for: .brightnessUp) { [self] in
       self.disengage()
     }
@@ -63,7 +73,7 @@ class KeyboardShortcutsManager {
   func updateRegistrations() {
     let brightnessEnabled = [KeyboardBrightness.custom.rawValue, KeyboardBrightness.both.rawValue].contains(prefs.integer(forKey: PrefKey.keyboardBrightness.rawValue))
     let volumeEnabled = [KeyboardVolume.custom.rawValue, KeyboardVolume.both.rawValue].contains(prefs.integer(forKey: PrefKey.keyboardVolume.rawValue))
-    let enabledShortcuts = (brightnessEnabled ? self.brightnessShortcuts : []) + (volumeEnabled ? self.volumeShortcuts : [])
+    let enabledShortcuts = (brightnessEnabled ? self.brightnessShortcuts : []) + (volumeEnabled ? self.volumeShortcuts : []) + self.presetShortcuts
     let disabledShortcuts = (brightnessEnabled ? [] : self.brightnessShortcuts) + (volumeEnabled ? [] : self.volumeShortcuts)
 
     self.disengage()
@@ -98,6 +108,9 @@ class KeyboardShortcutsManager {
     }
     if self.volumeShortcuts.contains(shortcut) {
       return [KeyboardVolume.custom.rawValue, KeyboardVolume.both.rawValue].contains(prefs.integer(forKey: PrefKey.keyboardVolume.rawValue))
+    }
+    if self.presetShortcuts.contains(shortcut) {
+      return true
     }
     return false
   }

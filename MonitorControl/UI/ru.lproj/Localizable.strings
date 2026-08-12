@@ -1,3 +1,6 @@
+/* Shown in the keyboard prefs window */
+"A preset sets every display to a fixed brightness. Presets work whichever way the brightness keys above are set." = "A preset sets every display to a fixed brightness. Presets work whichever way the brightness keys above are set.";
+
 /* Shown in the main prefs window */
 "About" = "О программе";
 
@@ -15,6 +18,9 @@
 
 /* Shown in menu */
 "Brightness" = "Яркость";
+
+/* Shown in the keyboard prefs window */
+"Brightness presets:" = "Brightness presets:";
 
 /* Build */
 "Build" = "Релиз";
@@ -90,6 +96,9 @@
 
 /* Shown in menu */
 "Quit" = "Выйти";
+
+/* Shown in record shortcut box */
+"Record Shortcut" = "Record Shortcut";
 
 /* Shown in the alert dialog */
 "Reset Settings?" = "Сбросить настройки?";

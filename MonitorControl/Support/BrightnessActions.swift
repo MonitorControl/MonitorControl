@@ -89,3 +89,52 @@ enum BrightnessActions {
     return true
   }
 }
+
+/// A fixed brightness level the user can put on a keyboard shortcut.
+///
+/// A preset always changes every display. A preset is a scene, so a level that
+/// reached only the display under the pointer would be of little use.
+enum BrightnessPreset: Int, CaseIterable {
+  case first
+  case second
+  case third
+  case fourth
+
+  /// The level to use while the user has not set one. Without this a new
+  /// install would put every preset at 0 percent, which is a black screen.
+  var defaultPercentage: Int {
+    switch self {
+    case .first: return 10
+    case .second: return 50
+    case .third: return 75
+    case .fourth: return 100
+    }
+  }
+
+  var prefKey: PrefKey {
+    switch self {
+    case .first: return .brightnessPreset1
+    case .second: return .brightnessPreset2
+    case .third: return .brightnessPreset3
+    case .fourth: return .brightnessPreset4
+    }
+  }
+
+  /// The level this preset sets, from 0 to 100.
+  var percentage: Int {
+    get {
+      guard prefs.object(forKey: self.prefKey.rawValue) != nil else {
+        return self.defaultPercentage
+      }
+      return max(0, min(100, prefs.integer(forKey: self.prefKey.rawValue)))
+    }
+    nonmutating set {
+      prefs.set(max(0, min(100, newValue)), forKey: self.prefKey.rawValue)
+    }
+  }
+
+  /// Sets every display to the level of this preset.
+  func apply() {
+    BrightnessActions.setLevel(Float(self.percentage) / 100, allDisplays: true)
+  }
+}

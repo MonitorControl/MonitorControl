@@ -90,6 +90,18 @@ enum PrefKey: String {
   // Ignore the monitorcontrol:// URL scheme
   case disableExternalControl
 
+  // Brightness percentage for the first preset shortcut
+  case brightnessPreset1
+
+  // Brightness percentage for the second preset shortcut
+  case brightnessPreset2
+
+  // Brightness percentage for the third preset shortcut
+  case brightnessPreset3
+
+  // Brightness percentage for the fourth preset shortcut
+  case brightnessPreset4
+
   /* -- Display specific settings */
 
   // Enable mute DDC for display
