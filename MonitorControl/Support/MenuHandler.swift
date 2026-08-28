@@ -5,6 +5,7 @@ import os.log
 
 class MenuHandler: NSMenu, NSMenuDelegate {
   var combinedSliderHandler: [Command: SliderHandler] = [:]
+  var presetsHandlers: [BrightnessPresetsHandler] = [] // Kept alive as long as the menu shows them
 
   var lastMenuRelevantDisplayId: CGDirectDisplayID = 0
 
@@ -17,6 +18,7 @@ class MenuHandler: NSMenu, NSMenuDelegate {
       self.removeItem(item)
     }
     self.combinedSliderHandler.removeAll()
+    self.presetsHandlers.removeAll()
   }
 
   func menuWillOpen(_: NSMenu) {
@@ -101,7 +103,31 @@ class MenuHandler: NSMenu, NSMenuDelegate {
     }
   }
 
-  func addDisplayMenuBlock(addedSliderHandlers: [SliderHandler], blockName: String, monitorSubMenu: NSMenu, numOfDisplays: Int, asSubMenu: Bool) {
+  // Presets belong right under the brightness slider, the views are stacked bottom to top.
+  func stackedViews(addedSliderHandlers: [SliderHandler], presetsView: NSView?) -> [NSView] {
+    var views: [NSView] = []
+    for addedSliderHandler in addedSliderHandlers {
+      if addedSliderHandler.command == .brightness, let presetsView = presetsView {
+        views.append(presetsView)
+      }
+      if let view = addedSliderHandler.view {
+        views.append(view)
+      }
+    }
+    return views
+  }
+
+  func makePresetsView(for sliderHandler: SliderHandler) -> NSView? {
+    guard let width = sliderHandler.view?.frame.width, !BrightnessPresetsHandler.presets().isEmpty else {
+      return nil
+    }
+    let presetsHandler = BrightnessPresetsHandler(sliderHandler: sliderHandler, width: width)
+    self.presetsHandlers.append(presetsHandler)
+    return presetsHandler.view
+  }
+
+  func addDisplayMenuBlock(addedSliderHandlers: [SliderHandler], blockName: String, monitorSubMenu: NSMenu, numOfDisplays: Int, asSubMenu: Bool, presetsView: NSView? = nil) {
+    let stackedViews = self.stackedViews(addedSliderHandlers: addedSliderHandlers, presetsView: presetsView)
     if numOfDisplays > 1, prefs.integer(forKey: PrefKey.multiSliders.rawValue) != MultiSliders.relevant.rawValue, !DEBUG_MACOS10, #available(macOS 11.0, *) {
       class BlockView: NSView {
         override func draw(_: NSRect) {
@@ -126,9 +152,9 @@ class MenuHandler: NSMenu, NSMenuDelegate {
       }
       var contentWidth: CGFloat = 0
       var contentHeight: CGFloat = 0
-      for addedSliderHandler in addedSliderHandlers {
-        contentWidth = max(addedSliderHandler.view!.frame.width, contentWidth)
-        contentHeight += addedSliderHandler.view!.frame.height
+      for stackedView in stackedViews {
+        contentWidth = max(stackedView.frame.width, contentWidth)
+        contentHeight += stackedView.frame.height
       }
       let margin = CGFloat(13)
       var blockNameView: NSTextField?
@@ -141,10 +167,10 @@ class MenuHandler: NSMenu, NSMenuDelegate {
       }
       let itemView = BlockView(frame: NSRect(x: 0, y: 0, width: contentWidth + margin * 2, height: contentHeight + margin * 2))
       var sliderPosition = CGFloat(margin * -1 + 1)
-      for addedSliderHandler in addedSliderHandlers {
-        addedSliderHandler.view!.setFrameOrigin(NSPoint(x: margin, y: margin + sliderPosition + 13))
-        itemView.addSubview(addedSliderHandler.view!)
-        sliderPosition += addedSliderHandler.view!.frame.height
+      for stackedView in stackedViews {
+        stackedView.setFrameOrigin(NSPoint(x: margin, y: margin + sliderPosition + 13))
+        itemView.addSubview(stackedView)
+        sliderPosition += stackedView.frame.height
       }
       if let blockNameView = blockNameView {
         blockNameView.setFrameOrigin(NSPoint(x: margin + 13, y: contentHeight - 8))
@@ -157,6 +183,11 @@ class MenuHandler: NSMenu, NSMenuDelegate {
       }
     } else {
       for addedSliderHandler in addedSliderHandlers {
+        if addedSliderHandler.command == .brightness, let presetsView = presetsView {
+          let presetsItem = NSMenuItem()
+          presetsItem.view = presetsView
+          monitorSubMenu.insertItem(presetsItem, at: 0)
+        }
         self.addSliderItem(monitorSubMenu: monitorSubMenu, sliderHandler: addedSliderHandler)
       }
     }
@@ -171,6 +202,11 @@ class MenuHandler: NSMenu, NSMenuDelegate {
       self.addSliderItem(monitorSubMenu: self, sliderHandler: sliderHandler)
     }
     if let sliderHandler = self.combinedSliderHandler[.brightness] {
+      if let presetsView = self.makePresetsView(for: sliderHandler) {
+        let presetsItem = NSMenuItem()
+        presetsItem.view = presetsView
+        self.insertItem(presetsItem, at: 0)
+      }
       self.addSliderItem(monitorSubMenu: self, sliderHandler: sliderHandler)
     }
   }
@@ -195,7 +231,11 @@ class MenuHandler: NSMenu, NSMenuDelegate {
       addedSliderHandlers.append(self.setupMenuSliderHandler(command: .brightness, display: display, title: title))
     }
     if prefs.integer(forKey: PrefKey.multiSliders.rawValue) != MultiSliders.combine.rawValue {
-      self.addDisplayMenuBlock(addedSliderHandlers: addedSliderHandlers, blockName: display.readPrefAsString(key: .friendlyName) != "" ? display.readPrefAsString(key: .friendlyName) : display.name, monitorSubMenu: monitorSubMenu, numOfDisplays: numOfDisplays, asSubMenu: asSubMenu)
+      var presetsView: NSView?
+      if let brightnessSliderHandler = addedSliderHandlers.first(where: { $0.command == .brightness }) {
+        presetsView = self.makePresetsView(for: brightnessSliderHandler)
+      }
+      self.addDisplayMenuBlock(addedSliderHandlers: addedSliderHandlers, blockName: display.readPrefAsString(key: .friendlyName) != "" ? display.readPrefAsString(key: .friendlyName) : display.name, monitorSubMenu: monitorSubMenu, numOfDisplays: numOfDisplays, asSubMenu: asSubMenu, presetsView: presetsView)
     }
     if addedSliderHandlers.count > 0, prefs.integer(forKey: PrefKey.menuIcon.rawValue) == MenuIcon.sliderOnly.rawValue {
       app.updateStatusItemVisibility(true)
@@ -236,6 +276,18 @@ class MenuHandler: NSMenu, NSMenuDelegate {
 
       let menuItemView = NSView(frame: NSRect(x: 0, y: 0, width: viewWidth, height: iconSize + 10))
 
+      let addPresetIcon = NSButton()
+      addPresetIcon.bezelStyle = .regularSquare
+      addPresetIcon.isBordered = false
+      addPresetIcon.setButtonType(.momentaryChange)
+      addPresetIcon.image = NSImage(systemSymbolName: "plus.circle", accessibilityDescription: NSLocalizedString("Remember the current brightness", comment: "Shown in menu"))
+      addPresetIcon.alternateImage = NSImage(systemSymbolName: "plus.circle.fill", accessibilityDescription: NSLocalizedString("Remember the current brightness", comment: "Shown in menu"))
+      addPresetIcon.toolTip = NSLocalizedString("Remember the current brightness", comment: "Shown in menu")
+      addPresetIcon.alphaValue = 0.3
+      addPresetIcon.frame = NSRect(x: 17 - compensateForBlock, y: menuItemView.frame.origin.y + 5, width: iconSize, height: iconSize)
+      addPresetIcon.imageScaling = .scaleProportionallyUpOrDown
+      addPresetIcon.action = #selector(app.addBrightnessPresetClicked)
+
       let settingsIcon = NSButton()
       settingsIcon.bezelStyle = .regularSquare
       settingsIcon.isBordered = false
@@ -273,6 +325,7 @@ class MenuHandler: NSMenu, NSMenuDelegate {
       quitIcon.imageScaling = .scaleProportionallyUpOrDown
       quitIcon.action = #selector(app.quitClicked)
 
+      menuItemView.addSubview(addPresetIcon)
       menuItemView.addSubview(settingsIcon)
       menuItemView.addSubview(updateIcon)
       menuItemView.addSubview(quitIcon)
@@ -283,6 +336,7 @@ class MenuHandler: NSMenu, NSMenuDelegate {
       if app.macOS10() {
         self.insertItem(NSMenuItem.separator(), at: self.items.count)
       }
+      self.insertItem(withTitle: NSLocalizedString("Remember the current brightness", comment: "Shown in menu"), action: #selector(app.addBrightnessPresetClicked), keyEquivalent: "", at: self.items.count)
       self.insertItem(withTitle: NSLocalizedString("Settings…", comment: "Shown in menu"), action: #selector(app.prefsClicked), keyEquivalent: ",", at: self.items.count)
       let updateItem = NSMenuItem(title: NSLocalizedString("Check for updates…", comment: "Shown in menu"), action: #selector(app.updaterController.checkForUpdates(_:)), keyEquivalent: "")
       updateItem.target = app.updaterController

@@ -323,6 +323,8 @@
                                 <rows>
                                     <gridRow height="20" bottomPadding="-6" id="jyr-gk-BEN"/>
                                     <gridRow height="20" bottomPadding="-13" id="ZS3-Gy-pfA"/>
+                                    <gridRow bottomPadding="-13" id="Scr-Mb-rw1"/>
+                                    <gridRow bottomPadding="-10" id="Scr-Mb-rw2"/>
                                     <gridRow bottomPadding="-10" id="HAl-L8-LPI"/>
                                     <gridRow bottomPadding="-10" id="AKq-Nb-ugC"/>
                                     <gridRow bottomPadding="-10" id="Cor-61-8R5"/>
@@ -406,6 +408,39 @@
                                                 <action selector="menuItemStyle:" target="tLm-u5-aZ2" id="XUL-Cr-YwF"/>
                                             </connections>
                                         </popUpButton>
+                                    </gridCell>
+                                    <gridCell row="Scr-Mb-rw1" column="FRJ-Rb-RRh" xPlacement="trailing" yPlacement="center" id="Scr-Mb-cl1">
+                                        <textField key="contentView" focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Scr-Mb-tf1">
+                                            <rect key="frame" x="99" y="435" width="113" height="16"/>
+                                            <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="Menu bar scrolling:" id="Scr-Mb-tc1">
+                                                <font key="font" usesAppearanceFont="YES"/>
+                                                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            </textFieldCell>
+                                        </textField>
+                                    </gridCell>
+                                    <gridCell row="Scr-Mb-rw1" column="V6M-Jv-Agj" id="Scr-Mb-cl2">
+                                        <button key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Scr-Mb-bt1">
+                                            <rect key="frame" x="218" y="434" width="472" height="18"/>
+                                            <buttonCell key="cell" type="check" title="Change brightness by scrolling over the menu bar icon" bezelStyle="regularSquare" imagePosition="left" inset="2" id="Scr-Mb-bc1">
+                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="enableMenuBarScrollClicked:" target="tLm-u5-aZ2" id="Scr-Mb-ac1"/>
+                                            </connections>
+                                        </button>
+                                    </gridCell>
+                                    <gridCell row="Scr-Mb-rw2" column="FRJ-Rb-RRh" id="Scr-Mb-cl3"/>
+                                    <gridCell row="Scr-Mb-rw2" column="V6M-Jv-Agj" id="Scr-Mb-cl4">
+                                        <textField key="contentView" focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Scr-Mb-tf2">
+                                            <rect key="frame" x="218" y="414" width="474" height="14"/>
+                                            <textFieldCell key="cell" controlSize="small" title="Scroll up or down with the mouse wheel over the menu bar icon to change brightness." id="Scr-Mb-tc2">
+                                                <font key="font" metaFont="smallSystem"/>
+                                                <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            </textFieldCell>
+                                        </textField>
                                     </gridCell>
                                     <gridCell row="HAl-L8-LPI" column="FRJ-Rb-RRh" id="ulS-1p-gHw"/>
                                     <gridCell row="HAl-L8-LPI" column="V6M-Jv-Agj" xPlacement="leading" id="tw2-81-sd0">
@@ -680,6 +715,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="enableMenuBarScroll" destination="Scr-Mb-bt1" id="Scr-Mb-ou1"/>
                         <outlet property="enableSliderPercent" destination="fkJ-cg-1cE" id="nba-Qb-Hor"/>
                         <outlet property="enableSliderSnap" destination="lao-JI-LJH" id="HGa-Fb-E7e"/>
                         <outlet property="iconShow" destination="TFy-Wt-ZJK" id="M96-eG-p5Q"/>
