@@ -18,6 +18,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   }()
   var mediaKeyTap = MediaKeyTapManager()
   var keyboardShortcuts = KeyboardShortcutsManager()
+  var menuBarScroll = MenuBarScrollManager()
   let coreAudio = SimplyCoreAudio()
   var accessibilityObserver: NSObjectProtocol!
   var statusItemObserver: NSObjectProtocol!
@@ -76,6 +77,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
   }
 
+  @objc func addBrightnessPresetClicked(_: AnyObject) {
+    BrightnessPresetsHandler.addCurrentBrightnessPreset()
+  }
+
   @objc func prefsClicked(_: AnyObject) {
     os_log("Settings clicked", type: .info)
     self.settingsWindowController.show()
@@ -112,6 +117,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       // Only settings that are not false, 0 or "" by default are set here. Assumes pre-wiped database.
       prefs.set(true, forKey: PrefKey.appAlreadyLaunched.rawValue)
       prefs.set(true, forKey: PrefKey.SUEnableAutomaticChecks.rawValue)
+      prefs.set(true, forKey: PrefKey.enableSliderPercent.rawValue)
     }
   }
 
@@ -158,6 +164,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   func updateMenusAndKeys() {
     menu.updateMenus()
     self.keyboardShortcuts.updateRegistrations()
+    self.menuBarScroll.updateRegistration()
     self.updateMediaKeyTap()
   }
 

@@ -19,6 +19,7 @@ class MenuslidersPrefsViewController: NSViewController, SettingsPane {
 
   @IBOutlet var iconShow: NSPopUpButton!
   @IBOutlet var menuItemStyle: NSPopUpButton!
+  @IBOutlet var enableMenuBarScroll: NSButton!
   @IBOutlet var quitApplication: NSButton!
 
   @IBOutlet var showBrightnessSlider: NSButton!
@@ -86,6 +87,7 @@ class MenuslidersPrefsViewController: NSViewController, SettingsPane {
   func populateSettings() {
     self.iconShow.selectItem(withTag: prefs.integer(forKey: PrefKey.menuIcon.rawValue))
     self.menuItemStyle.selectItem(withTag: prefs.integer(forKey: PrefKey.menuItemStyle.rawValue))
+    self.enableMenuBarScroll.state = !prefs.bool(forKey: PrefKey.disableMenuBarScroll.rawValue) ? .on : .off
     self.showBrightnessSlider.state = !prefs.bool(forKey: PrefKey.hideBrightness.rawValue) ? .on : .off
     if !prefs.bool(forKey: PrefKey.hideBrightness.rawValue) {
       self.showAppleFromMenu.isEnabled = true
@@ -115,6 +117,17 @@ class MenuslidersPrefsViewController: NSViewController, SettingsPane {
     prefs.set(sender.selectedTag(), forKey: PrefKey.menuItemStyle.rawValue)
     app.updateMenusAndKeys()
     self.updateGridLayout()
+  }
+
+  @IBAction func enableMenuBarScrollClicked(_ sender: NSButton) {
+    switch sender.state {
+    case .on:
+      prefs.set(false, forKey: PrefKey.disableMenuBarScroll.rawValue)
+    case .off:
+      prefs.set(true, forKey: PrefKey.disableMenuBarScroll.rawValue)
+    default: break
+    }
+    app.menuBarScroll.updateRegistration()
   }
 
   @IBAction func quitApplicationClicked(_: NSButton) {

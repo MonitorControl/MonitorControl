@@ -21,6 +21,12 @@ enum PrefKey: String {
   // Menu item style
   case menuItemStyle
 
+  // Do not change brightness when scrolling over the menu bar icon
+  case disableMenuBarScroll
+
+  // Remembered brightness values shown as chips in the menu
+  case brightnessPresets
+
   // Keys listened for
   case keyboardBrightness
 
