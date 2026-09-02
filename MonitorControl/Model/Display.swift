@@ -75,7 +75,11 @@ class Display: Equatable {
     os_log("Display init with prefsIdentifier %{public}@", type: .info, self.prefsId)
     self.swUpdateDefaultGammaTable()
     self.smoothBrightnessTransient = self.getBrightness()
-    if self.isVirtual || self.readPrefAsBool(key: PrefKey.avoidGamma), !self.isDummy {
+    let hasDisplayLinkBrightnessControl = self.isVirtual && DisplayLinkControl.shared.display(for: self.identifier)?.isEnabled == true
+    if hasDisplayLinkBrightnessControl {
+      os_log("Skipping software shade for DisplayLink display %{public}@", type: .info, String(self.identifier))
+      _ = DisplayManager.shared.destroyShade(displayID: self.identifier)
+    } else if self.isVirtual || self.readPrefAsBool(key: PrefKey.avoidGamma), !self.isDummy {
       os_log("Creating or updating shade for display %{public}@", type: .info, String(self.identifier))
       _ = DisplayManager.shared.updateShade(displayID: self.identifier)
     } else {
@@ -224,36 +228,35 @@ class Display: Equatable {
     var newValue = brightnessValue
     currentValue = self.swBrightnessTransform(value: currentValue)
     newValue = self.swBrightnessTransform(value: newValue)
+    if self.isVirtual || self.readPrefAsBool(key: .avoidGamma) {
+      self.swBrightnessSemaphore.signal()
+      let displayID = DisplayManager.resolveEffectiveDisplayID(self.identifier)
+      if smooth {
+        let duration = max(0.02, TimeInterval(abs(currentValue - newValue)) * 0.2)
+        return DisplayManager.shared.animateShadeAlpha(value: 1 - newValue, duration: duration, displayID: displayID)
+      }
+      return DisplayManager.shared.setShadeAlpha(value: 1 - newValue, displayID: displayID)
+    }
     if smooth {
       DispatchQueue.global(qos: .userInteractive).async {
         for transientValue in stride(from: currentValue, to: newValue, by: 0.005 * (currentValue > newValue ? -1 : 1)) {
           guard app.reconfigureID == 0 else {
-            self.swBrightnessSemaphore.signal()
             return
           }
-          if self.isVirtual || self.readPrefAsBool(key: .avoidGamma) {
-            _ = DisplayManager.shared.setShadeAlpha(value: 1 - transientValue, displayID: DisplayManager.resolveEffectiveDisplayID(self.identifier))
-          } else {
-            let gammaTableRed = self.defaultGammaTableRed.map { $0 * transientValue }
-            let gammaTableGreen = self.defaultGammaTableGreen.map { $0 * transientValue }
-            let gammaTableBlue = self.defaultGammaTableBlue.map { $0 * transientValue }
-            CGSetDisplayTransferByTable(self.identifier, self.defaultGammaTableSampleCount, gammaTableRed, gammaTableGreen, gammaTableBlue)
-          }
+          let gammaTableRed = self.defaultGammaTableRed.map { $0 * transientValue }
+          let gammaTableGreen = self.defaultGammaTableGreen.map { $0 * transientValue }
+          let gammaTableBlue = self.defaultGammaTableBlue.map { $0 * transientValue }
+          CGSetDisplayTransferByTable(self.identifier, self.defaultGammaTableSampleCount, gammaTableRed, gammaTableGreen, gammaTableBlue)
           Thread.sleep(forTimeInterval: 0.001) // Let's make things quick if not performed in the background
         }
       }
     } else {
-      if self.isVirtual || self.readPrefAsBool(key: .avoidGamma) {
-        self.swBrightnessSemaphore.signal()
-        return DisplayManager.shared.setShadeAlpha(value: 1 - newValue, displayID: DisplayManager.resolveEffectiveDisplayID(self.identifier))
-      } else {
-        let gammaTableRed = self.defaultGammaTableRed.map { $0 * newValue }
-        let gammaTableGreen = self.defaultGammaTableGreen.map { $0 * newValue }
-        let gammaTableBlue = self.defaultGammaTableBlue.map { $0 * newValue }
-        DisplayManager.shared.moveGammaActivityEnforcer(displayID: self.identifier)
-        CGSetDisplayTransferByTable(self.identifier, self.defaultGammaTableSampleCount, gammaTableRed, gammaTableGreen, gammaTableBlue)
-        DisplayManager.shared.enforceGammaActivity()
-      }
+      let gammaTableRed = self.defaultGammaTableRed.map { $0 * newValue }
+      let gammaTableGreen = self.defaultGammaTableGreen.map { $0 * newValue }
+      let gammaTableBlue = self.defaultGammaTableBlue.map { $0 * newValue }
+      DisplayManager.shared.moveGammaActivityEnforcer(displayID: self.identifier)
+      CGSetDisplayTransferByTable(self.identifier, self.defaultGammaTableSampleCount, gammaTableRed, gammaTableGreen, gammaTableBlue)
+      DisplayManager.shared.enforceGammaActivity()
     }
     self.swBrightnessSemaphore.signal()
     return true
@@ -269,8 +272,8 @@ class Display: Equatable {
     }
     self.swBrightnessSemaphore.wait()
     if self.isVirtual || self.readPrefAsBool(key: .avoidGamma) {
-      let rawBrightnessValue = 1 - (DisplayManager.shared.getShadeAlpha(displayID: DisplayManager.resolveEffectiveDisplayID(self.identifier)) ?? 1)
       self.swBrightnessSemaphore.signal()
+      let rawBrightnessValue = 1 - (DisplayManager.shared.getShadeAlpha(displayID: DisplayManager.resolveEffectiveDisplayID(self.identifier)) ?? 1)
       return self.swBrightnessTransform(value: rawBrightnessValue, reverse: true)
     }
     var gammaTableRed = [CGGammaValue](repeating: 0, count: 256)

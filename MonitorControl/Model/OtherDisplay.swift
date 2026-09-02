@@ -9,6 +9,9 @@ class OtherDisplay: Display {
   var arm64ddc: Bool = false
   var arm64avService: IOAVService?
   var displayLinkDisplay: DisplayLinkDisplay?
+  private var displayLinkBrightnessRecoveryAttempt = Date.distantPast
+  private var displayLinkContrastRecoveryAttempt = Date.distantPast
+  private let displayLinkRecoveryRetryInterval: TimeInterval = 3
   var isDiscouraged: Bool = false
   let writeDDCQueue = DispatchQueue(label: "Local write DDC queue")
   var writeDDCNextValue: [Command: UInt16] = [:]
@@ -334,11 +337,11 @@ class OtherDisplay: Display {
   }
 
   override func setBrightness(_ to: Float = -1, slow: Bool = false) -> Bool {
-    self.checkGammaInterference()
     if self.hasDisplayLinkBrightnessControl() {
       let value = to == -1 ? self.readPrefAsFloat(for: .brightness) : to
       return self.setDirectBrightness(value)
     }
+    self.checkGammaInterference()
     return super.setBrightness(to, slow: slow)
   }
 
@@ -346,11 +349,7 @@ class OtherDisplay: Display {
     let value = max(min(to, 1), 0)
     if self.hasDisplayLinkBrightnessControl() {
       if DisplayLinkControl.shared.setBrightness(for: self.identifier, value: value) {
-        if self.readPrefAsFloat(key: .SwBrightness) != 1 {
-          _ = self.setSwBrightness(1)
-        } else {
-          self.savePref(1, key: .SwBrightness)
-        }
+        self.savePref(1, key: .SwBrightness)
         _ = DisplayManager.shared.destroyShade(displayID: DisplayManager.resolveEffectiveDisplayID(self.identifier))
         if !transient {
           self.savePref(value, for: .brightness)
@@ -392,8 +391,8 @@ class OtherDisplay: Display {
   }
 
   override func getBrightness() -> Float {
-    if let displayLinkDisplay = self.displayLinkDisplay, !self.prefExists(for: .brightness) {
-      return displayLinkDisplay.brightness
+    if let displayLinkDisplay = self.displayLinkDisplay, let brightness = displayLinkDisplay.brightness, !self.prefExists(for: .brightness) {
+      return brightness
     }
     return self.prefExists(for: .brightness) ? self.readPrefAsFloat(for: .brightness) : 1
   }
@@ -407,30 +406,79 @@ class OtherDisplay: Display {
     guard display.isEnabled else {
       return
     }
-    self.savePref(display.brightness, for: .brightness)
     self.savePref(1, key: .SwBrightness)
-    self.brightnessSyncSourceValue = display.brightness
-    self.smoothBrightnessTransient = display.brightness
-    if updateSliders, let slider = self.sliderHandler[.brightness] {
-      slider.setValue(display.brightness, displayID: self.identifier)
+    if !display.brightnessRequiresRestore, let brightness = display.brightness {
+      self.savePref(brightness, for: .brightness)
+      self.brightnessSyncSourceValue = brightness
+      self.smoothBrightnessTransient = brightness
+      self.displayLinkBrightnessRecoveryAttempt = .distantPast
+      if updateSliders, let slider = self.sliderHandler[.brightness] {
+        slider.setValue(brightness, displayID: self.identifier)
+      }
+    } else if display.brightnessRequiresRestore {
+      os_log("DisplayLink returned an invalid brightness for %{public}@; keeping the last valid MonitorControl value.", type: .default, display.persistentDisplayId)
     }
-    if let contrast = display.contrast {
+    if !display.contrastRequiresRestore, let contrast = display.contrast {
       self.savePref(contrast, for: .contrast)
       self.savePref(DDC_MAX_DETECT_LIMIT, key: .maxDDC, for: .contrast)
+      self.displayLinkContrastRecoveryAttempt = .distantPast
       if updateSliders, let slider = self.sliderHandler[.contrast] {
         slider.setValue(contrast, displayID: self.identifier)
       }
+    } else if display.contrastRequiresRestore {
+      os_log("DisplayLink returned an invalid contrast for %{public}@; keeping the last valid MonitorControl value.", type: .default, display.persistentDisplayId)
     }
     self.savePref(DDC_MAX_DETECT_LIMIT, key: .maxDDC, for: .brightness)
     _ = DisplayManager.shared.destroyShade(displayID: DisplayManager.resolveEffectiveDisplayID(self.identifier))
+    self.restoreInvalidDisplayLinkValuesIfNeeded(updateSliders: updateSliders)
   }
 
   func hasDisplayLinkBrightnessControl() -> Bool {
-    self.displayLinkDisplay?.isEnabled ?? false
+    (self.displayLinkDisplay?.isEnabled ?? false) && (self.displayLinkDisplay?.supportsBrightness ?? false)
   }
 
   func hasDisplayLinkContrastControl() -> Bool {
-    (self.displayLinkDisplay?.isEnabled ?? false) && self.displayLinkDisplay?.contrast != nil
+    (self.displayLinkDisplay?.isEnabled ?? false) && (self.displayLinkDisplay?.supportsContrast ?? false)
+  }
+
+  private func restoreInvalidDisplayLinkValuesIfNeeded(updateSliders: Bool) {
+    guard app != nil, app.sleepID == 0, app.reconfigureID == 0, let display = self.displayLinkDisplay, display.isEnabled else {
+      return
+    }
+    let now = Date()
+    if display.supportsBrightness, display.brightnessRequiresRestore,
+       now.timeIntervalSince(self.displayLinkBrightnessRecoveryAttempt) >= self.displayLinkRecoveryRetryInterval,
+       let brightness = self.displayLinkRecoveryBrightness() {
+      self.displayLinkBrightnessRecoveryAttempt = now
+      os_log("Restoring DisplayLink brightness for %{public}@ to %{public}@ after an invalid reconnect value.", type: .default, display.persistentDisplayId, String(format: "%.3f", Double(brightness)))
+      if self.setDirectBrightness(brightness), updateSliders, let slider = self.sliderHandler[.brightness] {
+        slider.setValue(brightness, displayID: self.identifier)
+      }
+    }
+    if display.supportsContrast, display.contrastRequiresRestore,
+       now.timeIntervalSince(self.displayLinkContrastRecoveryAttempt) >= self.displayLinkRecoveryRetryInterval,
+       self.prefExists(for: .contrast),
+       let contrast = DisplayLinkControl.normalizedControlValue(self.readPrefAsFloat(for: .contrast)) {
+      self.displayLinkContrastRecoveryAttempt = now
+      os_log("Restoring DisplayLink contrast for %{public}@ to %{public}@ after an invalid reconnect value.", type: .default, display.persistentDisplayId, String(format: "%.3f", Double(contrast)))
+      if self.setDisplayLinkContrast(contrast), updateSliders, let slider = self.sliderHandler[.contrast] {
+        slider.setValue(contrast, displayID: self.identifier)
+      }
+    }
+  }
+
+  private func displayLinkRecoveryBrightness() -> Float? {
+    if prefs.bool(forKey: PrefKey.enableBrightnessSync.rawValue) {
+      let sourceDisplay = DisplayManager.shared.displays.first { $0 != self && $0.isBuiltIn() }
+        ?? DisplayManager.shared.displays.first { $0 != self && $0 is AppleDisplay }
+      if let sourceDisplay, let brightness = DisplayLinkControl.normalizedControlValue(sourceDisplay.getBrightness()) {
+        return brightness
+      }
+    }
+    if self.prefExists(for: .brightness), let brightness = DisplayLinkControl.normalizedControlValue(self.readPrefAsFloat(for: .brightness)) {
+      return brightness
+    }
+    return DisplayLinkControl.normalizedControlValue(self.displayLinkDisplay?.brightness)
   }
 
   @discardableResult

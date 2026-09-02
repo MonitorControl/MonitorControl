@@ -46,6 +46,7 @@ class DisplaysPrefsViewController: NSViewController, SettingsPane, NSTableViewDa
       return
     }
     os_log("Reloading Displays settings display list", type: .info)
+    _ = DisplayManager.shared.applyDisplayLinkDisplaysToCurrentDisplays(updateSliders: false, reloadDisplayPrefs: false)
     self.displays = DisplayManager.shared.getAllDisplays()
     self.displayList?.reloadData()
     self.updateDisplayListRowHeight()

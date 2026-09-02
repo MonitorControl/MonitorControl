@@ -9,8 +9,12 @@ struct DisplayLinkDisplay {
   let persistentDisplayId: String
   let name: String
   let isEnabled: Bool
-  let brightness: Float
+  let supportsBrightness: Bool
+  let brightness: Float?
+  let brightnessRequiresRestore: Bool
+  let supportsContrast: Bool
   let contrast: Float?
+  let contrastRequiresRestore: Bool
 }
 
 final class DisplayLinkControl {
@@ -72,6 +76,25 @@ final class DisplayLinkControl {
     let createdAt: Date
   }
 
+  private final class NotificationWaitState {
+    private let lock = NSLock()
+    private var notification: Notification?
+
+    func store(_ notification: Notification) {
+      self.lock.lock()
+      defer { self.lock.unlock() }
+      if self.notification == nil {
+        self.notification = notification
+      }
+    }
+
+    func value() -> Notification? {
+      self.lock.lock()
+      defer { self.lock.unlock() }
+      return self.notification
+    }
+  }
+
   private let notificationCenter = DistributedNotificationCenter.default()
   private let timeout: TimeInterval = 1.5
   private let writeCoalescingDelay: TimeInterval = 0.08
@@ -81,6 +104,7 @@ final class DisplayLinkControl {
   private var observerTokens: [NSObjectProtocol] = []
   private var displaysByID: [CGDirectDisplayID: DisplayLinkDisplay] = [:]
   private var displayIDsByPersistentID: [String: CGDirectDisplayID] = [:]
+  private var lastKnownDisplaysByPersistentID: [String: DisplayLinkDisplay] = [:]
   private var pendingWrites: [DisplayWriteKey: Float] = [:]
   private var scheduledWrites: Set<DisplayWriteKey> = []
   private var localWriteTargets: [DisplayWriteKey: LocalWriteTarget] = [:]
@@ -91,6 +115,12 @@ final class DisplayLinkControl {
 
   @discardableResult
   func refreshDisplays() -> [DisplayLinkDisplay] {
+    guard !Thread.isMainThread else {
+      os_log("DisplayLink display query skipped on the main thread.", type: .error)
+      return self.stateQueue.sync {
+        Array(self.displaysByID.values)
+      }
+    }
     let note = self.waitForNotification(name: "com.displaylink.DisplayListUpdated", timeout: self.timeout) {
       self.notificationCenter.postNotificationName(Notification.Name("com.displaylink.GetDisplays"), object: nil, userInfo: nil, deliverImmediately: true)
     }
@@ -104,9 +134,9 @@ final class DisplayLinkControl {
       self.replaceDisplays([], notify: false)
       return []
     }
-    self.replaceDisplays(displays, notify: false)
+    let resolvedDisplays = self.replaceDisplays(displays, notify: false)
     os_log("DisplayLink display query found %{public}@ display(s).", type: .info, String(displays.count))
-    return displays
+    return resolvedDisplays
   }
 
   func display(for displayID: CGDirectDisplayID) -> DisplayLinkDisplay? {
@@ -160,6 +190,12 @@ final class DisplayLinkControl {
       self.scheduledWrites.remove(key)
       return
     }
+    let logValue = String(format: "%.3f", Double(value))
+    if value <= 0.001 {
+      os_log("DisplayLink %{public}@ sending zero value to display %{public}@.", type: .default, key.kind.payloadKey, String(key.displayID))
+    } else {
+      os_log("DisplayLink %{public}@ sending to display %{public}@ value %{public}@.", type: .info, key.kind.payloadKey, String(key.displayID), logValue)
+    }
     if !self.writeValueSynchronously(kind: key.kind, for: key.displayID, value: value) {
       self.clearLocalWriteTarget(key, force: true)
     }
@@ -191,14 +227,36 @@ final class DisplayLinkControl {
       }
       return update.persistentDisplayId == display.persistentDisplayId
     }
-    guard let raw = Self.objectString(note),
-          let update = try? JSONDecoder().decode(UpdatePayload.self, from: Data(raw.utf8)),
-          update.statusCode == 0 else {
+    var acknowledgedValue: Float?
+    if let raw = Self.objectString(note),
+       let update = try? JSONDecoder().decode(UpdatePayload.self, from: Data(raw.utf8)),
+       update.statusCode == 0 {
+      acknowledgedValue = self.updatedValue(kind: kind, fallback: value, update: update)
+    }
+    if acknowledgedValue == nil {
+      let refreshedDisplay = self.refreshDisplays().first { $0.persistentDisplayId == display.persistentDisplayId }
+      let refreshedValue = refreshedDisplay.flatMap { refreshedDisplay -> Float? in
+        switch kind {
+        case .brightness:
+          return refreshedDisplay.brightnessRequiresRestore ? nil : refreshedDisplay.brightness
+        case .contrast:
+          return refreshedDisplay.contrastRequiresRestore ? nil : refreshedDisplay.contrast
+        }
+      }
+      if let refreshedValue, abs(refreshedValue - value) <= 0.011 {
+        acknowledgedValue = refreshedValue
+        os_log("DisplayLink %{public}@ write confirmed by refresh after notification timeout.", type: .info, kind.payloadKey)
+      }
+    }
+    guard let acknowledgedValue else {
       os_log("DisplayLink %{public}@ write failed for display %{public}@.", type: .info, kind.payloadKey, display.persistentDisplayId)
       return false
     }
-    guard let acknowledgedValue = self.updatedValue(kind: kind, fallback: value, update: update) else {
-      return false
+    let logValue = String(format: "%.3f", Double(acknowledgedValue))
+    if acknowledgedValue <= 0.001 {
+      os_log("DisplayLink %{public}@ wrote zero value for display %{public}@.", type: .default, kind.payloadKey, display.persistentDisplayId)
+    } else {
+      os_log("DisplayLink %{public}@ write succeeded for display %{public}@ value %{public}@.", type: .info, kind.payloadKey, display.persistentDisplayId, logValue)
     }
     self.updateCache(displayID: displayID, kind: kind, value: acknowledgedValue, notify: !self.hasActiveLocalWriteTarget(key: DisplayWriteKey(displayID: displayID, kind: kind)))
     self.clearLocalWriteTarget(DisplayWriteKey(displayID: displayID, kind: kind), acknowledgedValue: acknowledgedValue)
@@ -227,7 +285,12 @@ final class DisplayLinkControl {
       return
     }
     let key = DisplayWriteKey(displayID: displayID, kind: kind)
-    self.updateCache(displayID: displayID, kind: kind, value: value, notify: !self.hasActiveLocalWriteTarget(key: key))
+    let hasActiveLocalWrite = self.hasActiveLocalWriteTarget(key: key)
+    if !hasActiveLocalWrite, self.requiresRestore(for: key) {
+      os_log("Ignoring transient DisplayLink %{public}@ update while display %{public}@ requires restoration.", type: .default, kind.payloadKey, persistentDisplayId)
+      return
+    }
+    self.updateCache(displayID: displayID, kind: kind, value: value, notify: !hasActiveLocalWrite)
     self.clearLocalWriteTarget(key, acknowledgedValue: value)
   }
 
@@ -251,11 +314,16 @@ final class DisplayLinkControl {
         persistentDisplayId: current.persistentDisplayId,
         name: current.name,
         isEnabled: current.isEnabled,
+        supportsBrightness: current.supportsBrightness,
         brightness: brightness,
-        contrast: contrast
+        brightnessRequiresRestore: kind == .brightness ? false : current.brightnessRequiresRestore,
+        supportsContrast: current.supportsContrast,
+        contrast: contrast,
+        contrastRequiresRestore: kind == .contrast ? false : current.contrastRequiresRestore
       )
       self.displaysByID[displayID] = updated
       self.displayIDsByPersistentID[updated.persistentDisplayId] = displayID
+      self.lastKnownDisplaysByPersistentID[updated.persistentDisplayId] = updated
       updatedDisplay = updated
     }
     if notify, let updatedDisplay {
@@ -264,32 +332,50 @@ final class DisplayLinkControl {
     return updatedDisplay
   }
 
-  private func replaceDisplays(_ displays: [DisplayLinkDisplay], notify: Bool) {
+  @discardableResult
+  private func replaceDisplays(_ displays: [DisplayLinkDisplay], notify: Bool) -> [DisplayLinkDisplay] {
+    var resolvedDisplays: [DisplayLinkDisplay] = []
     self.stateQueue.sync {
       var displaysByID: [CGDirectDisplayID: DisplayLinkDisplay] = [:]
       var displayIDsByPersistentID: [String: CGDirectDisplayID] = [:]
       for display in displays {
-        displaysByID[display.cgID] = display
-        displayIDsByPersistentID[display.persistentDisplayId] = display.cgID
+        let previous = self.lastKnownDisplaysByPersistentID[display.persistentDisplayId]
+        let resolved = DisplayLinkDisplay(
+          cgID: display.cgID,
+          persistentDisplayId: display.persistentDisplayId,
+          name: display.name,
+          isEnabled: display.isEnabled,
+          supportsBrightness: display.supportsBrightness || previous?.supportsBrightness == true,
+          brightness: display.brightness ?? previous?.brightness,
+          brightnessRequiresRestore: display.brightnessRequiresRestore,
+          supportsContrast: display.supportsContrast || previous?.supportsContrast == true,
+          contrast: display.contrast ?? previous?.contrast,
+          contrastRequiresRestore: display.contrastRequiresRestore
+        )
+        displaysByID[resolved.cgID] = resolved
+        displayIDsByPersistentID[resolved.persistentDisplayId] = resolved.cgID
+        self.lastKnownDisplaysByPersistentID[resolved.persistentDisplayId] = resolved
+        resolvedDisplays.append(resolved)
       }
       self.displaysByID = displaysByID
       self.displayIDsByPersistentID = displayIDsByPersistentID
     }
     if notify {
-      for display in displays {
+      for display in resolvedDisplays {
         if self.shouldNotifyUpdate(for: display.cgID) {
           self.postDisplayUpdate(display)
         }
       }
     }
+    return resolvedDisplays
   }
 
   private func postDisplayUpdate(_ display: DisplayLinkDisplay) {
-    var userInfo: [String: Any] = [
-      Self.userInfoDisplayIDKey: display.cgID,
-      Self.userInfoBrightnessKey: display.brightness,
-    ]
-    if let contrast = display.contrast {
+    var userInfo: [String: Any] = [Self.userInfoDisplayIDKey: display.cgID]
+    if !display.brightnessRequiresRestore, let brightness = display.brightness {
+      userInfo[Self.userInfoBrightnessKey] = brightness
+    }
+    if !display.contrastRequiresRestore, let contrast = display.contrast {
       userInfo[Self.userInfoContrastKey] = contrast
     }
     DispatchQueue.main.async {
@@ -335,29 +421,43 @@ final class DisplayLinkControl {
     !self.hasActiveLocalWriteTarget(key: DisplayWriteKey(displayID: displayID, kind: .brightness)) && !self.hasActiveLocalWriteTarget(key: DisplayWriteKey(displayID: displayID, kind: .contrast))
   }
 
+  private func requiresRestore(for key: DisplayWriteKey) -> Bool {
+    self.stateQueue.sync {
+      guard let display = self.displaysByID[key.displayID] else {
+        return false
+      }
+      switch key.kind {
+      case .brightness:
+        return display.brightnessRequiresRestore
+      case .contrast:
+        return display.contrastRequiresRestore
+      }
+    }
+  }
+
   private func updatedValue(kind: ControlKind, fallback: Float?, update: UpdatePayload) -> Float? {
     switch kind {
     case .brightness:
-      return update.brightness ?? fallback
+      return Self.normalizedControlValue(update.brightness) ?? fallback
     case .contrast:
-      return update.contrast ?? fallback
+      return Self.normalizedControlValue(update.contrast) ?? fallback
     }
   }
 
   private func waitForNotification(name: String, timeout: TimeInterval, trigger: () -> Void, filter: ((Notification) -> Bool)? = nil) -> Notification? {
-    var received: Notification?
+    let state = NotificationWaitState()
     let token = self.notificationCenter.addObserver(forName: Notification.Name(name), object: nil, queue: nil) { note in
       if filter?(note) ?? true {
-        received = note
+        state.store(note)
       }
     }
     trigger()
     let until = Date().addingTimeInterval(timeout)
-    while received == nil, Date() < until {
+    while state.value() == nil, Date() < until {
       RunLoop.current.run(mode: .default, before: Date().addingTimeInterval(0.05))
     }
     self.notificationCenter.removeObserver(token)
-    return received
+    return state.value()
   }
 
   private static func objectString(_ note: Notification?) -> String? {
@@ -375,18 +475,31 @@ final class DisplayLinkControl {
       return nil
     }
     return payloads.compactMap { payload -> DisplayLinkDisplay? in
-      guard let cgID = payload.CGID, let brightness = payload.brightness else {
+      guard let cgID = payload.CGID else {
         return nil
       }
+      let brightness = self.normalizedControlValue(payload.brightness)
+      let contrast = self.normalizedControlValue(payload.contrast)
       return DisplayLinkDisplay(
         cgID: CGDirectDisplayID(cgID),
         persistentDisplayId: payload.persistentDisplayId,
         name: payload.name ?? payload.persistentDisplayId,
         isEnabled: payload.isEnabled ?? true,
+        supportsBrightness: payload.brightness != nil,
         brightness: brightness,
-        contrast: payload.contrast
+        brightnessRequiresRestore: payload.brightness != nil && brightness == nil,
+        supportsContrast: payload.contrast != nil,
+        contrast: contrast,
+        contrastRequiresRestore: payload.contrast != nil && contrast == nil
       )
     }
+  }
+
+  static func normalizedControlValue(_ value: Float?) -> Float? {
+    guard let value, value.isFinite, (0 ... 1).contains(value) else {
+      return nil
+    }
+    return value
   }
 
   private static func jsonString(_ object: [String: Any]) -> String? {

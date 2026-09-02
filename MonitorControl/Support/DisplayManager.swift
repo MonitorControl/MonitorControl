@@ -51,7 +51,14 @@ class DisplayManager {
   var shades: [CGDirectDisplayID: NSWindow] = [:]
   var shadeGrave: [NSWindow] = []
 
-  func isDisqualifiedFromShade(_ displayID: CGDirectDisplayID) -> Bool {
+  private func performShadeOperation<T>(_ operation: () -> T) -> T {
+    if Thread.isMainThread {
+      return operation()
+    }
+    return DispatchQueue.main.sync(execute: operation)
+  }
+
+  private func isDisqualifiedFromShade(_ displayID: CGDirectDisplayID) -> Bool {
     if CGDisplayIsInHWMirrorSet(displayID) != 0 || CGDisplayIsInMirrorSet(displayID) != 0 {
       if displayID == DisplayManager.resolveEffectiveDisplayID(displayID), DisplayManager.isVirtual(displayID: displayID) || DisplayManager.isDummy(displayID: displayID) {
         var displayIDs = [CGDirectDisplayID](repeating: 0, count: 16)
@@ -69,7 +76,7 @@ class DisplayManager {
     return false
   }
 
-  func createShadeOnDisplay(displayID: CGDirectDisplayID) -> NSWindow? {
+  private func createShadeOnDisplay(displayID: CGDirectDisplayID) -> NSWindow? {
     if let screen = DisplayManager.getByDisplayID(displayID: displayID) {
       let shade = NSWindow(contentRect: .init(origin: NSPoint(x: 0, y: 0), size: .init(width: 10, height: 1)), styleMask: [], backing: .buffered, defer: false)
       shade.title = "Monitor Control Window Shade for Display " + String(displayID)
@@ -90,7 +97,7 @@ class DisplayManager {
     return nil
   }
 
-  func getShade(displayID: CGDirectDisplayID) -> NSWindow? {
+  private func getShade(displayID: CGDirectDisplayID) -> NSWindow? {
     guard !self.isDisqualifiedFromShade(displayID) else {
       return nil
     }
@@ -106,22 +113,30 @@ class DisplayManager {
   }
 
   func destroyAllShades() -> Bool {
-    var ret = false
-    for displayID in self.shades.keys {
-      os_log("Attempting to destory shade for display  %{public}@", type: .info, String(displayID))
-      if self.destroyShade(displayID: displayID) {
-        ret = true
+    self.performShadeOperation {
+      var ret = false
+      for displayID in Array(self.shades.keys) {
+        os_log("Attempting to destory shade for display  %{public}@", type: .info, String(displayID))
+        if self.destroyShadeOnMain(displayID: displayID) {
+          ret = true
+        }
       }
+      if ret {
+        os_log("Destroyed all shades.", type: .info)
+      } else {
+        os_log("No shades were found to be destroyed.", type: .info)
+      }
+      return ret
     }
-    if ret {
-      os_log("Destroyed all shades.", type: .info)
-    } else {
-      os_log("No shades were found to be destroyed.", type: .info)
-    }
-    return ret
   }
 
   func destroyShade(displayID: CGDirectDisplayID) -> Bool {
+    self.performShadeOperation {
+      self.destroyShadeOnMain(displayID: displayID)
+    }
+  }
+
+  private func destroyShadeOnMain(displayID: CGDirectDisplayID) -> Bool {
     if let shade = shades[displayID] {
       os_log("Destroying shade for display %{public}@", type: .info, String(displayID))
       self.shadeGrave.append(shade)
@@ -133,38 +148,50 @@ class DisplayManager {
   }
 
   func updateShade(displayID: CGDirectDisplayID) -> Bool {
-    guard !self.isDisqualifiedFromShade(displayID) else {
-      return false
-    }
-    if let screen = DisplayManager.getByDisplayID(displayID: displayID) {
-      if let shade = getShade(displayID: displayID) {
+    self.performShadeOperation {
+      guard !self.isDisqualifiedFromShade(displayID) else {
+        return false
+      }
+      if let screen = DisplayManager.getByDisplayID(displayID: displayID), let shade = getShade(displayID: displayID) {
         shade.setFrame(screen.frame, display: true)
         return true
       }
+      return false
     }
-    return false
   }
 
   func getShadeAlpha(displayID: CGDirectDisplayID) -> Float? {
-    guard !self.isDisqualifiedFromShade(displayID) else {
-      return 1
-    }
-    if let shade = getShade(displayID: displayID) {
-      return Float(shade.contentView?.alphaValue ?? 1)
-    } else {
-      return 1
+    self.performShadeOperation {
+      guard !self.isDisqualifiedFromShade(displayID) else {
+        return 1
+      }
+      return Float(getShade(displayID: displayID)?.contentView?.alphaValue ?? 1)
     }
   }
 
   func setShadeAlpha(value: Float, displayID: CGDirectDisplayID) -> Bool {
-    guard !self.isDisqualifiedFromShade(displayID) else {
-      return false
-    }
-    if let shade = getShade(displayID: displayID) {
+    self.performShadeOperation {
+      guard !self.isDisqualifiedFromShade(displayID), let shade = getShade(displayID: displayID) else {
+        return false
+      }
+      shade.contentView?.layer?.removeAllAnimations()
       shade.contentView?.alphaValue = CGFloat(value)
       return true
     }
-    return false
+  }
+
+  func animateShadeAlpha(value: Float, duration: TimeInterval, displayID: CGDirectDisplayID) -> Bool {
+    self.performShadeOperation {
+      guard !self.isDisqualifiedFromShade(displayID), let shade = getShade(displayID: displayID) else {
+        return false
+      }
+      NSAnimationContext.runAnimationGroup { context in
+        context.duration = duration
+        context.allowsImplicitAnimation = true
+        shade.contentView?.animator().alphaValue = CGFloat(value)
+      }
+      return true
+    }
   }
 
   private func displayLinkDisplayDidUpdate(_ note: Notification) {
@@ -175,6 +202,7 @@ class DisplayManager {
       return
     }
     otherDisplay.applyDisplayLinkDisplay(displayLinkDisplay)
+    displaysPrefsVc?.loadDisplayList()
   }
 
   private func displayLinkDisplayID(from userInfo: [AnyHashable: Any]?) -> CGDirectDisplayID? {
@@ -193,9 +221,39 @@ class DisplayManager {
     return nil
   }
 
+  @discardableResult
+  func applyDisplayLinkDisplaysToCurrentDisplays(updateSliders: Bool = true, reloadDisplayPrefs: Bool = true) -> Bool {
+    var updated = false
+    for otherDisplay in self.getOtherDisplays() {
+      if let displayLinkDisplay = DisplayLinkControl.shared.display(for: otherDisplay.identifier) {
+        otherDisplay.applyDisplayLinkDisplay(displayLinkDisplay, updateSliders: updateSliders)
+        updated = true
+      }
+    }
+    if updated, reloadDisplayPrefs {
+      displaysPrefsVc?.loadDisplayList()
+    }
+    return updated
+  }
+
+  func refreshDisplayLinkDisplaysForCurrentDisplays() {
+    self.refreshDisplayLinkDisplays {
+      _ = self.applyDisplayLinkDisplaysToCurrentDisplays()
+    }
+  }
+
+  func refreshDisplayLinkDisplays(completion: @escaping () -> Void) {
+    let displayLinkControl = DisplayLinkControl.shared
+    DispatchQueue.global(qos: .utility).async {
+      _ = displayLinkControl.refreshDisplays()
+      DispatchQueue.main.async {
+        completion()
+      }
+    }
+  }
+
   func configureDisplays() {
     self.clearDisplays()
-    DisplayLinkControl.shared.refreshDisplays()
     var onlineDisplayIDs = [CGDirectDisplayID](repeating: 0, count: 16)
     var displayCount: UInt32 = 0
     guard CGGetOnlineDisplayList(16, &onlineDisplayIDs, &displayCount) == .success else {
@@ -415,6 +473,15 @@ class DisplayManager {
 
   func resetSwBrightnessForAllDisplays(prefsOnly: Bool = false, noPrefSave: Bool = false, async: Bool = false) {
     for otherDisplay in self.getOtherDisplays() {
+      if otherDisplay.hasDisplayLinkBrightnessControl() {
+        if !noPrefSave {
+          otherDisplay.savePref(1, key: .SwBrightness)
+        }
+        if !prefsOnly {
+          _ = DisplayManager.shared.destroyShade(displayID: DisplayManager.resolveEffectiveDisplayID(otherDisplay.identifier))
+        }
+        continue
+      }
       if !prefsOnly {
         _ = otherDisplay.setSwBrightness(1, smooth: async, noPrefSave: noPrefSave)
         if !noPrefSave {
@@ -433,7 +500,7 @@ class DisplayManager {
   func restoreSwBrightnessForAllDisplays(async: Bool = false) {
     for otherDisplay in self.getOtherDisplays() {
       if otherDisplay.hasDisplayLinkBrightnessControl() {
-        _ = otherDisplay.setSwBrightness(1, smooth: async)
+        otherDisplay.savePref(1, key: .SwBrightness)
         _ = DisplayManager.shared.destroyShade(displayID: DisplayManager.resolveEffectiveDisplayID(otherDisplay.identifier))
         if let slider = otherDisplay.sliderHandler[.brightness] {
           slider.setValue(otherDisplay.readPrefAsFloat(for: .brightness), displayID: otherDisplay.identifier)

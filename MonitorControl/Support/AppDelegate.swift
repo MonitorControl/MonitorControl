@@ -28,6 +28,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   var jobRunning = false
   var startupActionWriteCounter: Int = 0
   var audioPlayer: AVAudioPlayer?
+  private let brightnessSyncDisplaySettlingInterval: TimeInterval = 15
+  private var brightnessSyncBlockedUntil = Date.distantPast
+  private var brightnessSyncSettlingLogged = false
+  private var brightnessSyncSettlingGeneration = 0
+  private var brightnessSyncRequiredAfterSettling = false
+  private var brightnessSyncSourceDisplayID: CGDirectDisplayID?
   let updaterController = SPUStandardUpdaterController(startingUpdater: false, updaterDelegate: UpdaterDelegate(), userDriverDelegate: nil)
 
   var settingsPaneStyle: Settings.Style {
@@ -52,18 +58,21 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
   func applicationDidFinishLaunching(_: Notification) {
     app = self
+    self.blockBrightnessSyncDuringDisplaySettling(reason: "application launch")
     self.subscribeEventListeners()
     self.showSafeModeAlertIfNeeded()
     if !prefs.bool(forKey: PrefKey.appAlreadyLaunched.rawValue) {
       self.showOnboardingWindow()
     } else {
-      self.checkPermissions()
+      self.checkPermissions(firstAsk: true)
     }
     self.setPrefsBuildNumber()
     self.setDefaultPrefs()
     self.setMenu()
     CGDisplayRegisterReconfigurationCallback({ _, _, _ in app.displayReconfigured() }, nil)
-    self.configure(firstrun: true)
+    DisplayManager.shared.refreshDisplayLinkDisplays {
+      self.configure(firstrun: true)
+    }
     DisplayManager.shared.createGammaActivityEnforcer()
     self.updaterController.startUpdater()
   }
@@ -116,6 +125,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   }
 
   @objc func displayReconfigured() {
+    self.blockBrightnessSyncDuringDisplaySettling(reason: "display reconfiguration")
     DisplayManager.shared.resetSwBrightnessForAllDisplays(noPrefSave: true)
     CGDisplayRestoreColorSyncSettings()
     self.reconfigureID += 1
@@ -156,7 +166,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   }
 
   func updateMenusAndKeys() {
-    menu.updateMenus()
+    menu?.updateMenus()
     self.updateMediaKeyTap()
   }
 
@@ -180,12 +190,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
   @objc private func sleepNotification() {
     self.sleepID += 1
+    self.blockBrightnessSyncDuringDisplaySettling(reason: "display sleep")
     os_log("Sleeping with sleep %{public}@", type: .info, String(self.sleepID))
     self.updateMediaKeyTap()
   }
 
   @objc private func wakeNotification() {
     if self.sleepID != 0 {
+      self.blockBrightnessSyncDuringDisplaySettling(reason: "display wake")
       os_log("Waking up from sleep %{public}@", type: .info, String(self.sleepID))
       let dispatchedSleepID = self.sleepID
       DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) { // Some displays take time to recover...
@@ -198,6 +210,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     if self.sleepID == dispatchedSleepID {
       os_log("Sober from sleep %{public}@", type: .info, String(self.sleepID))
       self.sleepID = 0
+      self.blockBrightnessSyncDuringDisplaySettling(reason: "wake recovery")
       if self.reconfigureID != 0 {
         let dispatchedReconfigureID = self.reconfigureID
         os_log("Displays need reconfig after sober with reconfigureID %{public}@", type: .info, String(dispatchedReconfigureID))
@@ -208,7 +221,74 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         self.job(start: true)
       }
       self.startupActionWriteRepeatAfterSober()
+      self.scheduleDisplayLinkRefreshRetriesAfterWake()
       self.updateMediaKeyTap()
+    }
+  }
+
+  private func scheduleDisplayLinkRefreshRetriesAfterWake() {
+    for delay in [2.0, 5.0, 10.0] {
+      DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+        guard self.sleepID == 0, self.reconfigureID == 0 else {
+          return
+        }
+        DisplayManager.shared.refreshDisplayLinkDisplaysForCurrentDisplays()
+      }
+    }
+  }
+
+  private func blockBrightnessSyncDuringDisplaySettling(reason: String) {
+    self.brightnessSyncBlockedUntil = Date().addingTimeInterval(self.brightnessSyncDisplaySettlingInterval)
+    self.brightnessSyncSettlingLogged = false
+    self.brightnessSyncSettlingGeneration += 1
+    self.brightnessSyncRequiredAfterSettling = true
+    let generation = self.brightnessSyncSettlingGeneration
+    DispatchQueue.main.asyncAfter(deadline: .now() + self.brightnessSyncDisplaySettlingInterval) {
+      self.finishBrightnessSyncDisplaySettling(generation: generation)
+    }
+    os_log("Brightness sync paused during display settling for %{public}@ seconds. Reason: %{public}@.", type: .info, String(Int(self.brightnessSyncDisplaySettlingInterval)), reason)
+  }
+
+  private func isBrightnessSyncBlockedDuringDisplaySettling() -> Bool {
+    Date() < self.brightnessSyncBlockedUntil
+  }
+
+  private func finishBrightnessSyncDisplaySettling(generation: Int) {
+    guard generation == self.brightnessSyncSettlingGeneration else {
+      return
+    }
+    guard !self.isBrightnessSyncBlockedDuringDisplaySettling(), self.sleepID == 0, self.reconfigureID == 0 else {
+      DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+        self.finishBrightnessSyncDisplaySettling(generation: generation)
+      }
+      return
+    }
+    guard self.brightnessSyncRequiredAfterSettling else {
+      return
+    }
+    self.brightnessSyncRequiredAfterSettling = false
+    self.brightnessSyncSettlingLogged = false
+    guard prefs.bool(forKey: PrefKey.enableBrightnessSync.rawValue) else {
+      self.brightnessSyncSourceDisplayID = nil
+      return
+    }
+    let displays = DisplayManager.shared.displays
+    let sourceDisplay = displays.first { $0.identifier == self.brightnessSyncSourceDisplayID }
+      ?? displays.first { $0.isBuiltIn() }
+      ?? displays.first { $0 is AppleDisplay }
+    self.brightnessSyncSourceDisplayID = nil
+    guard let sourceDisplay else {
+      os_log("Brightness sync after display settling skipped because no source display is available.", type: .info)
+      return
+    }
+    let sourceBrightness = max(0, min(1, sourceDisplay.getBrightness()))
+    os_log("Brightness sync after display settling uses display %{public}@ value %{public}@.", type: .default, String(sourceDisplay.identifier), String(format: "%.3f", Double(sourceBrightness)))
+    for targetDisplay in displays where targetDisplay != sourceDisplay {
+      os_log("Restoring synchronized brightness from display %{public}@ to display %{public}@.", type: .info, String(sourceDisplay.identifier), String(targetDisplay.identifier))
+      _ = targetDisplay.setDirectBrightness(sourceBrightness)
+      if let slider = targetDisplay.sliderHandler[.brightness] {
+        slider.setValue(sourceBrightness, displayID: targetDisplay.identifier)
+      }
     }
   }
 
@@ -238,17 +318,27 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         self.jobRunning = true
       }
       var refreshedSomething = false
+      let brightnessSyncBlocked = self.isBrightnessSyncBlockedDuringDisplaySettling()
       for display in DisplayManager.shared.displays {
         let delta = display.refreshBrightness()
         if delta != 0 {
           refreshedSomething = true
           if prefs.bool(forKey: PrefKey.enableBrightnessSync.rawValue) {
-            for targetDisplay in DisplayManager.shared.displays where targetDisplay != display {
-              os_log("Updating delta from display %{public}@ to display %{public}@", type: .info, String(display.identifier), String(targetDisplay.identifier))
-              let newValue = max(0, min(1, targetDisplay.getBrightness() + delta))
-              _ = targetDisplay.setBrightness(newValue)
-              if let slider = targetDisplay.sliderHandler[.brightness] {
-                slider.setValue(newValue, displayID: targetDisplay.identifier)
+            if brightnessSyncBlocked {
+              self.brightnessSyncSourceDisplayID = display.identifier
+              if !self.brightnessSyncSettlingLogged {
+                os_log("Brightness sync skipped while displays settle after sleep or reconfiguration.", type: .default)
+                self.brightnessSyncSettlingLogged = true
+              }
+            } else {
+              self.brightnessSyncSettlingLogged = false
+              for targetDisplay in DisplayManager.shared.displays where targetDisplay != display {
+                os_log("Updating delta from display %{public}@ to display %{public}@", type: .info, String(display.identifier), String(targetDisplay.identifier))
+                let newValue = max(0, min(1, targetDisplay.getBrightness() + delta))
+                _ = targetDisplay.setBrightness(newValue)
+                if let slider = targetDisplay.sliderHandler[.brightness] {
+                  slider.setValue(newValue, displayID: targetDisplay.identifier)
+                }
               }
             }
           }
