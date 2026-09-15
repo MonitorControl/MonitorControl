@@ -3,6 +3,11 @@
 import Cocoa
 import os.log
 
+enum MenuLayout {
+  static let width: CGFloat = 300
+  static let inset: CGFloat = 12
+}
+
 class SliderHandler {
   var slider: MCSlider?
   var view: NSView?
@@ -11,130 +16,22 @@ class SliderHandler {
   var values: [CGDirectDisplayID: Float] = [:]
   var title: String
   let command: Command
-  var icon: ClickThroughImageView?
 
   class MCSliderCell: NSSliderCell {
-    let knobFillColor = NSColor(white: 1, alpha: 1)
-    let knobFillColorTracking = NSColor(white: 0.8, alpha: 1)
-    let knobStrokeColor = NSColor.systemGray.withAlphaComponent(0.5)
-    let knobShadowColor = NSColor(white: 0, alpha: 0.03)
-    let barFillColor = NSColor.systemGray.withAlphaComponent(0.2)
-    let barStrokeColor = NSColor.systemGray.withAlphaComponent(0.5)
-    let barFilledFillColor = NSColor(white: 1, alpha: 1)
-    let highlightDisplayIndicatorColor = NSColor(white: 0.85, alpha: 1) // This is visible if there is more the 2 displays
-    let tickMarkColor = NSColor.systemGray.withAlphaComponent(0.5)
-
-    let inset: CGFloat = 3.5
-    let offsetX: CGFloat = -1.5
-    let offsetY: CGFloat = -1.5
-
-    let tickMarkKnobExtraInset: CGFloat = 4
-    let tickMarkKnobExtraRadiusMultiplier: CGFloat = 0.25
-
-    var numOfTickmarks: Int = 0
-    var isHighlightDisplayItems: Bool = false
+    var isHighlightDisplayItems = false
     var displayHighlightItems: [CGDirectDisplayID: Float] = [:]
 
-    var isTracking: Bool = false
-
-    required init(coder aDecoder: NSCoder) {
-      super.init(coder: aDecoder)
-    }
-
-    override init() {
-      super.init()
-    }
-
-    override func barRect(flipped: Bool) -> NSRect {
-      let bar = super.barRect(flipped: flipped)
-      let knob = super.knobRect(flipped: flipped)
-      return NSRect(x: bar.origin.x, y: knob.origin.y, width: bar.width, height: knob.height).insetBy(dx: 0, dy: self.inset).offsetBy(dx: self.offsetX, dy: self.offsetY)
-    }
-
-    override func startTracking(at startPoint: NSPoint, in controlView: NSView) -> Bool {
-      self.isTracking = true
-      return super.startTracking(at: startPoint, in: controlView)
-    }
-
-    override func stopTracking(last lastPoint: NSPoint, current stopPoint: NSPoint, in controlView: NSView, mouseIsUp flag: Bool) {
-      self.isTracking = false
-      return super.stopTracking(last: lastPoint, current: stopPoint, in: controlView, mouseIsUp: flag)
-    }
-
-    override func drawKnob(_ knobRect: NSRect) {
-      guard !DEBUG_MACOS10, #available(macOS 11.0, *) else {
-        super.drawKnob(knobRect)
-        return
-      }
-      // This is intentionally empty as the knob is inside the bar. Please leave it like this!
-    }
-
     override func drawBar(inside aRect: NSRect, flipped: Bool) {
-      guard !DEBUG_MACOS10, #available(macOS 11.0, *) else {
-        super.drawBar(inside: aRect, flipped: flipped)
-        return
-      }
-      var maxValue: Float = self.floatValue
-      var minValue: Float = self.floatValue
-
+      super.drawBar(inside: aRect, flipped: flipped)
+      // Keep individual display values visible when the combined slider differs.
       if self.isHighlightDisplayItems {
-        maxValue = max(self.displayHighlightItems.values.max() ?? 0, maxValue)
-        minValue = min(self.displayHighlightItems.values.min() ?? 1, minValue)
-      }
-
-      let barRadius = aRect.height * 0.5 * (self.numOfTickmarks == 0 ? 1 : self.tickMarkKnobExtraRadiusMultiplier)
-      let bar = NSBezierPath(roundedRect: aRect, xRadius: barRadius, yRadius: barRadius)
-      self.barFillColor.setFill()
-      bar.fill()
-
-      let barFilledWidth = (aRect.width - aRect.height) * CGFloat(maxValue) + aRect.height
-      let barFilledRect = NSRect(x: aRect.origin.x, y: aRect.origin.y, width: barFilledWidth, height: aRect.height)
-      let barFilled = NSBezierPath(roundedRect: barFilledRect, xRadius: barRadius, yRadius: barRadius)
-      self.barFilledFillColor.setFill()
-      barFilled.fill()
-
-      let knobMinX = aRect.origin.x + (aRect.width - aRect.height) * CGFloat(minValue)
-      let knobMaxX = aRect.origin.x + (aRect.width - aRect.height) * CGFloat(maxValue)
-      let knobRect = NSRect(x: knobMinX + (self.numOfTickmarks == 0 ? CGFloat(0) : self.tickMarkKnobExtraInset), y: aRect.origin.y, width: aRect.height + CGFloat(knobMaxX - knobMinX), height: aRect.height).insetBy(dx: self.numOfTickmarks == 0 ? CGFloat(0) : self.tickMarkKnobExtraInset, dy: 0)
-      let knobRadius = knobRect.height * 0.5 * (self.numOfTickmarks == 0 ? 1 : self.tickMarkKnobExtraRadiusMultiplier)
-
-      if self.numOfTickmarks > 0 {
-        for i in 1 ... self.numOfTickmarks - 2 {
-          let currentMarkLocation = CGFloat((Float(1) / Float(self.numOfTickmarks - 1)) * Float(i))
-          let tickMarkBounds = NSRect(x: aRect.origin.x + aRect.height + self.tickMarkKnobExtraInset - knobRect.height + self.tickMarkKnobExtraInset * 2 + CGFloat(Float((aRect.width - self.tickMarkKnobExtraInset * 5) * currentMarkLocation)), y: aRect.origin.y + aRect.height * (1 / 3), width: 4, height: aRect.height / 3)
-          let tickmark = NSBezierPath(roundedRect: tickMarkBounds, xRadius: 1, yRadius: 1)
-          self.tickMarkColor.setFill()
-          tickmark.fill()
+        NSColor.secondaryLabelColor.setFill()
+        for value in self.displayHighlightItems.values {
+          let fraction = CGFloat(min(1, max(0, value)))
+          let position = self.controlView?.userInterfaceLayoutDirection == .rightToLeft ? 1 - fraction : fraction
+          NSBezierPath(ovalIn: NSRect(x: aRect.minX + position * (aRect.width - 3), y: aRect.midY - 1.5, width: 3, height: 3)).fill()
         }
       }
-
-      let knobAlpha = CGFloat(max(0, min(1, (minValue - 0.08) * 5)))
-      for i in 1 ... 3 {
-        let knobShadow = NSBezierPath(roundedRect: knobRect.offsetBy(dx: CGFloat(-1 * 2 * i), dy: 0), xRadius: knobRadius, yRadius: knobRadius)
-        self.knobShadowColor.withAlphaComponent(self.knobShadowColor.alphaComponent * knobAlpha).setFill()
-        knobShadow.fill()
-      }
-
-      let knob = NSBezierPath(roundedRect: knobRect, xRadius: knobRadius, yRadius: knobRadius)
-      (self.isTracking ? self.knobFillColorTracking : self.knobFillColor).withAlphaComponent(knobAlpha).setFill()
-      knob.fill()
-
-      if self.isHighlightDisplayItems, self.displayHighlightItems.count > 2 {
-        for currentMarkLocation in self.displayHighlightItems.values {
-          let highlightKnobX = aRect.origin.x + (aRect.width - aRect.height) * CGFloat(currentMarkLocation)
-          let highlightKnobRect = NSRect(x: highlightKnobX + (self.numOfTickmarks == 0 ? CGFloat(0) : self.tickMarkKnobExtraInset), y: aRect.origin.y, width: aRect.height, height: aRect.height).insetBy(dx: (self.numOfTickmarks == 0 ? CGFloat(0) : self.tickMarkKnobExtraInset) + CGFloat(self.numOfTickmarks == 0 ? 6 : 3), dy: CGFloat(self.numOfTickmarks == 0 ? 6 : 6))
-          let highlightKnobRadius = highlightKnobRect.height * 0.5 * (self.numOfTickmarks == 0 ? 1 : self.tickMarkKnobExtraRadiusMultiplier)
-          let highlightKnob = NSBezierPath(roundedRect: highlightKnobRect, xRadius: highlightKnobRadius, yRadius: highlightKnobRadius)
-          let highlightDisplayIndicatorAlpha = CGFloat(max(0, min(1, (currentMarkLocation - 0.08) * 5)))
-          self.highlightDisplayIndicatorColor.withAlphaComponent(self.highlightDisplayIndicatorColor.alphaComponent * highlightDisplayIndicatorAlpha).setFill()
-          highlightKnob.fill()
-        }
-      }
-
-      self.knobStrokeColor.withAlphaComponent(self.knobStrokeColor.alphaComponent * knobAlpha).setStroke()
-      knob.stroke()
-      self.barStrokeColor.setStroke()
-      bar.stroke()
     }
   }
 
@@ -146,12 +43,6 @@ class SliderHandler {
     override init(frame frameRect: NSRect) {
       super.init(frame: frameRect)
       self.cell = MCSliderCell()
-    }
-
-    func setNumOfCustomTickmarks(_ numOfCustomTickmarks: Int) {
-      if let cell = self.cell as? MCSliderCell {
-        cell.numOfTickmarks = numOfCustomTickmarks
-      }
     }
 
     func setDisplayHighlightItems(_ isHighlightDisplayItems: Bool) {
@@ -215,48 +106,43 @@ class SliderHandler {
     let slider = SliderHandler.MCSlider(value: 0, minValue: 0, maxValue: 1, target: self, action: #selector(SliderHandler.valueChanged))
     let showPercent = prefs.bool(forKey: PrefKey.enableSliderPercent.rawValue)
     slider.isEnabled = true
-    slider.setNumOfCustomTickmarks(prefs.bool(forKey: PrefKey.showTickMarks.rawValue) ? 5 : 0)
+    slider.numberOfTickMarks = prefs.bool(forKey: PrefKey.showTickMarks.rawValue) ? 5 : 0
+    slider.allowsTickMarkValuesOnly = false
     self.slider = slider
-    if !DEBUG_MACOS10, #available(macOS 11.0, *) {
-      slider.frame.size.width = 180
-      slider.frame.origin = NSPoint(x: 15, y: 5)
-      let view = NSView(frame: NSRect(x: 0, y: 0, width: slider.frame.width + 30 + (showPercent ? 38 : 0), height: slider.frame.height + 14))
-      view.frame.origin = NSPoint(x: 12, y: 0)
-      var iconName = "circle.dashed"
-      switch command {
-      case .audioSpeakerVolume: iconName = "speaker.wave.2.fill"
-      case .brightness: iconName = "sun.max.fill"
-      case .contrast: iconName = "circle.lefthalf.fill"
-      default: break
-      }
-      let icon = SliderHandler.ClickThroughImageView()
-      icon.image = NSImage(systemSymbolName: iconName, accessibilityDescription: title)
-      icon.contentTintColor = NSColor.black.withAlphaComponent(0.6)
-      icon.frame = NSRect(x: view.frame.origin.x + 6.5, y: view.frame.origin.y + 13, width: 15, height: 15)
-      icon.imageAlignment = .alignCenter
-      view.addSubview(slider)
-      view.addSubview(icon)
-      self.icon = icon
-      if showPercent {
-        let percentageBox = NSTextField(frame: NSRect(x: 15 + slider.frame.size.width - 2, y: 17, width: 40, height: 12))
-        self.setupPercentageBox(percentageBox)
-        self.percentageBox = percentageBox
-        view.addSubview(percentageBox)
-      }
-      self.view = view
-    } else {
-      slider.frame.size.width = 180
-      slider.frame.origin = NSPoint(x: 15, y: 5)
-      let view = NSView(frame: NSRect(x: 0, y: 0, width: slider.frame.width + 30 + (showPercent ? 38 : 0), height: slider.frame.height + 10))
-      view.addSubview(slider)
-      if showPercent {
-        let percentageBox = NSTextField(frame: NSRect(x: 15 + slider.frame.size.width - 2, y: 18, width: 40, height: 12))
-        self.setupPercentageBox(percentageBox)
-        self.percentageBox = percentageBox
-        view.addSubview(percentageBox)
-      }
-      self.view = view
+    slider.setAccessibilityLabel(title)
+    slider.trackFillColor = .controlAccentColor
+    let width = MenuLayout.width
+    let percentageBox = NSTextField(labelWithString: "100%")
+    self.setupPercentageBox(percentageBox)
+    percentageBox.maximumNumberOfLines = 1
+    percentageBox.sizeToFit()
+    let percentageWidth = ceil(percentageBox.frame.width)
+    let endIconX = width - MenuLayout.inset - 18
+    let sliderHeight: CGFloat = prefs.bool(forKey: PrefKey.showTickMarks.rawValue) ? 38 : 32
+    let height = sliderHeight + (showPercent ? 10 : 0)
+    let view = NSView(frame: NSRect(x: 0, y: 0, width: width, height: height))
+    slider.frame = NSRect(x: 34, y: 6, width: endIconX - 42, height: sliderHeight - 12)
+    view.addSubview(slider)
+    let symbols: (String, String)
+    switch command {
+    case .brightness: symbols = ("sun.min.fill", "sun.max.fill")
+    case .audioSpeakerVolume: symbols = ("speaker.fill", "speaker.wave.3.fill")
+    default: symbols = ("circle.lefthalf.fill", "circle.righthalf.fill")
     }
+    for (symbol, x) in [(symbols.0, CGFloat(12)), (symbols.1, endIconX)] {
+      let icon = SliderHandler.ClickThroughImageView()
+      icon.image = NSImage(systemSymbolName: symbol, accessibilityDescription: nil)
+      icon.contentTintColor = .secondaryLabelColor
+      icon.imageScaling = .scaleProportionallyUpOrDown
+      icon.frame = NSRect(x: x, y: (sliderHeight - 18) / 2, width: 18, height: 18)
+      view.addSubview(icon)
+    }
+    if showPercent {
+      percentageBox.frame = NSRect(x: MenuLayout.inset, y: sliderHeight - 6, width: percentageWidth, height: 16)
+      self.percentageBox = percentageBox
+      view.addSubview(percentageBox)
+    }
+    self.view = view
     slider.maxValue = 1
     if let displayToAppend = display {
       self.addDisplay(displayToAppend)
@@ -276,12 +162,12 @@ class SliderHandler {
   }
 
   func setupPercentageBox(_ percentageBox: NSTextField) {
-    percentageBox.font = NSFont.systemFont(ofSize: 12)
+    percentageBox.font = NSFont.systemFont(ofSize: 11)
     percentageBox.isEditable = false
     percentageBox.isBordered = false
     percentageBox.drawsBackground = false
-    percentageBox.alignment = .right
-    percentageBox.alphaValue = 0.7
+    percentageBox.alignment = .left
+    percentageBox.textColor = .secondaryLabelColor
   }
 
   func valueChangedOtherDisplay(otherDisplay: OtherDisplay, value: Float) {
@@ -309,7 +195,6 @@ class SliderHandler {
       return
     }
     var value = slider.floatValue
-    self.updateIcon()
     if prefs.bool(forKey: PrefKey.enableSliderSnap.rawValue) {
       let intPercent = Int(value * 100)
       let snapInterval = 25
@@ -334,24 +219,6 @@ class SliderHandler {
     slider.setDisplayHighlightItems(false)
   }
 
-  func updateIcon() {
-    // This looks hideous so I disable it for now. Maybe after a bit of tinkering it will look better
-    /*
-     if self.command == .audioSpeakerVolume {
-       let value = self.slider?.floatValue ?? 0.5
-       if value > 2/3 {
-         self.icon?.image = NSImage(systemSymbolName: "speaker.wave.3.fill", accessibilityDescription: "")
-       } else if value > 1/3 {
-         self.icon?.image = NSImage(systemSymbolName: "speaker.wave.2.fill", accessibilityDescription: "")
-       } else if value != 0 {
-         self.icon?.image = NSImage(systemSymbolName: "speaker.wave.1.fill", accessibilityDescription: "")
-       } else {
-         self.icon?.image = NSImage(systemSymbolName: "speaker.slash.fill", accessibilityDescription: "")
-       }
-     }
-     */
-  }
-
   func setValue(_ value: Float, displayID: CGDirectDisplayID = 0) {
     if let slider = self.slider {
       if displayID != 0 {
@@ -372,7 +239,6 @@ class SliderHandler {
       }
       // let average = sumVal / Float(num)
       slider.floatValue = value
-      self.updateIcon()
       if abs(maxVal - minVal) > 0.001 {
         slider.setDisplayHighlightItems(true)
       } else {

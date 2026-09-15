@@ -2,9 +2,12 @@
 
 import AppKit
 import os.log
+import SwiftUI
 
 class MenuHandler: NSMenu, NSMenuDelegate {
   var combinedSliderHandler: [Command: SliderHandler] = [:]
+
+  private var systemControlsTimer: Timer?
 
   var lastMenuRelevantDisplayId: CGDirectDisplayID = 0
 
@@ -22,6 +25,23 @@ class MenuHandler: NSMenu, NSMenuDelegate {
   func menuWillOpen(_: NSMenu) {
     self.updateMenuRelevantDisplay()
     app.keyboardShortcuts.disengage()
+    if self.showsSystemControls {
+      CoreBrightnessService.shared.refresh()
+      self.systemControlsTimer?.invalidate()
+      let timer = Timer(timeInterval: 2, repeats: true) { _ in
+        Task { @MainActor in CoreBrightnessService.shared.refresh() }
+      }
+      RunLoop.main.add(timer, forMode: .eventTracking)
+      self.systemControlsTimer = timer
+    }
+  }
+
+  func menuDidClose(_: NSMenu) {
+    self.systemControlsTimer?.invalidate()
+    self.systemControlsTimer = nil
+    if self.showsSystemControls {
+      CoreBrightnessService.shared.nightShiftTemperature?.setEditing(false)
+    }
   }
 
   func closeMenu() {
@@ -71,6 +91,7 @@ class MenuHandler: NSMenu, NSMenuDelegate {
         self.addCombinedDisplayMenuBlock()
       }
     }
+    self.addSystemControls()
     self.addDefaultMenuOptions()
   }
 
@@ -78,12 +99,6 @@ class MenuHandler: NSMenu, NSMenuDelegate {
     let item = NSMenuItem()
     item.view = sliderHandler.view
     monitorSubMenu.insertItem(item, at: 0)
-    if app.macOS10() {
-      let sliderHeaderItem = NSMenuItem()
-      let attrs: [NSAttributedString.Key: Any] = [.foregroundColor: NSColor.systemGray, .font: NSFont.systemFont(ofSize: 12)]
-      sliderHeaderItem.attributedTitle = NSAttributedString(string: sliderHandler.title, attributes: attrs)
-      monitorSubMenu.insertItem(sliderHeaderItem, at: 0)
-    }
   }
 
   func setupMenuSliderHandler(command: Command, display: Display, title: String) -> SliderHandler {
@@ -101,66 +116,72 @@ class MenuHandler: NSMenu, NSMenuDelegate {
     }
   }
 
-  func addDisplayMenuBlock(addedSliderHandlers: [SliderHandler], blockName: String, monitorSubMenu: NSMenu, numOfDisplays: Int, asSubMenu: Bool) {
-    if numOfDisplays > 1, prefs.integer(forKey: PrefKey.multiSliders.rawValue) != MultiSliders.relevant.rawValue, !DEBUG_MACOS10, #available(macOS 11.0, *) {
-      class BlockView: NSView {
-        override func draw(_: NSRect) {
-          let radius = prefs.bool(forKey: PrefKey.showTickMarks.rawValue) ? CGFloat(4) : CGFloat(11)
-          let outerMargin = CGFloat(15)
-          let blockRect = self.frame.insetBy(dx: outerMargin, dy: outerMargin / 2 + 2).offsetBy(dx: 0, dy: outerMargin / 2 * -1 + 7)
-          for i in 1 ... 5 {
-            let blockPath = NSBezierPath(roundedRect: blockRect.insetBy(dx: CGFloat(i) * -1, dy: CGFloat(i) * -1), xRadius: radius + CGFloat(i) * 0.5, yRadius: radius + CGFloat(i) * 0.5)
-            NSColor.black.withAlphaComponent(0.1 / CGFloat(i)).setStroke()
-            blockPath.stroke()
-          }
-          let blockPath = NSBezierPath(roundedRect: blockRect, xRadius: radius, yRadius: radius)
-          if [NSAppearance.Name.darkAqua, NSAppearance.Name.vibrantDark].contains(effectiveAppearance.name) {
-            NSColor.systemGray.withAlphaComponent(0.3).setStroke()
-            blockPath.stroke()
-          }
-          if ![NSAppearance.Name.darkAqua, NSAppearance.Name.vibrantDark].contains(effectiveAppearance.name) {
-            NSColor.white.withAlphaComponent(0.5).setFill()
-            blockPath.fill()
-          }
-        }
-      }
-      var contentWidth: CGFloat = 0
-      var contentHeight: CGFloat = 0
-      for addedSliderHandler in addedSliderHandlers {
-        contentWidth = max(addedSliderHandler.view!.frame.width, contentWidth)
-        contentHeight += addedSliderHandler.view!.frame.height
-      }
-      let margin = CGFloat(13)
-      var blockNameView: NSTextField?
-      if blockName != "" {
-        contentHeight += 21
-        let attrs: [NSAttributedString.Key: Any] = [.foregroundColor: NSColor.textColor, .font: NSFont.boldSystemFont(ofSize: 12)]
-        blockNameView = NSTextField(labelWithAttributedString: NSAttributedString(string: blockName, attributes: attrs))
-        blockNameView?.frame.size.width = contentWidth - margin * 2
-        blockNameView?.alphaValue = 0.5
-      }
-      let itemView = BlockView(frame: NSRect(x: 0, y: 0, width: contentWidth + margin * 2, height: contentHeight + margin * 2))
-      var sliderPosition = CGFloat(margin * -1 + 1)
-      for addedSliderHandler in addedSliderHandlers {
-        addedSliderHandler.view!.setFrameOrigin(NSPoint(x: margin, y: margin + sliderPosition + 13))
-        itemView.addSubview(addedSliderHandler.view!)
-        sliderPosition += addedSliderHandler.view!.frame.height
-      }
-      if let blockNameView = blockNameView {
-        blockNameView.setFrameOrigin(NSPoint(x: margin + 13, y: contentHeight - 8))
-        itemView.addSubview(blockNameView)
-      }
+  func addDisplayMenuBlock(addedSliderHandlers: [SliderHandler], blockName: String, monitorSubMenu: NSMenu, numOfDisplays _: Int, asSubMenu: Bool, resolution: String? = nil) {
+    self.addSystemDisplayBlock(addedSliderHandlers: addedSliderHandlers, name: blockName, resolution: resolution, menu: monitorSubMenu)
+    if asSubMenu {
       let item = NSMenuItem()
-      item.view = itemView
-      if addedSliderHandlers.count != 0 {
-        monitorSubMenu.insertItem(item, at: 0)
-      }
-    } else {
-      for addedSliderHandler in addedSliderHandlers {
-        self.addSliderItem(monitorSubMenu: monitorSubMenu, sliderHandler: addedSliderHandler)
-      }
+      item.title = blockName
+      item.submenu = monitorSubMenu
+      self.insertItem(item, at: 0)
     }
-    self.appendMenuHeader(friendlyName: blockName, monitorSubMenu: monitorSubMenu, asSubMenu: asSubMenu, numOfDisplays: numOfDisplays)
+  }
+
+  private func displayResolution(_ displayID: CGDirectDisplayID) -> String? {
+    guard prefs.bool(forKey: PrefKey.showDisplayResolution.rawValue),
+          let mode = CGDisplayCopyDisplayMode(displayID) else { return nil }
+    // Logical dimensions match the scaled resolution shown in macOS settings.
+    return "\(mode.width)×\(mode.height)"
+  }
+
+  private func addSystemDisplayBlock(addedSliderHandlers: [SliderHandler], name: String, resolution: String?, menu: NSMenu) {
+    guard !addedSliderHandlers.isEmpty else { return }
+    let width = addedSliderHandlers.compactMap { $0.view?.frame.width }.max() ?? 300
+    let headerHeight: CGFloat = resolution == nil ? 28 : 42
+    let height = addedSliderHandlers.compactMap { $0.view?.frame.height }.reduce(0, +) + headerHeight + 4
+    let block = NSView(frame: NSRect(x: 0, y: 0, width: width, height: height))
+    var y: CGFloat = 2
+    for handler in addedSliderHandlers {
+      guard let view = handler.view else { continue }
+      view.setFrameOrigin(NSPoint(x: 0, y: y))
+      block.addSubview(view)
+      y += view.frame.height
+    }
+    let title = NSTextField(labelWithString: name)
+    title.font = .boldSystemFont(ofSize: 13)
+    title.lineBreakMode = .byTruncatingTail
+    title.frame = NSRect(x: 12, y: height - 26, width: width - 24, height: 18)
+    block.addSubview(title)
+    if let resolution = resolution {
+      let subtitle = NSTextField(labelWithString: resolution)
+      subtitle.font = .systemFont(ofSize: 11)
+      subtitle.textColor = .secondaryLabelColor
+      subtitle.frame = NSRect(x: 12, y: height - 42, width: width - 24, height: 16)
+      block.addSubview(subtitle)
+    }
+    let item = NSMenuItem()
+    item.view = block
+    menu.insertItem(item, at: 0)
+  }
+
+  private var showsSystemControls: Bool {
+    [PrefKey.showSystemControls, .showNightShiftTemperature].contains {
+      prefs.bool(forKey: $0.rawValue)
+    }
+  }
+
+  private func addSystemControls() {
+    guard self.showsSystemControls else { return }
+    // NSMenu views are constructed synchronously on AppKit's main thread.
+    MainActor.assumeIsolated {
+      let effects = CoreBrightnessService.shared
+      let showEffects = prefs.bool(forKey: PrefKey.showSystemControls.rawValue)
+      let temperature = prefs.bool(forKey: PrefKey.showNightShiftTemperature.rawValue) && effects.nightShiftTemperature != nil
+      let view = NSHostingView(rootView: SystemControlsView(showEffects: showEffects, showTemperature: temperature))
+      view.frame.size = view.fittingSize
+      let item = NSMenuItem()
+      item.view = view
+      self.addItem(item)
+    }
   }
 
   func addCombinedDisplayMenuBlock() {
@@ -195,23 +216,10 @@ class MenuHandler: NSMenu, NSMenuDelegate {
       addedSliderHandlers.append(self.setupMenuSliderHandler(command: .brightness, display: display, title: title))
     }
     if prefs.integer(forKey: PrefKey.multiSliders.rawValue) != MultiSliders.combine.rawValue {
-      self.addDisplayMenuBlock(addedSliderHandlers: addedSliderHandlers, blockName: display.readPrefAsString(key: .friendlyName) != "" ? display.readPrefAsString(key: .friendlyName) : display.name, monitorSubMenu: monitorSubMenu, numOfDisplays: numOfDisplays, asSubMenu: asSubMenu)
+      self.addDisplayMenuBlock(addedSliderHandlers: addedSliderHandlers, blockName: display.readPrefAsString(key: .friendlyName) != "" ? display.readPrefAsString(key: .friendlyName) : display.name, monitorSubMenu: monitorSubMenu, numOfDisplays: numOfDisplays, asSubMenu: asSubMenu, resolution: self.displayResolution(display.identifier))
     }
     if addedSliderHandlers.count > 0, prefs.integer(forKey: PrefKey.menuIcon.rawValue) == MenuIcon.sliderOnly.rawValue {
       app.updateStatusItemVisibility(true)
-    }
-  }
-
-  private func appendMenuHeader(friendlyName: String, monitorSubMenu: NSMenu, asSubMenu: Bool, numOfDisplays: Int) {
-    let monitorMenuItem = NSMenuItem()
-    if asSubMenu {
-      monitorMenuItem.title = "\(friendlyName)"
-      monitorMenuItem.submenu = monitorSubMenu
-      self.insertItem(monitorMenuItem, at: 0)
-    } else if app.macOS10(), numOfDisplays > 1 {
-      let attrs: [NSAttributedString.Key: Any] = [.foregroundColor: NSColor.systemGray, .font: NSFont.boldSystemFont(ofSize: 12)]
-      monitorMenuItem.attributedTitle = NSAttributedString(string: "\(friendlyName)", attributes: attrs)
-      self.insertItem(monitorMenuItem, at: 0)
     }
   }
 
@@ -226,68 +234,32 @@ class MenuHandler: NSMenu, NSMenuDelegate {
   }
 
   func addDefaultMenuOptions() {
-    if !DEBUG_MACOS10, #available(macOS 11.0, *), prefs.integer(forKey: PrefKey.menuItemStyle.rawValue) == MenuItemStyle.icon.rawValue {
-      let iconSize = CGFloat(18)
-      let viewWidth = max(130, self.size.width)
-      var compensateForBlock: CGFloat = 0
-      if viewWidth > 230 { // if there are display blocks, we need to compensate a bit for the negative inset of the blocks
-        compensateForBlock = 4
-      }
+    let style = prefs.integer(forKey: PrefKey.menuItemStyle.rawValue)
+    guard style != MenuItemStyle.hide.rawValue else { return }
+    let showIcons = style == MenuItemStyle.icon.rawValue
+    self.addItem(NSMenuItem.separator())
+    self.addSystemMenuAction(title: NSLocalizedString("Settings…", comment: "Shown in menu"),
+                             symbol: showIcons ? "gearshape" : nil,
+                             action: #selector(app.prefsClicked), target: app, key: ",")
+    self.addSystemMenuAction(title: NSLocalizedString("Check for updates…", comment: "Shown in menu"),
+                             symbol: showIcons ? "arrow.triangle.2.circlepath" : nil,
+                             action: #selector(app.updaterController.checkForUpdates(_:)), target: app.updaterController)
+    self.addItem(NSMenuItem.separator())
+    self.addSystemMenuAction(title: NSLocalizedString("Quit", comment: "Shown in menu"),
+                             symbol: nil, action: #selector(app.quitClicked), target: app, key: "q")
+  }
 
-      let menuItemView = NSView(frame: NSRect(x: 0, y: 0, width: viewWidth, height: iconSize + 10))
-
-      let settingsIcon = NSButton()
-      settingsIcon.bezelStyle = .regularSquare
-      settingsIcon.isBordered = false
-      settingsIcon.setButtonType(.momentaryChange)
-      settingsIcon.image = NSImage(systemSymbolName: "gearshape", accessibilityDescription: NSLocalizedString("Settings…", comment: "Shown in menu"))
-      settingsIcon.alternateImage = NSImage(systemSymbolName: "gearshape.fill", accessibilityDescription: NSLocalizedString("Settings…", comment: "Shown in menu"))
-      settingsIcon.alphaValue = 0.3
-      settingsIcon.frame = NSRect(x: menuItemView.frame.maxX - iconSize * 3 - 20 - 17 + compensateForBlock, y: menuItemView.frame.origin.y + 5, width: iconSize, height: iconSize)
-      settingsIcon.imageScaling = .scaleProportionallyUpOrDown
-      settingsIcon.action = #selector(app.prefsClicked)
-
-      let updateIcon = NSButton()
-      updateIcon.bezelStyle = .regularSquare
-      updateIcon.isBordered = false
-      updateIcon.setButtonType(.momentaryChange)
-      var symbolName = prefs.bool(forKey: PrefKey.showTickMarks.rawValue) ? "arrow.left.arrow.right.square" : "arrow.triangle.2.circlepath.circle"
-      updateIcon.image = NSImage(systemSymbolName: symbolName, accessibilityDescription: NSLocalizedString("Check for updates…", comment: "Shown in menu"))
-      updateIcon.alternateImage = NSImage(systemSymbolName: symbolName + ".fill", accessibilityDescription: NSLocalizedString("Check for updates…", comment: "Shown in menu"))
-
-      updateIcon.alphaValue = 0.3
-      updateIcon.frame = NSRect(x: menuItemView.frame.maxX - iconSize * 2 - 14 - 17 + compensateForBlock, y: menuItemView.frame.origin.y + 5, width: iconSize, height: iconSize)
-      updateIcon.imageScaling = .scaleProportionallyUpOrDown
-      updateIcon.action = #selector(app.updaterController.checkForUpdates(_:))
-      updateIcon.target = app.updaterController
-
-      let quitIcon = NSButton()
-      quitIcon.bezelStyle = .regularSquare
-      quitIcon.isBordered = false
-      quitIcon.setButtonType(.momentaryChange)
-      symbolName = prefs.bool(forKey: PrefKey.showTickMarks.rawValue) ? "multiply.square" : "xmark.circle"
-      quitIcon.image = NSImage(systemSymbolName: symbolName, accessibilityDescription: NSLocalizedString("Quit", comment: "Shown in menu"))
-      quitIcon.alternateImage = NSImage(systemSymbolName: symbolName + ".fill", accessibilityDescription: NSLocalizedString("Quit", comment: "Shown in menu"))
-      quitIcon.alphaValue = 0.3
-      quitIcon.frame = NSRect(x: menuItemView.frame.maxX - iconSize - 17 + compensateForBlock, y: menuItemView.frame.origin.y + 5, width: iconSize, height: iconSize)
-      quitIcon.imageScaling = .scaleProportionallyUpOrDown
-      quitIcon.action = #selector(app.quitClicked)
-
-      menuItemView.addSubview(settingsIcon)
-      menuItemView.addSubview(updateIcon)
-      menuItemView.addSubview(quitIcon)
-      let item = NSMenuItem()
-      item.view = menuItemView
-      self.insertItem(item, at: self.items.count)
-    } else if prefs.integer(forKey: PrefKey.menuItemStyle.rawValue) != MenuItemStyle.hide.rawValue {
-      if app.macOS10() {
-        self.insertItem(NSMenuItem.separator(), at: self.items.count)
-      }
-      self.insertItem(withTitle: NSLocalizedString("Settings…", comment: "Shown in menu"), action: #selector(app.prefsClicked), keyEquivalent: ",", at: self.items.count)
-      let updateItem = NSMenuItem(title: NSLocalizedString("Check for updates…", comment: "Shown in menu"), action: #selector(app.updaterController.checkForUpdates(_:)), keyEquivalent: "")
-      updateItem.target = app.updaterController
-      self.insertItem(updateItem, at: self.items.count)
-      self.insertItem(withTitle: NSLocalizedString("Quit", comment: "Shown in menu"), action: #selector(app.quitClicked), keyEquivalent: "q", at: self.items.count)
+  private func addSystemMenuAction(title: String, symbol: String?, action: Selector, target: AnyObject, key: String = "") {
+    let item = NSMenuItem(title: title, action: action, keyEquivalent: key)
+    item.target = target
+    MainActor.assumeIsolated {
+      let view = NSHostingView(rootView: MenuActionRow(title: title, symbol: symbol) { [weak self, weak item] in
+        self?.cancelTrackingWithoutAnimation()
+        NSApp.sendAction(action, to: target, from: item)
+      })
+      view.frame.size = view.fittingSize
+      item.view = view
     }
+    self.addItem(item)
   }
 }

@@ -9,6 +9,12 @@
 /* Begin PBXBuildFile section */
 		28D1DDF2227FBE71004CB494 /* NSScreen+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D1DDF1227FBE71004CB494 /* NSScreen+Extension.swift */; };
 		28D1DDF3227FC8C6004CB494 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 56754EB01D9A4016007BCDC5 /* Assets.xcassets */; };
+		2D5C19ED3059864D0019FDA8 /* NightShiftTemperatureClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D5C19EC3059864D0019FDA8 /* NightShiftTemperatureClient.swift */; };
+		2D5C19EF305986500019FDA8 /* NightShiftTemperatureController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D5C19EE305986500019FDA8 /* NightShiftTemperatureController.swift */; };
+		2D5C19F1305986580019FDA8 /* CoreBrightnessService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D5C19F0305986580019FDA8 /* CoreBrightnessService.swift */; };
+		2D5C19F33059865B0019FDA8 /* ScreenEffectsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D5C19F23059865B0019FDA8 /* ScreenEffectsView.swift */; };
+		2D5C19F53059865F0019FDA8 /* SystemControlsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D5C19F43059865F0019FDA8 /* SystemControlsView.swift */; };
+		2D5C19F7305988820019FDA8 /* Crisp-LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2D5C19F6305988820019FDA8 /* Crisp-LICENSE.txt */; };
 		56754EAF1D9A4016007BCDC5 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56754EAE1D9A4016007BCDC5 /* main.swift */; };
 		56754EB11D9A4016007BCDC5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 56754EB01D9A4016007BCDC5 /* Assets.xcassets */; };
 		6C85EFDA22C941B000227EA1 /* DisplayManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C85EFD922C941B000227EA1 /* DisplayManager.swift */; };
@@ -82,6 +88,12 @@
 		17DE48C5273E9DC500A1779F /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/InternetAccessPolicy.strings; sourceTree = "<group>"; };
 		17DE48C6273E9DC500A1779F /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		28D1DDF1227FBE71004CB494 /* NSScreen+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSScreen+Extension.swift"; sourceTree = "<group>"; };
+		2D5C19EC3059864D0019FDA8 /* NightShiftTemperatureClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NightShiftTemperatureClient.swift; sourceTree = "<group>"; };
+		2D5C19EE305986500019FDA8 /* NightShiftTemperatureController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NightShiftTemperatureController.swift; sourceTree = "<group>"; };
+		2D5C19F0305986580019FDA8 /* CoreBrightnessService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreBrightnessService.swift; sourceTree = "<group>"; };
+		2D5C19F23059865B0019FDA8 /* ScreenEffectsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenEffectsView.swift; sourceTree = "<group>"; };
+		2D5C19F43059865F0019FDA8 /* SystemControlsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemControlsView.swift; sourceTree = "<group>"; };
+		2D5C19F6305988820019FDA8 /* Crisp-LICENSE.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "Crisp-LICENSE.txt"; sourceTree = "<group>"; };
 		2FBCCED52853930200C06A13 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
 		2FBCCED62853930200C06A13 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InternetAccessPolicy.strings; sourceTree = "<group>"; };
 		2FBCCED72853930200C06A13 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -318,6 +330,11 @@
 				AA16139A26BE772E00DCF027 /* Arm64DDC.swift */,
 				AA4398A826DD55DA00943F16 /* IntelDDC.swift */,
 				FE4E0895249D584C003A50BB /* OSDUtils.swift */,
+				2D5C19EC3059864D0019FDA8 /* NightShiftTemperatureClient.swift */,
+				2D5C19EE305986500019FDA8 /* NightShiftTemperatureController.swift */,
+				2D5C19F0305986580019FDA8 /* CoreBrightnessService.swift */,
+				2D5C19F23059865B0019FDA8 /* ScreenEffectsView.swift */,
+				2D5C19F43059865F0019FDA8 /* SystemControlsView.swift */,
 			);
 			path = Support;
 			sourceTree = "<group>";
@@ -328,6 +345,7 @@
 				8C17418A2707B91F00E88D53 /* InternetAccessPolicy.strings */,
 				F01B0680228221B6008E64DB /* Localizable.strings */,
 				6CDA0FCD26485A8300F52125 /* Main.storyboard */,
+				2D5C19F6305988820019FDA8 /* Crisp-LICENSE.txt */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -494,6 +512,7 @@
 			files = (
 				AAB2F642273ED0C7004AB5A4 /* .github in Resources */,
 				AAB2F63E273ED0AD004AB5A4 /* .swiftformat in Resources */,
+				2D5C19F7305988820019FDA8 /* Crisp-LICENSE.txt in Resources */,
 				56754EB11D9A4016007BCDC5 /* Assets.xcassets in Resources */,
 				6CDA0FCF26485A8300F52125 /* Main.storyboard in Resources */,
 				AAB2F640273ED0B8004AB5A4 /* .bartycrouch.toml in Resources */,
@@ -622,6 +641,7 @@
 				AA062E8A26C9A039007E628C /* DisplaysPrefsViewController.swift in Sources */,
 				AA473EB126DFF8DE0063A181 /* Command.swift in Sources */,
 				6CC260F6256AD8F900613714 /* Preferences+Extension.swift in Sources */,
+				2D5C19F1305986580019FDA8 /* CoreBrightnessService.swift in Sources */,
 				AA99521926FE49A300612E07 /* MenuHandler.swift in Sources */,
 				AA665A5D26C5892800FEF2C1 /* AboutPrefsViewController.swift in Sources */,
 				6CBFE27C23DB27A200D1BC41 /* AppleDisplay.swift in Sources */,
@@ -629,6 +649,8 @@
 				AA25F6D726E68C160087F3A2 /* MediaKeyTapManager.swift in Sources */,
 				FE4E0896249D584C003A50BB /* OSDUtils.swift in Sources */,
 				6CBFE27A23DB266000D1BC41 /* Display.swift in Sources */,
+				2D5C19F33059865B0019FDA8 /* ScreenEffectsView.swift in Sources */,
+				2D5C19ED3059864D0019FDA8 /* NightShiftTemperatureClient.swift in Sources */,
 				CB0D15010000000000000001 /* KeyboardShortcuts.swift in Sources */,
 				AA44E70727038F7F00E06865 /* KeyboardShortcutsManager.swift in Sources */,
 				F03A8DF21FFBAA6F0034DC27 /* OtherDisplay.swift in Sources */,
@@ -638,7 +660,9 @@
 				AA16139B26BE772E00DCF027 /* Arm64DDC.swift in Sources */,
 				F0445D3820023E710025AE82 /* MainPrefsViewController.swift in Sources */,
 				28D1DDF2227FBE71004CB494 /* NSScreen+Extension.swift in Sources */,
+				2D5C19EF305986500019FDA8 /* NightShiftTemperatureController.swift in Sources */,
 				AA99521726FE25AB00612E07 /* AppDelegate.swift in Sources */,
+				2D5C19F53059865F0019FDA8 /* SystemControlsView.swift in Sources */,
 				AA25F6D126E681D30087F3A2 /* KeyboardPrefsViewController.swift in Sources */,
 				F01B069F228221B7008E64DB /* SliderHandler.swift in Sources */,
 				AACE5E2327050C63006C2A48 /* NSNotification+Extension.swift in Sources */,
@@ -880,7 +904,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 4.4.0;
 				PRODUCT_BUNDLE_IDENTIFIER = app.monitorcontrol.MonitorControl;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -917,7 +941,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 4.4.0;
 				PRODUCT_BUNDLE_IDENTIFIER = app.monitorcontrol.MonitorControl;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -954,7 +978,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 4.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = app.monitorcontrol.MonitorControlHelper;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -985,7 +1009,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 4.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = app.monitorcontrol.MonitorControlHelper;
 				PRODUCT_NAME = "$(TARGET_NAME)";

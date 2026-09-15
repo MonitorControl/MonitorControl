@@ -32,7 +32,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   let updaterController = SPUStandardUpdaterController(startingUpdater: false, updaterDelegate: UpdaterDelegate(), userDriverDelegate: nil)
 
   var settingsPaneStyle: Settings.Style {
-    if !DEBUG_MACOS10, #available(macOS 11.0, *) {
+    if !DEBUG_MACOS10 {
       return Settings.Style.toolbarItems
     } else {
       return Settings.Style.segmentedControl
@@ -77,9 +77,43 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
   }
 
+  private weak var settingsWindowAwaitingActivation: NSWindow?
+
   @objc func prefsClicked(_: AnyObject) {
     os_log("Settings clicked", type: .info)
-    self.settingsWindowController.show()
+    // Request activation while still handling the user's menu action.
+    NSApp.activate()
+    menu?.cancelTrackingWithoutAnimation()
+    // A main-queue block can run during menu tracking. Use the default mode
+    // so the menu has finished restoring the previously active application.
+    RunLoop.main.perform(inModes: [.default]) {
+      guard let window = self.settingsWindowController.window else { return }
+      window.collectionBehavior.remove(.canJoinAllSpaces)
+      window.collectionBehavior.formUnion([.moveToActiveSpace, .fullScreenAuxiliary])
+      self.settingsWindowController.show()
+      if window.isMiniaturized {
+        window.deminiaturize(self)
+      }
+      self.settingsWindowAwaitingActivation = window
+      window.makeKeyAndOrderFront(self)
+      window.orderFrontRegardless()
+      NSApp.activate()
+      if NSApp.isActive {
+        self.focusSettingsAfterActivation()
+      }
+    }
+  }
+
+  func applicationDidBecomeActive(_: Notification) {
+    self.focusSettingsAfterActivation()
+  }
+
+  private func focusSettingsAfterActivation() {
+    guard let window = self.settingsWindowAwaitingActivation else { return }
+    self.settingsWindowAwaitingActivation = nil
+    guard window.isVisible else { return }
+    window.makeKeyAndOrderFront(self)
+    window.orderFrontRegardless()
   }
 
   private func currentReopenSenderBundleIdentifier() -> String? {
@@ -127,6 +161,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   }
 
   func setDefaultPrefs() {
+    prefs.register(defaults: [
+      PrefKey.showDisplayResolution.rawValue: true,
+      PrefKey.showSystemControls.rawValue: true,
+      PrefKey.showNightShiftTemperature.rawValue: true,
+    ])
     if !prefs.bool(forKey: PrefKey.appAlreadyLaunched.rawValue) {
       // Only settings that are not false, 0 or "" by default are set here. Assumes pre-wiped database.
       prefs.set(true, forKey: PrefKey.appAlreadyLaunched.rawValue)
@@ -337,7 +376,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   }
 
   func macOS10() -> Bool {
-    if !DEBUG_MACOS10, #available(macOS 11.0, *) {
+    if !DEBUG_MACOS10 {
       return false
     } else {
       return true

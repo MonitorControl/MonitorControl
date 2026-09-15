@@ -44,6 +44,8 @@ brew install --cask monitorcontrol
 - Support for custom keyboard shortcuts as well as standard brightness and media keys on Apple keyboards.
 - Dozens of customization options to tweak the inner workings of the app to suit your hardware and needs (don't forget to enable `Show advanced settings` in app Settings).
 - Simple, unobtrusive UI to blend in to the general aesthetics of macOS.
+- Native menu sliders with optional current display resolution labels.
+- System Dark Mode, Night Shift and True Tone share one option in Settings > App menu. Night Shift temperature has a separate option. Both are enabled by default. Show percentages also controls the Night Shift temperature value.
 - Completely FREE.
 
 For additional features, more advanced brightness control with XDR/HDR brightness upscaling and support for more Mac models and displays, check out [BetterDisplay](https://github.com/waydabber/BetterDisplay#readme)!
@@ -69,6 +71,8 @@ For additional features, more advanced brightness control with XDR/HDR brightnes
 8. If you have any questions, go to [Discussions](https://github.com/MonitorControl/MonitorControl/discussions)!
 
 ### macOS compatibility
+
+Building this branch requires macOS 14 or later as the deployment target. The menu modernization drops support for macOS 10.14 through 13. Earlier releases remain available below.
 
 | MonitorControl version | macOS version     |
 | ---------------------- | ----------------- |
