@@ -44,17 +44,13 @@ class MainPrefsViewController: NSViewController, SettingsPane {
     }
   }
 
-  @available(macOS, deprecated: 10.10)
   override func viewDidLoad() {
     super.viewDidLoad()
     self.populateSettings()
   }
 
-  @available(macOS, deprecated: 10.10)
   func populateSettings() {
-    // This is marked as deprectated but according to the function header it still does not have a replacement as of macOS 12 Monterey and is valid to use.
-    let startAtLogin = (SMCopyAllJobDictionaries(kSMDomainUserLaunchd).takeRetainedValue() as? [[String: AnyObject]])?.first { $0["Label"] as? String == "\(Bundle.main.bundleIdentifier!)Helper" }?["OnDemand"] as? Bool ?? false
-    self.startAtLogin.state = startAtLogin ? .on : .off
+    self.refreshStartAtLogin()
     self.automaticUpdateCheck.state = prefs.bool(forKey: PrefKey.SUEnableAutomaticChecks.rawValue) ? .on : .off
     self.combinedBrightness.state = prefs.bool(forKey: PrefKey.disableCombinedBrightness.rawValue) ? .off : .on
     self.allowZeroSwBrightness.state = prefs.bool(forKey: PrefKey.allowZeroSwBrightness.rawValue) ? .on : .off
@@ -69,14 +65,19 @@ class MainPrefsViewController: NSViewController, SettingsPane {
     self.updateGridLayout()
   }
 
+  override func viewWillAppear() {
+    super.viewWillAppear()
+    self.refreshStartAtLogin()
+  }
+
+  func refreshStartAtLogin() {
+    guard self.isViewLoaded else { return }
+    self.startAtLogin.state = SMAppService.mainApp.status == .enabled ? .on : .off
+  }
+
   @IBAction func startAtLoginClicked(_ sender: NSButton) {
-    switch sender.state {
-    case .on:
-      app.setStartAtLogin(enabled: true)
-    case .off:
-      app.setStartAtLogin(enabled: false)
-    default: break
-    }
+    app.setStartAtLogin(enabled: sender.state == .on)
+    self.refreshStartAtLogin()
   }
 
   @IBAction func automaticUpdateCheck(_ sender: NSButton) {
@@ -145,7 +146,6 @@ class MainPrefsViewController: NSViewController, SettingsPane {
     self.updateGridLayout()
   }
 
-  @available(macOS, deprecated: 10.10)
   func resetSheetModalHander(modalResponse: NSApplication.ModalResponse) {
     if modalResponse == NSApplication.ModalResponse.alertFirstButtonReturn {
       app.settingsReset()
@@ -156,7 +156,6 @@ class MainPrefsViewController: NSViewController, SettingsPane {
     }
   }
 
-  @available(macOS, deprecated: 10.10)
   @IBAction func resetPrefsClicked(_: NSButton) {
     let alert = NSAlert()
     alert.messageText = NSLocalizedString("Reset Settings?", comment: "Shown in the alert dialog")

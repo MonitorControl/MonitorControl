@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		28D1DDF2227FBE71004CB494 /* NSScreen+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D1DDF1227FBE71004CB494 /* NSScreen+Extension.swift */; };
-		28D1DDF3227FC8C6004CB494 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 56754EB01D9A4016007BCDC5 /* Assets.xcassets */; };
 		2D5C19ED3059864D0019FDA8 /* NightShiftTemperatureClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D5C19EC3059864D0019FDA8 /* NightShiftTemperatureClient.swift */; };
 		2D5C19EF305986500019FDA8 /* NightShiftTemperatureController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D5C19EE305986500019FDA8 /* NightShiftTemperatureController.swift */; };
 		2D5C19F1305986580019FDA8 /* CoreBrightnessService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D5C19F0305986580019FDA8 /* CoreBrightnessService.swift */; };
@@ -60,8 +59,6 @@
 		F01B069F228221B7008E64DB /* SliderHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01B068F228221B7008E64DB /* SliderHandler.swift */; };
 		F03A8DF21FFBAA6F0034DC27 /* OtherDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03A8DF11FFBAA6F0034DC27 /* OtherDisplay.swift */; };
 		F0445D3820023E710025AE82 /* MainPrefsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0445D3720023E710025AE82 /* MainPrefsViewController.swift */; };
-		F06792EA200A73460066C438 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = F06792E9200A73460066C438 /* main.swift */; };
-		F06792F6200A745F0066C438 /* MonitorControlHelper.app in [Login] Copy Helper to start at Login */ = {isa = PBXBuildFile; fileRef = F06792E7200A73460066C438 /* MonitorControlHelper.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		F0A489C4279C71B200BEDFD6 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A489C3279C71B200BEDFD6 /* OnboardingViewController.swift */; };
 		FE4E0896249D584C003A50BB /* OSDUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE4E0895249D584C003A50BB /* OSDUtils.swift */; };
 /* End PBXBuildFile section */
@@ -73,7 +70,6 @@
 			dstPath = Contents/Library/LoginItems;
 			dstSubfolderSpec = 1;
 			files = (
-				F06792F6200A745F0066C438 /* MonitorControlHelper.app in [Login] Copy Helper to start at Login */,
 			);
 			name = "[Login] Copy Helper to start at Login";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -185,10 +181,6 @@
 		F01B068F228221B7008E64DB /* SliderHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SliderHandler.swift; sourceTree = "<group>"; };
 		F03A8DF11FFBAA6F0034DC27 /* OtherDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherDisplay.swift; sourceTree = "<group>"; };
 		F0445D3720023E710025AE82 /* MainPrefsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPrefsViewController.swift; sourceTree = "<group>"; };
-		F06792E7200A73460066C438 /* MonitorControlHelper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MonitorControlHelper.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		F06792E9200A73460066C438 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
-		F06792F0200A73470066C438 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F06792F1200A73470066C438 /* MonitorControlHelper.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MonitorControlHelper.entitlements; sourceTree = "<group>"; };
 		F0A489C3279C71B200BEDFD6 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		FB5DB28E2AD54C4600306223 /* pt-PT */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-PT"; path = "pt-PT.lproj/Main.strings"; sourceTree = "<group>"; };
 		FB5DB28F2AD54C4600306223 /* pt-PT */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-PT"; path = "pt-PT.lproj/InternetAccessPolicy.strings"; sourceTree = "<group>"; };
@@ -208,13 +200,6 @@
 				AA9AE86F26B5BF3D00B6CA65 /* OSD.framework in Frameworks */,
 				AAD7DD342CAFF3D90062822F /* Settings in Frameworks */,
 				AADB625A26BC196900DFFAA5 /* DisplayServices.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		F06792E4200A73460066C438 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -248,7 +233,6 @@
 				AAB2F646273ED127004AB5A4 /* Misc */,
 				28D1DDD1227FB759004CB494 /* Frameworks */,
 				56754EAD1D9A4016007BCDC5 /* MonitorControl */,
-				F06792E8200A73460066C438 /* MonitorControlHelper */,
 				56754EAC1D9A4016007BCDC5 /* Products */,
 			);
 			indentWidth = 2;
@@ -258,7 +242,6 @@
 			isa = PBXGroup;
 			children = (
 				56754EAB1D9A4016007BCDC5 /* MonitorControl.app */,
-				F06792E7200A73460066C438 /* MonitorControlHelper.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -359,16 +342,6 @@
 			path = "View Controllers";
 			sourceTree = "<group>";
 		};
-		F06792E8200A73460066C438 /* MonitorControlHelper */ = {
-			isa = PBXGroup;
-			children = (
-				F06792F0200A73470066C438 /* Info.plist */,
-				F06792E9200A73460066C438 /* main.swift */,
-				F06792F1200A73470066C438 /* MonitorControlHelper.entitlements */,
-			);
-			path = MonitorControlHelper;
-			sourceTree = "<group>";
-		};
 		F0A489C1279C718400BEDFD6 /* Preferences */ = {
 			isa = PBXGroup;
 			children = (
@@ -420,25 +393,6 @@
 			productReference = 56754EAB1D9A4016007BCDC5 /* MonitorControl.app */;
 			productType = "com.apple.product-type.application";
 		};
-		F06792E6200A73460066C438 /* MonitorControlHelper */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = F06792F4200A73470066C438 /* Build configuration list for PBXNativeTarget "MonitorControlHelper" */;
-			buildPhases = (
-				F06792E3200A73460066C438 /* Sources */,
-				F06792E4200A73460066C438 /* Frameworks */,
-				F06792E5200A73460066C438 /* Resources */,
-				28F6A5802283515F00A4ADCD /* Increase Build Number */,
-				28F6A5822283548F00A4ADCD /* Sync Version Numbers */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = MonitorControlHelper;
-			productName = MonitorControlHelper;
-			productReference = F06792E7200A73460066C438 /* MonitorControlHelper.app */;
-			productType = "com.apple.product-type.application";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -452,11 +406,6 @@
 				TargetAttributes = {
 					56754EAA1D9A4016007BCDC5 = {
 						CreatedOnToolsVersion = 8.0;
-						LastSwiftMigration = 1020;
-						ProvisioningStyle = Automatic;
-					};
-					F06792E6200A73460066C438 = {
-						CreatedOnToolsVersion = 9.2;
 						LastSwiftMigration = 1020;
 						ProvisioningStyle = Automatic;
 					};
@@ -500,7 +449,6 @@
 			projectRoot = "";
 			targets = (
 				56754EAA1D9A4016007BCDC5 /* MonitorControl */,
-				F06792E6200A73460066C438 /* MonitorControlHelper */,
 			);
 		};
 /* End PBXProject section */
@@ -527,14 +475,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		F06792E5200A73460066C438 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				28D1DDF3227FC8C6004CB494 /* Assets.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
@@ -556,44 +496,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\nif which swiftformat >/dev/null; then\n  swiftformat .\nelse\n  echo \"warning: SwiftFormat not installed, download from https://github.com/nicklockwood/SwiftFormat\" >&2\nfi\n";
-		};
-		28F6A5802283515F00A4ADCD /* Increase Build Number */ = {
-			isa = PBXShellScriptBuildPhase;
-			alwaysOutOfDate = 1;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Increase Build Number";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = "/bin/bash -euo pipefail";
-			shellScript = "files_have_changed() {\n  test -n \"$(find \"${1}\" ! -path '*xcuserdata*' ! -path '*.git' ! -path '*.git/*' -newer \"${2}\")\"\n}\n\nif files_have_changed \"${PROJECT_DIR}\" \"${INFOPLIST_FILE}\"; then\n  build_number=\"$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"${INFOPLIST_FILE}\")\"\n  new_build_number=\"$((build_number + 1))\"\n\n  /usr/libexec/PlistBuddy -c \"Set :CFBundleVersion ${new_build_number}\" \"${INFOPLIST_FILE/Helper/}\"\n  /usr/libexec/PlistBuddy -c \"Set :CFBundleVersion ${new_build_number}\" \"${INFOPLIST_FILE}\"\nfi\n";
-		};
-		28F6A5822283548F00A4ADCD /* Sync Version Numbers */ = {
-			isa = PBXShellScriptBuildPhase;
-			alwaysOutOfDate = 1;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Sync Version Numbers";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = "/bin/bash -euo pipefail";
-			shellScript = "version_number=\"$(/usr/libexec/PlistBuddy -c \"Print CFBundleShortVersionString\" \"${INFOPLIST_FILE/Helper/}\")\"\n\n/usr/libexec/PlistBuddy -c \"Set :CFBundleShortVersionString ${version_number}\" \"${INFOPLIST_FILE/Helper/}\"\n/usr/libexec/PlistBuddy -c \"Set :CFBundleShortVersionString ${version_number}\" \"${INFOPLIST_FILE}\"\n";
 		};
 		6CB1BDB2253C7EBE00B52124 /* [Localization] Run BartyCrouch */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -669,14 +571,6 @@
 				AA25F6CF26E680510087F3A2 /* MenuslidersPrefsViewController.swift in Sources */,
 				AA4398A926DD55DA00943F16 /* IntelDDC.swift in Sources */,
 				6C85EFDA22C941B000227EA1 /* DisplayManager.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		F06792E3200A73460066C438 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				F06792EA200A73460066C438 /* main.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -905,7 +799,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 4.4.0;
+				MARKETING_VERSION = 5.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = app.monitorcontrol.MonitorControl;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -942,7 +836,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 4.4.0;
+				MARKETING_VERSION = 5.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = app.monitorcontrol.MonitorControl;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -953,68 +847,6 @@
 					"$(inherited)",
 					"$(SYSTEM_LIBRARY_DIR)/PrivateFrameworks",
 				);
-			};
-			name = Release;
-		};
-		F06792F2200A73470066C438 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = MonitorControlHelper/MonitorControlHelper.entitlements;
-				CODE_SIGN_IDENTITY = "-";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 7100;
-				DEAD_CODE_STRIPPING = YES;
-				DEVELOPMENT_TEAM = 299YSU96J7;
-				ENABLE_HARDENED_RUNTIME = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = MonitorControlHelper/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-				);
-				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 4.1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = app.monitorcontrol.MonitorControlHelper;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 5.5;
-			};
-			name = Debug;
-		};
-		F06792F3200A73470066C438 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = MonitorControlHelper/MonitorControlHelper.entitlements;
-				CODE_SIGN_IDENTITY = "-";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 7100;
-				DEAD_CODE_STRIPPING = YES;
-				DEVELOPMENT_TEAM = 299YSU96J7;
-				ENABLE_HARDENED_RUNTIME = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = MonitorControlHelper/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-				);
-				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 4.1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = app.monitorcontrol.MonitorControlHelper;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 5.5;
 			};
 			name = Release;
 		};
@@ -1035,15 +867,6 @@
 			buildConfigurations = (
 				56754EB91D9A4016007BCDC5 /* Debug */,
 				56754EBA1D9A4016007BCDC5 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		F06792F4200A73470066C438 /* Build configuration list for PBXNativeTarget "MonitorControlHelper" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				F06792F2200A73470066C438 /* Debug */,
-				F06792F3200A73470066C438 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

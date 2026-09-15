@@ -105,6 +105,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   }
 
   func applicationDidBecomeActive(_: Notification) {
+    mainPrefsVc?.refreshStartAtLogin()
     self.focusSettingsAfterActivation()
   }
 
@@ -357,8 +358,24 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   }
 
   func setStartAtLogin(enabled: Bool) {
-    let identifier = "\(Bundle.main.bundleIdentifier!)Helper" as CFString
-    SMLoginItemSetEnabled(identifier, enabled)
+    do {
+      let service = SMAppService.mainApp
+      if enabled {
+        if service.status != .enabled, service.status != .requiresApproval {
+          try service.register()
+        }
+        if service.status == .requiresApproval {
+          SMAppService.openSystemSettingsLoginItems()
+        }
+      } else {
+        if service.status != .notRegistered {
+          try service.unregister()
+        }
+      }
+    } catch {
+      os_log("Unable to change launch at login: %{public}@", type: .error, error.localizedDescription)
+      NSAlert(error: error).runModal()
+    }
   }
 
   func getSystemSettings() -> [String: AnyObject]? {

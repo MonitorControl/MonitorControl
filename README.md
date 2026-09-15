@@ -45,6 +45,7 @@ brew install --cask monitorcontrol
 - Dozens of customization options to tweak the inner workings of the app to suit your hardware and needs (don't forget to enable `Show advanced settings` in app Settings).
 - Simple, unobtrusive UI to blend in to the general aesthetics of macOS.
 - Native menu sliders with optional current display resolution labels.
+- Launch at login directly through macOS Service Management, without a separate helper app.
 - System Dark Mode, Night Shift and True Tone share one option in Settings > App menu. Night Shift temperature has a separate option. Both are enabled by default. Show percentages also controls the Night Shift temperature value.
 - Completely FREE.
 
@@ -72,7 +73,7 @@ For additional features, more advanced brightness control with XDR/HDR brightnes
 
 ### macOS compatibility
 
-Building this branch requires macOS 14 or later as the deployment target. The menu modernization drops support for macOS 10.14 through 13. Earlier releases remain available below.
+MonitorControl 5.0.0 requires macOS 14 or later. Earlier releases remain available for older macOS versions.
 
 | MonitorControl version | macOS version     |
 | ---------------------- | ----------------- |
