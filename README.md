@@ -54,6 +54,10 @@ For additional features, more advanced brightness control with XDR/HDR brightnes
 
 ### Settings
 
+<div align="center">
+<img src=".github/settings-general.png" width="940" alt="MonitorControl settings with sidebar navigation and grouped General controls"/>
+</div>
+
 Use the sidebar to switch between General, Appearance, Keyboard, Displays and About.
 General includes launch at login, updates and brightness behavior. Appearance controls
 which sliders, display information and system controls appear in the menu. Keyboard
