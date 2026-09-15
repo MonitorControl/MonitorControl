@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CB0D15010000000000000001 /* KeyboardShortcuts.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB0D15010000000000000002 /* KeyboardShortcuts.swift */; };
 		28D1DDF2227FBE71004CB494 /* NSScreen+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D1DDF1227FBE71004CB494 /* NSScreen+Extension.swift */; };
 		28D1DDF3227FC8C6004CB494 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 56754EB01D9A4016007BCDC5 /* Assets.xcassets */; };
 		56754EAF1D9A4016007BCDC5 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56754EAE1D9A4016007BCDC5 /* main.swift */; };
@@ -28,7 +29,6 @@
 		AA25F6D726E68C160087F3A2 /* MediaKeyTapManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA25F6D626E68C160087F3A2 /* MediaKeyTapManager.swift */; };
 		AA3B4A2826AE103C00B74CD2 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = AA3B4A2726AE103C00B74CD2 /* README.md */; };
 		AA4398A926DD55DA00943F16 /* IntelDDC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4398A826DD55DA00943F16 /* IntelDDC.swift */; };
-		AA44E703270377C200E06865 /* KeyboardShortcuts in Frameworks */ = {isa = PBXBuildFile; productRef = AA44E702270377C200E06865 /* KeyboardShortcuts */; };
 		AA44E7052703790100E06865 /* KeyboardShortcuts+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA44E7042703790100E06865 /* KeyboardShortcuts+Extension.swift */; };
 		AA44E70727038F7F00E06865 /* KeyboardShortcutsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA44E70627038F7F00E06865 /* KeyboardShortcutsManager.swift */; };
 		AA473EB126DFF8DE0063A181 /* Command.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA473EB026DFF8DE0063A181 /* Command.swift */; };
@@ -75,6 +75,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		CB0D15010000000000000002 /* KeyboardShortcuts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardShortcuts.swift; sourceTree = "<group>"; };
 		01D6471D2AF916A800321FFB /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hi; path = hi.lproj/Main.strings; sourceTree = "<group>"; };
 		01D6471E2AF916A800321FFB /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hi; path = hi.lproj/InternetAccessPolicy.strings; sourceTree = "<group>"; };
 		01D6471F2AF916A800321FFB /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hi; path = hi.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -190,7 +191,6 @@
 			files = (
 				AA9AE87126B5BFB700B6CA65 /* CoreDisplay.framework in Frameworks */,
 				AA70817C27046B9800CC5625 /* Sparkle in Frameworks */,
-				AA44E703270377C200E06865 /* KeyboardShortcuts in Frameworks */,
 				6CD35F53264FFFC6001F1344 /* SimplyCoreAudio in Frameworks */,
 				6CD35F5626500008001F1344 /* MediaKeyTap in Frameworks */,
 				AA9AE86F26B5BF3D00B6CA65 /* OSD.framework in Frameworks */,
@@ -313,6 +313,7 @@
 				F01B068F228221B7008E64DB /* SliderHandler.swift */,
 				6C85EFD922C941B000227EA1 /* DisplayManager.swift */,
 				AA25F6D626E68C160087F3A2 /* MediaKeyTapManager.swift */,
+				CB0D15010000000000000002 /* KeyboardShortcuts.swift */,
 				AA44E70627038F7F00E06865 /* KeyboardShortcutsManager.swift */,
 				AA16139A26BE772E00DCF027 /* Arm64DDC.swift */,
 				AA4398A826DD55DA00943F16 /* IntelDDC.swift */,
@@ -394,7 +395,6 @@
 			packageProductDependencies = (
 				6CD35F52264FFFC6001F1344 /* SimplyCoreAudio */,
 				6CD35F5526500008001F1344 /* MediaKeyTap */,
-				AA44E702270377C200E06865 /* KeyboardShortcuts */,
 				AA70817B27046B9800CC5625 /* Sparkle */,
 				AAD7DD332CAFF3D90062822F /* Settings */,
 			);
@@ -475,7 +475,6 @@
 				6CD35F51264FFFC6001F1344 /* XCRemoteSwiftPackageReference "SimplyCoreAudio" */,
 				6CD35F5426500008001F1344 /* XCRemoteSwiftPackageReference "MediaKeyTap" */,
 				6CD35F5A2650003F001F1344 /* XCRemoteSwiftPackageReference "Settings" */,
-				AA44E701270377C200E06865 /* XCRemoteSwiftPackageReference "KeyboardShortcuts" */,
 				AA70817A27046B9800CC5625 /* XCRemoteSwiftPackageReference "Sparkle" */,
 			);
 			productRefGroup = 56754EAC1D9A4016007BCDC5 /* Products */;
@@ -630,6 +629,7 @@
 				AA25F6D726E68C160087F3A2 /* MediaKeyTapManager.swift in Sources */,
 				FE4E0896249D584C003A50BB /* OSDUtils.swift in Sources */,
 				6CBFE27A23DB266000D1BC41 /* Display.swift in Sources */,
+				CB0D15010000000000000001 /* KeyboardShortcuts.swift in Sources */,
 				AA44E70727038F7F00E06865 /* KeyboardShortcutsManager.swift in Sources */,
 				F03A8DF21FFBAA6F0034DC27 /* OtherDisplay.swift in Sources */,
 				AA78BDBD2709FE7B00CA8DF7 /* UpdaterDelegate.swift in Sources */,
@@ -1051,14 +1051,6 @@
 				kind = branch;
 			};
 		};
-		AA44E701270377C200E06865 /* XCRemoteSwiftPackageReference "KeyboardShortcuts" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/sindresorhus/KeyboardShortcuts";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.0;
-			};
-		};
 		AA70817A27046B9800CC5625 /* XCRemoteSwiftPackageReference "Sparkle" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/sparkle-project/Sparkle";
@@ -1079,11 +1071,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 6CD35F5426500008001F1344 /* XCRemoteSwiftPackageReference "MediaKeyTap" */;
 			productName = MediaKeyTap;
-		};
-		AA44E702270377C200E06865 /* KeyboardShortcuts */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = AA44E701270377C200E06865 /* XCRemoteSwiftPackageReference "KeyboardShortcuts" */;
-			productName = KeyboardShortcuts;
 		};
 		AA70817B27046B9800CC5625 /* Sparkle */ = {
 			isa = XCSwiftPackageProductDependency;
