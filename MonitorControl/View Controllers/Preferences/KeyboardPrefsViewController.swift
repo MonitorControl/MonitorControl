@@ -1,7 +1,6 @@
 //  Copyright © MonitorControl. @JoniVR, @theOneyouseek, @waydabber and others
 
 import Cocoa
-import KeyboardShortcuts
 import ServiceManagement
 import Settings
 
@@ -133,13 +132,24 @@ class KeyboardPrefsViewController: NSViewController, SettingsPane {
     customVolumeDownRecorder.placeholderString = customBrightnessDownRecorder.placeholderString
     customMuteRecorder.placeholderString = NSLocalizedString("Mute", comment: "Shown in record shortcut box")
 
-    self.customBrightnessUp.addSubview(customBrightnessUpRecorder)
-    self.customBrightnessDown.addSubview(customBrightnessDownRecorder)
-    self.customContrastUp.addSubview(customContrastUpRecorder)
-    self.customContrastDown.addSubview(customContrastDownRecorder)
-    self.customVolumeUp.addSubview(customVolumeUpRecorder)
-    self.customVolumeDown.addSubview(customVolumeDownRecorder)
-    self.customMute.addSubview(customMuteRecorder)
+    for (container, recorder) in [
+      (self.customBrightnessUp, customBrightnessUpRecorder),
+      (self.customBrightnessDown, customBrightnessDownRecorder),
+      (self.customContrastUp, customContrastUpRecorder),
+      (self.customContrastDown, customContrastDownRecorder),
+      (self.customVolumeUp, customVolumeUpRecorder),
+      (self.customVolumeDown, customVolumeDownRecorder),
+      (self.customMute, customMuteRecorder),
+    ] {
+      guard let container else { continue }
+      container.addSubview(recorder)
+      NSLayoutConstraint.activate([
+        recorder.leadingAnchor.constraint(equalTo: container.leadingAnchor),
+        recorder.trailingAnchor.constraint(equalTo: container.trailingAnchor),
+        recorder.topAnchor.constraint(equalTo: container.topAnchor),
+        recorder.bottomAnchor.constraint(equalTo: container.bottomAnchor),
+      ])
+    }
 
     self.populateSettings()
   }

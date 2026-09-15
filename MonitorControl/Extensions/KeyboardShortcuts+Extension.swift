@@ -1,7 +1,5 @@
 //  Copyright © MonitorControl. @JoniVR, @theOneyouseek, @waydabber and others
 
-import KeyboardShortcuts
-
 extension KeyboardShortcuts.Name {
   static let brightnessUp = Self("brightnessUp")
   static let brightnessDown = Self("brightnessDown")

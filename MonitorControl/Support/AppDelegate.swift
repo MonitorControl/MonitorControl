@@ -16,6 +16,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     item.behavior = .removalAllowed
     return item
   }()
+
   var mediaKeyTap = MediaKeyTapManager()
   var keyboardShortcuts = KeyboardShortcutsManager()
   let coreAudio = SimplyCoreAudio()
@@ -81,9 +82,27 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     self.settingsWindowController.show()
   }
 
+  private func currentReopenSenderBundleIdentifier() -> String? {
+    guard let event = NSAppleEventManager.shared().currentAppleEvent else { return nil }
+    if let pid = event.attributeDescriptor(forKeyword: keySenderPIDAttr)?.int32Value,
+       let sender = NSRunningApplication(processIdentifier: pid_t(pid))
+    {
+      return sender.bundleIdentifier
+    }
+    if let pid = event.attributeDescriptor(forKeyword: keyAddressAttr)?.coerce(toDescriptorType: typeKernelProcessID)?.int32Value,
+       let sender = NSRunningApplication(processIdentifier: pid_t(pid))
+    {
+      return sender.bundleIdentifier
+    }
+    return nil
+  }
+
   func applicationShouldHandleReopen(_: NSApplication, hasVisibleWindows _: Bool) -> Bool {
-    app.prefsClicked(self)
-    return true
+    guard let senderBundleIdentifier = self.currentReopenSenderBundleIdentifier()?.lowercased(),
+          !senderBundleIdentifier.contains("workflow"), !senderBundleIdentifier.contains("shortcut")
+    else { return false }
+    self.prefsClicked(self)
+    return false
   }
 
   func applicationWillTerminate(_: Notification) {
@@ -176,7 +195,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     NSWorkspace.shared.notificationCenter.addObserver(self, selector: #selector(self.sleepNotification), name: NSWorkspace.willSleepNotification, object: nil)
     NSWorkspace.shared.notificationCenter.addObserver(self, selector: #selector(self.wakeNotification), name: NSWorkspace.didWakeNotification, object: nil)
     _ = DistributedNotificationCenter.default().addObserver(forName: NSNotification.Name(rawValue: NSNotification.Name.accessibilityApi.rawValue), object: nil, queue: nil) { _ in DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { self.updateMediaKeyTap() } } // listen for accessibility status changes
-    self.statusItemObserver = statusItem.observe(\.isVisible, options: [.old, .new]) { _, _ in self.statusItemVisibilityChanged() }
+    self.statusItemObserver = self.statusItem.observe(\.isVisible, options: [.old, .new]) { _, _ in self.statusItemVisibilityChanged() }
   }
 
   @objc private func sleepNotification() {
@@ -360,16 +379,16 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     onboardingVc?.window?.center()
     NSApp.activate(ignoringOtherApps: true)
   }
-  
+
   private func statusItemVisibilityChanged() {
     if !self.statusItem.isVisible, self.statusItemVisibilityChangedByUser {
       prefs.set(MenuIcon.hide.rawValue, forKey: PrefKey.menuIcon.rawValue)
     }
   }
-  
+
   func updateStatusItemVisibility(_ visible: Bool) {
-    statusItemVisibilityChangedByUser = false
-    statusItem.isVisible = visible
-    statusItemVisibilityChangedByUser = true
+    self.statusItemVisibilityChangedByUser = false
+    self.statusItem.isVisible = visible
+    self.statusItemVisibilityChangedByUser = true
   }
 }

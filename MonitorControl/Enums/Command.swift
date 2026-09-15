@@ -87,7 +87,7 @@ enum Command: UInt8 {
   case audioBalanceLR = 0x93
   case audioProcessorMode = 0x94
 
-  // OSD/Button Event Control
+  /// OSD/Button Event Control
   case osd = 0xCA
 
   // Image Adjustment

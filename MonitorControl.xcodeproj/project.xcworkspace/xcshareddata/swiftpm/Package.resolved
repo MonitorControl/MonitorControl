@@ -1,15 +1,6 @@
 {
-  "originHash" : "df195b12c1f6bd471af1cacb709842cb7eb355cce32fee1413f0f7d7aa5c4eb2",
+  "originHash" : "f1e1257b2b6f49d4a2249ee595030e60931b7b84f7eee8197554bac73d4e024c",
   "pins" : [
-    {
-      "identity" : "keyboardshortcuts",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/sindresorhus/KeyboardShortcuts",
-      "state" : {
-        "revision" : "8a2cc9130b0eec6e1dae0a9a405a17741437caa5",
-        "version" : "1.6.0"
-      }
-    },
     {
       "identity" : "mediakeytap",
       "kind" : "remoteSourceControl",

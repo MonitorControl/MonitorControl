@@ -116,7 +116,7 @@ class Arm64DDC: NSObject {
     return success
   }
 
-  // DDC checksum calculator
+  /// DDC checksum calculator
   static func checksum(chk: UInt8, data: inout [UInt8], start: Int, end: Int) -> UInt8 {
     var chkd: UInt8 = chk
     for i in start ... end {

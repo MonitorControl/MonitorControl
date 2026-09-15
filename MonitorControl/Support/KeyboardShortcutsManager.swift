@@ -1,7 +1,6 @@
 //  Copyright © MonitorControl. @JoniVR, @theOneyouseek, @waydabber and others
 
 import Foundation
-import KeyboardShortcuts
 import os.log
 
 class KeyboardShortcutsManager {
@@ -71,9 +70,6 @@ class KeyboardShortcutsManager {
       KeyboardShortcuts.enable(shortcut)
     }
     for shortcut in disabledShortcuts {
-      guard let assignedShortcut = KeyboardShortcuts.getShortcut(for: shortcut), !enabledShortcuts.contains(where: { KeyboardShortcuts.getShortcut(for: $0) == assignedShortcut }) else {
-        continue
-      }
       KeyboardShortcuts.disable(shortcut)
     }
   }

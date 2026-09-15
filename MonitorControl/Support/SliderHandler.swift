@@ -180,7 +180,7 @@ class SliderHandler {
       }
     }
 
-    //  Credits for this class go to @thompsonate - https://github.com/thompsonate/Scrollable-NSSlider
+    ///  Credits for this class go to @thompsonate - https://github.com/thompsonate/Scrollable-NSSlider
     override func scrollWheel(with event: NSEvent) {
       guard self.isEnabled else { return }
       let range = Float(self.maxValue - self.minValue)
