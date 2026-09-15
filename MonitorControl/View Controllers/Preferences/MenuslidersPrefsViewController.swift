@@ -211,8 +211,8 @@ class MenuslidersPrefsViewController: NSViewController, SettingsPane {
     app.updateMenusAndKeys()
     self.updateGridLayout()
   }
-  
-  override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+
+  override func observeValue(forKeyPath keyPath: String?, of object: Any?, change _: [NSKeyValueChangeKey: Any]?, context _: UnsafeMutableRawPointer?) {
     guard let object = object as? AnyObject else { return }
     if object === prefs, keyPath == PrefKey.menuIcon.rawValue {
       self.populateSettings()

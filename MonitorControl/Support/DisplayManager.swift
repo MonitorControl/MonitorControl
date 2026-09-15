@@ -243,43 +243,43 @@ class DisplayManager {
 
   func sortDisplays() {
     // Opsiyonel: sıralamadan önce log al
-    let before = displays.map { $0.name }
+    let before = self.displays.map(\.name)
     os_log("Displays before sorting: %{public}@", before)
-    
+
     // In‑place sıralama
-    displays.sort { lhs, rhs in
+    self.displays.sort { lhs, rhs in
       lhs.name.localizedStandardCompare(rhs.name) == .orderedAscending
     }
-    
+
     // Opsiyonel: sıralamadan sonra log al
-    let after = displays.map { $0.name }
+    let after = self.displays.map(\.name)
     os_log("Displays after sorting: %{public}@", after)
   }
-  
+
   func sortDisplaysByFriendlyName() -> [Display] {
-      return displays.sorted { lhs, rhs in
-          let lhsTitle = lhs.readPrefAsString(key: .friendlyName).isEmpty
-              ? lhs.name
-              : lhs.readPrefAsString(key: .friendlyName)
-          let rhsTitle = rhs.readPrefAsString(key: .friendlyName).isEmpty
-              ? rhs.name
-              : rhs.readPrefAsString(key: .friendlyName)
-          return lhsTitle.localizedStandardCompare(rhsTitle) == .orderedDescending
-      }
+    self.displays.sorted { lhs, rhs in
+      let lhsTitle = lhs.readPrefAsString(key: .friendlyName).isEmpty
+        ? lhs.name
+        : lhs.readPrefAsString(key: .friendlyName)
+      let rhsTitle = rhs.readPrefAsString(key: .friendlyName).isEmpty
+        ? rhs.name
+        : rhs.readPrefAsString(key: .friendlyName)
+      return lhsTitle.localizedStandardCompare(rhsTitle) == .orderedDescending
+    }
   }
-
-
 
   /// displays dizisini sıralar ve döner
   func getAllDisplays() -> [Display] {
-    return displays
+    self.displays
   }
 
   func getDdcCapableDisplays() -> [OtherDisplay] {
     self.displays.compactMap { display -> OtherDisplay? in
       if let otherDisplay = display as? OtherDisplay, !otherDisplay.isSw() {
         return otherDisplay
-      } else { return nil }
+      } else {
+        return nil
+      }
     }
   }
 
@@ -314,7 +314,7 @@ class DisplayManager {
   func clearDisplays() {
     self.displays = []
   }
-  
+
   func addDisplayCounterSuffixes() {
     var nameDisplays: [String: [Display]] = [:]
     for display in self.displays {
