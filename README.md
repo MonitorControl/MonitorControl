@@ -18,7 +18,7 @@ Use menubar extra sliders or the keyboard, including native Apple keys!</p>
 <br/>
 <br/>
 
-<img src=".github/screenshot.png" width="824" alt="Screenshot"/><br/>
+<img src=".github/screenshot.png" width="300" alt="MonitorControl menu with separate display brightness sliders, system appearance controls and Night Shift temperature"/><br/>
 
 </div>
 
@@ -44,21 +44,21 @@ brew install --cask monitorcontrol
 - Support for custom keyboard shortcuts as well as standard brightness and media keys on Apple keyboards.
 - Dozens of customization options to tweak the inner workings of the app to suit your hardware and needs (don't forget to enable `Show advanced settings` in app Settings).
 - Simple, unobtrusive UI to blend in to the general aesthetics of macOS.
+- Resizable settings window with sidebar navigation and grouped General and Appearance controls.
 - Native menu sliders with optional current display resolution labels.
 - Launch at login directly through macOS Service Management, without a separate helper app.
-- System Dark Mode, Night Shift and True Tone share one option in Settings > App menu. Night Shift temperature has a separate option. Both are enabled by default. Show percentages also controls the Night Shift temperature value.
+- System Dark Mode, Night Shift and True Tone share one option in Settings > Appearance. Night Shift temperature has a separate option. Both are enabled by default. Show percentages also controls the Night Shift temperature value.
 - Completely FREE.
 
 For additional features, more advanced brightness control with XDR/HDR brightness upscaling and support for more Mac models and displays, check out [BetterDisplay](https://github.com/waydabber/BetterDisplay#readme)!
 
-### Screenshots (Settings)
+### Settings
 
-<div align="center">
-<img src=".github/pref_1.png" width="392" alt="Screenshot"/>
-<img src=".github/pref_2.png" width="392" alt="Screenshot"/>
-<img src=".github/pref_3.png" width="392" alt="Screenshot"/>
-<img src=".github/pref_4.png" width="392" alt="Screenshot"/>
-</div>
+Use the sidebar to switch between General, Appearance, Keyboard, Displays and About.
+General includes launch at login, updates and brightness behavior. Appearance controls
+which sliders, display information and system controls appear in the menu. Keyboard
+and Displays retain the existing shortcuts and per-display options, including advanced
+DDC settings.
 
 ## How to install and use the app
 
@@ -73,7 +73,7 @@ For additional features, more advanced brightness control with XDR/HDR brightnes
 
 ### macOS compatibility
 
-MonitorControl 5.0.0 requires macOS 14 or later. Earlier releases remain available for older macOS versions.
+MonitorControl 26.0.0 requires macOS 14 or later. Earlier releases remain available for older macOS versions.
 
 | MonitorControl version | macOS version     |
 | ---------------------- | ----------------- |
