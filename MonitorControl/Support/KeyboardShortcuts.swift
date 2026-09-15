@@ -124,7 +124,21 @@ enum KeyboardShortcuts {
   private static var keyDownHandlers = [Name: [() -> Void]]()
   private static var keyUpHandlers = [Name: [() -> Void]]()
   private static var disabledNames = Set<Name>()
-  static var isPaused = false
+  static var isPaused = false {
+    didSet {
+      guard self.isPaused != oldValue else { return }
+      if self.isPaused {
+        // Let the recorder receive combinations that are already registered as hotkeys.
+        for shortcut in self.registeredShortcuts {
+          self.unregister(shortcut)
+        }
+      } else {
+        for shortcut in self.shortcutsForHandlers {
+          self.register(shortcut)
+        }
+      }
+    }
+  }
 
   static func onKeyDown(for name: Name, action: @escaping () -> Void) {
     self.keyDownHandlers[name, default: []].append(action)
@@ -226,7 +240,7 @@ enum KeyboardShortcuts {
   }
 
   private static func register(_ shortcut: Shortcut) {
-    guard !self.registeredShortcuts.contains(shortcut) else {
+    guard !self.isPaused, !self.registeredShortcuts.contains(shortcut) else {
       return
     }
     self.hotKeyId += 1
@@ -332,13 +346,14 @@ enum KeyboardShortcuts {
 }
 
 extension KeyboardShortcuts {
-  final class RecorderCocoa: NSSearchField, NSSearchFieldDelegate {
+  final class RecorderCocoa: NSSearchField {
+    private weak static var activeRecorder: RecorderCocoa?
     private let minimumWidth = 130.0
     private var eventMonitor: LocalEventMonitor?
     private var isRecording = false
     private var idlePlaceholder: String?
     private var observer: NSObjectProtocol?
-    private var windowObserver: NSObjectProtocol?
+    private var recordingObservers = [NSObjectProtocol]()
     private var cancelButton: NSButtonCell?
 
     var shortcutName: KeyboardShortcuts.Name {
@@ -346,15 +361,35 @@ extension KeyboardShortcuts {
         guard self.shortcutName != oldValue else {
           return
         }
+        self.endRecording()
         self.setStringValue()
-        DispatchQueue.main.async {
-          self.window?.makeFirstResponder(nil)
-        }
       }
     }
 
     override var canBecomeKeyView: Bool {
       false
+    }
+
+    override func isAccessibilityElement() -> Bool {
+      true
+    }
+
+    override func accessibilityRole() -> NSAccessibility.Role? {
+      .button
+    }
+
+    override func accessibilityLabel() -> String? {
+      self.idlePlaceholder ?? placeholderString
+    }
+
+    override func accessibilityValue() -> String? {
+      KeyboardShortcuts.getShortcut(for: self.shortcutName)?.shortcutGlyph
+    }
+
+    override func accessibilityPerformPress() -> Bool {
+      guard isEnabled, window?.makeFirstResponder(self) == true else { return false }
+      self.startRecording()
+      return true
     }
 
     override var intrinsicContentSize: CGSize {
@@ -371,7 +406,8 @@ extension KeyboardShortcuts {
     init(for name: KeyboardShortcuts.Name) {
       self.shortcutName = name
       super.init(frame: .zero)
-      delegate = self
+      isEditable = false
+      isSelectable = false
       placeholderString = NSLocalizedString("Record", comment: "Shortcut recorder placeholder")
       alignment = .center
       baseWritingDirection = .leftToRight // Keep modifier glyphs before digit and arrow keys in RTL.
@@ -406,107 +442,133 @@ extension KeyboardShortcuts {
       if let observer {
         NotificationCenter.default.removeObserver(observer)
       }
-      if let windowObserver {
-        NotificationCenter.default.removeObserver(windowObserver)
+      for observer in recordingObservers {
+        NotificationCenter.default.removeObserver(observer)
       }
     }
 
     override func viewDidMoveToWindow() {
       super.viewDidMoveToWindow()
-      if let windowObserver = self.windowObserver {
-        NotificationCenter.default.removeObserver(windowObserver)
-        self.windowObserver = nil
-      }
-      self.stopRecording()
-      guard let window else { return }
-      self.windowObserver = NotificationCenter.default.addObserver(forName: NSWindow.didResignKeyNotification, object: window, queue: nil) { [weak self] _ in
-        guard let self, self.isRecording else { return }
-        self.stopRecording()
-        self.window?.makeFirstResponder(nil)
-      }
+      self.endRecording()
     }
 
-    func controlTextDidChange(_: Notification) {
-      let recordedShortcutGlyph = KeyboardShortcuts.getShortcut(for: self.shortcutName)?.shortcutGlyph ?? ""
-      if stringValue.isEmpty {
-        self.saveShortcut(nil)
-      } else if self.isRecording, stringValue != recordedShortcutGlyph {
-        NSSound.beep()
-        self.setStringValue()
-      }
-      self.showsCancelButton = !stringValue.isEmpty
-      if stringValue.isEmpty {
-        window?.makeFirstResponder(self)
-      }
+    override func viewDidHide() {
+      super.viewDidHide()
+      self.endRecording()
     }
 
-    func controlTextDidBeginEditing(_: Notification) {
+    /// Keep first-responder ownership on the recorder, not NSSearchField's shared text editor.
+    override var acceptsFirstResponder: Bool {
+      isEnabled
+    }
+
+    override func becomeFirstResponder() -> Bool {
+      guard isEnabled, window != nil, !isHiddenOrHasHiddenAncestor else { return false }
       self.startRecording()
+      return true
     }
 
-    func controlTextDidEndEditing(_: Notification) {
+    override func resignFirstResponder() -> Bool {
       self.stopRecording()
+      return true
+    }
+
+    /// Newer AppKit search fields contain interactive subviews; keep their clicks here too.
+    override func hitTest(_ point: NSPoint) -> NSView? {
+      super.hitTest(point) == nil ? nil : self
     }
 
     override func mouseDown(with event: NSEvent) {
-      super.mouseDown(with: event)
-      self.startRecording()
+      guard isEnabled else { return }
+      let cancelBounds: NSRect
+      if #available(macOS 11.0, *) {
+        cancelBounds = cancelButtonBounds
+      } else {
+        cancelBounds = (cell as? NSSearchFieldCell)?.cancelButtonRect(forBounds: bounds) ?? .zero
+      }
+      if self.showsCancelButton, cancelBounds.contains(convert(event.locationInWindow, from: nil)) {
+        self.clear()
+        return
+      }
+      if window?.makeFirstResponder(self) == true {
+        self.startRecording()
+      }
+    }
+
+    private func endRecording() {
+      self.stopRecording()
+      if window?.firstResponder === self {
+        window?.makeFirstResponder(nil)
+      }
     }
 
     private func stopRecording() {
       guard self.isRecording else { return }
       self.eventMonitor = nil
+      for observer in self.recordingObservers {
+        NotificationCenter.default.removeObserver(observer)
+      }
+      self.recordingObservers.removeAll()
       self.isRecording = false
       placeholderString = self.idlePlaceholder
-      self.showsCancelButton = !stringValue.isEmpty
-      KeyboardShortcuts.isPaused = false
-    }
-
-    override func becomeFirstResponder() -> Bool {
-      let shouldBecomeFirstResponder = super.becomeFirstResponder()
-      guard shouldBecomeFirstResponder else {
-        return shouldBecomeFirstResponder
+      self.setStringValue()
+      if Self.activeRecorder === self {
+        Self.activeRecorder = nil
+        KeyboardShortcuts.isPaused = false
       }
-
-      self.startRecording()
-
-      return shouldBecomeFirstResponder
+      needsDisplay = true
     }
 
     private func startRecording() {
-      guard window != nil, !self.isRecording else {
-        return
-      }
-
+      guard let window, !self.isRecording else { return }
+      Self.activeRecorder?.endRecording()
+      Self.activeRecorder = self
       self.idlePlaceholder = placeholderString
       self.isRecording = true
       placeholderString = NSLocalizedString("Press Shortcut", comment: "Shortcut recorder prompt")
-      self.showsCancelButton = !stringValue.isEmpty
-      (currentEditor() as? NSTextView)?.insertionPointColor = .clear
+      stringValue = ""
+      self.showsCancelButton = KeyboardShortcuts.getShortcut(for: self.shortcutName) != nil
       KeyboardShortcuts.isPaused = true
-      self.eventMonitor = LocalEventMonitor(events: [.keyDown, .leftMouseUp, .rightMouseUp]) { [weak self] event in
-        self?.handle(event)
+      self.eventMonitor = LocalEventMonitor(events: [.keyDown, .leftMouseDown, .rightMouseDown, .otherMouseDown]) { [weak self] event in
+        guard let self else { return event }
+        return self.handle(event)
       }.start()
+      for (name, object) in [
+        (NSWindow.didResignKeyNotification, window as AnyObject),
+        (NSWindow.willCloseNotification, window as AnyObject),
+        (NSApplication.didResignActiveNotification, NSApp as AnyObject),
+      ] {
+        self.recordingObservers.append(NotificationCenter.default.addObserver(forName: name, object: object, queue: nil) { [weak self] _ in
+          self?.endRecording()
+        })
+      }
+      needsDisplay = true
     }
 
     private func handle(_ event: NSEvent) -> NSEvent? {
-      let clickPoint = convert(event.locationInWindow, from: nil)
-      if event.type == .leftMouseUp || event.type == .rightMouseUp, !bounds.insetBy(dx: -3, dy: -3).contains(clickPoint) {
-        window?.makeFirstResponder(nil)
+      guard Self.activeRecorder === self, self.isRecording else { return event }
+      guard let window, window.firstResponder === self, !isHiddenOrHasHiddenAncestor else {
+        self.endRecording()
+        return event
+      }
+      if !event.isKeyEvent {
+        if event.window !== window || !bounds.contains(convert(event.locationInWindow, from: nil)) {
+          self.endRecording()
+        }
+        return event
+      }
+      guard event.window === window else {
+        self.endRecording()
         return event
       }
 
-      guard event.isKeyEvent else {
-        return nil
-      }
-
       if event.modifiers.isEmpty, event.specialKey == .tab {
-        window?.makeFirstResponder(nil)
+        self.endRecording()
         return event
       }
 
       if event.modifiers.isEmpty, event.keyCode == kVK_Escape {
-        window?.makeFirstResponder(nil)
+        self.endRecording()
         return nil
       }
 
@@ -523,23 +585,27 @@ extension KeyboardShortcuts {
       let shortcut = KeyboardShortcuts.Shortcut(event: event)
 
       if let menuItem = shortcut.takenByMainMenu {
-        window?.makeFirstResponder(nil)
+        self.endRecording()
         NSAlert.showModal(for: window, title: String(format: NSLocalizedString("This keyboard shortcut is already used by the menu item \"%@\".", comment: "Shortcut conflict; menu item title"), menuItem.title))
-        window?.makeFirstResponder(self)
+        if window.isKeyWindow {
+          window.makeFirstResponder(self)
+        }
         return nil
       }
 
       guard !shortcut.isTakenBySystem else {
-        window?.makeFirstResponder(nil)
+        self.endRecording()
         NSAlert.showModal(for: window, title: NSLocalizedString("This keyboard shortcut is used by the system.", comment: "Shortcut conflict"), message: NSLocalizedString("Keyboard shortcuts can be changed in system keyboard settings.", comment: "Shortcut conflict guidance"))
-        window?.makeFirstResponder(self)
+        if window.isKeyWindow {
+          window.makeFirstResponder(self)
+        }
         return nil
       }
 
       stringValue = shortcut.shortcutGlyph
       self.showsCancelButton = true
       self.saveShortcut(shortcut)
-      window?.makeFirstResponder(nil)
+      self.endRecording()
       return nil
     }
 
@@ -553,7 +619,9 @@ extension KeyboardShortcuts {
     }
 
     private func clear() {
-      (cell as? NSSearchFieldCell)?.cancelButtonCell?.performClick(self)
+      self.saveShortcut(nil)
+      self.setStringValue()
+      self.endRecording()
     }
   }
 }
