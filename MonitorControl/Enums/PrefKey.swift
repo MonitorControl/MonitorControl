@@ -54,6 +54,11 @@ enum PrefKey: String {
   /// Disable slider snapping
   case enableSliderPercent
 
+  /// Optional menu appearance and system controls (enabled by default).
+  case showDisplayResolution
+  case showSystemControls
+  case showNightShiftTemperature
+
   /// Show tick marks for sliders
   case showTickMarks
 

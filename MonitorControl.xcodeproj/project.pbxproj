@@ -8,7 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		28D1DDF2227FBE71004CB494 /* NSScreen+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D1DDF1227FBE71004CB494 /* NSScreen+Extension.swift */; };
-		28D1DDF3227FC8C6004CB494 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 56754EB01D9A4016007BCDC5 /* Assets.xcassets */; };
+		2D5C19ED3059864D0019FDA8 /* NightShiftTemperatureClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D5C19EC3059864D0019FDA8 /* NightShiftTemperatureClient.swift */; };
+		2D5C19EF305986500019FDA8 /* NightShiftTemperatureController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D5C19EE305986500019FDA8 /* NightShiftTemperatureController.swift */; };
+		2D5C19F1305986580019FDA8 /* CoreBrightnessService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D5C19F0305986580019FDA8 /* CoreBrightnessService.swift */; };
+		2D5C19F33059865B0019FDA8 /* ScreenEffectsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D5C19F23059865B0019FDA8 /* ScreenEffectsView.swift */; };
+		2D5C19F53059865F0019FDA8 /* SystemControlsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D5C19F43059865F0019FDA8 /* SystemControlsView.swift */; };
+		2D5C19F7305988820019FDA8 /* Crisp-LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2D5C19F6305988820019FDA8 /* Crisp-LICENSE.txt */; };
+		2DC67DB93059CE1300FD385A /* SettingsPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DC67DB83059CE1300FD385A /* SettingsPreferences.swift */; };
+		2DC67DBB3059CE7400FD385A /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DC67DBA3059CE7400FD385A /* SettingsView.swift */; };
+		2DC67DBD3059CEA900FD385A /* ModernSettingsWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DC67DBC3059CEA900FD385A /* ModernSettingsWindowController.swift */; };
+		2DC67DBF3059D5CC00FD385A /* SettingsSplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DC67DBE3059D5CC00FD385A /* SettingsSplitViewController.swift */; };
 		56754EAF1D9A4016007BCDC5 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56754EAE1D9A4016007BCDC5 /* main.swift */; };
 		56754EB11D9A4016007BCDC5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 56754EB01D9A4016007BCDC5 /* Assets.xcassets */; };
 		6C85EFDA22C941B000227EA1 /* DisplayManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C85EFD922C941B000227EA1 /* DisplayManager.swift */; };
@@ -54,8 +63,6 @@
 		F01B069F228221B7008E64DB /* SliderHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01B068F228221B7008E64DB /* SliderHandler.swift */; };
 		F03A8DF21FFBAA6F0034DC27 /* OtherDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03A8DF11FFBAA6F0034DC27 /* OtherDisplay.swift */; };
 		F0445D3820023E710025AE82 /* MainPrefsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0445D3720023E710025AE82 /* MainPrefsViewController.swift */; };
-		F06792EA200A73460066C438 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = F06792E9200A73460066C438 /* main.swift */; };
-		F06792F6200A745F0066C438 /* MonitorControlHelper.app in [Login] Copy Helper to start at Login */ = {isa = PBXBuildFile; fileRef = F06792E7200A73460066C438 /* MonitorControlHelper.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		F0A489C4279C71B200BEDFD6 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A489C3279C71B200BEDFD6 /* OnboardingViewController.swift */; };
 		FE4E0896249D584C003A50BB /* OSDUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE4E0895249D584C003A50BB /* OSDUtils.swift */; };
 /* End PBXBuildFile section */
@@ -67,7 +74,6 @@
 			dstPath = Contents/Library/LoginItems;
 			dstSubfolderSpec = 1;
 			files = (
-				F06792F6200A745F0066C438 /* MonitorControlHelper.app in [Login] Copy Helper to start at Login */,
 			);
 			name = "[Login] Copy Helper to start at Login";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -82,6 +88,16 @@
 		17DE48C5273E9DC500A1779F /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/InternetAccessPolicy.strings; sourceTree = "<group>"; };
 		17DE48C6273E9DC500A1779F /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		28D1DDF1227FBE71004CB494 /* NSScreen+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSScreen+Extension.swift"; sourceTree = "<group>"; };
+		2D5C19EC3059864D0019FDA8 /* NightShiftTemperatureClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NightShiftTemperatureClient.swift; sourceTree = "<group>"; };
+		2D5C19EE305986500019FDA8 /* NightShiftTemperatureController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NightShiftTemperatureController.swift; sourceTree = "<group>"; };
+		2D5C19F0305986580019FDA8 /* CoreBrightnessService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreBrightnessService.swift; sourceTree = "<group>"; };
+		2D5C19F23059865B0019FDA8 /* ScreenEffectsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenEffectsView.swift; sourceTree = "<group>"; };
+		2D5C19F43059865F0019FDA8 /* SystemControlsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemControlsView.swift; sourceTree = "<group>"; };
+		2D5C19F6305988820019FDA8 /* Crisp-LICENSE.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "Crisp-LICENSE.txt"; sourceTree = "<group>"; };
+		2DC67DB83059CE1300FD385A /* SettingsPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPreferences.swift; sourceTree = "<group>"; };
+		2DC67DBA3059CE7400FD385A /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		2DC67DBC3059CEA900FD385A /* ModernSettingsWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModernSettingsWindowController.swift; sourceTree = "<group>"; };
+		2DC67DBE3059D5CC00FD385A /* SettingsSplitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSplitViewController.swift; sourceTree = "<group>"; };
 		2FBCCED52853930200C06A13 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
 		2FBCCED62853930200C06A13 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InternetAccessPolicy.strings; sourceTree = "<group>"; };
 		2FBCCED72853930200C06A13 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -173,10 +189,6 @@
 		F01B068F228221B7008E64DB /* SliderHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SliderHandler.swift; sourceTree = "<group>"; };
 		F03A8DF11FFBAA6F0034DC27 /* OtherDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherDisplay.swift; sourceTree = "<group>"; };
 		F0445D3720023E710025AE82 /* MainPrefsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPrefsViewController.swift; sourceTree = "<group>"; };
-		F06792E7200A73460066C438 /* MonitorControlHelper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MonitorControlHelper.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		F06792E9200A73460066C438 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
-		F06792F0200A73470066C438 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F06792F1200A73470066C438 /* MonitorControlHelper.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MonitorControlHelper.entitlements; sourceTree = "<group>"; };
 		F0A489C3279C71B200BEDFD6 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		FB5DB28E2AD54C4600306223 /* pt-PT */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-PT"; path = "pt-PT.lproj/Main.strings"; sourceTree = "<group>"; };
 		FB5DB28F2AD54C4600306223 /* pt-PT */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-PT"; path = "pt-PT.lproj/InternetAccessPolicy.strings"; sourceTree = "<group>"; };
@@ -196,13 +208,6 @@
 				AA9AE86F26B5BF3D00B6CA65 /* OSD.framework in Frameworks */,
 				AAD7DD342CAFF3D90062822F /* Settings in Frameworks */,
 				AADB625A26BC196900DFFAA5 /* DisplayServices.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		F06792E4200A73460066C438 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -236,7 +241,6 @@
 				AAB2F646273ED127004AB5A4 /* Misc */,
 				28D1DDD1227FB759004CB494 /* Frameworks */,
 				56754EAD1D9A4016007BCDC5 /* MonitorControl */,
-				F06792E8200A73460066C438 /* MonitorControlHelper */,
 				56754EAC1D9A4016007BCDC5 /* Products */,
 			);
 			indentWidth = 2;
@@ -246,7 +250,6 @@
 			isa = PBXGroup;
 			children = (
 				56754EAB1D9A4016007BCDC5 /* MonitorControl.app */,
-				F06792E7200A73460066C438 /* MonitorControlHelper.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -318,6 +321,11 @@
 				AA16139A26BE772E00DCF027 /* Arm64DDC.swift */,
 				AA4398A826DD55DA00943F16 /* IntelDDC.swift */,
 				FE4E0895249D584C003A50BB /* OSDUtils.swift */,
+				2D5C19EC3059864D0019FDA8 /* NightShiftTemperatureClient.swift */,
+				2D5C19EE305986500019FDA8 /* NightShiftTemperatureController.swift */,
+				2D5C19F0305986580019FDA8 /* CoreBrightnessService.swift */,
+				2D5C19F23059865B0019FDA8 /* ScreenEffectsView.swift */,
+				2D5C19F43059865F0019FDA8 /* SystemControlsView.swift */,
 			);
 			path = Support;
 			sourceTree = "<group>";
@@ -328,6 +336,7 @@
 				8C17418A2707B91F00E88D53 /* InternetAccessPolicy.strings */,
 				F01B0680228221B6008E64DB /* Localizable.strings */,
 				6CDA0FCD26485A8300F52125 /* Main.storyboard */,
+				2D5C19F6305988820019FDA8 /* Crisp-LICENSE.txt */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -341,16 +350,6 @@
 			path = "View Controllers";
 			sourceTree = "<group>";
 		};
-		F06792E8200A73460066C438 /* MonitorControlHelper */ = {
-			isa = PBXGroup;
-			children = (
-				F06792F0200A73470066C438 /* Info.plist */,
-				F06792E9200A73460066C438 /* main.swift */,
-				F06792F1200A73470066C438 /* MonitorControlHelper.entitlements */,
-			);
-			path = MonitorControlHelper;
-			sourceTree = "<group>";
-		};
 		F0A489C1279C718400BEDFD6 /* Preferences */ = {
 			isa = PBXGroup;
 			children = (
@@ -360,6 +359,10 @@
 				AA062E8926C9A039007E628C /* DisplaysPrefsViewController.swift */,
 				AA062E8D26CA7BE5007E628C /* DisplaysPrefsCellView.swift */,
 				AA665A5C26C5892800FEF2C1 /* AboutPrefsViewController.swift */,
+				2DC67DB83059CE1300FD385A /* SettingsPreferences.swift */,
+				2DC67DBA3059CE7400FD385A /* SettingsView.swift */,
+				2DC67DBC3059CEA900FD385A /* ModernSettingsWindowController.swift */,
+				2DC67DBE3059D5CC00FD385A /* SettingsSplitViewController.swift */,
 			);
 			path = Preferences;
 			sourceTree = "<group>";
@@ -402,25 +405,6 @@
 			productReference = 56754EAB1D9A4016007BCDC5 /* MonitorControl.app */;
 			productType = "com.apple.product-type.application";
 		};
-		F06792E6200A73460066C438 /* MonitorControlHelper */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = F06792F4200A73470066C438 /* Build configuration list for PBXNativeTarget "MonitorControlHelper" */;
-			buildPhases = (
-				F06792E3200A73460066C438 /* Sources */,
-				F06792E4200A73460066C438 /* Frameworks */,
-				F06792E5200A73460066C438 /* Resources */,
-				28F6A5802283515F00A4ADCD /* Increase Build Number */,
-				28F6A5822283548F00A4ADCD /* Sync Version Numbers */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = MonitorControlHelper;
-			productName = MonitorControlHelper;
-			productReference = F06792E7200A73460066C438 /* MonitorControlHelper.app */;
-			productType = "com.apple.product-type.application";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -434,11 +418,6 @@
 				TargetAttributes = {
 					56754EAA1D9A4016007BCDC5 = {
 						CreatedOnToolsVersion = 8.0;
-						LastSwiftMigration = 1020;
-						ProvisioningStyle = Automatic;
-					};
-					F06792E6200A73460066C438 = {
-						CreatedOnToolsVersion = 9.2;
 						LastSwiftMigration = 1020;
 						ProvisioningStyle = Automatic;
 					};
@@ -482,7 +461,6 @@
 			projectRoot = "";
 			targets = (
 				56754EAA1D9A4016007BCDC5 /* MonitorControl */,
-				F06792E6200A73460066C438 /* MonitorControlHelper */,
 			);
 		};
 /* End PBXProject section */
@@ -494,6 +472,7 @@
 			files = (
 				AAB2F642273ED0C7004AB5A4 /* .github in Resources */,
 				AAB2F63E273ED0AD004AB5A4 /* .swiftformat in Resources */,
+				2D5C19F7305988820019FDA8 /* Crisp-LICENSE.txt in Resources */,
 				56754EB11D9A4016007BCDC5 /* Assets.xcassets in Resources */,
 				6CDA0FCF26485A8300F52125 /* Main.storyboard in Resources */,
 				AAB2F640273ED0B8004AB5A4 /* .bartycrouch.toml in Resources */,
@@ -505,14 +484,6 @@
 				AAB2F63D273ED0AD004AB5A4 /* .gitignore in Resources */,
 				8C1741882707B91F00E88D53 /* InternetAccessPolicy.strings in Resources */,
 				AAB2F644273ED0E9004AB5A4 /* License.txt in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		F06792E5200A73460066C438 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				28D1DDF3227FC8C6004CB494 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -537,44 +508,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\nif which swiftformat >/dev/null; then\n  swiftformat .\nelse\n  echo \"warning: SwiftFormat not installed, download from https://github.com/nicklockwood/SwiftFormat\" >&2\nfi\n";
-		};
-		28F6A5802283515F00A4ADCD /* Increase Build Number */ = {
-			isa = PBXShellScriptBuildPhase;
-			alwaysOutOfDate = 1;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Increase Build Number";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = "/bin/bash -euo pipefail";
-			shellScript = "files_have_changed() {\n  test -n \"$(find \"${1}\" ! -path '*xcuserdata*' ! -path '*.git' ! -path '*.git/*' -newer \"${2}\")\"\n}\n\nif files_have_changed \"${PROJECT_DIR}\" \"${INFOPLIST_FILE}\"; then\n  build_number=\"$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"${INFOPLIST_FILE}\")\"\n  new_build_number=\"$((build_number + 1))\"\n\n  /usr/libexec/PlistBuddy -c \"Set :CFBundleVersion ${new_build_number}\" \"${INFOPLIST_FILE/Helper/}\"\n  /usr/libexec/PlistBuddy -c \"Set :CFBundleVersion ${new_build_number}\" \"${INFOPLIST_FILE}\"\nfi\n";
-		};
-		28F6A5822283548F00A4ADCD /* Sync Version Numbers */ = {
-			isa = PBXShellScriptBuildPhase;
-			alwaysOutOfDate = 1;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Sync Version Numbers";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = "/bin/bash -euo pipefail";
-			shellScript = "version_number=\"$(/usr/libexec/PlistBuddy -c \"Print CFBundleShortVersionString\" \"${INFOPLIST_FILE/Helper/}\")\"\n\n/usr/libexec/PlistBuddy -c \"Set :CFBundleShortVersionString ${version_number}\" \"${INFOPLIST_FILE/Helper/}\"\n/usr/libexec/PlistBuddy -c \"Set :CFBundleShortVersionString ${version_number}\" \"${INFOPLIST_FILE}\"\n";
 		};
 		6CB1BDB2253C7EBE00B52124 /* [Localization] Run BartyCrouch */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -617,18 +550,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2DC67DBB3059CE7400FD385A /* SettingsView.swift in Sources */,
 				AA5314C426EBF5170041D178 /* PrefKey.swift in Sources */,
 				56754EAF1D9A4016007BCDC5 /* main.swift in Sources */,
 				AA062E8A26C9A039007E628C /* DisplaysPrefsViewController.swift in Sources */,
 				AA473EB126DFF8DE0063A181 /* Command.swift in Sources */,
 				6CC260F6256AD8F900613714 /* Preferences+Extension.swift in Sources */,
+				2D5C19F1305986580019FDA8 /* CoreBrightnessService.swift in Sources */,
 				AA99521926FE49A300612E07 /* MenuHandler.swift in Sources */,
 				AA665A5D26C5892800FEF2C1 /* AboutPrefsViewController.swift in Sources */,
 				6CBFE27C23DB27A200D1BC41 /* AppleDisplay.swift in Sources */,
+				2DC67DBF3059D5CC00FD385A /* SettingsSplitViewController.swift in Sources */,
 				AA062E8E26CA7BE5007E628C /* DisplaysPrefsCellView.swift in Sources */,
 				AA25F6D726E68C160087F3A2 /* MediaKeyTapManager.swift in Sources */,
 				FE4E0896249D584C003A50BB /* OSDUtils.swift in Sources */,
 				6CBFE27A23DB266000D1BC41 /* Display.swift in Sources */,
+				2D5C19F33059865B0019FDA8 /* ScreenEffectsView.swift in Sources */,
+				2D5C19ED3059864D0019FDA8 /* NightShiftTemperatureClient.swift in Sources */,
 				CB0D15010000000000000001 /* KeyboardShortcuts.swift in Sources */,
 				AA44E70727038F7F00E06865 /* KeyboardShortcutsManager.swift in Sources */,
 				F03A8DF21FFBAA6F0034DC27 /* OtherDisplay.swift in Sources */,
@@ -638,21 +576,17 @@
 				AA16139B26BE772E00DCF027 /* Arm64DDC.swift in Sources */,
 				F0445D3820023E710025AE82 /* MainPrefsViewController.swift in Sources */,
 				28D1DDF2227FBE71004CB494 /* NSScreen+Extension.swift in Sources */,
+				2D5C19EF305986500019FDA8 /* NightShiftTemperatureController.swift in Sources */,
 				AA99521726FE25AB00612E07 /* AppDelegate.swift in Sources */,
+				2D5C19F53059865F0019FDA8 /* SystemControlsView.swift in Sources */,
 				AA25F6D126E681D30087F3A2 /* KeyboardPrefsViewController.swift in Sources */,
 				F01B069F228221B7008E64DB /* SliderHandler.swift in Sources */,
 				AACE5E2327050C63006C2A48 /* NSNotification+Extension.swift in Sources */,
 				AA25F6CF26E680510087F3A2 /* MenuslidersPrefsViewController.swift in Sources */,
+				2DC67DB93059CE1300FD385A /* SettingsPreferences.swift in Sources */,
+				2DC67DBD3059CEA900FD385A /* ModernSettingsWindowController.swift in Sources */,
 				AA4398A926DD55DA00943F16 /* IntelDDC.swift in Sources */,
 				6C85EFDA22C941B000227EA1 /* DisplayManager.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		F06792E3200A73460066C438 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				F06792EA200A73460066C438 /* main.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -880,8 +814,8 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.14;
-				MARKETING_VERSION = 4.4.0;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 26.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = app.monitorcontrol.MonitorControl;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -917,8 +851,8 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.14;
-				MARKETING_VERSION = 4.4.0;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 26.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = app.monitorcontrol.MonitorControl;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -929,68 +863,6 @@
 					"$(inherited)",
 					"$(SYSTEM_LIBRARY_DIR)/PrivateFrameworks",
 				);
-			};
-			name = Release;
-		};
-		F06792F2200A73470066C438 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = MonitorControlHelper/MonitorControlHelper.entitlements;
-				CODE_SIGN_IDENTITY = "-";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 7100;
-				DEAD_CODE_STRIPPING = YES;
-				DEVELOPMENT_TEAM = 299YSU96J7;
-				ENABLE_HARDENED_RUNTIME = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = MonitorControlHelper/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-				);
-				MACOSX_DEPLOYMENT_TARGET = 10.14;
-				MARKETING_VERSION = 4.1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = app.monitorcontrol.MonitorControlHelper;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 5.5;
-			};
-			name = Debug;
-		};
-		F06792F3200A73470066C438 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = MonitorControlHelper/MonitorControlHelper.entitlements;
-				CODE_SIGN_IDENTITY = "-";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 7100;
-				DEAD_CODE_STRIPPING = YES;
-				DEVELOPMENT_TEAM = 299YSU96J7;
-				ENABLE_HARDENED_RUNTIME = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = MonitorControlHelper/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-				);
-				MACOSX_DEPLOYMENT_TARGET = 10.14;
-				MARKETING_VERSION = 4.1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = app.monitorcontrol.MonitorControlHelper;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 5.5;
 			};
 			name = Release;
 		};
@@ -1011,15 +883,6 @@
 			buildConfigurations = (
 				56754EB91D9A4016007BCDC5 /* Debug */,
 				56754EBA1D9A4016007BCDC5 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		F06792F4200A73470066C438 /* Build configuration list for PBXNativeTarget "MonitorControlHelper" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				F06792F2200A73470066C438 /* Debug */,
-				F06792F3200A73470066C438 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

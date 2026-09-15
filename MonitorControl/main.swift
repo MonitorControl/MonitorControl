@@ -19,18 +19,23 @@ var menu: MenuHandler!
 
 let prefs = UserDefaults.standard
 
-// Views
-private let storyboard = NSStoryboard(name: "Main", bundle: Bundle.main)
-let mainPrefsVc = storyboard.instantiateController(withIdentifier: "MainPrefsVC") as? MainPrefsViewController
-let displaysPrefsVc = storyboard.instantiateController(withIdentifier: "DisplaysPrefsVC") as? DisplaysPrefsViewController
-let menuslidersPrefsVc = storyboard.instantiateController(withIdentifier: "MenuslidersPrefsVC") as? MenuslidersPrefsViewController
-let keyboardPrefsVc = storyboard.instantiateController(withIdentifier: "KeyboardPrefsVC") as? KeyboardPrefsViewController
-let aboutPrefsVc = storyboard.instantiateController(withIdentifier: "AboutPrefsVC") as? AboutPrefsViewController
-let onboardingVc = storyboard.instantiateController(withIdentifier: "onboardingViewController") as? NSWindowController
+// Canvas previews provide isolated settings data and must not start display control.
+private let isRunningForPreviews = ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] == "1"
 
-autoreleasepool { () in
-  let mc = NSApplication.shared
-  let mcDelegate = AppDelegate()
-  mc.delegate = mcDelegate
-  mc.run()
+// Views
+private let storyboard = isRunningForPreviews ? nil : NSStoryboard(name: "Main", bundle: Bundle.main)
+let mainPrefsVc = storyboard?.instantiateController(withIdentifier: "MainPrefsVC") as? MainPrefsViewController
+let displaysPrefsVc = storyboard?.instantiateController(withIdentifier: "DisplaysPrefsVC") as? DisplaysPrefsViewController
+let menuslidersPrefsVc = storyboard?.instantiateController(withIdentifier: "MenuslidersPrefsVC") as? MenuslidersPrefsViewController
+let keyboardPrefsVc = storyboard?.instantiateController(withIdentifier: "KeyboardPrefsVC") as? KeyboardPrefsViewController
+let aboutPrefsVc = storyboard?.instantiateController(withIdentifier: "AboutPrefsVC") as? AboutPrefsViewController
+let onboardingVc = storyboard?.instantiateController(withIdentifier: "onboardingViewController") as? NSWindowController
+
+if !isRunningForPreviews {
+  autoreleasepool { () in
+    let mc = NSApplication.shared
+    let mcDelegate = AppDelegate()
+    mc.delegate = mcDelegate
+    mc.run()
+  }
 }

@@ -10,7 +10,7 @@ class MenuslidersPrefsViewController: NSViewController, SettingsPane {
   let paneTitle: String = NSLocalizedString("App menu", comment: "Shown in the main prefs window")
 
   var toolbarItemIcon: NSImage {
-    if !DEBUG_MACOS10, #available(macOS 11.0, *) {
+    if !DEBUG_MACOS10 {
       return NSImage(systemSymbolName: "filemenu.and.cursorarrow", accessibilityDescription: "App menu")!
     } else {
       return NSImage(named: NSImage.infoName)!
@@ -41,6 +41,44 @@ class MenuslidersPrefsViewController: NSViewController, SettingsPane {
 
   @IBOutlet var rowTickCheck: NSGridRow!
   @IBOutlet var rowTickText: NSGridRow!
+
+  private var appearanceButtons: [PrefKey: NSButton] = [:]
+
+  private func addAppearanceSettings() {
+    guard let grid = self.view.subviews.compactMap({ $0 as? NSGridView }).first else { return }
+    let options: [(PrefKey, String)] = [
+      (.showDisplayResolution, "Show display resolution"),
+      (.showSystemControls, "Show Dark Mode, Night Shift and True Tone"),
+      (.showNightShiftTemperature, "Show Night Shift temperature"),
+    ]
+    let stack = NSStackView()
+    stack.orientation = .vertical
+    stack.alignment = .leading
+    stack.spacing = 6
+    for (key, title) in options {
+      let button = NSButton(checkboxWithTitle: NSLocalizedString(title, comment: "App menu appearance preference"), target: self, action: #selector(self.appearanceSettingChanged(_:)))
+      button.identifier = NSUserInterfaceItemIdentifier(key.rawValue)
+      self.appearanceButtons[key] = button
+      stack.addArrangedSubview(button)
+    }
+    let separator = NSBox()
+    separator.boxType = .separator
+    let separatorRow = grid.addRow(with: [separator, NSGridCell.emptyContentView])
+    separatorRow.mergeCells(in: NSRange(location: 0, length: grid.numberOfColumns))
+    separatorRow.cell(at: 0).xPlacement = .fill
+    separatorRow.height = 1
+    let label = NSTextField(labelWithString: NSLocalizedString("Appearance:", comment: "App menu settings section"))
+    let row = grid.addRow(with: [label, stack])
+    row.cell(at: 0).xPlacement = .trailing
+    row.cell(at: 0).yPlacement = .top
+    self.view.setFrameSize(NSSize(width: self.view.frame.width, height: self.view.frame.height + stack.fittingSize.height + 18))
+  }
+
+  @objc private func appearanceSettingChanged(_ sender: NSButton) {
+    guard let key = sender.identifier?.rawValue else { return }
+    prefs.set(sender.state == .on, forKey: key)
+    app.updateMenusAndKeys()
+  }
 
   func updateGridLayout() {
     if app.macOS10() {
@@ -79,11 +117,15 @@ class MenuslidersPrefsViewController: NSViewController, SettingsPane {
 
   override func viewDidLoad() {
     super.viewDidLoad()
+    self.addAppearanceSettings()
     self.populateSettings()
     prefs.addObserver(self, forKeyPath: PrefKey.menuIcon.rawValue, context: nil)
   }
 
   func populateSettings() {
+    for (key, button) in self.appearanceButtons {
+      button.state = prefs.bool(forKey: key.rawValue) ? .on : .off
+    }
     self.iconShow.selectItem(withTag: prefs.integer(forKey: PrefKey.menuIcon.rawValue))
     self.menuItemStyle.selectItem(withTag: prefs.integer(forKey: PrefKey.menuItemStyle.rawValue))
     self.showBrightnessSlider.state = !prefs.bool(forKey: PrefKey.hideBrightness.rawValue) ? .on : .off

@@ -150,3 +150,39 @@
 
 /* Shown in the alert dialog */
 "You need to enable MonitorControl in System Settings > Security and Privacy > Accessibility for the keyboard shortcuts to work" = "You need to enable MonitorControl in System Settings > Security and Privacy > Accessibility for the keyboard shortcuts to work";
+
+/* Menu appearance and system display controls */
+"Show display resolution" = "Show display resolution";
+
+/* Menu appearance and system display controls */
+"Show Dark Mode, Night Shift and True Tone" = "Show Dark Mode, Night Shift and True Tone";
+
+/* Menu appearance and system display controls */
+"Show Night Shift temperature" = "Show Night Shift temperature";
+
+/* Menu appearance and system display controls */
+"Appearance:" = "Appearance:";
+
+/* Menu appearance and system display controls */
+"Dark Mode" = "Dark Mode";
+
+/* Menu appearance and system display controls */
+"Night Shift" = "Night Shift";
+
+/* Menu appearance and system display controls */
+"True Tone" = "True Tone";
+
+/* Menu appearance and system display controls */
+"Night Shift Temperature" = "Night Shift Temperature";
+
+/* Menu appearance and system display controls */
+"Less Warm" = "Less Warm";
+
+/* Menu appearance and system display controls */
+"More Warm" = "More Warm";
+
+/* Menu appearance and system display controls */
+"On" = "On";
+
+/* Menu appearance and system display controls */
+"Off" = "Off";
