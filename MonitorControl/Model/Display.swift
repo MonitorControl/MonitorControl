@@ -86,11 +86,8 @@ class Display: Equatable {
   }
 
   func calcNewBrightness(isUp: Bool, isSmallIncrement: Bool) -> Float {
-    var step: Float = (isUp ? 1 : -1) / 16.0
+    let step: Float = (isUp ? 1 : -1) / (isSmallIncrement ? 64.0 : 16.0)
     let delta = step / 4
-    if isSmallIncrement {
-      step = delta
-    }
     return min(max(0, ceil((self.getBrightness() + delta) / step) * step), 1)
   }
 
