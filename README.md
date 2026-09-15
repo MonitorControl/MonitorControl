@@ -24,9 +24,6 @@ Use menubar extra sliders or the keyboard, including native Apple keys!</p>
 
 <hr>
 
-> [!WARNING]
-> MonitorControl v4.2.0 [may crash](https://github.com/MonitorControl/MonitorControl/issues/1663) on certain configurations running macOS 15 Sequoia or Tahoe. Additionally, this version will not automatically update to the [latest app version](https://github.com/MonitorControl/MonitorControl/releases). To resolve the issue and ensure future updates, please upgrade manually.
-
 ## Download
 
 Go to [Releases](https://github.com/MonitorControl/MonitorControl/releases) and download the latest `.dmg`, or you can install via Homebrew:
@@ -81,7 +78,7 @@ For additional features, more advanced brightness control with XDR/HDR brightnes
 
 _* With some limitations - full functionality available on macOS 11 Big Sur or newer._
 
-For macOS Sequoia and Tahoe 26 compatibility [v4.3.3 or newer](https://github.com/MonitorControl/MonitorControl/releases) is required!
+For macOS 27 Golden Gate compatibility [v4.4.0 or newer](https://github.com/MonitorControl/MonitorControl/releases) is required!
 
 Please note that current versions have limited native macOS OSD support on macOS Tahoe - although the Control Center brightness or volume OSD appears, the OSD percentage value will not show or update.
 
