@@ -6,7 +6,6 @@ import Foundation
 import MediaKeyTap
 import os.log
 import ServiceManagement
-import Settings
 import SimplyCoreAudio
 import Sparkle
 
@@ -31,25 +30,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   var audioPlayer: AVAudioPlayer?
   let updaterController = SPUStandardUpdaterController(startingUpdater: false, updaterDelegate: UpdaterDelegate(), userDriverDelegate: nil)
 
-  var settingsPaneStyle: Settings.Style {
-    if !DEBUG_MACOS10 {
-      return Settings.Style.toolbarItems
-    } else {
-      return Settings.Style.segmentedControl
-    }
-  }
-
-  lazy var settingsWindowController: SettingsWindowController = .init(
-    panes: [
-      mainPrefsVc!,
-      menuslidersPrefsVc!,
-      keyboardPrefsVc!,
-      displaysPrefsVc!,
-      aboutPrefsVc!,
-    ],
-    style: self.settingsPaneStyle,
-    animated: true
-  )
+  lazy var settingsWindowController = ModernSettingsWindowController()
 
   func applicationDidFinishLaunching(_: Notification) {
     app = self
@@ -105,7 +86,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   }
 
   func applicationDidBecomeActive(_: Notification) {
-    mainPrefsVc?.refreshStartAtLogin()
     self.focusSettingsAfterActivation()
   }
 
