@@ -157,6 +157,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
   func updateMenusAndKeys() {
     menu.updateMenus()
+    self.keyboardShortcuts.updateRegistrations()
     self.updateMediaKeyTap()
   }
 

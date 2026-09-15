@@ -5,6 +5,9 @@ import KeyboardShortcuts
 import os.log
 
 class KeyboardShortcutsManager {
+  private let brightnessShortcuts: [KeyboardShortcuts.Name] = [.brightnessUp, .brightnessDown, .contrastUp, .contrastDown]
+  private let volumeShortcuts: [KeyboardShortcuts.Name] = [.volumeUp, .volumeDown, .mute]
+
   var initialKeyRepeat = 0.21
   var keyRepeat = 0.028
   var keyRepeatCount = 0
@@ -54,9 +57,31 @@ class KeyboardShortcutsManager {
     KeyboardShortcuts.onKeyUp(for: .volumeDown) { [self] in
       self.disengage()
     }
+    self.updateRegistrations()
+  }
+
+  func updateRegistrations() {
+    let brightnessEnabled = [KeyboardBrightness.custom.rawValue, KeyboardBrightness.both.rawValue].contains(prefs.integer(forKey: PrefKey.keyboardBrightness.rawValue))
+    let volumeEnabled = [KeyboardVolume.custom.rawValue, KeyboardVolume.both.rawValue].contains(prefs.integer(forKey: PrefKey.keyboardVolume.rawValue))
+    let enabledShortcuts = (brightnessEnabled ? self.brightnessShortcuts : []) + (volumeEnabled ? self.volumeShortcuts : [])
+    let disabledShortcuts = (brightnessEnabled ? [] : self.brightnessShortcuts) + (volumeEnabled ? [] : self.volumeShortcuts)
+
+    self.disengage()
+    for shortcut in enabledShortcuts {
+      KeyboardShortcuts.enable(shortcut)
+    }
+    for shortcut in disabledShortcuts {
+      guard let assignedShortcut = KeyboardShortcuts.getShortcut(for: shortcut), !enabledShortcuts.contains(where: { KeyboardShortcuts.getShortcut(for: $0) == assignedShortcut }) else {
+        continue
+      }
+      KeyboardShortcuts.disable(shortcut)
+    }
   }
 
   func engage(_ shortcut: KeyboardShortcuts.Name) {
+    guard self.isEnabled(shortcut) else {
+      return
+    }
     self.initialKeyRepeat = max(15, UserDefaults.standard.double(forKey: "InitialKeyRepeat")) * 0.014
     self.keyRepeat = max(2, UserDefaults.standard.double(forKey: "KeyRepeat")) * 0.014
     self.currentCommand = shortcut
@@ -65,6 +90,16 @@ class KeyboardShortcutsManager {
     self.currentEventId += 1
     self.keyRepeatCount = 0
     self.apply(shortcut, eventId: self.currentEventId)
+  }
+
+  private func isEnabled(_ shortcut: KeyboardShortcuts.Name) -> Bool {
+    if self.brightnessShortcuts.contains(shortcut) {
+      return [KeyboardBrightness.custom.rawValue, KeyboardBrightness.both.rawValue].contains(prefs.integer(forKey: PrefKey.keyboardBrightness.rawValue))
+    }
+    if self.volumeShortcuts.contains(shortcut) {
+      return [KeyboardVolume.custom.rawValue, KeyboardVolume.both.rawValue].contains(prefs.integer(forKey: PrefKey.keyboardVolume.rawValue))
+    }
+    return false
   }
 
   func disengage() {

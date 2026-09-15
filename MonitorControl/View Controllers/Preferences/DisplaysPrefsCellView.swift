@@ -281,8 +281,8 @@ class DisplaysPrefsCellView: NSTableCellView {
     let prefKey = PrefKey.maxDDCOverride
     let value = sender.stringValue
     if let display = display as? OtherDisplay {
-      if !value.isEmpty, let intValue = UInt(value) {
-        display.savePref(Int(intValue), key: prefKey, for: command)
+      if let intValue = Int(value), intValue >= 0, intValue <= 65535 {
+        display.savePref(intValue, key: prefKey, for: command)
       } else {
         display.removePref(key: prefKey, for: command)
       }
