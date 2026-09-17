@@ -56,11 +56,18 @@ class MenuHandler: NSMenu, NSMenuDelegate {
     displays = DisplayManager.shared.sortDisplaysByFriendlyName()
     let relevant = prefs.integer(forKey: PrefKey.multiSliders.rawValue) == MultiSliders.relevant.rawValue
     let combine = prefs.integer(forKey: PrefKey.multiSliders.rawValue) == MultiSliders.combine.rawValue
+    let excludeBuiltinFromCombined = DisplayManager.shared.isBuiltinExcludedFromCombinedSlider()
     let numOfDisplays = displays.filter { !$0.isDummy }.count
     if numOfDisplays != 0 {
       let asSubMenu: Bool = (displays.count > 3 && !relevant && !combine && app.macOS10()) ? true : false
       var iterator = 0
       for display in displays where (!relevant || DisplayManager.resolveEffectiveDisplayID(display.identifier) == DisplayManager.resolveEffectiveDisplayID(currentDisplay!.identifier)) && !display.isDummy {
+        if excludeBuiltinFromCombined, CGDisplayIsBuiltin(display.identifier) != 0 {
+          display.sliderHandler[.audioSpeakerVolume] = nil
+          display.sliderHandler[.contrast] = nil
+          display.sliderHandler[.brightness] = nil
+          continue
+        }
         iterator += 1
         if !relevant, !combine, iterator != 1, app.macOS10() {
           self.insertItem(NSMenuItem.separator(), at: 0)

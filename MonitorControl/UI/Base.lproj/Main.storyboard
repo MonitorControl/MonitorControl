@@ -316,10 +316,10 @@
             <objects>
                 <viewController storyboardIdentifier="MenuslidersPrefsVC" id="tLm-u5-aZ2" customClass="MenuslidersPrefsViewController" customModule="MonitorControl" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" translatesAutoresizingMaskIntoConstraints="NO" id="5un-m0-FM4">
-                        <rect key="frame" x="0.0" y="0.0" width="730" height="560"/>
+                        <rect key="frame" x="0.0" y="0.0" width="730" height="580"/>
                         <subviews>
                             <gridView xPlacement="leading" yPlacement="fill" rowAlignment="none" rowSpacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="ZrF-7t-BP5">
-                                <rect key="frame" x="20" y="20" width="690" height="520"/>
+                                <rect key="frame" x="20" y="20" width="690" height="540"/>
                                 <rows>
                                     <gridRow height="20" bottomPadding="-6" id="jyr-gk-BEN"/>
                                     <gridRow height="20" bottomPadding="-13" id="ZS3-Gy-pfA"/>
@@ -334,7 +334,8 @@
                                     <gridRow bottomPadding="-13" id="xbz-Tf-py0"/>
                                     <gridRow bottomPadding="-10" id="KPA-bi-7h3"/>
                                     <gridRow bottomPadding="-13" id="CuW-77-ls4"/>
-                                    <gridRow bottomPadding="-10" id="MaK-MK-gRQ"/>
+                                    <gridRow bottomPadding="-6" id="MaK-MK-gRQ"/>
+                                    <gridRow bottomPadding="-10" id="kD8-mX-4qP"/>
                                     <gridRow bottomPadding="-10" id="7kD-xD-py0"/>
                                     <gridRow bottomPadding="-13" id="BmS-ju-SrX"/>
                                     <gridRow height="28" bottomPadding="-10" id="dqd-4Y-f2g"/>
@@ -580,6 +581,19 @@
                                             </textFieldCell>
                                         </textField>
                                     </gridCell>
+                                    <gridCell row="kD8-mX-4qP" column="FRJ-Rb-RRh" id="gT2-vB-8wZ"/>
+                                    <gridCell row="kD8-mX-4qP" column="V6M-Jv-Agj" id="mN5-pQ-3rT">
+                                        <button key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cV9-xL-6yU">
+                                            <rect key="frame" x="218" y="143" width="472" height="18"/>
+                                            <buttonCell key="cell" type="check" title="Ignore built-in display" bezelStyle="regularSquare" imagePosition="left" inset="2" id="bN3-zK-9fD">
+                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="combineExcludeBuiltinClicked:" target="tLm-u5-aZ2" id="fG4-hJ-1sA"/>
+                                            </connections>
+                                        </button>
+                                    </gridCell>
                                     <gridCell row="7kD-xD-py0" column="FRJ-Rb-RRh" headOfMergedCell="zOL-GT-1cQ" id="zOL-GT-1cQ">
                                         <box key="contentView" autoresizesSubviews="NO" horizontalHuggingPriority="1" verticalHuggingPriority="750" horizontalCompressionResistancePriority="1000" placeholderIntrinsicWidth="690" placeholderIntrinsicHeight="2" verifyAmbiguity="off" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="ASF-dP-OR6">
                                             <rect key="frame" x="0.0" y="153" width="690" height="6"/>
@@ -680,12 +694,14 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="combineExcludeBuiltin" destination="cV9-xL-6yU" id="jH6-kD-2wE"/>
                         <outlet property="enableSliderPercent" destination="fkJ-cg-1cE" id="nba-Qb-Hor"/>
                         <outlet property="enableSliderSnap" destination="lao-JI-LJH" id="HGa-Fb-E7e"/>
                         <outlet property="iconShow" destination="TFy-Wt-ZJK" id="M96-eG-p5Q"/>
                         <outlet property="menuItemStyle" destination="6td-Zq-3e7" id="yMt-fU-PZX"/>
                         <outlet property="multiSliders" destination="78Q-P6-b97" id="uJP-0H-YuL"/>
                         <outlet property="quitApplication" destination="dy4-nH-cIr" id="aXV-0Q-H4L"/>
+                        <outlet property="rowCombineExcludeBuiltin" destination="kD8-mX-4qP" id="lK8-nM-5xF"/>
                         <outlet property="rowMenuItemStyle" destination="ZS3-Gy-pfA" id="tVN-WD-eoa"/>
                         <outlet property="rowMultiSliders" destination="CuW-77-ls4" id="XPi-6a-J58"/>
                         <outlet property="rowQuitButton" destination="AKq-Nb-ugC" id="yym-xx-O9Z"/>
