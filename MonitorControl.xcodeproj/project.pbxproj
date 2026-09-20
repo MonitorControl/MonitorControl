@@ -50,6 +50,7 @@
 		AAD7DD342CAFF3D90062822F /* Settings in Frameworks */ = {isa = PBXBuildFile; productRef = AAD7DD332CAFF3D90062822F /* Settings */; };
 		AADB625A26BC196900DFFAA5 /* DisplayServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AADB625926BC196900DFFAA5 /* DisplayServices.framework */; };
 		CB0D15010000000000000001 /* KeyboardShortcuts.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB0D15010000000000000002 /* KeyboardShortcuts.swift */; };
+		CB0D15010000000000000011 /* BrightnessSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB0D15010000000000000012 /* BrightnessSync.swift */; };
 		F01B0699228221B7008E64DB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F01B0680228221B6008E64DB /* Localizable.strings */; };
 		F01B069F228221B7008E64DB /* SliderHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01B068F228221B7008E64DB /* SliderHandler.swift */; };
 		F03A8DF21FFBAA6F0034DC27 /* OtherDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03A8DF11FFBAA6F0034DC27 /* OtherDisplay.swift */; };
@@ -167,6 +168,7 @@
 		B7FA437F2AC5857A00A94C01 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InternetAccessPolicy.strings; sourceTree = "<group>"; };
 		B7FA43802AC5857A00A94C01 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		CB0D15010000000000000002 /* KeyboardShortcuts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardShortcuts.swift; sourceTree = "<group>"; };
+		CB0D15010000000000000012 /* BrightnessSync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrightnessSync.swift; sourceTree = "<group>"; };
 		F01B0682228221B6008E64DB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F01B0685228221B6008E64DB /* Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
 		F01B0686228221B6008E64DB /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -312,6 +314,7 @@
 				AA99521826FE49A300612E07 /* MenuHandler.swift */,
 				F01B068F228221B7008E64DB /* SliderHandler.swift */,
 				6C85EFD922C941B000227EA1 /* DisplayManager.swift */,
+				CB0D15010000000000000012 /* BrightnessSync.swift */,
 				AA25F6D626E68C160087F3A2 /* MediaKeyTapManager.swift */,
 				CB0D15010000000000000002 /* KeyboardShortcuts.swift */,
 				AA44E70627038F7F00E06865 /* KeyboardShortcutsManager.swift */,
@@ -630,6 +633,7 @@
 				FE4E0896249D584C003A50BB /* OSDUtils.swift in Sources */,
 				6CBFE27A23DB266000D1BC41 /* Display.swift in Sources */,
 				CB0D15010000000000000001 /* KeyboardShortcuts.swift in Sources */,
+				CB0D15010000000000000011 /* BrightnessSync.swift in Sources */,
 				AA44E70727038F7F00E06865 /* KeyboardShortcutsManager.swift in Sources */,
 				F03A8DF21FFBAA6F0034DC27 /* OtherDisplay.swift in Sources */,
 				AA78BDBD2709FE7B00CA8DF7 /* UpdaterDelegate.swift in Sources */,

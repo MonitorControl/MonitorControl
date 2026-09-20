@@ -22,6 +22,8 @@ class Display: Equatable {
 
   var sliderHandler: [Command: SliderHandler] = [:]
   var brightnessSyncSourceValue: Float = 1
+  // Where brightness sync would have put this display if it had no ends - see BrightnessSync.
+  var brightnessSyncAnchor: Float?
   var isVirtual: Bool = false
   var isDummy: Bool = false
 
