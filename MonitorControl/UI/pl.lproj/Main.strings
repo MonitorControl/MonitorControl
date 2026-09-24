@@ -62,7 +62,7 @@
 "9yL-no-aWa.title" = "Próba odczytania ustawień wyświetlacza";
 
 /* Class = "NSTextFieldCell"; title = "Show tick marks at 0%, 25%, 50%, 75% and 100% for accuracy."; ObjectID = "A8P-vn-DEJ"; */
-"A8P-vn-DEJ.title" = "Pokaż znaczniki przy 0%, 25%, 50%, 75% and 100% dla dokładności.";
+"A8P-vn-DEJ.title" = "Pokaż znaczniki przy 0%, 25%, 50%, 75% i 100% dla dokładności.";
 
 /* Class = "NSTextFieldCell"; title = "Use brightness, volume and other settings from last time or use defaults. Values will be applied to the display upon first change by the user."; ObjectID = "an7-Aj-3fZ"; */
 "an7-Aj-3fZ.title" = "Użyj jasności, głośności i innych ustawień z poprzedniej edycji lub zastosuj wartości domyślne. Wartości zostaną zastosowane do wyświetlacza przy pierwszej zmianie przez użytkownika.";
@@ -143,7 +143,7 @@
 "Faf-9L-TXx.title" = "Automatycznie sprawdź aktualizacje";
 
 /* Class = "NSTextFieldCell"; title = "Brightness control:"; ObjectID = "fe9-Ia-t9m"; */
-"fe9-Ia-t9m.title" = "Sterowanie jasnośćią:";
+"fe9-Ia-t9m.title" = "Sterowanie jasnością:";
 
 /* Class = "NSTextFieldCell"; title = "Volume:"; ObjectID = "FER-Ri-4UO"; */
 "FER-Ri-4UO.title" = "Głośność:";
