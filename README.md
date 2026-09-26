@@ -95,6 +95,21 @@ Notable exceptions for hardware control compatibility:
 - Some displays (notably EIZO) use MCCS over USB or an entirely custom protocol for control. These displays are supported with software dimming only.
 - DisplayLink docks and dongles do not allow for DDC control on Macs, only software dimming is available for these connections.
 
+## Troubleshooting
+
+### Screenshots, screen recordings, or screen sharing look dim/dull
+
+If your display does **not** support hardware (DDC) brightness control, MonitorControl dims it in software. There are two software methods, and which one is in use decides whether screen captures are affected:
+
+- **Gamma table manipulation** (default) adjusts the GPU output curve. Your eyes see the dimmed screen, but screenshots, screen recordings, and screen sharing capture the framebuffer *before* the curve is applied, so they stay at normal brightness.
+- **Shade overlay** (used when *Avoid gamma table manipulation* is enabled, or for AirPlay/Sidecar/DisplayLink virtual displays) lays a dark layer over the screen. This layer *is* part of the captured image, so captures look dim.
+
+Fix: open `Settings` » `Displays`, enable `Show advanced settings`, and make sure **`Avoid gamma table manipulation` is turned OFF** for the affected display. If the display is virtual (AirPlay/Sidecar/DisplayLink), only overlay dimming is available and this limitation is expected.
+
+### Brightness changes suddenly at a certain point on the slider
+
+On a display without hardware (DDC) control, the lower part of the slider dims in software while the upper part expects hardware dimming, so the handover between the two can produce a sudden jump. Turning OFF `Avoid gamma table manipulation` lets gamma (software) dimming cover the full range smoothly.
+
 ## Contributing to the project
 
 - If you want, you can fork the code, make improvements and submit a pull request to improve the app. Accepting a PR is solely in the hands of the maintainer - before making fundamental changes expecting it to be accepted, please consult the maintainer of the project!
