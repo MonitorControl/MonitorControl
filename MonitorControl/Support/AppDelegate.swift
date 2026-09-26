@@ -160,6 +160,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     DisplayManager.shared.configureDisplays()
     DisplayManager.shared.addDisplayCounterSuffixes()
     DisplayManager.shared.updateArm64AVServices()
+    DisplayManager.shared.updateUSBDisplayControls()
     if firstrun && prefs.integer(forKey: PrefKey.startupAction.rawValue) != StartupAction.write.rawValue {
       DisplayManager.shared.resetSwBrightnessForAllDisplays(prefsOnly: true)
     }
@@ -222,10 +223,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let dispatchedReconfigureID = self.reconfigureID
         os_log("Displays need reconfig after sober with reconfigureID %{public}@", type: .info, String(dispatchedReconfigureID))
         self.configure(dispatchedReconfigureID: dispatchedReconfigureID)
-      } else if Arm64DDC.isArm64 {
-        os_log("Displays don't need reconfig after sober but might need AVServices update", type: .info)
-        DisplayManager.shared.updateArm64AVServices()
-        self.job(start: true)
+      } else {
+        // USB displays may have reconnected as new devices during sleep
+        DisplayManager.shared.updateUSBDisplayControls()
+        if Arm64DDC.isArm64 {
+          os_log("Displays don't need reconfig after sober but might need AVServices update", type: .info)
+          DisplayManager.shared.updateArm64AVServices()
+          self.job(start: true)
+        }
       }
       self.startupActionWriteRepeatAfterSober()
       self.updateMediaKeyTap()

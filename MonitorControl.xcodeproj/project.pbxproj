@@ -23,6 +23,7 @@
 		AA062E8A26C9A039007E628C /* DisplaysPrefsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA062E8926C9A039007E628C /* DisplaysPrefsViewController.swift */; };
 		AA062E8E26CA7BE5007E628C /* DisplaysPrefsCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA062E8D26CA7BE5007E628C /* DisplaysPrefsCellView.swift */; };
 		AA16139B26BE772E00DCF027 /* Arm64DDC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA16139A26BE772E00DCF027 /* Arm64DDC.swift */; };
+		0D7A308FEF62326701BD65F4 /* USBDisplayControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412CC6158DF12CC480297A74 /* USBDisplayControl.swift */; };
 		AA25F6CF26E680510087F3A2 /* MenuslidersPrefsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA25F6CE26E680510087F3A2 /* MenuslidersPrefsViewController.swift */; };
 		AA25F6D126E681D30087F3A2 /* KeyboardPrefsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA25F6D026E681D30087F3A2 /* KeyboardPrefsViewController.swift */; };
 		AA25F6D726E68C160087F3A2 /* MediaKeyTapManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA25F6D626E68C160087F3A2 /* MediaKeyTapManager.swift */; };
@@ -109,6 +110,7 @@
 		AA062E8926C9A039007E628C /* DisplaysPrefsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplaysPrefsViewController.swift; sourceTree = "<group>"; };
 		AA062E8D26CA7BE5007E628C /* DisplaysPrefsCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplaysPrefsCellView.swift; sourceTree = "<group>"; };
 		AA16139A26BE772E00DCF027 /* Arm64DDC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Arm64DDC.swift; sourceTree = "<group>"; };
+		412CC6158DF12CC480297A74 /* USBDisplayControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = USBDisplayControl.swift; sourceTree = "<group>"; };
 		AA25F6CE26E680510087F3A2 /* MenuslidersPrefsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuslidersPrefsViewController.swift; sourceTree = "<group>"; };
 		AA25F6D026E681D30087F3A2 /* KeyboardPrefsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardPrefsViewController.swift; sourceTree = "<group>"; };
 		AA25F6D626E68C160087F3A2 /* MediaKeyTapManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaKeyTapManager.swift; sourceTree = "<group>"; };
@@ -316,6 +318,7 @@
 				CB0D15010000000000000002 /* KeyboardShortcuts.swift */,
 				AA44E70627038F7F00E06865 /* KeyboardShortcutsManager.swift */,
 				AA16139A26BE772E00DCF027 /* Arm64DDC.swift */,
+				412CC6158DF12CC480297A74 /* USBDisplayControl.swift */,
 				AA4398A826DD55DA00943F16 /* IntelDDC.swift */,
 				FE4E0895249D584C003A50BB /* OSDUtils.swift */,
 			);
@@ -636,6 +639,7 @@
 				AA44E7052703790100E06865 /* KeyboardShortcuts+Extension.swift in Sources */,
 				F0A489C4279C71B200BEDFD6 /* OnboardingViewController.swift in Sources */,
 				AA16139B26BE772E00DCF027 /* Arm64DDC.swift in Sources */,
+				0D7A308FEF62326701BD65F4 /* USBDisplayControl.swift in Sources */,
 				F0445D3820023E710025AE82 /* MainPrefsViewController.swift in Sources */,
 				28D1DDF2227FBE71004CB494 /* NSScreen+Extension.swift in Sources */,
 				AA99521726FE25AB00612E07 /* AppDelegate.swift in Sources */,
