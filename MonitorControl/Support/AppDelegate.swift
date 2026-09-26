@@ -222,9 +222,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let dispatchedReconfigureID = self.reconfigureID
         os_log("Displays need reconfig after sober with reconfigureID %{public}@", type: .info, String(dispatchedReconfigureID))
         self.configure(dispatchedReconfigureID: dispatchedReconfigureID)
-      } else if Arm64DDC.isArm64 {
-        os_log("Displays don't need reconfig after sober but might need AVServices update", type: .info)
-        DisplayManager.shared.updateArm64AVServices()
+      } else {
+        if Arm64DDC.isArm64 {
+          os_log("Displays don't need reconfig after sober but might need AVServices update", type: .info)
+          DisplayManager.shared.updateArm64AVServices()
+        }
         self.job(start: true)
       }
       self.startupActionWriteRepeatAfterSober()
