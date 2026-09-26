@@ -1004,6 +1004,7 @@
                                                 <menu key="menu" id="LhY-cM-Msq">
                                                     <items>
                                                         <menuItem title="Standard keyboard volume and mute keys" state="on" id="1sy-Kd-WL5"/>
+                                                        <menuItem title="Standard keys (force capture)" tag="4" id="fVk-mR-9Xp"/>
                                                         <menuItem title="Custom keyboard shortcuts" tag="1" id="4CG-0I-anB"/>
                                                         <menuItem title="Both standard and custom shortcuts" tag="2" id="QDG-SA-mRX">
                                                             <modifierMask key="keyEquivalentModifierMask"/>

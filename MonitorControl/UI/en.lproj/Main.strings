@@ -415,5 +415,8 @@
 /* Class = "NSButtonCell"; title = "Show percentages"; ObjectID = "ZUu-MR-XwA"; */
 "ZUu-MR-XwA.title" = "Show percentages";
 
+/* Class = "NSMenuItem"; title = "Standard keys (force capture)"; ObjectID = "fVk-mR-9Xp"; */
+"fVk-mR-9Xp.title" = "Standard keys (force capture)";
+
 /* Class = "NSTextFieldCell"; title = "Combined dimming switchover point:"; ObjectID = "zv8-pZ-OPy"; */
 "zv8-pZ-OPy.title" = "Combined dimming switchover point:";
