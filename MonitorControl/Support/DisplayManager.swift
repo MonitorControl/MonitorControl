@@ -360,6 +360,41 @@ class DisplayManager {
     }
   }
 
+  func updateUSBDisplayControls() {
+    for otherDisplay in self.getOtherDisplays() {
+      otherDisplay.usbControl = nil
+    }
+    let appleDisplays = self.getOtherDisplays().filter { !$0.isVirtual && $0.vendorNumber == USBDisplayControl.appleEDIDVendorNumber }
+    var usbControls = USBDisplayControl.connectedDisplays()
+    guard !appleDisplays.isEmpty, !usbControls.isEmpty else {
+      return
+    }
+    os_log("USB display control update requested", type: .info)
+    var unmatchedDisplays: [OtherDisplay] = []
+    // An Apple display's EDID model number is normally its USB product ID
+    for otherDisplay in appleDisplays {
+      if let index = usbControls.firstIndex(where: { UInt32($0.productID) == otherDisplay.modelNumber }) {
+        self.attachUSBDisplayControl(usbControls.remove(at: index), to: otherDisplay)
+      } else {
+        unmatchedDisplays.append(otherDisplay)
+      }
+    }
+    // Otherwise a single leftover display must be the one USB display that macOS doesn't drive itself
+    let undrivenUSBControls = usbControls.filter { !$0.isDrivenByMacOS }
+    if unmatchedDisplays.count == 1, undrivenUSBControls.count == 1 {
+      self.attachUSBDisplayControl(undrivenUSBControls[0], to: unmatchedDisplays[0])
+    }
+    os_log("USB display control update done", type: .info)
+  }
+
+  func attachUSBDisplayControl(_ usbControl: USBDisplayControl, to otherDisplay: OtherDisplay) {
+    otherDisplay.usbControl = usbControl
+    // Brightness is the only control these displays offer over USB
+    otherDisplay.savePref(true, key: .unavailableDDC, for: .contrast)
+    otherDisplay.savePref(true, key: .unavailableDDC, for: .audioSpeakerVolume)
+    os_log("USB control attached to display %{public}@ (USB product %{public}@)", type: .info, String(otherDisplay.identifier), String(format: "0x%04x", usbControl.productID))
+  }
+
   func resetSwBrightnessForAllDisplays(prefsOnly: Bool = false, noPrefSave: Bool = false, async: Bool = false) {
     for otherDisplay in self.getOtherDisplays() {
       if !prefsOnly {
