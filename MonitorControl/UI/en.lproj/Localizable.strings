@@ -28,6 +28,24 @@
 /* Shown in menu */
 "Contrast" = "Contrast";
 
+/* Shown in the main prefs window */
+"Language:" = "Language:";
+
+/* Shown in the language picker */
+"System Default" = "System Default";
+
+/* Shown after changing the app language */
+"Language Change Requires Restart" = "Language Change Requires Restart";
+
+/* Shown after changing the app language */
+"The new language will be used the next time MonitorControl is opened." = "The new language will be used the next time MonitorControl is opened.";
+
+/* Shown after changing the app language */
+"Quit MonitorControl" = "Quit MonitorControl";
+
+/* Shown after changing the app language */
+"Later" = "Later";
+
 /* Version */
 "Copyright Ⓒ MonitorControl, " = "Copyright Ⓒ MonitorControl, ";
 
