@@ -38,6 +38,8 @@ class MenuslidersPrefsViewController: NSViewController, SettingsPane {
 
   @IBOutlet var rowMultiSliders: NSGridRow!
   @IBOutlet var rowSlidersCombineText: NSGridRow!
+  @IBOutlet var rowCombineExcludeBuiltin: NSGridRow!
+  @IBOutlet var combineExcludeBuiltin: NSButton!
 
   @IBOutlet var rowTickCheck: NSGridRow!
   @IBOutlet var rowTickText: NSGridRow!
@@ -60,12 +62,15 @@ class MenuslidersPrefsViewController: NSViewController, SettingsPane {
     if self.multiSliders.selectedTag() == MultiSliders.separate.rawValue {
       self.rowMultiSliders.bottomPadding = -6
       self.rowSlidersCombineText.isHidden = true
+      self.rowCombineExcludeBuiltin.isHidden = true
     } else if self.multiSliders.selectedTag() == MultiSliders.relevant.rawValue {
       self.rowMultiSliders.bottomPadding = -6
       self.rowSlidersCombineText.isHidden = true
+      self.rowCombineExcludeBuiltin.isHidden = true
     } else if self.multiSliders.selectedTag() == MultiSliders.combine.rawValue {
       self.rowMultiSliders.bottomPadding = -10
       self.rowSlidersCombineText.isHidden = false
+      self.rowCombineExcludeBuiltin.isHidden = false
     }
 
     if app.macOS10() {
@@ -97,6 +102,7 @@ class MenuslidersPrefsViewController: NSViewController, SettingsPane {
     self.showContrastSlider.state = prefs.bool(forKey: PrefKey.showContrast.rawValue) ? .on : .off
 
     self.multiSliders.selectItem(withTag: prefs.integer(forKey: PrefKey.multiSliders.rawValue))
+    self.combineExcludeBuiltin.state = prefs.bool(forKey: PrefKey.combineExcludeBuiltin.rawValue) ? .on : .off
 
     self.showVolumeSlider.state = prefs.bool(forKey: PrefKey.hideVolume.rawValue) ? .off : .on
     self.enableSliderSnap.state = prefs.bool(forKey: PrefKey.enableSliderSnap.rawValue) ? .on : .off
@@ -186,6 +192,17 @@ class MenuslidersPrefsViewController: NSViewController, SettingsPane {
     prefs.set(sender.selectedTag(), forKey: PrefKey.multiSliders.rawValue)
     app.updateMenusAndKeys()
     self.updateGridLayout()
+  }
+
+  @IBAction func combineExcludeBuiltinClicked(_ sender: NSButton) {
+    switch sender.state {
+    case .on:
+      prefs.set(true, forKey: PrefKey.combineExcludeBuiltin.rawValue)
+    case .off:
+      prefs.set(false, forKey: PrefKey.combineExcludeBuiltin.rawValue)
+    default: break
+    }
+    app.updateMenusAndKeys()
   }
 
   @IBAction func showTickMarks(_ sender: NSButton) {

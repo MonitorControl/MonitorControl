@@ -226,6 +226,9 @@
 /* Class = "NSMenuItem"; title = "Depends on mouse pointer position"; ObjectID = "km4-hK-auM"; */
 "km4-hK-auM.title" = "取決於滑鼠游標位置";
 
+/* Class = "NSButtonCell"; title = "Ignore built-in display"; ObjectID = "bN3-zK-9fD"; */
+"bN3-zK-9fD.title" = "忽略內建顯示器";
+
 /* Class = "NSMenuItem"; title = "Use combined slider for all displays"; ObjectID = "lA0-tv-qRs"; */
 "lA0-tv-qRs.title" = "使用單一滑桿控制所有螢幕";
 

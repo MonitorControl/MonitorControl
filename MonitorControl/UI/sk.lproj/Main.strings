@@ -311,6 +311,9 @@
 /* Class = "NSMenuItem"; title = "Depends on mouse pointer position"; ObjectID = "km4-hK-auM"; */
 "km4-hK-auM.title" = "Závisí od polohy ukazovateľa myši";
 
+/* Class = "NSButtonCell"; title = "Ignore built-in display"; ObjectID = "bN3-zK-9fD"; */
+"bN3-zK-9fD.title" = "Ignorovať vstavaný displej";
+
 /* Class = "NSMenuItem"; title = "Use combined slider for all displays"; ObjectID = "lA0-tv-qRs"; */
 "lA0-tv-qRs.title" = "Použiť kombinovaný posuvník pre všetky displeje";
 
