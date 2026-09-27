@@ -131,6 +131,11 @@ class MainPrefsViewController: NSViewController, SettingsPane {
   }
 
   @IBAction func enableBrightnessSync(_ sender: NSButton) {
+    // While sync was off the user was free to move the displays apart, so drop the
+    // anchors and let the next change pick the offsets up from where they are now.
+    for display in DisplayManager.shared.displays {
+      display.brightnessSyncAnchor = nil
+    }
     switch sender.state {
     case .on:
       prefs.set(true, forKey: PrefKey.enableBrightnessSync.rawValue)
