@@ -21,6 +21,7 @@ class DisplayManager {
     self.gammaActivityEnforcer.alphaValue = 1 * (DEBUG_GAMMA_ENFORCER ? 0.5 : 0.01)
     self.gammaActivityEnforcer.ignoresMouseEvents = true
     self.gammaActivityEnforcer.level = .screenSaver
+    self.gammaActivityEnforcer.sharingType = .none // exclude helper overlay from screen capture/recording
     self.gammaActivityEnforcer.orderFrontRegardless()
     self.gammaActivityEnforcer.collectionBehavior = [.stationary, .canJoinAllSpaces]
     os_log("Gamma activity enforcer created.", type: .info)
@@ -70,6 +71,14 @@ class DisplayManager {
       shade.backgroundColor = .clear
       shade.ignoresMouseEvents = true
       shade.level = NSWindow.Level(rawValue: Int(CGShieldingWindowLevel()))
+      // Hiding the shade from screen capture is only safe on real displays. On VIRTUAL
+      // displays (AirPlay / Sidecar / DisplayLink) macOS presents the display itself via
+      // screen capture, so a non-capturable shade would also disappear from the physical
+      // monitor and stop dimming it. Only opt these shades out of capture when the display
+      // is not virtual (e.g. a Mac mini HDMI / blacklisted display using shade dimming).
+      if !DisplayManager.isVirtual(displayID: displayID) {
+        shade.sharingType = .none // dimming overlay must not appear in screenshots / screen recordings
+      }
       shade.orderFrontRegardless()
       shade.collectionBehavior = [.stationary, .canJoinAllSpaces, .ignoresCycle]
       shade.setFrame(screen.frame, display: true)
