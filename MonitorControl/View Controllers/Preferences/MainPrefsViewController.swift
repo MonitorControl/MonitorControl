@@ -150,7 +150,7 @@ class MainPrefsViewController: NSViewController, SettingsPane {
       return
     }
     let controller = EqualBrightnessSettingsWindowController()
-    controller.onSave = { [weak self] _, _ in
+    controller.onSave = { [weak self] in
       self?.equalBrightnessWindowController = nil
     }
     controller.onCancel = { [weak self] in

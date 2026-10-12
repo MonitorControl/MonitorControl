@@ -16,8 +16,8 @@ struct EqualBrightnessCalibrationPoint: Codable, Identifiable {
 
   /// Creates a normalized calibration point and clamps both values to the supported range.
   /// 创建归一化参考点，并将两个值限制在支持的范围内。
-  init(sourceValue: Double, targetValue: Double) {
-    self.id = UUID()
+  init(id: UUID = UUID(), sourceValue: Double, targetValue: Double) {
+    self.id = id
     self.sourceValue = EqualBrightnessCurve.clamp(sourceValue)
     self.targetValue = EqualBrightnessCurve.clamp(targetValue)
   }
@@ -208,86 +208,56 @@ struct EqualBrightnessCurve: Codable {
 
 // MARK: - Persistence / 配置持久化
 
-/// Identifies a display with stable hardware values and keeps legacy aliases for migration.
-/// 使用稳定硬件字段标识显示器，并保留旧键以便迁移已有配置。
+/// Identifies a display with explicit hardware fields.
+/// 使用明确的硬件字段标识显示器。
 struct EqualBrightnessDisplayIdentity: Codable, Hashable {
   let key: String
   let displayName: String
-  private let legacyKeys: [String]
-  private let legacyDisplayIDPrefixes: [String]
 
-  /// Returns the current key followed by keys written by older builds.
-  /// 返回当前键以及旧版本写入的兼容键。
-  var lookupKeys: [String] {
-    var keys = [self.key]
-    for legacyKey in self.legacyKeys where !keys.contains(legacyKey) {
-      keys.append(legacyKey)
-    }
-    return keys
-  }
-
-  /// Checks whether a stored key belongs to this display's old ID-based namespace.
-  /// 检查持久化键是否属于当前显示器旧版的 ID 命名空间。
-  func matchesLegacyDisplayIDKey(_ storedKey: String) -> Bool {
-    self.legacyDisplayIDPrefixes.contains { storedKey.hasPrefix($0) }
-  }
-
-  /// Builds a stable identity from the current display metadata.
-  /// 根据当前显示器元数据构造稳定身份。
+  /// Builds a readable versioned key from display metadata.
+  /// 根据显示器元数据构造可读的版本化键。
   init(display: Display) {
     self.displayName = display.name
-    let localizedName = Self.normalized(display.name)
     let hardwareName = Self.normalized(DisplayManager.getDisplayRawNameByID(displayID: display.identifier))
-    let stableName = hardwareName.isEmpty ? localizedName : hardwareName
     let vendor = display.vendorNumber ?? 0
     let model = display.modelNumber ?? 0
     let serial = display.serialNumber ?? 0
     let unit = CGDisplayUnitNumber(display.identifier)
     let isBuiltin = CGDisplayIsBuiltin(display.identifier) != 0
 
+    // The v2 key names every field so it is clear why two displays are considered different.
+    // v2 键明确写出每个字段，便于判断两台显示器为何被视为不同设备。
+    var components = [
+      "v2",
+      "kind=\(isBuiltin ? "builtin" : "external")",
+      "vendor=\(vendor)",
+      "model=\(model)"
+    ]
     if isBuiltin {
-      // Built-in displays are unique on a Mac, so vendor/model are sufficient when no serial exists.
-      // 内置屏幕在一台 Mac 上唯一；没有序列号时使用厂商/型号即可。
-      self.key = serial == 0 ? "builtin-\(vendor)-\(model)" : "builtin-\(vendor)-\(model)-serial-\(serial)"
+      // Built-in displays are unique on a Mac; add the serial only when available.
+      // 内置屏幕在一台 Mac 上唯一；只有系统提供序列号时才加入序列号。
+      if serial != 0 {
+        components.append("serial=\(serial)")
+      }
     } else if serial != 0 {
       // Serial numbers keep identical external displays separate after reconnects.
       // 序列号可让同型号外接显示器在重连后仍保持独立配置。
-      self.key = "external-\(vendor)-\(model)-serial-\(serial)"
-    } else if !stableName.isEmpty, unit != 0 {
-      // Unit number represents the physical display connection and survives display-ID reassignment.
-      // 显示单元号代表物理连接，显示器 ID 重新分配后通常仍保持不变。
-      self.key = "external-\(vendor)-\(model)-name-\(stableName)-unit-\(unit)"
-    } else if !stableName.isEmpty {
-      // Keep a metadata-only fallback when the system does not expose a unit number.
-      // 系统不提供显示单元号时，至少使用显示器元数据作为稳定回退。
-      self.key = "external-\(vendor)-\(model)-name-\(stableName)"
+      components.append("serial=\(serial)")
     } else {
-      // A display ID is the last resort when no identifying metadata is available at all.
-      // 完全没有可识别元数据时，最后才回退到当前显示器 ID。
-      self.key = "external-display-\(display.identifier)"
-    }
-
-    // Keep both the original serial/zero format and the display-ID fallback used by recent builds.
-    // 同时兼容最初的序列号/0 格式，以及近期版本使用的显示器 ID 回退格式。
-    var aliases: [String] = []
-    var displayIDPrefixes: [String] = []
-    if isBuiltin {
-      aliases.append("builtin-\(localizedName)-\(vendor)-\(model)")
-      if hardwareName != localizedName, !hardwareName.isEmpty {
-        aliases.append("builtin-\(hardwareName)-\(vendor)-\(model)")
+      // Name and unit together identify a serial-less external display.
+      // 没有序列号时，使用硬件名称和显示单元号识别外接显示器。
+      if !hardwareName.isEmpty {
+        components.append("name=\(Self.escape(hardwareName))")
       }
-    } else {
-      aliases.append("external-\(localizedName)-\(vendor)-\(model)-\(serial)")
-      aliases.append("external-\(localizedName)-\(vendor)-\(model)-display-\(display.identifier)")
-      displayIDPrefixes.append("external-\(localizedName)-\(vendor)-\(model)-display-")
-      if hardwareName != localizedName, !hardwareName.isEmpty {
-        aliases.append("external-\(hardwareName)-\(vendor)-\(model)-\(serial)")
-        aliases.append("external-\(hardwareName)-\(vendor)-\(model)-display-\(display.identifier)")
-        displayIDPrefixes.append("external-\(hardwareName)-\(vendor)-\(model)-display-")
+      if unit != 0 {
+        components.append("unit=\(unit)")
+      } else {
+        // Without a unit number, include the current display ID to avoid merging identical devices.
+        // 没有显示单元号时加入当前显示器 ID，避免把同名同型号设备错误合并。
+        components.append("displayID=\(display.identifier)")
       }
     }
-    self.legacyKeys = aliases
-    self.legacyDisplayIDPrefixes = displayIDPrefixes
+    self.key = components.joined(separator: "|")
   }
 
   /// Normalizes names without tying persistence to localization or whitespace.
@@ -295,12 +265,20 @@ struct EqualBrightnessDisplayIdentity: Codable, Hashable {
   private static func normalized(_ value: String) -> String {
     value.filter { !$0.isWhitespace }.lowercased()
   }
+
+  /// Escapes separators so a hardware name remains one readable key field.
+  /// 转义分隔符，确保硬件名称仍是一个可读的键字段。
+  private static func escape(_ value: String) -> String {
+    value.replacingOccurrences(of: "%", with: "%25").replacingOccurrences(of: "|", with: "%7C")
+  }
 }
 
 /// Stores every saved curve and the reference display for one app installation.
 /// 保存当前应用的一组曲线以及参考显示器身份。
 struct EqualBrightnessSettingsProfile: Codable {
-  static let currentSchemaVersion = 1
+  // Version 2 intentionally uses a separate storage key; old profiles are not migrated.
+  // v2 使用独立的存储键，旧配置不再迁移或兼容读取。
+  static let currentSchemaVersion = 2
 
   var schemaVersion: Int = EqualBrightnessSettingsProfile.currentSchemaVersion
   var isEnabled: Bool = false
@@ -308,12 +286,12 @@ struct EqualBrightnessSettingsProfile: Codable {
   var curves: [String: EqualBrightnessCurve] = [:]
 }
 
-/// Persists equal-brightness curves separately from the legacy brightness preferences.
-/// 将等亮度曲线与原有亮度偏好分开持久化。
+/// Persists equal-brightness curves separately from normal brightness preferences.
+/// 将等亮度曲线与普通亮度偏好分开持久化。
 final class EqualBrightnessSettingsStore {
   static let shared = EqualBrightnessSettingsStore()
 
-  private let userDefaultsKey = "equalBrightnessSettings.profile.v1"
+  private let userDefaultsKey = "equalBrightnessSettings.profile.v2"
   private let encoder: JSONEncoder
   private let decoder: JSONDecoder
 
@@ -347,16 +325,18 @@ final class EqualBrightnessSettingsStore {
     return true
   }
 
-  /// Saves one target curve and enables mapped synchronization for future changes.
-  /// 保存一台目标显示器的曲线，并为后续亮度变化启用映射同步。
+  /// Saves all target curves in one profile and enables mapped synchronization.
+  /// 一次保存全部目标显示器曲线，并启用映射同步。
   @discardableResult
-  func saveCurve(_ curve: EqualBrightnessCurve, for targetDisplay: Display, referenceDisplay: Display) -> Bool {
+  func saveCurves(_ mappings: [(display: Display, curve: EqualBrightnessCurve)], referenceDisplay: Display) -> Bool {
     var profile = self.load() ?? EqualBrightnessSettingsProfile()
-    let targetIdentity = EqualBrightnessDisplayIdentity(display: targetDisplay)
     let referenceIdentity = EqualBrightnessDisplayIdentity(display: referenceDisplay)
-    profile.isEnabled = true
+    profile.isEnabled = !mappings.isEmpty
     profile.referenceDisplayKey = referenceIdentity.key
-    profile.curves[targetIdentity.key] = curve
+    for mapping in mappings {
+      let targetIdentity = EqualBrightnessDisplayIdentity(display: mapping.display)
+      profile.curves[targetIdentity.key] = mapping.curve
+    }
     return self.save(profile)
   }
 
@@ -367,21 +347,7 @@ final class EqualBrightnessSettingsStore {
       return nil
     }
     let identity = EqualBrightnessDisplayIdentity(display: display)
-    for key in identity.lookupKeys {
-      if let curve = profile.curves[key] {
-        return curve
-      }
-    }
-
-    // Recover one pre-migration display-ID record after reconnecting; refuse ambiguous matches.
-    // 重连后尝试恢复一条旧显示器 ID 记录；存在歧义时拒绝匹配，避免串用曲线。
-    let legacyMatches = profile.curves.filter { key, _ in
-      identity.matchesLegacyDisplayIDKey(key)
-    }
-    if legacyMatches.count == 1 {
-      return legacyMatches.first?.value
-    }
-    return nil
+    return profile.curves[identity.key]
   }
 
   /// Indicates whether a saved mapping should participate in runtime synchronization.
@@ -397,12 +363,7 @@ final class EqualBrightnessSettingsStore {
       return false
     }
     let identity = EqualBrightnessDisplayIdentity(display: display)
-    if identity.lookupKeys.contains(configuredKey) {
-      return true
-    }
-    // Also recognize the old display-ID key so legacy profiles keep their reference display after reconnecting.
-    // 同时识别旧版显示器 ID 键，确保旧配置在重连后仍能找到参考显示器。
-    return identity.matchesLegacyDisplayIDKey(configuredKey)
+    return identity.key == configuredKey
   }
 
   /// Deletes all equal-brightness data and restores the disabled default.
