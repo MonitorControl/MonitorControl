@@ -12,19 +12,7 @@ final class EqualBrightnessSettingsViewController: NSViewController {
   private let displayPopup = NSPopUpButton(frame: .zero, pullsDown: false)
   private let curvePopup = NSPopUpButton(frame: .zero, pullsDown: false)
   private let pointsSummary = NSTextField(labelWithString: "")
-  private let targetDisplayColors: [NSColor] = [
-    .systemOrange,
-    .systemGreen,
-    .systemPurple,
-    .systemRed,
-    .systemPink,
-    .systemTeal,
-    .systemYellow,
-    .systemIndigo,
-    .systemBrown,
-    .systemMint,
-    .systemCyan
-  ]
+  private let targetDisplayColors: [NSColor] = EqualBrightnessSettingsViewController.makeTargetDisplayColors()
   private var liveSliderRows: [EqualBrightnessAlignedSliderRow] = []
   private var sliderDisplays: [ObjectIdentifier: Display] = [:]
   private var slidersByDisplayID: [CGDirectDisplayID: NSSlider] = [:]
@@ -35,6 +23,36 @@ final class EqualBrightnessSettingsViewController: NSViewController {
   private var displayObjects: [Display] = []
   private var referenceDisplay: Display?
   private var selectedPointID: UUID?
+
+  /// Keeps the palette available on the project's macOS 10.14 deployment target.
+  /// 让调色板兼容项目的 macOS 10.14 最低部署版本。
+  private static func makeTargetDisplayColors() -> [NSColor] {
+    var colors: [NSColor] = [
+      .systemOrange,
+      .systemGreen,
+      .systemPurple,
+      .systemRed,
+      .systemPink,
+      .systemTeal,
+      .systemYellow,
+      .systemBrown,
+      .systemMint
+    ]
+
+    if #available(macOS 10.15, *) {
+      colors.insert(.systemIndigo, at: 7)
+    } else {
+      colors.insert(NSColor(calibratedRed: 0.35, green: 0.25, blue: 0.85, alpha: 1), at: 7)
+    }
+
+    if #available(macOS 12.0, *) {
+      colors.append(.systemCyan)
+    } else {
+      colors.append(NSColor(calibratedRed: 0.05, green: 0.65, blue: 0.85, alpha: 1))
+    }
+
+    return colors
+  }
 
   /// Builds the standalone page without inheriting layout from the host preferences window.
   /// 创建独立页面，不继承宿主偏好设置窗口的布局。
