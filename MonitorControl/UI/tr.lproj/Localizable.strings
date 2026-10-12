@@ -150,3 +150,17 @@
 
 /* Shown in the alert dialog */
 "You need to enable MonitorControl in System Settings > Security and Privacy > Accessibility for the keyboard shortcuts to work" = "MonitorControl klavye kısayollarını aktif hale getirmek için Sistem Tercihleri > Güvenlik ve Gizlilik > Erişebilirlik altından izin vermeniz gerekmektedir";
+
+/* Equal brightness settings / 等亮度设置 */
+"Equal Brightness Settings" = "Eşit Parlaklık Ayarları";
+"Equal brightness instructions" = "Bağlı her ekran için hizalanmış bir canlı kaydırıcı bulunur. Referans ekran mavi renktedir; her hedef ekranın eğrisi, referans noktaları ve kaydırıcısında kullanılan kendine ait bir rengi vardır. Kullanım: kalibre etmek istediğiniz hedef ekranı seçin ve tüm ekranlar aynı parlaklıktaymış gibi görünene kadar kaydırıcıları hareket ettirin. Parlaklık değişiklikleri hemen uygulanır. Geçerli parlaklık eşlemesini kaydetmek için “Referans Noktası Ekle” düğmesine tıklayın. Her referans noktasında gri dikey bir kılavuz bulunur; bir kılavuza tıklayarak tüm kaydırıcıları ilgili değerlere taşıyabilir, ekranları güncelleyebilir ve tam eğri önizlemesini yenileyebilirsiniz. Doğruluğu artırmak için birden fazla referans noktası ekleyin. Düzenlenebilir bir noktayı seçerek silebilirsiniz. Bir eğri türü seçip kalibrasyonu uygulamak için “Kaydet” düğmesine, değişiklikleri atmak için “İptal” düğmesine tıklayın. Her ekranı ayrı ayrı kalibre etmek için hedef ekranı değiştirin. Kaydettikten sonra parlaklık eşitleme, referans ekranın parlaklığını her ekranın eğrisi üzerinden eşler.";
+"Piecewise Linear" = "Parçalı doğrusal";
+"Smooth Monotone Cubic" = "Pürüzsüz monoton kübik";
+"Add Reference Point" = "Referans Noktası Ekle";
+"Delete Selected Point" = "Seçili Noktayı Sil";
+"Curve type" = "Eğri türü";
+"Cancel" = "İptal";
+"Save" = "Kaydet";
+"Target display" = "Hedef ekran";
+"Mac Reference" = "Mac referansı";
+"No reference points yet." = "Henüz referans noktası yok.";

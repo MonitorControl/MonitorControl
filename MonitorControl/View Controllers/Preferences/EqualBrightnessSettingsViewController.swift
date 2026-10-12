@@ -2,9 +2,227 @@
 
 import Cocoa
 
+/// Equal-brightness graph, editor layout, and window controller.
+/// 等亮度曲线图、编辑器布局和窗口控制器。
+
+// MARK: - Graph / 曲线图
+
+/// A sampled curve used by the graph view without coupling the graph to display hardware.
+/// 图表使用的采样曲线，避免图表直接依赖显示器硬件。
+struct EqualBrightnessGraphCurve {
+  let title: String
+  let color: NSColor
+  let evaluator: (Double) -> Double
+  let isReference: Bool
+}
+
+/// Draws the normalized brightness grid, reference line, target curves, and calibration points.
+/// 绘制归一化亮度网格、参考直线、目标曲线和校准点。
+final class EqualBrightnessGraphView: NSView {
+  var curves: [EqualBrightnessGraphCurve] = [] {
+    didSet {
+      self.needsDisplay = true
+    }
+  }
+
+  var points: [EqualBrightnessCalibrationPoint] = [] {
+    didSet {
+      self.needsDisplay = true
+    }
+  }
+
+  var selectedPointID: UUID? {
+    didSet {
+      self.needsDisplay = true
+    }
+  }
+
+  /// Uses the selected target display color for its calibration markers.
+  /// 使用当前选中目标显示器的颜色绘制校准点。
+  var pointColor: NSColor = .systemOrange {
+    didSet {
+      self.needsDisplay = true
+    }
+  }
+
+  var onPointSelected: ((UUID?) -> Void)?
+
+  /// Keeps graph coordinates readable in both light and dark appearances.
+  /// 让图表坐标在浅色和深色外观下都保持可读。
+  override var isFlipped: Bool {
+    true
+  }
+
+  /// Draws the grid and all current curve samples.
+  /// 绘制网格以及当前的所有曲线采样点。
+  override func draw(_ dirtyRect: NSRect) {
+    super.draw(dirtyRect)
+    NSColor.windowBackgroundColor.setFill()
+    dirtyRect.fill()
+    let rect = self.plotRect()
+    self.drawGrid(in: rect)
+    self.drawReferenceGuides(in: rect)
+    for curve in self.curves {
+      self.drawCurve(curve, in: rect)
+    }
+    self.drawLegend(in: rect)
+    for point in self.points {
+      self.drawPoint(point, in: rect)
+    }
+  }
+
+  /// Selects the closest reference point guide when the graph is clicked.
+  /// 点击图表时选中距离最近的参考点纵向引导线。
+  override func mouseDown(with event: NSEvent) {
+    let location = self.convert(event.locationInWindow, from: nil)
+    let rect = self.plotRect()
+    guard rect.insetBy(dx: -12, dy: 0).contains(location) else {
+      return
+    }
+    let candidates: [(point: EqualBrightnessCalibrationPoint, distance: CGFloat)] = self.points.map { point in
+      let pointX = self.graphPoint(source: point.sourceValue, target: point.targetValue, in: rect).x
+      return (point: point, distance: abs(pointX - location.x))
+    }
+    let nearest = candidates
+      .filter { candidate in candidate.distance <= 12 }
+      .min { left, right in left.distance < right.distance }
+    self.selectedPointID = nearest?.0.id
+    self.onPointSelected?(self.selectedPointID)
+  }
+
+  /// Calculates the inset plotting rectangle used by the graph.
+  /// 计算图表实际绘图区的内边距矩形。
+  private func plotRect() -> NSRect {
+    self.bounds.insetBy(dx: 36, dy: 24)
+  }
+
+  /// Draws five-by-five grid divisions and the two coordinate axes.
+  /// 绘制五乘五网格以及两条坐标轴。
+  private func drawGrid(in rect: NSRect) {
+    let gridColor = NSColor.separatorColor.withAlphaComponent(0.55)
+    gridColor.setStroke()
+    let path = NSBezierPath()
+    path.lineWidth = 0.5
+    for index in 0...4 {
+      let ratio = CGFloat(index) / 4
+      let x = rect.minX + rect.width * ratio
+      let y = rect.minY + rect.height * ratio
+      path.move(to: NSPoint(x: x, y: rect.minY))
+      path.line(to: NSPoint(x: x, y: rect.maxY))
+      path.move(to: NSPoint(x: rect.minX, y: y))
+      path.line(to: NSPoint(x: rect.maxX, y: y))
+    }
+    path.stroke()
+
+    NSColor.secondaryLabelColor.setStroke()
+    let axes = NSBezierPath()
+    axes.lineWidth = 1
+    axes.move(to: NSPoint(x: rect.minX, y: rect.minY))
+    axes.line(to: NSPoint(x: rect.maxX, y: rect.minY))
+    axes.move(to: NSPoint(x: rect.minX, y: rect.minY))
+    axes.line(to: NSPoint(x: rect.minX, y: rect.maxY))
+    axes.stroke()
+  }
+
+  /// Draws one gray vertical guide for every reference point.
+  /// 为每个参考点绘制一条灰色纵向引导线。
+  private func drawReferenceGuides(in rect: NSRect) {
+    let guideColor = NSColor.systemGray.withAlphaComponent(0.6)
+    guideColor.setStroke()
+    for point in self.points {
+      let x = self.graphPoint(source: point.sourceValue, target: point.targetValue, in: rect).x
+      let guide = NSBezierPath()
+      guide.lineWidth = point.id == self.selectedPointID ? 1.5 : 1
+      guide.setLineDash([3, 3], count: 2, phase: 0)
+      guide.move(to: NSPoint(x: x, y: rect.minY))
+      guide.line(to: NSPoint(x: x, y: rect.maxY))
+      guide.stroke()
+    }
+  }
+
+  /// Samples one normalized curve and renders it as a smooth polyline.
+  /// 对一条归一化曲线采样，并绘制为连续折线。
+  private func drawCurve(_ curve: EqualBrightnessGraphCurve, in rect: NSRect) {
+    let path = NSBezierPath()
+    path.lineWidth = curve.isReference ? 1 : 2
+    curve.color.withAlphaComponent(curve.isReference ? 0.65 : 0.9).setStroke()
+    for index in 0...60 {
+      let source = Double(index) / 60
+      let target = EqualBrightnessCurve.clamp(curve.evaluator(source))
+      let point = self.graphPoint(source: source, target: target, in: rect)
+      if index == 0 {
+        path.move(to: point)
+      } else {
+        path.line(to: point)
+      }
+    }
+    if curve.isReference {
+      path.setLineDash([4, 3], count: 2, phase: 0)
+    }
+    path.stroke()
+  }
+
+  /// Renders one calibration point as a colored marker.
+  /// 将一个校准点绘制为彩色标记。
+  private func drawPoint(_ point: EqualBrightnessCalibrationPoint, in rect: NSRect) {
+    let center = self.graphPoint(source: point.sourceValue, target: point.targetValue, in: rect)
+    if point.id == self.selectedPointID {
+      let selection = NSBezierPath(ovalIn: NSRect(x: center.x - 8, y: center.y - 8, width: 16, height: 16))
+      NSColor.controlAccentColor.setStroke()
+      selection.lineWidth = 2
+      selection.stroke()
+    }
+    let marker = NSBezierPath(ovalIn: NSRect(x: center.x - 4, y: center.y - 4, width: 8, height: 8))
+    self.pointColor.setFill()
+    marker.fill()
+    NSColor.labelColor.setStroke()
+    marker.lineWidth = 1
+    marker.stroke()
+  }
+
+  /// Draws a compact legend using the actual display names for every curve.
+  /// 使用每台显示器的实际名称绘制紧凑图例。
+  private func drawLegend(in rect: NSRect) {
+    var origin = NSPoint(x: rect.minX + 8, y: rect.minY + 8)
+    let attributes: [NSAttributedString.Key: Any] = [
+      .font: NSFont.systemFont(ofSize: NSFont.smallSystemFontSize),
+      .foregroundColor: NSColor.labelColor
+    ]
+    for curve in self.curves {
+      let title = NSString(string: curve.title)
+      let size = title.size(withAttributes: attributes)
+      let swatch = NSBezierPath(roundedRect: NSRect(x: origin.x, y: origin.y + 4, width: 12, height: 3), xRadius: 1.5, yRadius: 1.5)
+      curve.color.setStroke()
+      swatch.lineWidth = 2
+      swatch.stroke()
+      title.draw(at: NSPoint(x: origin.x + 16, y: origin.y), withAttributes: attributes)
+      origin.x += 16 + size.width + 18
+      if origin.x > rect.maxX - 100 {
+        origin.x = rect.minX + 8
+        origin.y += 18
+      }
+    }
+  }
+
+  /// Converts normalized values into the flipped view coordinate system.
+  /// 将归一化数值转换为翻转坐标系中的绘图位置。
+  private func graphPoint(source: Double, target: Double, in rect: NSRect) -> NSPoint {
+    let x = rect.minX + rect.width * CGFloat(EqualBrightnessCurve.clamp(source))
+    let y = rect.maxY - rect.height * CGFloat(EqualBrightnessCurve.clamp(target))
+    return NSPoint(x: x, y: y)
+  }
+}
+
+// MARK: - Editor / 编辑器
+
 /// Hosts the first functional equal-brightness editor window.
 /// 承载第一版可操作的等亮度设置窗口。
 final class EqualBrightnessSettingsViewController: NSViewController {
+  private struct SliderRow {
+    let label: NSTextField
+    let slider: NSSlider
+  }
+
   var onSave: (([EqualBrightnessCalibrationPoint], EqualBrightnessCurveKind) -> Void)?
   var onCancel: (() -> Void)?
 
@@ -13,7 +231,7 @@ final class EqualBrightnessSettingsViewController: NSViewController {
   private let curvePopup = NSPopUpButton(frame: .zero, pullsDown: false)
   private let pointsSummary = NSTextField(labelWithString: "")
   private let targetDisplayColors: [NSColor] = EqualBrightnessSettingsViewController.makeTargetDisplayColors()
-  private var liveSliderRows: [EqualBrightnessAlignedSliderRow] = []
+  private var liveSliderRows: [SliderRow] = []
   private var sliderDisplays: [ObjectIdentifier: Display] = [:]
   private var slidersByDisplayID: [CGDirectDisplayID: NSSlider] = [:]
   private var displayColors: [CGDirectDisplayID: NSColor] = [:]
@@ -108,14 +326,13 @@ final class EqualBrightnessSettingsViewController: NSViewController {
     self.pointsSummary.cell?.isScrollable = false
   }
 
-  /// Creates one aligned live slider per discovered display plus the calibration actions.
-  /// 为发现到的每台显示器创建一个对齐的实时滑块，并创建校准操作。
-  private func makeCalibrationControls() -> EqualBrightnessCalibrationControlsView {
+  /// Creates the aligned controls using the same two-column grid pattern as the existing preferences page.
+  /// 使用与原有设置页相同的两列网格模式创建对齐控件。
+  private func makeCalibrationControls() -> NSGridView {
     let addPointButton = NSButton(title: NSLocalizedString("Add Reference Point", comment: "Equal brightness add point button"), target: self, action: #selector(self.addReferencePoint(_:)))
     let removePointButton = NSButton(title: NSLocalizedString("Delete Selected Point", comment: "Equal brightness delete point button"), target: self, action: #selector(self.removeSelectedPoint(_:)))
     self.removePointButton = removePointButton
-    let curveLabel = NSTextField(labelWithString: NSLocalizedString("Curve type", comment: "Equal brightness curve selector label"))
-    let curveRow = EqualBrightnessAlignedControlRow(label: curveLabel, control: self.curvePopup)
+
     let displays = ([self.referenceDisplay] + self.displayObjects).compactMap { $0 }
     self.liveSliderRows = displays.map { display in
       let slider = NSSlider(value: self.currentBrightness(for: display), minValue: 0, maxValue: 1, target: self, action: #selector(self.sliderChanged(_:)))
@@ -124,33 +341,69 @@ final class EqualBrightnessSettingsViewController: NSViewController {
       let color = display == self.referenceDisplay ? NSColor.systemBlue : self.color(for: display, targetIndex: targetIndex)
       slider.trackFillColor = color
       let label = NSTextField(labelWithString: "")
+      label.alignment = .right
       self.sliderDisplays[ObjectIdentifier(slider)] = display
       self.slidersByDisplayID[display.identifier] = slider
-      return EqualBrightnessAlignedSliderRow(label: label, slider: slider)
+      return SliderRow(label: label, slider: slider)
     }
-    return EqualBrightnessCalibrationControlsView(
-      sliderRows: self.liveSliderRows,
-      curveRow: curveRow,
-      addButton: addPointButton,
-      removeButton: removePointButton
-    )
+
+    var rows: [[NSView]] = self.liveSliderRows.map { [$0.label, $0.slider] }
+    let curveLabel = NSTextField(labelWithString: NSLocalizedString("Curve type", comment: "Equal brightness curve selector label"))
+    curveLabel.alignment = .right
+    rows.append([curveLabel, self.curvePopup])
+
+    let actions = NSStackView(views: [addPointButton, removePointButton])
+    actions.orientation = .horizontal
+    actions.alignment = .centerY
+    actions.spacing = 8
+    actions.distribution = .fillProportionally
+    rows.append([NSGridCell.emptyContentView, actions])
+
+    let grid = NSGridView(views: rows)
+    self.configureAlignedGrid(grid)
+    grid.rowSpacing = 8
+    grid.row(at: grid.numberOfRows - 1).topPadding = 4
+    return grid
   }
 
-  /// Creates the target-display selector using the same fixed label column as the sliders.
-  /// 使用与滑块相同的固定标签列创建目标显示器选择器。
-  private func makeDisplayHeader() -> EqualBrightnessDisplaySelectorView {
+  /// Creates the target-display selector with the same label/control columns as the existing preferences page.
+  /// 使用与原有设置页相同的标签列和控件列创建目标显示器选择器。
+  private func makeDisplayHeader() -> NSGridView {
     let label = NSTextField(labelWithString: NSLocalizedString("Target display", comment: "Equal brightness target display label"))
-    return EqualBrightnessDisplaySelectorView(label: label, popup: self.displayPopup)
+    label.alignment = .right
+    let grid = NSGridView(views: [[label, self.displayPopup]])
+    self.configureAlignedGrid(grid)
+    return grid
   }
 
-  /// Creates Save and Cancel actions with a stable bottom-right layout.
-  /// 创建具有稳定右下角布局的“保存”和“取消”操作。
-  private func makeFooter() -> EqualBrightnessActionBar {
+  /// Creates Save and Cancel actions in a standard AppKit stack view.
+  /// 使用标准 AppKit 堆叠视图创建“保存”和“取消”操作。
+  private func makeFooter() -> NSStackView {
     let cancelButton = NSButton(title: NSLocalizedString("Cancel", comment: "Equal brightness cancel button"), target: self, action: #selector(self.cancel(_:)))
     let saveButton = NSButton(title: NSLocalizedString("Save", comment: "Equal brightness save button"), target: self, action: #selector(self.save(_:)))
     saveButton.keyEquivalent = "\r"
     cancelButton.keyEquivalent = "\u{1b}"
-    return EqualBrightnessActionBar(cancelButton: cancelButton, saveButton: saveButton)
+
+    let spacer = NSView(frame: .zero)
+    spacer.setContentHuggingPriority(.defaultLow, for: .horizontal)
+    spacer.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+    let stack = NSStackView(views: [spacer, cancelButton, saveButton])
+    stack.orientation = .horizontal
+    stack.alignment = .centerY
+    stack.spacing = 12
+    stack.distribution = .fill
+    return stack
+  }
+
+  /// Applies the existing preferences page's label column and system control spacing.
+  /// 复用原设置页的标签列宽度和系统控件间距。
+  private func configureAlignedGrid(_ grid: NSGridView) {
+    grid.columnSpacing = 12
+    grid.column(at: 0).width = EqualBrightnessSettingsLayout.labelColumnWidth
+    grid.column(at: 0).xPlacement = .trailing
+    grid.column(at: 1).xPlacement = .fill
+    grid.column(at: 1).leadingPadding = 4
+    grid.rowAlignment = .firstBaseline
   }
 
   /// Refreshes the graph after the view has been loaded.
@@ -467,6 +720,90 @@ final class EqualBrightnessSettingsViewController: NSViewController {
     // Leave one empty line between the point summary and the bilingual usage guide.
     // 在参考点摘要和双语使用说明之间保留一个空行。
     self.pointsSummary.stringValue = "\(pointSummary)\n\n\(instruction)"
+  }
+}
+
+/// Keeps the editor dimensions aligned with the existing preferences grid.
+/// 集中管理编辑器尺寸，使其与原有设置页网格保持一致。
+private enum EqualBrightnessSettingsLayout {
+  static let contentSize = NSSize(width: 760, height: 800)
+  static let minimumContentSize = NSSize(width: 680, height: 760)
+  static let contentInset: CGFloat = 24
+  static let sectionSpacing: CGFloat = 16
+  static let graphHeight: CGFloat = 300
+  static let summaryHeight: CGFloat = 128
+  static let footerHeight: CGFloat = 32
+  static let labelColumnWidth: CGFloat = 210
+}
+
+/// Provides the standalone page while reusing NSGridView and NSStackView conventions from the preferences UI.
+/// 使用与偏好设置页相同的 NSGridView 和 NSStackView 规范提供独立页面。
+private final class EqualBrightnessSettingsPageView: NSView {
+  private let displaySelector: NSGridView
+  private let graphView: EqualBrightnessGraphView
+  private let controlsView: NSGridView
+  private let pointsSummary: NSTextField
+  private let actionBar: NSStackView
+
+  init(displaySelector: NSGridView, graphView: EqualBrightnessGraphView, controlsView: NSGridView, pointsSummary: NSTextField, actionBar: NSStackView) {
+    self.displaySelector = displaySelector
+    self.graphView = graphView
+    self.controlsView = controlsView
+    self.pointsSummary = pointsSummary
+    self.actionBar = actionBar
+    super.init(frame: NSRect(origin: .zero, size: EqualBrightnessSettingsLayout.contentSize))
+    self.autoresizingMask = [.width, .height]
+    self.addSubview(graphView)
+    self.addSubview(displaySelector)
+    self.addSubview(controlsView)
+    self.addSubview(pointsSummary)
+    self.addSubview(actionBar)
+  }
+
+  required init?(coder: NSCoder) {
+    fatalError("EqualBrightnessSettingsPageView does not support storyboard decoding")
+  }
+
+  override var isFlipped: Bool {
+    true
+  }
+
+  /// Calculates the minimum content height required by the discovered display rows.
+  /// 根据当前显示器行数计算页面所需的最小高度。
+  var requiredContentHeight: CGFloat {
+    let gridHeight = self.controlsView.fittingSize.height
+    return EqualBrightnessSettingsLayout.contentInset * 2
+      + EqualBrightnessSettingsLayout.graphHeight
+      + self.displaySelector.fittingSize.height
+      + gridHeight
+      + EqualBrightnessSettingsLayout.summaryHeight
+      + EqualBrightnessSettingsLayout.footerHeight
+      + EqualBrightnessSettingsLayout.sectionSpacing * 4
+  }
+
+  override func layout() {
+    super.layout()
+    let inset = EqualBrightnessSettingsLayout.contentInset
+    let spacing = EqualBrightnessSettingsLayout.sectionSpacing
+    let width = max(0, self.bounds.width - inset * 2)
+    var y = inset
+
+    self.graphView.frame = NSRect(x: inset, y: y, width: width, height: EqualBrightnessSettingsLayout.graphHeight)
+    y += EqualBrightnessSettingsLayout.graphHeight + spacing
+
+    let selectorHeight = max(28, self.displaySelector.fittingSize.height)
+    self.displaySelector.frame = NSRect(x: inset, y: y, width: width, height: selectorHeight)
+    y += selectorHeight + spacing
+
+    let controlsHeight = self.controlsView.fittingSize.height
+    self.controlsView.frame = NSRect(x: inset, y: y, width: width, height: controlsHeight)
+    y += controlsHeight + spacing
+
+    let footerY = max(y + EqualBrightnessSettingsLayout.summaryHeight + spacing, self.bounds.height - inset - EqualBrightnessSettingsLayout.footerHeight)
+    let summaryY = footerY - spacing - EqualBrightnessSettingsLayout.summaryHeight
+    self.pointsSummary.frame = NSRect(x: inset, y: summaryY, width: width, height: EqualBrightnessSettingsLayout.summaryHeight)
+    self.pointsSummary.preferredMaxLayoutWidth = width
+    self.actionBar.frame = NSRect(x: inset, y: footerY, width: width, height: EqualBrightnessSettingsLayout.footerHeight)
   }
 }
 

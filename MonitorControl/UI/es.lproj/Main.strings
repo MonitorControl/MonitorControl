@@ -417,3 +417,6 @@
 
 /* Class = "NSTextFieldCell"; title = "Combined dimming switchover point:"; ObjectID = "zv8-pZ-OPy"; */
 "zv8-pZ-OPy.title" = "Puntos combinados de atenuación:";
+
+/* Class = "NSButtonCell"; title = "Equal Brightness Settings"; ObjectID = "K2x-9V-dsR"; */
+"K2x-9V-dsR.title" = "Configuración de brillo uniforme";

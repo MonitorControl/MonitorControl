@@ -152,3 +152,17 @@
 
 /* Shown in the alert dialog */
 "You need to enable MonitorControl in System Settings > Security and Privacy > Accessibility for the keyboard shortcuts to work" = "U moet MonitorControl inschakelen in Systeemvoorkeuren > Beveiliging en Privacy > Privacy > Toegankelijkheid inschakelen, zodat de sneltoetsen werken.";
+
+/* Equal brightness settings / 等亮度设置 */
+"Equal Brightness Settings" = "Instellingen voor gelijke helderheid";
+"Equal brightness instructions" = "Elke aangesloten monitor heeft een uitgelijnde live-schuifregelaar. De referentiemonitor is blauw; elke doelmonitor heeft een eigen kleur die wordt gebruikt voor de curve, referentiepunten en schuifregelaar. Gebruik: selecteer de doelmonitor die je wilt kalibreren en versleep de schuifregelaars totdat alle monitors even helder lijken. Helderheidswijzigingen worden direct toegepast. Klik op „Referentiepunt toevoegen” om de huidige helderheidskoppeling vast te leggen. Elk referentiepunt heeft een grijze verticale hulplijn; klik op een lijn om alle schuifregelaars naar de bijbehorende waarden te verplaatsen, de monitors bij te werken en de volledige curve-preview te vernieuwen. Voeg meerdere punten toe voor meer nauwkeurigheid. Selecteer een bewerkbaar punt om het te verwijderen. Kies een curvetype en klik op „Opslaan” om de kalibratie toe te passen, of op „Annuleren” om wijzigingen te verwerpen. Wissel van doelmonitor om elke monitor afzonderlijk te kalibreren. Na het opslaan koppelt helderheidssynchronisatie de helderheid van de referentiemonitor via de curve van elke monitor.";
+"Piecewise Linear" = "Stuksgewijs lineair";
+"Smooth Monotone Cubic" = "Vloeiende monotone kubische curve";
+"Add Reference Point" = "Referentiepunt toevoegen";
+"Delete Selected Point" = "Geselecteerd punt verwijderen";
+"Curve type" = "Curvetype";
+"Cancel" = "Annuleren";
+"Save" = "Opslaan";
+"Target display" = "Doelmonitor";
+"Mac Reference" = "Mac-referentie";
+"No reference points yet." = "Nog geen referentiepunten.";

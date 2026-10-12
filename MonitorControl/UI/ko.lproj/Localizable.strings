@@ -150,3 +150,17 @@
 
 /* Shown in the alert dialog */
 "You need to enable MonitorControl in System Settings > Security and Privacy > Accessibility for the keyboard shortcuts to work" = "단축키가 동작하기 위해서는 시스템 환경설정 > 개인정보 보호 및 보안 > 손쉬운 사용에서 MonitorControl을 활성화해야 합니다.";
+
+/* Equal brightness settings / 等亮度设置 */
+"Equal Brightness Settings" = "균일 밝기 설정";
+"Equal brightness instructions" = "연결된 각 디스플레이에는 정렬된 실시간 슬라이더가 있습니다. 기준 디스플레이는 파란색이며, 각 대상 디스플레이에는 곡선, 기준점, 슬라이더에 함께 사용되는 고유 색상이 지정됩니다. 사용 방법: 보정할 대상 디스플레이를 선택하고 모든 디스플레이가 같은 밝기로 보일 때까지 슬라이더를 움직입니다. 밝기 변경은 즉시 적용됩니다. 현재 밝기 매핑을 기록하려면 “기준점 추가”를 클릭합니다. 각 기준점에는 회색 세로 안내선이 표시됩니다. 안내선을 클릭하면 모든 슬라이더가 해당 값으로 이동하고 디스플레이가 업데이트되며 전체 곡선 미리보기가 새로 그려집니다. 정확도를 높이려면 기준점을 여러 개 추가하세요. 편집 가능한 점을 선택하면 삭제할 수 있습니다. 곡선 유형을 선택한 후 “저장”을 눌러 적용하거나 “취소”를 눌러 변경 사항을 버립니다. 대상 디스플레이를 전환하여 각 디스플레이를 개별적으로 보정할 수 있습니다. 저장 후 밝기 동기화는 각 디스플레이의 곡선을 통해 기준 디스플레이 밝기를 매핑합니다.";
+"Piecewise Linear" = "구간 선형";
+"Smooth Monotone Cubic" = "부드러운 단조 3차 곡선";
+"Add Reference Point" = "기준점 추가";
+"Delete Selected Point" = "선택한 점 삭제";
+"Curve type" = "곡선 유형";
+"Cancel" = "취소";
+"Save" = "저장";
+"Target display" = "대상 디스플레이";
+"Mac Reference" = "Mac 기준";
+"No reference points yet." = "아직 기준점이 없습니다.";

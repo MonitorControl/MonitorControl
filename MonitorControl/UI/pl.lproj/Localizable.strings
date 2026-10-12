@@ -150,3 +150,17 @@
 
 /* Shown in the alert dialog */
 "You need to enable MonitorControl in System Settings > Security and Privacy > Accessibility for the keyboard shortcuts to work" = "Aby skróty klawiaturowe działały, należy włączyć funkcję MonitorControl w Preferencjach systemowych > Bezpieczeństwo i prywatność > Dostępność";
+
+/* Equal brightness settings / 等亮度设置 */
+"Equal Brightness Settings" = "Ustawienia wyrównania jasności";
+"Equal brightness instructions" = "Każdy podłączony ekran ma wyrównany suwak działający na żywo. Ekran referencyjny jest niebieski, a każdy ekran docelowy ma własny kolor używany dla jego krzywej, punktów referencyjnych i suwaka. Sposób użycia: wybierz ekran docelowy do kalibracji i przesuwaj suwaki, aż wszystkie ekrany będą wyglądały na równie jasne. Zmiany jasności są stosowane natychmiast. Kliknij „Dodaj punkt referencyjny”, aby zapisać bieżące odwzorowanie jasności. Każdy punkt ma szarą pionową linię pomocniczą; kliknięcie linii przesuwa wszystkie suwaki do odpowiednich wartości, aktualizuje ekrany i odświeża podgląd całej krzywej. Dodaj kilka punktów, aby poprawić dokładność. Wybierz edytowalny punkt, aby go usunąć. Wybierz typ krzywej i kliknij „Zapisz”, aby zastosować kalibrację, albo „Anuluj”, aby odrzucić zmiany. Zmieniaj ekran docelowy, aby kalibrować każdy ekran osobno. Po zapisaniu synchronizacja jasności odwzorowuje jasność ekranu referencyjnego przez krzywą każdego ekranu.";
+"Piecewise Linear" = "Liniowa odcinkami";
+"Smooth Monotone Cubic" = "Gładka monotoniczna krzywa sześcienna";
+"Add Reference Point" = "Dodaj punkt referencyjny";
+"Delete Selected Point" = "Usuń wybrany punkt";
+"Curve type" = "Typ krzywej";
+"Cancel" = "Anuluj";
+"Save" = "Zapisz";
+"Target display" = "Ekran docelowy";
+"Mac Reference" = "Referencja Mac";
+"No reference points yet." = "Brak punktów referencyjnych.";

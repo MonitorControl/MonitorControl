@@ -150,3 +150,17 @@
 
 /* Shown in the alert dialog */
 "You need to enable MonitorControl in System Settings > Security and Privacy > Accessibility for the keyboard shortcuts to work" = "Precisas de habilitar o MonitorControl nas Preferências do Sistema > Segurança e privacidade > Acessibilidade para que os atalhos de teclado funcionem";
+
+/* Equal brightness settings / 等亮度设置 */
+"Equal Brightness Settings" = "Definições de brilho uniforme";
+"Equal brightness instructions" = "Cada ecrã ligado tem um cursor em direto alinhado. O ecrã de referência usa azul; cada ecrã de destino tem a sua própria cor, partilhada pela curva, pelos pontos de referência e pelo cursor. Como utilizar: selecione o ecrã de destino a calibrar e arraste os cursores até todos os ecrãs parecerem ter o mesmo brilho. As alterações de brilho são aplicadas imediatamente. Clique em “Adicionar ponto de referência” para registar o mapeamento atual. Cada ponto de referência tem uma guia vertical cinzenta; clique numa guia para mover todos os cursores para os valores correspondentes, atualizar os ecrãs e redesenhar a pré-visualização completa da curva. Adicione vários pontos para melhorar a precisão. Selecione um ponto editável para o remover. Escolha um tipo de curva e clique em “Guardar” para aplicar a calibração, ou em “Cancelar” para rejeitar as alterações. Mude o ecrã de destino para calibrar cada ecrã separadamente. Depois de guardar, a sincronização mapeia o brilho do ecrã de referência através da curva de cada ecrã.";
+"Piecewise Linear" = "Linear por segmentos";
+"Smooth Monotone Cubic" = "Cúbica monótona suave";
+"Add Reference Point" = "Adicionar ponto de referência";
+"Delete Selected Point" = "Eliminar ponto selecionado";
+"Curve type" = "Tipo de curva";
+"Cancel" = "Cancelar";
+"Save" = "Guardar";
+"Target display" = "Ecrã de destino";
+"Mac Reference" = "Referência do Mac";
+"No reference points yet." = "Ainda não existem pontos de referência.";

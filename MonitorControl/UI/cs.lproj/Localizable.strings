@@ -150,3 +150,17 @@
 
 /* Shown in the alert dialog */
 "You need to enable MonitorControl in System Settings > Security and Privacy > Accessibility for the keyboard shortcuts to work" = "Abyste mohli používat klávesové zkratky, jděte do Předvoleb systému > Zabezpečení a soukromí > Zpřístupnění a tam zaškrtněte MonitorControl";
+
+/* Equal brightness settings / 等亮度设置 */
+"Equal Brightness Settings" = "Nastavení stejného jasu";
+"Equal brightness instructions" = "Každý připojený displej má vlastní zarovnaný živý posuvník. Referenční displej je modrý; každý cílový displej má vlastní barvu, která se používá pro jeho křivku, referenční body i posuvník. Použití: vyberte cílový displej, který chcete kalibrovat, a posouvejte posuvníky, dokud všechny displeje nevypadají stejně jasně. Změny jasu se použijí okamžitě. Kliknutím na „Přidat referenční bod“ zaznamenejte aktuální mapování jasu. Každý referenční bod má šedou svislou vodicí čáru; kliknutím na ni přesunete všechny posuvníky na odpovídající hodnoty, aktualizujete displeje a obnovíte náhled celé křivky. Přidejte více bodů pro přesnější kalibraci. Vyberte upravitelný bod a odstraňte jej. Zvolte typ křivky a kliknutím na „Uložit“ kalibraci použijte, nebo klikněte na „Zrušit“ a změny zahoďte. Přepnutím cílového displeje kalibrujete každý displej samostatně. Po uložení synchronizace jasu mapuje jas referenčního displeje pomocí křivky každého displeje.";
+"Piecewise Linear" = "Po částech lineární";
+"Smooth Monotone Cubic" = "Hladká monotónní kubická";
+"Add Reference Point" = "Přidat referenční bod";
+"Delete Selected Point" = "Odstranit vybraný bod";
+"Curve type" = "Typ křivky";
+"Cancel" = "Zrušit";
+"Save" = "Uložit";
+"Target display" = "Cílový displej";
+"Mac Reference" = "Reference Mac";
+"No reference points yet." = "Zatím žádné referenční body.";

@@ -421,3 +421,6 @@
 
 /* Class = "NSTextFieldCell"; title = "Combined dimming switchover point:"; ObjectID = "zv8-pZ-OPy"; */
 "zv8-pZ-OPy.title" = "Kombinovaný prepínací bod stmievania:";
+
+/* Class = "NSButtonCell"; title = "Equal Brightness Settings"; ObjectID = "K2x-9V-dsR"; */
+"K2x-9V-dsR.title" = "Nastavenia rovnakého jasu";

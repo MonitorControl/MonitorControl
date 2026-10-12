@@ -151,3 +151,17 @@
 
 /* Shown in the alert dialog */
 "You need to enable MonitorControl in System Settings > Security and Privacy > Accessibility for the keyboard shortcuts to work" = "Necesitas habilitar MonitorControl en Preferencias del Sistema > Seguridad y privacidad > Accesibilidad para permitir los atajos de teclado";
+
+/* Equal brightness settings / 等亮度设置 */
+"Equal Brightness Settings" = "Configuración de brillo uniforme";
+"Equal brightness instructions" = "Cada pantalla conectada tiene un control deslizante en vivo alineado. La pantalla de referencia usa el azul; cada pantalla objetivo tiene su propio color, compartido por su curva, puntos de referencia y control deslizante. Uso: selecciona la pantalla objetivo que quieres calibrar y arrastra los controles hasta que todas las pantallas parezcan tener el mismo brillo. Los cambios se aplican inmediatamente. Haz clic en «Añadir punto de referencia» para registrar la relación de brillo actual. Cada punto muestra una guía vertical gris; haz clic en una guía para mover todos los controles a los valores correspondientes, actualizar las pantallas y volver a dibujar la vista previa completa de la curva. Añade varios puntos para mejorar la precisión. Selecciona un punto editable para eliminarlo. Elige un tipo de curva y pulsa «Guardar» para aplicar la calibración, o «Cancelar» para descartarla. Cambia la pantalla objetivo para calibrar cada pantalla por separado. Después de guardar, la sincronización asigna el brillo de la pantalla de referencia mediante la curva de cada pantalla.";
+"Piecewise Linear" = "Lineal por tramos";
+"Smooth Monotone Cubic" = "Cúbica monótona suave";
+"Add Reference Point" = "Añadir punto de referencia";
+"Delete Selected Point" = "Eliminar punto seleccionado";
+"Curve type" = "Tipo de curva";
+"Cancel" = "Cancelar";
+"Save" = "Guardar";
+"Target display" = "Pantalla objetivo";
+"Mac Reference" = "Referencia del Mac";
+"No reference points yet." = "Aún no hay puntos de referencia.";

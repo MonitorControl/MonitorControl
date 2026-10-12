@@ -150,3 +150,17 @@
 
 /* Shown in the alert dialog */
 "You need to enable MonitorControl in System Settings > Security and Privacy > Accessibility for the keyboard shortcuts to work" = "Devi abilitare MonitorControl nelle Preferenze di Sistema > Sicurezza e Privacy > Accessibilità affinchè le abbreviazioni da tastiera funzionino";
+
+/* Equal brightness settings / 等亮度设置 */
+"Equal Brightness Settings" = "Impostazioni della luminosità uniforme";
+"Equal brightness instructions" = "Ogni schermo collegato ha un cursore live allineato. Lo schermo di riferimento usa il blu; ogni schermo target ha un colore dedicato, condiviso dalla sua curva, dai punti di riferimento e dal cursore. Uso: seleziona lo schermo target da calibrare e trascina i cursori finché tutti gli schermi sembrano avere la stessa luminosità. Le modifiche vengono applicate subito. Fai clic su «Aggiungi punto di riferimento» per registrare la mappatura attuale. Ogni punto mostra una guida verticale grigia; fai clic su una guida per spostare tutti i cursori sui valori corrispondenti, aggiornare gli schermi e ridisegnare l’anteprima completa della curva. Aggiungi più punti per migliorare la precisione. Seleziona un punto modificabile per eliminarlo. Scegli un tipo di curva e fai clic su «Salva» per applicare la calibrazione, oppure su «Annulla» per scartare le modifiche. Cambia lo schermo target per calibrare ogni schermo separatamente. Dopo il salvataggio, la sincronizzazione mappa la luminosità dello schermo di riferimento tramite la curva di ogni schermo.";
+"Piecewise Linear" = "Lineare a tratti";
+"Smooth Monotone Cubic" = "Cubica monotona uniforme";
+"Add Reference Point" = "Aggiungi punto di riferimento";
+"Delete Selected Point" = "Elimina punto selezionato";
+"Curve type" = "Tipo di curva";
+"Cancel" = "Annulla";
+"Save" = "Salva";
+"Target display" = "Schermo target";
+"Mac Reference" = "Riferimento Mac";
+"No reference points yet." = "Nessun punto di riferimento.";

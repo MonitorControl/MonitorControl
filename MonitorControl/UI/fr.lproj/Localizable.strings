@@ -152,3 +152,17 @@
 
 /* Shown in the alert dialog */
 "You need to enable MonitorControl in System Settings > Security and Privacy > Accessibility for the keyboard shortcuts to work" = "Vous devez activer MonitorControl dans Préférences Système > Sécurité et confidentialité > Accessibilité pour que les raccourcis clavier fonctionnent";
+
+/* Equal brightness settings / 等亮度设置 */
+"Equal Brightness Settings" = "Réglages de luminosité uniforme";
+"Equal brightness instructions" = "Chaque écran connecté possède un curseur en direct aligné. L’écran de référence est bleu ; chaque écran cible possède sa propre couleur, utilisée pour sa courbe, ses points de référence et son curseur. Utilisation : sélectionnez l’écran cible à calibrer, puis faites glisser les curseurs jusqu’à ce que tous les écrans semblent avoir la même luminosité. Les changements sont appliqués immédiatement. Cliquez sur « Ajouter un point de référence » pour enregistrer la correspondance actuelle. Chaque point affiche un guide vertical gris ; cliquez sur un guide pour déplacer tous les curseurs aux valeurs correspondantes, mettre à jour les écrans et actualiser l’aperçu complet de la courbe. Ajoutez plusieurs points pour améliorer la précision. Sélectionnez un point modifiable pour le supprimer. Choisissez un type de courbe et cliquez sur « Enregistrer » pour appliquer le calibrage, ou sur « Annuler » pour abandonner les changements. Changez d’écran cible pour calibrer chaque écran séparément. Après l’enregistrement, la synchronisation mappe la luminosité de l’écran de référence avec la courbe de chaque écran.";
+"Piecewise Linear" = "Linéaire par morceaux";
+"Smooth Monotone Cubic" = "Courbe cubique monotone lisse";
+"Add Reference Point" = "Ajouter un point de référence";
+"Delete Selected Point" = "Supprimer le point sélectionné";
+"Curve type" = "Type de courbe";
+"Cancel" = "Annuler";
+"Save" = "Enregistrer";
+"Target display" = "Écran cible";
+"Mac Reference" = "Référence du Mac";
+"No reference points yet." = "Aucun point de référence pour le moment.";
