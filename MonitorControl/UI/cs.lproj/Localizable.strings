@@ -164,3 +164,8 @@
 "Target display" = "Cílový displej";
 "Mac Reference" = "Reference Mac";
 "No reference points yet." = "Zatím žádné referenční body.";
+/* Equal brightness reference display selection */
+"Select Reference Display" = "Vybrat referenční displej";
+"Choose a reference display for equal brightness settings." = "Vyberte referenční displej pro nastavení stejného jasu.";
+"Reference display" = "Referenční displej";
+"Continue" = "Pokračovat";

@@ -164,3 +164,8 @@
 "Target display" = "Hedef ekran";
 "Mac Reference" = "Mac referansı";
 "No reference points yet." = "Henüz referans noktası yok.";
+/* Equal brightness reference display selection */
+"Select Reference Display" = "Referans ekranı seç";
+"Choose a reference display for equal brightness settings." = "Eşit parlaklık ayarları için bir referans ekranı seçin.";
+"Reference display" = "Referans ekranı";
+"Continue" = "Devam";

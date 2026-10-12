@@ -164,3 +164,8 @@
 "Target display" = "対象ディスプレイ";
 "Mac Reference" = "Macの基準";
 "No reference points yet." = "基準点はまだありません。";
+/* Equal brightness reference display selection */
+"Select Reference Display" = "基準ディスプレイを選択";
+"Choose a reference display for equal brightness settings." = "均一輝度設定の基準ディスプレイを選択してください。";
+"Reference display" = "基準ディスプレイ";
+"Continue" = "続ける";

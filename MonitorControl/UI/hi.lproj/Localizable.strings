@@ -164,3 +164,8 @@
 "Target display" = "लक्ष्य डिस्प्ले";
 "Mac Reference" = "Mac संदर्भ";
 "No reference points yet." = "अभी कोई संदर्भ बिंदु नहीं है।";
+/* Equal brightness reference display selection */
+"Select Reference Display" = "संदर्भ डिस्प्ले चुनें";
+"Choose a reference display for equal brightness settings." = "समान चमक सेटिंग्स के लिए एक संदर्भ डिस्प्ले चुनें।";
+"Reference display" = "संदर्भ डिस्प्ले";
+"Continue" = "जारी रखें";

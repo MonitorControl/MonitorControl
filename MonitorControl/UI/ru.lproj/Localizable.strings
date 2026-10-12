@@ -164,3 +164,8 @@
 "Target display" = "Целевой дисплей";
 "Mac Reference" = "Эталон Mac";
 "No reference points yet." = "Опорных точек пока нет.";
+/* Equal brightness reference display selection */
+"Select Reference Display" = "Выберите эталонный дисплей";
+"Choose a reference display for equal brightness settings." = "Выберите эталонный дисплей для настройки одинаковой яркости.";
+"Reference display" = "Эталонный дисплей";
+"Continue" = "Продолжить";

@@ -164,3 +164,8 @@
 "Target display" = "Ekran docelowy";
 "Mac Reference" = "Referencja Mac";
 "No reference points yet." = "Brak punktów referencyjnych.";
+/* Equal brightness reference display selection */
+"Select Reference Display" = "Wybierz wyświetlacz referencyjny";
+"Choose a reference display for equal brightness settings." = "Wybierz wyświetlacz referencyjny dla ustawień wyrównania jasności.";
+"Reference display" = "Wyświetlacz referencyjny";
+"Continue" = "Kontynuuj";

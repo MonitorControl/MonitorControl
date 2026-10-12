@@ -166,3 +166,8 @@
 "Target display" = "Doelmonitor";
 "Mac Reference" = "Mac-referentie";
 "No reference points yet." = "Nog geen referentiepunten.";
+/* Equal brightness reference display selection */
+"Select Reference Display" = "Referentiescherm selecteren";
+"Choose a reference display for equal brightness settings." = "Kies een referentiescherm voor de instellingen voor gelijke helderheid.";
+"Reference display" = "Referentiescherm";
+"Continue" = "Doorgaan";

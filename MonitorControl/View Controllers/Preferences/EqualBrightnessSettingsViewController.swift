@@ -259,9 +259,24 @@ final class EqualBrightnessSettingsViewController: NSViewController {
   private var curveKind: EqualBrightnessCurveKind = .monotoneCubic
   private var displayObjects: [Display] = []
   private var referenceDisplay: Display?
+  private let requestedReferenceDisplay: Display?
   private var selectedPointID: UUID?
   private var selectedSourceValue: Double?
   private var labelColumnWidth: CGFloat = 0
+
+  /// Creates the editor with an optional reference chosen before the window opens.
+  /// 创建编辑器；可传入窗口打开前由用户选择的参考显示器。
+  init(referenceDisplay: Display? = nil) {
+    self.requestedReferenceDisplay = referenceDisplay
+    super.init(nibName: nil, bundle: nil)
+  }
+
+  /// Required initializer for storyboard and nib compatibility.
+  /// 为兼容 storyboard 和 nib 提供必需的初始化方法。
+  required init?(coder: NSCoder) {
+    self.requestedReferenceDisplay = nil
+    super.init(coder: coder)
+  }
 
   /// Keeps the palette available on the project's macOS 10.14 deployment target.
   /// 让调色板兼容项目的 macOS 10.14 最低部署版本。
@@ -486,7 +501,14 @@ final class EqualBrightnessSettingsViewController: NSViewController {
   /// 发现当前显示器，并将参考显示器从目标列表中移除。
   private func loadDisplays() {
     let allDisplays = DisplayManager.shared.displays.filter { !$0.isDummy }
-    self.referenceDisplay = EqualBrightnessDisplaySupport.referenceDisplay(from: allDisplays)
+    if let requestedReferenceDisplay = self.requestedReferenceDisplay {
+      let requestedIdentity = EqualBrightnessDisplayIdentity(display: requestedReferenceDisplay)
+      self.referenceDisplay = allDisplays.first { display in
+        display == requestedReferenceDisplay
+          || EqualBrightnessDisplayIdentity(display: display).key == requestedIdentity.key
+      }
+    }
+    self.referenceDisplay = self.referenceDisplay ?? EqualBrightnessDisplaySupport.referenceDisplay(from: allDisplays)
     self.displayObjects = EqualBrightnessDisplaySupport.targetDisplays(from: allDisplays, reference: self.referenceDisplay)
   }
 
@@ -912,8 +934,8 @@ final class EqualBrightnessSettingsWindowController: NSWindowController, NSWindo
 
   /// Creates a resizable AppKit settings window with the functional editor view.
   /// 创建一个可调整大小、包含功能编辑器视图的 AppKit 设置窗口。
-  init() {
-    let viewController = EqualBrightnessSettingsViewController()
+  init(referenceDisplay: Display? = nil) {
+    let viewController = EqualBrightnessSettingsViewController(referenceDisplay: referenceDisplay)
     let window = NSWindow(
       contentRect: NSRect(origin: .zero, size: EqualBrightnessSettingsLayout.contentSize),
       styleMask: [.titled, .closable, .resizable],

@@ -164,3 +164,8 @@
 "Target display" = "Schermo target";
 "Mac Reference" = "Riferimento Mac";
 "No reference points yet." = "Nessun punto di riferimento.";
+/* Equal brightness reference display selection */
+"Select Reference Display" = "Seleziona il display di riferimento";
+"Choose a reference display for equal brightness settings." = "Scegli un display di riferimento per le impostazioni della luminosità uniforme.";
+"Reference display" = "Display di riferimento";
+"Continue" = "Continua";

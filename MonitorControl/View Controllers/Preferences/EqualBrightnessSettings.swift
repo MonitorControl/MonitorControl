@@ -396,12 +396,20 @@ enum EqualBrightnessDisplaySupport {
     return "\(externalName) \(fallbackIndex + 1)"
   }
 
-  /// Chooses the built-in or first Apple display as the reference display.
-  /// 选择内置显示器或第一台 Apple 显示器作为参考显示器。
-  static func referenceDisplay(from displays: [Display]) -> Display? {
+  /// Returns the automatic reference only when the Mac exposes a built-in display.
+  /// 只有 Mac 存在内置屏幕时才自动返回参考显示器。
+  ///
+  /// A headless Mac or a non-MacBook has no safe default external reference, so
+  /// the settings entry point asks the user to choose one instead.
+  /// 无头 Mac 或非 MacBook 没有安全的外接屏幕默认值，因此设置入口会改为让用户选择。
+  static func automaticReferenceDisplay(from _: [Display]) -> Display? {
     DisplayManager.shared.getBuiltInDisplay()
-      ?? DisplayManager.shared.getAppleDisplays().first
-      ?? displays.first
+  }
+
+  /// Chooses the automatic reference and keeps a first-display fallback for callers that cannot present a chooser.
+  /// 优先选择自动参考显示器；无法弹出选择器的调用方使用第一台显示器兜底。
+  static func referenceDisplay(from displays: [Display]) -> Display? {
+    self.automaticReferenceDisplay(from: displays) ?? displays.first
   }
 
   /// Removes the reference display from the list of target displays.

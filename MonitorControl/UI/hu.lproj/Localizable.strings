@@ -166,3 +166,8 @@
 "Target display" = "Célkijelző";
 "Mac Reference" = "Mac-referencia";
 "No reference points yet." = "Még nincsenek referenciapontok.";
+/* Equal brightness reference display selection */
+"Select Reference Display" = "Referenciakijelző kiválasztása";
+"Choose a reference display for equal brightness settings." = "Válasszon referenciakijelzőt az egyenletes fényerő beállításaihoz.";
+"Reference display" = "Referenciakijelző";
+"Continue" = "Folytatás";
