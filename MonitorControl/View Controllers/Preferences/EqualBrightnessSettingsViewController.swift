@@ -241,6 +241,7 @@ final class EqualBrightnessSettingsViewController: NSViewController {
   private var displayObjects: [Display] = []
   private var referenceDisplay: Display?
   private var selectedPointID: UUID?
+  private var labelColumnWidth: CGFloat = 0
 
   /// Keeps the palette available on the project's macOS 10.14 deployment target.
   /// 让调色板兼容项目的 macOS 10.14 最低部署版本。
@@ -276,6 +277,7 @@ final class EqualBrightnessSettingsViewController: NSViewController {
   /// 创建独立页面，不继承宿主偏好设置窗口的布局。
   override func loadView() {
     self.configureInteractiveControls()
+    self.updateLabelColumnWidth()
 
     let header = self.makeDisplayHeader()
     let controls = self.makeCalibrationControls()
@@ -340,16 +342,14 @@ final class EqualBrightnessSettingsViewController: NSViewController {
       let targetIndex = self.displayObjects.firstIndex(where: { $0.identifier == display.identifier }) ?? 0
       let color = display == self.referenceDisplay ? NSColor.systemBlue : self.color(for: display, targetIndex: targetIndex)
       slider.trackFillColor = color
-      let label = NSTextField(labelWithString: "")
-      label.alignment = .right
+      let label = self.makeAlignedLabel("")
       self.sliderDisplays[ObjectIdentifier(slider)] = display
       self.slidersByDisplayID[display.identifier] = slider
       return SliderRow(label: label, slider: slider)
     }
 
     var rows: [[NSView]] = self.liveSliderRows.map { [$0.label, $0.slider] }
-    let curveLabel = NSTextField(labelWithString: NSLocalizedString("Curve type", comment: "Equal brightness curve selector label"))
-    curveLabel.alignment = .right
+    let curveLabel = self.makeAlignedLabel(NSLocalizedString("Curve type", comment: "Equal brightness curve selector label"))
     rows.append([curveLabel, self.curvePopup])
 
     let actions = NSStackView(views: [addPointButton, removePointButton])
@@ -369,8 +369,7 @@ final class EqualBrightnessSettingsViewController: NSViewController {
   /// Creates the target-display selector with the same label/control columns as the existing preferences page.
   /// 使用与原有设置页相同的标签列和控件列创建目标显示器选择器。
   private func makeDisplayHeader() -> NSGridView {
-    let label = NSTextField(labelWithString: NSLocalizedString("Target display", comment: "Equal brightness target display label"))
-    label.alignment = .right
+    let label = self.makeAlignedLabel(NSLocalizedString("Target display", comment: "Equal brightness target display label"))
     let grid = NSGridView(views: [[label, self.displayPopup]])
     self.configureAlignedGrid(grid)
     return grid
@@ -384,10 +383,18 @@ final class EqualBrightnessSettingsViewController: NSViewController {
     saveButton.keyEquivalent = "\r"
     cancelButton.keyEquivalent = "\u{1b}"
 
-    let spacer = NSView(frame: .zero)
-    spacer.setContentHuggingPriority(.defaultLow, for: .horizontal)
-    spacer.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
-    let stack = NSStackView(views: [spacer, cancelButton, saveButton])
+    // Keep both actions wide enough for every localized title and center them as one group.
+    // 为所有本地化标题保留足够按钮宽度，并将两个按钮作为整体居中。
+    for button in [cancelButton, saveButton] {
+      button.widthAnchor.constraint(equalToConstant: EqualBrightnessSettingsLayout.actionButtonWidth).isActive = true
+    }
+    let leadingSpacer = NSView(frame: .zero)
+    let trailingSpacer = NSView(frame: .zero)
+    for spacer in [leadingSpacer, trailingSpacer] {
+      spacer.setContentHuggingPriority(.defaultLow, for: .horizontal)
+      spacer.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+    }
+    let stack = NSStackView(views: [leadingSpacer, cancelButton, saveButton, trailingSpacer])
     stack.orientation = .horizontal
     stack.alignment = .centerY
     stack.spacing = 12
@@ -395,12 +402,42 @@ final class EqualBrightnessSettingsViewController: NSViewController {
     return stack
   }
 
+  /// Creates one label that fills the calculated column and justifies its text.
+  /// 创建填满计算列宽并进行两端对齐的标签。
+  private func makeAlignedLabel(_ title: String) -> NSTextField {
+    let label = NSTextField(labelWithString: title)
+    label.alignment = .justified
+    label.lineBreakMode = .byClipping
+    label.maximumNumberOfLines = 1
+    label.setContentHuggingPriority(.defaultLow, for: .horizontal)
+    label.setContentCompressionResistancePriority(.required, for: .horizontal)
+    return label
+  }
+
+  /// Calculates the label column from the widest localized row title.
+  /// 根据本地化后最宽的行标题计算标签列宽度。
+  private func updateLabelColumnWidth() {
+    let brightnessTitle = NSLocalizedString("Brightness", comment: "Display brightness label")
+    let displayTitles = self.calibrationDisplays().enumerated().map { index, display in
+      EqualBrightnessDisplaySupport.userFacingName(for: display, fallbackIndex: index) + " " + brightnessTitle
+    }
+    let titles = displayTitles + [
+      NSLocalizedString("Target display", comment: "Equal brightness target display label"),
+      NSLocalizedString("Curve type", comment: "Equal brightness curve selector label")
+    ]
+    let font = NSFont.systemFont(ofSize: NSFont.systemFontSize)
+    let widestTitle = titles.map { title in
+      NSString(string: title).size(withAttributes: [.font: font]).width
+    }.max() ?? 0
+    self.labelColumnWidth = ceil(widestTitle) + EqualBrightnessSettingsLayout.labelColumnPadding
+  }
+
   /// Applies the existing preferences page's label column and system control spacing.
-  /// 复用原设置页的标签列宽度和系统控件间距。
+  /// 复用原有设置页的标签列宽度和系统控件间距。
   private func configureAlignedGrid(_ grid: NSGridView) {
     grid.columnSpacing = 12
-    grid.column(at: 0).width = EqualBrightnessSettingsLayout.labelColumnWidth
-    grid.column(at: 0).xPlacement = .trailing
+    grid.column(at: 0).width = self.labelColumnWidth
+    grid.column(at: 0).xPlacement = .fill
     grid.column(at: 1).xPlacement = .fill
     grid.column(at: 1).leadingPadding = 4
     grid.rowAlignment = .firstBaseline
@@ -733,7 +770,8 @@ private enum EqualBrightnessSettingsLayout {
   static let graphHeight: CGFloat = 300
   static let summaryHeight: CGFloat = 128
   static let footerHeight: CGFloat = 32
-  static let labelColumnWidth: CGFloat = 210
+  static let labelColumnPadding: CGFloat = 4
+  static let actionButtonWidth: CGFloat = 120
 }
 
 /// Provides the standalone page while reusing NSGridView and NSStackView conventions from the preferences UI.
