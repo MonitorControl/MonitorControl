@@ -56,6 +56,10 @@
 		D2C0A0012A00000100000001 /* EqualBrightnessSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C0A0012A00000100000002 /* EqualBrightnessSettingsViewController.swift */; };
 		D2C0A0012A00000100000003 /* EqualBrightnessSettingsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C0A0012A00000100000004 /* EqualBrightnessSettingsStore.swift */; };
 		D2C0A0012A00000100000005 /* EqualBrightnessSyncCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C0A0012A00000100000006 /* EqualBrightnessSyncCoordinator.swift */; };
+		D2C0A0012A00000100000007 /* EqualBrightnessDisplaySupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C0A0012A00000100000008 /* EqualBrightnessDisplaySupport.swift */; };
+		D2C0A0012A00000100000009 /* EqualBrightnessSettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C0A0012A0000010000000A /* EqualBrightnessSettingsModel.swift */; };
+		D2C0A0012A0000010000000B /* EqualBrightnessGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C0A0012A0000010000000C /* EqualBrightnessGraphView.swift */; };
+		D2C0A0012A0000010000000D /* EqualBrightnessSettingsLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C0A0012A0000010000000E /* EqualBrightnessSettingsLayout.swift */; };
 		F0445D3820023E710025AE82 /* MainPrefsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0445D3720023E710025AE82 /* MainPrefsViewController.swift */; };
 		F06792EA200A73460066C438 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = F06792E9200A73460066C438 /* main.swift */; };
 		F06792F6200A745F0066C438 /* MonitorControlHelper.app in [Login] Copy Helper to start at Login */ = {isa = PBXBuildFile; fileRef = F06792E7200A73460066C438 /* MonitorControlHelper.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -178,6 +182,10 @@
 		D2C0A0012A00000100000002 /* EqualBrightnessSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EqualBrightnessSettingsViewController.swift; sourceTree = "<group>"; };
 		D2C0A0012A00000100000004 /* EqualBrightnessSettingsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EqualBrightnessSettingsStore.swift; sourceTree = "<group>"; };
 		D2C0A0012A00000100000006 /* EqualBrightnessSyncCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EqualBrightnessSyncCoordinator.swift; sourceTree = "<group>"; };
+		D2C0A0012A00000100000008 /* EqualBrightnessDisplaySupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EqualBrightnessDisplaySupport.swift; sourceTree = "<group>"; };
+		D2C0A0012A0000010000000A /* EqualBrightnessSettingsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EqualBrightnessSettingsModel.swift; sourceTree = "<group>"; };
+		D2C0A0012A0000010000000C /* EqualBrightnessGraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EqualBrightnessGraphView.swift; sourceTree = "<group>"; };
+		D2C0A0012A0000010000000E /* EqualBrightnessSettingsLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EqualBrightnessSettingsLayout.swift; sourceTree = "<group>"; };
 		F0445D3720023E710025AE82 /* MainPrefsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPrefsViewController.swift; sourceTree = "<group>"; };
 		F06792E7200A73460066C438 /* MonitorControlHelper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MonitorControlHelper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F06792E9200A73460066C438 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
@@ -364,6 +372,10 @@
 				D2C0A0012A00000100000002 /* EqualBrightnessSettingsViewController.swift */,
 				D2C0A0012A00000100000004 /* EqualBrightnessSettingsStore.swift */,
 				D2C0A0012A00000100000006 /* EqualBrightnessSyncCoordinator.swift */,
+				D2C0A0012A00000100000008 /* EqualBrightnessDisplaySupport.swift */,
+				D2C0A0012A0000010000000A /* EqualBrightnessSettingsModel.swift */,
+				D2C0A0012A0000010000000C /* EqualBrightnessGraphView.swift */,
+				D2C0A0012A0000010000000E /* EqualBrightnessSettingsLayout.swift */,
 				AA25F6CE26E680510087F3A2 /* MenuslidersPrefsViewController.swift */,
 				AA25F6D026E681D30087F3A2 /* KeyboardPrefsViewController.swift */,
 				AA062E8926C9A039007E628C /* DisplaysPrefsViewController.swift */,
@@ -657,6 +669,10 @@
 				D2C0A0012A00000100000001 /* EqualBrightnessSettingsViewController.swift in Sources */,
 				D2C0A0012A00000100000003 /* EqualBrightnessSettingsStore.swift in Sources */,
 				D2C0A0012A00000100000005 /* EqualBrightnessSyncCoordinator.swift in Sources */,
+				D2C0A0012A00000100000007 /* EqualBrightnessDisplaySupport.swift in Sources */,
+				D2C0A0012A00000100000009 /* EqualBrightnessSettingsModel.swift in Sources */,
+				D2C0A0012A0000010000000B /* EqualBrightnessGraphView.swift in Sources */,
+				D2C0A0012A0000010000000D /* EqualBrightnessSettingsLayout.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -806,7 +822,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
@@ -862,7 +878,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -892,7 +908,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				MARKETING_VERSION = 4.4.0;
 				PRODUCT_BUNDLE_IDENTIFIER = app.monitorcontrol.MonitorControl;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -929,7 +945,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				MARKETING_VERSION = 4.4.0;
 				PRODUCT_BUNDLE_IDENTIFIER = app.monitorcontrol.MonitorControl;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -966,7 +982,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				MARKETING_VERSION = 4.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = app.monitorcontrol.MonitorControlHelper;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -997,7 +1013,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				MARKETING_VERSION = 4.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = app.monitorcontrol.MonitorControlHelper;
 				PRODUCT_NAME = "$(TARGET_NAME)";

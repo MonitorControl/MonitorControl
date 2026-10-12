@@ -291,24 +291,6 @@ class DisplayManager {
     self.displays.first { CGDisplayIsBuiltin($0.identifier) != 0 }
   }
 
-  /// Returns the user-facing name used by menus and calibration controls.
-  /// 返回菜单和校准控件使用的用户可见显示器名称。
-  func userFacingDisplayName(for display: Display, fallbackIndex: Int = 0) -> String {
-    let friendlyName = display.readPrefAsString(key: .friendlyName).trimmingCharacters(in: .whitespacesAndNewlines)
-    if !friendlyName.isEmpty {
-      return friendlyName
-    }
-    let displayName = display.name.trimmingCharacters(in: .whitespacesAndNewlines)
-    if !displayName.isEmpty {
-      return displayName
-    }
-    if CGDisplayIsBuiltin(display.identifier) != 0 {
-      return NSLocalizedString("Built-in Display", comment: "Fallback built-in display name")
-    }
-    let externalName = NSLocalizedString("External Display", comment: "Fallback external display name")
-    return "\(externalName) \(fallbackIndex + 1)"
-  }
-
   func getCurrentDisplay(byFocus: Bool = false) -> Display? {
     if byFocus {
       guard let mainDisplayID = NSScreen.main?.displayID else {

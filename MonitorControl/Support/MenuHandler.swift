@@ -195,11 +195,7 @@ class MenuHandler: NSMenu, NSMenuDelegate {
       addedSliderHandlers.append(self.setupMenuSliderHandler(command: .brightness, display: display, title: title))
     }
     if prefs.integer(forKey: PrefKey.multiSliders.rawValue) != MultiSliders.combine.rawValue {
-      // Keep display names visible in the multi-display menu, including stable fallbacks.
-      // 在多显示器菜单中保留显示器名称，并为缺少名称的显示器提供稳定兜底。
-      let displayIndex = DisplayManager.shared.displays.firstIndex { $0.identifier == display.identifier } ?? 0
-      let displayName = DisplayManager.shared.userFacingDisplayName(for: display, fallbackIndex: displayIndex)
-      self.addDisplayMenuBlock(addedSliderHandlers: addedSliderHandlers, blockName: displayName, monitorSubMenu: monitorSubMenu, numOfDisplays: numOfDisplays, asSubMenu: asSubMenu)
+      self.addDisplayMenuBlock(addedSliderHandlers: addedSliderHandlers, blockName: display.readPrefAsString(key: .friendlyName) != "" ? display.readPrefAsString(key: .friendlyName) : display.name, monitorSubMenu: monitorSubMenu, numOfDisplays: numOfDisplays, asSubMenu: asSubMenu)
     }
     if addedSliderHandlers.count > 0, prefs.integer(forKey: PrefKey.menuIcon.rawValue) == MenuIcon.sliderOnly.rawValue {
       app.updateStatusItemVisibility(true)

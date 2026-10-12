@@ -4,10 +4,6 @@ import Cocoa
 import os.log
 
 class SliderHandler {
-  /// Controls the horizontal width of menu brightness and volume sliders, in points.
-  /// 控制菜单亮度和音量滑块的水平宽度，单位为点。
-  private static let menuSliderWidth: CGFloat = 180
-
   var slider: MCSlider?
   var view: NSView?
   var percentageBox: NSTextField?
@@ -227,7 +223,7 @@ class SliderHandler {
     slider.setNumOfCustomTickmarks(prefs.bool(forKey: PrefKey.showTickMarks.rawValue) ? 5 : 0)
     self.slider = slider
     if !DEBUG_MACOS10, #available(macOS 11.0, *) {
-      slider.frame.size.width = Self.menuSliderWidth
+      slider.frame.size.width = 180
       slider.frame.origin = NSPoint(x: 15, y: 5)
       let view = NSView(frame: NSRect(x: 0, y: 0, width: slider.frame.width + 30 + (showPercent ? 38 : 0), height: slider.frame.height + 14))
       view.frame.origin = NSPoint(x: 12, y: 0)
@@ -254,7 +250,7 @@ class SliderHandler {
       }
       self.view = view
     } else {
-      slider.frame.size.width = Self.menuSliderWidth
+      slider.frame.size.width = 180
       slider.frame.origin = NSPoint(x: 15, y: 5)
       let view = NSView(frame: NSRect(x: 0, y: 0, width: slider.frame.width + 30 + (showPercent ? 38 : 0), height: slider.frame.height + 10))
       view.addSubview(slider)

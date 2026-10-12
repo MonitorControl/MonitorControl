@@ -262,8 +262,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let delta = display.refreshBrightness()
         if delta != 0 {
           refreshedSomething = true
-          // The coordinator keeps legacy synchronization intact and gates calibrated propagation.
-          // 协调器保留旧版同步行为，并控制校准曲线的传播入口。
+          // Keep legacy synchronization while allowing the calibrated path to map values.
+          // 保留原有同步行为，同时允许校准路径映射亮度值。
           if prefs.bool(forKey: PrefKey.enableBrightnessSync.rawValue),
              EqualBrightnessSyncCoordinator.shared.shouldPropagate(sourceDisplay: display) {
             for targetDisplay in DisplayManager.shared.displays where targetDisplay != display {

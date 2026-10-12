@@ -103,7 +103,7 @@
                                     <gridCell row="xKQ-LY-5il" column="eHC-Ur-UsS" id="5Ae-gB-MUt"/>
                                     <gridCell row="xKQ-LY-5il" column="64O-72-10l" id="Rzu-9I-Tog">
                                         <button key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="DW6-ez-A8y">
-                                            <rect key="frame" x="218" y="344" width="472" height="18"/>
+                                            <rect key="frame" x="218" y="351" width="472" height="18"/>
                                             <buttonCell key="cell" type="check" title="Sync brightness changes from Built-in and Apple displays" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="0ca-DG-AgB">
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                 <font key="font" metaFont="system"/>
@@ -129,7 +129,7 @@
                                     <gridCell row="jHJ-o2-Y9H" column="eHC-Ur-UsS" id="En7-LK-oWB"/>
                                     <gridCell row="jHJ-o2-Y9H" column="64O-72-10l" id="wYJ-EG-TWv">
                                         <textField key="contentView" focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" preferredMaxLayoutWidth="400" translatesAutoresizingMaskIntoConstraints="NO" id="gLU-8p-2gU">
-                                            <rect key="frame" x="218" y="290" width="474" height="28"/>
+                                            <rect key="frame" x="218" y="317" width="474" height="28"/>
                                             <textFieldCell key="cell" controlSize="small" id="wjv-tq-iUx">
                                                 <font key="font" metaFont="smallSystem"/>
                                                 <string key="title">Changes that are caused by the Ambient light sensor or made using Touch Bar, Control Center, System Settings will be replicated to all displays.</string>

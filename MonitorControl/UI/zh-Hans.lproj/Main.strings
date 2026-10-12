@@ -4,6 +4,9 @@
 /* Class = "NSButtonCell"; title = "Equal Brightness Settings"; ObjectID = "K2x-9V-dsR"; */
 "K2x-9V-dsR.title" = "等亮度设置";
 
+/* Class = "NSButtonCell"; title = "Equal Brightness Settings"; ObjectID = "K2x-9V-dsR"; */
+"K2x-9V-dsR.title" = "等亮度设置";
+
 /* Class = "NSMenuItem"; title = "Assume last saved settings are valid (recommended)"; ObjectID = "1in-79-6qm"; */
 "1in-79-6qm.title" = "假设之前的设置可用（建议）";
 

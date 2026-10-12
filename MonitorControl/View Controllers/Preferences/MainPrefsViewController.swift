@@ -22,15 +22,13 @@ class MainPrefsViewController: NSViewController, SettingsPane {
   @IBOutlet var allowZeroSwBrightness: NSButton!
   @IBOutlet var combinedBrightness: NSButton!
   @IBOutlet var enableSmooth: NSButton!
-  // Keep this outlet optional so an older storyboard cannot crash settings loading.
-  // 保留可选 outlet，避免旧 storyboard 缺少连接时导致设置页崩溃。
-  @IBOutlet var enableBrightnessSync: NSButton?
+  @IBOutlet var enableBrightnessSync: NSButton!
   @IBOutlet var startupAction: NSPopUpButton!
   @IBOutlet var rowDoNothingStartupText: NSGridRow!
   @IBOutlet var rowWriteStartupText: NSGridRow!
   @IBOutlet var rowReadStartupText: NSGridRow!
 
-  private var equalBrightnessSettingsWindowController: EqualBrightnessSettingsWindowController?
+  private var equalBrightnessWindowController: EqualBrightnessSettingsWindowController?
 
   func updateGridLayout() {
     if self.startupAction.selectedTag() == StartupAction.doNothing.rawValue {
@@ -63,7 +61,7 @@ class MainPrefsViewController: NSViewController, SettingsPane {
     self.combinedBrightness.state = prefs.bool(forKey: PrefKey.disableCombinedBrightness.rawValue) ? .off : .on
     self.allowZeroSwBrightness.state = prefs.bool(forKey: PrefKey.allowZeroSwBrightness.rawValue) ? .on : .off
     self.enableSmooth.state = prefs.bool(forKey: PrefKey.disableSmoothBrightness.rawValue) ? .off : .on
-    self.populateBrightnessSyncSetting()
+    self.enableBrightnessSync.state = prefs.bool(forKey: PrefKey.enableBrightnessSync.rawValue) ? .on : .off
     self.startupAction.selectItem(withTag: prefs.integer(forKey: PrefKey.startupAction.rawValue))
     // Preload Display settings to some extent to properly set up size in orther that animation won't fail
     menuslidersPrefsVc?.view.layoutSubtreeIfNeeded()
@@ -71,15 +69,6 @@ class MainPrefsViewController: NSViewController, SettingsPane {
     displaysPrefsVc?.view.layoutSubtreeIfNeeded()
     aboutPrefsVc?.view.layoutSubtreeIfNeeded()
     self.updateGridLayout()
-  }
-
-  /// Applies the saved legacy synchronization preference when its storyboard outlet exists.
-  /// 当 storyboard outlet 存在时，应用已保存的旧版亮度同步偏好。
-  private func populateBrightnessSyncSetting() {
-    guard let syncButton = self.enableBrightnessSync else {
-      return
-    }
-    syncButton.state = prefs.bool(forKey: PrefKey.enableBrightnessSync.rawValue) ? .on : .off
   }
 
   @IBAction func startAtLoginClicked(_ sender: NSButton) {
@@ -153,21 +142,21 @@ class MainPrefsViewController: NSViewController, SettingsPane {
     }
   }
 
-  /// Opens the function-based equal-brightness editor without changing legacy sync settings.
-  /// 打开函数化的等亮度编辑器，同时不改变原有同步设置。
+  /// Opens the standalone equal-brightness editor from the existing settings page.
+  /// 从现有设置页打开独立的等亮度编辑器。
   @IBAction func equalBrightnessSettingsClicked(_: NSButton) {
-    if let existingController = self.equalBrightnessSettingsWindowController {
+    if let existingController = self.equalBrightnessWindowController {
       existingController.showSettings()
       return
     }
     let controller = EqualBrightnessSettingsWindowController()
     controller.onSave = { [weak self] _, _ in
-      self?.equalBrightnessSettingsWindowController = nil
+      self?.equalBrightnessWindowController = nil
     }
     controller.onCancel = { [weak self] in
-      self?.equalBrightnessSettingsWindowController = nil
+      self?.equalBrightnessWindowController = nil
     }
-    self.equalBrightnessSettingsWindowController = controller
+    self.equalBrightnessWindowController = controller
     controller.showSettings()
   }
 
