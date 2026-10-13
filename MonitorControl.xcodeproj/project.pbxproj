@@ -76,8 +76,11 @@
 
 /* Begin PBXFileReference section */
 		01D6471D2AF916A800321FFB /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hi; path = hi.lproj/Main.strings; sourceTree = "<group>"; };
+		3FA7CC692A9525B4AD4ADF52 /* fa */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fa; path = fa.lproj/Main.strings; sourceTree = "<group>"; };
 		01D6471E2AF916A800321FFB /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hi; path = hi.lproj/InternetAccessPolicy.strings; sourceTree = "<group>"; };
+		3D6E3E6D2C9FDF3036CDC013 /* fa */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fa; path = fa.lproj/InternetAccessPolicy.strings; sourceTree = "<group>"; };
 		01D6471F2AF916A800321FFB /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hi; path = hi.lproj/Localizable.strings; sourceTree = "<group>"; };
+		7C392B336B759587F3AD52B9 /* fa */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fa; path = fa.lproj/Localizable.strings; sourceTree = "<group>"; };
 		17DE48C4273E9DC500A1779F /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Main.strings; sourceTree = "<group>"; };
 		17DE48C5273E9DC500A1779F /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/InternetAccessPolicy.strings; sourceTree = "<group>"; };
 		17DE48C6273E9DC500A1779F /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -469,6 +472,7 @@
 				"pt-PT",
 				hi,
 				sk,
+				fa,
 			);
 			mainGroup = 56754EA21D9A4016007BCDC5;
 			packageReferences = (
@@ -681,6 +685,7 @@
 				B7FA437E2AC5857A00A94C01 /* ja */,
 				FB5DB28E2AD54C4600306223 /* pt-PT */,
 				01D6471D2AF916A800321FFB /* hi */,
+				3FA7CC692A9525B4AD4ADF52 /* fa */,
 				AABCFABB2B47247200344F55 /* sk */,
 			);
 			name = Main.storyboard;
@@ -707,6 +712,7 @@
 				B7FA437F2AC5857A00A94C01 /* ja */,
 				FB5DB28F2AD54C4600306223 /* pt-PT */,
 				01D6471E2AF916A800321FFB /* hi */,
+				3D6E3E6D2C9FDF3036CDC013 /* fa */,
 				AABCFABC2B47247200344F55 /* sk */,
 			);
 			name = InternetAccessPolicy.strings;
@@ -733,6 +739,7 @@
 				B7FA43802AC5857A00A94C01 /* ja */,
 				FB5DB2902AD54C4600306223 /* pt-PT */,
 				01D6471F2AF916A800321FFB /* hi */,
+				7C392B336B759587F3AD52B9 /* fa */,
 				AABCFABD2B47247200344F55 /* sk */,
 			);
 			name = Localizable.strings;

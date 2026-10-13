@@ -1,0 +1,152 @@
+/* Shown in the main prefs window */
+"About" = "درباره";
+
+/* Shown in the alert dialog */
+"An other app seems to change the brightness or colors which causes issues.\n\nTo solve this, you need to quit the other app or disable gamma control for your displays in MonitorControl!" = "به نظر می‌رسد برنامه دیگری روشنایی یا رنگ‌ها را تغییر می‌دهد که باعث بروز مشکل می‌شود.\n\nبرای حل این مشکل، باید برنامه دیگر را ببندید یا کنترل گاما را برای نمایشگرهای خود در MonitorControl غیرفعال کنید!";
+
+/* Shown in the main prefs window */
+"App menu" = "منوی برنامه";
+
+/* Shown in the alert dialog */
+"Are you sure you want to enable a longer delay? Doing so may freeze your system and require a restart. Start at login will be disabled as a safety measure." = "آیا مطمئن هستید که می‌خواهید تأخیر طولانی‌تری را فعال کنید؟ این کار ممکن است باعث قفل شدن سیستم و نیاز به راه‌اندازی مجدد شود. به عنوان یک اقدام احتیاطی، «اجرا هنگام ورود به سیستم» غیرفعال خواهد شد.";
+
+/* Shown in the alert dialog */
+"Are you sure you want to reset all settings?" = "آیا مطمئن هستید که می‌خواهید همه تنظیمات را بازنشانی کنید؟";
+
+/* Shown in menu */
+"Brightness" = "روشنایی";
+
+/* Build */
+"Build" = "ساخت";
+
+/* Shown in the Display Settings */
+"Built-in Display" = "نمایشگر داخلی";
+
+/* Shown in menu */
+"Check for updates…" = "بررسی به‌روزرسانی‌ها…";
+
+/* Shown in menu */
+"Contrast" = "کنتراست";
+
+/* Version */
+"Copyright Ⓒ MonitorControl, " = "حق نشر Ⓒ MonitorControl، ";
+
+/* Shown in record shortcut box */
+"Decrease" = "کاهش";
+
+/* Shown in the alert dialog */
+"Disable gamma control for my displays" = "غیرفعال کردن کنترل گاما برای نمایشگرهای من";
+
+/* Shown in the main prefs window */
+"Displays" = "نمایشگرها";
+
+/* Shown in the alert dialog */
+"Enable Longer Delay?" = "فعال کردن تأخیر طولانی‌تر؟";
+
+/* Shown in the Display Settings */
+"External Display" = "نمایشگر خارجی";
+
+/* Shown in the main prefs window */
+"General" = "عمومی";
+
+/* Shown in the Display Settings */
+"Hardware (Apple)" = "سخت‌افزاری (Apple)";
+
+/* Shown in the Display Settings */
+"Hardware (DDC)" = "سخت‌افزاری (DDC)";
+
+/* Shown in the alert dialog */
+"I'll quit the other app" = "برنامه دیگر را می‌بندم";
+
+/* Shown in the alert dialog */
+"Incompatible previous version" = "نسخه قبلی ناسازگار";
+
+/* Shown in record shortcut box */
+"Increase" = "افزایش";
+
+/* Shown in the alert dialog */
+"Is f.lux or similar running?" = "آیا f.lux یا برنامه‌ای مشابه در حال اجرا است؟";
+
+/* Shown in the main prefs window */
+"Keyboard" = "صفحه‌کلید";
+
+/* Shown in record shortcut box */
+"Mute" = "بی‌صدا";
+
+/* Shown in the alert dialog */
+"No" = "خیر";
+
+/* Shown in the Display Settings */
+"No Control" = "بدون کنترل";
+
+/* Shown in the Display Settings */
+"Other Display" = "نمایشگر دیگر";
+
+/* Shown in the alert dialog */
+"Settings for an incompatible previous app version detected. Default settings are reloaded." = "تنظیمات مربوط به نسخه پیشین ناسازگار برنامه شناسایی شد. تنظیمات پیش‌فرض دوباره بارگذاری شدند.";
+
+/* Shown in menu */
+"Settings…" = "تنظیمات…";
+
+/* Shown in menu */
+"Quit" = "خروج";
+
+/* Shown in the alert dialog */
+"Reset Settings?" = "بازنشانی تنظیمات؟";
+
+/* Shown in the alert dialog */
+"Safe Mode Activated" = "حالت ایمن فعال شد";
+
+/* Shown in the alert dialog */
+"Shift was pressed during launch. MonitorControl started in safe mode. Default settings are reloaded, DDC read is blocked." = "کلید Shift هنگام راه‌اندازی فشرده شد. MonitorControl در حالت ایمن شروع به کار کرد. تنظیمات پیش‌فرض دوباره بارگذاری شدند، خواندن DDC مسدود است.";
+
+/* Shown in the alert dialog */
+"Shortcuts not available" = "میانبرها در دسترس نیستند";
+
+/* Shown in the Display Settings */
+"Software (gamma)" = "نرم‌افزاری (گاما)";
+
+/* Shown in the Display Settings */
+"Software (gamma, forced)" = "نرم‌افزاری (گاما، اجباری)";
+
+/* Shown in the Display Settings */
+"Software (shade)" = "نرم‌افزاری (سایه)";
+
+/* Shown in the Display Settings */
+"Software (shade, forced)" = "نرم‌افزاری (سایه، اجباری)";
+
+/* Shown in the Display Settings */
+"This display allows for software brightness control via gamma table manipulation or shade as it does not support hardware control. Reasons for this might be using the HDMI port of a Mac mini (which blocks hardware DDC control) or having a blacklisted display." = "این نمایشگر به دلیل عدم پشتیبانی از کنترل سخت‌افزاری، امکان کنترل نرم‌افزاری روشنایی را از طریق دستکاری جدول گاما یا سایه فراهم می‌کند. دلایل این امر می‌تواند استفاده از درگاه HDMI در Mac mini (که کنترل سخت‌افزاری DDC را مسدود می‌کند) یا قرار داشتن نمایشگر در فهرست سیاه باشد.";
+
+/* Shown in the Display Settings */
+"This display has an unspecified control status." = "این نمایشگر وضعیت کنترل نامشخصی دارد.";
+
+/* Shown in the Display Settings */
+"This display is reported to support hardware DDC control but the current settings allow for software control only." = "طبق گزارش، این نمایشگر از کنترل سخت‌افزاری DDC پشتیبانی می‌کند، اما تنظیمات فعلی تنها اجازه کنترل نرم‌افزاری را می‌دهد.";
+
+/* Shown in the Display Settings */
+"This display is reported to support hardware DDC control. If you encounter issues, you can disable hardware DDC control to force software control." = "طبق گزارش، این نمایشگر از کنترل سخت‌افزاری DDC پشتیبانی می‌کند. در صورت بروز مشکل، می‌توانید کنترل سخت‌افزاری DDC را غیرفعال کنید تا کنترل نرم‌افزاری اعمال شود.";
+
+/* Shown in the Display Settings */
+"This display supports native Apple brightness protocol. This allows macOS to control this display without MonitorControl as well." = "این نمایشگر از پروتکل بومی روشنایی Apple پشتیبانی می‌کند. این قابلیت به macOS امکان می‌دهد بدون MonitorControl نیز این نمایشگر را کنترل کند.";
+
+/* Shown in the Display Settings */
+"This is a virtual display (examples: AirPlay, Sidecar, display connected via a DisplayLink Dock or similar) which does not allow hardware or software gammatable control. Shading is used as a substitute but only in non-mirror scenarios. Mouse cursor will be unaffected and artifacts may appear when entering/leaving full screen mode." = "این یک نمایشگر مجازی است (برای مثال: AirPlay، Sidecar، نمایشگر متصل از طریق DisplayLink Dock یا موارد مشابه) که اجازه کنترل سخت‌افزاری یا نرم‌افزاری جدول گاما را نمی‌دهد. ایجاد سایه به عنوان جایگزین به کار می‌رود اما فقط در حالت‌های غیرآینه‌ای. نشانگر ماوس تحت تأثیر قرار نمی‌گیرد و ممکن است هنگام ورود یا خروج از حالت تمام‌صفحه اشکالات تصویری ظاهر شود.";
+
+/* Unknown display name */
+"Unknown" = "ناشناخته";
+
+/* Version */
+"Version" = "نسخه";
+
+/* Shown in the Display Settings */
+"Virtual Display" = "نمایشگر مجازی";
+
+/* Shown in menu */
+"Volume" = "صدا";
+
+/* Shown in the alert dialog */
+"Yes" = "بله";
+
+/* Shown in the alert dialog */
+"You need to enable MonitorControl in System Settings > Security and Privacy > Accessibility for the keyboard shortcuts to work" = "برای کارکرد میانبرهای صفحه‌کلید، باید MonitorControl را در System Settings > Security and Privacy > Accessibility فعال کنید";
