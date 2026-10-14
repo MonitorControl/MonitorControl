@@ -1,0 +1,8 @@
+/* General application description */
+"ApplicationDescription" = "روشنایی و صدای نمایشگرهای خارجی را MonitorControl به شما امکان می‌دهد کنترل کنید";
+
+/* Sofware update deny consequences */
+"SoftwareUpdateDenyConsequences" = "اگر این اتصالات را رد کنید، از نسخه‌های جدید و به‌روزرسانی‌های امنیتی مطلع نخواهید شد. به‌روزرسانی‌های امنیتی برای محافظت در برابر حملات بدافزار اهمیت دارند.";
+
+/* Software update purpose */
+"SoftwareUpdatePurpose" = "نسخه‌های جدید و به‌روزرسانی‌های امنیتی را MonitorControl بررسی می‌کند.";
