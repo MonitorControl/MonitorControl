@@ -1,3 +1,6 @@
+/* Shown in the keyboard prefs window */
+"A preset sets every display to a fixed brightness. Presets work whichever way the brightness keys above are set." = "A preset sets every display to a fixed brightness. Presets work whichever way the brightness keys above are set.";
+
 /* Shown in the main prefs window */
 "About" = "के बारे में";
 
@@ -15,6 +18,9 @@
 
 /* Shown in menu */
 "Brightness" = "चमक।";
+
+/* Shown in the keyboard prefs window */
+"Brightness presets:" = "Brightness presets:";
 
 /* Build */
 "Build" = "निर्माण करें";
@@ -90,6 +96,9 @@
 
 /* Shown in menu */
 "Quit" = "बाहर निकलें";
+
+/* Shown in record shortcut box */
+"Record Shortcut" = "Record Shortcut";
 
 /* Shown in the alert dialog */
 "Reset Settings?" = "वरीयताएँ पुनर्निर्धारित करें?";
