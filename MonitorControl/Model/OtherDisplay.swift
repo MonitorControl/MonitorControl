@@ -8,6 +8,7 @@ class OtherDisplay: Display {
   var ddc: IntelDDC?
   var arm64ddc: Bool = false
   var arm64avService: IOAVService?
+  var usbControl: USBDisplayControl?
   var isDiscouraged: Bool = false
   let writeDDCQueue = DispatchQueue(label: "Local write DDC queue")
   var writeDDCNextValue: [Command: UInt16] = [:]
@@ -255,7 +256,7 @@ class OtherDisplay: Display {
   }
 
   func isSwOnly() -> Bool {
-    (!self.arm64ddc && self.ddc == nil) || self.isVirtual || self.isDummy
+    (!self.arm64ddc && self.ddc == nil && self.usbControl == nil) || self.isVirtual || self.isDummy
   }
 
   func isSw() -> Bool {
@@ -403,6 +404,12 @@ class OtherDisplay: Display {
       self.writeDDCLastSavedValue[command] = value
       self.savePref(true, key: PrefKey.isTouched, for: command)
     }
+    if let usbControl = self.usbControl {
+      if command == .brightness {
+        _ = usbControl.write(value)
+      }
+      return
+    }
     var controlCodes = self.getRemapControlCodes(command: command)
     if controlCodes.count == 0 {
       controlCodes.append(command.rawValue)
@@ -421,6 +428,15 @@ class OtherDisplay: Display {
   func readDDCValues(for command: Command, tries: UInt, minReplyDelay delay: UInt64?) -> (current: UInt16, max: UInt16)? {
     var values: (UInt16, UInt16)?
     guard app.sleepID == 0, app.reconfigureID == 0, !self.readPrefAsBool(key: .forceSw), !self.readPrefAsBool(key: .unavailableDDC, for: command) else {
+      return values
+    }
+    if let usbControl = self.usbControl {
+      guard command == .brightness else {
+        return nil
+      }
+      DisplayManager.shared.globalDDCQueue.sync {
+        values = usbControl.read()
+      }
       return values
     }
     let controlCodes = self.getRemapControlCodes(command: command)

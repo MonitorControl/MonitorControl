@@ -112,6 +112,9 @@ class DisplaysPrefsViewController: NSViewController, SettingsPane, NSTableViewDa
               controlMethod = NSLocalizedString("Software (gamma, forced)", comment: "Shown in the Display Settings")
             }
             controlStatus = NSLocalizedString("This display is reported to support hardware DDC control but the current settings allow for software control only.", comment: "Shown in the Display Settings")
+          } else if otherDisplay.usbControl != nil {
+            controlMethod = NSLocalizedString("Hardware (USB)", comment: "Shown in the Display Settings")
+            controlStatus = NSLocalizedString("This older Apple display is controlled over its USB connection, which only offers brightness control. If you encounter issues, you can disable hardware control to force software control.", comment: "Shown in the Display Settings")
           } else {
             controlMethod = NSLocalizedString("Hardware (DDC)", comment: "Shown in the Display Settings")
             controlStatus = NSLocalizedString("This display is reported to support hardware DDC control. If you encounter issues, you can disable hardware DDC control to force software control.", comment: "Shown in the Display Settings")
