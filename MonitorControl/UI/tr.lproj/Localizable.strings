@@ -28,6 +28,24 @@
 /* Shown in menu */
 "Contrast" = "Kontrast";
 
+/* Shown in the main prefs window */
+"Language:" = "Dil:";
+
+/* Shown in the language picker */
+"System Default" = "Sistem Varsayılanı";
+
+/* Shown after changing the app language */
+"Language Change Requires Restart" = "Dil Değişikliği Yeniden Başlatma Gerektiriyor";
+
+/* Shown after changing the app language */
+"The new language will be used the next time MonitorControl is opened." = "Yeni dil, MonitorControl bir sonraki açılışında kullanılacak.";
+
+/* Shown after changing the app language */
+"Quit MonitorControl" = "MonitorControl'den Çık";
+
+/* Shown after changing the app language */
+"Later" = "Daha Sonra";
+
 /* Version */
 "Copyright Ⓒ MonitorControl, " = "Telif Hakkı Ⓒ MonitorControl, ";
 

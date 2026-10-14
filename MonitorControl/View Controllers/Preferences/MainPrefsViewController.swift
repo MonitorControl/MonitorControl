@@ -6,6 +6,8 @@ import ServiceManagement
 import Settings
 
 class MainPrefsViewController: NSViewController, SettingsPane {
+  private static let appleLanguagesKey = "AppleLanguages"
+
   let paneIdentifier = Settings.PaneIdentifier.main
   let paneTitle: String = NSLocalizedString("General", comment: "Shown in the main prefs window")
 
@@ -47,7 +49,81 @@ class MainPrefsViewController: NSViewController, SettingsPane {
   @available(macOS, deprecated: 10.10)
   override func viewDidLoad() {
     super.viewDidLoad()
+    self.addLanguageSetting()
     self.populateSettings()
+  }
+
+  private func addLanguageSetting() {
+    guard let gridView = self.view.subviews.compactMap({ $0 as? NSGridView }).first else {
+      return
+    }
+
+    let label = NSTextField(labelWithString: NSLocalizedString("Language:", comment: "Shown in the main prefs window"))
+    label.alignment = .right
+
+    let languagePicker = NSPopUpButton(frame: .zero, pullsDown: false)
+    languagePicker.target = self
+    languagePicker.action = #selector(self.languageChanged(_:))
+
+    let systemDefaultItem = NSMenuItem(title: NSLocalizedString("System Default", comment: "Shown in the language picker"), action: nil, keyEquivalent: "")
+    systemDefaultItem.representedObject = ""
+    languagePicker.menu?.addItem(systemDefaultItem)
+
+    for identifier in self.availableLanguageIdentifiers() {
+      let locale = Locale(identifier: identifier)
+      let languageName = locale.localizedString(forLanguageCode: identifier) ?? identifier
+      let item = NSMenuItem(title: languageName.capitalized(with: locale), action: nil, keyEquivalent: "")
+      item.representedObject = identifier
+      languagePicker.menu?.addItem(item)
+    }
+
+    let selectedIdentifier = self.preferredLanguageIdentifier()
+    languagePicker.select(languagePicker.itemArray.first { ($0.representedObject as? String) == selectedIdentifier })
+    gridView.addRow(with: [label, languagePicker])
+  }
+
+  private func availableLanguageIdentifiers() -> [String] {
+    Bundle.main.localizations
+      .filter { $0 != "Base" }
+      .sorted {
+        let firstLocale = Locale(identifier: $0)
+        let secondLocale = Locale(identifier: $1)
+        let firstName = firstLocale.localizedString(forLanguageCode: $0) ?? $0
+        let secondName = secondLocale.localizedString(forLanguageCode: $1) ?? $1
+        return firstName.localizedStandardCompare(secondName) == .orderedAscending
+      }
+  }
+
+  private func preferredLanguageIdentifier() -> String {
+    guard let bundleIdentifier = Bundle.main.bundleIdentifier,
+          let languages = prefs.persistentDomain(forName: bundleIdentifier)?[Self.appleLanguagesKey] as? [String]
+    else {
+      return ""
+    }
+    return languages.first ?? ""
+  }
+
+  @objc private func languageChanged(_ sender: NSPopUpButton) {
+    guard let identifier = sender.selectedItem?.representedObject as? String else {
+      return
+    }
+
+    if identifier.isEmpty {
+      prefs.removeObject(forKey: Self.appleLanguagesKey)
+    } else {
+      prefs.set([identifier], forKey: Self.appleLanguagesKey)
+    }
+
+    let alert = NSAlert()
+    alert.messageText = NSLocalizedString("Language Change Requires Restart", comment: "Shown after changing the app language")
+    alert.informativeText = NSLocalizedString("The new language will be used the next time MonitorControl is opened.", comment: "Shown after changing the app language")
+    alert.addButton(withTitle: NSLocalizedString("Quit MonitorControl", comment: "Shown after changing the app language"))
+    alert.addButton(withTitle: NSLocalizedString("Later", comment: "Shown after changing the app language"))
+    alert.alertStyle = .informational
+
+    if alert.runModal() == .alertFirstButtonReturn {
+      NSApp.terminate(nil)
+    }
   }
 
   @available(macOS, deprecated: 10.10)
