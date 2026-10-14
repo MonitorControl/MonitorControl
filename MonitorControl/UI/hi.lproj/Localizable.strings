@@ -150,3 +150,22 @@
 
 /* Shown in the alert dialog */
 "You need to enable MonitorControl in System Settings > Security and Privacy > Accessibility for the keyboard shortcuts to work" = "आपको सिस्टम प्राथमिकताओं> सुरक्षा और गोपनीयता> में मॉनिटरकंट्रोल को सक्षम करने की आवश्यकता है कीबोर्ड शॉर्टकट के काम करने के लिए सुलभता";
+
+/* Equal brightness settings / 等亮度设置 */
+"Equal Brightness Settings" = "समान चमक सेटिंग्स";
+"Equal brightness instructions" = "सभी जुड़े हुए डिस्प्ले को तब तक समायोजित करें जब तक वे समान चमक वाले न दिखें। संदर्भ डिस्प्ले नीला है; हर बाहरी डिस्प्ले की वक्र, संदर्भ बिंदुओं और स्लाइडर के लिए अपनी रंग पहचान है। “संदर्भ बिंदु जोड़ें” पर क्लिक करने से सभी बाहरी डिस्प्ले का वर्तमान चमक संबंध एक साथ सहेजा जाता है। किसी मार्गदर्शक पर क्लिक करने से सभी स्लाइडर उस संदर्भ स्तर पर चले जाते हैं। अधिक सटीकता के लिए कई बिंदु जोड़ें। वक्र प्रकार चुनें और हर डिस्प्ले का मैपिंग सहेजने के लिए “सहेजें” दबाएँ, या बदलाव छोड़ने के लिए “रद्द करें” दबाएँ। डिस्प्ले दोबारा जोड़ने पर उसके सभी बिंदु बहाल हो जाते हैं।";
+"Piecewise Linear" = "खंडित रैखिक";
+"Smooth Monotone Cubic" = "स्मूथ मोनोटोनिक क्यूबिक";
+"Add Reference Point" = "संदर्भ बिंदु जोड़ें";
+"Delete Selected Point" = "चयनित बिंदु हटाएँ";
+"Curve type" = "वक्र प्रकार";
+"Cancel" = "रद्द करें";
+"Save" = "सहेजें";
+"Target display" = "लक्ष्य डिस्प्ले";
+"Mac Reference" = "Mac संदर्भ";
+"No reference points yet." = "अभी कोई संदर्भ बिंदु नहीं है।";
+/* Equal brightness reference display selection */
+"Select Reference Display" = "संदर्भ डिस्प्ले चुनें";
+"Choose a reference display for equal brightness settings." = "समान चमक सेटिंग्स के लिए एक संदर्भ डिस्प्ले चुनें।";
+"Reference display" = "संदर्भ डिस्प्ले";
+"Continue" = "जारी रखें";

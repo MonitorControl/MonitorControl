@@ -150,3 +150,22 @@
 
 /* Shown in the alert dialog */
 "You need to enable MonitorControl in System Settings > Security and Privacy > Accessibility for the keyboard shortcuts to work" = "キーボードショートカットを機能させるには、システム環境設定 > セキュリティとプライバシー > アクセシビリティ で MonitorControl を有効にする必要があります。";
+
+/* Equal brightness settings / 等亮度设置 */
+"Equal Brightness Settings" = "均一輝度設定";
+"Equal brightness instructions" = "接続されているすべてのディスプレイが同じ明るさに見えるまで調整します。基準ディスプレイは青で表示され、各外部ディスプレイには曲線、基準点、スライダーで共通して使う固有の色があります。「基準点を追加」をクリックすると、すべての外部ディスプレイの現在の明るさの対応を同時に保存できます。ガイドをクリックすると、すべてのスライダーがその基準レベルに移動します。精度を高めるには複数の点を追加してください。曲線の種類を選び、「保存」で各ディスプレイの対応を保存するか、「キャンセル」で変更を破棄します。ディスプレイを再接続すると、そのディスプレイのすべての点が復元されます。";
+"Piecewise Linear" = "区分線形";
+"Smooth Monotone Cubic" = "滑らかな単調三次曲線";
+"Add Reference Point" = "基準点を追加";
+"Delete Selected Point" = "選択した点を削除";
+"Curve type" = "曲線の種類";
+"Cancel" = "キャンセル";
+"Save" = "保存";
+"Target display" = "対象ディスプレイ";
+"Mac Reference" = "Macの基準";
+"No reference points yet." = "基準点はまだありません。";
+/* Equal brightness reference display selection */
+"Select Reference Display" = "基準ディスプレイを選択";
+"Choose a reference display for equal brightness settings." = "均一輝度設定の基準ディスプレイを選択してください。";
+"Reference display" = "基準ディスプレイ";
+"Continue" = "続ける";

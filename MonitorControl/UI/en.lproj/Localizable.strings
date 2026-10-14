@@ -150,3 +150,22 @@
 
 /* Shown in the alert dialog */
 "You need to enable MonitorControl in System Settings > Security and Privacy > Accessibility for the keyboard shortcuts to work" = "You need to enable MonitorControl in System Settings > Security and Privacy > Accessibility for the keyboard shortcuts to work";
+
+/* Equal brightness settings */
+"Equal Brightness Settings" = "Equal Brightness Settings";
+"Equal brightness instructions" = "Adjust all connected displays until they appear equally bright. The reference display uses blue; each external display has its own color for its curve, reference points, and slider. Click “Add Reference Point” to save the current brightness relationship for every external display at once. Clicking a guide moves all sliders to that reference level. Add multiple points for better accuracy. Select a curve type, then click “Save” to store each display’s mapping, or “Cancel” to discard changes. Each display’s complete set of points is restored when it is connected again.";
+"Piecewise Linear" = "Piecewise Linear";
+"Smooth Monotone Cubic" = "Smooth Monotone Cubic";
+"Add Reference Point" = "Add Reference Point";
+"Delete Selected Point" = "Delete Selected Point";
+"Curve type" = "Curve type";
+"Cancel" = "Cancel";
+"Save" = "Save";
+"Target display" = "Target display";
+"Mac Reference" = "Mac Reference";
+"No reference points yet." = "No reference points yet.";
+/* Equal brightness reference display selection */
+"Select Reference Display" = "Select Reference Display";
+"Choose a reference display for equal brightness settings." = "Choose a reference display for equal brightness settings.";
+"Reference display" = "Reference display";
+"Continue" = "Continue";

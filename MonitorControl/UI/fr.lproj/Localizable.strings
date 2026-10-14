@@ -152,3 +152,22 @@
 
 /* Shown in the alert dialog */
 "You need to enable MonitorControl in System Settings > Security and Privacy > Accessibility for the keyboard shortcuts to work" = "Vous devez activer MonitorControl dans Préférences Système > Sécurité et confidentialité > Accessibilité pour que les raccourcis clavier fonctionnent";
+
+/* Equal brightness settings / 等亮度设置 */
+"Equal Brightness Settings" = "Réglages de luminosité uniforme";
+"Equal brightness instructions" = "Réglez tous les écrans connectés jusqu’à ce qu’ils semblent avoir la même luminosité. L’écran de référence est bleu ; chaque écran externe a sa propre couleur pour sa courbe, ses points de référence et son curseur. Cliquez sur « Ajouter un point de référence » pour enregistrer en une fois la relation de luminosité actuelle de tous les écrans externes. Cliquez sur un guide pour déplacer tous les curseurs au niveau de référence correspondant. Ajoutez plusieurs points pour améliorer la précision. Choisissez un type de courbe, puis cliquez sur « Enregistrer » pour mémoriser la correspondance de chaque écran, ou sur « Annuler » pour abandonner les modifications. Lorsqu’un écran est reconnecté, tous ses points sont restaurés.";
+"Piecewise Linear" = "Linéaire par morceaux";
+"Smooth Monotone Cubic" = "Courbe cubique monotone lisse";
+"Add Reference Point" = "Ajouter un point de référence";
+"Delete Selected Point" = "Supprimer le point sélectionné";
+"Curve type" = "Type de courbe";
+"Cancel" = "Annuler";
+"Save" = "Enregistrer";
+"Target display" = "Écran cible";
+"Mac Reference" = "Référence du Mac";
+"No reference points yet." = "Aucun point de référence pour le moment.";
+/* Equal brightness reference display selection */
+"Select Reference Display" = "Sélectionner l’écran de référence";
+"Choose a reference display for equal brightness settings." = "Choisissez un écran de référence pour les réglages de luminosité uniforme.";
+"Reference display" = "Écran de référence";
+"Continue" = "Continuer";

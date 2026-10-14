@@ -417,3 +417,6 @@
 
 /* Class = "NSTextFieldCell"; title = "Combined dimming switchover point:"; ObjectID = "zv8-pZ-OPy"; */
 "zv8-pZ-OPy.title" = "통합된 밝기 조절 전환 지점:";
+
+/* Class = "NSButtonCell"; title = "Equal Brightness Settings"; ObjectID = "K2x-9V-dsR"; */
+"K2x-9V-dsR.title" = "균일 밝기 설정";

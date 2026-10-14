@@ -22,6 +22,7 @@
                                     <gridRow bottomPadding="-13" id="fnu-hr-lg2"/>
                                     <gridRow bottomPadding="-10" id="fZn-VF-HKh"/>
                                     <gridRow bottomPadding="-13" id="xKQ-LY-5il"/>
+                                    <gridRow bottomPadding="-13" id="q8E-4M-kT1"/>
                                     <gridRow bottomPadding="-10" id="jHJ-o2-Y9H"/>
                                     <gridRow bottomPadding="-13" id="DxT-oY-DIZ"/>
                                     <gridRow bottomPadding="-10" id="Xcd-Ny-zkH"/>
@@ -109,6 +110,19 @@
                                             </buttonCell>
                                             <connections>
                                                 <action selector="enableBrightnessSync:" target="BGD-tY-Myx" id="Icj-yj-at8"/>
+                                            </connections>
+                                        </button>
+                                    </gridCell>
+                                    <gridCell row="q8E-4M-kT1" column="eHC-Ur-UsS" id="X8E-2q-3Lk"/>
+                                    <gridCell row="q8E-4M-kT1" column="64O-72-10l" xPlacement="leading" id="Y4P-5c-VsN">
+                                        <button key="contentView" verticalHuggingPriority="750" placeholderIntrinsicWidth="132" placeholderIntrinsicHeight="20" translatesAutoresizingMaskIntoConstraints="NO" id="Y7p-qL-8mN">
+                                            <rect key="frame" x="218" y="317" width="132" height="32"/>
+                                            <buttonCell key="cell" type="push" title="Equal Brightness Settings" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="K2x-9V-dsR">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="equalBrightnessSettingsClicked:" target="BGD-tY-Myx" id="X8q-7V-pLm"/>
                                             </connections>
                                         </button>
                                     </gridCell>

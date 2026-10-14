@@ -152,3 +152,22 @@
 
 /* Shown in the alert dialog */
 "You need to enable MonitorControl in System Settings > Security and Privacy > Accessibility for the keyboard shortcuts to work" = "您需要在「系統偏好設定」>「安全性與隱私權」>「輔助使用」中啟用MonitorControl使鍵盤快捷鍵生效";
+
+/* Equal brightness settings / 等亮度设置 */
+"Equal Brightness Settings" = "等亮度設定";
+"Equal brightness instructions" = "將所有已連接的螢幕亮度調到一致。參考螢幕使用藍色；每個外接螢幕使用獨立色彩，曲線、參考點和滑桿保持同色。按一下「新增參考點」會同時儲存所有外接螢幕目前的亮度對應關係。按一下輔助線會將所有滑桿移至該參考亮度。可新增多個參考點以提高準確度。選擇曲線類型後按一下「儲存」分別儲存每個螢幕的對應，或按一下「取消」放棄修改。重新連接某個螢幕時，會恢復它自己的全部參考點。";
+"Piecewise Linear" = "分段線性";
+"Smooth Monotone Cubic" = "平滑單調三次曲線";
+"Add Reference Point" = "新增參考點";
+"Delete Selected Point" = "刪除選取的點";
+"Curve type" = "曲線類型";
+"Cancel" = "取消";
+"Save" = "儲存";
+"Target display" = "目標螢幕";
+"Mac Reference" = "Mac 參考螢幕";
+"No reference points yet." = "尚無參考點。";
+/* Equal brightness reference display selection */
+"Select Reference Display" = "選擇參考螢幕";
+"Choose a reference display for equal brightness settings." = "為等亮度設定選擇一個參考螢幕。";
+"Reference display" = "參考螢幕";
+"Continue" = "繼續";

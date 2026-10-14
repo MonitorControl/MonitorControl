@@ -262,10 +262,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let delta = display.refreshBrightness()
         if delta != 0 {
           refreshedSomething = true
-          if prefs.bool(forKey: PrefKey.enableBrightnessSync.rawValue) {
+          // Keep legacy synchronization while allowing the calibrated path to map values.
+          // 保留原有同步行为，同时允许校准路径映射亮度值。
+          if prefs.bool(forKey: PrefKey.enableBrightnessSync.rawValue),
+             EqualBrightnessSyncCoordinator.shared.shouldPropagate(sourceDisplay: display) {
             for targetDisplay in DisplayManager.shared.displays where targetDisplay != display {
               os_log("Updating delta from display %{public}@ to display %{public}@", type: .info, String(display.identifier), String(targetDisplay.identifier))
-              let newValue = max(0, min(1, targetDisplay.getBrightness() + delta))
+              let newValue = EqualBrightnessSyncCoordinator.shared.targetValue(for: targetDisplay, sourceDisplay: display, delta: delta)
               _ = targetDisplay.setBrightness(newValue)
               if let slider = targetDisplay.sliderHandler[.brightness] {
                 slider.setValue(newValue, displayID: targetDisplay.identifier)

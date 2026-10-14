@@ -150,3 +150,22 @@
 
 /* Shown in the alert dialog */
 "You need to enable MonitorControl in System Settings > Security and Privacy > Accessibility for the keyboard shortcuts to work" = "Precisas de habilitar o MonitorControl nas Preferências do Sistema > Segurança e privacidade > Acessibilidade para que os atalhos de teclado funcionem";
+
+/* Equal brightness settings / 等亮度设置 */
+"Equal Brightness Settings" = "Definições de brilho uniforme";
+"Equal brightness instructions" = "Ajuste todos os ecrãs ligados até parecerem ter o mesmo brilho. O ecrã de referência usa azul; cada ecrã externo tem uma cor própria para a sua curva, pontos de referência e cursor. Clique em “Adicionar ponto de referência” para guardar de uma vez a relação de brilho atual de todos os ecrãs externos. Clique numa guia para mover todos os cursores para esse nível de referência. Adicione vários pontos para melhorar a precisão. Escolha um tipo de curva e clique em “Guardar” para guardar o mapeamento de cada ecrã, ou em “Cancelar” para rejeitar as alterações. Ao ligar novamente um ecrã, todos os seus pontos são restaurados.";
+"Piecewise Linear" = "Linear por segmentos";
+"Smooth Monotone Cubic" = "Cúbica monótona suave";
+"Add Reference Point" = "Adicionar ponto de referência";
+"Delete Selected Point" = "Eliminar ponto selecionado";
+"Curve type" = "Tipo de curva";
+"Cancel" = "Cancelar";
+"Save" = "Guardar";
+"Target display" = "Ecrã de destino";
+"Mac Reference" = "Referência do Mac";
+"No reference points yet." = "Ainda não existem pontos de referência.";
+/* Equal brightness reference display selection */
+"Select Reference Display" = "Selecionar monitor de referência";
+"Choose a reference display for equal brightness settings." = "Escolha um monitor de referência para as definições de brilho uniforme.";
+"Reference display" = "Monitor de referência";
+"Continue" = "Continuar";

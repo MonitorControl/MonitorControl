@@ -152,3 +152,22 @@
 
 /* Shown in the alert dialog */
 "You need to enable MonitorControl in System Settings > Security and Privacy > Accessibility for the keyboard shortcuts to work" = "Engedélyeznie kell a MonitorControlt a Rendszerbeállítások > Biztonság és adatvédelem > Kisegítő lehetőségek alatt a gyorsbillentyűk használatához!";
+
+/* Equal brightness settings / 等亮度设置 */
+"Equal Brightness Settings" = "Egyenletes fényerő beállításai";
+"Equal brightness instructions" = "Állítsa be az összes csatlakoztatott kijelzőt úgy, hogy azonos fényerejűnek tűnjenek. A referencia-kijelző kék; minden külső kijelző saját színt kap a görbéhez, a referenciapontokhoz és a csúszkához. A „Referenciapont hozzáadása” gombbal egyszerre mentheti minden külső kijelző aktuális fényerő-kapcsolatát. Egy segédvonalra kattintva minden csúszka az adott referenciaértékre áll. A pontosság növeléséhez adjon hozzá több pontot. Válasszon görbetípust, majd a „Mentés” gombbal mentse minden kijelző leképezését, vagy a „Mégse” gombbal vesse el a módosításokat. A kijelző újbóli csatlakoztatásakor minden hozzá tartozó pont visszaáll.";
+"Piecewise Linear" = "Szakaszonként lineáris";
+"Smooth Monotone Cubic" = "Sima monoton köbös";
+"Add Reference Point" = "Referenciapont hozzáadása";
+"Delete Selected Point" = "Kijelölt pont törlése";
+"Curve type" = "Görbe típusa";
+"Cancel" = "Mégse";
+"Save" = "Mentés";
+"Target display" = "Célkijelző";
+"Mac Reference" = "Mac-referencia";
+"No reference points yet." = "Még nincsenek referenciapontok.";
+/* Equal brightness reference display selection */
+"Select Reference Display" = "Referenciakijelző kiválasztása";
+"Choose a reference display for equal brightness settings." = "Válasszon referenciakijelzőt az egyenletes fényerő beállításaihoz.";
+"Reference display" = "Referenciakijelző";
+"Continue" = "Folytatás";

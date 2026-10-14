@@ -150,3 +150,22 @@
 
 /* Shown in the alert dialog */
 "You need to enable MonitorControl in System Settings > Security and Privacy > Accessibility for the keyboard shortcuts to work" = "Aby skróty klawiaturowe działały, należy włączyć funkcję MonitorControl w Preferencjach systemowych > Bezpieczeństwo i prywatność > Dostępność";
+
+/* Equal brightness settings / 等亮度设置 */
+"Equal Brightness Settings" = "Ustawienia wyrównania jasności";
+"Equal brightness instructions" = "Ustaw wszystkie podłączone ekrany tak, aby wyglądały na równie jasne. Ekran referencyjny jest niebieski, a każdy ekran zewnętrzny ma własny kolor używany dla krzywej, punktów referencyjnych i suwaka. Kliknij „Dodaj punkt referencyjny”, aby jednocześnie zapisać bieżącą zależność jasności wszystkich ekranów zewnętrznych. Kliknięcie linii pomocniczej przesuwa wszystkie suwaki do tego poziomu odniesienia. Dodaj kilka punktów, aby zwiększyć dokładność. Wybierz typ krzywej i kliknij „Zapisz”, aby zapisać mapowanie każdego ekranu, albo „Anuluj”, aby odrzucić zmiany. Po ponownym podłączeniu ekranu wszystkie jego punkty zostaną przywrócone.";
+"Piecewise Linear" = "Liniowa odcinkami";
+"Smooth Monotone Cubic" = "Gładka monotoniczna krzywa sześcienna";
+"Add Reference Point" = "Dodaj punkt referencyjny";
+"Delete Selected Point" = "Usuń wybrany punkt";
+"Curve type" = "Typ krzywej";
+"Cancel" = "Anuluj";
+"Save" = "Zapisz";
+"Target display" = "Ekran docelowy";
+"Mac Reference" = "Referencja Mac";
+"No reference points yet." = "Brak punktów referencyjnych.";
+/* Equal brightness reference display selection */
+"Select Reference Display" = "Wybierz wyświetlacz referencyjny";
+"Choose a reference display for equal brightness settings." = "Wybierz wyświetlacz referencyjny dla ustawień wyrównania jasności.";
+"Reference display" = "Wyświetlacz referencyjny";
+"Continue" = "Kontynuuj";

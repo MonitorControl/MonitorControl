@@ -152,3 +152,22 @@
 
 /* Shown in the alert dialog */
 "You need to enable MonitorControl in System Settings > Security and Privacy > Accessibility for the keyboard shortcuts to work" = "Du musst MonitorControl in Systemeinstellungen > Sicherheit > Datenschutz > Bedienungshilfen aktivieren, damit die Kurzbefehle funktionieren.";
+
+/* Equal brightness settings / 等亮度设置 */
+"Equal Brightness Settings" = "Einstellungen für gleiche Helligkeit";
+"Equal brightness instructions" = "Stellen Sie alle verbundenen Displays so ein, dass sie gleich hell wirken. Das Referenzdisplay ist blau; jedes externe Display hat eine eigene Farbe für Kurve, Referenzpunkte und Regler. Mit „Referenzpunkt hinzufügen“ speichern Sie die aktuelle Helligkeitszuordnung für alle externen Displays gleichzeitig. Ein Klick auf eine Hilfslinie bewegt alle Regler auf diese Referenzstufe. Mehrere Punkte erhöhen die Genauigkeit. Wählen Sie einen Kurventyp und klicken Sie auf „Speichern“, um die Zuordnung jedes Displays zu speichern, oder auf „Abbrechen“, um Änderungen zu verwerfen. Beim erneuten Verbinden eines Displays werden alle zugehörigen Punkte wiederhergestellt.";
+"Piecewise Linear" = "Stückweise linear";
+"Smooth Monotone Cubic" = "Glatte monotone kubische Kurve";
+"Add Reference Point" = "Referenzpunkt hinzufügen";
+"Delete Selected Point" = "Ausgewählten Punkt löschen";
+"Curve type" = "Kurventyp";
+"Cancel" = "Abbrechen";
+"Save" = "Speichern";
+"Target display" = "Zieldisplay";
+"Mac Reference" = "Mac-Referenz";
+"No reference points yet." = "Noch keine Referenzpunkte.";
+/* Equal brightness reference display selection */
+"Select Reference Display" = "Referenzmonitor auswählen";
+"Choose a reference display for equal brightness settings." = "Wählen Sie einen Referenzmonitor für die Einstellungen der gleichen Helligkeit.";
+"Reference display" = "Referenzmonitor";
+"Continue" = "Fortfahren";

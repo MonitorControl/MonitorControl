@@ -152,3 +152,22 @@
 
 /* Shown in the alert dialog */
 "You need to enable MonitorControl in System Settings > Security and Privacy > Accessibility for the keyboard shortcuts to work" = "U moet MonitorControl inschakelen in Systeemvoorkeuren > Beveiliging en Privacy > Privacy > Toegankelijkheid inschakelen, zodat de sneltoetsen werken.";
+
+/* Equal brightness settings / 等亮度设置 */
+"Equal Brightness Settings" = "Instellingen voor gelijke helderheid";
+"Equal brightness instructions" = "Stel alle verbonden beeldschermen zo in dat ze even helder lijken. Het referentiescherm is blauw; elk extern scherm heeft een eigen kleur voor de curve, referentiepunten en schuifregelaar. Klik op „Referentiepunt toevoegen” om de huidige helderheidsrelatie voor alle externe schermen tegelijk op te slaan. Klik op een hulplijn om alle schuifregelaars naar dat referentieniveau te verplaatsen. Voeg meerdere punten toe voor meer nauwkeurigheid. Kies een curvetype en klik op „Opslaan” om de koppeling van elk scherm op te slaan, of op „Annuleren” om wijzigingen te verwerpen. Bij het opnieuw verbinden van een scherm worden al zijn punten hersteld.";
+"Piecewise Linear" = "Stuksgewijs lineair";
+"Smooth Monotone Cubic" = "Vloeiende monotone kubische curve";
+"Add Reference Point" = "Referentiepunt toevoegen";
+"Delete Selected Point" = "Geselecteerd punt verwijderen";
+"Curve type" = "Curvetype";
+"Cancel" = "Annuleren";
+"Save" = "Opslaan";
+"Target display" = "Doelmonitor";
+"Mac Reference" = "Mac-referentie";
+"No reference points yet." = "Nog geen referentiepunten.";
+/* Equal brightness reference display selection */
+"Select Reference Display" = "Referentiescherm selecteren";
+"Choose a reference display for equal brightness settings." = "Kies een referentiescherm voor de instellingen voor gelijke helderheid.";
+"Reference display" = "Referentiescherm";
+"Continue" = "Doorgaan";

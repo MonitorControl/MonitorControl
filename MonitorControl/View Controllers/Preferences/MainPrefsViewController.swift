@@ -28,6 +28,8 @@ class MainPrefsViewController: NSViewController, SettingsPane {
   @IBOutlet var rowWriteStartupText: NSGridRow!
   @IBOutlet var rowReadStartupText: NSGridRow!
 
+  private var equalBrightnessWindowController: EqualBrightnessSettingsWindowController?
+
   func updateGridLayout() {
     if self.startupAction.selectedTag() == StartupAction.doNothing.rawValue {
       self.rowDoNothingStartupText.isHidden = false
@@ -138,6 +140,107 @@ class MainPrefsViewController: NSViewController, SettingsPane {
       prefs.set(false, forKey: PrefKey.enableBrightnessSync.rawValue)
     default: break
     }
+  }
+
+  /// Opens the standalone equal-brightness editor from the existing settings page.
+  /// 从现有设置页打开独立的等亮度编辑器。
+  @IBAction func equalBrightnessSettingsClicked(_: NSButton) {
+    if let existingController = self.equalBrightnessWindowController {
+      existingController.showSettings()
+      return
+    }
+
+    let displays = DisplayManager.shared.displays.filter { !$0.isDummy }
+    let savedProfile = EqualBrightnessSettingsStore.shared.load()
+    let savedReferenceDisplay = displays.first { display in
+      guard let savedReferenceKey = savedProfile?.referenceDisplayKey else {
+        return false
+      }
+      return EqualBrightnessDisplayIdentity(display: display).key == savedReferenceKey
+    }
+    if let savedReferenceDisplay {
+      self.openEqualBrightnessSettings(referenceDisplay: savedReferenceDisplay)
+      return
+    }
+
+    if savedProfile?.referenceDisplayKey != nil {
+      // A saved reference that is currently disconnected must be selected again.
+      // 已保存的参考显示器当前未连接时，必须重新选择。
+      guard !displays.isEmpty else {
+        self.openEqualBrightnessSettings(referenceDisplay: nil)
+        return
+      }
+      self.chooseReferenceDisplayAndOpenSettings(from: displays)
+      return
+    }
+
+    if let automaticReferenceDisplay = EqualBrightnessDisplaySupport.automaticReferenceDisplay(from: displays) {
+      self.openEqualBrightnessSettings(referenceDisplay: automaticReferenceDisplay)
+      return
+    }
+
+    // Headless Macs and other systems without a built-in screen need an explicit reference.
+    // 无头 Mac 以及没有内置屏幕的设备需要用户明确选择参考显示器。
+    guard !displays.isEmpty else {
+      self.openEqualBrightnessSettings(referenceDisplay: nil)
+      return
+    }
+    self.chooseReferenceDisplayAndOpenSettings(from: displays)
+  }
+
+  /// Opens the editor after the reference display has been resolved.
+  /// 确定参考显示器后打开编辑器。
+  private func openEqualBrightnessSettings(referenceDisplay: Display?) {
+    let controller = EqualBrightnessSettingsWindowController(referenceDisplay: referenceDisplay)
+    controller.onSave = { [weak self] in
+      self?.equalBrightnessWindowController = nil
+    }
+    controller.onCancel = { [weak self] in
+      self?.equalBrightnessWindowController = nil
+    }
+    self.equalBrightnessWindowController = controller
+    controller.showSettings()
+  }
+
+  /// Chooses a reference display and opens the editor only after confirmation.
+  /// 选择参考显示器并仅在确认后打开编辑器。
+  private func chooseReferenceDisplayAndOpenSettings(from displays: [Display]) {
+    self.chooseReferenceDisplay(from: displays) { [weak self] selectedDisplay in
+      guard let self, let selectedDisplay else {
+        return
+      }
+      self.openEqualBrightnessSettings(referenceDisplay: selectedDisplay)
+    }
+  }
+
+  /// Presents a localized display picker for headless and non-MacBook systems.
+  /// 为无头 Mac 和非 MacBook 设备显示本地化的显示器选择器。
+  private func chooseReferenceDisplay(from displays: [Display], completion: @escaping (Display?) -> Void) {
+    let alert = NSAlert()
+    alert.messageText = NSLocalizedString("Select Reference Display", comment: "Reference display selection title")
+    alert.informativeText = NSLocalizedString("Choose a reference display for equal brightness settings.", comment: "Reference display selection explanation")
+
+    let accessoryView = NSView(frame: NSRect(x: 0, y: 0, width: 320, height: 54))
+    let label = NSTextField(labelWithString: NSLocalizedString("Reference display", comment: "Reference display picker label"))
+    label.frame = NSRect(x: 0, y: 30, width: 320, height: 18)
+    let displayPopup = NSPopUpButton(frame: NSRect(x: 0, y: 0, width: 320, height: 26), pullsDown: false)
+    displayPopup.addItems(withTitles: displays.enumerated().map { index, display in
+      EqualBrightnessDisplaySupport.userFacingName(for: display, fallbackIndex: index)
+    })
+    accessoryView.addSubview(label)
+    accessoryView.addSubview(displayPopup)
+    alert.accessoryView = accessoryView
+    alert.addButton(withTitle: NSLocalizedString("Continue", comment: "Reference display selection confirmation"))
+    alert.addButton(withTitle: NSLocalizedString("Cancel", comment: "Reference display selection cancellation"))
+
+    let response = alert.runModal()
+    guard response == .alertFirstButtonReturn,
+          displayPopup.indexOfSelectedItem >= 0,
+          displayPopup.indexOfSelectedItem < displays.count else {
+      completion(nil)
+      return
+    }
+    completion(displays[displayPopup.indexOfSelectedItem])
   }
 
   @IBAction func startupAction(_ sender: NSPopUpButton) {

@@ -150,3 +150,22 @@
 
 /* Shown in the alert dialog */
 "You need to enable MonitorControl in System Settings > Security and Privacy > Accessibility for the keyboard shortcuts to work" = "단축키가 동작하기 위해서는 시스템 환경설정 > 개인정보 보호 및 보안 > 손쉬운 사용에서 MonitorControl을 활성화해야 합니다.";
+
+/* Equal brightness settings / 等亮度设置 */
+"Equal Brightness Settings" = "균일 밝기 설정";
+"Equal brightness instructions" = "연결된 모든 디스플레이가 같은 밝기로 보일 때까지 조정합니다. 기준 디스플레이는 파란색이며, 각 외부 디스플레이에는 곡선, 기준점, 슬라이더에 함께 사용할 고유 색상이 있습니다. “기준점 추가”를 클릭하면 모든 외부 디스플레이의 현재 밝기 관계를 한 번에 저장합니다. 안내선을 클릭하면 모든 슬라이더가 해당 기준 밝기로 이동합니다. 정확도를 높이려면 여러 점을 추가하세요. 곡선 유형을 선택한 뒤 “저장”을 눌러 각 디스플레이의 매핑을 저장하거나 “취소”를 눌러 변경 사항을 버립니다. 디스플레이를 다시 연결하면 해당 디스플레이의 모든 점이 복원됩니다.";
+"Piecewise Linear" = "구간 선형";
+"Smooth Monotone Cubic" = "부드러운 단조 3차 곡선";
+"Add Reference Point" = "기준점 추가";
+"Delete Selected Point" = "선택한 점 삭제";
+"Curve type" = "곡선 유형";
+"Cancel" = "취소";
+"Save" = "저장";
+"Target display" = "대상 디스플레이";
+"Mac Reference" = "Mac 기준";
+"No reference points yet." = "아직 기준점이 없습니다.";
+/* Equal brightness reference display selection */
+"Select Reference Display" = "기준 디스플레이 선택";
+"Choose a reference display for equal brightness settings." = "균일 밝기 설정에 사용할 기준 디스플레이를 선택하십시오.";
+"Reference display" = "기준 디스플레이";
+"Continue" = "계속";

@@ -150,3 +150,22 @@
 
 /* Shown in the alert dialog */
 "You need to enable MonitorControl in System Settings > Security and Privacy > Accessibility for the keyboard shortcuts to work" = "Abyste mohli používat klávesové zkratky, jděte do Předvoleb systému > Zabezpečení a soukromí > Zpřístupnění a tam zaškrtněte MonitorControl";
+
+/* Equal brightness settings / 等亮度设置 */
+"Equal Brightness Settings" = "Nastavení stejného jasu";
+"Equal brightness instructions" = "Upravte všechny připojené displeje tak, aby vypadaly stejně jasně. Referenční displej je modrý; každý externí displej má vlastní barvu pro křivku, referenční body a posuvník. Kliknutím na „Přidat referenční bod“ uložíte aktuální vztah jasu pro všechny externí displeje současně. Kliknutí na vodicí čáru přesune všechny posuvníky na danou referenční úroveň. Přidejte více bodů pro vyšší přesnost. Vyberte typ křivky a kliknutím na „Uložit“ uložte mapování každého displeje, nebo klikněte na „Zrušit“ a změny zahoďte. Po opětovném připojení displeje se obnoví všechny jeho vlastní body.";
+"Piecewise Linear" = "Po částech lineární";
+"Smooth Monotone Cubic" = "Hladká monotónní kubická";
+"Add Reference Point" = "Přidat referenční bod";
+"Delete Selected Point" = "Odstranit vybraný bod";
+"Curve type" = "Typ křivky";
+"Cancel" = "Zrušit";
+"Save" = "Uložit";
+"Target display" = "Cílový displej";
+"Mac Reference" = "Reference Mac";
+"No reference points yet." = "Zatím žádné referenční body.";
+/* Equal brightness reference display selection */
+"Select Reference Display" = "Vybrat referenční displej";
+"Choose a reference display for equal brightness settings." = "Vyberte referenční displej pro nastavení stejného jasu.";
+"Reference display" = "Referenční displej";
+"Continue" = "Pokračovat";

@@ -58,7 +58,12 @@ class SliderHandler {
 
     override func stopTracking(last lastPoint: NSPoint, current stopPoint: NSPoint, in controlView: NSView, mouseIsUp flag: Bool) {
       self.isTracking = false
-      return super.stopTracking(last: lastPoint, current: stopPoint, in: controlView, mouseIsUp: flag)
+      super.stopTracking(last: lastPoint, current: stopPoint, in: controlView, mouseIsUp: flag)
+      if flag, let slider = controlView as? NSSlider, slider.target is SliderHandler {
+        // Submit the final value once more after the knob is released.
+        // 滑块松开后再次提交一次最终值。
+        slider.sendAction(slider.action, to: slider.target)
+      }
     }
 
     override func drawKnob(_ knobRect: NSRect) {
