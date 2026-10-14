@@ -264,11 +264,16 @@ class AppDelegate: NSObject, NSApplicationDelegate {
           refreshedSomething = true
           if prefs.bool(forKey: PrefKey.enableBrightnessSync.rawValue) {
             for targetDisplay in DisplayManager.shared.displays where targetDisplay != display {
+              let current = targetDisplay.getBrightness()
+              let step = BrightnessSync.step(current: current, anchor: targetDisplay.brightnessSyncAnchor, delta: delta)
+              targetDisplay.brightnessSyncAnchor = step.anchor
+              guard step.value != current else {
+                continue // The display is at the end of its range, there is nothing to push yet.
+              }
               os_log("Updating delta from display %{public}@ to display %{public}@", type: .info, String(display.identifier), String(targetDisplay.identifier))
-              let newValue = max(0, min(1, targetDisplay.getBrightness() + delta))
-              _ = targetDisplay.setBrightness(newValue)
+              _ = targetDisplay.setBrightness(step.value)
               if let slider = targetDisplay.sliderHandler[.brightness] {
-                slider.setValue(newValue, displayID: targetDisplay.identifier)
+                slider.setValue(step.value, displayID: targetDisplay.identifier)
               }
             }
           }
