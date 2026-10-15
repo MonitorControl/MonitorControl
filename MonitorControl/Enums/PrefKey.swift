@@ -78,6 +78,9 @@ enum PrefKey: String {
   /// Use fine OSD scale for volume
   case useFineScaleVolume
 
+  /// Experimental, opt-in app-drawn volume feedback on macOS 26 and later.
+  case modernVolumeOSD
+
   /// Use smoothBrightness
   case disableSmoothBrightness
 
