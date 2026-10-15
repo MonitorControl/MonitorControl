@@ -11,7 +11,20 @@ if CommandLine.arguments.contains("--self-test") {
   assert(ModernVolumeOSD.normalizedVolume(value: 1, maxValue: 0) == nil)
   assert(ModernVolumeOSD.normalizedVolume(value: 1, maxValue: -.infinity) == nil)
   assert(!ModernVolumeOSD.show(displayID: .max, value: 0.5, maxValue: 1, isMuted: false))
-  os_log("Volume normalization and missing-display fallback checks passed")
+  // Layer CGColors must refresh when the system appearance changes.
+  let preview = ModernVolumeView()
+  let track = preview.contentView!.subviews[1]
+  let fill = track.subviews[0]
+  for appearanceName in [NSAppearance.Name.aqua, .darkAqua, .aqua] {
+    let appearance = NSAppearance(named: appearanceName)!
+    preview.appearance = appearance
+    preview.viewDidChangeEffectiveAppearance()
+    appearance.performAsCurrentDrawingAppearance {
+      assert(fill.layer?.backgroundColor == NSColor.labelColor.cgColor)
+      assert(track.layer?.backgroundColor == NSColor.labelColor.withAlphaComponent(0.15).cgColor)
+    }
+  }
+  os_log("Volume normalization, missing-display fallback and appearance checks passed")
   exit(0)
 }
 

@@ -101,19 +101,30 @@ final class ModernVolumeView: NSGlassEffectView {
     content.addSubview(self.icon)
     self.track.frame = NSRect(x: 50, y: 20, width: 128, height: 8)
     self.track.wantsLayer = true
-    self.track.layer?.backgroundColor = NSColor.labelColor.withAlphaComponent(0.15).cgColor
     self.track.layer?.cornerRadius = 4
     self.fill.wantsLayer = true
-    self.fill.layer?.backgroundColor = NSColor.labelColor.cgColor
     self.fill.layer?.cornerRadius = 4
     self.track.addSubview(self.fill)
     content.addSubview(self.track)
     self.track.setAccessibilityElement(true)
     self.track.setAccessibilityRole(.levelIndicator)
     self.track.setAccessibilityLabel(NSLocalizedString("Volume", comment: "Volume indicator accessibility label"))
+    self.updateColors()
   }
 
   required init?(coder: NSCoder) { return nil }
+
+  override func viewDidChangeEffectiveAppearance() {
+    super.viewDidChangeEffectiveAppearance()
+    self.updateColors()
+  }
+
+  private func updateColors() {
+    self.effectiveAppearance.performAsCurrentDrawingAppearance {
+      self.track.layer?.backgroundColor = NSColor.labelColor.withAlphaComponent(0.15).cgColor
+      self.fill.layer?.backgroundColor = NSColor.labelColor.cgColor
+    }
+  }
 
   func update(level: CGFloat, isMuted: Bool) {
     let symbol = isMuted ? "speaker.slash.fill" : (level < 0.5 ? "speaker.wave.1.fill" : "speaker.wave.3.fill")
