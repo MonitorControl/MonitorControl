@@ -106,6 +106,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   }
 
   func applicationWillTerminate(_: Notification) {
+    if #available(macOS 26.0, *) {
+      ModernVolumeOSD.dismissAll()
+    }
     os_log("Goodbye!", type: .info)
     DisplayManager.shared.resetSwBrightnessForAllDisplays(noPrefSave: true)
     self.updateStatusItemVisibility(true)

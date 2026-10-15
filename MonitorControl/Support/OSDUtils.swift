@@ -23,6 +23,12 @@ class OSDUtils: NSObject {
   }
 
   static func showOsd(displayID: CGDirectDisplayID, command: Command, value: Float, maxValue: Float = 1, roundChiclet: Bool = false, lock: Bool = false) {
+    if #available(macOS 26.0, *), !lock,
+       prefs.bool(forKey: PrefKey.modernVolumeOSD.rawValue),
+       command == .audioSpeakerVolume || command == .audioMuteScreenBlank,
+       ModernVolumeOSD.show(displayID: displayID, value: value, maxValue: maxValue, isMuted: command == .audioMuteScreenBlank) {
+      return
+    }
     self.withOSD { manager in
       let osdImage = self.getOSDImageByCommand(command: command, value: value)
       let filledChiclets: Int
