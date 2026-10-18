@@ -34,6 +34,7 @@ brew install --cask monitorcontrol
 ## Major features
 
 - Control your display's brightness, volume and contrast!
+- Optional [software volume](docs/software-volume.md) for digital monitor outputs without usable hardware volume control (macOS 15+).
 - Shows native OSD for brightness and volume.
 - Supports multiple protocols to adjust brightness: DDC for external displays (brightness, contrast, volume), native Apple protocol for Apple and built-in displays, Gamma table control for software dimming, shade control for AirPlay, Sidecar and Display Link devices and other virtual screens.
 - Supports smooth brightness transitions.

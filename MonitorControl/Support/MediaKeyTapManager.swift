@@ -177,7 +177,13 @@ class MediaKeyTapManager: MediaKeyTapDelegate {
         keys.removeAll { keysToDelete.contains($0) }
       }
     }
+    if app.softwareAudio.ownsCurrentOutput {
+      // The dedicated software-audio tap owns volume events and filters duplicates.
+      // Keep the legacy tap on brightness only to avoid a second handler.
+      keys.removeAll { [.volumeDown, .volumeUp, .mute].contains($0) }
+    }
     self.mediaKeyTap?.stop()
+    self.mediaKeyTap = nil
     // returning an empty array listens for all mediakeys in MediaKeyTap
     if keys.count > 0 {
       self.mediaKeyTap = MediaKeyTap(delegate: self, on: KeyPressMode.keyDownAndUp, for: keys, observeBuiltIn: true)

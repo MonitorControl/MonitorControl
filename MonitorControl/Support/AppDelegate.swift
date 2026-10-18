@@ -20,6 +20,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   var mediaKeyTap = MediaKeyTapManager()
   var keyboardShortcuts = KeyboardShortcutsManager()
   let coreAudio = SimplyCoreAudio()
+  let softwareAudio = MonitorSoftwareAudio()
   var accessibilityObserver: NSObjectProtocol!
   var statusItemObserver: NSObjectProtocol!
   var statusItemVisibilityChangedByUser = true
@@ -67,6 +68,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     self.configure(firstrun: true)
     DisplayManager.shared.createGammaActivityEnforcer()
     self.updaterController.startUpdater()
+    self.softwareAudio.start()
   }
 
   @objc func quitClicked(_: AnyObject) {
@@ -106,6 +108,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   }
 
   func applicationWillTerminate(_: Notification) {
+    self.softwareAudio.stop()
     os_log("Goodbye!", type: .info)
     DisplayManager.shared.resetSwBrightnessForAllDisplays(noPrefSave: true)
     self.updateStatusItemVisibility(true)
@@ -199,6 +202,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   }
 
   @objc private func sleepNotification() {
+    self.softwareAudio.stopForSleep()
     self.sleepID += 1
     os_log("Sleeping with sleep %{public}@", type: .info, String(self.sleepID))
     self.updateMediaKeyTap()
@@ -218,6 +222,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     if self.sleepID == dispatchedSleepID {
       os_log("Sober from sleep %{public}@", type: .info, String(self.sleepID))
       self.sleepID = 0
+      self.softwareAudio.resume()
       if self.reconfigureID != 0 {
         let dispatchedReconfigureID = self.reconfigureID
         os_log("Displays need reconfig after sober with reconfigureID %{public}@", type: .info, String(dispatchedReconfigureID))

@@ -58,6 +58,18 @@
 		F06792F6200A745F0066C438 /* MonitorControlHelper.app in [Login] Copy Helper to start at Login */ = {isa = PBXBuildFile; fileRef = F06792E7200A73460066C438 /* MonitorControlHelper.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		F0A489C4279C71B200BEDFD6 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A489C3279C71B200BEDFD6 /* OnboardingViewController.swift */; };
 		FE4E0896249D584C003A50BB /* OSDUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE4E0895249D584C003A50BB /* OSDUtils.swift */; };
+		65D19DF119564256BEBA0622 = {isa = PBXBuildFile; fileRef = AC31F9A9923344D6BF9BCF79; };
+		71A77979EF7F446B97E8B7A3 = {isa = PBXBuildFile; fileRef = 99194E65C24E45BB90F978F4; };
+		07ED40F997124324819507BD = {isa = PBXBuildFile; fileRef = E1CB79DB55A54ACC852ECD4F; };
+		F001CBE0407C41E5B59B7D72 = {isa = PBXBuildFile; fileRef = 75B0270748BC439A9F27FD2A; };
+		1B8E79B229A4439C8A513936 = {isa = PBXBuildFile; fileRef = 1F8AB3E2E5C443B890289A9D; };
+		C2EF76B042AD467CBBA21A1C = {isa = PBXBuildFile; fileRef = 30EC96C3830E43519D8D78BB; };
+		8142B804CF9A4BDB9B0839B4 = {isa = PBXBuildFile; fileRef = DE6ABCE23499493888A01F63; };
+		B484A100E2A5473EAD8D2109 = {isa = PBXBuildFile; fileRef = AD969B52D2C549D2A0B2DF68; };
+		CEAB68355ECA45438F80BC64 = {isa = PBXBuildFile; fileRef = 8615D424BDAA4297A6D303C4; };
+		345355F1B291494390C9C7C8 = {isa = PBXBuildFile; fileRef = 1C103009B52D469DB7E6E225; };
+		595D3EA8735442E4830145FD = {isa = PBXBuildFile; fileRef = 27B02E148A6A4007A19DCE8E; };
+		BA7E6F902A7E400000000002 /* SoftwareAudio licenses in Resources */ = {isa = PBXBuildFile; fileRef = BA7E6F902A7E400000000001; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -185,6 +197,18 @@
 		FB5DB28F2AD54C4600306223 /* pt-PT */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-PT"; path = "pt-PT.lproj/InternetAccessPolicy.strings"; sourceTree = "<group>"; };
 		FB5DB2902AD54C4600306223 /* pt-PT */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-PT"; path = "pt-PT.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		FE4E0895249D584C003A50BB /* OSDUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OSDUtils.swift; sourceTree = "<group>"; };
+		AC31F9A9923344D6BF9BCF79 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemAudioTapEngine.swift; sourceTree = "<group>"; };
+		99194E65C24E45BB90F978F4 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioBufferListUtilities.swift; sourceTree = "<group>"; };
+		E1CB79DB55A54ACC852ECD4F = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoftwareVolume.swift; sourceTree = "<group>"; };
+		75B0270748BC439A9F27FD2A = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioOutputDevice.swift; sourceTree = "<group>"; };
+		1F8AB3E2E5C443B890289A9D = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapKitIdentity.swift; sourceTree = "<group>"; };
+		30EC96C3830E43519D8D78BB = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemAudioDeviceLookup.swift; sourceTree = "<group>"; };
+		DE6ABCE23499493888A01F63 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemTapCapture.swift; sourceTree = "<group>"; };
+		AD969B52D2C549D2A0B2DF68 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreAudioTapError.swift; sourceTree = "<group>"; };
+		8615D424BDAA4297A6D303C4 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioProcessor.swift; sourceTree = "<group>"; };
+		1C103009B52D469DB7E6E225 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioDevices.swift; sourceTree = "<group>"; };
+		27B02E148A6A4007A19DCE8E = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonitorSoftwareAudio.swift; sourceTree = "<group>"; };
+		BA7E6F902A7E400000000001 /* Licenses */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Licenses; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -311,6 +335,7 @@
 			children = (
 				F01B0685228221B6008E64DB /* Bridging-Header.h */,
 				AA99521626FE25AB00612E07 /* AppDelegate.swift */,
+				13B2E509F5454ABCA4F9CCFD,
 				AA78BDBC2709FE7B00CA8DF7 /* UpdaterDelegate.swift */,
 				AA99521826FE49A300612E07 /* MenuHandler.swift */,
 				F01B068F228221B7008E64DB /* SliderHandler.swift */,
@@ -375,6 +400,7 @@
 			path = Onboarding;
 			sourceTree = "<group>";
 		};
+		13B2E509F5454ABCA4F9CCFD = {isa = PBXGroup; children = (BA7E6F902A7E400000000001,AC31F9A9923344D6BF9BCF79,99194E65C24E45BB90F978F4,E1CB79DB55A54ACC852ECD4F,75B0270748BC439A9F27FD2A,1F8AB3E2E5C443B890289A9D,30EC96C3830E43519D8D78BB,DE6ABCE23499493888A01F63,AD969B52D2C549D2A0B2DF68,8615D424BDAA4297A6D303C4,1C103009B52D469DB7E6E225,27B02E148A6A4007A19DCE8E,); path = ../SoftwareAudio; sourceTree = "<group>"; };
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -496,6 +522,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BA7E6F902A7E400000000002 /* SoftwareAudio licenses in Resources */,
 				AAB2F642273ED0C7004AB5A4 /* .github in Resources */,
 				AAB2F63E273ED0AD004AB5A4 /* .swiftformat in Resources */,
 				56754EB11D9A4016007BCDC5 /* Assets.xcassets in Resources */,
@@ -643,6 +670,19 @@
 				F0445D3820023E710025AE82 /* MainPrefsViewController.swift in Sources */,
 				28D1DDF2227FBE71004CB494 /* NSScreen+Extension.swift in Sources */,
 				AA99521726FE25AB00612E07 /* AppDelegate.swift in Sources */,
+
+				595D3EA8735442E4830145FD,
+				65D19DF119564256BEBA0622,
+				71A77979EF7F446B97E8B7A3,
+				07ED40F997124324819507BD,
+				F001CBE0407C41E5B59B7D72,
+				1B8E79B229A4439C8A513936,
+				C2EF76B042AD467CBBA21A1C,
+				8142B804CF9A4BDB9B0839B4,
+				B484A100E2A5473EAD8D2109,
+				CEAB68355ECA45438F80BC64,
+				345355F1B291494390C9C7C8,
+
 				AA25F6D126E681D30087F3A2 /* KeyboardPrefsViewController.swift in Sources */,
 				F01B069F228221B7008E64DB /* SliderHandler.swift in Sources */,
 				AACE5E2327050C63006C2A48 /* NSNotification+Extension.swift in Sources */,

@@ -89,6 +89,7 @@ class OtherDisplay: Display {
   }
 
   func setupCurrentAndMaxValues(command: Command, firstrun: Bool = false) {
+    if command == .audioSpeakerVolume && app.softwareAudio.configured(self) { return }
     var ddcValues: (UInt16, UInt16)?
     var maxDDCValue = UInt16(DDC_MAX_DETECT_LIMIT)
     var currentDDCValue: UInt16
@@ -162,10 +163,15 @@ class OtherDisplay: Display {
   }
 
   func setupSliderCurrentValue(command: Command) -> Float {
-    (command == .audioSpeakerVolume && self.readPrefAsBool(key: .enableMuteUnmute) && self.readPrefAsInt(for: .audioMuteScreenBlank) == 1) ? 0 : self.readPrefAsFloat(for: command)
+    if command == .audioSpeakerVolume && app.softwareAudio.configured(self) { return app.softwareAudio.sliderValue }
+    return (command == .audioSpeakerVolume && self.readPrefAsBool(key: .enableMuteUnmute) && self.readPrefAsInt(for: .audioMuteScreenBlank) == 1) ? 0 : self.readPrefAsFloat(for: command)
   }
 
   func stepVolume(isUp: Bool, isSmallIncrement: Bool) {
+    if app.softwareAudio.configured(self) {
+      app.softwareAudio.stepVolume(isUp: isUp, isSmallIncrement: isSmallIncrement, display: self)
+      return
+    }
     guard !self.readPrefAsBool(key: .unavailableDDC, for: .audioSpeakerVolume) else {
       OSDUtils.showOsdVolumeDisabled(displayID: self.identifier)
       return
@@ -219,6 +225,10 @@ class OtherDisplay: Display {
   }
 
   func toggleMute(fromVolumeSlider: Bool = false) {
+    if app.softwareAudio.configured(self) {
+      app.softwareAudio.toggleMute(display: self, showHUD: !fromVolumeSlider)
+      return
+    }
     guard !self.readPrefAsBool(key: .unavailableDDC, for: .audioSpeakerVolume) else {
       OSDUtils.showOsdMuteDisabled(displayID: self.identifier)
       return
@@ -378,6 +388,7 @@ class OtherDisplay: Display {
   }
 
   func writeDDCValues(command: Command, value: UInt16) {
+    if command == .audioSpeakerVolume && app.softwareAudio.configured(self) { return }
     guard app.sleepID == 0, app.reconfigureID == 0, !self.readPrefAsBool(key: .forceSw), !self.readPrefAsBool(key: .unavailableDDC, for: command) else {
       return
     }

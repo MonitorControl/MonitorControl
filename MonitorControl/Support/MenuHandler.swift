@@ -71,6 +71,7 @@ class MenuHandler: NSMenu, NSMenuDelegate {
         self.addCombinedDisplayMenuBlock()
       }
     }
+    app.softwareAudio.addMenu(to: self)
     self.addDefaultMenuOptions()
   }
 
@@ -180,8 +181,8 @@ class MenuHandler: NSMenu, NSMenuDelegate {
     let monitorSubMenu: NSMenu = asSubMenu ? NSMenu() : self
     var addedSliderHandlers: [SliderHandler] = []
     display.sliderHandler[.audioSpeakerVolume] = nil
-    if let otherDisplay = display as? OtherDisplay, !otherDisplay.isSw(), !display.readPrefAsBool(key: .unavailableDDC, for: .audioSpeakerVolume), !prefs.bool(forKey: PrefKey.hideVolume.rawValue) {
-      let title = NSLocalizedString("Volume", comment: "Shown in menu")
+    if let otherDisplay = display as? OtherDisplay, (app.softwareAudio.configured(display) || (!otherDisplay.isSw() && !display.readPrefAsBool(key: .unavailableDDC, for: .audioSpeakerVolume))), !prefs.bool(forKey: PrefKey.hideVolume.rawValue) {
+      let title = app.softwareAudio.configured(display) ? NSLocalizedString("Software Volume", comment: "Software attenuation of monitor audio") : NSLocalizedString("Volume", comment: "Shown in menu")
       addedSliderHandlers.append(self.setupMenuSliderHandler(command: .audioSpeakerVolume, display: display, title: title))
     }
     display.sliderHandler[.contrast] = nil

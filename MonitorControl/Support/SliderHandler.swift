@@ -285,6 +285,10 @@ class SliderHandler {
   }
 
   func valueChangedOtherDisplay(otherDisplay: OtherDisplay, value: Float) {
+    if self.command == .audioSpeakerVolume && app.softwareAudio.configured(otherDisplay) {
+      app.softwareAudio.set(value, display: otherDisplay)
+      return
+    }
     // For the speaker volume slider, also set/unset the mute command when the value is changed from/to 0
     if self.command == .audioSpeakerVolume, (otherDisplay.readPrefAsInt(for: .audioMuteScreenBlank) == 1 && value > 0) || (otherDisplay.readPrefAsInt(for: .audioMuteScreenBlank) != 1 && value == 0) {
       otherDisplay.toggleMute(fromVolumeSlider: true)
