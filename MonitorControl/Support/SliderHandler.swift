@@ -48,6 +48,9 @@ class SliderHandler {
     override func barRect(flipped: Bool) -> NSRect {
       let bar = super.barRect(flipped: flipped)
       let knob = super.knobRect(flipped: flipped)
+      if knob.height <= 16 {
+        return NSRect(x: bar.origin.x, y: 1.5, width: bar.width, height: 21).offsetBy(dx: self.offsetX, dy: self.offsetY)
+      }
       return NSRect(x: bar.origin.x, y: knob.origin.y, width: bar.width, height: knob.height).insetBy(dx: 0, dy: self.inset).offsetBy(dx: self.offsetX, dy: self.offsetY)
     }
 
@@ -219,6 +222,7 @@ class SliderHandler {
     self.slider = slider
     if !DEBUG_MACOS10, #available(macOS 11.0, *) {
       slider.frame.size.width = 180
+      slider.frame.size.height = max(slider.frame.size.height, 25)
       slider.frame.origin = NSPoint(x: 15, y: 5)
       let view = NSView(frame: NSRect(x: 0, y: 0, width: slider.frame.width + 30 + (showPercent ? 38 : 0), height: slider.frame.height + 14))
       view.frame.origin = NSPoint(x: 12, y: 0)

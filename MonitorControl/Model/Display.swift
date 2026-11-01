@@ -97,7 +97,9 @@ class Display: Equatable {
     }
     let value = self.calcNewBrightness(isUp: isUp, isSmallIncrement: isSmallIncrement)
     if self.setBrightness(value) {
-      OSDUtils.showOsd(displayID: self.identifier, command: .brightness, value: value * 64, maxValue: 64)
+      if !self.readPrefAsBool(key: .hideOsd) {
+        OSDUtils.showOsd(displayID: self.identifier, command: .brightness, value: value * 64, maxValue: 64)
+      }
       if let slider = self.sliderHandler[.brightness] {
         slider.setValue(value, displayID: self.identifier)
         self.brightnessSyncSourceValue = value
@@ -343,5 +345,14 @@ class Display: Equatable {
     } else {
       return false
     }
+  }
+
+  func getFriendlyName() -> String {
+    let customName = self.readPrefAsString(key: .friendlyName)
+    return customName.isEmpty ? self.name : customName
+  }
+
+  func getNits(forValue _: Float? = nil) -> Int? {
+    nil
   }
 }
