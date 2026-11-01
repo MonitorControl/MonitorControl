@@ -311,8 +311,8 @@ private final class OSDHudLumaMonitor: NSObject, CALayerDelegate {
 final class MacOS27OSDHudView: NSView {
   private static let adaptiveBannerVariant = 9
   private static let hudCornerRadius: CGFloat = 32.0
-  private static let darkLumaThreshold: Double = 0.45
-  private static let lightLumaThreshold: Double = 0.53
+  private static let darkLumaThreshold: Double = 0.68
+  private static let lightLumaThreshold: Double = 0.75
   private static let iconSize: CGFloat = 24.0
   private static let iconX: CGFloat = 24.0
   private static let trackX: CGFloat = 62.0
@@ -401,7 +401,7 @@ final class MacOS27OSDHudView: NSView {
         newIsDark = current
       }
     } else {
-      newIsDark = luma < 0.5
+      newIsDark = luma < 0.72
     }
 
     guard self.isDarkBackdropOverride != newIsDark else { return }
