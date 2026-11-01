@@ -311,8 +311,8 @@ private final class OSDHudLumaMonitor: NSObject, CALayerDelegate {
 final class MacOS27OSDHudView: NSView {
   private static let adaptiveBannerVariant = 9
   private static let hudCornerRadius: CGFloat = 32.0
-  private static let darkLumaThreshold: Double = 0.68
-  private static let lightLumaThreshold: Double = 0.75
+  private static let darkLumaThreshold: Double = 0.78
+  private static let lightLumaThreshold: Double = 0.85
   private static let iconSize: CGFloat = 24.0
   private static let iconX: CGFloat = 24.0
   private static let trackX: CGFloat = 62.0
@@ -348,11 +348,12 @@ final class MacOS27OSDHudView: NSView {
 
     self.glassView.frame = self.bounds
     self.glassView.autoresizingMask = [.width, .height]
-    self.glassView.cornerRadius = Self.hudCornerRadius
     self.glassView.style = .regular
     if self.glassView.responds(to: NSSelectorFromString("set_variant:")) {
       self.glassView.setValue(Self.adaptiveBannerVariant, forKey: "_variant")
     }
+    // Set after _variant: the variant resets the corner radius to its own default, which clips the rim highlight.
+    self.glassView.cornerRadius = Self.hudCornerRadius
     self.addSubview(self.glassView)
     self.containerView.frame = self.glassView.bounds
     self.containerView.autoresizingMask = [.width, .height]
@@ -401,7 +402,7 @@ final class MacOS27OSDHudView: NSView {
         newIsDark = current
       }
     } else {
-      newIsDark = luma < 0.72
+      newIsDark = luma < 0.8
     }
 
     guard self.isDarkBackdropOverride != newIsDark else { return }
