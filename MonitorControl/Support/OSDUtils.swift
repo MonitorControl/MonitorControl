@@ -372,12 +372,18 @@ final class MacOS27OSDHudView: NSView {
     self.applyAppearanceColors()
   }
 
+  /// Inset well inside the capsule so the backdrop layer's aliased clip edge never shows at the HUD outline.
+  private var lumaSampleFrame: NSRect {
+    self.bounds.insetBy(dx: Self.hudCornerRadius * 0.6, dy: 8.0)
+  }
+
   private func setupLumaBackdropLayer() {
     guard let backdropClass = NSClassFromString("CABackdropLayer") as? CALayer.Type else { return }
     let layer = backdropClass.init()
-    layer.frame = self.bounds
-    layer.cornerRadius = Self.hudCornerRadius
+    layer.frame = self.lumaSampleFrame
+    layer.cornerRadius = self.lumaSampleFrame.height / 2.0
     layer.masksToBounds = true
+    layer.allowsEdgeAntialiasing = true
     layer.setValue(true, forKey: "windowServerAware")
     layer.setValue(true, forKey: "tracksLuma")
     layer.setValue(0.25, forKey: "scale")
@@ -436,7 +442,8 @@ final class MacOS27OSDHudView: NSView {
   override func layout() {
     super.layout()
     let bounds = self.bounds
-    self.lumaBackdropLayer?.frame = bounds
+    self.lumaBackdropLayer?.frame = self.lumaSampleFrame
+    self.lumaBackdropLayer?.cornerRadius = self.lumaSampleFrame.height / 2.0
 
     let iconSize = Self.iconSize
     self.iconView.frame = NSRect(x: Self.iconX, y: round(Self.trackCenterY + 1.0 - iconSize / 2.0), width: iconSize, height: iconSize)
