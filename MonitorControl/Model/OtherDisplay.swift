@@ -108,7 +108,6 @@ class OtherDisplay: Display {
         ddcValues = self.readDDCValues(for: command, tries: UInt(self.pollingCount), minReplyDelay: delay)
         if ddcValues != nil {
           (currentDDCValue, maxDDCValue) = ddcValues ?? (currentDDCValue, maxDDCValue)
-          self.processCurrentDDCValue(isReadFromDisplay: true, command: command, firstrun: firstrun, currentDDCValue: currentDDCValue)
           os_log("- DDC read successful.", type: .info)
         } else {
           os_log("- DDC read failed.", type: .info)
@@ -116,12 +115,19 @@ class OtherDisplay: Display {
       } else {
         os_log("- DDC read disabled.", type: .info)
       }
-      if self.readPrefAsInt(key: .maxDDCOverride, for: command) > self.readPrefAsInt(key: .minDDCOverride, for: command) {
-        self.savePref(self.readPrefAsInt(key: .maxDDCOverride, for: command), key: .maxDDC, for: command)
-      } else {
-        self.savePref(min(Int(maxDDCValue), DDC_MAX_DETECT_LIMIT), key: .maxDDC, for: command)
+      let minDDCOverride = self.readPrefAsInt(key: .minDDCOverride, for: command)
+      let maxDDCOverride = self.readPrefAsInt(key: .maxDDCOverride, for: command)
+      var maxDDC = maxDDCOverride > minDDCOverride ? maxDDCOverride : min(Int(maxDDCValue), DDC_MAX_DETECT_LIMIT)
+      if maxDDC <= minDDCOverride {
+        maxDDC = max(DDC_MAX_DETECT_LIMIT, minDDCOverride + 1) // A maximum at or below the minimum (some displays report 0) would make every conversion divide by zero
       }
-      if ddcValues == nil {
+      self.savePref(maxDDC, key: .maxDDC, for: command)
+      if self.readPrefAsFloat(for: command).isNaN {
+        self.removePref(for: command) // Earlier versions could save NaN here, which crashes when converted back to a DDC value
+      }
+      if ddcValues != nil {
+        self.processCurrentDDCValue(isReadFromDisplay: true, command: command, firstrun: firstrun, currentDDCValue: currentDDCValue)
+      } else {
         self.processCurrentDDCValue(isReadFromDisplay: false, command: command, firstrun: firstrun, currentDDCValue: currentDDCValue)
         currentDDCValue = self.getDDCValueFromPrefs(command)
       }

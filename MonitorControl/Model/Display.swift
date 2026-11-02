@@ -35,7 +35,7 @@ class Display: Equatable {
     prefs.object(forKey: self.getKey(key: key, for: command)) != nil
   }
 
-  func removePref(key: PrefKey, for command: Command? = nil) {
+  func removePref(key: PrefKey? = nil, for command: Command? = nil) {
     prefs.removeObject(forKey: self.getKey(key: key, for: command))
   }
 
