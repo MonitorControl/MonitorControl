@@ -256,8 +256,8 @@ class DisplayManager {
     os_log("Displays after sorting: %{public}@", after)
   }
 
-  func sortDisplaysByFriendlyName() -> [Display] {
-    self.displays.sorted { lhs, rhs in
+  func sortDisplaysByFriendlyName(_ displays: [Display]) -> [Display] {
+    displays.sorted { lhs, rhs in
       let lhsTitle = lhs.readPrefAsString(key: .friendlyName).isEmpty
         ? lhs.name
         : lhs.readPrefAsString(key: .friendlyName)
