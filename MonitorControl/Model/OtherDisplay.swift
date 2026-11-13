@@ -178,7 +178,7 @@ class OtherDisplay: Display {
     } else if self.readPrefAsInt(for: .audioMuteScreenBlank) != 1, volumeOSDValue == 0 {
       muteValue = 1
     }
-    let isAlreadySet = volumeOSDValue == self.readPrefAsFloat(for: .audioSpeakerVolume)
+    let isAlreadySet = volumeOSDValue == self.readPrefAsFloat(for: .audioSpeakerVolume) && muteValue == nil
     if !isAlreadySet {
       if let muteValue = muteValue {
         if self.readPrefAsBool(key: .enableMuteUnmute) {
