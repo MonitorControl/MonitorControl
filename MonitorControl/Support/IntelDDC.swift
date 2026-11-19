@@ -99,7 +99,7 @@ public class IntelDDC {
             continue
           }
         }
-        guard replyData[2] == 0x02 else {
+        guard replyData[2] == 0x02, replyData[4] == command else {
           os_log("Got wrong response type for %{public}@. Expected %u, got %u.", type: .info, String(reflecting: command), 0x02, replyData[2])
           os_log("Response was: %{public}@", type: .info, replyData.map { String(format: "%02X", $0) }.joined(separator: " "))
           continue
@@ -112,8 +112,8 @@ public class IntelDDC {
           os_log("Reading %{public}@ took %u tries.", type: .info, String(reflecting: command), i)
         }
         let (mh, ml, sh, sl) = (replyData[6], replyData[7], replyData[8], replyData[9])
-        let maxValue = UInt16(mh << 8) + UInt16(ml)
-        let currentValue = UInt16(sh << 8) + UInt16(sl)
+        let maxValue = (UInt16(mh) << 8) + UInt16(ml)
+        let currentValue = (UInt16(sh) << 8) + UInt16(sl)
         return (currentValue, maxValue)
       }
     }

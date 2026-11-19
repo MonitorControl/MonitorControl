@@ -12,15 +12,16 @@
             <objects>
                 <viewController storyboardIdentifier="MainPrefsVC" id="BGD-tY-Myx" customClass="MainPrefsViewController" customModule="MonitorControl" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" horizontalHuggingPriority="1" translatesAutoresizingMaskIntoConstraints="NO" id="COE-Oc-gZs">
-                        <rect key="frame" x="0.0" y="0.0" width="730" height="516"/>
+                        <rect key="frame" x="0.0" y="0.0" width="730" height="552"/>
                         <subviews>
                             <gridView xPlacement="leading" yPlacement="fill" rowAlignment="none" rowSpacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="noT-gJ-0yS">
-                                <rect key="frame" x="20" y="20" width="690" height="476"/>
+                                <rect key="frame" x="20" y="20" width="690" height="512"/>
                                 <rows>
                                     <gridRow bottomPadding="-13" id="DnA-aR-kcy"/>
                                     <gridRow bottomPadding="-10" id="xlB-05-nd7"/>
                                     <gridRow bottomPadding="-13" id="fnu-hr-lg2"/>
                                     <gridRow bottomPadding="-10" id="fZn-VF-HKh"/>
+                                    <gridRow bottomPadding="-10" id="rcB-Sg-Row"/>
                                     <gridRow bottomPadding="-13" id="xKQ-LY-5il"/>
                                     <gridRow bottomPadding="-10" id="jHJ-o2-Y9H"/>
                                     <gridRow bottomPadding="-13" id="DxT-oY-DIZ"/>
@@ -98,6 +99,19 @@
                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
                                         </textField>
+                                    </gridCell>
+                                    <gridCell row="rcB-Sg-Row" column="eHC-Ur-UsS" id="rcB-Sg-Lft"/>
+                                    <gridCell row="rcB-Sg-Row" column="64O-72-10l" xPlacement="leading" id="rcB-Sg-Rgt">
+                                        <button key="contentView" translatesAutoresizingMaskIntoConstraints="NO" id="rcB-Sg-Btn">
+                                            <rect key="frame" x="218" y="352" width="235" height="32"/>
+                                            <buttonCell key="cell" type="push" title="Suggest External Brightness…" bezelStyle="rounded" alignment="center" borderStyle="border" inset="2" id="rcB-Sg-Cel">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="recommendBrightness:" target="BGD-tY-Myx" id="rcB-Sg-Act"/>
+                                            </connections>
+                                        </button>
                                     </gridCell>
                                     <gridCell row="xKQ-LY-5il" column="eHC-Ur-UsS" id="5Ae-gB-MUt"/>
                                     <gridCell row="xKQ-LY-5il" column="64O-72-10l" id="Rzu-9I-Tog">
