@@ -331,6 +331,44 @@ class OtherDisplay: Display {
     return super.setBrightness(to, slow: slow)
   }
 
+  /// A first-use slider can still contain a default or a cached value. Do not animate
+  /// from it or send a hardware command that might raise the current backlight.
+  func applyStartingBrightness(_ suggestion: StartingBrightness) -> Bool {
+    guard !self.smoothBrightnessRunning, suggestion.wouldDim(self.getBrightness()) else { return false }
+    let level = suggestion.level
+    let softwareOnly = self.isSw()
+    let combined = !prefs.bool(forKey: PrefKey.disableCombinedBrightness.rawValue)
+    let switchingPoint = self.combinedBrightnessSwitchingValue()
+    if combined, !softwareOnly, !(0 < switchingPoint && switchingPoint < 1) { return false }
+    let softwareTarget: Float? = softwareOnly ? level : (combined ? min(1, level / switchingPoint) : nil)
+    if let target = softwareTarget {
+      guard StartingBrightness.permitsSoftwareTarget(target, reading: self.readSwBrightness(rounded: false)) else { return false }
+    }
+    var hardwareTarget: UInt16?
+    if !softwareOnly {
+      // The normal setter can write multiple remapped controls. One read cannot verify all of them.
+      guard self.getRemapControlCodes(command: .brightness).count <= 1 else { return false }
+      let hardwareLevel = combined ? max(0, level - switchingPoint) / (1 - switchingPoint) : level
+      let target = self.convValueToDDC(for: .brightness, from: hardwareLevel)
+      let inverted = self.readPrefAsBool(key: .invertDDC, for: .brightness)
+      if !StartingBrightness.permitsHardwareTarget(target, inverted: inverted, reading: nil) {
+        guard self.pollingCount > 0 else { return false }
+        let delay = self.readPrefAsBool(key: .longerDelay) ? UInt64(40 * kMillisecondScale) : nil
+        let reading = self.readDDCValues(for: .brightness, tries: 1, minReplyDelay: delay)
+        guard StartingBrightness.permitsHardwareTarget(target, inverted: inverted, reading: reading) else { return false }
+      }
+      hardwareTarget = target
+    }
+    // The user or macOS may have changed either level since MonitorControl's last write.
+    if let target = softwareTarget, !self.setSwBrightness(target) { return false }
+    if let target = hardwareTarget { self.writeDDCValues(command: .brightness, value: target, force: true) }
+    self.savePref(level, for: .brightness)
+    self.smoothBrightnessTransient = level
+    self.brightnessSyncSourceValue = level
+    self.sliderHandler[.brightness]?.setValue(level, displayID: self.identifier)
+    return true
+  }
+
   override func setDirectBrightness(_ to: Float, transient: Bool = false) -> Bool {
     let value = max(min(to, 1), 0)
     if !self.isSw() {
@@ -377,7 +415,7 @@ class OtherDisplay: Display {
     return intCodes
   }
 
-  func writeDDCValues(command: Command, value: UInt16) {
+  func writeDDCValues(command: Command, value: UInt16, force: Bool = false) {
     guard app.sleepID == 0, app.reconfigureID == 0, !self.readPrefAsBool(key: .forceSw), !self.readPrefAsBool(key: .unavailableDDC, for: command) else {
       return
     }
@@ -385,18 +423,18 @@ class OtherDisplay: Display {
       self.writeDDCNextValue[command] = value
     }
     DisplayManager.shared.globalDDCQueue.async(flags: .barrier) {
-      self.asyncPerformWriteDDCValues(command: command)
+      self.asyncPerformWriteDDCValues(command: command, force: force)
     }
   }
 
-  func asyncPerformWriteDDCValues(command: Command) {
+  func asyncPerformWriteDDCValues(command: Command, force: Bool) {
     var value = UInt16.max
     var lastValue = UInt16.max
     self.writeDDCQueue.sync {
       value = self.writeDDCNextValue[command] ?? UInt16.max
       lastValue = self.writeDDCLastSavedValue[command] ?? UInt16.max
     }
-    guard value != UInt16.max, value != lastValue else {
+    guard value != UInt16.max, force || value != lastValue else {
       return
     }
     self.writeDDCQueue.async(flags: .barrier) {

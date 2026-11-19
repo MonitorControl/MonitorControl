@@ -152,3 +152,32 @@
 
 /* Shown in the alert dialog */
 "You need to enable MonitorControl in System Settings > Security and Privacy > Accessibility for the keyboard shortcuts to work" = "您需要在「系统偏好设置」>「安全性与隐私」>「辅助功能」中启用MonitorControl让键盘快捷键生效";
+
+/* One-time brightness suggestion */
+"Suggested starting brightness: %d%%" = "建议起始亮度：%d%%";
+
+
+/* One-time brightness suggestion */
+"Use Suggested Brightness" = "使用建议亮度";
+
+/* One-time brightness suggestion */
+"Keep Current Levels" = "保留当前亮度";
+
+
+/* One-time brightness suggestion */
+"Open the built-in display and connect an independently adjustable external display to see a suggestion." = "请打开内建显示器，并连接一块可以独立调节的外屏。";
+
+/* One-time brightness suggestion */
+"The current brightness is unavailable." = "当前无法读取亮度。";
+
+/* One-time brightness suggestion */
+"This display is already at or below the suggested level." = "这块显示器已处于或低于建议亮度。";
+
+/* One-time brightness suggestion */
+"This one-time estimate uses the current built-in brightness. Apply it to this display, then fine-tune its slider." = "本次建议参考内屏当前亮度。采用后只调节这块外屏一次，你仍可随时单独微调。";
+
+/* One-time brightness suggestion */
+"The selected display is no longer available." = "所选的显示器已不可用。";
+
+/* One-time brightness suggestion */
+"MonitorControl could not verify a dim-only adjustment. You can adjust this display manually." = "无法确认此次调节只会使屏幕变暗。你可以手动调节这块显示器。";

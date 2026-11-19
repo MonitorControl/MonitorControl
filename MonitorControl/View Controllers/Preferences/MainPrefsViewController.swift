@@ -140,6 +140,102 @@ class MainPrefsViewController: NSViewController, SettingsPane {
     }
   }
 
+  private func startingBrightnessReference() -> (Display, StartingBrightness)? {
+    guard app.sleepID == 0, app.reconfigureID == 0, !app.safeMode,
+          let source = DisplayManager.shared.getBuiltInDisplay() as? AppleDisplay,
+          CGDisplayIsActive(source.identifier) != 0, CGDisplayIsAsleep(source.identifier) == 0,
+          !source.isDummy, !source.isVirtual else { return nil }
+    var level: Float = 0
+    guard DisplayServicesGetBrightness(source.identifier, &level) == 0,
+          let suggestion = StartingBrightness(builtInLevel: level) else { return nil }
+    return (source, suggestion)
+  }
+
+  private func eligibleForStartingBrightness(_ display: OtherDisplay) -> Bool {
+    !display.isDummy && !display.isVirtual && CGDisplayIsBuiltin(display.identifier) == 0 &&
+      CGDisplayIsOnline(display.identifier) != 0 && CGDisplayIsAsleep(display.identifier) == 0 &&
+      CGDisplayIsInMirrorSet(display.identifier) == 0 &&
+      !display.readPrefAsBool(key: .isDisabled) && !display.readPrefAsBool(key: .unavailableDDC, for: .brightness)
+  }
+
+  private func suggestionName(for display: OtherDisplay) -> String {
+    let friendly = display.readPrefAsString(key: .friendlyName)
+    return friendly.isEmpty || friendly == display.name ? display.name : "\(friendly) (\(display.name))"
+  }
+
+  @IBAction func recommendBrightness(_ sender: NSButton) {
+    let displays = DisplayManager.shared.getOtherDisplays().filter(self.eligibleForStartingBrightness)
+    guard !displays.isEmpty, self.startingBrightnessReference() != nil else {
+      self.showBrightnessNotice(NSLocalizedString("Open the built-in display and connect an independently adjustable external display to see a suggestion.", comment: "One-time brightness suggestion"))
+      return
+    }
+    if displays.count == 1, let display = displays.first {
+      self.offerStartingBrightness(for: display)
+      return
+    }
+    let menu = NSMenu()
+    for display in displays {
+      let item = menu.addItem(withTitle: self.suggestionName(for: display), action: #selector(self.chooseSuggestionDisplay(_:)), keyEquivalent: "")
+      item.target = self
+      item.representedObject = display
+    }
+    menu.popUp(positioning: nil, at: NSPoint(x: 0, y: sender.bounds.minY), in: sender)
+  }
+
+  @objc func chooseSuggestionDisplay(_ sender: NSMenuItem) {
+    if let display = sender.representedObject as? OtherDisplay {
+      self.offerStartingBrightness(for: display)
+    }
+  }
+
+  private func showBrightnessNotice(_ text: String) {
+    guard let window = self.view.window else { return }
+    let alert = NSAlert()
+    alert.messageText = text
+    alert.beginSheetModal(for: window)
+  }
+
+  private func offerStartingBrightness(for display: OtherDisplay) {
+    guard let window = self.view.window else { return }
+    guard let (_, suggestion) = self.startingBrightnessReference(),
+          DisplayManager.shared.getOtherDisplays().contains(where: { $0 === display }),
+          self.eligibleForStartingBrightness(display) else {
+      self.showBrightnessNotice(NSLocalizedString("Open the built-in display and connect an independently adjustable external display to see a suggestion.", comment: "One-time brightness suggestion"))
+      return
+    }
+    let alert = NSAlert()
+    let title = NSLocalizedString("Suggested starting brightness: %d%%", comment: "One-time brightness suggestion")
+    alert.messageText = String(format: title, suggestion.percent)
+    let current = display.getBrightness()
+    guard current.isFinite, (0 ... 1).contains(current) else {
+      self.showBrightnessNotice(NSLocalizedString("The current brightness is unavailable.", comment: "One-time brightness suggestion"))
+      return
+    }
+    let line = "\(self.suggestionName(for: display)): \(Int((current * 100).rounded()))%"
+    if !suggestion.wouldDim(current) {
+      alert.informativeText = line + "\n\n" + NSLocalizedString("This display is already at or below the suggested level.", comment: "One-time brightness suggestion")
+      alert.beginSheetModal(for: window)
+      return
+    }
+    alert.informativeText = line + " → \(suggestion.percent)%\n\n" + NSLocalizedString("This one-time estimate uses the current built-in brightness. Apply it to this display, then fine-tune its slider.", comment: "One-time brightness suggestion")
+    alert.addButton(withTitle: NSLocalizedString("Use Suggested Brightness", comment: "One-time brightness suggestion"))
+    alert.addButton(withTitle: NSLocalizedString("Keep Current Levels", comment: "One-time brightness suggestion")).keyEquivalent = "\u{1b}"
+    alert.beginSheetModal(for: window) { response in
+      guard response == .alertFirstButtonReturn else { return }
+      // A click accepts the displayed percentage, even if the reference screen has since changed.
+      guard app.sleepID == 0, app.reconfigureID == 0, !app.safeMode,
+            DisplayManager.shared.getOtherDisplays().contains(where: { $0 === display }),
+            self.eligibleForStartingBrightness(display) else {
+        self.showBrightnessNotice(NSLocalizedString("The selected display is no longer available.", comment: "One-time brightness suggestion"))
+        return
+      }
+      guard suggestion.wouldDim(display.getBrightness()) else { return }
+      if !display.applyStartingBrightness(suggestion) {
+        self.showBrightnessNotice(NSLocalizedString("MonitorControl could not verify a dim-only adjustment. You can adjust this display manually.", comment: "One-time brightness suggestion"))
+      }
+    }
+  }
+
   @IBAction func startupAction(_ sender: NSPopUpButton) {
     prefs.set(sender.selectedTag(), forKey: PrefKey.startupAction.rawValue)
     self.updateGridLayout()

@@ -264,27 +264,28 @@ class Display: Equatable {
         return 1
       }
     }
+    return self.readSwBrightness() ?? 1
+  }
+
+  /// A failed read must be distinguishable from an undimmed display before a one-time adjustment.
+  func readSwBrightness(rounded: Bool = true) -> Float? {
     self.swBrightnessSemaphore.wait()
+    defer { self.swBrightnessSemaphore.signal() }
     if self.isVirtual || self.readPrefAsBool(key: .avoidGamma) {
       let rawBrightnessValue = 1 - (DisplayManager.shared.getShadeAlpha(displayID: DisplayManager.resolveEffectiveDisplayID(self.identifier)) ?? 1)
-      self.swBrightnessSemaphore.signal()
       return self.swBrightnessTransform(value: rawBrightnessValue, reverse: true)
     }
     var gammaTableRed = [CGGammaValue](repeating: 0, count: 256)
     var gammaTableGreen = [CGGammaValue](repeating: 0, count: 256)
     var gammaTableBlue = [CGGammaValue](repeating: 0, count: 256)
     var gammaTableSampleCount: UInt32 = 0
-    var brightnessValue: Float = 1
-    if CGGetDisplayTransferByTable(self.identifier, 256, &gammaTableRed, &gammaTableGreen, &gammaTableBlue, &gammaTableSampleCount) == CGError.success {
-      let redPeak = gammaTableRed.max() ?? 0
-      let greenPeak = gammaTableGreen.max() ?? 0
-      let bluePeak = gammaTableBlue.max() ?? 0
-      let gammaTablePeak = max(redPeak, greenPeak, bluePeak)
-      let peakRatio = gammaTablePeak / self.defaultGammaTablePeak
-      brightnessValue = round(self.swBrightnessTransform(value: peakRatio, reverse: true) * 256) / 256
-    }
-    self.swBrightnessSemaphore.signal()
-    return brightnessValue
+    guard CGGetDisplayTransferByTable(self.identifier, 256, &gammaTableRed, &gammaTableGreen, &gammaTableBlue, &gammaTableSampleCount) == .success,
+          gammaTableSampleCount > 0, self.defaultGammaTableSampleCount > 0,
+          self.defaultGammaTablePeak.isFinite, self.defaultGammaTablePeak > 0 else { return nil }
+    let peak = max(gammaTableRed.max() ?? 0, gammaTableGreen.max() ?? 0, gammaTableBlue.max() ?? 0)
+    let value = self.swBrightnessTransform(value: peak / self.defaultGammaTablePeak, reverse: true)
+    guard value.isFinite else { return nil }
+    return rounded ? round(value * 256) / 256 : value
   }
 
   func checkGammaInterference() {

@@ -150,3 +150,32 @@
 
 /* Shown in the alert dialog */
 "You need to enable MonitorControl in System Settings > Security and Privacy > Accessibility for the keyboard shortcuts to work" = "You need to enable MonitorControl in System Settings > Security and Privacy > Accessibility for the keyboard shortcuts to work";
+
+/* One-time brightness suggestion */
+"Suggested starting brightness: %d%%" = "Suggested starting brightness: %d%%";
+
+
+/* One-time brightness suggestion */
+"Use Suggested Brightness" = "Use Suggested Brightness";
+
+/* One-time brightness suggestion */
+"Keep Current Levels" = "Keep Current Levels";
+
+
+/* One-time brightness suggestion */
+"Open the built-in display and connect an independently adjustable external display to see a suggestion." = "Open the built-in display and connect an independently adjustable external display to see a suggestion.";
+
+/* One-time brightness suggestion */
+"The current brightness is unavailable." = "The current brightness is unavailable.";
+
+/* One-time brightness suggestion */
+"This display is already at or below the suggested level." = "This display is already at or below the suggested level.";
+
+/* One-time brightness suggestion */
+"This one-time estimate uses the current built-in brightness. Apply it to this display, then fine-tune its slider." = "This one-time estimate uses the current built-in brightness. Apply it to this display, then fine-tune its slider.";
+
+/* One-time brightness suggestion */
+"The selected display is no longer available." = "The selected display is no longer available.";
+
+/* One-time brightness suggestion */
+"MonitorControl could not verify a dim-only adjustment. You can adjust this display manually." = "MonitorControl could not verify a dim-only adjustment. You can adjust this display manually.";

@@ -68,6 +68,10 @@ For additional features, more advanced brightness control with XDR/HDR brightnes
 7. You can set up custom keyboard shortcuts under the `Keyboard` in Settings (the app uses Apple media keys by default).
 8. If you have any questions, go to [Discussions](https://github.com/MonitorControl/MonitorControl/discussions)!
 
+### Get a one-time external brightness suggestion
+
+Open **Settings → General → Suggest External Brightness…**. If several external displays are available, select one. MonitorControl estimates a starting level using the built-in display's current brightness, which reflects room lighting when macOS automatic brightness is enabled. Review the proposed level and choose **Use Suggested Brightness** to apply it once to the selected display. You can adjust either display independently afterwards when brightness sync is off.
+
 ### macOS compatibility
 
 | MonitorControl version | macOS version     |

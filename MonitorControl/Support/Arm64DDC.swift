@@ -74,6 +74,7 @@ class Arm64DDC: NSObject {
     var send: [UInt8] = [command]
     var reply = [UInt8](repeating: 0, count: 11)
     if Self.performDDCCommunication(service: service, send: &send, reply: &reply, writeSleepTime: writeSleepTime, numOfWriteCycles: numOfWriteCycles, readSleepTime: readSleepTime, numOfRetryAttemps: numOfRetryAttemps, retrySleepTime: retrySleepTime) {
+      guard reply[2] == 0x02, reply[3] == 0, reply[4] == command else { return nil }
       let max = UInt16(reply[6]) * 256 + UInt16(reply[7])
       let current = UInt16(reply[8]) * 256 + UInt16(reply[9])
       values = (current, max)
