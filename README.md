@@ -68,6 +68,14 @@ For additional features, more advanced brightness control with XDR/HDR brightnes
 7. You can set up custom keyboard shortcuts under the `Keyboard` in Settings (the app uses Apple media keys by default).
 8. If you have any questions, go to [Discussions](https://github.com/MonitorControl/MonitorControl/discussions)!
 
+### Follow the MacBook's ambient light sensor
+
+1. In macOS `System Settings` » `Displays`, select the built-in display and turn on `Automatically adjust brightness`.
+2. With the MacBook lid open, set a comfortable starting brightness for each display using its own slider.
+3. In MonitorControl `Settings…` » `General`, enable `Sync brightness changes from Built-in and Apple displays`.
+
+To check the setup, move the built-in display's brightness slider in macOS slightly. The external display should brighten or dim with it. The two sliders can start at different percentages because MonitorControl applies the change to the external display's current level. Keep MonitorControl running so it can follow automatic adjustments as the room lighting changes.
+
 ### macOS compatibility
 
 | MonitorControl version | macOS version     |
